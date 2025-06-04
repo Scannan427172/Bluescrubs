@@ -148,21 +148,52 @@ export function Navigation({ user }: NavigationProps) {
 
       {/* Mobile Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
-        <div className="grid grid-cols-5 gap-1">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-                item.current
-                  ? "text-medical-blue bg-blue-50"
-                  : "text-gray-400"
-              }`}
-            >
-              <item.icon className="w-5 h-5 mb-1" />
-              <span className="text-xs font-medium">{item.name}</span>
-            </Link>
-          ))}
+        <div className="grid grid-cols-4 gap-1">
+          {/* Essential Navigation Items */}
+          <Link
+            href="/"
+            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
+              location === "/"
+                ? "text-medical-blue bg-blue-50"
+                : "text-gray-400"
+            }`}
+          >
+            <Home className="w-5 h-5 mb-1" />
+            <span className="text-xs font-medium">Dashboard</span>
+          </Link>
+
+          <Link
+            href="/plab1"
+            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
+              location === "/plab1"
+                ? "text-medical-blue bg-blue-50"
+                : "text-gray-400"
+            }`}
+          >
+            <BookOpen className="w-5 h-5 mb-1" />
+            <span className="text-xs font-medium">PLAB 1</span>
+          </Link>
+
+          <Link
+            href="/video-osce"
+            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
+              location === "/video-osce"
+                ? "text-medical-blue bg-blue-50"
+                : "text-gray-400"
+            }`}
+          >
+            <Video className="w-5 h-5 mb-1" />
+            <span className="text-xs font-medium">Video OSCE</span>
+          </Link>
+
+          {/* Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="flex flex-col items-center justify-center py-2 px-1 transition-colors text-gray-400"
+          >
+            <Menu className="w-5 h-5 mb-1" />
+            <span className="text-xs font-medium">More</span>
+          </button>
         </div>
       </nav>
     </>
