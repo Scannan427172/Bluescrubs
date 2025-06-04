@@ -66,13 +66,6 @@ export function Navigation({ user }: NavigationProps) {
 
             {/* Right Side */}
             <div className="flex items-center space-x-4">
-              {/* Login Button */}
-              <Link href="/auth">
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-sm px-4 py-2">
-                  Login / Register
-                </Button>
-              </Link>
-
               {/* Notifications */}
               <Button variant="ghost" size="sm" className="relative">
                 <Bell className="w-5 h-5 text-gray-600 hover:text-medical-blue" />
