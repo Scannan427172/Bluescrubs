@@ -157,38 +157,38 @@ export default function AdaptiveLearning() {
         </div>
 
         <Tabs defaultValue="recommendations" className="space-y-8">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="recommendations">AI Recommendations</TabsTrigger>
-            <TabsTrigger value="weaknesses">Weakness Analysis</TabsTrigger>
-            <TabsTrigger value="progress">Learning Progress</TabsTrigger>
-            <TabsTrigger value="insights">Smart Insights</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4 bg-white">
+            <TabsTrigger value="recommendations" className="text-black">AI Recommendations</TabsTrigger>
+            <TabsTrigger value="weaknesses" className="text-black">Weakness Analysis</TabsTrigger>
+            <TabsTrigger value="progress" className="text-black">Learning Progress</TabsTrigger>
+            <TabsTrigger value="insights" className="text-black">Smart Insights</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="recommendations" className="space-y-6">
-            <div className="grid gap-6">
+          <TabsContent value="recommendations" className="mt-6">
+            <div className="space-y-6">
               {adaptiveData.recommendations.map((rec) => (
-                <Card key={rec.id} className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between">
+                <Card key={rec.id} className="bg-white border shadow-sm">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
                           <Brain className="w-5 h-5 text-purple-600" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg" style={{ color: '#000000' }}>{rec.title}</CardTitle>
-                          <Badge className={`${getPriorityColor(rec.priority)} border`}>
+                          <h3 className="text-lg font-semibold text-black mb-1">{rec.title}</h3>
+                          <Badge className={`${getPriorityColor(rec.priority)} border text-xs`}>
                             {getPriorityText(rec.priority)}
                           </Badge>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-medium" style={{ color: '#000000' }}>{rec.questions} questions</div>
-                        <div className="text-sm" style={{ color: '#666666' }}>{rec.estimatedTime} min</div>
+                        <div className="text-sm font-medium text-black">{rec.questions} questions</div>
+                        <div className="text-sm text-gray-600">{rec.estimatedTime} min</div>
                       </div>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-700 mb-4">{rec.description}</p>
+                    
+                    <p className="text-black mb-4 leading-relaxed">{rec.description}</p>
+                    
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <Lightbulb className="w-4 h-4 text-yellow-500" />
