@@ -95,9 +95,11 @@ export default function Home() {
                     Continue Learning
                   </Button>
                 </Link>
-                <Button variant="outline" className="border-white/30 hover:bg-white/10 px-8 py-3" style={{ color: '#000000', borderColor: '#000000' }}>
-                  View Progress
-                </Button>
+                <Link href="/dashboard">
+                  <Button variant="outline" className="border-gray-300 hover:bg-gray-100 px-8 py-3" style={{ color: '#000000', borderColor: '#000000' }}>
+                    View Progress
+                  </Button>
+                </Link>
               </div>
             </div>
 

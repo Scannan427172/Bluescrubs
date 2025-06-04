@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/navigation";
 import Home from "@/pages/home";
+import Dashboard from "@/pages/dashboard";
 import Plab1Practice from "@/pages/plab1-practice";
 import Plab2Osce from "@/pages/plab2-osce";
 import Community from "@/pages/community";
@@ -24,6 +25,7 @@ function Router() {
       <Navigation user={DEMO_USER} />
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/onboarding" component={Onboarding} />
         <Route path="/plab1" component={Plab1Practice} />
         <Route path="/plab2" component={Plab2Osce} />
