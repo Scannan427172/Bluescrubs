@@ -21,8 +21,8 @@ export default function Landing() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           
           {/* Hero Content */}
-          <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl p-8 space-y-6 shadow-lg">
-            <p className="text-2xl text-black font-semibold max-w-3xl mx-auto leading-relaxed">
+          <div className="bg-white rounded-2xl p-8 space-y-6 shadow-xl border border-gray-200">
+            <p className="text-2xl text-gray-900 font-bold max-w-3xl mx-auto leading-relaxed">
               The most comprehensive PLAB preparation platform with AI-powered learning, 
               video OSCE simulations, and personalized study plans.
             </p>
@@ -48,15 +48,15 @@ export default function Landing() {
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">10,000+</div>
-                <div className="text-black font-medium">Successful Candidates</div>
+                <div className="text-gray-900 font-bold">Successful Candidates</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">95%</div>
-                <div className="text-black font-medium">Pass Rate</div>
+                <div className="text-gray-900 font-bold">Pass Rate</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">12</div>
-                <div className="text-black font-medium">Unique Features</div>
+                <div className="text-gray-900 font-bold">Unique Features</div>
               </div>
             </div>
           </div>
