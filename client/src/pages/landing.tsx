@@ -2,7 +2,6 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle, Target, Zap, Shield, Star, Play, CheckCircle, Globe, Award } from "lucide-react";
-import nhsPrepWomanImg from "@assets/image_1749071491789.png";
 
 export default function Landing() {
   return (
@@ -89,7 +88,7 @@ export default function Landing() {
             {/* Right Side - Feature Cards */}
             <div className="relative lg:pl-8">
               <div className="grid grid-cols-2 gap-6">
-                {/* Floating Achievement Cards */}
+                {/* Feature Cards */}
                 <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
                   <div className="flex items-center space-x-3">
                     <Trophy className="w-8 h-8" />
@@ -140,27 +139,27 @@ export default function Landing() {
             <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
-      </div>
-
-      {/* Stats Section */}
-      <div className="py-16 bg-gradient-to-r from-slate-50 to-blue-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center group">
-              <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2 group-hover:scale-110 transition-transform">10,000+</div>
-              <div className="text-slate-600 font-medium">Successful Students</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-2 group-hover:scale-110 transition-transform">95%</div>
-              <div className="text-slate-600 font-medium">Pass Rate</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-4xl lg:text-5xl font-bold text-purple-600 mb-2 group-hover:scale-110 transition-transform">12+</div>
-              <div className="text-slate-600 font-medium">Unique Features</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-4xl lg:text-5xl font-bold text-orange-600 mb-2 group-hover:scale-110 transition-transform">24/7</div>
-              <div className="text-slate-600 font-medium">Expert Support</div>
+        
+        {/* Stats Section - now within hero background */}
+        <div className="py-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="text-center group">
+                <div className="text-4xl lg:text-5xl font-bold text-blue-400 mb-2 group-hover:scale-110 transition-transform">10,000+</div>
+                <div className="text-slate-300 font-medium">Successful Students</div>
+              </div>
+              <div className="text-center group">
+                <div className="text-4xl lg:text-5xl font-bold text-green-400 mb-2 group-hover:scale-110 transition-transform">95%</div>
+                <div className="text-slate-300 font-medium">Pass Rate</div>
+              </div>
+              <div className="text-center group">
+                <div className="text-4xl lg:text-5xl font-bold text-purple-400 mb-2 group-hover:scale-110 transition-transform">12+</div>
+                <div className="text-slate-300 font-medium">Unique Features</div>
+              </div>
+              <div className="text-center group">
+                <div className="text-4xl lg:text-5xl font-bold text-orange-400 mb-2 group-hover:scale-110 transition-transform">24/7</div>
+                <div className="text-slate-300 font-medium">Expert Support</div>
+              </div>
             </div>
           </div>
         </div>
