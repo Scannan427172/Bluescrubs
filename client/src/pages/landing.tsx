@@ -21,9 +21,6 @@ export default function Landing() {
           
           {/* Hero Content */}
           <div className="space-y-6">
-            <h1 className="text-5xl lg:text-7xl font-extrabold text-black">
-              PLAB Master
-            </h1>
             <p className="text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               The most comprehensive PLAB preparation platform with AI-powered learning, 
               video OSCE simulations, and personalized study plans.
