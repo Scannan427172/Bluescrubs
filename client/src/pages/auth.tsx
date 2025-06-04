@@ -442,9 +442,17 @@ export default function Auth() {
         </div>
       </div>
       
-      {/* Bottom Block with 50% Transparency */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur-sm p-6">
-        <div className="max-w-6xl mx-auto text-center">
+      {/* Bottom Block with Background Image and 50% Transparency */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 bg-cover bg-center p-6"
+        style={{
+          backgroundImage: `url('@assets/image_1749076175862.jpeg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative max-w-6xl mx-auto text-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
             <div className="flex items-center justify-center space-x-2">
               <Shield className="w-5 h-5" />
