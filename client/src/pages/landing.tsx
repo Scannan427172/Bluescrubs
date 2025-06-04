@@ -10,7 +10,7 @@ export default function Landing() {
       {/* Hero Section */}
       <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
         {/* Hero Background Image */}
-        <div className="absolute inset-0 opacity-50">
+        <div className="absolute inset-0 opacity-30">
           <img 
             src={heroImage} 
             alt="Hero background"
