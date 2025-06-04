@@ -1,0 +1,49 @@
+import { Switch, Route } from "wouter";
+import { queryClient } from "./lib/queryClient";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Navigation } from "@/components/navigation";
+import Home from "@/pages/home";
+import Plab1Practice from "@/pages/plab1-practice";
+import Plab2Osce from "@/pages/plab2-osce";
+import Community from "@/pages/community";
+import NhsPrep from "@/pages/nhs-prep";
+import Onboarding from "@/pages/onboarding";
+import NotFound from "@/pages/not-found";
+
+// Mock user for demo - in real app this would come from auth context
+const DEMO_USER = {
+  username: "Dr. Sarah Ahmed",
+  studyStreak: 12
+};
+
+function Router() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navigation user={DEMO_USER} />
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/onboarding" component={Onboarding} />
+        <Route path="/plab1" component={Plab1Practice} />
+        <Route path="/plab2" component={Plab2Osce} />
+        <Route path="/community" component={Community} />
+        <Route path="/nhs-prep" component={NhsPrep} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Router />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
+
+export default App;

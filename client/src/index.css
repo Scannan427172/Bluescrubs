@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 210 13% 16%; /* #212529 */
+  --muted: 212 10% 97%; /* #F8F9FA */
+  --muted-foreground: 210 6% 45%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 13% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 13% 16%;
+  --border: 210 13% 91%;
+  --input: 210 13% 91%;
+  --primary: 198 70% 42%; /* #2E86AB */
+  --primary-foreground: 210 100% 98%;
+  --secondary: 332 60% 45%; /* #A23B72 */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 259 45% 51%; /* #6F42C1 */
+  --accent-foreground: 0 0% 100%;
+  --success: 160 84% 44%; /* #06D6A0 */
+  --success-foreground: 0 0% 100%;
+  --warning: 35 100% 50%; /* #F18F01 */
+  --warning-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 60 9% 98%;
+  --ring: 198 70% 42%;
+  --radius: 0.75rem;
+  --medical-blue: 198 70% 42%; /* #2E86AB */
+  --deep-rose: 332 60% 45%; /* #A23B72 */
+  --mint-green: 160 84% 44%; /* #06D6A0 */
+  --amber-warning: 35 100% 50%; /* #F18F01 */
+  --purple-accent: 259 45% 51%; /* #6F42C1 */
+  --light-bg: 212 10% 97%; /* #F8F9FA */
+}
+
+.dark {
+  --background: 210 13% 16%;
+  --foreground: 0 0% 98%;
+  --muted: 210 13% 20%;
+  --muted-foreground: 210 6% 64%;
+  --popover: 210 13% 16%;
+  --popover-foreground: 0 0% 98%;
+  --card: 210 13% 16%;
+  --card-foreground: 0 0% 98%;
+  --border: 210 13% 24%;
+  --input: 210 13% 24%;
+  --primary: 198 70% 50%;
+  --primary-foreground: 210 100% 6%;
+  --secondary: 332 60% 55%;
+  --secondary-foreground: 0 0% 6%;
+  --accent: 259 45% 61%;
+  --accent-foreground: 0 0% 6%;
+  --success: 160 84% 54%;
+  --success-foreground: 0 0% 6%;
+  --warning: 35 100% 60%;
+  --warning-foreground: 0 0% 6%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 198 70% 50%;
+  --medical-blue: 198 70% 50%;
+  --deep-rose: 332 60% 55%;
+  --mint-green: 160 84% 54%;
+  --amber-warning: 35 100% 60%;
+  --purple-accent: 259 45% 61%;
+  --light-bg: 210 13% 20%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  .text-medical-blue {
+    color: hsl(var(--medical-blue));
+  }
+
+  .bg-medical-blue {
+    background-color: hsl(var(--medical-blue));
+  }
+
+  .text-deep-rose {
+    color: hsl(var(--deep-rose));
+  }
+
+  .bg-deep-rose {
+    background-color: hsl(var(--deep-rose));
+  }
+
+  .text-mint-green {
+    color: hsl(var(--mint-green));
+  }
+
+  .bg-mint-green {
+    background-color: hsl(var(--mint-green));
+  }
+
+  .text-amber-warning {
+    color: hsl(var(--amber-warning));
+  }
+
+  .bg-amber-warning {
+    background-color: hsl(var(--amber-warning));
+  }
+
+  .text-purple-accent {
+    color: hsl(var(--purple-accent));
+  }
+
+  .bg-purple-accent {
+    background-color: hsl(var(--purple-accent));
+  }
+
+  .bg-light-bg {
+    background-color: hsl(var(--light-bg));
+  }
+
+  /* Custom spacing utilities */
+  .spacing-20 {
+    @apply p-5 gap-5;
+  }
+
+  /* Animation for progress bars */
+  .progress-animate {
+    transition: width 0.8s ease-in-out;
+  }
+
+  /* Custom gradient backgrounds */
+  .gradient-medical {
+    background: linear-gradient(135deg, hsl(var(--medical-blue)), hsl(var(--purple-accent)));
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, hsl(var(--deep-rose)), hsl(var(--purple-accent)));
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    transition: all 0.2s ease-in-out;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Custom button styles */
+  .btn-medical {
+    @apply bg-medical-blue text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-deep-rose text-white px-6 py-3 rounded-xl font-semibold hover:bg-rose-600 transition-colors;
+  }
+
+  .btn-success {
+    @apply bg-mint-green text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors;
+  }
+
+  /* Quiz option styles */
+  .quiz-option {
+    @apply p-4 border-2 border-gray-200 rounded-lg hover:border-medical-blue hover:bg-blue-50 transition-all cursor-pointer;
+  }
+
+  .quiz-option.selected {
+    @apply border-medical-blue bg-blue-50;
+  }
+
+  .quiz-option.correct {
+    @apply border-mint-green bg-green-50;
+  }
+
+  .quiz-option.incorrect {
+    @apply border-red-500 bg-red-50;
+  }
+
+  /* OSCE station styles */
+  .osce-station {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow;
+  }
+
+  /* Mobile responsive utilities */
+  @media (max-width: 768px) {
+    .mobile-padding {
+      @apply px-4;
+    }
+    
+    .mobile-text {
+      @apply text-sm;
+    }
+  }
+
+  /* Loading animations */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Progress indicators */
+  .progress-ring {
+    transition: stroke-dasharray 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+}
