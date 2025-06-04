@@ -243,7 +243,7 @@ export default function Auth() {
                       </Button>
                     </div>
 
-                    <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3">
+                    <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-black py-3">
                       Sign In to Your Account
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
