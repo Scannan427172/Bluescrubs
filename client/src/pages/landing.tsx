@@ -2,107 +2,63 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Users, Brain, Clock, Award, Globe, Stethoscope } from "lucide-react";
-import womanWithGlassesImg from "@assets/image_1749071383658.png";
+import nhsPrepWomanImg from "@assets/image_1749071491789.png";
 
 export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-blue-50 to-purple-50 py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="text-center lg:text-left">
-              <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-6">
-                Master Your Medical Career
-              </span>
-              <h1 className="text-5xl lg:text-6xl font-extrabold text-black mb-6">
-                PLAB Exam<br/>
-                <span className="text-blue-600">Success Platform</span>
-              </h1>
-              <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-                The most comprehensive PLAB preparation platform with AI-powered learning, 
-                video OSCE simulations, and personalized study plans.
-              </p>
-
-              {/* Action Buttons */}
-              <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center lg:justify-start mb-8">
-                <Link href="/auth">
-                  <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-lg">
-                    Login / Register
-                  </Button>
-                </Link>
-                <Link href="/dashboard">
-                  <Button 
-                    variant="outline" 
-                    className="w-full sm:w-auto border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold rounded-lg"
-                  >
-                    Bypass Login - Try Now
-                  </Button>
-                </Link>
-              </div>
-
-              {/* Key Features Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <div className="flex items-center space-x-2">
-                  <Brain className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-black">AI Learning</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <BookOpen className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-black">Video OSCE</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Users className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-black">Mentors</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-black">Smart Planner</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Award className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-black">Gamification</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Globe className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-black">UK Culture</span>
-                </div>
-              </div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 relative">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          {/* Main Hero Image */}
+          <div className="mb-8">
+            <img 
+              src={nhsPrepWomanImg} 
+              alt="Professional woman with glasses studying with NHS Prep books"
+              className="w-full max-w-2xl mx-auto rounded-2xl shadow-2xl"
+            />
+          </div>
+          
+          {/* Hero Content */}
+          <div className="space-y-6">
+            <h1 className="text-5xl lg:text-7xl font-extrabold text-black">
+              PLAB Master
+            </h1>
+            <p className="text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              The most comprehensive PLAB preparation platform with AI-powered learning, 
+              video OSCE simulations, and personalized study plans.
+            </p>
+            
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <Link href="/auth">
+                <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 text-xl font-semibold rounded-lg">
+                  Login / Register
+                </Button>
+              </Link>
+              <Link href="/dashboard">
+                <Button 
+                  variant="outline" 
+                  className="w-full sm:w-auto border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-12 py-4 text-xl font-semibold rounded-lg"
+                >
+                  Bypass Login - Try Now
+                </Button>
+              </Link>
             </div>
-
-            {/* Right Side - Woman with Glasses */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
-                <div className="text-center">
-                  {/* Professional Woman with Glasses Photo */}
-                  <div className="w-64 h-64 mx-auto mb-6 relative overflow-hidden rounded-2xl shadow-lg">
-                    <img 
-                      src={womanWithGlassesImg} 
-                      alt="Professional woman with glasses over books"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  </div>
-                  
-                  <h3 className="text-xl font-semibold text-black mb-2">
-                    Dr. Sarah Johnson
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-6">
-                    "I passed PLAB 1 & 2 on my first attempt using this platform. 
-                    The AI-powered learning and video OSCE practice were game-changers!"
-                  </p>
-                  
-                  {/* Books Stack */}
-                  <div className="flex justify-center space-x-2 mb-6">
-                    <div className="w-8 h-10 bg-blue-600 rounded shadow-md transform rotate-2"></div>
-                    <div className="w-8 h-10 bg-purple-600 rounded shadow-md"></div>
-                    <div className="w-8 h-10 bg-green-600 rounded shadow-md transform -rotate-2"></div>
-                  </div>
-                  
-                  <div className="text-xs text-gray-500">
-                    Join 10,000+ successful candidates
-                  </div>
-                </div>
+            
+            {/* Success Stats */}
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600">10,000+</div>
+                <div className="text-gray-600">Successful Candidates</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600">95%</div>
+                <div className="text-gray-600">Pass Rate</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600">12</div>
+                <div className="text-gray-600">Unique Features</div>
               </div>
             </div>
           </div>
