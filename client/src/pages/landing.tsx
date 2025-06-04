@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Users, Brain, Clock, Award, Globe, Stethoscope } from "lucide-react";
+import womanWithGlassesImg from "@assets/image_1749071383658.png";
 
 export default function Landing() {
   return (
@@ -74,55 +75,13 @@ export default function Landing() {
             <div className="flex justify-center lg:justify-end">
               <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
                 <div className="text-center">
-                  {/* Professional Woman with Glasses */}
-                  <div className="w-48 h-48 mx-auto mb-6 relative">
-                    <svg viewBox="0 0 200 200" className="w-full h-full">
-                      {/* Hair */}
-                      <ellipse cx="100" cy="85" rx="55" ry="45" fill="#8B4513" />
-                      <ellipse cx="100" cy="70" rx="45" ry="35" fill="#A0522D" />
-                      
-                      {/* Face */}
-                      <ellipse cx="100" cy="100" rx="40" ry="50" fill="#FDBCB4" />
-                      
-                      {/* Eyes */}
-                      <circle cx="88" cy="90" r="3" fill="#000" />
-                      <circle cx="112" cy="90" r="3" fill="#000" />
-                      
-                      {/* Eyebrows */}
-                      <ellipse cx="88" cy="85" rx="6" ry="2" fill="#654321" />
-                      <ellipse cx="112" cy="85" rx="6" ry="2" fill="#654321" />
-                      
-                      {/* Glasses Frame */}
-                      <g stroke="#000" strokeWidth="3" fill="none">
-                        {/* Left lens */}
-                        <circle cx="88" cy="90" r="12" />
-                        {/* Right lens */}
-                        <circle cx="112" cy="90" r="12" />
-                        {/* Bridge */}
-                        <line x1="100" y1="90" x2="100" y2="90" strokeWidth="2" />
-                        {/* Temple arms */}
-                        <line x1="76" y1="85" x2="65" y2="82" strokeWidth="2" />
-                        <line x1="124" y1="85" x2="135" y2="82" strokeWidth="2" />
-                      </g>
-                      
-                      {/* Lens reflection */}
-                      <circle cx="85" cy="87" r="3" fill="#E6F3FF" opacity="0.7" />
-                      <circle cx="109" cy="87" r="3" fill="#E6F3FF" opacity="0.7" />
-                      
-                      {/* Nose */}
-                      <ellipse cx="100" cy="98" rx="2" ry="4" fill="#F4A9A8" />
-                      
-                      {/* Smile */}
-                      <path d="M 90 108 Q 100 115 110 108" stroke="#000" strokeWidth="2" fill="none" />
-                      
-                      {/* Lab coat collar */}
-                      <path d="M 70 140 L 80 125 L 120 125 L 130 140 L 130 160 L 70 160 Z" fill="#FFF" stroke="#DDD" strokeWidth="1" />
-                      
-                      {/* Stethoscope */}
-                      <circle cx="85" cy="145" r="4" fill="#4A90E2" />
-                      <path d="M 85 145 Q 100 135 115 145" stroke="#4A90E2" strokeWidth="3" fill="none" />
-                      <circle cx="115" cy="145" r="4" fill="#4A90E2" />
-                    </svg>
+                  {/* Professional Woman with Glasses Photo */}
+                  <div className="w-64 h-64 mx-auto mb-6 relative overflow-hidden rounded-2xl shadow-lg">
+                    <img 
+                      src={womanWithGlassesImg} 
+                      alt="Professional woman with glasses over books"
+                      className="w-full h-full object-cover object-center"
+                    />
                   </div>
                   
                   <h3 className="text-xl font-semibold text-black mb-2">
