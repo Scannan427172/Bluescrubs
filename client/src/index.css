@@ -251,6 +251,11 @@
     color: #ffffff !important;
   }
 
+  /* Specific override for gradient sections */
+  .bg-gradient-to-br * {
+    color: #ffffff !important;
+  }
+
   /* Ensure white text is always visible on gradient backgrounds */
   .text-white {
     color: #ffffff !important;
