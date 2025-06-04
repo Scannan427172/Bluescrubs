@@ -2,22 +2,13 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle, Target, Zap, Shield, Star, Play, CheckCircle, Globe, Award } from "lucide-react";
-import heroImage from "@assets/image_1749073508621.jpeg";
+import nhsPrepWomanImg from "@assets/image_1749071491789.png";
 
 export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
-        {/* Hero Background Image */}
-        <div className="absolute inset-0 opacity-30">
-          <img 
-            src={heroImage} 
-            alt="Hero background"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.05)_50%,transparent_75%,transparent_100%)] bg-[length:250px_250px] animate-[move_20s_linear_infinite]"></div>
@@ -95,7 +86,51 @@ export default function Landing() {
               </div>
             </div>
             
-
+            {/* Right Side - Feature Cards */}
+            <div className="relative lg:pl-8">
+              <div className="grid grid-cols-2 gap-6">
+                {/* Floating Achievement Cards */}
+                <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center space-x-3">
+                    <Trophy className="w-8 h-8" />
+                    <div>
+                      <div className="text-xl font-bold">95%</div>
+                      <div className="text-sm opacity-90">Pass Rate</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center space-x-3">
+                    <Video className="w-8 h-8" />
+                    <div>
+                      <div className="text-xl font-bold">Video</div>
+                      <div className="text-sm opacity-90">OSCE Prep</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center space-x-3">
+                    <Brain className="w-8 h-8" />
+                    <div>
+                      <div className="text-xl font-bold">AI</div>
+                      <div className="text-sm opacity-90">Learning</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center space-x-3">
+                    <Users className="w-8 h-8" />
+                    <div>
+                      <div className="text-xl font-bold">10K+</div>
+                      <div className="text-sm opacity-90">Students</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -105,8 +140,30 @@ export default function Landing() {
             <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
-        
+      </div>
 
+      {/* Stats Section */}
+      <div className="py-16 bg-gradient-to-r from-slate-50 to-blue-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center group">
+              <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2 group-hover:scale-110 transition-transform">10,000+</div>
+              <div className="text-slate-600 font-medium">Successful Students</div>
+            </div>
+            <div className="text-center group">
+              <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-2 group-hover:scale-110 transition-transform">95%</div>
+              <div className="text-slate-600 font-medium">Pass Rate</div>
+            </div>
+            <div className="text-center group">
+              <div className="text-4xl lg:text-5xl font-bold text-purple-600 mb-2 group-hover:scale-110 transition-transform">12+</div>
+              <div className="text-slate-600 font-medium">Unique Features</div>
+            </div>
+            <div className="text-center group">
+              <div className="text-4xl lg:text-5xl font-bold text-orange-600 mb-2 group-hover:scale-110 transition-transform">24/7</div>
+              <div className="text-slate-600 font-medium">Expert Support</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Features Section */}
@@ -168,8 +225,8 @@ export default function Landing() {
                   <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
                     <feature.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-4 group-hover:text-blue-600 transition-colors">{feature.title}</h3>
-                  <p className="text-black leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">{feature.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
