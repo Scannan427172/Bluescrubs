@@ -116,11 +116,11 @@ export default function Plab1Practice() {
   return (
     <div className="min-h-screen bg-light-bg pb-20 md:pb-0">
       {/* Header */}
-      <div className="bg-gradient-to-r from-medical-blue to-purple-accent text-white py-12">
+      <div className="bg-white py-12 border-b" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">PLAB 1 MCQ Practice</h1>
-            <p className="text-xl opacity-90">Master clinical scenarios with comprehensive question bank</p>
+            <h1 className="text-4xl font-bold mb-4" style={{ color: '#000000' }}>PLAB 1 MCQ Practice</h1>
+            <p className="text-xl" style={{ color: '#666666' }}>Master clinical scenarios with comprehensive question bank</p>
           </div>
         </div>
       </div>
@@ -128,51 +128,51 @@ export default function Plab1Practice() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-mint-green/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Trophy className="w-6 h-6 text-mint-green" />
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Trophy className="w-6 h-6 text-green-600" />
               </div>
-              <div className="text-2xl font-bold text-mint-green mb-1">
-                {userStats?.correctAnswers || 0}
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
+                {(userStats as any)?.correctAnswers || 0}
               </div>
-              <div className="text-sm text-gray-600">Correct Answers</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Correct Answers</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-medical-blue/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Target className="w-6 h-6 text-medical-blue" />
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Target className="w-6 h-6 text-blue-600" />
               </div>
-              <div className="text-2xl font-bold text-medical-blue mb-1">
-                {userStats?.totalAnswered ? Math.round((userStats.correctAnswers / userStats.totalAnswered) * 100) : 0}%
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
+                {(userStats as any)?.totalAnswered ? Math.round(((userStats as any).correctAnswers / (userStats as any).totalAnswered) * 100) : 0}%
               </div>
-              <div className="text-sm text-gray-600">Accuracy Rate</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Accuracy Rate</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-purple-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-6 h-6 text-purple-accent" />
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-6 h-6 text-purple-600" />
               </div>
-              <div className="text-2xl font-bold text-purple-accent mb-1">
-                {userStats?.averageTime ? Math.round(userStats.averageTime) : 0}s
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
+                {(userStats as any)?.averageTime ? Math.round((userStats as any).averageTime) : 0}s
               </div>
-              <div className="text-sm text-gray-600">Avg. Time</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Avg. Time</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-amber-warning/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-6 h-6 text-amber-warning" />
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-6 h-6 text-yellow-600" />
               </div>
-              <div className="text-2xl font-bold text-amber-warning mb-1">
-                {userStats?.totalAnswered || 0}
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
+                {(userStats as any)?.totalAnswered || 0}
               </div>
-              <div className="text-sm text-gray-600">Questions Attempted</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Questions Attempted</div>
             </CardContent>
           </Card>
         </div>
@@ -181,10 +181,10 @@ export default function Plab1Practice() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Practice Options */}
-            <Card>
+            <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
-                <CardTitle className="text-2xl font-bold flex items-center">
-                  <BookOpen className="w-6 h-6 mr-3 text-medical-blue" />
+                <CardTitle className="text-2xl font-bold flex items-center" style={{ color: '#000000' }}>
+                  <BookOpen className="w-6 h-6 mr-3 text-blue-600" />
                   Start Practice Session
                 </CardTitle>
               </CardHeader>
@@ -192,7 +192,7 @@ export default function Plab1Practice() {
                 {/* Filters */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#000000' }}>
                       Category
                     </label>
                     <Select value={selectedCategory} onValueChange={setSelectedCategory}>
@@ -210,7 +210,7 @@ export default function Plab1Practice() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#000000' }}>
                       Difficulty
                     </label>
                     <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
@@ -274,8 +274,8 @@ export default function Plab1Practice() {
                 {questionsLoading && (
                   <div className="text-center py-4">
                     <div className="inline-flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-medical-blue border-t-transparent rounded-full animate-spin"></div>
-                      <span className="text-gray-600">Loading questions...</span>
+                      <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                      <span style={{ color: '#000000' }}>Loading questions...</span>
                     </div>
                   </div>
                 )}
@@ -285,8 +285,8 @@ export default function Plab1Practice() {
                     <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <BookOpen className="w-8 h-8 text-gray-400" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No Questions Available</h3>
-                    <p className="text-gray-600">Try adjusting your filters or check back later.</p>
+                    <h3 className="text-lg font-semibold mb-2" style={{ color: '#000000' }}>No Questions Available</h3>
+                    <p style={{ color: '#666666' }}>Try adjusting your filters or check back later.</p>
                   </div>
                 )}
               </CardContent>
@@ -301,29 +301,29 @@ export default function Plab1Practice() {
           {/* Sidebar */}
           <div className="space-y-8">
             {/* Study Tips */}
-            <Card>
+            <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
-                <CardTitle className="text-lg font-bold">Study Tips</CardTitle>
+                <CardTitle className="text-lg font-bold" style={{ color: '#000000' }}>Study Tips</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-medical-blue">
-                    <h4 className="font-semibold text-gray-900 mb-2">📚 Active Learning</h4>
-                    <p className="text-sm text-gray-700">
+                  <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600">
+                    <h4 className="font-semibold mb-2" style={{ color: '#000000' }}>📚 Active Learning</h4>
+                    <p className="text-sm" style={{ color: '#000000' }}>
                       Don't just memorize answers. Understand the underlying clinical reasoning behind each question.
                     </p>
                   </div>
 
-                  <div className="p-4 bg-green-50 rounded-lg border-l-4 border-mint-green">
-                    <h4 className="font-semibold text-gray-900 mb-2">⏱️ Time Management</h4>
-                    <p className="text-sm text-gray-700">
+                  <div className="p-4 bg-green-50 rounded-lg border-l-4 border-green-600">
+                    <h4 className="font-semibold mb-2" style={{ color: '#000000' }}>⏱️ Time Management</h4>
+                    <p className="text-sm" style={{ color: '#000000' }}>
                       Aim for 1-2 minutes per question during practice to build speed for the actual exam.
                     </p>
                   </div>
 
-                  <div className="p-4 bg-amber-50 rounded-lg border-l-4 border-amber-warning">
-                    <h4 className="font-semibold text-gray-900 mb-2">🎯 Focus Areas</h4>
-                    <p className="text-sm text-gray-700">
+                  <div className="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-600">
+                    <h4 className="font-semibold mb-2" style={{ color: '#000000' }}>🎯 Focus Areas</h4>
+                    <p className="text-sm" style={{ color: '#000000' }}>
                       Prioritize high-yield topics like cardiology, respiratory, and emergency medicine.
                     </p>
                   </div>
@@ -332,42 +332,42 @@ export default function Plab1Practice() {
             </Card>
 
             {/* Recent Performance */}
-            <Card>
+            <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
-                <CardTitle className="text-lg font-bold">Performance Insights</CardTitle>
+                <CardTitle className="text-lg font-bold" style={{ color: '#000000' }}>Performance Insights</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <div className="font-medium text-gray-900">Strong Areas</div>
-                      <div className="text-sm text-gray-600">Categories you excel in</div>
+                      <div className="font-medium" style={{ color: '#000000' }}>Strong Areas</div>
+                      <div className="text-sm" style={{ color: '#666666' }}>Categories you excel in</div>
                     </div>
-                    <Badge className="bg-mint-green text-white">
-                      {Object.entries(userStats?.categoryStats || {})
-                        .filter(([, stats]) => stats.total > 0 && (stats.correct / stats.total) >= 0.8)
+                    <Badge className="bg-green-600 text-white">
+                      {Object.entries((userStats as any)?.categoryStats || {})
+                        .filter(([, stats]: [string, any]) => stats.total > 0 && (stats.correct / stats.total) >= 0.8)
                         .length}
                     </Badge>
                   </div>
 
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <div className="font-medium text-gray-900">Areas to Improve</div>
-                      <div className="text-sm text-gray-600">Categories needing focus</div>
+                      <div className="font-medium" style={{ color: '#000000' }}>Areas to Improve</div>
+                      <div className="text-sm" style={{ color: '#666666' }}>Categories needing focus</div>
                     </div>
-                    <Badge variant="outline" className="border-amber-warning text-amber-warning">
-                      {Object.entries(userStats?.categoryStats || {})
-                        .filter(([, stats]) => stats.total > 0 && (stats.correct / stats.total) < 0.7)
+                    <Badge variant="outline" className="border-yellow-600" style={{ color: '#ca8a04' }}>
+                      {Object.entries((userStats as any)?.categoryStats || {})
+                        .filter(([, stats]: [string, any]) => stats.total > 0 && (stats.correct / stats.total) < 0.7)
                         .length}
                     </Badge>
                   </div>
 
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <div className="font-medium text-gray-900">Practice Streak</div>
-                      <div className="text-sm text-gray-600">Consecutive days</div>
+                      <div className="font-medium" style={{ color: '#000000' }}>Practice Streak</div>
+                      <div className="text-sm" style={{ color: '#666666' }}>Consecutive days</div>
                     </div>
-                    <Badge className="bg-purple-accent text-white">
+                    <Badge className="bg-purple-600 text-white">
                       12 🔥
                     </Badge>
                   </div>
