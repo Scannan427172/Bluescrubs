@@ -15,7 +15,7 @@ export default function Landing() {
             <img 
               src={nhsPrepWomanImg} 
               alt="Professional woman with glasses studying with NHS Prep books"
-              className="w-full max-w-2xl mx-auto rounded-2xl shadow-2xl"
+              className="w-full mx-auto rounded-2xl shadow-2xl"
             />
           </div>
           
