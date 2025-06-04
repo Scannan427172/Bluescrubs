@@ -28,13 +28,13 @@ export default function Landing() {
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                   Master Your{" "}
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
-                    PLAB
+                    NHS
                   </span>{" "}
                   Journey
                 </h1>
                 
                 <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl">
-                  The world's most advanced AI-powered platform for PLAB preparation featuring{" "}
+                  The world's most advanced AI-powered platform for NHS preparation featuring{" "}
                   <span className="text-blue-400 font-semibold">video OSCE simulations</span>,{" "}
                   <span className="text-purple-400 font-semibold">adaptive learning</span>, and{" "}
                   <span className="text-green-400 font-semibold">expert mentorship</span>.
@@ -178,7 +178,7 @@ export default function Landing() {
               Why We're Different
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              12 innovative features that set us apart from every other PLAB preparation platform
+              12 innovative features that set us apart from every other NHS preparation platform
             </p>
           </div>
 
@@ -245,14 +245,14 @@ export default function Landing() {
             </div>
             
             <h2 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-              Ready to Pass Your
+              Ready to Join the
               <span className="block bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                PLAB Exams?
+                NHS?
               </span>
             </h2>
             
             <p className="text-xl text-blue-100 leading-relaxed max-w-2xl mx-auto">
-              Join thousands of international medical graduates who achieved their UK medical career dreams with our platform.
+              Join thousands of international medical graduates who achieved their UK medical career dreams with NHS Prep.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
