@@ -51,33 +51,7 @@ export default function Landing() {
                 </p>
               </div>
               
-              {/* Feature Highlights */}
-              <div className="grid grid-cols-2 gap-4 py-6">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 text-green-400" />
-                  </div>
-                  <span className="text-slate-300">AI-Powered Learning</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                    <Video className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <span className="text-slate-300">Video OSCE Prep</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 text-purple-400" />
-                  </div>
-                  <span className="text-slate-300">Expert Mentors</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                    <Trophy className="w-5 h-5 text-orange-400" />
-                  </div>
-                  <span className="text-slate-300">95% Pass Rate</span>
-                </div>
-              </div>
+
               
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
