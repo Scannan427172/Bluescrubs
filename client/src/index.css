@@ -75,10 +75,29 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #212529;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
+    color: #212529;
+  }
+
+  /* Ensure better text contrast throughout the app */
+  .text-gray-900 {
+    color: #212529 !important;
+  }
+
+  .text-gray-800 {
+    color: #495057 !important;
+  }
+
+  .text-gray-700 {
+    color: #6c757d !important;
+  }
+
+  .text-gray-600 {
+    color: #6c757d !important;
   }
 
   .text-medical-blue {
@@ -172,6 +191,17 @@
   .card-hover:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Enhanced card readability */
+  .card {
+    background-color: #ffffff;
+    color: #212529;
+    border: 1px solid #e9ecef;
+  }
+
+  .card-content {
+    color: #212529;
   }
 
   /* Custom button styles */
