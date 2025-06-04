@@ -12,6 +12,9 @@ import Community from "@/pages/community";
 import NhsPrep from "@/pages/nhs-prep";
 import Onboarding from "@/pages/onboarding";
 import NotFound from "@/pages/not-found";
+import AdaptiveLearning from "@/pages/adaptive-learning";
+import SmartPlanner from "@/pages/smart-planner";
+import Mentors from "@/pages/mentors";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -31,6 +34,9 @@ function Router() {
         <Route path="/plab2" component={Plab2Osce} />
         <Route path="/community" component={Community} />
         <Route path="/nhs-prep" component={NhsPrep} />
+        <Route path="/adaptive-learning" component={AdaptiveLearning} />
+        <Route path="/smart-planner" component={SmartPlanner} />
+        <Route path="/mentors" component={Mentors} />
         <Route component={NotFound} />
       </Switch>
     </div>
