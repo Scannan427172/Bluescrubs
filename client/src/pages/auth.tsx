@@ -189,7 +189,7 @@ export default function Auth() {
                 <TabsContent value="login" className="space-y-4">
                   <form onSubmit={handleLogin} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="login-email">Email Address</Label>
+                      <Label htmlFor="login-email" className="text-black">Email Address</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                         <Input
@@ -205,7 +205,7 @@ export default function Auth() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="login-password">Password</Label>
+                      <Label htmlFor="login-password" className="text-black">Password</Label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                         <Input
@@ -254,7 +254,7 @@ export default function Auth() {
                   <form onSubmit={handleRegister} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
+                        <Label htmlFor="firstName" className="text-black">First Name</Label>
                         <Input
                           id="firstName"
                           placeholder="John"
@@ -264,7 +264,7 @@ export default function Auth() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
+                        <Label htmlFor="lastName" className="text-black">Last Name</Label>
                         <Input
                           id="lastName"
                           placeholder="Doe"
@@ -276,7 +276,7 @@ export default function Auth() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="register-email">Email Address</Label>
+                      <Label htmlFor="register-email" className="text-black">Email Address</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                         <Input
@@ -292,7 +292,7 @@ export default function Auth() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="medicalBackground">Medical Background</Label>
+                      <Label htmlFor="medicalBackground" className="text-black">Medical Background</Label>
                       <Select value={registerForm.medicalBackground} onValueChange={(value) => setRegisterForm({...registerForm, medicalBackground: value})}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select your background" />
@@ -309,7 +309,7 @@ export default function Auth() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="country">Country</Label>
+                        <Label htmlFor="country" className="text-black">Country</Label>
                         <Select value={registerForm.country} onValueChange={(value) => setRegisterForm({...registerForm, country: value})}>
                           <SelectTrigger>
                             <SelectValue placeholder="Select country" />
@@ -326,7 +326,7 @@ export default function Auth() {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="examDate">Target Exam Date</Label>
+                        <Label htmlFor="examDate" className="text-black">Target Exam Date</Label>
                         <Input
                           id="examDate"
                           type="date"
