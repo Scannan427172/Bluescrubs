@@ -86,47 +86,46 @@ export default function Landing() {
               </div>
             </div>
             
-            {/* Right Side - Hero Image */}
+            {/* Right Side - Feature Cards */}
             <div className="relative lg:pl-8">
-              <div className="relative">
-                {/* Main Image Container */}
-                <div className="relative bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-3xl p-1 border border-white/20 shadow-2xl">
-                  <div className="bg-gradient-to-br from-white/5 to-white/10 rounded-3xl p-6">
-                    <img 
-                      src={nhsPrepWomanImg} 
-                      alt="Professional woman with glasses studying with NHS Prep books"
-                      className="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
-                
+              <div className="grid grid-cols-2 gap-6">
                 {/* Floating Achievement Cards */}
-                <div className="absolute -top-6 -right-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-2xl shadow-2xl animate-bounce">
-                  <div className="flex items-center space-x-2">
-                    <Trophy className="w-5 h-5" />
+                <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center space-x-3">
+                    <Trophy className="w-8 h-8" />
                     <div>
-                      <div className="text-sm font-bold">95% Pass Rate</div>
-                      <div className="text-xs opacity-90">Success Guaranteed</div>
+                      <div className="text-xl font-bold">95%</div>
+                      <div className="text-sm opacity-90">Pass Rate</div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="absolute -bottom-6 -left-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-2xl shadow-2xl animate-pulse">
-                  <div className="flex items-center space-x-2">
-                    <Video className="w-5 h-5" />
+                <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center space-x-3">
+                    <Video className="w-8 h-8" />
                     <div>
-                      <div className="text-sm font-bold">Video OSCE</div>
-                      <div className="text-xs opacity-90">Real Simulations</div>
+                      <div className="text-xl font-bold">Video</div>
+                      <div className="text-sm opacity-90">OSCE Prep</div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="absolute top-1/2 -left-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-3 rounded-2xl shadow-2xl">
-                  <div className="flex items-center space-x-2">
-                    <Brain className="w-5 h-5" />
+                <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center space-x-3">
+                    <Brain className="w-8 h-8" />
                     <div>
-                      <div className="text-sm font-bold">AI Learning</div>
-                      <div className="text-xs opacity-90">Adaptive</div>
+                      <div className="text-xl font-bold">AI</div>
+                      <div className="text-sm opacity-90">Learning</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-center space-x-3">
+                    <Users className="w-8 h-8" />
+                    <div>
+                      <div className="text-xl font-bold">10K+</div>
+                      <div className="text-sm opacity-90">Students</div>
                     </div>
                   </div>
                 </div>
