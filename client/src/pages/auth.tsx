@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { 
   Stethoscope, Mail, Lock, User, GraduationCap, 
   MapPin, Calendar, Eye, EyeOff, CheckCircle, 
-  ArrowRight, Globe, Shield
+  ArrowRight, Globe, Shield, Users, Award
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -439,6 +439,26 @@ export default function Auth() {
               </div>
             </CardContent>
           </Card>
+        </div>
+      </div>
+      
+      {/* Bottom Block with 50% Transparency */}
+      <div className="absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur-sm p-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
+            <div className="flex items-center justify-center space-x-2">
+              <Shield className="w-5 h-5" />
+              <span className="text-sm font-medium">Secure & Private</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <Users className="w-5 h-5" />
+              <span className="text-sm font-medium">15,000+ Students</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <Award className="w-5 h-5" />
+              <span className="text-sm font-medium">94% Success Rate</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
