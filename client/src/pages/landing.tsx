@@ -7,17 +7,17 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 overflow-hidden">
+      <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,.05)_50%,transparent_75%,transparent_100%)] bg-[length:250px_250px] animate-[move_20s_linear_infinite]"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.05)_50%,transparent_75%,transparent_100%)] bg-[length:250px_250px] animate-[move_20s_linear_infinite]"></div>
         </div>
         
         {/* Hero Content */}
         <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Content */}
-            <div className="text-black space-y-8 lg:pr-8">
+            <div className="text-white space-y-8 lg:pr-8">
               <div className="space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
                   <Star className="w-5 h-5 mr-3 text-yellow-400" />
@@ -26,17 +26,17 @@ export default function Landing() {
                 
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                   Master Your{" "}
-                  <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse">
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
                     NHSprep
                   </span>{" "}
                   Journey
                 </h1>
                 
-                <p className="text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-2xl">
+                <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl">
                   The world's most advanced AI-powered platform for NHSprep featuring{" "}
-                  <span className="text-blue-600 font-semibold">video OSCE simulations</span>,{" "}
-                  <span className="text-purple-600 font-semibold">adaptive learning</span>, and{" "}
-                  <span className="text-green-600 font-semibold">expert mentorship</span>.
+                  <span className="text-blue-400 font-semibold">video OSCE simulations</span>,{" "}
+                  <span className="text-purple-400 font-semibold">adaptive learning</span>, and{" "}
+                  <span className="text-green-400 font-semibold">expert mentorship</span>.
                 </p>
               </div>
               
@@ -44,27 +44,27 @@ export default function Landing() {
               <div className="grid grid-cols-2 gap-4 py-6">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
+                    <CheckCircle className="w-5 h-5 text-green-400" />
                   </div>
-                  <span className="text-gray-700">AI-Powered Learning</span>
+                  <span className="text-slate-300">AI-Powered Learning</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                    <Video className="w-5 h-5 text-blue-600" />
+                    <Video className="w-5 h-5 text-blue-400" />
                   </div>
-                  <span className="text-gray-700">Video OSCE Prep</span>
+                  <span className="text-slate-300">Video OSCE Prep</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 text-purple-600" />
+                    <Users className="w-5 h-5 text-purple-400" />
                   </div>
-                  <span className="text-gray-700">Expert Mentors</span>
+                  <span className="text-slate-300">Expert Mentors</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                    <Trophy className="w-5 h-5 text-orange-600" />
+                    <Trophy className="w-5 h-5 text-orange-400" />
                   </div>
-                  <span className="text-gray-700">95% Pass Rate</span>
+                  <span className="text-slate-300">95% Pass Rate</span>
                 </div>
               </div>
               
@@ -135,8 +135,8 @@ export default function Landing() {
         
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center cursor-pointer hover:border-gray-600 transition-colors">
-            <div className="w-1 h-3 bg-gray-600 rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center cursor-pointer hover:border-white/60 transition-colors">
+            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
         
@@ -145,20 +145,20 @@ export default function Landing() {
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center group">
-                <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2 group-hover:scale-110 transition-transform">10,000+</div>
-                <div className="text-gray-700 font-medium">Successful Students</div>
+                <div className="text-4xl lg:text-5xl font-bold text-blue-400 mb-2 group-hover:scale-110 transition-transform">10,000+</div>
+                <div className="text-slate-300 font-medium">Successful Students</div>
               </div>
               <div className="text-center group">
-                <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-2 group-hover:scale-110 transition-transform">95%</div>
-                <div className="text-gray-700 font-medium">Pass Rate</div>
+                <div className="text-4xl lg:text-5xl font-bold text-green-400 mb-2 group-hover:scale-110 transition-transform">95%</div>
+                <div className="text-slate-300 font-medium">Pass Rate</div>
               </div>
               <div className="text-center group">
-                <div className="text-4xl lg:text-5xl font-bold text-purple-600 mb-2 group-hover:scale-110 transition-transform">12+</div>
-                <div className="text-gray-700 font-medium">Unique Features</div>
+                <div className="text-4xl lg:text-5xl font-bold text-purple-400 mb-2 group-hover:scale-110 transition-transform">12+</div>
+                <div className="text-slate-300 font-medium">Unique Features</div>
               </div>
               <div className="text-center group">
-                <div className="text-4xl lg:text-5xl font-bold text-orange-600 mb-2 group-hover:scale-110 transition-transform">24/7</div>
-                <div className="text-gray-700 font-medium">Expert Support</div>
+                <div className="text-4xl lg:text-5xl font-bold text-orange-400 mb-2 group-hover:scale-110 transition-transform">24/7</div>
+                <div className="text-slate-300 font-medium">Expert Support</div>
               </div>
             </div>
           </div>
