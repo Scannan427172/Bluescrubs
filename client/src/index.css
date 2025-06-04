@@ -35,6 +35,20 @@
   --light-bg: 212 10% 97%; /* #F8F9FA */
 }
 
+/* Custom input styling for black text */
+.auth-input input {
+  color: black !important;
+}
+
+.auth-input input::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Select field styling */
+.auth-select [data-radix-select-trigger] {
+  color: black !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;

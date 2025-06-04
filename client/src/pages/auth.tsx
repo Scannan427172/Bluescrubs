@@ -196,7 +196,7 @@ export default function Auth() {
                           id="login-email"
                           type="email"
                           placeholder="doctor@example.com"
-                          className="pl-10"
+                          className="pl-10 auth-input text-black"
                           value={loginForm.email}
                           onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
                           required
@@ -212,7 +212,7 @@ export default function Auth() {
                           id="login-password"
                           type={showPassword ? "text" : "password"}
                           placeholder="Enter your password"
-                          className="pl-10 pr-10"
+                          className="pl-10 pr-10 auth-input text-black"
                           value={loginForm.password}
                           onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
                           required
@@ -258,6 +258,7 @@ export default function Auth() {
                         <Input
                           id="firstName"
                           placeholder="John"
+                          className="auth-input text-black"
                           value={registerForm.firstName}
                           onChange={(e) => setRegisterForm({...registerForm, firstName: e.target.value})}
                           required
@@ -268,6 +269,7 @@ export default function Auth() {
                         <Input
                           id="lastName"
                           placeholder="Doe"
+                          className="auth-input text-black"
                           value={registerForm.lastName}
                           onChange={(e) => setRegisterForm({...registerForm, lastName: e.target.value})}
                           required
@@ -283,7 +285,7 @@ export default function Auth() {
                           id="register-email"
                           type="email"
                           placeholder="doctor@example.com"
-                          className="pl-10"
+                          className="pl-10 auth-input text-black"
                           value={registerForm.email}
                           onChange={(e) => setRegisterForm({...registerForm, email: e.target.value})}
                           required
@@ -294,7 +296,7 @@ export default function Auth() {
                     <div className="space-y-2">
                       <Label htmlFor="medicalBackground" className="text-black">Medical Background</Label>
                       <Select value={registerForm.medicalBackground} onValueChange={(value) => setRegisterForm({...registerForm, medicalBackground: value})}>
-                        <SelectTrigger>
+                        <SelectTrigger className="auth-select text-black">
                           <SelectValue placeholder="Select your background" />
                         </SelectTrigger>
                         <SelectContent>
@@ -311,7 +313,7 @@ export default function Auth() {
                       <div className="space-y-2">
                         <Label htmlFor="country" className="text-black">Country</Label>
                         <Select value={registerForm.country} onValueChange={(value) => setRegisterForm({...registerForm, country: value})}>
-                          <SelectTrigger>
+                          <SelectTrigger className="auth-select text-black">
                             <SelectValue placeholder="Select country" />
                           </SelectTrigger>
                           <SelectContent>
