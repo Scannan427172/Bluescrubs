@@ -63,16 +63,6 @@ export function Navigation({ user }: NavigationProps) {
                 <Badge className="absolute -top-1 -right-1 w-3 h-3 p-0 bg-deep-rose" />
               </Button>
 
-              {/* Login Button */}
-              <Link href="/auth">
-                <Button 
-                  className="bg-medical-blue text-white hover:bg-blue-700" 
-                  style={{ backgroundColor: '#2E86AB' }}
-                >
-                  Login
-                </Button>
-              </Link>
-
               {/* User Profile */}
               {user && (
                 <div className="flex items-center space-x-3">
