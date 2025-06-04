@@ -68,56 +68,56 @@ export default function Home() {
               <h1 className="text-4xl font-bold mb-4" style={{ color: '#000000' }}>
                 Welcome back, {DEMO_USER.username.split(' ')[1]}! 👋
               </h1>
-              <p className="text-xl mb-8 opacity-90">
+              <p className="text-xl mb-8 opacity-90" style={{ color: '#000000' }}>
                 Continue your PLAB journey with personalized study plans and comprehensive practice.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <div className="bg-white/10 rounded-lg px-6 py-4">
+                <div className="bg-white/10 rounded-lg px-6 py-4" style={{ color: '#000000' }}>
                   <div className="flex items-center space-x-2 mb-1">
                     <Flame className="w-5 h-5 text-amber-warning" />
-                    <span className="text-sm font-medium">Study Streak</span>
+                    <span className="text-sm font-medium" style={{ color: '#000000' }}>Study Streak</span>
                   </div>
-                  <div className="text-2xl font-bold">{DEMO_USER.studyStreak} days</div>
+                  <div className="text-2xl font-bold" style={{ color: '#000000' }}>{DEMO_USER.studyStreak} days</div>
                 </div>
-                <div className="bg-white/10 rounded-lg px-6 py-4">
+                <div className="bg-white/10 rounded-lg px-6 py-4" style={{ color: '#000000' }}>
                   <div className="flex items-center space-x-2 mb-1">
                     <Award className="w-5 h-5 text-mint-green" />
-                    <span className="text-sm font-medium">Total Points</span>
+                    <span className="text-sm font-medium" style={{ color: '#000000' }}>Total Points</span>
                   </div>
-                  <div className="text-2xl font-bold">{DEMO_USER.totalPoints.toLocaleString()}</div>
+                  <div className="text-2xl font-bold" style={{ color: '#000000' }}>{DEMO_USER.totalPoints.toLocaleString()}</div>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/plab1">
-                  <Button className="bg-white text-medical-blue hover:bg-gray-100 font-semibold px-8 py-3">
+                  <Button className="bg-white text-medical-blue hover:bg-gray-100 font-semibold px-8 py-3" style={{ color: '#2E86AB' }}>
                     Continue Learning
                   </Button>
                 </Link>
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-3">
+                <Button variant="outline" className="border-white/30 hover:bg-white/10 px-8 py-3" style={{ color: '#000000', borderColor: '#000000' }}>
                   View Progress
                 </Button>
               </div>
             </div>
 
             <div className="relative">
-              <div className="bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
-                <h3 className="text-xl font-bold mb-6">Quick Stats</h3>
+              <div className="bg-white/10 rounded-2xl p-8 backdrop-blur-sm" style={{ color: '#000000' }}>
+                <h3 className="text-xl font-bold mb-6" style={{ color: '#000000' }}>Quick Stats</h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span>Questions Completed</span>
-                    <span className="font-bold">{userStats?.totalAnswered || 0}</span>
+                    <span style={{ color: '#000000' }}>Questions Completed</span>
+                    <span className="font-bold" style={{ color: '#000000' }}>{userStats?.totalAnswered || 0}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span>Accuracy Rate</span>
-                    <span className="font-bold">
+                    <span style={{ color: '#000000' }}>Accuracy Rate</span>
+                    <span className="font-bold" style={{ color: '#000000' }}>
                       {userStats?.totalAnswered ? Math.round((userStats.correctAnswers / userStats.totalAnswered) * 100) : 0}%
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span>Current Focus</span>
-                    <Badge className="bg-white/20 text-white">PLAB 1</Badge>
+                    <span style={{ color: '#000000' }}>Current Focus</span>
+                    <Badge className="bg-white/20" style={{ color: '#000000' }}>PLAB 1</Badge>
                   </div>
                 </div>
               </div>
