@@ -61,7 +61,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-light-bg pb-20 md:pb-0">
       {/* Welcome Hero Section */}
-      <section className="bg-gradient-to-br from-medical-blue to-purple-accent text-white py-16">
+      <section className="bg-white py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -73,14 +73,14 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <div className="bg-white/10 rounded-lg px-6 py-4" style={{ color: '#000000' }}>
+                <div className="bg-gray-100 rounded-lg px-6 py-4 border" style={{ backgroundColor: '#f8f9fa', color: '#000000' }}>
                   <div className="flex items-center space-x-2 mb-1">
                     <Flame className="w-5 h-5 text-amber-warning" />
                     <span className="text-sm font-medium" style={{ color: '#000000' }}>Study Streak</span>
                   </div>
                   <div className="text-2xl font-bold" style={{ color: '#000000' }}>{DEMO_USER.studyStreak} days</div>
                 </div>
-                <div className="bg-white/10 rounded-lg px-6 py-4" style={{ color: '#000000' }}>
+                <div className="bg-gray-100 rounded-lg px-6 py-4 border" style={{ backgroundColor: '#f8f9fa', color: '#000000' }}>
                   <div className="flex items-center space-x-2 mb-1">
                     <Award className="w-5 h-5 text-mint-green" />
                     <span className="text-sm font-medium" style={{ color: '#000000' }}>Total Points</span>
@@ -102,7 +102,7 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="bg-white/10 rounded-2xl p-8 backdrop-blur-sm" style={{ color: '#000000' }}>
+              <div className="bg-gray-100 rounded-2xl p-8 border" style={{ backgroundColor: '#f8f9fa', color: '#000000' }}>
                 <h3 className="text-xl font-bold mb-6" style={{ color: '#000000' }}>Quick Stats</h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
@@ -117,7 +117,7 @@ export default function Home() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span style={{ color: '#000000' }}>Current Focus</span>
-                    <Badge className="bg-white/20" style={{ color: '#000000' }}>PLAB 1</Badge>
+                    <Badge className="bg-blue-100 border border-blue-300" style={{ color: '#2E86AB', backgroundColor: '#e3f2fd' }}>PLAB 1</Badge>
                   </div>
                 </div>
               </div>
