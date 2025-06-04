@@ -81,11 +81,11 @@ export default function Plab2Osce() {
   return (
     <div className="min-h-screen bg-light-bg pb-20 md:pb-0">
       {/* Header */}
-      <div className="bg-gradient-to-r from-deep-rose to-purple-accent text-white py-12">
+      <div className="bg-white py-12 border-b" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">PLAB 2 OSCE Preparation</h1>
-            <p className="text-xl opacity-90">Master clinical skills through interactive simulations</p>
+            <h1 className="text-4xl font-bold mb-4" style={{ color: '#000000' }}>PLAB 2 OSCE Preparation</h1>
+            <p className="text-xl" style={{ color: '#666666' }}>Master clinical skills through interactive simulations</p>
           </div>
         </div>
       </div>
@@ -93,51 +93,51 @@ export default function Plab2Osce() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-mint-green/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-6 h-6 text-mint-green" />
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
-              <div className="text-2xl font-bold text-mint-green mb-1">
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
                 {userAttempts?.filter(a => a.score >= 70).length || 0}
               </div>
-              <div className="text-sm text-gray-600">Stations Passed</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Stations Passed</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-deep-rose/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Star className="w-6 h-6 text-deep-rose" />
+              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Star className="w-6 h-6 text-red-600" />
               </div>
-              <div className="text-2xl font-bold text-deep-rose mb-1">
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
                 {userAttempts?.length ? Math.round(userAttempts.reduce((acc, a) => acc + a.score, 0) / userAttempts.length) : 0}%
               </div>
-              <div className="text-sm text-gray-600">Average Score</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Average Score</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-purple-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Stethoscope className="w-6 h-6 text-purple-accent" />
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Stethoscope className="w-6 h-6 text-purple-600" />
               </div>
-              <div className="text-2xl font-bold text-purple-accent mb-1">
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
                 {userAttempts?.length || 0}/{stations?.length || 0}
               </div>
-              <div className="text-sm text-gray-600">Stations Attempted</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Stations Attempted</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-amber-warning/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-6 h-6 text-amber-warning" />
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-6 h-6 text-yellow-600" />
               </div>
-              <div className="text-2xl font-bold text-amber-warning mb-1">
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
                 8
               </div>
-              <div className="text-sm text-gray-600">Avg. Time (min)</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Avg. Time (min)</div>
             </CardContent>
           </Card>
         </div>
@@ -146,10 +146,10 @@ export default function Plab2Osce() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* OSCE Stations */}
-            <Card>
+            <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
-                <CardTitle className="text-2xl font-bold flex items-center">
-                  <Stethoscope className="w-6 h-6 mr-3 text-deep-rose" />
+                <CardTitle className="text-2xl font-bold flex items-center" style={{ color: '#000000' }}>
+                  <Stethoscope className="w-6 h-6 mr-3 text-red-600" />
                   OSCE Stations
                 </CardTitle>
               </CardHeader>
@@ -157,8 +157,8 @@ export default function Plab2Osce() {
                 {stationsLoading ? (
                   <div className="text-center py-8">
                     <div className="inline-flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-deep-rose border-t-transparent rounded-full animate-spin"></div>
-                      <span className="text-gray-600">Loading stations...</span>
+                      <div className="w-4 h-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+                      <span style={{ color: '#000000' }}>Loading stations...</span>
                     </div>
                   </div>
                 ) : stations && stations.length > 0 ? (
@@ -170,38 +170,39 @@ export default function Plab2Osce() {
                       return (
                         <div
                           key={station.id}
-                          className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                          className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white"
+                          style={{ backgroundColor: '#ffffff' }}
                         >
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center space-x-3">
-                              <div className="w-10 h-10 bg-deep-rose/10 rounded-lg flex items-center justify-center">
+                              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
                                 <span className="text-lg">{getStationIcon(station.category)}</span>
                               </div>
                               <div>
-                                <h3 className="font-semibold text-gray-900">{station.title}</h3>
-                                <p className="text-sm text-gray-600 capitalize">{station.category.replace('-', ' ')}</p>
+                                <h3 className="font-semibold" style={{ color: '#000000' }}>{station.title}</h3>
+                                <p className="text-sm capitalize" style={{ color: '#666666' }}>{station.category.replace('-', ' ')}</p>
                               </div>
                             </div>
                             
                             {isCompleted && (
-                              <Badge className="bg-mint-green text-white">
+                              <Badge className="bg-green-600 text-white">
                                 {attempt.score}%
                               </Badge>
                             )}
                           </div>
 
-                          <p className="text-gray-700 text-sm mb-4 line-clamp-2">
+                          <p className="text-sm mb-4 line-clamp-2" style={{ color: '#000000' }}>
                             {station.description}
                           </p>
 
-                          <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
+                          <div className="flex items-center justify-between text-sm mb-4" style={{ color: '#666666' }}>
                             <div className="flex items-center space-x-2">
                               <Clock className="w-4 h-4" />
                               <span>{station.timeLimit} minutes</span>
                             </div>
                             {isCompleted && (
                               <div className="flex items-center space-x-2">
-                                <CheckCircle className="w-4 h-4 text-mint-green" />
+                                <CheckCircle className="w-4 h-4 text-green-600" />
                                 <span>Completed</span>
                               </div>
                             )}
@@ -227,7 +228,7 @@ export default function Plab2Osce() {
                     <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Stethoscope className="w-8 h-8 text-gray-400" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No OSCE Stations Available</h3>
+                    <h3 className="text-lg font-semibold mb-2" style={{ color: '#000000' }}>No OSCE Stations Available</h3>
                     <p className="text-gray-600">OSCE stations will be available once you complete PLAB 1 preparation.</p>
                   </div>
                 )}

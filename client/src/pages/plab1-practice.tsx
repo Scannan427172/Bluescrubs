@@ -376,27 +376,27 @@ export default function Plab1Practice() {
             </Card>
 
             {/* Exam Information */}
-            <Card>
+            <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
-                <CardTitle className="text-lg font-bold">PLAB 1 Exam Info</CardTitle>
+                <CardTitle className="text-lg font-bold" style={{ color: '#000000' }}>PLAB 1 Exam Info</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Format:</span>
-                    <span className="font-medium">180 MCQs</span>
+                    <span style={{ color: '#666666' }}>Format:</span>
+                    <span className="font-medium" style={{ color: '#000000' }}>180 MCQs</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Duration:</span>
-                    <span className="font-medium">3 hours</span>
+                    <span style={{ color: '#666666' }}>Duration:</span>
+                    <span className="font-medium" style={{ color: '#000000' }}>3 hours</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Pass Mark:</span>
-                    <span className="font-medium">~65%</span>
+                    <span style={{ color: '#666666' }}>Pass Mark:</span>
+                    <span className="font-medium" style={{ color: '#000000' }}>~65%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Cost:</span>
-                    <span className="font-medium">£230</span>
+                    <span style={{ color: '#666666' }}>Cost:</span>
+                    <span className="font-medium" style={{ color: '#000000' }}>£230</span>
                   </div>
                 </div>
                 
