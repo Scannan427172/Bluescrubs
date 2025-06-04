@@ -25,8 +25,9 @@ export default function Landing() {
         
         {/* Hero Content */}
         <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
-          <div className="max-w-7xl mx-auto text-center">
-            <div className="text-white space-y-8">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Content */}
+            <div className="text-white space-y-8 lg:pr-8">
               <div className="space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
                   <Star className="w-5 h-5 mr-3 text-yellow-400" />
@@ -41,44 +42,44 @@ export default function Landing() {
                   Journey
                 </h1>
                 
-                <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl">
                   The world's most advanced AI-powered platform for NHSprep featuring{" "}
                   <span className="text-blue-400 font-semibold">video OSCE simulations</span>,{" "}
                   <span className="text-purple-400 font-semibold">adaptive learning</span>, and{" "}
                   <span className="text-green-400 font-semibold">expert mentorship</span>.
                 </p>
-                
-                {/* Feature Highlights - moved below expert mentorship */}
-                <div className="grid grid-cols-2 gap-4 py-6 max-w-lg mx-auto">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-                      <CheckCircle className="w-5 h-5 text-green-400" />
-                    </div>
-                    <span className="text-slate-300">AI-Powered Learning</span>
+              </div>
+              
+              {/* Feature Highlights */}
+              <div className="grid grid-cols-2 gap-4 py-6">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                    <CheckCircle className="w-5 h-5 text-green-400" />
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                      <Video className="w-5 h-5 text-blue-400" />
-                    </div>
-                    <span className="text-slate-300">Video OSCE Prep</span>
+                  <span className="text-slate-300">AI-Powered Learning</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                    <Video className="w-5 h-5 text-blue-400" />
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                      <Users className="w-5 h-5 text-purple-400" />
-                    </div>
-                    <span className="text-slate-300">Expert Mentors</span>
+                  <span className="text-slate-300">Video OSCE Prep</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                    <Users className="w-5 h-5 text-purple-400" />
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                      <Trophy className="w-5 h-5 text-orange-400" />
-                    </div>
-                    <span className="text-slate-300">95% Pass Rate</span>
+                  <span className="text-slate-300">Expert Mentors</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                    <Trophy className="w-5 h-5 text-orange-400" />
                   </div>
+                  <span className="text-slate-300">95% Pass Rate</span>
                 </div>
               </div>
               
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link href="/auth">
                   <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
                     Start Your Free Trial
@@ -93,6 +94,8 @@ export default function Landing() {
                 </Link>
               </div>
             </div>
+            
+
           </div>
         </div>
         
@@ -102,6 +105,8 @@ export default function Landing() {
             <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
+        
+
       </div>
 
       {/* Features Section */}
