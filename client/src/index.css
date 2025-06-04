@@ -125,6 +125,26 @@
     background-color: hsl(var(--light-bg));
   }
 
+  .border-medical-blue {
+    border-color: hsl(var(--medical-blue));
+  }
+
+  .border-deep-rose {
+    border-color: hsl(var(--deep-rose));
+  }
+
+  .border-mint-green {
+    border-color: hsl(var(--mint-green));
+  }
+
+  .border-amber-warning {
+    border-color: hsl(var(--amber-warning));
+  }
+
+  .border-purple-accent {
+    border-color: hsl(var(--purple-accent));
+  }
+
   /* Custom spacing utilities */
   .spacing-20 {
     @apply p-5 gap-5;

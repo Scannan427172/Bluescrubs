@@ -207,7 +207,8 @@ export class MemStorage implements IStorage {
       id,
       studyStreak: 0,
       totalPoints: 0,
-      createdAt: new Date()
+      createdAt: new Date(),
+      currentStage: insertUser.currentStage || 'plab1'
     };
     this.users.set(id, user);
     return user;
@@ -239,7 +240,11 @@ export class MemStorage implements IStorage {
 
   async createQuestion(insertQuestion: InsertQuestion): Promise<Question> {
     const id = this.currentQuestionId++;
-    const question: Question = { ...insertQuestion, id };
+    const question: Question = { 
+      ...insertQuestion, 
+      id,
+      options: insertQuestion.options || []
+    };
     this.questions.set(id, question);
     return question;
   }
@@ -296,7 +301,11 @@ export class MemStorage implements IStorage {
 
   async createStudyPlan(insertPlan: InsertStudyPlan): Promise<StudyPlan> {
     const id = this.currentPlanId++;
-    const plan: StudyPlan = { ...insertPlan, id };
+    const plan: StudyPlan = { 
+      ...insertPlan, 
+      id,
+      completed: insertPlan.completed || false
+    };
     this.studyPlans.set(id, plan);
     return plan;
   }
@@ -393,7 +402,8 @@ export class MemStorage implements IStorage {
     const attempt: UserOsceAttempt = {
       ...insertAttempt,
       id,
-      completedAt: new Date()
+      completedAt: new Date(),
+      feedback: insertAttempt.feedback || null
     };
     this.userOsceAttempts.set(id, attempt);
     return attempt;
