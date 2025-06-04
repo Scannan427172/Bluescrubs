@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { 
   Wifi, WifiOff, Download, CheckCircle, Clock, 
-  AlertCircle, Smartphone, Database, Sync, Settings
+  AlertCircle, Smartphone, Database, RefreshCw, Settings
 } from "lucide-react";
 
 export default function OfflineMode() {
@@ -185,7 +185,7 @@ export default function OfflineMode() {
           <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Sync className="w-6 h-6 text-purple-600" />
+                <RefreshCw className="w-6 h-6 text-purple-600" />
               </div>
               <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>{offlineData.syncStatus.pendingUploads}</div>
               <div className="text-sm" style={{ color: '#666666' }}>Pending Sync</div>
@@ -290,7 +290,7 @@ export default function OfflineMode() {
                         {content.downloaded === content.total ? 'Complete' : 'Download More'}
                       </Button>
                       <Button size="sm" variant="outline" onClick={() => syncNow()}>
-                        <Sync className="w-4 h-4" />
+                        <RefreshCw className="w-4 h-4" />
                       </Button>
                     </div>
                   </CardContent>
@@ -346,7 +346,7 @@ export default function OfflineMode() {
 
                   <div className="flex flex-col justify-center space-y-4">
                     <Button onClick={syncNow} className="bg-blue-600 hover:bg-blue-700 text-white" disabled={!isOnline}>
-                      <Sync className="w-4 h-4 mr-2" />
+                      <RefreshCw className="w-4 h-4 mr-2" />
                       {isOnline ? 'Sync Now' : 'Connect to Sync'}
                     </Button>
                     

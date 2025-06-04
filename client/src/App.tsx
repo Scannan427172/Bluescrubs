@@ -21,6 +21,7 @@ import Analytics from "@/pages/analytics";
 import Gamification from "@/pages/gamification";
 import OfflineMode from "@/pages/offline-mode";
 import PersonalizedPaths from "@/pages/personalized-paths";
+import Auth from "@/pages/auth";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -49,6 +50,7 @@ function Router() {
         <Route path="/gamification" component={Gamification} />
         <Route path="/offline-mode" component={OfflineMode} />
         <Route path="/personalized-paths" component={PersonalizedPaths} />
+        <Route path="/auth" component={Auth} />
         <Route component={NotFound} />
       </Switch>
     </div>
