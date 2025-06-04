@@ -81,29 +81,7 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div className="py-16 bg-gradient-to-r from-slate-50 to-blue-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center group">
-              <div className="text-4xl lg:text-5xl font-bold text-blue-600 mb-2 group-hover:scale-110 transition-transform">10,000+</div>
-              <div className="text-slate-600 font-medium">Successful Students</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-4xl lg:text-5xl font-bold text-green-600 mb-2 group-hover:scale-110 transition-transform">95%</div>
-              <div className="text-slate-600 font-medium">Pass Rate</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-4xl lg:text-5xl font-bold text-purple-600 mb-2 group-hover:scale-110 transition-transform">12+</div>
-              <div className="text-slate-600 font-medium">Unique Features</div>
-            </div>
-            <div className="text-center group">
-              <div className="text-4xl lg:text-5xl font-bold text-orange-600 mb-2 group-hover:scale-110 transition-transform">24/7</div>
-              <div className="text-slate-600 font-medium">Expert Support</div>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       {/* Features Section */}
       <div className="py-20 bg-white">
