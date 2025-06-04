@@ -1,0 +1,85 @@
+🩺 PLAB Prep App – Complete Copy & Feature Breakdown
+
+⸻
+
+🔧 How to Make It Better Than Existing Apps
+
+1. Adaptive Learning System
+
+📈 Like a private tutor in your pocket.
+
+	•	Tracks your strengths and weaknesses
+	•	Adjusts daily study content automatically
+	•	Boosts low-performing areas (e.g. cardiology, ethics)
+	•	Smart revision reminders based on spaced repetition
+
+⸻
+
+2. Full PLAB Journey Support
+
+🚑 Go beyond questions. Guide users through the full path.
+
+	•	PLAB 1 & 2 booking walkthroughs
+	•	Visa and travel guidance for international candidates
+	•	GMC registration steps post-exam
+	•	NHS job interview prep
+	•	Motivational check-ins and burnout prevention alerts
+
+⸻
+
+3. Realistic PLAB 2 OSCE Simulation
+
+🎥 The most immersive OSCE prep experience yet.
+
+	•	Video-based simulated stations (actor-patient style)
+	•	Record your own responses for self-review
+	•	AI feedback on communication, structure, empathy
+	•	Filter stations by theme (e.g. abdominal pain, mental health)
+
+⸻
+
+4. Built-In Planner & Tracker
+
+🗓️ A smart study plan that adapts to your life.
+
+	•	Weekly planner with drag-and-drop topics
+	•	Auto-generates daily goals based on your exam date
+	•	“Missed a day” function to instantly replan
+	•	Well-being tips (hydration, breaks, sleep nudges)
+
+⸻
+
+5. Peer Community + Mentor Support
+
+🤝 Don’t study alone. Learn from those ahead of you.
+
+	•	Forums by PLAB 1, PLAB 2, country, or study stage
+	•	Verified mentors who passed recently
+	•	Ask-an-expert anonymously
+	•	Share your mock scores with your study group
+
+⸻
+
+6. Cultural & NHS Context Training
+
+🇬🇧 Succeed beyond the exam.
+
+	•	Modules on NHS hierarchy and referral systems
+	•	Breaking bad news the UK way
+	•	Consultation etiquette and time management
+	•	Accents, phrases, and pronunciation tips
+	•	Cultural scenario quizzes
+
+⸻
+
+7. Offline & Low-Data Mode
+
+🌍 Perfect for users in low-bandwidth areas.
+
+	•	Download mocks and flashcards offline
+	•	“Lite Mode” strips videos and loads faster
+	•	Offline practice mode with result syncing when back online
+
+⸻
+
+💡 Bonus Features
