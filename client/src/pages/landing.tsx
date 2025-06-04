@@ -2,12 +2,22 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle, Target, Zap, Shield, Star, Play, CheckCircle, Globe, Award } from "lucide-react";
+import heroImage from "@assets/image_1749073508621.jpeg";
 
 export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 opacity-50">
+          <img 
+            src={heroImage} 
+            alt="Hero background"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.05)_50%,transparent_75%,transparent_100%)] bg-[length:250px_250px] animate-[move_20s_linear_infinite]"></div>
