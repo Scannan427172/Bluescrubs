@@ -72,16 +72,16 @@ export default function Auth() {
                 <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   PLAB Master
                 </h1>
-                <p className="text-gray-600 text-lg">AI-Powered PLAB Preparation</p>
+                <p className="text-black text-lg">AI-Powered PLAB Preparation</p>
               </div>
             </div>
             
             <div className="space-y-6">
               <div className="text-left">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                <h2 className="text-2xl font-bold text-black mb-4">
                   The Complete PLAB Success Platform
                 </h2>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <p className="text-black text-lg leading-relaxed">
                   Join thousands of international medical graduates who've successfully passed 
                   PLAB and secured their NHS careers with our comprehensive AI-powered platform.
                 </p>
@@ -93,8 +93,8 @@ export default function Auth() {
                     <CheckCircle className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">94% Success Rate</h4>
-                    <p className="text-gray-600 text-sm">PLAB pass guarantee</p>
+                    <h4 className="font-semibold text-black">94% Success Rate</h4>
+                    <p className="text-black text-sm">PLAB pass guarantee</p>
                   </div>
                 </div>
 
@@ -103,8 +103,8 @@ export default function Auth() {
                     <Globe className="w-6 h-6 text-purple-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">50+ Countries</h4>
-                    <p className="text-gray-600 text-sm">Global community</p>
+                    <h4 className="font-semibold text-black">50+ Countries</h4>
+                    <p className="text-black text-sm">Global community</p>
                   </div>
                 </div>
 
@@ -113,8 +113,8 @@ export default function Auth() {
                     <Stethoscope className="w-6 h-6 text-green-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">Expert Mentors</h4>
-                    <p className="text-gray-600 text-sm">NHS doctors guide you</p>
+                    <h4 className="font-semibold text-black">Expert Mentors</h4>
+                    <p className="text-black text-sm">NHS doctors guide you</p>
                   </div>
                 </div>
 
@@ -123,8 +123,8 @@ export default function Auth() {
                     <Shield className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800">AI-Powered</h4>
-                    <p className="text-gray-600 text-sm">Adaptive learning</p>
+                    <h4 className="font-semibold text-black">AI-Powered</h4>
+                    <p className="text-black text-sm">Adaptive learning</p>
                   </div>
                 </div>
               </div>
@@ -148,10 +148,10 @@ export default function Auth() {
 
           <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-2xl">
             <CardHeader className="text-center pb-4">
-              <CardTitle className="text-2xl font-bold text-gray-800">
+              <CardTitle className="text-2xl font-bold text-black">
                 Welcome to Your PLAB Journey
               </CardTitle>
-              <p className="text-gray-600">Start your path to NHS success today</p>
+              <p className="text-black">Start your path to NHS success today</p>
             </CardHeader>
             
             <CardContent>
@@ -165,7 +165,7 @@ export default function Auth() {
                     <CheckCircle className="w-4 h-4 mr-2" />
                     Quick Demo Access - Skip Registration
                   </Button>
-                  <p className="text-center text-sm text-gray-500 mt-2">
+                  <p className="text-center text-sm text-black mt-2">
                     Try all features instantly, no signup required
                   </p>
                   
@@ -174,7 +174,7 @@ export default function Auth() {
                       <div className="w-full border-t border-gray-300"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-4 bg-white text-gray-500">Or continue with account</span>
+                      <span className="px-4 bg-white text-black">Or continue with account</span>
                     </div>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export default function Auth() {
                           checked={loginForm.rememberMe}
                           onCheckedChange={(checked) => setLoginForm({...loginForm, rememberMe: checked as boolean})}
                         />
-                        <Label htmlFor="remember" className="text-sm text-gray-600">
+                        <Label htmlFor="remember" className="text-sm text-black">
                           Remember me
                         </Label>
                       </div>
