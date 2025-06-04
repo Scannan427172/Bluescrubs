@@ -18,6 +18,9 @@ import Mentors from "@/pages/mentors";
 import CulturalTraining from "@/pages/cultural-training";
 import VideoOsce from "@/pages/video-osce";
 import Analytics from "@/pages/analytics";
+import Gamification from "@/pages/gamification";
+import OfflineMode from "@/pages/offline-mode";
+import PersonalizedPaths from "@/pages/personalized-paths";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -43,6 +46,9 @@ function Router() {
         <Route path="/cultural-training" component={CulturalTraining} />
         <Route path="/video-osce" component={VideoOsce} />
         <Route path="/analytics" component={Analytics} />
+        <Route path="/gamification" component={Gamification} />
+        <Route path="/offline-mode" component={OfflineMode} />
+        <Route path="/personalized-paths" component={PersonalizedPaths} />
         <Route component={NotFound} />
       </Switch>
     </div>
