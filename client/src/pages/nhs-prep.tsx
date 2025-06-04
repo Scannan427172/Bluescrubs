@@ -156,11 +156,11 @@ export default function NhsPrep() {
   return (
     <div className="min-h-screen bg-light-bg pb-20 md:pb-0">
       {/* Header */}
-      <div className="bg-gradient-to-r from-mint-green to-medical-blue text-white py-12">
+      <div className="bg-white py-12 border-b" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">NHS Career Preparation</h1>
-            <p className="text-xl opacity-90">Your complete guide to starting your NHS career after PLAB success</p>
+            <h1 className="text-4xl font-bold mb-4" style={{ color: '#000000' }}>NHS Career Preparation</h1>
+            <p className="text-xl" style={{ color: '#666666' }}>Your complete guide to starting your NHS career after PLAB success</p>
           </div>
         </div>
       </div>
@@ -168,45 +168,45 @@ export default function NhsPrep() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-mint-green/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-6 h-6 text-mint-green" />
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
-              <div className="text-2xl font-bold text-mint-green mb-1">
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>
                 {completedSteps.length}/{applicationSteps.length}
               </div>
-              <div className="text-sm text-gray-600">Steps Completed</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Steps Completed</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-medical-blue/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-6 h-6 text-medical-blue" />
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-6 h-6 text-blue-600" />
               </div>
-              <div className="text-2xl font-bold text-medical-blue mb-1">89%</div>
-              <div className="text-sm text-gray-600">Success Rate</div>
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>89%</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Success Rate</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-purple-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Users className="w-6 h-6 text-purple-accent" />
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Users className="w-6 h-6 text-purple-600" />
               </div>
-              <div className="text-2xl font-bold text-purple-accent mb-1">2,847</div>
-              <div className="text-sm text-gray-600">Placements Made</div>
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>2,847</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Placements Made</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-white border" style={{ backgroundColor: '#ffffff' }}>
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 bg-amber-warning/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-6 h-6 text-amber-warning" />
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-6 h-6 text-yellow-600" />
               </div>
-              <div className="text-2xl font-bold text-amber-warning mb-1">6-8</div>
-              <div className="text-sm text-gray-600">Weeks Average</div>
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>6-8</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Weeks Average</div>
             </CardContent>
           </Card>
         </div>
