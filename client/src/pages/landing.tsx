@@ -8,16 +8,17 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 relative">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 relative">
+        {/* Main Hero Image - Full Width */}
+        <div className="w-full mb-8">
+          <img 
+            src={nhsPrepWomanImg} 
+            alt="Professional woman with glasses studying with NHS Prep books"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+        
         <div className="max-w-4xl mx-auto px-4 text-center">
-          {/* Main Hero Image */}
-          <div className="mb-8">
-            <img 
-              src={nhsPrepWomanImg} 
-              alt="Professional woman with glasses studying with NHS Prep books"
-              className="w-full mx-auto rounded-2xl shadow-2xl"
-            />
-          </div>
           
           {/* Hero Content */}
           <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl p-8 space-y-6 shadow-lg">
