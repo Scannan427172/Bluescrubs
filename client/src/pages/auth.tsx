@@ -337,7 +337,7 @@ export default function Auth() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="register-password">Password</Label>
+                      <Label htmlFor="register-password" className="text-black">Password</Label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                         <Input
