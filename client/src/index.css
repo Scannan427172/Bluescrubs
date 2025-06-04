@@ -195,13 +195,33 @@
 
   /* Enhanced card readability */
   .card {
-    background-color: #ffffff;
-    color: #212529;
-    border: 1px solid #e9ecef;
+    background-color: #ffffff !important;
+    color: #212529 !important;
+    border: 1px solid #e9ecef !important;
   }
 
   .card-content {
-    color: #212529;
+    color: #212529 !important;
+  }
+
+  /* Fix white text on white background issues */
+  .text-white {
+    color: #ffffff !important;
+  }
+
+  .bg-white {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+  }
+
+  /* Ensure proper contrast for all components */
+  [data-state="open"] {
+    color: #212529 !important;
+  }
+
+  .bg-gray-50 {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
   }
 
   /* Custom button styles */

@@ -6,6 +6,8 @@ import {
   type CommunityPost, type InsertCommunityPost, type PostReply, type InsertPostReply,
   type OsceStation, type InsertOsceStation, type UserOsceAttempt, type InsertUserOsceAttempt
 } from "@shared/schema";
+import { db } from "./db";
+import { eq, and } from "drizzle-orm";
 
 export interface IStorage {
   // User management
@@ -424,4 +426,239 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+
+
+export class DatabaseStorage implements IStorage {
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values({
+        ...insertUser,
+        currentStage: insertUser.currentStage || 'plab1'
+      })
+      .returning();
+    return user;
+  }
+
+  async updateUser(id: number, updates: Partial<User>): Promise<User | undefined> {
+    const [user] = await db
+      .update(users)
+      .set(updates)
+      .where(eq(users.id, id))
+      .returning();
+    return user || undefined;
+  }
+
+  async getQuestions(examType: string, category?: string, limit = 20): Promise<Question[]> {
+    if (category) {
+      return await db.select().from(questions)
+        .where(and(eq(questions.examType, examType), eq(questions.category, category)))
+        .limit(limit);
+    }
+    
+    return await db.select().from(questions)
+      .where(eq(questions.examType, examType))
+      .limit(limit);
+  }
+
+  async getQuestion(id: number): Promise<Question | undefined> {
+    const [question] = await db.select().from(questions).where(eq(questions.id, id));
+    return question || undefined;
+  }
+
+  async createQuestion(insertQuestion: InsertQuestion): Promise<Question> {
+    const [question] = await db
+      .insert(questions)
+      .values({
+        ...insertQuestion,
+        options: insertQuestion.options || []
+      })
+      .returning();
+    return question;
+  }
+
+  async getUserProgress(userId: number): Promise<UserProgress[]> {
+    return await db.select().from(userProgress).where(eq(userProgress.userId, userId));
+  }
+
+  async createUserProgress(insertProgress: InsertUserProgress): Promise<UserProgress> {
+    const [progress] = await db
+      .insert(userProgress)
+      .values(insertProgress)
+      .returning();
+    return progress;
+  }
+
+  async getUserStats(userId: number): Promise<{
+    totalAnswered: number;
+    correctAnswers: number;
+    averageTime: number;
+    categoryStats: Record<string, { correct: number; total: number }>;
+  }> {
+    const progressData = await this.getUserProgress(userId);
+    
+    const totalAnswered = progressData.length;
+    const correctAnswers = progressData.filter(p => p.isCorrect).length;
+    const averageTime = progressData.length > 0 
+      ? progressData.reduce((acc, p) => acc + p.timeSpent, 0) / progressData.length 
+      : 0;
+
+    const categoryStats: Record<string, { correct: number; total: number }> = {};
+    
+    for (const progress of progressData) {
+      const question = await this.getQuestion(progress.questionId);
+      if (question) {
+        if (!categoryStats[question.category]) {
+          categoryStats[question.category] = { correct: 0, total: 0 };
+        }
+        categoryStats[question.category].total++;
+        if (progress.isCorrect) {
+          categoryStats[question.category].correct++;
+        }
+      }
+    }
+
+    return { totalAnswered, correctAnswers, averageTime, categoryStats };
+  }
+
+  async getUserStudyPlan(userId: number, date: string): Promise<StudyPlan | undefined> {
+    const [plan] = await db
+      .select()
+      .from(studyPlan)
+      .where(and(eq(studyPlan.userId, userId), eq(studyPlan.date, date)));
+    return plan || undefined;
+  }
+
+  async createStudyPlan(insertPlan: InsertStudyPlan): Promise<StudyPlan> {
+    const [plan] = await db
+      .insert(studyPlan)
+      .values({
+        ...insertPlan,
+        completed: insertPlan.completed || false
+      })
+      .returning();
+    return plan;
+  }
+
+  async updateStudyPlan(id: number, updates: Partial<StudyPlan>): Promise<StudyPlan | undefined> {
+    const [plan] = await db
+      .update(studyPlan)
+      .set(updates)
+      .where(eq(studyPlan.id, id))
+      .returning();
+    return plan || undefined;
+  }
+
+  async getCommunityPosts(category?: string, limit = 20): Promise<(CommunityPost & { author: Pick<User, 'username'> })[]> {
+    let query = db
+      .select({
+        id: communityPosts.id,
+        userId: communityPosts.userId,
+        title: communityPosts.title,
+        content: communityPosts.content,
+        category: communityPosts.category,
+        createdAt: communityPosts.createdAt,
+        author: {
+          username: users.username
+        }
+      })
+      .from(communityPosts)
+      .leftJoin(users, eq(communityPosts.userId, users.id));
+
+    if (category) {
+      query = query.where(eq(communityPosts.category, category));
+    }
+
+    const results = await query.limit(limit);
+    return results as (CommunityPost & { author: Pick<User, 'username'> })[];
+  }
+
+  async getCommunityPost(id: number): Promise<CommunityPost | undefined> {
+    const [post] = await db.select().from(communityPosts).where(eq(communityPosts.id, id));
+    return post || undefined;
+  }
+
+  async createCommunityPost(insertPost: InsertCommunityPost): Promise<CommunityPost> {
+    const [post] = await db
+      .insert(communityPosts)
+      .values(insertPost)
+      .returning();
+    return post;
+  }
+
+  async getPostReplies(postId: number): Promise<(PostReply & { author: Pick<User, 'username'> })[]> {
+    const results = await db
+      .select({
+        id: postReplies.id,
+        postId: postReplies.postId,
+        userId: postReplies.userId,
+        content: postReplies.content,
+        createdAt: postReplies.createdAt,
+        author: {
+          username: users.username
+        }
+      })
+      .from(postReplies)
+      .leftJoin(users, eq(postReplies.userId, users.id))
+      .where(eq(postReplies.postId, postId));
+
+    return results as (PostReply & { author: Pick<User, 'username'> })[];
+  }
+
+  async createPostReply(insertReply: InsertPostReply): Promise<PostReply> {
+    const [reply] = await db
+      .insert(postReplies)
+      .values(insertReply)
+      .returning();
+    return reply;
+  }
+
+  async getOsceStations(): Promise<OsceStation[]> {
+    return await db.select().from(osceStations);
+  }
+
+  async getOsceStation(id: number): Promise<OsceStation | undefined> {
+    const [station] = await db.select().from(osceStations).where(eq(osceStations.id, id));
+    return station || undefined;
+  }
+
+  async createOsceStation(insertStation: InsertOsceStation): Promise<OsceStation> {
+    const [station] = await db
+      .insert(osceStations)
+      .values(insertStation)
+      .returning();
+    return station;
+  }
+
+  async getUserOsceAttempts(userId: number): Promise<UserOsceAttempt[]> {
+    return await db.select().from(userOsceAttempts).where(eq(userOsceAttempts.userId, userId));
+  }
+
+  async createUserOsceAttempt(insertAttempt: InsertUserOsceAttempt): Promise<UserOsceAttempt> {
+    const [attempt] = await db
+      .insert(userOsceAttempts)
+      .values({
+        ...insertAttempt,
+        feedback: insertAttempt.feedback || null
+      })
+      .returning();
+    return attempt;
+  }
+}
+
+export const storage = new DatabaseStorage();
