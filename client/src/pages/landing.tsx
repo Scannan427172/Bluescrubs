@@ -47,15 +47,15 @@ export default function Landing() {
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">10,000+</div>
-                <div className="text-gray-600">Successful Candidates</div>
+                <div className="text-black">Successful Candidates</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">95%</div>
-                <div className="text-gray-600">Pass Rate</div>
+                <div className="text-black">Pass Rate</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">12</div>
-                <div className="text-gray-600">Unique Features</div>
+                <div className="text-black">Unique Features</div>
               </div>
             </div>
           </div>
