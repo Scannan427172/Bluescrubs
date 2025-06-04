@@ -15,6 +15,9 @@ import NotFound from "@/pages/not-found";
 import AdaptiveLearning from "@/pages/adaptive-learning";
 import SmartPlanner from "@/pages/smart-planner";
 import Mentors from "@/pages/mentors";
+import CulturalTraining from "@/pages/cultural-training";
+import VideoOsce from "@/pages/video-osce";
+import Analytics from "@/pages/analytics";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -37,6 +40,9 @@ function Router() {
         <Route path="/adaptive-learning" component={AdaptiveLearning} />
         <Route path="/smart-planner" component={SmartPlanner} />
         <Route path="/mentors" component={Mentors} />
+        <Route path="/cultural-training" component={CulturalTraining} />
+        <Route path="/video-osce" component={VideoOsce} />
+        <Route path="/analytics" component={Analytics} />
         <Route component={NotFound} />
       </Switch>
     </div>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3 } from "lucide-react";
 
 interface NavigationProps {
   user?: { username: string; studyStreak: number } | null;
@@ -18,9 +18,12 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Dashboard", href: "/", icon: Home, current: location === "/" },
     { name: "PLAB 1", href: "/plab1", icon: BookOpen, current: location === "/plab1" },
     { name: "PLAB 2", href: "/plab2", icon: User, current: location === "/plab2" },
+    { name: "Video OSCE", href: "/video-osce", icon: Video, current: location === "/video-osce" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Brain, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },
+    { name: "UK Culture", href: "/cultural-training", icon: Flag, current: location === "/cultural-training" },
     { name: "Mentors", href: "/mentors", icon: UserCheck, current: location === "/mentors" },
+    { name: "Analytics", href: "/analytics", icon: BarChart3, current: location === "/analytics" },
     { name: "Community", href: "/community", icon: Users, current: location === "/community" },
     { name: "NHS Prep", href: "/nhs-prep", icon: GraduationCap, current: location === "/nhs-prep" },
   ];
