@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, jsonb, real, date } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -80,6 +80,97 @@ export const userOsceAttempts = pgTable("user_osce_attempts", {
   completedAt: timestamp("completed_at").defaultNow().notNull(),
 });
 
+// Adaptive Learning System Tables
+export const userLearningProfile = pgTable("user_learning_profile", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  weakCategories: text("weak_categories").array(),
+  strongCategories: text("strong_categories").array(),
+  learningVelocity: integer("learning_velocity").default(100), // percentage (100 = normal pace)
+  lastUpdated: timestamp("last_updated").defaultNow()
+});
+
+export const adaptiveRecommendations = pgTable("adaptive_recommendations", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  questionId: integer("question_id").references(() => questions.id),
+  priority: integer("priority").notNull(), // 1-10 scale
+  reason: text("reason").notNull(), // why this was recommended
+  createdAt: timestamp("created_at").defaultNow(),
+  isCompleted: boolean("is_completed").default(false)
+});
+
+// Enhanced Study Planning
+export const smartStudyPlans = pgTable("smart_study_plans", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  examDate: date("exam_date").notNull(),
+  dailyHours: real("daily_hours").notNull(),
+  autoRebalance: boolean("auto_rebalance").default(true),
+  adaptiveMode: boolean("adaptive_mode").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  lastRebalanced: timestamp("last_rebalanced")
+});
+
+export const dailyStudyGoals = pgTable("daily_study_goals", {
+  id: serial("id").primaryKey(),
+  planId: integer("plan_id").notNull().references(() => smartStudyPlans.id),
+  date: date("date").notNull(),
+  categories: text("categories").array(),
+  targetQuestions: integer("target_questions").notNull(),
+  targetTime: integer("target_time").notNull(), // in minutes
+  isCompleted: boolean("is_completed").default(false),
+  actualQuestions: integer("actual_questions").default(0),
+  actualTime: integer("actual_time").default(0)
+});
+
+// Mentor System
+export const mentors = pgTable("mentors", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  specialties: text("specialties").array(),
+  plabPassDate: date("plab_pass_date"),
+  currentPosition: text("current_position"),
+  isVerified: boolean("is_verified").default(false),
+  rating: real("rating").default(0),
+  totalSessions: integer("total_sessions").default(0),
+  hourlyRate: integer("hourly_rate"), // in pence, null for free mentors
+  bio: text("bio"),
+  availableHours: text("available_hours") // JSON string with schedule
+});
+
+export const mentoringSessions = pgTable("mentoring_sessions", {
+  id: serial("id").primaryKey(),
+  menteeId: integer("mentee_id").notNull().references(() => users.id),
+  mentorId: integer("mentor_id").notNull().references(() => mentors.id),
+  topic: text("topic").notNull(),
+  scheduledAt: timestamp("scheduled_at").notNull(),
+  duration: integer("duration").notNull(), // in minutes
+  status: text("status").notNull(), // scheduled, completed, cancelled
+  feedback: text("feedback"),
+  rating: integer("rating") // 1-5 stars
+});
+
+// Cultural Context Training
+export const culturalModules = pgTable("cultural_modules", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  content: text("content").notNull(),
+  category: text("category").notNull(), // nhs-structure, communication, ethics
+  difficulty: text("difficulty").notNull(), // beginner, intermediate, advanced
+  estimatedTime: integer("estimated_time").notNull() // in minutes
+});
+
+export const userCulturalProgress = pgTable("user_cultural_progress", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  moduleId: integer("module_id").notNull().references(() => culturalModules.id),
+  isCompleted: boolean("is_completed").default(false),
+  score: integer("score"),
+  completedAt: timestamp("completed_at")
+});
+
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).pick({
   email: true,
@@ -140,6 +231,70 @@ export const insertUserOsceAttemptSchema = createInsertSchema(userOsceAttempts).
   stationId: true,
   score: true,
   feedback: true,
+});
+
+export const insertUserLearningProfileSchema = createInsertSchema(userLearningProfile).pick({
+  userId: true,
+  weakCategories: true,
+  strongCategories: true,
+  learningVelocity: true,
+});
+
+export const insertAdaptiveRecommendationSchema = createInsertSchema(adaptiveRecommendations).pick({
+  userId: true,
+  questionId: true,
+  priority: true,
+  reason: true,
+});
+
+export const insertSmartStudyPlanSchema = createInsertSchema(smartStudyPlans).pick({
+  userId: true,
+  examDate: true,
+  dailyHours: true,
+  autoRebalance: true,
+  adaptiveMode: true,
+});
+
+export const insertDailyStudyGoalSchema = createInsertSchema(dailyStudyGoals).pick({
+  planId: true,
+  date: true,
+  categories: true,
+  targetQuestions: true,
+  targetTime: true,
+});
+
+export const insertMentorSchema = createInsertSchema(mentors).pick({
+  userId: true,
+  specialties: true,
+  plabPassDate: true,
+  currentPosition: true,
+  bio: true,
+  hourlyRate: true,
+  availableHours: true,
+});
+
+export const insertMentoringSessionSchema = createInsertSchema(mentoringSessions).pick({
+  menteeId: true,
+  mentorId: true,
+  topic: true,
+  scheduledAt: true,
+  duration: true,
+  status: true,
+});
+
+export const insertCulturalModuleSchema = createInsertSchema(culturalModules).pick({
+  title: true,
+  description: true,
+  content: true,
+  category: true,
+  difficulty: true,
+  estimatedTime: true,
+});
+
+export const insertUserCulturalProgressSchema = createInsertSchema(userCulturalProgress).pick({
+  userId: true,
+  moduleId: true,
+  score: true,
 });
 
 // Types
