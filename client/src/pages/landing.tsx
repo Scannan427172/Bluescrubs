@@ -16,12 +16,12 @@ export default function Landing() {
         </div>
         
         {/* Background Image for Right Side */}
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1/2 h-[500px] rounded-l-3xl overflow-hidden shadow-2xl">
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1/2 h-[600px] rounded-l-3xl overflow-hidden shadow-2xl">
           <div className="absolute inset-0 bg-blue-600/40 z-10"></div>
           <img 
             src={heroBackgroundImg} 
             alt="Hero background"
-            className="w-full h-full object-cover opacity-80"
+            className="w-full h-full object-cover object-center opacity-80"
           />
         </div>
         
