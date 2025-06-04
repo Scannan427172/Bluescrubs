@@ -74,29 +74,55 @@ export default function Landing() {
             <div className="flex justify-center lg:justify-end">
               <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
                 <div className="text-center">
-                  {/* Professional Woman Avatar with Glasses */}
-                  <div className="w-32 h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 relative">
-                    {/* Face */}
-                    <div className="w-24 h-24 bg-pink-200 rounded-full flex items-center justify-center relative">
-                      {/* Eyes */}
-                      <div className="absolute top-6 flex space-x-3">
-                        <div className="w-2 h-2 bg-black rounded-full"></div>
-                        <div className="w-2 h-2 bg-black rounded-full"></div>
-                      </div>
-                      {/* Glasses */}
-                      <div className="absolute top-5 w-16 h-8 border-2 border-gray-700 rounded-lg bg-transparent">
-                        <div className="absolute left-1 top-1 w-5 h-5 bg-blue-100 rounded-full opacity-20"></div>
-                        <div className="absolute right-1 top-1 w-5 h-5 bg-blue-100 rounded-full opacity-20"></div>
-                      </div>
-                      {/* Nose bridge */}
-                      <div className="absolute top-7 w-1 h-1 bg-gray-700"></div>
-                      {/* Smile */}
-                      <div className="absolute bottom-4 w-6 h-3 border-b-2 border-black rounded-full"></div>
+                  {/* Professional Woman with Glasses */}
+                  <div className="w-48 h-48 mx-auto mb-6 relative">
+                    <svg viewBox="0 0 200 200" className="w-full h-full">
                       {/* Hair */}
-                      <div className="absolute -top-2 w-20 h-8 bg-brown-600 rounded-t-full" style={{backgroundColor: '#8B4513'}}></div>
-                    </div>
-                    {/* Stethoscope */}
-                    <Stethoscope className="absolute bottom-2 right-2 w-6 h-6 text-blue-600" />
+                      <ellipse cx="100" cy="85" rx="55" ry="45" fill="#8B4513" />
+                      <ellipse cx="100" cy="70" rx="45" ry="35" fill="#A0522D" />
+                      
+                      {/* Face */}
+                      <ellipse cx="100" cy="100" rx="40" ry="50" fill="#FDBCB4" />
+                      
+                      {/* Eyes */}
+                      <circle cx="88" cy="90" r="3" fill="#000" />
+                      <circle cx="112" cy="90" r="3" fill="#000" />
+                      
+                      {/* Eyebrows */}
+                      <ellipse cx="88" cy="85" rx="6" ry="2" fill="#654321" />
+                      <ellipse cx="112" cy="85" rx="6" ry="2" fill="#654321" />
+                      
+                      {/* Glasses Frame */}
+                      <g stroke="#000" strokeWidth="3" fill="none">
+                        {/* Left lens */}
+                        <circle cx="88" cy="90" r="12" />
+                        {/* Right lens */}
+                        <circle cx="112" cy="90" r="12" />
+                        {/* Bridge */}
+                        <line x1="100" y1="90" x2="100" y2="90" strokeWidth="2" />
+                        {/* Temple arms */}
+                        <line x1="76" y1="85" x2="65" y2="82" strokeWidth="2" />
+                        <line x1="124" y1="85" x2="135" y2="82" strokeWidth="2" />
+                      </g>
+                      
+                      {/* Lens reflection */}
+                      <circle cx="85" cy="87" r="3" fill="#E6F3FF" opacity="0.7" />
+                      <circle cx="109" cy="87" r="3" fill="#E6F3FF" opacity="0.7" />
+                      
+                      {/* Nose */}
+                      <ellipse cx="100" cy="98" rx="2" ry="4" fill="#F4A9A8" />
+                      
+                      {/* Smile */}
+                      <path d="M 90 108 Q 100 115 110 108" stroke="#000" strokeWidth="2" fill="none" />
+                      
+                      {/* Lab coat collar */}
+                      <path d="M 70 140 L 80 125 L 120 125 L 130 140 L 130 160 L 70 160 Z" fill="#FFF" stroke="#DDD" strokeWidth="1" />
+                      
+                      {/* Stethoscope */}
+                      <circle cx="85" cy="145" r="4" fill="#4A90E2" />
+                      <path d="M 85 145 Q 100 135 115 145" stroke="#4A90E2" strokeWidth="3" fill="none" />
+                      <circle cx="115" cy="145" r="4" fill="#4A90E2" />
+                    </svg>
                   </div>
                   
                   <h3 className="text-xl font-semibold text-black mb-2">
