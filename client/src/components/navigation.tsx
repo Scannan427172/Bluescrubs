@@ -102,23 +102,42 @@ export function Navigation({ user }: NavigationProps) {
                     <Menu className="w-5 h-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px]">
-                  <div className="flex flex-col space-y-4 mt-8">
-                    {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={`flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                          item.current
-                            ? "bg-medical-blue text-white"
-                            : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        <item.icon className="w-5 h-5" />
-                        <span className="font-medium">{item.name}</span>
-                      </Link>
-                    ))}
+                <SheetContent side="right" className="w-[320px] h-full overflow-hidden">
+                  <div className="flex flex-col h-full">
+                    {/* Header */}
+                    <div className="flex items-center space-x-3 pb-6 border-b">
+                      <div className="w-8 h-8 bg-medical-blue rounded-lg flex items-center justify-center">
+                        <Stethoscope className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-lg font-bold text-medical-blue">PLAB Master</span>
+                    </div>
+                    
+                    {/* Scrollable Navigation */}
+                    <div className="flex-1 overflow-y-auto py-6 space-y-2">
+                      {navigation.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          className={`flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+                            item.current
+                              ? "bg-medical-blue text-white"
+                              : "text-gray-700 hover:bg-gray-100"
+                          }`}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <item.icon className="w-5 h-5" />
+                          <span className="font-medium text-sm">{item.name}</span>
+                        </Link>
+                      ))}
+                    </div>
+                    
+                    {/* Footer */}
+                    <div className="pt-4 border-t">
+                      <div className="text-center text-xs text-gray-500">
+                        <p>All 12 unique features available</p>
+                        <p className="mt-1">Comprehensive PLAB preparation</p>
+                      </div>
+                    </div>
                   </div>
                 </SheetContent>
               </Sheet>
