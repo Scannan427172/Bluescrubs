@@ -14,6 +14,9 @@ export default function Landing() {
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.05)_50%,transparent_75%,transparent_100%)] bg-[length:250px_250px] animate-[move_20s_linear_infinite]"></div>
         </div>
         
+        {/* Extended Blue Background for Right Side */}
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1/2 h-96 bg-blue-800/30 rounded-l-3xl blur-xl"></div>
+        
         {/* Hero Content */}
         <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
