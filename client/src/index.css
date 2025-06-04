@@ -75,7 +75,22 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: #212529;
+    color: #212529 !important;
+  }
+
+  /* Force black text for main content areas */
+  .bg-light-bg * {
+    color: #212529 !important;
+  }
+
+  /* Ensure card content is readable */
+  .card * {
+    color: #212529 !important;
+  }
+
+  /* Main content sections */
+  main * {
+    color: #212529 !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
