@@ -332,6 +332,7 @@ export default function Auth() {
                         <Input
                           id="examDate"
                           type="date"
+                          className="auth-input text-black"
                           value={registerForm.examDate}
                           onChange={(e) => setRegisterForm({...registerForm, examDate: e.target.value})}
                         />
@@ -346,7 +347,7 @@ export default function Auth() {
                           id="register-password"
                           type={showPassword ? "text" : "password"}
                           placeholder="Create a strong password"
-                          className="pl-10 pr-10"
+                          className="pl-10 pr-10 auth-input text-black"
                           value={registerForm.password}
                           onChange={(e) => setRegisterForm({...registerForm, password: e.target.value})}
                           required
