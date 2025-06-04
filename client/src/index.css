@@ -224,6 +224,28 @@
     color: #212529 !important;
   }
 
+  /* Fix welcome section text visibility */
+  .bg-gradient-to-br {
+    color: #ffffff !important;
+  }
+
+  .bg-gradient-to-br h1,
+  .bg-gradient-to-br p,
+  .bg-gradient-to-br span,
+  .bg-gradient-to-br div {
+    color: #ffffff !important;
+  }
+
+  /* Ensure white text is always visible on gradient backgrounds */
+  .text-white {
+    color: #ffffff !important;
+  }
+
+  /* Override any conflicting text colors in gradient sections */
+  [class*="gradient"] * {
+    color: inherit !important;
+  }
+
   /* Custom button styles */
   .btn-medical {
     @apply bg-medical-blue text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-colors;
