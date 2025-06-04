@@ -74,6 +74,20 @@ export class MemStorage implements IStorage {
   }
 
   private seedData() {
+    // Create demo user
+    const demoUser: User = {
+      id: 1,
+      email: "demo@plabmaster.com",
+      username: "DemoUser",
+      password: "password123",
+      currentStage: "plab1",
+      studyStreak: 7,
+      totalPoints: 245,
+      createdAt: new Date()
+    };
+    this.users.set(1, demoUser);
+    this.currentUserId = 2; // Next user will get ID 2
+
     // Create sample questions
     const sampleQuestions: InsertQuestion[] = [
       {
