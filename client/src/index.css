@@ -78,18 +78,21 @@
     color: #212529 !important;
   }
 
-  /* Force black text for main content areas */
-  .bg-light-bg * {
+  /* Force black text for main content areas only */
+  .bg-light-bg {
+    color: #212529 !important;
+  }
+
+  .bg-light-bg > * {
     color: #212529 !important;
   }
 
   /* Ensure card content is readable */
-  .card * {
+  .card {
     color: #212529 !important;
   }
 
-  /* Main content sections */
-  main * {
+  .card * {
     color: #212529 !important;
   }
 
