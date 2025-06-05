@@ -189,25 +189,36 @@ label {
   color: white !important;
 }
 
-/* Target landing page buttons to make text blue */
-#trial-button,
-#demo-button {
-  color: #2563eb !important;
-}
+/* Removed conflicting blue text styling - handled by consistent button styling below */
 
-#trial-button svg,
-#demo-button svg {
-  color: #2563eb !important;
-}
-
-/* Target dashboard Continue PLAB 1 and Continue Practice buttons to make text white */
+/* Consistent button styling - blue gradient with white text */
+.btn-primary,
 #continue-plab1-btn,
-#continue-practice-btn {
+#continue-practice-btn,
+#trial-button,
+#demo-button,
+#prep-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   color: white !important;
+  border: none !important;
 }
 
+.btn-primary:hover,
+#continue-plab1-btn:hover,
+#continue-practice-btn:hover,
+#trial-button:hover,
+#demo-button:hover,
+#prep-button:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-primary svg,
 #continue-plab1-btn svg,
-#continue-practice-btn svg {
+#continue-practice-btn svg,
+#trial-button svg,
+#demo-button svg,
+#prep-button svg {
   color: white !important;
 }
 
