@@ -110,7 +110,7 @@ export default function Auth() {
                 <CardTitle className="text-2xl font-bold text-black">
                   Welcome to Your PLAB Journey
                 </CardTitle>
-                <p className="text-black/80">Start your path to NHS success today</p>
+                <p className="text-black">Start your path to NHS success today</p>
               </CardHeader>
               
               <CardContent className="space-y-6">

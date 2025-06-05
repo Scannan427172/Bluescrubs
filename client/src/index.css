@@ -134,6 +134,17 @@ p.text-black {
   color: black !important;
 }
 
+/* Force all form labels to be black */
+label {
+  color: black !important;
+}
+
+/* Force all text elements within auth forms to be black */
+.text-black,
+[class*="text-black"] {
+  color: black !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
