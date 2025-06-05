@@ -42,6 +42,71 @@ export const studyPlan = pgTable("study_plan", {
   completed: boolean("completed").notNull().default(false),
 });
 
+export const studySessions = pgTable("study_sessions", {
+  id: text("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  subject: text("subject").notNull(),
+  category: text("category").notNull(),
+  difficulty: text("difficulty").notNull(), // foundation, intermediate, advanced
+  scheduledStart: timestamp("scheduled_start").notNull(),
+  scheduledEnd: timestamp("scheduled_end").notNull(),
+  duration: integer("duration").notNull(), // minutes
+  priority: text("priority").notNull(), // low, medium, high, critical
+  sessionType: text("session_type").notNull(), // review, learning, practice, assessment
+  learningObjectives: jsonb("learning_objectives").notNull(), // array of strings
+  estimatedQuestions: integer("estimated_questions").notNull(),
+  completed: boolean("completed").notNull().default(false),
+  actualStart: timestamp("actual_start"),
+  actualEnd: timestamp("actual_end"),
+  performance: jsonb("performance"), // { accuracy, timePerQuestion, confidence }
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const userPreferences = pgTable("user_preferences", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().unique(),
+  preferredStudyHours: jsonb("preferred_study_hours").notNull(), // { start: number, end: number }
+  preferredDays: jsonb("preferred_days").notNull(), // array of numbers 0-6
+  maxSessionDuration: integer("max_session_duration").notNull().default(60), // minutes
+  minBreakBetweenSessions: integer("min_break_between_sessions").notNull().default(15), // minutes
+  studyIntensity: text("study_intensity").notNull().default("moderate"), // light, moderate, intensive
+  learningStyle: text("learning_style").notNull().default("visual"), // visual, auditory, kinesthetic, reading
+  weakAreas: jsonb("weak_areas").notNull().default('[]'), // array of strings
+  strongAreas: jsonb("strong_areas").notNull().default('[]'), // array of strings
+  examDate: date("exam_date"),
+  dailyStudyGoal: integer("daily_study_goal").notNull().default(120), // minutes
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const performanceMetrics = pgTable("performance_metrics", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  category: text("category").notNull(),
+  difficulty: text("difficulty").notNull(),
+  recentAccuracy: real("recent_accuracy").notNull(),
+  averageTimePerQuestion: real("average_time_per_question").notNull(),
+  completionRate: real("completion_rate").notNull(),
+  retentionRate: real("retention_rate").notNull(),
+  improvementTrend: real("improvement_trend").notNull(), // -1 to 1
+  lastStudied: timestamp("last_studied").notNull(),
+  masteryLevel: integer("mastery_level").notNull(), // 0-100
+  strugglingTopics: jsonb("struggling_topics").notNull().default('[]'), // array of strings
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const studyReminders = pgTable("study_reminders", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  sessionId: text("session_id").notNull(),
+  reminderTime: timestamp("reminder_time").notNull(),
+  message: text("message").notNull(),
+  type: text("type").notNull(), // preparation, start, break, review
+  sent: boolean("sent").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const communityPosts = pgTable("community_posts", {
   id: serial("id").primaryKey(),
   userId: integer("user_id").notNull(),
@@ -314,3 +379,19 @@ export type OsceStation = typeof osceStations.$inferSelect;
 export type InsertOsceStation = z.infer<typeof insertOsceStationSchema>;
 export type UserOsceAttempt = typeof userOsceAttempts.$inferSelect;
 export type InsertUserOsceAttempt = z.infer<typeof insertUserOsceAttemptSchema>;
+
+// Study Scheduler Types
+export type StudySession = typeof studySessions.$inferSelect;
+export type InsertStudySession = typeof studySessions.$inferInsert;
+export type UserPreferences = typeof userPreferences.$inferSelect;
+export type InsertUserPreferences = typeof userPreferences.$inferInsert;
+export type PerformanceMetrics = typeof performanceMetrics.$inferSelect;
+export type InsertPerformanceMetrics = typeof performanceMetrics.$inferInsert;
+export type StudyReminder = typeof studyReminders.$inferSelect;
+export type InsertStudyReminder = typeof studyReminders.$inferInsert;
+
+// Study Scheduler Schemas
+export const insertStudySessionSchema = createInsertSchema(studySessions);
+export const insertUserPreferencesSchema = createInsertSchema(userPreferences);
+export const insertPerformanceMetricsSchema = createInsertSchema(performanceMetrics);
+export const insertStudyReminderSchema = createInsertSchema(studyReminders);
