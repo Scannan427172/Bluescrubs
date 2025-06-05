@@ -139,13 +139,434 @@ export class MemStorage implements IStorage {
         correctAnswer: "Dexamethasone suppression test",
         explanation: "After confirming hypercortisolism, the next step is to determine if it's ACTH-dependent or independent using dexamethasone suppression test.",
         examType: "plab1"
+      },
+      
+      // ADDITIONAL CARDIOLOGY QUESTIONS
+      {
+        type: "mcq",
+        category: "cardiology",
+        difficulty: "hard",
+        content: "A 45-year-old woman presents with palpitations and dizziness. ECG shows narrow complex tachycardia at 180 bpm. Carotid sinus massage terminates the arrhythmia. What is the most likely diagnosis?",
+        options: [
+          "Atrial fibrillation",
+          "Atrial flutter", 
+          "Supraventricular tachycardia",
+          "Ventricular tachycardia",
+          "Sinus tachycardia"
+        ],
+        correctAnswer: "Supraventricular tachycardia",
+        explanation: "SVT typically responds to vagal maneuvers like carotid sinus massage, unlike other arrhythmias.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "cardiology",
+        difficulty: "easy",
+        content: "What is the first-line medication for hypertension in a 30-year-old African Caribbean patient?",
+        options: [
+          "ACE inhibitor",
+          "Calcium channel blocker",
+          "Beta blocker", 
+          "Thiazide diuretic",
+          "ARB"
+        ],
+        correctAnswer: "Calcium channel blocker",
+        explanation: "NICE guidelines recommend calcium channel blockers as first-line for African Caribbean patients due to lower renin levels.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "cardiology",
+        difficulty: "medium",
+        content: "A patient with heart failure has an ejection fraction of 35%. Which medication has been shown to reduce mortality?",
+        options: [
+          "Furosemide",
+          "Digoxin",
+          "Ramipril",
+          "Amlodipine",
+          "Spironolactone"
+        ],
+        correctAnswer: "Ramipril",
+        explanation: "ACE inhibitors like ramipril have proven mortality benefit in heart failure with reduced ejection fraction.",
+        examType: "plab1"
+      },
+
+      // ADDITIONAL RESPIRATORY QUESTIONS
+      {
+        type: "mcq",
+        category: "respiratory",
+        difficulty: "medium",
+        content: "A 70-year-old smoker presents with progressive dyspnea and productive cough. Spirometry shows FEV1/FVC ratio of 0.6. What is the most likely diagnosis?",
+        options: [
+          "Asthma",
+          "COPD",
+          "Pulmonary fibrosis",
+          "Bronchiectasis",
+          "Lung cancer"
+        ],
+        correctAnswer: "COPD",
+        explanation: "FEV1/FVC ratio <0.7 in a smoker with progressive symptoms indicates COPD.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "respiratory",
+        difficulty: "hard",
+        content: "A patient with pneumonia fails to respond to amoxicillin. Chest X-ray shows bilateral infiltrates. What is the most likely organism?",
+        options: [
+          "Streptococcus pneumoniae",
+          "Mycoplasma pneumoniae",
+          "Haemophilus influenzae",
+          "Staphylococcus aureus",
+          "Legionella pneumophila"
+        ],
+        correctAnswer: "Mycoplasma pneumoniae",
+        explanation: "Atypical pneumonia with bilateral infiltrates not responding to beta-lactams suggests Mycoplasma.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "respiratory",
+        difficulty: "medium",
+        content: "What is the most appropriate initial treatment for massive pulmonary embolism with hemodynamic instability?",
+        options: [
+          "Heparin",
+          "Warfarin",
+          "Thrombolysis",
+          "IVC filter",
+          "Embolectomy"
+        ],
+        correctAnswer: "Thrombolysis",
+        explanation: "Massive PE with hemodynamic compromise requires immediate thrombolysis if no contraindications.",
+        examType: "plab1"
+      },
+
+      // GASTROENTEROLOGY QUESTIONS
+      {
+        type: "mcq",
+        category: "gastroenterology",
+        difficulty: "medium",
+        content: "A 35-year-old man presents with epigastric pain and coffee-ground vomiting. What is the most appropriate initial investigation?",
+        options: [
+          "CT abdomen",
+          "Upper endoscopy",
+          "H. pylori testing",
+          "Abdominal ultrasound",
+          "Barium swallow"
+        ],
+        correctAnswer: "Upper endoscopy",
+        explanation: "Upper GI bleeding requires urgent endoscopy for diagnosis and potential therapeutic intervention.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "gastroenterology",
+        difficulty: "easy",
+        content: "What is the first-line treatment for H. pylori eradication?",
+        options: [
+          "Amoxicillin alone",
+          "PPI + clarithromycin + amoxicillin",
+          "Bismuth quadruple therapy",
+          "PPI alone",
+          "Metronidazole + clarithromycin"
+        ],
+        correctAnswer: "PPI + clarithromycin + amoxicillin",
+        explanation: "Triple therapy with PPI, clarithromycin, and amoxicillin is first-line H. pylori treatment.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "gastroenterology",
+        difficulty: "hard",
+        content: "A patient with ulcerative colitis develops severe abdominal pain and distension. X-ray shows colonic dilatation >6cm. What is the most likely complication?",
+        options: [
+          "Perforation",
+          "Toxic megacolon",
+          "Stricture",
+          "Malignancy",
+          "Abscess"
+        ],
+        correctAnswer: "Toxic megacolon",
+        explanation: "Toxic megacolon is characterized by colonic dilatation >6cm with systemic toxicity in IBD.",
+        examType: "plab1"
+      },
+
+      // NEUROLOGY QUESTIONS
+      {
+        type: "mcq",
+        category: "neurology",
+        difficulty: "medium",
+        content: "A 25-year-old woman presents with unilateral facial weakness, unable to close her eye or wrinkle her forehead. What is the most likely diagnosis?",
+        options: [
+          "Stroke",
+          "Bell's palsy",
+          "Multiple sclerosis",
+          "Trigeminal neuralgia",
+          "Ramsay Hunt syndrome"
+        ],
+        correctAnswer: "Bell's palsy",
+        explanation: "Bell's palsy affects both upper and lower facial muscles, unlike upper motor neuron lesions.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "neurology",
+        difficulty: "hard",
+        content: "A patient presents with sudden severe headache described as 'worst headache of my life'. CT head is normal. What is the next most appropriate investigation?",
+        options: [
+          "MRI brain",
+          "Lumbar puncture",
+          "CT angiogram",
+          "Repeat CT in 24 hours",
+          "EEG"
+        ],
+        correctAnswer: "Lumbar puncture",
+        explanation: "Suspected SAH with normal CT requires lumbar puncture to detect xanthochromia.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "neurology",
+        difficulty: "easy",
+        content: "What is the first-line treatment for focal seizures?",
+        options: [
+          "Phenytoin",
+          "Carbamazepine",
+          "Valproate",
+          "Lamotrigine",
+          "Levetiracetam"
+        ],
+        correctAnswer: "Carbamazepine",
+        explanation: "Carbamazepine is first-line for focal seizures according to NICE guidelines.",
+        examType: "plab1"
+      },
+
+      // PSYCHIATRY QUESTIONS
+      {
+        type: "mcq",
+        category: "psychiatry",
+        difficulty: "medium",
+        content: "A 22-year-old student presents with low mood, loss of interest, and thoughts of self-harm for 6 weeks. What is the most appropriate initial treatment?",
+        options: [
+          "Antidepressants",
+          "CBT",
+          "Hospitalization",
+          "Antipsychotics",
+          "ECT"
+        ],
+        correctAnswer: "CBT",
+        explanation: "CBT is first-line for moderate depression in young adults, with antidepressants if severe or CBT ineffective.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "psychiatry",
+        difficulty: "hard",
+        content: "A patient with bipolar disorder is started on lithium. Which blood test requires regular monitoring?",
+        options: [
+          "LFTs",
+          "Creatinine",
+          "FBC",
+          "Lipids",
+          "Glucose"
+        ],
+        correctAnswer: "Creatinine",
+        explanation: "Lithium requires regular monitoring of renal function (creatinine) and thyroid function.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "psychiatry",
+        difficulty: "easy",
+        content: "What is the most common side effect of SSRIs?",
+        options: [
+          "Weight gain",
+          "Gastrointestinal upset",
+          "Sedation",
+          "Hypotension",
+          "Dry mouth"
+        ],
+        correctAnswer: "Gastrointestinal upset",
+        explanation: "GI upset including nausea is the most common early side effect of SSRIs.",
+        examType: "plab1"
+      },
+
+      // OBSTETRICS & GYNECOLOGY QUESTIONS
+      {
+        type: "mcq",
+        category: "obstetrics-gynecology",
+        difficulty: "medium",
+        content: "A 28-year-old woman at 36 weeks gestation presents with severe headache and visual disturbances. BP is 160/110 mmHg. What is the most likely diagnosis?",
+        options: [
+          "Gestational hypertension",
+          "Pre-eclampsia",
+          "Eclampsia",
+          "HELLP syndrome",
+          "Chronic hypertension"
+        ],
+        correctAnswer: "Pre-eclampsia",
+        explanation: "Pre-eclampsia is hypertension with end-organ dysfunction (visual symptoms) after 20 weeks gestation.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "obstetrics-gynecology",
+        difficulty: "easy",
+        content: "What is the recommended folic acid dose for women planning pregnancy?",
+        options: [
+          "200 mcg",
+          "400 mcg",
+          "800 mcg",
+          "5 mg",
+          "1 mg"
+        ],
+        correctAnswer: "400 mcg",
+        explanation: "400 mcg daily folic acid is recommended from before conception until 12 weeks gestation.",
+        examType: "plab1"
+      },
+
+      // PEDIATRICS QUESTIONS
+      {
+        type: "mcq",
+        category: "pediatrics",
+        difficulty: "medium",
+        content: "A 3-year-old child presents with barking cough and stridor. Temperature is 38.5°C. What is the most likely diagnosis?",
+        options: [
+          "Epiglottitis",
+          "Croup",
+          "Bronchiolitis",
+          "Pneumonia",
+          "Asthma"
+        ],
+        correctAnswer: "Croup",
+        explanation: "Croup presents with barking cough, stridor, and low-grade fever in young children.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "pediatrics",
+        difficulty: "easy",
+        content: "At what age should the MMR vaccine be first given?",
+        options: [
+          "6 months",
+          "12 months",
+          "18 months",
+          "2 years",
+          "4 years"
+        ],
+        correctAnswer: "12 months",
+        explanation: "First MMR vaccine is given at 12-13 months as part of UK immunization schedule.",
+        examType: "plab1"
+      },
+
+      // SURGERY QUESTIONS
+      {
+        type: "mcq",
+        category: "surgery",
+        difficulty: "medium",
+        content: "A 65-year-old man presents with severe epigastric pain radiating to the back. Amylase is markedly elevated. What is the most common cause?",
+        options: [
+          "Alcohol",
+          "Gallstones",
+          "Drugs",
+          "Trauma",
+          "Malignancy"
+        ],
+        correctAnswer: "Gallstones",
+        explanation: "Gallstones are the most common cause of acute pancreatitis, followed by alcohol.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "surgery",
+        difficulty: "easy",
+        content: "What is the most appropriate management for uncomplicated appendicitis?",
+        options: [
+          "Antibiotics alone",
+          "Appendicectomy",
+          "Conservative management",
+          "CT scan",
+          "Laparoscopy"
+        ],
+        correctAnswer: "Appendicectomy",
+        explanation: "Appendicectomy remains the gold standard treatment for uncomplicated appendicitis.",
+        examType: "plab1"
+      },
+
+      // EMERGENCY MEDICINE QUESTIONS
+      {
+        type: "mcq",
+        category: "emergency-medicine",
+        difficulty: "medium",
+        content: "A patient presents with crushing chest pain and ST elevation in leads V1-V4. What is the most appropriate immediate treatment?",
+        options: [
+          "Aspirin",
+          "Primary PCI",
+          "Thrombolysis",
+          "GTN",
+          "Morphine"
+        ],
+        correctAnswer: "Primary PCI",
+        explanation: "Anterior STEMI requires primary PCI if available within 120 minutes, otherwise thrombolysis.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "emergency-medicine",
+        difficulty: "easy",
+        content: "What is the correct compression:ventilation ratio for adult CPR?",
+        options: [
+          "15:2",
+          "30:2",
+          "5:1",
+          "3:1",
+          "100:2"
+        ],
+        correctAnswer: "30:2",
+        explanation: "Adult CPR uses 30 chest compressions to 2 ventilations.",
+        examType: "plab1"
+      },
+
+      // PHARMACOLOGY QUESTIONS
+      {
+        type: "mcq",
+        category: "pharmacology",
+        difficulty: "medium",
+        content: "Which medication should be stopped before contrast imaging due to risk of lactic acidosis?",
+        options: [
+          "Ramipril",
+          "Metformin",
+          "Atorvastatin",
+          "Aspirin",
+          "Warfarin"
+        ],
+        correctAnswer: "Metformin",
+        explanation: "Metformin should be stopped before contrast to prevent contrast-induced nephropathy and lactic acidosis.",
+        examType: "plab1"
+      },
+      {
+        type: "mcq",
+        category: "pharmacology",
+        difficulty: "easy",
+        content: "What is the mechanism of action of simvastatin?",
+        options: [
+          "ACE inhibition",
+          "HMG-CoA reductase inhibition",
+          "Beta blockade",
+          "Calcium channel blockade",
+          "Angiotensin receptor blockade"
+        ],
+        correctAnswer: "HMG-CoA reductase inhibition",
+        explanation: "Statins inhibit HMG-CoA reductase, the rate-limiting enzyme in cholesterol synthesis.",
+        examType: "plab1"
       }
     ];
 
     sampleQuestions.forEach(q => this.createQuestion(q));
 
-    // Create sample OSCE stations
+    // Create comprehensive OSCE stations - Full 18 Station PLAB 2 System
     const sampleStations: InsertOsceStation[] = [
+      // HISTORY TAKING STATIONS
       {
         title: "History Taking - Chest Pain",
         category: "history-taking",
@@ -164,9 +585,45 @@ export class MemStorage implements IStorage {
         }
       },
       {
-        title: "Breaking Bad News",
+        title: "History Taking - Shortness of Breath",
+        category: "history-taking",
+        description: "Take a comprehensive history from a patient with acute shortness of breath",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Introduction", "Presenting complaint", "Systems review", "Drug history", "Social history"],
+          communication: ["Professional manner", "Clarifying questions", "Appropriate pace", "Summarizing"],
+          clinical: ["Differential diagnosis consideration", "Relevant screening questions", "Risk stratification"]
+        },
+        patientInfo: {
+          name: "Sarah Wilson",
+          age: 68,
+          presenting_complaint: "Increasing breathlessness over 2 weeks",
+          setting: "GP Surgery"
+        }
+      },
+      {
+        title: "History Taking - Abdominal Pain",
+        category: "history-taking",
+        description: "Take a focused history from a patient with acute abdominal pain",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Introduction", "Pain assessment (SOCRATES)", "Associated symptoms", "Past medical history", "Family history"],
+          communication: ["Empathy for pain", "Appropriate questioning", "Professional demeanor"],
+          clinical: ["Systematic pain assessment", "Red flag symptoms", "Relevant investigations mentioned"]
+        },
+        patientInfo: {
+          name: "David Brown",
+          age: 42,
+          presenting_complaint: "Severe right-sided abdominal pain for 6 hours",
+          setting: "Emergency Department"
+        }
+      },
+
+      // COMMUNICATION STATIONS
+      {
+        title: "Breaking Bad News - Cancer Diagnosis",
         category: "communication",
-        description: "Break bad news to a patient about their recent diagnosis",
+        description: "Break bad news to a patient about their recent cancer diagnosis",
         timeLimit: 10,
         markingCriteria: {
           structure: ["SPIKES framework", "Setting preparation", "Perception assessment", "Information sharing", "Emotional response", "Strategy planning"],
@@ -178,6 +635,254 @@ export class MemStorage implements IStorage {
           age: 62,
           diagnosis: "Breast cancer",
           setting: "Outpatient clinic"
+        }
+      },
+      {
+        title: "Explaining Investigation Results",
+        category: "communication",
+        description: "Explain abnormal blood test results to a concerned patient",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Introduction", "Explanation of results", "Answering questions", "Next steps", "Safety netting"],
+          communication: ["Clear explanations", "Checking understanding", "Reassurance where appropriate"],
+          clinical: ["Accurate interpretation", "Appropriate follow-up", "Risk explanation"]
+        },
+        patientInfo: {
+          name: "Robert Taylor",
+          age: 45,
+          results: "Elevated cholesterol and HbA1c",
+          setting: "GP Surgery"
+        }
+      },
+      {
+        title: "Discussing Treatment Options",
+        category: "communication",
+        description: "Discuss treatment options with a patient newly diagnosed with hypertension",
+        timeLimit: 10,
+        markingCriteria: {
+          structure: ["Diagnosis explanation", "Treatment options", "Lifestyle advice", "Monitoring plan", "Questions"],
+          communication: ["Shared decision making", "Patient-centered approach", "Clear explanations"],
+          clinical: ["Evidence-based options", "Side effect discussion", "Monitoring requirements"]
+        },
+        patientInfo: {
+          name: "Linda Green",
+          age: 58,
+          diagnosis: "Hypertension",
+          setting: "GP Surgery"
+        }
+      },
+
+      // PHYSICAL EXAMINATION STATIONS
+      {
+        title: "Cardiovascular Examination",
+        category: "examination",
+        description: "Perform a complete cardiovascular examination on a patient with suspected heart murmur",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Introduction", "Inspection", "Palpation", "Auscultation", "Summary"],
+          communication: ["Explanation of examination", "Patient comfort", "Professional manner"],
+          clinical: ["Systematic approach", "Correct technique", "Accurate findings", "Appropriate conclusion"]
+        },
+        patientInfo: {
+          name: "Michael Davis",
+          age: 35,
+          presenting_complaint: "Heart murmur found on routine examination",
+          setting: "Cardiology Clinic"
+        }
+      },
+      {
+        title: "Respiratory Examination",
+        category: "examination",
+        description: "Examine the respiratory system of a patient with chronic cough",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Introduction", "Inspection", "Palpation", "Percussion", "Auscultation"],
+          communication: ["Clear instructions", "Patient dignity", "Explanation of findings"],
+          clinical: ["Systematic examination", "Correct technique", "Accurate interpretation"]
+        },
+        patientInfo: {
+          name: "Jennifer White",
+          age: 55,
+          presenting_complaint: "Persistent cough for 6 weeks",
+          setting: "Respiratory Clinic"
+        }
+      },
+      {
+        title: "Abdominal Examination",
+        category: "examination",
+        description: "Perform an abdominal examination on a patient with weight loss",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Introduction", "Inspection", "Palpation", "Percussion", "Auscultation"],
+          communication: ["Gentle approach", "Explanation throughout", "Patient comfort"],
+          clinical: ["Systematic examination", "Organomegaly assessment", "Mass detection technique"]
+        },
+        patientInfo: {
+          name: "Thomas Anderson",
+          age: 67,
+          presenting_complaint: "Unexplained weight loss over 3 months",
+          setting: "Gastroenterology Clinic"
+        }
+      },
+      {
+        title: "Neurological Examination - Upper Limb",
+        category: "examination",
+        description: "Examine the upper limb neurological system in a patient with weakness",
+        timeLimit: 10,
+        markingCriteria: {
+          structure: ["Introduction", "Inspection", "Tone", "Power", "Reflexes", "Sensation", "Coordination"],
+          communication: ["Clear instructions", "Encouragement", "Professional manner"],
+          clinical: ["Systematic approach", "Accurate technique", "Lateralization", "Upper vs lower motor neuron signs"]
+        },
+        patientInfo: {
+          name: "Patricia Moore",
+          age: 72,
+          presenting_complaint: "Left arm weakness following stroke",
+          setting: "Neurology Ward"
+        }
+      },
+
+      // PRACTICAL PROCEDURES
+      {
+        title: "Blood Pressure Measurement",
+        category: "procedure",
+        description: "Accurately measure blood pressure and counsel patient on hypertension",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Equipment check", "Patient preparation", "Measurement technique", "Recording", "Patient counseling"],
+          communication: ["Explanation of procedure", "Results discussion", "Lifestyle advice"],
+          clinical: ["Correct technique", "Accurate reading", "Appropriate cuff size", "Hypertension counseling"]
+        },
+        patientInfo: {
+          name: "James Wilson",
+          age: 50,
+          indication: "Routine health check",
+          setting: "GP Surgery"
+        }
+      },
+      {
+        title: "Peak Flow Measurement",
+        category: "procedure",
+        description: "Demonstrate and measure peak expiratory flow rate in an asthmatic patient",
+        timeLimit: 6,
+        markingCriteria: {
+          structure: ["Equipment preparation", "Patient instruction", "Demonstration", "Patient performance", "Recording"],
+          communication: ["Clear instructions", "Encouragement", "Technique correction"],
+          clinical: ["Correct technique", "Accurate measurement", "Interpretation of results"]
+        },
+        patientInfo: {
+          name: "Emma Thompson",
+          age: 28,
+          diagnosis: "Asthma monitoring",
+          setting: "Respiratory Clinic"
+        }
+      },
+      {
+        title: "Venepuncture",
+        category: "procedure",
+        description: "Safely perform venepuncture for blood sampling",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Hand hygiene", "Patient identification", "Equipment preparation", "Procedure", "Disposal"],
+          communication: ["Consent", "Explanation", "Reassurance"],
+          clinical: ["Aseptic technique", "Correct vein selection", "Safe disposal", "Sample labeling"]
+        },
+        patientInfo: {
+          name: "Christopher Lee",
+          age: 40,
+          indication: "Routine blood tests",
+          setting: "Phlebotomy Clinic"
+        }
+      },
+
+      // EMERGENCY SCENARIOS
+      {
+        title: "Basic Life Support",
+        category: "emergency",
+        description: "Manage a patient in cardiac arrest using BLS protocol",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Scene safety", "Responsiveness check", "Help activation", "CPR technique", "AED use"],
+          communication: ["Clear commands", "Team communication", "Family interaction"],
+          clinical: ["Correct CPR ratio", "Adequate compression depth", "Minimal interruptions"]
+        },
+        patientInfo: {
+          name: "Cardiac Arrest Scenario",
+          age: 65,
+          scenario: "Collapsed in hospital corridor",
+          setting: "Hospital Ward"
+        }
+      },
+      {
+        title: "Anaphylaxis Management",
+        category: "emergency",
+        description: "Recognize and manage acute anaphylactic reaction",
+        timeLimit: 10,
+        markingCriteria: {
+          structure: ["Recognition", "ABCDE assessment", "Adrenaline administration", "Monitoring", "Follow-up"],
+          communication: ["Clear instructions", "Reassurance", "Information gathering"],
+          clinical: ["Rapid diagnosis", "Correct drug doses", "Monitoring priorities", "Discharge planning"]
+        },
+        patientInfo: {
+          name: "Sophie Clark",
+          age: 22,
+          scenario: "Allergic reaction after eating nuts",
+          setting: "Emergency Department"
+        }
+      },
+
+      // MENTAL HEALTH STATIONS
+      {
+        title: "Depression Assessment",
+        category: "mental-health",
+        description: "Assess a patient presenting with low mood and suicidal ideation",
+        timeLimit: 10,
+        markingCriteria: {
+          structure: ["Mental state examination", "Risk assessment", "Social history", "Management plan"],
+          communication: ["Non-judgmental approach", "Active listening", "Empathy", "Safety planning"],
+          clinical: ["Suicide risk factors", "Mental capacity", "Safeguarding", "Appropriate referral"]
+        },
+        patientInfo: {
+          name: "Andrew Harris",
+          age: 34,
+          presenting_complaint: "Feeling depressed and having thoughts of self-harm",
+          setting: "GP Surgery"
+        }
+      },
+      {
+        title: "Alcohol History Assessment",
+        category: "mental-health",
+        description: "Take a sensitive alcohol history from a patient with liver problems",
+        timeLimit: 8,
+        markingCriteria: {
+          structure: ["Alcohol consumption patterns", "CAGE questionnaire", "Social impact", "Medical complications"],
+          communication: ["Non-judgmental approach", "Motivational interviewing", "Confidentiality"],
+          clinical: ["Accurate assessment", "Complications screening", "Support services", "Follow-up plan"]
+        },
+        patientInfo: {
+          name: "Richard Baker",
+          age: 48,
+          presenting_complaint: "Abnormal liver function tests",
+          setting: "GP Surgery"
+        }
+      },
+
+      // PEDIATRIC STATIONS
+      {
+        title: "Pediatric Development Assessment",
+        category: "pediatrics",
+        description: "Assess development in a 2-year-old child with parental concerns",
+        timeLimit: 10,
+        markingCriteria: {
+          structure: ["Development history", "Observation", "Milestone assessment", "Parental concerns", "Advice"],
+          communication: ["Child-friendly approach", "Parent interaction", "Clear explanations"],
+          clinical: ["Age-appropriate milestones", "Red flag signs", "Appropriate referrals"]
+        },
+        patientInfo: {
+          name: "Oliver Martinez",
+          age: 2,
+          parental_concern: "Not talking as much as expected",
+          setting: "Pediatric Clinic"
         }
       }
     ];
