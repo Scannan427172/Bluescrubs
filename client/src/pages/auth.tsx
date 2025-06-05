@@ -11,9 +11,10 @@ import {
   MapPin, Calendar, Eye, EyeOff, CheckCircle, 
   ArrowRight, Globe, Shield, Users, Award
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export default function Auth() {
+  const [, setLocation] = useLocation();
   const [activeTab, setActiveTab] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -54,8 +55,8 @@ export default function Auth() {
   const handleBypassLogin = () => {
     // Bypass registration and login directly
     console.log("Bypass login activated");
-    // Redirect to dashboard
-    window.location.href = "/";
+    // Navigate to dashboard using proper routing
+    setLocation("/");
   };
 
   return (
