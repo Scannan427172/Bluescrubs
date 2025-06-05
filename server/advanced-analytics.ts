@@ -200,7 +200,7 @@ export class AdvancedAnalyticsEngine {
   }
 
   // Generate knowledge gap analysis
-  analyzeKnowledgeGaps(
+  analyseKnowledgeGaps(
     userStats: any,
     recentMistakes: any[]
   ): KnowledgeGap[] {

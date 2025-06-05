@@ -574,8 +574,8 @@ Under UK GDPR, you have the following rights:
 
 ### 6.1 AI-Powered Features
 We use automated processing for:
-- Personalized learning recommendations
-- Study plan optimization
+- Personalised learning recommendations
+- Study plan optimisation
 - Performance analysis and feedback
 - Mentor matching algorithms
 
@@ -1263,7 +1263,7 @@ We may process health-related information including:
 ### 10.3 Transfer Safeguards
 - Due diligence on recipient data protection laws
 - Contractual obligations for data protection
-- Technical and organizational measures
+- Technical and organisational measures
 - Regular monitoring and compliance audits
 
 ## 11. Security Measures

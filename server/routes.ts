@@ -564,12 +564,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(analysis);
     } catch (error) {
       console.error("Performance analysis error:", error);
-      res.status(500).json({ message: "Failed to analyze performance" });
+      res.status(500).json({ message: "Failed to analyse performance" });
     }
   });
 
   // Enhanced Video OSCE API
-  app.post("/api/video-osce/analyze", async (req, res) => {
+  app.post("/api/video-osce/analyse", async (req, res) => {
     try {
       const { videoData, audioData, stationRequirements } = req.body;
       
@@ -587,7 +587,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Video OSCE analysis error:", error);
-      res.status(500).json({ message: "Failed to analyze OSCE video" });
+      res.status(500).json({ message: "Failed to analyse OSCE video" });
     }
   });
 
