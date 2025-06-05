@@ -18,7 +18,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Dashboard", href: "/", icon: Home, current: location === "/" },
     { name: "Learning Path", href: "/personalized-paths", icon: Route, current: location === "/personalized-paths" },
     { name: "PLAB 1", href: "/plab1", icon: BookOpen, current: location === "/plab1" },
-    { name: "PLAB 2", href: "/plab2", icon: User, current: location === "/plab2" },
+    { name: "PLAB 2", href: "/plab2-osce", icon: User, current: location === "/plab2-osce" },
     { name: "Video OSCE", href: "/video-osce", icon: Video, current: location === "/video-osce" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Brain, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },

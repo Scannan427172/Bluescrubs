@@ -212,7 +212,8 @@ button[class*="bg-medical"],
 #update-plan-btn,
 #quick-practice-btn,
 #random-quiz-btn,
-#timed-mock-btn {
+#timed-mock-btn,
+button[id*="station-"][id$="-btn"] {
   color: white !important;
   border-radius: 8px !important;
   font-weight: 500 !important;
@@ -234,7 +235,8 @@ button[class*="bg-medical"],
 #update-plan-btn,
 #quick-practice-btn,
 #random-quiz-btn,
-#timed-mock-btn {
+#timed-mock-btn,
+button[id*="station-"][id$="-btn"] {
   background: #3B82F6 !important;
   border: none !important;
 }
@@ -259,7 +261,8 @@ button[class*="bg-green"]:hover,
 #update-plan-btn:hover,
 #quick-practice-btn:hover,
 #random-quiz-btn:hover,
-#timed-mock-btn:hover {
+#timed-mock-btn:hover,
+button[id*="station-"][id$="-btn"]:hover {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
 }
@@ -284,7 +287,8 @@ button[class*="bg-green"] svg,
 #update-plan-btn svg,
 #quick-practice-btn svg,
 #random-quiz-btn svg,
-#timed-mock-btn svg {
+#timed-mock-btn svg,
+button[id*="station-"][id$="-btn"] svg {
   color: white !important;
 }
 

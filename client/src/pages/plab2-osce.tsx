@@ -209,6 +209,7 @@ export default function Plab2Osce() {
                           </div>
 
                           <Button
+                            id={`station-${station.id}-btn`}
                             onClick={() => setActiveStation(station)}
                             className={`w-full ${
                               isCompleted 
