@@ -219,6 +219,9 @@ button[class*="bg-medical"],
 }
 
 /* Ensure all primary button backgrounds are consistent */
+.btn-medical,
+.btn-secondary,
+.btn-success,
 .btn-primary,
 #continue-plab1-btn,
 #continue-practice-btn,
@@ -228,7 +231,10 @@ button[class*="bg-medical"],
 #continue-path-btn,
 #continue-learning-btn,
 #milestone-continue-btn,
-#update-plan-btn {
+#update-plan-btn,
+#quick-practice-btn,
+#random-quiz-btn,
+#timed-mock-btn {
   background: #3B82F6 !important;
   border: none !important;
 }
