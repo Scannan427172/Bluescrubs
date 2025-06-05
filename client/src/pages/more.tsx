@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   FileText, Shield, Lock, Eye, Users, 
   Cookie, Scale, HelpCircle, Mail, Phone,
-  Building, Globe, Download, ExternalLink
+  Building, Globe, Download, ExternalLink, Heart
 } from "lucide-react";
 
 export default function More() {
@@ -67,6 +67,20 @@ export default function More() {
       title: "Accessibility Statement",
       icon: Globe,
       description: "Our commitment to digital accessibility",
+      lastUpdated: "June 2025"
+    },
+    {
+      id: "nhs-compliance",
+      title: "NHS Standards Compliance",
+      icon: Heart,
+      description: "Compliance with NHS standards and regulatory requirements",
+      lastUpdated: "June 2025"
+    },
+    {
+      id: "nhs-code-of-conduct",
+      title: "NHS Code of Conduct",
+      icon: Shield,
+      description: "NHS values and professional standards in medical education",
       lastUpdated: "June 2025"
     }
   ];
