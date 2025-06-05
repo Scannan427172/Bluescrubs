@@ -145,15 +145,9 @@ label {
   color: black !important;
 }
 
-/* Exception for specific white text on left side */
-.text-white p,
-p.text-white {
-  color: white !important;
-}
-
-/* Override any global styles that might be affecting the left side text */
-div[class*="bg-gradient"] p {
-  color: white !important;
+/* Keep all form area text black */
+.text-center p {
+  color: black !important;
 }
 
 .dark {
