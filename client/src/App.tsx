@@ -55,7 +55,7 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <Plab1Practice />
         </Route>
-        <Route path="/plab2">
+        <Route path="/plab2-osce">
           <Navigation user={DEMO_USER} />
           <Plab2Osce />
         </Route>
