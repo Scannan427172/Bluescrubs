@@ -11,6 +11,10 @@ import { MobileOptimizationEngine } from "./mobile-optimization";
 import { ProfessionalDevelopmentEngine } from "./professional-development";
 import { CommunityIntegrationEngine } from "./community-integration";
 import { InternationalisationEngine } from "./internationalization";
+import { VideoConsultationEngine } from "./video-consultation";
+import { AIEssayMarkingEngine } from "./ai-essay-marking";
+import { VRClinicalEngine } from "./vr-clinical-scenarios";
+import { CertificationEngine } from "./certification-pathways";
 import { findMatchingMentors, generateSessionPlan, getMentorProfiles, bookMentorSession } from "./mentor-matching";
 import { generateCulturalContent, assessCulturalCompetency, nhsCulturalModules } from "./cultural-content";
 import { 
@@ -842,6 +846,374 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Cultural adaptation error:", error);
       res.status(500).json({ message: "Failed to generate cultural adaptation notes" });
+    }
+  });
+
+  // Initialize premium feature engines
+  const videoConsultation = new VideoConsultationEngine();
+  const aiEssayMarking = new AIEssayMarkingEngine();
+  const vrClinical = new VRClinicalEngine();
+  const certification = new CertificationEngine();
+
+  // Video Consultation API Routes
+  app.get("/api/video-consultation/doctors", async (req, res) => {
+    try {
+      const { speciality, language, sessionType, maxPrice } = req.query;
+      const startDate = req.query.startDate ? new Date(req.query.startDate as string) : new Date();
+      const endDate = req.query.endDate ? new Date(req.query.endDate as string) : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+      
+      const doctors = await videoConsultation.findAvailableDoctors({
+        speciality: speciality as string,
+        language: language as string,
+        sessionType: sessionType as string,
+        maxPrice: maxPrice ? parseInt(maxPrice as string) : undefined,
+        dateRange: { start: startDate, end: endDate }
+      });
+      
+      res.json({ doctors, totalFound: doctors.length });
+    } catch (error) {
+      console.error("Doctor search error:", error);
+      res.status(500).json({ message: "Failed to find available doctors" });
+    }
+  });
+
+  app.post("/api/video-consultation/book", async (req, res) => {
+    try {
+      const { doctorId, sessionType, scheduledTime, duration, speciality, language, notes } = req.body;
+      const userId = 1; // In real app, get from authenticated user
+      
+      const session = await videoConsultation.bookConsultation({
+        doctorId: parseInt(doctorId),
+        studentId: userId,
+        sessionType,
+        scheduledTime: new Date(scheduledTime),
+        duration: parseInt(duration),
+        speciality,
+        language,
+        notes
+      });
+      
+      res.status(201).json({ session, message: "Consultation booked successfully" });
+    } catch (error) {
+      console.error("Booking error:", error);
+      res.status(500).json({ message: "Failed to book consultation" });
+    }
+  });
+
+  app.get("/api/video-consultation/group-sessions", async (req, res) => {
+    try {
+      const { topic, language, difficulty } = req.query;
+      const startDate = req.query.startDate ? new Date(req.query.startDate as string) : new Date();
+      const endDate = req.query.endDate ? new Date(req.query.endDate as string) : new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
+      
+      const sessions = await videoConsultation.searchGroupSessions({
+        topic: topic as string,
+        language: language as string,
+        difficulty: difficulty as string,
+        dateRange: { start: startDate, end: endDate }
+      });
+      
+      res.json({ sessions, available: sessions.length });
+    } catch (error) {
+      console.error("Group session search error:", error);
+      res.status(500).json({ message: "Failed to find group sessions" });
+    }
+  });
+
+  app.post("/api/video-consultation/group-sessions", async (req, res) => {
+    try {
+      const { title, description, scheduledTime, duration, topic, difficulty, language, maxParticipants, isPublic } = req.body;
+      const hostId = 1; // In real app, get from authenticated user
+      
+      const session = await videoConsultation.createGroupStudySession({
+        hostId,
+        title,
+        description,
+        scheduledTime: new Date(scheduledTime),
+        duration: parseInt(duration),
+        topic,
+        difficulty,
+        language,
+        maxParticipants: parseInt(maxParticipants),
+        isPublic: Boolean(isPublic)
+      });
+      
+      res.status(201).json({ session, message: "Group study session created successfully" });
+    } catch (error) {
+      console.error("Group session creation error:", error);
+      res.status(500).json({ message: "Failed to create group session" });
+    }
+  });
+
+  // AI Essay Marking API Routes
+  app.post("/api/essay-marking/submit", async (req, res) => {
+    try {
+      const { questionId, essayText, timeSpent, category, difficulty } = req.body;
+      const userId = 1; // In real app, get from authenticated user
+      
+      const submission = {
+        id: `essay_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        userId,
+        questionId: parseInt(questionId),
+        essayText,
+        submittedAt: new Date(),
+        wordCount: essayText.split(' ').length,
+        timeSpent: parseInt(timeSpent),
+        category,
+        difficulty,
+        rubric: {
+          clinicalKnowledge: { maxPoints: 25, criteria: ["Accurate medical facts", "Appropriate terminology"] },
+          clinicalReasoning: { maxPoints: 30, criteria: ["Logical thinking", "Evidence-based decisions"] },
+          communication: { maxPoints: 20, criteria: ["Clear expression", "Professional language"] },
+          professionalism: { maxPoints: 15, criteria: ["Patient safety focus", "Ethical considerations"] },
+          structure: { maxPoints: 10, criteria: ["Logical organisation", "Complete coverage"] }
+        }
+      };
+      
+      const feedback = await aiEssayMarking.markEssaySubmission(submission);
+      
+      res.status(201).json({ submission, feedback, message: "Essay marked successfully" });
+    } catch (error) {
+      console.error("Essay marking error:", error);
+      res.status(500).json({ message: "Failed to mark essay submission" });
+    }
+  });
+
+  app.get("/api/essay-marking/scenarios", async (req, res) => {
+    try {
+      const { specialty, difficulty, count } = req.query;
+      
+      const scenarios = await aiEssayMarking.generatePracticeScenarios({
+        specialty: specialty as string || "General Medicine",
+        difficulty: difficulty as string || "intermediate",
+        count: parseInt(count as string) || 5
+      });
+      
+      res.json({ scenarios, generated: scenarios.length });
+    } catch (error) {
+      console.error("Scenario generation error:", error);
+      res.status(500).json({ message: "Failed to generate practice scenarios" });
+    }
+  });
+
+  app.post("/api/essay-marking/recommendations", async (req, res) => {
+    try {
+      const { recentScores, weakAreas, strongAreas, timeManagement } = req.body;
+      
+      const recommendations = await aiEssayMarking.generateStudyRecommendations({
+        recentScores: recentScores || [],
+        weakAreas: weakAreas || [],
+        strongAreas: strongAreas || [],
+        timeManagement: timeManagement || 'needs_improvement'
+      });
+      
+      res.json({ recommendations, personalised: true });
+    } catch (error) {
+      console.error("Study recommendations error:", error);
+      res.status(500).json({ message: "Failed to generate study recommendations" });
+    }
+  });
+
+  // VR Clinical Scenarios API Routes
+  app.get("/api/vr-scenarios", async (req, res) => {
+    try {
+      const { type, difficulty, category } = req.query;
+      const userId = 1; // In real app, get from authenticated user
+      
+      const scenarios = await vrClinical.getAvailableScenarios({
+        type: type as string,
+        difficulty: difficulty as string,
+        category: category as string,
+        userId
+      });
+      
+      res.json({ scenarios, available: scenarios.length });
+    } catch (error) {
+      console.error("VR scenarios error:", error);
+      res.status(500).json({ message: "Failed to get VR scenarios" });
+    }
+  });
+
+  app.post("/api/vr-scenarios/start", async (req, res) => {
+    try {
+      const { scenarioId, vrSettings } = req.body;
+      const userId = 1; // In real app, get from authenticated user
+      
+      const session = await vrClinical.startVRSession({
+        userId,
+        scenarioId,
+        vrSettings: vrSettings || {
+          resolution: "1080p",
+          audioEnabled: true,
+          hapticsEnabled: true,
+          recordingEnabled: true
+        }
+      });
+      
+      res.status(201).json({ session, message: "VR session started successfully" });
+    } catch (error) {
+      console.error("VR session start error:", error);
+      res.status(500).json({ message: "Failed to start VR session" });
+    }
+  });
+
+  app.get("/api/vr-scenarios/anatomy/:bodySystem", async (req, res) => {
+    try {
+      const { bodySystem } = req.params;
+      
+      const anatomyModule = await vrClinical.generateAnatomyModule(bodySystem);
+      
+      res.json({ anatomyModule, bodySystem });
+    } catch (error) {
+      console.error("Anatomy module error:", error);
+      res.status(500).json({ message: "Failed to generate anatomy module" });
+    }
+  });
+
+  app.post("/api/vr-scenarios/complete", async (req, res) => {
+    try {
+      const { sessionId, completedInteractions, totalScore, timeSpent, userActions } = req.body;
+      
+      const result = await vrClinical.completeVRSession(sessionId, {
+        completedInteractions: completedInteractions || [],
+        totalScore: parseInt(totalScore) || 0,
+        timeSpent: parseInt(timeSpent) || 0,
+        userActions: userActions || []
+      });
+      
+      res.json({ result, message: "VR session completed successfully" });
+    } catch (error) {
+      console.error("VR session completion error:", error);
+      res.status(500).json({ message: "Failed to complete VR session" });
+    }
+  });
+
+  app.get("/api/vr-scenarios/requirements", async (req, res) => {
+    try {
+      const requirements = vrClinical.getVRRequirements();
+      res.json({ requirements, compatible: true });
+    } catch (error) {
+      console.error("VR requirements error:", error);
+      res.status(500).json({ message: "Failed to get VR requirements" });
+    }
+  });
+
+  // Certification Pathways API Routes
+  app.get("/api/certification/pathways", async (req, res) => {
+    try {
+      const { level, category } = req.query;
+      const userId = 1; // In real app, get from authenticated user
+      
+      const pathways = await certification.getAvailablePathways({
+        level: level as string,
+        category: category as string,
+        userId
+      });
+      
+      res.json({ pathways, available: pathways.length });
+    } catch (error) {
+      console.error("Certification pathways error:", error);
+      res.status(500).json({ message: "Failed to get certification pathways" });
+    }
+  });
+
+  app.post("/api/certification/enroll", async (req, res) => {
+    try {
+      const { pathwayId } = req.body;
+      const userId = 1; // In real app, get from authenticated user
+      
+      const userCertification = await certification.enrollUserInPathway(userId, pathwayId);
+      
+      res.status(201).json({ userCertification, message: "Successfully enrolled in certification pathway" });
+    } catch (error) {
+      console.error("Certification enrollment error:", error);
+      res.status(500).json({ message: "Failed to enroll in certification pathway" });
+    }
+  });
+
+  app.post("/api/certification/assess", async (req, res) => {
+    try {
+      const { certificationId, moduleId, score } = req.body;
+      
+      const result = await certification.completeModuleAssessment(
+        certificationId,
+        moduleId,
+        parseInt(score)
+      );
+      
+      res.json({ result, message: "Module assessment completed" });
+    } catch (error) {
+      console.error("Module assessment error:", error);
+      res.status(500).json({ message: "Failed to complete module assessment" });
+    }
+  });
+
+  app.post("/api/certification/issue-certificate", async (req, res) => {
+    try {
+      const { certificationId } = req.body;
+      
+      const certificateData = await certification.issueDigitalCertificate(certificationId);
+      
+      res.status(201).json({ certificateData, message: "Digital certificate issued successfully" });
+    } catch (error) {
+      console.error("Certificate issuance error:", error);
+      res.status(500).json({ message: "Failed to issue digital certificate" });
+    }
+  });
+
+  app.get("/api/certification/verify/:verificationCode", async (req, res) => {
+    try {
+      const { verificationCode } = req.params;
+      
+      const verification = await certification.verifyCertificate(verificationCode);
+      
+      res.json({ verification, authentic: verification.valid });
+    } catch (error) {
+      console.error("Certificate verification error:", error);
+      res.status(500).json({ message: "Failed to verify certificate" });
+    }
+  });
+
+  // Tutor Marketplace API Routes
+  app.get("/api/tutors", async (req, res) => {
+    try {
+      const { specialty, language, rating, minPrice, maxPrice } = req.query;
+      
+      const tutors = await certification.getMarketplaceTutors({
+        specialty: specialty as string,
+        language: language as string,
+        rating: rating ? parseFloat(rating as string) : undefined,
+        priceRange: minPrice && maxPrice ? {
+          min: parseInt(minPrice as string),
+          max: parseInt(maxPrice as string)
+        } : undefined
+      });
+      
+      res.json({ tutors, available: tutors.length });
+    } catch (error) {
+      console.error("Tutor search error:", error);
+      res.status(500).json({ message: "Failed to search tutors" });
+    }
+  });
+
+  app.post("/api/tutors/book", async (req, res) => {
+    try {
+      const { tutorId, serviceId, scheduledTime, duration, notes } = req.body;
+      const studentId = 1; // In real app, get from authenticated user
+      
+      const booking = await certification.bookTutorSession({
+        tutorId,
+        serviceId,
+        studentId,
+        scheduledTime: new Date(scheduledTime),
+        duration: parseInt(duration),
+        notes
+      });
+      
+      res.status(201).json({ booking, message: "Tutor session booked successfully" });
+    } catch (error) {
+      console.error("Tutor booking error:", error);
+      res.status(500).json({ message: "Failed to book tutor session" });
     }
   });
 
