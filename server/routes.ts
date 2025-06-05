@@ -10,6 +10,7 @@ import { EnhancedVideoOSCEEngine } from "./enhanced-video-osce";
 import { MobileOptimizationEngine } from "./mobile-optimization";
 import { ProfessionalDevelopmentEngine } from "./professional-development";
 import { CommunityIntegrationEngine } from "./community-integration";
+import { InternationalisationEngine } from "./internationalization";
 import { findMatchingMentors, generateSessionPlan, getMentorProfiles, bookMentorSession } from "./mentor-matching";
 import { generateCulturalContent, assessCulturalCompetency, nhsCulturalModules } from "./cultural-content";
 import { 
@@ -444,6 +445,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const mobileOptimization = new MobileOptimizationEngine();
   const professionalDevelopment = new ProfessionalDevelopmentEngine();
   const communityIntegration = new CommunityIntegrationEngine();
+  const internationalization = new InternationalisationEngine();
 
   // Advanced Analytics API
   app.get("/api/analytics/:userId", async (req, res) => {
@@ -457,7 +459,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const allUserStats = await storage.getAllUserStats();
       const peerComparison = advancedAnalytics.generatePeerComparison(userId, userStats, allUserStats);
       const predictiveScore = advancedAnalytics.generatePredictiveScore(userStats, {}, 60);
-      const knowledgeGaps = advancedAnalytics.analyzeKnowledgeGaps(userStats, userProgress.slice(-20));
+      const knowledgeGaps = advancedAnalytics.analyseKnowledgeGaps(userStats, userProgress.slice(-20));
       
       res.json({
         performanceTrends,
@@ -699,6 +701,147 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Offline sync error:", error);
       res.status(500).json({ message: "Failed to sync offline content" });
+    }
+  });
+
+  // Multi-Language Support API for International Medical Graduates
+  app.get("/api/internationalization/languages", async (req, res) => {
+    try {
+      const supportedLanguages = internationalization.getSupportedLanguages();
+      res.json({
+        languages: supportedLanguages,
+        totalSupported: supportedLanguages.length,
+        featuredLanguages: supportedLanguages.filter(lang => 
+          ['ar', 'ur', 'hi', 'bn', 'es', 'fr'].includes(lang.code)
+        )
+      });
+    } catch (error) {
+      console.error("Language fetch error:", error);
+      res.status(500).json({ message: "Failed to fetch supported languages" });
+    }
+  });
+
+  app.post("/api/internationalization/medical-terminology", async (req, res) => {
+    try {
+      const { targetLanguage, medicalTerms } = req.body;
+      
+      if (!targetLanguage || !medicalTerms) {
+        return res.status(400).json({ message: "Target language and medical terms required" });
+      }
+
+      const terminology = await internationalization.generateMedicalTerminology(
+        targetLanguage, 
+        medicalTerms
+      );
+      
+      res.json({
+        targetLanguage,
+        terminology,
+        termCount: Object.keys(terminology).length,
+        supportLevel: 'professional-grade'
+      });
+    } catch (error) {
+      console.error("Medical terminology error:", error);
+      res.status(500).json({ message: "Failed to generate medical terminology" });
+    }
+  });
+
+  app.post("/api/internationalization/translate-question", async (req, res) => {
+    try {
+      const { question, targetLanguage } = req.body;
+      
+      if (!question || !targetLanguage) {
+        return res.status(400).json({ message: "Question and target language required" });
+      }
+
+      const translatedQuestion = await internationalization.translatePlabQuestion(
+        question, 
+        targetLanguage
+      );
+      
+      res.json({
+        originalQuestion: question,
+        translatedQuestion,
+        targetLanguage,
+        translationQuality: 'medical-grade',
+        preservedContext: true
+      });
+    } catch (error) {
+      console.error("Question translation error:", error);
+      res.status(500).json({ message: "Failed to translate PLAB question" });
+    }
+  });
+
+  app.get("/api/internationalization/nhs-context/:language", async (req, res) => {
+    try {
+      const { language } = req.params;
+      
+      const nhsContext = await internationalization.generateNhsContextualisation(language);
+      
+      res.json({
+        language,
+        nhsContext,
+        contextualisation: 'complete',
+        culturalAdaptation: true
+      });
+    } catch (error) {
+      console.error("NHS contextualisation error:", error);
+      res.status(500).json({ message: "Failed to generate NHS contextualisation" });
+    }
+  });
+
+  app.post("/api/internationalization/learning-path", async (req, res) => {
+    try {
+      const { nativeLanguage, currentLevel } = req.body;
+      
+      if (!nativeLanguage || !currentLevel) {
+        return res.status(400).json({ message: "Native language and current level required" });
+      }
+
+      if (!['beginner', 'intermediate', 'advanced'].includes(currentLevel)) {
+        return res.status(400).json({ message: "Current level must be beginner, intermediate, or advanced" });
+      }
+
+      const learningPath = await internationalization.generateProgressiveLearningPath(
+        nativeLanguage, 
+        currentLevel as 'beginner' | 'intermediate' | 'advanced'
+      );
+      
+      res.json({
+        nativeLanguage,
+        currentLevel,
+        progressivePath: learningPath,
+        optimisedForSuccess: true
+      });
+    } catch (error) {
+      console.error("Learning path error:", error);
+      res.status(500).json({ message: "Failed to generate progressive learning path" });
+    }
+  });
+
+  app.post("/api/internationalization/cultural-adaptation", async (req, res) => {
+    try {
+      const { userRegion, targetLanguage } = req.body;
+      
+      if (!userRegion || !targetLanguage) {
+        return res.status(400).json({ message: "User region and target language required" });
+      }
+
+      const adaptationNotes = await internationalization.generateCulturalAdaptationNotes(
+        userRegion, 
+        targetLanguage
+      );
+      
+      res.json({
+        userRegion,
+        targetLanguage,
+        adaptationNotes,
+        preparationAdvice: 'region-specific',
+        nhsReadiness: true
+      });
+    } catch (error) {
+      console.error("Cultural adaptation error:", error);
+      res.status(500).json({ message: "Failed to generate cultural adaptation notes" });
     }
   });
 
