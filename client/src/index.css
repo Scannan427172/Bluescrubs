@@ -195,7 +195,8 @@ label {
 .btn-primary,
 #continue-plab1-btn,
 #continue-practice-btn,
-#prep-button {
+#prep-button,
+#start-practice-btn {
   background: #3B82F6 !important;
   color: white !important;
   border: none !important;
@@ -206,7 +207,8 @@ label {
 .btn-primary:hover,
 #continue-plab1-btn:hover,
 #continue-practice-btn:hover,
-#prep-button:hover {
+#prep-button:hover,
+#start-practice-btn:hover {
   background: #2563EB !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
@@ -215,7 +217,8 @@ label {
 .btn-primary svg,
 #continue-plab1-btn svg,
 #continue-practice-btn svg,
-#prep-button svg {
+#prep-button svg,
+#start-practice-btn svg {
   color: white !important;
 }
 

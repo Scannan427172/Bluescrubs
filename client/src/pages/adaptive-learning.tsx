@@ -194,7 +194,7 @@ export default function AdaptiveLearning() {
                         <Lightbulb className="w-4 h-4 text-yellow-500" />
                         <span className="text-sm text-gray-600">{rec.reason}</span>
                       </div>
-                      <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                      <Button id="start-practice-btn" className="bg-purple-600 hover:bg-purple-700">
                         Start Practice
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
