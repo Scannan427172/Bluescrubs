@@ -25,6 +25,7 @@ import OfflineMode from "@/pages/offline-mode";
 import PersonalizedPaths from "@/pages/personalized-paths";
 import More from "@/pages/more";
 import Auth from "@/pages/auth";
+import International from "@/pages/international";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -190,6 +191,15 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1">
               <More />
+            </div>
+            <Footer />
+          </div>
+        </Route>
+        <Route path="/international">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <International />
             </div>
             <Footer />
           </div>
