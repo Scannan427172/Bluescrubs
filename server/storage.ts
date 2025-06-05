@@ -1364,6 +1364,131 @@ export class DatabaseStorage implements IStorage {
       .returning();
     return attempt;
   }
+
+  // Advanced Analytics Storage Methods
+  async getUserStats(userId: number): Promise<any> {
+    const progress = await this.getUserProgress(userId);
+    
+    if (progress.length === 0) {
+      return {
+        totalAnswered: 0,
+        correctAnswers: 0,
+        averageTime: 0,
+        categoryStats: {},
+        totalPoints: 0,
+        recentSessions: []
+      };
+    }
+
+    const totalAnswered = progress.length;
+    const correctAnswers = progress.filter(p => p.isCorrect).length;
+    const averageTime = progress.reduce((sum, p) => sum + p.timeSpent, 0) / totalAnswered;
+    
+    // Calculate category statistics
+    const categoryStats: Record<string, any> = {};
+    progress.forEach(p => {
+      const category = p.category || 'general';
+      if (!categoryStats[category]) {
+        categoryStats[category] = { correct: 0, total: 0 };
+      }
+      categoryStats[category].total++;
+      if (p.isCorrect) categoryStats[category].correct++;
+    });
+
+    // Calculate total points based on performance
+    const totalPoints = correctAnswers * 10 + Math.floor(totalAnswered * 2);
+
+    // Get recent sessions (last 10)
+    const recentSessions = progress.slice(-10).map(p => ({
+      date: p.attemptedAt,
+      accuracy: p.isCorrect ? 100 : 0,
+      questionsAnswered: 1,
+      timeSpent: p.timeSpent
+    }));
+
+    return {
+      totalAnswered,
+      correctAnswers,
+      averageTime,
+      categoryStats,
+      totalPoints,
+      recentSessions
+    };
+  }
+
+  async getAllUserStats(): Promise<any[]> {
+    // Get all users and their stats
+    const users = await db.select().from(this.users);
+    const allStats = [];
+    
+    for (const user of users.slice(0, 100)) { // Limit to 100 users for performance
+      const stats = await this.getUserStats(user.id);
+      allStats.push({ ...stats, userId: user.id });
+    }
+    
+    return allStats;
+  }
+
+  async getUserProgress(userId: number): Promise<any[]> {
+    const progress = await db.select().from(userProgress).where(eq(userProgress.userId, userId));
+    
+    return progress.map(p => ({
+      id: p.id,
+      userId: p.userId,
+      questionId: p.questionId,
+      isCorrect: p.isCorrect,
+      timeSpent: p.timeSpent,
+      attemptedAt: p.attemptedAt,
+      category: p.category || 'general'
+    }));
+  }
+
+  // Gamification Storage Methods
+  async getUserAchievements(userId: number): Promise<any[]> {
+    // In a real implementation, this would query a user_achievements table
+    // For now, return empty array since achievements are calculated dynamically
+    return [];
+  }
+
+  async saveUserAchievement(userId: number, achievementId: string): Promise<void> {
+    // In a real implementation, this would save to user_achievements table
+    // For now, just log the achievement
+    console.log(`Achievement unlocked: ${achievementId} for user ${userId}`);
+  }
+
+  async updateUserPoints(userId: number, points: number): Promise<void> {
+    // Update user's total points
+    const currentStats = await this.getUserStats(userId);
+    const newTotal = currentStats.totalPoints + points;
+    
+    // In a real implementation, this would update a user points field
+    console.log(`User ${userId} earned ${points} points. Total: ${newTotal}`);
+  }
+
+  async getLeaderboardData(timeframe: string, category?: string): Promise<any[]> {
+    const users = await db.select().from(this.users);
+    const leaderboard = [];
+    
+    for (const user of users.slice(0, 50)) { // Limit for performance
+      const stats = await this.getUserStats(user.id);
+      
+      // Filter by category if specified
+      let score = stats.totalPoints;
+      if (category && stats.categoryStats[category]) {
+        score = stats.categoryStats[category].correct * 10;
+      }
+      
+      leaderboard.push({
+        userId: user.id,
+        username: user.username || `User${user.id}`,
+        score,
+        accuracy: stats.totalAnswered > 0 ? Math.round((stats.correctAnswers / stats.totalAnswered) * 100) : 0,
+        totalQuestions: stats.totalAnswered
+      });
+    }
+    
+    return leaderboard.sort((a, b) => b.score - a.score);
+  }
 }
 
 export const storage = new DatabaseStorage();

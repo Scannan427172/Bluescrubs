@@ -3,6 +3,13 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { analyzeVideoPerformance, generateStudyPlan } from "./ai-analysis";
 import { generateUserAnalytics, generateAdaptiveLearningPlan } from "./analytics-engine";
+import { AdvancedAnalyticsEngine } from "./advanced-analytics";
+import { GamificationEngine } from "./gamification-system";
+import { AIStudyCompanion } from "./ai-study-companion";
+import { EnhancedVideoOSCEEngine } from "./enhanced-video-osce";
+import { MobileOptimizationEngine } from "./mobile-optimization";
+import { ProfessionalDevelopmentEngine } from "./professional-development";
+import { CommunityIntegrationEngine } from "./community-integration";
 import { findMatchingMentors, generateSessionPlan, getMentorProfiles, bookMentorSession } from "./mentor-matching";
 import { generateCulturalContent, assessCulturalCompetency, nhsCulturalModules } from "./cultural-content";
 import { 
@@ -426,6 +433,272 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error assessing cultural competency:", error);
       res.status(500).json({ message: "Failed to assess cultural competency" });
+    }
+  });
+
+  // Initialize advanced system engines
+  const advancedAnalytics = new AdvancedAnalyticsEngine();
+  const gamificationEngine = new GamificationEngine();
+  const aiStudyCompanion = new AIStudyCompanion();
+  const videoOSCEEngine = new EnhancedVideoOSCEEngine();
+  const mobileOptimization = new MobileOptimizationEngine();
+  const professionalDevelopment = new ProfessionalDevelopmentEngine();
+  const communityIntegration = new CommunityIntegrationEngine();
+
+  // Advanced Analytics API
+  app.get("/api/analytics/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const userStats = await storage.getUserStats(userId);
+      const userProgress = await storage.getUserProgress(userId);
+      
+      // Generate comprehensive analytics
+      const performanceTrends = advancedAnalytics.calculatePerformanceTrends(userProgress, 'month');
+      const allUserStats = await storage.getAllUserStats();
+      const peerComparison = advancedAnalytics.generatePeerComparison(userId, userStats, allUserStats);
+      const predictiveScore = advancedAnalytics.generatePredictiveScore(userStats, {}, 60);
+      const knowledgeGaps = advancedAnalytics.analyzeKnowledgeGaps(userStats, userProgress.slice(-20));
+      
+      res.json({
+        performanceTrends,
+        peerComparison,
+        predictiveScore,
+        knowledgeGaps,
+        overallReadiness: predictiveScore.readinessScore,
+        lastUpdated: new Date()
+      });
+    } catch (error) {
+      console.error("Advanced analytics error:", error);
+      res.status(500).json({ message: "Failed to generate analytics" });
+    }
+  });
+
+  app.post("/api/analytics/:userId/adaptive-plan", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const userStats = await storage.getUserStats(userId);
+      const analytics = await generateUserAnalytics(userId);
+      const adaptivePlan = await generateAdaptiveLearningPlan(userId, analytics);
+      
+      res.json(adaptivePlan);
+    } catch (error) {
+      console.error("Adaptive plan generation error:", error);
+      res.status(500).json({ message: "Failed to generate adaptive plan" });
+    }
+  });
+
+  // Gamification System API
+  app.get("/api/gamification/:userId/achievements", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const userStats = await storage.getUserStats(userId);
+      const recentActivity = await storage.getUserProgress(userId);
+      
+      const newAchievements = await gamificationEngine.checkAchievements(userId, userStats, recentActivity.slice(-50));
+      const currentStreak = gamificationEngine.updateStudyStreak(userId, new Date());
+      const motivationalMessage = gamificationEngine.generateMotivationalMessage(userStats, [], currentStreak.currentStreak);
+      const userPoints = userStats.totalPoints || 0;
+      const badge = gamificationEngine.getBadgeForPoints(userPoints);
+      
+      res.json({
+        newAchievements,
+        currentStreak,
+        motivationalMessage,
+        badge,
+        totalPoints: userPoints
+      });
+    } catch (error) {
+      console.error("Gamification error:", error);
+      res.status(500).json({ message: "Failed to fetch gamification data" });
+    }
+  });
+
+  app.get("/api/gamification/leaderboard", async (req, res) => {
+    try {
+      const { timeframe = 'weekly', category, limit = 50 } = req.query;
+      const leaderboard = await gamificationEngine.generateLeaderboard(
+        timeframe as any, 
+        category as string, 
+        parseInt(limit as string)
+      );
+      
+      res.json(leaderboard);
+    } catch (error) {
+      console.error("Leaderboard error:", error);
+      res.status(500).json({ message: "Failed to fetch leaderboard" });
+    }
+  });
+
+  // AI Study Companion API
+  app.post("/api/ai-companion/explanation", async (req, res) => {
+    try {
+      const { concept, userAnswer, correctAnswer, learningStyle, previousMistakes } = req.body;
+      const explanation = await aiStudyCompanion.generatePersonalizedExplanation(
+        concept, userAnswer, correctAnswer, learningStyle, previousMistakes || []
+      );
+      
+      res.json(explanation);
+    } catch (error) {
+      console.error("AI explanation error:", error);
+      res.status(500).json({ message: "Failed to generate explanation" });
+    }
+  });
+
+  app.post("/api/ai-companion/study-plan", async (req, res) => {
+    try {
+      const { userProfile } = req.body;
+      const studyPlan = await aiStudyCompanion.generateStudyPlan(userProfile);
+      
+      res.json(studyPlan);
+    } catch (error) {
+      console.error("Study plan error:", error);
+      res.status(500).json({ message: "Failed to generate study plan" });
+    }
+  });
+
+  app.post("/api/ai-companion/performance-analysis", async (req, res) => {
+    try {
+      const { performanceData } = req.body;
+      const analysis = await aiStudyCompanion.analyzePerformancePattern(performanceData);
+      
+      res.json(analysis);
+    } catch (error) {
+      console.error("Performance analysis error:", error);
+      res.status(500).json({ message: "Failed to analyze performance" });
+    }
+  });
+
+  // Enhanced Video OSCE API
+  app.post("/api/video-osce/analyze", async (req, res) => {
+    try {
+      const { videoData, audioData, stationRequirements } = req.body;
+      
+      // Convert base64 to blob simulation
+      const videoBlob = new Blob([Buffer.from(videoData, 'base64')]);
+      const audioBlob = new Blob([Buffer.from(audioData, 'base64')]);
+      
+      const analysis = await videoOSCEEngine.analyzeOSCEVideo(videoBlob, audioBlob, stationRequirements);
+      const feedbackReport = await videoOSCEEngine.generateFeedbackReport(analysis, stationRequirements);
+      
+      res.json({
+        analysis,
+        feedbackReport,
+        sessionId: `session_${Date.now()}`
+      });
+    } catch (error) {
+      console.error("Video OSCE analysis error:", error);
+      res.status(500).json({ message: "Failed to analyze OSCE video" });
+    }
+  });
+
+  // Professional Development API
+  app.post("/api/professional/cv-builder", async (req, res) => {
+    try {
+      const { profile } = req.body;
+      const cvResult = await professionalDevelopment.buildNHSCV(profile);
+      
+      res.json(cvResult);
+    } catch (error) {
+      console.error("CV builder error:", error);
+      res.status(500).json({ message: "Failed to build CV" });
+    }
+  });
+
+  app.get("/api/professional/foundation-programme/:year", async (req, res) => {
+    try {
+      const year = parseInt(req.params.year);
+      const programme = await professionalDevelopment.getFoundationProgrammeGuidance(year);
+      
+      res.json(programme);
+    } catch (error) {
+      console.error("Foundation programme error:", error);
+      res.status(500).json({ message: "Failed to fetch foundation programme data" });
+    }
+  });
+
+  app.get("/api/professional/specialty-training", async (req, res) => {
+    try {
+      const specialtyTraining = await professionalDevelopment.getSpecialtyGuidance();
+      
+      res.json(specialtyTraining);
+    } catch (error) {
+      console.error("Specialty training error:", error);
+      res.status(500).json({ message: "Failed to fetch specialty training data" });
+    }
+  });
+
+  // Community Features API
+  app.post("/api/community/study-groups", async (req, res) => {
+    try {
+      const { creatorId, groupData } = req.body;
+      const studyGroup = await communityIntegration.createStudyGroup(creatorId, groupData);
+      
+      res.json(studyGroup);
+    } catch (error) {
+      console.error("Study group creation error:", error);
+      res.status(500).json({ message: "Failed to create study group" });
+    }
+  });
+
+  app.get("/api/community/study-groups/matching/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const { examType, categories, schedule, experience } = req.query;
+      
+      const preferences = {
+        examType: examType as string,
+        categories: (categories as string)?.split(',') || [],
+        schedule: schedule as string,
+        experience: experience as string
+      };
+      
+      const matchingGroups = await communityIntegration.findMatchingStudyGroups(userId, preferences);
+      
+      res.json(matchingGroups);
+    } catch (error) {
+      console.error("Study group matching error:", error);
+      res.status(500).json({ message: "Failed to find matching study groups" });
+    }
+  });
+
+  app.post("/api/community/forum/threads", async (req, res) => {
+    try {
+      const { categoryId, authorId, threadData } = req.body;
+      const result = await communityIntegration.createForumThread(categoryId, authorId, threadData);
+      
+      res.json(result);
+    } catch (error) {
+      console.error("Forum thread creation error:", error);
+      res.status(500).json({ message: "Failed to create forum thread" });
+    }
+  });
+
+  // Mobile Optimization API
+  app.get("/api/mobile/pwa-manifest", async (req, res) => {
+    try {
+      const manifest = mobileOptimization.generatePWAManifest();
+      res.json(manifest);
+    } catch (error) {
+      console.error("PWA manifest error:", error);
+      res.status(500).json({ message: "Failed to generate PWA manifest" });
+    }
+  });
+
+  app.post("/api/mobile/offline-sync/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const { categories, maxQuestionsPerCategory } = req.body;
+      
+      const offlineBanks = await mobileOptimization.syncOfflineQuestions(
+        userId, 
+        categories, 
+        maxQuestionsPerCategory || 50
+      );
+      
+      res.json(offlineBanks);
+    } catch (error) {
+      console.error("Offline sync error:", error);
+      res.status(500).json({ message: "Failed to sync offline content" });
     }
   });
 
