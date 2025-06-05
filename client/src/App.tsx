@@ -22,6 +22,7 @@ import Analytics from "@/pages/analytics";
 import Gamification from "@/pages/gamification";
 import OfflineMode from "@/pages/offline-mode";
 import PersonalizedPaths from "@/pages/personalized-paths";
+import More from "@/pages/more";
 import Auth from "@/pages/auth";
 
 // Mock user for demo - in real app this would come from auth context
@@ -102,6 +103,10 @@ function Router() {
         <Route path="/personalized-paths">
           <Navigation user={DEMO_USER} />
           <PersonalizedPaths />
+        </Route>
+        <Route path="/more">
+          <Navigation user={DEMO_USER} />
+          <More />
         </Route>
         <Route component={NotFound} />
       </Switch>
