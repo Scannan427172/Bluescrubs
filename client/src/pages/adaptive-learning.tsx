@@ -326,7 +326,7 @@ export default function AdaptiveLearning() {
                   <RefreshCw className="w-4 h-4 mr-2" />
                   Refresh Analysis
                 </Button>
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                <Button id="start-ai-session-btn" className="bg-purple-600 hover:bg-purple-700">
                   <Brain className="w-4 h-4 mr-2" />
                   Start AI Session
                 </Button>
