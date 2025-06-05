@@ -65,7 +65,7 @@ export default function Landing() {
                 <Link href="/dashboard">
                   <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
                     <Play className="mr-2 w-5 h-5 text-white" />
-                    <span className="text-white">Watch Demo</span>
+                    <span className="text-white">Try Demo</span>
                   </Button>
                 </Link>
               </div>
