@@ -322,7 +322,11 @@ export default function Auth() {
             </div>
           </div>
           
-          <Button id="prep-button" className="bg-white hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold">
+          <Button 
+            id="prep-button" 
+            className="bg-white hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold"
+            onClick={() => setLocation("/onboarding")}
+          >
             Begin Your Preparation
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
           </Button>
