@@ -197,6 +197,9 @@ button[class*="bg-purple"],
 button[class*="bg-indigo"],
 button[class*="bg-green"],
 button[class*="bg-medical"],
+.btn-medical,
+.btn-secondary,
+.btn-success,
 .btn-primary,
 #continue-plab1-btn,
 #continue-practice-btn,
@@ -206,7 +209,10 @@ button[class*="bg-medical"],
 #continue-path-btn,
 #continue-learning-btn,
 #milestone-continue-btn,
-#update-plan-btn {
+#update-plan-btn,
+#quick-practice-btn,
+#random-quiz-btn,
+#timed-mock-btn {
   color: white !important;
   border-radius: 8px !important;
   font-weight: 500 !important;
@@ -232,6 +238,9 @@ button[class*="bg-blue"]:hover,
 button[class*="bg-purple"]:hover,
 button[class*="bg-indigo"]:hover,
 button[class*="bg-green"]:hover,
+.btn-medical:hover,
+.btn-secondary:hover,
+.btn-success:hover,
 .btn-primary:hover,
 #continue-plab1-btn:hover,
 #continue-practice-btn:hover,
@@ -241,7 +250,10 @@ button[class*="bg-green"]:hover,
 #continue-path-btn:hover,
 #continue-learning-btn:hover,
 #milestone-continue-btn:hover,
-#update-plan-btn:hover {
+#update-plan-btn:hover,
+#quick-practice-btn:hover,
+#random-quiz-btn:hover,
+#timed-mock-btn:hover {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
 }
@@ -251,6 +263,9 @@ button[class*="bg-blue"] svg,
 button[class*="bg-purple"] svg,
 button[class*="bg-indigo"] svg,
 button[class*="bg-green"] svg,
+.btn-medical svg,
+.btn-secondary svg,
+.btn-success svg,
 .btn-primary svg,
 #continue-plab1-btn svg,
 #continue-practice-btn svg,
@@ -260,7 +275,10 @@ button[class*="bg-green"] svg,
 #continue-path-btn svg,
 #continue-learning-btn svg,
 #milestone-continue-btn svg,
-#update-plan-btn svg {
+#update-plan-btn svg,
+#quick-practice-btn svg,
+#random-quiz-btn svg,
+#timed-mock-btn svg {
   color: white !important;
 }
 

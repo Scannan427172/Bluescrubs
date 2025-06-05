@@ -231,6 +231,7 @@ export default function Plab1Practice() {
                 {/* Quick Action Buttons */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <Button
+                    id="quick-practice-btn"
                     onClick={() => handleStartQuiz()}
                     disabled={questionsLoading || !questions?.length}
                     className="btn-medical flex items-center justify-center space-x-2 h-16"
@@ -243,6 +244,7 @@ export default function Plab1Practice() {
                   </Button>
 
                   <Button
+                    id="random-quiz-btn"
                     onClick={() => {
                       // Shuffle questions for random practice
                       const shuffled = [...(questions || [])].sort(() => Math.random() - 0.5);
@@ -259,6 +261,7 @@ export default function Plab1Practice() {
                   </Button>
 
                   <Button
+                    id="timed-mock-btn"
                     onClick={() => handleStartQuiz()}
                     disabled={questionsLoading || !questions?.length}
                     className="btn-success flex items-center justify-center space-x-2 h-16"
