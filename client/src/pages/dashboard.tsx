@@ -163,7 +163,10 @@ export default function Dashboard() {
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                     <span className="text-xl" style={{ color: '#2E86AB' }}>📚</span>
                   </div>
-                  <Badge variant={user.currentStage === "plab1" ? "default" : "secondary"}>
+                  <Badge 
+                    variant={user.currentStage === "plab1" ? "default" : "secondary"}
+                    className={user.currentStage === "plab1" ? "bg-blue-500 text-white" : ""}
+                  >
                     {user.currentStage === "plab1" ? "ACTIVE" : "COMPLETED"}
                   </Badge>
                 </div>
