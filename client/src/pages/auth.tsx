@@ -64,7 +64,7 @@ export default function Auth() {
               Your Gateway to NHS Success
             </h2>
             
-            <p className="text-lg" style={{color: 'white !important'}}>
+            <p id="hero-text" className="text-lg">
               Join thousands of international medical graduates who've successfully passed their PLAB examinations with our comprehensive preparation platform.
             </p>
             

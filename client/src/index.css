@@ -156,8 +156,8 @@ label {
   fill: #10b981 !important;
 }
 
-/* Override any conflicting styles for inline white text */
-p[style*="color: white"] {
+/* Target specific hero text to make it white */
+#hero-text {
   color: white !important;
 }
 
