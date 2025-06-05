@@ -161,6 +161,11 @@ label {
   color: white !important;
 }
 
+/* Target subtext to make it white */
+#subtext {
+  color: white !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;

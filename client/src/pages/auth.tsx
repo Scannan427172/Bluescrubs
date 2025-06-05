@@ -283,7 +283,7 @@ export default function Auth() {
           <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6">
             Start Your NHS Journey Today
           </h2>
-          <p className="text-lg sm:text-xl text-white/90 mb-8 sm:mb-12">
+          <p id="subtext" className="text-lg sm:text-xl text-white/90 mb-8 sm:mb-12">
             Join 15,000+ medical professionals who trust our platform
           </p>
           
