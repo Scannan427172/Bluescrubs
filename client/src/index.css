@@ -213,7 +213,9 @@ button[class*="bg-medical"],
 #quick-practice-btn,
 #random-quiz-btn,
 #timed-mock-btn,
-button[id*="station-"][id$="-btn"] {
+button[id*="station-"][id$="-btn"],
+button[id*="video-station-"][id$="-btn"],
+#start-first-video-station-btn {
   color: white !important;
   border-radius: 8px !important;
   font-weight: 500 !important;
@@ -236,7 +238,9 @@ button[id*="station-"][id$="-btn"] {
 #quick-practice-btn,
 #random-quiz-btn,
 #timed-mock-btn,
-button[id*="station-"][id$="-btn"] {
+button[id*="station-"][id$="-btn"],
+button[id*="video-station-"][id$="-btn"],
+#start-first-video-station-btn {
   background: #3B82F6 !important;
   border: none !important;
 }
@@ -262,7 +266,9 @@ button[class*="bg-green"]:hover,
 #quick-practice-btn:hover,
 #random-quiz-btn:hover,
 #timed-mock-btn:hover,
-button[id*="station-"][id$="-btn"]:hover {
+button[id*="station-"][id$="-btn"]:hover,
+button[id*="video-station-"][id$="-btn"]:hover,
+#start-first-video-station-btn:hover {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
 }
@@ -288,7 +294,9 @@ button[class*="bg-green"] svg,
 #quick-practice-btn svg,
 #random-quiz-btn svg,
 #timed-mock-btn svg,
-button[id*="station-"][id$="-btn"] svg {
+button[id*="station-"][id$="-btn"] svg,
+button[id*="video-station-"][id$="-btn"] svg,
+#start-first-video-station-btn svg {
   color: white !important;
 }
 

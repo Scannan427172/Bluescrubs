@@ -438,7 +438,8 @@ export default function VideoOsce() {
                       </div>
 
                       <Button 
-                        className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                        id={`video-station-${station.id}-btn`}
+                        className="w-full btn-medical"
                         onClick={() => startStation(station)}
                       >
                         <Play className="w-4 h-4 mr-2" />
@@ -460,7 +461,7 @@ export default function VideoOsce() {
                     <Video className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                     <h3 className="text-lg font-medium mb-2" style={{ color: '#000000' }}>No recordings yet</h3>
                     <p className="text-gray-600 mb-6">Complete a video station to start building your practice library</p>
-                    <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                    <Button id="start-first-video-station-btn" className="btn-medical">
                       Start First Station
                     </Button>
                   </div>
