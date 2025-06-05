@@ -145,6 +145,17 @@ label {
   color: black !important;
 }
 
+/* Exception for specific white text on left side */
+.text-white p,
+p.text-white {
+  color: white !important;
+}
+
+/* Override any global styles that might be affecting the left side text */
+div[class*="bg-gradient"] p {
+  color: white !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
