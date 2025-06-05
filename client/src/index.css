@@ -156,8 +156,8 @@ label {
   fill: #10b981 !important;
 }
 
-/* Make only the specific paragraph white */
-.bg-gradient-to-br .text-white[style*="white"] {
+/* Override any conflicting styles for inline white text */
+p[style*="color: white"] {
   color: white !important;
 }
 
