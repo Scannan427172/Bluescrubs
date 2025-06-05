@@ -167,7 +167,7 @@ export default function Landing() {
               </span>
             </h2>
             
-            <p className="text-xl text-blue-100 leading-relaxed max-w-2xl mx-auto">
+            <p id="landing-hero-text" className="text-xl text-blue-100 leading-relaxed max-w-2xl mx-auto">
               Join thousands of international medical graduates who achieved their UK medical career dreams with NHSprep.
             </p>
             

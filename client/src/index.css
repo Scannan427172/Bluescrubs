@@ -184,6 +184,11 @@ label {
   color: #2563eb !important;
 }
 
+/* Target landing page hero text to make it white */
+#landing-hero-text {
+  color: white !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
