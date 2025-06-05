@@ -82,6 +82,20 @@ export default function More() {
       icon: Shield,
       description: "NHS values and professional standards in medical education",
       lastUpdated: "June 2025"
+    },
+    {
+      id: "intellectual-property",
+      title: "Intellectual Property Notice",
+      icon: Scale,
+      description: "Copyright, trademark, and intellectual property protection",
+      lastUpdated: "June 2025"
+    },
+    {
+      id: "platform-security",
+      title: "Platform Security & Data Protection",
+      icon: Lock,
+      description: "Security measures and data protection protocols",
+      lastUpdated: "June 2025"
     }
   ];
 
@@ -2470,10 +2484,123 @@ By using the NHSprep platform, you acknowledge that you have read, understood, a
 This code is reviewed annually and updated to reflect current NHS standards and best practices.
       `
     },
+    "intellectual-property": {
+      title: "Intellectual Property Notice",
+      content: `
+Intellectual Property Notice
+
+**Effective Date:** June 5, 2025  
+**Last Updated:** June 5, 2025
+
+1. Copyright Protection
+
+All content, materials, and resources on the NHSprep platform are protected by intellectual property laws including copyright, trademark, and trade secret laws. This includes but is not limited to:
+
+- Educational content and curriculum materials
+- Medical question databases and explanations
+- Video content and OSCE scenarios
+- Software code and platform functionality
+- Branding, logos, and visual design elements
+- AI-generated feedback and analysis tools
+
+2. Trademark Rights
+
+The following are registered trademarks of NHSprep Ltd:
+- NHSprep® (Registered trademark)
+- PLAB Master® (Registered trademark)
+- Video OSCE Pro® (Registered trademark)
+- Smart Learning Engine® (Registered trademark)
+
+3. User License and Restrictions
+
+By using this platform, you are granted a limited, non-exclusive, non-transferable license to:
+- Access educational content for personal study purposes
+- Download materials for offline study (where permitted)
+- Participate in community discussions and mentoring
+
+You may NOT:
+- Reproduce, distribute, or sell any platform content
+- Create derivative works based on our materials
+- Reverse engineer our software or AI systems
+- Use our content for commercial purposes without permission
+- Share access credentials with others
+
+4. Digital Millennium Copyright Act (DMCA) Compliance
+
+We respect intellectual property rights and comply with the DMCA. If you believe content infringes your copyright:
+
+Email: dmca@nhsprep.com
+Include: Description of copyrighted work, location of infringing material, your contact information, and a good faith statement.
+
+5. Medical Content Disclaimer
+
+Educational materials are for training purposes only and do not constitute medical advice. Always consult current clinical guidelines and seek professional medical advice for patient care decisions.
+
+**Contact for IP matters:** legal@nhsprep.com
+      `
+    },
+    "platform-security": {
+      title: "Platform Security & Data Protection",
+      content: `
+Platform Security & Data Protection
+
+**Last Updated:** June 5, 2025
+
+1. Security Measures
+
+We implement comprehensive security measures to protect your data:
+
+Technical Security:
+- End-to-end encryption for all data transmission
+- Advanced firewall protection and intrusion detection
+- Regular security audits and penetration testing
+- Secure data centers with 24/7 monitoring
+- Multi-factor authentication options
+- Regular security updates and patches
+
+Data Protection:
+- GDPR compliant data processing
+- NHS Data Security and Protection Toolkit compliance
+- Regular backup systems with encryption
+- Access controls and audit logging
+- Staff security training and background checks
+
+2. User Responsibilities
+
+To maintain platform security, users must:
+- Use strong, unique passwords
+- Enable two-factor authentication when available
+- Report suspected security incidents immediately
+- Keep personal devices secure when accessing the platform
+- Log out from shared or public computers
+- Report any unauthorized access to your account
+
+3. Incident Response
+
+In case of security incidents:
+- Immediate containment and investigation
+- Notification to affected users within 24 hours
+- Cooperation with relevant authorities
+- Transparent reporting of incident details
+- Implementation of additional safeguards
+
+4. Data Breach Procedures
+
+If a data breach occurs:
+- Users notified within 72 hours
+- Detailed explanation of what data was involved
+- Steps taken to secure the breach
+- Recommendations for user protection
+- Support services provided at no cost
+
+**Report Security Issues:** security@nhsprep.com
+**Emergency Contact:** +44 20 1234 5684 (24/7)
+      `
+    },
     "accessibility": {
       title: "Accessibility Statement",
       content: `
-# Accessibility Statement
+Accessibility Statement
 
 **Effective Date:** June 5, 2025  
 **Last Updated:** June 5, 2025
