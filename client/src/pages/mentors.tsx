@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,19 +8,121 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { apiRequest } from "@/lib/queryClient";
 import { 
   Star, Users, Calendar, MessageCircle, Video, 
   Award, Clock, MapPin, Stethoscope, GraduationCap,
-  BookOpen, Heart, DollarSign, CheckCircle
+  BookOpen, Heart, DollarSign, CheckCircle, Brain, Zap
 } from "lucide-react";
+
+const DEMO_USER_ID = 1;
 
 export default function Mentors() {
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>("all");
   const [selectedMentor, setSelectedMentor] = useState<any>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [matchingOpen, setMatchingOpen] = useState(false);
+  const [sessionPlan, setSessionPlan] = useState<any>(null);
+  const [bookingData, setBookingData] = useState({
+    date: "",
+    time: "",
+    duration: 60,
+    sessionType: "General Consultation",
+    notes: ""
+  });
 
-  // Mock mentor data with diverse backgrounds
-  const mentors = [
+  // Fetch mentors from API
+  const { data: mentorData, isLoading: mentorsLoading } = useQuery({
+    queryKey: ['/api/mentors'],
+  });
+
+  // AI Mentor Matching
+  const [matchingCriteria, setMatchingCriteria] = useState({
+    weakAreas: ["Cardiology", "Ethics"],
+    learningStyle: "visual",
+    availability: "evenings",
+    budget: 30,
+    language: "English",
+    specificNeeds: ["OSCE practice", "Interview skills"]
+  });
+
+  const findMatchingMentors = async () => {
+    try {
+      const response = await fetch('/api/mentors/match', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(matchingCriteria)
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        return result;
+      }
+    } catch (error) {
+      console.error('Failed to find matching mentors:', error);
+    }
+  };
+
+  const generateSessionPlan = async (mentorId: number) => {
+    try {
+      const response = await fetch(`/api/mentors/${mentorId}/session-plan`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          studentWeakAreas: matchingCriteria.weakAreas,
+          sessionType: bookingData.sessionType,
+          duration: bookingData.duration
+        })
+      });
+      
+      if (response.ok) {
+        const plan = await response.json();
+        setSessionPlan(plan);
+      }
+    } catch (error) {
+      console.error('Failed to generate session plan:', error);
+    }
+  };
+
+  const bookSession = async () => {
+    if (!selectedMentor) return;
+    
+    try {
+      const response = await fetch(`/api/mentors/${selectedMentor.id}/book`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          studentId: DEMO_USER_ID,
+          sessionDetails: {
+            date: `${bookingData.date}T${bookingData.time}:00`,
+            duration: bookingData.duration,
+            sessionType: bookingData.sessionType,
+            notes: bookingData.notes
+          }
+        })
+      });
+      
+      if (response.ok) {
+        const session = await response.json();
+        alert('Session booked successfully! You will receive a confirmation email with meeting details.');
+        setBookingOpen(false);
+        setSelectedMentor(null);
+      }
+    } catch (error) {
+      console.error('Failed to book session:', error);
+      alert('Failed to book session. Please try again.');
+    }
+  };
+
+  // Use fetched mentors or fallback data
+  const displayMentors = mentorData || [
     {
       id: 1,
       name: "Dr. Priya Sharma",

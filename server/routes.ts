@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { analyzeVideoPerformance, generateStudyPlan } from "./ai-analysis";
 import { generateUserAnalytics, generateAdaptiveLearningPlan } from "./analytics-engine";
 import { findMatchingMentors, generateSessionPlan, getMentorProfiles, bookMentorSession } from "./mentor-matching";
+import { generateCulturalContent, assessCulturalCompetency, nhsCulturalModules } from "./cultural-content";
 import { 
   insertUserSchema, insertQuestionSchema, insertUserProgressSchema,
   insertStudyPlanSchema, insertCommunityPostSchema, insertPostReplySchema,
@@ -393,6 +394,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Session booking error:", error);
       res.status(500).json({ message: "Failed to book session" });
+    }
+  });
+
+  // Cultural Training routes
+  app.get("/api/cultural-modules", async (req, res) => {
+    try {
+      res.json(nhsCulturalModules);
+    } catch (error) {
+      console.error("Error fetching cultural modules:", error);
+      res.status(500).json({ message: "Failed to fetch cultural modules" });
+    }
+  });
+
+  app.post("/api/cultural-modules/generate", async (req, res) => {
+    try {
+      const { topic, difficulty } = req.body;
+      const module = await generateCulturalContent(topic, difficulty);
+      res.json(module);
+    } catch (error) {
+      console.error("Error generating cultural content:", error);
+      res.status(500).json({ message: "Failed to generate cultural content" });
+    }
+  });
+
+  app.post("/api/cultural-competency/assess", async (req, res) => {
+    try {
+      const { responses } = req.body;
+      const assessment = await assessCulturalCompetency(responses);
+      res.json(assessment);
+    } catch (error) {
+      console.error("Error assessing cultural competency:", error);
+      res.status(500).json({ message: "Failed to assess cultural competency" });
     }
   });
 
