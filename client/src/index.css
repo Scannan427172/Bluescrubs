@@ -199,7 +199,8 @@ label {
 #start-practice-btn,
 #start-ai-session-btn,
 #continue-path-btn,
-#continue-learning-btn {
+#continue-learning-btn,
+#milestone-continue-btn {
   background: #3B82F6 !important;
   color: white !important;
   border: none !important;
@@ -214,7 +215,8 @@ label {
 #start-practice-btn:hover,
 #start-ai-session-btn:hover,
 #continue-path-btn:hover,
-#continue-learning-btn:hover {
+#continue-learning-btn:hover,
+#milestone-continue-btn:hover {
   background: #2563EB !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
@@ -227,7 +229,8 @@ label {
 #start-practice-btn svg,
 #start-ai-session-btn svg,
 #continue-path-btn svg,
-#continue-learning-btn svg {
+#continue-learning-btn svg,
+#milestone-continue-btn svg {
   color: white !important;
 }
 

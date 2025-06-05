@@ -267,7 +267,7 @@ export default function PersonalizedPaths() {
                         )}
                       </div>
                       {milestone.current && (
-                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                        <Button id="milestone-continue-btn" size="sm" className="bg-blue-600 hover:bg-blue-700">
                           Continue
                         </Button>
                       )}
