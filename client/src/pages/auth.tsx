@@ -458,7 +458,7 @@ export default function Auth() {
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{
-            backgroundImage: `url('@assets/IMG_2493_1749108709437.jpeg')`,
+            backgroundImage: `url('@assets/IMG_2493_1749109164834.jpeg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
