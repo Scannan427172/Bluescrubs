@@ -173,13 +173,13 @@ export default function Landing() {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
               <Link href="/auth">
-                <Button size="lg" className="w-full sm:w-auto bg-white text-blue-600 hover:bg-gray-100 px-10 py-4 text-xl font-bold rounded-xl shadow-2xl hover:shadow-white/25 transition-all duration-300 transform hover:scale-105">
+                <Button id="trial-button" size="lg" className="w-full sm:w-auto bg-white hover:bg-gray-100 px-10 py-4 text-xl font-bold rounded-xl shadow-2xl hover:shadow-white/25 transition-all duration-300 transform hover:scale-105">
                   Start Free Trial Today
                   <ArrowRight className="ml-3 w-6 h-6" />
                 </Button>
               </Link>
               <Link href="/dashboard">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm px-10 py-4 text-xl font-semibold rounded-xl transition-all duration-300">
+                <Button id="demo-button" variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white hover:bg-white/10 backdrop-blur-sm px-10 py-4 text-xl font-semibold rounded-xl transition-all duration-300">
                   <Play className="mr-3 w-6 h-6" />
                   Try Demo Now
                 </Button>
