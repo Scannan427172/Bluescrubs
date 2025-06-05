@@ -338,6 +338,13 @@ button[id*="video-station-"][id$="-btn"] svg,
   color: #4c1d95 !important;
 }
 
+/* Achievement Center header text - ensure white text on purple background */
+.bg-gradient-to-r.from-purple-600.to-blue-600 h1,
+.bg-gradient-to-r.from-purple-600.to-blue-600 p,
+.bg-gradient-to-r.from-purple-600.to-blue-600 .text-white {
+  color: white !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
