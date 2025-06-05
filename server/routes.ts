@@ -272,6 +272,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // AI Analysis routes
+  app.post("/api/ai/analyze-video", async (req, res) => {
+    try {
+      const { stationTitle, stationCategory, learningObjectives, recordingDuration } = req.body;
+      
+      if (!stationTitle || !stationCategory || !learningObjectives || !recordingDuration) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+
+      const analysis = await analyzeVideoPerformance(
+        stationTitle,
+        stationCategory,
+        learningObjectives,
+        recordingDuration
+      );
+      
+      res.json(analysis);
+    } catch (error) {
+      console.error("Video analysis error:", error);
+      res.status(500).json({ message: "Failed to analyze video" });
+    }
+  });
+
+  app.post("/api/ai/generate-study-plan", async (req, res) => {
+    try {
+      const { analysisResults, weakAreas } = req.body;
+      
+      if (!analysisResults || !weakAreas) {
+        return res.status(400).json({ message: "Missing analysis data" });
+      }
+
+      const studyPlan = await generateStudyPlan(analysisResults, weakAreas);
+      res.json(studyPlan);
+    } catch (error) {
+      console.error("Study plan generation error:", error);
+      res.status(500).json({ message: "Failed to generate study plan" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
