@@ -219,15 +219,15 @@ export default function SmartPlanner() {
                       <div className="pt-4 border-t">
                         <h4 className="font-medium mb-3" style={{ color: '#000000' }}>Quick Actions</h4>
                         <div className="space-y-2">
-                          <Button variant="outline" size="sm" className="w-full justify-start">
+                          <Button id="rebalance-week-btn" size="sm" className="w-full justify-start btn-medical">
                             <RefreshCw className="w-4 h-4 mr-2" />
                             Rebalance This Week
                           </Button>
-                          <Button variant="outline" size="sm" className="w-full justify-start">
+                          <Button id="mark-session-complete-btn" size="sm" className="w-full justify-start btn-medical">
                             <Clock className="w-4 h-4 mr-2" />
                             Mark Session Complete
                           </Button>
-                          <Button variant="outline" size="sm" className="w-full justify-start">
+                          <Button id="report-missed-day-btn" size="sm" className="w-full justify-start btn-medical">
                             <AlertTriangle className="w-4 h-4 mr-2" />
                             Report Missed Day
                           </Button>

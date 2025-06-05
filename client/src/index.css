@@ -215,7 +215,10 @@ button[class*="bg-medical"],
 #timed-mock-btn,
 button[id*="station-"][id$="-btn"],
 button[id*="video-station-"][id$="-btn"],
-#start-first-video-station-btn {
+#start-first-video-station-btn,
+#rebalance-week-btn,
+#mark-session-complete-btn,
+#report-missed-day-btn {
   color: white !important;
   border-radius: 8px !important;
   font-weight: 500 !important;
@@ -240,7 +243,10 @@ button[id*="video-station-"][id$="-btn"],
 #timed-mock-btn,
 button[id*="station-"][id$="-btn"],
 button[id*="video-station-"][id$="-btn"],
-#start-first-video-station-btn {
+#start-first-video-station-btn,
+#rebalance-week-btn,
+#mark-session-complete-btn,
+#report-missed-day-btn {
   background: #3B82F6 !important;
   border: none !important;
 }
@@ -268,7 +274,10 @@ button[class*="bg-green"]:hover,
 #timed-mock-btn:hover,
 button[id*="station-"][id$="-btn"]:hover,
 button[id*="video-station-"][id$="-btn"]:hover,
-#start-first-video-station-btn:hover {
+#start-first-video-station-btn:hover,
+#rebalance-week-btn:hover,
+#mark-session-complete-btn:hover,
+#report-missed-day-btn:hover {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
 }
@@ -296,7 +305,10 @@ button[class*="bg-green"] svg,
 #timed-mock-btn svg,
 button[id*="station-"][id$="-btn"] svg,
 button[id*="video-station-"][id$="-btn"] svg,
-#start-first-video-station-btn svg {
+#start-first-video-station-btn svg,
+#rebalance-week-btn svg,
+#mark-session-complete-btn svg,
+#report-missed-day-btn svg {
   color: white !important;
 }
 
