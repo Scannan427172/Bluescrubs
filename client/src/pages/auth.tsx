@@ -393,7 +393,7 @@ export default function Auth() {
                           onCheckedChange={(checked) => setRegisterForm({...registerForm, agreeToTerms: checked as boolean})}
                           required
                         />
-                        <Label htmlFor="terms" className="text-sm text-gray-600">
+                        <Label htmlFor="terms" className="text-sm text-black">
                           I agree to the <Button variant="link" className="text-blue-600 hover:text-blue-800 p-0 h-auto">Terms of Service</Button> and <Button variant="link" className="text-blue-600 hover:text-blue-800 p-0 h-auto">Privacy Policy</Button>
                         </Label>
                       </div>
@@ -404,7 +404,7 @@ export default function Auth() {
                           checked={registerForm.agreeToNewsletter}
                           onCheckedChange={(checked) => setRegisterForm({...registerForm, agreeToNewsletter: checked as boolean})}
                         />
-                        <Label htmlFor="newsletter" className="text-sm text-gray-600">
+                        <Label htmlFor="newsletter" className="text-sm text-black">
                           Subscribe to study tips and PLAB updates
                         </Label>
                       </div>
@@ -419,7 +419,7 @@ export default function Auth() {
               </Tabs>
 
               <div className="mt-6 text-center">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-black">
                   {activeTab === "login" ? "Don't have an account? " : "Already have an account? "}
                   <Button 
                     variant="link" 
@@ -432,7 +432,7 @@ export default function Auth() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="text-center text-xs text-gray-500">
+                <div className="text-center text-xs text-black">
                   <p>🔒 Your data is secure and encrypted</p>
                   <p className="mt-1">Trusted by 15,000+ medical professionals worldwide</p>
                 </div>
