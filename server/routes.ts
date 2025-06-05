@@ -20,8 +20,10 @@ import { generateCulturalContent, assessCulturalCompetency, nhsCulturalModules }
 import { 
   insertUserSchema, insertQuestionSchema, insertUserProgressSchema,
   insertStudyPlanSchema, insertCommunityPostSchema, insertPostReplySchema,
-  insertUserOsceAttemptSchema
+  insertUserOsceAttemptSchema, insertStudySessionSchema, insertUserPreferencesSchema,
+  insertPerformanceMetricsSchema, insertStudyReminderSchema
 } from "@shared/schema";
+import { studyScheduleOptimizer } from "./study-scheduler";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -1214,6 +1216,267 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Tutor booking error:", error);
       res.status(500).json({ message: "Failed to book tutor session" });
+    }
+  });
+
+  // Personalized Study Schedule Optimizer API Routes
+  
+  // User Preferences Management
+  app.get("/api/study-scheduler/preferences/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const preferences = await storage.getUserPreferences(userId);
+      
+      if (!preferences) {
+        return res.status(404).json({ message: "User preferences not found" });
+      }
+      
+      res.json(preferences);
+    } catch (error) {
+      console.error("Get preferences error:", error);
+      res.status(500).json({ message: "Failed to get user preferences" });
+    }
+  });
+
+  app.post("/api/study-scheduler/preferences", async (req, res) => {
+    try {
+      const preferencesData = insertUserPreferencesSchema.parse(req.body);
+      const preferences = await storage.createUserPreferences(preferencesData);
+      
+      res.status(201).json(preferences);
+    } catch (error) {
+      console.error("Create preferences error:", error);
+      res.status(400).json({ message: "Invalid preferences data" });
+    }
+  });
+
+  app.put("/api/study-scheduler/preferences/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const updates = req.body;
+      
+      const preferences = await storage.updateUserPreferences(userId, updates);
+      
+      res.json(preferences);
+    } catch (error) {
+      console.error("Update preferences error:", error);
+      res.status(500).json({ message: "Failed to update user preferences" });
+    }
+  });
+
+  // Study Sessions Management
+  app.get("/api/study-scheduler/sessions/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const { startDate, endDate, completed } = req.query;
+      
+      const sessions = await storage.getUserStudySessions(userId, {
+        startDate: startDate ? new Date(startDate as string) : undefined,
+        endDate: endDate ? new Date(endDate as string) : undefined,
+        completed: completed === 'true' ? true : completed === 'false' ? false : undefined
+      });
+      
+      res.json({ sessions, total: sessions.length });
+    } catch (error) {
+      console.error("Get sessions error:", error);
+      res.status(500).json({ message: "Failed to get study sessions" });
+    }
+  });
+
+  app.post("/api/study-scheduler/sessions", async (req, res) => {
+    try {
+      const sessionData = insertStudySessionSchema.parse(req.body);
+      const session = await storage.createStudySession(sessionData);
+      
+      res.status(201).json(session);
+    } catch (error) {
+      console.error("Create session error:", error);
+      res.status(400).json({ message: "Invalid session data" });
+    }
+  });
+
+  app.put("/api/study-scheduler/sessions/:sessionId", async (req, res) => {
+    try {
+      const sessionId = req.params.sessionId;
+      const updates = req.body;
+      
+      const session = await storage.updateStudySession(sessionId, updates);
+      
+      res.json(session);
+    } catch (error) {
+      console.error("Update session error:", error);
+      res.status(500).json({ message: "Failed to update study session" });
+    }
+  });
+
+  // Performance Metrics
+  app.get("/api/study-scheduler/metrics/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const { category, difficulty } = req.query;
+      
+      const metrics = await storage.getUserPerformanceMetrics(userId, {
+        category: category as string,
+        difficulty: difficulty as string
+      });
+      
+      res.json({ metrics, total: metrics.length });
+    } catch (error) {
+      console.error("Get metrics error:", error);
+      res.status(500).json({ message: "Failed to get performance metrics" });
+    }
+  });
+
+  app.post("/api/study-scheduler/metrics", async (req, res) => {
+    try {
+      const metricsData = insertPerformanceMetricsSchema.parse(req.body);
+      const metrics = await storage.createPerformanceMetrics(metricsData);
+      
+      res.status(201).json(metrics);
+    } catch (error) {
+      console.error("Create metrics error:", error);
+      res.status(400).json({ message: "Invalid metrics data" });
+    }
+  });
+
+  // Generate Optimized Schedule
+  app.post("/api/study-scheduler/generate-schedule", async (req, res) => {
+    try {
+      const { userId, startDate, endDate } = req.body;
+      
+      if (!userId || !startDate || !endDate) {
+        return res.status(400).json({ message: "User ID, start date, and end date are required" });
+      }
+
+      // Get user preferences and performance metrics
+      const preferences = await storage.getUserPreferences(userId);
+      const metrics = await storage.getUserPerformanceMetrics(userId);
+      
+      if (!preferences) {
+        return res.status(404).json({ message: "User preferences not found. Please set up preferences first." });
+      }
+
+      // Generate optimized schedule using the study scheduler
+      const schedule = await studyScheduleOptimizer.generateOptimizedSchedule(
+        preferences,
+        metrics,
+        new Date(startDate),
+        new Date(endDate)
+      );
+      
+      // Save generated sessions to database
+      const savedSessions = [];
+      for (const session of schedule.sessions) {
+        const savedSession = await storage.createStudySession(session);
+        savedSessions.push(savedSession);
+      }
+      
+      res.status(201).json({
+        schedule: {
+          ...schedule,
+          sessions: savedSessions
+        },
+        optimization: schedule.optimization,
+        totalSessions: savedSessions.length,
+        message: "Optimized study schedule generated successfully"
+      });
+    } catch (error) {
+      console.error("Generate schedule error:", error);
+      res.status(500).json({ message: "Failed to generate optimized schedule" });
+    }
+  });
+
+  // Adapt Schedule Based on Performance
+  app.post("/api/study-scheduler/adapt-schedule", async (req, res) => {
+    try {
+      const { userId, sessionId, performance } = req.body;
+      
+      if (!userId || !sessionId || !performance) {
+        return res.status(400).json({ message: "User ID, session ID, and performance data are required" });
+      }
+
+      // Update session with actual performance
+      await storage.updateStudySession(sessionId, {
+        completed: true,
+        actualEnd: new Date(),
+        performance: performance
+      });
+
+      // Get updated metrics and adapt future sessions
+      const updatedMetrics = await storage.getUserPerformanceMetrics(userId);
+      const preferences = await storage.getUserPreferences(userId);
+      
+      const adaptedSchedule = await studyScheduleOptimizer.adaptScheduleBasedOnPerformance(
+        userId,
+        performance,
+        updatedMetrics
+      );
+      
+      res.json({
+        adaptedSchedule,
+        message: "Schedule adapted based on performance",
+        performanceRecorded: true
+      });
+    } catch (error) {
+      console.error("Adapt schedule error:", error);
+      res.status(500).json({ message: "Failed to adapt schedule" });
+    }
+  });
+
+  // Study Reminders
+  app.get("/api/study-scheduler/reminders/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const { upcoming, sent } = req.query;
+      
+      const reminders = await storage.getUserStudyReminders(userId, {
+        upcoming: upcoming === 'true',
+        sent: sent === 'true' ? true : sent === 'false' ? false : undefined
+      });
+      
+      res.json({ reminders, total: reminders.length });
+    } catch (error) {
+      console.error("Get reminders error:", error);
+      res.status(500).json({ message: "Failed to get study reminders" });
+    }
+  });
+
+  app.post("/api/study-scheduler/reminders", async (req, res) => {
+    try {
+      const reminderData = insertStudyReminderSchema.parse(req.body);
+      const reminder = await storage.createStudyReminder(reminderData);
+      
+      res.status(201).json(reminder);
+    } catch (error) {
+      console.error("Create reminder error:", error);
+      res.status(400).json({ message: "Invalid reminder data" });
+    }
+  });
+
+  // Generate Study Recommendations
+  app.get("/api/study-scheduler/recommendations/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      
+      const metrics = await storage.getUserPerformanceMetrics(userId);
+      const preferences = await storage.getUserPreferences(userId);
+      
+      if (!preferences) {
+        return res.status(404).json({ message: "User preferences not found" });
+      }
+
+      const recommendations = await studyScheduleOptimizer.generateStudyReminders(
+        await storage.getUserStudySessions(userId, { completed: false })
+      );
+      
+      res.json({
+        recommendations,
+        basedOnPerformance: metrics.length > 0,
+        totalRecommendations: recommendations.length
+      });
+    } catch (error) {
+      console.error("Get recommendations error:", error);
+      res.status(500).json({ message: "Failed to generate study recommendations" });
     }
   });
 

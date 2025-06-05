@@ -1,13 +1,15 @@
 import { 
   users, questions, userProgress, studyPlan, communityPosts, postReplies, 
-  osceStations, userOsceAttempts,
+  osceStations, userOsceAttempts, studySessions, userPreferences, performanceMetrics, studyReminders,
   type User, type InsertUser, type Question, type InsertQuestion,
   type UserProgress, type InsertUserProgress, type StudyPlan, type InsertStudyPlan,
   type CommunityPost, type InsertCommunityPost, type PostReply, type InsertPostReply,
-  type OsceStation, type InsertOsceStation, type UserOsceAttempt, type InsertUserOsceAttempt
+  type OsceStation, type InsertOsceStation, type UserOsceAttempt, type InsertUserOsceAttempt,
+  type StudySession, type InsertStudySession, type UserPreferences, type InsertUserPreferences,
+  type PerformanceMetrics, type InsertPerformanceMetrics, type StudyReminder, type InsertStudyReminder
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and } from "drizzle-orm";
+import { eq, and, sql } from "drizzle-orm";
 
 export interface IStorage {
   // User management
@@ -50,6 +52,21 @@ export interface IStorage {
   createOsceStation(station: InsertOsceStation): Promise<OsceStation>;
   getUserOsceAttempts(userId: number): Promise<UserOsceAttempt[]>;
   createUserOsceAttempt(attempt: InsertUserOsceAttempt): Promise<UserOsceAttempt>;
+
+  // Study Scheduler
+  getUserPreferences(userId: number): Promise<UserPreferences | undefined>;
+  createUserPreferences(preferences: InsertUserPreferences): Promise<UserPreferences>;
+  updateUserPreferences(userId: number, updates: Partial<UserPreferences>): Promise<UserPreferences>;
+  
+  getUserStudySessions(userId: number, filters?: { startDate?: Date; endDate?: Date; completed?: boolean }): Promise<StudySession[]>;
+  createStudySession(session: InsertStudySession): Promise<StudySession>;
+  updateStudySession(sessionId: string, updates: Partial<StudySession>): Promise<StudySession>;
+  
+  getUserPerformanceMetrics(userId: number, filters?: { category?: string; difficulty?: string }): Promise<PerformanceMetrics[]>;
+  createPerformanceMetrics(metrics: InsertPerformanceMetrics): Promise<PerformanceMetrics>;
+  
+  getUserStudyReminders(userId: number, filters?: { upcoming?: boolean; sent?: boolean }): Promise<StudyReminder[]>;
+  createStudyReminder(reminder: InsertStudyReminder): Promise<StudyReminder>;
 }
 
 export class MemStorage implements IStorage {
@@ -1488,6 +1505,124 @@ export class DatabaseStorage implements IStorage {
     }
     
     return leaderboard.sort((a, b) => b.score - a.score);
+  }
+
+  // Study Scheduler Methods
+  async getUserPreferences(userId: number): Promise<UserPreferences | undefined> {
+    const [preferences] = await db.select().from(userPreferences).where(eq(userPreferences.userId, userId));
+    return preferences;
+  }
+
+  async createUserPreferences(preferences: InsertUserPreferences): Promise<UserPreferences> {
+    const [newPreferences] = await db.insert(userPreferences).values(preferences).returning();
+    return newPreferences;
+  }
+
+  async updateUserPreferences(userId: number, updates: Partial<UserPreferences>): Promise<UserPreferences> {
+    const [updatedPreferences] = await db.update(userPreferences)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(userPreferences.userId, userId))
+      .returning();
+    return updatedPreferences;
+  }
+
+  async getUserStudySessions(
+    userId: number, 
+    filters?: { startDate?: Date; endDate?: Date; completed?: boolean }
+  ): Promise<StudySession[]> {
+    let query = db.select().from(studySessions).where(eq(studySessions.userId, userId));
+    
+    if (filters?.startDate) {
+      query = query.where(and(
+        eq(studySessions.userId, userId),
+        sql`${studySessions.scheduledStart} >= ${filters.startDate}`
+      ));
+    }
+    
+    if (filters?.endDate) {
+      query = query.where(and(
+        eq(studySessions.userId, userId),
+        sql`${studySessions.scheduledEnd} <= ${filters.endDate}`
+      ));
+    }
+    
+    if (filters?.completed !== undefined) {
+      query = query.where(and(
+        eq(studySessions.userId, userId),
+        eq(studySessions.completed, filters.completed)
+      ));
+    }
+    
+    return await query.orderBy(studySessions.scheduledStart);
+  }
+
+  async createStudySession(session: InsertStudySession): Promise<StudySession> {
+    const [newSession] = await db.insert(studySessions).values(session).returning();
+    return newSession;
+  }
+
+  async updateStudySession(sessionId: string, updates: Partial<StudySession>): Promise<StudySession> {
+    const [updatedSession] = await db.update(studySessions)
+      .set(updates)
+      .where(eq(studySessions.id, sessionId))
+      .returning();
+    return updatedSession;
+  }
+
+  async getUserPerformanceMetrics(
+    userId: number,
+    filters?: { category?: string; difficulty?: string }
+  ): Promise<PerformanceMetrics[]> {
+    let query = db.select().from(performanceMetrics).where(eq(performanceMetrics.userId, userId));
+    
+    if (filters?.category) {
+      query = query.where(and(
+        eq(performanceMetrics.userId, userId),
+        eq(performanceMetrics.category, filters.category)
+      ));
+    }
+    
+    if (filters?.difficulty) {
+      query = query.where(and(
+        eq(performanceMetrics.userId, userId),
+        eq(performanceMetrics.difficulty, filters.difficulty)
+      ));
+    }
+    
+    return await query.orderBy(performanceMetrics.lastStudied);
+  }
+
+  async createPerformanceMetrics(metrics: InsertPerformanceMetrics): Promise<PerformanceMetrics> {
+    const [newMetrics] = await db.insert(performanceMetrics).values(metrics).returning();
+    return newMetrics;
+  }
+
+  async getUserStudyReminders(
+    userId: number,
+    filters?: { upcoming?: boolean; sent?: boolean }
+  ): Promise<StudyReminder[]> {
+    let query = db.select().from(studyReminders).where(eq(studyReminders.userId, userId));
+    
+    if (filters?.upcoming) {
+      query = query.where(and(
+        eq(studyReminders.userId, userId),
+        sql`${studyReminders.reminderTime} > NOW()`
+      ));
+    }
+    
+    if (filters?.sent !== undefined) {
+      query = query.where(and(
+        eq(studyReminders.userId, userId),
+        eq(studyReminders.sent, filters.sent)
+      ));
+    }
+    
+    return await query.orderBy(studyReminders.reminderTime);
+  }
+
+  async createStudyReminder(reminder: InsertStudyReminder): Promise<StudyReminder> {
+    const [newReminder] = await db.insert(studyReminders).values(reminder).returning();
+    return newReminder;
   }
 }
 
