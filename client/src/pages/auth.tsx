@@ -10,6 +10,7 @@ import {
   Users, 
   Award, 
   CheckCircle, 
+  Check,
   Shield,
   ArrowRight,
   Mail,
@@ -70,19 +71,27 @@ export default function Auth() {
             
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <CheckCircle className="w-6 h-6 text-green-500 fill-current" strokeWidth="3" />
+                <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                  <Check className="w-4 h-4 text-white" strokeWidth="3" />
+                </div>
                 <span>AI-Powered Adaptive Learning</span>
               </div>
               <div className="flex items-center space-x-3">
-                <CheckCircle className="w-6 h-6 text-green-500 fill-current" strokeWidth="3" />
+                <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                  <Check className="w-4 h-4 text-white" strokeWidth="3" />
+                </div>
                 <span>Real PLAB 1 & 2 Practice Questions</span>
               </div>
               <div className="flex items-center space-x-3">
-                <CheckCircle className="w-6 h-6 text-green-500 fill-current" strokeWidth="3" />
+                <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                  <Check className="w-4 h-4 text-white" strokeWidth="3" />
+                </div>
                 <span>Expert Mentor Guidance</span>
               </div>
               <div className="flex items-center space-x-3">
-                <CheckCircle className="w-6 h-6 text-green-500 fill-current" strokeWidth="3" />
+                <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                  <Check className="w-4 h-4 text-white" strokeWidth="3" />
+                </div>
                 <span>Cultural Context Training</span>
               </div>
             </div>
