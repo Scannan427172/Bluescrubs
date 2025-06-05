@@ -495,8 +495,17 @@ export default function Auth() {
       </div>
       
       {/* New Hero Banner with Blue Background */}
-      <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 py-16 px-6">
-        <div className="max-w-6xl mx-auto text-center">
+      <div className="relative bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 py-16 px-6 overflow-hidden">
+        {/* Background Image with 50% Transparency */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-50"
+          style={{
+            backgroundImage: `url('@assets/IMG_2493_1749109164834.jpeg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto text-center z-10">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Ready to master your NHS prep?
           </h2>
