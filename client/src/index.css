@@ -50,7 +50,21 @@ input[type="password"]::placeholder,
 input[type="text"]::placeholder, 
 input[type="tel"]::placeholder,
 input::placeholder {
-  color: rgba(0, 0, 0, 0.6) !important;
+  color: rgba(0, 0, 0, 0.8) !important;
+  opacity: 1 !important;
+}
+
+/* Additional targeting for specific input styling */
+.bg-white input,
+[data-radix-collection-item] input {
+  color: black !important;
+  background-color: white !important;
+}
+
+.bg-white input::placeholder,
+[data-radix-collection-item] input::placeholder {
+  color: rgba(0, 0, 0, 0.8) !important;
+  opacity: 1 !important;
 }
 
 /* Custom input styling for black text */

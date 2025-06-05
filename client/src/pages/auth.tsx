@@ -132,7 +132,7 @@ export default function Auth() {
                             placeholder="Enter your email"
                             value={loginForm.email}
                             onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
-                            className="pl-10 text-black placeholder:text-black/60 border-gray-300 bg-white"
+                            className="pl-10 text-black placeholder:text-gray-700 border-gray-300 bg-white"
                             required
                           />
                         </div>
@@ -148,7 +148,7 @@ export default function Auth() {
                             placeholder="Enter your password"
                             value={loginForm.password}
                             onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
-                            className="pl-10 text-black placeholder:text-black/60 border-gray-300 bg-white"
+                            className="pl-10 text-black placeholder:text-gray-700 border-gray-300 bg-white"
                             required
                           />
                         </div>
