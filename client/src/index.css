@@ -191,22 +191,25 @@ label {
 
 /* Removed conflicting blue text styling - handled by consistent button styling below */
 
-/* Consistent button styling - blue gradient with white text for dashboard buttons */
+/* Clean button styling to match app theme */
 .btn-primary,
 #continue-plab1-btn,
 #continue-practice-btn,
 #prep-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: #3B82F6 !important;
   color: white !important;
   border: none !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
 }
 
 .btn-primary:hover,
 #continue-plab1-btn:hover,
 #continue-practice-btn:hover,
 #prep-button:hover {
-  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+  background: #2563EB !important;
   transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
 }
 
 .btn-primary svg,
