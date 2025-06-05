@@ -293,7 +293,7 @@ export default function Auth() {
                 <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Secure Platform</h3>
-              <p className="text-sm sm:text-base text-white/80">Enterprise-grade security</p>
+              <p id="security-text" className="text-sm sm:text-base text-white/80">Enterprise-grade security</p>
             </div>
             
             <div className="text-center">
@@ -301,7 +301,7 @@ export default function Auth() {
                 <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Global Community</h3>
-              <p className="text-sm sm:text-base text-white/80">15,000+ active students</p>
+              <p id="community-text" className="text-sm sm:text-base text-white/80">15,000+ active students</p>
             </div>
             
             <div className="text-center">
@@ -309,7 +309,7 @@ export default function Auth() {
                 <Award className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Proven Results</h3>
-              <p className="text-sm sm:text-base text-white/80">94% success rate</p>
+              <p id="results-text" className="text-sm sm:text-base text-white/80">94% success rate</p>
             </div>
           </div>
           

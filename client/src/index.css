@@ -166,6 +166,13 @@ label {
   color: white !important;
 }
 
+/* Target feature description texts to make them white */
+#security-text,
+#community-text,
+#results-text {
+  color: white !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
