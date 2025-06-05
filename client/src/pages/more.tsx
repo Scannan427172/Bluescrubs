@@ -3158,6 +3158,69 @@ This accessibility statement is reviewed and updated every six months to ensure 
             </TabsList>
 
             <TabsContent value="legal" className="space-y-6">
+              {/* Company Information Section */}
+              <Card className="bg-blue-50 border-blue-200">
+                <CardHeader>
+                  <CardTitle className="text-blue-800 flex items-center space-x-2">
+                    <Stethoscope className="w-6 h-6" />
+                    <span>About NHSprep</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <p className="text-blue-700">
+                      Empowering international medical graduates to succeed in the UK healthcare system through comprehensive PLAB preparation and cultural training.
+                    </p>
+                    <div className="flex space-x-4">
+                      <a href="https://twitter.com/nhsprep" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                        <Twitter className="w-5 h-5" />
+                      </a>
+                      <a href="https://facebook.com/nhsprep" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                        <Facebook className="w-5 h-5" />
+                      </a>
+                      <a href="https://linkedin.com/company/nhsprep" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                        <Linkedin className="w-5 h-5" />
+                      </a>
+                      <a href="https://instagram.com/nhsprep" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                        <Instagram className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contact Information */}
+              <Card className="bg-purple-50 border-purple-200">
+                <CardHeader>
+                  <CardTitle className="text-purple-800">Contact Information</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="flex items-center space-x-3">
+                      <Mail className="w-5 h-5 text-purple-600" />
+                      <div>
+                        <h4 className="font-medium text-purple-800">Email</h4>
+                        <p className="text-purple-700 text-sm">support@nhsprep.com</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <Phone className="w-5 h-5 text-purple-600" />
+                      <div>
+                        <h4 className="font-medium text-purple-800">Phone</h4>
+                        <p className="text-purple-700 text-sm">+44 20 1234 5678</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <MapPin className="w-5 h-5 text-purple-600 mt-0.5" />
+                      <div>
+                        <h4 className="font-medium text-purple-800">Address</h4>
+                        <p className="text-purple-700 text-sm">123 Medical Square<br />London, SW1A 1AA<br />United Kingdom</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Important Disclaimers Section */}
               <Card className="bg-red-50 border-red-200">
                 <CardHeader>
@@ -3190,30 +3253,30 @@ This accessibility statement is reviewed and updated every six months to ensure 
               </Card>
 
               {/* Legal Protection Section */}
-              <Card className="bg-blue-50 border-blue-200">
+              <Card className="bg-gray-50 border-gray-200">
                 <CardHeader>
-                  <CardTitle className="text-blue-800">Legal Protection</CardTitle>
+                  <CardTitle className="text-gray-800">Legal Protection</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="space-y-3">
                       <div>
-                        <h4 className="font-semibold text-blue-800 mb-1">COPYRIGHT PROTECTED</h4>
-                        <p className="text-blue-700">All content is protected by intellectual property laws. Unauthorized reproduction is strictly prohibited.</p>
+                        <h4 className="font-semibold text-gray-800 mb-1">COPYRIGHT PROTECTED</h4>
+                        <p className="text-gray-700">All content is protected by intellectual property laws. Unauthorized reproduction is strictly prohibited.</p>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-blue-800 mb-1">DATA PROTECTION</h4>
-                        <p className="text-blue-700">GDPR compliant with NHS Data Security standards. Enterprise-grade security protocols in place.</p>
+                        <h4 className="font-semibold text-gray-800 mb-1">DATA PROTECTION</h4>
+                        <p className="text-gray-700">GDPR compliant with NHS Data Security standards. Enterprise-grade security protocols in place.</p>
                       </div>
                     </div>
                     <div className="space-y-3">
                       <div>
-                        <h4 className="font-semibold text-blue-800 mb-1">COMPLIANCE</h4>
-                        <p className="text-blue-700">Full adherence to NHS standards, GMC requirements, and UK medical education regulations.</p>
+                        <h4 className="font-semibold text-gray-800 mb-1">COMPLIANCE</h4>
+                        <p className="text-gray-700">Full adherence to NHS standards, GMC requirements, and UK medical education regulations.</p>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-blue-800 mb-1">TRADEMARK RIGHTS</h4>
-                        <p className="text-blue-700">NHSprep®, PLAB Master®, and other marks are registered trademarks of NHSprep Ltd.</p>
+                        <h4 className="font-semibold text-gray-800 mb-1">TRADEMARK RIGHTS</h4>
+                        <p className="text-gray-700">NHSprep®, PLAB Master®, and other marks are registered trademarks of NHSprep Ltd.</p>
                       </div>
                     </div>
                   </div>
