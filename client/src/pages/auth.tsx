@@ -70,19 +70,19 @@ export default function Auth() {
             
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
+                <CheckCircle className="w-5 h-5 text-green-500 fill-current" />
                 <span>AI-Powered Adaptive Learning</span>
               </div>
               <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
+                <CheckCircle className="w-5 h-5 text-green-500 fill-current" />
                 <span>Real PLAB 1 & 2 Practice Questions</span>
               </div>
               <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
+                <CheckCircle className="w-5 h-5 text-green-500 fill-current" />
                 <span>Expert Mentor Guidance</span>
               </div>
               <div className="flex items-center space-x-3">
-                <CheckCircle className="w-5 h-5 text-green-600" />
+                <CheckCircle className="w-5 h-5 text-green-500 fill-current" />
                 <span>Cultural Context Training</span>
               </div>
             </div>

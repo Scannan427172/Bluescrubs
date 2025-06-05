@@ -150,6 +150,12 @@ label {
   color: black !important;
 }
 
+/* Fix checkmark icon visibility */
+.text-green-500.fill-current {
+  color: #10b981 !important;
+  fill: #10b981 !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
