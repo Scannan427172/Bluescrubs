@@ -188,6 +188,172 @@ export default function Landing() {
           </div>
         </div>
       </div>
+
+      {/* Why We're Different Section */}
+      <div className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="inline-block px-6 py-3 bg-blue-100 rounded-full mb-6">
+              <span className="text-blue-700 font-semibold">Premium PLAB Ecosystem</span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Why We're <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Different</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              The world's first comprehensive PLAB preparation ecosystem combining AI-powered learning, 
+              real-time expert consultations, and immersive clinical training in 17 languages.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {[
+              {
+                icon: Video,
+                title: "Live Video Consultations",
+                subtitle: "£25/session",
+                description: "Real-time OSCE practice with qualified UK doctors and PLAB examiners. Get instant feedback on clinical skills, communication, and examination techniques.",
+                features: ["Qualified UK doctors", "Live OSCE simulations", "Instant expert feedback", "Flexible scheduling"],
+                color: "from-blue-500 to-cyan-500"
+              },
+              {
+                icon: Brain,
+                title: "AI Essay Marking System",
+                subtitle: "£15/essay",
+                description: "Advanced AI evaluation of clinical reasoning essays with detailed feedback on medical knowledge, communication skills, and professional development.",
+                features: ["Instant marking", "Clinical reasoning analysis", "Improvement tracking", "Professional writing skills"],
+                color: "from-green-500 to-emerald-500"
+              },
+              {
+                icon: Award,
+                title: "VR Clinical Scenarios",
+                subtitle: "£12/month",
+                description: "Immersive hospital ward simulations for realistic NHS environment training, cultural communication practice, and hands-on clinical experience.",
+                features: ["3D hospital environments", "Cultural communication", "Realistic patient interactions", "NHS protocol training"],
+                color: "from-purple-500 to-pink-500"
+              }
+            ].map((feature, index) => (
+              <Card key={index} className="group border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 bg-white overflow-hidden">
+                <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
+                <CardContent className="p-8">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
+                    <feature.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
+                    <span className="text-sm font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">
+                      {feature.subtitle}
+                    </span>
+                  </div>
+                  <p className="text-gray-700 mb-6 leading-relaxed">{feature.description}</p>
+                  <ul className="space-y-2">
+                    {feature.features.map((item, idx) => (
+                      <li key={idx} className="flex items-center text-sm text-gray-600">
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Competitive Advantages */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                Our Competitive <span className="text-blue-600">Advantages</span>
+              </h3>
+              <div className="space-y-6">
+                {[
+                  {
+                    icon: Globe,
+                    title: "17-Language Support",
+                    description: "First-to-market multi-language PLAB preparation for international medical graduates studying abroad before UK arrival."
+                  },
+                  {
+                    icon: Zap,
+                    title: "AI-Powered Personalisation",
+                    description: "Advanced machine learning algorithms adapt to your learning style, pace, and weak areas for optimised study plans."
+                  },
+                  {
+                    icon: Shield,
+                    title: "Digital Certification Pathways",
+                    description: "Comprehensive professional development with CPD tracking, blockchain verification, and career advancement tools (£199/pathway)."
+                  },
+                  {
+                    icon: Users,
+                    title: "Expert Tutor Marketplace",
+                    description: "Verified UK medical professionals offering specialised coaching, mock exams, and career mentorship with revenue sharing."
+                  }
+                ].map((advantage, index) => (
+                  <div key={index} className="flex gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <advantage.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-gray-900 mb-2">{advantage.title}</h4>
+                      <p className="text-gray-600 leading-relaxed">{advantage.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl p-8 text-white">
+              <div className="text-center mb-8">
+                <h4 className="text-2xl font-bold mb-4">Complete Premium Package</h4>
+                <div className="text-5xl font-bold mb-2">£79<span className="text-xl">/month</span></div>
+                <p className="text-blue-200">Everything you need for PLAB success</p>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                {[
+                  "Unlimited video consultations",
+                  "AI essay marking & feedback",
+                  "VR clinical scenario access",
+                  "All certification pathways",
+                  "Expert tutor marketplace",
+                  "17-language content library",
+                  "Advanced analytics & insights",
+                  "Priority customer support"
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 rounded-xl">
+                Start Premium Trial
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Revenue Projections & Market Position */}
+          <div className="mt-20 text-center">
+            <div className="bg-white rounded-3xl p-8 shadow-xl border-2 border-gray-200">
+              <h4 className="text-2xl font-bold text-gray-900 mb-6">Market-Leading PLAB Platform</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">£2-3M</div>
+                  <p className="text-gray-600">Projected Annual Revenue</p>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-green-600 mb-2">95%</div>
+                  <p className="text-gray-600">PLAB Pass Rate</p>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-purple-600 mb-2">10,000+</div>
+                  <p className="text-gray-600">Successful Graduates</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
