@@ -452,7 +452,10 @@ export default function Auth() {
         }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative max-w-6xl mx-auto text-center">
+        <div className="relative max-w-6xl mx-auto text-center py-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to master your NHS prep?
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
             <div className="flex items-center justify-center space-x-2">
               <Shield className="w-5 h-5" />
