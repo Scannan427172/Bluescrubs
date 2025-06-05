@@ -263,7 +263,7 @@ export default function Auth() {
                 </Tabs>
                 
                 <div className="text-center pt-4 border-t border-gray-200">
-                  <p className="text-sm text-black/60 mb-3">Want to explore first?</p>
+                  <p className="text-sm text-black mb-3">Want to explore first?</p>
                   <Button 
                     onClick={handleBypassLogin}
                     variant="outline" 
