@@ -221,7 +221,7 @@ export default function Gamification() {
               </div>
 
               <div className="flex items-center justify-center">
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                <Button id="view-full-profile-btn" className="btn-medical">
                   <Trophy className="w-4 h-4 mr-2" />
                   View Full Profile
                 </Button>
