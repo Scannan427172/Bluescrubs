@@ -493,6 +493,41 @@ export default function Auth() {
           </div>
         </div>
       </div>
+      
+      {/* New Hero Banner with Blue Background */}
+      <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 py-16 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Ready to master your NHS prep?
+          </h2>
+          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
+            Join thousands of successful medical professionals who chose our platform to achieve their NHS career goals
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <Shield className="w-12 h-12 text-white mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">Secure & Private</h3>
+              <p className="text-white/80">Your data is protected with enterprise-grade security</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <Users className="w-12 h-12 text-white mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">15,000+ Students</h3>
+              <p className="text-white/80">Join our global community of medical professionals</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <Award className="w-12 h-12 text-white mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">94% Success Rate</h3>
+              <p className="text-white/80">Proven track record of helping students pass</p>
+            </div>
+          </div>
+          <div className="mt-12">
+            <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-xl">
+              Start Your Journey Today
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
