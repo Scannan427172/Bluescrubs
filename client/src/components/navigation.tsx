@@ -142,7 +142,7 @@ export function Navigation({ user }: NavigationProps) {
 
       {/* Mobile Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
-        <div className="grid grid-cols-4 gap-1">
+        <div className="grid grid-cols-5 gap-1">
           {/* Essential Navigation Items */}
           <Link
             href="/"
@@ -169,9 +169,9 @@ export function Navigation({ user }: NavigationProps) {
           </Link>
 
           <Link
-            href="/plab2"
+            href="/plab2-osce"
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/plab2"
+              location === "/plab2-osce"
                 ? "text-medical-blue bg-blue-50"
                 : "text-gray-400"
             }`}
@@ -190,6 +190,18 @@ export function Navigation({ user }: NavigationProps) {
           >
             <Video className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">Video OSCE</span>
+          </Link>
+
+          <Link
+            href="/more"
+            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
+              location === "/more"
+                ? "text-medical-blue bg-blue-50"
+                : "text-gray-400"
+            }`}
+          >
+            <MoreHorizontal className="w-5 h-5 mb-1" />
+            <span className="text-xs font-medium">More</span>
           </Link>
         </div>
       </nav>

@@ -123,15 +123,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Mobile More Button - Sticky at bottom */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 px-4 py-3 z-40">
-        <Link href="/more">
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-            <FileText className="w-4 h-4 mr-2" />
-            Legal & Support
-          </Button>
-        </Link>
-      </div>
+
 
       {/* Desktop More Section */}
       <div className="hidden md:block bg-gray-800 border-t border-gray-700">
@@ -179,8 +171,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Mobile bottom spacing to account for sticky button */}
-      <div className="md:hidden h-16"></div>
+
     </footer>
   );
 }
