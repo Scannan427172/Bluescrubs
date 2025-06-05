@@ -173,6 +173,15 @@ label {
   color: white !important;
 }
 
+/* Fix button text visibility */
+#prep-button {
+  color: #2563eb !important;
+}
+
+#prep-button svg {
+  color: #2563eb !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;

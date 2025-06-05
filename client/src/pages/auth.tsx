@@ -313,9 +313,9 @@ export default function Auth() {
             </div>
           </div>
           
-          <Button className="bg-white text-blue-600 hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold">
-            <span style={{color: 'rgb(37 99 235)'}}>Begin Your Preparation</span>
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 text-blue-600" />
+          <Button id="prep-button" className="bg-white hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold">
+            Begin Your Preparation
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
           </Button>
         </div>
       </div>
