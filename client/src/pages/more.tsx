@@ -6,7 +6,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   FileText, Shield, Lock, Eye, Users, 
   Cookie, Scale, HelpCircle, Mail, Phone,
-  Building, Globe, Download, ExternalLink, Heart
+  Building, Globe, Download, ExternalLink, Heart,
+  Stethoscope, Twitter, Facebook, Linkedin, Instagram, MapPin
 } from "lucide-react";
 
 export default function More() {
