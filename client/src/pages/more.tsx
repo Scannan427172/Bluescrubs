@@ -2970,9 +2970,9 @@ This accessibility statement is reviewed and updated every six months to ensure 
             Back to Documents
           </Button>
         </div>
-        <ScrollArea className="h-[600px] w-full rounded-md border p-6">
+        <ScrollArea className="h-[600px] w-full rounded-md border p-6 bg-white">
           <div className="prose max-w-none">
-            <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-gray-800">
+            <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-gray-900 bg-white">
               {doc.content}
             </pre>
           </div>
