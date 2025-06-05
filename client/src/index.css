@@ -191,12 +191,10 @@ label {
 
 /* Removed conflicting blue text styling - handled by consistent button styling below */
 
-/* Consistent button styling - blue gradient with white text */
+/* Consistent button styling - blue gradient with white text for dashboard buttons */
 .btn-primary,
 #continue-plab1-btn,
 #continue-practice-btn,
-#trial-button,
-#demo-button,
 #prep-button {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   color: white !important;
@@ -206,8 +204,6 @@ label {
 .btn-primary:hover,
 #continue-plab1-btn:hover,
 #continue-practice-btn:hover,
-#trial-button:hover,
-#demo-button:hover,
 #prep-button:hover {
   background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
   transform: translateY(-1px) !important;
@@ -216,10 +212,30 @@ label {
 .btn-primary svg,
 #continue-plab1-btn svg,
 #continue-practice-btn svg,
-#trial-button svg,
-#demo-button svg,
 #prep-button svg {
   color: white !important;
+}
+
+/* Landing page buttons - white/light theme for purple background */
+#trial-button,
+#demo-button {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #4c1d95 !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+#trial-button:hover,
+#demo-button:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  color: #4c1d95 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+#trial-button svg,
+#demo-button svg {
+  color: #4c1d95 !important;
 }
 
 .dark {
