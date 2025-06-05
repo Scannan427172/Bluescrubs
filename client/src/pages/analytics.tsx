@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,12 +9,44 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { 
   BarChart3, TrendingUp, Target, Clock, Brain,
   Calendar, Award, AlertTriangle, CheckCircle,
-  Users, BookOpen, Zap, Eye, Download
+  Users, BookOpen, Zap, Eye, Download, Lightbulb
 } from "lucide-react";
+
+// Demo user ID
+const DEMO_USER_ID = 1;
 
 export default function Analytics() {
   const [timeRange, setTimeRange] = useState("30days");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [loadingAdaptivePlan, setLoadingAdaptivePlan] = useState(false);
+  const [adaptivePlan, setAdaptivePlan] = useState<any>(null);
+
+  // Fetch AI-powered analytics
+  const { data: analytics, isLoading: analyticsLoading } = useQuery({
+    queryKey: [`/api/analytics/${DEMO_USER_ID}`],
+    refetchInterval: 5 * 60 * 1000, // Refresh every 5 minutes
+  });
+
+  const generateAdaptivePlan = async () => {
+    setLoadingAdaptivePlan(true);
+    try {
+      const response = await fetch(`/api/analytics/${DEMO_USER_ID}/adaptive-plan`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      
+      if (response.ok) {
+        const plan = await response.json();
+        setAdaptivePlan(plan);
+      }
+    } catch (error) {
+      console.error('Failed to generate adaptive plan:', error);
+    } finally {
+      setLoadingAdaptivePlan(false);
+    }
+  };
 
   // Advanced analytics data
   const analyticsData = {

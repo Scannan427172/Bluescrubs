@@ -2,6 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { analyzeVideoPerformance, generateStudyPlan } from "./ai-analysis";
+import { generateUserAnalytics, generateAdaptiveLearningPlan } from "./analytics-engine";
+import { findMatchingMentors, generateSessionPlan, getMentorProfiles, bookMentorSession } from "./mentor-matching";
 import { 
   insertUserSchema, insertQuestionSchema, insertUserProgressSchema,
   insertStudyPlanSchema, insertCommunityPostSchema, insertPostReplySchema,
@@ -308,6 +310,89 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Study plan generation error:", error);
       res.status(500).json({ message: "Failed to generate study plan" });
+    }
+  });
+
+  // Analytics routes
+  app.get("/api/analytics/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const analytics = await generateUserAnalytics(userId);
+      res.json(analytics);
+    } catch (error) {
+      console.error("Analytics generation error:", error);
+      res.status(500).json({ message: "Failed to generate analytics" });
+    }
+  });
+
+  app.post("/api/analytics/:userId/adaptive-plan", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const analytics = await generateUserAnalytics(userId);
+      const adaptivePlan = await generateAdaptiveLearningPlan(userId, analytics);
+      res.json(adaptivePlan);
+    } catch (error) {
+      console.error("Adaptive plan generation error:", error);
+      res.status(500).json({ message: "Failed to generate adaptive plan" });
+    }
+  });
+
+  // Mentor routes
+  app.get("/api/mentors", async (req, res) => {
+    try {
+      const mentors = await getMentorProfiles();
+      res.json(mentors);
+    } catch (error) {
+      console.error("Error fetching mentors:", error);
+      res.status(500).json({ message: "Failed to fetch mentors" });
+    }
+  });
+
+  app.post("/api/mentors/match", async (req, res) => {
+    try {
+      const userProfile = req.body;
+      const matchingResult = await findMatchingMentors(userProfile);
+      res.json(matchingResult);
+    } catch (error) {
+      console.error("Mentor matching error:", error);
+      res.status(500).json({ message: "Failed to find matching mentors" });
+    }
+  });
+
+  app.post("/api/mentors/:mentorId/session-plan", async (req, res) => {
+    try {
+      const mentorId = parseInt(req.params.mentorId);
+      const { studentWeakAreas, sessionType, duration } = req.body;
+      
+      const mentors = await getMentorProfiles();
+      const mentor = mentors.find(m => m.id === mentorId);
+      
+      if (!mentor) {
+        return res.status(404).json({ message: "Mentor not found" });
+      }
+
+      const sessionPlan = await generateSessionPlan(mentor, studentWeakAreas, sessionType, duration);
+      res.json(sessionPlan);
+    } catch (error) {
+      console.error("Session plan generation error:", error);
+      res.status(500).json({ message: "Failed to generate session plan" });
+    }
+  });
+
+  app.post("/api/mentors/:mentorId/book", async (req, res) => {
+    try {
+      const mentorId = parseInt(req.params.mentorId);
+      const { studentId, sessionDetails } = req.body;
+      
+      const session = await bookMentorSession(mentorId, studentId, {
+        ...sessionDetails,
+        date: new Date(sessionDetails.date)
+      });
+      
+      res.json(session);
+    } catch (error) {
+      console.error("Session booking error:", error);
+      res.status(500).json({ message: "Failed to book session" });
     }
   });
 
