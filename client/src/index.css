@@ -154,6 +154,8 @@ label {
 .text-green-500.fill-current {
   color: #10b981 !important;
   fill: #10b981 !important;
+  stroke-width: 3 !important;
+  font-weight: bold !important;
 }
 
 /* Target specific hero text to make it white */
