@@ -3158,6 +3158,86 @@ This accessibility statement is reviewed and updated every six months to ensure 
             </TabsList>
 
             <TabsContent value="legal" className="space-y-6">
+              {/* Important Disclaimers Section */}
+              <Card className="bg-red-50 border-red-200">
+                <CardHeader>
+                  <CardTitle className="text-red-800">Important Disclaimers</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold text-red-800 mb-1">MEDICAL EDUCATION ONLY</h4>
+                        <p className="text-red-700">All content is for educational purposes. This platform does not provide medical advice and should never be used for patient care decisions.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-red-800 mb-1">EXAMINATION PREPARATION</h4>
+                        <p className="text-red-700">While designed to support PLAB preparation, success is not guaranteed. Official GMC guidelines take precedence.</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold text-red-800 mb-1">PROFESSIONAL RESPONSIBILITY</h4>
+                        <p className="text-red-700">Users remain fully responsible for their clinical practice and professional development.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-red-800 mb-1">NO WARRANTIES</h4>
+                        <p className="text-red-700">Platform provided "as is" without warranties. No guarantee of uninterrupted service or error-free content.</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Legal Protection Section */}
+              <Card className="bg-blue-50 border-blue-200">
+                <CardHeader>
+                  <CardTitle className="text-blue-800">Legal Protection</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold text-blue-800 mb-1">COPYRIGHT PROTECTED</h4>
+                        <p className="text-blue-700">All content is protected by intellectual property laws. Unauthorized reproduction is strictly prohibited.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-blue-800 mb-1">DATA PROTECTION</h4>
+                        <p className="text-blue-700">GDPR compliant with NHS Data Security standards. Enterprise-grade security protocols in place.</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold text-blue-800 mb-1">COMPLIANCE</h4>
+                        <p className="text-blue-700">Full adherence to NHS standards, GMC requirements, and UK medical education regulations.</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-blue-800 mb-1">TRADEMARK RIGHTS</h4>
+                        <p className="text-blue-700">NHSprep®, PLAB Master®, and other marks are registered trademarks of NHSprep Ltd.</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Compliance Badges */}
+              <Card className="bg-green-50 border-green-200">
+                <CardHeader>
+                  <CardTitle className="text-green-800">Compliance & Certifications</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-3">
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">NHS Standards Compliant</span>
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">GDPR Protected</span>
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Medical Education Approved</span>
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">ISO 27001 Security</span>
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">UK Data Protection Act</span>
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">GMC Aligned</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Legal Documents Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {legalDocuments.map((doc) => {
                   const IconComponent = doc.icon;

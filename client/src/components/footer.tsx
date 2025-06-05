@@ -155,37 +155,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Legal Protection & Disclaimers */}
-      <div className="bg-gray-900 border-t border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="space-y-4 text-xs text-gray-400">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-gray-300 mb-2">IMPORTANT DISCLAIMERS</h4>
-                <p><strong>MEDICAL EDUCATION ONLY:</strong> All content is for educational purposes. This platform does not provide medical advice and should never be used for patient care decisions.</p>
-                <p><strong>EXAMINATION PREPARATION:</strong> While designed to support PLAB preparation, success is not guaranteed. Official GMC guidelines take precedence.</p>
-                <p><strong>PROFESSIONAL RESPONSIBILITY:</strong> Users remain fully responsible for their clinical practice and professional development.</p>
-              </div>
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-gray-300 mb-2">LEGAL PROTECTION</h4>
-                <p><strong>COPYRIGHT PROTECTED:</strong> All content is protected by intellectual property laws. Unauthorized reproduction is strictly prohibited.</p>
-                <p><strong>DATA PROTECTION:</strong> GDPR compliant with NHS Data Security standards. Enterprise-grade security protocols in place.</p>
-                <p><strong>COMPLIANCE:</strong> Full adherence to NHS standards, GMC requirements, and UK medical education regulations.</p>
-              </div>
-            </div>
-            
-            <div className="border-t border-gray-700 pt-4">
-              <div className="flex flex-wrap justify-center gap-2 text-xs">
-                <span className="bg-gray-800 px-2 py-1 rounded">NHS Standards Compliant</span>
-                <span className="bg-gray-800 px-2 py-1 rounded">GDPR Protected</span>
-                <span className="bg-gray-800 px-2 py-1 rounded">Medical Education Approved</span>
-                <span className="bg-gray-800 px-2 py-1 rounded">ISO 27001 Security</span>
-                <span className="bg-gray-800 px-2 py-1 rounded">UK Data Protection Act</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       {/* Bottom Bar */}
       <div className="bg-gray-800 border-t border-gray-700">
