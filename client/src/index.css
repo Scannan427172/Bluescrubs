@@ -82,6 +82,37 @@ input::placeholder {
   color: black !important;
 }
 
+/* Tab button text styling */
+[data-radix-tabs-trigger] {
+  color: black !important;
+}
+
+[data-radix-tabs-trigger][data-state="active"] {
+  color: black !important;
+  background-color: white !important;
+}
+
+[data-radix-tabs-trigger][data-state="inactive"] {
+  color: black !important;
+}
+
+/* Button text styling */
+button {
+  color: inherit !important;
+}
+
+button[variant="outline"] {
+  color: black !important;
+}
+
+/* Comprehensive button and text fixes */
+.bg-white button,
+.bg-white [role="button"],
+[data-radix-tabs-list] button,
+[data-radix-tabs-list] [role="button"] {
+  color: black !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;

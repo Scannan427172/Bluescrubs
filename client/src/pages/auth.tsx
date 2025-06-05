@@ -116,8 +116,8 @@ export default function Auth() {
               <CardContent className="space-y-6">
                 <Tabs defaultValue="login" className="w-full">
                   <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-100">
-                    <TabsTrigger value="login" className="text-black data-[state=active]:text-black data-[state=active]:bg-white">Sign In</TabsTrigger>
-                    <TabsTrigger value="register" className="text-black data-[state=active]:text-black data-[state=active]:bg-white">Create Account</TabsTrigger>
+                    <TabsTrigger value="login" className="text-black data-[state=active]:text-black data-[state=active]:bg-white font-medium">Sign In</TabsTrigger>
+                    <TabsTrigger value="register" className="text-black data-[state=active]:text-black data-[state=active]:bg-white font-medium">Create Account</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="login" className="space-y-4">
