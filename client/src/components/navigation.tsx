@@ -48,12 +48,12 @@ export function Navigation({ user }: NavigationProps) {
             </div>
             
             {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 2xl:space-x-6">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`font-medium transition-colors ${
+                  className={`font-medium transition-colors text-sm xl:text-base whitespace-nowrap ${
                     item.current
                       ? "text-medical-blue border-b-2 border-medical-blue pb-1"
                       : "text-gray-600 hover:text-medical-blue"
