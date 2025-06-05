@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal } from "lucide-react";
 
 interface NavigationProps {
   user?: { username: string; studyStreak: number } | null;
@@ -29,6 +29,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Offline Mode", href: "/offline-mode", icon: Wifi, current: location === "/offline-mode" },
     { name: "Community", href: "/community", icon: Users, current: location === "/community" },
     { name: "NHS Prep", href: "/nhs-prep", icon: GraduationCap, current: location === "/nhs-prep" },
+    { name: "More", href: "/more", icon: MoreHorizontal, current: location === "/more" },
   ];
 
   return (
