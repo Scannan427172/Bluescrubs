@@ -113,6 +113,18 @@ button[variant="outline"] {
   color: black !important;
 }
 
+/* Force button icons to be white */
+button svg,
+[role="button"] svg {
+  color: white !important;
+}
+
+/* Specific icon styling for landing page buttons */
+.text-white svg {
+  color: white !important;
+  fill: white !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
