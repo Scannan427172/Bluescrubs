@@ -2147,18 +2147,18 @@ You confirm that:
     "nhs-compliance": {
       title: "NHS Standards Compliance",
       content: `
-# NHS Standards Compliance
+NHS Standards Compliance
 
 **Effective Date:** June 5, 2025  
 **Last Updated:** June 5, 2025
 
-## 1. Introduction
+1. Introduction
 
 NHSprep Ltd is committed to maintaining full compliance with NHS standards and regulatory requirements for medical education. This document outlines our adherence to NHS frameworks and our ongoing commitment to supporting international medical graduates in their journey to NHS practice.
 
-## 2. NHS Standards Compliance
+2. NHS Standards Compliance
 
-### 2.1 NHS Constitution Compliance
+2.1 NHS Constitution Compliance
 - **Working together for patients:** All educational content prioritizes patient safety and wellbeing
 - **Respect and dignity:** Cultural sensitivity training integrated throughout the platform
 - **Commitment to quality of care:** Evidence-based curriculum aligned with NHS standards
@@ -2166,34 +2166,34 @@ NHSprep Ltd is committed to maintaining full compliance with NHS standards and r
 - **Improving lives:** Focus on continuous improvement and professional development
 - **Everyone counts:** Equal access to educational resources regardless of background
 
-### 2.2 Care Quality Commission (CQC) Standards
+2.2 Care Quality Commission (CQC) Standards
 - **Safe:** Educational content promotes safe clinical practices
 - **Effective:** Evidence-based learning materials aligned with current best practices
 - **Caring:** Emphasis on person-centered care approaches
 - **Responsive:** Adaptive learning system responsive to individual needs
 - **Well-led:** Strong governance and quality assurance processes
 
-### 2.3 General Medical Council (GMC) Standards
+2.3 General Medical Council (GMC) Standards
 - **Good Medical Practice:** Integration of GMC guidance throughout curriculum
 - **Professional standards:** Emphasis on professional behavior and ethics
 - **Continuing professional development:** Lifelong learning approach
 - **Patient safety:** Focus on safe clinical practice and risk management
 
-## 3. Information Governance Compliance
+3. Information Governance Compliance
 
-### 3.1 NHS Data Security and Protection Toolkit
+3.1 NHS Data Security and Protection Toolkit
 - **Data Security Standards:** Implementation of NHS Digital security requirements
 - **Staff responsibilities:** Regular training on data protection and security
 - **Technical security:** Encryption, access controls, and monitoring systems
 - **Incident management:** Robust incident response and reporting procedures
 
-### 3.2 Information Governance Framework
+3.2 Information Governance Framework
 - **Data protection impact assessments:** Regular assessment of data processing activities
 - **Privacy by design:** Built-in privacy protections in all platform features
 - **Data sharing agreements:** Formal agreements for any data sharing activities
 - **Audit and monitoring:** Regular review of information governance practices
 
-### 3.3 Caldicott Principles
+3.3 Caldicott Principles
 - **Justify the purpose:** Clear justification for all personal data processing
 - **Don't use personal data unless necessary:** Minimal data collection principles
 - **Use minimum necessary:** Only collect and process essential data
@@ -2201,87 +2201,87 @@ NHSprep Ltd is committed to maintaining full compliance with NHS standards and r
 - **Everyone is responsible:** Clear responsibilities for data protection
 - **Understand and comply:** Regular training and compliance monitoring
 
-## 4. Clinical Education Standards
+4. Clinical Education Standards
 
-### 4.1 NHS Education England Requirements
+4.1 NHS Education England Requirements
 - **Quality standards:** Adherence to medical education quality frameworks
 - **Curriculum alignment:** Content aligned with NHS training curricula
 - **Assessment standards:** Fair and transparent assessment processes
 - **Support systems:** Comprehensive learner support and guidance
 
-### 4.2 Royal College Standards
+4.2 Royal College Standards
 - **Professional competencies:** Integration of relevant Royal College competencies
 - **Examination preparation:** Alignment with professional examination standards
 - **Continuing education:** Support for ongoing professional development
 - **Quality assurance:** Regular review and updating of educational content
 
-### 4.3 Medical Schools Council Standards
+4.3 Medical Schools Council Standards
 - **Educational quality:** High-quality educational delivery and content
 - **Student support:** Comprehensive support services for learners
 - **Assessment validity:** Valid and reliable assessment methods
 - **Continuous improvement:** Regular review and enhancement of services
 
-## 5. Equality and Diversity Compliance
+5. Equality and Diversity Compliance
 
-### 5.1 Equality Act 2010 Compliance
+5.1 Equality Act 2010 Compliance
 - **Protected characteristics:** Protection against discrimination
 - **Reasonable adjustments:** Accommodation for disability-related needs
 - **Equal access:** Fair access to educational opportunities
 - **Harassment prevention:** Zero tolerance for harassment or discrimination
 
-### 5.2 NHS Equality Delivery System
+5.2 NHS Equality Delivery System
 - **Better health outcomes:** Support for diverse healthcare workforce
 - **Improved patient access:** Cultural competency training for better patient care
 - **Empowered communities:** Support for underrepresented groups in medicine
 - **Inclusive leadership:** Diverse representation in educational leadership
 
-## 6. Patient Safety Standards
+6. Patient Safety Standards
 
-### 6.1 NHS Patient Safety Strategy
+6.1 NHS Patient Safety Strategy
 - **Safety culture:** Promotion of safety culture in medical education
 - **Safety systems:** Integration of safety thinking in all educational content
 - **Safety improvement:** Continuous improvement in patient safety education
 
-### 6.2 National Patient Safety Alerts
+6.2 National Patient Safety Alerts
 - **Alert integration:** Incorporation of relevant safety alerts in education
 - **Learning from incidents:** Case studies based on safety incidents
 - **Prevention focus:** Emphasis on prevention rather than reaction
 
-## 7. Quality Assurance
+7. Quality Assurance
 
-### 7.1 Continuous Monitoring
+7.1 Continuous Monitoring
 - **Regular audits:** Monthly compliance audits and assessments
 - **Performance indicators:** Key performance indicators for NHS compliance
 - **Stakeholder feedback:** Regular feedback from NHS partners and users
 - **Improvement planning:** Continuous improvement based on audit findings
 
-### 7.2 External Validation
+7.2 External Validation
 - **Third-party assessments:** Independent validation of compliance standards
 - **Peer review:** Review by NHS education professionals
 - **Regulatory engagement:** Active engagement with relevant regulatory bodies
 
-## 8. Training and Development
+8. Training and Development
 
-### 8.1 Staff Training
+8.1 Staff Training
 - **NHS standards training:** Regular training on NHS standards and requirements
 - **Cultural competency:** Training on NHS values and culture
 - **Data protection:** Comprehensive data protection and security training
 - **Quality assurance:** Training on quality standards and processes
 
-### 8.2 Continuous Professional Development
+8.2 Continuous Professional Development
 - **Regular updates:** Ongoing education on changing NHS standards
 - **Best practice sharing:** Learning from NHS best practices
 - **Professional networks:** Active participation in NHS education networks
 
-## 9. Reporting and Communication
+9. Reporting and Communication
 
-### 9.1 Compliance Reporting
+9.1 Compliance Reporting
 - **Regular reports:** Monthly compliance reports to senior management
 - **Stakeholder communication:** Regular updates to NHS partners
 - **Public reporting:** Annual compliance statement publication
 - **Incident reporting:** Prompt reporting of any compliance issues
 
-### 9.2 Contact Information
+9.2 Contact Information
 **NHS Compliance Officer:**  
 Email: nhscompliance@nhsprep.com  
 Phone: +44 20 1234 5690  
@@ -2297,56 +2297,56 @@ This NHS Standards Compliance document is reviewed quarterly and updated as nece
     "nhs-code-of-conduct": {
       title: "NHS Code of Conduct",
       content: `
-# NHS Code of Conduct
+NHS Code of Conduct
 
 **Effective Date:** June 5, 2025  
 **Last Updated:** June 5, 2025
 
-## 1. Introduction
+1. Introduction
 
 This Code of Conduct embeds NHS values throughout our educational platform and ensures all users understand and commit to the highest standards of professional behavior expected in NHS practice.
 
-## 2. NHS Constitution Values
+2. NHS Constitution Values
 
-### 2.1 Working Together for Patients
+2.1 Working Together for Patients
 - **Patient-centered education:** All learning activities prioritize patient wellbeing
 - **Collaborative approach:** Emphasis on multidisciplinary teamwork
 - **Communication skills:** Development of effective patient communication
 - **Cultural sensitivity:** Understanding diverse patient populations
 
-### 2.2 Respect and Dignity
+2.2 Respect and Dignity
 - **Person-centered care:** Recognition of individual patient needs and preferences
 - **Equality and inclusion:** Respect for all individuals regardless of background
 - **Professional boundaries:** Maintaining appropriate professional relationships
 - **Confidentiality:** Protecting patient and personal information
 
-### 2.3 Commitment to Quality of Care
+2.3 Commitment to Quality of Care
 - **Evidence-based practice:** Use of current best evidence in all educational content
 - **Continuous improvement:** Commitment to ongoing learning and development
 - **Safety first:** Prioritizing patient safety in all scenarios
 - **Quality standards:** Adherence to professional quality standards
 
-### 2.4 Compassion
+2.4 Compassion
 - **Empathetic care:** Understanding and responding to patient emotions
 - **Kindness and consideration:** Treating all individuals with kindness
 - **Support for colleagues:** Providing support and assistance to fellow learners
 - **Emotional intelligence:** Developing emotional awareness and regulation
 
-### 2.5 Improving Lives
+2.5 Improving Lives
 - **Health promotion:** Focus on improving health outcomes
 - **Innovation:** Embracing new approaches to healthcare delivery
 - **Prevention:** Emphasis on preventive care and health maintenance
 - **Community impact:** Understanding broader health and social determinants
 
-### 2.6 Everyone Counts
+2.6 Everyone Counts
 - **Equality:** Equal treatment and opportunities for all
 - **Diversity:** Celebrating and leveraging diversity in healthcare teams
 - **Inclusion:** Creating inclusive learning and working environments
 - **Accessibility:** Ensuring educational resources are accessible to all
 
-## 3. Professional Standards
+3. Professional Standards
 
-### 3.1 Clinical Excellence
+3.1 Clinical Excellence
 - **Evidence-based practice:** Commitment to using best available evidence
 - **Continuous learning:** Ongoing professional development and education
 - **Reflective practice:** Regular reflection on performance and learning
