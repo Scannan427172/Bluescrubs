@@ -191,7 +191,12 @@ label {
 
 /* Removed conflicting blue text styling - handled by consistent button styling below */
 
-/* Clean button styling to match app theme */
+/* Comprehensive button styling for all primary buttons */
+button[class*="bg-blue"],
+button[class*="bg-purple"],
+button[class*="bg-indigo"],
+button[class*="bg-green"],
+button[class*="bg-medical"],
 .btn-primary,
 #continue-plab1-btn,
 #continue-practice-btn,
@@ -200,14 +205,33 @@ label {
 #start-ai-session-btn,
 #continue-path-btn,
 #continue-learning-btn,
-#milestone-continue-btn {
-  background: #3B82F6 !important;
+#milestone-continue-btn,
+#update-plan-btn {
   color: white !important;
-  border: none !important;
   border-radius: 8px !important;
   font-weight: 500 !important;
 }
 
+/* Ensure all primary button backgrounds are consistent */
+.btn-primary,
+#continue-plab1-btn,
+#continue-practice-btn,
+#prep-button,
+#start-practice-btn,
+#start-ai-session-btn,
+#continue-path-btn,
+#continue-learning-btn,
+#milestone-continue-btn,
+#update-plan-btn {
+  background: #3B82F6 !important;
+  border: none !important;
+}
+
+/* Hover effects for all primary buttons */
+button[class*="bg-blue"]:hover,
+button[class*="bg-purple"]:hover,
+button[class*="bg-indigo"]:hover,
+button[class*="bg-green"]:hover,
 .btn-primary:hover,
 #continue-plab1-btn:hover,
 #continue-practice-btn:hover,
@@ -216,12 +240,17 @@ label {
 #start-ai-session-btn:hover,
 #continue-path-btn:hover,
 #continue-learning-btn:hover,
-#milestone-continue-btn:hover {
-  background: #2563EB !important;
+#milestone-continue-btn:hover,
+#update-plan-btn:hover {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
 }
 
+/* Icons in all primary buttons should be white */
+button[class*="bg-blue"] svg,
+button[class*="bg-purple"] svg,
+button[class*="bg-indigo"] svg,
+button[class*="bg-green"] svg,
 .btn-primary svg,
 #continue-plab1-btn svg,
 #continue-practice-btn svg,
@@ -230,7 +259,8 @@ label {
 #start-ai-session-btn svg,
 #continue-path-btn svg,
 #continue-learning-btn svg,
-#milestone-continue-btn svg {
+#milestone-continue-btn svg,
+#update-plan-btn svg {
   color: white !important;
 }
 

@@ -285,7 +285,7 @@ export default function SmartPlanner() {
                     />
                   </div>
 
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                  <Button id="update-plan-btn" className="w-full bg-blue-600 hover:bg-blue-700">
                     Update Plan
                   </Button>
                 </CardContent>
