@@ -443,47 +443,46 @@ export default function Auth() {
         </div>
       </div>
       
-      {/* Hero Banner with Blue Background and Image */}
-      <div className="relative bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 py-16 px-6 overflow-hidden">
-        {/* Background Image with 50% Transparency */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-50"
-          style={{
-            backgroundImage: `url('@assets/IMG_2493_1749109164834.jpeg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        />
-        <div className="relative max-w-6xl mx-auto text-center z-10">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Ready to master your NHS prep?
+      {/* New Clean Hero Section */}
+      <div className="bg-gradient-to-br from-blue-600 to-purple-700 py-20">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-5xl font-bold text-white mb-6">
+            Start Your NHS Journey Today
           </h2>
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
-            Join thousands of successful medical professionals who chose our platform to achieve their NHS career goals
+          <p className="text-xl text-white/90 mb-12">
+            Join 15,000+ medical professionals who trust our platform
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Shield className="w-12 h-12 text-white mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-2">Secure & Private</h3>
-              <p className="text-white/80">Your data is protected with enterprise-grade security</p>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Secure Platform</h3>
+              <p className="text-white/80">Enterprise-grade security</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Users className="w-12 h-12 text-white mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-2">15,000+ Students</h3>
-              <p className="text-white/80">Join our global community of medical professionals</p>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Global Community</h3>
+              <p className="text-white/80">15,000+ active students</p>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Award className="w-12 h-12 text-white mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-2">94% Success Rate</h3>
-              <p className="text-white/80">Proven track record of helping students pass</p>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Proven Results</h3>
+              <p className="text-white/80">94% success rate</p>
             </div>
           </div>
-          <div className="mt-12">
-            <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-xl">
-              Start Your Journey Today
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
+          
+          <Button className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold">
+            Begin Your Preparation
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
         </div>
       </div>
     </div>
