@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 import Landing from "@/pages/landing";
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
@@ -33,7 +34,7 @@ const DEMO_USER = {
 
 function Router() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Switch>
         {/* Landing page without navigation */}
         <Route path="/" component={Landing} />
@@ -41,72 +42,157 @@ function Router() {
         
         {/* App pages with navigation */}
         <Route path="/dashboard">
-          <Navigation user={DEMO_USER} />
-          <Dashboard />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Dashboard />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/home">
-          <Navigation user={DEMO_USER} />
-          <Home />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Home />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/onboarding">
-          <Navigation user={DEMO_USER} />
-          <Onboarding />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Onboarding />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/plab1">
-          <Navigation user={DEMO_USER} />
-          <Plab1Practice />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Plab1Practice />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/plab2-osce">
-          <Navigation user={DEMO_USER} />
-          <Plab2Osce />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Plab2Osce />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/community">
-          <Navigation user={DEMO_USER} />
-          <Community />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Community />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/nhs-prep">
-          <Navigation user={DEMO_USER} />
-          <NhsPrep />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <NhsPrep />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/adaptive-learning">
-          <Navigation user={DEMO_USER} />
-          <AdaptiveLearning />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <AdaptiveLearning />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/smart-planner">
-          <Navigation user={DEMO_USER} />
-          <SmartPlanner />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <SmartPlanner />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/mentors">
-          <Navigation user={DEMO_USER} />
-          <Mentors />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Mentors />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/cultural-training">
-          <Navigation user={DEMO_USER} />
-          <CulturalTraining />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <CulturalTraining />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/video-osce">
-          <Navigation user={DEMO_USER} />
-          <VideoOsce />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <VideoOsce />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/analytics">
-          <Navigation user={DEMO_USER} />
-          <Analytics />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Analytics />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/gamification">
-          <Navigation user={DEMO_USER} />
-          <Gamification />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <Gamification />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/offline-mode">
-          <Navigation user={DEMO_USER} />
-          <OfflineMode />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <OfflineMode />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/personalized-paths">
-          <Navigation user={DEMO_USER} />
-          <PersonalizedPaths />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <PersonalizedPaths />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route path="/more">
-          <Navigation user={DEMO_USER} />
-          <More />
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1">
+              <More />
+            </div>
+            <Footer />
+          </div>
         </Route>
         <Route component={NotFound} />
       </Switch>
