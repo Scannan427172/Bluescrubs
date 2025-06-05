@@ -156,6 +156,11 @@ label {
   fill: #10b981 !important;
 }
 
+/* Make only the specific paragraph white */
+.bg-gradient-to-br .text-white[style*="white"] {
+  color: white !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
