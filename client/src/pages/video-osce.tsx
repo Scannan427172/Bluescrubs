@@ -14,6 +14,11 @@ export default function VideoOsce() {
   const [currentStation, setCurrentStation] = useState<any>(null);
   const [isRecording, setIsRecording] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+  const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
+  const [userRecordings, setUserRecordings] = useState<{id: string, stationId: number, blob: Blob, timestamp: Date}[]>([]);
+  const [recordingTime, setRecordingTime] = useState(0);
+  const [recordingInterval, setRecordingInterval] = useState<NodeJS.Timeout | null>(null);
 
   const videoStations = [
     {
@@ -160,8 +165,74 @@ export default function VideoOsce() {
     setCurrentStation(station);
   };
 
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: true, 
+        audio: true 
+      });
+      
+      const recorder = new MediaRecorder(stream);
+      const chunks: Blob[] = [];
+      
+      recorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          chunks.push(event.data);
+        }
+      };
+      
+      recorder.onstop = () => {
+        const blob = new Blob(chunks, { type: 'video/webm' });
+        const recording = {
+          id: Date.now().toString(),
+          stationId: currentStation.id,
+          blob,
+          timestamp: new Date()
+        };
+        setUserRecordings(prev => [...prev, recording]);
+        setRecordedChunks([]);
+        stream.getTracks().forEach(track => track.stop());
+      };
+      
+      setMediaRecorder(recorder);
+      recorder.start();
+      setIsRecording(true);
+      setRecordingTime(0);
+      
+      const interval = setInterval(() => {
+        setRecordingTime(prev => prev + 1);
+      }, 1000);
+      setRecordingInterval(interval);
+      
+    } catch (error) {
+      console.error('Error accessing camera/microphone:', error);
+      alert('Please allow camera and microphone access to record your response.');
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder && isRecording) {
+      mediaRecorder.stop();
+      setIsRecording(false);
+      if (recordingInterval) {
+        clearInterval(recordingInterval);
+        setRecordingInterval(null);
+      }
+    }
+  };
+
   const toggleRecording = () => {
-    setIsRecording(!isRecording);
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   const togglePlayback = () => {
@@ -296,9 +367,15 @@ export default function VideoOsce() {
                         Restart
                       </Button>
                       <div className="flex-1 text-right">
-                        <span className="text-sm text-gray-600">
-                          Time remaining: {currentStation.duration}:00
-                        </span>
+                        {isRecording ? (
+                          <span className="text-sm text-red-600 font-medium">
+                            Recording: {formatTime(recordingTime)}
+                          </span>
+                        ) : (
+                          <span className="text-sm text-gray-600">
+                            Time limit: {currentStation.duration}:00
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -457,14 +534,72 @@ export default function VideoOsce() {
                   <CardTitle style={{ color: '#000000' }}>Your Practice Recordings</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center py-12">
-                    <Video className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-medium mb-2" style={{ color: '#000000' }}>No recordings yet</h3>
-                    <p className="text-gray-600 mb-6">Complete a video station to start building your practice library</p>
-                    <Button id="start-first-video-station-btn" className="btn-medical">
-                      Start First Station
-                    </Button>
-                  </div>
+                  {userRecordings.length === 0 ? (
+                    <div className="text-center py-12">
+                      <Video className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                      <h3 className="text-lg font-medium mb-2" style={{ color: '#000000' }}>No recordings yet</h3>
+                      <p className="text-gray-600 mb-6">Complete a video station to start building your practice library</p>
+                      <Button id="start-first-video-station-btn" className="btn-medical">
+                        Start First Station
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {userRecordings.map((recording) => {
+                        const station = videoStations.find(s => s.id === recording.stationId);
+                        return (
+                          <Card key={recording.id} className="bg-gray-50">
+                            <CardContent className="p-4">
+                              <div className="flex items-center justify-between mb-3">
+                                <div>
+                                  <h4 className="font-medium" style={{ color: '#000000' }}>
+                                    {station?.title || 'Unknown Station'}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">
+                                    Recorded on {recording.timestamp.toLocaleDateString()} at {recording.timestamp.toLocaleTimeString()}
+                                  </p>
+                                </div>
+                                <div className="flex gap-2">
+                                  <Button 
+                                    size="sm" 
+                                    variant="outline"
+                                    onClick={() => {
+                                      const videoUrl = URL.createObjectURL(recording.blob);
+                                      window.open(videoUrl, '_blank');
+                                    }}
+                                  >
+                                    <Play className="w-4 h-4 mr-1" />
+                                    Play
+                                  </Button>
+                                  <Button 
+                                    size="sm" 
+                                    variant="outline"
+                                    onClick={() => {
+                                      const url = URL.createObjectURL(recording.blob);
+                                      const a = document.createElement('a');
+                                      a.href = url;
+                                      a.download = `${station?.title || 'recording'}-${recording.timestamp.toISOString().split('T')[0]}.webm`;
+                                      document.body.appendChild(a);
+                                      a.click();
+                                      document.body.removeChild(a);
+                                      URL.revokeObjectURL(url);
+                                    }}
+                                  >
+                                    Download
+                                  </Button>
+                                </div>
+                              </div>
+                              <video 
+                                className="w-full max-w-md rounded-lg" 
+                                controls
+                                src={URL.createObjectURL(recording.blob)}
+                              />
+                            </CardContent>
+                          </Card>
+                        );
+                      })}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
