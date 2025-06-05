@@ -442,32 +442,53 @@ export default function Auth() {
         </div>
       </div>
       
-      {/* Bottom Block with Background Image and 50% Transparency */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 bg-cover bg-center p-6"
-        style={{
-          backgroundImage: `url('@assets/image_1749076175862.jpeg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
+      {/* Hero Banner with Multiple Images */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 md:h-80">
+        {/* First Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('@assets/IMG_2492_1749108659622.jpeg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+        
+        {/* Second Background Image with 50% Transparency */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-50"
+          style={{
+            backgroundImage: `url('@assets/IMG_2493_1749108709437.jpeg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+        
+        {/* Dark Overlay for Text Readability */}
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative max-w-6xl mx-auto text-center py-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to master your NHS prep?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
-            <div className="flex items-center justify-center space-x-2">
-              <Shield className="w-5 h-5" />
-              <span className="text-sm font-medium">Secure & Private</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <Users className="w-5 h-5" />
-              <span className="text-sm font-medium">15,000+ Students</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <Award className="w-5 h-5" />
-              <span className="text-sm font-medium">94% Success Rate</span>
+        
+        {/* Hero Content */}
+        <div className="relative h-full flex items-center justify-center">
+          <div className="max-w-6xl mx-auto text-center px-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Ready to master your NHS prep?
+            </h2>
+            <p className="text-xl md:text-2xl text-white/90 mb-8">
+              Join thousands of successful medical professionals
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
+              <div className="flex items-center justify-center space-x-2">
+                <Shield className="w-6 h-6" />
+                <span className="text-lg font-medium">Secure & Private</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <Users className="w-6 h-6" />
+                <span className="text-lg font-medium">15,000+ Students</span>
+              </div>
+              <div className="flex items-center justify-center space-x-2">
+                <Award className="w-6 h-6" />
+                <span className="text-lg font-medium">94% Success Rate</span>
+              </div>
             </div>
           </div>
         </div>
