@@ -69,7 +69,7 @@ export default function Dashboard() {
           
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/plab1">
-              <Button className="bg-medical-blue text-white hover:bg-blue-700" style={{ backgroundColor: '#2E86AB' }}>
+              <Button id="continue-plab1-btn" className="bg-medical-blue hover:bg-blue-700" style={{ backgroundColor: '#2E86AB' }}>
                 Continue PLAB 1
               </Button>
             </Link>
@@ -184,7 +184,7 @@ export default function Dashboard() {
                 </div>
                 
                 <Link href="/plab1">
-                  <Button className="w-full bg-medical-blue text-white" style={{ backgroundColor: '#2E86AB' }}>
+                  <Button id="continue-practice-btn" className="w-full bg-medical-blue" style={{ backgroundColor: '#2E86AB' }}>
                     {user.currentStage === "plab1" ? "Continue Practice" : "Review"}
                   </Button>
                 </Link>

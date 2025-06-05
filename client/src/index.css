@@ -200,6 +200,17 @@ label {
   color: #2563eb !important;
 }
 
+/* Target dashboard Continue PLAB 1 and Continue Practice buttons to make text white */
+#continue-plab1-btn,
+#continue-practice-btn {
+  color: white !important;
+}
+
+#continue-plab1-btn svg,
+#continue-practice-btn svg {
+  color: white !important;
+}
+
 .dark {
   --background: 210 13% 16%;
   --foreground: 0 0% 98%;
