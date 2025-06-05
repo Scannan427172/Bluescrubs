@@ -132,7 +132,7 @@ export default function Auth() {
                             placeholder="Enter your email"
                             value={loginForm.email}
                             onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
-                            className="pl-10 text-black placeholder:text-black/60 border-gray-300"
+                            className="pl-10 text-black placeholder:text-black/60 border-gray-300 bg-white"
                             required
                           />
                         </div>
@@ -148,7 +148,7 @@ export default function Auth() {
                             placeholder="Enter your password"
                             value={loginForm.password}
                             onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
-                            className="pl-10 text-black placeholder:text-black/60 border-gray-300"
+                            className="pl-10 text-black placeholder:text-black/60 border-gray-300 bg-white"
                             required
                           />
                         </div>
@@ -172,7 +172,7 @@ export default function Auth() {
                               placeholder="First name"
                               value={registerForm.firstName}
                               onChange={(e) => setRegisterForm({...registerForm, firstName: e.target.value})}
-                              className="pl-10 text-black placeholder:text-black/60 border-gray-300"
+                              className="pl-10 text-black placeholder:text-black/60 border-gray-300 bg-white"
                               required
                             />
                           </div>
@@ -185,7 +185,7 @@ export default function Auth() {
                             placeholder="Last name"
                             value={registerForm.lastName}
                             onChange={(e) => setRegisterForm({...registerForm, lastName: e.target.value})}
-                            className="text-black placeholder:text-black/60 border-gray-300"
+                            className="text-black placeholder:text-black/60 border-gray-300 bg-white"
                             required
                           />
                         </div>

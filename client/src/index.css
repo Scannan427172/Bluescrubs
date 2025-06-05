@@ -35,9 +35,28 @@
   --light-bg: 212 10% 97%; /* #F8F9FA */
 }
 
+/* Force all input fields to have black text and white background */
+input[type="email"], 
+input[type="password"], 
+input[type="text"], 
+input[type="tel"],
+input {
+  color: black !important;
+  background-color: white !important;
+}
+
+input[type="email"]::placeholder, 
+input[type="password"]::placeholder, 
+input[type="text"]::placeholder, 
+input[type="tel"]::placeholder,
+input::placeholder {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
 /* Custom input styling for black text */
 .auth-input input {
   color: black !important;
+  background-color: white !important;
 }
 
 .auth-input input::placeholder {
