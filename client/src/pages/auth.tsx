@@ -266,8 +266,7 @@ export default function Auth() {
                   <p className="text-sm text-black mb-3">Want to explore first?</p>
                   <Button 
                     onClick={handleBypassLogin}
-                    variant="outline" 
-                    className="w-full text-blue-600 border-blue-600 hover:bg-blue-50"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white border-0"
                   >
                     Quick Demo Access - Skip Registration
                   </Button>
