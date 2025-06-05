@@ -244,10 +244,10 @@ export default function Landing() {
                       {feature.subtitle}
                     </span>
                   </div>
-                  <p className="text-gray-700 mb-6 leading-relaxed">{feature.description}</p>
+                  <p className="text-gray-900 mb-6 leading-relaxed font-medium">{feature.description}</p>
                   <ul className="space-y-2">
                     {feature.features.map((item, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-600">
+                      <li key={idx} className="flex items-center text-sm text-gray-800 font-medium">
                         <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
                         {item}
                       </li>
@@ -293,7 +293,7 @@ export default function Landing() {
                     </div>
                     <div>
                       <h4 className="text-lg font-bold text-gray-900 mb-2">{advantage.title}</h4>
-                      <p className="text-gray-600 leading-relaxed">{advantage.description}</p>
+                      <p className="text-gray-800 leading-relaxed font-medium">{advantage.description}</p>
                     </div>
                   </div>
                 ))}
@@ -339,15 +339,15 @@ export default function Landing() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                   <div className="text-3xl font-bold text-blue-600 mb-2">£2-3M</div>
-                  <p className="text-gray-600">Projected Annual Revenue</p>
+                  <p className="text-gray-800 font-medium">Projected Annual Revenue</p>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-green-600 mb-2">95%</div>
-                  <p className="text-gray-600">PLAB Pass Rate</p>
+                  <p className="text-gray-800 font-medium">PLAB Pass Rate</p>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-purple-600 mb-2">10,000+</div>
-                  <p className="text-gray-600">Successful Graduates</p>
+                  <p className="text-gray-800 font-medium">Successful Graduates</p>
                 </div>
               </div>
             </div>
