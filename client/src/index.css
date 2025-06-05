@@ -191,16 +191,17 @@ label {
 
 /* Removed conflicting blue text styling - handled by consistent button styling below */
 
-/* Consistent button styling - blue gradient with white text */
+/* Consistent button styling - soft blue gradient with white text */
 .btn-primary,
 #continue-plab1-btn,
 #continue-practice-btn,
 #trial-button,
 #demo-button,
 #prep-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%) !important;
   color: white !important;
   border: none !important;
+  border-radius: 12px !important;
 }
 
 .btn-primary:hover,
@@ -209,7 +210,7 @@ label {
 #trial-button:hover,
 #demo-button:hover,
 #prep-button:hover {
-  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+  background: linear-gradient(135deg, #7BC7E6 0%, #3E75A8 100%) !important;
   transform: translateY(-1px) !important;
 }
 
