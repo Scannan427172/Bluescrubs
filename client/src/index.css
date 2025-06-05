@@ -198,7 +198,8 @@ label {
 #prep-button,
 #start-practice-btn,
 #start-ai-session-btn,
-#continue-path-btn {
+#continue-path-btn,
+#continue-learning-btn {
   background: #3B82F6 !important;
   color: white !important;
   border: none !important;
@@ -212,7 +213,8 @@ label {
 #prep-button:hover,
 #start-practice-btn:hover,
 #start-ai-session-btn:hover,
-#continue-path-btn:hover {
+#continue-path-btn:hover,
+#continue-learning-btn:hover {
   background: #2563EB !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
@@ -224,7 +226,8 @@ label {
 #prep-button svg,
 #start-practice-btn svg,
 #start-ai-session-btn svg,
-#continue-path-btn svg {
+#continue-path-btn svg,
+#continue-learning-btn svg {
   color: white !important;
 }
 

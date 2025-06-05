@@ -91,7 +91,7 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/plab1">
-                  <Button id="continue-learning-btn" className="bg-white hover:bg-gray-100 font-semibold px-8 py-3" style={{ color: '#2E86AB' }}>
+                  <Button id="continue-learning-btn" className="font-semibold px-8 py-3">
                     Continue Learning
                   </Button>
                 </Link>
