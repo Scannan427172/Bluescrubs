@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { 
   Video, 
   Brain, 
-  VrHeadset, 
+  Headset, 
   Award, 
   Users, 
   Clock, 
@@ -70,7 +70,7 @@ export default function Premium() {
     {
       id: "vr-scenarios",
       name: "VR Clinical Scenarios",
-      icon: VrHeadset,
+      icon: Headset,
       description: "Immersive hospital ward simulations",
       price: "£12/month",
       features: [
@@ -389,7 +389,7 @@ export default function Premium() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <VrHeadset className="h-5 w-5" />
+                  <Headset className="h-5 w-5" />
                   Immersive VR Training
                 </CardTitle>
                 <CardDescription>
@@ -557,7 +557,7 @@ export default function Premium() {
               <span>AI Essay Marking</span>
             </div>
             <div className="flex flex-col items-center">
-              <VrHeadset className="h-8 w-8 text-purple-500 mb-2" />
+              <Headset className="h-8 w-8 text-purple-500 mb-2" />
               <span>VR Scenarios</span>
             </div>
             <div className="flex flex-col items-center">
