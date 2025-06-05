@@ -221,7 +221,7 @@ export default function PersonalizedPaths() {
               </div>
 
               <div className="flex items-center justify-center">
-                <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                <Button id="continue-path-btn" className="bg-indigo-600 hover:bg-indigo-700">
                   <Route className="w-4 h-4 mr-2" />
                   Continue Path
                 </Button>
