@@ -252,7 +252,7 @@ export default function Premium() {
                   <Video className="h-5 w-5" />
                   Live Video Consultations
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-gray-700 font-medium">
                   Connect with qualified UK doctors for personalised OSCE practice
                 </CardDescription>
               </CardHeader>
@@ -274,8 +274,8 @@ export default function Premium() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Available Tutors</CardTitle>
-                <CardDescription>Verified PLAB examiners and NHS doctors</CardDescription>
+                <CardTitle className="text-gray-900">Available Tutors</CardTitle>
+                <CardDescription className="text-gray-700 font-medium">Verified PLAB examiners and NHS doctors</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {tutorMarketplace.slice(0, 2).map((tutor, index) => (
@@ -285,17 +285,17 @@ export default function Premium() {
                       <AvatarFallback>{tutor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
-                      <div className="font-medium">{tutor.name}</div>
-                      <div className="text-sm text-muted-foreground">{tutor.specialty}</div>
-                      <div className="flex items-center gap-2 text-xs">
+                      <div className="font-medium text-gray-900">{tutor.name}</div>
+                      <div className="text-sm text-gray-700 font-medium">{tutor.specialty}</div>
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
                         <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                         <span>{tutor.rating}</span>
                         <span>({tutor.reviews} reviews)</span>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-medium">{tutor.rate}</div>
-                      <div className="text-xs text-muted-foreground">{tutor.experience}</div>
+                      <div className="font-medium text-gray-900">{tutor.rate}</div>
+                      <div className="text-xs text-gray-600 font-medium">{tutor.experience}</div>
                     </div>
                   </div>
                 ))}
