@@ -194,7 +194,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-3 bg-blue-100 rounded-full mb-6">
-              <span className="text-blue-700 font-semibold">Premium PLAB Ecosystem</span>
+              <span className="text-blue-600 font-semibold">Premium PLAB Ecosystem</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Why We're <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Different</span>
