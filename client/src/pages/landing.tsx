@@ -84,70 +84,96 @@ export default function Landing() {
 
 
 
-      {/* Features Section */}
+      {/* NHSprep+ Global Platform Section */}
       <div className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-blue-100 rounded-full mb-4 sm:mb-6">
-              <span className="text-blue-600 font-semibold text-sm sm:text-base">REVOLUTIONARY FEATURES</span>
+            <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full mb-4 sm:mb-6">
+              <span className="text-blue-600 font-semibold text-sm sm:text-base">GLOBAL MEDICAL PLATFORM</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-              Why We're Different
+              NHSprep<span className="relative text-red-500 text-3xl lg:text-4xl" style={{ top: '-0.2em', marginLeft: '0.1em' }}>+</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              12 innovative features that set us apart from every other NHSprep platform
+              Beyond PLAB - prepare for medical licensing exams across 6 countries with our unified global platform
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: Brain,
-                title: "AI-Powered Adaptive Learning",
-                description: "Personalized question difficulty that adapts to your performance in real-time",
+                icon: BookOpen,
+                title: "PLAB (United Kingdom)",
+                description: "Complete PLAB 1 & 2 preparation with OSCE training and UK job placement support",
+                badge: "Active",
                 color: "from-blue-500 to-cyan-500"
               },
               {
-                icon: Video,
-                title: "Video-Based OSCE Simulations",
-                description: "Practice with real clinical scenarios and patient interactions",
-                color: "from-purple-500 to-pink-500"
-              },
-              {
-                icon: Users,
-                title: "Expert Mentor Matching",
-                description: "Connect with successful PLAB graduates for personalized guidance",
-                color: "from-green-500 to-emerald-500"
+                icon: Award,
+                title: "USMLE (United States)",
+                description: "Steps 1, 2 CK & CS preparation with residency match guidance and clinical skills",
+                badge: "Coming Soon",
+                color: "from-red-500 to-pink-500"
               },
               {
                 icon: Target,
-                title: "Smart Study Planner",
-                description: "AI-optimized study schedules based on your exam date and goals",
+                title: "AMC (Australia)",
+                description: "AMC CAT & Clinical exam prep with Australian state employment guidance",
+                badge: "Coming Soon",
+                color: "from-green-500 to-emerald-500"
+              },
+              {
+                icon: Brain,
+                title: "MRCP (United Kingdom)",
+                description: "Parts 1, 2 & PACES training for Royal College of Physicians membership",
+                badge: "Beta",
+                color: "from-purple-500 to-indigo-500"
+              },
+              {
+                icon: Globe,
+                title: "IELTS Medical",
+                description: "Healthcare-focused English proficiency with medical vocabulary and scenarios",
+                badge: "Beta",
                 color: "from-orange-500 to-red-500"
               },
               {
                 icon: Trophy,
-                title: "Gamification & Achievements",
-                description: "Stay motivated with progress tracking, streaks, and rewards",
+                title: "15+ Global Exams",
+                description: "MRCS, MCCEE, DHA, SCFHS and more medical licensing exams worldwide",
+                badge: "In Planning",
                 color: "from-yellow-500 to-orange-500"
-              },
-              {
-                icon: Globe,
-                title: "UK Cultural Context Training",
-                description: "Master NHS protocols and UK healthcare system nuances",
-                color: "from-indigo-500 to-purple-500"
               }
-            ].map((feature, index) => (
+            ].map((exam, index) => (
               <Card key={index} className="group border-2 border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white">
                 <CardContent className="p-8">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
-                    <feature.icon className="w-8 h-8 text-white" />
+                  <div className="flex justify-between items-start mb-4">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${exam.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg`}>
+                      <exam.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
+                      exam.badge === 'Active' ? 'bg-green-100 text-green-800' :
+                      exam.badge === 'Beta' ? 'bg-blue-100 text-blue-800' :
+                      exam.badge === 'Coming Soon' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-gray-100 text-gray-800'
+                    }`}>
+                      {exam.badge}
+                    </span>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                  <p className="text-gray-800 leading-relaxed font-medium">{feature.description}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{exam.title}</h3>
+                  <p className="text-gray-800 leading-relaxed font-medium">{exam.description}</p>
                 </CardContent>
               </Card>
             ))}
+          </div>
+          
+          {/* Global Platform CTA */}
+          <div className="mt-16 text-center">
+            <Link href="/global-exams">
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
+                Explore Global Platform
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
