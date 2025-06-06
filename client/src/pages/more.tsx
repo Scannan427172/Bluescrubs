@@ -57,74 +57,74 @@ export default function More() {
   const features = [
     {
       icon: BookOpen,
-      title: "Resources",
-      description: "Training guides, technique videos, and educational materials",
+      title: "Study Resources",
+      description: "PLAB exam guides, medical textbooks, and educational materials",
       hasArrow: true
     },
     {
       icon: Heart,
-      title: "Nutrition",
-      description: "Meal plans, nutrition advice, and recovery strategies",
+      title: "Clinical Skills",
+      description: "Essential clinical examination techniques and patient care",
       hasArrow: true
     },
     {
       icon: Award,
       title: "Achievements",
-      description: "Your performance milestones and badges",
+      description: "Your PLAB preparation milestones and progress badges",
       hasArrow: true
     },
     {
       icon: Clock,
-      title: "History",
-      description: "Past training sessions and progress",
+      title: "Study History",
+      description: "Past study sessions and examination progress tracking",
       hasArrow: true
     },
     {
       icon: User,
-      title: "Profile",
-      description: "Manage your athlete profile and settings",
+      title: "Medical Profile",
+      description: "Manage your medical student profile and preferences",
       hasArrow: true
     },
     {
       icon: Users,
-      title: "Coaches Corner",
-      description: "Exclusive resources for coaches",
+      title: "Mentors Corner",
+      description: "Exclusive resources and guidance from medical mentors",
       hasArrow: true
     },
     {
       icon: FileText,
-      title: "Athletics Rules",
-      description: "Official rules and regulations",
+      title: "GMC Guidelines",
+      description: "Official GMC regulations and medical practice standards",
       hasArrow: true
     },
     {
-      icon: Target,
-      title: "Injury Rehab",
-      description: "Injury rehabilitation guides and programs",
+      icon: Stethoscope,
+      title: "Clinical Cases",
+      description: "Interactive medical case studies and diagnostic scenarios",
       hasArrow: true
     },
     {
       icon: Shield,
-      title: "Injury Prevention",
-      description: "Preventative measures for common track & field injuries",
+      title: "Patient Safety",
+      description: "Essential patient safety protocols and risk management",
+      hasArrow: true
+    },
+    {
+      icon: Brain,
+      title: "Medical Knowledge",
+      description: "Comprehensive medical knowledge assessment and tracking",
       hasArrow: true
     },
     {
       icon: Activity,
-      title: "Coach Wellness",
-      description: "Coach wellness monitoring dashboard",
-      hasArrow: true
-    },
-    {
-      icon: Heart,
-      title: "Athlete Wellness",
-      description: "Track athlete health and wellness metrics",
+      title: "Performance Analytics",
+      description: "Detailed analysis of your PLAB preparation performance",
       hasArrow: true
     },
     {
       icon: Camera,
-      title: "Technique Analysis",
-      description: "Professional coaching analysis of athletic techniques",
+      title: "OSCE Practice",
+      description: "Video-based OSCE station practice and skill assessment",
       hasArrow: true
     }
   ];
