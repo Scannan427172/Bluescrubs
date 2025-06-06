@@ -38,6 +38,13 @@ import Features from "@/pages/features";
 import MedicalEducationPlatform from "@/pages/medical-education-platform";
 import ProfessionalDevelopment from "@/pages/professional-development";
 import CareerSupport from "@/pages/career-support";
+import FeaturesList from "@/pages/features-list";
+import PlabInfo from "@/pages/plab-info";
+import GlobalExams from "@/pages/global-exams";
+import USMLE from "@/pages/usmle";
+import AMC from "@/pages/amc";
+import MRCP from "@/pages/mrcp";
+import IELTSMedical from "@/pages/ielts-medical";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -291,6 +298,62 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <StudyScheduler />
+            </div>
+          </div>
+        </Route>
+        <Route path="/features-list">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <FeaturesList />
+            </div>
+          </div>
+        </Route>
+        <Route path="/plab-info">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <PlabInfo />
+            </div>
+          </div>
+        </Route>
+        <Route path="/global-exams">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <GlobalExams />
+            </div>
+          </div>
+        </Route>
+        <Route path="/usmle">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <USMLE />
+            </div>
+          </div>
+        </Route>
+        <Route path="/amc">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <AMC />
+            </div>
+          </div>
+        </Route>
+        <Route path="/mrcp">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <MRCP />
+            </div>
+          </div>
+        </Route>
+        <Route path="/ielts-medical">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <IELTSMedical />
             </div>
           </div>
         </Route>
