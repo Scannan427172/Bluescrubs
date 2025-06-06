@@ -20,7 +20,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "PLAB 1", href: "/plab1", icon: BookOpen, current: location === "/plab1" },
     { name: "PLAB 2", href: "/plab2-osce", icon: User, current: location === "/plab2-osce" },
     { name: "Video OSCE", href: "/video-osce", icon: Video, current: location === "/video-osce" },
-    { name: "Neurodiverse", href: "/neurodiverse-support", icon: Accessibility, current: location === "/neurodiverse-support" },
+    { name: "More", href: "/neurodiverse-support", icon: Accessibility, current: location === "/neurodiverse-support" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Brain, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },
     { name: "UK Culture", href: "/cultural-training", icon: Flag, current: location === "/cultural-training" },
@@ -30,7 +30,6 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Offline Mode", href: "/offline-mode", icon: Wifi, current: location === "/offline-mode" },
     { name: "Community", href: "/community", icon: Users, current: location === "/community" },
     { name: "NHS Prep", href: "/nhs-prep", icon: GraduationCap, current: location === "/nhs-prep" },
-    { name: "More", href: "/more", icon: MoreHorizontal, current: location === "/more" },
   ];
 
   return (
