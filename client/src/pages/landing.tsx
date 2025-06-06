@@ -300,11 +300,17 @@ export default function Landing() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-900 to-blue-950 rounded-3xl p-8 border border-blue-800" style={{ color: '#ffffff' }}>
-              <div className="text-center mb-8">
-                <h4 style={{ color: 'white', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Complete Premium Package</h4>
-                <div style={{ color: 'white', fontSize: '3rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>£79<span style={{ color: 'white', fontSize: '1.25rem' }}>/month</span></div>
-                <p style={{ color: 'white' }}>Everything you need for PLAB success</p>
+            <div style={{ 
+              background: 'linear-gradient(to bottom right, #1e3a8a, #1e1b4b)', 
+              borderRadius: '1.5rem', 
+              padding: '2rem', 
+              border: '1px solid #1e40af',
+              color: 'white'
+            }}>
+              <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                <h4 style={{ color: 'white', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', textAlign: 'center' }}>Complete Premium Package</h4>
+                <div style={{ color: 'white', fontSize: '3rem', fontWeight: 'bold', marginBottom: '0.5rem', textAlign: 'center' }}>£79<span style={{ color: 'white', fontSize: '1.25rem' }}>/month</span></div>
+                <p style={{ color: 'white', textAlign: 'center' }}>Everything you need for PLAB success</p>
               </div>
               
               <div className="space-y-4 mb-8">
