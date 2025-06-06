@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle, Target, Zap, Shield, Star, Play, CheckCircle, Globe, Award } from "lucide-react";
+import { Logo } from "@/components/logo";
 import nhsPrepWomanImg from "@assets/image_1749071491789.png";
 import heroBackgroundImg from "@assets/image_1749074194942.jpeg";
 
@@ -38,9 +39,9 @@ export default function Landing() {
                 
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight" style={{ color: 'white' }}>
                   <span style={{ color: 'white' }}>Master Your</span>{" "}
-                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
-                    NHSprep
-                  </span>{" "}
+                  <div className="inline-flex items-center">
+                    <Logo size="xl" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text animate-pulse" />
+                  </div>{" "}
                   <span style={{ color: 'white' }}>Journey</span>
                 </h1>
                 

@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility } from "lucide-react";
+import { Logo } from "@/components/logo";
 
 interface NavigationProps {
   user?: { username: string; studyStreak: number } | null;
@@ -41,10 +42,10 @@ export function Navigation({ user }: NavigationProps) {
             {/* Logo */}
             <div className="flex items-center space-x-4">
               <Link href="/" className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-medical-blue rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                   <Stethoscope className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold text-medical-blue">PLAB Master</span>
+                <Logo size="lg" />
               </Link>
             </div>
             
