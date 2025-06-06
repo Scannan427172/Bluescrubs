@@ -259,40 +259,83 @@ export default function More() {
           </div>
         </div>
 
-        {/* Accessibility Features */}
+        {/* Neurodiverse Support */}
         <div className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Accessibility & Support</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Neurodiverse Support</h2>
+          <div className="mb-6">
+            <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 p-6">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-3 bg-purple-100 rounded-lg">
+                  <Accessibility className="h-6 w-6 text-purple-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-purple-900">Comprehensive Neurodiverse Support</h3>
+                  <p className="text-purple-700 text-sm">Specialized support for ADHD, dyslexia, autism, and other neurodivergent learning styles</p>
+                </div>
+              </div>
+            </Card>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               {
                 icon: Timer,
-                title: "Extended Time",
-                description: "Automatic time extensions for exams and assessments"
+                title: "Extended Time Allowances",
+                description: "25% - 100% extra time for practice exams with pause and resume options"
               },
               {
                 icon: Palette,
-                title: "Visual Accessibility",
-                description: "Color blind support and theme customization"
+                title: "Visual Accessibility Options",
+                description: "Color blind support, dark/light themes, reduced motion modes"
+              },
+              {
+                icon: Brain,
+                title: "ADHD Learning Support",
+                description: "Focus timers, distraction-free modes, and attention management tools"
+              },
+              {
+                icon: BookOpen,
+                title: "Dyslexia Reading Tools",
+                description: "Dyslexia-friendly fonts, text spacing adjustments, reading assistance"
               },
               {
                 icon: UserCheck,
                 title: "Reasonable Adjustments",
-                description: "PLAB exam adjustment guidance and forms"
+                description: "PLAB exam adjustment forms, documentation support, expert guidance"
               },
               {
                 icon: MessageCircle,
                 title: "Communication Support",
-                description: "Alternative communication methods and tools"
+                description: "Written instructions, visual communication aids, peer support groups"
               },
               {
                 icon: Settings2,
                 title: "Personalized Interface",
-                description: "Customizable study environment and layouts"
+                description: "Custom layouts, sensory preferences, workflow adaptation tools"
               },
               {
                 icon: Headphones,
-                title: "Audio Learning",
-                description: "Audio lectures and voice-guided practice"
+                title: "Audio Learning Support",
+                description: "Audio lectures, voice-guided practice, multi-sensory content"
+              },
+              {
+                icon: Heart,
+                title: "Autism Spectrum Support",
+                description: "Structured routines, clear instructions, social communication guidance"
+              },
+              {
+                icon: Shield,
+                title: "Stress Management",
+                description: "Anxiety reduction techniques, mindfulness tools, emotional regulation"
+              },
+              {
+                icon: Users,
+                title: "Peer Support Network",
+                description: "Connect with other neurodiverse medical students and mentors"
+              },
+              {
+                icon: FileText,
+                title: "Documentation & Forms",
+                description: "Help with disability evidence forms, DSA applications, adjustments"
               }
             ].map((feature, index) => (
               <Card key={index} className="bg-purple-50 hover:bg-purple-100 transition-colors cursor-pointer border-purple-200">
