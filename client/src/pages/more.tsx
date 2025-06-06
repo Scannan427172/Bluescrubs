@@ -14,7 +14,7 @@ import {
   Briefcase, FileCheck, Calendar, Target, MessageCircle, 
   HeadphonesIcon, Video, Bot, Mic, ClipboardList, Award,
   Accessibility, Volume2, Palette, Type, Timer, Focus, 
-  Lightbulb, Settings2,
+  Lightbulb, Settings2, UserCheck, Headset,
   Building2, Map, CheckCircle, AlertCircle,
   TrendingUp, PieChart, BarChart3, Clock, Star,
   Zap, Cpu, Headphones, Gamepad2, Camera,
@@ -467,7 +467,7 @@ export default function More() {
       </div>
 
       <Tabs value={activeSection} onValueChange={setActiveSection} className="space-y-4 sm:space-y-6">
-        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 h-auto p-1 gap-1">
+        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 h-auto p-1 gap-1">
           <TabsTrigger value="overview" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2">
             <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
             <span className="text-xs sm:text-xs font-medium">Overview</span>
@@ -496,6 +496,10 @@ export default function More() {
           <TabsTrigger value="legal-support" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2 hidden lg:flex">
             <Scale className="h-3 w-3 sm:h-4 sm:w-4" />
             <span className="text-xs sm:text-xs font-medium">Legal</span>
+          </TabsTrigger>
+          <TabsTrigger value="accessibility" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2 hidden lg:flex">
+            <Accessibility className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-xs font-medium">Access</span>
           </TabsTrigger>
         </TabsList>
 
@@ -725,6 +729,170 @@ export default function More() {
                   Company Number: 12345678<br />
                   ICO Registration: Z1234567<br />
                   VAT Number: GB123456789
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="accessibility" className="space-y-4 sm:space-y-6">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Accessibility & Neurodiverse Support</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              Comprehensive accessibility features and specialized support for neurodiverse medical professionals.
+            </p>
+          </div>
+
+          <Card className="bg-gradient-to-br from-purple-50 to-blue-100 border-purple-200">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-purple-800">
+                <Accessibility className="h-5 w-5" />
+                Neurodiverse Learning Support
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-purple-800 mb-4">
+                Specialized features designed for ADHD, dyslexia, autism, and other neurodivergent learning styles.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                {[
+                  {
+                    icon: Focus,
+                    title: "Focus Enhancement",
+                    features: ["Distraction-free study mode", "Customizable timers", "Break reminders", "Progress tracking"]
+                  },
+                  {
+                    icon: Type,
+                    title: "Text Customization",
+                    features: ["Dyslexia-friendly fonts", "Adjustable text size", "High contrast modes", "Line spacing control"]
+                  },
+                  {
+                    icon: Volume2,
+                    title: "Audio Learning",
+                    features: ["Text-to-speech", "Audio descriptions", "Voice commands", "Sound alerts"]
+                  }
+                ].map((feature, index) => (
+                  <div key={index} className="bg-white/60 p-3 sm:p-4 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <feature.icon className="h-4 w-4 text-purple-600" />
+                      <h4 className="font-semibold text-purple-900 text-sm sm:text-base">{feature.title}</h4>
+                    </div>
+                    <ul className="space-y-1">
+                      {feature.features.map((item, idx) => (
+                        <li key={idx} className="text-xs sm:text-sm text-purple-700 flex items-center gap-1">
+                          <CheckCircle className="h-3 w-3 text-green-500" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {[
+              {
+                icon: Timer,
+                title: "Extended Time Allowances",
+                description: "Automatic time extensions for practice exams and assessments based on individual needs.",
+                features: ["25% - 100% extra time", "Pause and resume options", "Flexible scheduling"],
+                category: "time-support"
+              },
+              {
+                icon: Palette,
+                title: "Visual Accessibility",
+                description: "Comprehensive visual customization options for different processing needs.",
+                features: ["Color blind support", "Dark/light themes", "Reduced motion modes"],
+                category: "visual-support"
+              },
+              {
+                icon: Brain,
+                title: "Cognitive Support",
+                description: "Tools designed to support different cognitive processing styles and memory techniques.",
+                features: ["Memory aids", "Visual mnemonics", "Structured layouts"],
+                category: "cognitive-support"
+              },
+              {
+                icon: UserCheck,
+                title: "Reasonable Adjustments",
+                description: "Guidance on requesting and implementing reasonable adjustments for PLAB exams.",
+                features: ["PLAB adjustment forms", "Documentation support", "Expert guidance"],
+                category: "adjustments"
+              },
+              {
+                icon: MessageCircle,
+                title: "Communication Support",
+                description: "Alternative communication methods and social interaction tools.",
+                features: ["Written instructions", "Visual communication", "Peer support groups"],
+                category: "communication"
+              },
+              {
+                icon: Settings2,
+                title: "Personalized Interface",
+                description: "Fully customizable study environment adapted to individual learning preferences.",
+                features: ["Custom layouts", "Sensory preferences", "Workflow adaptation"],
+                category: "personalization"
+              }
+            ].map((feature, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
+                      <feature.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-sm sm:text-base">{feature.title}</CardTitle>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-3">
+                    {feature.description}
+                  </p>
+                  <ul className="space-y-1">
+                    {feature.features.map((item, idx) => (
+                      <li key={idx} className="text-xs sm:text-sm text-gray-700 flex items-center gap-1">
+                        <CheckCircle className="h-3 w-3 text-green-500" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Card className="bg-gradient-to-r from-green-50 to-teal-50 border-green-200">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-800">
+                <Lightbulb className="h-5 w-5" />
+                NHS Workplace Accommodations
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-green-800 mb-4">
+                Comprehensive guidance for workplace accommodations and career support within the NHS system.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-semibold text-green-900 mb-2">Pre-Employment Support</h4>
+                  <ul className="space-y-1 text-sm text-green-700">
+                    <li>• Disclosure guidance and timing</li>
+                    <li>• Interview accommodation requests</li>
+                    <li>• Documentation preparation</li>
+                    <li>• Rights and legal protections</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-green-900 mb-2">Workplace Adjustments</h4>
+                  <ul className="space-y-1 text-sm text-green-700">
+                    <li>• Equipment and technology support</li>
+                    <li>• Flexible working arrangements</li>
+                    <li>• Communication preferences</li>
+                    <li>• Ongoing support networks</li>
+                  </ul>
                 </div>
               </div>
             </CardContent>
