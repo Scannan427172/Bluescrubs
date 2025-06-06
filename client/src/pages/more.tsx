@@ -202,12 +202,14 @@ export default function More() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {adminTools.map((tool, index) => (
-                <Card key={index} className="bg-blue-800/20 border-blue-300 hover:bg-blue-800/30 transition-colors cursor-pointer">
-                  <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-                    <tool.icon className="h-8 w-8 text-blue-600 mb-3" />
-                    <h4 className="font-medium text-blue-900">{tool.title}</h4>
-                  </CardContent>
-                </Card>
+                <Link key={index} href="/admin-tools">
+                  <Card className="bg-blue-800/20 border-blue-300 hover:bg-blue-800/30 transition-colors cursor-pointer">
+                    <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                      <tool.icon className="h-8 w-8 text-blue-600 mb-3" />
+                      <h4 className="font-medium text-blue-900">{tool.title}</h4>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           </Card>
@@ -446,20 +448,22 @@ export default function More() {
                 hasArrow: true
               }
             ].map((feature, index) => (
-              <Card key={index} className="bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer border-slate-200">
-                <CardContent className="flex items-center p-6">
-                  <div className="p-3 bg-slate-500/20 rounded-lg mr-4">
-                    <feature.icon className="h-6 w-6 text-slate-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 mb-1">{feature.title}</h3>
-                    <p className="text-gray-600 text-sm">{feature.description}</p>
-                  </div>
-                  {feature.hasArrow && (
-                    <ChevronRight className="h-5 w-5 text-gray-400" />
-                  )}
-                </CardContent>
-              </Card>
+              <Link key={index} href="/legal-compliance">
+                <Card className="bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer border-slate-200">
+                  <CardContent className="flex items-center p-6">
+                    <div className="p-3 bg-slate-500/20 rounded-lg mr-4">
+                      <feature.icon className="h-6 w-6 text-slate-600" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-1">{feature.title}</h3>
+                      <p className="text-gray-600 text-sm">{feature.description}</p>
+                    </div>
+                    {feature.hasArrow && (
+                      <ChevronRight className="h-5 w-5 text-gray-400" />
+                    )}
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>

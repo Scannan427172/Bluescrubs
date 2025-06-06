@@ -28,6 +28,9 @@ import Auth from "@/pages/auth";
 import International from "@/pages/international";
 import Premium from "@/pages/premium";
 import StudyScheduler from "@/pages/study-scheduler";
+import AdminTools from "@/pages/admin-tools";
+import LegalCompliance from "@/pages/legal-compliance";
+import NeurodiverseSupport from "@/pages/neurodiverse-support";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -144,7 +147,23 @@ function Router() {
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
-              <More />
+              <NeurodiverseSupport />
+            </div>
+          </div>
+        </Route>
+        <Route path="/admin-tools">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <AdminTools />
+            </div>
+          </div>
+        </Route>
+        <Route path="/legal-compliance">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <LegalCompliance />
             </div>
           </div>
         </Route>
