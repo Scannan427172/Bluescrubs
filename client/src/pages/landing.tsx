@@ -244,10 +244,10 @@ export default function Landing() {
                       {feature.subtitle}
                     </span>
                   </div>
-                  <p className="text-gray-900 mb-6 leading-relaxed font-medium">{feature.description}</p>
+                  <p className="text-gray-700 mb-6 leading-relaxed font-medium">{feature.description}</p>
                   <ul className="space-y-2">
                     {feature.features.map((item, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-800 font-medium">
+                      <li key={idx} className="flex items-center text-sm text-gray-700 font-medium">
                         <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
                         {item}
                       </li>
