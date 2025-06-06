@@ -325,9 +325,9 @@ export default function Landing() {
                 ))}
               </div>
 
-              <Button className="w-full bg-white text-slate-900 hover:bg-gray-100 font-bold py-3 rounded-xl">
+              <Button className="w-full bg-white hover:bg-gray-100 font-bold py-3 rounded-xl" style={{ color: '#2563eb' }}>
                 Start Premium Trial
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-5 h-5" style={{ color: '#2563eb' }} />
               </Button>
             </div>
           </div>
