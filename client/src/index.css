@@ -98,14 +98,21 @@ input::placeholder {
 
 /* Force dark text on Premium PLAB cards */
 .premium-plab-card, 
-.premium-plab-card * {
+.premium-plab-card *,
+.premium-plab-card h1,
+.premium-plab-card h2,
+.premium-plab-card h3,
+.premium-plab-card h4,
+.premium-plab-card h5,
+.premium-plab-card p,
+.premium-plab-card li,
+.premium-plab-card span,
+.premium-plab-card div {
   color: #1f2937 !important;
 }
 
-.premium-plab-card h3,
-.premium-plab-card p,
-.premium-plab-card li,
-.premium-plab-card span {
+/* Global fix for white text on white background */
+.bg-white *:not(svg):not(.text-blue-600):not(.text-green-600):not(.text-purple-600):not(.text-white) {
   color: #1f2937 !important;
 }
 
