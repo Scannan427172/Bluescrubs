@@ -111,14 +111,32 @@ input::placeholder {
   color: #1f2937 !important;
 }
 
-/* Global fix for white text on white background */
-.bg-white *:not(svg):not(.text-blue-600):not(.text-green-600):not(.text-purple-600):not(.text-white):not(.hero-text) {
+/* Only apply dark text to non-hero white sections */
+.bg-white .premium-plab-card *,
+.bg-white section:not(.hero-section) *,
+.bg-white > div:not(.hero-section) p,
+.bg-white > div:not(.hero-section) h1,
+.bg-white > div:not(.hero-section) h2,
+.bg-white > div:not(.hero-section) h3,
+.bg-white > div:not(.hero-section) h4 {
   color: #1f2937 !important;
 }
 
 /* Hero banner text should be white */
 .hero-text,
-.hero-text * {
+.hero-text *,
+.hero-text h1,
+.hero-text p,
+.hero-text span,
+.hero-text div {
+  color: white !important;
+}
+
+/* Override any conflicting styles for hero section */
+.hero-text.text-white,
+.hero-text .text-white,
+.hero-text h1.text-white,
+.hero-text p.text-white {
   color: white !important;
 }
 
