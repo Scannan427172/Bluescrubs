@@ -195,17 +195,17 @@ export default function More() {
         {/* Admin Tools Section */}
         <div className="mb-12">
           <h2 className="text-xl font-bold text-gray-900 mb-6">Admin Tools</h2>
-          <Card className="bg-gradient-to-br from-red-50 to-red-100 border-red-200 p-6">
+          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 p-6">
             <div className="mb-4">
-              <h3 className="text-lg font-semibold text-red-900 mb-2">Admin Tools</h3>
-              <p className="text-red-700 text-sm">System management and optimization tools</p>
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">Admin Tools</h3>
+              <p className="text-blue-700 text-sm">System management and optimization tools</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {adminTools.map((tool, index) => (
-                <Card key={index} className="bg-red-800/20 border-red-300 hover:bg-red-800/30 transition-colors cursor-pointer">
+                <Card key={index} className="bg-blue-800/20 border-blue-300 hover:bg-blue-800/30 transition-colors cursor-pointer">
                   <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-                    <tool.icon className="h-8 w-8 text-red-600 mb-3" />
-                    <h4 className="font-medium text-red-900">{tool.title}</h4>
+                    <tool.icon className="h-8 w-8 text-blue-600 mb-3" />
+                    <h4 className="font-medium text-blue-900">{tool.title}</h4>
                   </CardContent>
                 </Card>
               ))}
