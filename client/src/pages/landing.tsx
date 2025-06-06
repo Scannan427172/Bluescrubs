@@ -319,8 +319,8 @@ export default function Landing() {
                   "Priority customer support"
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
-                    <span className="text-sm text-white font-medium">{feature}</span>
+                    <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" style={{ color: '#ffffff' }} />
+                    <span className="text-sm font-medium" style={{ color: '#ffffff' }}>{feature}</span>
                   </div>
                 ))}
               </div>
