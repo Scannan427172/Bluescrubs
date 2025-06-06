@@ -111,17 +111,24 @@ input::placeholder {
   color: #1f2937 !important;
 }
 
-/* Ensure blue premium package has white text */
-.bg-gradient-to-br.from-blue-900,
-.bg-gradient-to-br.from-blue-900 *,
-.bg-gradient-to-br.from-blue-900 h1,
-.bg-gradient-to-br.from-blue-900 h2,
-.bg-gradient-to-br.from-blue-900 h3,
-.bg-gradient-to-br.from-blue-900 h4,
-.bg-gradient-to-br.from-blue-900 h5,
-.bg-gradient-to-br.from-blue-900 p,
-.bg-gradient-to-br.from-blue-900 span,
-.bg-gradient-to-br.from-blue-900 div {
+/* Ensure blue premium package has correct text colors */
+.bg-gradient-to-br.from-blue-900 h4 {
+  color: #e5e7eb !important; /* gray-200 */
+}
+
+.bg-gradient-to-br.from-blue-900 p {
+  color: #d1d5db !important; /* gray-300 */
+}
+
+.bg-gradient-to-br.from-blue-900 .text-5xl {
+  color: white !important;
+}
+
+.bg-gradient-to-br.from-blue-900 span.text-sm {
+  color: white !important;
+}
+
+.bg-gradient-to-br.from-blue-900 *:not(h4):not(p):not(.text-gray-200):not(.text-gray-300) {
   color: white !important;
 }
 
