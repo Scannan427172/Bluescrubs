@@ -49,15 +49,15 @@ export function Navigation({ user }: NavigationProps) {
             </div>
             
             {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 2xl:space-x-6">
-              {navigation.map((item) => (
+            <div className="hidden md:flex items-center space-x-2 lg:space-x-3 xl:space-x-4 2xl:space-x-6 overflow-x-auto">
+              {navigation.slice(0, 8).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`font-medium transition-colors text-sm xl:text-base whitespace-nowrap ${
+                  className={`font-medium transition-colors text-xs lg:text-sm xl:text-base whitespace-nowrap px-2 py-1 rounded ${
                     item.current
-                      ? "text-medical-blue border-b-2 border-medical-blue pb-1"
-                      : "text-gray-600 hover:text-medical-blue"
+                      ? "text-medical-blue bg-blue-50 border border-medical-blue"
+                      : "text-gray-600 hover:text-medical-blue hover:bg-gray-50"
                   }`}
                 >
                   {item.name}
@@ -96,7 +96,7 @@ export function Navigation({ user }: NavigationProps) {
                     <Menu className="w-5 h-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[320px] h-full overflow-hidden">
+                <SheetContent side="right" className="w-[280px] sm:w-[320px] h-full overflow-hidden">
                   <div className="flex flex-col h-full">
                     {/* Header */}
                     <div className="flex items-center space-x-3 pb-6 border-b">

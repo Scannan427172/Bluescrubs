@@ -456,43 +456,44 @@ export default function More() {
   };
 
   return (
-    <div className="container max-w-7xl mx-auto p-6">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">More Features</h1>
-        <p className="text-lg text-muted-foreground">
+    <div className="container max-w-7xl mx-auto p-3 sm:p-4 lg:p-6">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">More Features</h1>
+        <p className="text-sm sm:text-base lg:text-lg text-muted-foreground">
           Comprehensive medical career platform beyond PLAB preparation
         </p>
       </div>
 
-      <Tabs value={activeSection} onValueChange={setActiveSection} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-7 h-auto p-1">
-          <TabsTrigger value="overview" className="flex flex-col gap-1 h-auto py-3">
-            <Heart className="h-4 w-4" />
-            <span className="text-xs">Overview</span>
+      <Tabs value={activeSection} onValueChange={setActiveSection} className="space-y-4 sm:space-y-6">
+        <TabsList className="grid w-full grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 h-auto p-1 gap-1">
+          <TabsTrigger value="overview" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2">
+            <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-xs font-medium">Overview</span>
           </TabsTrigger>
-          <TabsTrigger value="specialization" className="flex flex-col gap-1 h-auto py-3">
-            <Stethoscope className="h-4 w-4" />
-            <span className="text-xs">Specialization</span>
+          <TabsTrigger value="specialization" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2 lg:flex">
+            <Stethoscope className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-xs font-medium hidden sm:block lg:block">Specialty</span>
+            <span className="text-xs sm:text-xs font-medium sm:hidden">Med</span>
           </TabsTrigger>
-          <TabsTrigger value="career" className="flex flex-col gap-1 h-auto py-3">
-            <Briefcase className="h-4 w-4" />
-            <span className="text-xs">Career</span>
+          <TabsTrigger value="career" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2">
+            <Briefcase className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-xs font-medium">Career</span>
           </TabsTrigger>
-          <TabsTrigger value="ai-features" className="flex flex-col gap-1 h-auto py-3">
-            <Brain className="h-4 w-4" />
-            <span className="text-xs">AI Features</span>
+          <TabsTrigger value="ai-features" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2 hidden sm:flex">
+            <Brain className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-xs font-medium">AI</span>
           </TabsTrigger>
-          <TabsTrigger value="regulatory" className="flex flex-col gap-1 h-auto py-3">
-            <Award className="h-4 w-4" />
-            <span className="text-xs">GMC & Compliance</span>
+          <TabsTrigger value="regulatory" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2 hidden lg:flex">
+            <Award className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-xs font-medium">GMC</span>
           </TabsTrigger>
-          <TabsTrigger value="learning-tech" className="flex flex-col gap-1 h-auto py-3">
-            <Headset className="h-4 w-4" />
-            <span className="text-xs">Learning Tech</span>
+          <TabsTrigger value="learning-tech" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2 hidden lg:flex">
+            <Headset className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-xs font-medium">Learning</span>
           </TabsTrigger>
-          <TabsTrigger value="legal-support" className="flex flex-col gap-1 h-auto py-3">
-            <Scale className="h-4 w-4" />
-            <span className="text-xs">Legal & Support</span>
+          <TabsTrigger value="legal-support" className="flex flex-col gap-1 h-auto py-2 sm:py-3 px-1 sm:px-2 hidden lg:flex">
+            <Scale className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-xs font-medium">Legal</span>
           </TabsTrigger>
         </TabsList>
 
@@ -508,106 +509,106 @@ export default function More() {
               <p className="text-blue-800 mb-4">
                 Beyond PLAB preparation, NHSprep offers comprehensive support for your entire medical career journey in the UK.
               </p>
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white/60 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2 text-blue-900">Medical Specialization</h4>
-                  <p className="text-sm text-blue-700">VR surgical training, radiology interpretation, pharmacology tools</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                <div className="bg-white/60 p-3 sm:p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2 text-blue-900 text-sm sm:text-base">Medical Specialization</h4>
+                  <p className="text-xs sm:text-sm text-blue-700">VR surgical training, radiology interpretation, pharmacology tools</p>
                 </div>
-                <div className="bg-white/60 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2 text-blue-900">Career Support</h4>
-                  <p className="text-sm text-blue-700">NHS applications, CV optimization, interview preparation</p>
+                <div className="bg-white/60 p-3 sm:p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2 text-blue-900 text-sm sm:text-base">Career Support</h4>
+                  <p className="text-xs sm:text-sm text-blue-700">NHS applications, CV optimization, interview preparation</p>
                 </div>
-                <div className="bg-white/60 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2 text-blue-900">AI-Powered Learning</h4>
-                  <p className="text-sm text-blue-700">Voice training, accent coaching, AI patient simulations</p>
+                <div className="bg-white/60 p-3 sm:p-4 rounded-lg sm:col-span-2 lg:col-span-1">
+                  <h4 className="font-semibold mb-2 text-blue-900 text-sm sm:text-base">AI-Powered Learning</h4>
+                  <p className="text-xs sm:text-sm text-blue-700">Voice training, accent coaching, AI patient simulations</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary mb-2">50+</div>
-                <p className="text-sm text-muted-foreground">Advanced Features</p>
+              <CardContent className="pt-4 sm:pt-6">
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">50+</div>
+                <p className="text-xs sm:text-sm text-muted-foreground">Advanced Features</p>
               </CardContent>
             </Card>
             <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-green-600 mb-2">45</div>
-                <p className="text-sm text-muted-foreground">VR Scenarios</p>
+              <CardContent className="pt-4 sm:pt-6">
+                <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-2">45</div>
+                <p className="text-xs sm:text-sm text-muted-foreground">VR Scenarios</p>
               </CardContent>
             </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-blue-600 mb-2">8,750</div>
-                <p className="text-sm text-muted-foreground">Practice Questions</p>
+            <Card className="text-center sm:col-span-2 lg:col-span-1">
+              <CardContent className="pt-4 sm:pt-6">
+                <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">8,750</div>
+                <p className="text-xs sm:text-sm text-muted-foreground">Practice Questions</p>
               </CardContent>
             </Card>
           </div>
         </TabsContent>
 
-        <TabsContent value="specialization" className="space-y-6">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold mb-2">Medical Specialization Modules</h2>
-            <p className="text-muted-foreground">
+        <TabsContent value="specialization" className="space-y-4 sm:space-y-6">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Medical Specialization Modules</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Advanced training modules for different medical specialties with VR and AI integration.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {specializationModules.map(module => renderFeatureCard(module, 'specialization'))}
           </div>
         </TabsContent>
 
-        <TabsContent value="career" className="space-y-6">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold mb-2">Post-PLAB Career Support</h2>
-            <p className="text-muted-foreground">
+        <TabsContent value="career" className="space-y-4 sm:space-y-6">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Post-PLAB Career Support</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Comprehensive tools and guidance for building your medical career in the UK NHS system.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {careerSupport.map(feature => renderFeatureCard(feature, 'career'))}
           </div>
         </TabsContent>
 
-        <TabsContent value="ai-features" className="space-y-6">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold mb-2">AI-Powered Learning Technologies</h2>
-            <p className="text-muted-foreground">
+        <TabsContent value="ai-features" className="space-y-4 sm:space-y-6">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">AI-Powered Learning Technologies</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Cutting-edge artificial intelligence tools to enhance your medical education and communication skills.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {aiFeatures.map(feature => renderFeatureCard(feature, 'ai'))}
           </div>
         </TabsContent>
 
-        <TabsContent value="regulatory" className="space-y-6">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold mb-2">GMC Registration & Compliance</h2>
-            <p className="text-muted-foreground">
+        <TabsContent value="regulatory" className="space-y-4 sm:space-y-6">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">GMC Registration & Compliance</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Complete guidance and tools for GMC registration, compliance tracking, and professional development.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {regulatoryTools.map(tool => renderFeatureCard(tool, 'regulatory'))}
           </div>
         </TabsContent>
 
-        <TabsContent value="learning-tech" className="space-y-6">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold mb-2">Enhanced Learning Technologies</h2>
-            <p className="text-muted-foreground">
+        <TabsContent value="learning-tech" className="space-y-4 sm:space-y-6">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Enhanced Learning Technologies</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Virtual reality, collaborative learning, and community-driven educational tools.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {learningTech.map(tech => renderFeatureCard(tech, 'learning'))}
           </div>
-          <div className="mt-8">
-            <h3 className="text-xl font-bold mb-4">Advanced Assessment Tools</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-6 sm:mt-8">
+            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Advanced Assessment Tools</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {assessmentTools.map(tool => renderFeatureCard(tool, 'assessment'))}
             </div>
           </div>

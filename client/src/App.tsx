@@ -47,7 +47,7 @@ function Router() {
         <Route path="/dashboard">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Dashboard />
             </div>
             <Footer />
@@ -56,7 +56,7 @@ function Router() {
         <Route path="/home">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Home />
             </div>
             <Footer />
@@ -65,7 +65,7 @@ function Router() {
         <Route path="/onboarding">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Onboarding />
             </div>
             <Footer />
@@ -74,7 +74,7 @@ function Router() {
         <Route path="/plab1">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Plab1Practice />
             </div>
             <Footer />
@@ -83,7 +83,7 @@ function Router() {
         <Route path="/plab2-osce">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Plab2Osce />
             </div>
             <Footer />
@@ -92,7 +92,7 @@ function Router() {
         <Route path="/community">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Community />
             </div>
             <Footer />
@@ -101,7 +101,7 @@ function Router() {
         <Route path="/nhs-prep">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <NhsPrep />
             </div>
             <Footer />
@@ -110,7 +110,7 @@ function Router() {
         <Route path="/adaptive-learning">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <AdaptiveLearning />
             </div>
             <Footer />
@@ -119,7 +119,7 @@ function Router() {
         <Route path="/smart-planner">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <SmartPlanner />
             </div>
             <Footer />
@@ -128,7 +128,7 @@ function Router() {
         <Route path="/mentors">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Mentors />
             </div>
             <Footer />
@@ -137,7 +137,7 @@ function Router() {
         <Route path="/cultural-training">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <CulturalTraining />
             </div>
             <Footer />
@@ -146,7 +146,7 @@ function Router() {
         <Route path="/video-osce">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <VideoOsce />
             </div>
             <Footer />
@@ -155,7 +155,7 @@ function Router() {
         <Route path="/analytics">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Analytics />
             </div>
             <Footer />
@@ -164,7 +164,7 @@ function Router() {
         <Route path="/gamification">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Gamification />
             </div>
             <Footer />
@@ -173,7 +173,7 @@ function Router() {
         <Route path="/offline-mode">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <OfflineMode />
             </div>
             <Footer />
@@ -182,7 +182,7 @@ function Router() {
         <Route path="/personalized-paths">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <PersonalizedPaths />
             </div>
             <Footer />
@@ -191,7 +191,7 @@ function Router() {
         <Route path="/more">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <More />
             </div>
             <Footer />
@@ -200,7 +200,7 @@ function Router() {
         <Route path="/international">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <International />
             </div>
             <Footer />
@@ -209,7 +209,7 @@ function Router() {
         <Route path="/premium">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <Premium />
             </div>
             <Footer />
@@ -218,7 +218,7 @@ function Router() {
         <Route path="/study-scheduler">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1">
+            <div className="flex-1 pb-16 md:pb-0">
               <StudyScheduler />
             </div>
             <Footer />
