@@ -232,9 +232,9 @@ export default function Landing() {
                 color: "from-purple-500 to-pink-500"
               }
             ].map((feature, index) => (
-              <Card key={index} className="group border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 bg-white overflow-hidden">
+              <Card key={index} className="group border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 bg-white overflow-hidden text-gray-900">
                 <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
-                <CardContent className="p-8">
+                <CardContent className="p-8 text-gray-900">
                   <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
                     <feature.icon className="w-8 h-8 text-white" />
                   </div>
@@ -244,12 +244,12 @@ export default function Landing() {
                       {feature.subtitle}
                     </span>
                   </div>
-                  <p className="text-gray-700 mb-6 leading-relaxed font-medium">{feature.description}</p>
+                  <p className="text-gray-800 mb-6 leading-relaxed font-medium">{feature.description}</p>
                   <ul className="space-y-2">
                     {feature.features.map((item, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-700 font-medium">
+                      <li key={idx} className="flex items-center text-sm text-gray-800 font-medium">
                         <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                        {item}
+                        <span className="text-gray-800">{item}</span>
                       </li>
                     ))}
                   </ul>
