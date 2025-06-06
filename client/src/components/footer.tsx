@@ -13,6 +13,16 @@ export function Footer() {
     <footer className="bg-gray-800 text-white mt-auto">
       {/* Enhanced Footer with Accessibility Links */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Prominent Neurodiverse Support Button */}
+        <div className="mb-8 text-center">
+          <Link href="/more" 
+                className="inline-flex items-center gap-3 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl">
+            <Accessibility className="h-6 w-6" />
+            Neurodiverse Support & Accessibility
+          </Link>
+          <p className="text-gray-400 text-sm mt-2">Specialized support for ADHD, dyslexia, autism, and other neurodivergent learning styles</p>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Quick Links */}
           <div>
@@ -44,7 +54,13 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li><Link href="/accessibility" className="hover:text-white transition-colors">Accessibility Features</Link></li>
-              <li><Link href="/neurodiverse-support" className="hover:text-white transition-colors">Neurodiverse Support</Link></li>
+              <li>
+                <Link href="/more" 
+                      className="hover:text-white transition-colors bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-md font-medium inline-flex items-center gap-2">
+                  <Accessibility className="h-4 w-4" />
+                  Neurodiverse Support
+                </Link>
+              </li>
               <li><Link href="/reasonable-adjustments" className="hover:text-white transition-colors">Reasonable Adjustments</Link></li>
               <li><Link href="/inclusive-learning" className="hover:text-white transition-colors">Inclusive Learning</Link></li>
             </ul>
