@@ -34,6 +34,10 @@ import LegalCompliance from "@/pages/legal-compliance";
 import StorageManagement from "@/pages/storage-management";
 import SecurityCenter from "@/pages/security-center";
 import SystemSettings from "@/pages/system-settings";
+import Features from "@/pages/features";
+import MedicalEducationPlatform from "@/pages/medical-education-platform";
+import ProfessionalDevelopment from "@/pages/professional-development";
+import CareerSupport from "@/pages/career-support";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -191,6 +195,38 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <SystemSettings />
+            </div>
+          </div>
+        </Route>
+        <Route path="/features">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <Features />
+            </div>
+          </div>
+        </Route>
+        <Route path="/medical-education-platform">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <MedicalEducationPlatform />
+            </div>
+          </div>
+        </Route>
+        <Route path="/professional-development">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <ProfessionalDevelopment />
+            </div>
+          </div>
+        </Route>
+        <Route path="/career-support">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <CareerSupport />
             </div>
           </div>
         </Route>
