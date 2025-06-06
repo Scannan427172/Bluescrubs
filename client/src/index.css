@@ -96,6 +96,19 @@ input::placeholder {
   color: black !important;
 }
 
+/* Force dark text on Premium PLAB cards */
+.premium-plab-card, 
+.premium-plab-card * {
+  color: #1f2937 !important;
+}
+
+.premium-plab-card h3,
+.premium-plab-card p,
+.premium-plab-card li,
+.premium-plab-card span {
+  color: #1f2937 !important;
+}
+
 /* Button text styling */
 button {
   color: inherit !important;

@@ -232,7 +232,7 @@ export default function Landing() {
                 color: "from-purple-500 to-pink-500"
               }
             ].map((feature, index) => (
-              <Card key={index} className="group border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 bg-white overflow-hidden text-gray-900">
+              <Card key={index} className="premium-plab-card group border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 bg-white overflow-hidden text-gray-900">
                 <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
                 <CardContent className="p-8 text-gray-900">
                   <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
