@@ -387,6 +387,182 @@ export default function Landing() {
           </div>
         </div>
       </div>
+
+      {/* NHSprep+ Global Expansion Section */}
+      <div className="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm rounded-full border border-purple-400/30 shadow-lg mb-6">
+              <Globe className="w-5 h-5 mr-3 text-purple-300" />
+              <span className="text-sm font-semibold text-white">Now Available Globally</span>
+            </div>
+            
+            <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+              Beyond <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">NHSprep</span>
+            </h2>
+            
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Introducing NHSprep+ - Your gateway to medical careers across 6 countries with support for 15+ international medical exams
+            </p>
+          </div>
+
+          {/* Global Exam Coverage */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {[
+              {
+                country: "🇺🇸 United States",
+                exam: "USMLE Steps 1, 2, 3",
+                description: "Complete preparation for US medical licensing",
+                placements: "1,247 successful placements"
+              },
+              {
+                country: "🇦🇺 Australia", 
+                exam: "AMC CAT & Clinical",
+                description: "Australian Medical Council certification",
+                placements: "892 doctors placed"
+              },
+              {
+                country: "🇨🇦 Canada",
+                exam: "MCCEE & NAC OSCE",
+                description: "Medical Council of Canada evaluation",
+                placements: "456 successful matches"
+              },
+              {
+                country: "🇪🇺 European Union",
+                exam: "MRCP & Specialty",
+                description: "Royal College certification pathways",
+                placements: "234 placements across EU"
+              },
+              {
+                country: "🇦🇪 Middle East",
+                exam: "DHA, MOH, HAAD",
+                description: "Gulf region medical licensing",
+                placements: "567 doctors licensed"
+              },
+              {
+                country: "🌍 Global English",
+                exam: "IELTS Medical",
+                description: "Medical English proficiency testing",
+                placements: "3,400+ certified"
+              }
+            ].map((region, index) => (
+              <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all duration-300">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-bold text-white mb-2">{region.country}</h3>
+                  <div className="text-purple-300 font-semibold mb-3">{region.exam}</div>
+                  <p className="text-gray-300 text-sm mb-4">{region.description}</p>
+                  <div className="text-xs text-green-300 font-medium">{region.placements}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Success Statistics */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+            <h3 className="text-2xl font-bold text-white text-center mb-8">Global Impact</h3>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-bold text-purple-400 mb-2">6</div>
+                <p className="text-gray-300">Countries Covered</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">15+</div>
+                <p className="text-gray-300">Medical Exams</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-green-400 mb-2">2,847</div>
+                <p className="text-gray-300">Global Placements</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-yellow-400 mb-2">17</div>
+                <p className="text-gray-300">Languages Supported</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Global Features */}
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">Advanced Global Features</h3>
+              <div className="space-y-4">
+                {[
+                  {
+                    icon: Globe,
+                    title: "Multi-Language Support",
+                    description: "Study in your native language with 17 supported languages including Arabic, Hindi, and Chinese"
+                  },
+                  {
+                    icon: Award,
+                    title: "Regional Job Placement",
+                    description: "Direct partnerships with 156 hospitals across 6 countries for guaranteed placement opportunities"
+                  },
+                  {
+                    icon: Brain,
+                    title: "Country-Specific AI",
+                    description: "Localized AI tutoring adapted to each country's medical system and examination patterns"
+                  },
+                  {
+                    icon: Video,
+                    title: "Cultural Adaptation",
+                    description: "Scenario-based training adapted to local healthcare systems and patient interaction styles"
+                  }
+                ].map((feature, index) => (
+                  <div key={index} className="flex gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <feature.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-white mb-2">{feature.title}</h4>
+                      <p className="text-gray-300">{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-800/50 to-blue-800/50 rounded-3xl p-8 border border-white/20">
+              <div className="text-center mb-6">
+                <h4 className="text-2xl font-bold text-white mb-4">NHSprep+ Global Access</h4>
+                <div className="text-5xl font-bold text-white mb-2">£129<span className="text-xl">/month</span></div>
+                <p className="text-gray-300">Access to all global medical exams</p>
+              </div>
+              
+              <div className="space-y-3 mb-8">
+                {[
+                  "All 15+ international medical exams",
+                  "17-language content library",
+                  "Global job placement network",
+                  "Country-specific AI tutoring",
+                  "Cultural adaptation training",
+                  "Regional exam strategies",
+                  "International mentor network",
+                  "Multi-timezone support"
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center">
+                    <CheckCircle className="w-5 h-5 mr-3 text-green-400 flex-shrink-0" />
+                    <span className="text-sm text-white">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3 rounded-xl">
+                Start Global Journey
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-16">
+            <Link href="/global-exams">
+              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl">
+                Explore Global Medical Exams
+                <ArrowRight className="ml-2 w-6 h-6" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
