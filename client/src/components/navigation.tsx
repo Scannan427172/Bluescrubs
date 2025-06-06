@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility } from "lucide-react";
 
 interface NavigationProps {
   user?: { username: string; studyStreak: number } | null;
@@ -20,6 +20,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "PLAB 1", href: "/plab1", icon: BookOpen, current: location === "/plab1" },
     { name: "PLAB 2", href: "/plab2-osce", icon: User, current: location === "/plab2-osce" },
     { name: "Video OSCE", href: "/video-osce", icon: Video, current: location === "/video-osce" },
+    { name: "Neurodiverse", href: "/neurodiverse-support", icon: Accessibility, current: location === "/neurodiverse-support" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Brain, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },
     { name: "UK Culture", href: "/cultural-training", icon: Flag, current: location === "/cultural-training" },
