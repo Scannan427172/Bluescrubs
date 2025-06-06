@@ -37,11 +37,11 @@ export default function Landing() {
                 </div>
                 
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight" style={{ color: 'white' }}>
-                  Master Your{" "}
+                  <span style={{ color: 'white' }}>Master Your</span>{" "}
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
                     NHSprep
                   </span>{" "}
-                  Journey
+                  <span style={{ color: 'white' }}>Journey</span>
                 </h1>
                 
                 <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl" style={{ color: 'white' }}>
