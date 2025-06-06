@@ -190,16 +190,16 @@ export default function Landing() {
       </div>
 
       {/* Why We're Different Section */}
-      <div className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-block px-6 py-3 bg-blue-100 rounded-full mb-6">
-              <span className="text-blue-600 font-semibold">Premium PLAB Ecosystem</span>
+      <div className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-blue-100 rounded-full mb-4 sm:mb-6">
+              <span className="text-blue-600 font-semibold text-sm sm:text-base">Premium PLAB Ecosystem</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Why We're <span className="text-black">Different</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4 sm:mb-6 leading-tight px-2">
+              Why We're Different
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed px-4">
               The world's first comprehensive PLAB preparation ecosystem combining AI-powered learning, 
               real-time expert consultations, and immersive clinical training in 17 languages.
             </p>

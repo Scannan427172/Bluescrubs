@@ -696,10 +696,22 @@ button[id*="video-station-"][id$="-btn"] svg,
     
     h2 {
       @apply text-xl;
+      line-height: 1.2 !important;
+      color: black !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
     }
     
     h3 {
       @apply text-lg;
+    }
+    
+    /* Fix "Why We're Different" text display on mobile */
+    .text-2xl, .text-3xl, .text-4xl, .text-5xl {
+      color: black !important;
+      line-height: 1.2 !important;
+      word-break: normal !important;
+      white-space: normal !important;
     }
     
     /* Mobile card adjustments */
