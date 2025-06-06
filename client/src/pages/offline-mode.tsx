@@ -7,26 +7,126 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { 
   Wifi, WifiOff, Download, CheckCircle, Clock, 
-  AlertCircle, Smartphone, Database, RefreshCw, Settings
+  AlertCircle, Smartphone, Database, RefreshCw, Settings, PlayCircle, BookOpen, Target
 } from "lucide-react";
+import { offlineManager, initializeOfflineMode } from "@/lib/offline";
 
 export default function OfflineMode() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [autoSync, setAutoSync] = useState(true);
   const [liteMode, setLiteMode] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [syncProgress, setSyncProgress] = useState(0);
+  const [offlineQuestions, setOfflineQuestions] = useState<any[]>([]);
+  const [storageUsed, setStorageUsed] = useState(0);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
+    const handleOnline = () => {
+      setIsOnline(true);
+      if (autoSync) {
+        handleSync();
+      }
+    };
     const handleOffline = () => setIsOnline(false);
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
+
+    // Initialize offline mode
+    initializeOffline();
 
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
   }, []);
+
+  const initializeOffline = async () => {
+    try {
+      await initializeOfflineMode();
+      setIsInitialized(true);
+      await loadOfflineData();
+      await calculateStorageUsage();
+    } catch (error) {
+      console.error('Failed to initialize offline mode:', error);
+    }
+  };
+
+  const loadOfflineData = async () => {
+    try {
+      const questions = await offlineManager.getQuestions();
+      setOfflineQuestions(questions);
+    } catch (error) {
+      console.error('Failed to load offline data:', error);
+    }
+  };
+
+  const calculateStorageUsage = async () => {
+    if ('storage' in navigator && 'estimate' in navigator.storage) {
+      const estimate = await navigator.storage.estimate();
+      const used = estimate.usage || 0;
+      setStorageUsed(Math.round(used / (1024 * 1024))); // Convert to MB
+    }
+  };
+
+  const handleSync = async () => {
+    if (!isOnline) return;
+    
+    try {
+      setSyncProgress(0);
+      await offlineManager.syncWithServer();
+      setSyncProgress(100);
+      await loadOfflineData();
+      await calculateStorageUsage();
+    } catch (error) {
+      console.error('Sync failed:', error);
+    }
+  };
+
+  const downloadContent = async (category: string) => {
+    setIsDownloading(true);
+    try {
+      // Simulate downloading content
+      for (let i = 0; i <= 100; i += 10) {
+        setSyncProgress(i);
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+      
+      // In real implementation, this would download actual content
+      const newQuestions = [
+        {
+          id: `offline_${Date.now()}`,
+          category,
+          difficulty: 'medium',
+          question: `Sample offline question for ${category}`,
+          options: ['Option A', 'Option B', 'Option C', 'Option D'],
+          correct: 0,
+          explanation: 'This is a sample explanation for offline practice.'
+        }
+      ];
+      
+      await offlineManager.storeQuestions(newQuestions);
+      await loadOfflineData();
+      await calculateStorageUsage();
+    } catch (error) {
+      console.error('Download failed:', error);
+    } finally {
+      setIsDownloading(false);
+      setSyncProgress(0);
+    }
+  };
+
+  const clearOfflineData = async () => {
+    try {
+      await offlineManager.clearOfflineData();
+      setOfflineQuestions([]);
+      setStorageUsed(0);
+      await calculateStorageUsage();
+    } catch (error) {
+      console.error('Failed to clear offline data:', error);
+    }
+  };
 
   const offlineData = {
     downloadedContent: {
@@ -102,22 +202,40 @@ export default function OfflineMode() {
     }
   };
 
-  const downloadContent = (contentType: string) => {
-    // Simulate download process
-    console.log(`Starting download for ${contentType}`);
+  const handleDownloadContent = (contentType: string) => {
+    downloadContent(contentType);
   };
 
   const syncNow = () => {
-    // Simulate sync process
-    console.log("Starting manual sync");
+    handleSync();
   };
 
-  const clearOfflineData = () => {
-    // Simulate clearing offline data
-    if (confirm("Are you sure you want to clear all offline data? This will free up storage but you'll need to re-download content.")) {
-      console.log("Clearing offline data");
+  const offlineCapabilities = [
+    {
+      icon: BookOpen,
+      title: "Practice Questions",
+      description: "Access question banks offline",
+      downloaded: offlineQuestions.length,
+      total: 1500,
+      action: () => handleDownloadContent('questions')
+    },
+    {
+      icon: Target,
+      title: "Study Plans",
+      description: "Personal study schedules",
+      downloaded: 1,
+      total: 5,
+      action: () => handleDownloadContent('plans')
+    },
+    {
+      icon: PlayCircle,
+      title: "Video Content",
+      description: "Clinical scenario videos",
+      downloaded: 0,
+      total: 50,
+      action: () => handleDownloadContent('videos')
     }
-  };
+  ];
 
   return (
     <div className="min-h-screen bg-light-bg pb-20 md:pb-0">
