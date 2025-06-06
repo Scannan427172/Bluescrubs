@@ -260,7 +260,7 @@ export default function Landing() {
 
           {/* Competitive Advantages */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="premium-plab-card">
               <h3 className="text-3xl font-bold text-gray-900 mb-6">
                 Our Competitive <span className="text-blue-600">Advantages</span>
               </h3>
