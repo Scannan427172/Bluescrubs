@@ -300,11 +300,11 @@ export default function Landing() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl p-8 text-white">
+            <div className="bg-gradient-to-br from-slate-900 to-gray-900 rounded-3xl p-8 text-white border border-gray-700">
               <div className="text-center mb-8">
-                <h4 className="text-2xl font-bold mb-4">Complete Premium Package</h4>
-                <div className="text-5xl font-bold mb-2">£79<span className="text-xl">/month</span></div>
-                <p className="text-blue-200">Everything you need for PLAB success</p>
+                <h4 className="text-2xl font-bold mb-4 text-white">Complete Premium Package</h4>
+                <div className="text-5xl font-bold mb-2 text-white">£79<span className="text-xl text-gray-300">/month</span></div>
+                <p className="text-gray-300">Everything you need for PLAB success</p>
               </div>
               
               <div className="space-y-4 mb-8">
@@ -320,12 +320,12 @@ export default function Landing() {
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center">
                     <CheckCircle className="w-5 h-5 text-green-400 mr-3 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
+                    <span className="text-sm text-white font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
 
-              <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 rounded-xl">
+              <Button className="w-full bg-white text-slate-900 hover:bg-gray-100 font-bold py-3 rounded-xl">
                 Start Premium Trial
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
