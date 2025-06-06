@@ -40,7 +40,7 @@ export default function Landing() {
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight" style={{ color: 'white' }}>
                   <span style={{ color: 'white' }}>Master Your</span>{" "}
                   <div className="inline-flex items-center">
-                    <Logo size="xl" className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text animate-pulse" />
+                    <Logo size="xl" />
                   </div>{" "}
                   <span style={{ color: 'white' }}>Journey</span>
                 </h1>
