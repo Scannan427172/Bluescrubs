@@ -311,7 +311,7 @@ export default function More() {
         </div>
 
         {/* AI & Technology Features */}
-        <div>
+        <div className="mb-12">
           <h2 className="text-xl font-bold text-gray-900 mb-6">AI & Advanced Technology</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
@@ -355,6 +355,165 @@ export default function More() {
                     <h4 className="font-medium text-gray-900 text-sm mb-1">{feature.title}</h4>
                     <p className="text-gray-600 text-xs">{feature.description}</p>
                   </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Legal & Compliance */}
+        <div className="mb-12">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Legal & Compliance</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              {
+                icon: FileText,
+                title: "Privacy Policy",
+                description: "Data protection and privacy information for users",
+                hasArrow: true
+              },
+              {
+                icon: Shield,
+                title: "GDPR Compliance",
+                description: "European data protection regulations and user rights",
+                hasArrow: true
+              },
+              {
+                icon: FileText,
+                title: "Terms of Service",
+                description: "Platform usage terms and conditions",
+                hasArrow: true
+              },
+              {
+                icon: Scale,
+                title: "Legal Documents",
+                description: "Contracts, agreements, and legal frameworks",
+                hasArrow: true
+              },
+              {
+                icon: Shield,
+                title: "Data Protection",
+                description: "Information security and data handling policies",
+                hasArrow: true
+              },
+              {
+                icon: FileText,
+                title: "Cookie Policy",
+                description: "Website cookies and tracking information",
+                hasArrow: true
+              }
+            ].map((feature, index) => (
+              <Card key={index} className="bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer border-gray-700">
+                <CardContent className="flex items-center p-6">
+                  <div className="p-3 bg-blue-500/20 rounded-lg mr-4">
+                    <feature.icon className="h-6 w-6 text-blue-400" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
+                    <p className="text-gray-400 text-sm">{feature.description}</p>
+                  </div>
+                  {feature.hasArrow && (
+                    <ChevronRight className="h-5 w-5 text-gray-400" />
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Support & Help */}
+        <div className="mb-12">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Support & Help</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                icon: MessageCircle,
+                title: "Contact Support",
+                description: "Get help from our support team"
+              },
+              {
+                icon: BookOpen,
+                title: "User Guide",
+                description: "Comprehensive platform documentation"
+              },
+              {
+                icon: Video,
+                title: "Video Tutorials",
+                description: "Step-by-step video instructions"
+              },
+              {
+                icon: Users,
+                title: "Community Forum",
+                description: "Connect with other medical students"
+              },
+              {
+                icon: FileText,
+                title: "FAQ",
+                description: "Frequently asked questions and answers"
+              },
+              {
+                icon: Phone,
+                title: "Live Chat",
+                description: "Real-time chat support assistance"
+              }
+            ].map((feature, index) => (
+              <Card key={index} className="bg-indigo-50 hover:bg-indigo-100 transition-colors cursor-pointer border-indigo-200">
+                <CardContent className="flex items-center p-4">
+                  <div className="p-2 bg-indigo-500/20 rounded-lg mr-3">
+                    <feature.icon className="h-5 w-5 text-indigo-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-medium text-gray-900 text-sm mb-1">{feature.title}</h4>
+                    <p className="text-gray-600 text-xs">{feature.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Account & Billing */}
+        <div>
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Account & Billing</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              {
+                icon: User,
+                title: "Account Settings",
+                description: "Manage your profile and preferences",
+                hasArrow: true
+              },
+              {
+                icon: Heart,
+                title: "Subscription Management",
+                description: "View and modify your subscription plan",
+                hasArrow: true
+              },
+              {
+                icon: FileText,
+                title: "Billing History",
+                description: "Access invoices and payment records",
+                hasArrow: true
+              },
+              {
+                icon: Settings,
+                title: "Notification Settings",
+                description: "Configure email and push notifications",
+                hasArrow: true
+              }
+            ].map((feature, index) => (
+              <Card key={index} className="bg-orange-50 hover:bg-orange-100 transition-colors cursor-pointer border-orange-200">
+                <CardContent className="flex items-center p-6">
+                  <div className="p-3 bg-orange-500/20 rounded-lg mr-4">
+                    <feature.icon className="h-6 w-6 text-orange-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-gray-900 mb-1">{feature.title}</h3>
+                    <p className="text-gray-600 text-sm">{feature.description}</p>
+                  </div>
+                  {feature.hasArrow && (
+                    <ChevronRight className="h-5 w-5 text-gray-400" />
+                  )}
                 </CardContent>
               </Card>
             ))}
