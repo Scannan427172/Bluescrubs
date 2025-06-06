@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { 
   FileText, Shield, Mail, Phone, 
   MapPin, Stethoscope, ExternalLink,
-  Twitter, Facebook, Linkedin, Instagram
+  Twitter, Facebook, Linkedin, Instagram, Accessibility
 } from "lucide-react";
 
 export function Footer() {
@@ -11,16 +11,72 @@ export function Footer() {
 
   return (
     <footer className="bg-gray-800 text-white mt-auto">
-      {/* Simple Bottom Bar Only */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0 text-sm text-gray-400">
-          <div className="flex items-center space-x-4">
-            <span>© {currentYear} NHSprep Ltd. All rights reserved.</span>
-            <span>Company Number: 12345678</span>
+      {/* Enhanced Footer with Accessibility Links */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Access</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              <li><Link href="/practice" className="hover:text-white transition-colors">Practice Tests</Link></li>
+              <li><Link href="/osce" className="hover:text-white transition-colors">OSCE Training</Link></li>
+              <li><Link href="/mentors" className="hover:text-white transition-colors">Expert Mentors</Link></li>
+              <li><Link href="/premium" className="hover:text-white transition-colors">Premium Features</Link></li>
+            </ul>
           </div>
-          <div className="flex items-center space-x-4">
-            <span>Registered in England and Wales</span>
-            <span>VAT: GB123456789</span>
+
+          {/* Support */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Support</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              <li><Link href="/help" className="hover:text-white transition-colors">Help Center</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+              <li><Link href="/community" className="hover:text-white transition-colors">Community</Link></li>
+              <li><Link href="/feedback" className="hover:text-white transition-colors">Feedback</Link></li>
+            </ul>
+          </div>
+
+          {/* Accessibility & Inclusion */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <Accessibility className="h-5 w-5" />
+              Accessibility
+            </h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              <li><Link href="/accessibility" className="hover:text-white transition-colors">Accessibility Features</Link></li>
+              <li><Link href="/neurodiverse-support" className="hover:text-white transition-colors">Neurodiverse Support</Link></li>
+              <li><Link href="/reasonable-adjustments" className="hover:text-white transition-colors">Reasonable Adjustments</Link></li>
+              <li><Link href="/inclusive-learning" className="hover:text-white transition-colors">Inclusive Learning</Link></li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Legal</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+              <li><Link href="/cookies" className="hover:text-white transition-colors">Cookie Policy</Link></li>
+              <li><Link href="/accessibility-statement" className="hover:text-white transition-colors">Accessibility Statement</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-700 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0 text-sm text-gray-400">
+            <div className="flex items-center space-x-4">
+              <span>© {currentYear} NHSprep Ltd. All rights reserved.</span>
+              <span>Company Number: 12345678</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span>Registered in England and Wales</span>
+              <span>VAT: GB123456789</span>
+              <span className="flex items-center gap-1">
+                <Accessibility className="h-4 w-4" />
+                WCAG 2.1 AA Compliant
+              </span>
+            </div>
           </div>
         </div>
       </div>

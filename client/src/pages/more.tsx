@@ -13,9 +13,11 @@ import {
   Brain, Microscope, Activity, Pill, BookOpen, GraduationCap,
   Briefcase, FileCheck, Calendar, Target, MessageCircle, 
   HeadphonesIcon, Video, Bot, Mic, ClipboardList, Award,
-  UserCheck, Building2, Map, CheckCircle, AlertCircle,
+  Accessibility, Volume2, Palette, Type, Timer, Focus, 
+  Lightbulb, Settings2,
+  Building2, Map, CheckCircle, AlertCircle,
   TrendingUp, PieChart, BarChart3, Clock, Star,
-  Zap, Cpu, Headphones, Gamepad2, Headset, Camera,
+  Zap, Cpu, Headphones, Gamepad2, Camera,
   FileImage, TestTube, Syringe, Thermometer, MonitorSpeaker
 } from "lucide-react";
 
