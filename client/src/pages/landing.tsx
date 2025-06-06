@@ -302,9 +302,9 @@ export default function Landing() {
 
             <div className="bg-gradient-to-br from-blue-900 to-blue-950 rounded-3xl p-8 text-white border border-blue-800">
               <div className="text-center mb-8">
-                <h4 className="text-2xl font-bold mb-4 text-gray-200" style={{ color: '#e5e7eb' }}>Complete Premium Package</h4>
-                <div className="text-5xl font-bold mb-2 text-white">£79<span className="text-xl text-gray-300">/month</span></div>
-                <p className="text-gray-300" style={{ color: '#d1d5db' }}>Everything you need for PLAB success</p>
+                <h4 className="text-2xl font-bold mb-4" style={{ color: '#e5e7eb' }}>Complete Premium Package</h4>
+                <div className="text-5xl font-bold mb-2" style={{ color: '#ffffff' }}>£79<span className="text-xl" style={{ color: '#d1d5db' }}>/month</span></div>
+                <p style={{ color: '#d1d5db' }}>Everything you need for PLAB success</p>
               </div>
               
               <div className="space-y-4 mb-8">
