@@ -50,7 +50,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Dashboard />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/home">
@@ -59,7 +58,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Home />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/onboarding">
@@ -68,7 +66,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Onboarding />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/plab1">
@@ -77,7 +74,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Plab1Practice />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/plab2-osce">
@@ -86,7 +82,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Plab2Osce />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/community">
@@ -95,7 +90,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Community />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/nhs-prep">
@@ -104,7 +98,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <NhsPrep />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/adaptive-learning">
@@ -113,7 +106,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <AdaptiveLearning />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/smart-planner">
@@ -122,7 +114,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <SmartPlanner />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/mentors">
@@ -131,7 +122,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Mentors />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/cultural-training">
@@ -140,7 +130,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <CulturalTraining />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/video-osce">
@@ -149,7 +138,14 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <VideoOsce />
             </div>
-            <Footer />
+          </div>
+        </Route>
+        <Route path="/neurodiverse-support">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <More />
+            </div>
           </div>
         </Route>
         <Route path="/analytics">
@@ -158,7 +154,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Analytics />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/gamification">
@@ -167,7 +162,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Gamification />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/offline-mode">
@@ -176,7 +170,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <OfflineMode />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/personalized-paths">
@@ -185,7 +178,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <PersonalizedPaths />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/more">
@@ -194,7 +186,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <More />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/international">
@@ -203,7 +194,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <International />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/premium">
@@ -212,7 +202,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Premium />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/study-scheduler">
@@ -221,7 +210,6 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <StudyScheduler />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route component={NotFound} />
