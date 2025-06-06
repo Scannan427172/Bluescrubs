@@ -186,9 +186,19 @@ export default function AdminTools() {
                   </div>
                 </div>
 
-                <Button className="w-full" variant="outline">
-                  Access {section.title}
-                </Button>
+                <Link 
+                  href={
+                    section.title === "Storage Management" ? "/storage-management" :
+                    section.title === "Security Center" ? "/security-center" :
+                    section.title === "System Settings" ? "/system-settings" :
+                    "#"
+                  }
+                  className="w-full"
+                >
+                  <Button className="w-full" variant="outline">
+                    Access {section.title}
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}
