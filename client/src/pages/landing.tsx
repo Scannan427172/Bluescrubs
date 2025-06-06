@@ -308,9 +308,9 @@ export default function Landing() {
               color: 'white'
             }}>
               <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <h4 style={{ color: 'white', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', textAlign: 'center' }}>Complete Premium Package</h4>
-                <div style={{ color: 'white', fontSize: '3rem', fontWeight: 'bold', marginBottom: '0.5rem', textAlign: 'center' }}>£79<span style={{ color: 'white', fontSize: '1.25rem' }}>/month</span></div>
-                <p style={{ color: 'white', textAlign: 'center' }}>Everything you need for PLAB success</p>
+                <h4 style={{ color: '#ffffff', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', textAlign: 'center', WebkitTextFillColor: '#ffffff' }}>Complete Premium Package</h4>
+                <div style={{ color: '#ffffff', fontSize: '3rem', fontWeight: 'bold', marginBottom: '0.5rem', textAlign: 'center', WebkitTextFillColor: '#ffffff' }}>£79<span style={{ color: '#ffffff', fontSize: '1.25rem', WebkitTextFillColor: '#ffffff' }}>/month</span></div>
+                <p style={{ color: '#ffffff', textAlign: 'center', WebkitTextFillColor: '#ffffff' }}>Everything you need for PLAB success</p>
               </div>
               
               <div className="space-y-4 mb-8">
