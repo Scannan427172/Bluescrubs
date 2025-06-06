@@ -112,8 +112,14 @@ input::placeholder {
 }
 
 /* Global fix for white text on white background */
-.bg-white *:not(svg):not(.text-blue-600):not(.text-green-600):not(.text-purple-600):not(.text-white) {
+.bg-white *:not(svg):not(.text-blue-600):not(.text-green-600):not(.text-purple-600):not(.text-white):not(.hero-text) {
   color: #1f2937 !important;
+}
+
+/* Hero banner text should be white */
+.hero-text,
+.hero-text * {
+  color: white !important;
 }
 
 /* Button text styling */

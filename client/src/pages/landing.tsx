@@ -29,7 +29,7 @@ export default function Landing() {
         <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
           <div className="max-w-7xl mx-auto w-full">
             {/* Left Side - Content */}
-            <div className="text-white space-y-8 max-w-2xl">
+            <div className="hero-text text-white space-y-8 max-w-2xl">
               <div className="space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
                   <Star className="w-5 h-5 mr-3 text-yellow-400" />
