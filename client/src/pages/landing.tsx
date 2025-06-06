@@ -45,10 +45,10 @@ export default function Landing() {
                 </h1>
                 
                 <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl" style={{ color: 'white' }}>
-                  The world's most advanced AI-powered platform for NHSprep featuring{" "}
-                  <span className="text-blue-400 font-semibold">video OSCE simulations</span>,{" "}
-                  <span className="text-purple-400 font-semibold">adaptive learning</span>, and{" "}
-                  <span className="text-green-400 font-semibold">expert mentorship</span>.
+                  <span style={{ color: 'white' }}>The world's most advanced AI-powered platform for NHSprep featuring{" "}</span>
+                  <span className="text-blue-400 font-semibold">video OSCE simulations</span><span style={{ color: 'white' }}>,{" "}</span>
+                  <span className="text-purple-400 font-semibold">adaptive learning</span><span style={{ color: 'white' }}>, and{" "}</span>
+                  <span className="text-green-400 font-semibold">expert mentorship</span><span style={{ color: 'white' }}>.</span>
                 </p>
               </div>
               
