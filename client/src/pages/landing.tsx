@@ -304,7 +304,7 @@ export default function Landing() {
               <div className="text-center mb-8">
                 <h4 className="text-2xl font-bold mb-4 text-white">Complete Premium Package</h4>
                 <div className="text-5xl font-bold mb-2 text-white">£79<span className="text-xl text-gray-300">/month</span></div>
-                <p className="text-gray-300">Everything you need for PLAB success</p>
+                <p className="text-white">Everything you need for PLAB success</p>
               </div>
               
               <div className="space-y-4 mb-8">
@@ -334,7 +334,7 @@ export default function Landing() {
 
           {/* Revenue Projections & Market Position */}
           <div className="mt-20 text-center">
-            <div className="bg-white rounded-3xl p-8 shadow-xl border-2 border-gray-200">
+            <div className="premium-plab-card bg-white rounded-3xl p-8 shadow-xl border-2 border-gray-200">
               <h4 className="text-2xl font-bold text-gray-900 mb-6">Market-Leading PLAB Platform</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
