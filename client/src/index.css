@@ -682,11 +682,112 @@ button[id*="video-station-"][id$="-btn"] svg,
   /* Mobile responsive utilities */
   @media (max-width: 768px) {
     .mobile-padding {
-      @apply px-4;
+      @apply px-3;
     }
     
     .mobile-text {
       @apply text-sm;
+    }
+    
+    /* Enhanced mobile typography */
+    h1 {
+      @apply text-2xl;
+    }
+    
+    h2 {
+      @apply text-xl;
+    }
+    
+    h3 {
+      @apply text-lg;
+    }
+    
+    /* Mobile card adjustments */
+    .card {
+      @apply px-3 py-4;
+    }
+    
+    /* Mobile button sizing */
+    button {
+      @apply px-4 py-2 text-sm;
+    }
+    
+    /* Mobile navigation spacing */
+    nav {
+      @apply px-3;
+    }
+    
+    /* Mobile grid adjustments */
+    .grid-cols-3 {
+      @apply grid-cols-2;
+    }
+    
+    .grid-cols-4 {
+      @apply grid-cols-2;
+    }
+    
+    /* Mobile tabs improvements */
+    [data-radix-tabs-list] {
+      @apply text-xs;
+    }
+    
+    /* Mobile form improvements */
+    input, select, textarea {
+      @apply text-base; /* Prevents zoom on iOS */
+    }
+  }
+  
+  /* Tablet responsive utilities */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .tablet-padding {
+      @apply px-6;
+    }
+    
+    .tablet-text {
+      @apply text-base;
+    }
+    
+    /* Tablet grid optimizations */
+    .lg\:grid-cols-3 {
+      @apply grid-cols-2;
+    }
+    
+    .lg\:grid-cols-4 {
+      @apply grid-cols-3;
+    }
+  }
+  
+  /* Touch-friendly interactions */
+  @media (hover: none) and (pointer: coarse) {
+    /* Increase touch targets for mobile */
+    button, [role="button"], a {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .card-hover:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+  
+  /* Safe area handling for notched devices */
+  @supports (padding-top: env(safe-area-inset-top)) {
+    .safe-top {
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    .safe-left {
+      padding-left: env(safe-area-inset-left);
+    }
+    
+    .safe-right {
+      padding-right: env(safe-area-inset-right);
     }
   }
 

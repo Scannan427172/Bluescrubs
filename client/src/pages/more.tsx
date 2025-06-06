@@ -614,40 +614,40 @@ export default function More() {
           </div>
         </TabsContent>
 
-        <TabsContent value="legal-support" className="space-y-6">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold mb-2">Legal Documents & Support</h2>
-            <p className="text-muted-foreground">
+        <TabsContent value="legal-support" className="space-y-4 sm:space-y-6">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Legal Documents & Support</h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Privacy policies, terms of service, and comprehensive support resources.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {legalDocuments.map((doc) => {
               const IconComponent = doc.icon;
               return (
                 <Card key={doc.id} className="cursor-pointer hover:shadow-lg transition-shadow">
-                  <CardHeader>
+                  <CardHeader className="pb-3">
                     <div className="flex items-center gap-3">
                       <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                        <IconComponent className="h-5 w-5" />
+                        <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" />
                       </div>
                       <div>
-                        <CardTitle className="text-base">{doc.title}</CardTitle>
+                        <CardTitle className="text-sm sm:text-base">{doc.title}</CardTitle>
                         <p className="text-xs text-muted-foreground">
                           Last updated: {doc.lastUpdated}
                         </p>
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground mb-3">
+                  <CardContent className="pt-0">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-3">
                       {doc.description}
                     </p>
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="w-full"
+                      className="w-full text-xs sm:text-sm"
                     >
                       Read Document
                     </Button>
@@ -657,25 +657,25 @@ export default function More() {
             })}
           </div>
 
-          <div className="mb-6">
-            <h3 className="text-xl font-bold mb-4">Contact & Support</h3>
-            <div className="grid md:grid-cols-2 gap-6">
+          <div className="mb-4 sm:mb-6">
+            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Contact & Support</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {supportOptions.map((option) => {
                 const IconComponent = option.icon;
                 return (
                   <Card key={option.title} className="cursor-pointer hover:shadow-lg transition-shadow">
-                    <CardHeader>
+                    <CardHeader className="pb-3">
                       <div className="flex items-center gap-3">
                         <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
-                          <IconComponent className="h-5 w-5" />
+                          <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" />
                         </div>
                         <div>
-                          <CardTitle className="text-base">{option.title}</CardTitle>
+                          <CardTitle className="text-sm sm:text-base">{option.title}</CardTitle>
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground mb-3">
+                    <CardContent className="pt-0">
+                      <p className="text-xs sm:text-sm text-muted-foreground mb-3">
                         {option.description}
                       </p>
                       <Button 
@@ -686,7 +686,7 @@ export default function More() {
                             window.location.href = option.action;
                           }
                         }}
-                        className="w-full"
+                        className="w-full text-xs sm:text-sm"
                       >
                         Contact Now
                       </Button>
