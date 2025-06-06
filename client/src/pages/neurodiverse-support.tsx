@@ -138,63 +138,63 @@ export default function NeurodiverseSupport() {
         {/* Quick Settings */}
         <div className="mb-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Settings</h2>
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+          <Card className="bg-white border-purple-200 shadow-lg">
             <CardContent className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <div className="font-medium">Extended Time</div>
-                    <div className="text-sm text-gray-600">25% extra time for assessments</div>
+                    <div className="font-semibold text-gray-900">Extended Time</div>
+                    <div className="text-sm text-gray-700">25% extra time for assessments</div>
                   </div>
                   <Switch 
                     checked={settings.extendedTime}
                     onCheckedChange={(checked) => setSettings({...settings, extendedTime: checked})}
                   />
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <div className="font-medium">High Contrast</div>
-                    <div className="text-sm text-gray-600">Enhanced visual contrast</div>
+                    <div className="font-semibold text-gray-900">High Contrast</div>
+                    <div className="text-sm text-gray-700">Enhanced visual contrast</div>
                   </div>
                   <Switch 
                     checked={settings.highContrast}
                     onCheckedChange={(checked) => setSettings({...settings, highContrast: checked})}
                   />
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <div className="font-medium">Focus Mode</div>
-                    <div className="text-sm text-gray-600">Distraction-free interface</div>
+                    <div className="font-semibold text-gray-900">Focus Mode</div>
+                    <div className="text-sm text-gray-700">Distraction-free interface</div>
                   </div>
                   <Switch 
                     checked={settings.focusMode}
                     onCheckedChange={(checked) => setSettings({...settings, focusMode: checked})}
                   />
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <div className="font-medium">Reduced Motion</div>
-                    <div className="text-sm text-gray-600">Minimize animations</div>
+                    <div className="font-semibold text-gray-900">Reduced Motion</div>
+                    <div className="text-sm text-gray-700">Minimize animations</div>
                   </div>
                   <Switch 
                     checked={settings.reducedMotion}
                     onCheckedChange={(checked) => setSettings({...settings, reducedMotion: checked})}
                   />
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <div className="font-medium">Audio Narration</div>
-                    <div className="text-sm text-gray-600">Text-to-speech reading</div>
+                    <div className="font-semibold text-gray-900">Audio Narration</div>
+                    <div className="text-sm text-gray-700">Text-to-speech reading</div>
                   </div>
                   <Switch 
                     checked={settings.audioNarration}
                     onCheckedChange={(checked) => setSettings({...settings, audioNarration: checked})}
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3 p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <div className="font-medium">Font Size</div>
-                    <div className="text-sm text-gray-600">{settings.fontSize[0]}px</div>
+                    <div className="font-semibold text-gray-900">Font Size</div>
+                    <div className="text-sm text-gray-700 font-medium">{settings.fontSize[0]}px</div>
                   </div>
                   <Slider
                     value={settings.fontSize}
