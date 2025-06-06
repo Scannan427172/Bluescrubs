@@ -403,14 +403,14 @@ export default function More() {
                 hasArrow: true
               }
             ].map((feature, index) => (
-              <Card key={index} className="bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer border-gray-700">
+              <Card key={index} className="bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer border-slate-200">
                 <CardContent className="flex items-center p-6">
-                  <div className="p-3 bg-blue-500/20 rounded-lg mr-4">
-                    <feature.icon className="h-6 w-6 text-blue-400" />
+                  <div className="p-3 bg-slate-500/20 rounded-lg mr-4">
+                    <feature.icon className="h-6 w-6 text-slate-600" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
-                    <p className="text-gray-400 text-sm">{feature.description}</p>
+                    <h3 className="font-semibold text-gray-900 mb-1">{feature.title}</h3>
+                    <p className="text-gray-600 text-sm">{feature.description}</p>
                   </div>
                   {feature.hasArrow && (
                     <ChevronRight className="h-5 w-5 text-gray-400" />
