@@ -220,8 +220,8 @@ export default function Landing() {
       <div className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 sm:mb-16">
-            <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-blue-100 rounded-full mb-4 sm:mb-6">
-              <span className="text-blue-600 font-semibold text-sm sm:text-base">Premium PLAB Ecosystem</span>
+            <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-blue-800 rounded-full mb-4 sm:mb-6">
+              <span className="text-white font-semibold text-sm sm:text-base">Premium PLAB Ecosystem</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4 sm:mb-6 leading-tight px-2">
               Why We're Different
