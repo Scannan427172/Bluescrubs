@@ -45,6 +45,11 @@ import USMLE from "@/pages/usmle";
 import AMC from "@/pages/amc";
 import MRCP from "@/pages/mrcp";
 import IELTSMedical from "@/pages/ielts-medical";
+import USMLETest from "@/pages/usmle-test";
+import AMCTest from "@/pages/amc-test";
+import MCCEETest from "@/pages/mccee-test";
+import MRCPTest from "@/pages/mrcp-test";
+import MiddleEastTest from "@/pages/middle-east-test";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
