@@ -276,11 +276,17 @@ export default function AMC() {
               </div>
               <div className="mt-6 p-4 bg-white rounded-lg">
                 <h3 className="font-semibold text-gray-900 mb-2">About AMC</h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 mb-4">
                   The Australian Medical Council (AMC) assesses international medical graduates seeking to 
                   practice medicine in Australia. The process ensures doctors meet Australian standards for 
                   safe medical practice.
                 </p>
+                <Link href="/amc-test">
+                  <Button className="bg-green-600 hover:bg-green-700 text-white">
+                    <Target className="mr-2 h-4 w-4" />
+                    Take AMC Practice Test
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

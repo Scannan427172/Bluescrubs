@@ -342,10 +342,16 @@ export default function IELTSMedical() {
               </div>
               <div className="mt-6 p-4 bg-white rounded-lg">
                 <h3 className="font-semibold text-gray-900 mb-2">IELTS for Healthcare</h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 mb-4">
                   Specialized IELTS preparation for medical professionals focusing on healthcare communication, 
                   medical terminology, and clinical scenarios essential for safe patient care.
                 </p>
+                <Link href="/ielts-medical-test">
+                  <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+                    <Target className="mr-2 h-4 w-4" />
+                    Take IELTS Medical Test
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

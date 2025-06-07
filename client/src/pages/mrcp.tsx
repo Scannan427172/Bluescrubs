@@ -321,10 +321,16 @@ export default function MRCP() {
               </div>
               <div className="mt-6 p-4 bg-white rounded-lg">
                 <h3 className="font-semibold text-gray-900 mb-2">About MRCP</h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 mb-4">
                   The MRCP is a postgraduate medical diploma that demonstrates knowledge and skills in internal medicine. 
                   It's essential for UK specialty training and recognized globally as a mark of clinical excellence.
                 </p>
+                <Link href="/mrcp-test">
+                  <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                    <Target className="mr-2 h-4 w-4" />
+                    Take MRCP Practice Test
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

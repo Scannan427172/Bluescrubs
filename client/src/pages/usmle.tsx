@@ -254,11 +254,17 @@ export default function USMLE() {
               </div>
               <div className="mt-6 p-4 bg-white rounded-lg">
                 <h3 className="font-semibold text-gray-900 mb-2">About USMLE</h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 mb-4">
                   The United States Medical Licensing Examination (USMLE) is a three-step examination for medical 
                   licensure in the United States. It assesses a physician's ability to apply knowledge, concepts, 
                   and principles that are important in health and disease.
                 </p>
+                <Link href="/usmle-test">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                    <Target className="mr-2 h-4 w-4" />
+                    Take USMLE Practice Test
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

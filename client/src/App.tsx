@@ -50,6 +50,7 @@ import AMCTest from "@/pages/amc-test";
 import MCCEETest from "@/pages/mccee-test";
 import MRCPTest from "@/pages/mrcp-test";
 import MiddleEastTest from "@/pages/middle-east-test";
+import IELTSMedicalTest from "@/pages/ielts-medical-test";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -401,6 +402,14 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <MiddleEastTest />
+            </div>
+          </div>
+        </Route>
+        <Route path="/ielts-medical-test">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <IELTSMedicalTest />
             </div>
           </div>
         </Route>
