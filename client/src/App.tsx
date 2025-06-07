@@ -362,6 +362,49 @@ function Router() {
             </div>
           </div>
         </Route>
+        
+        {/* Test Routes */}
+        <Route path="/usmle-test">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <USMLETest />
+            </div>
+          </div>
+        </Route>
+        <Route path="/amc-test">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <AMCTest />
+            </div>
+          </div>
+        </Route>
+        <Route path="/mccee-test">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <MCCEETest />
+            </div>
+          </div>
+        </Route>
+        <Route path="/mrcp-test">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <MRCPTest />
+            </div>
+          </div>
+        </Route>
+        <Route path="/middle-east-test">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <MiddleEastTest />
+            </div>
+          </div>
+        </Route>
+        
         <Route component={NotFound} />
       </Switch>
     </div>
