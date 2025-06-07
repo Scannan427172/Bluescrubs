@@ -96,7 +96,8 @@ export default function GlobalExams() {
           duration: "6-12 months",
           passRate: "92%",
           candidates: "45,000/year",
-          status: "coming-soon",
+          status: "available",
+          testLink: "/usmle-test",
           features: ["Comprehensive QBank", "Subject Reviews", "Performance Analytics"]
         },
         {
@@ -139,7 +140,8 @@ export default function GlobalExams() {
           duration: "6-12 months",
           passRate: "70%",
           candidates: "8,000/year",
-          status: "coming-soon",
+          status: "available",
+          testLink: "/amc-test",
           features: ["Adaptive Testing", "Australian Guidelines", "Clinical Scenarios"]
         },
         {
