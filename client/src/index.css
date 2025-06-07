@@ -111,6 +111,12 @@ input::placeholder {
   color: #1f2937 !important;
 }
 
+/* Override for pricing badges to keep white text on dark blue background */
+.bg-white .premium-plab-card span.bg-blue-800 {
+  color: white !important;
+  background-color: #1e40af !important;
+}
+
 /* Ensure blue premium package has correct text colors */
 .bg-gradient-to-br.from-blue-900 h4 {
   color: #e5e7eb !important; /* gray-200 */
