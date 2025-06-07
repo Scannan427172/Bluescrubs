@@ -267,7 +267,7 @@ export default function Landing() {
                   </div>
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
-                    <span className="text-sm font-semibold text-blue-900 bg-blue-100 px-3 py-1 rounded-full">
+                    <span className="text-sm font-semibold text-white bg-blue-800 px-3 py-1 rounded-full">
                       {feature.subtitle}
                     </span>
                   </div>
