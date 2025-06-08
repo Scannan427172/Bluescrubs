@@ -55,6 +55,7 @@ import IELTSMedicalTest from "@/pages/ielts-medical-test";
 import Disclaimer from "@/pages/disclaimer";
 import WhoAreNHSprep from "@/pages/who-are-nhsprep";
 import LanguageDemo from "@/pages/language-demo";
+import Pricing from "@/pages/pricing";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -424,6 +425,16 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <LanguageDemo />
+            </div>
+          </div>
+        </Route>
+
+        {/* Pricing */}
+        <Route path="/pricing">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <Pricing />
             </div>
           </div>
         </Route>

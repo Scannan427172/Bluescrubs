@@ -30,6 +30,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Achievements", href: "/gamification", icon: Trophy, current: location === "/gamification" },
     { name: "Analytics", href: "/analytics", icon: BarChart3, current: location === "/analytics" },
     { name: "Offline Mode", href: "/offline-mode", icon: Wifi, current: location === "/offline-mode" },
+    { name: "Pricing", href: "/pricing", icon: Trophy, current: location === "/pricing" },
     { name: "Community", href: "/community", icon: Users, current: location === "/community" },
     { name: "NHS Prep", href: "/nhs-prep", icon: GraduationCap, current: location === "/nhs-prep" },
   ];
