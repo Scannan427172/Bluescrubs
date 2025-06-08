@@ -210,6 +210,27 @@ export default function More() {
       description: "Privacy policy, terms of service, and data protection",
       hasArrow: true,
       link: "/legal"
+    },
+    {
+      icon: Zap,
+      title: "Premium Features",
+      description: "Unlock advanced AI tutoring and exclusive content",
+      hasArrow: true,
+      link: "/premium"
+    },
+    {
+      icon: Brain,
+      title: "Neurodiverse Support",
+      description: "Specialized learning tools for different cognitive styles",
+      hasArrow: true,
+      link: "/neurodiverse"
+    },
+    {
+      icon: Headphones,
+      title: "Help Center",
+      description: "Get support, tutorials, and frequently asked questions",
+      hasArrow: true,
+      link: "/help"
     }
   ];
 
