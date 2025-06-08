@@ -28,6 +28,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Access</h3>
             <ul className="space-y-2 text-sm text-gray-300">
+              <li><Link href="/plab1-new" className="hover:text-white transition-colors">PLAB 1</Link></li>
               <li><Link href="/plab2-osce" className="hover:text-white transition-colors">PLAB 2 OSCE</Link></li>
               <li>
                 <Link href="/more" 
