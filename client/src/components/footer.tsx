@@ -17,7 +17,7 @@ export function Footer() {
         <div className="mb-8 text-center">
           <Link href="/more" 
                 className="inline-flex items-center gap-3 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl">
-            <Accessibility className="h-6 w-6 text-blue-500" strokeWidth={2.5} />
+            <Accessibility className="h-6 w-6 text-blue-500" strokeWidth={3.5} />
             Neurodiverse Support & Accessibility
           </Link>
           <p className="text-gray-400 text-sm mt-2">Specialized support for ADHD, dyslexia, autism, and other neurodivergent learning styles</p>
@@ -33,7 +33,7 @@ export function Footer() {
               <li>
                 <Link href="/more" 
                       className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md font-medium transition-colors">
-                  <Accessibility className="h-4 w-4 text-blue-500" strokeWidth={2.5} />
+                  <Accessibility className="h-4 w-4 text-blue-500" strokeWidth={3.5} />
                   Neurodiverse Support
                 </Link>
               </li>
@@ -56,7 +56,7 @@ export function Footer() {
           {/* Accessibility & Inclusion */}
           <div>
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <Accessibility className="h-5 w-5 text-blue-500" strokeWidth={2.5} />
+              <Accessibility className="h-5 w-5 text-blue-500" strokeWidth={3.5} />
               Accessibility
             </h3>
             <ul className="space-y-2 text-sm text-gray-300">
@@ -64,7 +64,7 @@ export function Footer() {
               <li>
                 <Link href="/more" 
                       className="hover:text-white transition-colors bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-md font-medium inline-flex items-center gap-2">
-                  <Accessibility className="h-4 w-4 text-blue-500" strokeWidth={2.5} />
+                  <Accessibility className="h-4 w-4 text-blue-500" strokeWidth={3.5} />
                   Neurodiverse Support
                 </Link>
               </li>
@@ -97,7 +97,7 @@ export function Footer() {
               <span>Registered in England and Wales</span>
               <span>VAT: GB123456789</span>
               <span className="flex items-center gap-1">
-                <Accessibility className="h-4 w-4 text-blue-500" strokeWidth={2.5} />
+                <Accessibility className="h-4 w-4 text-blue-500" strokeWidth={3.5} />
                 WCAG 2.1 AA Compliant
               </span>
             </div>
