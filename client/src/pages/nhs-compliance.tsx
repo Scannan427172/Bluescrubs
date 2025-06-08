@@ -10,7 +10,7 @@ export default function NhsCompliance() {
         <div className="text-center space-y-4">
           <h1 className="text-3xl font-bold text-gray-900">NHS Compliance & Standards</h1>
           <p className="text-lg text-gray-600">
-            Our platform adheres to all NHS standards and regulatory requirements for medical education
+            Educational content designed to help prepare for NHS working environment
           </p>
         </div>
 
@@ -22,31 +22,31 @@ export default function NhsCompliance() {
               <span>NHS Standards Compliance</span>
             </CardTitle>
             <CardDescription>
-              We maintain full compliance with NHS healthcare standards and medical education requirements
+              Educational content focused on NHS working environment preparation
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                  ✓ NHS Constitution Compliant
+                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                  NHS Context Training
                 </Badge>
-                <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                  ✓ Care Quality Commission Standards
+                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                  Study Materials Available
                 </Badge>
-                <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                  ✓ Medical Education Standards
+                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                  Educational Resources
                 </Badge>
               </div>
               <div className="space-y-2">
-                <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                  ✓ Information Governance Standards
+                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                  Practice Content
                 </Badge>
-                <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                  ✓ Equality & Diversity Requirements
+                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                  Learning Support
                 </Badge>
-                <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                  ✓ Patient Safety Standards
+                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                  Preparation Tools
                 </Badge>
               </div>
             </div>
@@ -58,17 +58,17 @@ export default function NhsCompliance() {
           {/* Information Governance */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">NHS Information Governance</CardTitle>
+              <CardTitle className="text-lg">Data Protection</CardTitle>
               <CardDescription>
-                Data protection and information security standards as required by NHS Digital
+                Standard data protection and privacy measures for educational platform
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="text-sm text-gray-600 space-y-2">
-                <p>• Compliance with NHS Data Security and Protection Toolkit</p>
-                <p>• Adherence to NHS Information Governance Framework</p>
-                <p>• Implementation of NHS Digital security standards</p>
-                <p>• Regular security assessments and audits</p>
+                <p>• GDPR compliant data handling</p>
+                <p>• Secure user authentication</p>
+                <p>• Encrypted data transmission</p>
+                <p>• Regular security updates</p>
               </div>
               <Button variant="outline" size="sm" className="w-full">
                 <FileText className="w-4 h-4 mr-2" />
@@ -80,17 +80,17 @@ export default function NhsCompliance() {
           {/* Clinical Standards */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Clinical Education Standards</CardTitle>
+              <CardTitle className="text-lg">Educational Content</CardTitle>
               <CardDescription>
-                Alignment with NHS clinical education and training requirements
+                Study materials and practice resources for medical exam preparation
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="text-sm text-gray-600 space-y-2">
-                <p>• GMC standards for medical education</p>
-                <p>• NHS Education England requirements</p>
-                <p>• Royal College examination standards</p>
-                <p>• Continuous professional development alignment</p>
+                <p>• Practice questions and mock tests</p>
+                <p>• Study guides and reference materials</p>
+                <p>• Video tutorials and explanations</p>
+                <p>• Progress tracking and analytics</p>
               </div>
               <Button variant="outline" size="sm" className="w-full">
                 <FileText className="w-4 h-4 mr-2" />
@@ -102,17 +102,17 @@ export default function NhsCompliance() {
           {/* Equality & Diversity */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">NHS Equality & Diversity</CardTitle>
+              <CardTitle className="text-lg">Accessibility & Inclusion</CardTitle>
               <CardDescription>
-                Commitment to NHS equality, diversity and inclusion standards
+                Platform accessibility and inclusive learning environment
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="text-sm text-gray-600 space-y-2">
-                <p>• Equality Act 2010 compliance</p>
-                <p>• NHS Equality Delivery System alignment</p>
-                <p>• Accessible content for all users</p>
-                <p>• Cultural competency training integration</p>
+                <p>• Multi-language content support</p>
+                <p>• Screen reader compatibility</p>
+                <p>• Adjustable text size and contrast</p>
+                <p>• Neurodiversity learning adaptations</p>
               </div>
               <Button variant="outline" size="sm" className="w-full">
                 <FileText className="w-4 h-4 mr-2" />
