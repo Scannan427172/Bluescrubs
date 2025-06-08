@@ -57,10 +57,10 @@ export function Navigation({ user }: NavigationProps) {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`font-medium transition-colors text-xs lg:text-sm xl:text-base whitespace-nowrap px-2 py-1 rounded ${
+                  className={`font-medium transition-colors text-sm whitespace-nowrap px-3 py-2 rounded-md ${
                     item.current
-                      ? "text-medical-blue bg-blue-50 border border-medical-blue"
-                      : "text-gray-600 hover:text-medical-blue hover:bg-gray-50"
+                      ? "text-blue-600 bg-blue-50 border border-blue-200"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                   }`}
                 >
                   {item.name}
