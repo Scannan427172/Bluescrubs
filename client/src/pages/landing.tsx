@@ -264,7 +264,7 @@ export default function Landing() {
             </div>
             
             <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
-              Beyond <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">NHSprep</span>
+              <span className="text-white">Beyond</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">NHSprep</span>
             </h2>
             
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
