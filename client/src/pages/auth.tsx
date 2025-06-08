@@ -292,43 +292,43 @@ export default function Auth() {
           <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6">
             Start Your NHS Journey Today
           </h2>
-          <p id="subtext" className="text-lg sm:text-xl text-white/90 mb-8 sm:mb-12">
+          <p id="subtext" className="text-lg sm:text-xl text-white mb-8 sm:mb-12 font-semibold">
             Join 15,000+ medical professionals who trust our platform
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
             <div className="text-center">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
+                <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Secure Platform</h3>
-              <p id="security-text" className="text-sm sm:text-base text-white/80">Enterprise-grade security</p>
+              <p id="security-text" className="text-sm sm:text-base text-white font-medium">Enterprise-grade security</p>
             </div>
             
             <div className="text-center">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Global Community</h3>
-              <p id="community-text" className="text-sm sm:text-base text-white/80">15,000+ active students</p>
+              <p id="community-text" className="text-sm sm:text-base text-white font-medium">15,000+ active students</p>
             </div>
             
             <div className="text-center">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
+                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Proven Results</h3>
-              <p id="results-text" className="text-sm sm:text-base text-white/80">94% success rate</p>
+              <p id="results-text" className="text-sm sm:text-base text-white font-medium">94% success rate</p>
             </div>
           </div>
           
           <Button 
             id="prep-button" 
-            className="bg-white hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold"
+            className="bg-white hover:bg-blue-50 text-blue-800 hover:text-blue-900 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold"
             onClick={() => setLocation("/onboarding")}
           >
             Begin Your Preparation
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 text-blue-800" />
           </Button>
         </div>
       </div>
