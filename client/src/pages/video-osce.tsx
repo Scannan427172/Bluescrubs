@@ -111,17 +111,22 @@ export default function VideoOsce() {
   const analyzeRecording = async (recordingId: string, station: any, duration: number) => {
     setAnalyzingRecording(recordingId);
     try {
+      // Ensure all required parameters are present
+      const requestData = {
+        stationTitle: station?.title || 'Unknown Station',
+        stationCategory: station?.category || 'General',
+        learningObjectives: station?.learningObjectives || ['General medical skills assessment'],
+        recordingDuration: duration || 60
+      };
+
+      console.log('Sending analysis request:', requestData);
+
       const response = await fetch('/api/ai/analyze-video', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          stationTitle: station.title,
-          stationCategory: station.category,
-          learningObjectives: station.learningObjectives,
-          recordingDuration: duration
-        })
+        body: JSON.stringify(requestData)
       });
 
       if (response.ok) {
@@ -133,6 +138,10 @@ export default function VideoOsce() {
               : rec
           )
         );
+      } else {
+        const errorData = await response.json();
+        console.error('Analysis API error:', errorData);
+        throw new Error(errorData.error || 'Analysis failed');
       }
     } catch (error) {
       console.error('Analysis failed:', error);
@@ -145,30 +154,86 @@ export default function VideoOsce() {
     try {
       setCameraError(null);
       
-      // Request camera and microphone access
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { 
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
-          facingMode: 'user'
-        }, 
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true
+      // iOS Safari compatibility - try different constraint combinations
+      let stream;
+      const constraintsOptions = [
+        // Try full constraints first
+        {
+          video: {
+            width: { min: 640, ideal: 1280, max: 1920 },
+            height: { min: 480, ideal: 720, max: 1080 },
+            facingMode: 'user',
+            frameRate: { ideal: 30, max: 30 }
+          }, 
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true,
+            sampleRate: 44100
+          }
+        },
+        // Fallback for iOS - simpler constraints
+        {
+          video: {
+            facingMode: 'user',
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+          },
+          audio: true
+        },
+        // Minimal constraints for compatibility
+        {
+          video: true,
+          audio: true
         }
-      });
+      ];
+
+      let lastError;
+      for (const constraints of constraintsOptions) {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia(constraints);
+          break;
+        } catch (error) {
+          lastError = error;
+          console.log('Trying next constraint option due to:', error);
+        }
+      }
+
+      if (!stream) {
+        throw lastError || new Error('Unable to access camera');
+      }
       
       setVideoStream(stream);
       
-      // Set up video preview
+      // Set up video preview with iOS compatibility
       if (videoRef) {
         videoRef.srcObject = stream;
-        videoRef.play();
+        videoRef.setAttribute('playsinline', 'true');
+        videoRef.setAttribute('webkit-playsinline', 'true');
+        videoRef.muted = true;
+        videoRef.autoplay = true;
+        
+        // Force play for iOS
+        try {
+          await videoRef.play();
+        } catch (playError) {
+          console.log('Video play error (expected on some devices):', playError);
+        }
       }
       
-      const recorder = new MediaRecorder(stream, {
-        mimeType: 'video/webm;codecs=vp9,opus'
-      });
+      // iOS Safari compatibility - fallback mimeTypes
+      let mimeType = '';
+      if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')) {
+        mimeType = 'video/webm;codecs=vp9,opus';
+      } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')) {
+        mimeType = 'video/webm;codecs=vp8,opus';
+      } else if (MediaRecorder.isTypeSupported('video/webm')) {
+        mimeType = 'video/webm';
+      } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+        mimeType = 'video/mp4';
+      }
+
+      const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : {});
       const chunks: Blob[] = [];
       
       recorder.ondataavailable = (event) => {
@@ -328,12 +393,33 @@ export default function VideoOsce() {
                           autoPlay
                           playsInline
                           muted
+                          controls={false}
+                          preload="metadata"
+                          style={{ objectFit: 'cover' }}
                         />
                       ) : (
                         <div className="text-center text-white">
                           <Video className="w-16 h-16 mx-auto mb-4 opacity-50" />
                           <p className="text-lg font-medium">Camera Preview</p>
                           <p className="text-sm opacity-75">Click "Start Recording" to begin</p>
+                          <Button 
+                            onClick={async () => {
+                              try {
+                                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                                setVideoStream(stream);
+                                if (videoRef) {
+                                  videoRef.srcObject = stream;
+                                  videoRef.play();
+                                }
+                              } catch (error: any) {
+                                setCameraError('Camera access denied. Please allow camera permissions.');
+                              }
+                            }}
+                            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white"
+                            size="sm"
+                          >
+                            Enable Camera
+                          </Button>
                         </div>
                       )}
                       
