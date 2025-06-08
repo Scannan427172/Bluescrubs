@@ -86,7 +86,6 @@ function Router() {
             <div className="flex-1">
               <Dashboard />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/home">
@@ -95,7 +94,6 @@ function Router() {
             <div className="flex-1">
               <Home />
             </div>
-            <Footer />
           </div>
         </Route>
         <Route path="/onboarding">
