@@ -306,6 +306,22 @@ h4.text-white,
   -webkit-text-fill-color: #1e40af !important;
 }
 
+/* Fix visibility for competitive advantages section */
+.premium-plab-card h3,
+.premium-plab-card h4,
+.premium-plab-card p {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+/* Ensure icons in gradient backgrounds are visible */
+.bg-gradient-to-r svg,
+[class*="from-blue-500"] svg,
+[class*="to-purple-500"] svg {
+  color: white !important;
+  fill: white !important;
+}
+
 /* Override any conflicting styles for hero section */
 .hero-text.text-white,
 .hero-text .text-white,
