@@ -306,24 +306,48 @@ export default function Auth() {
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-white mb-2" style={{ color: '#ffffff' }}>Secure Platform</h3>
-              <p id="security-text" className="text-sm sm:text-base text-white font-bold" style={{ color: '#ffffff' }}>Enterprise-grade security</p>
+              <h3 className="text-base sm:text-lg font-bold mb-2" style={{ 
+                color: '#ffffff', 
+                WebkitTextFillColor: '#ffffff',
+                textShadow: 'none'
+              }}>Secure Platform</h3>
+              <p id="security-text" className="text-sm sm:text-base font-bold" style={{ 
+                color: '#ffffff', 
+                WebkitTextFillColor: '#ffffff',
+                textShadow: 'none'
+              }}>Enterprise-grade security</p>
             </div>
             
             <div className="text-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-white mb-2" style={{ color: '#ffffff' }}>Global Community</h3>
-              <p id="community-text" className="text-sm sm:text-base text-white font-bold" style={{ color: '#ffffff' }}>15,000+ active students</p>
+              <h3 className="text-base sm:text-lg font-bold mb-2" style={{ 
+                color: '#ffffff', 
+                WebkitTextFillColor: '#ffffff',
+                textShadow: 'none'
+              }}>Global Community</h3>
+              <p id="community-text" className="text-sm sm:text-base font-bold" style={{ 
+                color: '#ffffff', 
+                WebkitTextFillColor: '#ffffff',
+                textShadow: 'none'
+              }}>15,000+ active students</p>
             </div>
             
             <div className="text-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Award className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-white mb-2" style={{ color: '#ffffff' }}>Proven Results</h3>
-              <p id="results-text" className="text-sm sm:text-base text-white font-bold" style={{ color: '#ffffff' }}>94% success rate</p>
+              <h3 className="text-base sm:text-lg font-bold mb-2" style={{ 
+                color: '#ffffff', 
+                WebkitTextFillColor: '#ffffff',
+                textShadow: 'none'
+              }}>Proven Results</h3>
+              <p id="results-text" className="text-sm sm:text-base font-bold" style={{ 
+                color: '#ffffff', 
+                WebkitTextFillColor: '#ffffff',
+                textShadow: 'none'
+              }}>94% success rate</p>
             </div>
           </div>
           
