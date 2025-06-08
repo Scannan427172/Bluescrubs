@@ -140,9 +140,11 @@ export default function WhoAreNHSprep() {
                   </h5>
                   <ul className="text-sm text-purple-700 space-y-1">
                     <li>• Web Design & Development</li>
+                    <li>• App Build & Design</li>
+                    <li>• Video Editing & Motion Graphics</li>
                     <li>• Identity & Branding Solutions</li>
                     <li>• Typography & Color Direction</li>
-                    <li>• Motion Graphics & Print Design</li>
+                    <li>• Print Design & Collateral</li>
                   </ul>
                 </div>
                 
