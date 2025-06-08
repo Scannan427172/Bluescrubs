@@ -52,6 +52,7 @@ import MRCPTest from "@/pages/mrcp-test";
 import MiddleEastTest from "@/pages/middle-east-test";
 import IELTSMedicalTest from "@/pages/ielts-medical-test";
 import Disclaimer from "@/pages/disclaimer";
+import WhoAreNHSprep from "@/pages/who-are-nhsprep";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -417,6 +418,7 @@ function Router() {
         
         {/* Legal and Disclaimer Pages */}
         <Route path="/disclaimer" component={Disclaimer} />
+        <Route path="/who-are-nhsprep" component={WhoAreNHSprep} />
         
         <Route component={NotFound} />
       </Switch>
