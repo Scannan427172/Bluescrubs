@@ -112,14 +112,14 @@ export default function Landing() {
                 icon: Award,
                 title: "USMLE (United States)",
                 description: "Steps 1, 2 CK & CS preparation with residency match guidance and clinical skills",
-                badge: "Coming Soon",
+                badge: "Active",
                 color: "from-red-500 to-pink-500"
               },
               {
                 icon: Target,
                 title: "AMC (Australia)",
                 description: "AMC CAT & Clinical exam prep with Australian state employment guidance",
-                badge: "Coming Soon",
+                badge: "Active",
                 color: "from-green-500 to-emerald-500"
               },
               {
