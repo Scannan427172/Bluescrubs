@@ -30,7 +30,6 @@ import International from "@/pages/international";
 import Premium from "@/pages/premium";
 import StudyScheduler from "@/pages/study-scheduler";
 import AdminTools from "@/pages/admin-tools";
-import NeurodiverseSupport from "@/pages/neurodiverse-support";
 import LegalCompliance from "@/pages/legal-compliance";
 import StorageManagement from "@/pages/storage-management";
 import SecurityCenter from "@/pages/security-center";
@@ -59,6 +58,10 @@ import Pricing from "@/pages/pricing";
 import GMCPractice from "@/pages/gmc-practice";
 import ContentStrategy from "@/pages/content-strategy";
 import GlobalPractice from "@/pages/global-practice";
+import AdvancedAnalytics from "@/pages/advanced-analytics";
+import AIStudyBuddy from "@/pages/ai-study-buddy";
+import CulturalBridge from "@/pages/cultural-bridge";
+import NeurodiverseSupport from "@/pages/neurodiverse-support";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {

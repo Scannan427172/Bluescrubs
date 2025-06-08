@@ -1,335 +1,406 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
 import { 
-  ChevronLeft,
-  Accessibility,
-  Timer,
-  Palette,
-  Brain,
-  BookOpen,
-  UserCheck,
-  MessageCircle,
-  Settings2,
-  Headphones,
-  Heart,
-  Shield,
-  Users,
-  FileText,
-  Play,
-  Pause,
-  Volume2,
-  Eye,
-  Lightbulb,
-  Focus
+  Eye, Volume2, Timer, Palette, Brain, Focus, 
+  ZoomIn, Pause, RotateCcw, Settings, CheckCircle, Star
 } from "lucide-react";
-import { Link } from "wouter";
-import { useState } from "react";
 
 export default function NeurodiverseSupport() {
-  const [settings, setSettings] = useState({
-    extendedTime: false,
-    highContrast: false,
-    reducedMotion: false,
-    focusMode: false,
-    audioNarration: false,
-    fontSize: [16],
-    breakReminders: true
-  });
+  const [isDyslexiaMode, setIsDyslexiaMode] = useState(false);
+  const [isADHDMode, setIsADHDMode] = useState(false);
+  const [isAutismMode, setIsAutismMode] = useState(false);
+  const [fontSizeLevel, setFontSizeLevel] = useState([16]);
+  const [contrastLevel, setContrastLevel] = useState([50]);
+  const [readingSpeed, setReadingSpeed] = useState([100]);
+  const [focusMode, setFocusMode] = useState(false);
 
-  const supportCategories = [
+  const neurodiverseProfiles = [
     {
-      icon: Brain,
-      title: "ADHD Support",
-      description: "Tools and accommodations for attention and focus challenges",
-      color: "bg-blue-50 border-blue-200",
-      iconColor: "text-blue-600",
-      features: [
-        { name: "Focus Timer", description: "Pomodoro-style study sessions with breaks", enabled: settings.focusMode },
-        { name: "Distraction-Free Mode", description: "Simplified interface with minimal visual clutter", enabled: false },
-        { name: "Break Reminders", description: "Automatic reminders to take regular breaks", enabled: settings.breakReminders },
-        { name: "Task Chunking", description: "Break large tasks into manageable segments", enabled: true }
-      ]
-    },
-    {
-      icon: BookOpen,
-      title: "Dyslexia Support",
-      description: "Reading and text processing accommodations",
-      color: "bg-green-50 border-green-200",
-      iconColor: "text-green-600",
-      features: [
-        { name: "Dyslexia-Friendly Fonts", description: "OpenDyslexic and other accessible fonts", enabled: true },
-        { name: "Text Spacing", description: "Adjustable line and character spacing", enabled: false },
-        { name: "Reading Ruler", description: "Highlight current line while reading", enabled: false },
-        { name: "Audio Narration", description: "Text-to-speech for all content", enabled: settings.audioNarration }
-      ]
-    },
-    {
-      icon: Heart,
-      title: "Autism Spectrum Support",
-      description: "Structured learning environment and communication tools",
-      color: "bg-purple-50 border-purple-200",
-      iconColor: "text-purple-600",
-      features: [
-        { name: "Structured Routines", description: "Consistent layout and navigation patterns", enabled: true },
-        { name: "Clear Instructions", description: "Step-by-step guidance and explicit directions", enabled: true },
-        { name: "Sensory Preferences", description: "Adjustable colors, sounds, and animations", enabled: false },
-        { name: "Social Scripts", description: "Communication templates for peer interaction", enabled: false }
-      ]
-    },
-    {
+      name: "Dyslexia Support",
+      description: "Enhanced readability and text-to-speech",
       icon: Eye,
-      title: "Visual Processing Support",
-      description: "Visual accessibility and processing accommodations",
-      color: "bg-orange-50 border-orange-200",
-      iconColor: "text-orange-600",
       features: [
-        { name: "High Contrast Mode", description: "Enhanced contrast for better readability", enabled: settings.highContrast },
-        { name: "Color Blind Support", description: "Alternative color schemes and patterns", enabled: false },
-        { name: "Reduced Motion", description: "Minimize animations and transitions", enabled: settings.reducedMotion },
-        { name: "Font Size Control", description: "Adjustable text size throughout platform", enabled: true }
+        "OpenDyslexic font option",
+        "Syllable highlighting",
+        "Text-to-speech with medical pronunciation",
+        "Reading rulers and overlays",
+        "Customizable line spacing"
+      ],
+      isActive: isDyslexiaMode,
+      toggle: () => setIsDyslexiaMode(!isDyslexiaMode),
+      color: "text-blue-600"
+    },
+    {
+      name: "ADHD Optimization",
+      description: "Focus enhancement and distraction reduction",
+      icon: Focus,
+      features: [
+        "Pomodoro timer integration",
+        "Minimal distraction interface",
+        "Progress chunking",
+        "Gamified achievements",
+        "Background noise options"
+      ],
+      isActive: isADHDMode,
+      toggle: () => setIsADHDMode(!isADHDMode),
+      color: "text-green-600"
+    },
+    {
+      name: "Autism Accommodation",
+      description: "Predictable patterns and sensory considerations",
+      icon: Brain,
+      features: [
+        "Consistent navigation patterns",
+        "Sensory-friendly color schemes",
+        "Detailed progress indicators",
+        "Routine-based learning paths",
+        "Social interaction controls"
+      ],
+      isActive: isAutismMode,
+      toggle: () => setIsAutismMode(!isAutismMode),
+      color: "text-purple-600"
+    }
+  ];
+
+  const assistiveTechnologies = [
+    {
+      name: "Medical Text-to-Speech",
+      description: "Accurate pronunciation of medical terminology",
+      icon: Volume2,
+      features: [
+        "IPA phonetic breakdown",
+        "Etymology explanations",
+        "Multiple accent options (UK, US, International)",
+        "Speed control for complex terms",
+        "Terminology practice mode"
+      ]
+    },
+    {
+      name: "Visual Processing Aid",
+      description: "Enhanced visual comprehension tools",
+      icon: ZoomIn,
+      features: [
+        "Magnification with context preservation",
+        "Color-coded medical categories",
+        "Interactive anatomical overlays",
+        "Visual memory techniques",
+        "Pattern recognition training"
+      ]
+    },
+    {
+      name: "Cognitive Load Management",
+      description: "Information processing optimization",
+      icon: Timer,
+      features: [
+        "Adaptive content chunking",
+        "Cognitive break reminders",
+        "Complexity level adjustment",
+        "Mental model building",
+        "Memory palace techniques"
       ]
     }
   ];
 
-  const examAccommodations = [
-    {
-      icon: Timer,
-      title: "Extended Time",
-      description: "25% to 100% additional time for assessments",
-      status: "Available"
+  const adaptiveFeatures = {
+    dyslexia: {
+      textTransform: "font-family: 'OpenDyslexic', Arial; letter-spacing: 0.1em; line-height: 1.8;",
+      highlights: true,
+      speechSupport: true,
+      wordSpacing: true
     },
-    {
-      icon: Pause,
-      title: "Breaks During Exams",
-      description: "Scheduled or on-demand break periods",
-      status: "Configured"
+    adhd: {
+      focusMode: true,
+      timerIntegration: true,
+      progressChunking: true,
+      gamification: true
     },
-    {
-      icon: Headphones,
-      title: "Noise Reduction",
-      description: "Quiet environment or noise-cancelling options",
-      status: "Available"
-    },
-    {
-      icon: FileText,
-      title: "Alternative Formats",
-      description: "Large print, audio, or digital formats",
-      status: "Ready"
+    autism: {
+      consistentLayout: true,
+      predictableNavigation: true,
+      sensoryFriendly: true,
+      routineBased: true
     }
-  ];
+  };
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <Link href="/more" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-            <ChevronLeft className="h-5 w-5 text-gray-600" />
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Neurodiverse Support</h1>
-            <p className="text-gray-600">Comprehensive accessibility tools for diverse learning needs</p>
-          </div>
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-4">
+          <Brain className="w-8 h-8 text-purple-600" />
+          <h1 className="text-3xl font-bold">Neurodiverse Learning Support</h1>
+          <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+            World First in Medical Education
+          </Badge>
         </div>
-
-        {/* Quick Settings */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Settings</h2>
-          <Card className="bg-white border-purple-200 shadow-lg">
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <div className="font-semibold text-gray-900">Extended Time</div>
-                    <div className="text-sm text-gray-700">25% extra time for assessments</div>
-                  </div>
-                  <Switch 
-                    checked={settings.extendedTime}
-                    onCheckedChange={(checked) => setSettings({...settings, extendedTime: checked})}
-                  />
-                </div>
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <div className="font-semibold text-gray-900">High Contrast</div>
-                    <div className="text-sm text-gray-700">Enhanced visual contrast</div>
-                  </div>
-                  <Switch 
-                    checked={settings.highContrast}
-                    onCheckedChange={(checked) => setSettings({...settings, highContrast: checked})}
-                  />
-                </div>
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <div className="font-semibold text-gray-900">Focus Mode</div>
-                    <div className="text-sm text-gray-700">Distraction-free interface</div>
-                  </div>
-                  <Switch 
-                    checked={settings.focusMode}
-                    onCheckedChange={(checked) => setSettings({...settings, focusMode: checked})}
-                  />
-                </div>
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <div className="font-semibold text-gray-900">Reduced Motion</div>
-                    <div className="text-sm text-gray-700">Minimize animations</div>
-                  </div>
-                  <Switch 
-                    checked={settings.reducedMotion}
-                    onCheckedChange={(checked) => setSettings({...settings, reducedMotion: checked})}
-                  />
-                </div>
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <div className="font-semibold text-gray-900">Audio Narration</div>
-                    <div className="text-sm text-gray-700">Text-to-speech reading</div>
-                  </div>
-                  <Switch 
-                    checked={settings.audioNarration}
-                    onCheckedChange={(checked) => setSettings({...settings, audioNarration: checked})}
-                  />
-                </div>
-                <div className="space-y-3 p-4 bg-gray-50 rounded-lg">
-                  <div>
-                    <div className="font-semibold text-gray-900">Font Size</div>
-                    <div className="text-sm text-gray-700 font-medium">{settings.fontSize[0]}px</div>
-                  </div>
-                  <Slider
-                    value={settings.fontSize}
-                    onValueChange={(value) => setSettings({...settings, fontSize: value})}
-                    max={24}
-                    min={12}
-                    step={1}
-                    className="w-full"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Support Categories */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Support Categories</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {supportCategories.map((category, index) => (
-              <Card key={index} className={`${category.color} hover:shadow-lg transition-shadow`}>
-                <CardHeader className="pb-3">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 bg-white rounded-lg">
-                      <category.icon className={`h-6 w-6 ${category.iconColor}`} />
-                    </div>
-                    <div>
-                      <CardTitle className="text-lg">{category.title}</CardTitle>
-                      <p className="text-sm text-gray-600">{category.description}</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {category.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-3 bg-white rounded-lg">
-                        <div>
-                          <div className="font-medium text-sm">{feature.name}</div>
-                          <div className="text-xs text-gray-600">{feature.description}</div>
-                        </div>
-                        <Badge variant={feature.enabled ? "default" : "secondary"}>
-                          {feature.enabled ? "Active" : "Available"}
-                        </Badge>
-                      </div>
-                    ))}
-                  </div>
-                  <Button className="w-full mt-4" variant="outline">
-                    Configure {category.title}
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* PLAB Exam Accommodations */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">PLAB Exam Accommodations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {examAccommodations.map((accommodation, index) => (
-              <Card key={index} className="bg-blue-50 border-blue-200">
-                <CardContent className="p-4 text-center">
-                  <accommodation.icon className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-                  <h3 className="font-medium text-gray-900 mb-2">{accommodation.title}</h3>
-                  <p className="text-sm text-gray-600 mb-3">{accommodation.description}</p>
-                  <Badge className="bg-green-100 text-green-800">
-                    {accommodation.status}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="mt-4 text-center">
-            <Button>
-              <FileText className="h-4 w-4 mr-2" />
-              Apply for PLAB Adjustments
-            </Button>
-          </div>
-        </div>
-
-        {/* Resources & Support */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                Peer Support Network
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 mb-4">Connect with other neurodiverse medical students and share experiences.</p>
-              <div className="space-y-2">
-                <Button variant="outline" className="w-full justify-start">
-                  <MessageCircle className="h-4 w-4 mr-2" />
-                  Join Discussion Groups
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Heart className="h-4 w-4 mr-2" />
-                  Find Study Partners
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Lightbulb className="h-4 w-4 mr-2" />
-                  Share Success Stories
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5" />
-                Professional Support
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 mb-4">Access professional guidance and documentation support.</p>
-              <div className="space-y-2">
-                <Button variant="outline" className="w-full justify-start">
-                  <UserCheck className="h-4 w-4 mr-2" />
-                  Book Consultation
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <FileText className="h-4 w-4 mr-2" />
-                  Documentation Help
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Focus className="h-4 w-4 mr-2" />
-                  Study Strategies
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <p className="text-lg text-muted-foreground">
+          Comprehensive accessibility features designed specifically for neurodiverse learners pursuing medical careers.
+          Evidence-based accommodations that enhance learning without compromising medical education standards.
+        </p>
       </div>
+
+      {/* Profile Selection */}
+      <div className="grid md:grid-cols-3 gap-6 mb-8">
+        {neurodiverseProfiles.map((profile) => (
+          <Card key={profile.name} className={`border-2 ${profile.isActive ? 'border-purple-300 bg-purple-50' : 'border-gray-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <profile.icon className={`w-5 h-5 ${profile.color}`} />
+                  {profile.name}
+                </div>
+                <Switch 
+                  checked={profile.isActive} 
+                  onCheckedChange={profile.toggle}
+                />
+              </CardTitle>
+              <CardDescription>{profile.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2">
+                {profile.features.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="w-3 h-3 text-green-600 mt-1 flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Accessibility Controls */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Settings className="w-5 h-5" />
+            Personalized Accessibility Settings
+          </CardTitle>
+          <CardDescription>
+            Customize your learning environment to match your specific needs
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <div>
+                <label className="text-sm font-medium mb-3 block">Text Size</label>
+                <Slider
+                  value={fontSizeLevel}
+                  onValueChange={setFontSizeLevel}
+                  max={24}
+                  min={12}
+                  step={1}
+                  className="w-full"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>Small (12px)</span>
+                  <span>Current: {fontSizeLevel[0]}px</span>
+                  <span>Large (24px)</span>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm font-medium mb-3 block">Contrast Level</label>
+                <Slider
+                  value={contrastLevel}
+                  onValueChange={setContrastLevel}
+                  max={100}
+                  min={0}
+                  step={10}
+                  className="w-full"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>Low</span>
+                  <span>Current: {contrastLevel[0]}%</span>
+                  <span>High</span>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm font-medium mb-3 block">Reading Speed</label>
+                <Slider
+                  value={readingSpeed}
+                  onValueChange={setReadingSpeed}
+                  max={200}
+                  min={50}
+                  step={10}
+                  className="w-full"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                  <span>Slow (50%)</span>
+                  <span>Current: {readingSpeed[0]}%</span>
+                  <span>Fast (200%)</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                <div>
+                  <div className="font-medium">Focus Mode</div>
+                  <div className="text-sm text-muted-foreground">Hide distracting elements</div>
+                </div>
+                <Switch checked={focusMode} onCheckedChange={setFocusMode} />
+              </div>
+
+              <div className="p-3 bg-green-50 rounded-lg">
+                <div className="font-medium mb-2">Active Accommodations</div>
+                <div className="space-y-1">
+                  {isDyslexiaMode && <Badge variant="outline">Dyslexia Support</Badge>}
+                  {isADHDMode && <Badge variant="outline">ADHD Optimization</Badge>}
+                  {isAutismMode && <Badge variant="outline">Autism Accommodation</Badge>}
+                  {focusMode && <Badge variant="outline">Focus Mode</Badge>}
+                  {(!isDyslexiaMode && !isADHDMode && !isAutismMode && !focusMode) && (
+                    <span className="text-sm text-muted-foreground">No accommodations active</span>
+                  )}
+                </div>
+              </div>
+
+              <Button className="w-full" variant="outline">
+                <RotateCcw className="w-4 h-4 mr-2" />
+                Reset to Default
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Assistive Technologies */}
+      <div className="grid md:grid-cols-3 gap-6 mb-8">
+        {assistiveTechnologies.map((tech) => (
+          <Card key={tech.name}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <tech.icon className="w-5 h-5 text-blue-600" />
+                {tech.name}
+              </CardTitle>
+              <CardDescription>{tech.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 mb-4">
+                {tech.features.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-2 text-sm">
+                    <Star className="w-3 h-3 text-yellow-500 mt-1 flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <Button size="sm" className="w-full">
+                Enable Feature
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Sample Content with Accommodations */}
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Sample Medical Content with Accommodations</CardTitle>
+          <CardDescription>
+            See how your accessibility settings transform the learning experience
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div 
+            className={`p-4 rounded-lg border ${
+              isDyslexiaMode ? 'bg-cream-50 border-blue-200' : 'bg-gray-50 border-gray-200'
+            }`}
+            style={{
+              fontSize: `${fontSizeLevel[0]}px`,
+              lineHeight: isDyslexiaMode ? '1.8' : '1.6',
+              letterSpacing: isDyslexiaMode ? '0.1em' : 'normal',
+              fontFamily: isDyslexiaMode ? 'OpenDyslexic, Arial' : 'inherit'
+            }}
+          >
+            <h3 className="font-bold mb-3">
+              {isDyslexiaMode && <span className="text-blue-600">[DYSLEXIA MODE] </span>}
+              Myocardial Infarction - Clinical Presentation
+            </h3>
+            
+            <div className={isADHDMode ? 'space-y-4' : 'space-y-2'}>
+              <p>
+                A <strong>myo-car-di-al in-farc-tion</strong> {isDyslexiaMode && <Button variant="ghost" size="sm" className="p-1 h-auto"><Volume2 className="w-3 h-3" /></Button>} 
+                (heart attack) occurs when blood flow to part of the heart muscle is blocked.
+              </p>
+              
+              {isADHDMode && (
+                <div className="p-2 bg-green-100 rounded text-sm">
+                  <Timer className="w-4 h-4 inline mr-1" />
+                  Focus checkpoint: You've read 1 paragraph. Take a breath!
+                </div>
+              )}
+              
+              <p>
+                <strong>Symptoms include:</strong>
+              </p>
+              <ul className={`list-disc ml-6 ${isADHDMode ? 'space-y-2' : 'space-y-1'}`}>
+                <li>Chest pain (crushing, burning sensation)</li>
+                <li>Shortness of breath</li>
+                <li>Nausea and vomiting</li>
+                <li>Sweating</li>
+                <li>Pain radiating to arm, jaw, or back</li>
+              </ul>
+              
+              {isAutismMode && (
+                <div className="p-3 bg-purple-50 border border-purple-200 rounded">
+                  <div className="text-sm font-medium text-purple-800">Learning Progress</div>
+                  <div className="w-full bg-purple-200 rounded-full h-2 mt-1">
+                    <div className="bg-purple-600 h-2 rounded-full" style={{width: '60%'}}></div>
+                  </div>
+                  <div className="text-xs text-purple-600 mt-1">60% complete - 2 more sections</div>
+                </div>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Evidence Base */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Evidence-Based Accessibility</CardTitle>
+          <CardDescription>
+            Our accommodations are based on peer-reviewed research in medical education accessibility
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-medium mb-3">Research Foundation</h4>
+              <ul className="space-y-2 text-sm">
+                <li>• Universal Design for Learning (UDL) principles in medical education</li>
+                <li>• Cognitive load theory applications for neurodiverse learners</li>
+                <li>• Assistive technology effectiveness in healthcare training</li>
+                <li>• Inclusive assessment methods for medical licensing exams</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-medium mb-3">Professional Standards</h4>
+              <ul className="space-y-2 text-sm">
+                <li>• GMC requirements for reasonable adjustments</li>
+                <li>• Equality Act 2010 compliance</li>
+                <li>• WCAG 2.1 AAA accessibility standards</li>
+                <li>• Medical education equality and diversity frameworks</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <p className="text-sm text-blue-800">
+              <strong>Note:</strong> These accommodations maintain full medical education rigor while providing 
+              equitable access. All assessment standards remain unchanged, ensuring graduates meet professional 
+              competency requirements.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
