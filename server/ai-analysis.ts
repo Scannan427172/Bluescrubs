@@ -23,6 +23,8 @@ export async function analyzeVideoPerformance(
   recordingDuration: number
 ): Promise<VideoAnalysisResult> {
   try {
+    console.log('Starting video analysis with OpenAI...');
+    
     const prompt = `
 You are an expert medical educator and OSCE examiner. Analyze this PLAB 2 OSCE station performance:
 
@@ -68,6 +70,7 @@ Respond in JSON format with this structure:
 }
 `;
 
+    console.log('Calling OpenAI API...');
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
@@ -84,6 +87,7 @@ Respond in JSON format with this structure:
       max_tokens: 1500
     });
 
+    console.log('OpenAI response received successfully');
     const result = JSON.parse(response.choices[0].message.content || "{}");
     
     return {

@@ -20,16 +20,37 @@ export default function VideoOsce() {
   const [videoStream, setVideoStream] = useState<MediaStream | null>(null);
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
-  const [isIOS, setIsIOS] = useState(false);
+  const [deviceInfo, setDeviceInfo] = useState({
+    isIOS: false,
+    isAndroid: false,
+    isSafari: false,
+    isChrome: false,
+    isFirefox: false,
+    isMobile: false,
+    isTablet: false,
+    supportsWebRTC: false
+  });
   const [cameraReady, setCameraReady] = useState(false);
   
-  // Detect iOS on component mount
+  // Enhanced device detection on component mount
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
-    const isIOSDevice = /ipad|iphone|ipod/.test(userAgent) || 
-                       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    setIsIOS(isIOSDevice);
-    console.log('Device detection:', { isIOSDevice, userAgent });
+    const platform = navigator.platform?.toLowerCase() || '';
+    
+    const deviceDetection = {
+      isIOS: /ipad|iphone|ipod/.test(userAgent) || 
+             (platform === 'macintel' && navigator.maxTouchPoints > 1),
+      isAndroid: /android/.test(userAgent),
+      isSafari: /safari/.test(userAgent) && !/chrome/.test(userAgent),
+      isChrome: /chrome/.test(userAgent) && !/edg/.test(userAgent),
+      isFirefox: /firefox/.test(userAgent),
+      isMobile: /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent),
+      isTablet: /ipad|android(?!.*mobile)/i.test(userAgent),
+      supportsWebRTC: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+    };
+    
+    setDeviceInfo(deviceDetection);
+    console.log('Enhanced device detection:', { ...deviceDetection, userAgent, platform });
   }, []);
 
   const videoStations = [
@@ -165,39 +186,97 @@ export default function VideoOsce() {
     try {
       setCameraError(null);
       
-      // iOS Safari compatibility - try different constraint combinations
+      // Enhanced mobile device compatibility - device-specific constraints
       let stream;
-      const constraintsOptions = [
-        // Try full constraints first
-        {
-          video: {
-            width: { min: 640, ideal: 1280, max: 1920 },
-            height: { min: 480, ideal: 720, max: 1080 },
-            facingMode: 'user',
-            frameRate: { ideal: 30, max: 30 }
-          }, 
-          audio: {
-            echoCancellation: true,
-            noiseSuppression: true,
-            autoGainControl: true,
-            sampleRate: 44100
+      const constraintsOptions = [];
+      
+      if (deviceInfo.isIOS) {
+        // iOS (iPhone/iPad Safari) optimized constraints
+        constraintsOptions.push(
+          {
+            video: {
+              width: { min: 640, ideal: 1280, max: 1920 },
+              height: { min: 480, ideal: 720, max: 1080 },
+              facingMode: 'user',
+              frameRate: { ideal: 30, max: 30 },
+              aspectRatio: { ideal: 16/9 }
+            }, 
+            audio: {
+              echoCancellation: true,
+              noiseSuppression: true,
+              autoGainControl: true
+            }
+          },
+          {
+            video: {
+              facingMode: 'user',
+              width: { ideal: 854, max: 1280 },
+              height: { ideal: 480, max: 720 },
+              frameRate: { ideal: 24 }
+            },
+            audio: true
           }
-        },
-        // Fallback for iOS - simpler constraints
+        );
+      }
+      
+      if (deviceInfo.isAndroid) {
+        // Android Chrome/Firefox optimized constraints
+        constraintsOptions.push(
+          {
+            video: {
+              width: { min: 640, ideal: 1280, max: 1920 },
+              height: { min: 480, ideal: 720, max: 1080 },
+              facingMode: 'user',
+              frameRate: { ideal: 30, max: 60 }
+            }, 
+            audio: {
+              echoCancellation: true,
+              noiseSuppression: true,
+              autoGainControl: true,
+              sampleRate: 44100
+            }
+          },
+          {
+            video: {
+              facingMode: 'user',
+              width: { ideal: 854 },
+              height: { ideal: 480 },
+              frameRate: { ideal: 24 }
+            },
+            audio: true
+          }
+        );
+      }
+      
+      // Universal fallbacks for all mobile devices
+      constraintsOptions.push(
         {
           video: {
             facingMode: 'user',
-            width: { ideal: 1280 },
-            height: { ideal: 720 }
+            width: { ideal: 640, max: 1280 },
+            height: { ideal: 480, max: 720 },
+            frameRate: { ideal: 20 }
           },
           audio: true
         },
-        // Minimal constraints for compatibility
+        {
+          video: {
+            facingMode: 'user',
+            width: 640,
+            height: 480,
+            frameRate: 15
+          },
+          audio: true
+        },
+        {
+          video: { facingMode: 'user' },
+          audio: true
+        },
         {
           video: true,
           audio: true
         }
-      ];
+      );
 
       let lastError;
       for (const constraints of constraintsOptions) {
