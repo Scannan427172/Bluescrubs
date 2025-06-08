@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp 
@@ -18,7 +19,7 @@ export default function GMCPractice() {
   const [userAnswers, setUserAnswers] = useState<(number | null)[]>([]);
   const [timeSpent, setTimeSpent] = useState(0);
   const [sessionStarted, setSessionStarted] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('respiratory');
+  const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('all');
   const [sessionQuestions, setSessionQuestions] = useState<GMCQuestion[]>([]);
   const [examType, setExamType] = useState<'plab1' | 'plab2'>('plab1');
 
@@ -35,12 +36,7 @@ export default function GMCPractice() {
     { value: 'surgery', label: 'Surgery', count: GMC_QUESTION_BANK.filter(q => q.category === 'surgery').length }
   ];
 
-  // Debug logging
-  console.log('Total questions in bank:', GMC_QUESTION_BANK.length);
-  console.log('Surgery questions:', GMC_QUESTION_BANK.filter(q => q.category === 'surgery').length);
-  console.log('Categories with counts:', categories.map(c => `${c.label}: ${c.count}`));
-  console.log('Selected category:', selectedCategory);
-
+  // Timer effect
   useEffect(() => {
     if (sessionStarted && timeSpent > 0) {
       const timer = setInterval(() => {
@@ -50,13 +46,35 @@ export default function GMCPractice() {
     }
   }, [sessionStarted, timeSpent]);
 
-  const startSession = () => {
-    const questions = selectedCategory === 'all' 
-      ? GMC_QUESTION_BANK 
-      : GMC_QUESTION_BANK.filter(q => q.category === selectedCategory);
+  // Helper function to start practice session
+  const startPracticeSession = (questionsNeeded: number, sessionType: string = 'practice') => {
+    console.log(`Starting ${sessionType} with category: ${selectedCategory}`);
     
-    setSessionQuestions(questions);
-    setUserAnswers(new Array(questions.length).fill(null));
+    // Get questions based on selected category
+    let availableQuestions: GMCQuestion[] = [];
+    
+    if (selectedCategory === 'all') {
+      availableQuestions = [...GMC_QUESTION_BANK];
+    } else {
+      availableQuestions = GMC_QUESTION_BANK.filter(q => q.category === selectedCategory);
+    }
+    
+    console.log(`Available questions for ${selectedCategory}:`, availableQuestions.length);
+    
+    if (availableQuestions.length === 0) {
+      console.warn('No questions found for selected category');
+      return;
+    }
+    
+    // Shuffle and take required number of questions
+    const shuffledQuestions = [...availableQuestions].sort(() => Math.random() - 0.5);
+    const selectedQuestions = shuffledQuestions.slice(0, Math.min(questionsNeeded, availableQuestions.length));
+    
+    console.log(`Selected ${selectedQuestions.length} questions for session`);
+    
+    // Set up session state
+    setSessionQuestions(selectedQuestions);
+    setUserAnswers(new Array(selectedQuestions.length).fill(null));
     setCurrentQuestionIndex(0);
     setSelectedAnswer("");
     setShowExplanation(false);
@@ -88,7 +106,20 @@ export default function GMCPractice() {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer("");
       setShowExplanation(false);
+    } else {
+      // Session completed
+      console.log('Session completed');
     }
+  };
+
+  const endSession = () => {
+    setSessionStarted(false);
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer("");
+    setShowExplanation(false);
+    setUserAnswers([]);
+    setTimeSpent(0);
+    setSessionQuestions([]);
   };
 
   const previousQuestion = () => {
@@ -214,25 +245,28 @@ export default function GMCPractice() {
 
             <div className="mt-8 space-y-4">
               <div className="text-center">
-                <h3 className="text-lg font-semibold mb-4">🔥 Start Practice Session</h3>
-                <p className="text-sm text-gray-600 mb-6">Category: {categories.find(c => c.value === selectedCategory)?.label}</p>
+                <h3 className="text-lg font-semibold mb-4">Start Practice Session</h3>
+                <div className="mb-6">
+                  <Label htmlFor="category-select" className="text-sm font-medium">Select Category:</Label>
+                  <Select value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as GMCCategory | 'all')}>
+                    <SelectTrigger className="w-full max-w-md mx-auto mt-2">
+                      <SelectValue placeholder="Choose a category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories.map((category) => (
+                        <SelectItem key={category.value} value={category.value}>
+                          {category.label} ({category.count} questions)
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
               
               <div className="grid md:grid-cols-3 gap-4">
                 <Button 
                   size="lg" 
-                  onClick={() => {
-                    console.log('Quick Practice clicked', selectedCategory, GMC_QUESTION_BANK.length);
-                    const filteredQuestions = GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory).slice(0, 20);
-                    console.log('Filtered questions:', filteredQuestions.length);
-                    setSessionQuestions(filteredQuestions);
-                    setUserAnswers(new Array(20).fill(null));
-                    setCurrentQuestionIndex(0);
-                    setSelectedAnswer("");
-                    setShowExplanation(false);
-                    setSessionStarted(true);
-                    setTimeSpent(1);
-                  }}
+                  onClick={() => startPracticeSession(20, 'Quick Practice')}
                   disabled={examType === 'plab2'}
                   className="bg-blue-600 hover:bg-blue-700 text-white h-20 flex flex-col items-center justify-center"
                 >
@@ -243,19 +277,7 @@ export default function GMCPractice() {
 
                 <Button 
                   size="lg" 
-                  onClick={() => {
-                    console.log('Random Quiz clicked', selectedCategory);
-                    const allQuestions = GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory);
-                    const shuffled = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 50);
-                    console.log('Shuffled questions:', shuffled.length);
-                    setSessionQuestions(shuffled);
-                    setUserAnswers(new Array(50).fill(null));
-                    setCurrentQuestionIndex(0);
-                    setSelectedAnswer("");
-                    setShowExplanation(false);
-                    setSessionStarted(true);
-                    setTimeSpent(1);
-                  }}
+                  onClick={() => startPracticeSession(50, 'Random Quiz')}
                   disabled={examType === 'plab2'}
                   className="bg-purple-600 hover:bg-purple-700 text-white h-20 flex flex-col items-center justify-center"
                 >
@@ -266,18 +288,7 @@ export default function GMCPractice() {
 
                 <Button 
                   size="lg" 
-                  onClick={() => {
-                    console.log('Timed Mock clicked', selectedCategory);
-                    const questions = GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory).slice(0, 60);
-                    console.log('Mock questions:', questions.length);
-                    setSessionQuestions(questions);
-                    setUserAnswers(new Array(60).fill(null));
-                    setCurrentQuestionIndex(0);
-                    setSelectedAnswer("");
-                    setShowExplanation(false);
-                    setSessionStarted(true);
-                    setTimeSpent(1);
-                  }}
+                  onClick={() => startPracticeSession(60, 'Timed Mock')}
                   disabled={examType === 'plab2'}
                   className="bg-orange-600 hover:bg-orange-700 text-white h-20 flex flex-col items-center justify-center"
                 >
