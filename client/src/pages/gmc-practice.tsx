@@ -35,6 +35,12 @@ export default function GMCPractice() {
     { value: 'surgery', label: 'Surgery', count: GMC_QUESTION_BANK.filter(q => q.category === 'surgery').length }
   ];
 
+  // Debug logging
+  console.log('Total questions in bank:', GMC_QUESTION_BANK.length);
+  console.log('Surgery questions:', GMC_QUESTION_BANK.filter(q => q.category === 'surgery').length);
+  console.log('Categories with counts:', categories.map(c => `${c.label}: ${c.count}`));
+  console.log('Selected category:', selectedCategory);
+
   useEffect(() => {
     if (sessionStarted && timeSpent > 0) {
       const timer = setInterval(() => {
