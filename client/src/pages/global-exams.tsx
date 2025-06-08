@@ -228,7 +228,8 @@ export default function GlobalExams() {
           duration: "3-6 months",
           passRate: "75%",
           candidates: "3,000/year",
-          status: "planning",
+          status: "available",
+          testLink: "/middle-east-test",
           features: ["UAE Guidelines", "Clinical Practice", "Professional Ethics"]
         },
         {
@@ -240,7 +241,8 @@ export default function GlobalExams() {
           duration: "6-9 months",
           passRate: "70%",
           candidates: "5,000/year",
-          status: "planning",
+          status: "available",
+          testLink: "/middle-east-test",
           features: ["Saudi Guidelines", "Islamic Medical Ethics", "Arabic Medical Terms"]
         }
       ]
@@ -251,6 +253,8 @@ export default function GlobalExams() {
     switch (status) {
       case 'active':
         return <Badge className="bg-green-100 text-green-800">Active</Badge>;
+      case 'available':
+        return <Badge className="bg-green-100 text-green-800">Available</Badge>;
       case 'beta':
         return <Badge className="bg-blue-100 text-blue-800">Beta</Badge>;
       case 'coming-soon':
@@ -258,13 +262,13 @@ export default function GlobalExams() {
       case 'planning':
         return <Badge className="bg-gray-100 text-gray-800">In Planning</Badge>;
       default:
-        return <Badge variant="secondary">Coming Soon</Badge>;
+        return <Badge variant="secondary">Available</Badge>;
     }
   };
 
   const totalExams = examCategories.reduce((sum, category) => sum + category.exams.length, 0);
-  const activeExams = examCategories.reduce((sum, category) => 
-    sum + category.exams.filter(exam => exam.status === 'active').length, 0);
+  const availableExams = examCategories.reduce((sum, category) => 
+    sum + category.exams.filter(exam => exam.status === 'available' || exam.status === 'active').length, 0);
   const betaExams = examCategories.reduce((sum, category) => 
     sum + category.exams.filter(exam => exam.status === 'beta').length, 0);
 
@@ -375,16 +379,28 @@ export default function GlobalExams() {
                           <Users className="h-4 w-4 inline mr-1" />
                           {exam.candidates}
                         </div>
-                        <Button 
-                          size="sm" 
-                          variant={exam.status === 'active' ? 'default' : 'outline'}
-                          disabled={exam.status === 'planning'}
-                        >
-                          {exam.status === 'active' ? 'Start Prep' : 
-                           exam.status === 'beta' ? 'Join Beta' :
-                           exam.status === 'coming-soon' ? 'Notify Me' : 'Coming Soon'}
-                          <ArrowRight className="h-4 w-4 ml-1" />
-                        </Button>
+                        {(exam.status === 'available' || exam.status === 'active') && exam.testLink ? (
+                          <Link href={exam.testLink}>
+                            <Button 
+                              size="sm" 
+                              variant="default"
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                            >
+                              Practice Test
+                              <ArrowRight className="h-4 w-4 ml-1" />
+                            </Button>
+                          </Link>
+                        ) : (
+                          <Button 
+                            size="sm" 
+                            variant="outline"
+                            disabled={exam.status === 'planning'}
+                          >
+                            {exam.status === 'beta' ? 'Join Beta' :
+                             exam.status === 'coming-soon' ? 'Notify Me' : 'Coming Soon'}
+                            <ArrowRight className="h-4 w-4 ml-1" />
+                          </Button>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
