@@ -215,8 +215,14 @@ export default function GMCPractice() {
                 <Button 
                   size="lg" 
                   onClick={() => {
-                    setSessionQuestions(GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory).slice(0, 20));
+                    console.log('Quick Practice clicked', selectedCategory, GMC_QUESTION_BANK.length);
+                    const filteredQuestions = GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory).slice(0, 20);
+                    console.log('Filtered questions:', filteredQuestions.length);
+                    setSessionQuestions(filteredQuestions);
                     setUserAnswers(new Array(20).fill(null));
+                    setCurrentQuestionIndex(0);
+                    setSelectedAnswer("");
+                    setShowExplanation(false);
                     setSessionStarted(true);
                     setTimeSpent(1);
                   }}
@@ -231,10 +237,15 @@ export default function GMCPractice() {
                 <Button 
                   size="lg" 
                   onClick={() => {
+                    console.log('Random Quiz clicked', selectedCategory);
                     const allQuestions = GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory);
                     const shuffled = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 50);
+                    console.log('Shuffled questions:', shuffled.length);
                     setSessionQuestions(shuffled);
                     setUserAnswers(new Array(50).fill(null));
+                    setCurrentQuestionIndex(0);
+                    setSelectedAnswer("");
+                    setShowExplanation(false);
                     setSessionStarted(true);
                     setTimeSpent(1);
                   }}
@@ -249,9 +260,14 @@ export default function GMCPractice() {
                 <Button 
                   size="lg" 
                   onClick={() => {
+                    console.log('Timed Mock clicked', selectedCategory);
                     const questions = GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory).slice(0, 60);
+                    console.log('Mock questions:', questions.length);
                     setSessionQuestions(questions);
                     setUserAnswers(new Array(60).fill(null));
+                    setCurrentQuestionIndex(0);
+                    setSelectedAnswer("");
+                    setShowExplanation(false);
                     setSessionStarted(true);
                     setTimeSpent(1);
                   }}
