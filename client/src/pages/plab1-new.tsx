@@ -10,7 +10,7 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home
 } from "lucide-react";
-import { GMC_QUESTION_BANK, type GMCQuestion, type GMCCategory } from "@shared/gmc-question-bank";
+import { EXPANDED_QUESTION_BANK, QUESTION_BANK_STATS, type GMCQuestion, type GMCCategory } from "@shared/expanded-question-bank";
 
 export default function PLAB1New() {
   // Session state
@@ -40,16 +40,25 @@ export default function PLAB1New() {
 
   // Available categories with question counts
   const availableCategories = [
-    { value: 'all' as const, label: 'All Categories', count: GMC_QUESTION_BANK.length },
-    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: GMC_QUESTION_BANK.filter(q => q.category === 'cardiovascular').length },
-    { value: 'respiratory' as const, label: 'Respiratory', count: GMC_QUESTION_BANK.filter(q => q.category === 'respiratory').length },
-    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: GMC_QUESTION_BANK.filter(q => q.category === 'gastroenterology').length },
-    { value: 'neurology' as const, label: 'Neurology', count: GMC_QUESTION_BANK.filter(q => q.category === 'neurology').length },
-    { value: 'endocrinology' as const, label: 'Endocrinology', count: GMC_QUESTION_BANK.filter(q => q.category === 'endocrinology').length },
-    { value: 'psychiatry' as const, label: 'Psychiatry', count: GMC_QUESTION_BANK.filter(q => q.category === 'psychiatry').length },
-    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: GMC_QUESTION_BANK.filter(q => q.category === 'obstetrics-gynaecology').length },
-    { value: 'paediatrics' as const, label: 'Paediatrics', count: GMC_QUESTION_BANK.filter(q => q.category === 'paediatrics').length },
-    { value: 'surgery' as const, label: 'Surgery', count: GMC_QUESTION_BANK.filter(q => q.category === 'surgery').length }
+    { value: 'all' as const, label: 'All Categories', count: QUESTION_BANK_STATS.totalQuestions },
+    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: QUESTION_BANK_STATS.byCategory.cardiovascular },
+    { value: 'respiratory' as const, label: 'Respiratory', count: QUESTION_BANK_STATS.byCategory.respiratory },
+    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: QUESTION_BANK_STATS.byCategory.gastroenterology },
+    { value: 'neurology' as const, label: 'Neurology', count: QUESTION_BANK_STATS.byCategory.neurology },
+    { value: 'endocrinology' as const, label: 'Endocrinology', count: QUESTION_BANK_STATS.byCategory.endocrinology },
+    { value: 'psychiatry' as const, label: 'Psychiatry', count: QUESTION_BANK_STATS.byCategory.psychiatry },
+    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: QUESTION_BANK_STATS.byCategory['obstetrics-gynaecology'] },
+    { value: 'paediatrics' as const, label: 'Paediatrics', count: QUESTION_BANK_STATS.byCategory.paediatrics },
+    { value: 'surgery' as const, label: 'Surgery', count: QUESTION_BANK_STATS.byCategory.surgery },
+    { value: 'nephrology' as const, label: 'Nephrology', count: QUESTION_BANK_STATS.byCategory.nephrology },
+    { value: 'haematology' as const, label: 'Haematology', count: QUESTION_BANK_STATS.byCategory.haematology },
+    { value: 'infectious-diseases' as const, label: 'Infectious Diseases', count: QUESTION_BANK_STATS.byCategory['infectious-diseases'] },
+    { value: 'rheumatology' as const, label: 'Rheumatology', count: QUESTION_BANK_STATS.byCategory.rheumatology },
+    { value: 'dermatology' as const, label: 'Dermatology', count: QUESTION_BANK_STATS.byCategory.dermatology },
+    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: QUESTION_BANK_STATS.byCategory['emergency-medicine'] },
+    { value: 'ethics-law' as const, label: 'Ethics & Law', count: QUESTION_BANK_STATS.byCategory['ethics-law'] },
+    { value: 'public-health' as const, label: 'Public Health', count: QUESTION_BANK_STATS.byCategory['public-health'] },
+    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: QUESTION_BANK_STATS.byCategory['clinical-pharmacology'] }
   ];
 
   // Timer effect
