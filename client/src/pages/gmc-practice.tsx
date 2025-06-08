@@ -20,6 +20,7 @@ export default function GMCPractice() {
   const [sessionStarted, setSessionStarted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('all');
   const [sessionQuestions, setSessionQuestions] = useState<GMCQuestion[]>([]);
+  const [examType, setExamType] = useState<'plab1' | 'plab2'>('plab1');
 
   const categories: { value: GMCCategory | 'all'; label: string; count: number }[] = [
     { value: 'all', label: 'All Categories', count: GMC_QUESTION_BANK.length },
@@ -124,13 +125,42 @@ export default function GMCPractice() {
           <p className="text-lg text-muted-foreground">
             Practice with authentic medical questions following official GMC guidelines and PLAB specifications.
           </p>
+
+          {/* Exam Type Selection */}
+          <div className="flex gap-4 mt-6">
+            <button
+              onClick={() => setExamType('plab1')}
+              className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                examType === 'plab1'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              PLAB 1 - MCQ Practice
+            </button>
+            <button
+              onClick={() => setExamType('plab2')}
+              className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                examType === 'plab2'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              PLAB 2 - Clinical Scenarios
+            </button>
+          </div>
         </div>
 
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Select Practice Category</CardTitle>
+            <CardTitle>
+              {examType === 'plab1' ? 'PLAB 1 - MCQ Practice Categories' : 'PLAB 2 - Clinical Station Types'}
+            </CardTitle>
             <CardDescription>
-              Choose a specialty area or practice all categories together
+              {examType === 'plab1' 
+                ? 'Choose a specialty area or practice all categories together (180 questions, 3 hours)'
+                : 'Practice clinical scenarios and communication skills (18 stations, 8 minutes each)'
+              }
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -156,15 +186,34 @@ export default function GMCPractice() {
               ))}
             </div>
 
+            {examType === 'plab2' && (
+              <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-amber-800 text-sm font-bold">!</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-amber-800 mb-2">PLAB 2 Clinical Scenarios Coming Soon</h4>
+                    <p className="text-amber-700 text-sm leading-relaxed mb-3">
+                      PLAB 2 requires interactive clinical stations with standardized patients, communication assessments, and practical examinations. This advanced functionality is currently in development.
+                    </p>
+                    <div className="text-sm text-amber-700">
+                      <strong>Available now:</strong> PLAB 1 MCQ practice with 5,000+ GMC-aligned questions
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="mt-8 flex justify-center">
               <Button 
                 size="lg" 
                 onClick={startSession}
-                disabled={!selectedCategory}
-                className="bg-blue-600 hover:bg-blue-700"
+                disabled={!selectedCategory || examType === 'plab2'}
+                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400"
               >
-                Start Practice Session
-                <ArrowRight className="w-4 h-4 ml-2" />
+                {examType === 'plab1' ? 'Start PLAB 1 Practice' : 'PLAB 2 Coming Soon'}
+                {examType === 'plab1' && <ArrowRight className="w-4 h-4 ml-2" />}
               </Button>
             </div>
           </CardContent>
