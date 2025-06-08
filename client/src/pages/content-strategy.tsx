@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, BookOpen, Users, Shield, Award, Target, Brain, Globe, ArrowRight, FileText, Stethoscope, GraduationCap } from "lucide-react";
+import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
 
 export default function ContentStrategy() {
   return (
@@ -180,24 +181,24 @@ export default function ContentStrategy() {
         <h2 className="text-2xl font-bold mb-6">Comprehensive Content Coverage</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
-            { name: "Cardiovascular Medicine", questions: "500+", specialty: "Cardiology" },
-            { name: "Respiratory Medicine", questions: "400+", specialty: "Pulmonology" },
-            { name: "Gastroenterology", questions: "350+", specialty: "GI Medicine" },
-            { name: "Neurology", questions: "300+", specialty: "Neurosciences" },
-            { name: "Endocrinology", questions: "250+", specialty: "Diabetes & Endocrine" },
-            { name: "Nephrology", questions: "200+", specialty: "Renal Medicine" },
-            { name: "Psychiatry", questions: "300+", specialty: "Mental Health" },
-            { name: "Obstetrics & Gynecology", questions: "400+", specialty: "Women's Health" },
-            { name: "Pediatrics", questions: "350+", specialty: "Child Health" },
-            { name: "Surgery", questions: "450+", specialty: "Surgical Sciences" },
-            { name: "Emergency Medicine", questions: "300+", specialty: "Acute Care" },
-            { name: "Ethics & Law", questions: "150+", specialty: "Professional Practice" }
+            { name: "Cardiovascular Medicine", questions: QUESTION_BANK_STATS.byCategory.cardiovascular || 0, specialty: "Cardiology" },
+            { name: "Respiratory Medicine", questions: QUESTION_BANK_STATS.byCategory.respiratory || 0, specialty: "Pulmonology" },
+            { name: "Gastroenterology", questions: QUESTION_BANK_STATS.byCategory.gastroenterology || 0, specialty: "GI Medicine" },
+            { name: "Neurology", questions: QUESTION_BANK_STATS.byCategory.neurology || 0, specialty: "Neurosciences" },
+            { name: "Endocrinology", questions: QUESTION_BANK_STATS.byCategory.endocrinology || 0, specialty: "Diabetes & Endocrine" },
+            { name: "Nephrology", questions: QUESTION_BANK_STATS.byCategory.nephrology || 0, specialty: "Renal Medicine" },
+            { name: "Psychiatry", questions: QUESTION_BANK_STATS.byCategory.psychiatry || 0, specialty: "Mental Health" },
+            { name: "Obstetrics & Gynecology", questions: QUESTION_BANK_STATS.byCategory['obstetrics-gynaecology'] || 0, specialty: "Women's Health" },
+            { name: "Pediatrics", questions: QUESTION_BANK_STATS.byCategory.paediatrics || 0, specialty: "Child Health" },
+            { name: "Surgery", questions: QUESTION_BANK_STATS.byCategory.surgery || 0, specialty: "Surgical Sciences" },
+            { name: "Emergency Medicine", questions: QUESTION_BANK_STATS.byCategory['emergency-medicine'] || 0, specialty: "Acute Care" },
+            { name: "Ethics & Law", questions: QUESTION_BANK_STATS.byCategory['ethics-law'] || 0, specialty: "Professional Practice" }
           ].map((category) => (
             <Card key={category.name} className="hover:shadow-md transition-shadow">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-semibold text-sm">{category.name}</h4>
-                  <Badge variant="secondary" className="text-xs">{category.questions}</Badge>
+                  <Badge variant="secondary" className="text-xs">{category.questions.toLocaleString()}</Badge>
                 </div>
                 <p className="text-xs text-muted-foreground">{category.specialty}</p>
               </CardContent>

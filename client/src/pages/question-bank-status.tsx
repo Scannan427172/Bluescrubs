@@ -10,6 +10,7 @@ import {
   USMLE_QUESTION_BANK, MCCEE_QUESTION_BANK, AMC_QUESTION_BANK, 
   MRCP_QUESTION_BANK, MIDDLE_EAST_QUESTION_BANK, IELTS_MEDICAL_QUESTION_BANK 
 } from "@shared/global-exam-banks";
+import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
 
 export default function QuestionBankStatus() {
   const questionStats = {
