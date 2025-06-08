@@ -62,6 +62,7 @@ import AdvancedAnalytics from "@/pages/advanced-analytics";
 import AIStudyBuddy from "@/pages/ai-study-buddy";
 import CulturalBridge from "@/pages/cultural-bridge";
 import NeurodiverseSupport from "@/pages/neurodiverse-support";
+import QuestionBankStatus from "@/pages/question-bank-status";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
