@@ -304,18 +304,37 @@ export default function VideoOsce() {
         videoRef.muted = true;
         videoRef.autoplay = true;
         
-        // iOS Safari requires specific handling
-        if (isIOS) {
+        // Device-specific video handling
+        if (deviceInfo.isIOS) {
+          // iOS Safari specific attributes and behavior
           videoRef.setAttribute('controls', 'false');
           videoRef.setAttribute('preload', 'metadata');
+          videoRef.style.transform = 'scaleX(-1)'; // Mirror for selfie view
           
-          // Add event listeners for iOS video behavior
-          videoRef.addEventListener('loadedmetadata', () => {
-            console.log('Video metadata loaded');
+          // iOS event listeners for optimal playback
+          videoRef.addEventListener('loadedmetadata', async () => {
+            console.log('iOS: Video metadata loaded');
+            try {
+              await videoRef.play();
+              console.log('iOS: Video playing successfully');
+            } catch (e) {
+              console.log('iOS: Play requires user interaction');
+            }
           });
           
           videoRef.addEventListener('canplay', () => {
-            console.log('Video can play');
+            console.log('iOS: Video can play');
+          });
+        }
+        
+        if (deviceInfo.isAndroid) {
+          // Android Chrome/Firefox specific setup
+          videoRef.setAttribute('preload', 'auto');
+          videoRef.style.transform = 'scaleX(-1)'; // Mirror for selfie view
+          
+          videoRef.addEventListener('canplay', () => {
+            console.log('Android: Video ready to play');
+            videoRef.play().catch(e => console.log('Android: Play requires interaction'));
           });
         }
         
@@ -330,22 +349,53 @@ export default function VideoOsce() {
         }
       }
       
-      // iOS Safari compatibility - fallback mimeTypes
+      // Enhanced device-specific MediaRecorder format selection
       let mimeType = '';
-      if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')) {
-        mimeType = 'video/webm;codecs=vp9,opus';
-      } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')) {
-        mimeType = 'video/webm;codecs=vp8,opus';
-      } else if (MediaRecorder.isTypeSupported('video/webm')) {
-        mimeType = 'video/webm';
-      } else if (MediaRecorder.isTypeSupported('video/mp4')) {
-        mimeType = 'video/mp4';
+      let recordingFormat = 'video/webm';
+      
+      if (deviceInfo.isIOS) {
+        // iOS Safari prefers MP4 H.264
+        if (MediaRecorder.isTypeSupported('video/mp4;codecs=avc1.42E01E,mp4a.40.2')) {
+          mimeType = 'video/mp4;codecs=avc1.42E01E,mp4a.40.2';
+          recordingFormat = 'video/mp4';
+        } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+          mimeType = 'video/mp4';
+          recordingFormat = 'video/mp4';
+        } else if (MediaRecorder.isTypeSupported('video/webm')) {
+          mimeType = 'video/webm';
+        }
+      } else if (deviceInfo.isAndroid) {
+        // Android Chrome prefers WebM VP8/VP9
+        if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')) {
+          mimeType = 'video/webm;codecs=vp9,opus';
+        } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')) {
+          mimeType = 'video/webm;codecs=vp8,opus';
+        } else if (MediaRecorder.isTypeSupported('video/webm')) {
+          mimeType = 'video/webm';
+        } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+          mimeType = 'video/mp4';
+          recordingFormat = 'video/mp4';
+        }
+      } else {
+        // Desktop fallbacks
+        if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')) {
+          mimeType = 'video/webm;codecs=vp9,opus';
+        } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')) {
+          mimeType = 'video/webm;codecs=vp8,opus';
+        } else if (MediaRecorder.isTypeSupported('video/webm')) {
+          mimeType = 'video/webm';
+        } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+          mimeType = 'video/mp4';
+          recordingFormat = 'video/mp4';
+        }
       }
+      
+      console.log(`Selected recording format: ${mimeType || 'default'} for device:`, deviceInfo);
 
       const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : {});
       const chunks: Blob[] = [];
       
-      recorder.ondataavailable = (event) => {
+      recorder.ondataavailable = (event: BlobEvent) => {
         if (event.data.size > 0) {
           chunks.push(event.data);
         }
@@ -537,10 +587,11 @@ export default function VideoOsce() {
                                   videoRef.muted = true;
                                   videoRef.autoplay = true;
                                   
-                                  // iOS-specific video element setup
-                                  if (isIOS) {
+                                  // Device-specific video element setup
+                                  if (deviceInfo.isIOS) {
                                     videoRef.setAttribute('controls', 'false');
                                     videoRef.setAttribute('preload', 'metadata');
+                                    videoRef.style.transform = 'scaleX(-1)'; // Mirror for selfie
                                     
                                     // Wait for metadata to load before playing
                                     videoRef.addEventListener('loadedmetadata', async () => {
@@ -551,8 +602,16 @@ export default function VideoOsce() {
                                         console.log('iOS video play error:', playError);
                                       }
                                     });
+                                  } else if (deviceInfo.isAndroid) {
+                                    // Android-specific setup
+                                    videoRef.setAttribute('preload', 'auto');
+                                    videoRef.style.transform = 'scaleX(-1)'; // Mirror for selfie
+                                    
+                                    videoRef.addEventListener('canplay', () => {
+                                      videoRef.play().catch(e => console.log('Android play requires interaction'));
+                                    });
                                   } else {
-                                    // Non-iOS devices
+                                    // Desktop and other devices
                                     const playPromise = videoRef.play();
                                     if (playPromise !== undefined) {
                                       playPromise.catch(error => {
