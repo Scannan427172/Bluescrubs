@@ -9,7 +9,7 @@ import { Footer } from "@/components/footer";
 import Landing from "@/pages/landing";
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
-import Plab1Practice from "@/pages/plab1-practice";
+
 import Plab2Osce from "@/pages/plab2-osce";
 import Community from "@/pages/community";
 import NhsPrep from "@/pages/nhs-prep";
@@ -105,14 +105,7 @@ function Router() {
             </div>
           </div>
         </Route>
-        <Route path="/plab1">
-          <div className="flex flex-col min-h-screen">
-            <Navigation user={DEMO_USER} />
-            <div className="flex-1 pb-16 md:pb-0">
-              <Plab1Practice />
-            </div>
-          </div>
-        </Route>
+
         <Route path="/plab1-new">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />

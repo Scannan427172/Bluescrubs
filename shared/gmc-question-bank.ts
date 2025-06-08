@@ -683,6 +683,140 @@ export function getQuestionsByDifficulty(difficulty: string): GMCQuestion[] {
   return GMC_QUESTION_BANK.filter(q => q.difficulty === difficulty);
 }
 
+// Additional Cardiovascular Questions
+const additionalCardiovascularQuestions: GMCQuestion[] = [
+  {
+    id: "cardio-003",
+    category: "cardiovascular",
+    subcategory: "Acute Coronary Syndromes",
+    cognitiveLevel: "application",
+    difficulty: "intermediate",
+    clinicalSetting: "Emergency Department",
+    ageGroup: "Adults (18-65)",
+    stem: "A 58-year-old man presents with 2 hours of severe crushing chest pain radiating to his left arm. ECG shows ST elevation in leads II, III, and aVF. Blood pressure is 90/60 mmHg. What is the most appropriate immediate management?",
+    options: [
+      "Immediate thrombolysis with alteplase",
+      "Primary percutaneous coronary intervention (PCI)",
+      "High-dose aspirin and clopidogrel",
+      "Intravenous beta-blocker",
+      "Urgent echocardiogram"
+    ],
+    correctAnswer: 1,
+    explanation: "This patient has an inferior STEMI with hypotension. Primary PCI is the preferred reperfusion strategy when available within 120 minutes, especially in high-risk patients with hemodynamic compromise.",
+    learningObjectives: [
+      "Recognize STEMI presentation and ECG changes",
+      "Understand reperfusion strategies in STEMI",
+      "Manage hemodynamically unstable STEMI patients"
+    ],
+    gmcOutcomes: ["Clinical assessment", "Emergency management", "Patient safety"],
+    references: ["ESC STEMI Guidelines 2023", "NICE CG167"],
+    tags: ["STEMI", "primary PCI", "inferior MI", "hypotension"],
+    estimatedTime: 90
+  },
+  {
+    id: "cardio-004",
+    category: "cardiovascular",
+    subcategory: "Heart Failure",
+    cognitiveLevel: "problem-solving",
+    difficulty: "advanced",
+    clinicalSetting: "Cardiology Ward",
+    ageGroup: "Elderly (>65)",
+    stem: "A 72-year-old woman with known heart failure with reduced ejection fraction (HFrEF) is admitted with worsening breathlessness. Current medications include bisoprolol 10mg, ramipril 10mg, and furosemide 40mg daily. Echocardiogram shows EF 25%. Which additional medication would provide the greatest mortality benefit?",
+    options: [
+      "Spironolactone 25mg daily",
+      "Ivabradine 5mg twice daily",
+      "Sacubitril/valsartan 49/51mg twice daily",
+      "Digoxin 125mcg daily",
+      "Isosorbide mononitrate 60mg daily"
+    ],
+    correctAnswer: 2,
+    explanation: "Sacubitril/valsartan (ARNI) has shown superior mortality benefit compared to ACE inhibitors in HFrEF patients. It should replace the ACE inhibitor in stable patients already on optimal therapy with beta-blocker and diuretic.",
+    learningObjectives: [
+      "Understand evidence-based HFrEF management",
+      "Know mortality benefits of different HF medications",
+      "Apply guideline-directed medical therapy"
+    ],
+    gmcOutcomes: ["Evidence-based practice", "Chronic disease management", "Pharmacological knowledge"],
+    references: ["ESC Heart Failure Guidelines 2021", "PARADIGM-HF trial"],
+    tags: ["HFrEF", "sacubitril/valsartan", "ARNI", "mortality benefit"],
+    estimatedTime: 120
+  }
+];
+
+// Additional Respiratory Questions
+const additionalRespiratoryQuestions: GMCQuestion[] = [
+  {
+    id: "resp-003",
+    category: "respiratory",
+    subcategory: "Asthma",
+    cognitiveLevel: "application",
+    difficulty: "intermediate",
+    clinicalSetting: "GP Surgery",
+    ageGroup: "Adults (18-65)",
+    stem: "A 28-year-old teacher presents with a 6-month history of wheeze and cough, particularly at night and early morning. Peak flow varies between 350-450 L/min (predicted 500 L/min). Chest X-ray is normal. What is the most appropriate initial treatment?",
+    options: [
+      "Salbutamol inhaler 100mcg as required only",
+      "Beclometasone inhaler 200mcg twice daily",
+      "Salbutamol 100mcg as required plus beclometasone 200mcg twice daily",
+      "Prednisolone 30mg daily for 5 days",
+      "Montelukast 10mg daily"
+    ],
+    correctAnswer: 2,
+    explanation: "This patient has newly diagnosed asthma with symptoms occurring more than twice weekly and peak flow variability >20%. NICE guidelines recommend starting both a SABA (salbutamol) for symptom relief and ICS (beclometasone) for controller therapy.",
+    learningObjectives: [
+      "Diagnose asthma using clinical features and peak flow",
+      "Apply NICE guidelines for initial asthma treatment",
+      "Understand the role of controller vs reliever therapy"
+    ],
+    gmcOutcomes: ["Clinical assessment", "Evidence-based practice", "Patient education"],
+    references: ["NICE NG80 Asthma Guidelines", "BTS/SIGN Asthma Guidelines"],
+    tags: ["asthma", "newly diagnosed", "ICS", "SABA"],
+    estimatedTime: 90
+  }
+];
+
+// Additional Endocrine Questions
+const additionalEndocrineQuestions: GMCQuestion[] = [
+  {
+    id: "endo-003",
+    category: "endocrinology",
+    subcategory: "Diabetes Mellitus",
+    cognitiveLevel: "problem-solving",
+    difficulty: "advanced",
+    clinicalSetting: "Diabetes Clinic",
+    ageGroup: "Adults (18-65)",
+    stem: "A 45-year-old man with type 2 diabetes has HbA1c 75 mmol/mol (9.0%) despite metformin 1g twice daily and gliclazide 160mg twice daily. BMI is 32 kg/m². eGFR is 45 ml/min/1.73m². He has a history of heart failure. Which medication should be added next?",
+    options: [
+      "Insulin glargine",
+      "Empagliflozin (SGLT2 inhibitor)",
+      "Sitagliptin (DPP-4 inhibitor)",
+      "Pioglitazone",
+      "Liraglutide (GLP-1 agonist)"
+    ],
+    correctAnswer: 1,
+    explanation: "SGLT2 inhibitors like empagliflozin provide cardiovascular and renal protection in patients with diabetes, heart failure, and CKD. They're preferred in this patient with multiple comorbidities despite the reduced eGFR (can be used down to eGFR 30).",
+    learningObjectives: [
+      "Apply diabetes management in complex patients",
+      "Understand cardiovascular benefits of SGLT2 inhibitors",
+      "Consider renal function in diabetes medication choice"
+    ],
+    gmcOutcomes: ["Complex case management", "Evidence-based practice", "Risk-benefit assessment"],
+    references: ["NICE NG28 Diabetes Guidelines", "DAPA-HF trial", "EMPA-REG OUTCOME"],
+    tags: ["type 2 diabetes", "SGLT2 inhibitor", "heart failure", "CKD"],
+    estimatedTime: 120
+  }
+];
+
+// Combine all questions
+const allAdditionalQuestions = [
+  ...additionalCardiovascularQuestions,
+  ...additionalRespiratoryQuestions,
+  ...additionalEndocrineQuestions
+];
+
+// Add to main question bank
+GMC_QUESTION_BANK.push(...allAdditionalQuestions);
+
 export function getRandomQuestions(count: number, category?: GMCCategory): GMCQuestion[] {
   let questions = category ? getQuestionsByCategory(category) : GMC_QUESTION_BANK;
   return questions.sort(() => Math.random() - 0.5).slice(0, count);

@@ -20,7 +20,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Dashboard", href: "/", icon: Home, current: location === "/" },
     { name: "Learning Path", href: "/personalized-paths", icon: Route, current: location === "/personalized-paths" },
     { name: "Global Exams", href: "/global-practice", icon: Flag, current: location === "/global-practice" },
-    { name: "PLAB (UK)", href: "/gmc-practice", icon: BookOpen, current: location === "/gmc-practice" },
+    { name: "PLAB (UK)", href: "/plab1-new", icon: BookOpen, current: location === "/plab1-new" },
     { name: "Video OSCE", href: "/video-osce", icon: Video, current: location === "/video-osce" },
     { name: "Languages", href: "/language-demo", icon: Accessibility, current: location === "/language-demo" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Brain, current: location === "/adaptive-learning" },
