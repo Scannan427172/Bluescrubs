@@ -5,6 +5,7 @@ import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle
 import { Logo } from "@/components/logo";
 import nhsPrepWomanImg from "@assets/image_1749071491789.png";
 import heroBackgroundImg from "@assets/image_1749074194942.jpeg";
+import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
 
 export default function Landing() {
   return (

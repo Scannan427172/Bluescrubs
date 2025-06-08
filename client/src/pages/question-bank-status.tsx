@@ -15,52 +15,52 @@ import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
 export default function QuestionBankStatus() {
   const questionStats = {
     gmc: {
-      current: 5247, // Comprehensive expansion complete
+      current: QUESTION_BANK_STATS.totalQuestions, // Real question count from database
       target: 5000,
       name: "PLAB (UK)",
-      categories: 18,
+      categories: Object.keys(QUESTION_BANK_STATS.byCategory).length,
       averageRating: 4.9
     },
     usmle: {
-      current: 4321, // Competitive expansion  
+      current: USMLE_QUESTION_BANK.length,
       target: 4500,
       name: "USMLE (USA)",
-      categories: 15,
+      categories: [...new Set(USMLE_QUESTION_BANK.map(q => q.category))].length,
       averageRating: 4.8
     },
     mccee: {
-      current: 2756, // Comprehensive expansion
+      current: MCCEE_QUESTION_BANK.length,
       target: 3000,
       name: "MCCEE (Canada)",
-      categories: 12,
+      categories: [...new Set(MCCEE_QUESTION_BANK.map(q => q.category))].length,
       averageRating: 4.7
     },
     amc: {
-      current: 2247, // Full expansion
+      current: AMC_QUESTION_BANK.length,
       target: 2500,
       name: "AMC (Australia)",
-      categories: 11,
+      categories: [...new Set(AMC_QUESTION_BANK.map(q => q.category))].length,
       averageRating: 4.8
     },
     mrcp: {
-      current: 3134, // Advanced expansion
+      current: MRCP_QUESTION_BANK.length,
       target: 3500,
       name: "MRCP (Ireland)",
-      categories: 13,
+      categories: [...new Set(MRCP_QUESTION_BANK.map(q => q.category))].length,
       averageRating: 4.9
     },
     middleEast: {
-      current: 1989, // Near-complete expansion
+      current: MIDDLE_EAST_QUESTION_BANK.length,
       target: 2000,
       name: "Middle East Exams",
-      categories: 10,
+      categories: [...new Set(MIDDLE_EAST_QUESTION_BANK.map(q => q.category))].length,
       averageRating: 4.6
     },
     ielts: {
-      current: 1598, // Enhanced expansion
+      current: IELTS_MEDICAL_QUESTION_BANK.length,
       target: 1800,
       name: "IELTS Medical",
-      categories: 8,
+      categories: [...new Set(IELTS_MEDICAL_QUESTION_BANK.map(q => q.category))].length,
       averageRating: 4.7
     }
   };
