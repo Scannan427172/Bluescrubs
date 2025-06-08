@@ -133,6 +133,83 @@ export default function More() {
       title: "OSCE Practice",
       description: "Video-based OSCE station practice and skill assessment",
       hasArrow: true
+    },
+    {
+      icon: Users,
+      title: "Community",
+      description: "Connect with fellow PLAB candidates and share experiences",
+      hasArrow: true,
+      link: "/community"
+    },
+    {
+      icon: BarChart3,
+      title: "Analytics Dashboard",
+      description: "Advanced performance tracking and progress analytics",
+      hasArrow: true,
+      link: "/analytics"
+    },
+    {
+      icon: MapPin,
+      title: "Cultural Bridge",
+      description: "UK healthcare culture and communication training",
+      hasArrow: true,
+      link: "/cultural-training"
+    },
+    {
+      icon: Building,
+      title: "NHS Preparation",
+      description: "Complete NHS job application and interview preparation",
+      hasArrow: true,
+      link: "/nhs-prep"
+    },
+    {
+      icon: UserCheck,
+      title: "Expert Mentors",
+      description: "1-on-1 guidance from qualified NHS doctors",
+      hasArrow: true,
+      link: "/mentors"
+    },
+    {
+      icon: Video,
+      title: "Video OSCE",
+      description: "Advanced video-based OSCE practice stations",
+      hasArrow: true,
+      link: "/video-osce"
+    },
+    {
+      icon: FileText,
+      title: "Practice Tests",
+      description: "Full-length PLAB 1 mock exams and timed practice tests",
+      hasArrow: true,
+      link: "/practice-tests"
+    },
+    {
+      icon: Target,
+      title: "Job Placement",
+      description: "NHS job search, CV review, and interview preparation",
+      hasArrow: true,
+      link: "/job-placement"
+    },
+    {
+      icon: MessageCircle,
+      title: "Study Groups",
+      description: "Join study groups and collaborate with other candidates",
+      hasArrow: true,
+      link: "/study-groups"
+    },
+    {
+      icon: Accessibility,
+      title: "Accessibility",
+      description: "Customizable learning experience for diverse needs",
+      hasArrow: true,
+      link: "/accessibility"
+    },
+    {
+      icon: Scale,
+      title: "Legal & Privacy",
+      description: "Privacy policy, terms of service, and data protection",
+      hasArrow: true,
+      link: "/legal"
     }
   ];
 
