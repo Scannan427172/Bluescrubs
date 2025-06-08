@@ -289,10 +289,10 @@ export default function Auth() {
       {/* Bottom Hero Section */}
       <div className="bg-gradient-to-br from-blue-600 to-purple-700 py-12 sm:py-20">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6" style={{ color: '#ffffff' }}>
             Start Your NHS Journey Today
           </h2>
-          <p id="subtext" className="text-lg sm:text-xl text-white mb-8 sm:mb-12 font-bold">
+          <p id="subtext" className="text-lg sm:text-xl text-white mb-8 sm:mb-12 font-bold" style={{ color: '#ffffff' }}>
             Join 15,000+ medical professionals who trust our platform
           </p>
           
@@ -301,24 +301,24 @@ export default function Auth() {
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-white mb-2">Secure Platform</h3>
-              <p id="security-text" className="text-sm sm:text-base text-white font-bold">Enterprise-grade security</p>
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2" style={{ color: '#ffffff' }}>Secure Platform</h3>
+              <p id="security-text" className="text-sm sm:text-base text-white font-bold" style={{ color: '#ffffff' }}>Enterprise-grade security</p>
             </div>
             
             <div className="text-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-white mb-2">Global Community</h3>
-              <p id="community-text" className="text-sm sm:text-base text-white font-bold">15,000+ active students</p>
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2" style={{ color: '#ffffff' }}>Global Community</h3>
+              <p id="community-text" className="text-sm sm:text-base text-white font-bold" style={{ color: '#ffffff' }}>15,000+ active students</p>
             </div>
             
             <div className="text-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Award className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-white mb-2">Proven Results</h3>
-              <p id="results-text" className="text-sm sm:text-base text-white font-bold">94% success rate</p>
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2" style={{ color: '#ffffff' }}>Proven Results</h3>
+              <p id="results-text" className="text-sm sm:text-base text-white font-bold" style={{ color: '#ffffff' }}>94% success rate</p>
             </div>
           </div>
           
