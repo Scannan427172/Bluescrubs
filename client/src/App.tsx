@@ -63,6 +63,7 @@ import AIStudyBuddy from "@/pages/ai-study-buddy";
 import CulturalBridge from "@/pages/cultural-bridge";
 import NeurodiverseSupport from "@/pages/neurodiverse-support";
 import QuestionBankStatus from "@/pages/question-bank-status";
+import AIGenerationDemo from "@/pages/ai-generation-demo";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -180,6 +181,14 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <NeurodiverseSupport />
+            </div>
+          </div>
+        </Route>
+        <Route path="/ai-generation-demo">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <AIGenerationDemo />
             </div>
           </div>
         </Route>
