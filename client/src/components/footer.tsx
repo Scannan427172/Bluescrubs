@@ -28,8 +28,11 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Access</h3>
             <ul className="space-y-2 text-sm text-gray-300">
+              <li><Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
               <li><Link href="/plab1-new" className="hover:text-white transition-colors">PLAB 1</Link></li>
-              <li><Link href="/plab2-osce" className="hover:text-white transition-colors">PLAB 2 OSCE</Link></li>
+              <li><Link href="/plab2-osce" className="hover:text-white transition-colors">PLAB 2</Link></li>
+              <li><Link href="/mentors" className="hover:text-white transition-colors">Expert Mentors</Link></li>
+              <li><Link href="/premium" className="hover:text-white transition-colors">Premium Features</Link></li>
               <li>
                 <Link href="/more" 
                       className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md font-medium transition-colors">
@@ -37,8 +40,6 @@ export function Footer() {
                   Neurodiverse Support
                 </Link>
               </li>
-              <li><Link href="/mentors" className="hover:text-white transition-colors">Expert Mentors</Link></li>
-              <li><Link href="/premium" className="hover:text-white transition-colors">Premium Features</Link></li>
             </ul>
           </div>
 
