@@ -47,14 +47,14 @@ export class AIQuestionGenerator {
 
     try {
       const response = await openai.chat.completions.create({
-        model: "gpt-4o",
+        model: "gpt-4o-mini", // Faster model for improved response time
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt }
         ],
         response_format: { type: "json_object" },
         temperature: 0.7,
-        max_tokens: 4000
+        max_tokens: 2500 // Reduced for faster generation
       });
 
       const generatedData = JSON.parse(response.choices[0].message.content || "{}");
@@ -75,41 +75,31 @@ export class AIQuestionGenerator {
   }
 
   private buildSystemPrompt(examType: string): string {
-    const basePrompt = `You are a senior medical educator and examination specialist creating high-quality medical exam questions for ${examType}. 
-
-CRITICAL REQUIREMENTS:
-1. All questions must be medically accurate and evidence-based
-2. Follow official examination standards and guidelines
-3. Questions must test clinical reasoning, not just factual recall
-4. Include detailed explanations with medical rationale
-5. Ensure cultural sensitivity for international medical graduates
-6. Reference current guidelines (NICE, WHO, local regulatory bodies)
-
-QUESTION STRUCTURE:
-- Clear, unambiguous clinical scenarios
-- 5 plausible options with only one clearly correct answer
-- Comprehensive explanations citing evidence
-- Learning objectives aligned with exam competencies
-- Appropriate difficulty progression
-
-MEDICAL ACCURACY STANDARDS:
-- Use current evidence-based medicine
-- Cite authoritative sources (medical journals, guidelines)
-- Ensure dosages, procedures, and protocols are correct
-- Include relevant differential diagnoses
-- Consider patient safety and ethical implications
-
-OUTPUT FORMAT: JSON with 'questions' array containing objects with required fields.`;
-
-    const examSpecificPrompts = {
-      'PLAB': `Focus on GMC outcomes and NHS clinical practice. Include UK-specific guidelines (NICE, RCOG, BTS). Emphasize patient safety and multidisciplinary team working.`,
-      'USMLE': `Align with AAMC competencies. Include US clinical practice patterns, FDA-approved treatments, and American medical guidelines.`,
-      'MCCEE': `Follow CFPC and RCPSC standards. Include Canadian healthcare system context and Health Canada regulations.`,
-      'AMC': `Adhere to AMC blueprint and Australian clinical guidelines. Include TGA-approved medications and RACGP standards.`,
-      'MRCP': `Focus on UK specialist medicine. Include Royal College guidelines and advanced clinical reasoning.`
+    const guidelines = {
+      'PLAB': 'UK NHS/NICE guidelines',
+      'USMLE': 'US medical standards', 
+      'MCCEE': 'Canadian practice',
+      'AMC': 'Australian guidelines',
+      'MRCP': 'UK specialist medicine'
     };
 
-    return basePrompt + "\n\n" + (examSpecificPrompts[examType] || examSpecificPrompts['PLAB']);
+    return `Medical educator creating ${examType} questions. Use ${guidelines[examType] || guidelines['PLAB']}.
+
+JSON format:
+{
+  "questions": [{
+    "stem": "Clinical scenario",
+    "options": ["A.", "B.", "C.", "D.", "E."],
+    "correctAnswer": 0,
+    "explanation": "Medical reasoning",
+    "learningObjectives": ["Key points"],
+    "references": ["Guidelines"],
+    "tags": ["specialty"],
+    "difficulty_justification": "Brief rationale",
+    "clinical_relevance": "Clinical importance", 
+    "regulatory_alignment": "${examType} standards"
+  }]
+}`;
   }
 
   private buildUserPrompt(request: QuestionGenerationRequest): string {
