@@ -201,6 +201,40 @@ p.auth-subtitle,
   opacity: 1 !important;
 }
 
+/* Force white text for all elements in the auth page gradient section */
+.bg-gradient-to-br.from-blue-600.to-purple-700 h3,
+.bg-gradient-to-br.from-blue-600.to-purple-700 p,
+.bg-gradient-to-br.from-blue-600.to-purple-700 .text-center h3,
+.bg-gradient-to-br.from-blue-600.to-purple-700 .text-center p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* Maximum specificity for icon section text */
+div.bg-gradient-to-br.from-blue-600.to-purple-700 div.text-center h3,
+div.bg-gradient-to-br.from-blue-600.to-purple-700 div.text-center p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* Custom class overrides for icon text */
+.auth-icon-heading,
+h3.auth-icon-heading,
+.auth-icon-text,
+p.auth-icon-text {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* Nuclear option - force all text in gradient to be white */
+[class*="bg-gradient-to-br"][class*="from-blue-600"] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
 /* Hero banner text should be white */
 .hero-text,
 .hero-text *,

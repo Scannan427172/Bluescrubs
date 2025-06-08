@@ -310,15 +310,15 @@ export default function Auth() {
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold mb-2" style={{ 
-                color: '#ffffff', 
-                WebkitTextFillColor: '#ffffff',
-                textShadow: 'none'
+              <h3 className="auth-icon-heading text-base sm:text-lg font-bold mb-2" style={{ 
+                color: '#ffffff !important', 
+                WebkitTextFillColor: '#ffffff !important',
+                textShadow: 'none !important'
               }}>Secure Platform</h3>
-              <p id="security-text" className="text-sm sm:text-base font-bold" style={{ 
-                color: '#ffffff', 
-                WebkitTextFillColor: '#ffffff',
-                textShadow: 'none'
+              <p id="security-text" className="auth-icon-text text-sm sm:text-base font-bold" style={{ 
+                color: '#ffffff !important', 
+                WebkitTextFillColor: '#ffffff !important',
+                textShadow: 'none !important'
               }}>Enterprise-grade security</p>
             </div>
             
@@ -326,15 +326,15 @@ export default function Auth() {
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold mb-2" style={{ 
-                color: '#ffffff', 
-                WebkitTextFillColor: '#ffffff',
-                textShadow: 'none'
+              <h3 className="auth-icon-heading text-base sm:text-lg font-bold mb-2" style={{ 
+                color: '#ffffff !important', 
+                WebkitTextFillColor: '#ffffff !important',
+                textShadow: 'none !important'
               }}>Global Community</h3>
-              <p id="community-text" className="text-sm sm:text-base font-bold" style={{ 
-                color: '#ffffff', 
-                WebkitTextFillColor: '#ffffff',
-                textShadow: 'none'
+              <p id="community-text" className="auth-icon-text text-sm sm:text-base font-bold" style={{ 
+                color: '#ffffff !important', 
+                WebkitTextFillColor: '#ffffff !important',
+                textShadow: 'none !important'
               }}>15,000+ active students</p>
             </div>
             
@@ -342,15 +342,15 @@ export default function Auth() {
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 border-2 border-white/40">
                 <Award className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base sm:text-lg font-bold mb-2" style={{ 
-                color: '#ffffff', 
-                WebkitTextFillColor: '#ffffff',
-                textShadow: 'none'
+              <h3 className="auth-icon-heading text-base sm:text-lg font-bold mb-2" style={{ 
+                color: '#ffffff !important', 
+                WebkitTextFillColor: '#ffffff !important',
+                textShadow: 'none !important'
               }}>Proven Results</h3>
-              <p id="results-text" className="text-sm sm:text-base font-bold" style={{ 
-                color: '#ffffff', 
-                WebkitTextFillColor: '#ffffff',
-                textShadow: 'none'
+              <p id="results-text" className="auth-icon-text text-sm sm:text-base font-bold" style={{ 
+                color: '#ffffff !important', 
+                WebkitTextFillColor: '#ffffff !important',
+                textShadow: 'none !important'
               }}>94% success rate</p>
             </div>
           </div>
