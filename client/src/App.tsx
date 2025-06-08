@@ -86,6 +86,7 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <Dashboard />
             </div>
+            <Footer />
           </div>
         </Route>
         <Route path="/home">
