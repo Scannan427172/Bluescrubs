@@ -109,7 +109,8 @@ export default function GlobalExams() {
           duration: "6-9 months",
           passRate: "95%",
           candidates: "40,000/year",
-          status: "coming-soon",
+          status: "available",
+          testLink: "/usmle-test",
           features: ["Clinical Cases", "Differential Diagnosis", "Treatment Plans"]
         },
         {
@@ -121,7 +122,8 @@ export default function GlobalExams() {
           duration: "3-6 months",
           passRate: "85%",
           candidates: "35,000/year",
-          status: "planning",
+          status: "available",
+          testLink: "/usmle-test",
           features: ["Patient Encounters", "Clinical Skills", "Communication Training"]
         }
       ]
@@ -153,7 +155,8 @@ export default function GlobalExams() {
           duration: "3-6 months",
           passRate: "75%",
           candidates: "6,000/year",
-          status: "planning",
+          status: "available",
+          testLink: "/amc-test",
           features: ["Clinical Stations", "Australian Practice", "Communication Skills"]
         }
       ]
@@ -172,7 +175,8 @@ export default function GlobalExams() {
           duration: "6-9 months",
           passRate: "68%",
           candidates: "4,500/year",
-          status: "planning",
+          status: "available",
+          testLink: "/mccee-test",
           features: ["Canadian Guidelines", "Clinical Cases", "Medical Knowledge"]
         },
         {
@@ -184,7 +188,8 @@ export default function GlobalExams() {
           duration: "9-12 months",
           passRate: "85%",
           candidates: "12,000/year",
-          status: "planning",
+          status: "available",
+          testLink: "/mccee-test",
           features: ["Clinical Decision Making", "Canadian Practice", "Comprehensive Review"]
         }
       ]
@@ -203,7 +208,8 @@ export default function GlobalExams() {
           duration: "6-18 months",
           passRate: "80%",
           candidates: "15,000/year",
-          status: "planning",
+          status: "available",
+          testLink: "/mrcp-test",
           features: ["Document Preparation", "Language Requirements", "Country-Specific Guidance"]
         }
       ]
