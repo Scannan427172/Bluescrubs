@@ -314,7 +314,7 @@ export default function Landing() {
             ].map((region, index) => (
               <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all duration-300">
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-bold text-white mb-2">{region.country}</h3>
+                  <h3 className="text-lg font-bold text-white country-name mb-2">{region.country}</h3>
                   <div className="text-purple-300 font-semibold mb-3">{region.exam}</div>
                   <p className="text-gray-300 text-sm mb-4">{region.description}</p>
                   <div className="text-xs text-green-300 font-medium">{region.placements}</div>

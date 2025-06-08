@@ -205,6 +205,12 @@ input::placeholder {
   color: #86efac !important;
 }
 
+/* Force all country names to be white in landing page */
+.country-name,
+.country-title {
+  color: white !important;
+}
+
 /* Override any conflicting styles for hero section */
 .hero-text.text-white,
 .hero-text .text-white,
