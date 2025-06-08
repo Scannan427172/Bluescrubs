@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages
 } from "lucide-react";
 import { EXPANDED_QUESTION_BANK, QUESTION_BANK_STATS, type GMCQuestion, type GMCCategory } from "@shared/expanded-question-bank";
 
@@ -28,6 +28,38 @@ export default function PLAB1New() {
   
   // Category selection
   const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('all');
+  
+  // Language settings
+  const [currentLanguage, setCurrentLanguage] = useState<string>('en');
+  const [showTranslation, setShowTranslation] = useState(false);
+  
+  // Available languages for medical education
+  const supportedLanguages = [
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'ur', name: 'Urdu', flag: '🇵🇰' },
+    { code: 'hi', name: 'Hindi', flag: '🇮🇳' },
+    { code: 'ar', name: 'Arabic', flag: '🇸🇦' },
+    { code: 'bn', name: 'Bengali', flag: '🇧🇩' },
+    { code: 'es', name: 'Spanish', flag: '🇪🇸' },
+    { code: 'fr', name: 'French', flag: '🇫🇷' },
+    { code: 'de', name: 'German', flag: '🇩🇪' },
+    { code: 'it', name: 'Italian', flag: '🇮🇹' },
+    { code: 'pt', name: 'Portuguese', flag: '🇵🇹' },
+    { code: 'zh', name: 'Chinese', flag: '🇨🇳' },
+    { code: 'ja', name: 'Japanese', flag: '🇯🇵' },
+    { code: 'ko', name: 'Korean', flag: '🇰🇷' },
+    { code: 'ru', name: 'Russian', flag: '🇷🇺' },
+    { code: 'tr', name: 'Turkish', flag: '🇹🇷' },
+    { code: 'pl', name: 'Polish', flag: '🇵🇱' },
+    { code: 'ro', name: 'Romanian', flag: '🇷🇴' }
+  ];
+  
+  // Translation helper function (would integrate with translation API)
+  const getTranslation = (text: string, targetLang: string) => {
+    if (targetLang === 'en') return text;
+    // This would integrate with a translation service in production
+    return `[${targetLang.toUpperCase()}] ${text}`;
+  };
   
   // Performance analytics
   const [performanceData, setPerformanceData] = useState({
@@ -355,10 +387,47 @@ export default function PLAB1New() {
             <Target className="w-6 h-6 text-blue-600" />
             <h1 className="text-2xl font-bold">PLAB 1 Practice Session</h1>
           </div>
-          <Button variant="outline" onClick={endSession} className="gap-2">
-            <Home className="w-4 h-4" />
-            End Session
-          </Button>
+          
+          <div className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <div className="flex items-center gap-2">
+              <Languages className="w-4 h-4 text-gray-600" />
+              <Select value={currentLanguage} onValueChange={setCurrentLanguage}>
+                <SelectTrigger className="w-auto min-w-[120px] text-sm">
+                  <SelectValue>
+                    {supportedLanguages.find(lang => lang.code === currentLanguage)?.flag} {supportedLanguages.find(lang => lang.code === currentLanguage)?.name}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {supportedLanguages.map((language) => (
+                    <SelectItem key={language.code} value={language.code}>
+                      <div className="flex items-center gap-2">
+                        <span>{language.flag}</span>
+                        <span>{language.name}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              
+              {currentLanguage !== 'en' && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowTranslation(!showTranslation)}
+                  className={`gap-1 text-xs ${showTranslation ? 'bg-blue-100 text-blue-700' : 'text-gray-600'}`}
+                >
+                  <Globe className="w-3 h-3" />
+                  {showTranslation ? 'Hide Translation' : 'Show Translation'}
+                </Button>
+              )}
+            </div>
+            
+            <Button variant="outline" onClick={endSession} className="gap-2">
+              <Home className="w-4 h-4" />
+              End Session
+            </Button>
+          </div>
         </div>
 
         {/* Progress Bar */}
@@ -396,6 +465,17 @@ export default function PLAB1New() {
           </div>
           <CardTitle className="text-lg leading-relaxed">
             {currentQuestion.stem}
+            {showTranslation && currentLanguage !== 'en' && (
+              <div className="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r">
+                <div className="flex items-center gap-2 text-sm text-blue-700 mb-2">
+                  <Globe className="w-4 h-4" />
+                  <span className="font-medium">Translation ({supportedLanguages.find(lang => lang.code === currentLanguage)?.name}):</span>
+                </div>
+                <div className="text-blue-800 leading-relaxed">
+                  {getTranslation(currentQuestion.stem, currentLanguage)}
+                </div>
+              </div>
+            )}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -417,7 +497,14 @@ export default function PLAB1New() {
                       : 'hover:bg-gray-50'
                   }`}
                 >
-                  {option}
+                  <div>
+                    {option}
+                    {showTranslation && currentLanguage !== 'en' && (
+                      <div className="mt-2 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-2">
+                        {getTranslation(option, currentLanguage)}
+                      </div>
+                    )}
+                  </div>
                 </Label>
               </div>
             ))}
