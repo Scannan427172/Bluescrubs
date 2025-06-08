@@ -58,6 +58,7 @@ import LanguageDemo from "@/pages/language-demo";
 import Pricing from "@/pages/pricing";
 import GMCPractice from "@/pages/gmc-practice";
 import ContentStrategy from "@/pages/content-strategy";
+import GlobalPractice from "@/pages/global-practice";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -457,6 +458,16 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <ContentStrategy />
+            </div>
+          </div>
+        </Route>
+
+        {/* Global Practice */}
+        <Route path="/global-practice">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <GlobalPractice />
             </div>
           </div>
         </Route>

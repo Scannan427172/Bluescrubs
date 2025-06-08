@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { LanguageToggle } from "@/components/LanguageToggle";
 
@@ -19,8 +19,8 @@ export function Navigation({ user }: NavigationProps) {
   const navigation = [
     { name: "Dashboard", href: "/", icon: Home, current: location === "/" },
     { name: "Learning Path", href: "/personalized-paths", icon: Route, current: location === "/personalized-paths" },
-    { name: "PLAB 1", href: "/gmc-practice", icon: BookOpen, current: location === "/gmc-practice" },
-    { name: "PLAB 2", href: "/plab2-osce", icon: User, current: location === "/plab2-osce" },
+    { name: "Global Exams", href: "/global-practice", icon: Flag, current: location === "/global-practice" },
+    { name: "PLAB (UK)", href: "/gmc-practice", icon: BookOpen, current: location === "/gmc-practice" },
     { name: "Video OSCE", href: "/video-osce", icon: Video, current: location === "/video-osce" },
     { name: "Languages", href: "/language-demo", icon: Accessibility, current: location === "/language-demo" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Brain, current: location === "/adaptive-learning" },
