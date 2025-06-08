@@ -337,7 +337,24 @@ export default function GMCPractice() {
     );
   }
 
-  if (!currentQuestion) return null;
+  if (!currentQuestion) {
+    console.log('No current question:', {
+      sessionStarted,
+      sessionQuestions: sessionQuestions.length,
+      currentQuestionIndex,
+      selectedCategory
+    });
+    return (
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        <div className="text-center py-8">
+          <p className="text-lg">No questions available for the selected category.</p>
+          <Button onClick={() => setSessionStarted(false)} className="mt-4">
+            Back to Practice Selection
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   const stats = getSessionStats();
 
