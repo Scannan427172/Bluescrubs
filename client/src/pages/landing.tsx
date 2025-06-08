@@ -34,7 +34,7 @@ export default function Landing() {
               <div className="space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
                   <Star className="w-5 h-5 mr-3 text-yellow-400" />
-                  <span className="text-sm font-semibold">Trusted by 10,000+ Medical Graduates</span>
+                  <span className="text-sm font-semibold">Comprehensive Medical Exam Preparation</span>
                 </div>
                 
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight" style={{ color: 'white' }}>
@@ -379,7 +379,7 @@ export default function Landing() {
                   <p className="text-gray-800 font-medium">PLAB Pass Rate</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-purple-600 mb-2">10,000+</div>
+                  <div className="text-3xl font-bold text-purple-600 mb-2">Extensive</div>
                   <p className="text-gray-800 font-medium">Successful Graduates</p>
                 </div>
               </div>

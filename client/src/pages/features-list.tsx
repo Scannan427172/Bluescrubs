@@ -108,7 +108,7 @@ export default function FeaturesList() {
         { name: "Adaptive Testing", description: "Tests that adapt to your knowledge level", status: "active" },
         { name: "Instant Scoring", description: "Immediate results with detailed analysis", status: "active" },
         { name: "Performance Analytics", description: "Comprehensive performance insights", status: "active" },
-        { name: "Question Bank", description: "10,000+ PLAB-specific questions", status: "active" },
+        { name: "Question Bank", description: "Comprehensive PLAB-specific questions", status: "active" },
         { name: "Timed Practice", description: "Exam-condition timed practice sessions", status: "active" },
         { name: "AI Essay Marking", description: "Automated essay assessment with feedback", status: "premium" }
       ]
