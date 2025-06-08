@@ -34,7 +34,7 @@ export default function Features() {
         { name: "Adaptive Learning Engine", description: "AI adjusts difficulty based on performance", status: "active" },
         { name: "AI Study Companion", description: "24/7 intelligent tutoring assistant", status: "active" },
         { name: "Smart Question Generation", description: "Unlimited practice questions", status: "active" },
-        { name: "Performance Prediction", description: "AI predicts PLAB success probability", status: "beta" }
+        { name: "Performance Prediction", description: "AI predicts PLAB success probability", status: "active" }
       ]
     },
     {

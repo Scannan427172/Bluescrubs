@@ -53,7 +53,8 @@ export default function GlobalExams() {
           duration: "2-3 years",
           passRate: "45%",
           candidates: "8,000/year",
-          status: "beta",
+          status: "active",
+          testLink: "/mrcp-test",
           features: ["Advanced MCQs", "Clinical Cases", "PACES Training"]
         },
         {
@@ -65,7 +66,8 @@ export default function GlobalExams() {
           duration: "18-24 months",
           passRate: "55%",
           candidates: "5,000/year",
-          status: "coming-soon",
+          status: "active",
+          testLink: "/mrcp-test",
           features: ["Surgical Scenarios", "OSCE Practice", "Anatomy 3D"]
         },
         {
@@ -77,7 +79,8 @@ export default function GlobalExams() {
           duration: "3-6 months",
           passRate: "78%",
           candidates: "25,000/year",
-          status: "beta",
+          status: "active",
+          testLink: "/ielts-medical-test",
           features: ["Medical Vocabulary", "Clinical Communication", "Speaking Practice"]
         }
       ]

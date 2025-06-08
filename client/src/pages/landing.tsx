@@ -126,21 +126,21 @@ export default function Landing() {
                 icon: Brain,
                 title: "MRCP (United Kingdom)",
                 description: "Parts 1, 2 & PACES training for Royal College of Physicians membership",
-                badge: "Beta",
+                badge: "Active",
                 color: "from-purple-500 to-indigo-500"
               },
               {
                 icon: Globe,
                 title: "IELTS Medical",
                 description: "Healthcare-focused English proficiency with medical vocabulary and scenarios",
-                badge: "Beta",
+                badge: "Active",
                 color: "from-orange-500 to-red-500"
               },
               {
                 icon: Trophy,
                 title: "15+ Global Exams",
                 description: "MRCS, MCCEE, DHA, SCFHS and more medical licensing exams worldwide",
-                badge: "In Planning",
+                badge: "Active",
                 color: "from-yellow-500 to-orange-500"
               }
             ].map((exam, index) => (
