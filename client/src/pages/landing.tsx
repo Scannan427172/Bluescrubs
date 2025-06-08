@@ -421,10 +421,12 @@ export default function Landing() {
                 ))}
               </div>
 
-              <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3 rounded-xl">
-                Start Global Journey
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+              <Link href="/plab1-new">
+                <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3 rounded-xl">
+                  Start Global Journey
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
             </div>
           </div>
 
