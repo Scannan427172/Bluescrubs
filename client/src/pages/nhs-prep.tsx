@@ -185,8 +185,8 @@ export default function NhsPrep() {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <TrendingUp className="w-6 h-6 text-blue-600" />
               </div>
-              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>89%</div>
-              <div className="text-sm" style={{ color: '#666666' }}>Success Rate</div>
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>Active</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Study Program</div>
             </CardContent>
           </Card>
 
@@ -195,8 +195,8 @@ export default function NhsPrep() {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Users className="w-6 h-6 text-purple-600" />
               </div>
-              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>2,847</div>
-              <div className="text-sm" style={{ color: '#666666' }}>Placements Made</div>
+              <div className="text-2xl font-bold mb-1" style={{ color: '#000000' }}>Available</div>
+              <div className="text-sm" style={{ color: '#666666' }}>Study Resources</div>
             </CardContent>
           </Card>
 

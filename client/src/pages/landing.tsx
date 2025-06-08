@@ -237,16 +237,16 @@ export default function Landing() {
               <h4 className="text-2xl font-bold text-gray-900 mb-6">Market-Leading PLAB Platform</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                  <div className="text-3xl font-bold text-blue-600 mb-2">£2-3M</div>
-                  <p className="text-gray-800 font-medium">Projected Annual Revenue</p>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">Live</div>
+                  <p className="text-gray-800 font-medium">Video Consultations</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-green-600 mb-2">95%</div>
-                  <p className="text-gray-800 font-medium">PLAB Pass Rate</p>
+                  <div className="text-3xl font-bold text-green-600 mb-2">AI</div>
+                  <p className="text-gray-800 font-medium">Essay Marking</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-purple-600 mb-2">Extensive</div>
-                  <p className="text-gray-800 font-medium">Successful Graduates</p>
+                  <div className="text-3xl font-bold text-purple-600 mb-2">VR</div>
+                  <p className="text-gray-800 font-medium">Clinical Training</p>
                 </div>
               </div>
             </div>
@@ -336,8 +336,8 @@ export default function Landing() {
                 <p className="text-gray-300">Medical Exams</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-green-400 mb-2">2,847</div>
-                <p className="text-gray-300">Global Placements</p>
+                <div className="text-4xl font-bold text-green-400 mb-2">Active</div>
+                <p className="text-gray-300">Platform Status</p>
               </div>
               <div>
                 <div className="text-4xl font-bold text-yellow-400 mb-2">17</div>
