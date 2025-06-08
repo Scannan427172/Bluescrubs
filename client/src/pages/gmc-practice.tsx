@@ -18,7 +18,7 @@ export default function GMCPractice() {
   const [userAnswers, setUserAnswers] = useState<(number | null)[]>([]);
   const [timeSpent, setTimeSpent] = useState(0);
   const [sessionStarted, setSessionStarted] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('cardiovascular');
   const [sessionQuestions, setSessionQuestions] = useState<GMCQuestion[]>([]);
   const [examType, setExamType] = useState<'plab1' | 'plab2'>('plab1');
 
@@ -205,16 +205,70 @@ export default function GMCPractice() {
               </div>
             )}
 
-            <div className="mt-8 flex justify-center">
-              <Button 
-                size="lg" 
-                onClick={startSession}
-                disabled={!selectedCategory || examType === 'plab2'}
-                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400"
-              >
-                {examType === 'plab1' ? 'Start PLAB 1 Practice' : 'PLAB 2 Coming Soon'}
-                {examType === 'plab1' && <ArrowRight className="w-4 h-4 ml-2" />}
-              </Button>
+            <div className="mt-8 space-y-4">
+              <div className="text-center">
+                <h3 className="text-lg font-semibold mb-4">🔥 Start Practice Session</h3>
+                <p className="text-sm text-gray-600 mb-6">Category: {categories.find(c => c.value === selectedCategory)?.label}</p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-4">
+                <Button 
+                  size="lg" 
+                  onClick={() => {
+                    setSessionQuestions(GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory).slice(0, 20));
+                    setUserAnswers(new Array(20).fill(null));
+                    setSessionStarted(true);
+                    setTimeSpent(1);
+                  }}
+                  disabled={examType === 'plab2'}
+                  className="bg-blue-600 hover:bg-blue-700 text-white h-20 flex flex-col items-center justify-center"
+                >
+                  <ArrowRight className="w-6 h-6 mb-1" />
+                  <span className="font-medium">Quick Practice</span>
+                  <span className="text-xs opacity-90">20 questions</span>
+                </Button>
+
+                <Button 
+                  size="lg" 
+                  onClick={() => {
+                    const allQuestions = GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory);
+                    const shuffled = [...allQuestions].sort(() => Math.random() - 0.5).slice(0, 50);
+                    setSessionQuestions(shuffled);
+                    setUserAnswers(new Array(50).fill(null));
+                    setSessionStarted(true);
+                    setTimeSpent(1);
+                  }}
+                  disabled={examType === 'plab2'}
+                  className="bg-purple-600 hover:bg-purple-700 text-white h-20 flex flex-col items-center justify-center"
+                >
+                  <Brain className="w-6 h-6 mb-1" />
+                  <span className="font-medium">Random Quiz</span>
+                  <span className="text-xs opacity-90">Mixed topics</span>
+                </Button>
+
+                <Button 
+                  size="lg" 
+                  onClick={() => {
+                    const questions = GMC_QUESTION_BANK.filter(q => selectedCategory === 'all' || q.category === selectedCategory).slice(0, 60);
+                    setSessionQuestions(questions);
+                    setUserAnswers(new Array(60).fill(null));
+                    setSessionStarted(true);
+                    setTimeSpent(1);
+                  }}
+                  disabled={examType === 'plab2'}
+                  className="bg-orange-600 hover:bg-orange-700 text-white h-20 flex flex-col items-center justify-center"
+                >
+                  <Clock className="w-6 h-6 mb-1" />
+                  <span className="font-medium">Timed Mock</span>
+                  <span className="text-xs opacity-90">60 minutes</span>
+                </Button>
+              </div>
+              
+              {examType === 'plab2' && (
+                <div className="text-center text-sm text-gray-500 mt-4">
+                  PLAB 2 clinical scenarios coming soon
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
