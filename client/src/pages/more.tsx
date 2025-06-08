@@ -210,10 +210,10 @@ export default function More() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {adminTools.map((tool, index) => (
                 <Link key={index} href="/admin-tools">
-                  <Card className="bg-blue-800/20 border-blue-300 hover:bg-blue-800/30 transition-colors cursor-pointer">
+                  <Card className="bg-white border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
                     <CardContent className="flex flex-col items-center justify-center p-6 text-center">
                       <tool.icon className="h-8 w-8 text-blue-600 mb-3" />
-                      <h4 className="font-medium text-blue-900">{tool.title}</h4>
+                      <h4 className="font-medium text-gray-900">{tool.title}</h4>
                     </CardContent>
                   </Card>
                 </Link>
