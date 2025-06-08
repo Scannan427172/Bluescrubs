@@ -325,6 +325,22 @@ export default function PLAB1New() {
   const isCorrect = isAnswered && userAnswers[currentQuestionIndex] === currentQuestion?.correctAnswer;
   const stats = getStats();
 
+  // Trigger translations when language or translation visibility changes
+  useEffect(() => {
+    if (showTranslation && currentLanguage !== 'en' && currentQuestion) {
+      // Clear previous translations
+      setCurrentTranslations({});
+      
+      // Translate question stem
+      getTranslation(currentQuestion.stem, currentLanguage, 'question-stem');
+      
+      // Translate options
+      currentQuestion.options.forEach((option, index) => {
+        getTranslation(option, currentLanguage, `option-${index}`);
+      });
+    }
+  }, [showTranslation, currentLanguage, currentQuestion]);
+
   // Session selection view
   if (!sessionStarted) {
     return (
