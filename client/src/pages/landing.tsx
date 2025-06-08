@@ -75,7 +75,7 @@ export default function Landing() {
         </div>
         
         {/* Scroll Indicator - Centered and lower to avoid button overlap */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center cursor-pointer hover:border-white/60 transition-colors">
             <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
