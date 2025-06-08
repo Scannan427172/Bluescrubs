@@ -111,6 +111,7 @@ function Router() {
             <div className="flex-1 pb-16 md:pb-0">
               <PLAB1New />
             </div>
+            <Footer />
           </div>
         </Route>
         <Route path="/plab2-osce">
