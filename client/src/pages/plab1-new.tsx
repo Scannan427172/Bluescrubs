@@ -78,9 +78,9 @@ export default function PLAB1New() {
     // Filter questions by category
     let filteredQuestions: GMCQuestion[];
     if (selectedCategory === 'all') {
-      filteredQuestions = [...GMC_QUESTION_BANK];
+      filteredQuestions = [...EXPANDED_QUESTION_BANK];
     } else {
-      filteredQuestions = GMC_QUESTION_BANK.filter(q => q.category === selectedCategory);
+      filteredQuestions = EXPANDED_QUESTION_BANK.filter(q => q.category === selectedCategory);
     }
 
     console.log(`Found ${filteredQuestions.length} questions for category ${selectedCategory}`);

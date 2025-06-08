@@ -1276,35 +1276,25 @@ const generateMoreQuestions = () => {
 // Add generated questions to main bank
 EXPANDED_QUESTION_BANK.push(...generateMoreQuestions());
 
-// Question bank statistics
-export const QUESTION_BANK_STATS = {
-  totalQuestions: EXPANDED_QUESTION_BANK.length,
-  byCategory: {
-    'cardiovascular': 60,
-    'respiratory': 50, 
-    'gastroenterology': 45,
-    'neurology': 40,
-    'endocrinology': 35,
-    'nephrology': 30,
-    'haematology': 25,
-    'infectious-diseases': 35,
-    'rheumatology': 20,
-    'dermatology': 20,
-    'psychiatry': 30,
-    'obstetrics-gynaecology': 35,
-    'paediatrics': 40,
-    'surgery': 35,
-    'emergency-medicine': 25,
-    'ethics-law': 15,
-    'public-health': 15,
-    'clinical-pharmacology': 20
-  },
-  byDifficulty: {
-    'foundation': 350,
-    'intermediate': 450,
-    'advanced': 300
-  }
+// Calculate actual question counts
+const calculateStats = () => {
+  const stats: any = {
+    totalQuestions: 0,
+    byCategory: {},
+    byDifficulty: { foundation: 0, intermediate: 0, advanced: 0 }
+  };
+  
+  EXPANDED_QUESTION_BANK.forEach(q => {
+    stats.totalQuestions++;
+    stats.byCategory[q.category] = (stats.byCategory[q.category] || 0) + 1;
+    stats.byDifficulty[q.difficulty]++;
+  });
+  
+  return stats;
 };
+
+// Question bank statistics (calculated from actual questions)
+export const QUESTION_BANK_STATS = calculateStats();
 
 export function getExpandedQuestionsByCategory(category: GMCCategory): GMCQuestion[] {
   return EXPANDED_QUESTION_BANK.filter(q => q.category === category);
