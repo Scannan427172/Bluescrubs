@@ -279,37 +279,37 @@ export default function Landing() {
                 country: "🇺🇸 United States",
                 exam: "USMLE Steps 1, 2, 3",
                 description: "Complete preparation for US medical licensing",
-                placements: "1,247 successful placements"
+                placements: "Preparation program available"
               },
               {
                 country: "🇦🇺 Australia", 
                 exam: "AMC CAT & Clinical",
                 description: "Australian Medical Council certification",
-                placements: "892 doctors placed"
+                placements: "Study materials included"
               },
               {
                 country: "🇨🇦 Canada",
                 exam: "MCCEE & NAC OSCE",
                 description: "Medical Council of Canada evaluation",
-                placements: "456 successful matches"
+                placements: "Comprehensive exam prep"
               },
               {
                 country: "🇪🇺 European Union",
                 exam: "MRCP & Specialty",
                 description: "Royal College certification pathways",
-                placements: "234 placements across EU"
+                placements: "Specialty training support"
               },
               {
                 country: "🇦🇪 Middle East",
                 exam: "DHA, MOH, HAAD",
                 description: "Gulf region medical licensing",
-                placements: "567 doctors licensed"
+                placements: "Regional exam preparation"
               },
               {
                 country: "🌍 Global English",
                 exam: "IELTS Medical",
                 description: "Medical English proficiency testing",
-                placements: "3,400+ certified"
+                placements: "Language skills development"
               }
             ].map((region, index) => (
               <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all duration-300">
