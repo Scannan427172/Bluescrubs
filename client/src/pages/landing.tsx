@@ -555,9 +555,9 @@ export default function Landing() {
           {/* Call to Action */}
           <div className="text-center mt-16">
             <Link href="/global-exams">
-              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl">
-                Explore Global Medical Exams
-                <ArrowRight className="ml-2 w-6 h-6" />
+              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl" style={{ color: 'white' }}>
+                <span style={{ color: 'white' }}>Explore Global Medical Exams</span>
+                <ArrowRight className="ml-2 w-6 h-6" style={{ color: 'white' }} />
               </Button>
             </Link>
           </div>
