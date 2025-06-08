@@ -287,15 +287,15 @@ export default function PLAB1New() {
             <CardDescription>Select the type of practice session you want</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-4 gap-4">
               <Button 
                 size="lg" 
-                onClick={() => startPractice(20)}
+                onClick={() => startPractice(25)}
                 className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2"
               >
                 <ArrowRight className="w-6 h-6" />
                 <span className="font-medium">Quick Practice</span>
-                <span className="text-xs opacity-90">20 questions</span>
+                <span className="text-xs opacity-90">25 questions</span>
               </Button>
 
               <Button 
@@ -310,12 +310,22 @@ export default function PLAB1New() {
 
               <Button 
                 size="lg" 
-                onClick={() => startPractice(100)}
+                onClick={() => startPractice(180)}
                 className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2"
               >
                 <Clock className="w-6 h-6" />
-                <span className="font-medium">Full Mock</span>
-                <span className="text-xs opacity-90">100 questions</span>
+                <span className="font-medium">PLAB 1 Mock</span>
+                <span className="text-xs opacity-90">180 questions</span>
+              </Button>
+
+              <Button 
+                size="lg" 
+                onClick={() => startPractice(500)}
+                className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2"
+              >
+                <Target className="w-6 h-6" />
+                <span className="font-medium">Comprehensive</span>
+                <span className="text-xs opacity-90">500 questions</span>
               </Button>
             </div>
           </CardContent>
