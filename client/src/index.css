@@ -258,6 +258,13 @@ h4.text-white,
   -webkit-text-fill-color: white !important;
 }
 
+/* Exception: Admin tools cards should have dark text */
+.bg-white h4,
+[class*="bg-white"] h4 {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
 /* Override any conflicting styles for hero section */
 .hero-text.text-white,
 .hero-text .text-white,

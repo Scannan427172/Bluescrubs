@@ -213,7 +213,7 @@ export default function More() {
                   <Card className="bg-white border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
                     <CardContent className="flex flex-col items-center justify-center p-6 text-center">
                       <tool.icon className="h-8 w-8 text-blue-600 mb-3" />
-                      <h4 className="font-medium text-gray-900">{tool.title}</h4>
+                      <h4 className="font-medium text-gray-900" style={{color: '#111827 !important'}}>{tool.title}</h4>
                     </CardContent>
                   </Card>
                 </Link>
