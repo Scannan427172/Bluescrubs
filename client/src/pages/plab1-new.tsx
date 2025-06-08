@@ -54,12 +54,73 @@ export default function PLAB1New() {
     { code: 'ro', name: 'Romanian', flag: '🇷🇴' }
   ];
   
-  // Translation helper function (would integrate with translation API)
-  const getTranslation = (text: string, targetLang: string) => {
-    if (targetLang === 'en') return text;
-    // This would integrate with a translation service in production
-    return `[${targetLang.toUpperCase()}] ${text}`;
+  // Translation cache and state
+  const [translationCache, setTranslationCache] = useState<Record<string, Record<string, string>>>({});
+  const [currentTranslations, setCurrentTranslations] = useState<Record<string, string>>({});
+  const [isTranslating, setIsTranslating] = useState(false);
+  
+  // Real translation function using OpenAI API
+  const getTranslation = async (text: string, targetLang: string, key: string) => {
+    if (targetLang === 'en') return;
+    
+    // Check cache first
+    const cacheKey = `${targetLang}-${text.substring(0, 50)}`;
+    if (translationCache[targetLang]?.[cacheKey]) {
+      setCurrentTranslations(prev => ({
+        ...prev,
+        [key]: translationCache[targetLang][cacheKey]
+      }));
+      return;
+    }
+    
+    try {
+      setIsTranslating(true);
+      const response = await fetch('/api/translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text,
+          targetLanguage: targetLang,
+          context: 'medical_education'
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Translation failed');
+      }
+      
+      const data = await response.json();
+      const translatedText = data.translation;
+      
+      // Cache the translation
+      setTranslationCache(prev => ({
+        ...prev,
+        [targetLang]: {
+          ...prev[targetLang],
+          [cacheKey]: translatedText
+        }
+      }));
+      
+      // Update current translations
+      setCurrentTranslations(prev => ({
+        ...prev,
+        [key]: translatedText
+      }));
+      
+    } catch (error) {
+      console.error('Translation error:', error);
+      setCurrentTranslations(prev => ({
+        ...prev,
+        [key]: `[Translation unavailable] ${text}`
+      }));
+    } finally {
+      setIsTranslating(false);
+    }
   };
+
+
   
   // Performance analytics
   const [performanceData, setPerformanceData] = useState({
@@ -472,7 +533,7 @@ export default function PLAB1New() {
                   <span className="font-medium">Translation ({supportedLanguages.find(lang => lang.code === currentLanguage)?.name}):</span>
                 </div>
                 <div className="text-blue-800 leading-relaxed">
-                  {getTranslation(currentQuestion.stem, currentLanguage)}
+                  {currentTranslations['question-stem'] || (isTranslating ? 'Translating...' : 'Translation loading...')}
                 </div>
               </div>
             )}
@@ -501,7 +562,7 @@ export default function PLAB1New() {
                     {option}
                     {showTranslation && currentLanguage !== 'en' && (
                       <div className="mt-2 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-2">
-                        {getTranslation(option, currentLanguage)}
+                        {currentTranslations[`option-${index}`] || 'Translating...'}
                       </div>
                     )}
                   </div>

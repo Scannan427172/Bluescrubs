@@ -3,8 +3,75 @@ import { createServer, type Server } from "http";
 import { questionGenerator } from "./ai-question-generator";
 import { communitySystem } from "./community-contribution";
 import { analyzeVideoPerformance } from "./ai-analysis";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  
+  // Translation API endpoint
+  app.post("/api/translate", async (req, res) => {
+    try {
+      const { text, targetLanguage, context } = req.body;
+      
+      if (!text || !targetLanguage) {
+        return res.status(400).json({ error: "Missing text or target language" });
+      }
+
+      // Language code mapping for better translation quality
+      const languageNames: Record<string, string> = {
+        'ur': 'Urdu',
+        'hi': 'Hindi', 
+        'ar': 'Arabic',
+        'bn': 'Bengali',
+        'es': 'Spanish',
+        'fr': 'French',
+        'de': 'German',
+        'it': 'Italian',
+        'pt': 'Portuguese',
+        'zh': 'Chinese',
+        'ja': 'Japanese',
+        'ko': 'Korean',
+        'ru': 'Russian',
+        'tr': 'Turkish',
+        'pl': 'Polish',
+        'ro': 'Romanian'
+      };
+
+      const targetLanguageName = languageNames[targetLanguage] || targetLanguage;
+      
+      const systemPrompt = `You are a professional medical translator specializing in PLAB and medical education content. 
+      Translate the following medical text accurately while preserving medical terminology and context.
+      Target language: ${targetLanguageName}
+      Context: ${context || 'medical_education'}
+      
+      Important:
+      - Maintain medical accuracy
+      - Keep medical terms precise
+      - Preserve question format and structure
+      - Return only the translation, no explanations`;
+
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: text }
+        ],
+        temperature: 0.3,
+        max_tokens: 1000
+      });
+
+      const translation = response.choices[0].message.content?.trim() || text;
+      
+      res.json({ translation });
+      
+    } catch (error) {
+      console.error("Translation error:", error);
+      res.status(500).json({ error: "Translation service unavailable" });
+    }
+  });
   
   // Question Bank Expansion Routes
   app.post("/api/generate-questions", async (req, res) => {
