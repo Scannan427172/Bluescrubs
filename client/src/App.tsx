@@ -83,7 +83,7 @@ function Router() {
         <Route path="/dashboard">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1 pb-16 md:pb-0">
+            <div className="flex-1">
               <Dashboard />
             </div>
             <Footer />
@@ -92,9 +92,10 @@ function Router() {
         <Route path="/home">
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
-            <div className="flex-1 pb-16 md:pb-0">
+            <div className="flex-1">
               <Home />
             </div>
+            <Footer />
           </div>
         </Route>
         <Route path="/onboarding">
