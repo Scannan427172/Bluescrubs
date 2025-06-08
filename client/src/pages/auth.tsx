@@ -289,14 +289,17 @@ export default function Auth() {
       {/* Bottom Hero Section */}
       <div className="bg-gradient-to-br from-blue-600 to-purple-700 py-12 sm:py-20">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6" style={{ color: '#ffffff' }}>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-4 sm:mb-6" style={{ 
+            color: '#ffffff', 
+            WebkitTextFillColor: '#ffffff',
+            textShadow: 'none'
+          }}>
             Start Your NHS Journey Today
           </h2>
           <p id="subtext" className="text-lg sm:text-xl mb-8 sm:mb-12 font-bold" style={{ 
-            color: '#ffffff !important', 
+            color: '#ffffff', 
             WebkitTextFillColor: '#ffffff',
-            textShadow: 'none',
-            opacity: 1 
+            textShadow: 'none'
           }}>
             Join 15,000+ medical professionals who trust our platform
           </p>
