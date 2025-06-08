@@ -151,9 +151,9 @@ export function Navigation({ user }: NavigationProps) {
         <div className="grid grid-cols-5 gap-1">
           {/* Essential Navigation Items */}
           <Link
-            href="/"
+            href="/dashboard"
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/"
+              location === "/dashboard"
                 ? "text-medical-blue bg-blue-50"
                 : "text-gray-400"
             }`}
@@ -162,7 +162,17 @@ export function Navigation({ user }: NavigationProps) {
             <span className="text-xs font-medium">Dashboard</span>
           </Link>
 
-
+          <Link
+            href="/plab1-new"
+            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
+              location === "/plab1-new"
+                ? "text-medical-blue bg-blue-50"
+                : "text-gray-400"
+            }`}
+          >
+            <BookOpen className="w-5 h-5 mb-1" />
+            <span className="text-xs font-medium">PLAB 1</span>
+          </Link>
 
           <Link
             href="/plab2-osce"
