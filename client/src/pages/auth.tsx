@@ -292,7 +292,12 @@ export default function Auth() {
           <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6" style={{ color: '#ffffff' }}>
             Start Your NHS Journey Today
           </h2>
-          <p id="subtext" className="text-lg sm:text-xl text-white mb-8 sm:mb-12 font-bold" style={{ color: '#ffffff' }}>
+          <p id="subtext" className="text-lg sm:text-xl mb-8 sm:mb-12 font-bold" style={{ 
+            color: '#ffffff !important', 
+            WebkitTextFillColor: '#ffffff',
+            textShadow: 'none',
+            opacity: 1 
+          }}>
             Join 15,000+ medical professionals who trust our platform
           </p>
           

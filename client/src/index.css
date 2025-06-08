@@ -150,12 +150,37 @@ input::placeholder {
 }
 
 /* Force white text for auth page hero section */
-#subtext {
+#subtext,
+#subtext *,
+p#subtext {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.bg-gradient-to-br.from-blue-600 p,
+.bg-gradient-to-br.from-blue-600 p *,
+.bg-gradient-to-br p,
+.bg-gradient-to-br h2,
+.bg-gradient-to-br h3 {
   color: #ffffff !important;
 }
 
-.bg-gradient-to-br.from-blue-600 p {
+/* Target all text in auth page gradient sections */
+.bg-gradient-to-br.from-blue-600.to-purple-700 *,
+.bg-gradient-to-br.from-blue-600.to-purple-700 p,
+.bg-gradient-to-br.from-blue-600.to-purple-700 h2,
+.bg-gradient-to-br.from-blue-600.to-purple-700 h3 {
   color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* Ultra specific override for the problematic subtitle text */
+div.bg-gradient-to-br.from-blue-600.to-purple-700 div.max-w-4xl p.text-lg,
+div.bg-gradient-to-br.from-blue-600.to-purple-700 div.max-w-4xl p.text-xl,
+div.bg-gradient-to-br.from-blue-600.to-purple-700 p.text-lg.sm\\:text-xl,
+body p#subtext {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 /* Hero banner text should be white */
