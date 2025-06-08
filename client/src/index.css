@@ -159,21 +159,48 @@ input::placeholder {
   color: white !important;
 }
 
-/* Force all text in gradient backgrounds to be white */
-.bg-gradient-to-br *,
-.bg-gradient-to-r *,
-.bg-gradient-to-l *,
-.bg-gradient-to-t *,
-.bg-gradient-to-b *,
-[class*="gradient"] * {
+/* Force text to white only in specific dark gradient backgrounds */
+.bg-gradient-to-br.from-slate-900 *,
+.bg-gradient-to-br.from-blue-900 *,
+.bg-gradient-to-br.from-purple-900 *,
+.bg-gradient-to-br.from-indigo-900 *,
+.bg-gradient-to-r.from-slate-900 *,
+.bg-gradient-to-r.from-blue-900 *,
+.bg-gradient-to-r.from-purple-900 * {
   color: white !important;
 }
 
-/* Exception: Keep specific blue text elements blue */
-.text-blue-600 {
+/* Exception: Keep specific colored text elements in their original colors */
+.text-blue-600,
+[class*="text-blue"] {
   color: #2563eb !important;
 }
 
+.text-gray-600,
+[class*="text-gray-6"] {
+  color: #4b5563 !important;
+}
+
+.text-gray-700,
+[class*="text-gray-7"] {
+  color: #374151 !important;
+}
+
+.text-gray-800,
+[class*="text-gray-8"] {
+  color: #1f2937 !important;
+}
+
+.text-gray-900,
+[class*="text-gray-9"] {
+  color: #111827 !important;
+}
+
+.text-black {
+  color: #000000 !important;
+}
+
+/* Light gradient backgrounds should preserve text colors */
 .bg-gradient-to-r.from-blue-100.to-purple-100 .text-blue-600 {
   color: #2563eb !important;
 }
