@@ -168,15 +168,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { stationTitle, stationCategory, learningObjectives, recordingDuration } = req.body;
       
-      if (!stationTitle || !stationCategory || !learningObjectives || !recordingDuration) {
-        return res.status(400).json({ error: "Missing required parameters" });
+      console.log("Received analysis request:", req.body);
+      
+      // Validate required parameters with more flexible checking
+      if (!stationTitle || !stationCategory) {
+        return res.status(400).json({ 
+          error: "Missing required parameters",
+          required: ["stationTitle", "stationCategory"],
+          received: Object.keys(req.body || {})
+        });
       }
 
       const analysis = await analyzeVideoPerformance(
         stationTitle,
         stationCategory,
-        learningObjectives,
-        recordingDuration
+        learningObjectives || ["General medical assessment"],
+        recordingDuration || 60
       );
 
       res.json(analysis);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,17 @@ export default function VideoOsce() {
   const [videoStream, setVideoStream] = useState<MediaStream | null>(null);
   const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
+  const [isIOS, setIsIOS] = useState(false);
+  const [cameraReady, setCameraReady] = useState(false);
+  
+  // Detect iOS on component mount
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isIOSDevice = /ipad|iphone|ipod/.test(userAgent) || 
+                       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    setIsIOS(isIOSDevice);
+    console.log('Device detection:', { isIOSDevice, userAgent });
+  }, []);
 
   const videoStations = [
     {
@@ -204,6 +215,7 @@ export default function VideoOsce() {
       }
       
       setVideoStream(stream);
+      setCameraReady(true);
       
       // Set up video preview with iOS compatibility
       if (videoRef) {
@@ -213,9 +225,27 @@ export default function VideoOsce() {
         videoRef.muted = true;
         videoRef.autoplay = true;
         
+        // iOS Safari requires specific handling
+        if (isIOS) {
+          videoRef.setAttribute('controls', 'false');
+          videoRef.setAttribute('preload', 'metadata');
+          
+          // Add event listeners for iOS video behavior
+          videoRef.addEventListener('loadedmetadata', () => {
+            console.log('Video metadata loaded');
+          });
+          
+          videoRef.addEventListener('canplay', () => {
+            console.log('Video can play');
+          });
+        }
+        
         // Force play for iOS
         try {
-          await videoRef.play();
+          const playPromise = videoRef.play();
+          if (playPromise) {
+            await playPromise;
+          }
         } catch (playError) {
           console.log('Video play error (expected on some devices):', playError);
         }
@@ -405,14 +435,56 @@ export default function VideoOsce() {
                           <Button 
                             onClick={async () => {
                               try {
-                                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                                setCameraError(null);
+                                
+                                // iOS Safari requires specific approach
+                                const constraints = {
+                                  video: {
+                                    facingMode: 'user',
+                                    width: { ideal: 640 },
+                                    height: { ideal: 480 }
+                                  },
+                                  audio: true
+                                };
+                                
+                                const stream = await navigator.mediaDevices.getUserMedia(constraints);
                                 setVideoStream(stream);
+                                setCameraReady(true);
+                                
                                 if (videoRef) {
                                   videoRef.srcObject = stream;
-                                  videoRef.play();
+                                  videoRef.setAttribute('playsinline', 'true');
+                                  videoRef.setAttribute('webkit-playsinline', 'true');
+                                  videoRef.muted = true;
+                                  videoRef.autoplay = true;
+                                  
+                                  // iOS-specific video element setup
+                                  if (isIOS) {
+                                    videoRef.setAttribute('controls', 'false');
+                                    videoRef.setAttribute('preload', 'metadata');
+                                    
+                                    // Wait for metadata to load before playing
+                                    videoRef.addEventListener('loadedmetadata', async () => {
+                                      try {
+                                        await videoRef.play();
+                                        console.log('iOS video playing successfully');
+                                      } catch (playError) {
+                                        console.log('iOS video play error:', playError);
+                                      }
+                                    });
+                                  } else {
+                                    // Non-iOS devices
+                                    const playPromise = videoRef.play();
+                                    if (playPromise !== undefined) {
+                                      playPromise.catch(error => {
+                                        console.log('Auto-play prevented, user interaction required');
+                                      });
+                                    }
+                                  }
                                 }
                               } catch (error: any) {
-                                setCameraError('Camera access denied. Please allow camera permissions.');
+                                console.error('Camera error:', error);
+                                setCameraError(`Camera access failed: ${error.message}. Please enable camera permissions in your browser settings.`);
                               }
                             }}
                             className="mt-4 bg-blue-600 hover:bg-blue-700 text-white"
