@@ -176,6 +176,13 @@ input::placeholder {
   color: #2563eb !important;
 }
 
+/* Fix for "Why Choose NHSprep" heading - ensure blue text stays blue */
+h2 .text-blue-600,
+h2 span.text-blue-600 {
+  color: #2563eb !important;
+  -webkit-text-fill-color: #2563eb !important;
+}
+
 .text-gray-600,
 [class*="text-gray-6"] {
   color: #4b5563 !important;
