@@ -152,6 +152,16 @@ export default function Landing() {
           </div>
 
           {/* Competitive Advantages */}
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Why Choose <span className="text-blue-600">NHSprep</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover the unique advantages that make NHSprep the most comprehensive PLAB preparation platform
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="premium-plab-card">
               <h3 className="text-3xl font-bold text-gray-900 mb-6">
