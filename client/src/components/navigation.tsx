@@ -162,17 +162,7 @@ export function Navigation({ user }: NavigationProps) {
             <span className="text-xs font-medium">Dashboard</span>
           </Link>
 
-          <Link
-            href="/plab1"
-            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/plab1"
-                ? "text-medical-blue bg-blue-50"
-                : "text-gray-400"
-            }`}
-          >
-            <BookOpen className="w-5 h-5 mb-1" />
-            <span className="text-xs font-medium">PLAB 1</span>
-          </Link>
+
 
           <Link
             href="/plab2-osce"
