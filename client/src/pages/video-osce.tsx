@@ -17,6 +17,9 @@ export default function VideoOsce() {
   const [recordingTime, setRecordingTime] = useState(0);
   const [recordingInterval, setRecordingInterval] = useState<NodeJS.Timeout | null>(null);
   const [analyzingRecording, setAnalyzingRecording] = useState<string | null>(null);
+  const [videoStream, setVideoStream] = useState<MediaStream | null>(null);
+  const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null);
+  const [cameraError, setCameraError] = useState<string | null>(null);
 
   const videoStations = [
     {
@@ -140,12 +143,32 @@ export default function VideoOsce() {
 
   const startRecording = async () => {
     try {
+      setCameraError(null);
+      
+      // Request camera and microphone access
       const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: true, 
-        audio: true 
+        video: { 
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+          facingMode: 'user'
+        }, 
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true
+        }
       });
       
-      const recorder = new MediaRecorder(stream);
+      setVideoStream(stream);
+      
+      // Set up video preview
+      if (videoRef) {
+        videoRef.srcObject = stream;
+        videoRef.play();
+      }
+      
+      const recorder = new MediaRecorder(stream, {
+        mimeType: 'video/webm;codecs=vp9,opus'
+      });
       const chunks: Blob[] = [];
       
       recorder.ondataavailable = (event) => {
@@ -164,7 +187,13 @@ export default function VideoOsce() {
           timestamp: new Date()
         };
         setUserRecordings(prev => [...prev, recording]);
+        
+        // Stop camera preview
         stream.getTracks().forEach(track => track.stop());
+        setVideoStream(null);
+        if (videoRef) {
+          videoRef.srcObject = null;
+        }
         
         analyzeRecording(recordingId, currentStation, recordingTime);
       };
@@ -179,9 +208,21 @@ export default function VideoOsce() {
       }, 1000);
       setRecordingInterval(interval);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error accessing camera/microphone:', error);
-      alert('Please allow camera and microphone access to record your response.');
+      
+      let errorMessage = 'Camera access failed. ';
+      if (error.name === 'NotAllowedError') {
+        errorMessage += 'Please allow camera and microphone permissions in your browser settings.';
+      } else if (error.name === 'NotFoundError') {
+        errorMessage += 'No camera or microphone found. Please check your devices.';
+      } else if (error.name === 'NotReadableError') {
+        errorMessage += 'Camera is being used by another application.';
+      } else {
+        errorMessage += 'Please check your camera and microphone settings.';
+      }
+      
+      setCameraError(errorMessage);
     }
   };
 
@@ -262,12 +303,46 @@ export default function VideoOsce() {
               <div className="lg:col-span-2">
                 <Card className="bg-white">
                   <CardContent className="p-6">
-                    <div className="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4">
-                      <div className="text-center text-white">
-                        <Video className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                        <p className="text-lg font-medium">Video Player</p>
-                        <p className="text-sm opacity-75">Patient interaction simulation</p>
-                      </div>
+                    <div className="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4 relative overflow-hidden">
+                      {cameraError ? (
+                        <div className="text-center text-white p-4">
+                          <AlertCircle className="w-16 h-16 mx-auto mb-4 text-red-400" />
+                          <p className="text-lg font-medium text-red-400">Camera Error</p>
+                          <p className="text-sm opacity-75 mt-2">{cameraError}</p>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="mt-4 text-white border-white hover:bg-white hover:text-gray-900"
+                            onClick={() => {
+                              setCameraError(null);
+                              startRecording();
+                            }}
+                          >
+                            Try Again
+                          </Button>
+                        </div>
+                      ) : videoStream || isRecording ? (
+                        <video 
+                          ref={setVideoRef}
+                          className="w-full h-full object-cover rounded-lg"
+                          autoPlay
+                          playsInline
+                          muted
+                        />
+                      ) : (
+                        <div className="text-center text-white">
+                          <Video className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                          <p className="text-lg font-medium">Camera Preview</p>
+                          <p className="text-sm opacity-75">Click "Start Recording" to begin</p>
+                        </div>
+                      )}
+                      
+                      {isRecording && (
+                        <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full flex items-center gap-2">
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                          <span className="text-sm font-medium">REC</span>
+                        </div>
+                      )}
                     </div>
                     <div className="flex items-center justify-between">
                       <Button
