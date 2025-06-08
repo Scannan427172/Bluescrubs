@@ -258,18 +258,16 @@ h4.text-white,
   -webkit-text-fill-color: white !important;
 }
 
-/* Exception: Admin tools cards should have dark text and visible icons */
-.bg-white h4,
-[class*="bg-white"] h4,
-.bg-white p,
-[class*="bg-white"] p {
+/* Exception: Admin tools cards should have dark text and visible icons - more specific targeting */
+.bg-gradient-to-br.from-blue-50 .bg-white h4,
+.bg-gradient-to-br.from-blue-50 [class*="bg-white"] h4 {
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
 }
 
-/* Ensure icons in white background cards are visible */
-.bg-white svg,
-[class*="bg-white"] svg {
+/* Ensure icons in admin tools cards are visible - specific targeting */
+.bg-gradient-to-br.from-blue-50 .bg-white svg,
+.bg-gradient-to-br.from-blue-50 [class*="bg-white"] svg {
   color: #2563eb !important;
   fill: #2563eb !important;
 }
