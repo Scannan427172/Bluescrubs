@@ -309,6 +309,197 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     reviewedBy: "Dr. Emma Roberts, Obstetrician"
   },
 
+  // PHASE 2: RAPID CONTENT GENERATION - Cardiovascular Medicine
+  {
+    id: 'cardio001',
+    category: 'cardiovascular',
+    subcategory: 'acute-coronary-syndromes',
+    cognitiveLevel: 'analysis',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Adult',
+    stem: "A 58-year-old man presents with crushing central chest pain radiating to his left arm for 2 hours. ECG shows ST elevation in leads II, III, and aVF. Troponin I is elevated. Blood pressure is 85/50 mmHg. What is the most appropriate immediate management?",
+    options: [
+      "Primary PCI within 90 minutes",
+      "Thrombolysis with alteplase",
+      "Dual antiplatelet therapy only",
+      "IV fluids and monitoring",
+      "Morphine and GTN spray"
+    ],
+    correctAnswer: 0,
+    explanation: "This is an inferior STEMI with cardiogenic shock (hypotension). Primary PCI is the gold standard treatment for STEMI when available within 90 minutes, especially in hemodynamically unstable patients.",
+    learningObjectives: [
+      "Recognize STEMI presentation and ECG changes",
+      "Apply appropriate reperfusion strategies",
+      "Manage cardiogenic shock in acute MI"
+    ],
+    gmcOutcomes: [
+      "Emergency cardiovascular care",
+      "ECG interpretation",
+      "Time-critical decision making"
+    ],
+    references: [
+      "ESC Guidelines for STEMI 2023",
+      "NICE CG167: Myocardial infarction"
+    ],
+    tags: ["STEMI", "PCI", "cardiogenic-shock", "emergency"],
+    estimatedTime: 120,
+    lastReviewed: "2024-02-15",
+    reviewedBy: "Dr. James Mitchell, Cardiologist"
+  },
+
+  {
+    id: 'cardio002',
+    category: 'cardiovascular',
+    subcategory: 'heart-failure',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Medical Ward',
+    ageGroup: 'Elderly',
+    stem: "A 72-year-old woman with known heart failure (EF 30%) presents with worsening breathlessness, ankle swelling, and weight gain of 3kg over 1 week. She is currently on ramipril, bisoprolol, and furosemide. What is the most appropriate next step?",
+    options: [
+      "Increase furosemide dose",
+      "Add spironolactone",
+      "Start digoxin",
+      "IV dobutamine infusion",
+      "Reduce fluid intake only"
+    ],
+    correctAnswer: 0,
+    explanation: "This represents acute decompensated heart failure. Increasing loop diuretic dose is the first-line approach to manage fluid overload and symptom relief.",
+    learningObjectives: [
+      "Recognize heart failure decompensation",
+      "Apply diuretic management principles",
+      "Understand fluid balance in heart failure"
+    ],
+    gmcOutcomes: [
+      "Chronic disease management",
+      "Pharmacological knowledge",
+      "Clinical assessment skills"
+    ],
+    references: [
+      "ESC Heart Failure Guidelines 2023",
+      "NICE CG108: Chronic heart failure"
+    ],
+    tags: ["heart-failure", "diuretics", "fluid-overload", "elderly"],
+    estimatedTime: 90,
+    lastReviewed: "2024-02-15",
+    reviewedBy: "Dr. Sarah Chen, Cardiologist"
+  },
+
+  {
+    id: 'resp001',
+    category: 'respiratory',
+    subcategory: 'asthma-copd',
+    cognitiveLevel: 'application',
+    difficulty: 'foundation',
+    clinicalSetting: 'GP Surgery',
+    ageGroup: 'Adult',
+    stem: "A 35-year-old teacher presents with episodes of wheeze and breathlessness, particularly at night and early morning. Peak flow diary shows 20% diurnal variation. Spirometry shows reversible obstruction. What is the most appropriate initial treatment?",
+    options: [
+      "Short-acting beta-agonist (SABA) only",
+      "SABA plus low-dose inhaled corticosteroid",
+      "Long-acting beta-agonist (LABA) only",
+      "Oral prednisolone course",
+      "Leukotriene receptor antagonist"
+    ],
+    correctAnswer: 1,
+    explanation: "This is newly diagnosed asthma. Current guidelines recommend starting with SABA plus low-dose ICS as first-line treatment, moving away from SABA-only approaches.",
+    learningObjectives: [
+      "Diagnose asthma using appropriate criteria",
+      "Apply current asthma management guidelines",
+      "Understand inhaled therapy principles"
+    ],
+    gmcOutcomes: [
+      "Primary care management",
+      "Respiratory medicine knowledge",
+      "Evidence-based prescribing"
+    ],
+    references: [
+      "NICE NG80: Asthma diagnosis and management",
+      "BTS/SIGN Asthma Guidelines 2023"
+    ],
+    tags: ["asthma", "diagnosis", "inhaled-therapy", "primary-care"],
+    estimatedTime: 90,
+    lastReviewed: "2024-02-15",
+    reviewedBy: "Dr. Michael Thompson, Respiratory Physician"
+  },
+
+  {
+    id: 'resp002',
+    category: 'respiratory',
+    subcategory: 'pneumonia',
+    cognitiveLevel: 'analysis',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Elderly',
+    stem: "A 78-year-old man presents with confusion, cough, and fever. Chest X-ray shows right lower lobe consolidation. CURB-65 score is 3. Blood pressure is 95/60 mmHg, pulse 110 bpm. What is the most appropriate management?",
+    options: [
+      "Oral amoxicillin and discharge home",
+      "Hospital admission with IV co-amoxiclav",
+      "Hospital admission with IV co-amoxiclav plus clarithromycin",
+      "ICU admission for invasive ventilation",
+      "Oral doxycycline and follow-up"
+    ],
+    correctAnswer: 2,
+    explanation: "CURB-65 score of 3 indicates severe pneumonia requiring hospital admission. Dual antibiotic therapy (beta-lactam plus macrolide) is recommended for severe community-acquired pneumonia.",
+    learningObjectives: [
+      "Apply pneumonia severity assessment tools",
+      "Select appropriate antibiotic therapy",
+      "Recognize criteria for hospital admission"
+    ],
+    gmcOutcomes: [
+      "Emergency medicine skills",
+      "Antimicrobial stewardship",
+      "Risk stratification"
+    ],
+    references: [
+      "NICE CG191: Pneumonia in adults",
+      "BTS Guidelines for CAP 2023"
+    ],
+    tags: ["pneumonia", "CURB-65", "antibiotics", "elderly"],
+    estimatedTime: 120,
+    lastReviewed: "2024-02-15",
+    reviewedBy: "Dr. Lisa Wang, Emergency Medicine"
+  },
+
+  {
+    id: 'gastro001',
+    category: 'gastroenterology',
+    subcategory: 'peptic-ulcer',
+    cognitiveLevel: 'application',
+    difficulty: 'foundation',
+    clinicalSetting: 'GP Surgery',
+    ageGroup: 'Adult',
+    stem: "A 42-year-old man presents with epigastric pain, worse when hungry and at night. H. pylori test is positive. He has no alarm symptoms. What is the most appropriate initial management?",
+    options: [
+      "PPI therapy alone for 8 weeks",
+      "H. pylori eradication triple therapy",
+      "Urgent endoscopy",
+      "H2 receptor antagonist",
+      "Antacid therapy only"
+    ],
+    correctAnswer: 1,
+    explanation: "H. pylori-positive peptic ulcer disease without alarm symptoms should be treated with eradication therapy (PPI + two antibiotics) as first-line management.",
+    learningObjectives: [
+      "Recognize peptic ulcer symptoms",
+      "Apply H. pylori management guidelines",
+      "Understand eradication therapy principles"
+    ],
+    gmcOutcomes: [
+      "Primary care gastroenterology",
+      "Antimicrobial prescribing",
+      "Evidence-based medicine"
+    ],
+    references: [
+      "NICE CG184: Dyspepsia and gastro-oesophageal reflux",
+      "Maastricht VI Guidelines 2022"
+    ],
+    tags: ["peptic-ulcer", "h-pylori", "eradication", "primary-care"],
+    estimatedTime: 90,
+    lastReviewed: "2024-02-15",
+    reviewedBy: "Dr. Robert Harris, Gastroenterologist"
+  },
+
   {
     id: 'paeds001',
     category: 'paediatrics',
