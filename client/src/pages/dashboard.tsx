@@ -68,7 +68,7 @@ export default function Dashboard() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/plab1">
+            <Link href="/plab1-new">
               <Button id="continue-plab1-btn" className="bg-medical-blue hover:bg-blue-700" style={{ backgroundColor: '#2E86AB' }}>
                 Continue PLAB 1
               </Button>
@@ -186,7 +186,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 
-                <Link href="/plab1">
+                <Link href="/plab1-new">
                   <Button id="continue-practice-btn" className="w-full bg-medical-blue" style={{ backgroundColor: '#2E86AB' }}>
                     {user.currentStage === "plab1" ? "Continue Practice" : "Review"}
                   </Button>
@@ -245,7 +245,7 @@ export default function Dashboard() {
           <CardTitle style={{ color: '#000000' }}>Quick Actions</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <Link href="/plab1">
+          <Link href="/plab1-new">
             <Button variant="outline" className="w-full justify-start border-gray-300" style={{ color: '#000000' }}>
               <span className="mr-2">🎯</span>
               Random MCQ Challenge
