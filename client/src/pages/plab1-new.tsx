@@ -471,57 +471,13 @@ export default function PLAB1New() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <Target className="w-6 h-6 text-blue-600" />
-            <h1 className="text-2xl font-bold">PLAB 1 Practice Session</h1>
+            <h1 className="text-xl md:text-2xl font-bold">PLAB 1 Practice Session</h1>
           </div>
           
-          <div className="flex items-center gap-3">
-            {/* Language Toggle */}
-            <div className="flex items-center gap-2">
-              <Languages className="w-4 h-4 text-gray-600" />
-              <Select value={currentLanguage} onValueChange={setCurrentLanguage}>
-                <SelectTrigger className="w-auto min-w-[120px] text-sm">
-                  <SelectValue>
-                    {supportedLanguages.find(lang => lang.code === currentLanguage)?.flag} {supportedLanguages.find(lang => lang.code === currentLanguage)?.name}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  {supportedLanguages.map((language) => (
-                    <SelectItem key={language.code} value={language.code}>
-                      <div className="flex items-center gap-2">
-                        <span>{language.flag}</span>
-                        <span>{language.name}</span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              
-              {currentLanguage !== 'en' && (
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowTranslation(!showTranslation)}
-                    className={`gap-1 text-xs ${showTranslation ? 'bg-blue-100 text-blue-700' : 'text-gray-600'}`}
-                  >
-                    <Globe className="w-3 h-3" />
-                    {showTranslation ? 'Hide Translation' : 'Show Translation'}
-                  </Button>
-                  {isTranslating && (
-                    <div className="flex items-center gap-1 text-xs text-blue-600">
-                      <div className="animate-spin w-3 h-3 border border-blue-600 border-t-transparent rounded-full"></div>
-                      Translating...
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-            
-            <Button variant="outline" onClick={endSession} className="gap-2">
-              <Home className="w-4 h-4" />
-              End Session
-            </Button>
-          </div>
+          <Button variant="outline" onClick={endSession} className="gap-2">
+            <Home className="w-4 h-4" />
+            <span className="hidden sm:inline">End Session</span>
+          </Button>
         </div>
 
         {/* Progress Bar */}
@@ -548,6 +504,51 @@ export default function PLAB1New() {
             Accuracy: {stats.accuracy}%
           </span>
         </div>
+      </div>
+
+      {/* Language Controls - Mobile Friendly Position */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4 p-3 bg-gray-50 rounded-lg">
+        <div className="flex items-center gap-2">
+          <Languages className="w-4 h-4 text-gray-600" />
+          <span className="text-sm font-medium text-gray-700">Language:</span>
+          <Select value={currentLanguage} onValueChange={setCurrentLanguage}>
+            <SelectTrigger className="w-auto min-w-[140px] text-sm">
+              <SelectValue>
+                {supportedLanguages.find(lang => lang.code === currentLanguage)?.flag} {supportedLanguages.find(lang => lang.code === currentLanguage)?.name}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {supportedLanguages.map((language) => (
+                <SelectItem key={language.code} value={language.code}>
+                  <div className="flex items-center gap-2">
+                    <span>{language.flag}</span>
+                    <span>{language.name}</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        
+        {currentLanguage !== 'en' && (
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowTranslation(!showTranslation)}
+              className={`gap-1 text-xs ${showTranslation ? 'bg-blue-100 text-blue-700' : 'text-gray-600'}`}
+            >
+              <Globe className="w-3 h-3" />
+              {showTranslation ? 'Hide Translation' : 'Show Translation'}
+            </Button>
+            {isTranslating && (
+              <div className="flex items-center gap-1 text-xs text-blue-600">
+                <div className="animate-spin w-3 h-3 border border-blue-600 border-t-transparent rounded-full"></div>
+                Translating...
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Question Card */}
