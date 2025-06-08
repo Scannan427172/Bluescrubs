@@ -159,6 +159,24 @@ input::placeholder {
   color: white !important;
 }
 
+/* Force all text in gradient backgrounds to be white */
+.bg-gradient-to-br *,
+.bg-gradient-to-r *,
+.bg-gradient-to-l *,
+.bg-gradient-to-t *,
+.bg-gradient-to-b *,
+[class*="gradient"] * {
+  color: white !important;
+}
+
+/* Specific targeting for dark background sections */
+.from-slate-900 *,
+.from-blue-900 *,
+.from-purple-900 *,
+.from-indigo-900 * {
+  color: white !important;
+}
+
 /* Override any conflicting styles for hero section */
 .hero-text.text-white,
 .hero-text .text-white,
