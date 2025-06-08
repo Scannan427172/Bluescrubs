@@ -17,11 +17,11 @@ export function Navigation({ user }: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigation = [
-    { name: "Dashboard", href: "/", icon: Home, current: location === "/" },
+    { name: "Dashboard", href: "/dashboard", icon: Home, current: location === "/dashboard" },
+    { name: "PLAB 1", href: "/plab1-new", icon: BookOpen, current: location === "/plab1-new" },
+    { name: "PLAB 2", href: "/plab2-osce", icon: Video, current: location === "/plab2-osce" },
     { name: "Learning Path", href: "/personalized-paths", icon: Route, current: location === "/personalized-paths" },
     { name: "Global Exams", href: "/global-practice", icon: Flag, current: location === "/global-practice" },
-    { name: "PLAB (UK)", href: "/plab1-new", icon: BookOpen, current: location === "/plab1-new" },
-    { name: "Video OSCE", href: "/video-osce", icon: Video, current: location === "/video-osce" },
     { name: "Languages", href: "/language-demo", icon: Accessibility, current: location === "/language-demo" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Brain, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },
