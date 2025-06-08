@@ -149,6 +149,15 @@ input::placeholder {
   color: #1f2937 !important;
 }
 
+/* Force white text for auth page hero section */
+#subtext {
+  color: #ffffff !important;
+}
+
+.bg-gradient-to-br.from-blue-600 p {
+  color: #ffffff !important;
+}
+
 /* Hero banner text should be white */
 .hero-text,
 .hero-text *,
