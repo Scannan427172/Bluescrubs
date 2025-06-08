@@ -119,20 +119,48 @@ export default function WhoAreNHSprep() {
             <CardContent className="space-y-4">
               <div className="space-y-3 text-gray-700">
                 <p>
-                  <strong>The Builder:</strong> Keith brings years of professional app development experience, specializing in creating innovative digital solutions that solve real-world problems.
+                  <strong>Multidisciplinary Creative:</strong> Keith is a freelance digital creative based in Manchester with over 20 years of commercial experience spanning web development, print design, motion graphics, and identity design.
                 </p>
                 <p>
-                  <strong>Creative Talent:</strong> His technical expertise and creative approach to problem-solving made him the perfect partner to transform Yasa's vision into a functional, user-friendly platform.
+                  <strong>Technical Expertise:</strong> Equally skilled in web design and development as well as creating printed collateral for corporate and product design, Keith brings comprehensive digital creative abilities to the partnership.
                 </p>
                 <p>
-                  <strong>Professional Portfolio:</strong> Keith's extensive experience in app development provides the technical foundation that makes NHSprep's advanced features possible.
+                  <strong>Creative Approach:</strong> Keith combines a relaxed, informal approach to problem-solving with lateral thinking during brainstorming sessions, encouraging innovative solutions that might initially seem unconventional.
+                </p>
+                <p>
+                  <strong>Core Specialties:</strong> Identity & branding, typography, graphic design, web development, and creative direction - providing the complete technical foundation for NHSprep's user experience.
                 </p>
               </div>
               
-              <div className="flex items-center gap-2 p-3 bg-purple-100 rounded-lg">
+              <div className="space-y-3 mt-4">
+                <div className="bg-purple-100 p-3 rounded-lg">
+                  <h5 className="font-semibold text-purple-800 mb-2 flex items-center gap-2">
+                    <Code className="w-4 h-4" />
+                    Development & Design Expertise
+                  </h5>
+                  <ul className="text-sm text-purple-700 space-y-1">
+                    <li>• Web Design & Development</li>
+                    <li>• Identity & Branding Solutions</li>
+                    <li>• Typography & Color Direction</li>
+                    <li>• Motion Graphics & Print Design</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h5 className="font-semibold text-purple-800 mb-2 flex items-center gap-2">
+                    <Lightbulb className="w-4 h-4" />
+                    Creative Philosophy
+                  </h5>
+                  <p className="text-sm text-purple-700">
+                    Keith's brainstorming approach combines lateral thinking with problem-solving, encouraging unconventional ideas that can be crafted into original, creative solutions.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 p-3 bg-purple-100 rounded-lg mt-4">
                 <Target className="w-5 h-5 text-purple-600" />
                 <span className="text-sm font-medium text-purple-700">
-                  Dedicated to building technology that makes a difference
+                  20+ years creating digital solutions across multiple disciplines
                 </span>
               </div>
 

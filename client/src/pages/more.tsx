@@ -227,26 +227,35 @@ export default function More() {
           <h2 className="text-xl font-bold text-gray-900 mb-6">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {features.map((feature, index) => {
-              const CardComponent = feature.link ? Link : "div";
-              const cardProps = feature.link ? { href: feature.link } : {};
+              const cardContent = (
+                <Card className="bg-blue-50 hover:bg-blue-100 transition-colors cursor-pointer border-blue-200">
+                  <CardContent className="flex items-center p-6">
+                    <div className="p-3 bg-blue-500/20 rounded-lg mr-4">
+                      <feature.icon className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 mb-1">{feature.title}</h3>
+                      <p className="text-gray-600 text-sm">{feature.description}</p>
+                    </div>
+                    {feature.hasArrow && (
+                      <ChevronRight className="h-5 w-5 text-gray-400" />
+                    )}
+                  </CardContent>
+                </Card>
+              );
+              
+              if (feature.link) {
+                return (
+                  <Link key={index} href={feature.link}>
+                    {cardContent}
+                  </Link>
+                );
+              }
               
               return (
-                <CardComponent key={index} {...cardProps}>
-                  <Card className="bg-blue-50 hover:bg-blue-100 transition-colors cursor-pointer border-blue-200">
-                    <CardContent className="flex items-center p-6">
-                      <div className="p-3 bg-blue-500/20 rounded-lg mr-4">
-                        <feature.icon className="h-6 w-6 text-blue-600" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900 mb-1">{feature.title}</h3>
-                        <p className="text-gray-600 text-sm">{feature.description}</p>
-                      </div>
-                      {feature.hasArrow && (
-                        <ChevronRight className="h-5 w-5 text-gray-400" />
-                      )}
-                    </CardContent>
-                  </Card>
-                </CardComponent>
+                <div key={index}>
+                  {cardContent}
+                </div>
               );
             })}
           </div>
