@@ -296,10 +296,11 @@ export default function Auth() {
           }}>
             Start Your NHS Journey Today
           </h2>
-          <p id="subtext" className="text-lg sm:text-xl mb-8 sm:mb-12 font-bold" style={{ 
-            color: '#ffffff', 
-            WebkitTextFillColor: '#ffffff',
-            textShadow: 'none'
+          <p id="subtext" className="auth-subtitle text-lg sm:text-xl mb-8 sm:mb-12 font-bold" style={{ 
+            color: '#ffffff !important', 
+            WebkitTextFillColor: '#ffffff !important',
+            textShadow: 'none !important',
+            opacity: '1 !important'
           }}>
             Join 15,000+ medical professionals who trust our platform
           </p>
