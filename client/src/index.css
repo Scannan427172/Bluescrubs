@@ -224,17 +224,36 @@ input::placeholder {
   -webkit-text-fill-color: white !important;
 }
 
-/* Ultimate override for all h3 elements in the global section */
+/* Ultimate override for all h3 and h4 elements in the global section */
 .bg-gradient-to-br h3,
+.bg-gradient-to-br h4,
 .from-indigo-900 h3,
+.from-indigo-900 h4,
 .via-purple-900 h3,
-.to-blue-900 h3 {
+.via-purple-900 h4,
+.to-blue-900 h3,
+.to-blue-900 h4 {
   color: white !important;
   -webkit-text-fill-color: white !important;
 }
 
 /* Target the exact Card component structure */
 [class*="bg-gradient-to-br"] [class*="CardContent"] h3 {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Specific targeting for Advanced Global Features section */
+.text-white h4,
+h4.text-white,
+[class*="text-white"] h4 {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Override any dark text in gradient backgrounds */
+.bg-gradient-to-br h4,
+[class*="bg-gradient"] h4 {
   color: white !important;
   -webkit-text-fill-color: white !important;
 }
