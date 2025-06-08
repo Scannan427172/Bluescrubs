@@ -119,7 +119,7 @@ export default function WhoAreNHSprep() {
             <CardContent className="space-y-4">
               <div className="space-y-3 text-gray-700">
                 <p>
-                  <strong>Multidisciplinary Creative:</strong> Keith is a freelance digital creative based in Manchester with over 20 years of commercial experience spanning web development, print design, motion graphics, and identity design.
+                  <strong>Multidisciplinary Creative:</strong> Keith is a freelance digital creative based in Manchester with 35 years of commercial experience spanning web development, print design, motion graphics, and identity design.
                 </p>
                 <p>
                   <strong>Technical Expertise:</strong> Equally skilled in web design and development as well as creating printed collateral for corporate and product design, Keith brings comprehensive digital creative abilities to the partnership.
@@ -162,7 +162,7 @@ export default function WhoAreNHSprep() {
               <div className="flex items-center gap-2 p-3 bg-purple-100 rounded-lg mt-4">
                 <Target className="w-5 h-5 text-purple-600" />
                 <span className="text-sm font-medium text-purple-700">
-                  20+ years creating digital solutions across multiple disciplines
+                  35 years creating digital solutions across multiple disciplines
                 </span>
               </div>
 
