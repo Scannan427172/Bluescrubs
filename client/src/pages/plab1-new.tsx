@@ -32,6 +32,15 @@ export default function PLAB1New() {
   // Language settings
   const [currentLanguage, setCurrentLanguage] = useState<string>('en');
   const [showTranslation, setShowTranslation] = useState(false);
+
+  // Auto-enable translations when non-English language is selected
+  useEffect(() => {
+    if (currentLanguage !== 'en') {
+      setShowTranslation(true);
+    } else {
+      setShowTranslation(false);
+    }
+  }, [currentLanguage]);
   
   // Available languages for medical education
   const supportedLanguages = [
@@ -488,15 +497,23 @@ export default function PLAB1New() {
               </Select>
               
               {currentLanguage !== 'en' && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowTranslation(!showTranslation)}
-                  className={`gap-1 text-xs ${showTranslation ? 'bg-blue-100 text-blue-700' : 'text-gray-600'}`}
-                >
-                  <Globe className="w-3 h-3" />
-                  {showTranslation ? 'Hide Translation' : 'Show Translation'}
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowTranslation(!showTranslation)}
+                    className={`gap-1 text-xs ${showTranslation ? 'bg-blue-100 text-blue-700' : 'text-gray-600'}`}
+                  >
+                    <Globe className="w-3 h-3" />
+                    {showTranslation ? 'Hide Translation' : 'Show Translation'}
+                  </Button>
+                  {isTranslating && (
+                    <div className="flex items-center gap-1 text-xs text-blue-600">
+                      <div className="animate-spin w-3 h-3 border border-blue-600 border-t-transparent rounded-full"></div>
+                      Translating...
+                    </div>
+                  )}
+                </div>
               )}
             </div>
             
