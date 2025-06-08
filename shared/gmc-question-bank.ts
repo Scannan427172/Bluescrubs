@@ -536,6 +536,121 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     estimatedTime: 75,
     lastReviewed: "2024-02-01",
     reviewedBy: "Dr. Lucy Foster, Paediatrician"
+  },
+
+  // Surgery Questions
+  {
+    id: 'surg001',
+    category: 'surgery',
+    subcategory: 'acute-abdomen',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Adult',
+    stem: "A 35-year-old woman presents with sudden onset severe right iliac fossa pain, nausea, and vomiting. She has a low-grade fever and tenderness with guarding in the right iliac fossa. White cell count is 14,000/μL. What is the most likely diagnosis?",
+    options: [
+      "Ovarian cyst rupture",
+      "Acute appendicitis",
+      "Ectopic pregnancy",
+      "Urinary tract infection",
+      "Gastroenteritis"
+    ],
+    correctAnswer: 1,
+    explanation: "The clinical presentation of right iliac fossa pain with fever, leucocytosis, and localized tenderness with guarding is classic for acute appendicitis. The Alvarado score would be high in this case.",
+    learningObjectives: [
+      "Recognize clinical presentation of acute appendicitis",
+      "Understand differential diagnosis of acute abdomen",
+      "Apply clinical scoring systems"
+    ],
+    gmcOutcomes: [
+      "Emergency medicine competence",
+      "Clinical assessment skills",
+      "Surgical decision-making"
+    ],
+    references: [
+      "NICE CG141: Appendicitis",
+      "RCS Guidelines for Emergency Surgery"
+    ],
+    tags: ["appendicitis", "acute-abdomen", "emergency-surgery"],
+    estimatedTime: 90,
+    lastReviewed: "2024-02-15",
+    reviewedBy: "Mr. James Wilson, Consultant General Surgeon"
+  },
+
+  {
+    id: 'surg002',
+    category: 'surgery',
+    subcategory: 'gallbladder',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Elderly',
+    stem: "A 65-year-old obese woman presents with severe right upper quadrant pain radiating to the back, fever (38.5°C), and jaundice. Murphy's sign is positive. What is the most appropriate immediate management?",
+    options: [
+      "Oral antibiotics and discharge",
+      "IV antibiotics and urgent cholecystectomy within 72 hours",
+      "Conservative management with analgesia only",
+      "ERCP within 24 hours",
+      "Percutaneous cholecystostomy"
+    ],
+    correctAnswer: 1,
+    explanation: "This presentation suggests acute cholangitis (Charcot's triad: fever, jaundice, RUQ pain). Current guidelines recommend IV antibiotics and urgent cholecystectomy within 72 hours for acute cholecystitis with complications.",
+    learningObjectives: [
+      "Recognize acute cholangitis presentation",
+      "Understand timing of surgical intervention",
+      "Apply emergency surgery guidelines"
+    ],
+    gmcOutcomes: [
+      "Emergency surgical management",
+      "Clinical decision-making",
+      "Patient safety prioritization"
+    ],
+    references: [
+      "NICE CG188: Gallstone disease",
+      "Tokyo Guidelines for Acute Cholangitis"
+    ],
+    tags: ["cholangitis", "gallbladder", "emergency-surgery", "jaundice"],
+    estimatedTime: 120,
+    lastReviewed: "2024-02-15",
+    reviewedBy: "Mr. Sarah Chen, Consultant HPB Surgeon"
+  },
+
+  {
+    id: 'surg003',
+    category: 'surgery',
+    subcategory: 'hernia',
+    cognitiveLevel: 'knowledge',
+    difficulty: 'foundation',
+    clinicalSetting: 'Outpatient Clinic',
+    ageGroup: 'Adult',
+    stem: "A 45-year-old manual worker presents with a reducible swelling in the groin that appears on standing and disappears when lying down. On examination, the swelling is above and medial to the pubic tubercle. What type of hernia is this?",
+    options: [
+      "Femoral hernia",
+      "Inguinal hernia (direct)",
+      "Inguinal hernia (indirect)",
+      "Umbilical hernia",
+      "Incisional hernia"
+    ],
+    correctAnswer: 2,
+    explanation: "An inguinal hernia that is above and medial to the pubic tubercle, and is reducible, is most likely an indirect inguinal hernia. The relationship to the pubic tubercle is key to differentiating inguinal from femoral hernias.",
+    learningObjectives: [
+      "Differentiate types of groin hernias",
+      "Understand anatomical landmarks",
+      "Recognize clinical presentations"
+    ],
+    gmcOutcomes: [
+      "Clinical examination skills",
+      "Anatomical knowledge application",
+      "Surgical diagnosis"
+    ],
+    references: [
+      "NICE CG138: Inguinal hernia management",
+      "European Hernia Society Guidelines"
+    ],
+    tags: ["hernia", "groin", "anatomy", "examination"],
+    estimatedTime: 75,
+    lastReviewed: "2024-02-15",
+    reviewedBy: "Mr. David Kumar, Consultant General Surgeon"
   }
 ];
 
@@ -553,7 +668,7 @@ export const GMC_CATEGORIES_DISTRIBUTION = {
   'psychiatry': { target: 8, current: 1 },
   'obstetrics-gynaecology': { target: 10, current: 1 },
   'paediatrics': { target: 12, current: 1 },
-  'surgery': { target: 10, current: 0 },
+  'surgery': { target: 10, current: 3 },
   'emergency-medicine': { target: 8, current: 0 },
   'ethics-law': { target: 4, current: 0 },
   'public-health': { target: 4, current: 0 },

@@ -18,7 +18,7 @@ export default function GMCPractice() {
   const [userAnswers, setUserAnswers] = useState<(number | null)[]>([]);
   const [timeSpent, setTimeSpent] = useState(0);
   const [sessionStarted, setSessionStarted] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('cardiovascular');
+  const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('respiratory');
   const [sessionQuestions, setSessionQuestions] = useState<GMCQuestion[]>([]);
   const [examType, setExamType] = useState<'plab1' | 'plab2'>('plab1');
 
@@ -31,7 +31,8 @@ export default function GMCPractice() {
     { value: 'endocrinology', label: 'Endocrinology', count: GMC_QUESTION_BANK.filter(q => q.category === 'endocrinology').length },
     { value: 'psychiatry', label: 'Psychiatry', count: GMC_QUESTION_BANK.filter(q => q.category === 'psychiatry').length },
     { value: 'obstetrics-gynaecology', label: 'Obstetrics & Gynaecology', count: GMC_QUESTION_BANK.filter(q => q.category === 'obstetrics-gynaecology').length },
-    { value: 'paediatrics', label: 'Paediatrics', count: GMC_QUESTION_BANK.filter(q => q.category === 'paediatrics').length }
+    { value: 'paediatrics', label: 'Paediatrics', count: GMC_QUESTION_BANK.filter(q => q.category === 'paediatrics').length },
+    { value: 'surgery', label: 'Surgery', count: GMC_QUESTION_BANK.filter(q => q.category === 'surgery').length }
   ];
 
   useEffect(() => {
