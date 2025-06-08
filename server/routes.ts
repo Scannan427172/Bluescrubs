@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { questionGenerator } from "./ai-question-generator";
 import { communitySystem } from "./community-contribution";
+import { analyzeVideoPerformance } from "./ai-analysis";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -159,6 +160,151 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     } catch (error) {
       res.status(500).json({ error: "Specialty expansion failed" });
+    }
+  });
+
+  // Video OSCE Analysis Route
+  app.post("/api/ai/analyze-video", async (req, res) => {
+    try {
+      const { stationTitle, stationCategory, learningObjectives, recordingDuration } = req.body;
+      
+      if (!stationTitle || !stationCategory || !learningObjectives || !recordingDuration) {
+        return res.status(400).json({ error: "Missing required parameters" });
+      }
+
+      const analysis = await analyzeVideoPerformance(
+        stationTitle,
+        stationCategory,
+        learningObjectives,
+        recordingDuration
+      );
+
+      res.json(analysis);
+      
+    } catch (error) {
+      console.error("Video analysis error:", error);
+      res.status(500).json({ error: "Failed to analyze video" });
+    }
+  });
+
+  // OSCE Stations API Routes
+  app.get("/api/osce/stations", async (req, res) => {
+    try {
+      const stations = [
+        {
+          id: 1,
+          title: "History Taking - Chest Pain",
+          category: "History Taking",
+          difficulty: "Beginner",
+          duration: 8,
+          description: "Take focused history from patient presenting with acute chest pain",
+          patientInfo: {
+            name: "Mr. John Smith",
+            age: 45,
+            occupation: "Accountant",
+            background: "Presented to A&E with 2-hour history of central chest pain"
+          },
+          learningObjectives: [
+            "Obtain relevant history for chest pain",
+            "Assess cardiovascular risk factors", 
+            "Show empathy and professionalism",
+            "Explain next steps clearly"
+          ],
+          completed: true,
+          attempts: 3,
+          bestScore: 92
+        },
+        {
+          id: 2,
+          title: "Breaking Bad News - Cancer Diagnosis",
+          category: "Communication",
+          difficulty: "Advanced",
+          duration: 10,
+          description: "Break news of cancer diagnosis with sensitivity and clear communication",
+          patientInfo: {
+            name: "Mrs. Sarah Williams",
+            age: 52,
+            occupation: "Teacher",
+            background: "Awaiting test results after breast lump investigation"
+          },
+          learningObjectives: [
+            "Use appropriate breaking bad news framework",
+            "Show empathy and emotional support",
+            "Provide clear medical information",
+            "Address patient concerns and questions"
+          ],
+          completed: false,
+          attempts: 1,
+          bestScore: 85
+        }
+      ];
+
+      res.json(stations);
+    } catch (error) {
+      console.error("Error fetching OSCE stations:", error);
+      res.status(500).json({ error: "Failed to fetch stations" });
+    }
+  });
+
+  app.get("/api/users/:userId/osce-attempts", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      
+      // Mock OSCE attempt data
+      const attempts = [
+        {
+          id: 1,
+          stationId: 1,
+          userId: parseInt(userId),
+          score: 92,
+          duration: 480,
+          completedAt: new Date('2024-01-15'),
+          feedback: {
+            strengths: ["Good rapport building", "Systematic approach"],
+            improvements: ["Time management", "Clarifying questions"]
+          }
+        },
+        {
+          id: 2,
+          stationId: 2,
+          userId: parseInt(userId),
+          score: 85,
+          duration: 600,
+          completedAt: new Date('2024-01-10'),
+          feedback: {
+            strengths: ["Empathetic communication", "Clear explanations"],
+            improvements: ["Handling emotional responses", "Follow-up planning"]
+          }
+        }
+      ];
+
+      res.json(attempts);
+    } catch (error) {
+      console.error("Error fetching OSCE attempts:", error);
+      res.status(500).json({ error: "Failed to fetch attempts" });
+    }
+  });
+
+  app.get("/api/users", async (req, res) => {
+    try {
+      // Mock user data
+      const users = [
+        {
+          id: 1,
+          name: "Dr. Sarah Ahmed",
+          email: "sarah.ahmed@example.com",
+          country: "Pakistan",
+          examTarget: "PLAB",
+          studyStreak: 15,
+          totalScore: 1248,
+          createdAt: new Date('2024-01-01')
+        }
+      ];
+
+      res.json(users);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).json({ error: "Failed to fetch users" });
     }
   });
 
