@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 interface NavigationProps {
   user?: { username: string; studyStreak: number } | null;
@@ -21,7 +22,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "PLAB 1", href: "/plab1", icon: BookOpen, current: location === "/plab1" },
     { name: "PLAB 2", href: "/plab2-osce", icon: User, current: location === "/plab2-osce" },
     { name: "Video OSCE", href: "/video-osce", icon: Video, current: location === "/video-osce" },
-    { name: "More", href: "/neurodiverse-support", icon: Accessibility, current: location === "/neurodiverse-support" },
+    { name: "Languages", href: "/language-demo", icon: Accessibility, current: location === "/language-demo" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Brain, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },
     { name: "UK Culture", href: "/cultural-training", icon: Flag, current: location === "/cultural-training" },
@@ -67,7 +68,10 @@ export function Navigation({ user }: NavigationProps) {
             </div>
 
             {/* Right Side */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 lg:space-x-4">
+              {/* Language Toggle */}
+              <LanguageToggle variant="ghost" size="sm" />
+              
               {/* Notifications */}
               <Button variant="ghost" size="sm" className="relative">
                 <Bell className="w-5 h-5 text-gray-600 hover:text-medical-blue" />
