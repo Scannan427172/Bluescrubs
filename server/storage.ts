@@ -10,6 +10,7 @@ import {
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, sql } from "drizzle-orm";
+import { GMC_QUESTION_BANK, getQuestionsByCategory, getRandomQuestions, type GMCQuestion } from "@shared/gmc-question-bank";
 
 export interface IStorage {
   // User management
@@ -23,6 +24,11 @@ export interface IStorage {
   getQuestions(examType: string, category?: string, limit?: number): Promise<Question[]>;
   getQuestion(id: number): Promise<Question | undefined>;
   createQuestion(question: InsertQuestion): Promise<Question>;
+  
+  // GMC Questions
+  getGMCQuestions(): Promise<import("@shared/gmc-question-bank").GMCQuestion[]>;
+  getGMCQuestionsByCategory(category: string): Promise<import("@shared/gmc-question-bank").GMCQuestion[]>;
+  getRandomGMCQuestions(count: number, category?: string): Promise<import("@shared/gmc-question-bank").GMCQuestion[]>;
 
   // User Progress
   getUserProgress(userId: number): Promise<UserProgress[]>;
@@ -107,11 +113,13 @@ export class MemStorage implements IStorage {
     this.users.set(1, demoUser);
     this.currentUserId = 2; // Next user will get ID 2
 
-    // Create sample questions
+    // GMC question bank will be loaded from external source
+    
+    // Create sample questions from GMC bank
     const sampleQuestions: InsertQuestion[] = [
       {
         type: "mcq",
-        category: "cardiology",
+        category: "cardiology", 
         difficulty: "medium",
         content: "A 65-year-old man presents with severe central chest pain that started 2 hours ago. The pain is crushing in nature and radiates to his left arm and jaw. His ECG shows ST elevation in leads II, III, and aVF. What is the most likely diagnosis?",
         options: [
