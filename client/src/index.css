@@ -205,10 +205,38 @@ input::placeholder {
   color: #86efac !important;
 }
 
-/* Force all country names to be white in landing page */
-.country-name,
-.country-title {
+/* Force all country names to be white - highest specificity */
+.bg-gradient-to-br.from-indigo-900 .country-name,
+.bg-gradient-to-br.from-indigo-900 h3.country-name {
   color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Additional override for any text in cards */
+.bg-gradient-to-br.from-indigo-900 [class*="bg-white"] h3 {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Most specific selector for card content */
+.bg-gradient-to-br.from-indigo-900 div[class*="bg-white"] div h3 {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Ultimate override for all h3 elements in the global section */
+.bg-gradient-to-br h3,
+.from-indigo-900 h3,
+.via-purple-900 h3,
+.to-blue-900 h3 {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Target the exact Card component structure */
+[class*="bg-gradient-to-br"] [class*="CardContent"] h3 {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
 }
 
 /* Override any conflicting styles for hero section */
