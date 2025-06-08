@@ -182,8 +182,27 @@ input::placeholder {
 .from-slate-900 *,
 .from-blue-900 *,
 .from-purple-900 *,
-.from-indigo-900 * {
+.from-indigo-900 *,
+.via-purple-900 *,
+.to-blue-900 * {
   color: white !important;
+}
+
+/* Global expansion section specific fixes */
+.bg-gradient-to-br.from-indigo-900 * {
+  color: white !important;
+}
+
+.bg-gradient-to-br.from-indigo-900 .text-purple-300 {
+  color: #d8b4fe !important;
+}
+
+.bg-gradient-to-br.from-indigo-900 .text-gray-300 {
+  color: #d1d5db !important;
+}
+
+.bg-gradient-to-br.from-indigo-900 .text-green-300 {
+  color: #86efac !important;
 }
 
 /* Override any conflicting styles for hero section */
