@@ -21,9 +21,22 @@ export default function PLAB1New() {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [showExplanation, setShowExplanation] = useState(false);
   const [timeSpent, setTimeSpent] = useState(0);
+  const [questionStartTime, setQuestionStartTime] = useState(Date.now());
+  const [questionTimes, setQuestionTimes] = useState<number[]>([]);
+  const [sessionComplete, setSessionComplete] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   
   // Category selection
   const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('all');
+  
+  // Performance analytics
+  const [performanceData, setPerformanceData] = useState({
+    totalSessions: 0,
+    averageAccuracy: 0,
+    strongCategories: [] as string[],
+    weakCategories: [] as string[],
+    improvementTrend: 0
+  });
 
   // Available categories with question counts
   const availableCategories = [
@@ -98,6 +111,12 @@ export default function PLAB1New() {
     const newAnswers = [...userAnswers];
     newAnswers[currentQuestionIndex] = answerIndex;
     setUserAnswers(newAnswers);
+    
+    // Track question timing
+    const questionTime = (Date.now() - questionStartTime) / 1000;
+    const newTimes = [...questionTimes];
+    newTimes[currentQuestionIndex] = questionTime;
+    setQuestionTimes(newTimes);
     setShowExplanation(true);
   };
 
@@ -107,6 +126,11 @@ export default function PLAB1New() {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer("");
       setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+    } else {
+      // Session complete
+      setSessionComplete(true);
+      setShowResults(true);
     }
   };
 
@@ -126,6 +150,57 @@ export default function PLAB1New() {
     setSelectedAnswer("");
     setShowExplanation(false);
     setTimeSpent(0);
+    setSessionComplete(false);
+    setShowResults(false);
+    setQuestionTimes([]);
+  };
+
+  // Calculate comprehensive session results
+  const calculateSessionResults = () => {
+    const answered = userAnswers.filter(answer => answer !== null).length;
+    const correct = userAnswers.filter((answer, index) => 
+      answer !== null && answer === sessionQuestions[index]?.correctAnswer
+    ).length;
+    const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+    
+    // Category performance breakdown
+    const categoryStats = {} as Record<string, { correct: number; total: number; accuracy: number }>;
+    sessionQuestions.forEach((question, index) => {
+      const userAnswer = userAnswers[index];
+      if (userAnswer !== null) {
+        if (!categoryStats[question.category]) {
+          categoryStats[question.category] = { correct: 0, total: 0, accuracy: 0 };
+        }
+        categoryStats[question.category].total++;
+        if (userAnswer === question.correctAnswer) {
+          categoryStats[question.category].correct++;
+        }
+      }
+    });
+
+    Object.keys(categoryStats).forEach(category => {
+      const stats = categoryStats[category];
+      stats.accuracy = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+    });
+
+    // Time analysis
+    const averageTimePerQuestion = questionTimes.length > 0 
+      ? Math.round(questionTimes.reduce((a, b) => a + b, 0) / questionTimes.length) 
+      : 0;
+    const fastestTime = questionTimes.length > 0 ? Math.round(Math.min(...questionTimes)) : 0;
+    const slowestTime = questionTimes.length > 0 ? Math.round(Math.max(...questionTimes)) : 0;
+
+    return {
+      totalQuestions: sessionQuestions.length,
+      answered,
+      correct,
+      accuracy,
+      timeSpent,
+      averageTimePerQuestion,
+      fastestTime,
+      slowestTime,
+      categoryStats
+    };
   };
 
   // Stats calculation
