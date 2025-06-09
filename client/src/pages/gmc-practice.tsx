@@ -11,6 +11,7 @@ import {
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, ExternalLink
 } from "lucide-react";
 import { GMC_QUESTION_BANK, type GMCQuestion, type GMCCategory } from "@shared/gmc-question-bank";
+import { getSourcesForQuestion } from "@shared/educational-sources";
 
 export default function GMCPractice() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -520,37 +521,40 @@ export default function GMCPractice() {
               </div>
 
               {/* Educational Source Links */}
-              {currentQuestion.sourceLinks && currentQuestion.sourceLinks.length > 0 && (
-                <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <ExternalLink className="w-4 h-4 text-green-600" />
-                    <h5 className="font-medium text-green-800">Educational Resources:</h5>
-                  </div>
-                  <div className="space-y-2">
-                    {currentQuestion.sourceLinks.map((link, index) => (
-                      <a
-                        key={index}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
-                      >
-                        <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                        <span className="flex-1">{link.title}</span>
-                        <Badge 
-                          variant="outline" 
-                          className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
+              {(() => {
+                const sources = getSourcesForQuestion(currentQuestion.id);
+                return sources.length > 0 && (
+                  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <ExternalLink className="w-4 h-4 text-green-600" />
+                      <h5 className="font-medium text-green-800">Educational Resources:</h5>
+                    </div>
+                    <div className="space-y-2">
+                      {sources.map((source) => (
+                        <a
+                          key={source.id}
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
                         >
-                          {link.type.toUpperCase()}
-                        </Badge>
-                      </a>
-                    ))}
+                          <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                          <span className="flex-1">{source.title}</span>
+                          <Badge 
+                            variant="outline" 
+                            className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
+                          >
+                            {source.type.toUpperCase()}
+                          </Badge>
+                        </a>
+                      ))}
+                    </div>
+                    <p className="text-xs text-green-600 mt-2">
+                      Click links to access official medical guidelines and educational resources
+                    </p>
                   </div>
-                  <p className="text-xs text-green-600 mt-2">
-                    Click links to access official medical guidelines and educational resources
-                  </p>
-                </div>
-              )}
+                );
+              })()}
             </div>
           )}
         </CardContent>
