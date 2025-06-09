@@ -118,7 +118,7 @@ const generateRealisticOptions = (specialty: string, scenario: string, index: nu
 
 // Generate realistic explanations
 const generateRealisticExplanation = (specialty: string, scenario: string, index: number): string => {
-  const explanations = {
+  const explanations: Record<string, string> = {
     'cardiovascular': `This clinical presentation is consistent with ${scenario}. The management follows current ESC/AHA guidelines emphasizing evidence-based treatment protocols and risk stratification.`,
     'respiratory': `The symptoms and investigations suggest ${scenario}. Treatment should follow BTS/NICE guidelines with appropriate monitoring and follow-up.`,
     'gastroenterology': `This presentation indicates ${scenario}. Management should include appropriate investigation and treatment according to BSG guidelines.`
