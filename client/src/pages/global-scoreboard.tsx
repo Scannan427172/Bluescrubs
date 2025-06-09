@@ -404,49 +404,33 @@ export default function GlobalScoreboard() {
                 {globalScoreboard?.map((user: ScoreboardUser, index: number) => (
                   <div
                     key={user.id}
-                    className={`flex items-center justify-between p-4 rounded-lg border ${
+                    className={`p-4 rounded-lg border ${
                       index < 3 ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200' : 'bg-gray-50'
                     }`}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center w-12">
-                        {getRankDisplay(user.rank)}
-                      </div>
-                      
-                      <div className="flex flex-col">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-gray-900">{user.username}</span>
-                          <Badge variant="outline" className="text-xs">
-                            {user.plabCategory.toUpperCase()}
-                          </Badge>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3 min-w-0 flex-1">
+                        <div className="flex items-center justify-center w-10 h-10 flex-shrink-0">
+                          {getRankDisplay(user.rank)}
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <span>{user.flagEmoji}</span>
-                          <span>{user.city}, {user.country}</span>
-                          <span>•</span>
-                          <span>Country Rank #{user.countryRank}</span>
+                        
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-semibold text-gray-900 truncate">{user.username}</span>
+                            <Badge variant="outline" className="text-xs flex-shrink-0">
+                              {user.plabCategory.toUpperCase()}
+                            </Badge>
+                          </div>
+                          <div className="flex items-center gap-1 text-sm text-gray-600">
+                            <span>{user.flagEmoji}</span>
+                            <span className="truncate">{user.city}, {user.country}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="flex items-center gap-6">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">{user.totalScore}</div>
-                        <div className="text-xs text-gray-500">Points</div>
-                      </div>
-                      
-                      <div className="text-center">
-                        <div className="text-lg font-semibold text-green-600">{user.accuracyRate}%</div>
-                        <div className="text-xs text-gray-500">Accuracy</div>
-                      </div>
-                      
-                      <div className="text-center">
-                        <div className="text-lg font-semibold text-purple-600">{user.studyStreak}</div>
-                        <div className="text-xs text-gray-500">Day Streak</div>
-                      </div>
-                      
-                      <div className="text-center">
-                        <div className="text-sm text-gray-500">{getTimeAgo(user.lastActive)}</div>
+                      <div className="flex flex-col items-end gap-1 flex-shrink-0 ml-3">
+                        <div className="text-xl font-bold text-blue-600">{user.totalScore.toLocaleString()}</div>
+                        <div className="text-sm font-semibold text-green-600">{user.accuracyRate}%</div>
                       </div>
                     </div>
                   </div>
@@ -469,42 +453,30 @@ export default function GlobalScoreboard() {
                 {weeklyLeaderboard?.map((user: WeeklyLeader, index: number) => (
                   <div
                     key={user.id}
-                    className={`flex items-center justify-between p-4 rounded-lg border ${
+                    className={`p-4 rounded-lg border ${
                       index < 3 ? 'bg-gradient-to-r from-green-50 to-blue-50 border-green-200' : 'bg-gray-50'
                     }`}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center w-12">
-                        {getRankDisplay(user.weeklyRank)}
-                      </div>
-                      
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-gray-900">{user.username}</span>
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <span>{user.flagEmoji}</span>
-                          <span>{user.country}</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3 min-w-0 flex-1">
+                        <div className="flex items-center justify-center w-10 h-10 flex-shrink-0">
+                          {getRankDisplay(user.weeklyRank)}
+                        </div>
+                        
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <span className="font-semibold text-gray-900 truncate">{user.username}</span>
+                          <div className="flex items-center gap-1 text-sm text-gray-600">
+                            <span>{user.flagEmoji}</span>
+                            <span className="truncate">{user.country}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="flex items-center gap-6">
-                      <div className="text-center">
+                      <div className="flex flex-col items-end gap-1 flex-shrink-0 ml-3">
                         <div className="text-lg font-bold text-blue-600">{user.questionsThisWeek}</div>
-                        <div className="text-xs text-gray-500">Questions</div>
-                      </div>
-                      
-                      <div className="text-center">
-                        <div className="text-lg font-semibold text-green-600">
+                        <div className="text-sm font-semibold text-green-600">
                           {Math.round((user.correctThisWeek / user.questionsThisWeek) * 100) || 0}%
                         </div>
-                        <div className="text-xs text-gray-500">Accuracy</div>
-                      </div>
-                      
-                      <div className="text-center">
-                        <div className="text-lg font-semibold text-purple-600">
-                          {Math.round(user.studyTimeThisWeek / 60)}h
-                        </div>
-                        <div className="text-xs text-gray-500">Study Time</div>
                       </div>
                     </div>
                   </div>
