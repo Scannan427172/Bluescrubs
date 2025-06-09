@@ -154,30 +154,30 @@ export default function PLAB1Integrated() {
         </div>
 
         {/* Practice Configuration */}
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>Practice Configuration</CardTitle>
+        <Card className="mb-6 bg-white shadow-lg">
+          <CardHeader className="bg-white">
+            <CardTitle className="text-gray-900">Practice Configuration</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="bg-white">
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="category" className="mb-2 block">Category</Label>
+                <Label htmlFor="category" className="mb-2 block text-gray-700 font-medium">Category</Label>
                 <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
+                  <SelectTrigger className="bg-white border-gray-300 text-gray-900">
+                    <SelectValue placeholder="Select category" className="text-gray-900" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">
+                  <SelectContent className="bg-white border-gray-300">
+                    <SelectItem value="all" className="text-gray-900 hover:bg-gray-100">
                       <div className="flex justify-between items-center w-full">
-                        <span>All Categories</span>
-                        <Badge variant="secondary" className="ml-2">{COMPREHENSIVE_FLASHCARD_COLLECTION.length}</Badge>
+                        <span className="text-gray-900">All Categories</span>
+                        <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-800">{COMPREHENSIVE_FLASHCARD_COLLECTION.length}</Badge>
                       </div>
                     </SelectItem>
                     {PLAB1_CATEGORIES.map(category => (
-                      <SelectItem key={category} value={category}>
+                      <SelectItem key={category} value={category} className="text-gray-900 hover:bg-gray-100">
                         <div className="flex justify-between items-center w-full">
-                          <span className="truncate">{category}</span>
-                          <Badge variant="outline" className="ml-2">{categoryQuestionCounts[category] || 0}</Badge>
+                          <span className="truncate text-gray-900">{category}</span>
+                          <Badge variant="outline" className="ml-2 border-gray-300 text-gray-700">{categoryQuestionCounts[category] || 0}</Badge>
                         </div>
                       </SelectItem>
                     ))}
@@ -211,33 +211,33 @@ export default function PLAB1Integrated() {
 
         {/* Progress and Stats */}
         <div className="grid md:grid-cols-4 gap-4 mb-6">
-          <Card>
-            <CardContent className="pt-6">
+          <Card className="bg-white shadow-lg">
+            <CardContent className="pt-6 bg-white">
               <div className="text-2xl font-bold text-blue-600">{currentQuestionIndex + 1}</div>
-              <p className="text-sm text-gray-600">of {questions.length}</p>
+              <p className="text-sm text-gray-700">of {questions.length}</p>
             </CardContent>
           </Card>
           
-          <Card>
-            <CardContent className="pt-6">
+          <Card className="bg-white shadow-lg">
+            <CardContent className="pt-6 bg-white">
               <div className="text-2xl font-bold text-green-600">{score.correct}</div>
-              <p className="text-sm text-gray-600">Correct</p>
+              <p className="text-sm text-gray-700">Correct</p>
             </CardContent>
           </Card>
           
-          <Card>
-            <CardContent className="pt-6">
+          <Card className="bg-white shadow-lg">
+            <CardContent className="pt-6 bg-white">
               <div className="text-2xl font-bold text-orange-600">
                 {score.answered > 0 ? Math.round((score.correct / score.answered) * 100) : 0}%
               </div>
-              <p className="text-sm text-gray-600">Accuracy</p>
+              <p className="text-sm text-gray-700">Accuracy</p>
             </CardContent>
           </Card>
           
-          <Card>
-            <CardContent className="pt-6">
+          <Card className="bg-white shadow-lg">
+            <CardContent className="pt-6 bg-white">
               <div className="text-2xl font-bold text-purple-600">{formatTime(timeElapsed)}</div>
-              <p className="text-sm text-gray-600">Time</p>
+              <p className="text-sm text-gray-700">Time</p>
             </CardContent>
           </Card>
         </div>
@@ -248,10 +248,10 @@ export default function PLAB1Integrated() {
         </div>
 
         {/* Question */}
-        <Card className="mb-6">
-          <CardHeader>
+        <Card className="mb-6 bg-white shadow-lg">
+          <CardHeader className="bg-white">
             <div className="flex items-center justify-between">
-              <Badge variant="secondary">{currentQuestion.category}</Badge>
+              <Badge variant="secondary" className="bg-blue-100 text-blue-800">{currentQuestion.category}</Badge>
               <Badge className={
                 currentQuestion.difficulty === 'beginner' ? 'bg-green-100 text-green-800' :
                 currentQuestion.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800' :
@@ -260,11 +260,11 @@ export default function PLAB1Integrated() {
                 {currentQuestion.difficulty}
               </Badge>
             </div>
-            <CardTitle className="text-xl leading-relaxed">
+            <CardTitle className="text-xl leading-relaxed text-gray-900">
               {currentQuestion.stem}
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="bg-white">
             <RadioGroup value={selectedAnswer?.toString()} onValueChange={(value) => handleAnswerSelect(parseInt(value))}>
               {currentQuestion.options.map((option, index) => (
                 <div key={index} className={`flex items-center space-x-2 p-3 rounded-lg border transition-colors ${
@@ -279,7 +279,7 @@ export default function PLAB1Integrated() {
                     : 'hover:bg-gray-50'
                 }`}>
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
+                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-gray-900 font-medium">
                     {String.fromCharCode(65 + index)}. {option}
                   </Label>
                   {showExplanation && index === currentQuestion.correctAnswer && (
