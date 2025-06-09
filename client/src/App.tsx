@@ -66,6 +66,7 @@ import CulturalBridge from "@/pages/cultural-bridge";
 import NeurodiverseSupport from "@/pages/neurodiverse-support";
 import QuestionBankStatus from "@/pages/question-bank-status";
 import AIGenerationDemo from "@/pages/ai-generation-demo";
+import ClinicalGuides from "@/pages/clinical-guides";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -128,6 +129,14 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <InteractiveFlashcards />
+            </div>
+          </div>
+        </Route>
+        <Route path="/clinical-guides">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <ClinicalGuides />
             </div>
           </div>
         </Route>
