@@ -824,6 +824,204 @@ export const QUICK_CLINICAL_SUMMARIES: QuickClinicalSummary[] = [
       "Rapid deterioration"
     ],
     prognosis: "Good with treatment. 50-80% response to first-line therapy."
+  },
+  {
+    condition: "Pneumonia",
+    category: "Respiratory Medicine",
+    keyFacts: [
+      "Community-acquired pneumonia most common",
+      "Streptococcus pneumoniae leading cause",
+      "CURB-65 score guides management",
+      "Amoxicillin first-line for mild CAP",
+      "Consider atypical organisms in younger patients"
+    ],
+    diagnosticCriteria: [
+      "Fever and cough with purulent sputum",
+      "Focal chest signs",
+      "CXR showing consolidation",
+      "Raised inflammatory markers",
+      "CURB-65 score assessment"
+    ],
+    firstLineManagement: [
+      "Amoxicillin 500mg TDS for mild CAP",
+      "Co-amoxiclav + clarithromycin for severe",
+      "Oxygen if SpO2 <94%",
+      "Analgesia for pleuritic pain",
+      "Safety net advice"
+    ],
+    redFlags: [
+      "CURB-65 score ≥2",
+      "Sepsis",
+      "Respiratory failure",
+      "Bilateral pneumonia",
+      "Immunocompromised patient"
+    ],
+    prognosis: "Good with appropriate antibiotics. Mortality 1-5% for CAP treated in community."
+  },
+  {
+    condition: "Acute Myocardial Infarction",
+    category: "Cardiology",
+    keyFacts: [
+      "Time-critical emergency",
+      "Primary PCI preferred over thrombolysis",
+      "Dual antiplatelet therapy essential",
+      "Door-to-balloon time <90 minutes",
+      "Troponin confirms diagnosis"
+    ],
+    diagnosticCriteria: [
+      "Ischemic chest pain >20 minutes",
+      "ST elevation on ECG",
+      "Elevated troponin",
+      "Regional wall motion abnormality",
+      "Response to nitrates absent"
+    ],
+    firstLineManagement: [
+      "Aspirin 300mg + clopidogrel 600mg",
+      "Atorvastatin 80mg",
+      "Metoprolol if no contraindications",
+      "Primary PCI within 90 minutes",
+      "ACE inhibitor within 24 hours"
+    ],
+    redFlags: [
+      "Cardiogenic shock",
+      "Mechanical complications",
+      "Ventricular arrhythmias",
+      "Complete heart block",
+      "Pericarditis"
+    ],
+    prognosis: "Excellent with timely reperfusion. 30-day mortality <5% with primary PCI."
+  },
+  {
+    condition: "Diabetic Ketoacidosis",
+    category: "Endocrinology",
+    keyFacts: [
+      "Life-threatening emergency",
+      "Usually in Type 1 diabetes",
+      "Infection common precipitant",
+      "Fixed-rate insulin infusion treatment",
+      "Fluid replacement crucial"
+    ],
+    diagnosticCriteria: [
+      "Glucose >11 mmol/L",
+      "Ketones >3 mmol/L",
+      "pH <7.3 or bicarbonate <15",
+      "Dehydration and ketotic breath",
+      "Kussmaul breathing"
+    ],
+    firstLineManagement: [
+      "IV normal saline 500ml/hour",
+      "Fixed-rate insulin 0.1 units/kg/hour",
+      "Potassium replacement",
+      "Treat underlying cause",
+      "HDU/ITU monitoring"
+    ],
+    redFlags: [
+      "Severe dehydration",
+      "Reduced consciousness",
+      "Severe acidosis pH <7.1",
+      "Hypokalaemia <3.5",
+      "Cerebral edema (especially children)"
+    ],
+    prognosis: "Good with appropriate treatment. Mortality <1% in experienced centers."
+  },
+  {
+    condition: "Cellulitis",
+    category: "Dermatology",
+    keyFacts: [
+      "Bacterial skin and soft tissue infection",
+      "Streptococcus pyogenes most common",
+      "Lower limbs most affected",
+      "Oral antibiotics usually sufficient",
+      "Recurrence common in some patients"
+    ],
+    diagnosticCriteria: [
+      "Spreading erythema",
+      "Warmth and tenderness",
+      "Swelling and induration",
+      "Systemic symptoms if severe",
+      "Raised inflammatory markers"
+    ],
+    firstLineManagement: [
+      "Flucloxacillin 500mg QDS",
+      "Clarithromycin if penicillin allergic",
+      "Elevation of affected limb",
+      "Analgesia and rest",
+      "Mark extent of erythema"
+    ],
+    redFlags: [
+      "Necrotizing fasciitis",
+      "Systemic toxicity",
+      "Diabetic foot involvement",
+      "Immunocompromised patient",
+      "Failure to respond to treatment"
+    ],
+    prognosis: "Excellent with appropriate antibiotics. Most resolve within 7-10 days."
+  },
+  {
+    condition: "Gastroenteritis",
+    category: "Gastroenterology",
+    keyFacts: [
+      "Usually viral and self-limiting",
+      "Fluid replacement most important",
+      "Antibiotics rarely indicated",
+      "Campylobacter most common bacterial cause",
+      "Notifiable if food poisoning suspected"
+    ],
+    diagnosticCriteria: [
+      "Acute diarrhea ± vomiting",
+      "Abdominal cramps",
+      "Low-grade fever",
+      "Recent travel or food exposure",
+      "Stool culture if severe"
+    ],
+    firstLineManagement: [
+      "Oral rehydration solution",
+      "Continue normal diet when tolerated",
+      "Loperamide for symptomatic relief",
+      "Probiotics may help",
+      "Hand hygiene advice"
+    ],
+    redFlags: [
+      "Severe dehydration",
+      "Blood in stool",
+      "High fever",
+      "Immunocompromised patient",
+      "Hospital-acquired infection"
+    ],
+    prognosis: "Excellent. Most cases resolve within 3-5 days without treatment."
+  },
+  {
+    condition: "Hypertension",
+    category: "Cardiovascular Medicine",
+    keyFacts: [
+      "Silent killer - often asymptomatic",
+      "ACE inhibitors first-line in most patients",
+      "Target <140/90 in most patients",
+      "ABCD approach to treatment",
+      "Lifestyle modifications essential"
+    ],
+    diagnosticCriteria: [
+      "Clinic BP ≥140/90 on 2+ occasions",
+      "ABPM or HBPM confirmation",
+      "Target organ damage assessment",
+      "Cardiovascular risk calculation",
+      "Secondary cause investigation if severe"
+    ],
+    firstLineManagement: [
+      "ACE inhibitor (ramipril 2.5mg OD)",
+      "Calcium channel blocker if Afro-Caribbean",
+      "Lifestyle advice (diet, exercise, alcohol)",
+      "Annual review",
+      "Statin if 10-year CVD risk >10%"
+    ],
+    redFlags: [
+      "Malignant hypertension >180/120",
+      "End-organ damage",
+      "Secondary hypertension features",
+      "Hypertensive emergency",
+      "Young patient <40 years"
+    ],
+    prognosis: "Excellent with treatment. Reduces stroke risk by 30-40%."
   }
 ];
 

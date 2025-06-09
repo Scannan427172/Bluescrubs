@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { LanguageToggle } from "@/components/LanguageToggle";
 
@@ -20,6 +20,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Dashboard", href: "/dashboard", icon: Home, current: location === "/dashboard" },
     { name: "PLAB 1", href: "/plab1-new", icon: BookOpen, current: location === "/plab1-new" },
     { name: "PLAB 2", href: "/plab2-osce", icon: Video, current: location === "/plab2-osce" },
+    { name: "Clinical Guides", href: "/clinical-guides", icon: FileText, current: location === "/clinical-guides" },
     { name: "Learning Path", href: "/personalized-paths", icon: Route, current: location === "/personalized-paths" },
     { name: "Global Exams", href: "/global-practice", icon: Flag, current: location === "/global-practice" },
     { name: "Languages", href: "/language-demo", icon: Accessibility, current: location === "/language-demo" },
