@@ -886,8 +886,7 @@ const generateCategoryFlashcards = (category: string, count: number): Flashcard[
 };
 
 // Generate comprehensive flashcard collection - PLAB 1 Official Structure (5000+ cards)
-export const COMPREHENSIVE_FLASHCARD_COLLECTION = [
-  ...HIGH_YIELD_MEDICAL_FLASHCARDS,
+const GENERATED_FLASHCARDS = [
   ...generateCategoryFlashcards('Medicine', 800),
   ...generateCategoryFlashcards('Surgery', 600),
   ...generateCategoryFlashcards('Obstetrics & Gynaecology', 500),
@@ -899,23 +898,441 @@ export const COMPREHENSIVE_FLASHCARD_COLLECTION = [
   ...generateCategoryFlashcards('Prescribing and drug interactions', 400)
 ];
 
+// EXPANDED SPECIALTY SECTIONS FOR COMPREHENSIVE MEDICAL EDUCATION
+
+// Additional specialties flashcards
+const DERMATOLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'derm001',
+    category: 'Dermatology',
+    subcategory: 'Inflammatory Skin Conditions',
+    difficulty: 'intermediate',
+    front: {
+      text: "A 25-year-old presents with well-demarcated, silvery-scaled plaques on extensor surfaces of elbows and knees. Family history of similar condition. What is the diagnosis and first-line topical treatment?"
+    },
+    back: {
+      text: "Psoriasis - First-line: Topical corticosteroids + Vitamin D analogues (calcipotriol)",
+      explanation: "Psoriasis is a chronic inflammatory skin condition characterized by well-demarcated, erythematous plaques with silvery scales. Extensor surfaces are commonly affected. Strong genetic component with family history often present.",
+      keyPoints: [
+        "Well-demarcated silvery-scaled plaques",
+        "Extensor surfaces (elbows, knees)",
+        "Auspitz sign (pinpoint bleeding on scale removal)",
+        "First-line: Topical steroids + Vitamin D analogues",
+        "Strong genetic predisposition"
+      ],
+      mnemonics: [
+        "PSORIASIS: Plaques, Silvery scales, Oestrogenic (hormonal triggers), Red patches, Itchy, Auspitz sign, Symmetric, Inherited, Stress-triggered"
+      ]
+    },
+    tags: ['dermatology', 'psoriasis', 'inflammatory', 'topical treatment'],
+    highYield: true,
+    clinicalRelevance: "Very common condition affecting 2-3% of population, important for PLAB",
+    examFrequency: 'very-high'
+  },
+  {
+    id: 'derm002',
+    category: 'Dermatology',
+    subcategory: 'Skin Cancer',
+    difficulty: 'advanced',
+    front: {
+      text: "A 70-year-old farmer presents with a 6mm asymmetric, irregularly bordered, variegated pigmented lesion on his back that has changed over 3 months. What is the most likely diagnosis and urgent management?"
+    },
+    back: {
+      text: "Malignant melanoma - Urgent 2-week wait dermatology referral for excision biopsy",
+      explanation: "ABCDE criteria suggest melanoma: Asymmetry, Border irregularity, Color variation, Diameter >6mm, Evolving. Early detection and treatment crucial for prognosis.",
+      keyPoints: [
+        "ABCDE criteria for melanoma",
+        "Urgent 2-week wait referral",
+        "Excision biopsy for diagnosis",
+        "Risk factors: UV exposure, fair skin, family history",
+        "Prognosis depends on Breslow thickness"
+      ],
+      mnemonics: [
+        "ABCDE: Asymmetry, Border irregularity, Color variation, Diameter >6mm, Evolving"
+      ]
+    },
+    tags: ['dermatology', 'melanoma', 'skin cancer', 'urgent referral'],
+    highYield: true,
+    clinicalRelevance: "Critical for early detection and management of skin cancer",
+    examFrequency: 'very-high'
+  }
+];
+
+const ENDOCRINOLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'endo001',
+    category: 'Endocrinology',
+    subcategory: 'Diabetes Management',
+    difficulty: 'intermediate',
+    front: {
+      text: "A 45-year-old Type 2 diabetic presents with HbA1c 9.2% despite maximum dose metformin. BMI 32. What is the next most appropriate medication to add?"
+    },
+    back: {
+      text: "SGLT-2 inhibitor (e.g., empagliflozin) or GLP-1 agonist - both provide cardiovascular benefits",
+      explanation: "For overweight T2DM patients with suboptimal control on metformin, SGLT-2 inhibitors or GLP-1 agonists are preferred second-line due to weight loss benefits and cardiovascular protection.",
+      keyPoints: [
+        "SGLT-2 inhibitors: weight loss, CV protection",
+        "GLP-1 agonists: weight loss, satiety",
+        "Both reduce major adverse cardiovascular events",
+        "Consider patient BMI and comorbidities",
+        "Target HbA1c <7% (53 mmol/mol)"
+      ],
+      mnemonics: [
+        "SGLT-2: Sugar Goes Lost Through-2 kidneys (glucose excretion via kidneys)"
+      ]
+    },
+    tags: ['endocrinology', 'diabetes', 'SGLT-2', 'GLP-1', 'cardiovascular'],
+    highYield: true,
+    clinicalRelevance: "Essential for modern diabetes management and cardiovascular risk reduction",
+    examFrequency: 'very-high'
+  },
+  {
+    id: 'endo002',
+    category: 'Endocrinology',
+    subcategory: 'Thyroid Disorders',
+    difficulty: 'intermediate',
+    front: {
+      text: "A 35-year-old woman presents with palpitations, weight loss, heat intolerance, and tremor. TSH <0.01, Free T4 45 (9-25). What urgent complication should you assess for?"
+    },
+    back: {
+      text: "Thyroid storm/thyrotoxic crisis - Check for fever, altered consciousness, heart failure",
+      explanation: "Thyroid storm is a life-threatening complication of hyperthyroidism with mortality up to 30%. Requires immediate recognition and treatment with antithyroid drugs, beta-blockers, and corticosteroids.",
+      keyPoints: [
+        "Fever >39°C",
+        "Altered mental state/delirium",
+        "Heart failure/arrhythmias",
+        "Treatment: Carbimazole + Propranolol + Hydrocortisone",
+        "Consider plasmapheresis in severe cases"
+      ],
+      mnemonics: [
+        "STORM: Sweating, Tachycardia, Overheating, Restlessness, Mental confusion"
+      ]
+    },
+    tags: ['endocrinology', 'thyroid', 'emergency', 'thyroid storm'],
+    highYield: true,
+    clinicalRelevance: "Life-threatening emergency requiring immediate recognition",
+    examFrequency: 'high'
+  }
+];
+
+const RHEUMATOLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'rheum001',
+    category: 'Rheumatology',
+    subcategory: 'Inflammatory Arthritis',
+    difficulty: 'intermediate',
+    front: {
+      text: "A 30-year-old woman presents with 6 weeks of morning stiffness >1 hour, symmetrical swelling of MCPJs and PIPJs, and fatigue. What investigations would you order?"
+    },
+    back: {
+      text: "Rheumatoid arthritis suspected - Order RF, anti-CCP antibodies, CRP, ESR, FBC, and hand/foot X-rays",
+      explanation: "Early rheumatoid arthritis presentation. Anti-CCP antibodies are more specific than RF. Early diagnosis and treatment with DMARDs within 3 months improves long-term outcomes.",
+      keyPoints: [
+        "Symmetrical small joint polyarthritis",
+        "Morning stiffness >1 hour",
+        "Anti-CCP more specific than RF",
+        "Early DMARD treatment <3 months",
+        "Methotrexate first-line DMARD"
+      ],
+      mnemonics: [
+        "RHEUMATOID: Red joints, Hot, Erosive, Ulnar deviation, Morning stiffness, ANA, Tender, Ostoarthritis differential, Inflammatory, DMARD treatment"
+      ]
+    },
+    tags: ['rheumatology', 'rheumatoid arthritis', 'DMARD', 'anti-CCP'],
+    highYield: true,
+    clinicalRelevance: "Early diagnosis crucial for preventing joint damage",
+    examFrequency: 'very-high'
+  }
+];
+
+const HEMATOLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'haem001',
+    category: 'Hematology',
+    subcategory: 'Anemia',
+    difficulty: 'intermediate',
+    front: {
+      text: "A 45-year-old vegetarian woman presents with fatigue and pallor. FBC shows Hb 7.8, MCV 68, ferritin 8. What is the most likely cause and management?"
+    },
+    back: {
+      text: "Iron deficiency anemia - Investigate for GI blood loss, start oral iron replacement",
+      explanation: "Microcytic anemia with low ferritin indicates iron deficiency. In adults, must investigate for GI blood loss (especially colorectal cancer). Oral ferrous sulfate 200mg TDS on empty stomach.",
+      keyPoints: [
+        "Microcytic anemia + low ferritin = iron deficiency",
+        "Adults: investigate GI blood loss",
+        "Oral iron 200mg TDS on empty stomach",
+        "Vitamin C enhances absorption",
+        "Response expected in 2-4 weeks"
+      ],
+      mnemonics: [
+        "IRON: Investigate source, Replace with ferrous sulfate, Oral preferred, Needs vitamin C"
+      ]
+    },
+    tags: ['hematology', 'anemia', 'iron deficiency', 'investigation'],
+    highYield: true,
+    clinicalRelevance: "Very common condition requiring systematic approach",
+    examFrequency: 'very-high'
+  }
+];
+
+const INFECTIOUS_DISEASES_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'id001',
+    category: 'Infectious Diseases',
+    subcategory: 'Antimicrobial Resistance',
+    difficulty: 'advanced',
+    front: {
+      text: "A 70-year-old nursing home resident develops UTI. Urine culture shows E.coli resistant to trimethoprim and ciprofloxacin. What is the most appropriate oral antibiotic?"
+    },
+    back: {
+      text: "Nitrofurantoin 100mg BD for 7 days (if eGFR >45) or fosfomycin 3g single dose",
+      explanation: "Nitrofurantoin remains effective against most resistant E.coli strains. Fosfomycin is alternative for resistant UTIs. Avoid fluoroquinolones in elderly due to resistance and side effects.",
+      keyPoints: [
+        "Nitrofurantoin effective against resistant E.coli",
+        "Avoid if eGFR <45 ml/min",
+        "Fosfomycin single-dose alternative",
+        "Ciprofloxacin resistance increasing",
+        "Consider IV treatment if severe"
+      ],
+      mnemonics: [
+        "NITRO: No resistance Issues, Treatment for Resistant Organisms"
+      ]
+    },
+    tags: ['infectious diseases', 'UTI', 'antimicrobial resistance', 'nitrofurantoin'],
+    highYield: true,
+    clinicalRelevance: "Critical for appropriate antibiotic stewardship",
+    examFrequency: 'high'
+  }
+];
+
+const NEPHROLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'neph001',
+    category: 'Nephrology',
+    subcategory: 'Acute Kidney Injury',
+    difficulty: 'intermediate',
+    front: {
+      text: "A 65-year-old diabetic presents with creatinine risen from 120 to 380 μmol/L over 48 hours after contrast CT. Urine output 200ml in 24 hours. What is the immediate management?"
+    },
+    back: {
+      text: "Contrast-induced nephropathy - Stop nephrotoxic drugs, IV fluids, urgent nephrology referral",
+      explanation: "Contrast-induced AKI in high-risk patient (diabetes, pre-existing CKD). Oliguria indicates severe AKI. May require renal replacement therapy. Prevention with pre-hydration and N-acetylcysteine controversial.",
+      keyPoints: [
+        "Stop ACE inhibitors, NSAIDs, metformin",
+        "IV normal saline if not fluid overloaded",
+        "Monitor electrolytes and fluid balance",
+        "Consider dialysis if severe (K+ >6.5, acidosis, fluid overload)",
+        "Nephrology referral within 24 hours"
+      ],
+      mnemonics: [
+        "AEIOU: Acidosis, Electrolytes (K+), Ingestion (toxins), Overload (fluid), Uremia - indications for dialysis"
+      ]
+    },
+    tags: ['nephrology', 'AKI', 'contrast nephropathy', 'dialysis'],
+    highYield: true,
+    clinicalRelevance: "Common hospital complication requiring immediate recognition",
+    examFrequency: 'very-high'
+  }
+];
+
+// Additional advanced specialties for comprehensive coverage
+const GASTROENTEROLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'gastro001',
+    category: 'Gastroenterology',
+    subcategory: 'Inflammatory Bowel Disease',
+    difficulty: 'advanced',
+    front: {
+      text: "A 25-year-old presents with 3 months of bloody diarrhea, weight loss, and abdominal pain. Colonoscopy shows continuous mucosal inflammation from rectum to splenic flexure. What is the diagnosis and first-line treatment?"
+    },
+    back: {
+      text: "Ulcerative colitis - First-line: Mesalazine (5-ASA) with prednisolone for acute flare",
+      explanation: "UC presents with continuous inflammation starting from rectum. Left-sided disease extends to splenic flexure. Treatment depends on severity and extent of disease.",
+      keyPoints: [
+        "Continuous inflammation from rectum",
+        "Bloody diarrhea with mucus",
+        "Mesalazine for maintenance",
+        "Steroids for acute flares",
+        "Increased colorectal cancer risk"
+      ],
+      mnemonics: [
+        "UC: Ulcers Continuous, starts from bottom (rectum) and goes Up"
+      ]
+    },
+    tags: ['gastroenterology', 'IBD', 'ulcerative colitis', 'mesalazine'],
+    highYield: true,
+    clinicalRelevance: "Common GI condition requiring long-term management",
+    examFrequency: 'very-high'
+  }
+];
+
+const PULMONOLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'pulm001',
+    category: 'Pulmonology',
+    subcategory: 'Asthma Management',
+    difficulty: 'intermediate',
+    front: {
+      text: "A 28-year-old asthmatic presents to ED with severe wheeze, unable to complete sentences, peak flow 40% predicted, and oxygen saturation 92%. What is the immediate management?"
+    },
+    back: {
+      text: "Acute severe asthma - High-flow oxygen, nebulized salbutamol + ipratropium, oral prednisolone 40mg",
+      explanation: "Acute severe asthma based on inability to complete sentences and PEF <50% predicted. Requires immediate bronchodilation and systemic steroids.",
+      keyPoints: [
+        "High-flow oxygen to maintain SpO2 94-98%",
+        "Nebulized salbutamol 5mg + ipratropium 500mcg",
+        "Oral prednisolone 40mg or IV hydrocortisone",
+        "Consider IV magnesium if poor response",
+        "Chest X-ray to exclude pneumothorax"
+      ],
+      mnemonics: [
+        "ASTHMA emergency: Airways (bronchodilators), Steroids, Theophylline (if severe), High-flow oxygen, Magnesium, Admit if severe"
+      ]
+    },
+    tags: ['pulmonology', 'asthma', 'emergency', 'bronchodilators'],
+    highYield: true,
+    clinicalRelevance: "Life-threatening emergency requiring immediate recognition",
+    examFrequency: 'very-high'
+  }
+];
+
+const NEUROLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'neuro001',
+    category: 'Neurology',
+    subcategory: 'Stroke Management',
+    difficulty: 'advanced',
+    front: {
+      text: "A 65-year-old presents with sudden onset right-sided weakness and speech difficulty 2 hours ago. NIHSS score 8, no contraindications. What is the most appropriate immediate treatment?"
+    },
+    back: {
+      text: "Acute ischemic stroke - IV alteplase (tPA) within 4.5 hours of symptom onset",
+      explanation: "Acute stroke presenting within thrombolysis window. NIHSS >4 indicates moderate severity warranting thrombolysis. CT head must exclude hemorrhage first.",
+      keyPoints: [
+        "IV tPA within 4.5 hours of onset",
+        "NIHSS score helps assess severity",
+        "CT head to exclude hemorrhage",
+        "Blood pressure <185/110 required",
+        "Thrombectomy if large vessel occlusion"
+      ],
+      mnemonics: [
+        "FAST-ED: Face drooping, Arm weakness, Speech difficulty, Time critical - Emergency Department"
+      ]
+    },
+    tags: ['neurology', 'stroke', 'thrombolysis', 'emergency'],
+    highYield: true,
+    clinicalRelevance: "Time-critical emergency with significant morbidity",
+    examFrequency: 'very-high'
+  }
+];
+
+const ONCOLOGY_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'onco001',
+    category: 'Oncology',
+    subcategory: 'Cancer Screening',
+    difficulty: 'intermediate',
+    front: {
+      text: "A 55-year-old woman asks about breast cancer screening. She has no family history and no symptoms. What screening recommendations would you provide?"
+    },
+    back: {
+      text: "NHS Breast Screening Programme - Mammography every 3 years from age 50-70 (extending to 47-73)",
+      explanation: "UK screening programme invites women aged 50-70 for mammograms every 3 years. Those with family history may need earlier/more frequent screening.",
+      keyPoints: [
+        "Mammography every 3 years age 50-70",
+        "Extending to 47-73 in trial areas",
+        "Family history may warrant earlier screening",
+        "BRCA testing if strong family history",
+        "Self-examination awareness important"
+      ],
+      mnemonics: [
+        "BREAST screening: Before 50 (high risk), Routine 50-70, Everyone invited, Annual if high risk, Screening mammography, Three-yearly"
+      ]
+    },
+    tags: ['oncology', 'screening', 'breast cancer', 'mammography'],
+    highYield: true,
+    clinicalRelevance: "Important for population health and cancer prevention",
+    examFrequency: 'high'
+  }
+];
+
+const GERIATRICS_FLASHCARDS: Flashcard[] = [
+  {
+    id: 'geri001',
+    category: 'Geriatrics',
+    subcategory: 'Falls Assessment',
+    difficulty: 'intermediate',
+    front: {
+      text: "An 80-year-old presents after falling at home twice in the past month. Lives alone, takes 8 medications including antihypertensives. What comprehensive assessment would you perform?"
+    },
+    back: {
+      text: "Multifactorial falls assessment - Medication review, vision check, cognitive assessment, gait/balance testing, cardiovascular examination",
+      explanation: "Falls in elderly require comprehensive assessment addressing multiple risk factors including polypharmacy, vision, cognition, and environmental hazards.",
+      keyPoints: [
+        "Medication review (especially sedatives, antihypertensives)",
+        "Vision and hearing assessment",
+        "Cognitive screening",
+        "Gait and balance assessment",
+        "Home hazard evaluation"
+      ],
+      mnemonics: [
+        "FALLS assessment: Feet (podiatry), Activities (ADLs), Location (home hazards), Level of fitness, Substances (medications)"
+      ]
+    },
+    tags: ['geriatrics', 'falls', 'multifactorial', 'elderly'],
+    highYield: true,
+    clinicalRelevance: "Common presentation with high morbidity in elderly",
+    examFrequency: 'high'
+  }
+];
+
+const COMPREHENSIVE_SPECIALTY_FLASHCARDS = [
+  ...HIGH_YIELD_MEDICAL_FLASHCARDS,
+  ...DERMATOLOGY_FLASHCARDS,
+  ...ENDOCRINOLOGY_FLASHCARDS,
+  ...RHEUMATOLOGY_FLASHCARDS,
+  ...HEMATOLOGY_FLASHCARDS,
+  ...INFECTIOUS_DISEASES_FLASHCARDS,
+  ...NEPHROLOGY_FLASHCARDS,
+  ...GASTROENTEROLOGY_FLASHCARDS,
+  ...PULMONOLOGY_FLASHCARDS,
+  ...NEUROLOGY_FLASHCARDS,
+  ...ONCOLOGY_FLASHCARDS,
+  ...GERIATRICS_FLASHCARDS,
+  ...GENERATED_FLASHCARDS
+];
+
+export const COMPREHENSIVE_FLASHCARD_COLLECTION = COMPREHENSIVE_SPECIALTY_FLASHCARDS;
+
 export const FLASHCARD_STATS = {
-  total: COMPREHENSIVE_FLASHCARD_COLLECTION.length,
+  total: COMPREHENSIVE_SPECIALTY_FLASHCARDS.length,
   byCategory: {
-    'Medicine': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Medicine').length,
-    'Surgery': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Surgery').length,
-    'Obstetrics & Gynaecology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Obstetrics & Gynaecology').length,
-    'Paediatrics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Paediatrics').length,
-    'Psychiatry': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Psychiatry').length,
-    'ENT, Ophthalmology, and Orthopaedics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'ENT, Ophthalmology, and Orthopaedics').length,
-    'Medical ethics, law, and professionalism': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Medical ethics, law, and professionalism').length,
-    'Emergency care': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Emergency care').length,
-    'Prescribing and drug interactions': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Prescribing and drug interactions').length
+    'Medicine': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Medicine').length,
+    'Surgery': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Surgery').length,
+    'Obstetrics & Gynaecology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Obstetrics & Gynaecology').length,
+    'Paediatrics': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Paediatrics').length,
+    'Psychiatry': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Psychiatry').length,
+    'ENT, Ophthalmology, and Orthopaedics': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'ENT, Ophthalmology, and Orthopaedics').length,
+    'Medical ethics, law, and professionalism': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Medical ethics, law, and professionalism').length,
+    'Emergency care': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Emergency care').length,
+    'Prescribing and drug interactions': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Prescribing and drug interactions').length,
+    'Cardiovascular': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Cardiovascular').length,
+    'Dermatology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Dermatology').length,
+    'Endocrinology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Endocrinology').length,
+    'Rheumatology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Rheumatology').length,
+    'Hematology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Hematology').length,
+    'Infectious Diseases': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Infectious Diseases').length,
+    'Nephrology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Nephrology').length,
+    'Gastroenterology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Gastroenterology').length,
+    'Pulmonology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Pulmonology').length,
+    'Neurology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Neurology').length,
+    'Oncology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Oncology').length,
+    'Geriatrics': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Geriatrics').length
   },
   byDifficulty: {
-    'beginner': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.difficulty === 'beginner').length,
-    'intermediate': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.difficulty === 'intermediate').length,
-    'advanced': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.difficulty === 'advanced').length
+    'beginner': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.difficulty === 'beginner').length,
+    'intermediate': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.difficulty === 'intermediate').length,
+    'advanced': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.difficulty === 'advanced').length
   },
-  highYieldCount: COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.highYield).length
+  highYieldCount: COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.highYield).length
 };
