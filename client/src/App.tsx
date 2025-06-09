@@ -9,7 +9,8 @@ import { Footer } from "@/components/footer";
 import Landing from "@/pages/landing";
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
-import Plab2Osce from "@/pages/plab2-osce";
+import Plab2Osce from "@/pages/plab2-osce-fixed";
+import PLAB1Integrated from "@/pages/plab1-integrated";
 import Community from "@/pages/community";
 import NhsPrep from "@/pages/nhs-prep";
 import Onboarding from "@/pages/onboarding";
@@ -112,7 +113,7 @@ function Router() {
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
-              <PLAB1Practice />
+              <PLAB1Integrated />
             </div>
           </div>
         </Route>

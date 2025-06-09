@@ -10,7 +10,7 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages
 } from "lucide-react";
-import { COMPREHENSIVE_MLA_QUESTIONS, MLA_STATS, type MLAQuestion } from "@shared/mla-question-bank";
+import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 
 // Generate realistic clinical question stems
 const generateRealisticStem = (specialty: string, scenario: string, index: number): string => {

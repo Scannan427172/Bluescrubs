@@ -1,0 +1,369 @@
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { 
+  Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages
+} from "lucide-react";
+import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
+
+// Official PLAB 1 Categories - No separate specialties, all integrated
+const PLAB1_CATEGORIES = [
+  "Medicine",
+  "Surgery", 
+  "Obstetrics & Gynaecology",
+  "Paediatrics",
+  "Psychiatry",
+  "ENT, Ophthalmology, and Orthopaedics",
+  "Medical ethics, law, and professionalism",
+  "Emergency care",
+  "Prescribing and drug interactions"
+];
+
+// Convert flashcards to PLAB 1 questions format
+const generatePLAB1Questions = (category: string) => {
+  return COMPREHENSIVE_FLASHCARD_COLLECTION
+    .filter(card => card.category === category)
+    .slice(0, 50) // Limit for demo
+    .map((card, index) => ({
+      id: `${category.toLowerCase().replace(/[^a-z]/g, '')}_${index + 1}`,
+      category: category,
+      stem: card.front.text,
+      options: [
+        card.back.text,
+        ...card.back.keyPoints.slice(0, 3)
+      ].slice(0, 4),
+      correctAnswer: 0,
+      explanation: card.back.explanation,
+      difficulty: card.difficulty,
+      tags: card.tags
+    }));
+};
+
+export default function PLAB1Integrated() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+
+  // Generate questions based on selected category
+  const questions = selectedCategory === "all" 
+    ? PLAB1_CATEGORIES.flatMap(cat => generatePLAB1Questions(cat)).slice(0, 200)
+    : generatePLAB1Questions(selectedCategory);
+
+  const currentQuestion = questions[currentQuestionIndex];
+
+  // Timer logic
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setTimeElapsed(time => time + 1);
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isActive]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleAnswerSelect = (answerIndex: number) => {
+    if (showExplanation) return;
+    setSelectedAnswer(answerIndex);
+  };
+
+  const handleSubmitAnswer = () => {
+    if (selectedAnswer === null) return;
+    
+    setUserAnswers(prev => ({
+      ...prev,
+      [currentQuestion.id]: selectedAnswer
+    }));
+    setShowExplanation(true);
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+      setSelectedAnswer(null);
+      setShowExplanation(false);
+    }
+  };
+
+  const handlePreviousQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prev => prev - 1);
+      setSelectedAnswer(userAnswers[questions[currentQuestionIndex - 1].id] || null);
+      setShowExplanation(!!userAnswers[questions[currentQuestionIndex - 1].id]);
+    }
+  };
+
+  const getScore = () => {
+    const answered = Object.keys(userAnswers).length;
+    const correct = Object.entries(userAnswers).filter(([questionId, answer]) => {
+      const question = questions.find(q => q.id === questionId);
+      return question && answer === question.correctAnswer;
+    }).length;
+    return { answered, correct, total: questions.length };
+  };
+
+  const score = getScore();
+
+  if (!currentQuestion) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">PLAB 1 Practice</h1>
+          <p className="text-gray-600">Select a category to begin practice</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">PLAB 1 Practice</h1>
+          <p className="text-gray-600">Practice questions based on GMC Medical Licensing Assessment guidelines</p>
+        </div>
+
+        {/* Practice Configuration */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>Practice Configuration</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="category" className="mb-2 block">Category</Label>
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Categories</SelectItem>
+                    {PLAB1_CATEGORIES.map(category => (
+                      <SelectItem key={category} value={category}>
+                        {category} ({(FLASHCARD_STATS.byCategory as any)[category] || 0})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="flex items-end gap-2">
+                <Button 
+                  onClick={() => setIsActive(!isActive)}
+                  variant={isActive ? "destructive" : "default"}
+                >
+                  {isActive ? 'Pause' : 'Start'} Timer
+                </Button>
+                <Button 
+                  onClick={() => {
+                    setTimeElapsed(0);
+                    setCurrentQuestionIndex(0);
+                    setUserAnswers({});
+                    setSelectedAnswer(null);
+                    setShowExplanation(false);
+                  }}
+                  variant="outline"
+                >
+                  Reset
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Progress and Stats */}
+        <div className="grid md:grid-cols-4 gap-4 mb-6">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="text-2xl font-bold text-blue-600">{currentQuestionIndex + 1}</div>
+              <p className="text-sm text-gray-600">of {questions.length}</p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="pt-6">
+              <div className="text-2xl font-bold text-green-600">{score.correct}</div>
+              <p className="text-sm text-gray-600">Correct</p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="pt-6">
+              <div className="text-2xl font-bold text-orange-600">
+                {score.answered > 0 ? Math.round((score.correct / score.answered) * 100) : 0}%
+              </div>
+              <p className="text-sm text-gray-600">Accuracy</p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="pt-6">
+              <div className="text-2xl font-bold text-purple-600">{formatTime(timeElapsed)}</div>
+              <p className="text-sm text-gray-600">Time</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mb-6">
+          <Progress value={(currentQuestionIndex / questions.length) * 100} className="h-2" />
+        </div>
+
+        {/* Question */}
+        <Card className="mb-6">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <Badge variant="secondary">{currentQuestion.category}</Badge>
+              <Badge className={
+                currentQuestion.difficulty === 'beginner' ? 'bg-green-100 text-green-800' :
+                currentQuestion.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800' :
+                'bg-red-100 text-red-800'
+              }>
+                {currentQuestion.difficulty}
+              </Badge>
+            </div>
+            <CardTitle className="text-xl leading-relaxed">
+              {currentQuestion.stem}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup value={selectedAnswer?.toString()} onValueChange={(value) => handleAnswerSelect(parseInt(value))}>
+              {currentQuestion.options.map((option, index) => (
+                <div key={index} className={`flex items-center space-x-2 p-3 rounded-lg border transition-colors ${
+                  showExplanation
+                    ? index === currentQuestion.correctAnswer
+                      ? 'bg-green-50 border-green-200'
+                      : selectedAnswer === index && index !== currentQuestion.correctAnswer
+                      ? 'bg-red-50 border-red-200'
+                      : 'bg-gray-50'
+                    : selectedAnswer === index
+                    ? 'bg-blue-50 border-blue-200'
+                    : 'hover:bg-gray-50'
+                }`}>
+                  <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
+                    {String.fromCharCode(65 + index)}. {option}
+                  </Label>
+                  {showExplanation && index === currentQuestion.correctAnswer && (
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                  )}
+                  {showExplanation && selectedAnswer === index && index !== currentQuestion.correctAnswer && (
+                    <XCircle className="w-5 h-5 text-red-600" />
+                  )}
+                </div>
+              ))}
+            </RadioGroup>
+
+            {showExplanation && (
+              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                <h4 className="font-semibold text-blue-900 mb-2">Explanation</h4>
+                <p className="text-blue-800">{currentQuestion.explanation}</p>
+                {currentQuestion.tags && currentQuestion.tags.length > 0 && (
+                  <div className="mt-3">
+                    <p className="text-sm font-medium text-blue-900 mb-1">Tags:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {currentQuestion.tags.map((tag, index) => (
+                        <Badge key={index} variant="outline" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Navigation */}
+        <div className="flex justify-between items-center">
+          <Button
+            onClick={handlePreviousQuestion}
+            disabled={currentQuestionIndex === 0}
+            variant="outline"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Previous
+          </Button>
+
+          <div className="flex gap-2">
+            {!showExplanation ? (
+              <Button
+                onClick={handleSubmitAnswer}
+                disabled={selectedAnswer === null}
+              >
+                Submit Answer
+              </Button>
+            ) : (
+              <Button
+                onClick={handleNextQuestion}
+                disabled={currentQuestionIndex === questions.length - 1}
+              >
+                Next Question
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            )}
+          </div>
+        </div>
+
+        {/* Final Results */}
+        {currentQuestionIndex === questions.length - 1 && showExplanation && (
+          <Card className="mt-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Award className="w-6 h-6 text-yellow-500" />
+                Practice Complete!
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600">{score.correct}/{score.total}</div>
+                  <p className="text-gray-600">Questions Correct</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-green-600">
+                    {Math.round((score.correct / score.total) * 100)}%
+                  </div>
+                  <p className="text-gray-600">Overall Accuracy</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-600">{formatTime(timeElapsed)}</div>
+                  <p className="text-gray-600">Total Time</p>
+                </div>
+              </div>
+              
+              <div className="mt-4">
+                <Progress value={(score.correct / score.total) * 100} className="h-3" />
+                <p className="text-center mt-2 text-sm text-gray-600">
+                  {score.correct / score.total >= 0.7 ? 'Excellent work! You\'re ready for PLAB 1.' :
+                   score.correct / score.total >= 0.5 ? 'Good progress! Keep practicing to improve.' :
+                   'More practice needed. Focus on weak areas.'}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    </div>
+  );
+}
