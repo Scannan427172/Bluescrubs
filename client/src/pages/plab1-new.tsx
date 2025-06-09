@@ -10,6 +10,7 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages
 } from "lucide-react";
+import { Top10Leaderboard } from "@/components/top-10-leaderboard";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 
 // Generate realistic clinical question stems
@@ -841,6 +842,11 @@ export default function PLAB1New() {
           </CardContent>
         </Card>
       )}
+
+      {/* Global Leaderboard */}
+      <div className="mt-8">
+        <Top10Leaderboard />
+      </div>
     </div>
   );
 }
