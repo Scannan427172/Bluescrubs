@@ -56,6 +56,37 @@ const getCategoryQuestionCounts = () => {
 
 const categoryQuestionCounts = getCategoryQuestionCounts();
 
+// Simple translation function for demonstration - in production this would use a translation API
+const translateText = (text: string): string => {
+  // This is a simplified example - in production you'd use Google Translate API or similar
+  const commonTranslations: Record<string, string> = {
+    // Common medical terms
+    "heart": "قلب",
+    "patient": "مريض", 
+    "diagnosis": "تشخيص",
+    "treatment": "علاج",
+    "symptoms": "أعراض",
+    "blood pressure": "ضغط الدم",
+    "chest pain": "ألم في الصدر",
+    "shortness of breath": "ضيق في التنفس",
+    "fever": "حمى",
+    "headache": "صداع",
+    // Common question words
+    "What is the": "ما هو",
+    "Which of the following": "أي مما يلي",
+    "The most likely": "الأكثر احتمالا",
+    "best treatment": "أفضل علاج",
+    "first line": "الخط الأول"
+  };
+  
+  let translated = text;
+  Object.entries(commonTranslations).forEach(([english, native]) => {
+    translated = translated.replace(new RegExp(english, 'gi'), native);
+  });
+  
+  return `[Native] ${translated}`;
+};
+
 export default function PLAB1Integrated() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -64,6 +95,7 @@ export default function PLAB1Integrated() {
   const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [isEnglish, setIsEnglish] = useState(true);
 
   // Generate questions based on selected category
   const questions = selectedCategory === "all" 
@@ -212,18 +244,40 @@ export default function PLAB1Integrated() {
         {/* Question */}
         <Card className="mb-6 bg-white shadow-lg">
           <CardHeader className="bg-white">
-            <div className="flex items-center justify-between">
-              <Badge variant="secondary" className="bg-blue-100 text-blue-800">{currentQuestion.category}</Badge>
-              <Badge className={
-                currentQuestion.difficulty === 'beginner' ? 'bg-green-100 text-green-800' :
-                currentQuestion.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800' :
-                'bg-red-100 text-red-800'
-              }>
-                {currentQuestion.difficulty}
-              </Badge>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary" className="bg-blue-100 text-blue-800">{currentQuestion.category}</Badge>
+                <Badge className={
+                  currentQuestion.difficulty === 'beginner' ? 'bg-green-100 text-green-800' :
+                  currentQuestion.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-red-100 text-red-800'
+                }>
+                  {currentQuestion.difficulty}
+                </Badge>
+              </div>
+              
+              {/* Language Switcher */}
+              <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-1">
+                <Button
+                  variant={isEnglish ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setIsEnglish(true)}
+                  className="text-xs px-3 py-1 h-7"
+                >
+                  🇬🇧 EN
+                </Button>
+                <Button
+                  variant={!isEnglish ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setIsEnglish(false)}
+                  className="text-xs px-3 py-1 h-7"
+                >
+                  🌐 Native
+                </Button>
+              </div>
             </div>
             <CardTitle className="text-xl leading-relaxed text-gray-900">
-              {currentQuestion.stem}
+              {isEnglish ? currentQuestion.stem : translateText(currentQuestion.stem)}
             </CardTitle>
           </CardHeader>
           <CardContent className="bg-white">
@@ -242,7 +296,7 @@ export default function PLAB1Integrated() {
                 }`}>
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
                   <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-gray-900 font-medium">
-                    {String.fromCharCode(65 + index)}. {option}
+                    {String.fromCharCode(65 + index)}. {isEnglish ? option : translateText(option)}
                   </Label>
                   {showExplanation && index === currentQuestion.correctAnswer && (
                     <CheckCircle className="w-5 h-5 text-green-600" />
@@ -256,8 +310,8 @@ export default function PLAB1Integrated() {
 
             {showExplanation && (
               <div className="mt-6 p-4 bg-white border-l-4 border-blue-500 rounded-lg shadow-sm">
-                <h4 className="font-semibold text-gray-900 mb-2">Explanation</h4>
-                <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
+                <h4 className="font-semibold text-gray-900 mb-2">{isEnglish ? 'Explanation' : 'شرح'}</h4>
+                <p className="text-gray-800 leading-relaxed">{isEnglish ? currentQuestion.explanation : translateText(currentQuestion.explanation)}</p>
                 {currentQuestion.tags && currentQuestion.tags.length > 0 && (
                   <div className="mt-3">
                     <p className="text-sm font-medium text-gray-900 mb-1">Tags:</p>
