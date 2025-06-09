@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 import { useQuery } from "@tanstack/react-query";
+import { useI18n } from "@/hooks/useI18n";
 
 // Simple leaderboard component with guaranteed readable text
 const SimpleLeaderboard = () => {
@@ -210,6 +211,7 @@ const translateText = (text: string, targetLang: string): string => {
 };
 
 export default function PLAB1Integrated() {
+  const { currentLanguage, t } = useI18n();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -218,7 +220,6 @@ export default function PLAB1Integrated() {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [sessionStarted, setSessionStarted] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
 
   // Generate questions based on selected category
   const questions = selectedCategory === "all" 
@@ -388,31 +389,20 @@ export default function PLAB1Integrated() {
                 </Badge>
               </div>
               
-              {/* Language Switcher */}
+              {/* Language indicator - controlled by header toggle */}
               <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-1">
-                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                  <SelectTrigger className="w-32 h-7 text-xs bg-white border-gray-300">
-                    <SelectValue>
-                      {SUPPORTED_LANGUAGES[selectedLanguage as keyof typeof SUPPORTED_LANGUAGES]?.flag} {SUPPORTED_LANGUAGES[selectedLanguage as keyof typeof SUPPORTED_LANGUAGES]?.code}
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border-gray-300 max-h-60">
-                    {Object.entries(SUPPORTED_LANGUAGES).map(([code, lang]) => (
-                      <SelectItem key={code} value={code} className="text-xs hover:bg-gray-100">
-                        {lang.flag} {lang.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <div className="px-2 py-1 text-xs text-gray-600">
+                  Language: {currentLanguage === 'en' ? '🇬🇧 EN' : `🌐 ${currentLanguage.toUpperCase()}`}
+                </div>
               </div>
             </div>
             <CardTitle className="text-xl leading-relaxed text-gray-900">
-              {selectedLanguage === "en" ? (
+              {currentLanguage === "en" ? (
                 currentQuestion.stem
               ) : (
                 <div className="space-y-2">
                   <div className="text-gray-900">{currentQuestion.stem}</div>
-                  <div className="text-gray-600 text-base font-normal italic">{translateText(currentQuestion.stem, selectedLanguage)}</div>
+                  <div className="text-gray-600 text-base font-normal italic">{translateText(currentQuestion.stem, currentLanguage)}</div>
                 </div>
               )}
             </CardTitle>

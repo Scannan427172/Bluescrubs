@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Globe, Languages, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -8,6 +8,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { useI18n } from '@/hooks/useI18n';
+
 // Simple language data for the toggle component
 const SUPPORTED_LANGUAGES = [
   { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧' },
@@ -32,14 +34,13 @@ export function LanguageToggle({
   variant = 'ghost',
   size = 'default' 
 }: LanguageToggleProps) {
-  const [currentLanguage, setCurrentLanguage] = useState('en');
+  const { currentLanguage, setLanguage } = useI18n();
   const [isTranslationMode, setIsTranslationMode] = useState(false);
 
   const currentLangData = SUPPORTED_LANGUAGES.find(lang => lang.code === currentLanguage);
 
-  const handleLanguageChange = (langCode: string) => {
-    setCurrentLanguage(langCode);
-    localStorage.setItem('nhsprep_language', langCode);
+  const handleLanguageChange = (langCode: any) => {
+    setLanguage(langCode);
   };
 
   const toggleTranslationMode = () => {
