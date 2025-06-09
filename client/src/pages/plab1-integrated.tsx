@@ -272,7 +272,7 @@ export default function PLAB1Integrated() {
                   onClick={() => setIsEnglish(false)}
                   className="text-xs px-3 py-1 h-7"
                 >
-                  🌐 Native
+                  🌐 Arabic
                 </Button>
               </div>
             </div>
