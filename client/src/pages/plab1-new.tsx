@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 import { getSourcesForQuestion } from "@shared/educational-sources";
+import { GMC_QUESTION_BANK, type GMCQuestion, type GMCCategory } from "@shared/gmc-question-bank";
 
 
 
@@ -126,7 +127,7 @@ const generateRealisticExplanation = (specialty: string, scenario: string, index
   return explanations[specialty] || `This case demonstrates typical features of ${scenario} requiring appropriate clinical management according to current guidelines.`;
 };
 
-const PRACTICE_QUESTIONS: GMCQuestion[] = generateQuestionBank();
+const PRACTICE_QUESTIONS: GMCQuestion[] = GMC_QUESTION_BANK;
 
 export default function PLAB1New() {
   // Session state
