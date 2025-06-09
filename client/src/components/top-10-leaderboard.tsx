@@ -75,11 +75,11 @@ export function Top10Leaderboard() {
       <CardHeader className="pb-3 px-3 md:px-6 md:pb-4">
         <CardTitle className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div className="flex items-center gap-2">
-            <Globe className="h-4 w-4 md:h-5 md:w-5 text-blue-700" />
-            <span className="text-sm md:text-base text-slate-800 font-semibold">Top 10 Global Leaders</span>
+            <Globe className="h-4 w-4 md:h-5 md:w-5 text-blue-800" />
+            <span className="text-sm md:text-base text-black font-semibold">Top 10 Global Leaders</span>
           </div>
           <Link href="/global-scoreboard">
-            <Button variant="outline" size="sm" className="text-xs md:text-sm text-blue-700 border-blue-400 hover:bg-blue-100 w-full sm:w-auto font-medium">
+            <Button variant="outline" size="sm" className="text-xs md:text-sm text-blue-800 border-blue-400 hover:bg-blue-100 w-full sm:w-auto font-medium">
               <span className="hidden sm:inline">View Full Leaderboard</span>
               <span className="sm:hidden">Full Leaderboard</span>
               <ArrowRight className="h-3 w-3 md:h-4 md:w-4 ml-1" />
@@ -111,21 +111,21 @@ export function Top10Leaderboard() {
                 <div className="flex items-center gap-1 md:gap-2 min-w-0 flex-1">
                   <span className="text-base md:text-xl flex-shrink-0">{user.flagEmoji}</span>
                   <div className="min-w-0 flex-1">
-                    <div className="font-bold text-sm md:text-base truncate text-slate-800">{user.username}</div>
-                    <div className="text-sm truncate text-slate-700">{user.city}, {user.country}</div>
+                    <div className="font-bold text-sm md:text-base truncate text-black">{user.username}</div>
+                    <div className="text-sm truncate text-gray-800">{user.city}, {user.country}</div>
                   </div>
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
                 <div className={`font-bold text-sm md:text-base ${
-                  user.rank === 1 ? 'text-amber-700' :
-                  user.rank === 2 ? 'text-slate-700' :
-                  user.rank === 3 ? 'text-orange-700' :
-                  'text-blue-700'
+                  user.rank === 1 ? 'text-amber-800' :
+                  user.rank === 2 ? 'text-gray-900' :
+                  user.rank === 3 ? 'text-orange-800' :
+                  'text-blue-800'
                 }`}>
                   {user.totalScore.toLocaleString()} pts
                 </div>
-                <div className="text-sm font-medium text-emerald-700">{user.accuracyRate}% accuracy</div>
+                <div className="text-sm font-medium text-green-800">{user.accuracyRate}% accuracy</div>
               </div>
             </div>
           ))}
