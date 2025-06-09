@@ -8,9 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, Trophy
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
+import { Top10Leaderboard } from "@/components/top-10-leaderboard";
 
 
 // Official PLAB 1 Categories - No separate specialties, all integrated
@@ -517,6 +518,34 @@ export default function PLAB1Integrated() {
           </Card>
         )}
 
+        {/* Top 10 Global Leaderboard */}
+        <div className="mt-8">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2">
+                  <Trophy className="w-6 h-6 text-yellow-600" />
+                  Top 10 Global Leaders
+                </CardTitle>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => window.location.href = '/global-scoreboard'}
+                  className="gap-2"
+                >
+                  <Globe className="w-4 h-4" />
+                  View Full Globe
+                </Button>
+              </div>
+              <CardDescription>
+                See how you rank against medical students worldwide
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Top10Leaderboard />
+            </CardContent>
+          </Card>
+        </div>
 
       </div>
     </div>
