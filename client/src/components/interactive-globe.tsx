@@ -397,6 +397,7 @@ export function InteractiveGlobe() {
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
+    setAutoRotate(false);
     setLastMouse({ x: e.clientX, y: e.clientY });
   };
 
@@ -407,7 +408,7 @@ export function InteractiveGlobe() {
     const deltaY = e.clientY - lastMouse.y;
     
     setRotation(prev => ({
-      x: prev.x + deltaY * 0.5,
+      x: Math.max(-90, Math.min(90, prev.x + deltaY * 0.5)),
       y: prev.y + deltaX * 0.5
     }));
     
@@ -416,6 +417,38 @@ export function InteractiveGlobe() {
 
   const handleMouseUp = () => {
     setIsDragging(false);
+    setTimeout(() => setAutoRotate(true), 2000); // Resume auto-rotation after 2 seconds
+  };
+
+  // Touch event handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setAutoRotate(false);
+    setLastMouse({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
+    if (!isDragging) return;
+    
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - lastMouse.x;
+    const deltaY = touch.clientY - lastMouse.y;
+    
+    setRotation(prev => ({
+      x: Math.max(-90, Math.min(90, prev.x + deltaY * 0.5)),
+      y: prev.y + deltaX * 0.5
+    }));
+    
+    setLastMouse({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    setTimeout(() => setAutoRotate(true), 2000);
   };
 
   const handleClick = (e: React.MouseEvent) => {
@@ -425,8 +458,11 @@ export function InteractiveGlobe() {
     if (!canvas) return;
     
     const rect = canvas.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
+    // Scale mouse coordinates to match canvas internal resolution
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const clickX = (e.clientX - rect.left) * scaleX;
+    const clickY = (e.clientY - rect.top) * scaleY;
     
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
@@ -452,6 +488,9 @@ export function InteractiveGlobe() {
 
   return (
     <div className="relative w-full max-w-lg mx-auto">
+      <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded z-10">
+        Drag to rotate • Click users
+      </div>
       <canvas
         ref={canvasRef}
         width={500}
@@ -462,6 +501,10 @@ export function InteractiveGlobe() {
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         onClick={handleClick}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ touchAction: 'none' }}
       />
       
       {selectedUser && (
