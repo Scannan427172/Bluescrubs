@@ -268,10 +268,7 @@ export default function PLAB1Integrated() {
               <div className="flex items-end gap-2">
                 <Button 
                   onClick={() => setIsActive(!isActive)}
-                  className={isActive 
-                    ? "bg-black text-white hover:bg-gray-800" 
-                    : "bg-white text-black border border-gray-300 hover:bg-gray-50"
-                  }
+                  variant={isActive ? "destructive" : "default"}
                 >
                   {isActive ? 'Pause' : 'Start'} Timer
                 </Button>
@@ -283,7 +280,7 @@ export default function PLAB1Integrated() {
                     setSelectedAnswer(null);
                     setShowExplanation(false);
                   }}
-                  className="bg-white text-black border border-gray-300 hover:bg-gray-50"
+                  variant="outline"
                 >
                   Reset
                 </Button>
