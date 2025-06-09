@@ -68,6 +68,7 @@ import NeurodiverseSupport from "@/pages/neurodiverse-support";
 import QuestionBankStatus from "@/pages/question-bank-status";
 import AIGenerationDemo from "@/pages/ai-generation-demo";
 import ClinicalGuides from "@/pages/clinical-guides";
+import GlobalScoreboard from "@/pages/global-scoreboard";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -138,6 +139,14 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <ClinicalGuides />
+            </div>
+          </div>
+        </Route>
+        <Route path="/global-scoreboard">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <GlobalScoreboard />
             </div>
           </div>
         </Route>

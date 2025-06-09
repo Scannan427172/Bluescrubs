@@ -1645,6 +1645,271 @@ export class DatabaseStorage implements IStorage {
     const [newReminder] = await db.insert(studyReminders).values(reminder).returning();
     return newReminder;
   }
+
+  // Global Scoreboard Methods
+  async getGlobalScoreboard(filters?: { category?: string; country?: string; limit?: number }): Promise<(GlobalScoreboard & { username: string; country: string; city: string; flagEmoji: string })[]> {
+    let query = db
+      .select({
+        id: globalScoreboard.id,
+        userId: globalScoreboard.userId,
+        totalScore: globalScoreboard.totalScore,
+        questionsAnswered: globalScoreboard.questionsAnswered,
+        correctAnswers: globalScoreboard.correctAnswers,
+        accuracyRate: globalScoreboard.accuracyRate,
+        studyStreak: globalScoreboard.studyStreak,
+        totalStudyTime: globalScoreboard.totalStudyTime,
+        plabCategory: globalScoreboard.plabCategory,
+        rank: globalScoreboard.rank,
+        countryRank: globalScoreboard.countryRank,
+        lastActive: globalScoreboard.lastActive,
+        updatedAt: globalScoreboard.updatedAt,
+        username: users.username,
+        country: users.country,
+        city: users.city,
+        flagEmoji: users.flagEmoji,
+      })
+      .from(globalScoreboard)
+      .leftJoin(users, eq(globalScoreboard.userId, users.id))
+      .where(eq(users.isLocationPublic, true));
+
+    if (filters?.category && filters.category !== "all") {
+      query = query.where(eq(globalScoreboard.plabCategory, filters.category));
+    }
+
+    if (filters?.country && filters.country !== "all") {
+      query = query.where(eq(users.country, filters.country));
+    }
+
+    const results = await query
+      .orderBy(globalScoreboard.rank)
+      .limit(filters?.limit || 100);
+
+    return results.map(row => ({
+      ...row,
+      country: row.country || "Unknown",
+      city: row.city || "Unknown", 
+      flagEmoji: row.flagEmoji || "🌍"
+    }));
+  }
+
+  async getWeeklyLeaderboard(filters?: { country?: string; limit?: number }): Promise<(WeeklyLeaderboard & { username: string; country: string; flagEmoji: string })[]> {
+    const now = new Date();
+    const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+    
+    let query = db
+      .select({
+        id: weeklyLeaderboard.id,
+        userId: weeklyLeaderboard.userId,
+        weekStart: weeklyLeaderboard.weekStart,
+        weekEnd: weeklyLeaderboard.weekEnd,
+        questionsThisWeek: weeklyLeaderboard.questionsThisWeek,
+        correctThisWeek: weeklyLeaderboard.correctThisWeek,
+        studyTimeThisWeek: weeklyLeaderboard.studyTimeThisWeek,
+        weeklyRank: weeklyLeaderboard.weeklyRank,
+        countryWeeklyRank: weeklyLeaderboard.countryWeeklyRank,
+        createdAt: weeklyLeaderboard.createdAt,
+        username: users.username,
+        country: users.country,
+        flagEmoji: users.flagEmoji,
+      })
+      .from(weeklyLeaderboard)
+      .leftJoin(users, eq(weeklyLeaderboard.userId, users.id))
+      .where(eq(weeklyLeaderboard.weekStart, weekStart.toISOString().split('T')[0]));
+
+    if (filters?.country && filters.country !== "all") {
+      query = query.where(eq(users.country, filters.country));
+    }
+
+    const results = await query
+      .orderBy(weeklyLeaderboard.weeklyRank)
+      .limit(filters?.limit || 50);
+
+    return results.map(row => ({
+      ...row,
+      country: row.country || "Unknown",
+      flagEmoji: row.flagEmoji || "🌍"
+    }));
+  }
+
+  async getCountryStats(): Promise<CountryStats[]> {
+    return await db.select().from(countryStats).orderBy(countryStats.totalUsers);
+  }
+
+  async updateUserLocation(userId: number, location: { country: string; city: string; flagEmoji: string }): Promise<void> {
+    await db
+      .update(users)
+      .set({
+        country: location.country,
+        city: location.city,
+        flagEmoji: location.flagEmoji,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      })
+      .where(eq(users.id, userId));
+
+    // Update or create country stats
+    const existingCountry = await db
+      .select()
+      .from(countryStats)
+      .where(eq(countryStats.country, location.country))
+      .limit(1);
+
+    if (existingCountry.length === 0) {
+      await db.insert(countryStats).values({
+        country: location.country,
+        flagEmoji: location.flagEmoji,
+        totalUsers: 1,
+        activeUsers: 1,
+        averageScore: 0,
+        topUserScore: 0,
+        totalQuestionsAnswered: 0,
+      });
+    } else {
+      await db
+        .update(countryStats)
+        .set({
+          totalUsers: sql`${countryStats.totalUsers} + 1`,
+          activeUsers: sql`${countryStats.activeUsers} + 1`,
+          updatedAt: new Date(),
+        })
+        .where(eq(countryStats.country, location.country));
+    }
+  }
+
+  async updateScoreboard(userId: number, scoreData: { questionsAnswered: number; correctAnswers: number; studyTime: number; category: string }): Promise<void> {
+    const accuracyRate = scoreData.questionsAnswered > 0 ? (scoreData.correctAnswers / scoreData.questionsAnswered) * 100 : 0;
+    const points = scoreData.correctAnswers * 10 + (accuracyRate > 80 ? 50 : 0);
+
+    // Update or create global scoreboard entry
+    const existingScore = await db
+      .select()
+      .from(globalScoreboard)
+      .where(eq(globalScoreboard.userId, userId))
+      .limit(1);
+
+    if (existingScore.length === 0) {
+      await db.insert(globalScoreboard).values({
+        userId,
+        totalScore: points,
+        questionsAnswered: scoreData.questionsAnswered,
+        correctAnswers: scoreData.correctAnswers,
+        accuracyRate,
+        studyStreak: 1,
+        totalStudyTime: scoreData.studyTime,
+        plabCategory: scoreData.category,
+        rank: 0,
+        countryRank: 0,
+      });
+    } else {
+      await db
+        .update(globalScoreboard)
+        .set({
+          totalScore: sql`${globalScoreboard.totalScore} + ${points}`,
+          questionsAnswered: sql`${globalScoreboard.questionsAnswered} + ${scoreData.questionsAnswered}`,
+          correctAnswers: sql`${globalScoreboard.correctAnswers} + ${scoreData.correctAnswers}`,
+          accuracyRate: sql`ROUND((${globalScoreboard.correctAnswers} + ${scoreData.correctAnswers}) * 100.0 / (${globalScoreboard.questionsAnswered} + ${scoreData.questionsAnswered}), 2)`,
+          totalStudyTime: sql`${globalScoreboard.totalStudyTime} + ${scoreData.studyTime}`,
+          lastActive: new Date(),
+          updatedAt: new Date(),
+        })
+        .where(eq(globalScoreboard.userId, userId));
+    }
+
+    // Update weekly leaderboard
+    const now = new Date();
+    const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekEnd.getDate() + 6);
+
+    const existingWeekly = await db
+      .select()
+      .from(weeklyLeaderboard)
+      .where(and(
+        eq(weeklyLeaderboard.userId, userId),
+        eq(weeklyLeaderboard.weekStart, weekStart.toISOString().split('T')[0])
+      ))
+      .limit(1);
+
+    if (existingWeekly.length === 0) {
+      await db.insert(weeklyLeaderboard).values({
+        userId,
+        weekStart: weekStart.toISOString().split('T')[0],
+        weekEnd: weekEnd.toISOString().split('T')[0],
+        questionsThisWeek: scoreData.questionsAnswered,
+        correctThisWeek: scoreData.correctAnswers,
+        studyTimeThisWeek: scoreData.studyTime,
+        weeklyRank: 0,
+        countryWeeklyRank: 0,
+      });
+    } else {
+      await db
+        .update(weeklyLeaderboard)
+        .set({
+          questionsThisWeek: sql`${weeklyLeaderboard.questionsThisWeek} + ${scoreData.questionsAnswered}`,
+          correctThisWeek: sql`${weeklyLeaderboard.correctThisWeek} + ${scoreData.correctAnswers}`,
+          studyTimeThisWeek: sql`${weeklyLeaderboard.studyTimeThisWeek} + ${scoreData.studyTime}`,
+        })
+        .where(and(
+          eq(weeklyLeaderboard.userId, userId),
+          eq(weeklyLeaderboard.weekStart, weekStart.toISOString().split('T')[0])
+        ));
+    }
+
+    // Recalculate ranks (simplified version)
+    await this.recalculateRanks();
+  }
+
+  private async recalculateRanks(): Promise<void> {
+    // Global ranks
+    const globalUsers = await db
+      .select()
+      .from(globalScoreboard)
+      .orderBy(sql`${globalScoreboard.totalScore} DESC`);
+
+    for (let i = 0; i < globalUsers.length; i++) {
+      await db
+        .update(globalScoreboard)
+        .set({ rank: i + 1 })
+        .where(eq(globalScoreboard.id, globalUsers[i].id));
+    }
+
+    // Weekly ranks
+    const now = new Date();
+    const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+    
+    const weeklyUsers = await db
+      .select()
+      .from(weeklyLeaderboard)
+      .where(eq(weeklyLeaderboard.weekStart, weekStart.toISOString().split('T')[0]))
+      .orderBy(sql`${weeklyLeaderboard.questionsThisWeek} DESC`);
+
+    for (let i = 0; i < weeklyUsers.length; i++) {
+      await db
+        .update(weeklyLeaderboard)
+        .set({ weeklyRank: i + 1 })
+        .where(eq(weeklyLeaderboard.id, weeklyUsers[i].id));
+    }
+  }
+
+  async createAchievement(achievement: InsertAchievement): Promise<Achievement> {
+    const [newAchievement] = await db.insert(achievements).values(achievement).returning();
+    return newAchievement;
+  }
+
+  async getUserAchievements(userId: number): Promise<(UserAchievement & { achievement: Achievement })[]> {
+    return await db
+      .select({
+        id: userAchievements.id,
+        userId: userAchievements.userId,
+        achievementId: userAchievements.achievementId,
+        unlockedAt: userAchievements.unlockedAt,
+        isDisplayed: userAchievements.isDisplayed,
+        achievement: achievements,
+      })
+      .from(userAchievements)
+      .leftJoin(achievements, eq(userAchievements.achievementId, achievements.id))
+      .where(eq(userAchievements.userId, userId))
+      .orderBy(userAchievements.unlockedAt);
+  }
 }
 
 export const storage = new DatabaseStorage();

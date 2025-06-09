@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { questionGenerator } from "./ai-question-generator";
 import { communitySystem } from "./community-contribution";
 import { analyzeVideoPerformance } from "./ai-analysis";
+import { storage } from "./storage";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -435,6 +436,98 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(stats);
     } catch (error) {
       res.status(500).json({ error: "Failed to get statistics" });
+    }
+  });
+
+  // Global Scoreboard API Routes
+  app.get("/api/scoreboard/global", async (req, res) => {
+    try {
+      const { category, country, limit } = req.query;
+      const filters = {
+        category: category as string,
+        country: country as string,
+        limit: limit ? parseInt(limit as string) : 100
+      };
+      
+      const scoreboard = await storage.getGlobalScoreboard(filters);
+      res.json(scoreboard);
+    } catch (error) {
+      console.error("Global scoreboard error:", error);
+      res.status(500).json({ error: "Failed to fetch global scoreboard" });
+    }
+  });
+
+  app.get("/api/scoreboard/weekly", async (req, res) => {
+    try {
+      const { country, limit } = req.query;
+      const filters = {
+        country: country as string,
+        limit: limit ? parseInt(limit as string) : 50
+      };
+      
+      const weekly = await storage.getWeeklyLeaderboard(filters);
+      res.json(weekly);
+    } catch (error) {
+      console.error("Weekly leaderboard error:", error);
+      res.status(500).json({ error: "Failed to fetch weekly leaderboard" });
+    }
+  });
+
+  app.get("/api/scoreboard/countries", async (req, res) => {
+    try {
+      const countries = await storage.getCountryStats();
+      res.json(countries);
+    } catch (error) {
+      console.error("Country stats error:", error);
+      res.status(500).json({ error: "Failed to fetch country statistics" });
+    }
+  });
+
+  app.post("/api/users/location", async (req, res) => {
+    try {
+      const { country, city, flag } = req.body;
+      const userId = 1; // For now, using mock user ID - in real app would get from session
+      
+      await storage.updateUserLocation(userId, {
+        country,
+        city,
+        flagEmoji: flag
+      });
+      
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Location update error:", error);
+      res.status(500).json({ error: "Failed to update location" });
+    }
+  });
+
+  app.post("/api/scoreboard/update", async (req, res) => {
+    try {
+      const { questionsAnswered, correctAnswers, studyTime, category } = req.body;
+      const userId = 1; // For now, using mock user ID - in real app would get from session
+      
+      await storage.updateScoreboard(userId, {
+        questionsAnswered,
+        correctAnswers,
+        studyTime,
+        category
+      });
+      
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Scoreboard update error:", error);
+      res.status(500).json({ error: "Failed to update scoreboard" });
+    }
+  });
+
+  app.get("/api/achievements/:userId", async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const achievements = await storage.getUserAchievements(userId);
+      res.json(achievements);
+    } catch (error) {
+      console.error("Achievements error:", error);
+      res.status(500).json({ error: "Failed to fetch achievements" });
     }
   });
 
