@@ -52,9 +52,17 @@ function GlobalLeaderboardSection() {
     );
   }
 
+  if (!globalScoreboard || !Array.isArray(globalScoreboard)) {
+    return (
+      <div className="text-center py-8 text-gray-500">
+        No leaderboard data available
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
-      {globalScoreboard?.slice(0, 10).map((user: ScoreboardUser, index: number) => (
+      {globalScoreboard.slice(0, 10).map((user: any, index: number) => (
         <div
           key={user.id}
           className={`p-4 rounded-lg border ${
