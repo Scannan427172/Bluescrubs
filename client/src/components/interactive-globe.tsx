@@ -61,10 +61,13 @@ const CITY_COORDINATES: Record<string, { lat: number; lng: number }> = {
 
 export function InteractiveGlobe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>(0);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [targetRotation, setTargetRotation] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [lastMouse, setLastMouse] = useState({ x: 0, y: 0 });
   const [selectedUser, setSelectedUser] = useState<UserLocation | null>(null);
+  const [autoRotate, setAutoRotate] = useState(true);
 
   const { data: globalUsers } = useQuery({
     queryKey: ["/api/scoreboard/global"],
@@ -82,6 +85,27 @@ export function InteractiveGlobe() {
     }
   });
 
+  // Animation loop for smooth rotation
+  useEffect(() => {
+    const animate = () => {
+      if (!isDragging && autoRotate) {
+        setTargetRotation(prev => ({ ...prev, y: prev.y + 0.5 }));
+      }
+      
+      // Smooth interpolation towards target rotation
+      setRotation(prev => ({
+        x: prev.x + (targetRotation.x - prev.x) * 0.1,
+        y: prev.y + (targetRotation.y - prev.y) * 0.1
+      }));
+      
+      animationRef.current = requestAnimationFrame(animate);
+    };
+    
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
+  }, [isDragging, autoRotate, targetRotation]);
+
+  // Render the globe
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -91,55 +115,87 @@ export function InteractiveGlobe() {
 
     const width = canvas.width;
     const height = canvas.height;
-    const radius = Math.min(width, height) / 2 - 20;
+    const radius = Math.min(width, height) / 2 - 30;
     const centerX = width / 2;
     const centerY = height / 2;
 
-    // Clear canvas
-    ctx.clearRect(0, 0, width, height);
+    // Clear canvas with space background
+    const spaceGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(width, height));
+    spaceGradient.addColorStop(0, "#0a0a23");
+    spaceGradient.addColorStop(1, "#000000");
+    ctx.fillStyle = spaceGradient;
+    ctx.fillRect(0, 0, width, height);
 
-    // Draw Earth
-    const gradient = ctx.createRadialGradient(centerX - radius/3, centerY - radius/3, 0, centerX, centerY, radius);
-    gradient.addColorStop(0, "#4FC3F7");
-    gradient.addColorStop(0.7, "#2196F3");
-    gradient.addColorStop(1, "#1565C0");
+    // Draw stars
+    drawStars(ctx, width, height);
+
+    // Draw Earth with atmospheric glow
+    drawAtmosphere(ctx, centerX, centerY, radius);
     
-    ctx.fillStyle = gradient;
+    const earthGradient = ctx.createRadialGradient(
+      centerX - radius/3, centerY - radius/3, 0,
+      centerX, centerY, radius
+    );
+    earthGradient.addColorStop(0, "#87CEEB");
+    earthGradient.addColorStop(0.3, "#4682B4");
+    earthGradient.addColorStop(0.7, "#1E90FF");
+    earthGradient.addColorStop(1, "#000080");
+    
+    ctx.fillStyle = earthGradient;
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
     ctx.fill();
 
-    // Draw continents (simplified shapes)
-    ctx.fillStyle = "#4CAF50";
-    drawContinents(ctx, centerX, centerY, radius, rotation);
+    // Draw continents with better detail
+    ctx.fillStyle = "#228B22";
+    drawDetailedContinents(ctx, centerX, centerY, radius, rotation);
 
-    // Draw user locations
+    // Draw latitude/longitude grid
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+    ctx.lineWidth = 1;
+    drawGlobeGrid(ctx, centerX, centerY, radius, rotation);
+
+    // Draw user locations with enhanced visuals
     if (globalUsers) {
       globalUsers.forEach((user: UserLocation) => {
         const point = project3DTo2D(user.latitude, user.longitude, rotation, centerX, centerY, radius);
-        if (point.visible) {
-          // User dot
-          ctx.fillStyle = "#FF5722";
+        if (point.visible && point.z > 0) {
+          const size = 3 + (user.totalScore / 1000);
+          
+          // Glow effect
+          const glowGradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, size * 2);
+          glowGradient.addColorStop(0, "#FF6B35");
+          glowGradient.addColorStop(0.5, "rgba(255, 107, 53, 0.5)");
+          glowGradient.addColorStop(1, "rgba(255, 107, 53, 0)");
+          
+          ctx.fillStyle = glowGradient;
           ctx.beginPath();
-          ctx.arc(point.x, point.y, 4, 0, 2 * Math.PI);
+          ctx.arc(point.x, point.y, size * 2, 0, 2 * Math.PI);
           ctx.fill();
           
-          // Pulse effect for top users
+          // User marker
+          ctx.fillStyle = user.totalScore > 2000 ? "#FFD700" : "#FF6B35";
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, Math.max(2, size), 0, 2 * Math.PI);
+          ctx.fill();
+          
+          // Pulse animation for top users
           if (user.totalScore > 2000) {
-            ctx.strokeStyle = "#FF5722";
+            const pulseSize = size + Math.sin(Date.now() * 0.01) * 2;
+            ctx.strokeStyle = "#FFD700";
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.arc(point.x, point.y, 8, 0, 2 * Math.PI);
+            ctx.arc(point.x, point.y, pulseSize, 0, 2 * Math.PI);
             ctx.stroke();
           }
         }
       });
     }
 
-    // Draw grid lines
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-    ctx.lineWidth = 1;
-    drawGlobeGrid(ctx, centerX, centerY, radius, rotation);
+    // Draw equator line
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+    ctx.lineWidth = 2;
+    drawEquator(ctx, centerX, centerY, radius, rotation);
 
   }, [rotation, globalUsers]);
 
@@ -147,11 +203,11 @@ export function InteractiveGlobe() {
     const latRad = (lat * Math.PI) / 180;
     const lngRad = ((lng + rot.y) * Math.PI) / 180;
     
-    const x3d = Math.cos(latRad) * Math.cos(lngRad);
-    const y3d = Math.cos(latRad) * Math.sin(lngRad);
-    const z3d = Math.sin(latRad);
+    let x3d = Math.cos(latRad) * Math.cos(lngRad);
+    let y3d = Math.cos(latRad) * Math.sin(lngRad);
+    let z3d = Math.sin(latRad);
     
-    // Simple rotation around X axis
+    // Rotation around X axis
     const rotXRad = (rot.x * Math.PI) / 180;
     const y3dRot = y3d * Math.cos(rotXRad) - z3d * Math.sin(rotXRad);
     const z3dRot = y3d * Math.sin(rotXRad) + z3d * Math.cos(rotXRad);
@@ -161,8 +217,101 @@ export function InteractiveGlobe() {
     return {
       x: centerX + y3dRot * radius,
       y: centerY - z3dRot * radius,
+      z: x3d,
       visible
     };
+  };
+
+  const drawStars = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
+    ctx.fillStyle = "#FFFFFF";
+    for (let i = 0; i < 200; i++) {
+      const x = Math.random() * width;
+      const y = Math.random() * height;
+      const size = Math.random() * 1.5;
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  };
+
+  const drawAtmosphere = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, radius: number) => {
+    const atmosphereGradient = ctx.createRadialGradient(centerX, centerY, radius, centerX, centerY, radius + 20);
+    atmosphereGradient.addColorStop(0, "rgba(135, 206, 250, 0.3)");
+    atmosphereGradient.addColorStop(1, "rgba(135, 206, 250, 0)");
+    
+    ctx.fillStyle = atmosphereGradient;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius + 20, 0, 2 * Math.PI);
+    ctx.fill();
+  };
+
+  const drawDetailedContinents = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, radius: number, rot: {x: number, y: number}) => {
+    const continentPaths = [
+      // Africa - more detailed shape
+      [
+        { lat: 35, lng: 10 }, { lat: 30, lng: 30 }, { lat: 0, lng: 40 },
+        { lat: -10, lng: 40 }, { lat: -35, lng: 20 }, { lat: -30, lng: 15 },
+        { lat: -10, lng: 10 }, { lat: 10, lng: 0 }, { lat: 30, lng: 0 }
+      ],
+      // Europe
+      [
+        { lat: 60, lng: -10 }, { lat: 70, lng: 20 }, { lat: 60, lng: 40 },
+        { lat: 45, lng: 35 }, { lat: 40, lng: 10 }, { lat: 45, lng: -5 }
+      ],
+      // Asia
+      [
+        { lat: 70, lng: 60 }, { lat: 60, lng: 140 }, { lat: 20, lng: 140 },
+        { lat: 10, lng: 100 }, { lat: 30, lng: 80 }, { lat: 40, lng: 60 }
+      ],
+      // North America
+      [
+        { lat: 70, lng: -120 }, { lat: 60, lng: -60 }, { lat: 25, lng: -80 },
+        { lat: 30, lng: -120 }, { lat: 50, lng: -140 }
+      ],
+      // South America
+      [
+        { lat: 10, lng: -70 }, { lat: 0, lng: -50 }, { lat: -20, lng: -40 },
+        { lat: -55, lng: -70 }, { lat: -20, lng: -80 }, { lat: 0, lng: -80 }
+      ]
+    ];
+
+    continentPaths.forEach(continent => {
+      ctx.beginPath();
+      let firstPoint = true;
+      
+      continent.forEach(point => {
+        const projected = project3DTo2D(point.lat, point.lng, rot, centerX, centerY, radius);
+        if (projected.visible && projected.z > 0) {
+          if (firstPoint) {
+            ctx.moveTo(projected.x, projected.y);
+            firstPoint = false;
+          } else {
+            ctx.lineTo(projected.x, projected.y);
+          }
+        }
+      });
+      
+      ctx.closePath();
+      ctx.fill();
+    });
+  };
+
+  const drawEquator = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, radius: number, rot: {x: number, y: number}) => {
+    ctx.beginPath();
+    let firstPoint = true;
+    
+    for (let lng = -180; lng <= 180; lng += 2) {
+      const point = project3DTo2D(0, lng, rot, centerX, centerY, radius);
+      if (point.visible && point.z > 0) {
+        if (firstPoint) {
+          ctx.moveTo(point.x, point.y);
+          firstPoint = false;
+        } else {
+          ctx.lineTo(point.x, point.y);
+        }
+      }
+    }
+    ctx.stroke();
   };
 
   const drawContinents = (ctx: CanvasRenderingContext2D, centerX: number, centerY: number, radius: number, rot: {x: number, y: number}) => {
@@ -300,26 +449,54 @@ export function InteractiveGlobe() {
           </div>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span>Score:</span>
-              <span className="font-medium text-blue-600">{selectedUser.totalScore.toLocaleString()}</span>
+              <span className="text-gray-600">Score:</span>
+              <span className="font-semibold text-blue-600">{selectedUser.totalScore.toLocaleString()}</span>
             </div>
             <div className="flex justify-between">
-              <span>Accuracy:</span>
-              <span className="font-medium text-green-600">{selectedUser.accuracyRate}%</span>
+              <span className="text-gray-600">Accuracy:</span>
+              <span className="font-semibold text-green-600">{selectedUser.accuracyRate}%</span>
             </div>
           </div>
-          <button 
+          <button
             onClick={() => setSelectedUser(null)}
-            className="mt-2 text-xs text-gray-500 hover:text-gray-700"
+            className="mt-3 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-sm transition-colors"
           >
             Close
           </button>
         </div>
       )}
       
-      <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white p-2 rounded">
-        <p className="text-sm">🌍 Drag to rotate • Click users for details</p>
-        <p className="text-xs text-gray-300">{globalUsers?.length || 0} users worldwide</p>
+      <div className="absolute bottom-4 right-4 flex gap-2">
+        <button
+          onClick={() => setAutoRotate(!autoRotate)}
+          className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+            autoRotate 
+              ? 'bg-blue-600 text-white hover:bg-blue-700' 
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
+        >
+          {autoRotate ? 'Pause' : 'Rotate'}
+        </button>
+        <button
+          onClick={() => {
+            setTargetRotation({ x: 0, y: 0 });
+            setAutoRotate(true);
+          }}
+          className="px-3 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+        >
+          Reset
+        </button>
+      </div>
+      
+      <div className="absolute top-4 right-4 bg-black bg-opacity-70 text-white p-3 rounded-lg text-sm">
+        <div className="space-y-1">
+          <div>🌍 Interactive Globe</div>
+          <div>👆 Click and drag to rotate</div>
+          <div>🔍 Click markers for details</div>
+          <div className="text-xs text-gray-300 mt-2">
+            {globalUsers?.length || 0} users worldwide
+          </div>
+        </div>
       </div>
     </div>
   );
