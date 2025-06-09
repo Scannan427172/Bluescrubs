@@ -499,6 +499,30 @@ export default function PLAB1New() {
           <p className="text-lg text-muted-foreground">
             High-quality GMC-aligned practice questions for PLAB 1 preparation
           </p>
+          <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <BookOpen className="w-5 h-5 text-green-600" />
+              <h3 className="font-semibold text-green-800">Comprehensive Question Bank</h3>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+              <div className="text-center">
+                <div className="font-bold text-2xl text-green-700">{PRACTICE_QUESTIONS.length.toLocaleString()}</div>
+                <div className="text-green-600">Total Questions</div>
+              </div>
+              <div className="text-center">
+                <div className="font-bold text-2xl text-green-700">18</div>
+                <div className="text-green-600">Medical Specialties</div>
+              </div>
+              <div className="text-center">
+                <div className="font-bold text-2xl text-green-700">3</div>
+                <div className="text-green-600">Difficulty Levels</div>
+              </div>
+              <div className="text-center">
+                <div className="font-bold text-2xl text-green-700">100%</div>
+                <div className="text-green-600">GMC Aligned</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Category Selection */}
