@@ -413,6 +413,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE NG28: Type 2 diabetes in adults",
       "WHO diagnostic criteria for diabetes"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Type 2 diabetes overview",
+        url: "https://www.nhs.uk/conditions/type-2-diabetes/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Type 2 diabetes in adults",
+        url: "https://www.nice.org.uk/guidance/ng28",
+        type: "guideline"
+      },
+      {
+        title: "Diabetes UK - Educational resources",
+        url: "https://www.diabetes.org.uk/",
+        type: "educational"
+      }
+    ],
     tags: ["diabetes", "HbA1c", "polyuria", "obesity"],
     estimatedTime: 70,
     lastReviewed: "2024-01-25",
@@ -451,6 +468,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE CG90: Depression in adults",
       "PHQ-9 depression screening tool"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Clinical depression (depression in adults)",
+        url: "https://www.nhs.uk/mental-health/conditions/clinical-depression/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Depression in adults",
+        url: "https://www.nice.org.uk/guidance/cg90",
+        type: "guideline"
+      },
+      {
+        title: "Mind - Mental health charity resources",
+        url: "https://www.mind.org.uk/information-support/types-of-mental-health-problems/depression/",
+        type: "educational"
+      }
+    ],
     tags: ["depression", "PHQ-9", "self-harm", "mental-health"],
     estimatedTime: 85,
     lastReviewed: "2024-01-28",
@@ -488,6 +522,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "RCOG Green-top Guideline No. 63: Antepartum Haemorrhage",
       "NICE CG62: Antenatal care"
+    ],
+    sourceLinks: [
+      {
+        title: "NHS - Bleeding during pregnancy",
+        url: "https://www.nhs.uk/pregnancy/related-conditions/complications/bleeding/",
+        type: "nhs"
+      },
+      {
+        title: "RCOG - Patient information on pregnancy bleeding",
+        url: "https://www.rcog.org.uk/for-the-public/browse-all-patient-information-leaflets/bleeding-in-pregnancy/",
+        type: "educational"
+      },
+      {
+        title: "Tommy's - Pregnancy complications",
+        url: "https://www.tommys.org/pregnancy-information/pregnancy-complications",
+        type: "educational"
+      }
     ],
     tags: ["pregnancy", "bleeding", "emergency", "abruption"],
     estimatedTime: 90,
@@ -680,6 +731,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE CG184: Dyspepsia and gastro-oesophageal reflux",
       "Maastricht VI Guidelines 2022"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Stomach ulcer (peptic ulcer)",
+        url: "https://www.nhs.uk/conditions/stomach-ulcer/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Dyspepsia and GORD",
+        url: "https://www.nice.org.uk/guidance/cg184",
+        type: "guideline"
+      },
+      {
+        title: "Patient.info - H. pylori infection",
+        url: "https://patient.info/digestive-health/dyspepsia-indigestion/helicobacter-pylori",
+        type: "educational"
+      }
+    ],
     tags: ["peptic-ulcer", "h-pylori", "eradication", "primary-care"],
     estimatedTime: 90,
     lastReviewed: "2024-02-15",
@@ -717,6 +785,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "PHE Green Book: Measles",
       "NICE Clinical Knowledge Summary: Measles"
+    ],
+    sourceLinks: [
+      {
+        title: "NHS - Measles",
+        url: "https://www.nhs.uk/conditions/measles/",
+        type: "nhs"
+      },
+      {
+        title: "Gov.UK - Measles: guidance and data",
+        url: "https://www.gov.uk/government/collections/measles-guidance-data-and-analysis",
+        type: "government"
+      },
+      {
+        title: "NHS - MMR vaccine",
+        url: "https://www.nhs.uk/conditions/vaccinations/mmr-vaccine/",
+        type: "nhs"
+      }
     ],
     tags: ["measles", "vaccination", "rash", "paediatrics"],
     estimatedTime: 75,
@@ -757,6 +842,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE CG141: Appendicitis",
       "RCS Guidelines for Emergency Surgery"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Appendicitis",
+        url: "https://www.nhs.uk/conditions/appendicitis/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Appendicitis",
+        url: "https://www.nice.org.uk/guidance/cg141",
+        type: "guideline"
+      },
+      {
+        title: "Patient.info - Acute appendicitis",
+        url: "https://patient.info/digestive-health/appendicitis",
+        type: "educational"
+      }
+    ],
     tags: ["appendicitis", "acute-abdomen", "emergency-surgery"],
     estimatedTime: 90,
     lastReviewed: "2024-02-15",
@@ -794,6 +896,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "NICE CG188: Gallstone disease",
       "Tokyo Guidelines for Acute Cholangitis"
+    ],
+    sourceLinks: [
+      {
+        title: "NHS - Gallstones",
+        url: "https://www.nhs.uk/conditions/gallstones/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Gallstone disease",
+        url: "https://www.nice.org.uk/guidance/cg188",
+        type: "guideline"
+      },
+      {
+        title: "Patient.info - Gallbladder and bile duct problems",
+        url: "https://patient.info/digestive-health/gallstones-and-bile-problems",
+        type: "educational"
+      }
     ],
     tags: ["cholangitis", "gallbladder", "emergency-surgery", "jaundice"],
     estimatedTime: 120,
