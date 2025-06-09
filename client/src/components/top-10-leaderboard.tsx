@@ -55,10 +55,19 @@ export function Top10Leaderboard() {
   }
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Trophy className="h-5 w-5 md:h-6 md:w-6 text-yellow-500" />;
-    if (rank === 2) return <Medal className="h-5 w-5 md:h-6 md:w-6 text-gray-500" />;
-    if (rank === 3) return <Award className="h-5 w-5 md:h-6 md:w-6 text-amber-600" />;
-    return <span className="text-sm md:text-base font-bold" style={{ color: '#1f2937' }}>#{rank}</span>;
+    if (rank === 1) return (
+      <div className="relative">
+        <Trophy className="h-5 w-5 md:h-6 md:w-6 text-yellow-500 drop-shadow-sm" />
+        <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+      </div>
+    );
+    if (rank === 2) return <Medal className="h-5 w-5 md:h-6 md:w-6 text-gray-500 drop-shadow-sm" />;
+    if (rank === 3) return <Award className="h-5 w-5 md:h-6 md:w-6 text-orange-500 drop-shadow-sm" />;
+    return (
+      <div className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center border-2 border-blue-300">
+        <span className="text-xs md:text-sm font-bold text-blue-700">#{rank}</span>
+      </div>
+    );
   };
 
   return (
@@ -83,10 +92,16 @@ export function Top10Leaderboard() {
           {leaderboard?.map((user) => (
             <div
               key={user.id}
-              className={`flex items-center justify-between p-2 md:p-3 rounded-lg transition-colors ${
-                user.rank <= 3 
-                  ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200' 
-                  : 'bg-white hover:bg-gray-50'
+              className={`flex items-center justify-between p-2 md:p-3 rounded-lg transition-all duration-300 hover:shadow-md ${
+                user.rank === 1 
+                  ? 'bg-gradient-to-r from-yellow-50 via-yellow-100 to-gold-50 border-2 border-yellow-300 shadow-md' 
+                  : user.rank === 2
+                  ? 'bg-gradient-to-r from-gray-50 via-gray-100 to-slate-50 border-2 border-gray-300 shadow-sm'
+                  : user.rank === 3
+                  ? 'bg-gradient-to-r from-orange-50 via-orange-100 to-amber-50 border-2 border-orange-300 shadow-sm'
+                  : user.rank <= 5
+                  ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 hover:bg-blue-100'
+                  : 'bg-white border border-gray-200 hover:bg-gray-50 hover:border-gray-300'
               }`}
             >
               <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
@@ -96,14 +111,21 @@ export function Top10Leaderboard() {
                 <div className="flex items-center gap-1 md:gap-2 min-w-0 flex-1">
                   <span className="text-base md:text-xl flex-shrink-0">{user.flagEmoji}</span>
                   <div className="min-w-0 flex-1">
-                    <div className="font-bold text-sm md:text-base truncate" style={{ color: '#000000' }}>{user.username}</div>
-                    <div className="text-sm truncate" style={{ color: '#374151' }}>{user.city}, {user.country}</div>
+                    <div className="font-bold text-sm md:text-base truncate text-gray-900">{user.username}</div>
+                    <div className="text-sm truncate text-gray-600">{user.city}, {user.country}</div>
                   </div>
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
-                <div className="font-bold text-sm md:text-base" style={{ color: '#2563eb' }}>{user.totalScore.toLocaleString()}</div>
-                <div className="text-sm font-medium" style={{ color: '#374151' }}>{user.accuracyRate}% accuracy</div>
+                <div className={`font-bold text-sm md:text-base ${
+                  user.rank === 1 ? 'text-yellow-600' :
+                  user.rank === 2 ? 'text-gray-600' :
+                  user.rank === 3 ? 'text-orange-600' :
+                  'text-blue-600'
+                }`}>
+                  {user.totalScore.toLocaleString()} pts
+                </div>
+                <div className="text-sm font-medium text-emerald-600">{user.accuracyRate}% accuracy</div>
               </div>
             </div>
           ))}
