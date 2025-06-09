@@ -9,7 +9,7 @@ import { Footer } from "@/components/footer";
 import Landing from "@/pages/landing";
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
-import Plab2Osce from "@/pages/plab2-osce-fixed";
+import Plab2Osce from "@/pages/plab2-osce";
 import PLAB1New from "@/pages/plab1-new";
 import InteractiveFlashcards from "@/pages/interactive-flashcards";
 import ClinicalGuides from "@/pages/clinical-guides";
