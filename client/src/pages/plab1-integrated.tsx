@@ -277,7 +277,14 @@ export default function PLAB1Integrated() {
               </div>
             </div>
             <CardTitle className="text-xl leading-relaxed text-gray-900">
-              {isEnglish ? currentQuestion.stem : translateText(currentQuestion.stem)}
+              {isEnglish ? (
+                currentQuestion.stem
+              ) : (
+                <div className="space-y-2">
+                  <div className="text-gray-900">{currentQuestion.stem}</div>
+                  <div className="text-gray-600 text-base font-normal italic">{translateText(currentQuestion.stem)}</div>
+                </div>
+              )}
             </CardTitle>
           </CardHeader>
           <CardContent className="bg-white">
@@ -296,7 +303,14 @@ export default function PLAB1Integrated() {
                 }`}>
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
                   <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-gray-900 font-medium">
-                    {String.fromCharCode(65 + index)}. {isEnglish ? option : translateText(option)}
+                    {isEnglish ? (
+                      `${String.fromCharCode(65 + index)}. ${option}`
+                    ) : (
+                      <div className="space-y-1">
+                        <div>{String.fromCharCode(65 + index)}. {option}</div>
+                        <div className="text-gray-600 text-sm font-normal italic ml-4">{translateText(option)}</div>
+                      </div>
+                    )}
                   </Label>
                   {showExplanation && index === currentQuestion.correctAnswer && (
                     <CheckCircle className="w-5 h-5 text-green-600" />
@@ -310,8 +324,15 @@ export default function PLAB1Integrated() {
 
             {showExplanation && (
               <div className="mt-6 p-4 bg-white border-l-4 border-blue-500 rounded-lg shadow-sm">
-                <h4 className="font-semibold text-gray-900 mb-2">{isEnglish ? 'Explanation' : 'شرح'}</h4>
-                <p className="text-gray-800 leading-relaxed">{isEnglish ? currentQuestion.explanation : translateText(currentQuestion.explanation)}</p>
+                <h4 className="font-semibold text-gray-900 mb-2">{isEnglish ? 'Explanation' : 'Explanation / شرح'}</h4>
+                {isEnglish ? (
+                  <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
+                ) : (
+                  <div className="space-y-3">
+                    <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
+                    <p className="text-gray-600 leading-relaxed italic border-l-2 border-gray-300 pl-3">{translateText(currentQuestion.explanation)}</p>
+                  </div>
+                )}
                 {currentQuestion.tags && currentQuestion.tags.length > 0 && (
                   <div className="mt-3">
                     <p className="text-sm font-medium text-gray-900 mb-1">Tags:</p>
