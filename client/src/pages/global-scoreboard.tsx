@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Globe, Trophy, Users, Clock, TrendingUp, MapPin, Crown, Medal, Award, List } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { InteractiveGlobe } from "@/components/interactive-globe";
@@ -55,8 +56,33 @@ export default function GlobalScoreboard() {
   const [selectedCountry, setSelectedCountry] = useState<string>("all");
   const [locationPermission, setLocationPermission] = useState<string>("pending");
   const [userLocation, setUserLocation] = useState<{ country: string; city: string; flag: string } | null>(null);
+  const [displayCount, setDisplayCount] = useState(20);
   
   const queryClient = useQueryClient();
+
+  // Auto-scroll to globe when reaching end of leaderboard
+  useEffect(() => {
+    const handleScroll = () => {
+      const leaderboardElement = document.getElementById('global-leaderboard');
+      const globeElement = document.getElementById('interactive-globe');
+      
+      if (!leaderboardElement || !globeElement) return;
+      
+      const leaderboardRect = leaderboardElement.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // If user has scrolled past the bottom of the leaderboard
+      if (leaderboardRect.bottom < windowHeight * 0.3) {
+        globeElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [displayCount]);
 
   // Get user's location
   useEffect(() => {
@@ -242,7 +268,7 @@ export default function GlobalScoreboard() {
       </div>
 
       {/* Interactive Globe Section */}
-      <Card className="w-full">
+      <Card id="interactive-globe" className="w-full">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Globe className="w-5 h-5 text-blue-600" />
@@ -368,16 +394,32 @@ export default function GlobalScoreboard() {
           </TabsList>
 
         <TabsContent value="global" className="space-y-6">
-          <Card>
+          <Card id="global-leaderboard">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-yellow-500" />
-                Global Rankings
+              <CardTitle className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-yellow-500" />
+                  Global Rankings
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-600">Show top:</span>
+                  <Select value={displayCount.toString()} onValueChange={(value) => setDisplayCount(parseInt(value))}>
+                    <SelectTrigger className="w-20">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="20">20</SelectItem>
+                      <SelectItem value="30">30</SelectItem>
+                      <SelectItem value="40">40</SelectItem>
+                      <SelectItem value="50">50</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {globalScoreboard?.map((user: ScoreboardUser, index: number) => (
+                {globalScoreboard?.slice(0, displayCount).map((user: ScoreboardUser, index: number) => (
                   <div
                     key={user.id}
                     className={`p-4 rounded-lg border ${
