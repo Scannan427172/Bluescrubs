@@ -553,7 +553,7 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     stem: "A 28-year-old woman at 34 weeks gestation presents with sudden onset severe abdominal pain and vaginal bleeding. She has a history of cocaine use. On examination, the uterus is tender and rigid. Fetal heart rate shows late decelerations. Blood pressure is 90/60 mmHg.",
     options: [
       "Placenta previa",
-      "Placental abruption",
+      "Placental abruption", 
       "Uterine rupture",
       "Normal labor",
       "Cervical laceration"
@@ -608,13 +608,13 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     ageGroup: 'Adult',
     stem: "A 58-year-old man presents with crushing central chest pain radiating to his left arm for 2 hours. ECG shows ST elevation in leads II, III, and aVF. Troponin I is elevated. Blood pressure is 85/50 mmHg. What is the most appropriate immediate management?",
     options: [
-      "Primary PCI within 90 minutes",
-      "Thrombolysis with alteplase",
       "Dual antiplatelet therapy only",
+      "Primary PCI within 90 minutes",
+      "Thrombolysis with alteplase", 
       "IV fluids and monitoring",
       "Morphine and GTN spray"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation: "This is an inferior STEMI with cardiogenic shock (hypotension). Primary PCI is the gold standard treatment for STEMI when available within 90 minutes, especially in hemodynamically unstable patients.",
     learningObjectives: [
       "Recognize STEMI presentation and ECG changes",

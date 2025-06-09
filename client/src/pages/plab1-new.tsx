@@ -784,11 +784,28 @@ export default function PLAB1New() {
                 </div>
               )}
 
-              {/* Educational Source Links */}
+              {/* Educational Source Links - Always show for testing */}
               {(() => {
-                // Use embedded source links from the question if available
-                const sources = currentQuestion.sourceLinks || [];
-                console.log('Question sources:', sources.length, currentQuestion.id);
+                // Create default educational sources for all questions
+                const defaultSources = [
+                  {
+                    title: "NHS - Heart Attack: Symptoms and Treatment",
+                    url: "https://www.nhs.uk/conditions/heart-attack/",
+                    type: "nhs"
+                  },
+                  {
+                    title: "NICE Guidelines - Acute coronary syndromes",
+                    url: "https://www.nice.org.uk/guidance/cg94",
+                    type: "guideline" 
+                  },
+                  {
+                    title: "British Heart Foundation - Heart Attack Information",
+                    url: "https://www.bhf.org.uk/informationsupport/conditions/heart-attack",
+                    type: "educational"
+                  }
+                ];
+                
+                const sources = currentQuestion.sourceLinks || defaultSources;
                 
                 return sources.length > 0 && (
                   <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
