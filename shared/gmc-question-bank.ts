@@ -630,6 +630,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "ESC Guidelines for STEMI 2023",
       "NICE CG167: Myocardial infarction"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Heart attack (myocardial infarction)",
+        url: "https://www.nhs.uk/conditions/heart-attack/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Myocardial infarction",
+        url: "https://www.nice.org.uk/guidance/cg167",
+        type: "guideline"
+      },
+      {
+        title: "British Heart Foundation - Heart attack information",
+        url: "https://www.bhf.org.uk/informationsupport/conditions/heart-attack",
+        type: "educational"
+      }
+    ],
     tags: ["STEMI", "PCI", "cardiogenic-shock", "emergency"],
     estimatedTime: 120,
     lastReviewed: "2024-02-15",
@@ -667,6 +684,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "ESC Heart Failure Guidelines 2023",
       "NICE CG108: Chronic heart failure"
+    ],
+    sourceLinks: [
+      {
+        title: "NHS - Heart failure overview",
+        url: "https://www.nhs.uk/conditions/heart-failure/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Chronic heart failure in adults",
+        url: "https://www.nice.org.uk/guidance/cg108",
+        type: "guideline"
+      },
+      {
+        title: "British Heart Foundation - Heart failure information",
+        url: "https://www.bhf.org.uk/informationsupport/conditions/heart-failure",
+        type: "educational"
+      }
     ],
     tags: ["heart-failure", "diuretics", "fluid-overload", "elderly"],
     estimatedTime: 90,
@@ -706,6 +740,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE NG80: Asthma diagnosis and management",
       "BTS/SIGN Asthma Guidelines 2023"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Asthma overview",
+        url: "https://www.nhs.uk/conditions/asthma/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Asthma diagnosis and monitoring",
+        url: "https://www.nice.org.uk/guidance/ng80",
+        type: "guideline"
+      },
+      {
+        title: "Asthma + Lung UK - Educational resources",
+        url: "https://www.asthmaandlung.org.uk/",
+        type: "educational"
+      }
+    ],
     tags: ["asthma", "diagnosis", "inhaled-therapy", "primary-care"],
     estimatedTime: 90,
     lastReviewed: "2024-02-15",
@@ -743,6 +794,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "NICE CG191: Pneumonia in adults",
       "BTS Guidelines for CAP 2023"
+    ],
+    sourceLinks: [
+      {
+        title: "NHS - Pneumonia overview",
+        url: "https://www.nhs.uk/conditions/pneumonia/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Pneumonia (community-acquired)",
+        url: "https://www.nice.org.uk/guidance/cg191",
+        type: "guideline"
+      },
+      {
+        title: "British Lung Foundation - Pneumonia information",
+        url: "https://www.blf.org.uk/support-for-you/pneumonia",
+        type: "educational"
+      }
     ],
     tags: ["pneumonia", "CURB-65", "antibiotics", "elderly"],
     estimatedTime: 120,
@@ -1002,6 +1070,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "NICE CG138: Inguinal hernia management",
       "European Hernia Society Guidelines"
+    ],
+    sourceLinks: [
+      {
+        title: "NHS - Inguinal hernia",
+        url: "https://www.nhs.uk/conditions/inguinal-hernia/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Inguinal hernia management",
+        url: "https://www.nice.org.uk/guidance/cg138",
+        type: "guideline"
+      },
+      {
+        title: "Patient.info - Inguinal hernia",
+        url: "https://patient.info/digestive-health/abdominal-pain/inguinal-hernia",
+        type: "educational"
+      }
     ],
     tags: ["hernia", "groin", "anatomy", "examination"],
     estimatedTime: 75,
