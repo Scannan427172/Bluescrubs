@@ -714,129 +714,114 @@ export const HIGH_YIELD_MEDICAL_FLASHCARDS: Flashcard[] = [
   }
 ];
 
-// Generate additional flashcards for comprehensive coverage
+// Generate additional flashcards for comprehensive coverage - PLAB 1 Official Structure
 const generateCategoryFlashcards = (category: string, count: number): Flashcard[] => {
   const templates = {
-    'Cardiovascular': [
-      'Arrhythmias', 'Hypertension', 'Heart Failure', 'Valvular Disease', 'Pericardial Disease'
-    ],
-    'Respiratory': [
-      'COPD', 'Pneumonia', 'Pulmonary Embolism', 'Pleural Disease', 'Lung Cancer'
-    ],
-    'Neurology': [
-      'Headache', 'Epilepsy', 'Movement Disorders', 'Dementia', 'Peripheral Neuropathy'
-    ],
-    'Gastroenterology': [
-      'IBD', 'Liver Disease', 'Pancreatic Disease', 'Colorectal Cancer', 'Dyspepsia'
-    ],
-    'Endocrinology': [
-      'Thyroid Disease', 'Diabetes', 'Adrenal Disease', 'Calcium Disorders', 'Pituitary Disease'
-    ],
-    'Nephrology': [
-      'Acute Kidney Injury', 'Chronic Kidney Disease', 'Glomerulonephritis', 'Electrolyte Disorders'
-    ],
-    'Rheumatology': [
-      'Rheumatoid Arthritis', 'Osteoarthritis', 'Connective Tissue Disease', 'Vasculitis'
-    ],
-    'Dermatology': [
-      'Skin Cancer', 'Eczema', 'Psoriasis', 'Infections', 'Drug Reactions'
-    ],
-    'Psychiatry': [
-      'Depression', 'Anxiety Disorders', 'Psychosis', 'Bipolar Disorder', 'Personality Disorders'
-    ],
-    'Infectious Diseases': [
-      'Sepsis', 'Pneumonia', 'UTI', 'Tuberculosis', 'HIV/AIDS'
-    ],
-    'Haematology': [
-      'Anaemia', 'Leukaemia', 'Lymphoma', 'Bleeding Disorders', 'Thrombosis'
-    ],
-    'Oncology': [
-      'Lung Cancer', 'Breast Cancer', 'Colorectal Cancer', 'Prostate Cancer', 'Chemotherapy'
-    ],
-    'Emergency Medicine': [
-      'Resuscitation', 'Trauma', 'Poisoning', 'Shock', 'Acute Presentations'
-    ],
-    'General Practice': [
-      'Preventive Care', 'Chronic Disease Management', 'Health Screening', 'Minor Illness', 'Prescribing'
+    'Medicine': [
+      'Cardiovascular Disease', 'Respiratory Medicine', 'Gastroenterology', 'Endocrinology', 'Nephrology', 
+      'Neurology', 'Rheumatology', 'Dermatology', 'Haematology', 'Infectious Diseases', 'Oncology'
     ],
     'Surgery': [
-      'Acute Abdomen', 'Trauma Surgery', 'Wound Care', 'Pre-operative Assessment', 'Post-operative Care'
+      'General Surgery', 'Acute Abdomen', 'Trauma Surgery', 'Wound Management', 'Pre-operative Assessment', 
+      'Post-operative Care', 'Surgical Emergencies', 'Day Case Surgery', 'Surgical Infections'
     ],
     'Obstetrics & Gynaecology': [
-      'Pregnancy', 'Labour', 'Gynaecological Cancers', 'Menstrual Disorders', 'Contraception'
+      'Antenatal Care', 'Labour & Delivery', 'Postnatal Care', 'Gynaecological Cancers', 'Menstrual Disorders', 
+      'Contraception', 'Fertility', 'Pregnancy Complications', 'Gynaecological Infections'
     ],
     'Paediatrics': [
-      'Neonatal Care', 'Growth & Development', 'Childhood Infections', 'Congenital Conditions', 'Adolescent Health'
+      'Neonatal Care', 'Growth & Development', 'Childhood Infections', 'Congenital Conditions', 
+      'Adolescent Health', 'Child Protection', 'Vaccination', 'Feeding Problems', 'Developmental Delays'
     ],
-    'Anaesthetics': [
-      'Pre-operative Assessment', 'Airway Management', 'Pain Management', 'Critical Care', 'Regional Anaesthesia'
+    'Psychiatry': [
+      'Depression', 'Anxiety Disorders', 'Psychosis', 'Bipolar Disorder', 'Personality Disorders', 
+      'Substance Abuse', 'Eating Disorders', 'Mental Health Act', 'Suicide Risk Assessment'
     ],
-    'Radiology': [
-      'Chest X-ray', 'CT Interpretation', 'MRI Basics', 'Ultrasound', 'Interventional Radiology'
+    'ENT, Ophthalmology, and Orthopaedics': [
+      'Hearing Loss', 'Vertigo', 'Rhinosinusitis', 'Throat Infections', 'Diabetic Retinopathy', 
+      'Glaucoma', 'Red Eye', 'Fractures', 'Joint Disease', 'Back Pain', 'Sports Injuries'
     ],
-    'Pathology': [
-      'Histopathology', 'Blood Tests', 'Microbiology', 'Immunology', 'Chemical Pathology'
+    'Medical ethics, law, and professionalism': [
+      'Consent', 'Confidentiality', 'Mental Capacity Act', 'Safeguarding', 'Professional Boundaries', 
+      'Breaking Bad News', 'Duty of Candour', 'Whistleblowing', 'GMC Guidelines', 'Cultural Competence'
     ],
-    'Ophthalmology': [
-      'Diabetic Retinopathy', 'Glaucoma', 'Cataracts', 'Retinal Detachment', 'Red Eye'
+    'Emergency care': [
+      'Resuscitation', 'Trauma Assessment', 'Poisoning', 'Shock', 'Acute Presentations', 
+      'Sepsis Recognition', 'Anaphylaxis', 'Cardiac Arrest', 'Stroke Management', 'Seizure Management'
     ],
-    'ENT': [
-      'Hearing Loss', 'Vertigo', 'Rhinosinusitis', 'Throat Infections', 'Head & Neck Cancer'
-    ],
-    'Orthopaedics': [
-      'Fractures', 'Joint Disease', 'Back Pain', 'Sports Injuries', 'Bone Tumours'
-    ],
-    'Urology': [
-      'Prostate Disease', 'Kidney Stones', 'UTI', 'Erectile Dysfunction', 'Urological Cancers'
+    'Prescribing and drug interactions': [
+      'Safe Prescribing', 'Drug Interactions', 'Contraindications', 'Adverse Drug Reactions', 'Polypharmacy', 
+      'Antimicrobial Stewardship', 'Pain Management', 'Controlled Drugs', 'Pregnancy Prescribing', 'Elderly Prescribing'
     ]
   };
 
   const subcategories = templates[category as keyof typeof templates] || ['General'];
   const flashcards: Flashcard[] = [];
 
-  // Enhanced medical education content patterns with proven mnemonics
+  // Enhanced medical education content patterns with proven mnemonics - PLAB 1 Aligned
   const medicalMnemonics = {
-    'Cardiovascular': [
+    'Medicine': [
       'MONA GREETS: Morphine, Oxygen, Nitrates, Aspirin for STEMI',
-      'PASS: Pulmonary/Aortic Stenosis = Systolic murmurs',
+      'CURB-65: Confusion, Urea, Respiratory rate, Blood pressure, 65+ for pneumonia severity',
+      'DKA: Diabetes, Ketones, Acidosis diagnostic triad',
       'ABCDE chest X-ray: Alveolar oedema, B lines, Cardiomegaly, Dilated vessels, Effusions',
       'CHADS-VASc: CHF, Hypertension, Age, Diabetes, Stroke, Vascular, Age, Sex for AF stroke risk'
     ],
-    'Respiratory': [
-      'CURB-65: Confusion, Urea, Respiratory rate, Blood pressure, 65+ for pneumonia severity',
-      'SABA-ICS-LABA-LAMA: Asthma step-up therapy',
-      'GOLD A-D: COPD assessment categories',
-      'Light criteria: Protein >30g/L, LDH >200, pleural:serum LDH >0.6 for exudates'
+    'Surgery': [
+      'ABCDE: Airway, Breathing, Circulation, Disability, Exposure for trauma assessment',
+      'WWW: Wound, Waterproof, Watch for signs of infection',
+      'SAMPLE: Signs/Symptoms, Allergies, Medications, Past history, Last meal, Events',
+      'ASA: American Society Anesthesiologists physical status classification',
+      'SIRS: Systemic Inflammatory Response Syndrome criteria'
     ],
-    'Emergency Medicine': [
-      'ABCDE: Airway, Breathing, Circulation, Disability, Exposure for trauma',
-      'GCS 4-5-6 = Alive (Eyes 4, Verbal 5, Motor 6)',
-      'FAST: Face, Arms, Speech, Time for stroke recognition',
-      'qSOFA: Mental status, SBP ≤100, RR ≥22 for sepsis'
+    'Obstetrics & Gynaecology': [
+      'HELLP: Haemolysis, Elevated LFTs, Low Platelets for pre-eclampsia complications',
+      'TORCH: Toxoplasma, Other, Rubella, CMV, HSV for congenital infections',
+      'PAINS: Period problems, Abdominal pain, Infection, Not pregnant, String problems for IUD',
+      'FIGO: International Federation of Gynecology and Obstetrics staging',
+      'Bishop score: Position, Consistency, Effacement, Dilation, Station for cervical assessment'
     ],
-    'Neurology': [
-      'BE-FAST: Balance, Eyes, Face, Arms, Speech, Time for stroke',
-      'SNOOP: Systemic illness, Neurological signs, Onset sudden, Older age, Pattern change for headache red flags',
-      'SAD PERSONS: Sex, Age, Depression, Previous attempts for suicide risk',
-      'DANISH: Dystonia, Akathisia, Neuroleptic malignant syndrome, Iron deficiency, Serotonin syndrome, Hyperthermia'
+    'Paediatrics': [
+      'SLOW: Sits 6 months, Language 12 months, Other leg 18 months, Words 24 months',
+      'APGAR: Appearance, Pulse, Grimace, Activity, Respiratory effort',
+      'WETFLAG: Weight, Energy, Trauma, Fluids, Labs, Antibiotics, Glucose for sepsis',
+      'HEADSS: Home, Education, Activities, Drugs, Sexuality, Suicide for adolescent assessment',
+      'SCOFF: Sick, Control, One stone, Fat, Food for eating disorder screening'
     ],
     'Psychiatry': [
       'ASEPTIC: Appearance, Speech, Emotion, Perception, Thoughts, Insight, Cognition for MSE',
+      'SAD PERSONS: Sex, Age, Depression, Previous attempts, Ethanol, Rational thinking, Social support, Organized plan, No spouse, Serious illness',
       'CAGE: Cut down, Annoyed, Guilty, Eye-opener for alcohol screening',
-      'DIGFAST: Distractibility, Indiscretion, Grandiosity, Flight of ideas, Activity, Sleep, Talkative for mania',
-      'SIG E CAPS: Sleep, Interest, Guilt, Energy, Concentration, Appetite, Psychomotor, Suicide for depression'
+      'SIG E CAPS: Sleep, Interest, Guilt, Energy, Concentration, Appetite, Psychomotor, Suicide for depression',
+      'DIGFAST: Distractibility, Indiscretion, Grandiosity, Flight of ideas, Activity, Sleep, Talkative for mania'
     ],
-    'Gastroenterology': [
-      'AIMS65: Age, INR, Mental status, Systolic BP, 65+ for GI bleeding',
-      'ROME IV criteria for IBS diagnosis',
-      'Child-Pugh: Ascites, Bilirubin, Albumin, Prothrombin, Encephalopathy for liver disease',
-      'BRAT: Bananas, Rice, Applesauce, Toast for gastroenteritis diet'
+    'ENT, Ophthalmology, and Orthopaedics': [
+      'VINDICATE: Vascular, Inflammatory, Neoplastic, Degenerative, Intoxication, Congenital, Autoimmune, Trauma, Endocrine',
+      'Red flags: Sudden vision loss, Severe eye pain, Halos around lights, Curtain across vision',
+      'Ottawa rules: Ankle and knee injury assessment',
+      'SOCRATES: Site, Onset, Character, Radiation, Associations, Time course, Exacerbating factors, Severity',
+      'Rinne and Weber tests for hearing assessment'
     ],
-    'Endocrinology': [
-      'DKA: Diabetes, Ketones, Acidosis diagnostic triad',
-      'KUSSMAUL breathing compensates for metabolic acidosis',
-      'TIDM: Polyuria, Polydipsia, Polyphagia, Weight loss classic symptoms',
-      'MUDPILES: Methanol, Uremia, DKA, Propylene glycol, Isoniazid, Lactate, Ethylene glycol, Salicylates for anion gap'
+    'Medical ethics, law, and professionalism': [
+      'Four pillars: Autonomy, Beneficence, Non-maleficence, Justice',
+      'CONSENT: Capacity, Options, Nature of treatment, Significant risks, Explanation, Time, Benefits',
+      'Gillick competence for children under 16',
+      'Mental Capacity Act: Assume capacity, Support decision-making, Unwise decisions allowed, Best interests, Least restrictive',
+      'Caldicott principles for information governance'
+    ],
+    'Emergency care': [
+      'ABCDE: Airway, Breathing, Circulation, Disability, Exposure',
+      'GCS 4-5-6 = Alive (Eyes 4, Verbal 5, Motor 6)',
+      'FAST: Face, Arms, Speech, Time for stroke recognition',
+      'qSOFA: Mental status, SBP ≤100, RR ≥22 for sepsis',
+      'AVPU: Alert, Voice, Pain, Unresponsive for consciousness level'
+    ],
+    'Prescribing and drug interactions': [
+      'Right patient, Right drug, Right dose, Right route, Right time, Right reason',
+      'STOP/START criteria for inappropriate prescribing in elderly',
+      'Cytochrome P450 inducers: St Johns wort, Smoking, Chronic alcohol, Rifampicin, Epilepsy drugs, Barbiturates',
+      'Warfarin interactions: Antibiotics, Amiodarone, Alcohol, Aspirin increase INR',
+      'ADME: Absorption, Distribution, Metabolism, Excretion'
     ]
   };
 
@@ -900,62 +885,32 @@ const generateCategoryFlashcards = (category: string, count: number): Flashcard[
   return flashcards;
 };
 
-// Generate comprehensive flashcard collection - scalable to 5000+ cards
+// Generate comprehensive flashcard collection - PLAB 1 Official Structure (5000+ cards)
 export const COMPREHENSIVE_FLASHCARD_COLLECTION = [
   ...HIGH_YIELD_MEDICAL_FLASHCARDS,
-  ...generateCategoryFlashcards('Cardiovascular', 200),
-  ...generateCategoryFlashcards('Respiratory', 180),
-  ...generateCategoryFlashcards('Neurology', 170),
-  ...generateCategoryFlashcards('Gastroenterology', 160),
-  ...generateCategoryFlashcards('Endocrinology', 150),
-  ...generateCategoryFlashcards('Emergency Medicine', 200),
-  ...generateCategoryFlashcards('General Practice', 180),
-  ...generateCategoryFlashcards('Paediatrics', 170),
-  ...generateCategoryFlashcards('Surgery', 160),
-  ...generateCategoryFlashcards('Obstetrics & Gynaecology', 150),
-  ...generateCategoryFlashcards('Psychiatry', 140),
-  ...generateCategoryFlashcards('Infectious Diseases', 130),
-  ...generateCategoryFlashcards('Haematology', 120),
-  ...generateCategoryFlashcards('Oncology', 120),
-  ...generateCategoryFlashcards('Nephrology', 110),
-  ...generateCategoryFlashcards('Rheumatology', 100),
-  ...generateCategoryFlashcards('Dermatology', 100),
-  ...generateCategoryFlashcards('Radiology', 120),
-  ...generateCategoryFlashcards('Pathology', 110),
-  ...generateCategoryFlashcards('Anaesthetics', 100),
-  ...generateCategoryFlashcards('Ophthalmology', 90),
-  ...generateCategoryFlashcards('ENT', 90),
-  ...generateCategoryFlashcards('Orthopaedics', 110),
-  ...generateCategoryFlashcards('Urology', 90)
+  ...generateCategoryFlashcards('Medicine', 800),
+  ...generateCategoryFlashcards('Surgery', 600),
+  ...generateCategoryFlashcards('Obstetrics & Gynaecology', 500),
+  ...generateCategoryFlashcards('Paediatrics', 500),
+  ...generateCategoryFlashcards('Psychiatry', 400),
+  ...generateCategoryFlashcards('ENT, Ophthalmology, and Orthopaedics', 400),
+  ...generateCategoryFlashcards('Medical ethics, law, and professionalism', 350),
+  ...generateCategoryFlashcards('Emergency care', 600),
+  ...generateCategoryFlashcards('Prescribing and drug interactions', 400)
 ];
 
 export const FLASHCARD_STATS = {
   total: COMPREHENSIVE_FLASHCARD_COLLECTION.length,
   byCategory: {
-    'Cardiovascular': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Cardiovascular').length,
-    'Respiratory': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Respiratory').length,
-    'Neurology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Neurology').length,
-    'Gastroenterology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Gastroenterology').length,
-    'Endocrinology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Endocrinology').length,
-    'Nephrology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Nephrology').length,
-    'Rheumatology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Rheumatology').length,
-    'Dermatology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Dermatology').length,
-    'Psychiatry': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Psychiatry').length,
-    'Infectious Diseases': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Infectious Diseases').length,
-    'Haematology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Haematology').length,
-    'Oncology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Oncology').length,
-    'Emergency Medicine': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Emergency Medicine').length,
-    'General Practice': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'General Practice').length,
+    'Medicine': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Medicine').length,
     'Surgery': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Surgery').length,
     'Obstetrics & Gynaecology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Obstetrics & Gynaecology').length,
     'Paediatrics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Paediatrics').length,
-    'Anaesthetics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Anaesthetics').length,
-    'Radiology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Radiology').length,
-    'Pathology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Pathology').length,
-    'Ophthalmology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Ophthalmology').length,
-    'ENT': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'ENT').length,
-    'Orthopaedics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Orthopaedics').length,
-    'Urology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Urology').length
+    'Psychiatry': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Psychiatry').length,
+    'ENT, Ophthalmology, and Orthopaedics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'ENT, Ophthalmology, and Orthopaedics').length,
+    'Medical ethics, law, and professionalism': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Medical ethics, law, and professionalism').length,
+    'Emergency care': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Emergency care').length,
+    'Prescribing and drug interactions': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Prescribing and drug interactions').length
   },
   byDifficulty: {
     'beginner': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.difficulty === 'beginner').length,

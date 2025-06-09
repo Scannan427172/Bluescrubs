@@ -35,33 +35,18 @@ export default function InteractiveFlashcards() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const speechSynthRef = useRef<SpeechSynthesis | null>(null);
 
-  // Available categories
+  // Available categories - PLAB 1 Official Structure
   const categories = [
-    { value: 'all', label: 'All Specialties' },
-    { value: 'Cardiovascular', label: 'Cardiovascular' },
-    { value: 'Respiratory', label: 'Respiratory Medicine' },
-    { value: 'Neurology', label: 'Neurology' },
-    { value: 'Endocrinology', label: 'Endocrinology' },
-    { value: 'Gastroenterology', label: 'Gastroenterology' },
-    { value: 'Nephrology', label: 'Nephrology' },
-    { value: 'Rheumatology', label: 'Rheumatology' },
-    { value: 'Dermatology', label: 'Dermatology' },
-    { value: 'Psychiatry', label: 'Psychiatry' },
-    { value: 'Infectious Diseases', label: 'Infectious Diseases' },
-    { value: 'Haematology', label: 'Haematology' },
-    { value: 'Oncology', label: 'Oncology' },
-    { value: 'Emergency Medicine', label: 'Emergency Medicine' },
-    { value: 'General Practice', label: 'General Practice' },
+    { value: 'all', label: 'All PLAB Specialties' },
+    { value: 'Medicine', label: 'Medicine' },
     { value: 'Surgery', label: 'Surgery' },
     { value: 'Obstetrics & Gynaecology', label: 'Obstetrics & Gynaecology' },
     { value: 'Paediatrics', label: 'Paediatrics' },
-    { value: 'Anaesthetics', label: 'Anaesthetics' },
-    { value: 'Radiology', label: 'Radiology' },
-    { value: 'Pathology', label: 'Pathology' },
-    { value: 'Ophthalmology', label: 'Ophthalmology' },
-    { value: 'ENT', label: 'ENT' },
-    { value: 'Orthopaedics', label: 'Orthopaedics' },
-    { value: 'Urology', label: 'Urology' }
+    { value: 'Psychiatry', label: 'Psychiatry' },
+    { value: 'ENT, Ophthalmology, and Orthopaedics', label: 'ENT, Ophthalmology & Orthopaedics' },
+    { value: 'Medical ethics, law, and professionalism', label: 'Medical Ethics, Law & Professionalism' },
+    { value: 'Emergency care', label: 'Emergency Care' },
+    { value: 'Prescribing and drug interactions', label: 'Prescribing & Drug Interactions' }
   ];
 
   const difficulties = [
@@ -317,10 +302,10 @@ export default function InteractiveFlashcards() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Badge variant="secondary">{currentCard.category}</Badge>
-              <Badge variant="outline">{currentCard.difficulty}</Badge>
+              <Badge variant="secondary" className="text-white bg-blue-600">{currentCard.category}</Badge>
+              <Badge variant="outline" className="text-white border-white">{currentCard.difficulty}</Badge>
               {currentCard.highYield && (
-                <Badge variant="destructive">High Yield</Badge>
+                <Badge variant="destructive" className="text-white">High Yield</Badge>
               )}
             </div>
             
