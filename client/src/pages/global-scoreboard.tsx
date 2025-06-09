@@ -3,10 +3,12 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { Globe, Trophy, Users, Clock, TrendingUp, MapPin, Crown, Medal, Award } from "lucide-react";
+import { Globe, Trophy, Users, Clock, TrendingUp, MapPin, Crown, Medal, Award, List } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
+import { InteractiveGlobe } from "@/components/interactive-globe";
 
 interface ScoreboardUser {
   id: number;
@@ -48,6 +50,7 @@ interface WeeklyLeader {
 }
 
 export default function GlobalScoreboard() {
+  const [viewMode, setViewMode] = useState<'list' | 'globe'>('list');
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedCountry, setSelectedCountry] = useState<string>("all");
   const [locationPermission, setLocationPermission] = useState<string>("pending");
@@ -198,6 +201,29 @@ export default function GlobalScoreboard() {
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Connect with PLAB candidates worldwide. See how you rank globally and in your country.
         </p>
+        
+        {/* View Mode Toggle */}
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <div className="flex items-center gap-3 bg-white p-3 rounded-lg border shadow-sm">
+            <div className="flex items-center gap-2">
+              <List className={`w-5 h-5 ${viewMode === 'list' ? 'text-blue-600' : 'text-gray-400'}`} />
+              <span className={`text-sm font-medium ${viewMode === 'list' ? 'text-blue-600' : 'text-gray-600'}`}>
+                List View
+              </span>
+            </div>
+            <Switch
+              checked={viewMode === 'globe'}
+              onCheckedChange={(checked) => setViewMode(checked ? 'globe' : 'list')}
+              className="data-[state=checked]:bg-blue-600"
+            />
+            <div className="flex items-center gap-2">
+              <Globe className={`w-5 h-5 ${viewMode === 'globe' ? 'text-blue-600' : 'text-gray-400'}`} />
+              <span className={`text-sm font-medium ${viewMode === 'globe' ? 'text-blue-600' : 'text-gray-600'}`}>
+                Globe View
+              </span>
+            </div>
+          </div>
+        </div>
 
         {/* Location Status */}
         {locationPermission === "pending" && (
@@ -339,13 +365,26 @@ export default function GlobalScoreboard() {
         </select>
       </div>
 
-      {/* Main Content Tabs */}
-      <Tabs defaultValue="global" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="global">Global Leaderboard</TabsTrigger>
-          <TabsTrigger value="weekly">Weekly Champions</TabsTrigger>
-          <TabsTrigger value="countries">Country Rankings</TabsTrigger>
-        </TabsList>
+      {/* Main Content */}
+      {viewMode === 'globe' ? (
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Globe className="w-5 h-5 text-blue-600" />
+              Interactive Global Map
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex justify-center">
+            <InteractiveGlobe />
+          </CardContent>
+        </Card>
+      ) : (
+        <Tabs defaultValue="global" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="global">Global Leaderboard</TabsTrigger>
+            <TabsTrigger value="weekly">Weekly Champions</TabsTrigger>
+            <TabsTrigger value="countries">Country Rankings</TabsTrigger>
+          </TabsList>
 
         <TabsContent value="global" className="space-y-6">
           <Card>
@@ -523,7 +562,8 @@ export default function GlobalScoreboard() {
             </CardContent>
           </Card>
         </TabsContent>
-      </Tabs>
+        </Tabs>
+      )}
     </div>
   );
 }
