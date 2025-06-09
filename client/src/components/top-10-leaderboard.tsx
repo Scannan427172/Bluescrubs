@@ -58,7 +58,7 @@ export function Top10Leaderboard() {
     if (rank === 1) return <Trophy className="h-5 w-5 md:h-6 md:w-6 text-yellow-500" />;
     if (rank === 2) return <Medal className="h-5 w-5 md:h-6 md:w-6 text-gray-500" />;
     if (rank === 3) return <Award className="h-5 w-5 md:h-6 md:w-6 text-amber-600" />;
-    return <span className="text-sm md:text-base font-bold text-gray-800">#{rank}</span>;
+    return <span className="text-sm md:text-base font-bold" style={{ color: '#1f2937' }}>#{rank}</span>;
   };
 
   return (
@@ -96,14 +96,14 @@ export function Top10Leaderboard() {
                 <div className="flex items-center gap-1 md:gap-2 min-w-0 flex-1">
                   <span className="text-base md:text-xl flex-shrink-0">{user.flagEmoji}</span>
                   <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-black text-sm md:text-base truncate">{user.username}</div>
-                    <div className="text-sm text-gray-800 truncate">{user.city}, {user.country}</div>
+                    <div className="font-bold text-sm md:text-base truncate" style={{ color: '#000000' }}>{user.username}</div>
+                    <div className="text-sm truncate" style={{ color: '#374151' }}>{user.city}, {user.country}</div>
                   </div>
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
-                <div className="font-bold text-blue-600 text-sm md:text-base">{user.totalScore.toLocaleString()}</div>
-                <div className="text-sm text-gray-800 font-medium">{user.accuracyRate}% accuracy</div>
+                <div className="font-bold text-sm md:text-base" style={{ color: '#2563eb' }}>{user.totalScore.toLocaleString()}</div>
+                <div className="text-sm font-medium" style={{ color: '#374151' }}>{user.accuracyRate}% accuracy</div>
               </div>
             </div>
           ))}
