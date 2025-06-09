@@ -135,22 +135,22 @@ export default function PLAB1Integrated() {
 
   if (!currentQuestion) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+      <div className="min-h-screen bg-gray-100 p-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">PLAB 1 Practice</h1>
-          <p className="text-gray-600">Select a category to begin practice</p>
+          <p className="text-gray-700">Select a category to begin practice</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">PLAB 1 Practice</h1>
-          <p className="text-gray-600">Practice questions based on GMC Medical Licensing Assessment guidelines</p>
+          <p className="text-gray-700 font-medium">Practice questions based on GMC Medical Licensing Assessment guidelines</p>
         </div>
 
         {/* Practice Configuration */}
