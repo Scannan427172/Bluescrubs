@@ -210,6 +210,246 @@ const MEDICAL_TRANSLATIONS: Record<string, Record<string, string>> = {
     "Inferior STEMI": "STEMI inferior", "Primary PCI within 90 minutes": "ICP primario dentro de 90 minutos",
     "thrombolysis within 30 minutes": "trombólisis dentro de 30 minutos", "Inferior leads": "Derivaciones inferiores",
     "Usually RCA occlusion": "Usualmente oclusión de ACD", "preferred": "preferido"
+  },
+  de: {
+    "heart": "Herz", "patient": "Patient", "diagnosis": "Diagnose", "treatment": "Behandlung",
+    "symptoms": "Symptome", "blood pressure": "Blutdruck", "chest pain": "Brustschmerzen",
+    "fever": "Fieber", "headache": "Kopfschmerzen", "What is the": "Was ist",
+    "Which of the following": "Welche der folgenden", "Explanation": "Erklärung",
+    "crushing central dolour thoracique radiating": "zentrale quetschende Brustschmerzen ausstrahlend",
+    "to left arm and jaw": "in den linken Arm und Kiefer", "ECG shows ST elevation": "EKG zeigt ST-Hebung",
+    "Inferior STEMI": "Hinterwand-STEMI", "Primary PCI within 90 minutes": "Primäre PCI innerhalb 90 Minuten",
+    "preferred": "bevorzugt"
+  },
+  it: {
+    "heart": "cuore", "patient": "paziente", "diagnosis": "diagnosi", "treatment": "trattamento",
+    "symptoms": "sintomi", "blood pressure": "pressione sanguigna", "chest pain": "dolore al petto",
+    "fever": "febbre", "headache": "mal di testa", "What is the": "Qual è",
+    "Which of the following": "Quale dei seguenti", "Explanation": "Spiegazione",
+    "crushing central dolour thoracique radiating": "dolore toracico centrale schiacciante irradiante",
+    "to left arm and jaw": "al braccio sinistro e mascella", "ECG shows ST elevation": "ECG mostra elevazione ST",
+    "Inferior STEMI": "STEMI inferiore", "Primary PCI within 90 minutes": "PCI primaria entro 90 minuti",
+    "preferred": "preferito"
+  },
+  pt: {
+    "heart": "coração", "patient": "paciente", "diagnosis": "diagnóstico", "treatment": "tratamento",
+    "symptoms": "sintomas", "blood pressure": "pressão arterial", "chest pain": "dor no peito",
+    "fever": "febre", "headache": "dor de cabeça", "What is the": "Qual é",
+    "Which of the following": "Qual dos seguintes", "Explanation": "Explicação",
+    "crushing central dolour thoracique radiating": "dor torácica central esmagadora irradiando",
+    "to left arm and jaw": "para braço esquerdo e mandíbula", "ECG shows ST elevation": "ECG mostra elevação ST",
+    "Inferior STEMI": "STEMI inferior", "Primary PCI within 90 minutes": "ICP primária em 90 minutos",
+    "preferred": "preferido"
+  },
+  zh: {
+    "heart": "心脏", "patient": "患者", "diagnosis": "诊断", "treatment": "治疗",
+    "symptoms": "症状", "blood pressure": "血压", "chest pain": "胸痛",
+    "fever": "发热", "headache": "头痛", "What is the": "什么是",
+    "Which of the following": "以下哪项", "Explanation": "解释",
+    "crushing central dolour thoracique radiating": "压榨性中央胸痛放射至",
+    "to left arm and jaw": "左臂和下颌", "ECG shows ST elevation": "心电图显示ST段抬高",
+    "Inferior STEMI": "下壁STEMI", "Primary PCI within 90 minutes": "90分钟内原发PCI",
+    "preferred": "首选"
+  },
+  ja: {
+    "heart": "心臓", "patient": "患者", "diagnosis": "診断", "treatment": "治療",
+    "symptoms": "症状", "blood pressure": "血圧", "chest pain": "胸痛",
+    "fever": "発熱", "headache": "頭痛", "What is the": "何ですか",
+    "Which of the following": "次のうちどれ", "Explanation": "説明",
+    "crushing central dolour thoracique radiating": "圧迫性中央胸痛が放散する",
+    "to left arm and jaw": "左腕と顎に", "ECG shows ST elevation": "心電図でST上昇を認める",
+    "Inferior STEMI": "下壁STEMI", "Primary PCI within 90 minutes": "90分以内のプライマリーPCI",
+    "preferred": "推奨"
+  },
+  ko: {
+    "heart": "심장", "patient": "환자", "diagnosis": "진단", "treatment": "치료",
+    "symptoms": "증상", "blood pressure": "혈압", "chest pain": "흉통",
+    "fever": "발열", "headache": "두통", "What is the": "무엇입니까",
+    "Which of the following": "다음 중 어느 것", "Explanation": "설명",
+    "crushing central dolour thoracique radiating": "압박성 중앙 흉통이 방사되는",
+    "to left arm and jaw": "왼쪽 팔과 턱으로", "ECG shows ST elevation": "심전도에서 ST 상승 보임",
+    "Inferior STEMI": "하벽 STEMI", "Primary PCI within 90 minutes": "90분 내 일차 PCI",
+    "preferred": "선호"
+  },
+  ru: {
+    "heart": "сердце", "patient": "пациент", "diagnosis": "диагноз", "treatment": "лечение",
+    "symptoms": "симптомы", "blood pressure": "артериальное давление", "chest pain": "боль в груди",
+    "fever": "лихорадка", "headache": "головная боль", "What is the": "Что такое",
+    "Which of the following": "Что из следующего", "Explanation": "Объяснение",
+    "crushing central dolour thoracique radiating": "давящая центральная боль в груди иррадиирующая",
+    "to left arm and jaw": "в левую руку и челюсть", "ECG shows ST elevation": "ЭКГ показывает подъем ST",
+    "Inferior STEMI": "Нижний ИМпST", "Primary PCI within 90 minutes": "Первичное ЧКВ в течение 90 минут",
+    "preferred": "предпочтительный"
+  },
+  tr: {
+    "heart": "kalp", "patient": "hasta", "diagnosis": "tanı", "treatment": "tedavi",
+    "symptoms": "semptomlar", "blood pressure": "kan basıncı", "chest pain": "göğüs ağrısı",
+    "fever": "ateş", "headache": "baş ağrısı", "What is the": "Nedir",
+    "Which of the following": "Aşağıdakilerden hangisi", "Explanation": "Açıklama",
+    "crushing central dolour thoracique radiating": "ezici merkezi göğüs ağrısı yayılan",
+    "to left arm and jaw": "sol kol ve çeneye", "ECG shows ST elevation": "EKG ST yükselmesi gösteriyor",
+    "Inferior STEMI": "Alt duvar STEMI", "Primary PCI within 90 minutes": "90 dakika içinde primer PCI",
+    "preferred": "tercih edilen"
+  },
+  pl: {
+    "heart": "serce", "patient": "pacjent", "diagnosis": "diagnoza", "treatment": "leczenie",
+    "symptoms": "objawy", "blood pressure": "ciśnienie krwi", "chest pain": "ból w klatce piersiowej",
+    "fever": "gorączka", "headache": "ból głowy", "What is the": "Co to jest",
+    "Which of the following": "Które z poniższych", "Explanation": "Wyjaśnienie",
+    "crushing central dolour thoracique radiating": "miażdżący centralny ból w klatce piersiowej promieniujący",
+    "to left arm and jaw": "do lewej ręki i szczęki", "ECG shows ST elevation": "EKG pokazuje uniesienie ST",
+    "Inferior STEMI": "Dolny STEMI", "Primary PCI within 90 minutes": "Pierwotne PCI w ciągu 90 minut",
+    "preferred": "preferowany"
+  },
+  nl: {
+    "heart": "hart", "patient": "patiënt", "diagnosis": "diagnose", "treatment": "behandeling",
+    "symptoms": "symptomen", "blood pressure": "bloeddruk", "chest pain": "pijn op de borst",
+    "fever": "koorts", "headache": "hoofdpijn", "What is the": "Wat is",
+    "Which of the following": "Welke van de volgende", "Explanation": "Uitleg",
+    "crushing central dolour thoracique radiating": "knellende centrale borstpijn uitstralend",
+    "to left arm and jaw": "naar linkerarm en kaak", "ECG shows ST elevation": "ECG toont ST-elevatie",
+    "Inferior STEMI": "Inferieure STEMI", "Primary PCI within 90 minutes": "Primaire PCI binnen 90 minuten",
+    "preferred": "geprefereerd"
+  },
+  sv: {
+    "heart": "hjärta", "patient": "patient", "diagnosis": "diagnos", "treatment": "behandling",
+    "symptoms": "symtom", "blood pressure": "blodtryck", "chest pain": "bröstsmärta",
+    "fever": "feber", "headache": "huvudvärk", "What is the": "Vad är",
+    "Which of the following": "Vilken av följande", "Explanation": "Förklaring",
+    "crushing central dolour thoracique radiating": "krossande central bröstsmärta utstrålande",
+    "to left arm and jaw": "till vänster arm och käke", "ECG shows ST elevation": "EKG visar ST-höjning",
+    "Inferior STEMI": "Inferior STEMI", "Primary PCI within 90 minutes": "Primär PCI inom 90 minuter",
+    "preferred": "föredragen"
+  },
+  th: {
+    "heart": "หัวใจ", "patient": "ผู้ป่วย", "diagnosis": "การวินิจฉัย", "treatment": "การรักษา",
+    "symptoms": "อาการ", "blood pressure": "ความดันโลหิต", "chest pain": "เจ็บหน้าอก",
+    "fever": "ไข้", "headache": "ปวดหัว", "What is the": "อะไรคือ",
+    "Which of the following": "ข้อใดต่อไปนี้", "Explanation": "คำอธิบาย",
+    "crushing central dolour thoracique radiating": "อาการเจ็บหน้าอกกดทับกลางลามไป",
+    "to left arm and jaw": "แขนซ้ายและขากรรไกร", "ECG shows ST elevation": "EKG แสดง ST elevation",
+    "Inferior STEMI": "Inferior STEMI", "Primary PCI within 90 minutes": "Primary PCI ภายใน 90 นาที",
+    "preferred": "ที่ต้องการ"
+  },
+  vi: {
+    "heart": "tim", "patient": "bệnh nhân", "diagnosis": "chẩn đoán", "treatment": "điều trị",
+    "symptoms": "triệu chứng", "blood pressure": "huyết áp", "chest pain": "đau ngực",
+    "fever": "sốt", "headache": "đau đầu", "What is the": "Cái gì là",
+    "Which of the following": "Cái nào sau đây", "Explanation": "Giải thích",
+    "crushing central dolour thoracique radiating": "đau ngực trung tâm nghiền nát lan tỏa",
+    "to left arm and jaw": "đến cánh tay trái và hàm", "ECG shows ST elevation": "ECG cho thấy ST elevation",
+    "Inferior STEMI": "STEMI dưới", "Primary PCI within 90 minutes": "PCI chính trong 90 phút",
+    "preferred": "ưa thích"
+  },
+  fa: {
+    "heart": "قلب", "patient": "بیمار", "diagnosis": "تشخیص", "treatment": "درمان",
+    "symptoms": "علائم", "blood pressure": "فشار خون", "chest pain": "درد قفسه سینه",
+    "fever": "تب", "headache": "سردرد", "What is the": "چیست",
+    "Which of the following": "کدام یک از موارد زیر", "Explanation": "توضیح",
+    "crushing central dolour thoracique radiating": "درد شدید مرکزی قفسه سینه که منتشر می‌شود",
+    "to left arm and jaw": "به بازوی چپ و فک", "ECG shows ST elevation": "ECG نشان دهنده بالا رفتن ST",
+    "Inferior STEMI": "STEMI تحتانی", "Primary PCI within 90 minutes": "PCI اولیه در 90 دقیقه",
+    "preferred": "ترجیح داده شده"
+  },
+  no: {
+    "heart": "hjerte", "patient": "pasient", "diagnosis": "diagnose", "treatment": "behandling",
+    "symptoms": "symptomer", "blood pressure": "blodtrykk", "chest pain": "brystsmerter",
+    "fever": "feber", "headache": "hodepine", "What is the": "Hva er",
+    "Which of the following": "Hvilken av følgende", "Explanation": "Forklaring",
+    "crushing central dolour thoracique radiating": "knusende sentral brystsmerte som stråler",
+    "to left arm and jaw": "til venstre arm og kjeve", "ECG shows ST elevation": "EKG viser ST-elevering",
+    "Inferior STEMI": "Inferior STEMI", "Primary PCI within 90 minutes": "Primær PCI innen 90 minutter",
+    "preferred": "foretrukket"
+  },
+  da: {
+    "heart": "hjerte", "patient": "patient", "diagnosis": "diagnose", "treatment": "behandling",
+    "symptoms": "symptomer", "blood pressure": "blodtryk", "chest pain": "brystsmerter",
+    "fever": "feber", "headache": "hovedpine", "What is the": "Hvad er",
+    "Which of the following": "Hvilken af følgende", "Explanation": "Forklaring",
+    "crushing central dolour thoracique radiating": "knusende central brystsmerte udstrålende",
+    "to left arm and jaw": "til venstre arm og kæbe", "ECG shows ST elevation": "EKG viser ST-elevation",
+    "Inferior STEMI": "Inferior STEMI", "Primary PCI within 90 minutes": "Primær PCI inden 90 minutter",
+    "preferred": "foretrukket"
+  },
+  fi: {
+    "heart": "sydän", "patient": "potilas", "diagnosis": "diagnoosi", "treatment": "hoito",
+    "symptoms": "oireet", "blood pressure": "verenpaine", "chest pain": "rintakipu",
+    "fever": "kuume", "headache": "päänsärky", "What is the": "Mikä on",
+    "Which of the following": "Mikä seuraavista", "Explanation": "Selitys",
+    "crushing central dolour thoracique radiating": "murskaava keskimerkkinen rintakipu säteilee",
+    "to left arm and jaw": "vasempaan käteen ja leukaan", "ECG shows ST elevation": "EKG näyttää ST-nousu",
+    "Inferior STEMI": "Alainen STEMI", "Primary PCI within 90 minutes": "Ensisijainen PCI 90 minuutissa",
+    "preferred": "suositeltava"
+  },
+  el: {
+    "heart": "καρδιά", "patient": "ασθενής", "diagnosis": "διάγνωση", "treatment": "θεραπεία",
+    "symptoms": "συμπτώματα", "blood pressure": "αρτηριακή πίεση", "chest pain": "πόνος στο στήθος",
+    "fever": "πυρετός", "headache": "πονοκέφαλος", "What is the": "Τι είναι",
+    "Which of the following": "Ποιο από τα παρακάτω", "Explanation": "Εξήγηση",
+    "crushing central dolour thoracique radiating": "συνθλιπτικός κεντρικός θωρακικός πόνος που ακτινοβολεί",
+    "to left arm and jaw": "στο αριστερό χέρι και γνάθο", "ECG shows ST elevation": "ΗΚΓ δείχνει ανύψωση ST",
+    "Inferior STEMI": "Κατώτερο STEMI", "Primary PCI within 90 minutes": "Πρωτογενής PCI εντός 90 λεπτών",
+    "preferred": "προτιμώμενο"
+  },
+  he: {
+    "heart": "לב", "patient": "מטופל", "diagnosis": "אבחנה", "treatment": "טיפול",
+    "symptoms": "תסמינים", "blood pressure": "לחץ דם", "chest pain": "כאב חזה",
+    "fever": "חום", "headache": "כאב ראש", "What is the": "מה זה",
+    "Which of the following": "איזה מהבאים", "Explanation": "הסבר",
+    "crushing central dolour thoracique radiating": "כאב חזה מרכזי מועך המקרין",
+    "to left arm and jaw": "לזרוע שמאל ולסנטר", "ECG shows ST elevation": "אק״ג מראה עליית ST",
+    "Inferior STEMI": "STEMI תחתון", "Primary PCI within 90 minutes": "PCI ראשוני תוך 90 דקות",
+    "preferred": "מועדף"
+  },
+  id: {
+    "heart": "jantung", "patient": "pasien", "diagnosis": "diagnosis", "treatment": "pengobatan",
+    "symptoms": "gejala", "blood pressure": "tekanan darah", "chest pain": "nyeri dada",
+    "fever": "demam", "headache": "sakit kepala", "What is the": "Apa itu",
+    "Which of the following": "Manakah dari berikut ini", "Explanation": "Penjelasan",
+    "crushing central dolour thoracique radiating": "nyeri dada sentral yang menghancurkan menyebar",
+    "to left arm and jaw": "ke lengan kiri dan rahang", "ECG shows ST elevation": "EKG menunjukkan elevasi ST",
+    "Inferior STEMI": "STEMI Inferior", "Primary PCI within 90 minutes": "PCI primer dalam 90 menit",
+    "preferred": "disukai"
+  },
+  ms: {
+    "heart": "jantung", "patient": "pesakit", "diagnosis": "diagnosis", "treatment": "rawatan",
+    "symptoms": "simptom", "blood pressure": "tekanan darah", "chest pain": "sakit dada",
+    "fever": "demam", "headache": "sakit kepala", "What is the": "Apakah",
+    "Which of the following": "Yang manakah antara berikut", "Explanation": "Penjelasan",
+    "crushing central dolour thoracique radiating": "sakit dada pusat yang menghancurkan memancar",
+    "to left arm and jaw": "ke lengan kiri dan rahang", "ECG shows ST elevation": "EKG menunjukkan peningkatan ST",
+    "Inferior STEMI": "STEMI Inferior", "Primary PCI within 90 minutes": "PCI primer dalam 90 minit",
+    "preferred": "dikehendaki"
+  },
+  tl: {
+    "heart": "puso", "patient": "pasyente", "diagnosis": "diagnosis", "treatment": "paggamot",
+    "symptoms": "mga sintomas", "blood pressure": "presyon ng dugo", "chest pain": "pananakit ng dibdib",
+    "fever": "lagnat", "headache": "sakit ng ulo", "What is the": "Ano ang",
+    "Which of the following": "Alin sa mga sumusunod", "Explanation": "Paliwanag",
+    "crushing central dolour thoracique radiating": "nakakadugong gitnang pananakit ng dibdib na kumakalat",
+    "to left arm and jaw": "sa kaliwang braso at panga", "ECG shows ST elevation": "ECG nagpapakita ng ST elevation",
+    "Inferior STEMI": "Inferior STEMI", "Primary PCI within 90 minutes": "Primary PCI sa loob ng 90 minuto",
+    "preferred": "mas gusto"
+  },
+  sw: {
+    "heart": "moyo", "patient": "mgonjwa", "diagnosis": "utambuzi", "treatment": "matibabu",
+    "symptoms": "dalili", "blood pressure": "shinikizo la damu", "chest pain": "maumivu ya kifua",
+    "fever": "homa", "headache": "maumivu ya kichwa", "What is the": "Ni nini",
+    "Which of the following": "Ni ipi kati ya zifuatazo", "Explanation": "Maelezo",
+    "crushing central dolour thoracique radiating": "maumivu makali ya kati ya kifua yanayoenea",
+    "to left arm and jaw": "kwenye mkono wa kushoto na taya", "ECG shows ST elevation": "ECG inaonyesha kupanda kwa ST",
+    "Inferior STEMI": "STEMI ya chini", "Primary PCI within 90 minutes": "PCI ya msingi ndani ya dakika 90",
+    "preferred": "inayopendelewa"
+  },
+  am: {
+    "heart": "ልብ", "patient": "ታካሚ", "diagnosis": "ምርመራ", "treatment": "ህክምና",
+    "symptoms": "ምልክቶች", "blood pressure": "የደም ግፊት", "chest pain": "የደረት ህመም",
+    "fever": "ትኩሳት", "headache": "የራስ ምታት", "What is the": "ምንድነው",
+    "Which of the following": "ከሚከተሉት ውስጥ የቱ", "Explanation": "ማብራሪያ",
+    "crushing central dolour thoracique radiating": "የሚያሰቃይ መሃከለኛ የደረት ህመም የሚሰራጭ",
+    "to left arm and jaw": "ወደ ግራ እጅ እና መንጋጋ", "ECG shows ST elevation": "ኢሲጂ የST ከፍታ ያሳያል",
+    "Inferior STEMI": "የታች STEMI", "Primary PCI within 90 minutes": "በ90 ደቂቃ ውስጥ ቀዳሚ PCI",
+    "preferred": "የተመረጠ"
   }
 };
 
@@ -413,15 +653,38 @@ export default function PLAB1Integrated() {
                   <SelectTrigger className="w-32 h-8 text-xs border-gray-200 hover:border-blue-300 transition-colors">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent align="end" className="w-40">
+                  <SelectContent align="end" className="w-48 max-h-60">
                     <SelectItem value="en">🇬🇧 English</SelectItem>
                     <SelectItem value="ar">🇸🇦 العربية</SelectItem>
                     <SelectItem value="es">🇪🇸 Español</SelectItem>
                     <SelectItem value="fr">🇫🇷 Français</SelectItem>
                     <SelectItem value="de">🇩🇪 Deutsch</SelectItem>
+                    <SelectItem value="it">🇮🇹 Italiano</SelectItem>
+                    <SelectItem value="pt">🇵🇹 Português</SelectItem>
                     <SelectItem value="hi">🇮🇳 हिन्दी</SelectItem>
+                    <SelectItem value="ur">🇵🇰 اردو</SelectItem>
+                    <SelectItem value="bn">🇧🇩 বাংলা</SelectItem>
                     <SelectItem value="zh">🇨🇳 中文</SelectItem>
+                    <SelectItem value="ja">🇯🇵 日本語</SelectItem>
+                    <SelectItem value="ko">🇰🇷 한국어</SelectItem>
                     <SelectItem value="ru">🇷🇺 Русский</SelectItem>
+                    <SelectItem value="tr">🇹🇷 Türkçe</SelectItem>
+                    <SelectItem value="pl">🇵🇱 Polski</SelectItem>
+                    <SelectItem value="nl">🇳🇱 Nederlands</SelectItem>
+                    <SelectItem value="sv">🇸🇪 Svenska</SelectItem>
+                    <SelectItem value="no">🇳🇴 Norsk</SelectItem>
+                    <SelectItem value="da">🇩🇰 Dansk</SelectItem>
+                    <SelectItem value="fi">🇫🇮 Suomi</SelectItem>
+                    <SelectItem value="el">🇬🇷 Ελληνικά</SelectItem>
+                    <SelectItem value="he">🇮🇱 עברית</SelectItem>
+                    <SelectItem value="fa">🇮🇷 فارسی</SelectItem>
+                    <SelectItem value="th">🇹🇭 ไทย</SelectItem>
+                    <SelectItem value="vi">🇻🇳 Tiếng Việt</SelectItem>
+                    <SelectItem value="id">🇮🇩 Bahasa Indonesia</SelectItem>
+                    <SelectItem value="ms">🇲🇾 Bahasa Melayu</SelectItem>
+                    <SelectItem value="tl">🇵🇭 Filipino</SelectItem>
+                    <SelectItem value="sw">🇰🇪 Kiswahili</SelectItem>
+                    <SelectItem value="am">🇪🇹 አማርኛ</SelectItem>
                   </SelectContent>
                 </Select>
                 {localLanguage !== 'en' && (
