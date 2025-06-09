@@ -1302,37 +1302,55 @@ const COMPREHENSIVE_SPECIALTY_FLASHCARDS = [
   ...GENERATED_FLASHCARDS
 ];
 
-export const COMPREHENSIVE_FLASHCARD_COLLECTION = COMPREHENSIVE_SPECIALTY_FLASHCARDS;
+// Reorganize all content under official PLAB 1 categories
+const REORGANIZED_FLASHCARDS = COMPREHENSIVE_SPECIALTY_FLASHCARDS.map(card => {
+  // Map all specialty content to the 9 official PLAB 1 categories
+  let newCategory = card.category;
+  
+  switch (card.category) {
+    case 'Cardiovascular':
+    case 'Dermatology':
+    case 'Endocrinology':
+    case 'Rheumatology':
+    case 'Hematology':
+    case 'Infectious Diseases':
+    case 'Nephrology':
+    case 'Gastroenterology':
+    case 'Pulmonology':
+    case 'Neurology':
+    case 'Oncology':
+    case 'Geriatrics':
+      newCategory = 'Medicine';
+      break;
+    case 'Emergency Medicine':
+      newCategory = 'Emergency care';
+      break;
+    default:
+      newCategory = card.category;
+  }
+  
+  return { ...card, category: newCategory };
+});
+
+export const COMPREHENSIVE_FLASHCARD_COLLECTION = REORGANIZED_FLASHCARDS;
 
 export const FLASHCARD_STATS = {
-  total: COMPREHENSIVE_SPECIALTY_FLASHCARDS.length,
+  total: REORGANIZED_FLASHCARDS.length,
   byCategory: {
-    'Medicine': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Medicine').length,
-    'Surgery': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Surgery').length,
-    'Obstetrics & Gynaecology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Obstetrics & Gynaecology').length,
-    'Paediatrics': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Paediatrics').length,
-    'Psychiatry': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Psychiatry').length,
-    'ENT, Ophthalmology, and Orthopaedics': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'ENT, Ophthalmology, and Orthopaedics').length,
-    'Medical ethics, law, and professionalism': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Medical ethics, law, and professionalism').length,
-    'Emergency care': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Emergency care').length,
-    'Prescribing and drug interactions': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Prescribing and drug interactions').length,
-    'Cardiovascular': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Cardiovascular').length,
-    'Dermatology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Dermatology').length,
-    'Endocrinology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Endocrinology').length,
-    'Rheumatology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Rheumatology').length,
-    'Hematology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Hematology').length,
-    'Infectious Diseases': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Infectious Diseases').length,
-    'Nephrology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Nephrology').length,
-    'Gastroenterology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Gastroenterology').length,
-    'Pulmonology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Pulmonology').length,
-    'Neurology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Neurology').length,
-    'Oncology': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Oncology').length,
-    'Geriatrics': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.category === 'Geriatrics').length
+    'Medicine': REORGANIZED_FLASHCARDS.filter(f => f.category === 'Medicine').length,
+    'Surgery': REORGANIZED_FLASHCARDS.filter(f => f.category === 'Surgery').length,
+    'Obstetrics & Gynaecology': REORGANIZED_FLASHCARDS.filter(f => f.category === 'Obstetrics & Gynaecology').length,
+    'Paediatrics': REORGANIZED_FLASHCARDS.filter(f => f.category === 'Paediatrics').length,
+    'Psychiatry': REORGANIZED_FLASHCARDS.filter(f => f.category === 'Psychiatry').length,
+    'ENT, Ophthalmology, and Orthopaedics': REORGANIZED_FLASHCARDS.filter(f => f.category === 'ENT, Ophthalmology, and Orthopaedics').length,
+    'Medical ethics, law, and professionalism': REORGANIZED_FLASHCARDS.filter(f => f.category === 'Medical ethics, law, and professionalism').length,
+    'Emergency care': REORGANIZED_FLASHCARDS.filter(f => f.category === 'Emergency care').length,
+    'Prescribing and drug interactions': REORGANIZED_FLASHCARDS.filter(f => f.category === 'Prescribing and drug interactions').length
   },
   byDifficulty: {
-    'beginner': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.difficulty === 'beginner').length,
-    'intermediate': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.difficulty === 'intermediate').length,
-    'advanced': COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.difficulty === 'advanced').length
+    'beginner': REORGANIZED_FLASHCARDS.filter(f => f.difficulty === 'beginner').length,
+    'intermediate': REORGANIZED_FLASHCARDS.filter(f => f.difficulty === 'intermediate').length,
+    'advanced': REORGANIZED_FLASHCARDS.filter(f => f.difficulty === 'advanced').length
   },
-  highYieldCount: COMPREHENSIVE_SPECIALTY_FLASHCARDS.filter(f => f.highYield).length
+  highYieldCount: REORGANIZED_FLASHCARDS.filter(f => f.highYield).length
 };
