@@ -322,8 +322,26 @@ export default function PLAB1New() {
 
     console.log(`Selected ${selected.length} questions for practice session`);
 
+    // Randomize answer positions for each question
+    const questionsWithShuffledOptions = selected.map(question => {
+      const correctOption = question.options[question.correctAnswer];
+      const allOptions = [...question.options];
+      
+      // Shuffle the options array
+      const shuffledOptions = allOptions.sort(() => Math.random() - 0.5);
+      
+      // Find new position of correct answer
+      const newCorrectAnswer = shuffledOptions.indexOf(correctOption);
+      
+      return {
+        ...question,
+        options: shuffledOptions,
+        correctAnswer: newCorrectAnswer
+      };
+    });
+
     // Initialize session
-    setSessionQuestions(selected);
+    setSessionQuestions(questionsWithShuffledOptions);
     setUserAnswers(new Array(selected.length).fill(null));
     setCurrentQuestionIndex(0);
     setSelectedAnswer("");
