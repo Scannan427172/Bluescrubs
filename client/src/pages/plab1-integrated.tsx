@@ -228,7 +228,7 @@ const translateText = (text: string, targetLang: string): string => {
 };
 
 export default function PLAB1Integrated() {
-  const { currentLanguage, translateText } = useI18n();
+  const { currentLanguage, translateText, setLanguage } = useI18n();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -406,11 +406,38 @@ export default function PLAB1Integrated() {
                 </Badge>
               </div>
               
-              {/* Language indicator - controlled by header toggle */}
-              <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-1">
-                <div className="px-2 py-1 text-xs text-gray-600">
-                  Language: {currentLanguage === 'en' ? '🇬🇧 EN' : `🌐 ${currentLanguage.toUpperCase()}`}
+              {/* Language translator in question block */}
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <Languages className="w-3 h-3 text-gray-500" />
+                  <span className="text-xs text-gray-600 font-medium">Translate:</span>
                 </div>
+                <Select value={currentLanguage} onValueChange={(lang) => setLanguage(lang as any)}>
+                  <SelectTrigger className="w-36 h-7 text-xs border-gray-200 hover:border-blue-300 transition-colors">
+                    <SelectValue placeholder="Language" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-60">
+                    <SelectItem value="en">🇬🇧 English</SelectItem>
+                    <SelectItem value="ar">🇸🇦 العربية</SelectItem>
+                    <SelectItem value="es">🇪🇸 Español</SelectItem>
+                    <SelectItem value="fr">🇫🇷 Français</SelectItem>
+                    <SelectItem value="de">🇩🇪 Deutsch</SelectItem>
+                    <SelectItem value="hi">🇮🇳 हिन्दी</SelectItem>
+                    <SelectItem value="ur">🇵🇰 اردو</SelectItem>
+                    <SelectItem value="zh">🇨🇳 中文</SelectItem>
+                    <SelectItem value="ja">🇯🇵 日本語</SelectItem>
+                    <SelectItem value="ko">🇰🇷 한국어</SelectItem>
+                    <SelectItem value="ru">🇷🇺 Русский</SelectItem>
+                    <SelectItem value="tr">🇹🇷 Türkçe</SelectItem>
+                    <SelectItem value="pt">🇵🇹 Português</SelectItem>
+                    <SelectItem value="it">🇮🇹 Italiano</SelectItem>
+                  </SelectContent>
+                </Select>
+                {currentLanguage !== 'en' && (
+                  <div className="px-2 py-1 text-xs bg-green-50 text-green-700 rounded-md border border-green-200 font-medium">
+                    Active
+                  </div>
+                )}
               </div>
             </div>
             <CardTitle className="text-xl leading-relaxed text-gray-900">
