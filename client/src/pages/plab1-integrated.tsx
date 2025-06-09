@@ -163,7 +163,12 @@ const MEDICAL_TRANSLATIONS: Record<string, Record<string, string>> = {
     "shortness of breath": "ضيق في التنفس", "fever": "حمى", "headache": "صداع",
     "What is the": "ما هو", "Which of the following": "أي مما يلي",
     "The most likely": "الأكثر احتمالا", "best treatment": "أفضل علاج",
-    "Explanation": "شرح"
+    "Explanation": "شرح", "crushing central dolour thoracique radiating": "ألم صدري مركزي ضاغط ينتشر",
+    "to left arm and jaw": "إلى الذراع الأيسر والفك", "ECG shows ST elevation": "تخطيط القلب يظهر ارتفاع ST",
+    "leads II, III, aVF": "المشاوير II، III، aVF", "diagnostic and immediate management": "التشخيص والعلاج الفوري",
+    "Inferior STEMI": "احتشاء عضلة القلب السفلي", "Primary PCI within 90 minutes": "التدخل التاجي الأولي خلال 90 دقيقة",
+    "thrombolysis within 30 minutes": "إذابة الجلطة خلال 30 دقيقة", "Inferior leads": "المشاوير السفلية",
+    "Usually RCA occlusion": "عادة انسداد الشريان التاجي الأيمن", "preferred": "مفضل"
   },
   ur: {
     "heart": "دل", "patient": "مریض", "diagnosis": "تشخیص", "treatment": "علاج",
@@ -186,13 +191,25 @@ const MEDICAL_TRANSLATIONS: Record<string, Record<string, string>> = {
     "heart": "cœur", "patient": "patient", "diagnosis": "diagnostic", "treatment": "traitement",
     "symptoms": "symptômes", "blood pressure": "tension artérielle", "chest pain": "douleur thoracique",
     "fever": "fièvre", "headache": "mal de tête", "What is the": "Qu'est-ce que",
-    "Which of the following": "Lequel des suivants", "Explanation": "Explication"
+    "Which of the following": "Lequel des suivants", "Explanation": "Explication",
+    "crushing central dolour thoracique radiating": "douleur thoracique centrale écrasante irradiant",
+    "to left arm and jaw": "vers le bras gauche et la mâchoire", "ECG shows ST elevation": "ECG montre une élévation du ST",
+    "leads II, III, aVF": "dérivations II, III, aVF", "diagnostic and immediate management": "diagnostic et prise en charge immédiate",
+    "Inferior STEMI": "STEMI inférieur", "Primary PCI within 90 minutes": "ICP primaire dans les 90 minutes",
+    "thrombolysis within 30 minutes": "thrombolyse dans les 30 minutes", "Inferior leads": "Dérivations inférieures",
+    "Usually RCA occlusion": "Généralement occlusion de l'artère coronaire droite", "preferred": "préféré"
   },
   es: {
     "heart": "corazón", "patient": "paciente", "diagnosis": "diagnóstico", "treatment": "tratamiento",
     "symptoms": "síntomas", "blood pressure": "presión arterial", "chest pain": "dolor en el pecho",
     "fever": "fiebre", "headache": "dolor de cabeza", "What is the": "¿Cuál es",
-    "Which of the following": "¿Cuál de los siguientes", "Explanation": "Explicación"
+    "Which of the following": "¿Cuál de los siguientes", "Explanation": "Explicación",
+    "crushing central dolour thoracique radiating": "dolor torácico central aplastante que irradia",
+    "to left arm and jaw": "al brazo izquierdo y mandíbula", "ECG shows ST elevation": "ECG muestra elevación del ST",
+    "leads II, III, aVF": "derivaciones II, III, aVF", "diagnostic and immediate management": "diagnóstico y manejo inmediato",
+    "Inferior STEMI": "STEMI inferior", "Primary PCI within 90 minutes": "ICP primario dentro de 90 minutos",
+    "thrombolysis within 30 minutes": "trombólisis dentro de 30 minutos", "Inferior leads": "Derivaciones inferiores",
+    "Usually RCA occlusion": "Usualmente oclusión de ACD", "preferred": "preferido"
   }
 };
 
@@ -423,12 +440,12 @@ export default function PLAB1Integrated() {
                 }`}>
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
                   <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-gray-900 font-medium">
-                    {selectedLanguage === "en" ? (
+                    {currentLanguage === "en" ? (
                       `${String.fromCharCode(65 + index)}. ${option}`
                     ) : (
                       <div className="space-y-1">
                         <div>{String.fromCharCode(65 + index)}. {option}</div>
-                        <div className="text-gray-600 text-sm font-normal italic ml-4">{translateText(option, selectedLanguage)}</div>
+                        <div className="text-gray-600 text-sm font-normal italic ml-4">{translateText(option, currentLanguage)}</div>
                       </div>
                     )}
                   </Label>
@@ -445,14 +462,14 @@ export default function PLAB1Integrated() {
             {showExplanation && (
               <div className="mt-6 p-4 bg-white border-l-4 border-blue-500 rounded-lg shadow-sm">
                 <h4 className="font-semibold text-gray-900 mb-2">
-                  {selectedLanguage === "en" ? 'Explanation' : `Explanation / ${translateText('Explanation', selectedLanguage)}`}
+                  {currentLanguage === "en" ? 'Explanation' : `Explanation / ${translateText('Explanation', currentLanguage)}`}
                 </h4>
-                {selectedLanguage === "en" ? (
+                {currentLanguage === "en" ? (
                   <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
                 ) : (
                   <div className="space-y-3">
                     <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
-                    <p className="text-gray-600 leading-relaxed italic border-l-2 border-gray-300 pl-3">{translateText(currentQuestion.explanation, selectedLanguage)}</p>
+                    <p className="text-gray-600 leading-relaxed italic border-l-2 border-gray-300 pl-3">{translateText(currentQuestion.explanation, currentLanguage)}</p>
                   </div>
                 )}
                 {currentQuestion.tags && currentQuestion.tags.length > 0 && (
