@@ -334,6 +334,20 @@ export default function PLAB1New() {
   const isCorrect = isAnswered && userAnswers[currentQuestionIndex] === currentQuestion?.correctAnswer;
   const stats = getStats();
 
+  // Debug logging
+  useEffect(() => {
+    if (currentQuestion) {
+      console.log('Current question data:', {
+        id: currentQuestion.id,
+        stem: currentQuestion.stem.substring(0, 50) + '...',
+        options: currentQuestion.options,
+        optionsType: typeof currentQuestion.options,
+        isArray: Array.isArray(currentQuestion.options),
+        optionsLength: currentQuestion.options?.length
+      });
+    }
+  }, [currentQuestion]);
+
   // Trigger translations when language or translation visibility changes
   useEffect(() => {
     if (showTranslation && currentLanguage !== 'en' && currentQuestion) {
@@ -575,34 +589,42 @@ export default function PLAB1New() {
         </CardHeader>
         <CardContent>
           <RadioGroup value={selectedAnswer} onValueChange={handleAnswerSelect}>
-            {currentQuestion.options.map((option, index) => (
-              <div key={index} className="flex items-center space-x-2">
-                <RadioGroupItem 
-                  value={index.toString()} 
-                  id={`option-${index}`}
-                  disabled={showExplanation}
-                />
-                <Label 
-                  htmlFor={`option-${index}`} 
-                  className={`flex-1 cursor-pointer p-3 rounded-lg border ${
-                    showExplanation && index === currentQuestion.correctAnswer
-                      ? 'bg-green-50 border-green-200 text-green-800'
-                      : showExplanation && index === parseInt(selectedAnswer) && index !== currentQuestion.correctAnswer
-                      ? 'bg-red-50 border-red-200 text-red-800'
-                      : 'hover:bg-gray-50'
-                  }`}
-                >
-                  <div>
-                    {option}
+            {currentQuestion.options && Array.isArray(currentQuestion.options) ? 
+              currentQuestion.options.map((option, index) => (
+                <div key={index} className="flex items-center space-x-2">
+                  <RadioGroupItem 
+                    value={index.toString()} 
+                    id={`option-${index}`}
+                    disabled={showExplanation}
+                  />
+                  <Label 
+                    htmlFor={`option-${index}`} 
+                    className={`flex-1 cursor-pointer p-3 rounded-lg border ${
+                      showExplanation && index === currentQuestion.correctAnswer
+                        ? 'bg-green-50 border-green-200 text-green-800'
+                        : showExplanation && index === parseInt(selectedAnswer) && index !== currentQuestion.correctAnswer
+                        ? 'bg-red-50 border-red-200 text-red-800'
+                        : 'hover:bg-gray-50'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="font-medium text-gray-600 text-sm">
+                        {String.fromCharCode(65 + index)}.
+                      </span>
+                      <span>
+                        {typeof option === 'string' ? option : `Option ${String.fromCharCode(65 + index)}`}
+                      </span>
+                    </div>
                     {showTranslation && currentLanguage !== 'en' && (
-                      <div className="mt-2 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-2">
+                      <div className="mt-2 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-2 ml-6">
                         {currentTranslations[`option-${index}`] || 'Translating...'}
                       </div>
                     )}
-                  </div>
-                </Label>
-              </div>
-            ))}
+                  </Label>
+                </div>
+              )) : 
+              <div className="text-red-500">No options available for this question</div>
+            }
           </RadioGroup>
         </CardContent>
       </Card>

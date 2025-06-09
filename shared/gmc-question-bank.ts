@@ -431,7 +431,7 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     id: 'cardio001',
     category: 'cardiovascular',
     subcategory: 'acute-coronary-syndromes',
-    cognitiveLevel: 'analysis',
+    cognitiveLevel: 'application',
     difficulty: 'intermediate',
     clinicalSetting: 'Emergency Department',
     ageGroup: 'Adult',
