@@ -407,9 +407,10 @@ export function InteractiveGlobe() {
     const deltaX = e.clientX - lastMouse.x;
     const deltaY = e.clientY - lastMouse.y;
     
+    // Increased sensitivity for easier control
     setRotation(prev => ({
-      x: Math.max(-90, Math.min(90, prev.x + deltaY * 0.5)),
-      y: prev.y + deltaX * 0.5
+      x: Math.max(-90, Math.min(90, prev.x + deltaY * 0.8)),
+      y: prev.y + deltaX * 0.8
     }));
     
     setLastMouse({ x: e.clientX, y: e.clientY });
@@ -437,9 +438,10 @@ export function InteractiveGlobe() {
     const deltaX = touch.clientX - lastMouse.x;
     const deltaY = touch.clientY - lastMouse.y;
     
+    // Increased sensitivity for touch devices
     setRotation(prev => ({
-      x: Math.max(-90, Math.min(90, prev.x + deltaY * 0.5)),
-      y: prev.y + deltaX * 0.5
+      x: Math.max(-90, Math.min(90, prev.x + deltaY * 0.8)),
+      y: prev.y + deltaX * 0.8
     }));
     
     setLastMouse({ x: touch.clientX, y: touch.clientY });
@@ -486,10 +488,71 @@ export function InteractiveGlobe() {
     setSelectedUser(closestUser);
   };
 
+  // Preset view functions
+  const rotateToRegion = (targetRotation: {x: number, y: number}) => {
+    setAutoRotate(false);
+    setRotation(targetRotation);
+    setTimeout(() => setAutoRotate(true), 3000);
+  };
+
+  const resetView = () => {
+    setAutoRotate(false);
+    setRotation({ x: 0, y: 0 });
+    setTimeout(() => setAutoRotate(true), 1000);
+  };
+
   return (
     <div className="relative w-full max-w-lg mx-auto">
+      {/* Control Instructions */}
       <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded z-10">
         Drag to rotate • Click users
+      </div>
+
+      {/* Navigation Controls */}
+      <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
+        <button
+          onClick={resetView}
+          className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-2 py-1 rounded transition-colors"
+          title="Reset View"
+        >
+          🌍 Reset
+        </button>
+        <button
+          onClick={() => rotateToRegion({ x: 20, y: -30 })}
+          className="bg-green-600 hover:bg-green-700 text-white text-xs px-2 py-1 rounded transition-colors"
+          title="View Europe"
+        >
+          🇪🇺 Europe
+        </button>
+        <button
+          onClick={() => rotateToRegion({ x: 20, y: 70 })}
+          className="bg-orange-600 hover:bg-orange-700 text-white text-xs px-2 py-1 rounded transition-colors"
+          title="View Asia"
+        >
+          🌏 Asia
+        </button>
+        <button
+          onClick={() => rotateToRegion({ x: 30, y: -100 })}
+          className="bg-purple-600 hover:bg-purple-700 text-white text-xs px-2 py-1 rounded transition-colors"
+          title="View Americas"
+        >
+          🌎 Americas
+        </button>
+      </div>
+
+      {/* Auto-rotate toggle */}
+      <div className="absolute bottom-2 right-2 z-10">
+        <button
+          onClick={() => setAutoRotate(!autoRotate)}
+          className={`text-xs px-2 py-1 rounded transition-colors ${
+            autoRotate 
+              ? 'bg-green-600 hover:bg-green-700 text-white' 
+              : 'bg-gray-600 hover:bg-gray-700 text-white'
+          }`}
+          title={autoRotate ? "Stop Auto-Rotation" : "Start Auto-Rotation"}
+        >
+          {autoRotate ? "⏸️ Pause" : "▶️ Auto"}
+        </button>
       </div>
       <canvas
         ref={canvasRef}
