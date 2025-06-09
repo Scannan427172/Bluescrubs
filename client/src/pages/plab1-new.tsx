@@ -785,8 +785,11 @@ export default function PLAB1New() {
 
               {/* Educational Source Links */}
               {(() => {
+                console.log('Current question:', currentQuestion.id, currentQuestion.category);
+                
                 // Try direct ID match first, then category-based mapping for generated questions
                 let sources = getSourcesForQuestion(currentQuestion.id);
+                console.log('Direct ID sources:', sources.length);
                 
                 // If no sources found by ID, use category-based mapping
                 if (sources.length === 0) {
@@ -803,8 +806,10 @@ export default function PLAB1New() {
                   };
                   
                   const fallbackId = categoryMapping[currentQuestion.category];
+                  console.log('Fallback ID:', fallbackId);
                   if (fallbackId) {
                     sources = getSourcesForQuestion(fallbackId);
+                    console.log('Fallback sources:', sources.length);
                   }
                 }
                 
