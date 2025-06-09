@@ -786,28 +786,9 @@ export default function PLAB1New() {
 
               {/* Educational Source Links */}
               {(() => {
-                // Always show educational sources for medical questions
-                const categoryMapping: Record<string, string> = {
-                  'cardiovascular': 'cv001',
-                  'respiratory': 'resp001', 
-                  'gastroenterology': 'gi001',
-                  'neurology': 'neuro001',
-                  'endocrinology': 'endo001',
-                  'psychiatry': 'psych001',
-                  'obstetrics-gynaecology': 'obsgyn001',
-                  'paediatrics': 'paeds001',
-                  'surgery': 'surg001'
-                };
-                
-                // Try direct ID match first, then use category mapping
-                let sources = getSourcesForQuestion(currentQuestion.id);
-                
-                if (sources.length === 0) {
-                  const fallbackId = categoryMapping[currentQuestion.category];
-                  if (fallbackId) {
-                    sources = getSourcesForQuestion(fallbackId);
-                  }
-                }
+                // Use embedded source links from the question if available
+                const sources = currentQuestion.sourceLinks || [];
+                console.log('Question sources:', sources.length, currentQuestion.id);
                 
                 return sources.length > 0 && (
                   <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
@@ -816,9 +797,9 @@ export default function PLAB1New() {
                       <h5 className="font-medium text-green-800">Educational Resources:</h5>
                     </div>
                     <div className="space-y-2">
-                      {sources.map((source) => (
+                      {sources.map((source, index) => (
                         <a
-                          key={source.id}
+                          key={index}
                           href={source.url}
                           target="_blank"
                           rel="noopener noreferrer"
