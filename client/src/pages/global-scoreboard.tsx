@@ -201,36 +201,10 @@ export default function GlobalScoreboard() {
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Connect with PLAB candidates worldwide. See how you rank globally and in your country.
         </p>
-        
-        {/* View Mode Toggle */}
-        <div className="flex items-center justify-center gap-4 mt-6 mb-6">
-          <div className="flex items-center gap-2 bg-white p-4 rounded-xl border-2 shadow-lg">
-            <button
-              onClick={() => setViewMode('list')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                viewMode === 'list' 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              <List className="w-5 h-5" />
-              <span className="font-medium">List View</span>
-            </button>
-            <button
-              onClick={() => setViewMode('globe')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                viewMode === 'globe' 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              <Globe className="w-5 h-5" />
-              <span className="font-medium">Globe View</span>
-            </button>
-          </div>
-        </div>
+      </div>
 
-        {/* Location Status */}
+      {/* Location Status */}
+      <div className="space-y-4">
         {locationPermission === "pending" && (
           <Card className="border-blue-200 bg-blue-50">
             <CardContent className="pt-4">
@@ -371,19 +345,8 @@ export default function GlobalScoreboard() {
       </div>
 
       {/* Main Content */}
-      {viewMode === 'globe' ? (
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Globe className="w-5 h-5 text-blue-600" />
-              Interactive Global Map
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex justify-center">
-            <InteractiveGlobe />
-          </CardContent>
-        </Card>
-      ) : (
+      <div className="space-y-8">
+        {/* Leaderboard Tabs */}
         <Tabs defaultValue="global" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="global">Global Leaderboard</TabsTrigger>
@@ -540,7 +503,20 @@ export default function GlobalScoreboard() {
           </Card>
         </TabsContent>
         </Tabs>
-      )}
+
+        {/* Interactive Globe Section */}
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Globe className="w-5 h-5 text-blue-600" />
+              Interactive Global Map
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex justify-center">
+            <InteractiveGlobe />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
