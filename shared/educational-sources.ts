@@ -300,7 +300,8 @@ export const EDUCATIONAL_SOURCES: Record<string, EducationalSource> = {
 
 // Question-to-source mapping for efficient lookups
 export const QUESTION_SOURCE_MAP: Record<string, string[]> = {
-  // Cardiovascular
+  // Cardiovascular - using actual question IDs from the bank
+  "cv001": ["nhs-heart-attack", "nice-mi", "bhf-heart-attack"],
   "cardio001": ["nhs-heart-attack", "nice-mi", "bhf-heart-attack"],
   "cardio002": ["nhs-heart-failure", "nice-heart-failure", "bhf-heart-failure"],
   "cardio004": ["nhs-arrhythmia", "resus-council", "bhf-arrhythmia"],
@@ -308,6 +309,7 @@ export const QUESTION_SOURCE_MAP: Record<string, string[]> = {
   // Respiratory
   "resp001": ["nhs-asthma", "nice-asthma", "asthma-lung-uk"],
   "resp002": ["nhs-pneumonia", "nice-pneumonia", "blf-pneumonia"],
+  "resp003": ["nhs-asthma", "nice-asthma", "asthma-lung-uk"],
   
   // Gastroenterology
   "gi001": ["nhs-peptic-ulcer", "nice-dyspepsia", "patient-info-peptic"],
@@ -315,6 +317,7 @@ export const QUESTION_SOURCE_MAP: Record<string, string[]> = {
   
   // Neurology
   "neuro001": ["nhs-stroke", "nice-stroke", "stroke-association"],
+  "neuro002": ["nhs-stroke", "nice-stroke", "stroke-association"],
   
   // Endocrinology
   "endo001": ["nhs-diabetes", "nice-diabetes", "diabetes-uk"],
