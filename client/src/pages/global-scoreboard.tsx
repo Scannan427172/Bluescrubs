@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Globe, Trophy, Users, Clock, TrendingUp, MapPin, Crown, Medal, Award, List } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
-import { InteractiveGlobe } from "@/components/interactive-globe";
+
 
 interface ScoreboardUser {
   id: number;
@@ -267,20 +267,7 @@ export default function GlobalScoreboard() {
         )}
       </div>
 
-      {/* Interactive Globe Section */}
-      <Card id="interactive-globe" className="w-full">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Globe className="w-5 h-5 text-blue-600" />
-            Interactive Global Map
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex justify-center py-8">
-          <div className="w-full max-w-md">
-            <InteractiveGlobe />
-          </div>
-        </CardContent>
-      </Card>
+
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
