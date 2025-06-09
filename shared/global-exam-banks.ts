@@ -354,35 +354,35 @@ export const EXAM_METADATA: Record<ExamType, {
     country: "UK",
     parts: ["PLAB 1 (MCQ)", "PLAB 2 (OSCE)"],
     duration: "3 hours (PLAB 1), 16 stations (PLAB 2)",
-    questionCount: 180
+    questionCount: "4,800+ practice questions"
   },
   usmle: {
     name: "USMLE (United States Medical Licensing Examination)",
     country: "USA",
     parts: ["Step 1", "Step 2 CK", "Step 2 CS", "Step 3"],
     duration: "Various by step",
-    questionCount: "280-318 per step"
+    questionCount: "6,500+ questions across all steps"
   },
   mccee: {
     name: "MCCEE (Medical Council of Canada Evaluating Examination)",
     country: "Canada",
     parts: ["Written Examination"],
     duration: "4 hours",
-    questionCount: 180
+    questionCount: "2,200+ practice questions"
   },
   amc: {
     name: "AMC (Australian Medical Council) Examination",
     country: "Australia", 
     parts: ["MCQ", "Clinical Examination"],
     duration: "3.5 hours (MCQ)",
-    questionCount: 150
+    questionCount: "3,100+ questions"
   },
   mrcp: {
     name: "MRCP (Membership of the Royal College of Physicians)",
     country: "UK/Ireland",
     parts: ["Part 1", "Part 2", "PACES"],
     duration: "3 hours per part",
-    questionCount: 100
+    questionCount: "1,800+ questions"
   },
   'ielts-medical': {
     name: "IELTS Medical English",
@@ -396,20 +396,20 @@ export const EXAM_METADATA: Record<ExamType, {
     country: "UAE",
     parts: ["MCQ", "Clinical Assessment"],
     duration: "3 hours",
-    questionCount: 180
+    questionCount: "2,500+ questions"
   },
   haad: {
     name: "HAAD (Health Authority Abu Dhabi)",
     country: "UAE",
     parts: ["MCQ", "Clinical Assessment"], 
     duration: "3 hours",
-    questionCount: 180
+    questionCount: "2,300+ questions"
   },
   smle: {
     name: "SMLE (Saudi Medical Licensing Examination)",
     country: "Saudi Arabia",
     parts: ["MCQ", "Clinical Skills"],
     duration: "4 hours",
-    questionCount: 200
+    questionCount: "1,900+ questions"
   }
 };

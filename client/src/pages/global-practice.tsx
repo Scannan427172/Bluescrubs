@@ -34,7 +34,7 @@ export default function GlobalPractice() {
       name: 'PLAB (UK)', 
       flag: '🇬🇧',
       description: 'Professional and Linguistic Assessments Board',
-      parts: '180 MCQ + OSCE',
+      parts: '4,800+ MCQ + OSCE',
       regulator: 'GMC'
     },
     { 
@@ -42,7 +42,7 @@ export default function GlobalPractice() {
       name: 'USMLE (USA)', 
       flag: '🇺🇸',
       description: 'United States Medical Licensing Examination',
-      parts: 'Step 1, 2CK, 2CS, 3',
+      parts: '6,500+ Questions',
       regulator: 'FSMB/NBME'
     },
     { 
@@ -50,7 +50,7 @@ export default function GlobalPractice() {
       name: 'MCCEE (Canada)', 
       flag: '🇨🇦',
       description: 'Medical Council of Canada Evaluating Examination',
-      parts: '180 MCQ',
+      parts: '2,200+ MCQ',
       regulator: 'MCC'
     },
     { 
@@ -58,7 +58,7 @@ export default function GlobalPractice() {
       name: 'AMC (Australia)', 
       flag: '🇦🇺',
       description: 'Australian Medical Council Examination',
-      parts: '150 MCQ + Clinical',
+      parts: '3,100+ MCQ + Clinical',
       regulator: 'AMC'
     },
     { 
@@ -66,7 +66,7 @@ export default function GlobalPractice() {
       name: 'MRCP (Ireland)', 
       flag: '🇮🇪',
       description: 'Membership Royal College of Physicians',
-      parts: 'Part 1, 2, PACES',
+      parts: '1,800+ Questions',
       regulator: 'RCP'
     },
     { 
@@ -74,7 +74,7 @@ export default function GlobalPractice() {
       name: 'DHA (UAE)', 
       flag: '🇦🇪',
       description: 'Dubai Health Authority Examination',
-      parts: 'MCQ + Clinical',
+      parts: '2,500+ MCQ + Clinical',
       regulator: 'DHA'
     }
   ];
