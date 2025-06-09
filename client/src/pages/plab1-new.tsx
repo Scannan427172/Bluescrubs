@@ -561,15 +561,9 @@ export default function PLAB1New() {
     return (
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <Target className="w-8 h-8 text-blue-600" />
-              <h1 className="text-3xl font-bold">PLAB 1 Practice (New)</h1>
-            </div>
-            <NeuroSettings 
-              selectedAccommodations={neuroAccommodations}
-              onAccommodationsChange={handleAccommodationsChange}
-            />
+          <div className="flex items-center gap-3 mb-4">
+            <Target className="w-8 h-8 text-blue-600" />
+            <h1 className="text-3xl font-bold">PLAB 1 Practice</h1>
           </div>
           <p className="text-lg text-muted-foreground">
             High-quality GMC-aligned practice questions for PLAB 1 preparation
@@ -599,6 +593,33 @@ export default function PLAB1New() {
             </div>
           </div>
         </div>
+
+        {/* Accessibility & Neurodiversity Support */}
+        <Card className="mb-6 border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50">
+          <CardContent className="pt-6">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Brain className="w-6 h-6 text-purple-600" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-purple-900">Accessibility Settings</h3>
+                  <p className="text-purple-700">Customize your learning experience for ADHD, dyslexia, autism, and other learning differences</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <span className="text-sm text-purple-700 font-medium">Enhanced support for diverse learning needs</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <NeuroSettings 
+                  selectedAccommodations={neuroAccommodations}
+                  onAccommodationsChange={handleAccommodationsChange}
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Featured All Categories Option */}
         <Card className="mb-6 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
