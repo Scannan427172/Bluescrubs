@@ -801,6 +801,37 @@ export default function PLAB1Integrated() {
                     </div>
                   </div>
                 )}
+
+                {/* Source Links */}
+                {currentQuestion.sourceLinks && currentQuestion.sourceLinks.length > 0 && (
+                  <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                      <BookOpen className="w-4 h-4" />
+                      Educational Resources
+                    </h4>
+                    <div className="space-y-2">
+                      {currentQuestion.sourceLinks.map((link, index) => (
+                        <div key={index} className="flex items-center gap-2">
+                          <ExternalLink className="w-3 h-3 text-blue-600 flex-shrink-0" />
+                          <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-700 hover:text-blue-900 underline text-sm"
+                          >
+                            {link.title}
+                          </a>
+                          <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
+                            {link.type.toUpperCase()}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-blue-600 mt-2">
+                      Links open in new tab for further study
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>

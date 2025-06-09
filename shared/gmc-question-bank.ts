@@ -16,6 +16,11 @@ export interface GMCQuestion {
   learningObjectives: string[];
   gmcOutcomes: string[];
   references: string[];
+  sourceLinks?: Array<{
+    title: string;
+    url: string;
+    type: 'guideline' | 'educational' | 'government' | 'nhs';
+  }> | null;
 
   tags: string[];
   estimatedTime: number; // seconds
@@ -76,7 +81,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE CG167: Acute coronary syndromes",
       "ESC Guidelines for STEMI management"
     ],
-
+    sourceLinks: [
+      {
+        title: "NHS - Heart attack symptoms and causes",
+        url: "https://www.nhs.uk/conditions/heart-attack/",
+        type: "nhs"
+      },
+      {
+        title: "British Heart Foundation - Heart attack information",
+        url: "https://www.bhf.org.uk/informationsupport/conditions/heart-attack",
+        type: "educational"
+      },
+      {
+        title: "NICE Guidelines - Acute coronary syndromes",
+        url: "https://www.nice.org.uk/guidance/cg167",
+        type: "guideline"
+      }
+    ],
     tags: ["chest-pain", "ECG", "emergency", "cardiology"],
     estimatedTime: 90,
     lastReviewed: "2024-01-15",
@@ -116,6 +137,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE CG102: Bacterial meningitis and meningococcal septicaemia",
       "British Infection Association guidelines"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Meningitis symptoms and causes",
+        url: "https://www.nhs.uk/conditions/meningitis/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Bacterial meningitis",
+        url: "https://www.nice.org.uk/guidance/cg102",
+        type: "guideline"
+      },
+      {
+        title: "Meningitis Now - Educational resources",
+        url: "https://www.meningitisnow.org/",
+        type: "educational"
+      }
+    ],
     tags: ["meningitis", "csf-analysis", "neurology", "infection", "differential-diagnosis"],
     estimatedTime: 120,
     lastReviewed: "2024-01-15",
@@ -154,6 +192,18 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "ATS/ERS Standardisation of Lung Function Testing",
       "British Thoracic Society guidelines"
+    ],
+    sourceLinks: [
+      {
+        title: "NHS - Lung function tests",
+        url: "https://www.nhs.uk/conditions/lung-function-tests/",
+        type: "nhs"
+      },
+      {
+        title: "British Thoracic Society - Respiratory guidelines",
+        url: "https://www.brit-thoracic.org.uk/",
+        type: "educational"
+      }
     ],
     tags: ["tlco", "pulmonary-function", "respiratory-physiology", "gas-transfer"],
     estimatedTime: 90,
