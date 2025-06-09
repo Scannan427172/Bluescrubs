@@ -153,62 +153,6 @@ export default function PLAB1Integrated() {
           <p className="text-gray-700 font-medium">Practice questions based on GMC Medical Licensing Assessment guidelines</p>
         </div>
 
-        {/* Practice Configuration */}
-        <Card className="mb-6 bg-white shadow-lg">
-          <CardHeader className="bg-white">
-            <CardTitle className="text-gray-900">Practice Configuration</CardTitle>
-          </CardHeader>
-          <CardContent className="bg-white">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="category" className="mb-2 block text-gray-700 font-medium">Category</Label>
-                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger className="bg-white border-gray-300 text-gray-900">
-                    <SelectValue placeholder="Select category" className="text-gray-900" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border-gray-300">
-                    <SelectItem value="all" className="text-gray-900 hover:bg-gray-100">
-                      <div className="flex justify-between items-center w-full">
-                        <span className="text-gray-900">All Categories</span>
-                        <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-800">{COMPREHENSIVE_FLASHCARD_COLLECTION.length}</Badge>
-                      </div>
-                    </SelectItem>
-                    {PLAB1_CATEGORIES.map(category => (
-                      <SelectItem key={category} value={category} className="text-gray-900 hover:bg-gray-100">
-                        <div className="flex justify-between items-center w-full">
-                          <span className="truncate text-gray-900">{category}</span>
-                          <Badge variant="outline" className="ml-2 border-gray-300 text-gray-700">{categoryQuestionCounts[category] || 0}</Badge>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="flex items-end gap-2">
-                <Button 
-                  onClick={() => setIsActive(!isActive)}
-                  variant={isActive ? "destructive" : "default"}
-                >
-                  {isActive ? 'Pause' : 'Start'} Timer
-                </Button>
-                <Button 
-                  onClick={() => {
-                    setTimeElapsed(0);
-                    setCurrentQuestionIndex(0);
-                    setUserAnswers({});
-                    setSelectedAnswer(null);
-                    setShowExplanation(false);
-                  }}
-                  variant="outline"
-                >
-                  Reset
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Progress and Stats */}
         <div className="grid md:grid-cols-4 gap-4 mb-6">
           <Card className="bg-white shadow-lg">
@@ -343,6 +287,62 @@ export default function PLAB1Integrated() {
             )}
           </div>
         </div>
+
+        {/* Practice Configuration */}
+        <Card className="mt-6 mb-6 bg-white shadow-lg">
+          <CardHeader className="bg-white">
+            <CardTitle className="text-gray-900">Practice Configuration</CardTitle>
+          </CardHeader>
+          <CardContent className="bg-white">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="category" className="mb-2 block text-gray-700 font-medium">Category</Label>
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="bg-white border-gray-300 text-gray-900">
+                    <SelectValue placeholder="Select category" className="text-gray-900" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border-gray-300">
+                    <SelectItem value="all" className="text-gray-900 hover:bg-gray-100">
+                      <div className="flex justify-between items-center w-full">
+                        <span className="text-gray-900">All Categories</span>
+                        <Badge variant="secondary" className="ml-2 bg-blue-100 text-blue-800">{COMPREHENSIVE_FLASHCARD_COLLECTION.length}</Badge>
+                      </div>
+                    </SelectItem>
+                    {PLAB1_CATEGORIES.map(category => (
+                      <SelectItem key={category} value={category} className="text-gray-900 hover:bg-gray-100">
+                        <div className="flex justify-between items-center w-full">
+                          <span className="truncate text-gray-900">{category}</span>
+                          <Badge variant="outline" className="ml-2 border-gray-300 text-gray-700">{categoryQuestionCounts[category] || 0}</Badge>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="flex items-end gap-2">
+                <Button 
+                  onClick={() => setIsActive(!isActive)}
+                  variant={isActive ? "destructive" : "default"}
+                >
+                  {isActive ? 'Pause' : 'Start'} Timer
+                </Button>
+                <Button 
+                  onClick={() => {
+                    setTimeElapsed(0);
+                    setCurrentQuestionIndex(0);
+                    setUserAnswers({});
+                    setSelectedAnswer(null);
+                    setShowExplanation(false);
+                  }}
+                  variant="outline"
+                >
+                  Reset
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Final Results */}
         {currentQuestionIndex === questions.length - 1 && showExplanation && (
