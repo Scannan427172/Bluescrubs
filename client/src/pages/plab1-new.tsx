@@ -35,8 +35,8 @@ const getRankDisplay = (rank: number) => {
   return <span className="text-lg font-bold text-gray-600">#{rank}</span>;
 };
 
-// Global Leaderboard Component
-function GlobalLeaderboardSection() {
+// Simple Leaderboard Display with exact global scoreboard styling
+const LeaderboardDisplay = () => {
   const { data: globalScoreboard, isLoading } = useQuery({
     queryKey: ["/api/scoreboard/global"],
     refetchInterval: 30000,
@@ -52,7 +52,7 @@ function GlobalLeaderboardSection() {
     );
   }
 
-  if (!globalScoreboard || !Array.isArray(globalScoreboard)) {
+  if (!globalScoreboard || !Array.isArray(globalScoreboard) || globalScoreboard.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500">
         No leaderboard data available
@@ -72,26 +72,29 @@ function GlobalLeaderboardSection() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 min-w-0 flex-1">
               <div className="flex items-center justify-center w-10 h-10 flex-shrink-0">
-                {getRankDisplay(user.rank)}
+                {index === 0 && <Crown className="w-6 h-6 text-yellow-500" />}
+                {index === 1 && <Medal className="w-6 h-6 text-gray-400" />}
+                {index === 2 && <Award className="w-6 h-6 text-amber-600" />}
+                {index > 2 && <span className="text-lg font-bold text-gray-600">#{index + 1}</span>}
               </div>
               
               <div className="flex flex-col min-w-0 flex-1">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-semibold text-gray-900 truncate">{user.username}</span>
                   <Badge variant="outline" className="text-xs flex-shrink-0">
-                    {user.plabCategory.toUpperCase()}
+                    {user.plabCategory?.toUpperCase() || 'PLAB1'}
                   </Badge>
                 </div>
                 <div className="flex items-center gap-1 text-sm text-gray-600">
-                  <span>{user.flagEmoji}</span>
-                  <span className="truncate">{user.city}, {user.country}</span>
+                  <span>{user.flagEmoji || '🌍'}</span>
+                  <span className="truncate">{user.city || 'Unknown'}, {user.country || 'Unknown'}</span>
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col items-end gap-1 flex-shrink-0 ml-3">
-              <div className="text-xl font-bold text-blue-600">{user.totalScore.toLocaleString()}</div>
-              <div className="text-sm font-semibold text-green-600">{user.accuracyRate}%</div>
+              <div className="text-xl font-bold text-blue-600">{user.totalScore?.toLocaleString() || '0'}</div>
+              <div className="text-sm font-semibold text-green-600">{user.accuracyRate || 0}%</div>
             </div>
           </div>
         </div>
@@ -942,7 +945,7 @@ export default function PLAB1New() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <GlobalLeaderboardSection />
+            <LeaderboardDisplay />
           </CardContent>
         </Card>
       </div>
