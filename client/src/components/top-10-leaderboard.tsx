@@ -96,14 +96,14 @@ export function Top10Leaderboard() {
                 <div className="flex items-center gap-1 md:gap-2 min-w-0 flex-1">
                   <span className="text-base md:text-xl flex-shrink-0">{user.flagEmoji}</span>
                   <div className="min-w-0 flex-1">
-                    <div className="font-medium text-gray-900 text-sm md:text-base truncate">{user.username}</div>
-                    <div className="text-sm text-gray-700 truncate">{user.city}, {user.country}</div>
+                    <div className="font-semibold text-black text-sm md:text-base truncate">{user.username}</div>
+                    <div className="text-sm text-gray-800 truncate">{user.city}, {user.country}</div>
                   </div>
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
                 <div className="font-bold text-blue-600 text-sm md:text-base">{user.totalScore.toLocaleString()}</div>
-                <div className="text-sm text-gray-700">{user.accuracyRate}% accuracy</div>
+                <div className="text-sm text-gray-800 font-medium">{user.accuracyRate}% accuracy</div>
               </div>
             </div>
           ))}
