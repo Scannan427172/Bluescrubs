@@ -784,61 +784,63 @@ export default function PLAB1New() {
                 </div>
               )}
 
-              {/* Educational Source Links - Always show for testing */}
-              {(() => {
-                // Create default educational sources for all questions
-                const defaultSources = [
-                  {
-                    title: "NHS - Heart Attack: Symptoms and Treatment",
-                    url: "https://www.nhs.uk/conditions/heart-attack/",
-                    type: "nhs"
-                  },
-                  {
-                    title: "NICE Guidelines - Acute coronary syndromes",
-                    url: "https://www.nice.org.uk/guidance/cg94",
-                    type: "guideline" 
-                  },
-                  {
-                    title: "British Heart Foundation - Heart Attack Information",
-                    url: "https://www.bhf.org.uk/informationsupport/conditions/heart-attack",
-                    type: "educational"
-                  }
-                ];
-                
-                const sources = currentQuestion.sourceLinks || defaultSources;
-                
-                return sources.length > 0 && (
-                  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                    <div className="flex items-center gap-2 mb-2">
-                      <ExternalLink className="w-4 h-4 text-green-600" />
-                      <h5 className="font-medium text-green-800">Educational Resources:</h5>
-                    </div>
-                    <div className="space-y-2">
-                      {sources.map((source, index) => (
-                        <a
-                          key={index}
-                          href={source.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
-                        >
-                          <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                          <span className="flex-1">{source.title}</span>
-                          <Badge 
-                            variant="outline" 
-                            className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
-                          >
-                            {source.type.toUpperCase()}
-                          </Badge>
-                        </a>
-                      ))}
-                    </div>
-                    <p className="text-xs text-green-600 mt-2">
-                      Click links to access official medical guidelines and educational resources
-                    </p>
-                  </div>
-                );
-              })()}
+              {/* Educational Source Links */}
+              <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <ExternalLink className="w-4 h-4 text-green-600" />
+                  <h5 className="font-medium text-green-800">Educational Resources:</h5>
+                </div>
+                <div className="space-y-2">
+                  <a
+                    href="https://www.nhs.uk/conditions/heart-attack/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
+                  >
+                    <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                    <span className="flex-1">NHS - Heart Attack: Symptoms and Treatment</span>
+                    <Badge 
+                      variant="outline" 
+                      className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
+                    >
+                      NHS
+                    </Badge>
+                  </a>
+                  <a
+                    href="https://www.nice.org.uk/guidance/cg94"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
+                  >
+                    <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                    <span className="flex-1">NICE Guidelines - Acute coronary syndromes</span>
+                    <Badge 
+                      variant="outline" 
+                      className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
+                    >
+                      GUIDELINE
+                    </Badge>
+                  </a>
+                  <a
+                    href="https://www.bhf.org.uk/informationsupport/conditions/heart-attack"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
+                  >
+                    <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                    <span className="flex-1">British Heart Foundation - Heart Attack Information</span>
+                    <Badge 
+                      variant="outline" 
+                      className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
+                    >
+                      EDUCATIONAL
+                    </Badge>
+                  </a>
+                </div>
+                <p className="text-xs text-green-600 mt-2">
+                  Click links to access official medical guidelines and educational resources
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
