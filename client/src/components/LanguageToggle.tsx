@@ -8,8 +8,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { useI18n } from '@/hooks/useI18n';
-import { SUPPORTED_LANGUAGES } from '@shared/i18n-data';
+import { useI18n, type Language } from '@/hooks/useI18n';
 
 interface LanguageToggleProps {
   className?: string;
