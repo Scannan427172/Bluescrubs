@@ -228,7 +228,7 @@ const translateText = (text: string, targetLang: string): string => {
 };
 
 export default function PLAB1Integrated() {
-  const { currentLanguage, translateText, setLanguage } = useI18n();
+  const [localLanguage, setLocalLanguage] = useState<string>("en");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -394,7 +394,7 @@ export default function PLAB1Integrated() {
         {/* Question */}
         <Card className="mb-6 bg-white shadow-lg">
           <CardHeader className="bg-white">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
               <div className="flex items-center gap-2">
                 <Badge variant="secondary" className="bg-blue-100 text-blue-800">{currentQuestion.category}</Badge>
                 <Badge className={
@@ -407,46 +407,37 @@ export default function PLAB1Integrated() {
               </div>
               
               {/* Language translator in question block */}
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1">
-                  <Languages className="w-3 h-3 text-gray-500" />
-                  <span className="text-xs text-gray-600 font-medium">Translate:</span>
-                </div>
-                <Select value={currentLanguage} onValueChange={(lang) => setLanguage(lang as any)}>
-                  <SelectTrigger className="w-36 h-7 text-xs border-gray-200 hover:border-blue-300 transition-colors">
-                    <SelectValue placeholder="Language" />
+              <div className="flex items-center gap-2 relative">
+                <Languages className="w-4 h-4 text-gray-500" />
+                <Select value={localLanguage} onValueChange={setLocalLanguage}>
+                  <SelectTrigger className="w-32 h-8 text-xs border-gray-200 hover:border-blue-300 transition-colors">
+                    <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="max-h-60">
+                  <SelectContent align="end" className="w-40">
                     <SelectItem value="en">🇬🇧 English</SelectItem>
                     <SelectItem value="ar">🇸🇦 العربية</SelectItem>
                     <SelectItem value="es">🇪🇸 Español</SelectItem>
                     <SelectItem value="fr">🇫🇷 Français</SelectItem>
                     <SelectItem value="de">🇩🇪 Deutsch</SelectItem>
                     <SelectItem value="hi">🇮🇳 हिन्दी</SelectItem>
-                    <SelectItem value="ur">🇵🇰 اردو</SelectItem>
                     <SelectItem value="zh">🇨🇳 中文</SelectItem>
-                    <SelectItem value="ja">🇯🇵 日本語</SelectItem>
-                    <SelectItem value="ko">🇰🇷 한국어</SelectItem>
                     <SelectItem value="ru">🇷🇺 Русский</SelectItem>
-                    <SelectItem value="tr">🇹🇷 Türkçe</SelectItem>
-                    <SelectItem value="pt">🇵🇹 Português</SelectItem>
-                    <SelectItem value="it">🇮🇹 Italiano</SelectItem>
                   </SelectContent>
                 </Select>
-                {currentLanguage !== 'en' && (
-                  <div className="px-2 py-1 text-xs bg-green-50 text-green-700 rounded-md border border-green-200 font-medium">
-                    Active
+                {localLanguage !== 'en' && (
+                  <div className="px-2 py-1 text-xs bg-blue-50 text-blue-700 rounded font-medium">
+                    ON
                   </div>
                 )}
               </div>
             </div>
             <CardTitle className="text-xl leading-relaxed text-gray-900">
-              {currentLanguage === "en" ? (
+              {localLanguage === "en" ? (
                 currentQuestion.stem
               ) : (
                 <div className="space-y-2">
                   <div className="text-gray-900">{currentQuestion.stem}</div>
-                  <div className="text-gray-600 text-base font-normal italic">{translateText(currentQuestion.stem, currentLanguage)}</div>
+                  <div className="text-gray-600 text-base font-normal italic">{translateText(currentQuestion.stem, localLanguage)}</div>
                 </div>
               )}
             </CardTitle>
@@ -467,12 +458,12 @@ export default function PLAB1Integrated() {
                 }`}>
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
                   <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-gray-900 font-medium">
-                    {currentLanguage === "en" ? (
+                    {localLanguage === "en" ? (
                       `${String.fromCharCode(65 + index)}. ${option}`
                     ) : (
                       <div className="space-y-1">
                         <div>{String.fromCharCode(65 + index)}. {option}</div>
-                        <div className="text-gray-600 text-sm font-normal italic ml-4">{translateText(option, currentLanguage)}</div>
+                        <div className="text-gray-600 text-sm font-normal italic ml-4">{translateText(option, localLanguage)}</div>
                       </div>
                     )}
                   </Label>
@@ -489,14 +480,14 @@ export default function PLAB1Integrated() {
             {showExplanation && (
               <div className="mt-6 p-4 bg-white border-l-4 border-blue-500 rounded-lg shadow-sm">
                 <h4 className="font-semibold text-gray-900 mb-2">
-                  {currentLanguage === "en" ? 'Explanation' : `Explanation / ${translateText('Explanation', currentLanguage)}`}
+                  {localLanguage === "en" ? 'Explanation' : `Explanation / ${translateText('Explanation', localLanguage)}`}
                 </h4>
-                {currentLanguage === "en" ? (
+                {localLanguage === "en" ? (
                   <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
                 ) : (
                   <div className="space-y-3">
                     <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
-                    <p className="text-gray-600 leading-relaxed italic border-l-2 border-gray-300 pl-3">{translateText(currentQuestion.explanation, currentLanguage)}</p>
+                    <p className="text-gray-600 leading-relaxed italic border-l-2 border-gray-300 pl-3">{translateText(currentQuestion.explanation, localLanguage)}</p>
                   </div>
                 )}
                 {currentQuestion.tags && currentQuestion.tags.length > 0 && (
