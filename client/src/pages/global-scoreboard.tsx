@@ -203,25 +203,30 @@ export default function GlobalScoreboard() {
         </p>
         
         {/* View Mode Toggle */}
-        <div className="flex items-center justify-center gap-4 mt-6">
-          <div className="flex items-center gap-3 bg-white p-3 rounded-lg border shadow-sm">
-            <div className="flex items-center gap-2">
-              <List className={`w-5 h-5 ${viewMode === 'list' ? 'text-blue-600' : 'text-gray-400'}`} />
-              <span className={`text-sm font-medium ${viewMode === 'list' ? 'text-blue-600' : 'text-gray-600'}`}>
-                List View
-              </span>
-            </div>
-            <Switch
-              checked={viewMode === 'globe'}
-              onCheckedChange={(checked) => setViewMode(checked ? 'globe' : 'list')}
-              className="data-[state=checked]:bg-blue-600"
-            />
-            <div className="flex items-center gap-2">
-              <Globe className={`w-5 h-5 ${viewMode === 'globe' ? 'text-blue-600' : 'text-gray-400'}`} />
-              <span className={`text-sm font-medium ${viewMode === 'globe' ? 'text-blue-600' : 'text-gray-600'}`}>
-                Globe View
-              </span>
-            </div>
+        <div className="flex items-center justify-center gap-4 mt-6 mb-6">
+          <div className="flex items-center gap-2 bg-white p-4 rounded-xl border-2 shadow-lg">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                viewMode === 'list' 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              <List className="w-5 h-5" />
+              <span className="font-medium">List View</span>
+            </button>
+            <button
+              onClick={() => setViewMode('globe')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                viewMode === 'globe' 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              <Globe className="w-5 h-5" />
+              <span className="font-medium">Globe View</span>
+            </button>
           </div>
         </div>
 
