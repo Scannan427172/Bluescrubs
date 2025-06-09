@@ -57,6 +57,7 @@ import Pricing from "@/pages/pricing";
 import GMCPractice from "@/pages/gmc-practice";
 import PLAB1Practice from "@/pages/plab1-practice";
 import MLAPractice from "@/pages/mla-practice";
+import InteractiveFlashcards from "@/pages/interactive-flashcards";
 import ContentStrategy from "@/pages/content-strategy";
 import GlobalPractice from "@/pages/global-practice";
 import AdvancedAnalytics from "@/pages/advanced-analytics";
@@ -119,6 +120,14 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <MLAPractice />
+            </div>
+          </div>
+        </Route>
+        <Route path="/flashcards">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <InteractiveFlashcards />
             </div>
           </div>
         </Route>
