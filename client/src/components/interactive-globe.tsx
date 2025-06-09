@@ -76,12 +76,38 @@ export function InteractiveGlobe() {
       if (!response.ok) throw new Error("Failed to fetch users");
       const users = await response.json();
       
-      // Add coordinates to users based on their city
-      return users.map((user: any) => ({
-        ...user,
-        latitude: CITY_COORDINATES[user.city]?.lat || 0,
-        longitude: CITY_COORDINATES[user.city]?.lng || 0
-      })).filter((user: any) => user.latitude !== 0); // Only include users with valid coordinates
+      // Add coordinates to users based on their city or country
+      return users.map((user: any) => {
+        let lat = CITY_COORDINATES[user.city]?.lat;
+        let lng = CITY_COORDINATES[user.city]?.lng;
+        
+        // If no city coordinates, use random coordinates near major regions
+        if (!lat || !lng) {
+          // Generate random coordinates based on country or use random global locations
+          const randomLocations = [
+            { lat: 51.5074, lng: -0.1278 }, // London
+            { lat: 40.7128, lng: -74.0060 }, // New York
+            { lat: 35.6762, lng: 139.6503 }, // Tokyo
+            { lat: -33.8688, lng: 151.2093 }, // Sydney
+            { lat: 19.0760, lng: 72.8777 }, // Mumbai
+            { lat: 55.7558, lng: 37.6176 }, // Moscow
+            { lat: -23.5505, lng: -46.6333 }, // São Paulo
+            { lat: 30.0444, lng: 31.2357 }, // Cairo
+            { lat: 1.3521, lng: 103.8198 }, // Singapore
+            { lat: 25.2048, lng: 55.2708 }, // Dubai
+          ];
+          const randomLocation = randomLocations[user.id % randomLocations.length];
+          // Add some randomness around the location
+          lat = randomLocation.lat + (Math.random() - 0.5) * 10;
+          lng = randomLocation.lng + (Math.random() - 0.5) * 20;
+        }
+        
+        return {
+          ...user,
+          latitude: lat,
+          longitude: lng
+        };
+      });
     }
   });
 
