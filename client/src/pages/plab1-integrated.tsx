@@ -56,35 +56,83 @@ const getCategoryQuestionCounts = () => {
 
 const categoryQuestionCounts = getCategoryQuestionCounts();
 
-// Simple translation function for demonstration - in production this would use a translation API
-const translateText = (text: string): string => {
-  // This is a simplified example - in production you'd use Google Translate API or similar
-  const commonTranslations: Record<string, string> = {
-    // Common medical terms
-    "heart": "قلب",
-    "patient": "مريض", 
-    "diagnosis": "تشخيص",
-    "treatment": "علاج",
-    "symptoms": "أعراض",
-    "blood pressure": "ضغط الدم",
-    "chest pain": "ألم في الصدر",
-    "shortness of breath": "ضيق في التنفس",
-    "fever": "حمى",
-    "headache": "صداع",
-    // Common question words
-    "What is the": "ما هو",
-    "Which of the following": "أي مما يلي",
-    "The most likely": "الأكثر احتمالا",
-    "best treatment": "أفضل علاج",
-    "first line": "الخط الأول"
-  };
+// Supported languages for international medical graduates
+const SUPPORTED_LANGUAGES = {
+  en: { name: "English", flag: "🇬🇧", code: "EN" },
+  ar: { name: "Arabic", flag: "🇸🇦", code: "عربي" },
+  ur: { name: "Urdu", flag: "🇵🇰", code: "اردو" },
+  hi: { name: "Hindi", flag: "🇮🇳", code: "हिंदी" },
+  bn: { name: "Bengali", flag: "🇧🇩", code: "বাংলা" },
+  fr: { name: "French", flag: "🇫🇷", code: "FR" },
+  es: { name: "Spanish", flag: "🇪🇸", code: "ES" },
+  pt: { name: "Portuguese", flag: "🇵🇹", code: "PT" },
+  de: { name: "German", flag: "🇩🇪", code: "DE" },
+  ru: { name: "Russian", flag: "🇷🇺", code: "RU" },
+  zh: { name: "Chinese", flag: "🇨🇳", code: "中文" },
+  ja: { name: "Japanese", flag: "🇯🇵", code: "日本語" },
+  ko: { name: "Korean", flag: "🇰🇷", code: "한국어" },
+  tr: { name: "Turkish", flag: "🇹🇷", code: "TR" },
+  fa: { name: "Persian", flag: "🇮🇷", code: "فارسی" },
+  sw: { name: "Swahili", flag: "🇰🇪", code: "SW" },
+  yo: { name: "Yoruba", flag: "🇳🇬", code: "YO" },
+  ha: { name: "Hausa", flag: "🇳🇬", code: "HA" },
+  am: { name: "Amharic", flag: "🇪🇹", code: "አማርኛ" },
+  ta: { name: "Tamil", flag: "🇮🇳", code: "தமிழ்" },
+};
+
+// Medical terminology translations for multiple languages
+const MEDICAL_TRANSLATIONS: Record<string, Record<string, string>> = {
+  ar: {
+    "heart": "قلب", "patient": "مريض", "diagnosis": "تشخيص", "treatment": "علاج",
+    "symptoms": "أعراض", "blood pressure": "ضغط الدم", "chest pain": "ألم في الصدر",
+    "shortness of breath": "ضيق في التنفس", "fever": "حمى", "headache": "صداع",
+    "What is the": "ما هو", "Which of the following": "أي مما يلي",
+    "The most likely": "الأكثر احتمالا", "best treatment": "أفضل علاج",
+    "Explanation": "شرح"
+  },
+  ur: {
+    "heart": "دل", "patient": "مریض", "diagnosis": "تشخیص", "treatment": "علاج",
+    "symptoms": "علامات", "blood pressure": "بلڈ پریشر", "chest pain": "سینے میں درد",
+    "fever": "بخار", "headache": "سر درد", "What is the": "کیا ہے",
+    "Which of the following": "مندرجہ ذیل میں سے کون سا", "Explanation": "وضاحت"
+  },
+  hi: {
+    "heart": "हृदय", "patient": "रोगी", "diagnosis": "निदान", "treatment": "इलाज",
+    "symptoms": "लक्षण", "blood pressure": "रक्तचाप", "chest pain": "छाती में दर्द",
+    "fever": "बुखार", "headache": "सिरदर्द", "What is the": "क्या है",
+    "Which of the following": "निम्नलिखित में से कौन सा", "Explanation": "व्याख्या"
+  },
+  bn: {
+    "heart": "হৃদয়", "patient": "রোগী", "diagnosis": "নির্ণয়", "treatment": "চিকিৎসা",
+    "symptoms": "উপসর্গ", "blood pressure": "রক্তচাপ", "fever": "জ্বর",
+    "headache": "মাথাব্যথা", "What is the": "কি", "Explanation": "ব্যাখ্যা"
+  },
+  fr: {
+    "heart": "cœur", "patient": "patient", "diagnosis": "diagnostic", "treatment": "traitement",
+    "symptoms": "symptômes", "blood pressure": "tension artérielle", "chest pain": "douleur thoracique",
+    "fever": "fièvre", "headache": "mal de tête", "What is the": "Qu'est-ce que",
+    "Which of the following": "Lequel des suivants", "Explanation": "Explication"
+  },
+  es: {
+    "heart": "corazón", "patient": "paciente", "diagnosis": "diagnóstico", "treatment": "tratamiento",
+    "symptoms": "síntomas", "blood pressure": "presión arterial", "chest pain": "dolor en el pecho",
+    "fever": "fiebre", "headache": "dolor de cabeza", "What is the": "¿Cuál es",
+    "Which of the following": "¿Cuál de los siguientes", "Explanation": "Explicación"
+  }
+};
+
+// Translation function supporting multiple languages
+const translateText = (text: string, targetLang: string): string => {
+  if (targetLang === "en") return text;
   
+  const translations = MEDICAL_TRANSLATIONS[targetLang] || {};
   let translated = text;
-  Object.entries(commonTranslations).forEach(([english, native]) => {
+  
+  Object.entries(translations).forEach(([english, native]) => {
     translated = translated.replace(new RegExp(english, 'gi'), native);
   });
   
-  return `[Native] ${translated}`;
+  return translated;
 };
 
 export default function PLAB1Integrated() {
@@ -95,7 +143,7 @@ export default function PLAB1Integrated() {
   const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [isEnglish, setIsEnglish] = useState(true);
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
 
   // Generate questions based on selected category
   const questions = selectedCategory === "all" 
@@ -258,31 +306,29 @@ export default function PLAB1Integrated() {
               
               {/* Language Switcher */}
               <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-1">
-                <Button
-                  variant={isEnglish ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setIsEnglish(true)}
-                  className="text-xs px-3 py-1 h-7"
-                >
-                  🇬🇧 EN
-                </Button>
-                <Button
-                  variant={!isEnglish ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setIsEnglish(false)}
-                  className="text-xs px-3 py-1 h-7"
-                >
-                  🌐 Arabic
-                </Button>
+                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                  <SelectTrigger className="w-32 h-7 text-xs bg-white border-gray-300">
+                    <SelectValue>
+                      {SUPPORTED_LANGUAGES[selectedLanguage as keyof typeof SUPPORTED_LANGUAGES]?.flag} {SUPPORTED_LANGUAGES[selectedLanguage as keyof typeof SUPPORTED_LANGUAGES]?.code}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border-gray-300 max-h-60">
+                    {Object.entries(SUPPORTED_LANGUAGES).map(([code, lang]) => (
+                      <SelectItem key={code} value={code} className="text-xs hover:bg-gray-100">
+                        {lang.flag} {lang.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             <CardTitle className="text-xl leading-relaxed text-gray-900">
-              {isEnglish ? (
+              {selectedLanguage === "en" ? (
                 currentQuestion.stem
               ) : (
                 <div className="space-y-2">
                   <div className="text-gray-900">{currentQuestion.stem}</div>
-                  <div className="text-gray-600 text-base font-normal italic">{translateText(currentQuestion.stem)}</div>
+                  <div className="text-gray-600 text-base font-normal italic">{translateText(currentQuestion.stem, selectedLanguage)}</div>
                 </div>
               )}
             </CardTitle>
@@ -303,12 +349,12 @@ export default function PLAB1Integrated() {
                 }`}>
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
                   <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-gray-900 font-medium">
-                    {isEnglish ? (
+                    {selectedLanguage === "en" ? (
                       `${String.fromCharCode(65 + index)}. ${option}`
                     ) : (
                       <div className="space-y-1">
                         <div>{String.fromCharCode(65 + index)}. {option}</div>
-                        <div className="text-gray-600 text-sm font-normal italic ml-4">{translateText(option)}</div>
+                        <div className="text-gray-600 text-sm font-normal italic ml-4">{translateText(option, selectedLanguage)}</div>
                       </div>
                     )}
                   </Label>
@@ -324,13 +370,15 @@ export default function PLAB1Integrated() {
 
             {showExplanation && (
               <div className="mt-6 p-4 bg-white border-l-4 border-blue-500 rounded-lg shadow-sm">
-                <h4 className="font-semibold text-gray-900 mb-2">{isEnglish ? 'Explanation' : 'Explanation / شرح'}</h4>
-                {isEnglish ? (
+                <h4 className="font-semibold text-gray-900 mb-2">
+                  {selectedLanguage === "en" ? 'Explanation' : `Explanation / ${translateText('Explanation', selectedLanguage)}`}
+                </h4>
+                {selectedLanguage === "en" ? (
                   <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
                 ) : (
                   <div className="space-y-3">
                     <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
-                    <p className="text-gray-600 leading-relaxed italic border-l-2 border-gray-300 pl-3">{translateText(currentQuestion.explanation)}</p>
+                    <p className="text-gray-600 leading-relaxed italic border-l-2 border-gray-300 pl-3">{translateText(currentQuestion.explanation, selectedLanguage)}</p>
                   </div>
                 )}
                 {currentQuestion.tags && currentQuestion.tags.length > 0 && (
