@@ -8,10 +8,82 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, Trophy
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, Trophy, Crown, Medal
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
-import { Top10Leaderboard } from "@/components/top-10-leaderboard";
+import { useQuery } from "@tanstack/react-query";
+
+// Simple leaderboard component with guaranteed readable text
+const SimpleLeaderboard = () => {
+  const { data: globalScoreboard, isLoading } = useQuery({
+    queryKey: ["/api/scoreboard/global"],
+    refetchInterval: 30000,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="space-y-3">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="h-16 bg-gray-100 rounded-lg animate-pulse"></div>
+        ))}
+      </div>
+    );
+  }
+
+  if (!globalScoreboard || !Array.isArray(globalScoreboard) || globalScoreboard.length === 0) {
+    return (
+      <div className="text-center py-8 text-gray-600">
+        No leaderboard data available
+      </div>
+    );
+  }
+
+  const getRankIcon = (index: number) => {
+    if (index === 0) return <Crown className="w-6 h-6 text-yellow-500" />;
+    if (index === 1) return <Medal className="w-6 h-6 text-gray-400" />;
+    if (index === 2) return <Award className="w-6 h-6 text-amber-600" />;
+    return <span className="text-lg font-bold text-gray-700">#{index + 1}</span>;
+  };
+
+  return (
+    <div className="space-y-3">
+      {globalScoreboard.slice(0, 10).map((user: any, index: number) => (
+        <div
+          key={user.id}
+          className={`p-4 rounded-lg border ${
+            index < 3 ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200' : 'bg-white border-gray-200'
+          } hover:shadow-md transition-shadow`}
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <div className="flex items-center justify-center w-10 h-10 flex-shrink-0">
+                {getRankIcon(index)}
+              </div>
+              
+              <div className="flex flex-col min-w-0 flex-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-semibold text-black truncate">{user.username}</span>
+                  <Badge variant="outline" className="text-xs flex-shrink-0">
+                    {user.plabCategory?.toUpperCase() || 'PLAB1'}
+                  </Badge>
+                </div>
+                <div className="flex items-center gap-1 text-sm text-gray-700">
+                  <span>{user.flagEmoji || '🌍'}</span>
+                  <span className="truncate">{user.city || 'Unknown'}, {user.country || 'Unknown'}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-end gap-1 flex-shrink-0 ml-3">
+              <div className="text-xl font-bold text-blue-700">{user.totalScore?.toLocaleString() || '0'}</div>
+              <div className="text-sm font-semibold text-green-700">{user.accuracyRate || 0}%</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 
 // Official PLAB 1 Categories - No separate specialties, all integrated
@@ -542,7 +614,7 @@ export default function PLAB1Integrated() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Top10Leaderboard />
+              <SimpleLeaderboard />
             </CardContent>
           </Card>
         </div>
