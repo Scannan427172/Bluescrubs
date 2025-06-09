@@ -6,7 +6,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { LanguageToggle } from "@/components/LanguageToggle";
 
 interface NavigationProps {
   user?: { username: string; studyStreak: number } | null;
@@ -71,9 +70,6 @@ export function Navigation({ user }: NavigationProps) {
 
             {/* Right Side */}
             <div className="flex items-center space-x-2 lg:space-x-4">
-              {/* Language Toggle */}
-              <LanguageToggle variant="ghost" size="sm" />
-              
               {/* Notifications */}
               <Button variant="ghost" size="sm" className="relative">
                 <Bell className="w-5 h-5 text-gray-600 hover:text-medical-blue" />
