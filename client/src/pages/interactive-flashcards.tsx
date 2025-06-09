@@ -30,6 +30,19 @@ export default function InteractiveFlashcards() {
     incorrect: 0,
     streak: 0
   });
+  
+  // High-yield learning features
+  const [cardPerformance, setCardPerformance] = useState<Record<string, { 
+    attempts: number, 
+    correct: number, 
+    lastIncorrect: Date | null 
+  }>>({});
+  const [showHelpPopup, setShowHelpPopup] = useState(false);
+  const [helpContent, setHelpContent] = useState<{
+    title: string;
+    content: string[];
+    mnemonics: string[];
+  } | null>(null);
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -147,8 +160,11 @@ export default function InteractiveFlashcards() {
     setShowBack(false);
   };
 
-  // Answer handling
+  // Enhanced answer handling with high-yield learning features
   const handleAnswer = (correct: boolean) => {
+    const cardId = currentCard.id;
+    
+    // Update statistics
     setStats(prev => ({
       studied: prev.studied + 1,
       correct: prev.correct + (correct ? 1 : 0),
@@ -156,7 +172,39 @@ export default function InteractiveFlashcards() {
       streak: correct ? prev.streak + 1 : 0
     }));
     
+    // Track card performance
+    setCardPerformance(prev => {
+      const current = prev[cardId] || { attempts: 0, correct: 0, lastIncorrect: null };
+      const updated = {
+        attempts: current.attempts + 1,
+        correct: current.correct + (correct ? 1 : 0),
+        lastIncorrect: correct ? current.lastIncorrect : new Date()
+      };
+      
+      // Show help popup for high-yield cards that are answered incorrectly multiple times
+      if (!correct && current.attempts >= 1 && currentCard.highYield) {
+        showHighYieldHelp();
+      }
+      
+      return { ...prev, [cardId]: updated };
+    });
+    
     setTimeout(nextCard, 1000);
+  };
+  
+  // Show high-yield help popup for difficult cards
+  const showHighYieldHelp = () => {
+    setHelpContent({
+      title: `High-Yield Learning Aid: ${currentCard.category}`,
+      content: [
+        `🎯 This is a HIGH-YIELD topic frequently tested in PLAB 1`,
+        `📚 Focus Area: ${currentCard.subcategory}`,
+        `⚡ Clinical Relevance: ${currentCard.clinicalRelevance}`,
+        ...currentCard.back.keyPoints.map(point => `• ${point}`)
+      ],
+      mnemonics: currentCard.back.mnemonics || []
+    });
+    setShowHelpPopup(true);
   };
 
   const flipCard = () => {
@@ -458,6 +506,112 @@ export default function InteractiveFlashcards() {
           Next →
         </Button>
       </div>
+
+      {/* Answer buttons for high-yield learning */}
+      {showBack && (
+        <div className="flex gap-4 justify-center mb-6">
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => handleAnswer(false)}
+            className="bg-red-600 text-white hover:bg-red-700 border-red-600"
+          >
+            ❌ Incorrect
+          </Button>
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => handleAnswer(true)}
+            className="bg-green-600 text-white hover:bg-green-700 border-green-600"
+          >
+            ✅ Correct
+          </Button>
+        </div>
+      )}
+
+      {/* High-Yield Help Popup */}
+      {showHelpPopup && helpContent && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-gradient-to-br from-blue-900 to-purple-900 text-white rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-xl font-bold text-yellow-300">{helpContent.title}</h3>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowHelpPopup(false)}
+                className="text-white hover:bg-white hover:bg-opacity-20"
+              >
+                ✕
+              </Button>
+            </div>
+            
+            <div className="space-y-4">
+              {helpContent.content.map((line, index) => (
+                <p key={index} className="text-white leading-relaxed">{line}</p>
+              ))}
+              
+              {helpContent.mnemonics.length > 0 && (
+                <div className="bg-yellow-900 bg-opacity-50 p-4 rounded-lg">
+                  <h4 className="font-bold text-yellow-300 mb-2">💡 Memory Aids:</h4>
+                  {helpContent.mnemonics.map((mnemonic, index) => (
+                    <p key={index} className="text-yellow-100 mb-1">• {mnemonic}</p>
+                  ))}
+                </div>
+              )}
+              
+              <div className="border-t border-white border-opacity-20 pt-4">
+                <p className="text-sm text-gray-300">
+                  💡 <strong>Pro Tip:</strong> Review this high-yield content multiple times. 
+                  These topics appear frequently in PLAB 1 examinations.
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex gap-3 mt-6">
+              <Button 
+                onClick={() => setShowHelpPopup(false)}
+                className="bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                Got It!
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={() => {
+                  setShowHelpPopup(false);
+                  if (speechEnabled && 'speechSynthesis' in window) {
+                    const text = helpContent.content.join('. ') + '. ' + helpContent.mnemonics.join('. ');
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.rate = playbackSpeed[0];
+                    utterance.volume = volume[0] / 100;
+                    speechSynthesis.speak(utterance);
+                  }
+                }}
+                className="text-white border-white hover:bg-white hover:bg-opacity-20"
+              >
+                🔊 Read Aloud
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Performance indicator for current card */}
+      {cardPerformance[currentCard.id] && (
+        <div className="mb-4 p-3 bg-gray-700 rounded-lg">
+          <div className="flex justify-between text-sm text-gray-300">
+            <span>Card Performance:</span>
+            <span>
+              {cardPerformance[currentCard.id].correct}/{cardPerformance[currentCard.id].attempts} correct
+              ({Math.round((cardPerformance[currentCard.id].correct / cardPerformance[currentCard.id].attempts) * 100)}%)
+            </span>
+          </div>
+          {cardPerformance[currentCard.id].attempts > 1 && cardPerformance[currentCard.id].correct / cardPerformance[currentCard.id].attempts < 0.5 && (
+            <div className="text-xs text-yellow-300 mt-1">
+              💡 This card needs more practice - review the key points above
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Hidden audio element for media playback */}
       <audio
