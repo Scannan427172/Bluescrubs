@@ -144,6 +144,7 @@ export default function PLAB1Integrated() {
   const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [sessionStarted, setSessionStarted] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
 
   // Generate questions based on selected category
@@ -180,6 +181,12 @@ export default function PLAB1Integrated() {
   const handleSubmitAnswer = () => {
     if (selectedAnswer === null) return;
     
+    // Start timer on first question submission
+    if (!sessionStarted) {
+      setSessionStarted(true);
+      setIsActive(true);
+    }
+    
     setUserAnswers(prev => ({
       ...prev,
       [currentQuestion.id]: selectedAnswer
@@ -192,6 +199,9 @@ export default function PLAB1Integrated() {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
+    } else {
+      // Stop timer when reaching the last question
+      setIsActive(false);
     }
   };
 
