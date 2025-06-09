@@ -37,12 +37,31 @@ export default function InteractiveFlashcards() {
 
   // Available categories
   const categories = [
-    { value: 'all', label: 'All Categories' },
+    { value: 'all', label: 'All Specialties' },
     { value: 'Cardiovascular', label: 'Cardiovascular' },
-    { value: 'Respiratory', label: 'Respiratory' },
+    { value: 'Respiratory', label: 'Respiratory Medicine' },
     { value: 'Neurology', label: 'Neurology' },
     { value: 'Endocrinology', label: 'Endocrinology' },
-    { value: 'Gastroenterology', label: 'Gastroenterology' }
+    { value: 'Gastroenterology', label: 'Gastroenterology' },
+    { value: 'Nephrology', label: 'Nephrology' },
+    { value: 'Rheumatology', label: 'Rheumatology' },
+    { value: 'Dermatology', label: 'Dermatology' },
+    { value: 'Psychiatry', label: 'Psychiatry' },
+    { value: 'Infectious Diseases', label: 'Infectious Diseases' },
+    { value: 'Haematology', label: 'Haematology' },
+    { value: 'Oncology', label: 'Oncology' },
+    { value: 'Emergency Medicine', label: 'Emergency Medicine' },
+    { value: 'General Practice', label: 'General Practice' },
+    { value: 'Surgery', label: 'Surgery' },
+    { value: 'Obstetrics & Gynaecology', label: 'Obstetrics & Gynaecology' },
+    { value: 'Paediatrics', label: 'Paediatrics' },
+    { value: 'Anaesthetics', label: 'Anaesthetics' },
+    { value: 'Radiology', label: 'Radiology' },
+    { value: 'Pathology', label: 'Pathology' },
+    { value: 'Ophthalmology', label: 'Ophthalmology' },
+    { value: 'ENT', label: 'ENT' },
+    { value: 'Orthopaedics', label: 'Orthopaedics' },
+    { value: 'Urology', label: 'Urology' }
   ];
 
   const difficulties = [

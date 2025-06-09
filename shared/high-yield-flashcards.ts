@@ -375,6 +375,54 @@ const generateCategoryFlashcards = (category: string, count: number): Flashcard[
     ],
     'Dermatology': [
       'Skin Cancer', 'Eczema', 'Psoriasis', 'Infections', 'Drug Reactions'
+    ],
+    'Psychiatry': [
+      'Depression', 'Anxiety Disorders', 'Psychosis', 'Bipolar Disorder', 'Personality Disorders'
+    ],
+    'Infectious Diseases': [
+      'Sepsis', 'Pneumonia', 'UTI', 'Tuberculosis', 'HIV/AIDS'
+    ],
+    'Haematology': [
+      'Anaemia', 'Leukaemia', 'Lymphoma', 'Bleeding Disorders', 'Thrombosis'
+    ],
+    'Oncology': [
+      'Lung Cancer', 'Breast Cancer', 'Colorectal Cancer', 'Prostate Cancer', 'Chemotherapy'
+    ],
+    'Emergency Medicine': [
+      'Resuscitation', 'Trauma', 'Poisoning', 'Shock', 'Acute Presentations'
+    ],
+    'General Practice': [
+      'Preventive Care', 'Chronic Disease Management', 'Health Screening', 'Minor Illness', 'Prescribing'
+    ],
+    'Surgery': [
+      'Acute Abdomen', 'Trauma Surgery', 'Wound Care', 'Pre-operative Assessment', 'Post-operative Care'
+    ],
+    'Obstetrics & Gynaecology': [
+      'Pregnancy', 'Labour', 'Gynaecological Cancers', 'Menstrual Disorders', 'Contraception'
+    ],
+    'Paediatrics': [
+      'Neonatal Care', 'Growth & Development', 'Childhood Infections', 'Congenital Conditions', 'Adolescent Health'
+    ],
+    'Anaesthetics': [
+      'Pre-operative Assessment', 'Airway Management', 'Pain Management', 'Critical Care', 'Regional Anaesthesia'
+    ],
+    'Radiology': [
+      'Chest X-ray', 'CT Interpretation', 'MRI Basics', 'Ultrasound', 'Interventional Radiology'
+    ],
+    'Pathology': [
+      'Histopathology', 'Blood Tests', 'Microbiology', 'Immunology', 'Chemical Pathology'
+    ],
+    'Ophthalmology': [
+      'Diabetic Retinopathy', 'Glaucoma', 'Cataracts', 'Retinal Detachment', 'Red Eye'
+    ],
+    'ENT': [
+      'Hearing Loss', 'Vertigo', 'Rhinosinusitis', 'Throat Infections', 'Head & Neck Cancer'
+    ],
+    'Orthopaedics': [
+      'Fractures', 'Joint Disease', 'Back Pain', 'Sports Injuries', 'Bone Tumours'
+    ],
+    'Urology': [
+      'Prostate Disease', 'Kidney Stones', 'UTI', 'Erectile Dysfunction', 'Urological Cancers'
     ]
   };
 
@@ -420,7 +468,23 @@ export const COMPREHENSIVE_FLASHCARD_COLLECTION = [
   ...generateCategoryFlashcards('Endocrinology', 25),
   ...generateCategoryFlashcards('Nephrology', 20),
   ...generateCategoryFlashcards('Rheumatology', 15),
-  ...generateCategoryFlashcards('Dermatology', 15)
+  ...generateCategoryFlashcards('Dermatology', 15),
+  ...generateCategoryFlashcards('Psychiatry', 25),
+  ...generateCategoryFlashcards('Infectious Diseases', 20),
+  ...generateCategoryFlashcards('Haematology', 20),
+  ...generateCategoryFlashcards('Oncology', 20),
+  ...generateCategoryFlashcards('Emergency Medicine', 30),
+  ...generateCategoryFlashcards('General Practice', 25),
+  ...generateCategoryFlashcards('Surgery', 25),
+  ...generateCategoryFlashcards('Obstetrics & Gynaecology', 25),
+  ...generateCategoryFlashcards('Paediatrics', 30),
+  ...generateCategoryFlashcards('Anaesthetics', 15),
+  ...generateCategoryFlashcards('Radiology', 20),
+  ...generateCategoryFlashcards('Pathology', 15),
+  ...generateCategoryFlashcards('Ophthalmology', 15),
+  ...generateCategoryFlashcards('ENT', 15),
+  ...generateCategoryFlashcards('Orthopaedics', 20),
+  ...generateCategoryFlashcards('Urology', 15)
 ];
 
 export const FLASHCARD_STATS = {
@@ -433,7 +497,23 @@ export const FLASHCARD_STATS = {
     'Endocrinology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Endocrinology').length,
     'Nephrology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Nephrology').length,
     'Rheumatology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Rheumatology').length,
-    'Dermatology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Dermatology').length
+    'Dermatology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Dermatology').length,
+    'Psychiatry': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Psychiatry').length,
+    'Infectious Diseases': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Infectious Diseases').length,
+    'Haematology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Haematology').length,
+    'Oncology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Oncology').length,
+    'Emergency Medicine': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Emergency Medicine').length,
+    'General Practice': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'General Practice').length,
+    'Surgery': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Surgery').length,
+    'Obstetrics & Gynaecology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Obstetrics & Gynaecology').length,
+    'Paediatrics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Paediatrics').length,
+    'Anaesthetics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Anaesthetics').length,
+    'Radiology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Radiology').length,
+    'Pathology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Pathology').length,
+    'Ophthalmology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Ophthalmology').length,
+    'ENT': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'ENT').length,
+    'Orthopaedics': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Orthopaedics').length,
+    'Urology': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.category === 'Urology').length
   },
   byDifficulty: {
     'beginner': COMPREHENSIVE_FLASHCARD_COLLECTION.filter(f => f.difficulty === 'beginner').length,
