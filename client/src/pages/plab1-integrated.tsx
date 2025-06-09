@@ -293,15 +293,15 @@ export default function PLAB1Integrated() {
             </RadioGroup>
 
             {showExplanation && (
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <h4 className="font-semibold text-blue-900 mb-2">Explanation</h4>
-                <p className="text-blue-800">{currentQuestion.explanation}</p>
+              <div className="mt-6 p-4 bg-white border-l-4 border-blue-500 rounded-lg shadow-sm">
+                <h4 className="font-semibold text-gray-900 mb-2">Explanation</h4>
+                <p className="text-gray-800 leading-relaxed">{currentQuestion.explanation}</p>
                 {currentQuestion.tags && currentQuestion.tags.length > 0 && (
                   <div className="mt-3">
-                    <p className="text-sm font-medium text-blue-900 mb-1">Tags:</p>
+                    <p className="text-sm font-medium text-gray-900 mb-1">Tags:</p>
                     <div className="flex flex-wrap gap-1">
                       {currentQuestion.tags.map((tag, index) => (
-                        <Badge key={index} variant="outline" className="text-xs">
+                        <Badge key={index} variant="outline" className="text-xs border-gray-300 text-gray-700">
                           {tag}
                         </Badge>
                       ))}
@@ -346,34 +346,34 @@ export default function PLAB1Integrated() {
 
         {/* Final Results */}
         {currentQuestionIndex === questions.length - 1 && showExplanation && (
-          <Card className="mt-6">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <Card className="mt-6 bg-white shadow-lg">
+            <CardHeader className="bg-white">
+              <CardTitle className="flex items-center gap-2 text-gray-900">
                 <Award className="w-6 h-6 text-yellow-500" />
                 Practice Complete!
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="bg-white">
               <div className="grid md:grid-cols-3 gap-4">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-600">{score.correct}/{score.total}</div>
-                  <p className="text-gray-600">Questions Correct</p>
+                  <p className="text-gray-700">Questions Correct</p>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-green-600">
                     {Math.round((score.correct / score.total) * 100)}%
                   </div>
-                  <p className="text-gray-600">Overall Accuracy</p>
+                  <p className="text-gray-700">Overall Accuracy</p>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-purple-600">{formatTime(timeElapsed)}</div>
-                  <p className="text-gray-600">Total Time</p>
+                  <p className="text-gray-700">Total Time</p>
                 </div>
               </div>
               
               <div className="mt-4">
                 <Progress value={(score.correct / score.total) * 100} className="h-3" />
-                <p className="text-center mt-2 text-sm text-gray-600">
+                <p className="text-center mt-2 text-sm text-gray-700 font-medium">
                   {score.correct / score.total >= 0.7 ? 'Excellent work! You\'re ready for PLAB 1.' :
                    score.correct / score.total >= 0.5 ? 'Good progress! Keep practicing to improve.' :
                    'More practice needed. Focus on weak areas.'}
