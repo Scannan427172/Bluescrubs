@@ -53,7 +53,7 @@ export default function InteractiveFlashcards() {
   ];
 
   // Filter flashcards
-  const filteredCards = HIGH_YIELD_FLASHCARDS.filter(card => {
+  const filteredCards = COMPREHENSIVE_FLASHCARD_COLLECTION.filter((card: Flashcard) => {
     const categoryMatch = selectedCategory === 'all' || card.category === selectedCategory;
     const difficultyMatch = selectedDifficulty === 'all' || card.difficulty === selectedDifficulty;
     return categoryMatch && difficultyMatch;
@@ -378,7 +378,7 @@ export default function InteractiveFlashcards() {
                 <div className="text-left bg-yellow-50 p-4 rounded-lg">
                   <h4 className="font-medium mb-2">Key Points:</h4>
                   <ul className="list-disc list-inside space-y-1">
-                    {currentCard.back.keyPoints.map((point, index) => (
+                    {currentCard.back.keyPoints.map((point: string, index: number) => (
                       <li key={index} className="text-sm">{point}</li>
                     ))}
                   </ul>
