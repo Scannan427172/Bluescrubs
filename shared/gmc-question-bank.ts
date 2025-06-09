@@ -16,6 +16,11 @@ export interface GMCQuestion {
   learningObjectives: string[];
   gmcOutcomes: string[];
   references: string[];
+  sourceLinks: Array<{
+    title: string;
+    url: string;
+    type: 'guideline' | 'textbook' | 'journal' | 'official';
+  }>;
   tags: string[];
   estimatedTime: number; // seconds
   lastReviewed: string;
@@ -74,6 +79,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "NICE CG167: Acute coronary syndromes",
       "ESC Guidelines for STEMI management"
+    ],
+    sourceLinks: [
+      {
+        title: "NICE CG167: Acute coronary syndromes",
+        url: "https://www.nice.org.uk/guidance/cg167",
+        type: "guideline"
+      },
+      {
+        title: "ESC Guidelines for STEMI management",
+        url: "https://academic.oup.com/eurheartj/article/44/31/3024/7226194",
+        type: "guideline"
+      },
+      {
+        title: "BMJ Best Practice: Acute coronary syndromes",
+        url: "https://bestpractice.bmj.com/topics/en-gb/3000019",
+        type: "textbook"
+      }
     ],
     tags: ["chest-pain", "ECG", "emergency", "cardiology"],
     estimatedTime: 90,
