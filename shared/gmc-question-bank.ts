@@ -282,6 +282,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE NG80: Asthma diagnosis and monitoring",
       "BTS/SIGN Asthma Guidelines"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Asthma symptoms and diagnosis",
+        url: "https://www.nhs.uk/conditions/asthma/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Asthma diagnosis and monitoring",
+        url: "https://www.nice.org.uk/guidance/ng80",
+        type: "guideline"
+      },
+      {
+        title: "Asthma + Lung UK - Educational resources",
+        url: "https://www.asthmaandlung.org.uk/",
+        type: "educational"
+      }
+    ],
     tags: ["wheeze", "peak-flow", "allergies", "respiratory"],
     estimatedTime: 75,
     lastReviewed: "2024-01-20",

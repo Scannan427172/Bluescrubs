@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, Trophy, Crown, Medal
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, Trophy, Crown, Medal, ExternalLink
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 import { useQuery } from "@tanstack/react-query";
@@ -802,15 +802,15 @@ export default function PLAB1Integrated() {
                   </div>
                 )}
 
-                {/* Source Links */}
-                {currentQuestion.sourceLinks && currentQuestion.sourceLinks.length > 0 && (
+                {/* Source Links - only for GMC questions */}
+                {currentQuestion && 'sourceLinks' in currentQuestion && (currentQuestion as any).sourceLinks && Array.isArray((currentQuestion as any).sourceLinks) && (currentQuestion as any).sourceLinks.length > 0 && (
                   <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                     <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
                       <BookOpen className="w-4 h-4" />
                       Educational Resources
                     </h4>
                     <div className="space-y-2">
-                      {currentQuestion.sourceLinks.map((link, index) => (
+                      {((currentQuestion as any).sourceLinks as any[]).map((link: any, index: number) => (
                         <div key={index} className="flex items-center gap-2">
                           <ExternalLink className="w-3 h-3 text-blue-600 flex-shrink-0" />
                           <a
