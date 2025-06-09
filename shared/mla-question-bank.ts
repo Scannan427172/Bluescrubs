@@ -282,7 +282,7 @@ export const MLA_STATS = {
     'Clinical Skills': COMPREHENSIVE_MLA_QUESTIONS.filter(q => q.domain === 'Clinical Skills').length,
     'Professional Values and Behaviours': COMPREHENSIVE_MLA_QUESTIONS.filter(q => q.domain === 'Professional Values and Behaviours').length
   },
-  bySpecialty: specialties => specialties.reduce((acc, specialty) => {
+  bySpecialty: (specialties: string[]) => specialties.reduce((acc: Record<string, number>, specialty: string) => {
     acc[specialty] = COMPREHENSIVE_MLA_QUESTIONS.filter(q => q.specialty === specialty).length;
     return acc;
   }, {} as Record<string, number>)

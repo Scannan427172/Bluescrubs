@@ -12,8 +12,6 @@ import {
 } from "lucide-react";
 import { COMPREHENSIVE_MLA_QUESTIONS, MLA_STATS, type MLAQuestion } from "@shared/mla-question-bank";
 
-const PRACTICE_QUESTIONS: MLAQuestion[] = COMPREHENSIVE_MLA_QUESTIONS;
-
 // Generate realistic clinical question stems
 const generateRealisticStem = (specialty: string, scenario: string, index: number): string => {
   const age = 20 + (index % 60);

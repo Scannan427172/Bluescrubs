@@ -55,7 +55,7 @@ import WhoAreNHSprep from "@/pages/who-are-nhsprep";
 import LanguageDemo from "@/pages/language-demo";
 import Pricing from "@/pages/pricing";
 import GMCPractice from "@/pages/gmc-practice";
-import PLAB1New from "@/pages/plab1-new";
+import PLAB1Practice from "@/pages/plab1-practice";
 import MLAPractice from "@/pages/mla-practice";
 import ContentStrategy from "@/pages/content-strategy";
 import GlobalPractice from "@/pages/global-practice";
@@ -110,7 +110,7 @@ function Router() {
           <div className="flex flex-col min-h-screen">
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
-              <PLAB1New />
+              <PLAB1Practice />
             </div>
           </div>
         </Route>
