@@ -930,7 +930,7 @@ export default function PLAB1Integrated() {
                   className="gap-2"
                 >
                   <Globe className="w-4 h-4" />
-                  View Full Globe
+                  View Global Leaderboard
                 </Button>
               </div>
               <CardDescription>

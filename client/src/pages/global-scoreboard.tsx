@@ -452,16 +452,11 @@ export default function GlobalScoreboard() {
                     <Button 
                       variant="outline" 
                       size="sm"
-                      onClick={() => {
-                        document.getElementById('interactive-globe')?.scrollIntoView({ 
-                          behavior: 'smooth',
-                          block: 'start'
-                        });
-                      }}
+                      onClick={() => setDisplayCount(Math.min(displayCount + 20, globalScoreboard.length))}
                       className="flex items-center gap-2"
                     >
-                      <Globe className="w-4 h-4" />
-                      View All on Globe
+                      <List className="w-4 h-4" />
+                      Show More Users
                     </Button>
                   </div>
                 )}
