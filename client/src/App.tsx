@@ -56,6 +56,7 @@ import LanguageDemo from "@/pages/language-demo";
 import Pricing from "@/pages/pricing";
 import GMCPractice from "@/pages/gmc-practice";
 import PLAB1New from "@/pages/plab1-new";
+import MLAPractice from "@/pages/mla-practice";
 import ContentStrategy from "@/pages/content-strategy";
 import GlobalPractice from "@/pages/global-practice";
 import AdvancedAnalytics from "@/pages/advanced-analytics";
@@ -110,6 +111,14 @@ function Router() {
             <Navigation user={DEMO_USER} />
             <div className="flex-1 pb-16 md:pb-0">
               <PLAB1New />
+            </div>
+          </div>
+        </Route>
+        <Route path="/mla-practice">
+          <div className="flex flex-col min-h-screen">
+            <Navigation user={DEMO_USER} />
+            <div className="flex-1 pb-16 md:pb-0">
+              <MLAPractice />
             </div>
           </div>
         </Route>
