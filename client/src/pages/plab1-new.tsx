@@ -543,22 +543,53 @@ export default function PLAB1New() {
           </div>
         </div>
 
+        {/* Featured All Categories Option */}
+        <Card className="mb-6 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <Target className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-blue-900">Complete Question Bank</h3>
+                  <p className="text-blue-700">Access all {PRACTICE_QUESTIONS.length.toLocaleString()} questions across 18 medical specialties</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm text-green-700 font-medium">Recommended for comprehensive practice</span>
+                  </div>
+                </div>
+              </div>
+              <Button 
+                size="lg"
+                onClick={() => setSelectedCategory('all')}
+                className={`px-8 py-3 ${selectedCategory === 'all' 
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                  : 'bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50'
+                }`}
+              >
+                {selectedCategory === 'all' ? '✓ Selected' : 'Select All Categories'}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Category Selection */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Select Practice Category</CardTitle>
-            <CardDescription>Choose your preferred category and question count</CardDescription>
+            <CardTitle>Or Choose Specific Specialty</CardTitle>
+            <CardDescription>Focus on a particular medical area for targeted practice</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
               <div>
-                <Label className="text-base font-medium mb-3 block">Category:</Label>
+                <Label className="text-base font-medium mb-3 block">Medical Specialties:</Label>
                 <Select value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as GMCCategory | 'all')}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder="Choose specific specialty" />
                   </SelectTrigger>
                   <SelectContent>
-                    {availableCategories.map((category) => (
+                    {availableCategories.filter(cat => cat.value !== 'all').map((category) => (
                       <SelectItem key={category.value} value={category.value}>
                         {category.label} ({category.count} questions)
                       </SelectItem>
