@@ -453,6 +453,29 @@ export default function GlobalScoreboard() {
                     </div>
                   </div>
                 ))}
+                
+                {/* Show indicator if there are more users beyond display count */}
+                {globalScoreboard && globalScoreboard.length > displayCount && (
+                  <div className="text-center p-4 border-t border-gray-200 bg-gradient-to-b from-transparent to-blue-50">
+                    <p className="text-sm text-gray-600 mb-2">
+                      Showing top {displayCount} of {globalScoreboard.length} users
+                    </p>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => {
+                        document.getElementById('interactive-globe')?.scrollIntoView({ 
+                          behavior: 'smooth',
+                          block: 'start'
+                        });
+                      }}
+                      className="flex items-center gap-2"
+                    >
+                      <Globe className="w-4 h-4" />
+                      View All on Globe
+                    </Button>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
