@@ -1,12 +1,16 @@
 import { 
   users, questions, userProgress, studyPlan, communityPosts, postReplies, 
   osceStations, userOsceAttempts, studySessions, userPreferences, performanceMetrics, studyReminders,
+  globalScoreboard, weeklyLeaderboard, countryStats, achievements, userAchievements,
   type User, type InsertUser, type Question, type InsertQuestion,
   type UserProgress, type InsertUserProgress, type StudyPlan, type InsertStudyPlan,
   type CommunityPost, type InsertCommunityPost, type PostReply, type InsertPostReply,
   type OsceStation, type InsertOsceStation, type UserOsceAttempt, type InsertUserOsceAttempt,
   type StudySession, type InsertStudySession, type UserPreferences, type InsertUserPreferences,
-  type PerformanceMetrics, type InsertPerformanceMetrics, type StudyReminder, type InsertStudyReminder
+  type PerformanceMetrics, type InsertPerformanceMetrics, type StudyReminder, type InsertStudyReminder,
+  type GlobalScoreboard, type InsertGlobalScoreboard, type WeeklyLeaderboard, type InsertWeeklyLeaderboard,
+  type CountryStats, type InsertCountryStats, type Achievement, type InsertAchievement,
+  type UserAchievement, type InsertUserAchievement
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, sql } from "drizzle-orm";
@@ -73,6 +77,15 @@ export interface IStorage {
   
   getUserStudyReminders(userId: number, filters?: { upcoming?: boolean; sent?: boolean }): Promise<StudyReminder[]>;
   createStudyReminder(reminder: InsertStudyReminder): Promise<StudyReminder>;
+
+  // Global Scoreboard
+  getGlobalScoreboard(filters?: { category?: string; country?: string; limit?: number }): Promise<(GlobalScoreboard & { username: string; country: string; city: string; flagEmoji: string })[]>;
+  getWeeklyLeaderboard(filters?: { country?: string; limit?: number }): Promise<(WeeklyLeaderboard & { username: string; country: string; flagEmoji: string })[]>;
+  getCountryStats(): Promise<CountryStats[]>;
+  updateUserLocation(userId: number, location: { country: string; city: string; flagEmoji: string }): Promise<void>;
+  updateScoreboard(userId: number, scoreData: { questionsAnswered: number; correctAnswers: number; studyTime: number; category: string }): Promise<void>;
+  createAchievement(achievement: InsertAchievement): Promise<Achievement>;
+  getUserAchievements(userId: number): Promise<(UserAchievement & { achievement: Achievement })[]>;
 }
 
 export class MemStorage implements IStorage {

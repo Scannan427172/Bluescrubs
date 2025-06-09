@@ -10,6 +10,11 @@ export const users = pgTable("users", {
   currentStage: text("current_stage").notNull().default("onboarding"), // onboarding, plab1, plab2, nhs
   studyStreak: integer("study_streak").notNull().default(0),
   totalPoints: integer("total_points").notNull().default(0),
+  country: text("country"),
+  city: text("city"),
+  flagEmoji: text("flag_emoji"),
+  timezone: text("timezone"),
+  isLocationPublic: boolean("is_location_public").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -362,6 +367,89 @@ export const insertUserCulturalProgressSchema = createInsertSchema(userCulturalP
   score: true,
 });
 
+// Global Scoreboard System
+export const globalScoreboard = pgTable("global_scoreboard", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  totalScore: integer("total_score").notNull().default(0),
+  questionsAnswered: integer("questions_answered").notNull().default(0),
+  correctAnswers: integer("correct_answers").notNull().default(0),
+  accuracyRate: real("accuracy_rate").notNull().default(0),
+  studyStreak: integer("study_streak").notNull().default(0),
+  totalStudyTime: integer("total_study_time").notNull().default(0), // in minutes
+  plabCategory: text("plab_category").notNull().default("plab1"), // plab1, plab2, both
+  rank: integer("rank").notNull().default(0),
+  countryRank: integer("country_rank").notNull().default(0),
+  lastActive: timestamp("last_active").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const weeklyLeaderboard = pgTable("weekly_leaderboard", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  weekStart: date("week_start").notNull(),
+  weekEnd: date("week_end").notNull(),
+  questionsThisWeek: integer("questions_this_week").notNull().default(0),
+  correctThisWeek: integer("correct_this_week").notNull().default(0),
+  studyTimeThisWeek: integer("study_time_this_week").notNull().default(0), // in minutes
+  weeklyRank: integer("weekly_rank").notNull().default(0),
+  countryWeeklyRank: integer("country_weekly_rank").notNull().default(0),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const achievements = pgTable("achievements", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  category: text("category").notNull(), // study_streak, accuracy, questions, time, special
+  requirement: jsonb("requirement").notNull(), // { type: "streak", value: 7 }
+  badgeIcon: text("badge_icon").notNull(),
+  badgeColor: text("badge_color").notNull(),
+  points: integer("points").notNull().default(0),
+  isRare: boolean("is_rare").notNull().default(false),
+});
+
+export const userAchievements = pgTable("user_achievements", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  achievementId: integer("achievement_id").notNull().references(() => achievements.id),
+  unlockedAt: timestamp("unlocked_at").defaultNow().notNull(),
+  isDisplayed: boolean("is_displayed").notNull().default(true),
+});
+
+export const studyGroups = pgTable("study_groups", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description"),
+  creatorId: integer("creator_id").notNull().references(() => users.id),
+  isPublic: boolean("is_public").notNull().default(true),
+  maxMembers: integer("max_members").notNull().default(50),
+  currentMembers: integer("current_members").notNull().default(1),
+  countryFilter: text("country_filter"), // null = all countries
+  plabStage: text("plab_stage"), // plab1, plab2, both
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const studyGroupMembers = pgTable("study_group_members", {
+  id: serial("id").primaryKey(),
+  groupId: integer("group_id").notNull().references(() => studyGroups.id),
+  userId: integer("user_id").notNull().references(() => users.id),
+  role: text("role").notNull().default("member"), // member, moderator, admin
+  joinedAt: timestamp("joined_at").defaultNow().notNull(),
+});
+
+export const countryStats = pgTable("country_stats", {
+  id: serial("id").primaryKey(),
+  country: text("country").notNull().unique(),
+  flagEmoji: text("flag_emoji").notNull(),
+  totalUsers: integer("total_users").notNull().default(0),
+  activeUsers: integer("active_users").notNull().default(0), // active in last 30 days
+  averageScore: real("average_score").notNull().default(0),
+  topUserScore: integer("top_user_score").notNull().default(0),
+  totalQuestionsAnswered: integer("total_questions_answered").notNull().default(0),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 // Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -395,3 +483,82 @@ export const insertStudySessionSchema = createInsertSchema(studySessions);
 export const insertUserPreferencesSchema = createInsertSchema(userPreferences);
 export const insertPerformanceMetricsSchema = createInsertSchema(performanceMetrics);
 export const insertStudyReminderSchema = createInsertSchema(studyReminders);
+
+// Global Scoreboard Schemas
+export const insertGlobalScoreboardSchema = createInsertSchema(globalScoreboard).pick({
+  userId: true,
+  totalScore: true,
+  questionsAnswered: true,
+  correctAnswers: true,
+  accuracyRate: true,
+  studyStreak: true,
+  totalStudyTime: true,
+  plabCategory: true,
+});
+
+export const insertWeeklyLeaderboardSchema = createInsertSchema(weeklyLeaderboard).pick({
+  userId: true,
+  weekStart: true,
+  weekEnd: true,
+  questionsThisWeek: true,
+  correctThisWeek: true,
+  studyTimeThisWeek: true,
+});
+
+export const insertAchievementSchema = createInsertSchema(achievements).pick({
+  name: true,
+  description: true,
+  category: true,
+  requirement: true,
+  badgeIcon: true,
+  badgeColor: true,
+  points: true,
+  isRare: true,
+});
+
+export const insertUserAchievementSchema = createInsertSchema(userAchievements).pick({
+  userId: true,
+  achievementId: true,
+});
+
+export const insertStudyGroupSchema = createInsertSchema(studyGroups).pick({
+  name: true,
+  description: true,
+  creatorId: true,
+  isPublic: true,
+  maxMembers: true,
+  countryFilter: true,
+  plabStage: true,
+});
+
+export const insertStudyGroupMemberSchema = createInsertSchema(studyGroupMembers).pick({
+  groupId: true,
+  userId: true,
+  role: true,
+});
+
+export const insertCountryStatsSchema = createInsertSchema(countryStats).pick({
+  country: true,
+  flagEmoji: true,
+  totalUsers: true,
+  activeUsers: true,
+  averageScore: true,
+  topUserScore: true,
+  totalQuestionsAnswered: true,
+});
+
+// Global Scoreboard Types
+export type GlobalScoreboard = typeof globalScoreboard.$inferSelect;
+export type InsertGlobalScoreboard = z.infer<typeof insertGlobalScoreboardSchema>;
+export type WeeklyLeaderboard = typeof weeklyLeaderboard.$inferSelect;
+export type InsertWeeklyLeaderboard = z.infer<typeof insertWeeklyLeaderboardSchema>;
+export type Achievement = typeof achievements.$inferSelect;
+export type InsertAchievement = z.infer<typeof insertAchievementSchema>;
+export type UserAchievement = typeof userAchievements.$inferSelect;
+export type InsertUserAchievement = z.infer<typeof insertUserAchievementSchema>;
+export type StudyGroup = typeof studyGroups.$inferSelect;
+export type InsertStudyGroup = z.infer<typeof insertStudyGroupSchema>;
+export type StudyGroupMember = typeof studyGroupMembers.$inferSelect;
+export type InsertStudyGroupMember = z.infer<typeof insertStudyGroupMemberSchema>;
+export type CountryStats = typeof countryStats.$inferSelect;
+export type InsertCountryStats = z.infer<typeof insertCountryStatsSchema>;
