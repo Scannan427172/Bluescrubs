@@ -14,7 +14,7 @@ import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } f
 import { getSourcesForQuestion } from "@shared/educational-sources";
 import { GMC_QUESTION_BANK, type GMCQuestion, type GMCCategory } from "@shared/gmc-question-bank";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
-import { type NeuroAtypicalType } from "@shared/neurodiversity-schema";
+import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
 
 
 
@@ -310,7 +310,7 @@ export default function PLAB1New() {
     { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: getQuestionCount('clinical-pharmacology') }
   ];
 
-  // Timer effect
+  // Timer effect with neurodiversity accommodations
   useEffect(() => {
     if (sessionStarted && timeSpent >= 0) {
       const timer = setInterval(() => {
@@ -319,6 +319,33 @@ export default function PLAB1New() {
       return () => clearInterval(timer);
     }
   }, [sessionStarted]);
+
+  // Calculate adjusted time limit based on accommodations
+  const getAdjustedTimeLimit = (baseTime: number) => {
+    if (accommodations.extendedTime) {
+      return Math.floor(baseTime * accommodations.timeMultiplier);
+    }
+    return baseTime;
+  };
+
+  // Visual cues for accessibility
+  const getVisualCues = () => {
+    if (!accommodations.visualCues) return null;
+    
+    return (
+      <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+        <div className="flex items-center gap-2 text-sm text-blue-700">
+          <Brain className="w-4 h-4" />
+          <span className="font-medium">Study Tips:</span>
+        </div>
+        <ul className="mt-2 text-sm text-blue-600 space-y-1">
+          <li>• Read each option carefully before selecting</li>
+          <li>• Look for key clinical terms in the question</li>
+          <li>• Consider the patient's age and presentation</li>
+        </ul>
+      </div>
+    );
+  };
 
   // Start practice session function
   const startPractice = (questionCount: number) => {
@@ -640,6 +667,44 @@ export default function PLAB1New() {
           </CardContent>
         </Card>
 
+        {/* Neurodiversity Information */}
+        {neuroAccommodations.length > 0 && !neuroAccommodations.includes('none') && (
+          <Card className="mb-6 bg-green-50 border-green-200">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3 mb-2">
+                <Brain className="w-5 h-5 text-green-600" />
+                <h3 className="font-semibold text-green-800">Active Accessibility Settings</h3>
+              </div>
+              <p className="text-sm text-green-700 mb-3">
+                Your learning accommodations are active: {neuroAccommodations
+                  .filter(acc => acc !== 'none')
+                  .map(acc => {
+                    const accommodation = NEURO_ACCOMMODATIONS.find(na => na.id === acc);
+                    return accommodation?.name;
+                  })
+                  .filter(Boolean)
+                  .join(', ')}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {accommodations.extendedTime && (
+                  <Badge variant="outline" className="text-xs bg-white">
+                    {accommodations.timeMultiplier}x Extended Time
+                  </Badge>
+                )}
+                {accommodations.largerButtons && (
+                  <Badge variant="outline" className="text-xs bg-white">Larger Buttons</Badge>
+                )}
+                {accommodations.visualCues && (
+                  <Badge variant="outline" className="text-xs bg-white">Visual Cues</Badge>
+                )}
+                {accommodations.audioSupport && (
+                  <Badge variant="outline" className="text-xs bg-white">Audio Support</Badge>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Practice Options */}
         <Card>
           <CardHeader>
@@ -748,6 +813,9 @@ export default function PLAB1New() {
         </div>
       </div>
 
+      {/* Visual Cues for Neurodiversity Support */}
+      {getVisualCues()}
+
       {/* Language Controls - Mobile Friendly Position */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4 p-3 bg-gray-50 rounded-lg">
         <div className="flex items-center gap-2">
@@ -800,7 +868,7 @@ export default function PLAB1New() {
             <Badge variant="secondary">{currentQuestion.category}</Badge>
             <Badge variant="outline">Intermediate</Badge>
           </div>
-          <CardTitle className="text-lg leading-relaxed">
+          <CardTitle className={`${questionStyles} leading-relaxed ${accommodations.keywordHighlighting ? 'font-medium' : ''}`}>
             {currentQuestion.stem}
             {showTranslation && currentLanguage !== 'en' && (
               <div className="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r">
@@ -827,7 +895,7 @@ export default function PLAB1New() {
                   />
                   <Label 
                     htmlFor={`option-${index}`} 
-                    className={`flex-1 cursor-pointer p-3 rounded-lg border ${
+                    className={`flex-1 cursor-pointer ${accommodations.largerButtons ? 'p-4' : 'p-3'} rounded-lg border ${questionStyles} ${
                       showExplanation && index === currentQuestion.correctAnswer
                         ? 'bg-green-50 border-green-200 text-green-800'
                         : showExplanation && index === parseInt(selectedAnswer) && index !== currentQuestion.correctAnswer
@@ -957,7 +1025,7 @@ export default function PLAB1New() {
           variant="outline" 
           onClick={previousQuestion}
           disabled={currentQuestionIndex === 0}
-          className="gap-2"
+          className={`gap-2 ${buttonStyles}`}
         >
           <ArrowLeft className="w-4 h-4" />
           Previous
@@ -967,7 +1035,7 @@ export default function PLAB1New() {
           <Button 
             onClick={submitAnswer}
             disabled={!selectedAnswer}
-            className="gap-2"
+            className={`gap-2 ${buttonStyles}`}
           >
             Submit Answer
           </Button>
@@ -975,7 +1043,7 @@ export default function PLAB1New() {
           <Button 
             onClick={nextQuestion}
             disabled={currentQuestionIndex === sessionQuestions.length - 1}
-            className="gap-2"
+            className={`gap-2 ${buttonStyles}`}
           >
             Next Question
             <ArrowRight className="w-4 h-4" />
