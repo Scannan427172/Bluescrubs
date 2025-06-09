@@ -142,21 +142,31 @@ const generateRealisticStem = (specialty: string, scenario: string, index: numbe
   const age = 20 + (index % 60);
   const gender = index % 2 === 0 ? 'man' : 'woman';
   
-  const stemTemplates = {
+  const stemTemplates: { [key: string]: string[] } = {
     'cardiovascular': [
-      `A ${age}-year-old ${gender} presents to A&E with ${scenario === 'acute coronary syndrome' ? 'chest pain and shortness of breath' : 'palpitations and dizziness'}. ECG shows ${index % 3 === 0 ? 'ST elevation' : 'atrial fibrillation'}. What is the most appropriate management?`,
-      `A ${age}-year-old patient with known ${scenario} presents with worsening symptoms. Which investigation would be most helpful?`,
+      `A ${age}-year-old ${gender} presents to A&E with ${scenario === 'acute coronary syndrome' ? 'crushing central chest pain for 2 hours' : 'palpitations and dizziness'}. ECG shows ${index % 3 === 0 ? 'ST elevation in leads II, III, aVF' : 'atrial fibrillation with rapid ventricular response'}. What is the most appropriate immediate management?`,
+      `A ${age}-year-old patient with known ${scenario} presents with worsening symptoms. Blood pressure is ${140 + (index % 40)}/90 mmHg. Which investigation would be most helpful?`,
     ],
     'respiratory': [
-      `A ${age}-year-old ${gender} with a history of smoking presents with ${scenario === 'COPD' ? 'progressive dyspnoea' : 'acute breathlessness'}. Chest X-ray shows ${index % 2 === 0 ? 'hyperinflation' : 'consolidation'}. What is the most likely diagnosis?`,
-      `A patient with known ${scenario} requires treatment optimization. Which medication would be most appropriate?`,
+      `A ${age}-year-old ${gender} with a 30-pack-year smoking history presents with ${scenario === 'COPD' ? 'progressive dyspnoea over 6 months' : 'acute onset breathlessness'}. Chest X-ray shows ${index % 2 === 0 ? 'hyperinflation and flattened diaphragms' : 'right lower lobe consolidation'}. What is the most likely diagnosis?`,
+      `A patient with known ${scenario} requires treatment optimization. Current FEV1 is ${30 + (index % 40)}% predicted. Which medication would be most appropriate?`,
+    ],
+    'psychiatry': [
+      `A ${age}-year-old ${gender} presents with ${scenario === 'depression' ? 'persistent low mood, anhedonia, and sleep disturbance for 6 weeks' : 'auditory hallucinations and paranoid delusions'}. Mental state examination reveals ${index % 2 === 0 ? 'psychomotor retardation and poor concentration' : 'formal thought disorder and inappropriate affect'}. What is the most appropriate management?`,
+      `A ${age}-year-old patient with known ${scenario} presents for review. They report ${index % 3 === 0 ? 'medication side effects' : 'worsening symptoms'}. What is the next step?`,
     ],
     'gastroenterology': [
-      `A ${age}-year-old presents with ${scenario === 'IBD' ? 'bloody diarrhoea' : 'abdominal pain and nausea'}. Examination reveals ${index % 2 === 0 ? 'tenderness' : 'distension'}. What is the next step?`,
+      `A ${age}-year-old presents with ${scenario === 'IBD' ? '6-week history of bloody diarrhoea, weight loss, and abdominal cramping' : 'epigastric pain and early satiety'}. Examination reveals ${index % 2 === 0 ? 'right iliac fossa tenderness' : 'epigastric tenderness'}. What is the most appropriate next step?`,
+    ],
+    'neurology': [
+      `A ${age}-year-old ${gender} presents with ${scenario === 'stroke' ? 'sudden onset left-sided weakness and dysphasia' : 'progressive headache with visual disturbance'}. Neurological examination shows ${index % 2 === 0 ? 'upper motor neuron signs' : 'papilloedema'}. What is the most urgent investigation?`,
+    ],
+    'endocrinology': [
+      `A ${age}-year-old ${gender} presents with ${scenario === 'diabetes mellitus' ? 'polyuria, polydipsia, and weight loss' : 'heat intolerance and palpitations'}. Blood tests show ${index % 2 === 0 ? 'HbA1c 85 mmol/mol' : 'TSH <0.1 mU/L, free T4 45 pmol/L'}. What is the most appropriate management?`,
     ]
   };
   
-  const templates = stemTemplates[specialty] || [`A ${age}-year-old ${gender} presents with symptoms related to ${scenario}. What is the most appropriate management?`];
+  const templates = stemTemplates[specialty] || [`A ${age}-year-old ${gender} presents with clinical features of ${scenario}. What is the most appropriate management?`];
   return templates[index % templates.length];
 };
 
@@ -164,7 +174,7 @@ const generateRealisticStem = (specialty: string, scenario: string, index: numbe
 const generateRealisticOptions = (specialty: string, scenario: string, index: number): string[] => {
   const optionSets = {
     'cardiovascular': [
-      ['Primary PCI', 'Thrombolysis', 'Dual antiplatelet therapy', 'Beta-blocker', 'Observation'],
+      ['Primary PCI', 'Thrombolysis', 'Dual antiplatelet therapy', 'Beta-blocker therapy', 'Conservative management'],
       ['Echocardiogram', 'Cardiac catheterization', 'Exercise stress test', 'Holter monitor', 'CT coronary angiogram'],
       ['Metoprolol', 'Amlodipine', 'Ramipril', 'Atorvastatin', 'Aspirin'],
     ],
@@ -172,11 +182,31 @@ const generateRealisticOptions = (specialty: string, scenario: string, index: nu
       ['Salbutamol inhaler', 'Prednisolone', 'Antibiotics', 'Oxygen therapy', 'Chest physiotherapy'],
       ['Chest X-ray', 'CT pulmonary angiogram', 'Arterial blood gas', 'Spirometry', 'Bronchoscopy'],
       ['Asthma', 'COPD', 'Pneumonia', 'Pulmonary embolism', 'Lung cancer'],
+    ],
+    'psychiatry': [
+      ['Cognitive behavioural therapy', 'Selective serotonin reuptake inhibitor', 'Lithium carbonate', 'Crisis intervention team', 'Inpatient psychiatric admission'],
+      ['Mental state examination', 'Beck Depression Inventory', 'CT head scan', 'Thyroid function tests', 'Vitamin B12 and folate'],
+      ['Major depressive disorder', 'Bipolar affective disorder', 'Schizophrenia', 'Generalized anxiety disorder', 'Substance use disorder'],
+    ],
+    'gastroenterology': [
+      ['Proton pump inhibitor', 'H. pylori eradication therapy', 'Upper GI endoscopy', 'Colonoscopy', 'Conservative management'],
+      ['Inflammatory bowel disease', 'Peptic ulcer disease', 'Gastroesophageal reflux', 'Colorectal carcinoma', 'Irritable bowel syndrome'],
+      ['Mesalazine', 'Prednisolone', 'Infliximab', 'Methotrexate', 'Azathioprine'],
+    ],
+    'neurology': [
+      ['Alteplase thrombolysis', 'Aspirin and clopidogrel', 'CT angiogram', 'MRI brain with DWI', 'Carotid endarterectomy'],
+      ['Stroke', 'Transient ischaemic attack', 'Migraine with aura', 'Tension headache', 'Subarachnoid haemorrhage'],
+      ['Levetiracetam', 'Carbamazepine', 'Sodium valproate', 'Phenytoin', 'Lamotrigine'],
+    ],
+    'endocrinology': [
+      ['Metformin', 'Insulin therapy', 'Gliclazide', 'Lifestyle modification', 'Bariatric surgery referral'],
+      ['Type 1 diabetes mellitus', 'Type 2 diabetes mellitus', 'Diabetic ketoacidosis', 'Hyperosmolar hyperglycaemic state', 'Gestational diabetes'],
+      ['Levothyroxine', 'Carbimazole', 'Radioiodine therapy', 'Thyroid surgery', 'Conservative monitoring'],
     ]
   };
   
   const sets = optionSets[specialty] || [
-    ['Treatment A', 'Treatment B', 'Treatment C', 'Treatment D', 'Treatment E']
+    ['Supportive care', 'Further investigation', 'Specialist referral', 'Medication therapy', 'Surgical intervention']
   ];
   
   return sets[index % sets.length];
@@ -759,7 +789,7 @@ export default function PLAB1New() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <Badge variant="secondary">{currentQuestion.category}</Badge>
-            <Badge variant="outline">{currentQuestion.difficulty}</Badge>
+            <Badge variant="outline">Intermediate</Badge>
           </div>
           <CardTitle className="text-lg leading-relaxed">
             {currentQuestion.stem}
