@@ -55,10 +55,10 @@ export function Top10Leaderboard() {
   }
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Trophy className="h-5 w-5 text-yellow-500" />;
-    if (rank === 2) return <Medal className="h-5 w-5 text-gray-400" />;
-    if (rank === 3) return <Award className="h-5 w-5 text-amber-600" />;
-    return <span className="text-sm font-medium text-gray-500">#{rank}</span>;
+    if (rank === 1) return <Trophy className="h-5 w-5 md:h-6 md:w-6 text-yellow-500" />;
+    if (rank === 2) return <Medal className="h-5 w-5 md:h-6 md:w-6 text-gray-500" />;
+    if (rank === 3) return <Award className="h-5 w-5 md:h-6 md:w-6 text-amber-600" />;
+    return <span className="text-sm md:text-base font-bold text-gray-800">#{rank}</span>;
   };
 
   return (
@@ -96,14 +96,14 @@ export function Top10Leaderboard() {
                 <div className="flex items-center gap-1 md:gap-2 min-w-0 flex-1">
                   <span className="text-base md:text-xl flex-shrink-0">{user.flagEmoji}</span>
                   <div className="min-w-0 flex-1">
-                    <div className="font-medium text-gray-900 text-xs md:text-sm truncate">{user.username}</div>
-                    <div className="text-xs text-gray-600 truncate">{user.city}, {user.country}</div>
+                    <div className="font-medium text-gray-900 text-sm md:text-base truncate">{user.username}</div>
+                    <div className="text-sm text-gray-700 truncate">{user.city}, {user.country}</div>
                   </div>
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
-                <div className="font-bold text-blue-600 text-xs md:text-sm">{user.totalScore.toLocaleString()}</div>
-                <div className="text-xs text-gray-500">{user.accuracyRate}% accuracy</div>
+                <div className="font-bold text-blue-600 text-sm md:text-base">{user.totalScore.toLocaleString()}</div>
+                <div className="text-sm text-gray-700">{user.accuracyRate}% accuracy</div>
               </div>
             </div>
           ))}
