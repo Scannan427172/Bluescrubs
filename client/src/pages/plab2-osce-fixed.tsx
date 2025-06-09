@@ -1,18 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 import { 
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
-  ClipboardList, Heart, Brain, AlertTriangle
+  ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft
 } from "lucide-react";
 import { PLAB2_OSCE_STATIONS, OSCE_STATION_TYPES, OSCE_STATION_STATS, type OSCEStation } from "@shared/plab2-osce-stations";
-import { Top10Leaderboard } from "@/components/top-10-leaderboard";
 
 export default function Plab2Osce() {
   const [activeStation, setActiveStation] = useState<OSCEStation | null>(null);
@@ -25,7 +23,7 @@ export default function Plab2Osce() {
   );
 
   const handleStationComplete = (stationId: string, score: number) => {
-    setCompletedStations(prev => [...prev.filter(id => id !== stationId), stationId]);
+    setCompletedStations(prev => [...prev, stationId]);
     setStationScores(prev => ({ ...prev, [stationId]: score }));
     setActiveStation(null);
   };
@@ -65,18 +63,41 @@ export default function Plab2Osce() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">PLAB 2 OSCE Practice</h1>
-          <p className="text-gray-600">16-20 clinical stations • 8-10 minutes each • History, Examination, Explanation, Ethics, Acute Care</p>
+          <div className="flex items-center gap-3 mb-4">
+            <Stethoscope className="w-8 h-8 text-blue-600" />
+            <h1 className="text-3xl font-bold text-gray-900">PLAB 2 OSCE Practice</h1>
+          </div>
+          <p className="text-lg text-gray-600">Comprehensive OSCE practice with 16-20 clinical stations covering history taking, examination, explanation, ethics, and acute care scenarios</p>
+          <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <BookOpen className="w-5 h-5 text-blue-600" />
+              <span className="font-semibold text-blue-800">Official PLAB 2 Format</span>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4 text-sm text-blue-700">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                <span>8-10 minutes per station</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>16-20 total stations</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4" />
+                <span>Pass mark: 50%</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Progress Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">Overall Progress</CardTitle>
+              <CardTitle className="text-lg text-gray-900">Overall Progress</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-blue-600 mb-2">
@@ -89,7 +110,7 @@ export default function Plab2Osce() {
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">Average Score</CardTitle>
+              <CardTitle className="text-lg text-gray-900">Average Score</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-green-600 mb-2">
@@ -103,12 +124,12 @@ export default function Plab2Osce() {
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">Station Types</CardTitle>
+              <CardTitle className="text-lg text-gray-900">Station Types</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 {Object.entries(OSCE_STATION_STATS.byType).map(([type, count]) => (
-                  <div key={type} className="flex justify-between text-sm">
+                  <div key={type} className="flex justify-between text-sm text-gray-700">
                     <span className="capitalize">{OSCE_STATION_TYPES[type as keyof typeof OSCE_STATION_TYPES]}</span>
                     <span className="font-medium">{count}</span>
                   </div>
@@ -119,10 +140,10 @@ export default function Plab2Osce() {
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg">Exam Format</CardTitle>
+              <CardTitle className="text-lg text-gray-900">Exam Format</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm text-gray-700">
                 <div className="flex justify-between">
                   <span>Duration:</span>
                   <span className="font-medium">8-10 min/station</span>
@@ -142,14 +163,14 @@ export default function Plab2Osce() {
 
         {/* Station Type Filters */}
         <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="all">All ({PLAB2_OSCE_STATIONS.length})</TabsTrigger>
-            <TabsTrigger value="history">History ({OSCE_STATION_STATS.byType.history})</TabsTrigger>
-            <TabsTrigger value="examination">Exam ({OSCE_STATION_STATS.byType.examination})</TabsTrigger>
-            <TabsTrigger value="explanation">Explain ({OSCE_STATION_STATS.byType.explanation})</TabsTrigger>
-            <TabsTrigger value="ethics">Ethics ({OSCE_STATION_STATS.byType.ethics})</TabsTrigger>
-            <TabsTrigger value="acute-care">Acute ({OSCE_STATION_STATS.byType['acute-care']})</TabsTrigger>
-            <TabsTrigger value="practical-skills">Skills ({OSCE_STATION_STATS.byType['practical-skills']})</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-7 gap-1">
+            <TabsTrigger value="all" className="text-xs lg:text-sm text-gray-700">All ({PLAB2_OSCE_STATIONS.length})</TabsTrigger>
+            <TabsTrigger value="history" className="text-xs lg:text-sm text-gray-700">History ({OSCE_STATION_STATS.byType.history})</TabsTrigger>
+            <TabsTrigger value="examination" className="text-xs lg:text-sm text-gray-700">Exam ({OSCE_STATION_STATS.byType.examination})</TabsTrigger>
+            <TabsTrigger value="explanation" className="text-xs lg:text-sm text-gray-700">Explain ({OSCE_STATION_STATS.byType.explanation})</TabsTrigger>
+            <TabsTrigger value="ethics" className="text-xs lg:text-sm text-gray-700">Ethics ({OSCE_STATION_STATS.byType.ethics})</TabsTrigger>
+            <TabsTrigger value="acute-care" className="text-xs lg:text-sm text-gray-700">Acute ({OSCE_STATION_STATS.byType['acute-care']})</TabsTrigger>
+            <TabsTrigger value="practical-skills" className="text-xs lg:text-sm text-gray-700">Skills ({OSCE_STATION_STATS.byType['practical-skills']})</TabsTrigger>
           </TabsList>
 
           <TabsContent value={selectedType} className="mt-6">
@@ -174,7 +195,7 @@ export default function Plab2Osce() {
                           </div>
                         )}
                       </div>
-                      <CardTitle className="text-lg leading-tight">{station.title}</CardTitle>
+                      <CardTitle className="text-lg leading-tight text-gray-900">{station.title}</CardTitle>
                       <div className="flex flex-wrap gap-1">
                         <Badge variant="secondary" className="text-xs">{OSCE_STATION_TYPES[station.type]}</Badge>
                         <Badge className={`text-xs ${getDifficultyColor(station.difficulty)}`}>
@@ -235,6 +256,16 @@ function OSCEStationView({
   const [userNotes, setUserNotes] = useState('');
   const [selfScore, setSelfScore] = useState(0);
 
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isRunning && timeRemaining > 0) {
+      interval = setInterval(() => {
+        setTimeRemaining(prev => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isRunning, timeRemaining]);
+
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -251,11 +282,12 @@ function OSCEStationView({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <Button variant="outline" onClick={onBack}>
-            ← Back to Stations
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Stations
           </Button>
           
           <div className="flex items-center gap-4">
@@ -276,7 +308,7 @@ function OSCEStationView({
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-2xl mb-2">Station {station.stationNumber}: {station.title}</CardTitle>
+                <CardTitle className="text-2xl mb-2 text-gray-900">Station {station.stationNumber}: {station.title}</CardTitle>
                 <div className="flex gap-2">
                   <Badge variant="secondary">{OSCE_STATION_TYPES[station.type]}</Badge>
                   <Badge className={getDifficultyColor(station.difficulty)}>{station.difficulty}</Badge>
@@ -287,7 +319,7 @@ function OSCEStationView({
           </CardHeader>
         </Card>
 
-        <Tabs value={currentSection} onValueChange={(value) => setCurrentSection(value as any)} className="w-full">
+        <Tabs value={currentSection} onValueChange={setCurrentSection as any} className="w-full">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="instructions">Instructions</TabsTrigger>
             <TabsTrigger value="scenario">Scenario</TabsTrigger>
@@ -298,17 +330,17 @@ function OSCEStationView({
           <TabsContent value="instructions" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Candidate Instructions</CardTitle>
+                <CardTitle className="text-gray-900">Candidate Instructions</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="leading-relaxed">{station.instructions.candidate}</p>
+                <p className="leading-relaxed text-gray-700">{station.instructions.candidate}</p>
               </CardContent>
             </Card>
             
             {station.instructions.standardizedPatient && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Patient Information</CardTitle>
+                  <CardTitle className="text-gray-900">Patient Information</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="leading-relaxed text-gray-700">{station.instructions.standardizedPatient}</p>
@@ -320,26 +352,10 @@ function OSCEStationView({
           <TabsContent value="scenario" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Clinical Scenario</CardTitle>
+                <CardTitle className="text-gray-900">Clinical Scenario</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="leading-relaxed text-lg">{station.scenario}</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Key Learning Points</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {station.keyLearningPoints.map((point, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <Star className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="leading-relaxed text-gray-700">{station.scenario}</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -348,13 +364,13 @@ function OSCEStationView({
             {station.markingCriteria.map((criteria, index) => (
               <Card key={index}>
                 <CardHeader>
-                  <CardTitle>{criteria.category} ({criteria.maxMarks} marks)</CardTitle>
+                  <CardTitle className="text-lg text-gray-900">{criteria.category} ({criteria.maxMarks} marks)</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
                     {criteria.criteria.map((criterion, criterionIndex) => (
-                      <li key={criterionIndex} className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <li key={criterionIndex} className="flex items-start gap-2 text-gray-700">
+                        <span className="text-blue-600 font-medium">•</span>
                         <span>{criterion}</span>
                       </li>
                     ))}
@@ -362,57 +378,43 @@ function OSCEStationView({
                 </CardContent>
               </Card>
             ))}
-            
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-red-600">Common Mistakes</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {station.commonMistakes.map((mistake, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
-                      <span>{mistake}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
           </TabsContent>
 
           <TabsContent value="feedback" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Self-Assessment</CardTitle>
+                <CardTitle className="text-gray-900">Your Notes</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Textarea 
+                  placeholder="Record your approach, observations, and key points..."
+                  value={userNotes}
+                  onChange={(e) => setUserNotes(e.target.value)}
+                  className="min-h-32"
+                />
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-gray-900">Self-Assessment</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Your Notes</label>
-                  <Textarea
-                    className="w-full p-3 border border-gray-300 rounded-lg"
-                    rows={6}
-                    placeholder="Reflect on your performance, what went well, what could be improved..."
-                    value={userNotes}
-                    onChange={(e) => setUserNotes(e.target.value)}
+                  <label className="text-sm font-medium text-gray-700">Self-Score (out of 20):</label>
+                  <input 
+                    type="number" 
+                    min="0" 
+                    max="20" 
+                    value={selfScore}
+                    onChange={(e) => setSelfScore(parseInt(e.target.value) || 0)}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
                 
-                <div>
-                  <label className="block text-sm font-medium mb-2">Self Score (0-20)</label>
-                  <Input
-                    type="number"
-                    min="0"
-                    max="20"
-                    className="w-24"
-                    value={selfScore}
-                    onChange={(e) => setSelfScore(Number(e.target.value))}
-                  />
-                </div>
-
-                <Button
+                <Button 
                   onClick={() => onComplete(station.id, selfScore)}
                   className="w-full"
-                  disabled={selfScore === 0}
                 >
                   Complete Station
                 </Button>
@@ -420,11 +422,6 @@ function OSCEStationView({
             </Card>
           </TabsContent>
         </Tabs>
-
-        {/* Global Leaderboard */}
-        <div className="mt-8">
-          <Top10Leaderboard />
-        </div>
       </div>
     </div>
   );

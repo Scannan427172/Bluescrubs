@@ -1,23 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { Textarea } from "@/components/ui/textarea";
 import { 
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
-  ClipboardList, Heart, Brain, AlertTriangle
+  ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft
 } from "lucide-react";
 import { PLAB2_OSCE_STATIONS, OSCE_STATION_TYPES, OSCE_STATION_STATS, type OSCEStation } from "@shared/plab2-osce-stations";
-
-// Mock user ID for demo
-const DEMO_USER_ID = 1;
 
 export default function Plab2Osce() {
   const [activeStation, setActiveStation] = useState<OSCEStation | null>(null);
   const [selectedType, setSelectedType] = useState<string>('all');
-  const [completedStations, setCompletedStations] = useState<Set<string>>(new Set());
+  const [completedStations, setCompletedStations] = useState<string[]>([]);
   const [stationScores, setStationScores] = useState<Record<string, number>>({});
 
   const filteredStations = PLAB2_OSCE_STATIONS.filter(station => 
@@ -25,7 +23,7 @@ export default function Plab2Osce() {
   );
 
   const handleStationComplete = (stationId: string, score: number) => {
-    setCompletedStations(prev => new Set([...prev, stationId]));
+    setCompletedStations(prev => [...prev, stationId]);
     setStationScores(prev => ({ ...prev, [stationId]: score }));
     setActiveStation(null);
   };
@@ -65,11 +63,34 @@ export default function Plab2Osce() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">PLAB 2 OSCE Practice</h1>
-          <p className="text-gray-600">16-20 clinical stations • 8-10 minutes each • History, Examination, Explanation, Ethics, Acute Care</p>
+          <div className="flex items-center gap-3 mb-4">
+            <Stethoscope className="w-8 h-8 text-blue-600" />
+            <h1 className="text-3xl font-bold text-gray-900">PLAB 2 OSCE Practice</h1>
+          </div>
+          <p className="text-lg text-gray-600">Comprehensive OSCE practice with 16-20 clinical stations covering history taking, examination, explanation, ethics, and acute care scenarios</p>
+          <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <BookOpen className="w-5 h-5 text-blue-600" />
+              <span className="font-semibold text-blue-800">Official PLAB 2 Format</span>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4 text-sm text-blue-700">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                <span>8-10 minutes per station</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>16-20 total stations</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4" />
+                <span>Pass mark: 50%</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Progress Overview */}
@@ -142,14 +163,14 @@ export default function Plab2Osce() {
 
         {/* Station Type Filters */}
         <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="all">All ({PLAB2_OSCE_STATIONS.length})</TabsTrigger>
-            <TabsTrigger value="history">History ({OSCE_STATION_STATS.byType.history})</TabsTrigger>
-            <TabsTrigger value="examination">Exam ({OSCE_STATION_STATS.byType.examination})</TabsTrigger>
-            <TabsTrigger value="explanation">Explain ({OSCE_STATION_STATS.byType.explanation})</TabsTrigger>
-            <TabsTrigger value="ethics">Ethics ({OSCE_STATION_STATS.byType.ethics})</TabsTrigger>
-            <TabsTrigger value="acute-care">Acute ({OSCE_STATION_STATS.byType['acute-care']})</TabsTrigger>
-            <TabsTrigger value="practical-skills">Skills ({OSCE_STATION_STATS.byType['practical-skills']})</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-7 gap-1">
+            <TabsTrigger value="all" className="text-xs lg:text-sm">All ({PLAB2_OSCE_STATIONS.length})</TabsTrigger>
+            <TabsTrigger value="history" className="text-xs lg:text-sm">History ({OSCE_STATION_STATS.byType.history})</TabsTrigger>
+            <TabsTrigger value="examination" className="text-xs lg:text-sm">Exam ({OSCE_STATION_STATS.byType.examination})</TabsTrigger>
+            <TabsTrigger value="explanation" className="text-xs lg:text-sm">Explain ({OSCE_STATION_STATS.byType.explanation})</TabsTrigger>
+            <TabsTrigger value="ethics" className="text-xs lg:text-sm">Ethics ({OSCE_STATION_STATS.byType.ethics})</TabsTrigger>
+            <TabsTrigger value="acute-care" className="text-xs lg:text-sm">Acute ({OSCE_STATION_STATS.byType['acute-care']})</TabsTrigger>
+            <TabsTrigger value="practical-skills" className="text-xs lg:text-sm">Skills ({OSCE_STATION_STATS.byType['practical-skills']})</TabsTrigger>
           </TabsList>
 
           <TabsContent value={selectedType} className="mt-6">
@@ -177,7 +198,7 @@ export default function Plab2Osce() {
                       <CardTitle className="text-lg leading-tight">{station.title}</CardTitle>
                       <div className="flex flex-wrap gap-1">
                         <Badge variant="secondary" className="text-xs">{OSCE_STATION_TYPES[station.type]}</Badge>
-                        <Badge className={`text-xs ${getDifficultyColor(station.difficulty)}`}>
+                        <Badge className={`text-xs ${station.difficulty === 'foundation' ? 'bg-green-100 text-green-800' : station.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
                           {station.difficulty}
                         </Badge>
                         <Badge variant="outline" className="text-xs">{station.category}</Badge>
@@ -271,7 +292,7 @@ function OSCEStationView({
                 <CardTitle className="text-2xl mb-2">Station {station.stationNumber}: {station.title}</CardTitle>
                 <div className="flex gap-2">
                   <Badge variant="secondary">{OSCE_STATION_TYPES[station.type]}</Badge>
-                  <Badge className={getDifficultyColor(station.difficulty)}>{station.difficulty}</Badge>
+                  <Badge className={station.difficulty === 'foundation' ? 'bg-green-100 text-green-800' : station.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}>{station.difficulty}</Badge>
                   <Badge variant="outline">{station.category}</Badge>
                 </div>
               </div>
