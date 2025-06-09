@@ -13,6 +13,8 @@ import {
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 import { getSourcesForQuestion } from "@shared/educational-sources";
 import { GMC_QUESTION_BANK, type GMCQuestion, type GMCCategory } from "@shared/gmc-question-bank";
+import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
+import { type NeuroAtypicalType } from "@shared/neurodiversity-schema";
 
 
 
@@ -256,6 +258,28 @@ export default function PLAB1New() {
     weakCategories: [] as string[],
     improvementTrend: 0
   });
+
+  // Neurodiversity settings
+  const [neuroAccommodations, setNeuroAccommodations] = useState<NeuroAtypicalType[]>(['none']);
+  const { accommodations, questionStyles, buttonStyles } = useNeuroAccommodations(neuroAccommodations);
+
+  // Load neurodiversity settings from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('neuro-accommodations');
+    if (saved) {
+      try {
+        setNeuroAccommodations(JSON.parse(saved));
+      } catch (e) {
+        console.error('Failed to parse saved accommodations');
+      }
+    }
+  }, []);
+
+  // Save neurodiversity settings to localStorage
+  const handleAccommodationsChange = (accommodations: NeuroAtypicalType[]) => {
+    setNeuroAccommodations(accommodations);
+    localStorage.setItem('neuro-accommodations', JSON.stringify(accommodations));
+  };
 
   // Calculate question counts by category
   const getQuestionCount = (category: string) => {
@@ -510,9 +534,15 @@ export default function PLAB1New() {
     return (
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Target className="w-8 h-8 text-blue-600" />
-            <h1 className="text-3xl font-bold">PLAB 1 Practice (New)</h1>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <Target className="w-8 h-8 text-blue-600" />
+              <h1 className="text-3xl font-bold">PLAB 1 Practice (New)</h1>
+            </div>
+            <NeuroSettings 
+              selectedAccommodations={neuroAccommodations}
+              onAccommodationsChange={handleAccommodationsChange}
+            />
           </div>
           <p className="text-lg text-muted-foreground">
             High-quality GMC-aligned practice questions for PLAB 1 preparation
@@ -764,7 +794,7 @@ export default function PLAB1New() {
       </div>
 
       {/* Question Card */}
-      <Card className="mb-6">
+      <Card className={`mb-6 ${accommodations.reducedClutter ? 'border-2 shadow-sm' : ''}`}>
         <CardHeader>
           <div className="flex items-center justify-between">
             <Badge variant="secondary">{currentQuestion.category}</Badge>
