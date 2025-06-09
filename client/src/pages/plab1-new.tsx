@@ -933,22 +933,7 @@ export default function PLAB1New() {
         </Card>
       )}
 
-      {/* Global Leaderboard - Styled like Global Scoreboard */}
-      <div className="mt-8">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-yellow-500" />
-                Top 10 Global Leaders
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <LeaderboardDisplay />
-          </CardContent>
-        </Card>
-      </div>
+
     </div>
   );
 }
