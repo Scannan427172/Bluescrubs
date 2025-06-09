@@ -187,12 +187,8 @@ export async function seedGlobalScoreboard() {
 }
 
 // Auto-seed when file is imported
-if (require.main === module) {
-  seedGlobalScoreboard().then(() => {
-    console.log("🌟 Global scoreboard seeding completed!");
-    process.exit(0);
-  }).catch((error) => {
-    console.error("💥 Seeding failed:", error);
-    process.exit(1);
-  });
-}
+seedGlobalScoreboard().then(() => {
+  console.log("Global scoreboard seeding completed!");
+}).catch((error) => {
+  console.error("Seeding failed:", error);
+});
