@@ -785,31 +785,26 @@ export default function PLAB1New() {
 
               {/* Educational Source Links */}
               {(() => {
-                console.log('Current question:', currentQuestion.id, currentQuestion.category);
+                // Always show educational sources for medical questions
+                const categoryMapping: Record<string, string> = {
+                  'cardiovascular': 'cv001',
+                  'respiratory': 'resp001', 
+                  'gastroenterology': 'gi001',
+                  'neurology': 'neuro001',
+                  'endocrinology': 'endo001',
+                  'psychiatry': 'psych001',
+                  'obstetrics-gynaecology': 'obsgyn001',
+                  'paediatrics': 'paeds001',
+                  'surgery': 'surg001'
+                };
                 
-                // Try direct ID match first, then category-based mapping for generated questions
+                // Try direct ID match first, then use category mapping
                 let sources = getSourcesForQuestion(currentQuestion.id);
-                console.log('Direct ID sources:', sources.length);
                 
-                // If no sources found by ID, use category-based mapping
                 if (sources.length === 0) {
-                  const categoryMapping: Record<string, string> = {
-                    'cardiovascular': 'cv001',
-                    'respiratory': 'resp001', 
-                    'gastroenterology': 'gi001',
-                    'neurology': 'neuro001',
-                    'endocrinology': 'endo001',
-                    'psychiatry': 'psych001',
-                    'obstetrics-gynaecology': 'obsgyn001',
-                    'paediatrics': 'paeds001',
-                    'surgery': 'surg001'
-                  };
-                  
                   const fallbackId = categoryMapping[currentQuestion.category];
-                  console.log('Fallback ID:', fallbackId);
                   if (fallbackId) {
                     sources = getSourcesForQuestion(fallbackId);
-                    console.log('Fallback sources:', sources.length);
                   }
                 }
                 
