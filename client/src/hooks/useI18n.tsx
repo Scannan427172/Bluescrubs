@@ -4,6 +4,36 @@ export type Language =
   | 'en' | 'es' | 'fr' | 'de' | 'it' | 'pt' | 'ar' | 'hi' 
   | 'ur' | 'zh' | 'ja' | 'ko' | 'ru' | 'tr' | 'pl' | 'nl' | 'sv';
 
+export type SupportedLanguage = Language;
+
+export interface LanguageOption {
+  code: Language;
+  name: string;
+  nativeName: string;
+  flag: string;
+  rtl?: boolean;
+}
+
+export const SUPPORTED_LANGUAGES: LanguageOption[] = [
+  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧' },
+  { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
+  { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
+  { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
+  { code: 'pt', name: 'Portuguese', nativeName: 'Português', flag: '🇵🇹' },
+  { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦', rtl: true },
+  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
+  { code: 'ur', name: 'Urdu', nativeName: 'اردو', flag: '🇵🇰', rtl: true },
+  { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' },
+  { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
+  { code: 'ko', name: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
+  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺' },
+  { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
+  { code: 'pl', name: 'Polish', nativeName: 'Polski', flag: '🇵🇱' },
+  { code: 'nl', name: 'Dutch', nativeName: 'Nederlands', flag: '🇳🇱' },
+  { code: 'sv', name: 'Swedish', nativeName: 'Svenska', flag: '🇸🇪' }
+];
+
 export function useI18n() {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
   const [nativeLanguage] = useState<Language>('en');
@@ -65,6 +95,9 @@ export function useI18n() {
     isRTL: false,
     formatNumber: (num: number) => num.toString(),
     formatDate: (date: Date) => date.toLocaleDateString(),
-    getAllLanguages: () => [],
+    getAllLanguages: () => SUPPORTED_LANGUAGES,
   };
 }
+
+// Export constants for other components to use
+export { SUPPORTED_LANGUAGES };

@@ -8,7 +8,18 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { useI18n, type Language } from '@/hooks/useI18n';
+// Simple language data for the toggle component
+const SUPPORTED_LANGUAGES = [
+  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧' },
+  { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
+  { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
+  { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦' },
+  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
+  { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' },
+  { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
+  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺' }
+];
 
 interface LanguageToggleProps {
   className?: string;
@@ -21,39 +32,25 @@ export function LanguageToggle({
   variant = 'ghost',
   size = 'default' 
 }: LanguageToggleProps) {
-  const { 
-    currentLanguage, 
-    nativeLanguage, 
-    isTranslationMode, 
-    setLanguage, 
-    toggleTranslationMode,
-    t 
-  } = useI18n();
+  const [currentLanguage, setCurrentLanguage] = useState('en');
+  const [isTranslationMode, setIsTranslationMode] = useState(false);
 
   const currentLangData = SUPPORTED_LANGUAGES.find(lang => lang.code === currentLanguage);
-  const nativeLangData = SUPPORTED_LANGUAGES.find(lang => lang.code === nativeLanguage);
+
+  const handleLanguageChange = (langCode: string) => {
+    setCurrentLanguage(langCode);
+    localStorage.setItem('nhsprep_language', langCode);
+  };
+
+  const toggleTranslationMode = () => {
+    setIsTranslationMode(!isTranslationMode);
+    if (isTranslationMode) {
+      handleLanguageChange('en');
+    }
+  };
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      {/* Quick Toggle Between Native and English */}
-      {nativeLanguage !== 'en' && (
-        <Button
-          variant="outline"
-          size={size}
-          onClick={toggleTranslationMode}
-          className="flex items-center gap-2"
-          title={isTranslationMode ? 
-            `Switch to English (Exam Mode)` : 
-            `Switch to ${nativeLangData?.nativeName} (Study Mode)`
-          }
-        >
-          <Languages className="w-4 h-4" />
-          <span className="hidden sm:inline">
-            {isTranslationMode ? 'EN' : currentLangData?.code.toUpperCase()}
-          </span>
-        </Button>
-      )}
-
       {/* Language Selector */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -70,13 +67,13 @@ export function LanguageToggle({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-64 max-h-80 overflow-y-auto">
           <div className="px-2 py-1.5 text-sm font-medium text-muted-foreground">
-            {t('language', 'labels')}
+            Choose Language
           </div>
           <DropdownMenuSeparator />
           
           {/* English First */}
           <DropdownMenuItem
-            onClick={() => setLanguage('en')}
+            onClick={() => handleLanguageChange('en')}
             className={`flex items-center gap-3 ${currentLanguage === 'en' ? 'bg-accent' : ''}`}
           >
             <span className="text-lg">🇬🇧</span>
@@ -95,7 +92,7 @@ export function LanguageToggle({
           {SUPPORTED_LANGUAGES.filter(lang => lang.code !== 'en').map((language) => (
             <DropdownMenuItem
               key={language.code}
-              onClick={() => setLanguage(language.code)}
+              onClick={() => handleLanguageChange(language.code)}
               className={`flex items-center gap-3 ${currentLanguage === language.code ? 'bg-accent' : ''}`}
             >
               <span className="text-lg">{language.flag}</span>
@@ -115,27 +112,22 @@ export function LanguageToggle({
 }
 
 export function ExamModeToggle({ className = '' }: { className?: string }) {
-  const { 
-    currentLanguage, 
-    nativeLanguage, 
-    isTranslationMode, 
-    toggleTranslationMode,
-    t 
-  } = useI18n();
+  const [currentLanguage] = useState('en');
+  const [isTranslationMode, setIsTranslationMode] = useState(false);
 
-  if (nativeLanguage === 'en') return null;
+  if (currentLanguage === 'en') return null;
 
-  const nativeLangData = SUPPORTED_LANGUAGES.find(lang => lang.code === nativeLanguage);
+  const currentLangData = SUPPORTED_LANGUAGES.find(lang => lang.code === currentLanguage);
 
   return (
     <div className={`flex items-center gap-4 p-4 bg-muted/50 rounded-lg border ${className}`}>
       <div className="flex-1">
         <h4 className="font-medium text-sm">
-          {t('toggleTranslation', 'medical')}
+          Translation Mode
         </h4>
         <p className="text-xs text-muted-foreground">
           {isTranslationMode 
-            ? `Currently viewing in ${nativeLangData?.nativeName}. Switch to English for exam practice.`
+            ? `Currently viewing in ${currentLangData?.nativeName}. Switch to English for exam practice.`
             : 'Currently in English (exam mode). Switch to your native language for better understanding.'
           }
         </p>
@@ -143,13 +135,13 @@ export function ExamModeToggle({ className = '' }: { className?: string }) {
       <Button
         variant={isTranslationMode ? "default" : "outline"}
         size="sm"
-        onClick={toggleTranslationMode}
+        onClick={() => setIsTranslationMode(!isTranslationMode)}
         className="shrink-0"
       >
         {isTranslationMode ? (
           <>🇬🇧 English</>
         ) : (
-          <>{nativeLangData?.flag} {nativeLangData?.nativeName}</>
+          <>{currentLangData?.flag} {currentLangData?.nativeName}</>
         )}
       </Button>
     </div>
