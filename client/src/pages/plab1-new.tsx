@@ -155,6 +155,10 @@ const generateRealisticStem = (specialty: string, scenario: string, index: numbe
       `A ${age}-year-old ${gender} presents with ${scenario === 'depression' ? 'persistent low mood, anhedonia, and sleep disturbance for 6 weeks' : 'auditory hallucinations and paranoid delusions'}. Mental state examination reveals ${index % 2 === 0 ? 'psychomotor retardation and poor concentration' : 'formal thought disorder and inappropriate affect'}. What is the most appropriate management?`,
       `A ${age}-year-old patient with known ${scenario} presents for review. They report ${index % 3 === 0 ? 'medication side effects' : 'worsening symptoms'}. What is the next step?`,
     ],
+    'surgery': [
+      `A ${age}-year-old ${gender} presents to A&E with ${scenario === 'acute abdomen' ? 'severe right iliac fossa pain, nausea, and fever' : 'sudden onset severe abdominal pain'}. Examination reveals ${index % 2 === 0 ? 'McBurney\'s point tenderness and positive Rovsing\'s sign' : 'rigid abdomen with guarding'}. What is the most appropriate management?`,
+      `A ${age}-year-old patient requires emergency surgery for ${scenario}. Pre-operative assessment shows ${index % 2 === 0 ? 'ASA grade II' : 'multiple comorbidities'}. What is the most appropriate anaesthetic approach?`,
+    ],
     'gastroenterology': [
       `A ${age}-year-old presents with ${scenario === 'IBD' ? '6-week history of bloody diarrhoea, weight loss, and abdominal cramping' : 'epigastric pain and early satiety'}. Examination reveals ${index % 2 === 0 ? 'right iliac fossa tenderness' : 'epigastric tenderness'}. What is the most appropriate next step?`,
     ],
@@ -163,10 +167,16 @@ const generateRealisticStem = (specialty: string, scenario: string, index: numbe
     ],
     'endocrinology': [
       `A ${age}-year-old ${gender} presents with ${scenario === 'diabetes mellitus' ? 'polyuria, polydipsia, and weight loss' : 'heat intolerance and palpitations'}. Blood tests show ${index % 2 === 0 ? 'HbA1c 85 mmol/mol' : 'TSH <0.1 mU/L, free T4 45 pmol/L'}. What is the most appropriate management?`,
+    ],
+    'obstetrics-gynaecology': [
+      `A ${age}-year-old pregnant woman at ${28 + (index % 12)} weeks gestation presents with ${scenario === 'preeclampsia' ? 'headache, visual disturbance, and epigastric pain' : 'reduced fetal movements'}. Blood pressure is ${150 + (index % 30)}/95 mmHg. What is the most appropriate management?`,
+    ],
+    'paediatrics': [
+      `A ${2 + (index % 10)}-year-old child presents with ${scenario === 'bronchiolitis' ? '3-day history of cough, wheeze, and feeding difficulties' : 'fever and irritability'}. Examination shows ${index % 2 === 0 ? 'widespread wheeze and intercostal recession' : 'neck stiffness and photophobia'}. What is the most appropriate management?`,
     ]
   };
   
-  const templates = stemTemplates[specialty] || [`A ${age}-year-old ${gender} presents with clinical features of ${scenario}. What is the most appropriate management?`];
+  const templates = stemTemplates[specialty as keyof typeof stemTemplates] || [`A ${age}-year-old ${gender} presents with clinical features of ${scenario}. What is the most appropriate management?`];
   return templates[index % templates.length];
 };
 
@@ -202,11 +212,26 @@ const generateRealisticOptions = (specialty: string, scenario: string, index: nu
       ['Metformin', 'Insulin therapy', 'Gliclazide', 'Lifestyle modification', 'Bariatric surgery referral'],
       ['Type 1 diabetes mellitus', 'Type 2 diabetes mellitus', 'Diabetic ketoacidosis', 'Hyperosmolar hyperglycaemic state', 'Gestational diabetes'],
       ['Levothyroxine', 'Carbimazole', 'Radioiodine therapy', 'Thyroid surgery', 'Conservative monitoring'],
+    ],
+    'surgery': [
+      ['Emergency laparotomy', 'Laparoscopic cholecystectomy', 'Appendicectomy', 'Conservative management', 'CT abdomen with contrast'],
+      ['General anaesthesia', 'Spinal anaesthesia', 'Local anaesthesia', 'Regional nerve block', 'Conscious sedation'],
+      ['Acute appendicitis', 'Cholecystitis', 'Bowel obstruction', 'Perforated peptic ulcer', 'Incarcerated hernia'],
+    ],
+    'obstetrics-gynaecology': [
+      ['Emergency caesarean section', 'Instrumental delivery', 'Normal vaginal delivery', 'Induction of labour', 'Expectant management'],
+      ['Preeclampsia', 'Gestational diabetes', 'Placenta praevia', 'Fetal growth restriction', 'Normal pregnancy'],
+      ['Magnesium sulphate', 'Betamethasone', 'Anti-D immunoglobulin', 'Iron supplementation', 'Folic acid'],
+    ],
+    'paediatrics': [
+      ['Oral rehydration therapy', 'IV fluid resuscitation', 'Antibiotic therapy', 'Bronchodilator therapy', 'Supportive care'],
+      ['Bronchiolitis', 'Pneumonia', 'Gastroenteritis', 'Febrile convulsion', 'Viral upper respiratory tract infection'],
+      ['Salbutamol', 'Prednisolone', 'Amoxicillin', 'Paracetamol', 'Ibuprofen'],
     ]
   };
   
-  const sets = optionSets[specialty] || [
-    ['Supportive care', 'Further investigation', 'Specialist referral', 'Medication therapy', 'Surgical intervention']
+  const sets = optionSets[specialty as keyof typeof optionSets] || [
+    ['Conservative management', 'Medical therapy', 'Surgical intervention', 'Further investigation', 'Specialist referral']
   ];
   
   return sets[index % sets.length];
