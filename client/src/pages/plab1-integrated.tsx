@@ -228,7 +228,7 @@ const translateText = (text: string, targetLang: string): string => {
 };
 
 export default function PLAB1Integrated() {
-  const { currentLanguage, t } = useI18n();
+  const { currentLanguage, translateText } = useI18n();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);

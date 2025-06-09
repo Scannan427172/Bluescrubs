@@ -9,6 +9,7 @@ interface I18nContextType {
   setLanguage: (lang: SupportedLanguage) => void;
   toggleTranslationMode: () => void;
   t: (key: string, section?: keyof typeof UI_TRANSLATIONS) => string;
+  translateText: (text: string, targetLanguage?: SupportedLanguage) => string;
   translateMedicalTerm: (term: string) => string;
   getMedicalDefinition: (term: string) => string;
   isRightToLeft: boolean;
@@ -75,6 +76,51 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
            term;
   };
 
+  const translateText = (text: string, targetLanguage?: SupportedLanguage): string => {
+    const lang = targetLanguage || currentLanguage;
+    if (lang === 'en') return text;
+    
+    // Basic medical translations
+    const medicalTranslations: Record<string, Record<string, string>> = {
+      ar: {
+        "heart": "قلب", "patient": "مريض", "diagnosis": "تشخيص", "treatment": "علاج",
+        "chest pain": "ألم في الصدر", "ECG": "تخطيط القلب", "STEMI": "احتشاء عضلة القلب",
+        "Primary PCI": "التدخل التاجي الأولي", "thrombolysis": "إذابة الجلطة",
+        "crushing central": "سحق مركزي", "radiating": "مشع", "left arm": "الذراع الأيسر",
+        "jaw": "الفك", "ST elevation": "ارتفاع ST", "leads": "المؤشرات",
+        "immediate management": "الإدارة الفورية", "Inferior": "سفلي", "within": "خلال",
+        "minutes": "دقائق", "Usually": "عادة", "occlusion": "انسداد", "preferred": "مفضل"
+      },
+      es: {
+        "heart": "corazón", "patient": "paciente", "diagnosis": "diagnóstico", "treatment": "tratamiento",
+        "chest pain": "dolor en el pecho", "ECG": "ECG", "STEMI": "STEMI",
+        "Primary PCI": "ICP primario", "thrombolysis": "trombólisis",
+        "crushing central": "dolor central aplastante", "radiating": "irradiando", "left arm": "brazo izquierdo",
+        "jaw": "mandíbula", "ST elevation": "elevación del ST", "leads": "derivaciones",
+        "immediate management": "manejo inmediato", "Inferior": "Inferior", "within": "dentro de",
+        "minutes": "minutos", "Usually": "Usualmente", "occlusion": "oclusión", "preferred": "preferido"
+      },
+      fr: {
+        "heart": "cœur", "patient": "patient", "diagnosis": "diagnostic", "treatment": "traitement",
+        "chest pain": "douleur thoracique", "ECG": "ECG", "STEMI": "STEMI",
+        "Primary PCI": "ICP primaire", "thrombolysis": "thrombolyse",
+        "crushing central": "douleur centrale écrasante", "radiating": "irradiant", "left arm": "bras gauche",
+        "jaw": "mâchoire", "ST elevation": "élévation du ST", "leads": "dérivations",
+        "immediate management": "prise en charge immédiate", "Inferior": "Inférieur", "within": "dans les",
+        "minutes": "minutes", "Usually": "Généralement", "occlusion": "occlusion", "preferred": "préféré"
+      }
+    };
+    
+    const translations = medicalTranslations[lang] || {};
+    let translated = text;
+    
+    Object.entries(translations).forEach(([english, native]) => {
+      translated = translated.replace(new RegExp(english, 'gi'), native);
+    });
+    
+    return translated;
+  };
+
   const getMedicalDefinition = (term: string): string => {
     const medicalTerm = MEDICAL_TERMS.find(
       mt => mt.term.toLowerCase() === term.toLowerCase()
@@ -94,6 +140,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     setLanguage,
     toggleTranslationMode,
     t,
+    translateText,
     translateMedicalTerm,
     getMedicalDefinition,
     isRightToLeft: isRTL(currentLanguage)

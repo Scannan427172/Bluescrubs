@@ -48,11 +48,40 @@ export function useI18n() {
   }, []);
 
   const translateText = (text: string, targetLanguage?: Language): string => {
-    return text;
+    const lang = targetLanguage || currentLanguage;
+    if (lang === 'en') return text;
+    
+    // Basic medical translations
+    const medicalTranslations: Record<string, Record<string, string>> = {
+      ar: {
+        "heart": "قلب", "patient": "مريض", "diagnosis": "تشخيص", "treatment": "علاج",
+        "chest pain": "ألم في الصدر", "ECG": "تخطيط القلب", "STEMI": "احتشاء عضلة القلب",
+        "Primary PCI": "التدخل التاجي الأولي", "thrombolysis": "إذابة الجلطة"
+      },
+      es: {
+        "heart": "corazón", "patient": "paciente", "diagnosis": "diagnóstico", "treatment": "tratamiento",
+        "chest pain": "dolor en el pecho", "ECG": "ECG", "STEMI": "STEMI",
+        "Primary PCI": "ICP primario", "thrombolysis": "trombólisis"
+      },
+      fr: {
+        "heart": "cœur", "patient": "patient", "diagnosis": "diagnostic", "treatment": "traitement",
+        "chest pain": "douleur thoracique", "ECG": "ECG", "STEMI": "STEMI",
+        "Primary PCI": "ICP primaire", "thrombolysis": "thrombolyse"
+      }
+    };
+    
+    const translations = medicalTranslations[lang] || {};
+    let translated = text;
+    
+    Object.entries(translations).forEach(([english, native]) => {
+      translated = translated.replace(new RegExp(english, 'gi'), native);
+    });
+    
+    return translated;
   };
 
   const translateMedicalTerm = (term: string, targetLanguage?: Language): string => {
-    return term;
+    return translateText(term, targetLanguage);
   };
 
   const getMedicalDefinition = (term: string, targetLanguage?: Language): string => {
