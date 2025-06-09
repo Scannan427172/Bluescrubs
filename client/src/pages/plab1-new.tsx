@@ -10,7 +10,102 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages
 } from "lucide-react";
-import { GMC_QUESTION_BANK, type GMCQuestion, type GMCCategory } from "@shared/gmc-question-bank";
+// Temporary high-quality question bank for PLAB practice
+interface GMCQuestion {
+  id: string;
+  category: string;
+  stem: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+}
+
+const PRACTICE_QUESTIONS: GMCQuestion[] = [
+  {
+    id: 'cv001',
+    category: 'cardiovascular',
+    stem: "A 52-year-old diabetic man presents with crushing central chest pain for 45 minutes. ECG shows ST depression in V4-V6. Troponin T is elevated at 0.8 ng/mL (normal <0.014). What is the most appropriate immediate management?",
+    options: [
+      "Immediate primary PCI",
+      "Dual antiplatelet therapy and heparin",
+      "Thrombolytic therapy with alteplase",
+      "Emergency CABG referral",
+      "Observation with serial ECGs"
+    ],
+    correctAnswer: 1,
+    explanation: "This presentation suggests NSTEMI. Management includes dual antiplatelet therapy (aspirin + clopidogrel), anticoagulation with heparin, and risk stratification. Primary PCI is reserved for STEMI or high-risk NSTEMI with ongoing symptoms."
+  },
+  {
+    id: 'neuro001',
+    category: 'neurology',
+    stem: "A 43-year-old man presents with headache and neck stiffness. Lumbar puncture shows: Cloudy CSF, glucose 3.3 mmol/L (serum 4.7), protein 0.7 g/L, WCC 100/mm³ (70% lymphocytes). What is the most likely diagnosis?",
+    options: [
+      "Bacterial meningitis",
+      "Viral meningitis",
+      "Tuberculous meningitis",
+      "Normal CSF result",
+      "Cryptococcal meningitis"
+    ],
+    correctAnswer: 1,
+    explanation: "Viral meningitis is correct. The CSF shows lymphocytic predominance (70%), mildly elevated protein, and relatively normal glucose. CSF:serum glucose ratio is 0.70 (normal >0.6). Bacterial meningitis typically shows neutrophilic predominance and much lower glucose levels."
+  },
+  {
+    id: 'resp001',
+    category: 'respiratory',
+    stem: "A 67-year-old retired smoker with progressive breathlessness has reduced FEV1/FVC ratio on spirometry. Which condition would cause a rise in carbon monoxide transfer factor (TLCO)?",
+    options: [
+      "Emphysema",
+      "Pulmonary embolism",
+      "Pulmonary haemorrhage",
+      "Pneumonia",
+      "Pulmonary fibrosis"
+    ],
+    correctAnswer: 2,
+    explanation: "Pulmonary haemorrhage causes a rise in TLCO. Carbon monoxide has extremely high affinity for hemoglobin. When bleeding occurs into alveoli, increased hemoglobin binds more CO, leading to elevated TLCO. Most other conditions reduce TLCO."
+  },
+  {
+    id: 'cardio001',
+    category: 'cardiovascular',
+    stem: "A 34-year-old woman presents with polymorphic ventricular tachycardia with QRS complexes twisting around the baseline (torsade de pointes). Which condition is NOT associated with increased risk?",
+    options: [
+      "Tricyclic antidepressant overdose",
+      "Subarachnoid haemorrhage",
+      "Hypercalcaemia",
+      "Romano-Ward syndrome",
+      "Hypothermia"
+    ],
+    correctAnswer: 2,
+    explanation: "Hypercalcaemia is NOT associated with torsade de pointes risk. Hypercalcaemia shortens QT interval, while torsade requires QT prolongation. Hypocalcaemia (not hypercalcaemia) prolongs QT. The other options all prolong QT and increase torsade risk."
+  },
+  {
+    id: 'nephro001',
+    category: 'nephrology',
+    stem: "A 35-year-old female presents with hypovolaemic shock. CT shows a haemorrhagic renal lesion. Emergency surgery reveals a ruptured renal angiomyolipoma. What is the most likely underlying diagnosis?",
+    options: [
+      "Neurofibromatosis",
+      "Budd-Chiari syndrome",
+      "Hereditary haemorrhagic telangiectasia",
+      "Von Hippel-Lindau syndrome",
+      "Tuberous sclerosis"
+    ],
+    correctAnswer: 4,
+    explanation: "Tuberous sclerosis is most likely. Around 70-80% of tuberous sclerosis patients have renal angiomyolipomas, and 10% of angiomyolipoma patients have tuberous sclerosis. These are often multiple, bilateral, and more prone to bleeding than sporadic ones."
+  },
+  {
+    id: 'resp002',
+    category: 'respiratory',
+    stem: "A 28-year-old teacher has 6 months of intermittent wheeze, shortness of breath, and dry cough, particularly at night and early morning. Symptoms worsen during hay fever season and after exercise. Peak flow shows 20% variability. What is the most likely diagnosis?",
+    options: [
+      "Chronic obstructive pulmonary disease",
+      "Asthma",
+      "Pneumonia",
+      "Pulmonary embolism",
+      "Bronchiectasis"
+    ],
+    correctAnswer: 1,
+    explanation: "Asthma is most likely. Classic features include wheeze, shortness of breath, and cough with diurnal variation (worse at night/morning), exercise triggers, seasonal variation, and 20% peak flow variability confirming reversible airway obstruction."
+  }
+];
 
 export default function PLAB1New() {
   // Session state
@@ -27,7 +122,7 @@ export default function PLAB1New() {
   const [showResults, setShowResults] = useState(false);
   
   // Category selection
-  const [selectedCategory, setSelectedCategory] = useState<GMCCategory | 'all'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
   // Language settings
   const [currentLanguage, setCurrentLanguage] = useState<string>('en');
@@ -140,27 +235,33 @@ export default function PLAB1New() {
     improvementTrend: 0
   });
 
+  // Calculate question counts by category
+  const getQuestionCount = (category: string) => {
+    if (category === 'all') return PRACTICE_QUESTIONS.length;
+    return PRACTICE_QUESTIONS.filter(q => q.category === category).length;
+  };
+
   // Available categories with question counts
   const availableCategories = [
-    { value: 'all' as const, label: 'All Categories', count: CURATED_QUESTION_STATS.total },
-    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: CURATED_QUESTION_STATS.byCategory.cardiovascular },
-    { value: 'respiratory' as const, label: 'Respiratory', count: CURATED_QUESTION_STATS.byCategory.respiratory },
-    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: CURATED_QUESTION_STATS.byCategory.gastroenterology },
-    { value: 'neurology' as const, label: 'Neurology', count: CURATED_QUESTION_STATS.byCategory.neurology },
-    { value: 'endocrinology' as const, label: 'Endocrinology', count: CURATED_QUESTION_STATS.byCategory.endocrinology },
-    { value: 'psychiatry' as const, label: 'Psychiatry', count: CURATED_QUESTION_STATS.byCategory.psychiatry },
-    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: CURATED_QUESTION_STATS.byCategory['obstetrics-gynaecology'] },
-    { value: 'paediatrics' as const, label: 'Paediatrics', count: CURATED_QUESTION_STATS.byCategory.paediatrics },
-    { value: 'surgery' as const, label: 'Surgery', count: CURATED_QUESTION_STATS.byCategory.surgery },
-    { value: 'nephrology' as const, label: 'Nephrology', count: CURATED_QUESTION_STATS.byCategory.nephrology },
-    { value: 'haematology' as const, label: 'Haematology', count: CURATED_QUESTION_STATS.byCategory.haematology },
-    { value: 'infectious-diseases' as const, label: 'Infectious Diseases', count: CURATED_QUESTION_STATS.byCategory['infectious-diseases'] },
-    { value: 'rheumatology' as const, label: 'Rheumatology', count: CURATED_QUESTION_STATS.byCategory.rheumatology },
-    { value: 'dermatology' as const, label: 'Dermatology', count: CURATED_QUESTION_STATS.byCategory.dermatology },
-    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: CURATED_QUESTION_STATS.byCategory['emergency-medicine'] },
-    { value: 'ethics-law' as const, label: 'Ethics & Law', count: CURATED_QUESTION_STATS.byCategory['ethics-law'] },
-    { value: 'public-health' as const, label: 'Public Health', count: CURATED_QUESTION_STATS.byCategory['public-health'] },
-    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: CURATED_QUESTION_STATS.byCategory['clinical-pharmacology'] }
+    { value: 'all' as const, label: 'All Categories', count: getQuestionCount('all') },
+    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: getQuestionCount('cardiovascular') },
+    { value: 'respiratory' as const, label: 'Respiratory', count: getQuestionCount('respiratory') },
+    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: getQuestionCount('gastroenterology') },
+    { value: 'neurology' as const, label: 'Neurology', count: getQuestionCount('neurology') },
+    { value: 'endocrinology' as const, label: 'Endocrinology', count: getQuestionCount('endocrinology') },
+    { value: 'psychiatry' as const, label: 'Psychiatry', count: getQuestionCount('psychiatry') },
+    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: getQuestionCount('obstetrics-gynaecology') },
+    { value: 'paediatrics' as const, label: 'Paediatrics', count: getQuestionCount('paediatrics') },
+    { value: 'surgery' as const, label: 'Surgery', count: getQuestionCount('surgery') },
+    { value: 'nephrology' as const, label: 'Nephrology', count: getQuestionCount('nephrology') },
+    { value: 'haematology' as const, label: 'Haematology', count: getQuestionCount('haematology') },
+    { value: 'infectious-diseases' as const, label: 'Infectious Diseases', count: getQuestionCount('infectious-diseases') },
+    { value: 'rheumatology' as const, label: 'Rheumatology', count: getQuestionCount('rheumatology') },
+    { value: 'dermatology' as const, label: 'Dermatology', count: getQuestionCount('dermatology') },
+    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: getQuestionCount('emergency-medicine') },
+    { value: 'ethics-law' as const, label: 'Ethics & Law', count: getQuestionCount('ethics-law') },
+    { value: 'public-health' as const, label: 'Public Health', count: getQuestionCount('public-health') },
+    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: getQuestionCount('clinical-pharmacology') }
   ];
 
   // Timer effect
@@ -180,9 +281,9 @@ export default function PLAB1New() {
     // Filter questions by category
     let filteredQuestions: GMCQuestion[];
     if (selectedCategory === 'all') {
-      filteredQuestions = [...CURATED_PLAB_QUESTIONS];
+      filteredQuestions = [...PRACTICE_QUESTIONS];
     } else {
-      filteredQuestions = CURATED_PLAB_QUESTIONS.filter(q => q.category === selectedCategory);
+      filteredQuestions = PRACTICE_QUESTIONS.filter(q => q.category === selectedCategory);
     }
 
     console.log(`Found ${filteredQuestions.length} questions for category ${selectedCategory}`);
