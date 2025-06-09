@@ -12,6 +12,7 @@ import {
   ClipboardList, Heart, Brain, AlertTriangle
 } from "lucide-react";
 import { PLAB2_OSCE_STATIONS, OSCE_STATION_TYPES, OSCE_STATION_STATS, type OSCEStation } from "@shared/plab2-osce-stations";
+import { Top10Leaderboard } from "@/components/top-10-leaderboard";
 
 export default function Plab2Osce() {
   const [activeStation, setActiveStation] = useState<OSCEStation | null>(null);
@@ -419,6 +420,11 @@ function OSCEStationView({
             </Card>
           </TabsContent>
         </Tabs>
+
+        {/* Global Leaderboard */}
+        <div className="mt-8">
+          <Top10Leaderboard />
+        </div>
       </div>
     </div>
   );

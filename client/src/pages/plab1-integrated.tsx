@@ -11,6 +11,7 @@ import {
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
+import { Top10Leaderboard } from "@/components/top-10-leaderboard";
 
 // Official PLAB 1 Categories - No separate specialties, all integrated
 const PLAB1_CATEGORIES = [
@@ -505,6 +506,11 @@ export default function PLAB1Integrated() {
             </CardContent>
           </Card>
         )}
+
+        {/* Global Leaderboard */}
+        <div className="mt-8">
+          <Top10Leaderboard />
+        </div>
       </div>
     </div>
   );
