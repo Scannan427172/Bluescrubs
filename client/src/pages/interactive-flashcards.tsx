@@ -294,7 +294,7 @@ export default function InteractiveFlashcards() {
       </div>
 
       {/* Flashcard */}
-      <Card className="mb-6 min-h-[500px] cursor-pointer" onClick={flipCard}>
+      <Card className="mb-6 min-h-[500px] cursor-pointer bg-gray-800 text-white" onClick={flipCard}>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -326,7 +326,7 @@ export default function InteractiveFlashcards() {
               </Button>
             </div>
           </div>
-          <CardTitle className="text-center text-lg">
+          <CardTitle className="text-center text-lg text-white">
             {showBack ? "Answer" : "Question"}
           </CardTitle>
         </CardHeader>
@@ -335,7 +335,7 @@ export default function InteractiveFlashcards() {
           {!showBack ? (
             // Front of card
             <div className="space-y-4">
-              <p className="text-lg leading-relaxed">{currentCard.front.text}</p>
+              <p className="text-lg leading-relaxed text-white">{currentCard.front.text}</p>
               
               {currentCard.front.image && (
                 <div className="flex justify-center">
@@ -360,26 +360,26 @@ export default function InteractiveFlashcards() {
                 </div>
               )}
               
-              <p className="text-blue-600 text-sm">Click to reveal answer</p>
+              <p className="text-blue-300 text-sm">Click to reveal answer</p>
             </div>
           ) : (
             // Back of card
             <div className="space-y-4">
-              <div className="text-xl font-semibold text-green-700">
+              <div className="text-xl font-semibold text-green-300">
                 {currentCard.back.text}
               </div>
               
-              <div className="text-left bg-blue-50 p-4 rounded-lg">
-                <h4 className="font-medium mb-2">Explanation:</h4>
-                <p className="leading-relaxed">{currentCard.back.explanation}</p>
+              <div className="text-left bg-blue-900 p-4 rounded-lg">
+                <h4 className="font-medium mb-2 text-white">Explanation:</h4>
+                <p className="leading-relaxed text-white">{currentCard.back.explanation}</p>
               </div>
 
               {currentCard.back.keyPoints.length > 0 && (
-                <div className="text-left bg-yellow-50 p-4 rounded-lg">
-                  <h4 className="font-medium mb-2">Key Points:</h4>
+                <div className="text-left bg-yellow-900 p-4 rounded-lg">
+                  <h4 className="font-medium mb-2 text-white">Key Points:</h4>
                   <ul className="list-disc list-inside space-y-1">
                     {currentCard.back.keyPoints.map((point: string, index: number) => (
-                      <li key={index} className="text-sm">{point}</li>
+                      <li key={index} className="text-sm text-white">{point}</li>
                     ))}
                   </ul>
                 </div>
@@ -407,7 +407,7 @@ export default function InteractiveFlashcards() {
                 </div>
               )}
 
-              <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded">
+              <div className="text-sm text-white bg-gray-700 p-3 rounded">
                 <strong>Clinical Relevance:</strong> {currentCard.clinicalRelevance}
               </div>
             </div>
