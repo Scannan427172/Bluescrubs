@@ -8,100 +8,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages,
-  Trophy, Crown, Medal
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
-import { useQuery } from "@tanstack/react-query";
 
-// Types for scoreboard data
-interface ScoreboardUser {
-  id: number;
-  rank: number;
-  username: string;
-  totalScore: number;
-  accuracyRate: number;
-  plabCategory: string;
-  flagEmoji: string;
-  city: string;
-  country: string;
-}
 
-// Rank display function
-const getRankDisplay = (rank: number) => {
-  if (rank === 1) return <Crown className="w-6 h-6 text-yellow-500" />;
-  if (rank === 2) return <Medal className="w-6 h-6 text-gray-400" />;
-  if (rank === 3) return <Award className="w-6 h-6 text-amber-600" />;
-  return <span className="text-lg font-bold text-gray-600">#{rank}</span>;
-};
-
-// Simple Leaderboard Display with exact global scoreboard styling
-const LeaderboardDisplay = () => {
-  const { data: globalScoreboard, isLoading } = useQuery({
-    queryKey: ["/api/scoreboard/global"],
-    refetchInterval: 30000,
-  });
-
-  if (isLoading) {
-    return (
-      <div className="space-y-4">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="h-16 bg-gray-200 rounded-lg animate-pulse"></div>
-        ))}
-      </div>
-    );
-  }
-
-  if (!globalScoreboard || !Array.isArray(globalScoreboard) || globalScoreboard.length === 0) {
-    return (
-      <div className="text-center py-8 text-gray-500">
-        No leaderboard data available
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-4">
-      {globalScoreboard.slice(0, 10).map((user: any, index: number) => (
-        <div
-          key={user.id}
-          className={`p-4 rounded-lg border ${
-            index < 3 ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200' : 'bg-gray-50'
-          }`}
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 min-w-0 flex-1">
-              <div className="flex items-center justify-center w-10 h-10 flex-shrink-0">
-                {index === 0 && <Crown className="w-6 h-6 text-yellow-500" />}
-                {index === 1 && <Medal className="w-6 h-6 text-gray-400" />}
-                {index === 2 && <Award className="w-6 h-6 text-amber-600" />}
-                {index > 2 && <span className="text-lg font-bold text-gray-600">#{index + 1}</span>}
-              </div>
-              
-              <div className="flex flex-col min-w-0 flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="font-semibold text-gray-900 truncate">{user.username}</span>
-                  <Badge variant="outline" className="text-xs flex-shrink-0">
-                    {user.plabCategory?.toUpperCase() || 'PLAB1'}
-                  </Badge>
-                </div>
-                <div className="flex items-center gap-1 text-sm text-gray-600">
-                  <span>{user.flagEmoji || '🌍'}</span>
-                  <span className="truncate">{user.city || 'Unknown'}, {user.country || 'Unknown'}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-end gap-1 flex-shrink-0 ml-3">
-              <div className="text-xl font-bold text-blue-600">{user.totalScore?.toLocaleString() || '0'}</div>
-              <div className="text-sm font-semibold text-green-600">{user.accuracyRate || 0}%</div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 // Generate realistic clinical question stems
 const generateRealisticStem = (specialty: string, scenario: string, index: number): string => {
