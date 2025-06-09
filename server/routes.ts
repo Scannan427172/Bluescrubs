@@ -483,6 +483,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Submit score to scoreboard
+  app.post("/api/scoreboard/submit", async (req, res) => {
+    try {
+      const { userId, category, score, timeSpent, questionsAnswered, accuracy } = req.body;
+      
+      if (!userId || score === undefined || !timeSpent || !questionsAnswered) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      // Update global scoreboard
+      await storage.updateScoreboard(userId, {
+        questionsAnswered,
+        correctAnswers: score,
+        studyTime: timeSpent,
+        category: category || 'PLAB1'
+      });
+
+      res.json({ 
+        success: true, 
+        message: "Score submitted successfully"
+      });
+      
+    } catch (error) {
+      console.error("Score submission error:", error);
+      res.status(500).json({ error: "Failed to submit score" });
+    }
+  });
+
   app.post("/api/users/location", async (req, res) => {
     try {
       const { country, city, flag } = req.body;

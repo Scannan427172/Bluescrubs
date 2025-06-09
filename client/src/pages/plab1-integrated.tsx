@@ -453,15 +453,23 @@ const MEDICAL_TRANSLATIONS: Record<string, Record<string, string>> = {
   }
 };
 
-// Translation function supporting multiple languages
+// Enhanced translation function with better pattern matching
 const translateText = (text: string, targetLang: string): string => {
-  if (targetLang === "en") return text;
+  if (targetLang === "en" || !text) return text;
   
-  const translations = MEDICAL_TRANSLATIONS[targetLang] || {};
+  const translations = MEDICAL_TRANSLATIONS[targetLang];
+  if (!translations) return text;
+  
   let translated = text;
   
-  Object.entries(translations).forEach(([english, native]) => {
-    translated = translated.replace(new RegExp(english, 'gi'), native);
+  // Sort translations by length (longest first) to avoid partial replacements
+  const sortedTranslations = Object.entries(translations)
+    .sort(([a], [b]) => b.length - a.length);
+  
+  sortedTranslations.forEach(([english, native]) => {
+    // Use word boundaries and case-insensitive matching
+    const regex = new RegExp(`\\b${english.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+    translated = translated.replace(regex, native);
   });
   
   return translated;
@@ -506,17 +514,18 @@ export default function PLAB1Integrated() {
 
   const handleAnswerSelect = (answerIndex: number) => {
     if (showExplanation) return;
+    
+    // Start timer on first answer selection
+    if (!sessionStarted) {
+      setSessionStarted(true);
+      setIsActive(true);
+    }
+    
     setSelectedAnswer(answerIndex);
   };
 
   const handleSubmitAnswer = () => {
     if (selectedAnswer === null) return;
-    
-    // Start timer on first question submission
-    if (!sessionStarted) {
-      setSessionStarted(true);
-      setIsActive(true);
-    }
     
     setUserAnswers(prev => ({
       ...prev,
@@ -525,14 +534,41 @@ export default function PLAB1Integrated() {
     setShowExplanation(true);
   };
 
-  const handleNextQuestion = () => {
+  const uploadToLeaderboard = async (finalScore: number, timeSpent: number) => {
+    try {
+      const response = await fetch('/api/scoreboard/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: 1, // Current user
+          category: selectedCategory,
+          score: finalScore,
+          timeSpent,
+          questionsAnswered: Object.keys(userAnswers).length + 1,
+          accuracy: Math.round((finalScore / (Object.keys(userAnswers).length + 1)) * 100)
+        }),
+      });
+      
+      if (response.ok) {
+        console.log('Score uploaded to leaderboard successfully');
+      }
+    } catch (error) {
+      console.error('Failed to upload score:', error);
+    }
+  };
+
+  const handleNextQuestion = async () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
     } else {
-      // Stop timer when reaching the last question
+      // Stop timer and upload to leaderboard when finishing last question
       setIsActive(false);
+      const finalScore = score.correct + (selectedAnswer === currentQuestion.correctAnswer ? 1 : 0);
+      await uploadToLeaderboard(finalScore, timeElapsed);
     }
   };
 
