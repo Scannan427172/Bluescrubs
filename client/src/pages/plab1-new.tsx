@@ -546,12 +546,12 @@ export default function PLAB1New() {
         {/* Featured All Categories Option */}
         <Card className="mb-6 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
           <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <Target className="w-6 h-6 text-blue-600" />
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="text-xl font-bold text-blue-900">Complete Question Bank</h3>
                   <p className="text-blue-700">Access all {PRACTICE_QUESTIONS.length.toLocaleString()} questions across 18 medical specialties</p>
                   <div className="flex items-center gap-2 mt-2">
@@ -560,16 +560,18 @@ export default function PLAB1New() {
                   </div>
                 </div>
               </div>
-              <Button 
-                size="lg"
-                onClick={() => setSelectedCategory('all')}
-                className={`px-8 py-3 ${selectedCategory === 'all' 
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                  : 'bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50'
-                }`}
-              >
-                {selectedCategory === 'all' ? '✓ Selected' : 'Select All Categories'}
-              </Button>
+              <div className="flex-shrink-0">
+                <Button 
+                  size="lg"
+                  onClick={() => setSelectedCategory('all')}
+                  className={`w-full md:w-auto px-6 py-3 ${selectedCategory === 'all' 
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                    : 'bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50'
+                  }`}
+                >
+                  {selectedCategory === 'all' ? '✓ Selected' : 'Select All Categories'}
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
