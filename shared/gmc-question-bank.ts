@@ -1080,6 +1080,312 @@ const additionalRespiratoryQuestions: GMCQuestion[] = [
   }
 ];
 
+// Additional Emergency Medicine Questions
+const additionalEmergencyQuestions: GMCQuestion[] = [
+  {
+    id: "emerg-001",
+    category: "emergency-medicine",
+    subcategory: "sepsis",
+    cognitiveLevel: "application",
+    difficulty: "intermediate",
+    clinicalSetting: "Emergency Department",
+    ageGroup: "Adult",
+    stem: "A 67-year-old woman presents with fever, confusion, and hypotension. Temperature 38.9°C, HR 115, BP 85/50, RR 28, SpO2 94%. Lactate 3.2 mmol/L. White cell count 16,000/μL. What is the most appropriate immediate management?",
+    options: [
+      "Blood cultures then broad-spectrum antibiotics within 1 hour",
+      "Urine dipstick and await results before treatment",
+      "CT scan to identify source before antibiotics",
+      "Paracetamol and reassess in 2 hours",
+      "IV fluids only until blood pressure normalizes"
+    ],
+    correctAnswer: 0,
+    explanation: "This patient meets sepsis criteria with SIRS and organ dysfunction (altered mental state, hypotension). The Sepsis Six bundle requires blood cultures and antibiotics within 1 hour, along with IV fluids and lactate measurement.",
+    learningObjectives: [
+      "Recognize sepsis presentation and criteria",
+      "Apply Sepsis Six care bundle",
+      "Understand time-critical nature of sepsis management"
+    ],
+    gmcOutcomes: ["Emergency medicine competence", "Time-critical decision making", "Patient safety"],
+    references: ["NICE NG51: Sepsis", "Surviving Sepsis Campaign Guidelines"],
+    sourceLinks: [
+      {
+        title: "NHS - Sepsis",
+        url: "https://www.nhs.uk/conditions/sepsis/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Sepsis recognition and management",
+        url: "https://www.nice.org.uk/guidance/ng51",
+        type: "guideline"
+      },
+      {
+        title: "UK Sepsis Trust - Educational resources",
+        url: "https://sepsistrust.org/",
+        type: "educational"
+      }
+    ],
+    tags: ["sepsis", "emergency", "antibiotics", "SIRS"],
+    estimatedTime: 120,
+    lastReviewed: "2024-02-25",
+    reviewedBy: "Dr. Catherine Mills, Emergency Medicine"
+  }
+];
+
+// Additional Nephrology Questions
+const additionalNephrologyQuestions: GMCQuestion[] = [
+  {
+    id: "nephro-001",
+    category: "nephrology",
+    subcategory: "acute-kidney-injury",
+    cognitiveLevel: "problem-solving",
+    difficulty: "intermediate",
+    clinicalSetting: "Medical Ward",
+    ageGroup: "Elderly",
+    stem: "A 78-year-old man with hypertension on ramipril develops AKI following a UTI. Baseline creatinine 120 μmol/L, current 280 μmol/L. Urine output 300ml in 24 hours. Which medication should be stopped immediately?",
+    options: [
+      "Paracetamol",
+      "Ramipril (ACE inhibitor)",
+      "Atorvastatin",
+      "Aspirin 75mg",
+      "Amlodipine"
+    ],
+    correctAnswer: 1,
+    explanation: "ACE inhibitors should be stopped in AKI as they reduce glomerular filtration pressure and can worsen kidney function. This is particularly important in elderly patients with reduced renal reserve.",
+    learningObjectives: [
+      "Recognize AKI and its staging",
+      "Understand nephrotoxic medications",
+      "Apply AKI management principles"
+    ],
+    gmcOutcomes: ["Acute medicine skills", "Drug safety", "Risk assessment"],
+    references: ["NICE CG169: Acute kidney injury", "KDIGO AKI Guidelines"],
+    sourceLinks: [
+      {
+        title: "NHS - Acute kidney injury",
+        url: "https://www.nhs.uk/conditions/kidney-disease/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Acute kidney injury",
+        url: "https://www.nice.org.uk/guidance/cg169",
+        type: "guideline"
+      },
+      {
+        title: "Kidney Care UK - Educational resources",
+        url: "https://www.kidneycareuk.org/",
+        type: "educational"
+      }
+    ],
+    tags: ["AKI", "nephrotoxic", "ACE-inhibitor", "elderly"],
+    estimatedTime: 105,
+    lastReviewed: "2024-02-22",
+    reviewedBy: "Dr. Rajesh Patel, Nephrologist"
+  }
+];
+
+// Additional Ethics and Law Questions  
+const additionalEthicsQuestions: GMCQuestion[] = [
+  {
+    id: "ethics-001",
+    category: "ethics-law",
+    subcategory: "consent",
+    cognitiveLevel: "application",
+    difficulty: "intermediate",
+    clinicalSetting: "Medical Ward",
+    ageGroup: "Adult",
+    stem: "A 45-year-old Jehovah's Witness with severe anemia (Hb 45 g/L) refuses blood transfusion. She is conscious and has capacity. Her condition is life-threatening without transfusion. What is the most appropriate action?",
+    options: [
+      "Give blood transfusion as it's life-saving treatment",
+      "Respect her refusal and provide alternative treatments",
+      "Seek court order to override her decision",
+      "Wait for her to become unconscious then transfuse",
+      "Discharge her to avoid legal complications"
+    ],
+    correctAnswer: 1,
+    explanation: "A competent adult has the right to refuse any treatment, even if life-saving. Alternative treatments like iron, EPO, or cell salvage should be considered while respecting autonomous decision-making.",
+    learningObjectives: [
+      "Understand principles of medical ethics",
+      "Apply concept of informed refusal",
+      "Respect patient autonomy and religious beliefs"
+    ],
+    gmcOutcomes: ["Ethical practice", "Respect for patient choice", "Professional boundaries"],
+    references: ["GMC Good Medical Practice", "Mental Capacity Act 2005"],
+    sourceLinks: [
+      {
+        title: "GMC - Good medical practice",
+        url: "https://www.gmc-uk.org/ethical-guidance/ethical-guidance-for-doctors/good-medical-practice",
+        type: "guideline"
+      },
+      {
+        title: "Gov.UK - Mental Capacity Act",
+        url: "https://www.gov.uk/government/publications/mental-capacity-act-code-of-practice",
+        type: "government"
+      },
+      {
+        title: "NHS - Consent to treatment",
+        url: "https://www.nhs.uk/conditions/consent-to-treatment/",
+        type: "nhs"
+      }
+    ],
+    tags: ["consent", "autonomy", "religious-beliefs", "ethics"],
+    estimatedTime: 90,
+    lastReviewed: "2024-02-28",
+    reviewedBy: "Prof. Sarah Johnson, Medical Ethics"
+  }
+];
+
+// Additional Dermatology Questions
+const additionalDermatologyQuestions: GMCQuestion[] = [
+  {
+    id: "derm-001",
+    category: "dermatology",
+    subcategory: "skin-cancer",
+    cognitiveLevel: "application",
+    difficulty: "intermediate",
+    clinicalSetting: "GP Surgery",
+    ageGroup: "Adult",
+    stem: "A 55-year-old outdoor worker presents with a 6mm asymmetrical, irregular-bordered, dark brown lesion on his shoulder that has changed in size over 3 months. What is the most appropriate management?",
+    options: [
+      "Reassure and review in 6 months",
+      "Urgent 2-week wait dermatology referral",
+      "Biopsy in primary care",
+      "Topical steroid trial",
+      "Photograph and monitor"
+    ],
+    correctAnswer: 1,
+    explanation: "This lesion meets criteria for possible melanoma (ABCDE criteria: Asymmetry, Border irregularity, Color variation, Diameter >6mm, Evolution). Urgent 2-week wait referral is required for suspected skin cancer.",
+    learningObjectives: [
+      "Apply ABCDE criteria for melanoma",
+      "Recognize indications for urgent referral",
+      "Understand skin cancer risk factors"
+    ],
+    gmcOutcomes: ["Cancer recognition", "Appropriate referral pathways", "Risk assessment"],
+    references: ["NICE NG14: Skin cancer recognition and referral", "BAD Guidelines"],
+    sourceLinks: [
+      {
+        title: "NHS - Melanoma skin cancer",
+        url: "https://www.nhs.uk/conditions/melanoma-skin-cancer/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Skin cancer recognition",
+        url: "https://www.nice.org.uk/guidance/ng14",
+        type: "guideline"
+      },
+      {
+        title: "Cancer Research UK - Skin cancer information",
+        url: "https://www.cancerresearchuk.org/about-cancer/skin-cancer",
+        type: "educational"
+      }
+    ],
+    tags: ["melanoma", "ABCDE", "skin-cancer", "referral"],
+    estimatedTime: 85,
+    lastReviewed: "2024-03-01",
+    reviewedBy: "Dr. Helen Carter, Dermatologist"
+  }
+];
+
+// Additional Infectious Diseases Questions
+const additionalInfectiousQuestions: GMCQuestion[] = [
+  {
+    id: "infect-001",
+    category: "infectious-diseases",
+    subcategory: "tuberculosis",
+    cognitiveLevel: "problem-solving",
+    difficulty: "intermediate",
+    clinicalSetting: "Respiratory Clinic",
+    ageGroup: "Adult",
+    stem: "A 35-year-old man from Somalia presents with 3 months of weight loss, night sweats, and productive cough. CXR shows upper lobe cavitation. Sputum is AFB positive. What is the most appropriate initial treatment?",
+    options: [
+      "Rifampicin and isoniazid for 6 months",
+      "Rifampicin, isoniazid, ethambutol, and pyrazinamide for 2 months",
+      "Amoxicillin for 7 days",
+      "Clarithromycin and doxycycline",
+      "Levofloxacin for 10 days"
+    ],
+    correctAnswer: 1,
+    explanation: "Standard TB treatment consists of 4-drug therapy (RIPE: Rifampicin, Isoniazid, Pyrazinamide, Ethambutol) for 2 months, followed by 2-drug continuation phase with rifampicin and isoniazid for 4 months.",
+    learningObjectives: [
+      "Recognize tuberculosis presentation",
+      "Apply standard TB treatment regimen",
+      "Understand infection control measures"
+    ],
+    gmcOutcomes: ["Infectious disease management", "Public health awareness", "Treatment protocols"],
+    references: ["NICE NG33: Tuberculosis", "WHO TB Treatment Guidelines"],
+    sourceLinks: [
+      {
+        title: "NHS - Tuberculosis (TB)",
+        url: "https://www.nhs.uk/conditions/tuberculosis-tb/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Tuberculosis",
+        url: "https://www.nice.org.uk/guidance/ng33",
+        type: "guideline"
+      },
+      {
+        title: "TB Alert - Educational resources",
+        url: "https://www.tbalert.org/",
+        type: "educational"
+      }
+    ],
+    tags: ["tuberculosis", "RIPE", "AFB", "treatment"],
+    estimatedTime: 110,
+    lastReviewed: "2024-03-05",
+    reviewedBy: "Dr. Ahmed Hassan, Infectious Diseases"
+  }
+];
+
+// Additional Public Health Questions
+const additionalPublicHealthQuestions: GMCQuestion[] = [
+  {
+    id: "pubhealth-001",
+    category: "public-health",
+    subcategory: "vaccination",
+    cognitiveLevel: "application",
+    difficulty: "foundation",
+    clinicalSetting: "GP Surgery",
+    ageGroup: "Child",
+    stem: "A mother asks about the MMR vaccine for her 13-month-old child, expressing concerns about autism. What is the most appropriate response?",
+    options: [
+      "Agree to delay vaccination until age 2",
+      "Offer single vaccines instead of MMR",
+      "Explain that MMR does not cause autism and recommend vaccination",
+      "Refer to specialist for opinion",
+      "Respect her choice and document refusal"
+    ],
+    correctAnswer: 2,
+    explanation: "Large-scale studies have shown no link between MMR vaccine and autism. The vaccine is safe and effective. Healthcare professionals should provide evidence-based information and recommend following the vaccination schedule.",
+    learningObjectives: [
+      "Address vaccine hesitancy appropriately",
+      "Provide evidence-based health information",
+      "Understand childhood vaccination schedule"
+    ],
+    gmcOutcomes: ["Health promotion", "Evidence-based practice", "Communication skills"],
+    references: ["Green Book Immunisation Guidelines", "Cochrane Review MMR Safety"],
+    sourceLinks: [
+      {
+        title: "NHS - MMR vaccine",
+        url: "https://www.nhs.uk/conditions/vaccinations/mmr-vaccine/",
+        type: "nhs"
+      },
+      {
+        title: "Gov.UK - Immunisation Green Book",
+        url: "https://www.gov.uk/government/collections/immunisation-green-book",
+        type: "government"
+      },
+      {
+        title: "NHS - Vaccination tips for parents",
+        url: "https://www.nhs.uk/conditions/vaccinations/vaccination-tips-for-parents/",
+        type: "nhs"
+      }
+    ],
+    tags: ["MMR", "vaccination", "autism", "health-promotion"],
+    estimatedTime: 75,
+    lastReviewed: "2024-03-10",
+    reviewedBy: "Dr. Maria Rodriguez, Public Health"
+  }
+];
+
 // Additional Endocrine Questions
 const additionalEndocrineQuestions: GMCQuestion[] = [
   {
@@ -1107,8 +1413,27 @@ const additionalEndocrineQuestions: GMCQuestion[] = [
     ],
     gmcOutcomes: ["Complex case management", "Evidence-based practice", "Risk-benefit assessment"],
     references: ["NICE NG28 Diabetes Guidelines", "DAPA-HF trial", "EMPA-REG OUTCOME"],
+    sourceLinks: [
+      {
+        title: "NHS - Type 2 diabetes treatment",
+        url: "https://www.nhs.uk/conditions/type-2-diabetes/treatment/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Diabetes medication management",
+        url: "https://www.nice.org.uk/guidance/ng28",
+        type: "guideline"
+      },
+      {
+        title: "Diabetes UK - SGLT2 inhibitors information",
+        url: "https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/diabetes-medication",
+        type: "educational"
+      }
+    ],
     tags: ["type 2 diabetes", "SGLT2 inhibitor", "heart failure", "CKD"],
-    estimatedTime: 120
+    estimatedTime: 120,
+    lastReviewed: "2024-02-20",
+    reviewedBy: "Dr. Mark Thompson, Endocrinologist"
   }
 ];
 
@@ -1116,6 +1441,12 @@ const additionalEndocrineQuestions: GMCQuestion[] = [
 const allAdditionalQuestions = [
   ...additionalCardiovascularQuestions,
   ...additionalRespiratoryQuestions,
+  ...additionalEmergencyQuestions,
+  ...additionalNephrologyQuestions,
+  ...additionalEthicsQuestions,
+  ...additionalDermatologyQuestions,
+  ...additionalInfectiousQuestions,
+  ...additionalPublicHealthQuestions,
   ...additionalEndocrineQuestions
 ];
 
