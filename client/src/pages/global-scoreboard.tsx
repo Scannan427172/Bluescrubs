@@ -241,6 +241,19 @@ export default function GlobalScoreboard() {
         )}
       </div>
 
+      {/* Interactive Globe Section */}
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Globe className="w-5 h-5 text-blue-600" />
+            Interactive Global Map
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex justify-center">
+          <InteractiveGlobe />
+        </CardContent>
+      </Card>
+
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
@@ -503,19 +516,6 @@ export default function GlobalScoreboard() {
           </Card>
         </TabsContent>
         </Tabs>
-
-        {/* Interactive Globe Section */}
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Globe className="w-5 h-5 text-blue-600" />
-              Interactive Global Map
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex justify-center">
-            <InteractiveGlobe />
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
