@@ -244,6 +244,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "ESC Guidelines for management of ventricular arrhythmias",
       "Resuscitation Council UK guidelines"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Heart rhythm problems (arrhythmias)",
+        url: "https://www.nhs.uk/conditions/arrhythmia/",
+        type: "nhs"
+      },
+      {
+        title: "Resuscitation Council UK - Guidelines",
+        url: "https://www.resus.org.uk/library/2021-resuscitation-guidelines",
+        type: "guideline"
+      },
+      {
+        title: "British Heart Foundation - Heart rhythm disorders",
+        url: "https://www.bhf.org.uk/informationsupport/conditions/arrhythmias",
+        type: "educational"
+      }
+    ],
     tags: ["arrhythmia", "torsade-de-pointes", "qt-prolongation", "emergency-medicine"],
     estimatedTime: 90,
     lastReviewed: "2024-01-15",
@@ -337,6 +354,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
       "NICE CG184: Gastro-oesophageal reflux disease and dyspepsia",
       "Maastricht V/Florence Consensus on H. pylori"
     ],
+    sourceLinks: [
+      {
+        title: "NHS - Stomach ulcer (peptic ulcer)",
+        url: "https://www.nhs.uk/conditions/stomach-ulcer/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Dyspepsia and GORD",
+        url: "https://www.nice.org.uk/guidance/cg184",
+        type: "guideline"
+      },
+      {
+        title: "Patient.info - Peptic ulcers",
+        url: "https://patient.info/digestive-health/dyspepsia-indigestion/peptic-ulcers",
+        type: "educational"
+      }
+    ],
     tags: ["epigastric-pain", "h-pylori", "NSAIDs", "peptic-ulcer"],
     estimatedTime: 80,
     lastReviewed: "2024-01-18",
@@ -374,6 +408,23 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     references: [
       "NICE CG68: Stroke and transient ischemic attack",
       "RCP National Clinical Guideline for Stroke"
+    ],
+    sourceLinks: [
+      {
+        title: "NHS - Stroke symptoms and causes",
+        url: "https://www.nhs.uk/conditions/stroke/",
+        type: "nhs"
+      },
+      {
+        title: "NICE Guidelines - Stroke and transient ischaemic attack",
+        url: "https://www.nice.org.uk/guidance/cg68",
+        type: "guideline"
+      },
+      {
+        title: "Stroke Association - Educational resources",
+        url: "https://www.stroke.org.uk/",
+        type: "educational"
+      }
     ],
     tags: ["stroke", "thrombolysis", "NIHSS", "emergency"],
     estimatedTime: 95,
