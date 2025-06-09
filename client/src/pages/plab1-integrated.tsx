@@ -29,7 +29,7 @@ const PLAB1_CATEGORIES = [
 const generatePLAB1Questions = (category: string) => {
   return COMPREHENSIVE_FLASHCARD_COLLECTION
     .filter(card => card.category === category)
-    .slice(0, 50) // Limit for demo
+    .slice(0, 200) // Increased limit to show more questions
     .map((card, index) => ({
       id: `${category.toLowerCase().replace(/[^a-z]/g, '')}_${index + 1}`,
       category: category,
@@ -44,6 +44,17 @@ const generatePLAB1Questions = (category: string) => {
       tags: card.tags
     }));
 };
+
+// Calculate question counts for each category
+const getCategoryQuestionCounts = () => {
+  const counts: Record<string, number> = {};
+  PLAB1_CATEGORIES.forEach(category => {
+    counts[category] = COMPREHENSIVE_FLASHCARD_COLLECTION.filter(card => card.category === category).length;
+  });
+  return counts;
+};
+
+const categoryQuestionCounts = getCategoryQuestionCounts();
 
 export default function PLAB1Integrated() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -156,10 +167,18 @@ export default function PLAB1Integrated() {
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Categories</SelectItem>
+                    <SelectItem value="all">
+                      <div className="flex justify-between items-center w-full">
+                        <span>All Categories</span>
+                        <Badge variant="secondary" className="ml-2">{COMPREHENSIVE_FLASHCARD_COLLECTION.length}</Badge>
+                      </div>
+                    </SelectItem>
                     {PLAB1_CATEGORIES.map(category => (
                       <SelectItem key={category} value={category}>
-                        {category} ({(FLASHCARD_STATS.byCategory as any)[category] || 0})
+                        <div className="flex justify-between items-center w-full">
+                          <span className="truncate">{category}</span>
+                          <Badge variant="outline" className="ml-2">{categoryQuestionCounts[category] || 0}</Badge>
+                        </div>
                       </SelectItem>
                     ))}
                   </SelectContent>
