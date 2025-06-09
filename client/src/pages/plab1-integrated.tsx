@@ -209,44 +209,6 @@ export default function PLAB1Integrated() {
           </CardContent>
         </Card>
 
-        {/* Progress and Stats */}
-        <div className="grid md:grid-cols-4 gap-4 mb-6">
-          <Card className="bg-white shadow-lg">
-            <CardContent className="pt-6 bg-white">
-              <div className="text-2xl font-bold text-blue-600">{currentQuestionIndex + 1}</div>
-              <p className="text-sm text-gray-700">of {questions.length}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-white shadow-lg">
-            <CardContent className="pt-6 bg-white">
-              <div className="text-2xl font-bold text-green-600">{score.correct}</div>
-              <p className="text-sm text-gray-700">Correct</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-white shadow-lg">
-            <CardContent className="pt-6 bg-white">
-              <div className="text-2xl font-bold text-orange-600">
-                {score.answered > 0 ? Math.round((score.correct / score.answered) * 100) : 0}%
-              </div>
-              <p className="text-sm text-gray-700">Accuracy</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-white shadow-lg">
-            <CardContent className="pt-6 bg-white">
-              <div className="text-2xl font-bold text-purple-600">{formatTime(timeElapsed)}</div>
-              <p className="text-sm text-gray-700">Time</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="mb-6">
-          <Progress value={(currentQuestionIndex / questions.length) * 100} className="h-2" />
-        </div>
-
         {/* Question */}
         <Card className="mb-6 bg-white shadow-lg">
           <CardHeader className="bg-white">
@@ -342,6 +304,44 @@ export default function PLAB1Integrated() {
               </Button>
             )}
           </div>
+        </div>
+
+        {/* Progress and Stats */}
+        <div className="grid md:grid-cols-4 gap-4 mt-6 mb-6">
+          <Card className="bg-white shadow-lg">
+            <CardContent className="pt-6 bg-white">
+              <div className="text-2xl font-bold text-blue-600">{currentQuestionIndex + 1}</div>
+              <p className="text-sm text-gray-700">of {questions.length}</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white shadow-lg">
+            <CardContent className="pt-6 bg-white">
+              <div className="text-2xl font-bold text-green-600">{score.correct}</div>
+              <p className="text-sm text-gray-700">Correct</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white shadow-lg">
+            <CardContent className="pt-6 bg-white">
+              <div className="text-2xl font-bold text-orange-600">
+                {score.answered > 0 ? Math.round((score.correct / score.answered) * 100) : 0}%
+              </div>
+              <p className="text-sm text-gray-700">Accuracy</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white shadow-lg">
+            <CardContent className="pt-6 bg-white">
+              <div className="text-2xl font-bold text-purple-600">{formatTime(timeElapsed)}</div>
+              <p className="text-sm text-gray-700">Time</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mb-6">
+          <Progress value={(currentQuestionIndex / questions.length) * 100} className="h-2" />
         </div>
 
         {/* Final Results */}
