@@ -275,8 +275,10 @@ export default function GlobalScoreboard() {
             Interactive Global Map
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex justify-center">
-          <InteractiveGlobe />
+        <CardContent className="flex justify-center py-8">
+          <div className="w-full max-w-md">
+            <InteractiveGlobe />
+          </div>
         </CardContent>
       </Card>
 

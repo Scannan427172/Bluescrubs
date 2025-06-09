@@ -451,12 +451,12 @@ export function InteractiveGlobe() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-lg mx-auto">
       <canvas
         ref={canvasRef}
-        width={600}
-        height={600}
-        className="border rounded-lg cursor-grab active:cursor-grabbing bg-gradient-to-br from-slate-900 to-blue-900"
+        width={500}
+        height={500}
+        className="border rounded-lg cursor-grab active:cursor-grabbing bg-gradient-to-br from-slate-900 to-blue-900 w-full h-auto max-w-full"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
