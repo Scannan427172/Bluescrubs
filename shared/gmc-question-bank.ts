@@ -82,6 +82,123 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
   },
 
   {
+    id: 'neuro002',
+    category: 'neurology',
+    subcategory: 'meningitis',
+    cognitiveLevel: 'problem-solving',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Adult',
+    stem: "A 43-year-old Asian man presents with headache and neck stiffness. CT brain is normal and a lumbar puncture is performed with the following results:\n\nSerum glucose: 4.7 mmol/L (4.0 - 7.0)\n\nLumbar puncture reveals:\nOpening pressure: 15 cmCSF (10 - 20)\nAppearance: Cloudy\nGlucose: 3.3 mmol/L (2.8 - 4.2)\nProtein: 0.7 g/L (0.15 - 0.45)\nWhite cells: 100 / mm³ (70% lymphocytes) (0 - 8)",
+    options: [
+      "Bacterial meningitis",
+      "Viral meningitis",
+      "Tuberculous meningitis",
+      "Normal CSF result",
+      "Cryptococcal meningitis"
+    ],
+    correctAnswer: 1,
+    explanation: "Viral meningitis is the correct diagnosis based on the CSF findings. The key features supporting viral meningitis are the lymphocytic predominance (70% lymphocytes) in the CSF, mildly elevated protein (0.7 g/L), and relatively normal CSF glucose level compared to serum glucose. The CSF:serum glucose ratio is 0.70, which is within normal limits (normal >0.6). Bacterial meningitis typically shows neutrophilic predominance (>80% neutrophils), much higher protein levels (often >1 g/L), and markedly reduced CSF glucose with CSF:serum glucose ratio typically <0.4.",
+    learningObjectives: [
+      "Interpret CSF results in context of clinical presentation",
+      "Understand normal reference ranges for CSF parameters",
+      "Calculate CSF:serum glucose ratio for diagnostic clarity",
+      "Recognize patterns of CSF abnormalities in different types of meningitis"
+    ],
+    gmcOutcomes: [
+      "Investigation interpretation",
+      "Clinical reasoning and diagnosis",
+      "Understanding of infectious diseases"
+    ],
+    references: [
+      "NICE CG102: Bacterial meningitis and meningococcal septicaemia",
+      "British Infection Association guidelines"
+    ],
+    tags: ["meningitis", "csf-analysis", "neurology", "infection", "differential-diagnosis"],
+    estimatedTime: 120,
+    lastReviewed: "2024-01-15",
+    reviewedBy: "Dr. Sarah Chen, Neurologist"
+  },
+
+  {
+    id: 'resp003',
+    category: 'respiratory',
+    subcategory: 'pulmonary-function',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Outpatient Clinic',
+    ageGroup: 'Adult',
+    stem: "Which one of the following would cause a rise in the carbon monoxide transfer factor (TLCO)?",
+    options: [
+      "Emphysema",
+      "Pulmonary embolism",
+      "Pulmonary haemorrhage",
+      "Pneumonia",
+      "Pulmonary fibrosis"
+    ],
+    correctAnswer: 2,
+    explanation: "Pulmonary haemorrhage would cause a rise in TLCO. Carbon monoxide has a very high affinity for haemoglobin, approximately 200-250 times greater than oxygen. When there is bleeding into the alveoli (pulmonary haemorrhage), the increased haemoglobin in the alveolar space binds more carbon monoxide, leading to an elevated TLCO measurement. This is one of the few conditions that causes an increased TLCO. Emphysema, pulmonary embolism, pneumonia, and pulmonary fibrosis all cause reduced TLCO by affecting surface area, perfusion, or membrane thickness.",
+    learningObjectives: [
+      "Understand the physiology of carbon monoxide transfer",
+      "Recognize conditions that increase vs decrease TLCO",
+      "Apply knowledge of gas transfer mechanisms to clinical scenarios",
+      "Interpret pulmonary function tests in context"
+    ],
+    gmcOutcomes: [
+      "Understanding of respiratory physiology",
+      "Investigation interpretation",
+      "Clinical reasoning"
+    ],
+    references: [
+      "ATS/ERS Standardisation of Lung Function Testing",
+      "British Thoracic Society guidelines"
+    ],
+    tags: ["tlco", "pulmonary-function", "respiratory-physiology", "gas-transfer"],
+    estimatedTime: 90,
+    lastReviewed: "2024-01-15",
+    reviewedBy: "Dr. Michael Thompson, Respiratory Physician"
+  },
+
+  {
+    id: 'cardio004',
+    category: 'cardiovascular',
+    subcategory: 'arrhythmias',
+    cognitiveLevel: 'application',
+    difficulty: 'advanced',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Adult',
+    stem: "A 34-year-old woman is admitted to the Emergency Department following a collapse. An ECG shows a polymorphic ventricular tachycardia. Which one of the following is not associated with an increased risk of developing torsade de pointes?",
+    options: [
+      "Tricyclic antidepressants",
+      "Subarachnoid haemorrhage",
+      "Hypercalcaemia",
+      "Romano-Ward syndrome",
+      "Hypothermia"
+    ],
+    correctAnswer: 2,
+    explanation: "Hypercalcaemia is not associated with increased risk of torsade de pointes. In fact, hypercalcaemia tends to shorten the QT interval, while torsade de pointes is associated with QT interval prolongation. Hypocalcaemia (not hypercalcaemia) is associated with QT prolongation and increased risk of torsade de pointes. Tricyclic antidepressants prolong QT through sodium and potassium channel blockade. Subarachnoid haemorrhage causes QT prolongation due to autonomic dysfunction. Romano-Ward syndrome is a congenital long QT syndrome. Hypothermia is associated with QT prolongation, particularly when core temperature falls below 32°C.",
+    learningObjectives: [
+      "Recognize ECG features of torsade de pointes",
+      "Understand relationship between QT interval and arrhythmia risk",
+      "Identify risk factors for QT prolongation",
+      "Distinguish between hypo- and hypercalcaemia effects on QT"
+    ],
+    gmcOutcomes: [
+      "Emergency management",
+      "Investigation interpretation",
+      "Understanding of cardiac electrophysiology"
+    ],
+    references: [
+      "ESC Guidelines for management of ventricular arrhythmias",
+      "Resuscitation Council UK guidelines"
+    ],
+    tags: ["arrhythmia", "torsade-de-pointes", "qt-prolongation", "emergency-medicine"],
+    estimatedTime: 90,
+    lastReviewed: "2024-01-15",
+    reviewedBy: "Dr. Emma Davies, Cardiologist"
+  },
+
+  {
     id: 'resp001',
     category: 'respiratory',
     subcategory: 'asthma',
