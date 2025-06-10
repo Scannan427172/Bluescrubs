@@ -83,7 +83,72 @@ export default function Plab2Osce() {
   };
 
   if (activeStation) {
-    return <OSCEStationView station={activeStation} onComplete={handleStationComplete} onBack={() => setActiveStation(null)} />;
+    return (
+      <div className="min-h-screen bg-white">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="flex items-center gap-4 mb-6">
+            <Button 
+              variant="outline" 
+              onClick={() => setActiveStation(null)}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Stations
+            </Button>
+            <h1 className="text-2xl font-bold text-gray-900">{activeStation.title}</h1>
+          </div>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="prose max-w-none">
+                <h3 className="text-lg font-semibold mb-4">Station Scenario</h3>
+                <p className="text-gray-700 mb-6">{activeStation.scenario}</p>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="font-semibold mb-2">Instructions</h4>
+                    <div className="space-y-2 text-sm text-gray-600">
+                      <p><strong>Candidate:</strong> {activeStation.instructions.candidate}</p>
+                      <p><strong>Examiner:</strong> {activeStation.instructions.examiner}</p>
+                      {activeStation.instructions.standardizedPatient && (
+                        <p><strong>Standardized Patient:</strong> {activeStation.instructions.standardizedPatient}</p>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-semibold mb-2">Marking Criteria</h4>
+                    <div className="space-y-3 text-sm text-gray-600">
+                      {activeStation.markingCriteria.map((criteria, index) => (
+                        <div key={index} className="border-l-2 border-blue-200 pl-3">
+                          <div className="font-medium text-gray-900">{criteria.category}</div>
+                          <div className="text-xs text-gray-500 mb-1">Max: {criteria.maxMarks} marks</div>
+                          <ul className="list-disc pl-4 space-y-1">
+                            {criteria.criteria.map((criterion, idx) => (
+                              <li key={idx}>{criterion}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Clock className="w-5 h-5 text-blue-600" />
+                    <span className="font-semibold text-blue-800">
+                      Time Limit: {accommodations.extendedTime ? Math.round(activeStation.duration * accommodations.timeMultiplier) : activeStation.duration} minutes
+                    </span>
+                  </div>
+                  <p className="text-sm text-blue-700">Use the timer to practice under exam conditions</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -264,50 +329,43 @@ export default function Plab2Osce() {
             <TabsList className="grid w-full grid-cols-7 gap-1">
               <TabsTrigger 
                 value="all" 
-                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
-                style={buttonStyles}
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
                 All ({PLAB2_OSCE_STATIONS.length})
               </TabsTrigger>
               <TabsTrigger 
                 value="history" 
-                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
-                style={buttonStyles}
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
                 History ({OSCE_STATION_STATS.byType.history})
               </TabsTrigger>
               <TabsTrigger 
                 value="examination" 
-                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
-                style={buttonStyles}
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
                 Exam ({OSCE_STATION_STATS.byType.examination})
               </TabsTrigger>
               <TabsTrigger 
                 value="explanation" 
-                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
-                style={buttonStyles}
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
                 Explain ({OSCE_STATION_STATS.byType.explanation})
               </TabsTrigger>
               <TabsTrigger 
                 value="ethics" 
-                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
-                style={buttonStyles}
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
                 Ethics ({OSCE_STATION_STATS.byType.ethics})
               </TabsTrigger>
               <TabsTrigger 
                 value="acute-care" 
-                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
-                style={buttonStyles}
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
                 Acute ({OSCE_STATION_STATS.byType['acute-care']})
               </TabsTrigger>
               <TabsTrigger 
                 value="practical-skills" 
-                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
-                style={buttonStyles}
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
                 Skills ({OSCE_STATION_STATS.byType['practical-skills']})
               </TabsTrigger>
