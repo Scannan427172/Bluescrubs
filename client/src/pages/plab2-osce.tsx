@@ -182,8 +182,17 @@ export default function Plab2Osce() {
           </Card>
         )}
 
-        {/* Progress Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        {/* PLAB 2 OSCE Practice Section - Now under accessibility settings */}
+        <div className="border-t-4 border-blue-200 pt-8 mt-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+              <Play className="w-4 h-4 text-blue-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900">OSCE Practice Stations</h2>
+          </div>
+
+          {/* Progress Overview */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg text-gray-900">Overall Progress</CardTitle>
@@ -250,17 +259,59 @@ export default function Plab2Osce() {
           </Card>
         </div>
 
-        {/* Station Type Filters */}
-        <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-          <TabsList className="grid w-full grid-cols-7 gap-1">
-            <TabsTrigger value="all" className="text-xs lg:text-sm text-gray-700">All ({PLAB2_OSCE_STATIONS.length})</TabsTrigger>
-            <TabsTrigger value="history" className="text-xs lg:text-sm text-gray-700">History ({OSCE_STATION_STATS.byType.history})</TabsTrigger>
-            <TabsTrigger value="examination" className="text-xs lg:text-sm text-gray-700">Exam ({OSCE_STATION_STATS.byType.examination})</TabsTrigger>
-            <TabsTrigger value="explanation" className="text-xs lg:text-sm text-gray-700">Explain ({OSCE_STATION_STATS.byType.explanation})</TabsTrigger>
-            <TabsTrigger value="ethics" className="text-xs lg:text-sm text-gray-700">Ethics ({OSCE_STATION_STATS.byType.ethics})</TabsTrigger>
-            <TabsTrigger value="acute-care" className="text-xs lg:text-sm text-gray-700">Acute ({OSCE_STATION_STATS.byType['acute-care']})</TabsTrigger>
-            <TabsTrigger value="practical-skills" className="text-xs lg:text-sm text-gray-700">Skills ({OSCE_STATION_STATS.byType['practical-skills']})</TabsTrigger>
-          </TabsList>
+          {/* Station Type Filters */}
+          <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
+            <TabsList className="grid w-full grid-cols-7 gap-1">
+              <TabsTrigger 
+                value="all" 
+                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
+                style={buttonStyles}
+              >
+                All ({PLAB2_OSCE_STATIONS.length})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="history" 
+                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
+                style={buttonStyles}
+              >
+                History ({OSCE_STATION_STATS.byType.history})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="examination" 
+                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
+                style={buttonStyles}
+              >
+                Exam ({OSCE_STATION_STATS.byType.examination})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="explanation" 
+                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
+                style={buttonStyles}
+              >
+                Explain ({OSCE_STATION_STATS.byType.explanation})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="ethics" 
+                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
+                style={buttonStyles}
+              >
+                Ethics ({OSCE_STATION_STATS.byType.ethics})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="acute-care" 
+                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
+                style={buttonStyles}
+              >
+                Acute ({OSCE_STATION_STATS.byType['acute-care']})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="practical-skills" 
+                className={`${accommodations.largerButtons ? 'text-sm lg:text-base py-3' : 'text-xs lg:text-sm'} text-gray-700`}
+                style={buttonStyles}
+              >
+                Skills ({OSCE_STATION_STATS.byType['practical-skills']})
+              </TabsTrigger>
+            </TabsList>
 
           <TabsContent value={selectedType} className="mt-6">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -324,6 +375,7 @@ export default function Plab2Osce() {
             </div>
           </TabsContent>
         </Tabs>
+        </div>
       </div>
     </div>
   );
