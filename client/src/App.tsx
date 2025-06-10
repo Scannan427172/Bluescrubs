@@ -14,6 +14,7 @@ import PLAB1New from "@/pages/plab1-new";
 import InteractiveFlashcards from "@/pages/interactive-flashcards";
 import ClinicalGuides from "@/pages/clinical-guides";
 import GlobalScoreboard from "@/pages/global-scoreboard";
+import Premium from "@/pages/premium";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -88,6 +89,14 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <Plab2Osce />
+          </div>
+        </div>
+      </Route>
+      <Route path="/premium">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Premium />
           </div>
         </div>
       </Route>
