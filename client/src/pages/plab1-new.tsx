@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 import { getSourcesForQuestion } from "@shared/educational-sources";
@@ -720,7 +720,10 @@ export default function PLAB1New() {
                   <Badge variant="outline" className="text-xs bg-white">Visual Cues</Badge>
                 )}
                 {accommodations.audioSupport && (
-                  <Badge variant="outline" className="text-xs bg-white">Audio Support</Badge>
+                  <Badge variant="outline" className="text-xs bg-white flex items-center gap-1">
+                    <Volume2 className="w-3 h-3" />
+                    Audio Support
+                  </Badge>
                 )}
               </div>
             </CardContent>

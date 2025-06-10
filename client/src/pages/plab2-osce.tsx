@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { 
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
-  ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft
+  ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2
 } from "lucide-react";
 import { PLAB2_OSCE_STATIONS, OSCE_STATION_TYPES, OSCE_STATION_STATS, type OSCEStation } from "@shared/plab2-osce-stations";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
@@ -102,7 +102,15 @@ export default function Plab2Osce() {
           <Card>
             <CardContent className="p-6">
               <div className="prose max-w-none">
-                <h3 className="text-lg font-semibold mb-4">Station Scenario</h3>
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <h3 className="text-lg font-semibold">Station Scenario</h3>
+                  {accommodations.audioSupport && (
+                    <AudioSupport 
+                      text={activeStation.scenario}
+                      size="default"
+                    />
+                  )}
+                </div>
                 <p className="text-gray-700 mb-6">{activeStation.scenario}</p>
                 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -241,7 +249,10 @@ export default function Plab2Osce() {
                   <Badge variant="outline" className="text-xs bg-white">Visual Cues</Badge>
                 )}
                 {accommodations.audioSupport && (
-                  <Badge variant="outline" className="text-xs bg-white">Audio Support</Badge>
+                  <Badge variant="outline" className="text-xs bg-white flex items-center gap-1">
+                    <Volume2 className="w-3 h-3" />
+                    Audio Support
+                  </Badge>
                 )}
               </div>
             </CardContent>
