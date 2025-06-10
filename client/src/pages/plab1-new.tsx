@@ -656,18 +656,25 @@ export default function PLAB1New() {
         </Card>
 
         {/* Category Selection */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Or Choose Specific Specialty</CardTitle>
-            <CardDescription>Focus on a particular medical area for targeted practice</CardDescription>
+        <Card className="mb-8 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 shadow-lg">
+          <CardHeader className="pb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                <Target className="w-5 h-5 text-blue-600" />
+              </div>
+              <div>
+                <CardTitle className="text-xl text-blue-900">Choose Your Medical Specialty</CardTitle>
+                <CardDescription className="text-blue-700 font-medium">Focus on specific areas for targeted PLAB preparation</CardDescription>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              <div>
-                <Label className="text-base font-medium mb-3 block">Medical Specialties:</Label>
+              <div className="p-4 bg-white rounded-lg border border-blue-200 shadow-sm">
+                <Label className="text-base font-semibold mb-3 block text-blue-900">Select Medical Specialty:</Label>
                 <Select value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as GMCCategory | 'all')}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Choose specific specialty" />
+                  <SelectTrigger className="w-full h-12 border-2 border-blue-300 bg-white hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                    <SelectValue placeholder="👩‍⚕️ Choose your specialty area" />
                   </SelectTrigger>
                   <SelectContent>
                     {availableCategories.filter(cat => cat.value !== 'all').map((category) => (
@@ -680,10 +687,14 @@ export default function PLAB1New() {
               </div>
 
               <div className="text-center">
-                <p className="text-sm text-gray-600 mb-6">
-                  Selected: <strong>{availableCategories.find(c => c.value === selectedCategory)?.label}</strong>
-                  {" "}({availableCategories.find(c => c.value === selectedCategory)?.count} questions available)
-                </p>
+                <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg">
+                  <p className="text-sm font-medium text-green-800">
+                    ✅ Currently Selected: <strong className="text-green-900">{availableCategories.find(c => c.value === selectedCategory)?.label}</strong>
+                  </p>
+                  <p className="text-xs text-green-700 mt-1">
+                    {availableCategories.find(c => c.value === selectedCategory)?.count} questions available for practice
+                  </p>
+                </div>
               </div>
             </div>
           </CardContent>
@@ -730,11 +741,31 @@ export default function PLAB1New() {
           </Card>
         )}
 
+        {/* Specialty Selection Notice */}
+        {selectedCategory === 'all' && (
+          <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-lg">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
+                <Target className="w-5 h-5 text-amber-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-amber-900">💡 Tip: Choose Your Medical Specialty</h3>
+                <p className="text-sm text-amber-800">Select a specific specialty above for more targeted practice and better exam preparation</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Practice Options */}
         <Card>
           <CardHeader>
             <CardTitle>Choose Practice Mode</CardTitle>
-            <CardDescription>Select the type of practice session you want</CardDescription>
+            <CardDescription>
+              {selectedCategory === 'all' 
+                ? 'Practice with questions from all medical specialties' 
+                : `Practice ${availableCategories.find(c => c.value === selectedCategory)?.label} questions`
+              }
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-4 gap-4">
