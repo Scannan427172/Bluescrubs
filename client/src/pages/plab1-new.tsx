@@ -15,6 +15,7 @@ import { getSourcesForQuestion } from "@shared/educational-sources";
 import { GMC_QUESTION_BANK, type GMCQuestion, type GMCCategory } from "@shared/gmc-question-bank";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
 import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
+import { AudioSupport, ReadableText } from "@/components/audio-support";
 
 
 
@@ -889,20 +890,33 @@ export default function PLAB1New() {
             <Badge variant="secondary">{currentQuestion.category}</Badge>
             <Badge variant="outline">Intermediate</Badge>
           </div>
-          <CardTitle className={`${questionStyles} leading-relaxed ${accommodations.keywordHighlighting ? 'font-medium' : ''}`}>
-            {currentQuestion.stem}
-            {showTranslation && currentLanguage !== 'en' && (
-              <div className="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r">
-                <div className="flex items-center gap-2 text-sm text-blue-700 mb-2">
-                  <Globe className="w-4 h-4" />
-                  <span className="font-medium">Translation ({supportedLanguages.find(lang => lang.code === currentLanguage)?.name}):</span>
+          <div className="flex items-start justify-between gap-4">
+            <CardTitle className={`flex-1 ${questionStyles} leading-relaxed ${accommodations.keywordHighlighting ? 'font-medium' : ''}`}>
+              {currentQuestion.stem}
+              {showTranslation && currentLanguage !== 'en' && (
+                <div className="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r">
+                  <div className="flex items-center gap-2 text-sm text-blue-700 mb-2">
+                    <Globe className="w-4 h-4" />
+                    <span className="font-medium">Translation ({supportedLanguages.find(lang => lang.code === currentLanguage)?.name}):</span>
+                  </div>
+                  <div className="text-blue-800 leading-relaxed">
+                    {currentTranslations['question-stem'] || (isTranslating ? 'Translating...' : 'Translation loading...')}
+                  </div>
                 </div>
-                <div className="text-blue-800 leading-relaxed">
-                  {currentTranslations['question-stem'] || (isTranslating ? 'Translating...' : 'Translation loading...')}
-                </div>
+              )}
+            </CardTitle>
+            {accommodations.audioSupport && (
+              <div className="flex-shrink-0 mt-1">
+                <AudioSupport 
+                  text={currentQuestion.stem + (showTranslation && currentTranslations['question-stem'] 
+                    ? ` Translation: ${currentTranslations['question-stem']}` 
+                    : '')}
+                  size="default"
+                  className="justify-end"
+                />
               </div>
             )}
-          </CardTitle>
+          </div>
         </CardHeader>
         <CardContent>
           <RadioGroup value={selectedAnswer} onValueChange={handleAnswerSelect}>

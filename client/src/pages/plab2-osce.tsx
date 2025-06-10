@@ -13,6 +13,7 @@ import {
 import { PLAB2_OSCE_STATIONS, OSCE_STATION_TYPES, OSCE_STATION_STATS, type OSCEStation } from "@shared/plab2-osce-stations";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
 import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
+import { AudioSupport } from "@/components/audio-support";
 
 export default function Plab2Osce() {
   const [activeStation, setActiveStation] = useState<OSCEStation | null>(null);
