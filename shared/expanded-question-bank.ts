@@ -1479,8 +1479,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Haematology Clinic', 'Emergency Department', 'GP Surgery'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Haematology question ${i}: A patient presents with blood disorder symptoms requiring evaluation.`,
-      options: ["Haem option A", "Haem option B", "Haem option C", "Haem option D", "Haem option E"],
+      stem: (() => {
+        const age = 20 + (i % 60);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['leukaemia', 'lymphoma', 'bleeding-disorders', 'transfusion'][i % 4];
+        
+        if (subcategory === 'leukaemia') {
+          return `A ${age}-year-old ${gender} presents with fatigue, recurrent infections, and easy bruising. Blood film shows 85% blast cells with Auer rods. What is the most likely diagnosis?`;
+        } else if (subcategory === 'lymphoma') {
+          return `A ${age}-year-old ${gender} presents with painless lymphadenopathy, night sweats, and weight loss. Lymph node biopsy shows Reed-Sternberg cells. What is the most likely diagnosis?`;
+        } else if (subcategory === 'bleeding-disorders') {
+          return `A ${age}-year-old ${gender} presents with prolonged bleeding after dental extraction and heavy menstrual periods. APTT is prolonged, factor VIII is low. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age}-year-old ${gender} requires urgent blood transfusion following major trauma. Blood group is O negative. What is the most appropriate blood product?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['leukaemia', 'lymphoma', 'bleeding-disorders', 'transfusion'][i % 4];
+        
+        if (subcategory === 'leukaemia') {
+          return ['Acute myeloid leukemia', 'Acute lymphoblastic leukemia', 'Chronic myeloid leukemia', 'Chronic lymphocytic leukemia', 'Myelodysplastic syndrome'];
+        } else if (subcategory === 'lymphoma') {
+          return ['Hodgkin lymphoma', 'Diffuse large B-cell lymphoma', 'Follicular lymphoma', 'Mantle cell lymphoma', 'Burkitt lymphoma'];
+        } else if (subcategory === 'bleeding-disorders') {
+          return ['Hemophilia A', 'Hemophilia B', 'Von Willebrand disease', 'Factor V deficiency', 'Disseminated intravascular coagulation'];
+        } else {
+          return ['O negative packed red cells', 'O positive packed red cells', 'AB negative packed red cells', 'Fresh frozen plasma', 'Platelets'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Blood disorder explanation ${i} covering diagnosis and treatment.`,
       learningObjectives: ["Blood film interpretation", "Haematological assessment", "Treatment protocols"],
@@ -1503,8 +1529,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['ID Clinic', 'Emergency Department', 'GP Surgery'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Infectious diseases question ${i}: A patient presents with infectious symptoms requiring management.`,
-      options: ["ID option A", "ID option B", "ID option C", "ID option D", "ID option E"],
+      stem: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['antimicrobial-resistance', 'tropical-diseases', 'HIV', 'hepatitis'][i % 4];
+        
+        if (subcategory === 'antimicrobial-resistance') {
+          return `A ${age}-year-old ${gender} with recurrent UTIs presents with fever and dysuria. Urine culture shows E. coli resistant to trimethoprim and amoxicillin. What is the most appropriate antibiotic?`;
+        } else if (subcategory === 'tropical-diseases') {
+          return `A ${age}-year-old ${gender} returns from Nigeria with fever, headache, and myalgia starting 10 days after return. Blood film shows ring forms and gametocytes. What is the most appropriate treatment?`;
+        } else if (subcategory === 'HIV') {
+          return `A ${age}-year-old ${gender} with newly diagnosed HIV has a CD4 count of 200 cells/μL and viral load of 100,000 copies/mL. What is the most appropriate initial management?`;
+        } else {
+          return `A ${age}-year-old ${gender} healthcare worker sustains a needlestick injury from a patient with known hepatitis B. They are unvaccinated. What is the most appropriate post-exposure prophylaxis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['antimicrobial-resistance', 'tropical-diseases', 'HIV', 'hepatitis'][i % 4];
+        
+        if (subcategory === 'antimicrobial-resistance') {
+          return ['Nitrofurantoin', 'Ciprofloxacin', 'Co-amoxiclav', 'Cefalexin', 'Fosfomycin'];
+        } else if (subcategory === 'tropical-diseases') {
+          return ['Artemether-lumefantrine', 'Chloroquine', 'Doxycycline', 'Mefloquine', 'Quinine'];
+        } else if (subcategory === 'HIV') {
+          return ['Start HAART immediately', 'Wait for resistance testing', 'Prophylaxis for opportunistic infections', 'Both A and C', 'Lifestyle advice only'];
+        } else {
+          return ['Hepatitis B vaccine and HBIG', 'Hepatitis B vaccine only', 'HBIG only', 'Antiviral therapy', 'No intervention needed'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Infectious disease explanation ${i} covering pathogen identification and treatment.`,
       learningObjectives: ["Infection control", "Antimicrobial stewardship", "Disease prevention"],
@@ -1527,8 +1579,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Rheumatology Clinic', 'GP Surgery', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Rheumatology question ${i}: A patient presents with musculoskeletal symptoms requiring assessment.`,
-      options: ["Rheum option A", "Rheum option B", "Rheum option C", "Rheum option D", "Rheum option E"],
+      stem: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['rheumatoid-arthritis', 'osteoarthritis', 'SLE', 'gout'][i % 4];
+        
+        if (subcategory === 'rheumatoid-arthritis') {
+          return `A ${age}-year-old ${gender} presents with symmetric polyarthritis affecting hands and feet, morning stiffness lasting 2 hours, and fatigue. RF and anti-CCP are positive. What is the most appropriate initial treatment?`;
+        } else if (subcategory === 'osteoarthritis') {
+          return `A ${age}-year-old ${gender} presents with knee pain that worsens with activity and improves with rest. X-ray shows joint space narrowing and osteophytes. What is the most appropriate initial management?`;
+        } else if (subcategory === 'SLE') {
+          return `A ${age}-year-old ${gender} presents with malar rash, arthralgia, and Raynaud's phenomenon. ANA is positive with anti-dsDNA antibodies. Complement levels are low. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with acute onset severe pain and swelling of the first MTP joint. Synovial fluid shows negatively birefringent crystals. What is the most appropriate acute treatment?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['rheumatoid-arthritis', 'osteoarthritis', 'SLE', 'gout'][i % 4];
+        
+        if (subcategory === 'rheumatoid-arthritis') {
+          return ['Methotrexate and folic acid', 'Prednisolone only', 'Sulfasalazine', 'Biologics', 'NSAIDs only'];
+        } else if (subcategory === 'osteoarthritis') {
+          return ['Paracetamol and physiotherapy', 'NSAIDs', 'Intra-articular steroids', 'Joint replacement', 'Bed rest'];
+        } else if (subcategory === 'SLE') {
+          return ['Systemic lupus erythematosus', 'Mixed connective tissue disease', 'Sjögren syndrome', 'Antiphospholipid syndrome', 'Drug-induced lupus'];
+        } else {
+          return ['Colchicine or NSAIDs', 'Allopurinol', 'Prednisolone', 'Febuxostat', 'Probenecid'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Rheumatological explanation ${i} covering joint and autoimmune diseases.`,
       learningObjectives: ["Joint examination", "Autoimmune assessment", "DMARD therapy"],
@@ -1551,8 +1629,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Dermatology Clinic', 'GP Surgery', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Dermatology question ${i}: A patient presents with skin lesions requiring evaluation.`,
-      options: ["Derm option A", "Derm option B", "Derm option C", "Derm option D", "Derm option E"],
+      stem: (() => {
+        const age = 20 + (i % 60);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['eczema', 'psoriasis', 'skin-cancer', 'infections'][i % 4];
+        
+        if (subcategory === 'eczema') {
+          return `A ${age}-year-old ${gender} presents with itchy, red, scaly patches on flexural surfaces that have been present since childhood. Family history of asthma and hay fever. What is the most likely diagnosis?`;
+        } else if (subcategory === 'psoriasis') {
+          return `A ${age}-year-old ${gender} presents with well-demarcated, erythematous plaques with silvery scales on elbows and knees. Nail pitting is present. What is the most likely diagnosis?`;
+        } else if (subcategory === 'skin-cancer') {
+          return `A ${age}-year-old ${gender} presents with a pigmented lesion on the back that has increased in size and changed color over 6 months. It has irregular borders and multiple colors. What is the most appropriate management?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with a painful, vesicular rash in a dermatomal distribution on the right side of the torso. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['eczema', 'psoriasis', 'skin-cancer', 'infections'][i % 4];
+        
+        if (subcategory === 'eczema') {
+          return ['Atopic dermatitis', 'Contact dermatitis', 'Seborrheic dermatitis', 'Psoriasis', 'Lichen planus'];
+        } else if (subcategory === 'psoriasis') {
+          return ['Plaque psoriasis', 'Guttate psoriasis', 'Eczema', 'Lichen planus', 'Seborrheic dermatitis'];
+        } else if (subcategory === 'skin-cancer') {
+          return ['Urgent dermatology referral', 'Routine dermatology referral', 'Reassurance and monitoring', 'Topical treatment', 'Biopsy in primary care'];
+        } else {
+          return ['Herpes zoster', 'Herpes simplex', 'Impetigo', 'Cellulitis', 'Contact dermatitis'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Dermatological explanation ${i} covering skin conditions and treatments.`,
       learningObjectives: ["Skin examination", "Lesion assessment", "Treatment protocols"],
