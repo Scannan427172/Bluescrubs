@@ -57,7 +57,7 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'intermediate',
     clinicalSetting: 'Emergency Department',
     ageGroup: 'Adult',
-    stem: "A 58-year-old man presents to the emergency department with severe central chest pain that started 2 hours ago. The pain radiates to his left arm and jaw. He has a history of type 2 diabetes and hypertension. On examination, he is sweating and looks unwell. His pulse is 95 bpm and blood pressure is 150/90 mmHg. The ECG shows ST elevation in leads II, III, and aVF.",
+    stem: "A 58-year-old man presents to the emergency department with severe central chest pain that started 2 hours ago. The pain radiates to his left arm and jaw. He has a history of type 2 diabetes and hypertension. On examination, he is sweating and looks unwell. His pulse is 95 bpm and blood pressure is 150/90 mmHg. The ECG shows ST elevation in leads II, III, and aVF.\n\nWhich one of the following is the most likely diagnosis?",
     options: [
       "Unstable angina",
       "Inferior ST-elevation myocardial infarction (STEMI)",
@@ -112,7 +112,7 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'intermediate',
     clinicalSetting: 'Emergency Department',
     ageGroup: 'Adult',
-    stem: "A 43-year-old Asian man presents with headache and neck stiffness. CT brain is normal and a lumbar puncture is performed with the following results:\n\nSerum glucose: 4.7 mmol/L (4.0 - 7.0)\n\nLumbar puncture reveals:\nOpening pressure: 15 cmCSF (10 - 20)\nAppearance: Cloudy\nGlucose: 3.3 mmol/L (2.8 - 4.2)\nProtein: 0.7 g/L (0.15 - 0.45)\nWhite cells: 100 / mm³ (70% lymphocytes) (0 - 8)",
+    stem: "A 43-year-old Asian man presents with headache and neck stiffness. CT brain is normal and a lumbar puncture is performed with the following results:\n\nSerum glucose: 4.7 mmol/L (4.0 - 7.0)\n\nLumbar puncture reveals:\nOpening pressure: 15 cmCSF (10 - 20)\nAppearance: Cloudy\nGlucose: 3.3 mmol/L (2.8 - 4.2)\nProtein: 0.7 g/L (0.15 - 0.45)\nWhite cells: 100 / mm³ (70% lymphocytes) (0 - 8)\n\nWhich one of the following is the most likely diagnosis?",
     options: [
       "Bacterial meningitis",
       "Viral meningitis",
@@ -275,7 +275,7 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'foundation',
     clinicalSetting: 'General Practice',
     ageGroup: 'Adult',
-    stem: "A 28-year-old teacher presents with a 6-month history of intermittent wheeze, shortness of breath, and dry cough, particularly at night and early morning. She reports that symptoms worsen during the hay fever season and after exercise. She has no significant past medical history and is a non-smoker. Peak flow readings show 20% variability between morning and evening measurements.",
+    stem: "A 28-year-old teacher presents with a 6-month history of intermittent wheeze, shortness of breath, and dry cough, particularly at night and early morning. She reports that symptoms worsen during the hay fever season and after exercise. She has no significant past medical history and is a non-smoker. Peak flow readings show 20% variability between morning and evening measurements.\n\nWhich one of the following is the most likely diagnosis?",
     options: [
       "Chronic obstructive pulmonary disease (COPD)",
       "Asthma",
@@ -330,7 +330,7 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'intermediate',
     clinicalSetting: 'Outpatient Clinic',
     ageGroup: 'Adult',
-    stem: "A 45-year-old man presents with a 3-week history of epigastric pain that is worse when hungry and improves after eating. He reports taking ibuprofen regularly for back pain. He has no weight loss or vomiting. Examination reveals mild epigastric tenderness. Blood tests show Helicobacter pylori antigen positive.",
+    stem: "A 45-year-old man presents with a 3-week history of epigastric pain that is worse when hungry and improves after eating. He reports taking ibuprofen regularly for back pain. He has no weight loss or vomiting. Examination reveals mild epigastric tenderness. Blood tests show Helicobacter pylori antigen positive.\n\nWhich one of the following is the most likely diagnosis?",
     options: [
       "Gastric carcinoma",
       "Duodenal ulcer",
@@ -385,7 +385,7 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'advanced',
     clinicalSetting: 'Emergency Department',
     ageGroup: 'Elderly',
-    stem: "A 72-year-old woman is brought to the emergency department by her daughter who found her collapsed at home 3 hours ago. The patient has right-sided weakness, facial droop, and slurred speech. She has a history of atrial fibrillation but stopped taking warfarin 6 months ago. NIHSS score is 18. CT head shows no acute hemorrhage.",
+    stem: "A 72-year-old woman is brought to the emergency department by her daughter who found her collapsed at home 3 hours ago. The patient has right-sided weakness, facial droop, and slurred speech. She has a history of atrial fibrillation but stopped taking warfarin 6 months ago. NIHSS score is 18. CT head shows no acute hemorrhage.\n\nWhich one of the following is the most appropriate immediate management?",
     options: [
       "Administer aspirin 300mg immediately",
       "Start intravenous thrombolysis with alteplase",
@@ -495,7 +495,7 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'intermediate',
     clinicalSetting: 'General Practice',
     ageGroup: 'Adult',
-    stem: "A 34-year-old woman presents with low mood, loss of interest in activities, poor sleep, and reduced appetite for the past 6 weeks. She reports feeling worthless and has had thoughts of self-harm but no specific plans. She has no previous psychiatric history. PHQ-9 score is 16.",
+    stem: "A 34-year-old woman presents with low mood, loss of interest in activities, poor sleep, and reduced appetite for the past 6 weeks. She reports feeling worthless and has had thoughts of self-harm but no specific plans. She has no previous psychiatric history. PHQ-9 score is 16.\n\nWhich one of the following is the most appropriate management?",
     options: [
       "Mild depression - watchful waiting",
       "Moderate depression - start antidepressant",
@@ -540,6 +540,56 @@ export const GMC_QUESTION_BANK: GMCQuestion[] = [
     estimatedTime: 85,
     lastReviewed: "2024-01-28",
     reviewedBy: "Dr. David Kumar, Psychiatrist"
+  },
+
+  {
+    id: 'surg001',
+    category: 'surgery',
+    subcategory: 'prophylactic-antibiotics',
+    cognitiveLevel: 'knowledge',
+    difficulty: 'foundation',
+    clinicalSetting: 'Operating Theatre',
+    ageGroup: 'Adult',
+    stem: "You are an F1 on a surgical rotation. Which one of the following procedures requires prophylactic antibiotics?",
+    options: [
+      "Tonsillectomy",
+      "Diagnostic colonoscopy", 
+      "Appendectomy",
+      "Inguinal hernia repair",
+      "Carpal tunnel decompression"
+    ],
+    correctAnswer: 2,
+    explanation: "Appendectomy requires prophylactic antibiotics as it involves entering the gastrointestinal tract, which has high bacterial contamination risk. Clean procedures like tonsillectomy, diagnostic colonoscopy, inguinal hernia repair, and carpal tunnel decompression typically do not require prophylactic antibiotics unless there are specific risk factors.",
+    learningObjectives: [
+      "Understand indications for prophylactic antibiotics in surgery",
+      "Classify surgical procedures by contamination risk",
+      "Apply evidence-based antibiotic prophylaxis guidelines"
+    ],
+    gmcOutcomes: [
+      "Perioperative care",
+      "Infection prevention and control",
+      "Clinical decision making"
+    ],
+    references: [
+      "NICE CG74: Surgical site infections",
+      "WHO Guidelines for Safe Surgery"
+    ],
+    sourceLinks: [
+      {
+        title: "NICE Guidelines - Surgical site infections",
+        url: "https://www.nice.org.uk/guidance/cg74",
+        type: "guideline"
+      },
+      {
+        title: "NHS - Preventing surgical site infections",
+        url: "https://www.nhs.uk/conditions/surgical-site-infections/",
+        type: "nhs"
+      }
+    ],
+    tags: ["surgery", "antibiotics", "prophylaxis", "infection-control"],
+    estimatedTime: 60,
+    lastReviewed: "2024-01-30",
+    reviewedBy: "Dr. Sarah Williams, General Surgeon"
   },
 
   {
