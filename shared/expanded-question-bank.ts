@@ -16,16 +16,16 @@ export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'foundation',
     clinicalSetting: 'GP Surgery',
     ageGroup: 'Adult',
-    stem: "A 55-year-old man has consistently high blood pressure readings of 160/95 mmHg on three separate occasions. He has no other medical conditions. What is the most appropriate first-line antihypertensive medication?",
+    stem: "A 55-year-old man has consistently high blood pressure readings of 160/95 mmHg on three separate occasions. He has no other medical conditions and normal renal function (eGFR >60). What is the most appropriate first-line antihypertensive medication?",
     options: [
-      "Amlodipine 5mg daily",
-      "Ramipril 2.5mg daily", 
-      "Bendroflumethiazide 2.5mg daily",
-      "Atenolol 25mg daily",
-      "Losartan 25mg daily"
+      "Amlodipine 5mg once daily (BNF: start 5mg daily, max 10mg daily)",
+      "Ramipril 2.5mg once daily (BNF: start 1.25-2.5mg daily, max 10mg daily)", 
+      "Bendroflumethiazide 2.5mg once daily (BNF: 2.5mg daily, avoid if eGFR <30)",
+      "Atenolol 25mg once daily (BNF: start 25-50mg daily, contraindicated in asthma)",
+      "Losartan 25mg once daily (BNF: start 25-50mg daily, monitor potassium)"
     ],
     correctAnswer: 0,
-    explanation: "For patients under 55 years of age and not of black African or Caribbean origin, ACE inhibitors or ARBs are first-line. However, for patients 55+ or black African/Caribbean origin, calcium channel blockers like amlodipine are preferred as first-line therapy according to NICE guidelines.",
+    explanation: "BNF guidance: For patients aged 55+ or black African/Caribbean origin, calcium channel blockers are first-line. Amlodipine 5mg daily (BNF section 2.6.2) is preferred due to once-daily dosing and fewer contraindications. Ramipril would be first-line if patient was <55 and not black African/Caribbean (BNF section 2.5.5.1). Atenolol is contraindicated in asthma/COPD (BNF cautions). Thiazides are third-line add-on therapy (BNF treatment summary).",
     learningObjectives: [
       "Apply NICE hypertension guidelines",
       "Understand age and ethnicity considerations in antihypertensive choice",
@@ -54,16 +54,16 @@ export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'intermediate',
     clinicalSetting: 'Emergency Department',
     ageGroup: 'Elderly',
-    stem: "A 78-year-old woman presents with acute breathlessness, bilateral ankle swelling, and orthopnea. Chest X-ray shows cardiomegaly and pulmonary edema. BNP is significantly elevated. What is the most appropriate immediate treatment?",
+    stem: "A 78-year-old woman presents with acute breathlessness, bilateral ankle swelling, and orthopnea. Chest X-ray shows cardiomegaly and pulmonary edema. BNP is significantly elevated. Her usual medications include bisoprolol 2.5mg daily. What is the most appropriate immediate treatment?",
     options: [
-      "IV furosemide 40mg",
-      "Sublingual GTN",
-      "High-flow oxygen",
-      "IV morphine 2-5mg",
-      "Non-invasive ventilation"
+      "IV furosemide 40mg (BNF: 20-80mg IV, max 2g daily in severe heart failure)",
+      "Sublingual GTN 400mcg (BNF: contraindicated if systolic BP <90mmHg)",
+      "High-flow oxygen 15L/min (BNF: monitor for CO2 retention)",
+      "IV morphine 2-5mg (BNF: respiratory depression risk, avoid in elderly)",
+      "Non-invasive ventilation (BNF: monitor arterial blood gases)"
     ],
     correctAnswer: 0,
-    explanation: "IV loop diuretics like furosemide are the cornerstone of acute heart failure management to reduce preload and improve symptoms. The dose should be equivalent to or higher than the patient's usual oral dose.",
+    explanation: "BNF guidance: IV furosemide 40mg (BNF section 2.2.2) is first-line for acute heart failure with fluid overload. Monitor electrolytes and renal function. GTN is useful but contraindicated if hypotensive. Morphine should be avoided due to respiratory depression risk (BNF cautions). Continue bisoprolol unless hypotensive (BNF: don't stop abruptly in heart failure). Oxygen only if saturations <90% to avoid hyperoxia (BNF treatment summary).",
     learningObjectives: [
       "Recognize acute heart failure presentation",
       "Understand immediate management priorities",
@@ -93,16 +93,16 @@ export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'intermediate',
     clinicalSetting: 'Emergency Department',
     ageGroup: 'Adult',
-    stem: "A 45-year-old smoker presents with 3 days of productive cough with purulent sputum, fever, and right-sided pleuritic chest pain. Chest X-ray shows right lower lobe consolidation. CURB-65 score is 2. What is the most appropriate management?",
+    stem: "A 45-year-old smoker presents with 3 days of productive cough with purulent sputum, fever, and right-sided pleuritic chest pain. Chest X-ray shows right lower lobe consolidation. CURB-65 score is 2. He takes warfarin for atrial fibrillation. What is the most appropriate management?",
     options: [
-      "Oral amoxicillin 500mg TDS for 5 days and discharge",
-      "IV co-amoxiclav 1.2g TDS and admit",
-      "Oral clarithromycin 500mg BD and discharge", 
-      "IV ceftriaxone and admit to ICU",
-      "Oral prednisolone and bronchodilators"
+      "Oral amoxicillin 500mg TDS for 5 days and discharge (BNF: no warfarin interaction)",
+      "IV co-amoxiclav 1.2g TDS and admit (BNF: moderate severity pneumonia treatment)",
+      "Oral clarithromycin 500mg BD and discharge (BNF: enhances warfarin effect - monitor INR)", 
+      "IV ceftriaxone 2g daily and admit to ICU (BNF: severe pneumonia, not first-line)",
+      "Oral prednisolone 30mg daily (BNF: only if underlying COPD)"
     ],
     correctAnswer: 1,
-    explanation: "CURB-65 score of 2 indicates moderate severity pneumonia requiring hospital admission. IV antibiotics (co-amoxiclav or amoxicillin + clarithromycin) are recommended for hospitalized patients according to BTS guidelines.",
+    explanation: "BNF guidance: CURB-65 score of 2 indicates moderate severity pneumonia requiring hospital admission and IV antibiotics. Co-amoxiclav 1.2g TDS IV (BNF section 5.1.1.3) is first-line for moderate pneumonia. Key consideration: warfarin interaction - clarithromycin enhances warfarin effect requiring INR monitoring (BNF interactions), while amoxicillin has no significant interaction. Amoxicillin alone insufficient for moderate pneumonia (BNF treatment summary).",
     learningObjectives: [
       "Apply CURB-65 scoring for pneumonia severity",
       "Understand antibiotic choice in community-acquired pneumonia",
@@ -210,16 +210,16 @@ export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'advanced',
     clinicalSetting: 'Emergency Department',
     ageGroup: 'Adult',
-    stem: "A 25-year-old known diabetic presents with vomiting, dehydration, and altered consciousness. Blood glucose 28 mmol/L, ketones 4.5 mmol/L, pH 7.12, bicarbonate 8 mmol/L. What is the most appropriate initial fluid management?",
+    stem: "A 25-year-old known diabetic presents with vomiting, dehydration, and altered consciousness. Blood glucose 28 mmol/L, ketones 4.5 mmol/L, pH 7.12, bicarbonate 8 mmol/L. Her usual medications include insulin glargine 20 units daily. What is the most appropriate initial management?",
     options: [
-      "0.9% sodium chloride 1L over 1 hour",
-      "5% dextrose 1L over 4 hours",
-      "0.45% sodium chloride 1L over 2 hours",
-      "Hartmann's solution 500ml over 30 minutes",
-      "10% dextrose with insulin infusion"
+      "0.9% sodium chloride 1L/hour + fixed-rate insulin infusion 0.1 units/kg/hour (BNF: standard DKA protocol)",
+      "5% dextrose 1L over 4 hours + continue glargine (BNF: avoid dextrose until glucose <14 mmol/L)",
+      "0.45% sodium chloride + IV insulin bolus 10 units (BNF: avoid insulin bolus in DKA)",
+      "Hartmann's solution + subcutaneous rapid-acting insulin (BNF: IV route essential in DKA)",
+      "10% dextrose with insulin sliding scale (BNF: inappropriate initial fluid choice)"
     ],
     correctAnswer: 0,
-    explanation: "In DKA, 0.9% sodium chloride is the preferred initial fluid replacement at 1L over the first hour (faster if patient is hypotensive), followed by ongoing replacement based on assessment of dehydration and electrolyte levels.",
+    explanation: "BNF guidance for DKA: Start 0.9% sodium chloride 1L over first hour unless patient hypotensive (BNF section 6.1.3). Commence fixed-rate insulin infusion 0.1 units/kg/hour (typically 5-7 units/hour for adults) via separate IV line (BNF treatment summary). Continue long-acting insulin (glargine) to prevent rebound ketosis. Monitor blood glucose, ketones, and electrolytes hourly. Switch to 5% dextrose when glucose falls below 14 mmol/L to prevent hypoglycemia while clearing ketones (BNF DKA protocol).",
     learningObjectives: [
       "Diagnose diabetic ketoacidosis",
       "Understand DKA fluid management protocols",
@@ -366,16 +366,16 @@ export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
     difficulty: 'intermediate',
     clinicalSetting: 'Rheumatology Clinic',
     ageGroup: 'Adult',
-    stem: "A 45-year-old woman presents with 6 months of symmetrical small joint stiffness lasting >1 hour each morning. RF positive, anti-CCP positive, CRP elevated. X-rays show early erosions. What is the most appropriate initial treatment?",
+    stem: "A 45-year-old woman presents with 6 months of symmetrical small joint stiffness lasting >1 hour each morning. RF positive, anti-CCP positive, CRP elevated. X-rays show early erosions. She has normal renal function and no contraindications. What is the most appropriate initial treatment?",
     options: [
-      "NSAIDs and physiotherapy",
-      "Methotrexate 15mg weekly with folic acid",
-      "Prednisolone 15mg daily",
-      "Hydroxychloroquine 200mg daily",
-      "Biologics (anti-TNF therapy)"
+      "NSAIDs and physiotherapy (BNF: insufficient for active RA with erosions)",
+      "Methotrexate 15mg weekly with folic acid 5mg weekly (BNF: start 7.5-10mg, max 25mg weekly)",
+      "Prednisolone 15mg daily long-term (BNF: short-term bridge only, multiple side effects)",
+      "Hydroxychloroquine 200mg daily (BNF: mild disease only, 6-12 months for effect)",
+      "Biologics (anti-TNF therapy) (BNF: reserved for DMARD-resistant disease)"
     ],
     correctAnswer: 1,
-    explanation: "Early, aggressive treatment with DMARDs (methotrexate is first-line) within 3 months of symptom onset is crucial in RA to prevent joint damage. Methotrexate with folic acid supplementation is the gold standard initial DMARD.",
+    explanation: "BNF guidance: Methotrexate is first-line DMARD for rheumatoid arthritis (BNF section 10.1.3). Start 7.5-10mg weekly, increase gradually to 15-25mg weekly based on response. Essential co-prescription: folic acid 5mg weekly (taken different day from methotrexate) to reduce toxicity (BNF prescribing notes). Monitor FBC, renal and liver function before starting and regularly during treatment. Contraindications include pregnancy, breastfeeding, significant renal/hepatic impairment (BNF cautions and contraindications).",
     learningObjectives: [
       "Diagnose rheumatoid arthritis early",
       "Understand DMARD therapy principles",
