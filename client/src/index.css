@@ -511,6 +511,15 @@ label {
   color: #2563eb !important;
 }
 
+/* Fix Complete Question Bank button text visibility */
+button[class*="bg-white"] {
+  color: #2563eb !important;
+}
+
+button[class*="bg-white"]:hover {
+  color: #2563eb !important;
+}
+
 /* Target landing page hero text to make it white */
 #landing-hero-text {
   color: white !important;
