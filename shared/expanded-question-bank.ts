@@ -1465,21 +1465,107 @@ const generateMoreQuestions = () => {
 
   // Dermatology (235 more questions to reach 255 total)
   for (let i = 121; i <= 355; i++) {
+    const subcategories = ['skin-cancer', 'eczema', 'psoriasis', 'infections', 'autoimmune', 'drug-reactions'];
+    const currentSubcategory = subcategories[i % 6];
+    
+    // Generate realistic dermatology stems based on subcategory
+    const generateDermStem = (index: number, subcategory: string): string => {
+      const age = 25 + (index % 50);
+      const gender = index % 2 === 0 ? 'man' : 'woman';
+      
+      const stemTemplates: { [key: string]: string[] } = {
+        'eczema': [
+          `A ${age}-year-old ${gender} presents with a 3-month history of itchy, red, scaly patches on the flexural surfaces of both elbows and knees. The lesions are worse at night and improve with topical emollients. There is a family history of asthma. What is the most appropriate initial management?`,
+          `A ${age}-year-old ${gender} with known atopic eczema presents with sudden worsening of their chronic skin condition. On examination, there are widespread erythematous, weeping lesions with small pustules and crusting. The patient feels systemically unwell with fever. What is the most likely complication?`,
+          `A ${age}-year-old ${gender} presents with chronic hand eczema affecting the palms and fingers, with dry, cracked, and fissured skin. The condition interferes with daily activities and work. Topical corticosteroids have provided minimal improvement. What is the next most appropriate treatment?`
+        ],
+        'psoriasis': [
+          `A ${age}-year-old ${gender} presents with well-demarcated, erythematous plaques covered with silvery scales on the extensor surfaces of elbows and knees. The plaques have been present for 6 months and are mildly itchy. What is the most appropriate first-line topical treatment?`,
+          `A ${age}-year-old ${gender} with psoriasis covering 15% of body surface area presents with joint pain and swelling in several fingers and toes. Morning stiffness lasts 2 hours. What is the most appropriate investigation?`,
+          `A ${age}-year-old ${gender} presents with small, drop-like scaly lesions scattered across the trunk and limbs that appeared 2 weeks after a streptococcal throat infection. What type of psoriasis is this?`
+        ],
+        'skin-cancer': [
+          `A ${age}-year-old ${gender} presents with a 8mm pigmented lesion on the shoulder that has increased in size and changed color over 4 months. It has irregular borders and contains multiple colors including black and blue areas. What is the most appropriate management?`,
+          `A ${age}-year-old ${gender} presents with a pearly, translucent nodule with visible telangiectasia on the nose that has been slowly growing over 12 months. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} presents with a scaly, erythematous patch on the back of the hand that fails to heal and occasionally bleeds. There is a history of significant sun exposure. What is the most appropriate management?`
+        ],
+        'infections': [
+          `A ${age}-year-old ${gender} presents with a painful, red, swollen area on the leg with a well-defined, raised border. The patient has fever and feels generally unwell. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} presents with itchy, circular patches with central clearing and an active, scaly border on the arm. What is the most appropriate treatment?`,
+          `A ${age}-year-old ${gender} presents with multiple small, painful vesicles on an erythematous base distributed along a dermatomal pattern on one side of the torso. What is the most likely diagnosis?`
+        ],
+        'autoimmune': [
+          `A ${age}-year-old ${gender} presents with tense, large bullae on normal-appearing skin, mainly affecting the trunk and proximal limbs. The patient is otherwise well. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} presents with painful oral ulcers and flaccid blisters on the skin that rupture easily, leaving painful erosions. Nikolsky sign is positive. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} presents with a symmetrical, violaceous rash over the knuckles and a heliotrope rash around the eyes, associated with muscle weakness. What is the most likely diagnosis?`
+        ],
+        'drug-reactions': [
+          `A ${age}-year-old ${gender} develops a widespread maculopapular rash 7 days after starting a new antibiotic. The rash is itchy but the patient is otherwise well. What is the most appropriate immediate management?`,
+          `A ${age}-year-old ${gender} presents with fever, facial swelling, and a widespread skin rash with target lesions 2 weeks after starting allopurinol. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} develops sudden onset of widespread erythema with sheet-like peeling of skin after starting a sulfonamide antibiotic. The patient has fever and mucosal involvement. What is the most urgent management?`
+        ]
+      };
+      
+      const templates = stemTemplates[subcategory] || [`A ${age}-year-old ${gender} presents with a dermatological condition requiring clinical assessment and evidence-based management according to current guidelines.`];
+      return templates[index % templates.length];
+    };
+    
+    const generateDermOptions = (subcategory: string, index: number): string[] => {
+      const optionSets: { [key: string]: string[][] } = {
+        'eczema': [
+          ['Topical emollients and mild topical corticosteroid', 'Oral antihistamines only', 'Topical calcineurin inhibitors', 'Oral corticosteroids', 'Topical antibiotics'],
+          ['Eczema herpeticum', 'Contact dermatitis', 'Secondary bacterial infection', 'Atopic dermatitis flare', 'Drug reaction'],
+          ['Topical tacrolimus', 'Systemic corticosteroids', 'UV phototherapy', 'Hand care education and barrier protection', 'Topical antibiotics']
+        ],
+        'psoriasis': [
+          ['Topical corticosteroid and vitamin D analogue', 'Oral methotrexate', 'Topical emollients only', 'UV phototherapy', 'Topical calcineurin inhibitor'],
+          ['X-ray of affected joints', 'Rheumatoid factor and anti-CCP', 'HLA-B27 testing', 'Uric acid levels', 'ANA and anti-dsDNA'],
+          ['Guttate psoriasis', 'Plaque psoriasis', 'Pustular psoriasis', 'Erythrodermic psoriasis', 'Inverse psoriasis']
+        ],
+        'skin-cancer': [
+          ['2-week wait urgent dermatology referral', 'Routine dermatology referral', 'Excision in primary care', 'Dermoscopy and monitoring', 'Topical treatment trial'],
+          ['Basal cell carcinoma', 'Squamous cell carcinoma', 'Sebaceous cyst', 'Dermatofibroma', 'Melanoma'],
+          ['Urgent 2-week wait referral', 'Topical 5-fluorouracil', 'Excision in primary care', 'Cryotherapy', 'Observation and monitoring']
+        ],
+        'infections': [
+          ['Cellulitis', 'Erysipelas', 'Deep vein thrombosis', 'Contact dermatitis', 'Necrotizing fasciitis'],
+          ['Topical antifungal cream', 'Oral antibiotics', 'Topical corticosteroid', 'Oral antifungal medication', 'Topical antibiotics'],
+          ['Herpes zoster (shingles)', 'Herpes simplex', 'Contact dermatitis', 'Impetigo', 'Cellulitis']
+        ],
+        'autoimmune': [
+          ['Bullous pemphigoid', 'Pemphigus vulgaris', 'Dermatitis herpetiformis', 'Stevens-Johnson syndrome', 'Epidermolysis bullosa'],
+          ['Pemphigus vulgaris', 'Bullous pemphigoid', 'Stevens-Johnson syndrome', 'Erythema multiforme', 'Linear IgA disease'],
+          ['Dermatomyositis', 'Systemic lupus erythematosus', 'Polymyositis', 'Scleroderma', 'Mixed connective tissue disease']
+        ],
+        'drug-reactions': [
+          ['Stop the antibiotic and prescribe antihistamines', 'Continue antibiotic and add topical corticosteroid', 'Reduce antibiotic dose', 'Switch to different antibiotic', 'Add oral corticosteroids'],
+          ['Drug reaction with eosinophilia and systemic symptoms (DRESS)', 'Stevens-Johnson syndrome', 'Erythema multiforme', 'Toxic epidermal necrolysis', 'Serum sickness-like syndrome'],
+          ['Immediate drug discontinuation and emergency treatment', 'Topical corticosteroids', 'Oral antihistamines', 'Reduce drug dose', 'Switch to alternative medication']
+        ]
+      };
+      
+      const sets = optionSets[subcategory] || [
+        ['Conservative management', 'Topical treatment', 'Systemic therapy', 'Specialist referral', 'Further investigation']
+      ];
+      
+      return sets[index % sets.length];
+    };
+    
     additionalQuestions.push({
       id: `derm${i}`,
       category: 'dermatology',
-      subcategory: ['skin-cancer', 'eczema', 'psoriasis', 'infections', 'autoimmune', 'drug-reactions'][i % 6],
+      subcategory: currentSubcategory,
       cognitiveLevel: ['knowledge', 'application', 'problem-solving'][i % 3] as any,
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Dermatology Clinic', 'GP Surgery', 'Emergency Department', 'Day Unit'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult', 'Child'][i % 4],
-      stem: `Advanced dermatology question ${i}: Complex skin condition requiring specialist diagnosis.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: generateDermStem(i, currentSubcategory),
+      options: generateDermOptions(currentSubcategory, i),
       correctAnswer: i % 5,
-      explanation: `Advanced dermatology explanation ${i} covering complex skin pathology and treatments.`,
+      explanation: `This clinical presentation is consistent with ${currentSubcategory.replace('-', ' ')}. Management should follow current BAD (British Association of Dermatologists) and NICE guidelines, emphasizing evidence-based treatment approaches and appropriate specialist referral when indicated.`,
       learningObjectives: ["Advanced skin assessment", "Pattern recognition", "Treatment protocols"],
       gmcOutcomes: ["Dermatological expertise", "Visual diagnosis", "Patient care"],
-      references: ["BJD Journal", "AAD Guidelines", "BAD Guidelines"],
+      references: ["BJD Journal", "BAD Guidelines", "NICE Skin Guidelines"],
       tags: ["dermatology", "advanced", "skin-disorders"],
       estimatedTime: 85 + (i % 35),
       lastReviewed: "2024-03-01",
