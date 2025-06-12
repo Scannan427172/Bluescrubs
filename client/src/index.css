@@ -520,6 +520,29 @@ button[class*="bg-white"]:hover {
   color: #2563eb !important;
 }
 
+/* Enhanced radio button selection styling */
+input[type="radio"]:checked {
+  background-color: #1e40af !important;
+  border-color: #1e40af !important;
+  border-width: 2px !important;
+}
+
+input[type="radio"]:checked::before {
+  background-color: white !important;
+  transform: scale(0.8) !important;
+}
+
+/* Radio button hover and focus states */
+input[type="radio"]:hover {
+  border-color: #3b82f6 !important;
+  border-width: 2px !important;
+}
+
+input[type="radio"]:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+  border-color: #3b82f6 !important;
+}
+
 /* Target landing page hero text to make it white */
 #landing-hero-text {
   color: white !important;

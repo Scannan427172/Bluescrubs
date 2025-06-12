@@ -970,7 +970,9 @@ export default function PLAB1New() {
                         ? 'bg-green-50 border-green-200 text-green-800'
                         : showExplanation && index === parseInt(selectedAnswer) && index !== currentQuestion.correctAnswer
                         ? 'bg-red-50 border-red-200 text-red-800'
-                        : 'hover:bg-gray-50'
+                        : selectedAnswer === index.toString() && !showExplanation
+                        ? 'bg-blue-50 border-blue-300 border-2 text-blue-900 shadow-sm'
+                        : 'hover:bg-gray-50 border-gray-200'
                     }`}
                   >
                     <div className="flex items-center gap-3">
