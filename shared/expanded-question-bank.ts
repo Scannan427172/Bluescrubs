@@ -2012,8 +2012,28 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Pharmacy', 'Clinical Ward', 'GP Surgery'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Clinical Pharmacology question ${i}: A medication-related issue requires pharmacological assessment.`,
-      options: ["Pharm option A", "Pharm option B", "Pharm option C", "Pharm option D", "Pharm option E"],
+      stem: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `A ${age}-year-old ${gender} on warfarin presents with an INR of 8.5 and minor bleeding from gums. They are otherwise well. What is the most appropriate management?`,
+          `A ${age}-year-old ${gender} starts taking amiodarone for atrial fibrillation. Which monitoring is most important during the first 6 months of treatment?`,
+          `A ${age}-year-old ${gender} with chronic kidney disease (eGFR 30 ml/min) requires antibiotic treatment for pneumonia. Which antibiotic requires dose adjustment?`,
+          `A ${age}-year-old ${gender} taking lithium develops diarrhea and vomiting. Lithium level is 2.1 mmol/L (therapeutic range 0.4-1.0). What is the most appropriate action?`,
+          `A ${age}-year-old ${gender} with depression starts sertraline. After 2 weeks, they develop tremor, confusion, and hyperthermia. What is the most likely diagnosis?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Withhold warfarin and give oral vitamin K', 'Continue warfarin and monitor', 'Stop warfarin and give IV vitamin K', 'Reverse with prothrombin complex concentrate', 'Emergency fresh frozen plasma'],
+          ['Thyroid function tests', 'Liver function tests', 'Pulmonary function tests', 'All of the above', 'Chest X-ray only'],
+          ['Gentamicin', 'Amoxicillin', 'Doxycycline', 'Azithromycin', 'All require dose adjustment'],
+          ['Stop lithium and check renal function', 'Reduce lithium dose by 50%', 'Continue current dose', 'Increase fluid intake', 'Add diuretic therapy'],
+          ['Serotonin syndrome', 'Neuroleptic malignant syndrome', 'Anticholinergic toxicity', 'Lithium toxicity', 'Thyrotoxicosis']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Pharmacological explanation ${i} covering drug therapy and monitoring.`,
       learningObjectives: ["Drug mechanisms", "Prescribing safety", "Therapeutic monitoring"],
@@ -2060,8 +2080,28 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['ID Clinic', 'Emergency Department', 'ICU', 'Travel Clinic'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Advanced infectious diseases question ${i}: Complex infection requiring specialist management.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `A ${age}-year-old ${gender} with HIV (CD4 50 cells/μL) presents with fever, headache, and altered consciousness. Lumbar puncture shows lymphocytic pleocytosis and low glucose. India ink stain is positive. What is the most likely pathogen?`,
+          `A ${age}-year-old ${gender} returns from Southeast Asia with fever, jaundice, and thrombocytopenia. Blood film shows intraerythrocytic parasites with multiple infected cells per field. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} with neutropenia post-chemotherapy develops breakthrough candidemia despite fluconazole prophylaxis. Blood cultures grow Candida krusei. What is the most appropriate antifungal?`,
+          `A ${age}-year-old ${gender} with MRSA bacteremia fails to respond to vancomycin after 5 days. MIC is 4 mg/L. Blood cultures remain positive. What is the most appropriate change?`,
+          `A ${age}-year-old ${gender} develops severe diarrhea, toxic megacolon, and leucocytosis after antibiotic therapy. C. difficile toxin is positive and strain typing shows ribotype 027. What is the most appropriate treatment?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Cryptococcus neoformans', 'Toxoplasma gondii', 'Mycobacterium tuberculosis', 'Listeria monocytogenes', 'Pneumocystis jirovecii'],
+          ['Plasmodium falciparum', 'Plasmodium vivax', 'Plasmodium knowlesi', 'Dengue fever', 'Typhoid fever'],
+          ['Amphotericin B', 'Caspofungin', 'Voriconazole', 'Anidulafungin', 'Flucytosine'],
+          ['Increase vancomycin dose', 'Switch to linezolid', 'Switch to daptomycin', 'Add gentamicin', 'Switch to ceftaroline'],
+          ['Oral vancomycin', 'IV metronidazole', 'Fidaxomicin', 'Fecal microbiota transplant', 'Emergency colectomy']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced ID explanation ${i} covering complex microbiology and antimicrobial therapy.`,
       learningObjectives: ["Advanced infection control", "Complex case management", "Antimicrobial stewardship"],
@@ -2084,8 +2124,28 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Rheumatology Clinic', 'Emergency Department', 'Day Unit', 'GP Surgery'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Advanced rheumatology question ${i}: Complex autoimmune condition requiring specialist care.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `A ${age}-year-old ${gender} with SLE develops acute kidney injury, proteinuria 4g/24hrs, and active urinary sediment. Kidney biopsy shows diffuse endocapillary proliferation. What is the most appropriate treatment?`,
+          `A ${age}-year-old ${gender} with rheumatoid arthritis on methotrexate develops progressive dyspnea. HRCT shows bilateral lower lobe reticular opacities and honeycombing. What is the most likely complication?`,
+          `A ${age}-year-old ${gender} presents with symmetric muscle weakness, elevated CK, and muscle biopsy showing endomysial inflammation with CD8+ T cells. Anti-Jo-1 is positive. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} with systemic sclerosis develops sudden onset dyspnea and chest pain. ECHO shows elevated pulmonary pressures and tricuspid regurgitation. What is the most appropriate investigation?`,
+          `A ${age}-year-old ${gender} with giant cell arteritis on prednisolone develops jaw claudication and visual symptoms despite treatment. ESR remains elevated. What is the most appropriate management?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Pulse methylprednisolone and cyclophosphamide', 'Oral prednisolone only', 'Rituximab therapy', 'Mycophenolate mofetil', 'Plasmapheresis'],
+          ['Methotrexate-induced pneumonitis', 'Rheumatoid lung disease', 'Opportunistic infection', 'Pulmonary embolism', 'Heart failure'],
+          ['Polymyositis', 'Dermatomyositis', 'Inclusion body myositis', 'Antisynthetase syndrome', 'Necrotizing myopathy'],
+          ['CT pulmonary angiogram', 'Right heart catheterization', 'Ventilation-perfusion scan', 'Pulmonary function tests', 'Exercise tolerance test'],
+          ['Increase prednisolone dose', 'Add methotrexate', 'Switch to tocilizumab', 'Urgent ophthalmology review', 'Temporal artery biopsy']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced rheumatology explanation ${i} covering complex immunology and biologic therapies.`,
       learningObjectives: ["Advanced rheumatology assessment", "Immunology understanding", "Biologic management"],
@@ -2218,8 +2278,28 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Psychiatry Clinic', 'Emergency Department', 'Crisis Team', 'GP Surgery'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult', 'Adolescent'][i % 4],
-      stem: `Advanced psychiatry question ${i}: Complex mental health presentation requiring specialist assessment.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 18 + (i % 62);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `A ${age}-year-old ${gender} with treatment-resistant schizophrenia has failed trials of risperidone, olanzapine, and aripiprazole. They continue to have positive symptoms and functional impairment. What is the most appropriate next treatment?`,
+          `A ${age}-year-old ${gender} with bipolar disorder on lithium develops polyuria, polydipsia, and rising creatinine. Lithium level is therapeutic. What is the most likely complication?`,
+          `A ${age}-year-old ${gender} presents with catatonia, autonomic instability, and elevated CK after starting haloperidol. Temperature is 39.5°C. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} with severe depression and psychotic features has failed multiple antidepressant trials. They express active suicidal ideation. What is the most appropriate treatment?`,
+          `A ${age}-year-old ${gender} with PTSD experiences severe nightmares, hypervigilance, and avoidance behaviors 6 months after trauma. First-line treatments have been ineffective. What is the next step?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Clozapine therapy', 'ECT treatment', 'High-dose antipsychotic', 'Combination antipsychotics', 'Long-acting injection'],
+          ['Nephrogenic diabetes insipidus', 'Lithium toxicity', 'Primary diabetes mellitus', 'Psychogenic polydipsia', 'Diabetes insipidus'],
+          ['Neuroleptic malignant syndrome', 'Serotonin syndrome', 'Malignant hyperthermia', 'Anticholinergic toxicity', 'Heat stroke'],
+          ['Electroconvulsive therapy', 'Antipsychotic augmentation', 'Lithium augmentation', 'TMS therapy', 'Ketamine infusion'],
+          ['EMDR therapy', 'Cognitive processing therapy', 'Prolonged exposure therapy', 'Prazosin for nightmares', 'All of the above']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced psychiatric explanation ${i} covering complex psychopathology and treatments.`,
       learningObjectives: ["Advanced mental health assessment", "Risk assessment", "Treatment planning"],
@@ -2242,8 +2322,27 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Antenatal Clinic', 'Labour Ward', 'Gynaecology Clinic', 'Emergency Department'][i % 4],
       ageGroup: ['Reproductive Age', 'Young Adult', 'Perimenopausal', 'Postmenopausal'][i % 4],
-      stem: `Advanced O&G question ${i}: Complex obstetric or gynaecological case requiring specialist care.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 18 + (i % 37);
+        const scenarios = [
+          `A ${age}-year-old woman presents at 32 weeks gestation with severe pre-eclampsia, HELLP syndrome, and deteriorating maternal condition. Fetal growth is appropriate but CTG shows late decelerations. What is the most appropriate management?`,
+          `A ${age}-year-old woman with previous cesarean section presents in labor at term with uterine rupture. Fetal heart rate shows severe bradycardia. She is hemodynamically unstable. What is the immediate priority?`,
+          `A ${age}-year-old woman presents with postmenopausal bleeding and endometrial biopsy showing grade 3 endometrioid adenocarcinoma. MRI shows myometrial invasion >50% and enlarged pelvic lymph nodes. What is the staging?`,
+          `A ${age}-year-old woman at 28 weeks gestation with placenta previa develops massive antepartum hemorrhage. Hemoglobin drops to 65 g/L and she becomes hemodynamically unstable. What is the priority management?`,
+          `A ${age}-year-old woman presents with ovarian mass, ascites, and elevated CA-125. CT shows peritoneal deposits and omental caking. Tissue biopsy confirms high-grade serous carcinoma. What is the optimal treatment sequence?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Immediate delivery by cesarean', 'Conservative management with monitoring', 'Corticosteroids and delivery in 48 hours', 'Antihypertensive therapy only', 'Magnesium sulfate and observation'],
+          ['Emergency cesarean section', 'Immediate laparotomy and repair', 'Resuscitation then cesarean', 'Tocolysis and monitoring', 'Emergency hysterectomy'],
+          ['Stage IB (T1b N0 M0)', 'Stage II (T2 N0 M0)', 'Stage IIIC1 (T3a N1 M0)', 'Stage IVA (T4 N1 M0)', 'Stage IVB (T1 N0 M1)'],
+          ['Emergency cesarean delivery', 'Blood transfusion and bed rest', 'Tocolysis and steroid therapy', 'Conservative management', 'Immediate hysterectomy'],
+          ['Primary cytoreductive surgery then chemotherapy', 'Neoadjuvant chemotherapy then surgery', 'Chemotherapy only', 'Radiotherapy only', 'Palliative care only']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced O&G explanation ${i} covering complex reproductive health and specialist procedures.`,
       learningObjectives: ["Advanced O&G assessment", "Risk management", "Specialist procedures"],
@@ -2266,8 +2365,26 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Paediatric Clinic', 'NICU', 'PICU', 'Emergency Department'][i % 4],
       ageGroup: ['Neonate', 'Infant', 'Child', 'Adolescent'][i % 4],
-      stem: `Advanced paediatrics question ${i}: Complex paediatric presentation requiring specialist expertise.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const scenarios = [
+          `A 3-month-old infant presents with poor feeding, failure to thrive, and cyanosis during feeding. Echocardiogram shows tetralogy of Fallot with severe pulmonary stenosis. What is the most appropriate management?`,
+          `A 6-year-old child presents with polyuria, polydipsia, and weight loss over 2 weeks. Blood glucose is 28 mmol/L, ketones are positive, and pH is 7.1. What is the immediate priority?`,
+          `A 2-year-old child presents with fever, irritability, and a purpuric rash that doesn't blanch. Lumbar puncture shows neutrophilic pleocytosis. What is the most likely organism?`,
+          `A 4-year-old child presents with developmental regression, loss of speech, and hand-wringing movements. Previous development was normal until 18 months. What is the most likely diagnosis?`,
+          `A 8-year-old child presents with recurrent pneumonia, failure to thrive, and steatorrhea. Sweat chloride test is 75 mmol/L. What is the most appropriate treatment?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Early total corrective surgery', 'Blalock-Taussig shunt', 'Balloon valvuloplasty', 'Medical management only', 'Heart transplant evaluation'],
+          ['IV fluid resuscitation and insulin', 'Oral hypoglycemic agents', 'Subcutaneous insulin', 'Dietary management', 'Emergency intubation'],
+          ['Neisseria meningitidis', 'Streptococcus pneumoniae', 'Haemophilus influenzae', 'Group B Streptococcus', 'Escherichia coli'],
+          ['Rett syndrome', 'Autism spectrum disorder', 'Childhood disintegrative disorder', 'Fragile X syndrome', 'Angelman syndrome'],
+          ['Pancreatic enzyme replacement', 'Chest physiotherapy', 'Nutritional support', 'Antibiotic prophylaxis', 'All of the above']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced paediatric explanation ${i} covering complex child health and development.`,
       learningObjectives: ["Advanced paediatric assessment", "Developmental understanding", "Family-centred care"],
@@ -2290,8 +2407,28 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Surgical Clinic', 'Emergency Department', 'Operating Theatre', 'Surgical Ward'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Advanced surgery question ${i}: Complex surgical case requiring specialist decision-making.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `A ${age}-year-old ${gender} presents with acute mesenteric ischemia confirmed on CT angiography. Bowel appears viable but shows early ischemic changes. What is the most appropriate surgical management?`,
+          `A ${age}-year-old ${gender} with ruptured abdominal aortic aneurysm undergoes emergency repair but develops postoperative acute kidney injury and compartment syndrome. What is the priority intervention?`,
+          `A ${age}-year-old ${gender} develops anastomotic leak following low anterior resection for rectal cancer on day 5 post-operatively. CT shows pelvic collection and clinical sepsis. What is the most appropriate management?`,
+          `A ${age}-year-old ${gender} presents with necrotizing pancreatitis and infected necrosis confirmed on CT. Conservative management has failed. What is the optimal surgical approach?`,
+          `A ${age}-year-old ${gender} with penetrating abdominal trauma has unstable vital signs and positive FAST scan. During laparotomy, massive retroperitoneal hematoma is discovered. What is the immediate priority?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Emergency embolectomy/thrombectomy', 'Bowel resection only', 'Conservative management', 'Bypass surgery', 'Second-look laparoscopy'],
+          ['Immediate fasciotomy', 'Hemodialysis', 'Fluid resuscitation', 'Reoperation for bleeding', 'ICU monitoring only'],
+          ['Emergency laparotomy and repair', 'CT-guided drainage', 'Defunctioning colostomy', 'Conservative management', 'Percutaneous drainage only'],
+          ['Open necrosectomy', 'Laparoscopic necrosectomy', 'Endoscopic necrosectomy', 'Step-up approach', 'Continue conservative treatment'],
+          ['Control hemorrhage and damage control', 'Complete exploration first', 'Angiographic embolization', 'Immediate closure', 'Pack and transfer']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced surgical explanation ${i} covering complex surgical anatomy and procedures.`,
       learningObjectives: ["Advanced surgical assessment", "Operative planning", "Risk stratification"],
