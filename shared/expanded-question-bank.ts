@@ -2,6 +2,7 @@
 // 1000+ GMC-aligned questions across all medical specialties
 
 import { GMCQuestion, GMCCategory } from './gmc-question-bank';
+import { enhanceQuestionWithBNF, SPECIALTY_MEDICATIONS, BNF_MEDICATIONS } from './bnf-integration';
 
 // Re-export types for consumption
 export type { GMCQuestion, GMCCategory };
