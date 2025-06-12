@@ -13,6 +13,7 @@ import {
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 import { getSourcesForQuestion } from "@shared/educational-sources";
 import { GMC_QUESTION_BANK, type GMCQuestion, type GMCCategory } from "@shared/gmc-question-bank";
+import { EXPANDED_QUESTION_BANK, QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
 import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
 import { AudioSupport, ReadableText } from "@/components/audio-support";
@@ -130,7 +131,7 @@ const generateRealisticExplanation = (specialty: string, scenario: string, index
   return explanations[specialty] || `This case demonstrates typical features of ${scenario} requiring appropriate clinical management according to current guidelines.`;
 };
 
-const PRACTICE_QUESTIONS: GMCQuestion[] = GMC_QUESTION_BANK;
+const PRACTICE_QUESTIONS: GMCQuestion[] = EXPANDED_QUESTION_BANK;
 
 export default function PLAB1New() {
   // Session state
@@ -282,10 +283,10 @@ export default function PLAB1New() {
     localStorage.setItem('neuro-accommodations', JSON.stringify(accommodations));
   };
 
-  // Calculate question counts by category
+  // Calculate question counts by category using expanded question bank stats
   const getQuestionCount = (category: string) => {
-    if (category === 'all') return PRACTICE_QUESTIONS.length;
-    return PRACTICE_QUESTIONS.filter(q => q.category === category).length;
+    if (category === 'all') return QUESTION_BANK_STATS.totalQuestions;
+    return QUESTION_BANK_STATS.byCategory[category] || 0;
   };
 
   // Available categories with question counts
@@ -632,7 +633,7 @@ export default function PLAB1New() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-blue-900">Complete Question Bank</h3>
-                  <p className="text-blue-700">Access all {PRACTICE_QUESTIONS.length.toLocaleString()} questions across 18 medical specialties</p>
+                  <p className="text-blue-700">Access all {QUESTION_BANK_STATS.totalQuestions.toLocaleString()} questions across 18 medical specialties</p>
                   <div className="flex items-center gap-2 mt-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span className="text-sm text-green-700 font-medium">Recommended for comprehensive practice</span>
