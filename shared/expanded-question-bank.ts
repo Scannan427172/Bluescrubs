@@ -2451,8 +2451,28 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Emergency Department', 'Resuscitation', 'Majors', 'Minors'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult', 'Child'][i % 4],
-      stem: `Advanced emergency medicine question ${i}: Critical presentation requiring immediate specialist care.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `A ${age}-year-old ${gender} presents unconscious after massive overdose of tricyclic antidepressants. ECG shows wide QRS complexes and ventricular arrhythmias. Blood pressure is 70/40 mmHg. What is the most appropriate immediate treatment?`,
+          `A ${age}-year-old ${gender} with severe crush injury to both legs is trapped for 6 hours before rescue. On arrival, compartment pressures are >40 mmHg and CK is markedly elevated. What is the priority concern?`,
+          `A ${age}-year-old ${gender} presents with thyrotoxic crisis following recent iodine contrast exposure. Temperature is 41°C, heart rate 180 bpm, and altered mental state. What is the most appropriate management?`,
+          `A ${age}-year-old ${gender} with severe burns covering 60% BSA develops acute respiratory distress and stridor 4 hours post-injury. What is the most likely complication?`,
+          `A ${age}-year-old ${gender} presents with acute angle-closure glaucoma with severe eye pain and visual loss. Intraocular pressure is 60 mmHg. What is the most urgent intervention?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['IV sodium bicarbonate and supportive care', 'Immediate hemodialysis', 'Activated charcoal', 'Flumazenil administration', 'Gastric lavage'],
+          ['Crush syndrome and hyperkalemia', 'Compartment syndrome only', 'Fat embolism syndrome', 'Acute kidney injury', 'Infection risk'],
+          ['IV propranolol and iodine', 'High-dose corticosteroids', 'Immediate thyroidectomy', 'Plasmapheresis', 'Radioactive iodine therapy'],
+          ['Inhalation injury requiring intubation', 'Pneumonia development', 'Pulmonary edema', 'Pneumothorax', 'Respiratory failure from pain'],
+          ['Immediate ophthalmology referral', 'IV acetazolamide and topical therapy', 'Emergency laser iridotomy', 'High-dose corticosteroids', 'Immediate surgical decompression']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced EM explanation ${i} covering complex emergency presentations and protocols.`,
       learningObjectives: ["Advanced emergency assessment", "Critical decision-making", "Resuscitation skills"],
@@ -2475,8 +2495,26 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Any Clinical Setting', 'Ethics Committee', 'Court', 'MDT Meeting'][i % 4],
       ageGroup: ['All Ages'][0],
-      stem: `Advanced ethics question ${i}: Complex ethical dilemma requiring professional judgment.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const scenarios = [
+          `A terminally ill patient with capacity requests assisted dying in a jurisdiction where it's illegal. Their family supports the decision but you have moral objections. The patient is suffering significantly despite palliative care. What is the most appropriate approach?`,
+          `During a pandemic with limited ICU beds, you must decide between two patients: a 35-year-old healthcare worker with good prognosis and a 70-year-old with multiple comorbidities but family pressure. What ethical framework should guide your decision?`,
+          `A pregnant woman with severe mental illness refuses antipsychotic medication that could harm her fetus but is necessary for her safety. She lacks capacity due to her condition. What is the ethical approach?`,
+          `You discover a colleague has been falsifying research data in a study that could influence national treatment guidelines. They threaten to destroy your career if you report them. What is your professional obligation?`,
+          `A 17-year-old Jehovah's Witness requires blood transfusion to survive but refuses along with their parents on religious grounds. You believe they lack full understanding of consequences. What should you do?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Refer to palliative care specialist', 'Respect autonomy but don\'t participate', 'Report to authorities', 'Transfer care to willing colleague', 'Seek ethics committee guidance'],
+          ['Clinical factors only (best prognosis)', 'First come, first served', 'Social utility considerations', 'Age-based allocation', 'Combination of clinical and ethical factors'],
+          ['Respect refusal and monitor closely', 'Apply for court order for treatment', 'Involuntary psychiatric treatment', 'Seek family court intervention', 'Wait for capacity to return'],
+          ['Report immediately to authorities', 'Confront colleague privately first', 'Seek legal advice before acting', 'Document evidence then report', 'Ignore to protect career'],
+          ['Respect their decision', 'Apply for court order immediately', 'Provide blood products as emergency', 'Seek second opinion on capacity', 'Involve hospital ethics committee']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced ethics explanation ${i} covering complex medical law and professional standards.`,
       learningObjectives: ["Advanced ethical reasoning", "Legal understanding", "Professional standards"],
@@ -2499,8 +2537,26 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Public Health Office', 'Community', 'GP Surgery', 'Hospital'][i % 4],
       ageGroup: ['Population Level'][0],
-      stem: `Advanced public health question ${i}: Complex population health challenge requiring specialist expertise.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const scenarios = [
+          `A city experiences a waterborne outbreak affecting 200+ people with cholera-like symptoms. Laboratory confirms Vibrio cholerae O1. Several deaths have occurred and the outbreak is spreading. What is the most critical immediate intervention?`,
+          `During an Ebola outbreak, a healthcare worker develops fever after treating infected patients. They've worn appropriate PPE but had a needle-stick injury. Risk assessment shows moderate exposure. What is the most appropriate management?`,
+          `A refugee camp reports measles outbreak with 50 confirmed cases and several deaths among children. Vaccination coverage is estimated at 30%. Camp conditions are overcrowded with poor sanitation. What is the priority intervention?`,
+          `Contact tracing for COVID-19 reveals a superspreader event at a wedding with 300 attendees now scattered across multiple countries. Genomic sequencing identifies a new variant of concern. What is the public health priority?`,
+          `A pharmaceutical company reports contamination of a widely-used antibiotic with a carcinogenic substance. The product has been distributed globally for 6 months. Millions of patients have been exposed. What is the immediate action?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Immediate water source control and sanitation', 'Mass antibiotic distribution', 'Case isolation only', 'Media information campaign', 'Hospital surge planning'],
+          ['Immediate isolation and monitoring', 'Post-exposure prophylaxis', 'Symptom monitoring at home', 'Laboratory testing only', 'Return to work with monitoring'],
+          ['Emergency vaccination campaign', 'Case isolation and treatment', 'Improve sanitation facilities', 'Nutritional support', 'All of the above in sequence'],
+          ['International notification and travel restrictions', 'Enhanced genomic surveillance globally', 'Contact tracing across borders', 'Vaccine strategy adaptation', 'All of the above'],
+          ['Global product recall immediately', 'Risk assessment before action', 'Inform regulatory authorities only', 'Continue sales pending investigation', 'Issue safety warnings to prescribers']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced public health explanation ${i} covering complex epidemiology and health policy.`,
       learningObjectives: ["Advanced epidemiology", "Health promotion", "Policy understanding"],
@@ -2523,8 +2579,28 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Any Clinical Setting', 'Pharmacy', 'Poison Centre', 'Clinical Trials'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Child'][i % 3],
-      stem: `Advanced pharmacology question ${i}: Complex drug therapy requiring specialist knowledge.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `A ${age}-year-old ${gender} with severe heart failure on multiple medications develops digoxin toxicity despite therapeutic levels. They're also taking amiodarone, spironolactone, and furosemide. What is the most likely cause of the toxicity?`,
+          `A ${age}-year-old ${gender} with epilepsy on carbamazepine starts oral contraceptives. Three months later, they experience breakthrough seizures despite good compliance. Carbamazepine levels are subtherapeutic. What is the mechanism?`,
+          `A ${age}-year-old ${gender} develops severe rhabdomyolysis while taking simvastatin 40mg daily. They recently started clarithromycin for pneumonia. CK is 15,000 U/L. What is the underlying mechanism?`,
+          `A ${age}-year-old ${gender} with atrial fibrillation on warfarin develops bleeding complications. INR is 6.8. They recently started St John's wort for depression. What effect does this herb have on warfarin?`,
+          `A ${age}-year-old ${gender} with bipolar disorder on lithium develops polyuria and polydipsia. Lithium level is 0.8 mmol/L (therapeutic). Creatinine is rising. What is the most likely mechanism?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Amiodarone inhibiting P-glycoprotein', 'Renal impairment from diuretics', 'Drug interaction with spironolactone', 'Hypokalemia enhancing toxicity', 'All of the above'],
+          ['Carbamazepine inducing contraceptive metabolism', 'Contraceptives inhibiting carbamazepine', 'Non-compliance with medication', 'Drug malabsorption', 'Hormonal effects on seizure threshold'],
+          ['CYP3A4 inhibition by clarithromycin', 'Additive muscle toxicity', 'Reduced simvastatin clearance', 'Clarithromycin-induced myopathy', 'Both A and C'],
+          ['Induces warfarin metabolism reducing effect', 'Inhibits warfarin metabolism increasing effect', 'Enhances vitamin K synthesis', 'Improves warfarin absorption', 'No significant interaction'],
+          ['Nephrogenic diabetes insipidus', 'Direct nephrotoxicity', 'Lithium-induced hyperparathyroidism', 'Chronic interstitial nephritis', 'All of the above possible']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced pharmacology explanation ${i} covering complex drug mechanisms and interactions.`,
       learningObjectives: ["Advanced pharmacology", "Safe prescribing", "Drug monitoring"],
