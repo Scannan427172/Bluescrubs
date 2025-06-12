@@ -754,24 +754,58 @@ const generateMoreQuestions = () => {
   
   // Generate 59 more cardiovascular questions
   for (let i = 103; i <= 160; i++) {
+    const subcategory = i % 2 === 0 ? 'arrhythmias' : 'valvular-disease';
+    const age = 35 + (i % 45);
+    const gender = i % 2 === 0 ? 'man' : 'woman';
+    
+    const generateCVStem = (index: number, subcat: string): string => {
+      if (subcat === 'arrhythmias') {
+        const arrhythmiaStems = [
+          `A ${age}-year-old ${gender} presents to A&E with palpitations, dizziness, and chest discomfort that started 2 hours ago. ECG shows an irregularly irregular rhythm with no discernible P waves and a ventricular rate of 140 bpm. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} with known heart failure presents with fast, regular palpitations. ECG shows a narrow complex tachycardia at 180 bpm with no visible P waves. The patient is hemodynamically stable. What is the most appropriate initial treatment?`,
+          `A ${age}-year-old ${gender} presents with syncope. ECG shows bradycardia at 35 bpm with intermittent complete heart block and ventricular escape beats. What is the most appropriate management?`
+        ];
+        return arrhythmiaStems[index % arrhythmiaStems.length];
+      } else {
+        const valvularStems = [
+          `A ${age}-year-old ${gender} presents with progressive breathlessness and fatigue over 6 months. On examination, there is a harsh systolic murmur best heard at the right sternal edge radiating to the carotids, with a slow-rising pulse. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} presents with sudden onset breathlessness and pink frothy sputum. On examination, there is a high-pitched early diastolic murmur best heard at the left sternal edge with a collapsing pulse. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} with rheumatic heart disease presents with increasing breathlessness on exertion. Echocardiogram shows a thickened, immobile mitral valve with a pressure gradient of 15 mmHg across the valve. What is the most appropriate management?`
+        ];
+        return valvularStems[index % valvularStems.length];
+      }
+    };
+    
+    const generateCVOptions = (subcat: string, index: number): string[] => {
+      if (subcat === 'arrhythmias') {
+        const arrhythmiaOptions = [
+          ['Atrial fibrillation', 'Ventricular tachycardia', 'Supraventricular tachycardia', 'Atrial flutter', 'Sinus tachycardia'],
+          ['Vagal maneuvers', 'Synchronized cardioversion', 'Adenosine 6mg IV', 'Amiodarone infusion', 'Beta-blocker'],
+          ['Temporary pacing', 'Permanent pacemaker', 'Atropine 0.5mg IV', 'External pacing', 'Adrenaline infusion']
+        ];
+        return arrhythmiaOptions[index % arrhythmiaOptions.length];
+      } else {
+        const valvularOptions = [
+          ['Aortic stenosis', 'Aortic regurgitation', 'Mitral stenosis', 'Mitral regurgitation', 'Tricuspid regurgitation'],
+          ['Acute aortic regurgitation', 'Acute mitral regurgitation', 'Aortic stenosis', 'Pulmonary edema', 'Myocardial infarction'],
+          ['Balloon valvuloplasty', 'Surgical valve replacement', 'Medical management', 'Percutaneous commissurotomy', 'Anticoagulation only']
+        ];
+        return valvularOptions[index % valvularOptions.length];
+      }
+    };
+    
     additionalQuestions.push({
       id: `cv${i}`,
       category: 'cardiovascular',
-      subcategory: i % 2 === 0 ? 'arrhythmias' : 'valvular-disease',
+      subcategory: subcategory,
       cognitiveLevel: ['knowledge', 'application', 'problem-solving'][i % 3] as any,
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['GP Surgery', 'Cardiology Clinic', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Cardiovascular question ${i}: A patient presents with cardiac symptoms requiring clinical assessment and management.`,
-      options: [
-        "Treatment option A",
-        "Treatment option B", 
-        "Treatment option C",
-        "Treatment option D",
-        "Treatment option E"
-      ],
+      stem: generateCVStem(i, subcategory),
+      options: generateCVOptions(subcategory, i),
       correctAnswer: i % 5,
-      explanation: `Detailed explanation for cardiovascular question ${i} covering pathophysiology, clinical features, and evidence-based management.`,
+      explanation: `This clinical presentation is consistent with ${subcategory.replace('-', ' ')}. Management should follow current ESC and NICE guidelines, emphasizing early recognition, appropriate investigation, and evidence-based treatment protocols.`,
       learningObjectives: [
         "Cardiovascular assessment skills",
         "Evidence-based cardiac management",
@@ -795,24 +829,58 @@ const generateMoreQuestions = () => {
 
   // Generate 49 more respiratory questions
   for (let i = 102; i <= 150; i++) {
+    const subcategory = i % 2 === 0 ? 'asthma-copd' : 'lung-cancer';
+    const age = 30 + (i % 50);
+    const gender = i % 2 === 0 ? 'man' : 'woman';
+    
+    const generateRespStem = (index: number, subcat: string): string => {
+      if (subcat === 'asthma-copd') {
+        const asthmaCopdStems = [
+          `A ${age}-year-old ${gender} with a 20-pack-year smoking history presents with progressive breathlessness over 2 years, morning cough with white sputum, and wheeze on exertion. Spirometry shows FEV1/FVC ratio of 0.65 and FEV1 55% predicted. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} presents to A&E with severe breathlessness, wheeze, and inability to complete sentences. Peak flow is 40% of best. The patient is using accessory muscles and appears distressed. What is the most appropriate immediate management?`,
+          `A ${age}-year-old ${gender} with known asthma presents with worsening symptoms over 3 days despite increased inhaler use. Peak flow is 60% of personal best, and there is widespread wheeze on examination. What is the most appropriate treatment?`
+        ];
+        return asthmaCopdStems[index % asthmaCopdStems.length];
+      } else {
+        const lungCancerStems = [
+          `A ${age}-year-old ${gender} with a 30-pack-year smoking history presents with a 6-week history of persistent cough, weight loss of 6kg, and hemoptysis. Chest X-ray shows a 4cm mass in the right upper lobe. What is the most appropriate next step?`,
+          `A ${age}-year-old ${gender} presents with progressive breathlessness and dull chest pain. Chest X-ray shows a large pleural effusion. Pleural tap reveals bloody fluid with malignant cells. What is the most likely primary site?`,
+          `A ${age}-year-old ${gender} presents with hoarseness, weight loss, and a persistent cough. CT chest shows a left hilar mass with mediastinal lymphadenopathy. What additional symptom would you specifically ask about?`
+        ];
+        return lungCancerStems[index % lungCancerStems.length];
+      }
+    };
+    
+    const generateRespOptions = (subcat: string, index: number): string[] => {
+      if (subcat === 'asthma-copd') {
+        const asthmaCopdOptions = [
+          ['COPD', 'Asthma', 'Bronchiectasis', 'Lung fibrosis', 'Heart failure'],
+          ['High-flow oxygen and nebulized salbutamol', 'Nebulized salbutamol and ipratropium bromide', 'IV aminophylline', 'Oral prednisolone', 'Mechanical ventilation'],
+          ['Oral prednisolone 40mg daily', 'Increase inhaled corticosteroid dose', 'Add long-acting beta agonist', 'Nebulized bronchodilators', 'Hospital admission']
+        ];
+        return asthmaCopdOptions[index % asthmaCopdOptions.length];
+      } else {
+        const lungCancerOptions = [
+          ['Urgent chest CT and respiratory referral', 'Sputum cytology', 'Antibiotics and review', 'Bronchoscopy', 'CT-guided biopsy'],
+          ['Lung adenocarcinoma', 'Mesothelioma', 'Metastatic breast cancer', 'Squamous cell lung cancer', 'Lymphoma'],
+          ['Dysphagia', 'Bone pain', 'Facial swelling', 'Abdominal pain', 'Skin rash']
+        ];
+        return lungCancerOptions[index % lungCancerOptions.length];
+      }
+    };
+    
     additionalQuestions.push({
       id: `resp${i}`,
       category: 'respiratory',
-      subcategory: i % 2 === 0 ? 'asthma-copd' : 'lung-cancer',
+      subcategory: subcategory,
       cognitiveLevel: ['knowledge', 'application', 'problem-solving'][i % 3] as any,
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['GP Surgery', 'Respiratory Clinic', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Respiratory question ${i}: A patient presents with respiratory symptoms requiring clinical evaluation.`,
-      options: [
-        "Management option A",
-        "Management option B",
-        "Management option C", 
-        "Management option D",
-        "Management option E"
-      ],
+      stem: generateRespStem(i, subcategory),
+      options: generateRespOptions(subcategory, i),
       correctAnswer: i % 5,
-      explanation: `Comprehensive explanation for respiratory question ${i} including pathophysiology and treatment protocols.`,
+      explanation: `This clinical presentation is consistent with ${subcategory.replace('-', ' ')}. Management should follow current BTS and NICE guidelines, emphasizing early recognition, appropriate investigation, and evidence-based treatment protocols.`,
       learningObjectives: [
         "Respiratory assessment",
         "Lung function interpretation",
@@ -836,22 +904,80 @@ const generateMoreQuestions = () => {
 
   // Generate gastroenterology questions
   for (let i = 102; i <= 145; i++) {
+    const subcategories = ['IBD', 'liver-disease', 'peptic-ulcer', 'colorectal'];
+    const currentSubcategory = subcategories[i % 4];
+    const age = 25 + (i % 55);
+    const gender = i % 2 === 0 ? 'man' : 'woman';
+    
+    const generateGIStem = (index: number, subcat: string): string => {
+      const stemTemplates: { [key: string]: string[] } = {
+        'IBD': [
+          `A ${age}-year-old ${gender} presents with a 3-month history of bloody diarrhea, abdominal cramping, and weight loss of 4kg. Colonoscopy shows continuous mucosal inflammation from rectum to splenic flexure with loss of haustral pattern. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} with known Crohn's disease presents with severe right iliac fossa pain, fever, and a palpable mass. CT abdomen shows bowel wall thickening and a fluid collection. What is the most likely complication?`,
+          `A ${age}-year-old ${gender} presents with alternating diarrhea and constipation, skip lesions on colonoscopy, and transmural inflammation affecting the terminal ileum. What is the most appropriate initial treatment?`
+        ],
+        'liver-disease': [
+          `A ${age}-year-old ${gender} with a history of alcohol excess presents with jaundice, ascites, and confusion. Blood tests show bilirubin 85 μmol/L, ALT 120 U/L, and INR 2.1. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} presents with fatigue and abnormal liver function tests. Anti-mitochondrial antibodies are positive. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} with hepatitis B presents with sudden onset severe abdominal pain and hypotension. CT shows fluid in the abdomen and a large liver lesion. What is the most likely complication?`
+        ],
+        'peptic-ulcer': [
+          `A ${age}-year-old ${gender} presents with epigastric pain that worsens with eating and is associated with early satiety. Upper GI endoscopy shows a 1cm ulcer in the gastric antrum. What is the most important investigation?`,
+          `A ${age}-year-old ${gender} on long-term NSAIDs presents with coffee-ground vomiting and melena. Hemoglobin has dropped from 140 to 95 g/L. What is the most appropriate immediate management?`,
+          `A ${age}-year-old ${gender} presents with severe epigastric pain radiating to the back, associated with nausea and vomiting. The pain improves when leaning forward. What is the most likely diagnosis?`
+        ],
+        'colorectal': [
+          `A ${age}-year-old ${gender} presents with a change in bowel habit over 6 weeks, passing blood and mucus, and unintentional weight loss of 5kg. What is the most appropriate investigation?`,
+          `A ${age}-year-old ${gender} presents with severe lower abdominal pain, fever, and altered bowel habit. CT shows sigmoid colon wall thickening with surrounding fat stranding. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} with a family history of colorectal cancer asks about screening. They have no symptoms. What is the most appropriate advice?`
+        ]
+      };
+      
+      const templates = stemTemplates[subcat] || [`A ${age}-year-old ${gender} presents with gastrointestinal symptoms requiring clinical assessment and evidence-based management.`];
+      return templates[index % templates.length];
+    };
+    
+    const generateGIOptions = (subcat: string, index: number): string[] => {
+      const optionSets: { [key: string]: string[][] } = {
+        'IBD': [
+          ['Ulcerative colitis', 'Crohn\'s disease', 'Infectious colitis', 'Ischemic colitis', 'Colorectal cancer'],
+          ['Abscess formation', 'Bowel perforation', 'Intestinal obstruction', 'Fistula formation', 'Toxic megacolon'],
+          ['Oral prednisolone', 'Mesalazine', 'Methotrexate', 'Infliximab', 'Azathioprine']
+        ],
+        'liver-disease': [
+          ['Acute liver failure', 'Alcoholic hepatitis', 'Viral hepatitis', 'Paracetamol overdose', 'Autoimmune hepatitis'],
+          ['Primary biliary cholangitis', 'Primary sclerosing cholangitis', 'Autoimmune hepatitis', 'Alcoholic liver disease', 'Hemochromatosis'],
+          ['Hepatocellular carcinoma rupture', 'Variceal hemorrhage', 'Spontaneous bacterial peritonitis', 'Portal vein thrombosis', 'Liver abscess']
+        ],
+        'peptic-ulcer': [
+          ['H. pylori testing', 'CT abdomen', 'Barium meal', 'Repeat endoscopy in 8 weeks', 'Serum gastrin level'],
+          ['Upper GI endoscopy', 'IV proton pump inhibitor', 'Blood transfusion', 'Emergency surgery', 'H. pylori eradication'],
+          ['Acute pancreatitis', 'Perforated peptic ulcer', 'Biliary colic', 'Myocardial infarction', 'Aortic dissection']
+        ],
+        'colorectal': [
+          ['Urgent colonoscopy', 'Flexible sigmoidoscopy', 'CT colonography', 'Barium enema', 'Fecal occult blood test'],
+          ['Diverticulitis', 'Colorectal cancer', 'Inflammatory bowel disease', 'Ischemic colitis', 'Infectious colitis'],
+          ['Start screening at age 50', 'FIT test every 2 years from age 50', 'Colonoscopy every 10 years from age 45', 'No screening needed', 'Genetic counseling first']
+        ]
+      };
+      
+      const sets = optionSets[subcat] || [
+        ['Conservative management', 'Medical therapy', 'Endoscopic intervention', 'Surgical consultation', 'Further investigation']
+      ];
+      
+      return sets[index % sets.length];
+    };
+    
     additionalQuestions.push({
       id: `gi${i}`,
       category: 'gastroenterology',
-      subcategory: ['IBD', 'liver-disease', 'peptic-ulcer', 'colorectal'][i % 4],
+      subcategory: currentSubcategory,
       cognitiveLevel: ['knowledge', 'application', 'problem-solving'][i % 3] as any,
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['GP Surgery', 'GI Clinic', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `GI question ${i}: A patient presents with gastrointestinal symptoms requiring assessment.`,
-      options: [
-        "Diagnostic option A",
-        "Diagnostic option B",
-        "Diagnostic option C",
-        "Diagnostic option D", 
-        "Diagnostic option E"
-      ],
+      stem: generateGIStem(i, currentSubcategory),
+      options: generateGIOptions(currentSubcategory, i),
       correctAnswer: i % 5,
       explanation: `Detailed GI explanation ${i} covering diagnosis and management approaches.`,
       learningObjectives: [
@@ -885,14 +1011,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Neurology Clinic', 'Emergency Department', 'GP Surgery'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Neurology question ${i}: A patient presents with neurological symptoms requiring evaluation.`,
-      options: [
-        "Neurological option A",
-        "Neurological option B",
-        "Neurological option C",
-        "Neurological option D",
-        "Neurological option E"
-      ],
+      stem: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['epilepsy', 'headache', 'dementia', 'movement-disorders'][i % 4];
+        
+        if (subcategory === 'epilepsy') {
+          return `A ${age}-year-old ${gender} presents following a witnessed episode where they suddenly became unresponsive, fell to the ground, and had generalized tonic-clonic movements lasting 2 minutes. There was tongue biting and incontinence. What is the most likely diagnosis?`;
+        } else if (subcategory === 'headache') {
+          return `A ${age}-year-old ${gender} presents with severe unilateral headache associated with nausea, vomiting, and photophobia. The headache is throbbing and lasts 4-24 hours. There is a family history of similar headaches. What is the most likely diagnosis?`;
+        } else if (subcategory === 'dementia') {
+          return `A ${age}-year-old ${gender} presents with progressive memory loss over 18 months, difficulty with familiar tasks, and getting lost in familiar places. MMSE score is 18/30. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with tremor affecting both hands at rest, bradykinesia, and rigidity. The tremor improves with movement. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['epilepsy', 'headache', 'dementia', 'movement-disorders'][i % 4];
+        
+        if (subcategory === 'epilepsy') {
+          return ['Generalized tonic-clonic seizure', 'Complex partial seizure', 'Simple partial seizure', 'Absence seizure', 'Pseudo-seizure'];
+        } else if (subcategory === 'headache') {
+          return ['Migraine without aura', 'Tension-type headache', 'Cluster headache', 'Medication overuse headache', 'Trigeminal neuralgia'];
+        } else if (subcategory === 'dementia') {
+          return ['Alzheimer\'s disease', 'Vascular dementia', 'Frontotemporal dementia', 'Lewy body dementia', 'Normal pressure hydrocephalus'];
+        } else {
+          return ['Parkinson\'s disease', 'Essential tremor', 'Drug-induced parkinsonism', 'Progressive supranuclear palsy', 'Multiple system atrophy'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Neurological explanation ${i} covering assessment and management.`,
       learningObjectives: [
