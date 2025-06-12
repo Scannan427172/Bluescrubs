@@ -1679,8 +1679,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Mental Health Unit', 'GP Surgery', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Psychiatry question ${i}: A patient presents with mental health symptoms requiring assessment.`,
-      options: ["Psych option A", "Psych option B", "Psych option C", "Psych option D", "Psych option E"],
+      stem: (() => {
+        const age = 18 + (i % 62);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['depression', 'anxiety', 'psychosis', 'bipolar'][i % 4];
+        
+        if (subcategory === 'depression') {
+          return `A ${age}-year-old ${gender} presents with low mood, loss of interest, poor sleep, and feelings of worthlessness for 6 weeks. They have lost weight and express thoughts of self-harm. What is the most appropriate initial management?`;
+        } else if (subcategory === 'anxiety') {
+          return `A ${age}-year-old ${gender} presents with recurrent episodes of intense fear, palpitations, sweating, and feeling of impending doom lasting 10 minutes. These occur several times a week. What is the most likely diagnosis?`;
+        } else if (subcategory === 'psychosis') {
+          return `A ${age}-year-old ${gender} presents with auditory hallucinations, delusions of persecution, and social withdrawal over 3 months. They believe their thoughts are being monitored. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with alternating periods of elevated mood with decreased sleep and grandiose ideas, followed by episodes of severe depression. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['depression', 'anxiety', 'psychosis', 'bipolar'][i % 4];
+        
+        if (subcategory === 'depression') {
+          return ['Risk assessment and SSRI', 'Immediate psychiatric admission', 'CBT only', 'Tricyclic antidepressants', 'Reassurance only'];
+        } else if (subcategory === 'anxiety') {
+          return ['Panic disorder', 'Generalized anxiety disorder', 'Social anxiety disorder', 'Specific phobia', 'PTSD'];
+        } else if (subcategory === 'psychosis') {
+          return ['Schizophrenia', 'Brief psychotic disorder', 'Delusional disorder', 'Schizoaffective disorder', 'Substance-induced psychosis'];
+        } else {
+          return ['Bipolar I disorder', 'Bipolar II disorder', 'Cyclothymic disorder', 'Major depressive disorder', 'Borderline personality disorder'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Psychiatric explanation ${i} covering mental health assessment and treatment.`,
       learningObjectives: ["Mental state examination", "Risk assessment", "Therapeutic interventions"],
@@ -1703,8 +1729,33 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Obstetric Unit', 'Gynaecology Clinic', 'GP Surgery'][i % 3],
       ageGroup: ['Adult', 'Young Adult', 'Elderly'][i % 3],
-      stem: `O&G question ${i}: A patient presents with obstetric or gynaecological symptoms requiring management.`,
-      options: ["O&G option A", "O&G option B", "O&G option C", "O&G option D", "O&G option E"],
+      stem: (() => {
+        const age = 16 + (i % 39);
+        const subcategory = ['pregnancy', 'menstrual-disorders', 'contraception', 'gynae-oncology'][i % 4];
+        
+        if (subcategory === 'pregnancy') {
+          return `A ${age}-year-old woman at 38 weeks gestation presents with regular contractions every 3 minutes, cervix 6cm dilated, and clear liquor draining. Fetal heart rate is 140 bpm. What is the most appropriate management?`;
+        } else if (subcategory === 'menstrual-disorders') {
+          return `A ${age}-year-old woman presents with heavy menstrual bleeding lasting 8 days with clots, occurring every 21 days. Hemoglobin is 85 g/L. Pelvic examination is normal. What is the most appropriate investigation?`;
+        } else if (subcategory === 'contraception') {
+          return `A ${age}-year-old woman requests emergency contraception 48 hours after unprotected intercourse. Her last menstrual period was 10 days ago. What is the most appropriate option?`;
+        } else {
+          return `A ${age}-year-old woman presents with post-menopausal bleeding and cervical smear showing severe dyskaryosis. Colposcopy reveals a suspicious lesion. What is the most appropriate management?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['pregnancy', 'menstrual-disorders', 'contraception', 'gynae-oncology'][i % 4];
+        
+        if (subcategory === 'pregnancy') {
+          return ['Continue labor management', 'Emergency cesarean section', 'Instrumental delivery', 'Augment labor with oxytocin', 'Epidural analgesia'];
+        } else if (subcategory === 'menstrual-disorders') {
+          return ['Pelvic ultrasound', 'Endometrial biopsy', 'Hysteroscopy', 'MRI pelvis', 'Laparoscopy'];
+        } else if (subcategory === 'contraception') {
+          return ['Levonorgestrel 1.5mg', 'Ulipristal acetate 30mg', 'Copper IUD insertion', 'Combined oral contraceptive', 'Too late for emergency contraception'];
+        } else {
+          return ['Urgent gynecology referral', 'Cone biopsy', 'Hysterectomy', 'Radiotherapy', 'Chemotherapy'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Obstetric/gynaecological explanation ${i} covering women's health issues.`,
       learningObjectives: ["Obstetric care", "Gynaecological assessment", "Women's health"],
@@ -1727,8 +1778,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Paediatric Ward', 'Emergency Department', 'GP Surgery'][i % 3],
       ageGroup: ['Child', 'Infant', 'Adolescent'][i % 3],
-      stem: `Paediatrics question ${i}: A child presents with symptoms requiring paediatric assessment.`,
-      options: ["Paeds option A", "Paeds option B", "Paeds option C", "Paeds option D", "Paeds option E"],
+      stem: (() => {
+        const age = i % 16 === 0 ? '6-month-old' : i % 16 === 1 ? '2-year-old' : i % 16 === 2 ? '5-year-old' : i % 16 === 3 ? '8-year-old' : i % 16 === 4 ? '12-year-old' : '15-year-old';
+        const gender = i % 2 === 0 ? 'boy' : 'girl';
+        const subcategory = ['respiratory', 'development', 'infectious', 'emergency'][i % 4];
+        
+        if (subcategory === 'respiratory') {
+          return `A ${age} ${gender} presents with barking cough, inspiratory stridor, and mild respiratory distress that worsens when agitated. Temperature is 37.8°C. What is the most likely diagnosis?`;
+        } else if (subcategory === 'development') {
+          return `A ${age} ${gender} is brought by parents concerned about delayed speech. They can say 2-3 words but should be using 50+ words. Hearing test is normal. What is the most appropriate management?`;
+        } else if (subcategory === 'infectious') {
+          return `A ${age} ${gender} presents with fever, sore throat, and a sandpaper-like rash starting on the neck and spreading to the trunk. The tongue appears strawberry-like. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age} ${gender} presents with severe abdominal pain that started periumbilically and has now localized to the right iliac fossa. They have vomiting and fever. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['respiratory', 'development', 'infectious', 'emergency'][i % 4];
+        
+        if (subcategory === 'respiratory') {
+          return ['Croup (laryngotracheobronchitis)', 'Epiglottitis', 'Bronchiolitis', 'Asthma', 'Pneumonia'];
+        } else if (subcategory === 'development') {
+          return ['Speech and language therapy referral', 'Hearing aid fitting', 'Autism assessment', 'Educational psychology', 'Reassurance only'];
+        } else if (subcategory === 'infectious') {
+          return ['Scarlet fever', 'Kawasaki disease', 'Measles', 'Roseola', 'Hand, foot and mouth disease'];
+        } else {
+          return ['Appendicitis', 'Gastroenteritis', 'Intussusception', 'Mesenteric adenitis', 'Constipation'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Paediatric explanation ${i} covering child health and development.`,
       learningObjectives: ["Child assessment", "Growth monitoring", "Vaccination schedules"],
@@ -1751,8 +1828,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Operating Theatre', 'Surgical Ward', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Surgery question ${i}: A patient requires surgical assessment and management.`,
-      options: ["Surgical option A", "Surgical option B", "Surgical option C", "Surgical option D", "Surgical option E"],
+      stem: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['colorectal', 'breast', 'vascular', 'orthopaedic'][i % 4];
+        
+        if (subcategory === 'colorectal') {
+          return `A ${age}-year-old ${gender} presents with sudden onset severe right iliac fossa pain, nausea, and vomiting. Temperature is 38.2°C, tenderness at McBurney's point. White cell count is 15×10⁹/L. What is the most appropriate management?`;
+        } else if (subcategory === 'breast') {
+          return `A ${age}-year-old ${gender} presents with a hard, fixed, painless breast lump. Mammography shows suspicious microcalcifications. Core biopsy confirms invasive ductal carcinoma. What is the most appropriate management?`;
+        } else if (subcategory === 'vascular') {
+          return `A ${age}-year-old ${gender} presents with sudden onset severe abdominal pain radiating to the back. Blood pressure is 80/50 mmHg and a pulsatile abdominal mass is palpable. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with severe hip pain following a fall. X-ray shows displaced intracapsular neck of femur fracture. What is the most appropriate surgical management?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['colorectal', 'breast', 'vascular', 'orthopaedic'][i % 4];
+        
+        if (subcategory === 'colorectal') {
+          return ['Emergency appendectomy', 'Conservative management', 'CT abdomen first', 'Laparoscopic exploration', 'Antibiotics only'];
+        } else if (subcategory === 'breast') {
+          return ['Multidisciplinary team discussion', 'Immediate mastectomy', 'Radiotherapy only', 'Chemotherapy only', 'Hormonal therapy only'];
+        } else if (subcategory === 'vascular') {
+          return ['Ruptured abdominal aortic aneurysm', 'Acute mesenteric ischemia', 'Perforated peptic ulcer', 'Acute pancreatitis', 'Renal colic'];
+        } else {
+          return ['Total hip replacement', 'Hemiarthroplasty', 'Internal fixation with screws', 'Dynamic hip screw', 'Conservative management'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Surgical explanation ${i} covering operative and perioperative care.`,
       learningObjectives: ["Surgical assessment", "Perioperative care", "Complication management"],
@@ -1775,8 +1878,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Emergency Department', 'Resuscitation Bay', 'Ambulance'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Emergency Medicine question ${i}: A patient presents with life-threatening symptoms requiring immediate care.`,
-      options: ["EM option A", "EM option B", "EM option C", "EM option D", "EM option E"],
+      stem: (() => {
+        const age = 20 + (i % 60);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['major-trauma', 'poisoning', 'cardiac-arrest', 'shock'][i % 4];
+        
+        if (subcategory === 'major-trauma') {
+          return `A ${age}-year-old ${gender} involved in an RTC presents with chest pain and dyspnea. Chest X-ray shows tension pneumothorax with mediastinal shift. Blood pressure is 90/60 mmHg. What is the most urgent intervention?`;
+        } else if (subcategory === 'poisoning') {
+          return `A ${age}-year-old ${gender} presents unconscious after taking an unknown number of paracetamol tablets 6 hours ago. Blood paracetamol level is 150 mg/L. What is the most appropriate treatment?`;
+        } else if (subcategory === 'cardiac-arrest') {
+          return `A ${age}-year-old ${gender} collapses with witnessed cardiac arrest. Monitor shows ventricular fibrillation. CPR is in progress. What is the most appropriate immediate intervention?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with hypotension, tachycardia, and warm peripheries. Lactate is elevated and white cell count is 20×10⁹/L. What type of shock is this?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['major-trauma', 'poisoning', 'cardiac-arrest', 'shock'][i % 4];
+        
+        if (subcategory === 'major-trauma') {
+          return ['Immediate needle thoracocentesis', 'Chest drain insertion', 'Intubation and ventilation', 'High-flow oxygen', 'Emergency thoracotomy'];
+        } else if (subcategory === 'poisoning') {
+          return ['N-acetylcysteine infusion', 'Activated charcoal', 'Gastric lavage', 'Supportive care only', 'Liver transplant assessment'];
+        } else if (subcategory === 'cardiac-arrest') {
+          return ['Immediate defibrillation', 'Continue CPR for 2 minutes', 'Give adrenaline 1mg', 'Check pulse', 'Intubation'];
+        } else {
+          return ['Septic shock', 'Cardiogenic shock', 'Hypovolemic shock', 'Anaphylactic shock', 'Neurogenic shock'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Emergency medicine explanation ${i} covering acute care and resuscitation.`,
       learningObjectives: ["Emergency assessment", "Resuscitation skills", "Triage principles"],
@@ -1799,8 +1928,26 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Any Clinical Setting', 'Legal Consultation', 'Ethics Committee'][i % 3],
       ageGroup: ['All Ages', 'Adult', 'Elderly'][i % 3],
-      stem: `Ethics question ${i}: A clinical scenario raises ethical and legal considerations.`,
-      options: ["Ethics option A", "Ethics option B", "Ethics option C", "Ethics option D", "Ethics option E"],
+      stem: (() => {
+        const scenarios = [
+          `A 16-year-old girl requests emergency contraception but asks you not to tell her parents. She appears competent to make this decision. What is the most appropriate action?`,
+          `An 85-year-old man with advanced dementia is brought by his daughter who requests "everything possible" be done. The patient has previously expressed wishes for comfort care only. What should guide your decision?`,
+          `A Jehovah's Witness patient requires urgent blood transfusion following major trauma but refuses consent while conscious. They are now unconscious and deteriorating. What is the most appropriate action?`,
+          `A colleague arrives at work smelling of alcohol and appears intoxicated. They are scheduled to see patients. What is your immediate responsibility?`,
+          `A patient asks you to falsify a medical certificate so they can claim sick leave for a holiday. They offer to pay you extra. What is the appropriate response?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Provide contraception maintaining confidentiality', 'Refuse unless parents consent', 'Provide contraception but inform parents', 'Refer to family planning clinic', 'Delay until legal advice obtained'],
+          ['Follow the patient\'s previous wishes', 'Comply with daughter\'s requests', 'Apply for court order', 'Seek ethics committee advice', 'Continue current treatment level'],
+          ['Respect refusal and provide supportive care', 'Give blood transfusion to save life', 'Seek court order for treatment', 'Contact Jehovah\'s Witness liaison', 'Wait for family consent'],
+          ['Report to clinical supervisor immediately', 'Suggest they go home', 'Monitor their performance closely', 'Discuss with colleagues first', 'Ignore if no patients harmed'],
+          ['Refuse and explain professional obligations', 'Agree if fee is sufficient', 'Report to medical director', 'Refer to another doctor', 'Suggest private consultation']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Ethical explanation ${i} covering professional duties and legal obligations.`,
       learningObjectives: ["Ethical reasoning", "Legal compliance", "Professional standards"],
@@ -1823,8 +1970,26 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Community Health', 'GP Surgery', 'Public Health Department'][i % 3],
       ageGroup: ['Population', 'Adult', 'Elderly'][i % 3],
-      stem: `Public Health question ${i}: A population health issue requires assessment and intervention.`,
-      options: ["PH option A", "PH option B", "PH option C", "PH option D", "PH option E"],
+      stem: (() => {
+        const scenarios = [
+          `A GP practice notices a cluster of gastroenteritis cases affecting 15 patients who all attended the same wedding reception. What is the most appropriate immediate action?`,
+          `A school reports 8 cases of suspected meningococcal disease over 2 weeks. Public Health England has been notified. What is the most appropriate intervention for close contacts?`,
+          `During a measles outbreak, a pregnant woman presents concerned about exposure. She is unsure of her vaccination status and has no antibody results. What is the most appropriate management?`,
+          `A tuberculosis case is identified in a homeless shelter. Contact tracing reveals 12 close contacts. What is the most appropriate screening approach?`,
+          `A workplace reports 6 cases of hepatitis A among food handlers in a restaurant kitchen. What is the most urgent public health measure?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['Notify Public Health England immediately', 'Send stool samples for analysis', 'Interview affected patients about food sources', 'Advise venue closure', 'All of the above'],
+          ['Antibiotic prophylaxis for close contacts', 'Vaccination for close contacts', 'Both prophylaxis and vaccination', 'Isolation of contacts', 'No intervention needed'],
+          ['Immediate MMR vaccination', 'Check immunity status urgently', 'Give immunoglobulin if non-immune', 'Advise isolation', 'Options B and C'],
+          ['Chest X-ray and tuberculin skin test', 'Interferon-gamma release assay', 'Sputum microscopy for all contacts', 'Contact chest X-ray only', 'Options A and B'],
+          ['Exclude affected staff from work', 'Deep clean kitchen facilities', 'Vaccination of remaining staff', 'Contact tracing of customers', 'All of the above']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Public health explanation ${i} covering population health and prevention.`,
       learningObjectives: ["Population health", "Disease prevention", "Health promotion"],
