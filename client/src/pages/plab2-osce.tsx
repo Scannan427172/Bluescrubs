@@ -144,6 +144,70 @@ export default function Plab2Osce() {
                   </div>
                 </div>
                 
+                {/* BNF Medication Information */}
+                {activeStation.medications && activeStation.medications.length > 0 && (
+                  <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Heart className="w-5 h-5 text-green-600" />
+                      <h4 className="font-semibold text-green-800">BNF Medication Guidance</h4>
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <h5 className="font-medium text-green-700 mb-2">Key Medications:</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {activeStation.medications.map((med, index) => (
+                            <Badge key={index} variant="outline" className="bg-white border-green-300 text-green-700">
+                              {med}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      {activeStation.bnfGuidance && (
+                        <div>
+                          <h5 className="font-medium text-green-700 mb-2">Clinical Guidance:</h5>
+                          <p className="text-sm text-green-600 leading-relaxed">{activeStation.bnfGuidance}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Clinical Reasoning */}
+                {activeStation.clinicalReasoning && (
+                  <div className="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Brain className="w-5 h-5 text-purple-600" />
+                      <h4 className="font-semibold text-purple-800">Clinical Reasoning</h4>
+                    </div>
+                    <ul className="space-y-2">
+                      {activeStation.clinicalReasoning.map((reason, index) => (
+                        <li key={index} className="flex items-start gap-2 text-sm text-purple-700">
+                          <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
+                          <span>{reason}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Red Flags */}
+                {activeStation.redFlags && (
+                  <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div className="flex items-center gap-2 mb-3">
+                      <AlertTriangle className="w-5 h-5 text-red-600" />
+                      <h4 className="font-semibold text-red-800">Red Flags</h4>
+                    </div>
+                    <ul className="space-y-2">
+                      {activeStation.redFlags.map((flag, index) => (
+                        <li key={index} className="flex items-start gap-2 text-sm text-red-700">
+                          <span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
+                          <span>{flag}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 <div className="mt-8 p-4 bg-blue-50 rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <Clock className="w-5 h-5 text-blue-600" />
@@ -350,37 +414,37 @@ export default function Plab2Osce() {
                 value="history" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
-                History ({OSCE_STATION_STATS.byType.history})
+                History ({EXPANDED_STATION_STATS.byType.history})
               </TabsTrigger>
               <TabsTrigger 
                 value="examination" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
-                Exam ({OSCE_STATION_STATS.byType.examination})
+                Exam ({EXPANDED_STATION_STATS.byType.examination})
               </TabsTrigger>
               <TabsTrigger 
                 value="explanation" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
-                Explain ({OSCE_STATION_STATS.byType.explanation})
+                Explain ({EXPANDED_STATION_STATS.byType.explanation})
               </TabsTrigger>
               <TabsTrigger 
                 value="ethics" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
-                Ethics ({OSCE_STATION_STATS.byType.ethics})
+                Ethics ({EXPANDED_STATION_STATS.byType.ethics})
               </TabsTrigger>
               <TabsTrigger 
                 value="acute-care" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
-                Acute ({OSCE_STATION_STATS.byType['acute-care']})
+                Acute ({EXPANDED_STATION_STATS.byType['acute-care']})
               </TabsTrigger>
               <TabsTrigger 
                 value="practical-skills" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
-                Skills ({OSCE_STATION_STATS.byType['practical-skills']})
+                Skills ({EXPANDED_STATION_STATS.byType['practical-skills']})
               </TabsTrigger>
             </TabsList>
 
@@ -392,7 +456,11 @@ export default function Plab2Osce() {
                 const score = stationScores[station.id];
 
                 return (
-                  <Card key={station.id} className={`hover:shadow-lg transition-shadow cursor-pointer ${isCompleted ? 'border-green-200 bg-green-50' : ''}`}>
+                  <Card key={station.id} className={`hover:shadow-lg transition-all duration-200 cursor-pointer border-2 ${
+                    isCompleted 
+                      ? 'border-green-300 bg-green-50 shadow-md' 
+                      : 'border-gray-200 hover:border-blue-300 hover:shadow-md'
+                  }`}>
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
                         <div className="flex items-center gap-2">
@@ -421,6 +489,28 @@ export default function Plab2Osce() {
                         {station.scenario}
                       </p>
                       
+                      {/* Medication Information */}
+                      {station.medications && station.medications.length > 0 && (
+                        <div className="mb-3 p-2 bg-green-50 border border-green-200 rounded">
+                          <div className="flex items-center gap-1 mb-1">
+                            <Heart className="w-3 h-3 text-green-600" />
+                            <span className="text-xs font-medium text-green-700">Key Medications</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1">
+                            {station.medications.slice(0, 3).map((med, index) => (
+                              <Badge key={index} variant="outline" className="text-xs bg-white border-green-300 text-green-700">
+                                {med}
+                              </Badge>
+                            ))}
+                            {station.medications.length > 3 && (
+                              <Badge variant="outline" className="text-xs bg-white border-green-300 text-green-700">
+                                +{station.medications.length - 3} more
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                      
                       <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
@@ -434,7 +524,7 @@ export default function Plab2Osce() {
 
                       <Button 
                         onClick={() => setActiveStation(station)}
-                        className="w-full"
+                        className={`w-full ${accommodations.largerButtons ? 'py-3 text-base' : ''}`}
                         variant={isCompleted ? "outline" : "default"}
                       >
                         {isCompleted ? 'Review Station' : 'Start Station'}
