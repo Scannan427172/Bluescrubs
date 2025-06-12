@@ -1072,14 +1072,34 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Endocrine Clinic', 'GP Surgery', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Endocrine question ${i}: A patient presents with endocrine symptoms requiring assessment.`,
-      options: [
-        "Endocrine option A",
-        "Endocrine option B", 
-        "Endocrine option C",
-        "Endocrine option D",
-        "Endocrine option E"
-      ],
+      stem: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['thyroid', 'diabetes-complications', 'adrenal', 'pituitary'][i % 4];
+        
+        if (subcategory === 'thyroid') {
+          return `A ${age}-year-old ${gender} presents with weight loss, palpitations, heat intolerance, and tremor. Blood tests show TSH <0.1 mU/L and free T4 45 pmol/L (normal 10-25). What is the most likely diagnosis?`;
+        } else if (subcategory === 'diabetes-complications') {
+          return `A ${age}-year-old ${gender} with type 2 diabetes for 15 years presents with burning pain in both feet, worse at night. HbA1c is 85 mmol/mol. What is the most likely complication?`;
+        } else if (subcategory === 'adrenal') {
+          return `A ${age}-year-old ${gender} presents with muscle weakness, hypertension, and hypokalemia. 24-hour urine cortisol is elevated. What is the most appropriate investigation?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with headaches, visual field defects, and amenorrhea. MRI shows a 2cm pituitary mass. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategory = ['thyroid', 'diabetes-complications', 'adrenal', 'pituitary'][i % 4];
+        
+        if (subcategory === 'thyroid') {
+          return ['Hyperthyroidism', 'Hypothyroidism', 'Thyroiditis', 'Euthyroid sick syndrome', 'Drug-induced thyrotoxicosis'];
+        } else if (subcategory === 'diabetes-complications') {
+          return ['Diabetic peripheral neuropathy', 'Peripheral vascular disease', 'Diabetic foot ulcer', 'Cellulitis', 'Vitamin B12 deficiency'];
+        } else if (subcategory === 'adrenal') {
+          return ['Dexamethasone suppression test', 'ACTH stimulation test', 'Aldosterone/renin ratio', 'Adrenal CT scan', 'Midnight cortisol'];
+        } else {
+          return ['Prolactinoma', 'Non-functioning adenoma', 'Craniopharyngioma', 'Growth hormone adenoma', 'ACTH adenoma'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Endocrine explanation ${i} covering hormone disorders and management.`,
       learningObjectives: [
@@ -1115,8 +1135,44 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['GP Surgery', 'Cardiology Clinic', 'Emergency Department', 'CCU'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Advanced cardiovascular question ${i}: Clinical scenario requiring cardiovascular expertise and management decisions.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 40 + (i % 40);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['acute-coronary-syndrome', 'heart-failure', 'arrhythmias', 'valvular-disease', 'hypertension', 'cardiomyopathy'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'acute-coronary-syndrome') {
+          return `A ${age}-year-old ${gender} presents with crushing central chest pain radiating to the left arm, lasting 45 minutes. ECG shows ST elevation in leads V1-V4. Troponin is elevated. What is the most appropriate immediate management?`;
+        } else if (subcategory === 'heart-failure') {
+          return `A ${age}-year-old ${gender} presents with progressive breathlessness, ankle swelling, and fatigue over 3 months. Echocardiogram shows ejection fraction of 35%. What is the most appropriate initial treatment?`;
+        } else if (subcategory === 'arrhythmias') {
+          return `A ${age}-year-old ${gender} presents with palpitations and dizziness. ECG shows atrial fibrillation with rapid ventricular response at 150 bpm. Blood pressure is stable. What is the most appropriate management?`;
+        } else if (subcategory === 'valvular-disease') {
+          return `A ${age}-year-old ${gender} presents with exertional breathlessness and chest pain. Echocardiogram shows severe aortic stenosis with valve area 0.8 cm². What is the most appropriate management?`;
+        } else if (subcategory === 'hypertension') {
+          return `A ${age}-year-old ${gender} presents with blood pressure consistently above 160/100 mmHg on multiple readings. They have type 2 diabetes. What is the most appropriate first-line antihypertensive?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with heart failure symptoms and family history of sudden cardiac death. Echocardiogram shows asymmetric septal hypertrophy. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategories = ['acute-coronary-syndrome', 'heart-failure', 'arrhythmias', 'valvular-disease', 'hypertension', 'cardiomyopathy'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'acute-coronary-syndrome') {
+          return ['Primary PCI within 120 minutes', 'Thrombolysis with alteplase', 'Dual antiplatelet therapy only', 'Coronary angiography within 24 hours', 'Conservative management'];
+        } else if (subcategory === 'heart-failure') {
+          return ['ACE inhibitor and beta-blocker', 'Diuretics only', 'Digoxin', 'Calcium channel blocker', 'Lifestyle advice only'];
+        } else if (subcategory === 'arrhythmias') {
+          return ['Rate control with diltiazem', 'Immediate cardioversion', 'Amiodarone loading', 'Beta-blocker therapy', 'Anticoagulation only'];
+        } else if (subcategory === 'valvular-disease') {
+          return ['Aortic valve replacement', 'Balloon valvuloplasty', 'Medical management', 'Transcatheter aortic valve implantation', 'Regular monitoring only'];
+        } else if (subcategory === 'hypertension') {
+          return ['ACE inhibitor', 'Thiazide diuretic', 'Calcium channel blocker', 'Beta-blocker', 'Alpha-blocker'];
+        } else {
+          return ['Hypertrophic cardiomyopathy', 'Dilated cardiomyopathy', 'Restrictive cardiomyopathy', 'Arrhythmogenic right ventricular cardiomyopathy', 'Athlete\'s heart'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Comprehensive cardiovascular explanation ${i} covering pathophysiology, diagnosis, and evidence-based treatment.`,
       learningObjectives: ["Advanced cardiovascular assessment", "Complex case management", "Evidence-based protocols"],
@@ -1139,8 +1195,44 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['GP Surgery', 'Respiratory Clinic', 'Emergency Department', 'ICU'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Advanced respiratory question ${i}: Complex respiratory case requiring expert clinical judgment.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 35 + (i % 45);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['pneumonia', 'asthma-copd', 'lung-cancer', 'pneumothorax', 'pulmonary-embolism', 'sleep-disorders'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'pneumonia') {
+          return `A ${age}-year-old ${gender} presents with fever, productive cough with purulent sputum, and right-sided pleuritic chest pain. Chest X-ray shows right lower lobe consolidation. CURB-65 score is 2. What is the most appropriate management?`;
+        } else if (subcategory === 'asthma-copd') {
+          return `A ${age}-year-old ${gender} with COPD presents with increasing breathlessness and purulent sputum over 3 days. Peak flow has dropped from baseline. What is the most appropriate treatment?`;
+        } else if (subcategory === 'lung-cancer') {
+          return `A ${age}-year-old ${gender} with 40-pack-year smoking history presents with persistent cough and weight loss. CT chest shows a 3cm spiculated mass in the right upper lobe with mediastinal lymphadenopathy. What is the next most appropriate step?`;
+        } else if (subcategory === 'pneumothorax') {
+          return `A ${age}-year-old tall, thin ${gender} presents with sudden onset sharp chest pain and breathlessness. Chest X-ray shows 40% pneumothorax on the right side. What is the most appropriate management?`;
+        } else if (subcategory === 'pulmonary-embolism') {
+          return `A ${age}-year-old ${gender} presents 5 days post-operative with sudden onset breathlessness and pleuritic chest pain. D-dimer is elevated and Well's score is 6. What is the most appropriate investigation?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with daytime sleepiness, loud snoring, and witnessed apnoeas during sleep. BMI is 35. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategories = ['pneumonia', 'asthma-copd', 'lung-cancer', 'pneumothorax', 'pulmonary-embolism', 'sleep-disorders'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'pneumonia') {
+          return ['Oral antibiotics at home', 'IV antibiotics in hospital', 'Outpatient parenteral antibiotic therapy', 'ICU admission', 'Chest physiotherapy only'];
+        } else if (subcategory === 'asthma-copd') {
+          return ['Increase bronchodilator therapy', 'Oral prednisolone 30mg', 'Nebulized bronchodilators', 'Antibiotic therapy', 'All of the above'];
+        } else if (subcategory === 'lung-cancer') {
+          return ['Tissue sampling via bronchoscopy', 'CT-guided biopsy', 'PET-CT staging scan', 'Mediastinoscopy', 'Immediate surgery'];
+        } else if (subcategory === 'pneumothorax') {
+          return ['Chest drain insertion', 'Needle aspiration', 'High-flow oxygen', 'Observation only', 'Emergency thoracotomy'];
+        } else if (subcategory === 'pulmonary-embolism') {
+          return ['CTPA (CT pulmonary angiogram)', 'V/Q scan', 'Echocardiogram', 'Chest X-ray', 'Arterial blood gas'];
+        } else {
+          return ['Obstructive sleep apnoea', 'Central sleep apnoea', 'Narcolepsy', 'Restless leg syndrome', 'Sleep hygiene disorder'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced respiratory explanation ${i} covering complex pathophysiology and specialist management.`,
       learningObjectives: ["Advanced respiratory assessment", "Complex case analysis", "Specialist protocols"],
@@ -1163,8 +1255,44 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['GP Surgery', 'GI Clinic', 'Emergency Department', 'Endoscopy Unit'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Advanced GI question ${i}: Complex gastroenterological case requiring specialist expertise.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['IBD', 'liver-disease', 'peptic-ulcer', 'colorectal', 'pancreatic', 'hepatitis'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'IBD') {
+          return `A ${age}-year-old ${gender} with ulcerative colitis presents with severe bloody diarrhea, abdominal pain, and fever. Heart rate is 110 bpm and hemoglobin is 85 g/L. What is the most appropriate management?`;
+        } else if (subcategory === 'liver-disease') {
+          return `A ${age}-year-old ${gender} presents with jaundice, ascites, and confusion. Bilirubin is 120 μmol/L, albumin is 22 g/L, and INR is 2.5. What is the most likely diagnosis?`;
+        } else if (subcategory === 'peptic-ulcer') {
+          return `A ${age}-year-old ${gender} presents with severe epigastric pain and coffee-ground vomiting. Blood pressure is 90/60 mmHg and hemoglobin has dropped to 75 g/L. What is the most appropriate immediate management?`;
+        } else if (subcategory === 'colorectal') {
+          return `A ${age}-year-old ${gender} presents with iron deficiency anemia and a positive fecal immunochemical test. Colonoscopy shows a large ulcerating mass in the sigmoid colon. What is the most appropriate management?`;
+        } else if (subcategory === 'pancreatic') {
+          return `A ${age}-year-old ${gender} presents with severe epigastric pain radiating to the back, vomiting, and fever. Amylase is elevated at 800 U/L. CT shows pancreatic inflammation. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age}-year-old ${gender} with known hepatitis B presents with fatigue, abdominal pain, and weight loss. AFP is markedly elevated and CT shows a 4cm liver lesion. What is the most likely complication?`;
+        }
+      })(),
+      options: (() => {
+        const subcategories = ['IBD', 'liver-disease', 'peptic-ulcer', 'colorectal', 'pancreatic', 'hepatitis'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'IBD') {
+          return ['IV corticosteroids and blood transfusion', 'Oral mesalazine', 'Anti-TNF therapy', 'Surgical consultation', 'Bowel rest only'];
+        } else if (subcategory === 'liver-disease') {
+          return ['Acute liver failure', 'Decompensated cirrhosis', 'Hepatocellular carcinoma', 'Acute hepatitis', 'Wilson\'s disease'];
+        } else if (subcategory === 'peptic-ulcer') {
+          return ['Emergency endoscopy', 'IV proton pump inhibitor', 'Blood transfusion', 'Surgical consultation', 'All of the above'];
+        } else if (subcategory === 'colorectal') {
+          return ['Urgent surgical resection', 'Neoadjuvant chemotherapy', 'Palliative care', 'Colonoscopic polypectomy', 'Further staging investigations'];
+        } else if (subcategory === 'pancreatic') {
+          return ['Acute pancreatitis', 'Chronic pancreatitis', 'Pancreatic cancer', 'Cholangitis', 'Peptic ulcer disease'];
+        } else {
+          return ['Hepatocellular carcinoma', 'Cholangiocarcinoma', 'Liver metastases', 'Hepatic adenoma', 'Focal nodular hyperplasia'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced GI explanation ${i} covering complex pathophysiology and specialist interventions.`,
       learningObjectives: ["Advanced GI assessment", "Complex diagnostic reasoning", "Specialist management"],
@@ -1187,8 +1315,44 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Neurology Clinic', 'Emergency Department', 'Stroke Unit', 'Memory Clinic'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Advanced neurology question ${i}: Complex neurological presentation requiring expert assessment.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 35 + (i % 45);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['stroke', 'epilepsy', 'headache', 'dementia', 'movement-disorders', 'multiple-sclerosis'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'stroke') {
+          return `A ${age}-year-old ${gender} presents with sudden onset left-sided weakness, facial droop, and speech difficulties that started 90 minutes ago. NIHSS score is 8. What is the most appropriate immediate treatment?`;
+        } else if (subcategory === 'epilepsy') {
+          return `A ${age}-year-old ${gender} with refractory epilepsy has breakthrough seizures despite optimal antiepileptic therapy. MRI shows mesial temporal sclerosis. What is the most appropriate management?`;
+        } else if (subcategory === 'headache') {
+          return `A ${age}-year-old ${gender} presents with thunderclap headache reaching maximum intensity within seconds. CT head is normal. What is the most appropriate investigation?`;
+        } else if (subcategory === 'dementia') {
+          return `A ${age}-year-old ${gender} presents with rapidly progressive cognitive decline over 6 months, myoclonus, and visual hallucinations. EEG shows periodic sharp wave complexes. What is the most likely diagnosis?`;
+        } else if (subcategory === 'movement-disorders') {
+          return `A ${age}-year-old ${gender} presents with unilateral rest tremor, bradykinesia, and cogwheel rigidity. Symptoms improve with levodopa. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with episodic neurological symptoms including visual disturbances, weakness, and sensory symptoms. MRI shows multiple T2 hyperintense lesions. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategories = ['stroke', 'epilepsy', 'headache', 'dementia', 'movement-disorders', 'multiple-sclerosis'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'stroke') {
+          return ['IV thrombolysis with alteplase', 'Mechanical thrombectomy', 'Antiplatelet therapy', 'Anticoagulation', 'Conservative management'];
+        } else if (subcategory === 'epilepsy') {
+          return ['Epilepsy surgery referral', 'VNS implantation', 'Ketogenic diet', 'Additional AED', 'Deep brain stimulation'];
+        } else if (subcategory === 'headache') {
+          return ['Lumbar puncture', 'CT angiography', 'MRI brain with gadolinium', 'Repeat CT in 24 hours', 'Cerebral angiography'];
+        } else if (subcategory === 'dementia') {
+          return ['Creutzfeldt-Jakob disease', 'Lewy body dementia', 'Frontotemporal dementia', 'Alzheimer\'s disease', 'Vascular dementia'];
+        } else if (subcategory === 'movement-disorders') {
+          return ['Parkinson\'s disease', 'Essential tremor', 'Progressive supranuclear palsy', 'Multiple system atrophy', 'Drug-induced parkinsonism'];
+        } else {
+          return ['Multiple sclerosis', 'Neuromyelitis optica', 'Acute disseminated encephalomyelitis', 'Migraine with aura', 'Conversion disorder'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced neurological explanation ${i} covering complex neuroanatomy and specialist treatments.`,
       learningObjectives: ["Advanced neurological examination", "Complex case analysis", "Specialist protocols"],
@@ -1211,8 +1375,44 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Endocrine Clinic', 'Diabetes Centre', 'Emergency Department', 'GP Surgery'][i % 4],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Advanced endocrine question ${i}: Complex hormonal disorder requiring specialist management.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['diabetes-complications', 'thyroid-disorders', 'adrenal-disorders', 'pituitary-disorders', 'calcium-disorders', 'reproductive-endocrinology'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'diabetes-complications') {
+          return `A ${age}-year-old ${gender} with type 1 diabetes for 20 years presents with proteinuria, retinopathy, and declining eGFR of 45 ml/min. HbA1c is 75 mmol/mol. What is the most appropriate management?`;
+        } else if (subcategory === 'thyroid-disorders') {
+          return `A ${age}-year-old ${gender} presents with heat intolerance, weight loss, and palpitations. TSH is suppressed, free T4 is elevated, and thyroid uptake scan shows diffuse increased uptake. What is the most likely diagnosis?`;
+        } else if (subcategory === 'adrenal-disorders') {
+          return `A ${age}-year-old ${gender} presents with muscle weakness, hypertension, and purple striae. 24-hour urinary cortisol is elevated and dexamethasone suppression test is abnormal. What is the most likely diagnosis?`;
+        } else if (subcategory === 'pituitary-disorders') {
+          return `A ${age}-year-old ${gender} presents with galactorrhea, amenorrhea, and visual field defects. Prolactin level is 2500 mU/L and MRI shows a 15mm pituitary mass. What is the most appropriate treatment?`;
+        } else if (subcategory === 'calcium-disorders') {
+          return `A ${age}-year-old ${gender} presents with kidney stones, depression, and fatigue. Serum calcium is 2.8 mmol/L, phosphate is low, and PTH is elevated. What is the most likely diagnosis?`;
+        } else {
+          return `A ${age}-year-old ${gender} presents with hirsutism, irregular periods, and insulin resistance. Testosterone is elevated and LH:FSH ratio is 3:1. What is the most likely diagnosis?`;
+        }
+      })(),
+      options: (() => {
+        const subcategories = ['diabetes-complications', 'thyroid-disorders', 'adrenal-disorders', 'pituitary-disorders', 'calcium-disorders', 'reproductive-endocrinology'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'diabetes-complications') {
+          return ['ACE inhibitor and statin therapy', 'Insulin intensification only', 'Dialysis referral', 'Pancreas transplant', 'Lifestyle modification only'];
+        } else if (subcategory === 'thyroid-disorders') {
+          return ['Graves\' disease', 'Toxic multinodular goiter', 'Toxic adenoma', 'Thyroiditis', 'Exogenous thyroid hormone'];
+        } else if (subcategory === 'adrenal-disorders') {
+          return ['Cushing\'s syndrome', 'Addison\'s disease', 'Conn\'s syndrome', 'Pheochromocytoma', 'Congenital adrenal hyperplasia'];
+        } else if (subcategory === 'pituitary-disorders') {
+          return ['Dopamine agonist therapy', 'Trans-sphenoidal surgery', 'Radiotherapy', 'Observation only', 'Medical management with bromocriptine'];
+        } else if (subcategory === 'calcium-disorders') {
+          return ['Primary hyperparathyroidism', 'Secondary hyperparathyroidism', 'Tertiary hyperparathyroidism', 'Malignancy-related hypercalcemia', 'Sarcoidosis'];
+        } else {
+          return ['Polycystic ovary syndrome', 'Congenital adrenal hyperplasia', 'Androgen-secreting tumor', 'Cushing\'s syndrome', 'Hypothyroidism'];
+        }
+      })(),
       correctAnswer: i % 5,
       explanation: `Advanced endocrine explanation ${i} covering complex hormone pathways and treatments.`,
       learningObjectives: ["Advanced endocrine assessment", "Hormone interpretation", "Complex protocols"],
@@ -1235,8 +1435,28 @@ const generateMoreQuestions = () => {
       difficulty: ['foundation', 'intermediate', 'advanced'][i % 3] as any,
       clinicalSetting: ['Nephrology Clinic', 'GP Surgery', 'Emergency Department'][i % 3],
       ageGroup: ['Adult', 'Elderly', 'Young Adult'][i % 3],
-      stem: `Nephrology question ${i}: A patient presents with renal symptoms requiring evaluation.`,
-      options: ["Option A", "Option B", "Option C", "Option D", "Option E"],
+      stem: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `A ${age}-year-old ${gender} presents with bilateral ankle swelling, proteinuria 3.5g/24hrs, and hypoalbuminemia. Renal biopsy shows minimal change disease. What is the most appropriate treatment?`,
+          `A ${age}-year-old ${gender} with diabetes presents with declining kidney function, eGFR 25 ml/min, and proteinuria. Blood pressure is 160/95 mmHg. What is the most appropriate management?`,
+          `A ${age}-year-old ${gender} presents with acute kidney injury, oliguria, and pulmonary edema following recent streptococcal infection. Urinalysis shows red cell casts. What is the most likely diagnosis?`,
+          `A ${age}-year-old ${gender} presents with recurrent kidney stones, hypercalciuria, and family history of nephrolithiasis. 24-hour urine shows elevated calcium excretion. What is the most appropriate prevention?`,
+          `A ${age}-year-old ${gender} with chronic kidney disease stage 4 presents with bone pain, elevated phosphate, and secondary hyperparathyroidism. What is the most appropriate treatment?`
+        ];
+        return scenarios[i % 5];
+      })(),
+      options: (() => {
+        const optionSets = [
+          ['High-dose corticosteroids', 'ACE inhibitor therapy', 'Immunosuppressive therapy', 'Diuretic therapy', 'Plasmapheresis'],
+          ['ACE inhibitor and ARB combination', 'Tight glycemic control', 'Dialysis preparation', 'Protein restriction', 'All of the above except A'],
+          ['Post-infectious glomerulonephritis', 'IgA nephropathy', 'Membranoproliferative GN', 'Minimal change disease', 'Focal segmental glomerulosclerosis'],
+          ['Thiazide diuretics', 'Increased fluid intake', 'Low calcium diet', 'Potassium citrate', 'All of the above except C'],
+          ['Phosphate binders', 'Vitamin D analogues', 'Calcimimetics', 'Parathyroidectomy', 'All of the above except D']
+        ];
+        return optionSets[i % 5];
+      })(),
       correctAnswer: i % 5,
       explanation: `Renal explanation ${i} covering kidney disease management.`,
       learningObjectives: ["Renal assessment", "GFR interpretation", "Treatment planning"],
