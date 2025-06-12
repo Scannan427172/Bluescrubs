@@ -11,12 +11,13 @@ import {
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2
 } from "lucide-react";
 import { PLAB2_OSCE_STATIONS, OSCE_STATION_TYPES, OSCE_STATION_STATS, type OSCEStation } from "@shared/plab2-osce-stations";
+import { EXPANDED_PLAB2_STATIONS, EXPANDED_STATION_STATS, type EnhancedOSCEStation } from "@shared/expanded-plab2-stations";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
 import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
 import { AudioSupport } from "@/components/audio-support";
 
 export default function Plab2Osce() {
-  const [activeStation, setActiveStation] = useState<OSCEStation | null>(null);
+  const [activeStation, setActiveStation] = useState<EnhancedOSCEStation | null>(null);
   const [selectedType, setSelectedType] = useState<string>('all');
   const [completedStations, setCompletedStations] = useState<string[]>([]);
   const [stationScores, setStationScores] = useState<Record<string, number>>({});
@@ -43,7 +44,7 @@ export default function Plab2Osce() {
     localStorage.setItem('neuro-accommodations', JSON.stringify(accommodations));
   };
 
-  const filteredStations = PLAB2_OSCE_STATIONS.filter(station => 
+  const filteredStations = EXPANDED_PLAB2_STATIONS.filter(station => 
     selectedType === 'all' || station.type === selectedType
   );
 
@@ -75,7 +76,7 @@ export default function Plab2Osce() {
   };
 
   const getOverallProgress = () => {
-    return (completedStations.length / PLAB2_OSCE_STATIONS.length) * 100;
+    return (completedStations.length / EXPANDED_PLAB2_STATIONS.length) * 100;
   };
 
   const getAverageScore = () => {
@@ -276,7 +277,7 @@ export default function Plab2Osce() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-blue-600 mb-2">
-                {completedStations.length}/{PLAB2_OSCE_STATIONS.length}
+                {completedStations.length}/{EXPANDED_PLAB2_STATIONS.length}
               </div>
               <Progress value={getOverallProgress()} className="mb-2" />
               <p className="text-sm text-gray-600">{Math.round(getOverallProgress())}% Complete</p>
@@ -303,9 +304,9 @@ export default function Plab2Osce() {
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                {Object.entries(OSCE_STATION_STATS.byType).map(([type, count]) => (
+                {Object.entries(EXPANDED_STATION_STATS.byType).map(([type, count]) => (
                   <div key={type} className="flex justify-between text-sm text-gray-700">
-                    <span className="capitalize">{OSCE_STATION_TYPES[type as keyof typeof OSCE_STATION_TYPES]}</span>
+                    <span className="capitalize">{type.replace('-', ' ')}</span>
                     <span className="font-medium">{count}</span>
                   </div>
                 ))}
@@ -343,7 +344,7 @@ export default function Plab2Osce() {
                 value="all" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
               >
-                All ({PLAB2_OSCE_STATIONS.length})
+                All ({EXPANDED_PLAB2_STATIONS.length})
               </TabsTrigger>
               <TabsTrigger 
                 value="history" 
