@@ -1058,29 +1058,76 @@ export default function PLAB1New() {
                     <h5 className="font-medium text-green-800">Educational References:</h5>
                   </div>
                   <div className="space-y-2">
-                    {currentQuestion.references.map((reference, index) => (
-                      <div key={index} className="flex items-start gap-2 text-sm text-green-700 p-2 bg-white rounded border border-green-100">
-                        <span className="text-green-600 font-medium text-xs mt-0.5 flex-shrink-0">
-                          {index + 1}.
-                        </span>
-                        <span className="flex-1 leading-relaxed">{reference}</span>
-                        <Badge 
-                          variant="outline" 
-                          className="text-xs px-1.5 py-0.5 border-green-300 text-green-700 flex-shrink-0"
-                        >
-                          {reference.includes('NICE') ? 'NICE' : 
-                           reference.includes('ESC') ? 'ESC' :
-                           reference.includes('BTS') ? 'BTS' :
-                           reference.includes('BNF') ? 'BNF' :
-                           reference.includes('NEJM') ? 'NEJM' :
-                           reference.includes('Lancet') ? 'LANCET' :
-                           'REFERENCE'}
-                        </Badge>
-                      </div>
-                    ))}
+                    {currentQuestion.references.map((reference, index) => {
+                      const getReferenceUrl = (ref: string) => {
+                        if (ref.includes('NICE CG')) {
+                          const cgNumber = ref.match(/CG(\d+)/)?.[1];
+                          if (cgNumber) return `https://www.nice.org.uk/guidance/cg${cgNumber}`;
+                        }
+                        if (ref.includes('NICE NG')) {
+                          const ngNumber = ref.match(/NG(\d+)/)?.[1];
+                          if (ngNumber) return `https://www.nice.org.uk/guidance/ng${ngNumber}`;
+                        }
+                        if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
+                        if (ref.includes('ESC')) return 'https://www.escardio.org/Guidelines';
+                        if (ref.includes('BTS')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/';
+                        if (ref.includes('BNF')) return 'https://bnf.nice.org.uk/';
+                        if (ref.includes('NEJM')) return 'https://www.nejm.org/';
+                        if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
+                        if (ref.includes('BMJ')) return 'https://www.bmj.com/';
+                        if (ref.includes('KDIGO')) return 'https://kdigo.org/guidelines/';
+                        if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
+                        if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
+                        if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
+                        return null;
+                      };
+
+                      const url = getReferenceUrl(reference);
+                      const referenceType = reference.includes('NICE') ? 'NICE' : 
+                                          reference.includes('ESC') ? 'ESC' :
+                                          reference.includes('BTS') ? 'BTS' :
+                                          reference.includes('BNF') ? 'BNF' :
+                                          reference.includes('NEJM') ? 'NEJM' :
+                                          reference.includes('Lancet') ? 'LANCET' :
+                                          reference.includes('BMJ') ? 'BMJ' :
+                                          reference.includes('KDIGO') ? 'KDIGO' :
+                                          reference.includes('WHO') ? 'WHO' :
+                                          reference.includes('ILAE') ? 'ILAE' :
+                                          reference.includes('ABN') ? 'ABN' :
+                                          'REFERENCE';
+
+                      return (
+                        <div key={index} className="flex items-start gap-2 text-sm text-green-700 p-2 bg-white rounded border border-green-100 hover:border-green-300 transition-colors">
+                          <span className="text-green-600 font-medium text-xs mt-0.5 flex-shrink-0">
+                            {index + 1}.
+                          </span>
+                          {url ? (
+                            <a 
+                              href={url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="flex-1 leading-relaxed hover:text-green-800 hover:underline transition-colors cursor-pointer"
+                            >
+                              {reference}
+                            </a>
+                          ) : (
+                            <span className="flex-1 leading-relaxed">{reference}</span>
+                          )}
+                          <Badge 
+                            variant="outline" 
+                            className="text-xs px-1.5 py-0.5 border-green-300 text-green-700 flex-shrink-0"
+                          >
+                            {referenceType}
+                          </Badge>
+                          {url && (
+                            <ExternalLink className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                   <p className="text-xs text-green-600 mt-2">
-                    These references support the clinical reasoning and evidence-based medicine approach used in this explanation
+                    Click on references to access official guidelines and publications
                   </p>
                 </div>
               )}
