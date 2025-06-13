@@ -111,9 +111,18 @@ export function generateSimpleQuestion(
         correctAnswer: 2,
         explanation: "Sudden onset breathlessness and pleuritic pain in a tall, thin young man with absent lung markings suggests spontaneous pneumothorax, which is more common in this demographic.",
         references: [
-          "BTS Pleural Disease Guidelines 2010: 'Primary spontaneous pneumothorax occurs in tall, thin young males (male:female ratio 6:1) aged 20-40 years'",
-          "NICE CKS Pneumothorax: 'Chest X-ray shows absent lung markings and visible pleural edge in pneumothorax'",
-          "Thorax 2010;65:ii18-ii31: 'Primary pneumothorax incidence 18-28 per 100,000 in tall men vs 1.2-6 per 100,000 in women'"
+          {
+            text: "BTS Pleural Disease Guidelines 2010: 'Primary spontaneous pneumothorax occurs in tall, thin young males (male:female ratio 6:1) aged 20-40 years'",
+            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pleural-disease/"
+          },
+          {
+            text: "NICE CKS Pneumothorax: 'Chest X-ray shows absent lung markings and visible pleural edge in pneumothorax'",
+            url: "https://cks.nice.org.uk/topics/pneumothorax/"
+          },
+          {
+            text: "Thorax 2010;65:ii18-ii31: 'Primary pneumothorax incidence 18-28 per 100,000 in tall men vs 1.2-6 per 100,000 in women'",
+            url: "https://thorax.bmj.com/content/65/Suppl_2/ii18"
+          }
         ]
       }
     ],
@@ -129,9 +138,18 @@ export function generateSimpleQuestion(
         correctAnswer: 1,
         explanation: "Continuous inflammation from rectum extending proximally is characteristic of ulcerative colitis, unlike the skip lesions seen in Crohn's disease.",
         references: [
-          "NICE CG166: Inflammatory bowel disease - Section 1.1.2 'Ulcerative colitis shows continuous mucosal inflammation starting from the rectum'",
-          "BSG IBD Guidelines 2019: 'UC demonstrates continuous inflammation extending proximally from the rectum, unlike Crohn's transmural skip lesions'",
-          "European Crohn's and Colitis Guidelines 2017: 'Endoscopic hallmark of UC is continuous mucosal inflammation beginning in rectum - Journal of Crohn's & Colitis 11:769-784'"
+          {
+            text: "NICE CG166: Inflammatory bowel disease - Section 1.1.2 'Ulcerative colitis shows continuous mucosal inflammation starting from the rectum'",
+            url: "https://www.nice.org.uk/guidance/cg166"
+          },
+          {
+            text: "BSG IBD Guidelines 2019: 'UC demonstrates continuous inflammation extending proximally from the rectum, unlike Crohn's transmural skip lesions'",
+            url: "https://www.bsg.org.uk/resource/bsg-inflammatory-bowel-disease-guidelines.html"
+          },
+          {
+            text: "European Crohn's and Colitis Guidelines 2017: 'Endoscopic hallmark of UC is continuous mucosal inflammation beginning in rectum - Journal of Crohn's & Colitis 11:769-784'",
+            url: "https://academic.oup.com/ecco-jcc/article/11/7/769/3072710"
+          }
         ]
       },
       {
@@ -145,9 +163,18 @@ export function generateSimpleQuestion(
         correctAnswer: 1,
         explanation: "Coffee-ground vomiting suggests upper GI bleeding. Initial management involves IV PPI therapy and resuscitation before considering endoscopy based on severity.",
         references: [
-          "NICE CG141: Upper gastrointestinal bleeding - Section 1.2.1 'Offer IV PPI therapy to people with suspected non-variceal upper GI bleeding'",
-          "SIGN 105: Management of acute upper GI bleeding - 'Initial resuscitation and PPI therapy should precede endoscopy in haemodynamically stable patients'",
-          "BSG Guidelines for Upper GI Bleeding 2015: 'Coffee-ground vomiting indicates upper GI bleeding; IV omeprazole 80mg bolus followed by 8mg/hour infusion - Gut 64:1326-1340'"
+          {
+            text: "NICE CG141: Upper gastrointestinal bleeding - Section 1.2.1 'Offer IV PPI therapy to people with suspected non-variceal upper GI bleeding'",
+            url: "https://www.nice.org.uk/guidance/cg141"
+          },
+          {
+            text: "SIGN 105: Management of acute upper GI bleeding - 'Initial resuscitation and PPI therapy should precede endoscopy in haemodynamically stable patients'",
+            url: "https://www.sign.ac.uk/media/1067/sign105.pdf"
+          },
+          {
+            text: "BSG Guidelines for Upper GI Bleeding 2015: 'Coffee-ground vomiting indicates upper GI bleeding; IV omeprazole 80mg bolus followed by 8mg/hour infusion - Gut 64:1326-1340'",
+            url: "https://gut.bmj.com/content/64/9/1326"
+          }
         ]
       }
     ],
@@ -161,7 +188,21 @@ export function generateSimpleQuestion(
           "Emergency craniotomy"
         ],
         correctAnswer: 1,
-        explanation: "Alteplase (tPA) should be given within 4.5 hours of symptom onset for acute ischemic stroke when CT excludes hemorrhage and there are no contraindications."
+        explanation: "Alteplase (tPA) should be given within 4.5 hours of symptom onset for acute ischemic stroke when CT excludes hemorrhage and there are no contraindications.",
+        references: [
+          {
+            text: "NICE CG68: Stroke and transient ischaemic attack - Section 1.4.9 'Offer alteplase within 4.5 hours of stroke symptom onset'",
+            url: "https://www.nice.org.uk/guidance/cg68"
+          },
+          {
+            text: "RCP Stroke Guidelines 2016: 'Thrombolysis with alteplase reduces disability when given within 4.5 hours of ischemic stroke onset'",
+            url: "https://www.strokeaudit.org/SupportFiles/Documents/Guidelines/2016-National-Clinical-Guidelines-for-Stroke-5t-(1).aspx"
+          },
+          {
+            text: "ESO Guidelines 2018: 'IV alteplase 0.9mg/kg recommended for acute ischemic stroke within 4.5 hours - European Stroke Journal 3:13-76'",
+            url: "https://journals.sagepub.com/doi/10.1177/2396987318756370"
+          }
+        ]
       },
       {
         stem: "A 25-year-old woman presents with sudden severe headache described as 'worst headache of my life'. She is photophobic and has neck stiffness. What is the most appropriate initial investigation?",
@@ -172,7 +213,21 @@ export function generateSimpleQuestion(
           "EEG"
         ],
         correctAnswer: 1,
-        explanation: "Sudden severe headache with meningism suggests subarachnoid hemorrhage. CT head is the initial investigation of choice to detect blood in the subarachnoid space."
+        explanation: "Sudden severe headache with meningism suggests subarachnoid hemorrhage. CT head is the initial investigation of choice to detect blood in the subarachnoid space.",
+        references: [
+          {
+            text: "NICE CG68: Stroke and transient ischaemic attack - Section 1.3.4 'Offer immediate CT head for suspected subarachnoid hemorrhage'",
+            url: "https://www.nice.org.uk/guidance/cg68"
+          },
+          {
+            text: "SIGN 108: Management of patients with stroke - 'CT head has 95% sensitivity for subarachnoid hemorrhage within 24 hours'",
+            url: "https://www.sign.ac.uk/media/1054/sign108.pdf"
+          },
+          {
+            text: "Neurocritical Care Society Guidelines: 'Thunderclap headache with meningism requires urgent CT to rule out SAH - Neurocritical Care 15:287-314'",
+            url: "https://link.springer.com/article/10.1007/s12028-011-9605-9"
+          }
+        ]
       }
     ],
     endocrinology: [
@@ -187,9 +242,18 @@ export function generateSimpleQuestion(
         correctAnswer: 1,
         explanation: "Suppressed TSH with elevated free T4, along with symptoms of palpitations, weight loss, and heat intolerance, indicates hyperthyroidism.",
         references: [
-          "NICE CG99: Thyroid disease assessment and management - Section 1.2.1 'Suppressed TSH with elevated free T4 confirms hyperthyroidism'",
-          "BTA Guidelines 2014: 'Classic triad of palpitations, weight loss, and heat intolerance with biochemical hyperthyroidism - Clinical Endocrinology 81:1-122'",
-          "ATA Guidelines 2016: 'TSH <0.1 mU/L with elevated free T4 indicates overt thyrotoxicosis requiring treatment - Thyroid 26:1343-1421'"
+          {
+            text: "NICE CG99: Thyroid disease assessment and management - Section 1.2.1 'Suppressed TSH with elevated free T4 confirms hyperthyroidism'",
+            url: "https://www.nice.org.uk/guidance/cg99"
+          },
+          {
+            text: "BTA Guidelines 2014: 'Classic triad of palpitations, weight loss, and heat intolerance with biochemical hyperthyroidism - Clinical Endocrinology 81:1-122'",
+            url: "https://www.british-thyroid-association.org/sandbox/bta2016/thyroid_guidelines.html"
+          },
+          {
+            text: "ATA Guidelines 2016: 'TSH <0.1 mU/L with elevated free T4 indicates overt thyrotoxicosis requiring treatment - Thyroid 26:1343-1421'",
+            url: "https://www.liebertpub.com/doi/10.1089/thy.2016.0229"
+          }
         ]
       }
     ],
@@ -205,9 +269,18 @@ export function generateSimpleQuestion(
         correctAnswer: 1,
         explanation: "For moderate to severe depression, SSRI antidepressants are first-line pharmacological treatment due to their efficacy and favorable side effect profile.",
         references: [
-          "NICE CG90: Depression in adults - Section 1.5.1 'Offer an SSRI as first-line pharmacological treatment for moderate to severe depression'",
-          "SIGN 114: Non-pharmaceutical management of depression - 'SSRIs preferred over TCAs due to lower toxicity in overdose and better tolerability'",
-          "WHO Guidelines for Depression 2016: 'SSRIs recommended as first-line antidepressants with evidence grade A for efficacy - Mental Health Action Plan 2013-2020'"
+          {
+            text: "NICE CG90: Depression in adults - Section 1.5.1 'Offer an SSRI as first-line pharmacological treatment for moderate to severe depression'",
+            url: "https://www.nice.org.uk/guidance/cg90"
+          },
+          {
+            text: "SIGN 114: Non-pharmaceutical management of depression - 'SSRIs preferred over TCAs due to lower toxicity in overdose and better tolerability'",
+            url: "https://www.sign.ac.uk/media/1073/sign114.pdf"
+          },
+          {
+            text: "WHO Guidelines for Depression 2016: 'SSRIs recommended as first-line antidepressants with evidence grade A for efficacy - Mental Health Action Plan 2013-2020'",
+            url: "https://www.who.int/publications/i/item/9789241549332"
+          }
         ]
       }
     ]
