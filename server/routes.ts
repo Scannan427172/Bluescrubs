@@ -99,25 +99,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Question Bank Expansion Routes
+  // Test endpoint for OpenAI connection
+  app.post("/api/test-ai", async (req, res) => {
+    try {
+      console.log("Testing OpenAI connection...");
+      const question = await generateMedicalQuestion('cardiology', 'general', 'intermediate');
+      console.log("OpenAI test successful");
+      res.json({ success: true, question });
+    } catch (error) {
+      console.error("OpenAI test failed:", error);
+      res.status(500).json({ error: `OpenAI test failed: ${error instanceof Error ? error.message : 'Unknown error'}` });
+    }
+  });
+
   app.post("/api/generate-questions", async (req, res) => {
     try {
       const { examType, specialty, count, difficulty } = req.body;
       
-      if (!examType || !specialty || !count) {
+      if (!examType || !specialty) {
         return res.status(400).json({ error: "Missing required parameters" });
       }
 
-      const request = {
-        examType,
-        specialty,
-        difficulty: difficulty || 'intermediate',
-        count: Math.min(count, 50), // Limit per request
-        clinicalSetting: 'General',
-        ageGroup: 'Adult',
-        cognitiveLevel: 'application' as const
-      };
+      // Limit count to prevent timeout issues
+      const limitedCount = Math.min(count || 1, 3);
+      
+      console.log(`Generating ${limitedCount} questions for ${specialty} at ${difficulty || 'intermediate'} level`);
 
-      const questions = await generateSpecialtyQuestionSet(specialty, count);
+      const questions = await generateSpecialtyQuestionSet(specialty, limitedCount);
       res.json({ questions });
       
     } catch (error) {
