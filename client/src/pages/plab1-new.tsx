@@ -176,10 +176,27 @@ export default function PLAB1New() {
         'Primary PCI': 'القسطرة الأولية',
         'Thrombolytic therapy': 'العلاج المذيب للجلطة',
         'Conservative management': 'العلاج التحفظي',
+        'Conservative': 'تحفظي',
         'Immediate': 'فوري',
         'Start': 'ابدأ',
         'Give': 'أعط',
-        'Administer': 'أعط'
+        'Administer': 'أعط',
+        // Answer option terms
+        'Detailed history and examination': 'تاريخ مفصل وفحص',
+        'specialist referral': 'إحالة للأخصائي',
+        'Further diagnostic investigation': 'مزيد من التحقيقات التشخيصية',
+        'Urgent': 'عاجل',
+        'Emergency': 'طوارئ',
+        'Admission': 'دخول المستشفى',
+        'Discharge': 'خروج من المستشفى',
+        'Follow-up': 'متابعة',
+        'Monitoring': 'مراقبة',
+        'Observation': 'ملاحظة',
+        'Referral': 'إحالة',
+        'Investigation': 'تحقيق',
+        'Assessment': 'تقييم',
+        'Review': 'مراجعة',
+        'Consultation': 'استشارة'
       },
       'hi': {
         // Common medical terms
@@ -207,10 +224,27 @@ export default function PLAB1New() {
         'Primary PCI': 'प्राथमिक पीसीआई',
         'Thrombolytic therapy': 'थ्रोम्बोलाइटिक थेरेपी',
         'Conservative management': 'रूढ़िवादी प्रबंधन',
+        'Conservative': 'रूढ़िवादी',
         'Immediate': 'तत्काल',
         'Start': 'शुरू करें',
         'Give': 'दें',
-        'Administer': 'दें'
+        'Administer': 'दें',
+        // Answer option terms
+        'Detailed history and examination': 'विस्तृत इतिहास और परीक्षा',
+        'specialist referral': 'विशेषज्ञ रेफरल',
+        'Further diagnostic investigation': 'आगे की निदान जांच',
+        'Urgent': 'तत्काल',
+        'Emergency': 'आपातकाल',
+        'Admission': 'भर्ती',
+        'Discharge': 'छुट्टी',
+        'Follow-up': 'फॉलो-अप',
+        'Monitoring': 'निगरानी',
+        'Observation': 'अवलोकन',
+        'Referral': 'रेफरल',
+        'Investigation': 'जांच',
+        'Assessment': 'मूल्यांकन',
+        'Review': 'समीक्षा',
+        'Consultation': 'परामर्श'
       },
       'ur': {
         // Common medical terms
@@ -238,10 +272,27 @@ export default function PLAB1New() {
         'Primary PCI': 'بنیادی پی سی آئی',
         'Thrombolytic therapy': 'خون کا لوتھڑا گھولنے کا علاج',
         'Conservative management': 'قدامت پسند انتظام',
+        'Conservative': 'قدامت پسند',
         'Immediate': 'فوری',
         'Start': 'شروع کریں',
         'Give': 'دیں',
-        'Administer': 'دیں'
+        'Administer': 'دیں',
+        // Answer option terms
+        'Detailed history and examination': 'تفصیلی تاریخ اور معائنہ',
+        'specialist referral': 'ماہر کا ریفرل',
+        'Further diagnostic investigation': 'مزید تشخیصی تحقیقات',
+        'Urgent': 'فوری',
+        'Emergency': 'ایمرجنسی',
+        'Admission': 'ہسپتال میں داخلہ',
+        'Discharge': 'ہسپتال سے فارغ',
+        'Follow-up': 'فالو اپ',
+        'Monitoring': 'نگرانی',
+        'Observation': 'مشاہدہ',
+        'Referral': 'ریفرل',
+        'Investigation': 'تحقیقات',
+        'Assessment': 'تشخیص',
+        'Review': 'جائزہ',
+        'Consultation': 'مشاورت'
       }
     };
     
