@@ -19,6 +19,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
     next();
   });
   
+  // Generate medical questions using OpenAI
+  app.post("/api/generate-questions", async (req, res) => {
+    try {
+      const { category, count = 5, difficulty = 'intermediate' } = req.body;
+      
+      if (!category) {
+        return res.status(400).json({ error: "Category is required" });
+      }
+
+      console.log(`Generating ${count} questions for category: ${category}, difficulty: ${difficulty}`);
+      
+      // Define subcategories for each medical specialty
+      const subcategoriesMap: Record<string, string[]> = {
+        cardiovascular: ['heart-failure', 'arrhythmias', 'hypertension', 'coronary-artery-disease', 'valvular-disease'],
+        respiratory: ['COPD', 'asthma', 'pneumonia', 'lung-cancer', 'pulmonary-embolism'],
+        gastroenterology: ['IBD', 'liver-disease', 'peptic-ulcer', 'colorectal-cancer', 'pancreatitis'],
+        neurology: ['stroke', 'epilepsy', 'headache', 'dementia', 'multiple-sclerosis'],
+        endocrinology: ['diabetes', 'thyroid-disorders', 'adrenal-disorders', 'obesity', 'osteoporosis'],
+        psychiatry: ['depression', 'anxiety', 'psychosis', 'bipolar-disorder', 'substance-abuse'],
+        nephrology: ['AKI', 'CKD', 'glomerulonephritis', 'electrolyte-disorders', 'hypertension'],
+        haematology: ['anaemia', 'bleeding-disorders', 'thrombosis', 'leukaemia', 'lymphoma']
+      };
+
+      const subcategories = subcategoriesMap[category] || ['general'];
+      const questions = await generateMultipleQuestions(category, subcategories, difficulty, count);
+      
+      res.json({ 
+        questions,
+        count: questions.length,
+        category,
+        difficulty
+      });
+      
+    } catch (error) {
+      console.error("Question generation error:", error);
+      res.status(500).json({ 
+        error: "Failed to generate questions",
+        details: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
   // Translation API endpoint
   app.post("/api/translate", async (req, res) => {
     try {

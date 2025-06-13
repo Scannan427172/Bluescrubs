@@ -149,6 +149,8 @@ export default function PLAB1New() {
   
   // Category selection
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string>('intermediate');
+  const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
   
   // Language settings
   const [currentLanguage, setCurrentLanguage] = useState<string>('en');
@@ -283,10 +285,9 @@ export default function PLAB1New() {
     localStorage.setItem('neuro-accommodations', JSON.stringify(accommodations));
   };
 
-  // Calculate question counts by category using expanded question bank stats
+  // Calculate question counts - now using AI generation so unlimited questions available
   const getQuestionCount = (category: string) => {
-    if (category === 'all') return QUESTION_BANK_STATS.totalQuestions;
-    return (QUESTION_BANK_STATS.categoryCounts as Record<string, number>)[category] || 0;
+    return "∞"; // AI-generated questions - unlimited
   };
 
   // Available categories with question counts
@@ -349,58 +350,88 @@ export default function PLAB1New() {
     );
   };
 
-  // Start practice session function
-  const startPractice = (questionCount: number) => {
-    console.log(`Starting practice with ${questionCount} questions, category: ${selectedCategory}`);
+  // Start practice session function with AI-generated questions
+  const startPractice = async (questionCount: number) => {
+    console.log(`Generating ${questionCount} questions for category: ${selectedCategory}`);
+    setIsGeneratingQuestions(true);
     
-    // Filter questions by category
-    let filteredQuestions: GMCQuestion[];
-    if (selectedCategory === 'all') {
-      filteredQuestions = [...EXPANDED_QUESTION_BANK];
-    } else {
-      filteredQuestions = EXPANDED_QUESTION_BANK.filter(q => q.category === selectedCategory);
+    try {
+      const response = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          category: selectedCategory === 'all' ? 'cardiovascular' : selectedCategory,
+          count: questionCount,
+          difficulty: selectedDifficulty
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to generate questions: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      const generatedQuestions = data.questions;
+
+      console.log(`Generated ${generatedQuestions.length} questions successfully`);
+
+      // Convert AI-generated questions to GMCQuestion format
+      const formattedQuestions: GMCQuestion[] = generatedQuestions.map((q: any) => ({
+        id: q.id,
+        category: q.category,
+        subcategory: q.subcategory,
+        cognitiveLevel: q.cognitiveLevel,
+        difficulty: q.difficulty,
+        clinicalSetting: q.clinicalSetting,
+        ageGroup: q.ageGroup,
+        stem: q.stem,
+        options: q.options,
+        correctAnswer: q.correctAnswer,
+        explanation: q.explanation,
+        learningObjectives: ['AI-generated clinical scenario', 'Evidence-based medical knowledge', 'Clinical decision making'],
+        gmcOutcomes: ['Clinical assessment', 'Medical knowledge', 'Patient care'],
+        references: q.references || ['Generated using OpenAI GPT-4o', 'NICE Guidelines', 'Medical literature'],
+        tags: q.tags || [q.category, q.subcategory],
+        estimatedTime: q.estimatedTime || 90,
+        lastReviewed: new Date().toISOString().split('T')[0],
+        reviewedBy: 'AI Generation System'
+      }));
+
+      // Randomize answer positions for each question
+      const questionsWithShuffledOptions = formattedQuestions.map(question => {
+        const correctOption = question.options[question.correctAnswer];
+        const allOptions = [...question.options];
+        
+        // Shuffle the options array
+        const shuffledOptions = allOptions.sort(() => Math.random() - 0.5);
+        
+        // Find new position of correct answer
+        const newCorrectAnswer = shuffledOptions.indexOf(correctOption);
+        
+        return {
+          ...question,
+          options: shuffledOptions,
+          correctAnswer: newCorrectAnswer
+        };
+      });
+
+      // Initialize session
+      setSessionQuestions(questionsWithShuffledOptions);
+      setUserAnswers(new Array(formattedQuestions.length).fill(null));
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setTimeSpent(0);
+      setSessionStarted(true);
+      
+    } catch (error) {
+      console.error('Error generating questions:', error);
+      alert('Failed to generate questions. Please try again or select a different category.');
+    } finally {
+      setIsGeneratingQuestions(false);
     }
-
-    console.log(`Found ${filteredQuestions.length} questions for category ${selectedCategory}`);
-
-    if (filteredQuestions.length === 0) {
-      console.error('No questions available for selected category');
-      alert('No questions available for the selected category. Please choose a different category.');
-      return;
-    }
-
-    // Shuffle and select questions
-    const shuffled = [...filteredQuestions].sort(() => Math.random() - 0.5);
-    const selected = shuffled.slice(0, Math.min(questionCount, filteredQuestions.length));
-
-    console.log(`Selected ${selected.length} questions for practice session`);
-
-    // Randomize answer positions for each question
-    const questionsWithShuffledOptions = selected.map(question => {
-      const correctOption = question.options[question.correctAnswer];
-      const allOptions = [...question.options];
-      
-      // Shuffle the options array
-      const shuffledOptions = allOptions.sort(() => Math.random() - 0.5);
-      
-      // Find new position of correct answer
-      const newCorrectAnswer = shuffledOptions.indexOf(correctOption);
-      
-      return {
-        ...question,
-        options: shuffledOptions,
-        correctAnswer: newCorrectAnswer
-      };
-    });
-
-    // Initialize session
-    setSessionQuestions(questionsWithShuffledOptions);
-    setUserAnswers(new Array(selected.length).fill(null));
-    setCurrentQuestionIndex(0);
-    setSelectedAnswer("");
-    setShowExplanation(false);
-    setTimeSpent(0);
-    setSessionStarted(true);
   };
 
   // Answer handling
@@ -769,45 +800,77 @@ export default function PLAB1New() {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Difficulty Selection */}
+            <div className="mb-6">
+              <Label className="text-sm font-medium mb-2 block">Question Difficulty</Label>
+              <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select difficulty level" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="foundation">Foundation Level</SelectItem>
+                  <SelectItem value="intermediate">Intermediate Level</SelectItem>
+                  <SelectItem value="advanced">Advanced Level</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Loading State */}
+            {isGeneratingQuestions && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+                  <div>
+                    <p className="font-medium text-blue-900">Generating AI Medical Questions</p>
+                    <p className="text-sm text-blue-700">Creating personalized clinical scenarios using OpenAI GPT-4o...</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="grid md:grid-cols-4 gap-4">
               <Button 
                 size="lg" 
                 onClick={() => startPractice(25)}
-                className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2"
+                disabled={isGeneratingQuestions}
+                className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <ArrowRight className="w-6 h-6" />
                 <span className="font-medium">Quick Practice</span>
-                <span className="text-xs opacity-90">25 questions</span>
+                <span className="text-xs opacity-90">25 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
                 onClick={() => startPractice(50)}
-                className="bg-purple-600 hover:bg-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2"
+                disabled={isGeneratingQuestions}
+                className="bg-purple-600 hover:bg-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Brain className="w-6 h-6" />
                 <span className="font-medium">Standard Quiz</span>
-                <span className="text-xs opacity-90">50 questions</span>
+                <span className="text-xs opacity-90">50 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
                 onClick={() => startPractice(180)}
-                className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2"
+                disabled={isGeneratingQuestions}
+                className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Clock className="w-6 h-6" />
                 <span className="font-medium">PLAB 1 Mock</span>
-                <span className="text-xs opacity-90">180 questions</span>
+                <span className="text-xs opacity-90">180 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
                 onClick={() => startPractice(500)}
-                className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2"
+                disabled={isGeneratingQuestions}
+                className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Target className="w-6 h-6" />
                 <span className="font-medium">Comprehensive</span>
-                <span className="text-xs opacity-90">500 questions</span>
+                <span className="text-xs opacity-90">500 AI questions</span>
               </Button>
             </div>
           </CardContent>
