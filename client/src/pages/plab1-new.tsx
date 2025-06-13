@@ -287,7 +287,7 @@ export default function PLAB1New() {
 
   // Calculate question counts - now using AI generation so unlimited questions available
   const getQuestionCount = (category: string) => {
-    return "∞ questions"; // AI-powered unlimited questions
+    return "unlimited"; // AI-powered unlimited questions
   };
 
   // Available categories with question counts
