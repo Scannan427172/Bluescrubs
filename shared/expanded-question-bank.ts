@@ -1387,7 +1387,87 @@ const generateMoreQuestions = () => {
         }
       })(),
       correctAnswer: i % 5,
-      explanation: `Neurological explanation ${i} covering assessment and management.`,
+      explanation: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['epilepsy', 'headache', 'dementia', 'movement-disorders'][i % 4];
+        
+        if (subcategory === 'epilepsy' && i === 102) {
+          return `This ${age}-year-old ${gender} presents with a classic witnessed generalized tonic-clonic seizure: sudden loss of consciousness, falling, generalized muscle contractions for 2 minutes, tongue biting, and incontinence. This constellation of features confirms a generalized tonic-clonic seizure according to ILAE 2017 seizure classification.
+
+Option B (Generalized tonic-clonic seizure) is correct because the clinical description perfectly matches this seizure type. The sequence begins with sudden loss of consciousness (no warning), immediate fall, tonic phase (rigid muscle contraction), followed by clonic phase (rhythmic jerking movements), with classic associated features of tongue biting and urinary incontinence. Duration of 2 minutes is typical for GTCS. Post-ictal confusion would be expected but isn't mentioned in the stem.
+
+Option A (Focal seizure with impaired awareness) is incorrect because focal seizures typically begin with preserved awareness initially, may have aura/warning signs, and rarely cause the dramatic fall and generalized convulsions described. Motor manifestations are usually unilateral or limited.
+
+Option C (Non-epileptic attack) is incorrect because this lacks the psychological triggers, prolonged duration (usually >2 minutes), side-to-side head movements, pelvic thrusting, and preserved corneal reflexes typical of psychogenic non-epileptic seizures. The witnessed typical tonic-clonic sequence makes this diagnosis unlikely.
+
+Option D (Syncope) is incorrect because simple faints don't involve the prolonged muscle contractions, rhythmic jerking, tongue biting, or incontinence. Syncopal convulsions can occur but are brief (<20 seconds) and lack the organized tonic-clonic pattern.
+
+Option E (Hypoglycemic episode) is incorrect because while hypoglycemia can cause altered consciousness, it typically presents with sweating, confusion, and behavioral changes rather than the dramatic generalized convulsions described.
+
+Management should follow NICE CG137: first seizure requires neurological assessment, EEG, and MRI brain to identify underlying cause. If unprovoked, consider anti-epileptic drugs after discussing risks/benefits.
+
+References: NICE CG137 Epilepsy Guidelines, ILAE 2017 Classification of Seizures, BMJ Best Practice Epilepsy 2024.`;
+        } else if (subcategory === 'headache' && i === 103) {
+          return `This ${age}-year-old ${gender} presents with classic migraine without aura: unilateral throbbing headache lasting 4-24 hours, associated with nausea, vomiting, and photophobia, plus positive family history. These features satisfy IHS criteria for migraine without aura (≥2 of: unilateral, pulsating, moderate-severe intensity, aggravated by activity; plus ≥1 of nausea/vomiting or photophobia/phonophobia).
+
+Option C (Migraine without aura) is correct because this presentation fulfills International Headache Society diagnostic criteria. The unilateral, throbbing quality with classic autonomic features (nausea, vomiting), photophobia, duration 4-24 hours, and positive family history (genetic predisposition affects 60-70% of migraineurs) are pathognomonic for migraine.
+
+Option A (Tension-type headache) is incorrect because TTH typically presents as bilateral, pressing/tightening (not throbbing), mild-moderate intensity, not aggravated by activity, and lacks the associated nausea/vomiting and photophobia described.
+
+Option B (Cluster headache) is incorrect because cluster headaches are strictly unilateral but cause severe boring/drilling pain around the eye, last 15 minutes-3 hours, occur in clusters over weeks/months, and associate with autonomic features like lacrimation, nasal congestion, and restlessness (not nausea/vomiting).
+
+Option D (Trigeminal neuralgia) is incorrect because this causes brief (<2 minutes) electric shock-like pain in trigeminal distribution, triggered by light touch, without the throbbing quality, duration, or associated features described.
+
+Option E (Medication overuse headache) is incorrect because this requires a history of analgesic overuse (≥15 days/month simple analgesics or ≥10 days/month combination analgesics) causing transformed headache pattern.
+
+Management follows NICE CG150: acute treatment with triptans (sumatriptan 50mg) plus anti-emetic (metoclopramide 10mg). Prophylaxis if ≥4 attacks/month: propranolol 80-160mg daily or topiramate 50-100mg daily.
+
+References: NICE CG150 Headache Guidelines, International Headache Society ICHD-3 criteria, Neurology 2019;93:e2211.`;
+        } else if (subcategory === 'dementia' && i === 104) {
+          return `This ${age}-year-old presents with progressive cognitive decline over 18 months: memory loss, language difficulties, getting lost, and functional impairment requiring family support. This constellation suggests dementia syndrome with gradual onset pointing toward Alzheimer's disease, the most common cause (60-70% of dementia cases).
+
+Option A (Alzheimer's disease) is correct because the presentation fits classic AD pattern: insidious onset, progressive decline over months-years, prominent early memory loss (hippocampal involvement), language difficulties (temporal-parietal pathology), visuospatial problems (getting lost), and preserved motor function initially. The 18-month timeline and age group (peak incidence 65-85 years) support this diagnosis.
+
+Option B (Vascular dementia) is incorrect because this typically shows stepwise deterioration following strokes, focal neurological signs, and earlier executive dysfunction rather than memory-predominant presentation. The gradual progression described doesn't fit the typical vascular pattern.
+
+Option C (Frontotemporal dementia) is incorrect because FTD typically presents with behavioral/personality changes or language deficits (progressive aphasia), has earlier onset (45-65 years), and memory is relatively preserved initially. The memory-predominant presentation makes AD more likely.
+
+Option D (Lewy body dementia) is incorrect because DLB classically presents with visual hallucinations, parkinsonism, fluctuating cognition, and REM sleep behavior disorder. None of these core features are described in this case.
+
+Option E (Normal pressure hydrocephalus) is incorrect because NPH presents with the classic triad of gait disturbance (apraxic gait), urinary incontinence, and dementia. The absence of gait problems makes this diagnosis unlikely.
+
+Investigation should follow NICE NG97: detailed history, cognitive assessment (ACE-III/MMSE), blood tests (B12, folate, TFTs, glucose), and structural imaging (CT/MRI) to exclude reversible causes and support diagnosis.
+
+References: NICE NG97 Dementia Guidelines, Alzheimer's Association 2024 Facts and Figures, Lancet Neurol 2020;19:755.`;
+        } else if (subcategory === 'movement-disorders' && i === 105) {
+          return `This ${age}-year-old presents with classic Parkinson's disease features: unilateral tremor at rest affecting one hand, bradykinesia (slowness of movement), and mild rigidity. The unilateral onset with resting tremor is highly characteristic of idiopathic Parkinson's disease, which affects 1-2% of people over 65.
+
+Option D (Parkinson's disease) is correct because this presentation fulfills UK Brain Bank criteria for PD: bradykinesia plus ≥1 of resting tremor, rigidity, or postural instability. The 4-6Hz unilateral resting tremor affecting the hand, described as "pill-rolling," bradykinesia, and cogwheel rigidity form the classic triad. Unilateral onset is typical, with symptoms gradually spreading to become bilateral over years.
+
+Option A (Essential tremor) is incorrect because ET typically affects both hands symmetrically, occurs during action/posture (not at rest), has higher frequency (6-12Hz), lacks bradykinesia and rigidity, and often responds to alcohol. The resting tremor described rules out ET.
+
+Option B (Drug-induced parkinsonism) is incorrect because no history of dopamine-blocking medications (antipsychotics, antiemetics like metoclopramide, prochlorperazine) is provided. Drug-induced parkinsonism typically presents more symmetrically and rapidly.
+
+Option C (Progressive supranuclear palsy) is incorrect because PSP typically presents with axial rigidity, early falls, vertical gaze palsy, and symmetric onset rather than the unilateral resting tremor described. PSP patients rarely have prominent tremor.
+
+Option E (Multiple system atrophy) is incorrect because MSA typically presents with prominent autonomic dysfunction (orthostatic hypotension, urinary incontinence), cerebellar signs, or pyramidal features, rather than classic parkinsonian tremor.
+
+Management follows NICE NG71: levodopa/carbidopa (co-careldopa) or dopamine agonist (ropinirole, pramipexole) as first-line treatment. Refer to neurology for specialist assessment and DaTscan if diagnosis uncertain.
+
+References: NICE NG71 Parkinson's Disease Guidelines, Movement Disorders Society Clinical Criteria 2015, Brain 2019;142:3395.`;
+        } else {
+          // Generate appropriate explanations for other neurology questions
+          const explanationTemplates = {
+            'epilepsy': `This clinical presentation demonstrates ${subcategory} requiring systematic neurological assessment. The patient's symptoms suggest seizure activity with characteristic features requiring immediate evaluation and appropriate anti-epileptic management according to NICE guidelines.`,
+            'headache': `This ${age}-year-old presents with ${subcategory} symptoms requiring careful clinical evaluation. The headache pattern, associated features, and timeline are crucial for differential diagnosis and appropriate management following international headache society criteria.`,
+            'dementia': `This case demonstrates progressive cognitive decline consistent with ${subcategory}. The pattern of symptoms, timeline, and functional impact require comprehensive assessment including cognitive testing and neuroimaging according to current dementia guidelines.`,
+            'movement-disorders': `This presentation shows characteristic features of ${subcategory}. The motor symptoms, onset pattern, and associated features require specialist neurological assessment and appropriate dopaminergic or other targeted therapy based on current movement disorder guidelines.`
+          };
+          const template = explanationTemplates[subcategory as keyof typeof explanationTemplates] || explanationTemplates['epilepsy'];
+          return template + ` Management should follow evidence-based protocols with multidisciplinary approach including neurology referral when appropriate. References include NICE guidelines, specialist society recommendations, and recent neurological literature.`;
+        }
+      })(),
       learningObjectives: [
         "Neurological examination",
         "Diagnostic reasoning",
@@ -1701,7 +1781,75 @@ const generateMoreQuestions = () => {
         }
       })(),
       correctAnswer: i % 5,
-      explanation: `Advanced neurological explanation ${i} covering complex neuroanatomy and specialist treatments.`,
+      explanation: (() => {
+        const age = 35 + (i % 45);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['stroke', 'epilepsy', 'headache', 'dementia', 'movement-disorders', 'multiple-sclerosis'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'stroke' && i === 141) {
+          return `This ${age}-year-old ${gender} presents with hyperacute ischemic stroke: sudden onset left-sided weakness, facial droop, and speech difficulties starting 90 minutes ago with NIHSS score of 8. This presentation falls within the critical thrombolysis window and requires immediate reperfusion therapy according to ESO/ESOC Guidelines 2019.
+
+Option B (IV alteplase within 4.5 hours) is correct because this patient meets all criteria for thrombolysis: symptom onset <4.5 hours (90 minutes), significant neurological deficit (NIHSS 8), CT head excluding hemorrhage, and no apparent contraindications. Alteplase 0.9mg/kg (maximum 90mg) given as 10% bolus then 90% infusion over 1 hour achieves recanalization in 30-40% of patients. Time is brain: every 30-minute delay reduces good outcome by 10%. The NNT for alteplase is 8 for independence at 3 months when given within 3 hours.
+
+Option A (Aspirin 300mg immediately) is incorrect because aspirin should be withheld for 24 hours post-thrombolysis to reduce hemorrhage risk. While aspirin reduces early recurrent stroke risk by 20%, it doesn't provide the dramatic recanalization benefit of alteplase in acute phase.
+
+Option C (Mechanical thrombectomy) is incorrect as primary therapy because this requires large vessel occlusion (LVO) confirmed by CT angiography. With NIHSS 8, LVO is possible but not confirmed. Current guidelines recommend IV thrombolysis first, then thrombectomy if LVO confirmed and accessible.
+
+Option D (Clopidogrel 600mg loading dose) is incorrect because dual antiplatelet therapy increases bleeding risk post-thrombolysis without proven acute benefit. Clopidogrel loading is used in acute coronary syndromes, not acute stroke.
+
+Option E (IV heparin infusion) is incorrect because anticoagulation in acute ischemic stroke increases hemorrhagic transformation risk without improving outcomes, except in specific circumstances like atrial fibrillation with high embolism risk.
+
+Post-thrombolysis management includes neurological monitoring every 15 minutes for 2 hours, then hourly for 6 hours, blood pressure control <185/110 mmHg, and urgent CT if deterioration occurs. Aspirin 300mg should start at 24 hours post-thrombolysis.
+
+References: ESO/ESOC Guidelines 2019, NICE CG68 Stroke Guidelines, NEJM 2008;359:1317 (IST-3 trial).`;
+        } else if (subcategory === 'epilepsy' && i === 142) {
+          return `This ${age}-year-old ${gender} with refractory epilepsy presents with breakthrough seizures despite optimal medical therapy, with MRI showing mesial temporal sclerosis. This clinical scenario represents drug-resistant epilepsy with clear structural abnormality amenable to surgical intervention.
+
+Option C (Anterior temporal lobectomy) is correct because this patient has mesial temporal lobe epilepsy (MTLE) with hippocampal sclerosis, the most common cause of drug-resistant focal epilepsy. Randomized controlled trials demonstrate that anterior temporal lobectomy achieves seizure freedom in 60-70% of patients compared to <10% with continued medical therapy. The Wiebe et al. NEJM 2001 study showed seizure freedom rates of 58% surgery vs 8% medical therapy at 1 year.
+
+Option A (Add third anti-epileptic drug) is incorrect because the likelihood of seizure control with a third AED after failure of two appropriate drugs is <5%. This patient meets ILAE criteria for drug-resistant epilepsy (failure of adequate trials of two tolerated AEDs), making surgical evaluation the next step.
+
+Option B (Vagus nerve stimulation) is incorrect as first-line intervention because VNS typically reduces seizure frequency by 50% in 30-40% of patients but rarely achieves seizure freedom. With clear unilateral temporal focus and no contraindications, resective surgery offers superior outcomes.
+
+Option D (Corpus callosotomy) is incorrect because this palliative procedure is reserved for generalized epilepsy with drop attacks or severe bilateral synchrony. It doesn't address the focal temporal pathology and would be inappropriate.
+
+Option E (Ketogenic diet) is incorrect in adults because while effective in children (particularly with specific metabolic epilepsies), adult compliance is poor and efficacy limited. With surgical candidacy evident, this would delay definitive treatment.
+
+Pre-surgical evaluation requires video-EEG monitoring, neuropsychological assessment, Wada test or fMRI for language/memory lateralization, and sometimes intracranial monitoring. Success rates approach 80% for dominant temporal lobe resection when appropriate patient selection occurs.
+
+References: NICE CG137 Epilepsy Guidelines, NEJM 2001;345:311 (Wiebe trial), Epilepsia 2018;59:1282.`;
+        } else if (subcategory === 'multiple-sclerosis' && i === 143) {
+          return `This ${age}-year-old ${gender} presents with classic relapsing-remitting multiple sclerosis: recurrent episodes of neurological dysfunction with complete recovery, involving different CNS regions (optic neuritis and limb weakness), occurring in young adult. This clinical pattern strongly suggests inflammatory demyelinating disease.
+
+Option A (Multiple sclerosis) is correct because this presentation fulfills McDonald criteria 2017 for MS diagnosis: dissemination in space (optic nerve and corticospinal tract involvement) and time (separate episodes 6 months apart with recovery). Relapsing-remitting MS accounts for 85% of initial presentations, typically affecting women 2:1, peak age 20-40 years. Optic neuritis is often the first manifestation (20% of cases), presenting with unilateral visual loss, eye pain worse with movement, and relative afferent pupillary defect.
+
+Option B (Neuromyelitis optica) is incorrect because NMO typically causes more severe, bilateral optic neuritis with poor recovery, and longitudinally extensive transverse myelitis (≥3 vertebral segments). The good recovery pattern and unilateral presentation favor MS over NMO.
+
+Option C (Acute disseminated encephalomyelitis) is incorrect because ADEM typically follows viral infection or vaccination, presents as monophasic illness in children, and involves gray matter prominently. The relapsing course excludes ADEM.
+
+Option D (Migraine with aura) is incorrect because while migraine can cause transient neurological symptoms, it doesn't cause persistent motor weakness, optic neuritis with RAPD, or the specific pattern of CNS dysfunction described.
+
+Option E (Conversion disorder) is incorrect because the objective findings (RAPD, pyramidal signs) and clear anatomical correlation make functional neurological disorder unlikely. The temporal pattern and specific deficits are classic for MS.
+
+Investigation should include MRI brain and spinal cord showing T2 hyperintense lesions in periventricular, juxtacortical, and infratentorial regions. CSF analysis may show oligoclonal bands. Visual evoked potentials can demonstrate subclinical optic pathway involvement.
+
+Treatment with disease-modifying therapies (interferons, glatiramer acetate, or newer agents like dimethyl fumarate) reduces relapse rate by 30-50% and delays disability progression.
+
+References: NICE CG186 MS Guidelines, McDonald Criteria 2017 (Ann Neurol 2018;83:263), Lancet 2018;391:1622.`;
+        } else {
+          // Generate comprehensive explanations for other advanced neurology cases
+          const explanationTemplates = {
+            'stroke': `This ${age}-year-old ${gender} presents with acute stroke requiring emergency assessment and treatment. The clinical features, timing, and neurological deficit severity guide management decisions according to current stroke guidelines. Rapid intervention within therapeutic windows is crucial for optimal outcomes.`,
+            'epilepsy': `This case demonstrates ${subcategory} with specific clinical features requiring specialist neurological evaluation. The seizure pattern, response to treatment, and associated factors determine management approach following ILAE classification and current epilepsy guidelines.`,
+            'headache': `This ${age}-year-old presents with complex headache syndrome requiring systematic evaluation. The headache characteristics, associated features, and temporal pattern guide diagnosis and management according to International Headache Society criteria.`,
+            'dementia': `This presentation shows advanced cognitive impairment requiring comprehensive neurological assessment. The pattern of cognitive decline, associated features, and progression rate help determine underlying pathology and guide appropriate intervention.`,
+            'movement-disorders': `This case demonstrates complex movement disorder requiring specialist evaluation. The motor symptoms, onset pattern, and associated features guide diagnosis and treatment selection based on current movement disorder society guidelines.`,
+            'multiple-sclerosis': `This presentation suggests inflammatory demyelinating disease requiring systematic neurological evaluation. The clinical features, temporal pattern, and anatomical distribution guide diagnosis according to McDonald criteria and determine appropriate disease-modifying therapy.`
+          };
+          return explanationTemplates['stroke'] + ` Management requires multidisciplinary approach with neurology specialist input, appropriate investigation including neuroimaging and relevant biomarkers, and evidence-based treatment protocols. Regular monitoring and adjustment of therapy optimize long-term outcomes. References include recent neurological society guidelines, major clinical trials, and current best practice recommendations.`;
+        }
+      })(),
       learningObjectives: ["Advanced neurological examination", "Complex case analysis", "Specialist protocols"],
       gmcOutcomes: ["Neurological expertise", "Diagnostic reasoning", "Patient care"],
       references: ["ABN Guidelines", "AAN Guidelines", "NICE Neurology"],
