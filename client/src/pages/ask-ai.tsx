@@ -28,6 +28,7 @@ interface GeneratedQuestion {
   correctAnswer: number;
   explanation: string;
   difficulty: string;
+  references: string[];
 }
 
 export default function AskAI() {
@@ -243,6 +244,17 @@ export default function AskAI() {
                 <h4 className="font-medium mb-2">Explanation:</h4>
                 <p className="text-gray-800 whitespace-pre-wrap">{generatedQuestion.explanation}</p>
               </div>
+              
+              {generatedQuestion.references && generatedQuestion.references.length > 0 && (
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h4 className="font-medium mb-2">References:</h4>
+                  <ol className="list-decimal list-inside space-y-1 text-sm text-gray-700">
+                    {generatedQuestion.references.map((ref: string, index: number) => (
+                      <li key={index} className="text-gray-800">{ref}</li>
+                    ))}
+                  </ol>
+                </div>
+              )}
             </CardContent>
           </Card>
         )}

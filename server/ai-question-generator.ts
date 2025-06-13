@@ -15,8 +15,6 @@ export interface GeneratedQuestion {
   options: string[];
   correctAnswer: number;
   explanation: string;
-  learningObjectives: string[];
-  gmcOutcomes: string[];
   references: string[];
   tags: string[];
   estimatedTime: number;
@@ -45,7 +43,7 @@ Key points:
 • [Key clinical fact with guidelines/evidence base]³
 • [Key clinical fact with prognosis/complications]⁴
 
-References
+References:
 
 1. [Primary guideline or major study with full citation]
 2. [NICE or specialty society guideline with full citation]
@@ -55,11 +53,10 @@ References
 6. [NHS England or national policy document]
 7. [General Medical Council. Good Medical Practice. GMC; 2024.]
 8. [General Medical Council. Medical Licensing Assessment (MLA) Content Map. [Specialty] section; 2024.]
-9. [General Medical Council. MLA External Examiners' Report: [Specialty]. GMC; 2024.]
 
 The question should test clinical decision-making, differential diagnosis, or evidence-based management. Ensure all medical facts are accurate and current as of 2024-2025.
 
-Return the response in JSON format with all required fields.`;
+Return the response in JSON format with these fields only: stem, options, correctAnswer, explanation, references. Do not include learningObjectives or gmcOutcomes fields.`;
 
   try {
     const response = await openai.chat.completions.create({
@@ -96,16 +93,7 @@ Return the response in JSON format with all required fields.`;
       options: generatedContent.options,
       correctAnswer: generatedContent.correctAnswer,
       explanation: generatedContent.explanation,
-      learningObjectives: generatedContent.learningObjectives || [
-        "Apply clinical reasoning",
-        "Interpret clinical findings",
-        "Make evidence-based decisions"
-      ],
-      gmcOutcomes: generatedContent.gmcOutcomes || [
-        "Clinical assessment",
-        "Evidence-based practice",
-        "Patient safety"
-      ],
+
       references: generatedContent.references || [],
       tags: generatedContent.tags || [category, subcategory],
       estimatedTime: generatedContent.estimatedTime || 90,

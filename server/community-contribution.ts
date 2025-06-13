@@ -319,15 +319,10 @@ Return enhanced version maintaining original structure.`;
     else if (question.explanation.length > 100) score += 15;
     else score += 5;
 
-    // Learning objectives (15 points)
-    if (question.learningObjectives.length >= 3) score += 15;
-    else if (question.learningObjectives.length >= 2) score += 10;
-    else score += 5;
-
-    // References (15 points)
-    if (question.references.length >= 2) score += 15;
-    else if (question.references.length >= 1) score += 10;
-    else score += 5;
+    // References and evidence base (15 points)
+    if (question.references.length >= 5) score += 15;
+    else if (question.references.length >= 3) score += 10;
+    else if (question.references.length >= 1) score += 5;
 
     return score;
   }
