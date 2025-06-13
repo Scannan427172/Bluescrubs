@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { generateMedicalQuestion, generateMultipleQuestions, generateSpecialtyQuestionSet } from "./ai-question-generator";
+import { generateMultipleSimpleQuestions } from "./simple-question-generator";
 import { communitySystem } from "./community-contribution";
 import { analyzeVideoPerformance } from "./ai-analysis";
 import { storage } from "./storage";
@@ -120,10 +120,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Generate questions for each difficulty level
         for (const difficulty of difficulties) {
           try {
-            const categoryQuestions = await generateMultipleQuestions(
+            const categoryQuestions = await generateMultipleSimpleQuestions(
               category, 
-              subcategories, 
-              difficulty as any, 
+              difficulty, 
               questionsPerDifficulty
             );
             
@@ -245,7 +244,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/test-ai", async (req, res) => {
     try {
       console.log("Testing OpenAI connection...");
-      const question = await generateMedicalQuestion('cardiology', 'general', 'intermediate');
+      const question = await generateMultipleSimpleQuestions('cardiology', 'intermediate', 1);
       console.log("OpenAI test successful");
       res.json({ success: true, question });
     } catch (error) {
@@ -267,7 +266,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log(`Generating ${limitedCount} questions for ${specialty} at ${difficulty || 'intermediate'} level`);
 
-      const questions = await generateSpecialtyQuestionSet(specialty, limitedCount);
+      const questions = await generateMultipleSimpleQuestions(specialty, difficulty || 'intermediate', limitedCount);
       res.json({ questions });
       
     } catch (error) {
