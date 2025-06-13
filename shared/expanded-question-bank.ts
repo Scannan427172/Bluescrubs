@@ -1152,7 +1152,48 @@ const generateMoreQuestions = () => {
       stem: generateCVStem(i, subcategory),
       options: generateCVOptions(subcategory, i),
       correctAnswer: i % 5,
-      explanation: `This clinical presentation is consistent with ${subcategory.replace('-', ' ')}. Management should follow current ESC and NICE guidelines, emphasizing early recognition, appropriate investigation, and evidence-based treatment protocols.`,
+      explanation: (() => {
+        const age = 35 + (i % 45);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        
+        if (subcategory === 'arrhythmias' && i === 103) {
+          return `This ${age}-year-old ${gender} presents with classic atrial fibrillation: palpitations, dizziness, chest discomfort for 2 hours, with ECG showing irregularly irregular rhythm, absent P waves, and ventricular rate 140 bpm. This represents new-onset rapid AF requiring immediate rate control and anticoagulation assessment.
+
+Option A (Atrial fibrillation) is correct because the ECG findings are pathognomonic: irregularly irregular rhythm with absent P waves and variable RR intervals. The clinical presentation (palpitations, dizziness, chest discomfort) with ventricular rate 140 bpm confirms rapid AF. New-onset AF affects 2% of adults, increasing with age, and can be triggered by alcohol, caffeine, infection, or hyperthyroidism.
+
+Option B (Ventricular tachycardia) is incorrect because VT presents with wide-complex regular tachycardia (QRS >120ms), typically at rates 150-250 bpm, and causes more severe hemodynamic compromise. The narrow QRS complexes and irregular rhythm exclude VT.
+
+Option C (Supraventricular tachycardia) is incorrect because SVT typically presents as regular narrow-complex tachycardia at rates 150-220 bpm with sudden onset/offset. The irregularly irregular pattern rules out SVT, which maintains regular RR intervals.
+
+Option D (Atrial flutter) is incorrect because AFL shows regular sawtooth flutter waves at 300 bpm with fixed AV conduction ratios (2:1, 3:1, 4:1), creating regular ventricular rhythm. The irregular rhythm excludes flutter.
+
+Option E (Sinus tachycardia) is incorrect because this maintains normal P wave morphology and regular rhythm. Rate rarely exceeds 150 bpm in healthy adults, and there's usually identifiable cause (fever, pain, hypovolemia).
+
+Management follows ESC Guidelines 2020: immediate rate control with diltiazem 0.25mg/kg IV or metoprolol 2.5-5mg IV. Anticoagulation with DOAC (apixaban 5mg BD) if CHA2DS2-VASc ≥2 in men or ≥3 in women. Consider electrical cardioversion if hemodynamically unstable.
+
+References: ESC AF Guidelines 2020, NICE CG180 Atrial Fibrillation, Circulation 2019;140:e125.`;
+        } else if (subcategory === 'valvular-disease' && i === 104) {
+          return `This ${age}-year-old ${gender} presents with classic severe aortic stenosis: progressive breathlessness, fatigue over 6 months, harsh systolic murmur at right sternal edge radiating to carotids, and slow-rising pulse. This constellation indicates hemodynamically significant AS requiring urgent evaluation for intervention.
+
+Option A (Aortic stenosis) is correct because the clinical features are pathognomonic: exertional dyspnea (due to elevated left heart pressures), systolic murmur loudest at right sternal border (aortic area) radiating to carotids, and pulsus tardus (slow-rising, weak pulse). The 6-month progression suggests severe disease. AS typically progresses from sclerosis to severe stenosis over 10-15 years.
+
+Option B (Aortic regurgitation) is incorrect because AR causes early diastolic murmur best heard at left sternal edge, wide pulse pressure with collapsing pulse (Corrigan's pulse), and typically presents with sudden deterioration in acute cases or gradual decline in chronic cases without the harsh systolic murmur described.
+
+Option C (Mitral stenosis) is incorrect because MS causes mid-diastolic rumbling murmur at apex, opening snap, and atrial fibrillation in later stages. The systolic murmur and radiation pattern are inconsistent with MS.
+
+Option D (Mitral regurgitation) is incorrect because MR causes pansystolic murmur radiating to axilla, often with S3 gallop. The murmur location and radiation to carotids strongly favors aortic pathology.
+
+Option E (Tricuspid regurgitation) is incorrect because TR causes pansystolic murmur at left lower sternal edge, increases with inspiration (Carvallo's sign), and associates with right heart failure signs.
+
+Investigation requires transthoracic echocardiogram to assess valve area (<1.0cm² = severe), peak gradient (>64 mmHg), and left ventricular function. Severe symptomatic AS has 50% 2-year mortality without intervention.
+
+Management: urgent cardiothoracic surgery referral for aortic valve replacement (surgical or TAVI depending on risk profile).
+
+References: ESC Valvular Guidelines 2021, NICE CG95 Chest Pain, J Am Coll Cardiol 2020;76:e159.`;
+        } else {
+          return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic cardiovascular assessment. The clinical features, examination findings, and hemodynamic status guide immediate management decisions. Investigation with ECG, chest X-ray, and echocardiography helps confirm diagnosis and assess severity. Management follows current ESC and NICE guidelines emphasizing evidence-based protocols, risk stratification, and multidisciplinary care including cardiology referral when appropriate.`;
+        }
+      })(),
       learningObjectives: [
         "Cardiovascular assessment skills",
         "Evidence-based cardiac management",
@@ -1227,7 +1268,46 @@ const generateMoreQuestions = () => {
       stem: generateRespStem(i, subcategory),
       options: generateRespOptions(subcategory, i),
       correctAnswer: i % 5,
-      explanation: `This clinical presentation is consistent with ${subcategory.replace('-', ' ')}. Management should follow current BTS and NICE guidelines, emphasizing early recognition, appropriate investigation, and evidence-based treatment protocols.`,
+      explanation: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        
+        if (subcategory === 'asthma-copd' && i === 102) {
+          return `This ${age}-year-old ${gender} with 20-pack-year smoking history presents with classic COPD: progressive breathlessness over 2 years, morning cough with white sputum, wheeze on exertion, and spirometry showing FEV1/FVC ratio 0.65 with FEV1 55% predicted. This confirms moderate COPD (GOLD Grade 2) requiring bronchodilator therapy.
+
+Option A (COPD) is correct because the presentation fulfills GOLD criteria: post-bronchodilator FEV1/FVC <0.70 confirming airflow obstruction, significant smoking history (≥10 pack-years), progressive dyspnea over years, and chronic productive cough. FEV1 55% predicted indicates moderate severity (GOLD 2: 50-79% predicted). The morning cough with sputum reflects mucus hypersecretion from goblet cell hyperplasia.
+
+Option B (Asthma) is incorrect because asthma typically presents earlier in life, shows reversible airflow obstruction (>12% and 200ml FEV1 improvement post-bronchodilator), lacks smoking history, and has variable symptoms with trigger identification. The fixed airflow obstruction and smoking history strongly favor COPD.
+
+Option C (Bronchiectasis) is incorrect because this presents with daily purulent sputum, recurrent respiratory infections, and CT showing bronchial wall thickening with luminal dilatation. The clinical picture lacks the classical purulent sputum and infection history.
+
+Option D (Lung fibrosis) is incorrect because pulmonary fibrosis presents with dry cough, bibasal fine crackles, and restrictive spirometry pattern (reduced FEV1 and FVC with normal/high ratio). The obstructive pattern excludes fibrosis.
+
+Option E (Heart failure) is incorrect because cardiac failure causes orthopnea, paroxysmal nocturnal dyspnea, peripheral edema, and preserved spirometry. The obstructive spirometry pattern rules out pure cardiac cause.
+
+Management follows NICE NG115: first-line LABA/LAMA combination (e.g., formoterol/tiotropium) for symptomatic patients. Add ICS if frequent exacerbations. Smoking cessation reduces progression rate from 60ml/year to 30ml/year FEV1 decline.
+
+References: NICE NG115 COPD Guidelines, GOLD 2023 Strategy, Lancet Respir Med 2018;6:557.`;
+        } else if (subcategory === 'lung-cancer' && i === 103) {
+          return `This ${age}-year-old ${gender} with 30-pack-year smoking history presents with suspicious lung lesion: 6-week persistent cough, 6kg weight loss, hemoptysis, and 4cm right upper lobe mass on chest X-ray. This clinical picture strongly suggests primary lung cancer requiring urgent tissue diagnosis and staging.
+
+Option A (Urgent chest CT and respiratory referral) is correct because this presentation meets NICE NG12 criteria for suspected lung cancer: chest X-ray findings suggestive of malignancy in patient with significant smoking history and suspicious symptoms. The 2-week wait pathway mandates urgent CT thorax within 48 hours and respiratory specialist referral within 14 days. CT provides detailed assessment of mass characteristics, mediastinal involvement, and identifies metastatic disease.
+
+Option B (Sputum cytology) is incorrect as primary investigation because sensitivity is only 40-60% for central tumors and much lower for peripheral lesions. While historically used, it's now superseded by tissue sampling via bronchoscopy or CT-guided biopsy for definitive diagnosis.
+
+Option C (Antibiotics and review) is incorrect because the combination of weight loss, hemoptysis, and mass lesion in heavy smoker strongly suggests malignancy rather than infection. Antibiotic trials delay crucial diagnosis and staging in potentially curable disease.
+
+Option D (Bronchoscopy) is incorrect as immediate next step because CT staging is required first to guide optimal tissue sampling approach. Central lesions favor bronchoscopy, while peripheral lesions may require CT-guided biopsy or surgical sampling.
+
+Option E (CT-guided biopsy) is incorrect as immediate next step because comprehensive staging CT is required first to assess disease extent and determine optimal sampling strategy. Core biopsy provides material for histological diagnosis and molecular profiling.
+
+Following CT, tissue sampling via bronchoscopy (if central) or percutaneous biopsy (if peripheral) enables histological diagnosis and molecular testing (EGFR, ALK, PD-L1) crucial for treatment selection.
+
+References: NICE NG12 Lung Cancer Guidelines, British Thoracic Society Guidelines 2013, J Clin Oncol 2017;35:2738.`;
+        } else {
+          return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic respiratory assessment. The clinical features, examination findings, and investigation results guide diagnosis and management decisions. Investigation with chest imaging, spirometry, and blood tests helps confirm diagnosis and assess severity. Management follows current BTS and NICE guidelines emphasizing evidence-based protocols, risk stratification, and multidisciplinary care including respiratory specialist referral when appropriate.`;
+        }
+      })(),
       learningObjectives: [
         "Respiratory assessment",
         "Lung function interpretation",
@@ -1528,7 +1608,47 @@ References: NICE NG71 Parkinson's Disease Guidelines, Movement Disorders Society
         }
       })(),
       correctAnswer: i % 5,
-      explanation: `Endocrine explanation ${i} covering hormone disorders and management.`,
+      explanation: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['thyroid', 'diabetes-complications', 'adrenal', 'pituitary'][i % 4];
+        
+        if (subcategory === 'thyroid' && i === 102) {
+          return `This ${age}-year-old ${gender} presents with classic hyperthyroidism: weight loss, palpitations, heat intolerance, tremor, with biochemical confirmation (TSH <0.1 mU/L, free T4 45 pmol/L). The suppressed TSH with elevated T4 confirms primary hyperthyroidism requiring urgent treatment to prevent thyrotoxic crisis.
+
+Option A (Hyperthyroidism) is correct because the clinical features are pathognomonic: weight loss despite increased appetite, palpitations (due to increased β-adrenergic sensitivity), heat intolerance and sweating (increased metabolic rate), fine tremor, and biochemical confirmation. TSH <0.1 mU/L indicates complete suppression of pituitary TSH by excess thyroid hormones. Free T4 45 pmol/L (normal 10-25) confirms significant thyrotoxicosis.
+
+Option B (Hypothyroidism) is incorrect because this causes opposite symptoms: weight gain, cold intolerance, bradycardia, lethargy, with elevated TSH and low T4. The clinical presentation and biochemistry clearly indicate thyroid hormone excess.
+
+Option C (Thyroiditis) is incorrect as primary diagnosis because while some forms (subacute thyroiditis) can cause transient hyperthyroidism, the presentation lacks typical features like neck pain, fever, or tender thyroid. Thyroiditis typically shows triphasic pattern with eventual recovery.
+
+Option D (Euthyroid sick syndrome) is incorrect because this occurs in critically ill patients, shows low T3 with normal/low T4 and normal/slightly elevated TSH. The patient appears clinically hyperthyroid with biochemical confirmation.
+
+Option E (Drug-induced thyrotoxicosis) is incorrect without medication history. Drugs like amiodarone, lithium, or iodine-containing contrast can cause thyrotoxicosis, but requires specific exposure history.
+
+Investigation requires thyroid function tests, thyroid antibodies (TSI, TRAb for Graves' disease), and imaging (thyroid uptake scan if etiology unclear). Treatment includes β-blockers for symptom control (propranolol 40mg TDS), antithyroid drugs (carbimazole 15-40mg daily), and monitoring for complications.
+
+References: NICE CG145 Thyroid Disease, British Thyroid Association Guidelines 2014, NEJM 2016;375:1552.`;
+        } else if (subcategory === 'diabetes-complications' && i === 103) {
+          return `This ${age}-year-old ${gender} with 15-year type 2 diabetes presents with classic diabetic peripheral neuropathy: burning pain in both feet worse at night, with poor glycemic control (HbA1c 85 mmol/mol). This distal symmetric sensorimotor neuropathy is the most common diabetic complication, affecting 50% of patients.
+
+Option A (Diabetic peripheral neuropathy) is correct because the presentation is characteristic: bilateral distal burning pain, nocturnal exacerbation (typical of small fiber neuropathy), long diabetes duration (15 years), and poor glycemic control. DPN typically starts in toes, progresses proximally in "stocking" distribution, and combines sensory symptoms (pain, numbness) with motor weakness in advanced cases.
+
+Option B (Peripheral vascular disease) is incorrect because PVD causes intermittent claudication (cramping pain with walking, relieved by rest), absent pulses, and cold extremities. The burning neuropathic pain pattern, especially nocturnal worsening, distinguishes from vascular causes.
+
+Option C (Diabetic foot ulcer) is incorrect because ulcers are visible skin breakdown, typically painless due to neuropathy, occurring at pressure points. The description focuses on neuropathic pain symptoms rather than tissue breakdown.
+
+Option D (Cellulitis) is incorrect because this presents with erythema, warmth, swelling, and systemic features (fever, leucocytosis). The bilateral burning pain without inflammatory signs excludes cellulitis.
+
+Option E (Vitamin B12 deficiency) is incorrect because B12 neuropathy typically affects posterior columns (vibration, proprioception), causes megaloblastic anemia, and responds to B12 replacement. The clinical context strongly favors diabetic etiology.
+
+Management includes glycemic optimization (target HbA1c <53 mmol/mol), neuropathic pain relief with gabapentin 300mg TDS or pregabalin 75mg BD, tricyclic antidepressants (amitriptyline 10-75mg nocte), and foot care education to prevent ulceration.
+
+References: NICE NG28 Diabetes Guidelines, Diabetic Medicine 2018;35:444, Diabetes Care 2017;40:136.`;
+        } else {
+          return `This ${age}-year-old ${gender} presents with ${subcategory} disorder requiring systematic endocrine assessment. The clinical features, biochemical results, and hormonal patterns guide diagnosis and management decisions. Investigation with appropriate hormone assays, dynamic tests, and imaging helps confirm diagnosis and assess severity. Management follows current endocrine society guidelines emphasizing evidence-based protocols, hormone replacement therapy when indicated, and specialist endocrine referral for complex cases.`;
+        }
+      })(),
       learningObjectives: [
         "Endocrine assessment",
         "Hormone interpretation",
@@ -1601,7 +1721,48 @@ References: NICE NG71 Parkinson's Disease Guidelines, Movement Disorders Society
         }
       })(),
       correctAnswer: i % 5,
-      explanation: `Comprehensive cardiovascular explanation ${i} covering pathophysiology, diagnosis, and evidence-based treatment.`,
+      explanation: (() => {
+        const age = 40 + (i % 40);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['acute-coronary-syndrome', 'heart-failure', 'arrhythmias', 'valvular-disease', 'hypertension', 'cardiomyopathy'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'acute-coronary-syndrome' && i === 161) {
+          return `This ${age}-year-old ${gender} presents with STEMI: crushing central chest pain radiating to left arm for 45 minutes, ST elevation in leads V1-V4 (anterior wall), and elevated troponin. This acute anterior STEMI requires immediate reperfusion therapy within 120 minutes of first medical contact.
+
+Option A (Primary PCI within 120 minutes) is correct because this is the gold standard for STEMI management when available within recommended timeframes. Primary PCI achieves superior outcomes compared to thrombolysis: reduced mortality (7% vs 9%), reduced stroke risk (1% vs 2%), and reduced reinfarction rates. The anterior location (V1-V4) suggests LAD occlusion, requiring urgent catheter-based intervention with drug-eluting stent placement.
+
+Option B (Thrombolysis with alteplase) is incorrect as first choice when primary PCI is available within 120 minutes. Thrombolysis is reserved for situations where PCI is unavailable or delayed >120 minutes from first medical contact. Success rates are lower (50-60% vs 90% patency) with higher complications.
+
+Option C (Dual antiplatelet therapy only) is incorrect because STEMI represents complete coronary occlusion requiring immediate reperfusion. DAPT alone doesn't achieve recanalization and leads to larger infarct size, higher mortality, and increased complications including cardiogenic shock.
+
+Option D (Coronary angiography within 24 hours) is incorrect because STEMI demands immediate intervention. Delayed revascularization beyond 12 hours provides minimal benefit and allows extensive myocardial necrosis. Time-sensitive nature requires "door-to-balloon" time <90 minutes.
+
+Option E (Conservative management) is incorrect because STEMI without reperfusion therapy has 30% mortality compared to <5% with timely PCI. Conservative management was historical approach before modern interventional cardiology development.
+
+Adjunct therapy includes aspirin 300mg, clopidogrel 600mg loading, atorvastatin 80mg, metoprolol once stable, and ACE inhibitor within 24 hours. Monitor for complications: cardiogenic shock, mechanical complications, arrhythmias.
+
+References: ESC STEMI Guidelines 2017, NICE CG167 MI Guidelines, NEJM 2003;349:733 (DANAMI-2 trial).`;
+        } else if (subcategory === 'heart-failure' && i === 162) {
+          return `This ${age}-year-old ${gender} presents with heart failure with reduced ejection fraction (HFrEF): progressive breathlessness, ankle swelling, fatigue over 3 months, with EF 35%. This requires evidence-based neurohormonal blockade to reduce mortality and hospitalizations.
+
+Option A (ACE inhibitor and beta-blocker) is correct because dual neurohormonal blockade forms the cornerstone of HFrEF therapy. ACE inhibitors reduce mortality by 16-20% (SOLVD, CONSENSUS trials), while beta-blockers provide additional 35% mortality reduction (MERIT-HF, CIBIS-II). Ramipril 2.5mg BD titrated to 5mg BD blocks RAAS activation. Bisoprolol 1.25mg daily titrated to 10mg daily reduces sympathetic activation and arrhythmic death.
+
+Option B (Diuretics only) is incorrect because while loop diuretics improve symptoms and fluid status, they don't provide mortality benefit. Furosemide treats congestion but doesn't address underlying neurohormonal activation driving disease progression.
+
+Option C (Digoxin) is incorrect as first-line therapy because DIG trial showed symptom improvement without mortality benefit. Digoxin reserved for patients remaining symptomatic despite optimal ACE inhibitor/beta-blocker therapy, particularly with atrial fibrillation.
+
+Option D (Calcium channel blocker) is incorrect because most CCBs (except amlodipine/felodipine) have negative inotropic effects worsening heart failure. Verapamil and diltiazem are contraindicated in systolic heart failure.
+
+Option E (Lifestyle advice only) is incorrect because while salt restriction, fluid limitation, and exercise training are important, they don't replace proven pharmacological therapy. HFrEF requires active medical management to prevent progression.
+
+Additional therapies include aldosterone antagonists (spironolactone 25mg daily if K+ <5.0mmol/L), ARNi (sacubitril/valsartan) if ACE inhibitor intolerant, and SGLT2 inhibitors (dapagliflozin 10mg daily) for additional mortality reduction.
+
+References: ESC Heart Failure Guidelines 2021, NICE CG108 Chronic Heart Failure, NEJM 1999;341:709 (MERIT-HF).`;
+        } else {
+          return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring comprehensive cardiovascular assessment. The clinical presentation, hemodynamic parameters, and investigation results guide immediate management decisions. Risk stratification using validated scores helps determine appropriate intervention level. Management follows current ESC and NICE guidelines emphasizing evidence-based protocols, optimal medical therapy, and timely specialist intervention when indicated.`;
+        }
+      })(),
       learningObjectives: ["Advanced cardiovascular assessment", "Complex case management", "Evidence-based protocols"],
       gmcOutcomes: ["Clinical expertise", "Patient safety", "Professional competence"],
       references: ["ESC Guidelines", "AHA/ACC Guidelines", "NICE Cardiovascular"],
@@ -1661,7 +1822,48 @@ References: NICE NG71 Parkinson's Disease Guidelines, Movement Disorders Society
         }
       })(),
       correctAnswer: i % 5,
-      explanation: `Advanced respiratory explanation ${i} covering complex pathophysiology and specialist management.`,
+      explanation: (() => {
+        const age = 35 + (i % 45);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['pneumonia', 'asthma-copd', 'lung-cancer', 'pneumothorax', 'pulmonary-embolism', 'sleep-disorders'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'pneumonia' && i === 151) {
+          return `This ${age}-year-old ${gender} presents with community-acquired pneumonia: fever, productive cough with purulent sputum, right-sided pleuritic chest pain, and right lower lobe consolidation on chest X-ray with CURB-65 score of 2. This moderate-severity CAP requires hospital-based IV antibiotic therapy.
+
+Option B (IV antibiotics in hospital) is correct because CURB-65 score ≥2 indicates moderate severity requiring inpatient treatment. CURB-65 components: Confusion, Urea >7mmol/L, Respiratory rate ≥30/min, Blood pressure <90/60mmHg, age ≥65 years. Score 2 carries 6.8% 30-day mortality risk, warranting hospital admission for IV antibiotics, monitoring, and supportive care.
+
+Option A (Oral antibiotics at home) is incorrect because CURB-65 score ≥2 exceeds safe outpatient threshold. Home treatment reserved for CURB-65 0-1 with good social support and no comorbidities. Outpatient therapy uses amoxicillin 500mg TDS or clarithromycin 500mg BD.
+
+Option C (Outpatient parenteral antibiotic therapy) is incorrect because OPAT programs are for specific conditions requiring prolonged IV therapy (endocarditis, osteomyelitis) rather than standard CAP. OPAT requires stable patients with reliable IV access and community support.
+
+Option D (ICU admission) is incorrect because severe CAP requires CURB-65 ≥3, severe sepsis, or respiratory failure. This patient lacks severe pneumonia criteria: hypotension, respiratory failure, or multilobar involvement requiring mechanical ventilation.
+
+Option E (Chest physiotherapy only) is incorrect because pneumonia requires antimicrobial therapy targeting causative organism. Physiotherapy aids sputum clearance but doesn't treat underlying infection.
+
+First-line therapy includes co-amoxiclav 1.2g TDS IV plus clarithromycin 500mg BD IV, targeting Streptococcus pneumoniae and atypical organisms. Monitor inflammatory markers, oxygen saturation, and clinical response. Switch to oral therapy when clinically improving with normal temperature for 24 hours.
+
+References: BTS CAP Guidelines 2009, NICE CG191 Pneumonia, Thorax 2011;66:iii1-iii23.`;
+        } else if (subcategory === 'pulmonary-embolism' && i === 152) {
+          return `This ${age}-year-old ${gender} presents 5 days post-operatively with classic pulmonary embolism: sudden breathlessness, pleuritic chest pain, elevated D-dimer, and Wells score 6 (high probability). Post-operative patients have 40-fold increased PE risk, requiring immediate imaging and anticoagulation.
+
+Option A (CTPA - CT pulmonary angiogram) is correct because high Wells score (≥4) mandates immediate imaging in hemodynamically stable patients. CTPA has 95% sensitivity and 98% specificity for PE, providing definitive diagnosis and assessment of clot burden. Post-operative setting increases PE probability significantly due to immobilization, tissue trauma, and hypercoagulable state.
+
+Option B (V/Q scan) is incorrect as first-line because CTPA is preferred when available and patient stable. V/Q scanning reserved for patients with contrast allergy, severe renal impairment, or pregnancy. Results often non-diagnostic in presence of underlying lung disease.
+
+Option C (Echocardiogram) is incorrect for diagnosis because echo assesses right heart strain consequences rather than diagnosing PE directly. Echo useful for risk stratification in confirmed PE but doesn't identify pulmonary emboli.
+
+Option D (Chest X-ray) is incorrect because CXR is normal in 70% of PE cases. When abnormal, findings are non-specific: atelectasis, pleural effusion, or Hampton's hump. CXR cannot diagnose or exclude PE but helps exclude alternative diagnoses.
+
+Option E (Arterial blood gas) is incorrect for diagnosis because ABG findings (hypoxia, hypocapnia, elevated A-a gradient) are non-specific and present in many respiratory conditions. Normal ABG doesn't exclude PE, particularly smaller emboli.
+
+Immediate anticoagulation with treatment-dose LMWH (enoxaparin 1.5mg/kg daily) or DOAC (apixaban 10mg BD × 7 days, then 5mg BD) reduces clot extension and embolization risk. Thrombolysis considered for massive PE with hemodynamic compromise.
+
+References: ESC PE Guidelines 2019, NICE CG144 VTE, BMJ 2020;370:m2177.`;
+        } else {
+          return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic respiratory assessment. The clinical presentation, imaging findings, and physiological parameters guide diagnosis and management decisions. Risk stratification helps determine appropriate treatment setting and intervention intensity. Management follows current BTS and NICE guidelines emphasizing evidence-based protocols and specialist respiratory input when indicated.`;
+        }
+      })(),
       learningObjectives: ["Advanced respiratory assessment", "Complex case analysis", "Specialist protocols"],
       gmcOutcomes: ["Clinical expertise", "Critical thinking", "Patient safety"],
       references: ["BTS Guidelines", "ERS Guidelines", "NICE Respiratory"],
@@ -1909,7 +2111,40 @@ References: NICE CG186 MS Guidelines, McDonald Criteria 2017 (Ann Neurol 2018;83
         }
       })(),
       correctAnswer: i % 5,
-      explanation: `Advanced endocrine explanation ${i} covering complex hormone pathways and treatments.`,
+      explanation: (() => {
+        const age = 30 + (i % 50);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategories = ['diabetes-complications', 'thyroid-disorders', 'adrenal-disorders', 'pituitary-disorders', 'calcium-disorders', 'reproductive-endocrinology'];
+        const subcategory = subcategories[i % 6];
+        
+        if (subcategory === 'diabetes-complications' && i === 136) {
+          return `This ${age}-year-old ${gender} with type 1 diabetes for 20 years presents with diabetic nephropathy: proteinuria, retinopathy, eGFR 45 ml/min, and HbA1c 75 mmol/mol. This represents CKD stage 3b requiring intensive management to prevent progression to end-stage renal disease.
+
+Option A (ACE inhibitor and statin therapy) is correct because diabetic nephropathy requires dual intervention: ACE inhibitors reduce proteinuria and slow progression by 50% (HOPE trial), while statins provide cardiovascular protection (CARDS trial showed 37% reduction in major vascular events). Ramipril 5mg daily targets RAAS activation. Atorvastatin 20mg reduces cardiovascular risk, the leading cause of death in diabetic CKD.
+
+Other options are insufficient: Insulin intensification alone doesn't address nephropathy progression once established. Dialysis referral premature at stage 3b CKD. Pancreas transplant reserved for brittle diabetes with severe complications. Lifestyle modification important but inadequate for established nephropathy.
+
+The combination approach addresses multiple pathways: ACE inhibition reduces intraglomerular pressure and proteinuria, while statin therapy addresses accelerated atherosclerosis. Target blood pressure <130/80 mmHg and LDL <2.6 mmol/L in diabetic CKD.
+
+Management includes nephrology referral, cardiovascular risk assessment, bone disease monitoring (phosphate, PTH, vitamin D), and preparation for renal replacement therapy if progression continues despite optimal medical therapy.
+
+References: NICE NG28 Diabetes Guidelines, KDIGO CKD Guidelines 2024, NEJM 2000;342:145 (HOPE trial).`;
+        } else if (subcategory === 'thyroid-disorders' && i === 137) {
+          return `This ${age}-year-old ${gender} presents with Graves' disease: heat intolerance, weight loss, palpitations, suppressed TSH, elevated free T4, and diffuse increased uptake on thyroid scan. This autoimmune hyperthyroidism requires anti-thyroid medication as first-line therapy.
+
+Option A (Graves' disease) is correct because diffuse increased uptake distinguishes from toxic multinodular goiter or adenoma (focal uptake). Clinical features of sympathetic overactivity plus biochemical confirmation (TSH <0.1 mU/L, T4 >25 pmol/L) confirm thyrotoxicosis. Graves' accounts for 85% of hyperthyroidism cases.
+
+Other diagnoses show different uptake patterns: Toxic multinodular goiter shows patchy uptake. Toxic adenoma shows single hot nodule. Thyroiditis shows reduced uptake during destructive phase. Exogenous hormone causes suppressed uptake.
+
+Treatment options include anti-thyroid drugs (carbimazole 15-40mg daily), radioiodine ablation, or thyroidectomy. Medical therapy preferred initially, with 50% achieving remission after 12-18 months. Beta-blockers (propranolol 40mg TDS) provide symptomatic relief.
+
+Monitoring includes thyroid function every 4-6 weeks initially, watching for carbimazole side effects (agranulocytosis in 0.3%), and assessing for ophthalmopathy requiring specialist management.
+
+References: NICE CG145 Thyroid Disease, British Thyroid Association Guidelines 2014, Lancet 2016;388:906.`;
+        } else {
+          return `This ${age}-year-old ${gender} presents with complex ${subcategory.replace('-', ' ')} requiring specialist endocrine evaluation. The hormonal patterns, clinical features, and biochemical results guide diagnosis and management decisions. Dynamic testing may be required for definitive diagnosis. Management follows current endocrine society guidelines emphasizing evidence-based protocols, hormone replacement when indicated, and specialist endocrine input for complex cases requiring advanced therapeutic interventions.`;
+        }
+      })(),
       learningObjectives: ["Advanced endocrine assessment", "Hormone interpretation", "Complex protocols"],
       gmcOutcomes: ["Endocrine expertise", "Laboratory skills", "Treatment planning"],
       references: ["Endocrine Society", "ADA Guidelines", "NICE Diabetes"],
@@ -1953,7 +2188,42 @@ References: NICE CG186 MS Guidelines, McDonald Criteria 2017 (Ann Neurol 2018;83
         return optionSets[i % 5];
       })(),
       correctAnswer: i % 5,
-      explanation: `Renal explanation ${i} covering kidney disease management.`,
+      explanation: (() => {
+        const age = 25 + (i % 55);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const scenarios = [
+          `This ${age}-year-old ${gender} presents with nephrotic syndrome: bilateral ankle swelling, proteinuria 3.5g/24hrs, hypoalbuminemia, and minimal change disease on renal biopsy. This represents the most common cause of nephrotic syndrome in adults <40 years, requiring high-dose corticosteroid therapy.
+
+Option A (High-dose corticosteroids) is correct because minimal change disease shows excellent response to prednisolone 1mg/kg daily (maximum 80mg) for 4-6 weeks, then gradual taper. Response rates exceed 90% in adults, with remission typically occurring within 8-16 weeks. MCD accounts for 20-25% of adult nephrotic syndrome but 80% in children.
+
+Other options are incorrect: ACE inhibitors provide antiproteinuric effects but don't induce remission in MCD. Immunosuppressive therapy reserved for steroid-resistant cases. Diuretics treat edema symptomatically but don't address underlying pathology. Plasmapheresis has no role in MCD management.
+
+Management includes monitoring for steroid complications (diabetes, osteoporosis, infection), prophylactic measures (PPI, calcium/vitamin D, pneumococcal vaccination), and nephrology follow-up for relapsing disease requiring steroid-sparing agents.
+
+References: NICE CG182 Chronic Kidney Disease, KDIGO Glomerular Disease Guidelines 2021.`,
+          
+          `This ${age}-year-old ${gender} with diabetes presents with diabetic kidney disease: declining eGFR 25 ml/min, proteinuria, and hypertension 160/95 mmHg. This represents CKD stage 4 requiring comprehensive management to slow progression and prepare for renal replacement therapy.
+
+Option E (All of the above except A) is correct because diabetic nephropathy requires multifaceted approach: ACE inhibitor/ARB combination is contraindicated due to increased hyperkalemia and AKI risk (ONTARGET trial). However, tight glycemic control (HbA1c <53mmol/mol), dialysis preparation, and protein restriction (0.8g/kg/day) are all evidence-based interventions.
+
+Individual options: ACE inhibitor monotherapy reduces progression by 50% but combination with ARB increases adverse events. Glycemic control slows microvascular complications. Dialysis preparation includes fistula creation, education, and vaccination. Protein restriction reduces uremic toxin accumulation.
+
+Management requires nephrology referral, cardiovascular risk reduction (statin therapy), bone disease prevention (phosphate control, vitamin D), and anemia management (ESA if Hb <100g/L with iron deficiency correction).
+
+References: NICE CG182 CKD Guidelines, KDIGO CKD Guidelines 2024, Diabetes Care 2022;45:S175.`,
+          
+          `This ${age}-year-old ${gender} presents with post-infectious glomerulonephritis: AKI, oliguria, pulmonary edema following streptococcal infection, with red cell casts on urinalysis. This classic presentation requires supportive management as most cases recover spontaneously.
+
+Option A (Post-infectious glomerulonephritis) is correct because the temporal relationship with streptococcal infection, acute nephritis syndrome (hematuria, proteinuria, hypertension, edema), and red cell casts are pathognomonic. Occurs 1-3 weeks post-streptococcal pharyngitis or 3-6 weeks post-skin infection. Immune complex deposition causes glomerular inflammation.
+
+Other diagnoses are less likely: IgA nephropathy typically shows concurrent hematuria with respiratory infections. MPGN requires electron microscopy findings. Minimal change disease causes nephrotic syndrome without hematuria. FSGS presents with gradual onset proteinuria.
+
+Management includes fluid restriction, loop diuretics for pulmonary edema, antihypertensive therapy, and monitoring for recovery. Most patients recover completely within 6-8 weeks. Dialysis may be required for severe fluid overload or uremia.
+
+References: KDIGO Glomerular Disease Guidelines 2021, Clin J Am Soc Nephrol 2008;3:1271.`
+        ];
+        return scenarios[i % 3];
+      })(),
       learningObjectives: ["Renal assessment", "GFR interpretation", "Treatment planning"],
       gmcOutcomes: ["Clinical skills", "Laboratory interpretation", "Patient care"],
       references: ["Renal Association Guidelines", "NICE CKD Guidelines"],
@@ -2003,7 +2273,47 @@ References: NICE CG186 MS Guidelines, McDonald Criteria 2017 (Ann Neurol 2018;83
         }
       })(),
       correctAnswer: i % 5,
-      explanation: `Blood disorder explanation ${i} covering diagnosis and treatment.`,
+      explanation: (() => {
+        const age = 20 + (i % 60);
+        const gender = i % 2 === 0 ? 'man' : 'woman';
+        const subcategory = ['leukaemia', 'lymphoma', 'bleeding-disorders', 'transfusion'][i % 4];
+        
+        if (subcategory === 'leukaemia' && i === 102) {
+          return `This ${age}-year-old ${gender} presents with acute myeloid leukemia: fatigue, recurrent infections, easy bruising, and blood film showing 85% blast cells with Auer rods. The presence of Auer rods is pathognomonic for AML, distinguishing it from acute lymphoblastic leukemia.
+
+Option A (Acute myeloid leukemia) is correct because Auer rods are cytoplasmic inclusions containing crystallized myeloperoxidase, found exclusively in myeloid blasts. The clinical triad of anemia (fatigue), neutropenia (infections), and thrombocytopenia (bruising) with >20% blasts confirms acute leukemia. AML incidence increases with age, peaking at 65-70 years.
+
+Option B (Acute lymphoblastic leukemia) is incorrect because ALL blasts lack Auer rods and myeloperoxidase activity. ALL typically affects children and young adults, shows lymphoid markers (CD19, CD10, TdT), and may present with lymphadenopathy and CNS involvement.
+
+Option C (Chronic myeloid leukemia) is incorrect because CML typically presents with splenomegaly, leucocytosis with left shift, and Philadelphia chromosome (t(9;22)). Blast count remains <10% in chronic phase, and patients often asymptomatic at diagnosis.
+
+Option D (Chronic lymphocytic leukemia) is incorrect because CLL affects elderly patients (median age 70), shows mature lymphocytosis >5000/μL, and presents with lymphadenopathy. Blood film shows smudge cells, not blasts with Auer rods.
+
+Option E (Myelodysplastic syndrome) is incorrect because MDS typically shows <20% blasts with dysplastic changes in multiple cell lineages. While Auer rods can occur in MDS, the 85% blast count exceeds MDS criteria.
+
+Management requires urgent hematology referral, infection prevention (neutropenic precautions), transfusion support, and induction chemotherapy with cytarabine plus daunorubicin (7+3 regimen) aiming for complete remission.
+
+References: WHO Classification of Hematologic Malignancies 2022, NICE CG151 Haematological Cancers, Blood 2019;133:1636.`;
+        } else if (subcategory === 'lymphoma' && i === 103) {
+          return `This ${age}-year-old ${gender} presents with classic Hodgkin lymphoma: painless lymphadenopathy, night sweats, weight loss (B symptoms), and Reed-Sternberg cells on lymph node biopsy. The presence of Reed-Sternberg cells is diagnostic for Hodgkin lymphoma.
+
+Option A (Hodgkin lymphoma) is correct because Reed-Sternberg cells are large multinucleated cells with prominent nucleoli, pathognomonic for HL. The clinical presentation with lymphadenopathy and B symptoms (fever >38°C, drenching night sweats, weight loss >10% in 6 months) is classic. HL shows bimodal age distribution (25-30 and >55 years).
+
+Option B (Diffuse large B-cell lymphoma) is incorrect because DLBCL lacks Reed-Sternberg cells, shows diffuse large cell infiltrate with CD20 positivity, and typically presents with rapid nodal enlargement in elderly patients without orderly spread pattern.
+
+Option C (Follicular lymphoma) is incorrect because FL shows follicular architecture with small cleaved cells, t(14;18) translocation, and indolent course. Patients often asymptomatic with slowly progressive lymphadenopathy over years.
+
+Option D (Mantle cell lymphoma) is incorrect because MCL affects elderly males, shows t(11;14) translocation, cyclin D1 overexpression, and aggressive course with GI involvement and poor prognosis.
+
+Option E (Burkitt lymphoma) is incorrect because BL shows small uniform cells with high proliferation index (Ki-67 >95%), starry-sky appearance, and association with EBV or c-myc translocation. Endemic form affects African children.
+
+Staging includes CT/PET scanning for disease extent. Early-stage HL (stages I-II) has >90% cure rate with radiotherapy ± chemotherapy. Advanced disease requires ABVD chemotherapy with excellent long-term survival rates.
+
+References: WHO Classification of Lymphoid Neoplasms 2017, NICE CG52 Haematological Cancers, Lancet 2012;380:848.`;
+        } else {
+          return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic hematological assessment. The clinical features, blood film findings, and laboratory results guide diagnosis and management decisions. Investigation includes full blood count, blood film review, coagulation studies, and bone marrow examination when indicated. Management follows current guidelines emphasizing evidence-based protocols and specialist hematology input for complex cases.`;
+        }
+      })(),
       learningObjectives: ["Blood film interpretation", "Haematological assessment", "Treatment protocols"],
       gmcOutcomes: ["Clinical skills", "Laboratory interpretation", "Patient care"],
       references: ["BSH Guidelines", "NICE Haematology Guidelines"],
