@@ -1050,63 +1050,40 @@ export default function PLAB1New() {
                 </div>
               )}
 
-              {/* Educational Source Links */}
-              <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                <div className="flex items-center gap-2 mb-2">
-                  <ExternalLink className="w-4 h-4 text-green-600" />
-                  <h5 className="font-medium text-green-800">Educational Resources:</h5>
+              {/* Educational References */}
+              {currentQuestion.references && currentQuestion.references.length > 0 && (
+                <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <BookOpen className="w-4 h-4 text-green-600" />
+                    <h5 className="font-medium text-green-800">Educational References:</h5>
+                  </div>
+                  <div className="space-y-2">
+                    {currentQuestion.references.map((reference, index) => (
+                      <div key={index} className="flex items-start gap-2 text-sm text-green-700 p-2 bg-white rounded border border-green-100">
+                        <span className="text-green-600 font-medium text-xs mt-0.5 flex-shrink-0">
+                          {index + 1}.
+                        </span>
+                        <span className="flex-1 leading-relaxed">{reference}</span>
+                        <Badge 
+                          variant="outline" 
+                          className="text-xs px-1.5 py-0.5 border-green-300 text-green-700 flex-shrink-0"
+                        >
+                          {reference.includes('NICE') ? 'NICE' : 
+                           reference.includes('ESC') ? 'ESC' :
+                           reference.includes('BTS') ? 'BTS' :
+                           reference.includes('BNF') ? 'BNF' :
+                           reference.includes('NEJM') ? 'NEJM' :
+                           reference.includes('Lancet') ? 'LANCET' :
+                           'REFERENCE'}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-green-600 mt-2">
+                    These references support the clinical reasoning and evidence-based medicine approach used in this explanation
+                  </p>
                 </div>
-                <div className="space-y-2">
-                  <a
-                    href="https://www.nhs.uk/conditions/heart-attack/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
-                  >
-                    <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                    <span className="flex-1">NHS - Heart Attack: Symptoms and Treatment</span>
-                    <Badge 
-                      variant="outline" 
-                      className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
-                    >
-                      NHS
-                    </Badge>
-                  </a>
-                  <a
-                    href="https://www.nice.org.uk/guidance/cg94"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
-                  >
-                    <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                    <span className="flex-1">NICE Guidelines - Acute coronary syndromes</span>
-                    <Badge 
-                      variant="outline" 
-                      className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
-                    >
-                      GUIDELINE
-                    </Badge>
-                  </a>
-                  <a
-                    href="https://www.bhf.org.uk/informationsupport/conditions/heart-attack"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-green-700 hover:text-green-900 hover:underline text-sm transition-colors"
-                  >
-                    <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                    <span className="flex-1">British Heart Foundation - Heart Attack Information</span>
-                    <Badge 
-                      variant="outline" 
-                      className="text-xs px-1.5 py-0.5 border-green-300 text-green-700"
-                    >
-                      EDUCATIONAL
-                    </Badge>
-                  </a>
-                </div>
-                <p className="text-xs text-green-600 mt-2">
-                  Click links to access official medical guidelines and educational resources
-                </p>
-              </div>
+              )}
 
               {/* Educational Disclaimer - Bottom Position */}
               <div className="mt-6 p-3 bg-amber-50 border border-amber-200 rounded-lg">
