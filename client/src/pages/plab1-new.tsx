@@ -928,12 +928,7 @@ export default function PLAB1New() {
               <Badge variant="outline" className="text-sm">Intermediate</Badge>
             </div>
             
-            {/* Educational Disclaimer - Prominent Position */}
-            <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-              <p className="text-xs text-amber-800 font-medium">
-                ⚠️ Educational Disclaimer: This information is for educational purposes only and not a substitute for professional medical advice.
-              </p>
-            </div>
+
             
             {/* Question Stem - Full Width Top */}
             <div className="w-full">
@@ -1110,6 +1105,13 @@ export default function PLAB1New() {
                 </div>
                 <p className="text-xs text-green-600 mt-2">
                   Click links to access official medical guidelines and educational resources
+                </p>
+              </div>
+
+              {/* Educational Disclaimer - Bottom Position */}
+              <div className="mt-6 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                <p className="text-xs text-amber-800 font-medium">
+                  ⚠️ Educational Disclaimer: This information is for educational purposes only and not a substitute for professional medical advice.
                 </p>
               </div>
             </div>
