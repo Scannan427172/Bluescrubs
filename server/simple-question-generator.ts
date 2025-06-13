@@ -189,10 +189,12 @@ export function generateMultipleSimpleQuestions(
   
   // Fast generation using templates - no API calls needed
   for (let i = 0; i < count; i++) {
-    const question = generateSimpleQuestion(category, difficulty);
-    // Add variation to question IDs to ensure uniqueness
-    question.id = `${question.id}_${i}`;
-    questions.push(question);
+    const baseQuestion = generateSimpleQuestion(category, difficulty);
+    const uniqueQuestion: SimpleQuestion = {
+      ...baseQuestion,
+      id: `fast_${category.slice(0,4)}_${Date.now()}_${i}_${Math.random().toString(36).substr(2, 6)}`
+    };
+    questions.push(uniqueQuestion);
   }
   
   console.log(`Generated ${questions.length}/${count} questions successfully instantly`);
