@@ -918,91 +918,110 @@ export default function PLAB1New() {
         )}
       </div>
 
-      {/* Question Card */}
-      <Card className={`mb-6 ${accommodations.reducedClutter ? 'border-2 shadow-sm' : ''}`}>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <Badge variant="secondary">{currentQuestion.category}</Badge>
-            <Badge variant="outline">Intermediate</Badge>
-          </div>
-          <div className="flex items-start justify-between gap-4">
-            <CardTitle className={`flex-1 ${questionStyles} leading-relaxed ${accommodations.keywordHighlighting ? 'font-medium' : ''}`}>
-              {currentQuestion.stem}
-              {showTranslation && currentLanguage !== 'en' && (
-                <div className="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r">
-                  <div className="flex items-center gap-2 text-sm text-blue-700 mb-2">
-                    <Globe className="w-4 h-4" />
-                    <span className="font-medium">Translation ({supportedLanguages.find(lang => lang.code === currentLanguage)?.name}):</span>
-                  </div>
-                  <div className="text-blue-800 leading-relaxed">
-                    {currentTranslations['question-stem'] || (isTranslating ? 'Translating...' : 'Translation loading...')}
-                  </div>
-                </div>
-              )}
-            </CardTitle>
-            {accommodations.audioSupport && (
-              <div className="flex-shrink-0 mt-1">
-                <AudioSupport 
-                  text={currentQuestion.stem + (showTranslation && currentTranslations['question-stem'] 
-                    ? ` Translation: ${currentTranslations['question-stem']}` 
-                    : '')}
-                  size="default"
-                  className="justify-end"
-                />
-              </div>
-            )}
+      {/* Question Section - Top Priority Layout */}
+      <div className="space-y-6">
+        {/* Question Header */}
+        <Card className={`${accommodations.reducedClutter ? 'border-2 shadow-sm' : 'shadow-lg'}`}>
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between mb-4">
+              <Badge variant="secondary" className="text-sm">{currentQuestion.category}</Badge>
+              <Badge variant="outline" className="text-sm">Intermediate</Badge>
+            </div>
             
-            {/* Educational Disclaimer */}
-            <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+            {/* Educational Disclaimer - Prominent Position */}
+            <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
               <p className="text-xs text-amber-800 font-medium">
                 ⚠️ Educational Disclaimer: This information is for educational purposes only and not a substitute for professional medical advice.
               </p>
             </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <RadioGroup value={selectedAnswer} onValueChange={handleAnswerSelect}>
-            {currentQuestion.options && Array.isArray(currentQuestion.options) ? 
-              currentQuestion.options.map((option, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <RadioGroupItem 
-                    value={index.toString()} 
-                    id={`option-${index}`}
-                    disabled={showExplanation}
+            
+            {/* Question Stem - Full Width Top */}
+            <div className="w-full">
+              <CardTitle className={`w-full ${questionStyles} leading-relaxed text-lg text-justify ${accommodations.keywordHighlighting ? 'font-medium' : ''} mb-4`}>
+                {currentQuestion.stem}
+              </CardTitle>
+              
+              {/* Audio Support */}
+              {accommodations.audioSupport && (
+                <div className="flex justify-end mb-4">
+                  <AudioSupport 
+                    text={currentQuestion.stem + (showTranslation && currentTranslations['question-stem'] 
+                      ? ` Translation: ${currentTranslations['question-stem']}` 
+                      : '')}
+                    size="default"
+                    className="justify-end"
                   />
-                  <Label 
-                    htmlFor={`option-${index}`} 
-                    className={`flex-1 cursor-pointer ${accommodations.largerButtons ? 'p-4' : 'p-3'} rounded-lg border ${questionStyles} ${
-                      showExplanation && index === currentQuestion.correctAnswer
-                        ? 'bg-green-50 border-green-200 text-green-800'
-                        : showExplanation && index === parseInt(selectedAnswer) && index !== currentQuestion.correctAnswer
-                        ? 'bg-red-50 border-red-200 text-red-800'
-                        : selectedAnswer === index.toString() && !showExplanation
-                        ? 'bg-blue-50 border-blue-300 border-2 text-blue-900 shadow-sm'
-                        : 'hover:bg-gray-50 border-gray-200'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="font-medium text-gray-600 text-sm">
-                        {String.fromCharCode(65 + index)}.
-                      </span>
-                      <span>
-                        {typeof option === 'string' ? option : `Option ${String.fromCharCode(65 + index)}`}
-                      </span>
-                    </div>
-                    {showTranslation && currentLanguage !== 'en' && (
-                      <div className="mt-2 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-2 ml-6">
-                        {currentTranslations[`option-${index}`] || 'Translating...'}
-                      </div>
-                    )}
-                  </Label>
                 </div>
-              )) : 
-              <div className="text-red-500">No options available for this question</div>
-            }
-          </RadioGroup>
-        </CardContent>
-      </Card>
+              )}
+              
+              {/* Translation Section */}
+              {showTranslation && currentLanguage !== 'en' && (
+                <div className="mt-4 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r">
+                  <div className="flex items-center gap-2 text-sm text-blue-700 mb-2">
+                    <Globe className="w-4 h-4" />
+                    <span className="font-medium">Translation ({supportedLanguages.find(lang => lang.code === currentLanguage)?.name}):</span>
+                  </div>
+                  <div className="text-blue-800 leading-relaxed text-lg text-justify">
+                    {currentTranslations['question-stem'] || (isTranslating ? 'Translating...' : 'Translation loading...')}
+                  </div>
+                </div>
+              )}
+            </div>
+          </CardHeader>
+        </Card>
+
+        {/* Answer Options Section - Full Width Below Question */}
+        <Card className={`${accommodations.reducedClutter ? 'border-2 shadow-sm' : 'shadow-lg'}`}>
+          <CardHeader>
+            <CardTitle className="text-lg">Select your answer:</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup value={selectedAnswer} onValueChange={handleAnswerSelect} className="space-y-3">
+              {currentQuestion.options && Array.isArray(currentQuestion.options) ? 
+                currentQuestion.options.map((option, index) => (
+                  <div key={index} className="w-full">
+                    <Label 
+                      htmlFor={`option-${index}`} 
+                      className={`w-full flex items-start gap-4 cursor-pointer ${accommodations.largerButtons ? 'p-6' : 'p-4'} rounded-lg border transition-all duration-200 ${questionStyles} ${
+                        showExplanation && index === currentQuestion.correctAnswer
+                          ? 'bg-green-50 border-green-300 text-green-800 border-2'
+                          : showExplanation && index === parseInt(selectedAnswer) && index !== currentQuestion.correctAnswer
+                          ? 'bg-red-50 border-red-300 text-red-800 border-2'
+                          : selectedAnswer === index.toString() && !showExplanation
+                          ? 'bg-blue-50 border-blue-400 border-2 text-blue-900 shadow-md'
+                          : 'hover:bg-gray-50 border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <RadioGroupItem 
+                        value={index.toString()} 
+                        id={`option-${index}`}
+                        disabled={showExplanation}
+                        className="mt-1 flex-shrink-0"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-start gap-3">
+                          <span className="font-bold text-gray-700 text-lg flex-shrink-0">
+                            {String.fromCharCode(65 + index)}.
+                          </span>
+                          <span className="text-base leading-relaxed text-justify">
+                            {typeof option === 'string' ? option : `Option ${String.fromCharCode(65 + index)}`}
+                          </span>
+                        </div>
+                        {showTranslation && currentLanguage !== 'en' && (
+                          <div className="mt-3 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-3 ml-6 text-justify">
+                            {currentTranslations[`option-${index}`] || 'Translating...'}
+                          </div>
+                        )}
+                      </div>
+                    </Label>
+                  </div>
+                )) : 
+                <div className="text-red-500 text-center p-4">No options available for this question</div>
+              }
+            </RadioGroup>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Answer Explanation */}
       {showExplanation && (
@@ -1021,7 +1040,7 @@ export default function PLAB1New() {
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold mb-2">Explanation:</h4>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed text-justify">
                   {currentQuestion.explanation}
                 </p>
               </div>
