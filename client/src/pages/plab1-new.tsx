@@ -5,12 +5,16 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
-
 export default function PLAB1New() {
+  // Translation state
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [isTranslationMode, setIsTranslationMode] = useState(false);
+  
   // Session state
   const [sessionStarted, setSessionStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -32,8 +36,60 @@ export default function PLAB1New() {
     currentCategory: string;
   } | null>(null);
 
-  // Language settings
-  const [currentLanguage, setCurrentLanguage] = useState<string>('en');
+  // Simple translation function
+  const translateText = (text: string) => {
+    if (!isTranslationMode || selectedLanguage === 'en') return text;
+    
+    const translations: Record<string, Record<string, string>> = {
+      'ar': {
+        'PLAB 1 Practice': 'ممارسة PLAB 1',
+        'Quick Practice': 'ممارسة سريعة',
+        'Standard Quiz': 'اختبار قياسي',
+        'PLAB 1 Mock': 'محاكاة PLAB 1',
+        'Comprehensive': 'شامل',
+        'questions': 'أسئلة',
+        'Submit Answer': 'إرسال الإجابة',
+        'Next Question': 'السؤال التالي',
+        'Complete Session': 'إكمال الجلسة',
+        'Correct!': 'صحيح!',
+        'Incorrect.': 'غير صحيح.',
+        'Reference:': 'مرجع:',
+        'Study Tip': 'نصيحة دراسية'
+      },
+      'hi': {
+        'PLAB 1 Practice': 'PLAB 1 अभ्यास',
+        'Quick Practice': 'त्वरित अभ्यास',
+        'Standard Quiz': 'मानक प्रश्नोत्तरी',
+        'PLAB 1 Mock': 'PLAB 1 मॉक',
+        'Comprehensive': 'व्यापक',
+        'questions': 'प्रश्न',
+        'Submit Answer': 'उत्तर जमा करें',
+        'Next Question': 'अगला प्रश्न',
+        'Complete Session': 'सत्र पूरा करें',
+        'Correct!': 'सही!',
+        'Incorrect.': 'गलत।',
+        'Reference:': 'संदर्भ:',
+        'Study Tip': 'अध्ययन युक्ति'
+      },
+      'ur': {
+        'PLAB 1 Practice': 'PLAB 1 پریکٹس',
+        'Quick Practice': 'فوری پریکٹس',
+        'Standard Quiz': 'معیاری کوئز',
+        'PLAB 1 Mock': 'PLAB 1 موک',
+        'Comprehensive': 'جامع',
+        'questions': 'سوالات',
+        'Submit Answer': 'جواب جمع کریں',
+        'Next Question': 'اگلا سوال',
+        'Complete Session': 'سیشن مکمل کریں',
+        'Correct!': 'درست!',
+        'Incorrect.': 'غلط۔',
+        'Reference:': 'حوالہ:',
+        'Study Tip': 'مطالعہ کی تجویز'
+      }
+    };
+    
+    return translations[selectedLanguage]?.[text] || text;
+  };
   
   // Calculate question counts for comprehensive question bank
   const getQuestionCount = (category: string) => {
@@ -202,11 +258,37 @@ export default function PLAB1New() {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">PLAB 1 Practice</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">{translateText('PLAB 1 Practice')}</h1>
             <p className="text-lg text-gray-600">Comprehensive AI-generated medical questions</p>
             <Badge variant="outline" className="mt-2">
               5000+ Questions Available
             </Badge>
+            
+            {/* Language Toggle */}
+            <div className="flex items-center gap-4 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+              <Globe className="w-4 h-4 text-blue-600" />
+              <div className="flex items-center gap-3">
+                <Switch
+                  checked={isTranslationMode}
+                  onCheckedChange={setIsTranslationMode}
+                  className="data-[state=checked]:bg-blue-600"
+                />
+                <span className="text-sm font-medium text-blue-900">Translation Mode</span>
+              </div>
+              {isTranslationMode && (
+                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                  <SelectTrigger className="w-40 border-blue-200">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">🇬🇧 English</SelectItem>
+                    <SelectItem value="ar">🇸🇦 Arabic</SelectItem>
+                    <SelectItem value="hi">🇮🇳 Hindi</SelectItem>
+                    <SelectItem value="ur">🇵🇰 Urdu</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            </div>
           </div>
 
           {/* Statistics Cards */}
@@ -312,8 +394,8 @@ export default function PLAB1New() {
                   className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <ArrowRight className="w-6 h-6" />
-                  <span className="font-medium">Quick Practice</span>
-                  <span className="text-xs opacity-90">5 questions</span>
+                  <span className="font-medium">{translateText('Quick Practice')}</span>
+                  <span className="text-xs opacity-90">5 {translateText('questions')}</span>
                 </Button>
 
                 <Button 
