@@ -163,8 +163,10 @@ export default function PLAB1New() {
 
   // Handle answer selection
   const handleAnswerSelect = (answer: string) => {
+    console.log('Answer selected:', answer, 'showExplanation:', showExplanation);
     if (!showExplanation) {
       setSelectedAnswer(answer);
+      console.log('Selected answer set to:', answer);
     }
   };
 
@@ -534,9 +536,20 @@ export default function PLAB1New() {
                         : 'border-gray-200 bg-white hover:border-gray-300'
                     }`}
                   >
-                    <Label 
-                      htmlFor={`option-${index}`}
-                      className="flex items-center gap-3 p-4 cursor-pointer w-full"
+                    <button
+                      onClick={() => handleAnswerSelect(index.toString())}
+                      disabled={showExplanation}
+                      className={`w-full flex items-center gap-3 p-4 text-left transition-all duration-200 ${
+                        showExplanation 
+                          ? isCorrectAnswer
+                            ? 'cursor-default'
+                            : isIncorrectlySelected
+                            ? 'cursor-default'
+                            : 'cursor-default'
+                          : selectedAnswer === index.toString()
+                          ? 'cursor-pointer'
+                          : 'cursor-pointer hover:bg-gray-50'
+                      }`}
                     >
                       <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-medium ${
                         showExplanation 
@@ -564,16 +577,7 @@ export default function PLAB1New() {
                       {showExplanation && isIncorrectlySelected && (
                         <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
                       )}
-                      
-                      <input 
-                        type="radio"
-                        value={index.toString()}
-                        checked={selectedAnswer === index.toString()}
-                        onChange={() => handleAnswerSelect(index.toString())}
-                        disabled={showExplanation}
-                        className="sr-only"
-                      />
-                    </Label>
+                    </button>
                   </div>
                 );
               })}
