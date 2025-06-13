@@ -951,6 +951,13 @@ export default function PLAB1New() {
                 />
               </div>
             )}
+            
+            {/* Educational Disclaimer */}
+            <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <p className="text-xs text-amber-800 font-medium">
+                ⚠️ Educational Disclaimer: This information is for educational purposes only and not a substitute for professional medical advice.
+              </p>
+            </div>
           </div>
         </CardHeader>
         <CardContent>

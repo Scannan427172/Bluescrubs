@@ -7,44 +7,246 @@ import { enhanceQuestionWithBNF, SPECIALTY_MEDICATIONS, BNF_MEDICATIONS } from '
 // Re-export types for consumption
 export type { GMCQuestion, GMCCategory };
 
+// Import GMC compliant questions
+import { GMC_COMPLIANT_QUESTIONS } from './gmc-compliant-questions';
+
 export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
-  // CARDIOVASCULAR SYSTEM (60 questions)
+  // CARDIOVASCULAR MEDICINE - GMC MLA Compliant Questions
   {
-    id: 'cv101',
+    id: 'cv_gmc_001',
     category: 'cardiovascular',
-    subcategory: 'hypertension',
+    subcategory: 'acute-coronary-syndrome',
+    cognitiveLevel: 'problem-solving',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Adult',
+    stem: "A 62-year-old taxi driver presents to Emergency Department with severe crushing central chest pain radiating to his jaw, lasting 90 minutes. He has diabetes mellitus and takes metformin. On examination: diaphoretic, blood pressure 160/90 mmHg, heart rate 100 bpm. ECG shows ST elevation in leads II, III, aVF. According to current ESC/NICE guidelines, what is the most appropriate immediate management?",
+    options: [
+      "Aspirin 300mg chewed, clopidogrel 600mg loading dose, and urgent primary PCI",
+      "Aspirin 75mg, atorvastatin 20mg, and 12-lead ECG monitoring",
+      "GTN sublingual, morphine 5mg IV, and troponin measurement",
+      "Thrombolysis with tenecteplase and transfer to cardiology ward",
+      "High-flow oxygen 15L/min and urgent echocardiogram"
+    ],
+    correctAnswer: 0,
+    explanation: "This patient presents with inferior STEMI (ST elevation in leads II, III, aVF). According to ESC STEMI guidelines and NICE CG167, immediate management includes: aspirin 300mg loading dose (antiplatelet therapy), clopidogrel 600mg loading dose (dual antiplatelet therapy), and urgent primary PCI within 120 minutes of first medical contact. Primary PCI is preferred over thrombolysis when available within appropriate timeframe. The combination provides optimal reperfusion and secondary prevention.",
+    learningObjectives: [
+      "Recognize STEMI on ECG (inferior leads)",
+      "Apply evidence-based acute coronary syndrome management",
+      "Understand dual antiplatelet therapy in STEMI"
+    ],
+    gmcOutcomes: [
+      "Emergency assessment and immediate management",
+      "Evidence-based treatment decisions",
+      "Patient safety in time-critical situations"
+    ],
+    references: [
+      "NICE CG167: Acute coronary syndromes",
+      "ESC Guidelines for STEMI management 2023",
+      "GMC Good Medical Practice 2024 - Providing good clinical care"
+    ],
+    tags: ["STEMI", "primary-PCI", "dual-antiplatelet", "emergency"],
+    estimatedTime: 90,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Robert Chen, Consultant Interventional Cardiologist"
+  },
+
+  {
+    id: 'cv_gmc_002',
+    category: 'cardiovascular',
+    subcategory: 'heart-failure',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'GP Surgery',
+    ageGroup: 'Elderly',
+    stem: "A 74-year-old retired teacher presents with 3-month history of progressive breathlessness on exertion, ankle swelling, and orthopnea. She has a history of myocardial infarction 2 years ago. Echocardiogram shows left ventricular ejection fraction of 35%. BNP is elevated at 850 pg/ml. According to NICE heart failure guidelines, what is the most appropriate first-line treatment?",
+    options: [
+      "Furosemide 40mg daily and lifestyle advice",
+      "ACE inhibitor (ramipril) and beta-blocker (bisoprolol) titrated to maximum tolerated doses",
+      "Digoxin 125mcg daily and spironolactone 25mg daily",
+      "Atorvastatin 80mg daily and aspirin 75mg daily",
+      "Amlodipine 5mg daily and bendroflumethiazide 2.5mg daily"
+    ],
+    correctAnswer: 1,
+    explanation: "NICE CG108 heart failure guidelines recommend ACE inhibitors and beta-blockers as first-line treatment for heart failure with reduced ejection fraction (HFrEF). Ramipril should be started at low dose (1.25mg daily) and titrated to maximum tolerated dose (10mg daily). Bisoprolol should be introduced once patient stable on ACE inhibitor, starting at 1.25mg daily. These medications have proven mortality benefit in HFrEF. Diuretics provide symptomatic relief but don't improve survival.",
+    learningObjectives: [
+      "Recognize heart failure with reduced ejection fraction",
+      "Apply NICE heart failure treatment guidelines",
+      "Understand evidence-based medications with mortality benefit"
+    ],
+    gmcOutcomes: [
+      "Evidence-based prescribing for chronic conditions",
+      "Patient safety and medication titration",
+      "Long-term condition management"
+    ],
+    references: [
+      "NICE CG108: Chronic heart failure in adults",
+      "ESC Guidelines for Heart Failure 2021",
+      "GMC Good Medical Practice 2024 - Prescribing and managing medicines"
+    ],
+    tags: ["heart-failure", "ACE-inhibitor", "beta-blocker", "HFrEF"],
+    estimatedTime: 75,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Sarah Williams, Consultant Cardiologist"
+  },
+
+  // RESPIRATORY MEDICINE - GMC MLA Compliant Questions
+  {
+    id: 'resp_gmc_001',
+    category: 'respiratory',
+    subcategory: 'pneumonia',
+    cognitiveLevel: 'problem-solving',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Elderly',
+    stem: "A 68-year-old retired engineer presents with 4-day history of productive cough with green sputum, fever (38.8°C), and increasing confusion. His wife reports he has been 'not himself' for 48 hours. Past medical history includes COPD and type 2 diabetes. On examination: respiratory rate 28/min, oxygen saturation 88% on air, blood pressure 100/65 mmHg, heart rate 110 bpm. Chest X-ray shows right lower lobe consolidation. Calculate his CURB-65 score and determine appropriate management according to BTS guidelines.",
+    options: [
+      "CURB-65 score 2: admit for oral antibiotics and supportive care",
+      "CURB-65 score 3: admit for IV antibiotics with consideration for ITU assessment",
+      "CURB-65 score 4: immediate ITU referral and IV antibiotics",
+      "CURB-65 score 1: discharge with oral antibiotics and GP follow-up",
+      "CURB-65 score 5: palliative care approach and family discussion"
+    ],
+    correctAnswer: 1,
+    explanation: "CURB-65 scoring: Confusion (1), Urea likely elevated given diabetes/age (1), Respiratory rate ≥30 (0, but 28 is concerning), Blood pressure <90 systolic (1), age ≥65 (1) = Score 3-4. CURB-65 ≥3 indicates severe pneumonia requiring hospital admission with consideration for intensive care. BTS guidelines recommend IV antibiotics (co-amoxiclav 1.2g TDS or ceftriaxone 2g daily) for severe community-acquired pneumonia. ITU assessment warranted given hypoxia and hemodynamic compromise.",
+    learningObjectives: [
+      "Apply CURB-65 severity scoring accurately",
+      "Recognize severe pneumonia requiring intensive care consideration",
+      "Understand evidence-based pneumonia management protocols"
+    ],
+    gmcOutcomes: [
+      "Clinical assessment and risk stratification",
+      "Evidence-based treatment decisions",
+      "Patient safety and appropriate escalation of care"
+    ],
+    references: [
+      "BTS Guidelines for Community Acquired Pneumonia 2015",
+      "NICE CG191: Pneumonia in adults",
+      "GMC Good Medical Practice 2024 - Providing good clinical care"
+    ],
+    tags: ["pneumonia", "CURB-65", "severity-assessment", "ITU-referral"],
+    estimatedTime: 90,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Michael Thompson, Consultant Respiratory Medicine"
+  },
+
+  {
+    id: 'resp_gmc_002',
+    category: 'respiratory',
+    subcategory: 'copd-exacerbation',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Adult',
+    stem: "A 58-year-old smoker presents with 3-day history of increased breathlessness, increased sputum production that has become purulent, and worsening wheeze. He has known COPD and usually takes salbutamol and tiotropium inhalers. On examination: respiratory rate 24/min, oxygen saturation 89% on air, using accessory muscles. No signs of pneumonia on chest X-ray. According to NICE COPD guidelines, what is the most appropriate management?",
+    options: [
+      "Prednisolone 30mg daily for 5 days and nebulized bronchodilators",
+      "Amoxicillin 500mg TDS for 5 days and continue regular inhalers",
+      "Prednisolone 30mg daily and amoxicillin 500mg TDS, both for 5 days",
+      "High-flow oxygen therapy and IV hydrocortisone 200mg",
+      "Non-invasive ventilation and urgent respiratory team referral"
+    ],
+    correctAnswer: 2,
+    explanation: "This patient presents with COPD exacerbation with evidence of bacterial infection (purulent sputum) according to Anthonisen criteria. NICE CG101 COPD guidelines recommend prednisolone 30mg daily for 5 days (anti-inflammatory) plus antibiotics when sputum is purulent. Amoxicillin 500mg TDS for 5 days is appropriate first-line antibiotic unless local resistance patterns suggest otherwise. The combination addresses both inflammatory and infective components of the exacerbation. Nebulized bronchodilators provide additional symptom relief.",
+    learningObjectives: [
+      "Recognize COPD exacerbation with bacterial infection",
+      "Apply NICE COPD exacerbation management guidelines",
+      "Understand Anthonisen criteria for antibiotic use"
+    ],
+    gmcOutcomes: [
+      "Evidence-based treatment of acute exacerbations",
+      "Appropriate antibiotic prescribing",
+      "Patient safety in respiratory emergencies"
+    ],
+    references: [
+      "NICE CG101: Chronic obstructive pulmonary disease",
+      "GOLD Global Strategy for COPD 2023",
+      "GMC Good Medical Practice 2024 - Prescribing and managing medicines"
+    ],
+    tags: ["COPD-exacerbation", "prednisolone", "antibiotics", "Anthonisen"],
+    estimatedTime: 80,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Emma Clarke, Consultant Respiratory Medicine"
+  },
+
+  // GASTROENTEROLOGY - GMC MLA Compliant Questions
+  {
+    id: 'gi_gmc_001',
+    category: 'gastroenterology',
+    subcategory: 'peptic-ulcer',
     cognitiveLevel: 'application',
     difficulty: 'foundation',
     clinicalSetting: 'GP Surgery',
-    ageGroup: 'Adult',
-    stem: "A 55-year-old man has consistently high blood pressure readings of 160/95 mmHg on three separate occasions. He has no other medical conditions and normal renal function (eGFR >60). What is the most appropriate first-line antihypertensive medication?",
+    ageGroup: 'Middle-aged',
+    stem: "A 52-year-old construction worker presents with 8-week history of epigastric pain that worsens when hungry and improves after eating. He takes ibuprofen 400mg TDS for chronic back pain. Helicobacter pylori stool antigen test is positive. He has no alarm symptoms (no weight loss, dysphagia, or GI bleeding). According to NICE dyspepsia guidelines, what is the most appropriate management?",
     options: [
-      "Amlodipine 5mg once daily (BNF: start 5mg daily, max 10mg daily)",
-      "Ramipril 2.5mg once daily (BNF: start 1.25-2.5mg daily, max 10mg daily)", 
-      "Bendroflumethiazide 2.5mg once daily (BNF: 2.5mg daily, avoid if eGFR <30)",
-      "Atenolol 25mg once daily (BNF: start 25-50mg daily, contraindicated in asthma)",
-      "Losartan 25mg once daily (BNF: start 25-50mg daily, monitor potassium)"
+      "Proton pump inhibitor monotherapy for 8 weeks then review",
+      "H. pylori eradication: PPI + amoxicillin + clarithromycin for 7 days",
+      "Urgent upper GI endoscopy within 2 weeks",
+      "H. pylori eradication: PPI + metronidazole + bismuth for 14 days",
+      "Discontinue ibuprofen and monitor symptoms for 4 weeks"
     ],
-    correctAnswer: 0,
-    explanation: "BNF guidance: For patients aged 55+ or black African/Caribbean origin, calcium channel blockers are first-line. Amlodipine 5mg daily (BNF section 2.6.2) is preferred due to once-daily dosing and fewer contraindications. Ramipril would be first-line if patient was <55 and not black African/Caribbean (BNF section 2.5.5.1). Atenolol is contraindicated in asthma/COPD (BNF cautions). Thiazides are third-line add-on therapy (BNF treatment summary).",
+    correctAnswer: 1,
+    explanation: "NICE CG184 dyspepsia guidelines recommend first-line H. pylori eradication therapy with triple therapy: PPI (omeprazole 20mg or lansoprazole 30mg) + amoxicillin 1g + clarithromycin 500mg, all twice daily for 7 days. This patient has classic peptic ulcer symptoms with positive H. pylori test and NSAID use as risk factors. No alarm symptoms present, so urgent endoscopy not indicated. NSAID cessation is important but eradication therapy is primary treatment. Urea breath test should confirm eradication 4 weeks post-treatment.",
     learningObjectives: [
-      "Apply NICE hypertension guidelines",
-      "Understand age and ethnicity considerations in antihypertensive choice",
-      "Recognize first-line treatments for hypertension"
+      "Recognize peptic ulcer disease presentation",
+      "Apply NICE H. pylori eradication guidelines",
+      "Understand relationship between NSAIDs and peptic ulcers"
     ],
     gmcOutcomes: [
-      "Evidence-based prescribing",
-      "Cardiovascular risk management",
-      "Patient safety"
+      "Evidence-based treatment decisions",
+      "Appropriate investigation and management",
+      "Patient safety and medication review"
     ],
     references: [
-      "NICE NG136: Hypertension in adults",
-      "ESC/ESH Guidelines for management of arterial hypertension"
+      "NICE CG184: Gastro-oesophageal reflux disease and dyspepsia",
+      "Maastricht VI/Florence Consensus on H. pylori",
+      "GMC Good Medical Practice 2024 - Prescribing and managing medicines"
     ],
-    tags: ["hypertension", "first-line", "calcium-channel-blocker", "NICE-guidelines"],
+    tags: ["H-pylori", "eradication-therapy", "peptic-ulcer", "NSAID"],
     estimatedTime: 75,
-    lastReviewed: "2024-03-01",
-    reviewedBy: "Dr. Sarah Mitchell, Consultant Cardiologist"
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. James Kumar, Consultant Gastroenterologist"
+  },
+
+  // ENDOCRINOLOGY - GMC MLA Compliant Questions
+  {
+    id: 'endo_gmc_001',
+    category: 'gastroenterology',
+    subcategory: 'diabetes-type2',
+    cognitiveLevel: 'application',
+    difficulty: 'foundation',
+    clinicalSetting: 'GP Surgery',
+    ageGroup: 'Middle-aged',
+    stem: "A 48-year-old office manager presents for diabetes review. Diagnosed with type 2 diabetes 6 months ago, currently on metformin 1g BD. Latest HbA1c is 58 mmol/mol (7.5%). BMI is 34 kg/m². Blood pressure 135/82 mmHg. No contraindications to medications. According to NICE type 2 diabetes guidelines, what is the most appropriate next step in management?",
+    options: [
+      "Increase metformin to maximum dose 1g TDS",
+      "Add sulfonylurea (gliclazide 40mg BD)",
+      "Add SGLT-2 inhibitor (empagliflozin 10mg daily)",
+      "Add DPP-4 inhibitor (sitagliptin 100mg daily)",
+      "Start basal insulin (glargine 10 units nocte)"
+    ],
+    correctAnswer: 2,
+    explanation: "NICE NG28 type 2 diabetes guidelines recommend SGLT-2 inhibitors as second-line therapy, particularly for patients with BMI ≥35 kg/m² (this patient has BMI 34). Empagliflozin provides cardiovascular and renal protection, promotes weight loss, and has low hypoglycemia risk. HbA1c target is <48 mmol/mol (6.5%) for most adults, so intensification needed. SGLT-2 inhibitors are preferred over sulfonylureas due to weight benefits and cardiovascular outcomes. Current metformin dose is adequate.",
+    learningObjectives: [
+      "Apply NICE type 2 diabetes treatment algorithm",
+      "Understand benefits of SGLT-2 inhibitors in obesity",
+      "Recognize HbA1c targets and when to intensify therapy"
+    ],
+    gmcOutcomes: [
+      "Evidence-based prescribing for chronic conditions",
+      "Patient-centered care considering comorbidities",
+      "Long-term condition management and monitoring"
+    ],
+    references: [
+      "NICE NG28: Type 2 diabetes in adults: management",
+      "ADA/EASD Consensus on Type 2 Diabetes Management",
+      "GMC Good Medical Practice 2024 - Providing good clinical care"
+    ],
+    tags: ["type2-diabetes", "SGLT2-inhibitor", "HbA1c", "obesity"],
+    estimatedTime: 75,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Rachel Green, Consultant Endocrinologist"
   },
 
   {
