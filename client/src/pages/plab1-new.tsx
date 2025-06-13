@@ -857,23 +857,21 @@ export default function PLAB1New() {
                   <div className="text-sm text-blue-800 space-y-2">
                     {currentQuestion.references && currentQuestion.references.length > 0 ? (
                       currentQuestion.references.map((reference: any, index: number) => (
-                        <div key={index} className="border-l-2 border-blue-200 pl-3 mb-3">
-                          <p className="text-blue-700 leading-relaxed mb-2">
+                        <div key={index} className="bg-white border border-blue-200 rounded-lg p-3 mb-3">
+                          <p className="text-blue-700 leading-relaxed mb-3 text-sm">
                             {typeof reference === 'string' ? reference : reference.text}
                           </p>
-                          {typeof reference === 'object' && reference.url ? (
+                          {typeof reference === 'object' && reference.url && (
                             <a 
                               href={reference.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-blue-600 hover:text-blue-800 underline text-sm inline-flex items-center gap-1 font-medium"
+                              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm inline-flex items-center gap-2 font-medium transition-colors"
                             >
                               <ExternalLink className="w-4 h-4" />
-                              View Source
+                              View Full Guidelines
                             </a>
-                          ) : typeof reference === 'string' ? (
-                            <div className="text-gray-500 text-xs">No direct link available</div>
-                          ) : null}
+                          )}
                         </div>
                       ))
                     ) : (
