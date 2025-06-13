@@ -86,9 +86,18 @@ export function generateSimpleQuestion(
         correctAnswer: 1,
         explanation: "CT chest with contrast is the next appropriate step to characterize the lung mass, assess for mediastinal involvement, and guide further management including staging and biopsy approach.",
         references: [
-          "NICE NG12: Suspected cancer recognition and referral - Section 1.3.1 'Offer urgent CT chest for adults with chest X-ray findings that suggest lung cancer'",
-          "British Thoracic Society Guidelines: 'CT chest with contrast is first-line imaging for suspected lung cancer to assess tumor size, location, and mediastinal involvement'",
-          "NCCN Lung Cancer Guidelines v3.2023: 'Contrast-enhanced CT chest recommended for initial staging of suspected lung malignancy'"
+          {
+            text: "NICE NG12: Suspected cancer recognition and referral - Section 1.3.1 'Offer urgent CT chest for adults with chest X-ray findings that suggest lung cancer'",
+            url: "https://www.nice.org.uk/guidance/ng12"
+          },
+          {
+            text: "British Thoracic Society Guidelines: 'CT chest with contrast is first-line imaging for suspected lung cancer to assess tumor size, location, and mediastinal involvement'",
+            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/"
+          },
+          {
+            text: "NCCN Lung Cancer Guidelines v3.2023: 'Contrast-enhanced CT chest recommended for initial staging of suspected lung malignancy'",
+            url: "https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1450"
+          }
         ]
       },
       {
