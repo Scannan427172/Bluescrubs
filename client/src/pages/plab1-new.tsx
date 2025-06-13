@@ -709,29 +709,33 @@ export default function PLAB1New() {
         </div>
 
         {/* Question Translation Toggle */}
-        <div className="flex justify-end mb-4">
-          <div className="flex items-center gap-3 bg-white rounded-lg shadow-sm p-3 border min-h-[48px]">
-            <Languages className="w-4 h-4 text-blue-600 flex-shrink-0" />
-            <div className="flex items-center gap-2">
+        <div className="flex justify-center mb-4">
+          <div className="bg-white rounded-lg shadow-sm border p-4 w-full max-w-md">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Languages className="w-5 h-5 text-blue-600" />
+                <span className="text-sm font-medium text-gray-700">Translation Mode</span>
+              </div>
               <Switch
                 checked={translateQuestions}
                 onCheckedChange={setTranslateQuestions}
                 className="data-[state=checked]:bg-blue-600"
               />
-              <span className="text-sm text-gray-700 whitespace-nowrap">Translate Questions</span>
             </div>
             {translateQuestions && (
-              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                <SelectTrigger className="w-28 h-9 text-xs border-blue-200 ml-2">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="en">🇬🇧 EN</SelectItem>
-                  <SelectItem value="ar">🇸🇦 AR</SelectItem>
-                  <SelectItem value="hi">🇮🇳 HI</SelectItem>
-                  <SelectItem value="ur">🇵🇰 UR</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="mt-3 pt-3 border-t">
+                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">🇬🇧 English</SelectItem>
+                    <SelectItem value="ar">🇸🇦 Arabic</SelectItem>
+                    <SelectItem value="hi">🇮🇳 Hindi</SelectItem>
+                    <SelectItem value="ur">🇵🇰 Urdu</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             )}
           </div>
         </div>
