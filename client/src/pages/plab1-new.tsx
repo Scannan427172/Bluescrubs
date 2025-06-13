@@ -742,7 +742,7 @@ export default function PLAB1New() {
                       
                       <div className="flex-1">
                         <span className="text-base leading-relaxed text-gray-800">
-                          {option}
+                          {translateMedicalContent(option)}
                         </span>
                       </div>
                       
@@ -789,7 +789,7 @@ export default function PLAB1New() {
                   <div className={`mt-3 text-base leading-relaxed ${
                     isCorrect ? 'text-green-700' : 'text-red-700'
                   }`}>
-                    {currentQuestion.explanation || 'Clinical explanation provided for educational purposes.'}
+                    {translateMedicalContent(currentQuestion.explanation || 'Clinical explanation provided for educational purposes.')}
                   </div>
                 </div>
               </div>
