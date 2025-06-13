@@ -4,6 +4,7 @@ import { questionGenerator } from "./ai-question-generator";
 import { communitySystem } from "./community-contribution";
 import { analyzeVideoPerformance } from "./ai-analysis";
 import { storage } from "./storage";
+import { askMedicalAI } from "./ask-ai-api";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -71,6 +72,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Translation error:", error);
       res.status(500).json({ error: "Translation service unavailable" });
+    }
+  });
+
+  // Ask AI Medical Questions Route
+  app.post("/api/ask-ai", async (req, res) => {
+    try {
+      const { question, context } = req.body;
+      
+      if (!question || typeof question !== 'string' || question.trim().length === 0) {
+        return res.status(400).json({ error: "Valid question is required" });
+      }
+
+      if (question.length > 500) {
+        return res.status(400).json({ error: "Question too long. Maximum 500 characters." });
+      }
+
+      const response = await askMedicalAI(question.trim());
+      res.json(response);
+
+    } catch (error) {
+      console.error("Ask AI error:", error);
+      const errorMessage = error.message || "Unable to process question";
+      res.status(500).json({ error: errorMessage });
     }
   });
   

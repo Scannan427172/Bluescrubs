@@ -15,6 +15,7 @@ import InteractiveFlashcards from "@/pages/interactive-flashcards";
 import ClinicalGuides from "@/pages/clinical-guides";
 import GlobalScoreboard from "@/pages/global-scoreboard";
 import Premium from "@/pages/premium";
+import AskAI from "@/pages/ask-ai";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -100,6 +101,17 @@ function Router() {
           </div>
         </div>
       </Route>
+
+      <Route path="/ask-ai">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <AskAI />
+          </div>
+          <Footer />
+        </div>
+      </Route>
+
       <Route component={NotFound} />
     </Switch>
   );
