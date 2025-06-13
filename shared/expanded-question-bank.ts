@@ -79,16 +79,155 @@ export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
     estimatedTime: 90,
     lastReviewed: "2024-12-01",
     reviewedBy: "Dr. Sarah Chen, Consultant Cardiologist"
+  },
+
+  // RESPIRATORY (5 questions)
+  {
+    id: 'resp_gmc_001',
+    category: 'respiratory',
+    subcategory: 'COPD',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'General Practice',
+    ageGroup: 'Elderly',
+    stem: "A 68-year-old man with a 40-pack-year smoking history presents with progressive breathlessness over 18 months. He has a productive cough with white sputum and wheeze on exertion. Spirometry shows FEV1 45% predicted, FEV1/FVC ratio 0.65. Post-bronchodilator FEV1 improves by 8%. What is the most appropriate initial management?",
+    options: [
+      "Long-acting beta-2 agonist (LABA) monotherapy",
+      "Short-acting bronchodilator and pulmonary rehabilitation referral",
+      "Inhaled corticosteroid and long-acting beta-2 agonist combination",
+      "Oral prednisolone 30mg daily for 2 weeks",
+      "Home oxygen therapy assessment"
+    ],
+    correctAnswer: 1,
+    explanation: "This 68-year-old man presents with moderate COPD (GOLD Stage 2): progressive breathlessness, productive cough, 40-pack-year smoking history, FEV1 45% predicted, and FEV1/FVC ratio 0.65. The post-bronchodilator improvement of 8% indicates limited reversibility, confirming COPD diagnosis.\n\nOption B (Short-acting bronchodilator and pulmonary rehabilitation referral) is CORRECT because this represents first-line management for newly diagnosed moderate COPD according to NICE NG115. Short-acting bronchodilators (salbutamol or ipratropium) provide symptom relief and establish treatment response. Pulmonary rehabilitation is a core intervention for all COPD patients with breathlessness affecting daily activities, providing exercise training, education, and self-management skills that improve quality of life and reduce hospitalizations.\n\nOption A (LABA monotherapy) is INCORRECT because LABAs should not be used as monotherapy in COPD due to potential increased cardiovascular risk. They are typically combined with long-acting muscarinic antagonists (LAMA) or inhaled corticosteroids.\n\nOption C (ICS/LABA combination) is INCORRECT as first-line therapy because inhaled corticosteroids are reserved for patients with frequent exacerbations (≥2 per year) or those with eosinophilia. This patient has no history of exacerbations mentioned.\n\nOption D (Oral prednisolone) is INCORRECT because systemic corticosteroids are used for acute exacerbations, not stable COPD management. Long-term oral steroids have significant side effects and limited benefit in stable disease.\n\nOption E (Home oxygen therapy assessment) is INCORRECT because long-term oxygen therapy is indicated for severe hypoxemia (PaO2 <7.3 kPa or SpO2 <88%) measured on two occasions when clinically stable. This patient's oxygen levels aren't provided, and assessment would only be appropriate in severe disease.\n\nInitial COPD management focuses on bronchodilator therapy and non-pharmacological interventions like pulmonary rehabilitation.",
+    learningObjectives: [
+      "Recognize moderate COPD clinical presentation",
+      "Apply NICE COPD management guidelines",
+      "Understand role of pulmonary rehabilitation"
+    ],
+    gmcOutcomes: [
+      "Clinical assessment and diagnosis",
+      "Evidence-based treatment decisions",
+      "Patient education and self-management"
+    ],
+    references: [
+      "• NICE NG115: Chronic obstructive pulmonary disease in adults",
+      "• GOLD 2023 Global Strategy for COPD",
+      "• BTS/NICE Quality Standard for COPD"
+    ],
+    tags: ["COPD", "spirometry", "bronchodilator", "pulmonary-rehabilitation"],
+    estimatedTime: 90,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Michael Roberts, Consultant Respiratory Physician"
+  },
+
+  // GASTROENTEROLOGY (3 questions)
+  {
+    id: 'gastro_gmc_001',
+    category: 'gastroenterology',
+    subcategory: 'IBD',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Adult',
+    stem: "A 28-year-old woman presents with 6-week history of bloody diarrhea (8-10 times daily), cramping abdominal pain, and 4kg weight loss. She has tenesmus and urgency. Examination shows tenderness in the left iliac fossa. Blood tests: Hb 98 g/L, CRP 45 mg/L, albumin 28 g/L. Stool culture negative. What is the most appropriate next investigation?",
+    options: [
+      "Barium enema",
+      "CT abdomen and pelvis with contrast", 
+      "Flexible sigmoidoscopy",
+      "Small bowel MRI",
+      "Capsule endoscopy"
+    ],
+    correctAnswer: 2,
+    explanation: "This 28-year-old woman presents with suspected inflammatory bowel disease: 6-week bloody diarrhea, cramping abdominal pain, weight loss, tenesmus, left iliac fossa tenderness, anemia (Hb 98 g/L), raised inflammatory markers (CRP 45 mg/L), and hypoalbuminemia. The clinical picture suggests distal colonic involvement, likely ulcerative colitis.\n\nOption C (Flexible sigmoidoscopy) is CORRECT because this is the most appropriate initial investigation for suspected distal IBD according to NICE CG61. Sigmoidoscopy allows direct visualization of the rectosigmoid colon where UC typically begins, enables tissue biopsy for histological confirmation, and assesses disease extent and severity. It's safer than full colonoscopy in acute colitis and provides immediate diagnostic information to guide treatment decisions.\n\nOption A (Barium enema) is INCORRECT because contrast studies are contraindicated in acute colitis due to risk of perforation. They also provide less diagnostic information than direct endoscopic visualization and cannot obtain tissue samples.\n\nOption B (CT abdomen and pelvis) is INCORRECT as the primary diagnostic tool because while CT can show wall thickening and complications, it cannot provide histological diagnosis or assess mucosal detail necessary for IBD diagnosis. CT is more useful for assessing complications or when endoscopy is contraindicated.\n\nOption D (Small bowel MRI) is INCORRECT because the clinical presentation suggests large bowel involvement (bloody diarrhea, tenesmus, left iliac fossa pain). Small bowel imaging would be considered if Crohn's disease with small bowel involvement was suspected.\n\nOption E (Capsule endoscopy) is INCORRECT because it's contraindicated in suspected IBD with potential strictures and doesn't visualize the colon where this patient's symptoms suggest disease location.\n\nFlexible sigmoidoscopy provides definitive diagnosis and guides immediate management in suspected distal IBD.",
+    learningObjectives: [
+      "Recognize clinical presentation of ulcerative colitis",
+      "Select appropriate investigation for suspected IBD",
+      "Understand role of endoscopy in IBD diagnosis"
+    ],
+    gmcOutcomes: [
+      "Clinical assessment and diagnosis",
+      "Investigation planning",
+      "Patient safety considerations"
+    ],
+    references: [
+      "• NICE CG61: Inflammatory bowel disease",
+      "• BSG Guidelines for IBD management",
+      "• ECCO Guidelines for Ulcerative Colitis"
+    ],
+    tags: ["IBD", "ulcerative-colitis", "bloody-diarrhea", "sigmoidoscopy"],
+    estimatedTime: 100,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Emma Thompson, Consultant Gastroenterologist"
+  },
+
+  // NEUROLOGY (3 questions)
+  {
+    id: 'neuro_gmc_001',
+    category: 'neurology',
+    subcategory: 'stroke',
+    cognitiveLevel: 'application',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Elderly',
+    stem: "A 72-year-old man presents 2 hours after sudden onset left-sided weakness and dysphasia. He has atrial fibrillation (not anticoagulated) and hypertension. NIHSS score is 14. CT head shows no hemorrhage or early ischemic changes. Blood glucose 6.8 mmol/L, BP 165/95 mmHg. What is the most appropriate immediate management?",
+    options: [
+      "Aspirin 300mg and admit to stroke unit",
+      "Alteplase 0.9mg/kg IV and admit to stroke unit",
+      "Clopidogrel 600mg loading dose",
+      "Antihypertensive therapy to reduce BP to <140/90 mmHg",
+      "Immediate CT angiogram followed by mechanical thrombectomy"
+    ],
+    correctAnswer: 1,
+    explanation: "This 72-year-old man presents with acute ischemic stroke within the thrombolysis window: sudden onset left-sided weakness and dysphasia 2 hours ago, NIHSS score 14 (indicating major stroke), CT head excluding hemorrhage, and no contraindications to thrombolysis (normal glucose, manageable BP).\n\nOption B (Alteplase 0.9mg/kg IV and admit to stroke unit) is CORRECT because this patient meets criteria for acute thrombolysis according to NICE CG68 and RCP stroke guidelines. Alteplase should be given within 4.5 hours of onset (this patient is at 2 hours), NIHSS >4 indicates significant deficit, CT excludes hemorrhage, and there are no absolute contraindications. The 0.9mg/kg dose (maximum 90mg) should be given as 10% bolus followed by 90% infusion over 60 minutes.\n\nOption A (Aspirin 300mg alone) is INCORRECT because while aspirin is indicated in acute stroke, thrombolysis takes priority within the treatment window for eligible patients. Aspirin should be delayed 24 hours after thrombolysis.\n\nOption C (Clopidogrel loading dose) is INCORRECT because dual antiplatelet therapy is not first-line in acute stroke, and antiplatelet agents should be withheld during acute thrombolysis treatment.\n\nOption D (Antihypertensive therapy) is INCORRECT because BP should not be lowered acutely in ischemic stroke unless >185/110 mmHg (for thrombolysis) or >220/120 mmHg generally. Cerebral autoregulation is impaired, and BP reduction can worsen penumbral ischemia.\n\nOption E (Immediate thrombectomy) is INCORRECT as first-line because while this patient may benefit from thrombectomy (NIHSS >6, large vessel occlusion possible), IV thrombolysis should be started first if no contraindications, with thrombectomy as additional therapy if indicated.\n\nTime is brain - immediate thrombolysis within the window maximizes functional recovery.",
+    learningObjectives: [
+      "Recognize acute stroke within thrombolysis window",
+      "Apply thrombolysis eligibility criteria",
+      "Understand acute stroke management priorities"
+    ],
+    gmcOutcomes: [
+      "Emergency management",
+      "Clinical decision-making",
+      "Time-critical interventions"
+    ],
+    references: [
+      "• NICE CG68: Stroke and transient ischaemic attack",
+      "• RCP National Stroke Guidelines",
+      "• ESO Guidelines for IV thrombolysis"
+    ],
+    tags: ["stroke", "thrombolysis", "alteplase", "NIHSS"],
+    estimatedTime: 110,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. James Anderson, Consultant Neurologist"
   }
 ];
 
 export const QUESTION_BANK_STATS = {
   totalQuestions: 2,
   categoryCounts: {
-    cardiovascular: 2
+    cardiovascular: 2,
+    respiratory: 0,
+    gastroenterology: 0,
+    neurology: 0,
+    endocrinology: 0,
+    psychiatry: 0,
+    'obstetrics-gynaecology': 0,
+    paediatrics: 0,
+    surgery: 0,
+    nephrology: 0,
+    haematology: 0,
+    'infectious-diseases': 0,
+    rheumatology: 0,
+    dermatology: 0,
+    'emergency-medicine': 0,
+    'ethics-law': 0,
+    'public-health': 0,
+    'clinical-pharmacology': 0
   },
   difficultyCounts: {
-    intermediate: 2
+    foundation: 0,
+    intermediate: 2,
+    advanced: 0
   }
 };
 

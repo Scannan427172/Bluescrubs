@@ -286,7 +286,7 @@ export default function PLAB1New() {
   // Calculate question counts by category using expanded question bank stats
   const getQuestionCount = (category: string) => {
     if (category === 'all') return QUESTION_BANK_STATS.totalQuestions;
-    return QUESTION_BANK_STATS.categoryCounts[category] || 0;
+    return (QUESTION_BANK_STATS.categoryCounts as Record<string, number>)[category] || 0;
   };
 
   // Available categories with question counts
@@ -356,9 +356,9 @@ export default function PLAB1New() {
     // Filter questions by category
     let filteredQuestions: GMCQuestion[];
     if (selectedCategory === 'all') {
-      filteredQuestions = [...PRACTICE_QUESTIONS];
+      filteredQuestions = [...EXPANDED_QUESTION_BANK];
     } else {
-      filteredQuestions = PRACTICE_QUESTIONS.filter(q => q.category === selectedCategory);
+      filteredQuestions = EXPANDED_QUESTION_BANK.filter(q => q.category === selectedCategory);
     }
 
     console.log(`Found ${filteredQuestions.length} questions for category ${selectedCategory}`);
