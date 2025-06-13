@@ -2258,12 +2258,12 @@ References: NICE CG186 MS Guidelines, McDonald Criteria 2017 (Ann Neurol 2018;83
             'movement-disorders': `This case demonstrates complex movement disorder requiring specialist evaluation. The motor symptoms, onset pattern, and associated features guide diagnosis and treatment selection based on current movement disorder society guidelines.`,
             'multiple-sclerosis': `This presentation suggests inflammatory demyelinating disease requiring systematic neurological evaluation. The clinical features, temporal pattern, and anatomical distribution guide diagnosis according to McDonald criteria and determine appropriate disease-modifying therapy.`
           };
-          return explanationTemplates['stroke'] + ` Management requires multidisciplinary approach with neurology specialist input, appropriate investigation including neuroimaging and relevant biomarkers, and evidence-based treatment protocols. Regular monitoring and adjustment of therapy optimize long-term outcomes. References include recent neurological society guidelines, major clinical trials, and current best practice recommendations.`;
+          return explanationTemplates['stroke'] + ` Management requires multidisciplinary approach with neurology specialist input, appropriate investigation including neuroimaging and relevant biomarkers, and evidence-based treatment protocols. Regular monitoring and adjustment of therapy optimize long-term outcomes.`;
         }
       })(),
       learningObjectives: ["Advanced neurological examination", "Complex case analysis", "Specialist protocols"],
       gmcOutcomes: ["Neurological expertise", "Diagnostic reasoning", "Patient care"],
-      references: ["ABN Guidelines", "AAN Guidelines", "NICE Neurology"],
+      references: ["ABN Guidelines", "AAN Guidelines", "NICE Neurology", "Recent neurological society guidelines, major clinical trials, and current best practice recommendations"],
       tags: ["neurology", "advanced", "complex"],
       estimatedTime: 105 + (i % 40),
       lastReviewed: "2024-03-01",
