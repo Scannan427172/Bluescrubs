@@ -156,6 +156,10 @@ export async function generateSpecialtyQuestionSet(
       subcategories: ['heart-failure', 'arrhythmias', 'ischemic-heart-disease', 'valvular-disease', 'hypertension'],
       difficulties: ['foundation', 'intermediate', 'advanced'] as const
     },
+    cardiology: {
+      subcategories: ['heart-failure', 'arrhythmias', 'ischemic-heart-disease', 'valvular-disease', 'hypertension'],
+      difficulties: ['foundation', 'intermediate', 'advanced'] as const
+    },
     respiratory: {
       subcategories: ['asthma', 'copd', 'pneumonia', 'pulmonary-embolism', 'lung-cancer'],
       difficulties: ['foundation', 'intermediate', 'advanced'] as const
