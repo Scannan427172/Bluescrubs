@@ -286,7 +286,7 @@ export default function PLAB1New() {
   // Calculate question counts by category using expanded question bank stats
   const getQuestionCount = (category: string) => {
     if (category === 'all') return QUESTION_BANK_STATS.totalQuestions;
-    return QUESTION_BANK_STATS.byCategory[category] || 0;
+    return QUESTION_BANK_STATS.categoryCounts[category] || 0;
   };
 
   // Available categories with question counts
