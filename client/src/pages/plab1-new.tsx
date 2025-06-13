@@ -287,7 +287,7 @@ export default function PLAB1New() {
 
   // Calculate question counts - now using AI generation so unlimited questions available
   const getQuestionCount = (category: string) => {
-    return "∞"; // AI-generated questions - unlimited
+    return "AI Generated"; // AI-powered unlimited questions
   };
 
   // Available categories with question counts
@@ -727,7 +727,7 @@ export default function PLAB1New() {
                   <SelectContent>
                     {availableCategories.filter(cat => cat.value !== 'all').map((category) => (
                       <SelectItem key={category.value} value={category.value}>
-                        {category.label} ({category.count} questions)
+                        {category.label} (unlimited {category.count})
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -740,7 +740,7 @@ export default function PLAB1New() {
                     ✅ Currently Selected: <strong className="text-green-900">{availableCategories.find(c => c.value === selectedCategory)?.label}</strong>
                   </p>
                   <p className="text-xs text-green-700 mt-1">
-                    {availableCategories.find(c => c.value === selectedCategory)?.count} questions available for practice
+                    Unlimited AI-generated questions available for practice
                   </p>
                 </div>
               </div>
