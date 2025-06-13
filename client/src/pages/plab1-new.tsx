@@ -1056,6 +1056,23 @@ export default function PLAB1New() {
               <div className="space-y-2 text-sm">
                 {currentQuestion.references.map((reference, index) => {
                   const getReferenceUrl = (ref: string) => {
+                    // NICE Clinical Guidelines - Specific URLs
+                    if (ref.includes('NICE CG186')) return 'https://www.nice.org.uk/guidance/cg186'; // Multiple sclerosis
+                    if (ref.includes('NICE CG150')) return 'https://www.nice.org.uk/guidance/cg150'; // Headaches
+                    if (ref.includes('NICE CG137')) return 'https://www.nice.org.uk/guidance/cg137'; // Epilepsies
+                    if (ref.includes('NICE CG180')) return 'https://www.nice.org.uk/guidance/cg180'; // Atrial fibrillation
+                    if (ref.includes('NICE CG181')) return 'https://www.nice.org.uk/guidance/cg181'; // Cardiovascular disease
+                    if (ref.includes('NICE CG191')) return 'https://www.nice.org.uk/guidance/cg191'; // Pneumonia
+                    if (ref.includes('NICE CG101')) return 'https://www.nice.org.uk/guidance/cg101'; // COPD
+                    
+                    // NICE New Guidelines - Specific URLs  
+                    if (ref.includes('NICE NG217')) return 'https://www.nice.org.uk/guidance/ng217'; // Epilepsy surgery
+                    if (ref.includes('NICE NG204')) return 'https://www.nice.org.uk/guidance/ng204'; // Stroke rehabilitation
+                    if (ref.includes('NICE NG128')) return 'https://www.nice.org.uk/guidance/ng128'; // Stroke and TIA
+                    if (ref.includes('NICE NG59')) return 'https://www.nice.org.uk/guidance/ng59'; // Low back pain
+                    if (ref.includes('NICE NG85')) return 'https://www.nice.org.uk/guidance/ng85'; // Dementia
+                    
+                    // Generic NICE pattern matching
                     if (ref.includes('NICE CG')) {
                       const cgNumber = ref.match(/CG(\d+)/)?.[1];
                       if (cgNumber) return `https://www.nice.org.uk/guidance/cg${cgNumber}`;
@@ -1064,17 +1081,60 @@ export default function PLAB1New() {
                       const ngNumber = ref.match(/NG(\d+)/)?.[1];
                       if (ngNumber) return `https://www.nice.org.uk/guidance/ng${ngNumber}`;
                     }
-                    if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
+                    
+                    // CKS (Clinical Knowledge Summaries) - Specific conditions
+                    if (ref.includes('CKS Epilepsy')) return 'https://cks.nice.org.uk/topics/epilepsy/';
+                    if (ref.includes('CKS Headache')) return 'https://cks.nice.org.uk/topics/headache-assessment/';
+                    if (ref.includes('CKS Stroke')) return 'https://cks.nice.org.uk/topics/stroke-tia/';
+                    if (ref.includes('CKS Dementia')) return 'https://cks.nice.org.uk/topics/dementia/';
+                    if (ref.includes('CKS Parkinson')) return 'https://cks.nice.org.uk/topics/parkinsons-disease/';
+                    if (ref.includes('CKS Multiple sclerosis')) return 'https://cks.nice.org.uk/topics/multiple-sclerosis/';
+                    if (ref.includes('CKS COPD')) return 'https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/';
+                    if (ref.includes('CKS Pneumonia')) return 'https://cks.nice.org.uk/topics/chest-infections-adult/';
+                    if (ref.includes('CKS Asthma')) return 'https://cks.nice.org.uk/topics/asthma/';
+                    if (ref.includes('CKS Heart failure')) return 'https://cks.nice.org.uk/topics/heart-failure-chronic/';
+                    if (ref.includes('CKS Atrial fibrillation')) return 'https://cks.nice.org.uk/topics/atrial-fibrillation/';
+                    if (ref.includes('CKS Hypertension')) return 'https://cks.nice.org.uk/topics/hypertension/';
+                    if (ref.includes('CKS Diabetes')) return 'https://cks.nice.org.uk/topics/diabetes-type-2/';
+                    
+                    // Specific medical organizations with condition-specific URLs
+                    if (ref.includes('ESC Heart Failure')) return 'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Heart-Failure-Guidelines';
+                    if (ref.includes('ESC Atrial Fibrillation')) return 'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Atrial-Fibrillation-Guidelines';
                     if (ref.includes('ESC')) return 'https://www.escardio.org/Guidelines';
+                    
+                    if (ref.includes('BTS Pneumonia')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pneumonia-adults/';
+                    if (ref.includes('BTS COPD')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/copd/';
+                    if (ref.includes('BTS Asthma')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/asthma/';
                     if (ref.includes('BTS')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/';
+                    
+                    if (ref.includes('ILAE Classification')) return 'https://www.ilae.org/guidelines/definition-and-classification';
+                    if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
+                    
+                    if (ref.includes('ABN Multiple Sclerosis')) return 'https://www.theabn.org/page/ProfessionalGuidance/MS';
+                    if (ref.includes('ABN Epilepsy')) return 'https://www.theabn.org/page/ProfessionalGuidance/Epilepsy';
+                    if (ref.includes('ABN Stroke')) return 'https://www.theabn.org/page/ProfessionalGuidance/Stroke';
+                    if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
+                    
+                    // Drug references - specific sections
+                    if (ref.includes('BNF Epilepsy')) return 'https://bnf.nice.org.uk/treatment-summaries/epilepsy/';
+                    if (ref.includes('BNF Cardiovascular')) return 'https://bnf.nice.org.uk/treatment-summaries/cardiovascular-system/';
+                    if (ref.includes('BNF Respiratory')) return 'https://bnf.nice.org.uk/treatment-summaries/respiratory-system/';
                     if (ref.includes('BNF')) return 'https://bnf.nice.org.uk/';
+                    
+                    // Journal articles and specific studies
                     if (ref.includes('NEJM')) return 'https://www.nejm.org/';
                     if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
                     if (ref.includes('BMJ')) return 'https://www.bmj.com/';
+                    
+                    // International organizations
+                    if (ref.includes('WHO Epilepsy')) return 'https://www.who.int/news-room/fact-sheets/detail/epilepsy';
+                    if (ref.includes('WHO Stroke')) return 'https://www.who.int/news-room/fact-sheets/detail/stroke-cerebrovascular-accident';
                     if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
-                    if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
-                    if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
+                    
+                    if (ref.includes('AAN Epilepsy')) return 'https://www.aan.com/Guidelines/home/ByTopic?topicId=15';
                     if (ref.includes('AAN')) return 'https://www.aan.com/Guidelines/';
+                    
+                    // Other medical organizations
                     if (ref.includes('KDIGO')) return 'https://kdigo.org/guidelines/';
                     if (ref.includes('AHA/ACC')) return 'https://www.ahajournals.org/guidelines';
                     if (ref.includes('British Thyroid Association')) return 'https://www.british-thyroid-association.org/guidelines/';
@@ -1086,6 +1146,10 @@ export default function PLAB1New() {
                     if (ref.includes('IDSA')) return 'https://www.idsociety.org/practice-guideline/';
                     if (ref.includes('GOLD')) return 'https://goldcopd.org/2024-gold-report/';
                     if (ref.includes('ERS')) return 'https://ers.app/guidelines/';
+                    
+                    // Fallback for NICE general
+                    if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
+                    
                     return null;
                   };
 
