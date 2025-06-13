@@ -31,6 +31,7 @@ export function Footer() {
               <li><Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
               <li><Link href="/plab1-new" className="hover:text-white transition-colors">PLAB 1</Link></li>
               <li><Link href="/plab2-osce" className="hover:text-white transition-colors">PLAB 2</Link></li>
+              <li><Link href="/ask-ai" className="hover:text-white transition-colors bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-md font-medium">Ask AI Medical Questions</Link></li>
               <li><Link href="/mentors" className="hover:text-white transition-colors">Expert Mentors</Link></li>
               <li><Link href="/premium" className="hover:text-white transition-colors">Premium Features</Link></li>
               <li>
