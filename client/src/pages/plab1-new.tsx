@@ -1035,164 +1035,69 @@ export default function PLAB1New() {
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold mb-2">Explanation:</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  {currentQuestion.explanation}
-                </p>
-              </div>
-              {currentQuestion.learningObjectives && currentQuestion.learningObjectives.length > 0 && (
-                <div>
-                  <h4 className="font-semibold mb-2">Learning Objectives:</h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                    {currentQuestion.learningObjectives.map((objective, index) => (
-                      <li key={index}>{objective}</li>
-                    ))}
-                  </ul>
+                <div className="text-muted-foreground leading-relaxed space-y-2">
+                  {currentQuestion.explanation.split('•').map((text, index) => {
+                    if (index === 0) {
+                      return <p key={index}>{text.trim()}</p>;
+                    }
+                    return (
+                      <div key={index} className="flex items-start gap-2">
+                        <span className="text-blue-600 font-bold mt-1">•</span>
+                        <p className="flex-1">{text.trim()}</p>
+                      </div>
+                    );
+                  })}
                 </div>
-              )}
+                
+                {/* References directly under explanation */}
+                {currentQuestion.references && currentQuestion.references.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold mb-2">References:</h4>
+                    <div className="space-y-1 text-sm">
+                      {currentQuestion.references.map((reference, index) => {
+                        const getReferenceUrl = (ref: string) => {
+                          if (ref.includes('NICE CG')) {
+                            const cgNumber = ref.match(/CG(\d+)/)?.[1];
+                            if (cgNumber) return `https://www.nice.org.uk/guidance/cg${cgNumber}`;
+                          }
+                          if (ref.includes('NICE NG')) {
+                            const ngNumber = ref.match(/NG(\d+)/)?.[1];
+                            if (ngNumber) return `https://www.nice.org.uk/guidance/ng${ngNumber}`;
+                          }
+                          if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
+                          if (ref.includes('ESC')) return 'https://www.escardio.org/Guidelines';
+                          if (ref.includes('BTS')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/';
+                          if (ref.includes('BNF')) return 'https://bnf.nice.org.uk/';
+                          if (ref.includes('NEJM')) return 'https://www.nejm.org/';
+                          if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
+                          if (ref.includes('BMJ')) return 'https://www.bmj.com/';
+                          if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
+                          if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
+                          if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
+                          return null;
+                        };
 
-              {/* Educational References */}
-              {currentQuestion.references && currentQuestion.references.length > 0 && (
-                <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <BookOpen className="w-4 h-4 text-green-600" />
-                    <h5 className="font-medium text-green-800">Educational References:</h5>
+                        const url = getReferenceUrl(reference);
+                        return (
+                          <div key={index} className="text-gray-700">
+                            {index + 1}. {url ? (
+                              <a 
+                                href={url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:text-blue-800 hover:underline"
+                              >
+                                {reference}
+                              </a>
+                            ) : (
+                              reference
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    {currentQuestion.references.map((reference, index) => {
-                      const getReferenceUrl = (ref: string) => {
-                        // NICE Guidelines - Updated 2025 URLs
-                        if (ref.includes('NICE CG')) {
-                          const cgNumber = ref.match(/CG(\d+)/)?.[1];
-                          if (cgNumber) return `https://www.nice.org.uk/guidance/cg${cgNumber}`;
-                        }
-                        if (ref.includes('NICE NG')) {
-                          const ngNumber = ref.match(/NG(\d+)/)?.[1];
-                          if (ngNumber) return `https://www.nice.org.uk/guidance/ng${ngNumber}`;
-                        }
-                        if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
-                        
-                        // European Society of Cardiology - Updated URL
-                        if (ref.includes('ESC')) return 'https://www.escardio.org/Guidelines';
-                        
-                        // British Thoracic Society - Updated URL
-                        if (ref.includes('BTS')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/';
-                        
-                        // British National Formulary
-                        if (ref.includes('BNF')) return 'https://bnf.nice.org.uk/';
-                        
-                        // New England Journal of Medicine
-                        if (ref.includes('NEJM')) return 'https://www.nejm.org/';
-                        
-                        // The Lancet
-                        if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
-                        
-                        // British Medical Journal
-                        if (ref.includes('BMJ')) return 'https://www.bmj.com/';
-                        
-                        // KDIGO Guidelines
-                        if (ref.includes('KDIGO')) return 'https://kdigo.org/guidelines/';
-                        
-                        // World Health Organization
-                        if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
-                        
-                        // International League Against Epilepsy
-                        if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
-                        
-                        // Association of British Neurologists
-                        if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
-                        
-                        // Additional Medical Organizations - 2025 URLs
-                        if (ref.includes('AHA/ACC')) return 'https://www.ahajournals.org/guidelines';
-                        if (ref.includes('AAN')) return 'https://www.aan.com/Guidelines/';
-                        if (ref.includes('British Thyroid Association')) return 'https://www.british-thyroid-association.org/guidelines/';
-                        if (ref.includes('Endocrine Society')) return 'https://www.endocrine.org/clinical-practice-guidelines';
-                        if (ref.includes('Renal Association')) return 'https://renal.org/guidelines/';
-                        if (ref.includes('BSH')) return 'https://b-s-h.org.uk/guidelines/';
-                        if (ref.includes('EULAR')) return 'https://www.eular.org/recommendations-management';
-                        if (ref.includes('BSR')) return 'https://www.rheumatology.org.uk/practice-quality/guidelines';
-                        if (ref.includes('IDSA')) return 'https://www.idsociety.org/practice-guideline/';
-                        if (ref.includes('PHE')) return 'https://www.gov.uk/government/organisations/uk-health-security-agency';
-                        if (ref.includes('GOLD')) return 'https://goldcopd.org/2024-gold-report/';
-                        if (ref.includes('ERS')) return 'https://ers.app/guidelines/';
-                        
-                        // Specific condition guidelines
-                        if (ref.includes('McDonald Criteria')) return 'https://www.nationalmssociety.org/What-is-MS/Diagnosing-MS/McDonald-Criteria';
-                        if (ref.includes('Movement Disorders Society')) return 'https://www.movementdisorders.org/MDS/About/Movement-Disorder-Overviews/';
-                        if (ref.includes('International Headache Society')) return 'https://ichd-3.org/';
-                        
-                        return null;
-                      };
-
-                      const url = getReferenceUrl(reference);
-                      const referenceType = reference.includes('NICE') ? 'NICE' : 
-                                          reference.includes('ESC') ? 'ESC' :
-                                          reference.includes('BTS') ? 'BTS' :
-                                          reference.includes('BNF') ? 'BNF' :
-                                          reference.includes('NEJM') ? 'NEJM' :
-                                          reference.includes('Lancet') ? 'LANCET' :
-                                          reference.includes('BMJ') ? 'BMJ' :
-                                          reference.includes('KDIGO') ? 'KDIGO' :
-                                          reference.includes('WHO') ? 'WHO' :
-                                          reference.includes('ILAE') ? 'ILAE' :
-                                          reference.includes('ABN') ? 'ABN' :
-                                          reference.includes('AHA/ACC') ? 'AHA' :
-                                          reference.includes('AAN') ? 'AAN' :
-                                          reference.includes('British Thyroid Association') ? 'BTA' :
-                                          reference.includes('Endocrine Society') ? 'ENDO' :
-                                          reference.includes('Renal Association') ? 'RENAL' :
-                                          reference.includes('BSH') ? 'BSH' :
-                                          reference.includes('EULAR') ? 'EULAR' :
-                                          reference.includes('BSR') ? 'BSR' :
-                                          reference.includes('IDSA') ? 'IDSA' :
-                                          reference.includes('PHE') ? 'UKHSA' :
-                                          reference.includes('GOLD') ? 'GOLD' :
-                                          reference.includes('ERS') ? 'ERS' :
-                                          reference.includes('McDonald') ? 'MS' :
-                                          reference.includes('Movement Disorders') ? 'MDS' :
-                                          reference.includes('International Headache') ? 'IHS' :
-                                          'REFERENCE';
-
-                      return (
-                        <div key={index} className="flex items-start gap-2 text-sm text-green-700 p-2 bg-white rounded border border-green-100 hover:border-green-300 transition-colors">
-                          <span className="text-green-600 font-medium text-xs mt-0.5 flex-shrink-0">
-                            {index + 1}.
-                          </span>
-                          {url ? (
-                            <a 
-                              href={url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="flex-1 leading-relaxed hover:text-green-800 hover:underline transition-colors cursor-pointer"
-                            >
-                              {reference}
-                            </a>
-                          ) : (
-                            <span className="flex-1 leading-relaxed">{reference}</span>
-                          )}
-                          <Badge 
-                            variant="outline" 
-                            className="text-xs px-1.5 py-0.5 border-green-300 text-green-700 flex-shrink-0"
-                          >
-                            {referenceType}
-                          </Badge>
-                          {url && (
-                            <ExternalLink className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <p className="text-xs text-green-600 mt-2">
-                    Click on references to access official guidelines and publications
-                  </p>
-                </div>
-              )}
-
-              {/* Educational Disclaimer - Bottom Position */}
-              <div className="mt-6 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                <p className="text-xs text-amber-800 font-medium">
-                  ⚠️ Educational Disclaimer: This information is for educational purposes only and not a substitute for professional medical advice.
-                </p>
+                )}
               </div>
             </div>
           </CardContent>
