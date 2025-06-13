@@ -51,7 +51,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const subcategories = subcategoriesMap[category] || ['general'];
       
-      const questionGenerationPromise = generateMultipleQuestions(category, subcategories, difficulty, limitedCount);
+      const questionGenerationPromise = generateMultipleSimpleQuestions(category, difficulty, limitedCount);
       
       // Race between question generation and timeout
       const questions = await Promise.race([questionGenerationPromise, timeoutPromise]);

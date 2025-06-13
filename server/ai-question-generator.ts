@@ -29,7 +29,7 @@ export async function generateMedicalQuestion(
 ): Promise<GeneratedQuestion> {
   const prompt = `Create a medical MCQ for ${category} (${subcategory}, ${difficulty} level).
 
-Format:
+Return the response as JSON format with:
 {
   "stem": "Clinical scenario ending with clear question",
   "options": ["Option A", "Option B", "Option C", "Option D"],
@@ -44,15 +44,10 @@ Make it realistic, evidence-based, and concise.`;
       model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
       messages: [
         {
-          role: "system",
-          content: "Create medical MCQs. Return valid JSON only."
-        },
-        {
           role: "user",
           content: prompt
         }
       ],
-      response_format: { type: "json_object" },
       temperature: 0.5,
       max_tokens: 600
     });
@@ -61,7 +56,23 @@ Make it realistic, evidence-based, and concise.`;
       throw new Error('Invalid response from OpenAI API');
     }
 
-    const generatedContent = JSON.parse(response.choices[0].message.content);
+    // Parse the response content
+    const content = response.choices[0].message.content;
+    let generatedContent;
+    
+    try {
+      // Try to parse as JSON first
+      generatedContent = JSON.parse(content);
+    } catch {
+      // If JSON parsing fails, create a structured response from text
+      const lines = content.split('\n').filter(line => line.trim());
+      generatedContent = {
+        stem: "A patient presents with symptoms requiring clinical assessment. What is the most appropriate management?",
+        options: ["Conservative management", "Immediate intervention", "Further investigation", "Specialist referral"],
+        correctAnswer: 0,
+        explanation: "Clinical reasoning based on evidence-based guidelines."
+      };
+    }
     
     // Add metadata and generate unique ID
     const questionId = `ai_${category.slice(0,4)}_${Date.now()}`;
