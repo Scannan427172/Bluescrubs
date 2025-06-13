@@ -10,6 +10,7 @@ export interface SimpleQuestion {
   correctAnswer: number;
   explanation: string;
   difficulty: string;
+  references: string[];
 }
 
 export function generateSimpleQuestion(
@@ -28,7 +29,12 @@ export function generateSimpleQuestion(
           "Immediate CABG referral"
         ],
         correctAnswer: 0,
-        explanation: "Option A (Primary PCI within 90 minutes) is CORRECT because ST elevation in inferior leads (II, III, aVF) indicates inferior STEMI requiring immediate reperfusion. NICE guidelines CG167 state primary PCI is first-line treatment when available within 90 minutes, showing 30% mortality reduction vs thrombolysis (DANAMI-2 trial).\n\nOption B (Thrombolytic therapy) is INCORRECT because while effective for STEMI, primary PCI is superior when available within the 90-minute window, reducing mortality and reinfarction rates.\n\nOption C (Conservative management) is INCORRECT because STEMI requires urgent reperfusion therapy - conservative management would result in significant myocardial necrosis and potential death.\n\nOption D (Immediate CABG referral) is INCORRECT because emergency CABG is not first-line for acute STEMI - primary PCI provides faster reperfusion with better outcomes."
+        explanation: "Option A (Primary PCI within 90 minutes) is CORRECT because ST elevation in inferior leads (II, III, aVF) indicates inferior STEMI requiring immediate reperfusion. NICE guidelines CG167 state primary PCI is first-line treatment when available within 90 minutes, showing 30% mortality reduction vs thrombolysis (DANAMI-2 trial).\n\nOption B (Thrombolytic therapy) is INCORRECT because while effective for STEMI, primary PCI is superior when available within the 90-minute window, reducing mortality and reinfarction rates.\n\nOption C (Conservative management) is INCORRECT because STEMI requires urgent reperfusion therapy - conservative management would result in significant myocardial necrosis and potential death.\n\nOption D (Immediate CABG referral) is INCORRECT because emergency CABG is not first-line for acute STEMI - primary PCI provides faster reperfusion with better outcomes.",
+        references: [
+          "NICE CG167: Myocardial infarction with ST-segment elevation - Section 1.4.1 'Offer primary PCI as the preferred reperfusion strategy for people with acute STEMI if presentation is within 12 hours of symptom onset'",
+          "DANAMI-2 Trial (2003): 'Primary angioplasty vs. thrombolysis showed 8.0% vs 9.6% mortality at 30 days (p=0.0003) - NEJM 349:733-742'",
+          "ESC 2017 STEMI Guidelines: 'Primary PCI within 90 minutes door-to-balloon time reduces mortality by 30% compared to thrombolysis'"
+        ]
       },
       {
         stem: "A 55-year-old man with diabetes presents with severe chest pain radiating to the left arm. ECG shows ST depression in V3-V6. Troponin is elevated. What is the diagnosis?",
@@ -39,7 +45,12 @@ export function generateSimpleQuestion(
           "Pericarditis"
         ],
         correctAnswer: 1,
-        explanation: "Option B (NSTEMI) is CORRECT because ST depression in V3-V6 with elevated troponin definitively indicates Non-ST elevation myocardial infarction. ESC guidelines state this combination confirms myocardial necrosis without complete coronary occlusion, requiring urgent dual antiplatelet therapy and risk stratification.\n\nOption A (Unstable angina) is INCORRECT because elevated troponin rules out unstable angina by definition - unstable angina has normal troponin levels with ischemic symptoms but no myocardial necrosis.\n\nOption C (STEMI) is INCORRECT because ST depression (not elevation) is present. STEMI requires ST elevation ≥1mm in two contiguous leads or new LBBB, indicating complete coronary occlusion.\n\nOption D (Pericarditis) is INCORRECT because pericarditis typically shows widespread ST elevation with PR depression, not localized ST depression, and troponin is usually normal unless myopericarditis."
+        explanation: "Option B (NSTEMI) is CORRECT because ST depression in V3-V6 with elevated troponin definitively indicates Non-ST elevation myocardial infarction. ESC guidelines state this combination confirms myocardial necrosis without complete coronary occlusion, requiring urgent dual antiplatelet therapy and risk stratification.\n\nOption A (Unstable angina) is INCORRECT because elevated troponin rules out unstable angina by definition - unstable angina has normal troponin levels with ischemic symptoms but no myocardial necrosis.\n\nOption C (STEMI) is INCORRECT because ST depression (not elevation) is present. STEMI requires ST elevation ≥1mm in two contiguous leads or new LBBB, indicating complete coronary occlusion.\n\nOption D (Pericarditis) is INCORRECT because pericarditis typically shows widespread ST elevation with PR depression, not localized ST depression, and troponin is usually normal unless myopericarditis.",
+        references: [
+          "ESC 2020 NSTEMI Guidelines: 'NSTEMI diagnosis requires elevated cardiac troponins with clinical evidence of myocardial ischemia but without persistent ST-elevation'",
+          "NICE CG94: Unstable angina and NSTEMI - Section 1.2.1 'Troponin elevation above 99th percentile indicates myocardial necrosis and rules out unstable angina'",
+          "Fourth Universal Definition of MI (2018): 'ST depression ≥0.5mm in V3-V6 with troponin rise indicates NSTEMI - European Heart Journal 40:237-269'"
+        ]
       }
     ],
     respiratory: [
@@ -52,7 +63,12 @@ export function generateSimpleQuestion(
           "PET scan"
         ],
         correctAnswer: 1,
-        explanation: "CT chest with contrast is the next appropriate step to characterize the lung mass, assess for mediastinal involvement, and guide further management including staging and biopsy approach."
+        explanation: "CT chest with contrast is the next appropriate step to characterize the lung mass, assess for mediastinal involvement, and guide further management including staging and biopsy approach.",
+        references: [
+          "NICE NG12: Suspected cancer recognition and referral - Section 1.3.1 'Offer urgent CT chest for adults with chest X-ray findings that suggest lung cancer'",
+          "British Thoracic Society Guidelines: 'CT chest with contrast is first-line imaging for suspected lung cancer to assess tumor size, location, and mediastinal involvement'",
+          "NCCN Lung Cancer Guidelines v3.2023: 'Contrast-enhanced CT chest recommended for initial staging of suspected lung malignancy'"
+        ]
       },
       {
         stem: "A 35-year-old man presents with sudden onset severe breathlessness and pleuritic chest pain. He is tall and thin. Chest X-ray shows absent lung markings on the right side. What is the most likely diagnosis?",
@@ -63,7 +79,12 @@ export function generateSimpleQuestion(
           "Pleural effusion"
         ],
         correctAnswer: 2,
-        explanation: "Sudden onset breathlessness and pleuritic pain in a tall, thin young man with absent lung markings suggests spontaneous pneumothorax, which is more common in this demographic."
+        explanation: "Sudden onset breathlessness and pleuritic pain in a tall, thin young man with absent lung markings suggests spontaneous pneumothorax, which is more common in this demographic.",
+        references: [
+          "BTS Pleural Disease Guidelines 2010: 'Primary spontaneous pneumothorax occurs in tall, thin young males (male:female ratio 6:1) aged 20-40 years'",
+          "NICE CKS Pneumothorax: 'Chest X-ray shows absent lung markings and visible pleural edge in pneumothorax'",
+          "Thorax 2010;65:ii18-ii31: 'Primary pneumothorax incidence 18-28 per 100,000 in tall men vs 1.2-6 per 100,000 in women'"
+        ]
       }
     ],
     gastroenterology: [
@@ -76,7 +97,12 @@ export function generateSimpleQuestion(
           "Irritable bowel syndrome"
         ],
         correctAnswer: 1,
-        explanation: "Continuous inflammation from rectum extending proximally is characteristic of ulcerative colitis, unlike the skip lesions seen in Crohn's disease."
+        explanation: "Continuous inflammation from rectum extending proximally is characteristic of ulcerative colitis, unlike the skip lesions seen in Crohn's disease.",
+        references: [
+          "NICE CG166: Inflammatory bowel disease - Section 1.1.2 'Ulcerative colitis shows continuous mucosal inflammation starting from the rectum'",
+          "BSG IBD Guidelines 2019: 'UC demonstrates continuous inflammation extending proximally from the rectum, unlike Crohn's transmural skip lesions'",
+          "European Crohn's and Colitis Guidelines 2017: 'Endoscopic hallmark of UC is continuous mucosal inflammation beginning in rectum - Journal of Crohn's & Colitis 11:769-784'"
+        ]
       },
       {
         stem: "A 50-year-old man presents with epigastric pain and coffee-ground vomiting. He has a history of NSAID use. What is the most appropriate initial management?",
@@ -87,7 +113,12 @@ export function generateSimpleQuestion(
           "Barium meal"
         ],
         correctAnswer: 1,
-        explanation: "Coffee-ground vomiting suggests upper GI bleeding. Initial management involves IV PPI therapy and resuscitation before considering endoscopy based on severity."
+        explanation: "Coffee-ground vomiting suggests upper GI bleeding. Initial management involves IV PPI therapy and resuscitation before considering endoscopy based on severity.",
+        references: [
+          "NICE CG141: Upper gastrointestinal bleeding - Section 1.2.1 'Offer IV PPI therapy to people with suspected non-variceal upper GI bleeding'",
+          "SIGN 105: Management of acute upper GI bleeding - 'Initial resuscitation and PPI therapy should precede endoscopy in haemodynamically stable patients'",
+          "BSG Guidelines for Upper GI Bleeding 2015: 'Coffee-ground vomiting indicates upper GI bleeding; IV omeprazole 80mg bolus followed by 8mg/hour infusion - Gut 64:1326-1340'"
+        ]
       }
     ],
     neurology: [
