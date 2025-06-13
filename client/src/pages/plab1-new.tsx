@@ -287,7 +287,7 @@ export default function PLAB1New() {
 
   // Calculate question counts - now using AI generation so unlimited questions available
   const getQuestionCount = (category: string) => {
-    return "AI Generated"; // AI-powered unlimited questions
+    return "∞ questions"; // AI-powered unlimited questions
   };
 
   // Available categories with question counts
@@ -727,7 +727,7 @@ export default function PLAB1New() {
                   <SelectContent>
                     {availableCategories.filter(cat => cat.value !== 'all').map((category) => (
                       <SelectItem key={category.value} value={category.value}>
-                        {category.label} (unlimited {category.count})
+                        {category.label} ({category.count})
                       </SelectItem>
                     ))}
                   </SelectContent>
