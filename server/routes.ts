@@ -13,6 +13,12 @@ const openai = new OpenAI({
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Add JSON parsing middleware for API routes
+  app.use('/api/*', (req, res, next) => {
+    console.log(`API Request: ${req.method} ${req.originalUrl}`);
+    next();
+  });
+  
   // Translation API endpoint
   app.post("/api/translate", async (req, res) => {
     try {
