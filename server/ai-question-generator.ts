@@ -1,302 +1,188 @@
 import OpenAI from "openai";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-export interface QuestionGenerationRequest {
-  examType: 'PLAB' | 'USMLE' | 'MCCEE' | 'AMC' | 'MRCP' | 'DHA' | 'HAAD' | 'SMLE';
-  specialty: string;
-  difficulty: 'foundation' | 'intermediate' | 'advanced';
-  count: number;
-  clinicalSetting: string;
-  ageGroup: string;
-  cognitiveLevel: 'knowledge' | 'comprehension' | 'application' | 'analysis' | 'synthesis' | 'evaluation';
-}
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export interface GeneratedQuestion {
+  id: string;
+  category: string;
+  subcategory: string;
+  cognitiveLevel: 'knowledge' | 'application' | 'problem-solving';
+  difficulty: 'foundation' | 'intermediate' | 'advanced';
+  clinicalSetting: string;
+  ageGroup: string;
   stem: string;
   options: string[];
   correctAnswer: number;
   explanation: string;
   learningObjectives: string[];
+  gmcOutcomes: string[];
   references: string[];
   tags: string[];
-  difficulty_justification: string;
-  clinical_relevance: string;
-  regulatory_alignment: string;
+  estimatedTime: number;
+  lastReviewed: string;
+  reviewedBy: string;
 }
 
-export interface QuestionGenerationResponse {
-  questions: GeneratedQuestion[];
-  metadata: {
-    generatedAt: Date;
-    examType: string;
-    specialty: string;
-    quality_score: number;
-    medical_accuracy_validated: boolean;
-  };
-}
+export async function generateMedicalQuestion(
+  category: string,
+  subcategory: string,
+  difficulty: 'foundation' | 'intermediate' | 'advanced'
+): Promise<GeneratedQuestion> {
+  const prompt = `Generate a GMC MLA-compliant medical question for ${category} - ${subcategory} at ${difficulty} level.
 
-export class AIQuestionGenerator {
-  
-  async generateQuestions(request: QuestionGenerationRequest): Promise<QuestionGenerationResponse> {
-    const systemPrompt = this.buildSystemPrompt(request.examType);
-    const userPrompt = this.buildUserPrompt(request);
+Requirements:
+1. Create a realistic clinical scenario with specific patient details (age, gender, presenting symptoms, examination findings, investigations)
+2. Provide 5 multiple choice options (A-E)
+3. Follow this exact explanation format:
 
-    try {
-      const response = await openai.chat.completions.create({
-        model: "gpt-4o-mini", // Faster model for improved response time
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt }
-        ],
-        response_format: { type: "json_object" },
-        temperature: 0.7,
-        max_tokens: 2500 // Reduced for faster generation
-      });
+Answer: [Letter]. [Correct option]
 
-      const generatedData = JSON.parse(response.choices[0].message.content || "{}");
-      
-      return {
-        questions: generatedData.questions || [],
-        metadata: {
-          generatedAt: new Date(),
-          examType: request.examType,
-          specialty: request.specialty,
-          quality_score: this.calculateQualityScore(generatedData.questions || []),
-          medical_accuracy_validated: true
+Key points:
+
+• [Key clinical fact with pathophysiology/diagnostic criteria]¹
+• [Key clinical fact with management/treatment details]²
+• [Key clinical fact with guidelines/evidence base]³
+• [Key clinical fact with prognosis/complications]⁴
+
+References
+
+1. [Primary guideline or major study with full citation]
+2. [NICE or specialty society guideline with full citation]
+3. [BMJ Best Practice or UpToDate reference]
+4. [Specialty journal or textbook reference]
+5. [World Health Organization or international guideline]
+6. [NHS England or national policy document]
+7. [General Medical Council. Good Medical Practice. GMC; 2024.]
+8. [General Medical Council. Medical Licensing Assessment (MLA) Content Map. [Specialty] section; 2024.]
+9. [General Medical Council. MLA External Examiners' Report: [Specialty]. GMC; 2024.]
+
+The question should test clinical decision-making, differential diagnosis, or evidence-based management. Ensure all medical facts are accurate and current as of 2024-2025.
+
+Return the response in JSON format with all required fields.`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: "You are a medical education expert creating GMC MLA-compliant examination questions. Provide accurate, evidence-based medical content with comprehensive explanations and authoritative references."
+        },
+        {
+          role: "user",
+          content: prompt
         }
-      };
-    } catch (error) {
-      throw new Error(`Question generation failed: ${error.message}`);
-    }
-  }
+      ],
+      response_format: { type: "json_object" },
+      temperature: 0.7,
+      max_tokens: 2000
+    });
 
-  private buildSystemPrompt(examType: string): string {
-    const guidelines = {
-      'PLAB': 'UK NHS/NICE guidelines',
-      'USMLE': 'US medical standards', 
-      'MCCEE': 'Canadian practice',
-      'AMC': 'Australian guidelines',
-      'MRCP': 'UK specialist medicine'
-    };
-
-    return `Medical educator creating ${examType} questions. Use ${guidelines[examType] || guidelines['PLAB']}.
-
-JSON format:
-{
-  "questions": [{
-    "stem": "Clinical scenario",
-    "options": ["A.", "B.", "C.", "D.", "E."],
-    "correctAnswer": 0,
-    "explanation": "Medical reasoning",
-    "learningObjectives": ["Key points"],
-    "references": ["Guidelines"],
-    "tags": ["specialty"],
-    "difficulty_justification": "Brief rationale",
-    "clinical_relevance": "Clinical importance", 
-    "regulatory_alignment": "${examType} standards"
-  }]
-}`;
-  }
-
-  private buildUserPrompt(request: QuestionGenerationRequest): string {
-    return `Generate ${request.count} high-quality ${request.examType} questions with the following specifications:
-
-SPECIFICATIONS:
-- Specialty: ${request.specialty}
-- Difficulty Level: ${request.difficulty}
-- Clinical Setting: ${request.clinicalSetting}
-- Age Group: ${request.ageGroup}
-- Cognitive Level: ${request.cognitiveLevel}
-
-QUESTION REQUIREMENTS:
-1. Each question must test authentic clinical scenarios
-2. Include realistic patient presentations with relevant history
-3. Provide 5 options with graduated difficulty
-4. Detailed explanations must include:
-   - Medical rationale for correct answer
-   - Why other options are incorrect
-   - Clinical pearls and teaching points
-   - Current evidence and guidelines
-
-5. Learning objectives should map to exam competencies
-6. Include appropriate medical references
-7. Add relevant clinical tags for categorization
-
-DIFFICULTY GUIDELINES:
-- Foundation: Basic knowledge application, common presentations
-- Intermediate: Clinical reasoning, complex scenarios, differential diagnosis
-- Advanced: Rare conditions, complex management, research interpretation
-
-COGNITIVE LEVEL FOCUS:
-- Knowledge: Recall of facts, guidelines, classifications
-- Comprehension: Understanding concepts, mechanisms, pathophysiology
-- Application: Using knowledge in new clinical situations
-- Analysis: Breaking down complex problems, interpreting data
-- Synthesis: Combining information to form clinical judgments
-- Evaluation: Assessing treatment efficacy, making clinical decisions
-
-Return JSON format:
-{
-  "questions": [
-    {
-      "stem": "Detailed clinical scenario...",
-      "options": ["Option A", "Option B", "Option C", "Option D", "Option E"],
-      "correctAnswer": 0,
-      "explanation": "Comprehensive medical explanation...",
-      "learningObjectives": ["Objective 1", "Objective 2", "Objective 3"],
-      "references": ["Source 1", "Source 2"],
-      "tags": ["tag1", "tag2", "tag3"],
-      "difficulty_justification": "Why this difficulty level...",
-      "clinical_relevance": "Real-world application...",
-      "regulatory_alignment": "Exam standard alignment..."
-    }
-  ]
-}`;
-  }
-
-  private calculateQualityScore(questions: GeneratedQuestion[]): number {
-    if (!questions.length) return 0;
-
-    let totalScore = 0;
-    for (const question of questions) {
-      let questionScore = 0;
-      
-      // Stem quality (30%)
-      if (question.stem && question.stem.length > 100) questionScore += 30;
-      else if (question.stem && question.stem.length > 50) questionScore += 20;
-      else questionScore += 10;
-
-      // Options quality (20%)
-      if (question.options && question.options.length === 5) {
-        const avgLength = question.options.reduce((sum, opt) => sum + opt.length, 0) / 5;
-        if (avgLength > 15) questionScore += 20;
-        else questionScore += 10;
-      }
-
-      // Explanation quality (25%)
-      if (question.explanation && question.explanation.length > 200) questionScore += 25;
-      else if (question.explanation && question.explanation.length > 100) questionScore += 15;
-      else questionScore += 5;
-
-      // Learning objectives (15%)
-      if (question.learningObjectives && question.learningObjectives.length >= 3) questionScore += 15;
-      else if (question.learningObjectives && question.learningObjectives.length >= 2) questionScore += 10;
-      else questionScore += 5;
-
-      // References (10%)
-      if (question.references && question.references.length >= 2) questionScore += 10;
-      else if (question.references && question.references.length >= 1) questionScore += 5;
-
-      totalScore += questionScore;
-    }
-
-    return totalScore / questions.length;
-  }
-
-  async generateSpecialtyQuestionBank(
-    examType: string,
-    specialty: string,
-    targetCount: number
-  ): Promise<GeneratedQuestion[]> {
-    const batchSize = 10;
-    const allQuestions: GeneratedQuestion[] = [];
+    const generatedContent = JSON.parse(response.choices[0].message.content || '{}');
     
-    const difficulties = ['foundation', 'intermediate', 'advanced'] as const;
-    const questionsPerDifficulty = Math.ceil(targetCount / 3);
-
-    for (const difficulty of difficulties) {
-      let generated = 0;
-      while (generated < questionsPerDifficulty) {
-        const remaining = Math.min(batchSize, questionsPerDifficulty - generated);
-        
-        const request: QuestionGenerationRequest = {
-          examType: examType as any,
-          specialty,
-          difficulty,
-          count: remaining,
-          clinicalSetting: this.getRandomClinicalSetting(),
-          ageGroup: this.getRandomAgeGroup(),
-          cognitiveLevel: this.getCognitiveLevel(difficulty)
-        };
-
-        try {
-          const response = await this.generateQuestions(request);
-          allQuestions.push(...response.questions);
-          generated += response.questions.length;
-          
-          // Rate limiting
-          await new Promise(resolve => setTimeout(resolve, 1000));
-        } catch (error) {
-          console.error(`Failed to generate questions for ${specialty} ${difficulty}:`, error);
-          break;
-        }
-      }
-    }
-
-    return allQuestions;
-  }
-
-  private getRandomClinicalSetting(): string {
-    const settings = [
-      'Emergency Department', 'GP Surgery', 'Medical Ward', 'ICU',
-      'Outpatient Clinic', 'Operating Theatre', 'Maternity Unit',
-      'Paediatric Ward', 'Mental Health Unit', 'Cardiology Clinic'
-    ];
-    return settings[Math.floor(Math.random() * settings.length)];
-  }
-
-  private getRandomAgeGroup(): string {
-    const groups = ['Neonate', 'Infant', 'Child', 'Adolescent', 'Young Adult', 'Adult', 'Elderly'];
-    return groups[Math.floor(Math.random() * groups.length)];
-  }
-
-  private getCognitiveLevel(difficulty: string): any {
-    const levels = {
-      foundation: ['knowledge', 'comprehension', 'application'],
-      intermediate: ['application', 'analysis'],
-      advanced: ['analysis', 'synthesis', 'evaluation']
+    // Add metadata and generate unique ID
+    const questionId = `ai_${category.slice(0,4)}_${Date.now()}`;
+    
+    return {
+      id: questionId,
+      category: category,
+      subcategory: subcategory,
+      cognitiveLevel: generatedContent.cognitiveLevel || 'application',
+      difficulty: difficulty,
+      clinicalSetting: generatedContent.clinicalSetting || 'Hospital',
+      ageGroup: generatedContent.ageGroup || 'Adult',
+      stem: generatedContent.stem,
+      options: generatedContent.options,
+      correctAnswer: generatedContent.correctAnswer,
+      explanation: generatedContent.explanation,
+      learningObjectives: generatedContent.learningObjectives || [
+        "Apply clinical reasoning",
+        "Interpret clinical findings",
+        "Make evidence-based decisions"
+      ],
+      gmcOutcomes: generatedContent.gmcOutcomes || [
+        "Clinical assessment",
+        "Evidence-based practice",
+        "Patient safety"
+      ],
+      references: generatedContent.references || [],
+      tags: generatedContent.tags || [category, subcategory],
+      estimatedTime: generatedContent.estimatedTime || 90,
+      lastReviewed: new Date().toISOString().split('T')[0],
+      reviewedBy: "AI Medical Education System"
     };
-    const options = levels[difficulty] || levels.foundation;
-    return options[Math.floor(Math.random() * options.length)];
+
+  } catch (error) {
+    console.error('Error generating medical question:', error);
+    throw new Error(`Failed to generate medical question: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }
 
-export const questionGenerator = new AIQuestionGenerator();
-
-// Specialty-specific question generation templates
-export const SPECIALTY_TEMPLATES = {
-  cardiovascular: {
-    commonConditions: ['MI', 'heart failure', 'arrhythmias', 'hypertension', 'valve disease'],
-    clinicalSettings: ['Emergency Department', 'Cardiology Clinic', 'CCU', 'Cardiac Catheter Lab'],
-    ageGroups: ['Adult', 'Elderly'],
-    keyGuidelines: ['ESC Guidelines', 'AHA/ACC Guidelines', 'NICE CG', 'SIGN Guidelines']
-  },
-  respiratory: {
-    commonConditions: ['asthma', 'COPD', 'pneumonia', 'pneumothorax', 'lung cancer'],
-    clinicalSettings: ['Emergency Department', 'Respiratory Clinic', 'GP Surgery', 'ICU'],
-    ageGroups: ['Child', 'Adult', 'Elderly'],
-    keyGuidelines: ['BTS Guidelines', 'NICE Guidelines', 'GOLD Guidelines']
-  },
-  gastroenterology: {
-    commonConditions: ['IBD', 'peptic ulcer', 'GERD', 'liver disease', 'GI bleeding'],
-    clinicalSettings: ['Gastroenterology Unit', 'Emergency Department', 'Endoscopy Suite'],
-    ageGroups: ['Adult', 'Elderly'],
-    keyGuidelines: ['BSG Guidelines', 'NICE Guidelines', 'ESGE Guidelines']
-  },
-  neurology: {
-    commonConditions: ['stroke', 'epilepsy', 'headache', 'dementia', 'Parkinson disease'],
-    clinicalSettings: ['Neurology Ward', 'Emergency Department', 'Memory Clinic'],
-    ageGroups: ['Adult', 'Elderly'],
-    keyGuidelines: ['NICE Guidelines', 'ESO Guidelines', 'AAN Guidelines']
-  },
-  endocrinology: {
-    commonConditions: ['diabetes', 'thyroid disease', 'adrenal disorders', 'obesity'],
-    clinicalSettings: ['Endocrinology Clinic', 'Diabetes Centre', 'GP Surgery'],
-    ageGroups: ['Child', 'Adult', 'Elderly'],
-    keyGuidelines: ['ADA Guidelines', 'NICE Guidelines', 'Endocrine Society Guidelines']
+export async function generateMultipleQuestions(
+  category: string,
+  subcategories: string[],
+  difficulty: 'foundation' | 'intermediate' | 'advanced',
+  count: number
+): Promise<GeneratedQuestion[]> {
+  const questions: GeneratedQuestion[] = [];
+  
+  for (let i = 0; i < count; i++) {
+    const subcategory = subcategories[i % subcategories.length];
+    try {
+      const question = await generateMedicalQuestion(category, subcategory, difficulty);
+      questions.push(question);
+      
+      // Add small delay to avoid rate limiting
+      await new Promise(resolve => setTimeout(resolve, 500));
+    } catch (error) {
+      console.error(`Failed to generate question ${i + 1}:`, error);
+    }
   }
-};
+  
+  return questions;
+}
+
+export async function generateSpecialtyQuestionSet(
+  specialty: string,
+  totalQuestions: number = 25
+): Promise<GeneratedQuestion[]> {
+  const specialtyConfig = {
+    neurology: {
+      subcategories: ['epilepsy', 'stroke', 'headache', 'dementia', 'movement-disorders', 'multiple-sclerosis', 'neuropathy'],
+      difficulties: ['foundation', 'intermediate', 'advanced'] as const
+    },
+    cardiovascular: {
+      subcategories: ['heart-failure', 'arrhythmias', 'ischemic-heart-disease', 'valvular-disease', 'hypertension'],
+      difficulties: ['foundation', 'intermediate', 'advanced'] as const
+    },
+    respiratory: {
+      subcategories: ['asthma', 'copd', 'pneumonia', 'pulmonary-embolism', 'lung-cancer'],
+      difficulties: ['foundation', 'intermediate', 'advanced'] as const
+    },
+    endocrinology: {
+      subcategories: ['diabetes', 'thyroid', 'adrenal', 'pituitary', 'metabolic-bone-disease'],
+      difficulties: ['foundation', 'intermediate', 'advanced'] as const
+    }
+  };
+
+  const config = specialtyConfig[specialty as keyof typeof specialtyConfig];
+  if (!config) {
+    throw new Error(`Unsupported specialty: ${specialty}`);
+  }
+
+  const questionsPerDifficulty = Math.ceil(totalQuestions / 3);
+  const allQuestions: GeneratedQuestion[] = [];
+
+  for (const difficulty of config.difficulties) {
+    const questions = await generateMultipleQuestions(
+      specialty,
+      config.subcategories,
+      difficulty,
+      questionsPerDifficulty
+    );
+    allQuestions.push(...questions);
+  }
+
+  return allQuestions.slice(0, totalQuestions);
+}

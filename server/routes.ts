@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { questionGenerator } from "./ai-question-generator";
+import { generateMedicalQuestion, generateMultipleQuestions, generateSpecialtyQuestionSet } from "./ai-question-generator";
 import { communitySystem } from "./community-contribution";
 import { analyzeVideoPerformance } from "./ai-analysis";
 import { storage } from "./storage";
@@ -93,7 +93,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     } catch (error) {
       console.error("Ask AI error:", error);
-      const errorMessage = error.message || "Unable to process question";
+      const errorMessage = error instanceof Error ? error.message : "Unable to process question";
       res.status(500).json({ error: errorMessage });
     }
   });
@@ -117,12 +117,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         cognitiveLevel: 'application' as const
       };
 
-      const response = await questionGenerator.generateQuestions(request);
-      res.json(response);
+      const questions = await generateSpecialtyQuestionSet(specialty, count);
+      res.json({ questions });
       
     } catch (error) {
       console.error("Question generation error:", error);
-      res.status(500).json({ error: "Failed to generate questions" });
+      res.status(500).json({ error: `Failed to generate questions: ${error instanceof Error ? error.message : 'Unknown error'}` });
     }
   });
 
@@ -239,7 +239,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             specialty,
             generated: 0,
             status: 'failed',
-            error: error.message
+            error: error instanceof Error ? error.message : 'Unknown error'
           });
         }
       }

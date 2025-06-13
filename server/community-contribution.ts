@@ -1,4 +1,4 @@
-import { questionGenerator } from "./ai-question-generator";
+import { generateMedicalQuestion, generateMultipleQuestions, generateSpecialtyQuestionSet } from "./ai-question-generator";
 import type { GeneratedQuestion } from "./ai-question-generator";
 
 export interface MedicalProfessional {
@@ -148,8 +148,7 @@ export class CommunityContributionSystem {
       
       try {
         // Generate questions using AI
-        const batch = await questionGenerator.generateSpecialtyQuestionBank(
-          examType,
+        const batch = await generateSpecialtyQuestionSet(
           specialty,
           remaining
         );
