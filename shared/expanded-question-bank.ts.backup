@@ -1169,9 +1169,7 @@ Option D (Atrial flutter) is incorrect because AFL shows regular sawtooth flutte
 
 Option E (Sinus tachycardia) is incorrect because this maintains normal P wave morphology and regular rhythm. Rate rarely exceeds 150 bpm in healthy adults, and there's usually identifiable cause (fever, pain, hypovolemia).
 
-Management follows ESC Guidelines 2020: immediate rate control with diltiazem 0.25mg/kg IV or metoprolol 2.5-5mg IV. Anticoagulation with DOAC (apixaban 5mg BD) if CHA2DS2-VASc ≥2 in men or ≥3 in women. Consider electrical cardioversion if hemodynamically unstable.
-
-References: ESC AF Guidelines 2020, NICE CG180 Atrial Fibrillation, Circulation 2019;140:e125.`;
+Management follows ESC Guidelines 2020: immediate rate control with diltiazem 0.25mg/kg IV or metoprolol 2.5-5mg IV. Anticoagulation with DOAC (apixaban 5mg BD) if CHA2DS2-VASc ≥2 in men or ≥3 in women. Consider electrical cardioversion if hemodynamically unstable.`;
         } else if (subcategory === 'valvular-disease' && i === 104) {
           return `This ${age}-year-old ${gender} presents with classic severe aortic stenosis: progressive breathlessness, fatigue over 6 months, harsh systolic murmur at right sternal edge radiating to carotids, and slow-rising pulse. This constellation indicates hemodynamically significant AS requiring urgent evaluation for intervention.
 
@@ -1187,9 +1185,7 @@ Option E (Tricuspid regurgitation) is incorrect because TR causes pansystolic mu
 
 Investigation requires transthoracic echocardiogram to assess valve area (<1.0cm² = severe), peak gradient (>64 mmHg), and left ventricular function. Severe symptomatic AS has 50% 2-year mortality without intervention.
 
-Management: urgent cardiothoracic surgery referral for aortic valve replacement (surgical or TAVI depending on risk profile).
-
-References: ESC Valvular Guidelines 2021, NICE CG95 Chest Pain, J Am Coll Cardiol 2020;76:e159.`;
+Management: urgent cardiothoracic surgery referral for aortic valve replacement (surgical or TAVI depending on risk profile).`;
         } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic cardiovascular assessment. The clinical features, examination findings, and hemodynamic status guide immediate management decisions. Investigation with ECG, chest X-ray, and echocardiography helps confirm diagnosis and assess severity. Management follows current ESC and NICE guidelines emphasizing evidence-based protocols, risk stratification, and multidisciplinary care including cardiology referral when appropriate.`;
         }
@@ -1287,7 +1283,6 @@ Option E (Heart failure) is incorrect because cardiac failure causes orthopnea, 
 
 Management follows NICE NG115: first-line LABA/LAMA combination (e.g., formoterol/tiotropium) for symptomatic patients. Add ICS if frequent exacerbations. Smoking cessation reduces progression rate from 60ml/year to 30ml/year FEV1 decline.
 
-References: NICE NG115 COPD Guidelines, GOLD 2023 Strategy, Lancet Respir Med 2018;6:557.`;
         } else if (subcategory === 'lung-cancer' && i === 103) {
           return `This ${age}-year-old ${gender} with 30-pack-year smoking history presents with suspicious lung lesion: 6-week persistent cough, 6kg weight loss, hemoptysis, and 4cm right upper lobe mass on chest X-ray. This clinical picture strongly suggests primary lung cancer requiring urgent tissue diagnosis and staging.
 
@@ -1303,7 +1298,6 @@ Option E (CT-guided biopsy) is incorrect as immediate next step because comprehe
 
 Following CT, tissue sampling via bronchoscopy (if central) or percutaneous biopsy (if peripheral) enables histological diagnosis and molecular testing (EGFR, ALK, PD-L1) crucial for treatment selection.
 
-References: NICE NG12 Lung Cancer Guidelines, British Thoracic Society Guidelines 2013, J Clin Oncol 2017;35:2738.`;
         } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic respiratory assessment. The clinical features, examination findings, and investigation results guide diagnosis and management decisions. Investigation with chest imaging, spirometry, and blood tests helps confirm diagnosis and assess severity. Management follows current BTS and NICE guidelines emphasizing evidence-based protocols, risk stratification, and multidisciplinary care including respiratory specialist referral when appropriate.`;
         }
@@ -1813,7 +1807,6 @@ Option E (Drug-induced thyrotoxicosis) is incorrect without medication history. 
 
 Investigation requires thyroid function tests, thyroid antibodies (TSI, TRAb for Graves' disease), and imaging (thyroid uptake scan if etiology unclear). Treatment includes β-blockers for symptom control (propranolol 40mg TDS), antithyroid drugs (carbimazole 15-40mg daily), and monitoring for complications.
 
-References: NICE CG145 Thyroid Disease, British Thyroid Association Guidelines 2014, NEJM 2016;375:1552.`;
         } else if (subcategory === 'diabetes-complications' && i === 103) {
           return `This ${age}-year-old ${gender} with 15-year type 2 diabetes presents with classic diabetic peripheral neuropathy: burning pain in both feet worse at night, with poor glycemic control (HbA1c 85 mmol/mol). This distal symmetric sensorimotor neuropathy is the most common diabetic complication, affecting 50% of patients.
 
@@ -1829,7 +1822,6 @@ Option E (Vitamin B12 deficiency) is incorrect because B12 neuropathy typically 
 
 Management includes glycemic optimization (target HbA1c <53 mmol/mol), neuropathic pain relief with gabapentin 300mg TDS or pregabalin 75mg BD, tricyclic antidepressants (amitriptyline 10-75mg nocte), and foot care education to prevent ulceration.
 
-References: NICE NG28 Diabetes Guidelines, Diabetic Medicine 2018;35:444, Diabetes Care 2017;40:136.`;
         } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory} disorder requiring systematic endocrine assessment. The clinical features, biochemical results, and hormonal patterns guide diagnosis and management decisions. Investigation with appropriate hormone assays, dynamic tests, and imaging helps confirm diagnosis and assess severity. Management follows current endocrine society guidelines emphasizing evidence-based protocols, hormone replacement therapy when indicated, and specialist endocrine referral for complex cases.`;
         }
@@ -1927,7 +1919,6 @@ Option E (Conservative management) is incorrect because STEMI without reperfusio
 
 Adjunct therapy includes aspirin 300mg, clopidogrel 600mg loading, atorvastatin 80mg, metoprolol once stable, and ACE inhibitor within 24 hours. Monitor for complications: cardiogenic shock, mechanical complications, arrhythmias.
 
-References: ESC STEMI Guidelines 2017, NICE CG167 MI Guidelines, NEJM 2003;349:733 (DANAMI-2 trial).`;
         } else if (subcategory === 'heart-failure' && i === 162) {
           return `This ${age}-year-old ${gender} presents with heart failure with reduced ejection fraction (HFrEF): progressive breathlessness, ankle swelling, fatigue over 3 months, with EF 35%. This requires evidence-based neurohormonal blockade to reduce mortality and hospitalizations.
 
@@ -1943,7 +1934,6 @@ Option E (Lifestyle advice only) is incorrect because while salt restriction, fl
 
 Additional therapies include aldosterone antagonists (spironolactone 25mg daily if K+ <5.0mmol/L), ARNi (sacubitril/valsartan) if ACE inhibitor intolerant, and SGLT2 inhibitors (dapagliflozin 10mg daily) for additional mortality reduction.
 
-References: ESC Heart Failure Guidelines 2021, NICE CG108 Chronic Heart Failure, NEJM 1999;341:709 (MERIT-HF).`;
         } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring comprehensive cardiovascular assessment. The clinical presentation, hemodynamic parameters, and investigation results guide immediate management decisions. Risk stratification using validated scores helps determine appropriate intervention level. Management follows current ESC and NICE guidelines emphasizing evidence-based protocols, optimal medical therapy, and timely specialist intervention when indicated.`;
         }
@@ -2028,7 +2018,6 @@ Option E (Chest physiotherapy only) is incorrect because pneumonia requires anti
 
 First-line therapy includes co-amoxiclav 1.2g TDS IV plus clarithromycin 500mg BD IV, targeting Streptococcus pneumoniae and atypical organisms. Monitor inflammatory markers, oxygen saturation, and clinical response. Switch to oral therapy when clinically improving with normal temperature for 24 hours.
 
-References: BTS CAP Guidelines 2009, NICE CG191 Pneumonia, Thorax 2011;66:iii1-iii23.`;
         } else if (subcategory === 'pulmonary-embolism' && i === 152) {
           return `This ${age}-year-old ${gender} presents 5 days post-operatively with classic pulmonary embolism: sudden breathlessness, pleuritic chest pain, elevated D-dimer, and Wells score 6 (high probability). Post-operative patients have 40-fold increased PE risk, requiring immediate imaging and anticoagulation.
 
@@ -2044,7 +2033,6 @@ Option E (Arterial blood gas) is incorrect for diagnosis because ABG findings (h
 
 Immediate anticoagulation with treatment-dose LMWH (enoxaparin 1.5mg/kg daily) or DOAC (apixaban 10mg BD × 7 days, then 5mg BD) reduces clot extension and embolization risk. Thrombolysis considered for massive PE with hemodynamic compromise.
 
-References: ESC PE Guidelines 2019, NICE CG144 VTE, BMJ 2020;370:m2177.`;
         } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic respiratory assessment. The clinical presentation, imaging findings, and physiological parameters guide diagnosis and management decisions. Risk stratification helps determine appropriate treatment setting and intervention intensity. Management follows current BTS and NICE guidelines emphasizing evidence-based protocols and specialist respiratory input when indicated.`;
         }
@@ -2189,7 +2177,6 @@ Option E (IV heparin infusion) is incorrect because anticoagulation in acute isc
 
 Post-thrombolysis management includes neurological monitoring every 15 minutes for 2 hours, then hourly for 6 hours, blood pressure control <185/110 mmHg, and urgent CT if deterioration occurs. Aspirin 300mg should start at 24 hours post-thrombolysis.
 
-References: ESO/ESOC Guidelines 2019, NICE CG68 Stroke Guidelines, NEJM 2008;359:1317 (IST-3 trial).`;
         } else if (subcategory === 'epilepsy' && i === 142) {
           return `This ${age}-year-old ${gender} with refractory epilepsy presents with breakthrough seizures despite optimal medical therapy, with MRI showing mesial temporal sclerosis. This clinical scenario represents drug-resistant epilepsy with clear structural abnormality amenable to surgical intervention.
 
@@ -2205,7 +2192,6 @@ Option E (Ketogenic diet) is incorrect in adults because while effective in chil
 
 Pre-surgical evaluation requires video-EEG monitoring, neuropsychological assessment, Wada test or fMRI for language/memory lateralization, and sometimes intracranial monitoring. Success rates approach 80% for dominant temporal lobe resection when appropriate patient selection occurs.
 
-References: NICE CG137 Epilepsy Guidelines, NEJM 2001;345:311 (Wiebe trial), Epilepsia 2018;59:1282.`;
         } else if (subcategory === 'multiple-sclerosis' && i === 143) {
           return `This ${age}-year-old ${gender} presents with classic relapsing-remitting multiple sclerosis: recurrent episodes of neurological dysfunction with complete recovery, involving different CNS regions (optic neuritis and limb weakness), occurring in young adult. This clinical pattern strongly suggests inflammatory demyelinating disease.
 
@@ -2223,7 +2209,6 @@ Investigation should include MRI brain and spinal cord showing T2 hyperintense l
 
 Treatment with disease-modifying therapies (interferons, glatiramer acetate, or newer agents like dimethyl fumarate) reduces relapse rate by 30-50% and delays disability progression.
 
-References: NICE CG186 MS Guidelines, McDonald Criteria 2017 (Ann Neurol 2018;83:263), Lancet 2018;391:1622.`;
         } else {
           // Generate comprehensive explanations for other advanced neurology cases
           const explanationTemplates = {
@@ -2313,7 +2298,6 @@ The combination approach addresses multiple pathways: ACE inhibition reduces int
 
 Management includes nephrology referral, cardiovascular risk assessment, bone disease monitoring (phosphate, PTH, vitamin D), and preparation for renal replacement therapy if progression continues despite optimal medical therapy.
 
-References: NICE NG28 Diabetes Guidelines, KDIGO CKD Guidelines 2024, NEJM 2000;342:145 (HOPE trial).`;
         } else if (subcategory === 'thyroid-disorders' && i === 137) {
           return `This ${age}-year-old ${gender} presents with Graves' disease: heat intolerance, weight loss, palpitations, suppressed TSH, elevated free T4, and diffuse increased uptake on thyroid scan. This autoimmune hyperthyroidism requires anti-thyroid medication as first-line therapy.
 
@@ -2325,7 +2309,6 @@ Treatment options include anti-thyroid drugs (carbimazole 15-40mg daily), radioi
 
 Monitoring includes thyroid function every 4-6 weeks initially, watching for carbimazole side effects (agranulocytosis in 0.3%), and assessing for ophthalmopathy requiring specialist management.
 
-References: NICE CG145 Thyroid Disease, British Thyroid Association Guidelines 2014, Lancet 2016;388:906.`;
         } else {
           return `This ${age}-year-old ${gender} presents with complex ${subcategory.replace('-', ' ')} requiring specialist endocrine evaluation. The hormonal patterns, clinical features, and biochemical results guide diagnosis and management decisions. Dynamic testing may be required for definitive diagnosis. Management follows current endocrine society guidelines emphasizing evidence-based protocols, hormone replacement when indicated, and specialist endocrine input for complex cases requiring advanced therapeutic interventions.`;
         }
@@ -2385,7 +2368,6 @@ Other options are incorrect: ACE inhibitors provide antiproteinuric effects but 
 
 Management includes monitoring for steroid complications (diabetes, osteoporosis, infection), prophylactic measures (PPI, calcium/vitamin D, pneumococcal vaccination), and nephrology follow-up for relapsing disease requiring steroid-sparing agents.
 
-References: NICE CG182 Chronic Kidney Disease, KDIGO Glomerular Disease Guidelines 2021.`,
           
           `This ${age}-year-old ${gender} with diabetes presents with diabetic kidney disease: declining eGFR 25 ml/min, proteinuria, and hypertension 160/95 mmHg. This represents CKD stage 4 requiring comprehensive management to slow progression and prepare for renal replacement therapy.
 
@@ -2395,7 +2377,6 @@ Individual options: ACE inhibitor monotherapy reduces progression by 50% but com
 
 Management requires nephrology referral, cardiovascular risk reduction (statin therapy), bone disease prevention (phosphate control, vitamin D), and anemia management (ESA if Hb <100g/L with iron deficiency correction).
 
-References: NICE CG182 CKD Guidelines, KDIGO CKD Guidelines 2024, Diabetes Care 2022;45:S175.`,
           
           `This ${age}-year-old ${gender} presents with post-infectious glomerulonephritis: AKI, oliguria, pulmonary edema following streptococcal infection, with red cell casts on urinalysis. This classic presentation requires supportive management as most cases recover spontaneously.
 
@@ -2405,7 +2386,6 @@ Other diagnoses are less likely: IgA nephropathy typically shows concurrent hema
 
 Management includes fluid restriction, loop diuretics for pulmonary edema, antihypertensive therapy, and monitoring for recovery. Most patients recover completely within 6-8 weeks. Dialysis may be required for severe fluid overload or uremia.
 
-References: KDIGO Glomerular Disease Guidelines 2021, Clin J Am Soc Nephrol 2008;3:1271.`
         ];
         return scenarios[i % 3];
       })(),
@@ -2478,7 +2458,6 @@ Option E (Myelodysplastic syndrome) is incorrect because MDS typically shows <20
 
 Management requires urgent hematology referral, infection prevention (neutropenic precautions), transfusion support, and induction chemotherapy with cytarabine plus daunorubicin (7+3 regimen) aiming for complete remission.
 
-References: WHO Classification of Hematologic Malignancies 2022, NICE CG151 Haematological Cancers, Blood 2019;133:1636.`;
         } else if (subcategory === 'lymphoma' && i === 103) {
           return `This ${age}-year-old ${gender} presents with classic Hodgkin lymphoma: painless lymphadenopathy, night sweats, weight loss (B symptoms), and Reed-Sternberg cells on lymph node biopsy. The presence of Reed-Sternberg cells is diagnostic for Hodgkin lymphoma.
 
@@ -2494,7 +2473,6 @@ Option E (Burkitt lymphoma) is incorrect because BL shows small uniform cells wi
 
 Staging includes CT/PET scanning for disease extent. Early-stage HL (stages I-II) has >90% cure rate with radiotherapy ± chemotherapy. Advanced disease requires ABVD chemotherapy with excellent long-term survival rates.
 
-References: WHO Classification of Lymphoid Neoplasms 2017, NICE CG52 Haematological Cancers, Lancet 2012;380:848.`;
         } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic hematological assessment. The clinical features, blood film findings, and laboratory results guide diagnosis and management decisions. Investigation includes full blood count, blood film review, coagulation studies, and bone marrow examination when indicated. Management follows current guidelines emphasizing evidence-based protocols and specialist hematology input for complex cases.`;
         }
