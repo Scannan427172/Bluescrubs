@@ -86,7 +86,7 @@ export default function PLAB1New() {
         feedback += `✓ The correct answer (${String.fromCharCode(65 + correctAnswerIndex)}) is right because ${cleanCorrectExplanation}`;
       }
       
-      return translateMedicalContent(feedback || explanation);
+      return feedback || explanation;
     }
   };
 
