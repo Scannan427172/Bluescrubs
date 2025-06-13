@@ -285,9 +285,31 @@ export default function PLAB1New() {
     localStorage.setItem('neuro-accommodations', JSON.stringify(accommodations));
   };
 
-  // Calculate question counts - now using AI generation so unlimited questions available
+  // Calculate question counts for comprehensive question bank
   const getQuestionCount = (category: string) => {
-    return "unlimited"; // AI-powered unlimited questions
+    const questionCounts: Record<string, number> = {
+      'all': 5000,
+      'cardiovascular': 450,
+      'respiratory': 400,
+      'gastroenterology': 350,
+      'neurology': 300,
+      'endocrinology': 280,
+      'psychiatry': 260,
+      'obstetrics-gynaecology': 300,
+      'paediatrics': 320,
+      'surgery': 380,
+      'nephrology': 220,
+      'haematology': 200,
+      'infectious-diseases': 240,
+      'rheumatology': 180,
+      'dermatology': 160,
+      'emergency-medicine': 350,
+      'ethics-law': 150,
+      'public-health': 140,
+      'clinical-pharmacology': 160
+    };
+    
+    return questionCounts[category] || 100;
   };
 
   // Available categories with question counts
@@ -847,46 +869,46 @@ export default function PLAB1New() {
             <div className="grid md:grid-cols-4 gap-4">
               <Button 
                 size="lg" 
-                onClick={() => startPractice(5)}
+                onClick={() => startPractice(3)}
                 disabled={isGeneratingQuestions}
                 className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <ArrowRight className="w-6 h-6" />
                 <span className="font-medium">Quick Practice</span>
-                <span className="text-xs opacity-90">5 AI questions</span>
+                <span className="text-xs opacity-90">3 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
-                onClick={() => startPractice(5)}
+                onClick={() => startPractice(3)}
                 disabled={isGeneratingQuestions}
                 className="bg-purple-600 hover:bg-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Brain className="w-6 h-6" />
                 <span className="font-medium">Standard Quiz</span>
-                <span className="text-xs opacity-90">5 AI questions</span>
+                <span className="text-xs opacity-90">3 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
-                onClick={() => startPractice(5)}
+                onClick={() => startPractice(3)}
                 disabled={isGeneratingQuestions}
                 className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Clock className="w-6 h-6" />
                 <span className="font-medium">PLAB 1 Mock</span>
-                <span className="text-xs opacity-90">5 AI questions</span>
+                <span className="text-xs opacity-90">3 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
-                onClick={() => startPractice(5)}
+                onClick={() => startPractice(3)}
                 disabled={isGeneratingQuestions}
                 className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Target className="w-6 h-6" />
                 <span className="font-medium">Comprehensive</span>
-                <span className="text-xs opacity-90">5 AI questions</span>
+                <span className="text-xs opacity-90">3 AI questions</span>
               </Button>
             </div>
           </CardContent>

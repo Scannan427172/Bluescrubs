@@ -143,7 +143,7 @@ export async function generateMultipleQuestions(
     
     // Small delay between questions to avoid overwhelming the API
     if (i < count - 1) {
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 200));
     }
   }
   
