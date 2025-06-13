@@ -32,9 +32,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const limitedCount = Math.min(count, 3);
       console.log(`Generating ${limitedCount} questions for category: ${category}, difficulty: ${difficulty}`);
       
-      // Set timeout for the entire operation
+      // Set timeout for the entire operation  
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Question generation timeout')), 30000); // 30 second timeout
+        setTimeout(() => reject(new Error('Question generation timeout')), 120000); // 2 minute timeout
       });
 
       // Define subcategories for each medical specialty
@@ -73,6 +73,85 @@ export async function registerRoutes(app: Express): Promise<Server> {
         error: "Failed to generate questions",
         details: error instanceof Error ? error.message : "Unknown error"
       });
+    }
+  });
+
+  // Bulk question generation endpoint for creating comprehensive question banks
+  app.post('/api/generate-bulk-questions', async (req, res) => {
+    try {
+      const { categories, questionsPerCategory = 100 } = req.body;
+      
+      if (!categories || !Array.isArray(categories)) {
+        return res.status(400).json({ error: "Categories array is required" });
+      }
+
+      const allQuestions: any[] = [];
+      let totalGenerated = 0;
+
+      const subcategoriesMap: Record<string, string[]> = {
+        cardiovascular: ['heart-failure', 'arrhythmias', 'hypertension', 'coronary-artery-disease', 'valvular-disease'],
+        respiratory: ['COPD', 'asthma', 'pneumonia', 'lung-cancer', 'pulmonary-embolism'],
+        gastroenterology: ['IBD', 'liver-disease', 'peptic-ulcer', 'colorectal-cancer', 'pancreatitis'],
+        neurology: ['stroke', 'epilepsy', 'headache', 'dementia', 'multiple-sclerosis'],
+        endocrinology: ['diabetes', 'thyroid-disorders', 'adrenal-disorders', 'obesity', 'osteoporosis'],
+        psychiatry: ['depression', 'anxiety', 'psychosis', 'bipolar-disorder', 'substance-abuse'],
+        'obstetrics-gynaecology': ['pregnancy', 'labour', 'gynaecological-cancers', 'menstrual-disorders', 'contraception'],
+        paediatrics: ['neonatal', 'respiratory-infections', 'developmental', 'immunizations', 'child-abuse'],
+        surgery: ['general-surgery', 'orthopaedics', 'urology', 'vascular-surgery', 'emergency-surgery'],
+        nephrology: ['AKI', 'CKD', 'glomerulonephritis', 'electrolyte-disorders', 'dialysis'],
+        haematology: ['anaemia', 'bleeding-disorders', 'thrombosis', 'leukaemia', 'lymphoma'],
+        'infectious-diseases': ['sepsis', 'HIV', 'tuberculosis', 'tropical-diseases', 'antimicrobial-resistance'],
+        rheumatology: ['rheumatoid-arthritis', 'osteoarthritis', 'gout', 'lupus', 'vasculitis'],
+        dermatology: ['skin-cancer', 'eczema', 'psoriasis', 'infections', 'dermatitis'],
+        'emergency-medicine': ['trauma', 'poisoning', 'cardiac-arrest', 'shock', 'burns'],
+        'ethics-law': ['consent', 'confidentiality', 'end-of-life', 'medical-negligence', 'capacity'],
+        'public-health': ['epidemiology', 'health-promotion', 'screening', 'health-policy', 'global-health'],
+        'clinical-pharmacology': ['drug-interactions', 'adverse-reactions', 'prescribing', 'pharmacokinetics', 'therapeutics']
+      };
+
+      // Generate questions for each category
+      for (const category of categories) {
+        console.log(`Starting bulk generation for ${category}: ${questionsPerCategory} questions`);
+        
+        const subcategories = subcategoriesMap[category] || ['general'];
+        const difficulties = ['foundation', 'intermediate', 'advanced'];
+        const questionsPerDifficulty = Math.ceil(questionsPerCategory / 3);
+
+        // Generate questions for each difficulty level
+        for (const difficulty of difficulties) {
+          try {
+            const categoryQuestions = await generateMultipleQuestions(
+              category, 
+              subcategories, 
+              difficulty as any, 
+              questionsPerDifficulty
+            );
+            
+            allQuestions.push(...categoryQuestions);
+            totalGenerated += categoryQuestions.length;
+            
+            console.log(`Generated ${categoryQuestions.length} ${difficulty} questions for ${category}`);
+            
+            // Delay between categories
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+          } catch (error) {
+            console.error(`Failed to generate ${difficulty} questions for ${category}:`, error);
+          }
+        }
+      }
+
+      console.log(`Bulk generation complete: ${totalGenerated} questions generated`);
+      res.json({ 
+        questions: allQuestions, 
+        totalGenerated,
+        categories: categories.length,
+        questionsPerCategory 
+      });
+
+    } catch (error) {
+      console.error('Bulk question generation error:', error);
+      res.status(500).json({ error: 'Failed to generate bulk questions' });
     }
   });
 

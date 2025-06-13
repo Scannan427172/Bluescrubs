@@ -911,6 +911,49 @@ export default function PLAB1New() {
                 <span className="text-xs opacity-90">3 AI questions</span>
               </Button>
             </div>
+
+            {/* Bulk Question Generation Section */}
+            <div className="mt-8 pt-8 border-t border-gray-200">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900">Build Complete Question Bank</h3>
+                  <p className="text-sm text-gray-600">Generate comprehensive AI question database across all specialties</p>
+                </div>
+                <Button
+                  onClick={generateBulkQuestions}
+                  disabled={isBulkGenerating}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 disabled:opacity-50"
+                >
+                  {isBulkGenerating ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4 mr-2" />
+                      Generate 5000 Questions
+                    </>
+                  )}
+                </Button>
+              </div>
+              
+              {bulkProgress && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-blue-900">Generation Progress</span>
+                    <span className="text-sm text-blue-700">{bulkProgress.completed}/{bulkProgress.total} categories</span>
+                  </div>
+                  <div className="w-full bg-blue-200 rounded-full h-2">
+                    <div 
+                      className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${(bulkProgress.completed / bulkProgress.total) * 100}%` }}
+                    />
+                  </div>
+                  <p className="text-xs text-blue-600 mt-2">Current: {bulkProgress.currentCategory}</p>
+                </div>
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>
