@@ -37,6 +37,59 @@ export default function PLAB1New() {
     currentCategory: string;
   } | null>(null);
 
+  // Function to provide targeted explanations based on user's answer
+  const getTargetedExplanation = (question: any, userAnswer: string, isCorrect: boolean): string => {
+    if (!question.explanation) return 'Clinical explanation provided for educational purposes.';
+    
+    const explanation = question.explanation;
+    const userAnswerIndex = parseInt(userAnswer);
+    const correctAnswerIndex = question.correctAnswer;
+    
+    if (isCorrect) {
+      // User got it right - show why their answer is correct
+      const lines = explanation.split('\n');
+      const correctLine = lines.find(line => 
+        line.includes(`Option ${String.fromCharCode(65 + correctAnswerIndex)}`) && 
+        line.includes('CORRECT')
+      );
+      
+      if (correctLine) {
+        const cleanExplanation = correctLine.replace(/Option [A-E] \([^)]+\) is CORRECT because/, '').trim();
+        return translateMedicalContent(`✓ Your answer is correct. ${cleanExplanation}`);
+      }
+      
+      return translateMedicalContent('✓ Correct! ' + explanation.split('\n')[0]);
+    } else {
+      // User got it wrong - explain why their choice is wrong AND why correct answer is right
+      const lines = explanation.split('\n');
+      let feedback = '';
+      
+      // Find why user's answer is wrong
+      const wrongLine = lines.find(line => 
+        line.includes(`Option ${String.fromCharCode(65 + userAnswerIndex)}`) && 
+        line.includes('INCORRECT')
+      );
+      
+      if (wrongLine) {
+        const cleanWrongExplanation = wrongLine.replace(/Option [A-E] \([^)]+\) is INCORRECT because/, '').trim();
+        feedback += `✗ Your choice (${String.fromCharCode(65 + userAnswerIndex)}) is incorrect because ${cleanWrongExplanation}\n\n`;
+      }
+      
+      // Find why correct answer is right
+      const correctLine = lines.find(line => 
+        line.includes(`Option ${String.fromCharCode(65 + correctAnswerIndex)}`) && 
+        line.includes('CORRECT')
+      );
+      
+      if (correctLine) {
+        const cleanCorrectExplanation = correctLine.replace(/Option [A-E] \([^)]+\) is CORRECT because/, '').trim();
+        feedback += `✓ The correct answer (${String.fromCharCode(65 + correctAnswerIndex)}) is right because ${cleanCorrectExplanation}`;
+      }
+      
+      return translateMedicalContent(feedback || explanation);
+    }
+  };
+
   // Simple translation function
   const translateText = (text: string) => {
     if (!isTranslationMode || selectedLanguage === 'en') return text;
@@ -785,11 +838,11 @@ export default function PLAB1New() {
                     }
                   </p>
                   
-                  {/* Clean Explanation Text */}
+                  {/* Targeted Explanation Text */}
                   <div className={`mt-3 text-base leading-relaxed ${
                     isCorrect ? 'text-green-700' : 'text-red-700'
-                  }`}>
-                    {translateMedicalContent(currentQuestion.explanation || 'Clinical explanation provided for educational purposes.')}
+                  }`} style={{ whiteSpace: 'pre-line' }}>
+                    {getTargetedExplanation(currentQuestion, selectedAnswer, isCorrect)}
                   </div>
                 </div>
               </div>

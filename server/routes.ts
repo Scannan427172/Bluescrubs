@@ -34,7 +34,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Set timeout for the entire operation  
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Question generation timeout')), 120000); // 2 minute timeout
+        setTimeout(() => reject(new Error('Question generation timeout')), 30000); // 30 second timeout
       });
 
       // Define subcategories for each medical specialty
