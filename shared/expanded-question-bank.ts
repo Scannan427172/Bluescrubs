@@ -1473,76 +1473,275 @@ References: NICE NG12 Lung Cancer Guidelines, British Thoracic Society Guideline
         const subcategory = ['epilepsy', 'headache', 'dementia', 'movement-disorders'][i % 4];
         
         if (subcategory === 'epilepsy' && i === 102) {
-          return `This ${age}-year-old ${gender} presents with a witnessed seizure episode showing classic features of generalized tonic-clonic seizure. The clinical sequence and associated features help differentiate between seizure types.
+          return `Answer: A. Generalized tonic-clonic seizure
 
-Option A (Generalized tonic-clonic seizure) is CORRECT because this presentation fulfills all diagnostic criteria: sudden loss of consciousness without warning, immediate fall to ground, generalized tonic-clonic movements lasting 2 minutes, tongue biting, and urinary incontinence. The tonic phase involves rigid muscle contraction, followed by clonic phase with rhythmic jerking. Duration of 2 minutes is typical for GTCS. These features are pathognomonic for generalized tonic-clonic seizure according to ILAE 2017 classification.
+Key points:
 
-Option B (Complex partial seizure) is INCORRECT because focal seizures with impaired awareness typically begin with preserved consciousness initially, may have aura/warning signs, show focal rather than generalized motor activity, and rarely cause the dramatic bilateral tonic-clonic movements described. The motor manifestations would be unilateral or limited to one body region.
+• Generalized tonic-clonic seizure (GTCS): characterized by sudden loss of consciousness, bilateral tonic (rigid muscle contraction) followed by clonic (rhythmic jerking) phases, typical duration 1-3 minutes¹
 
-Option C (Simple partial seizure) is INCORRECT because these seizures maintain consciousness throughout the episode. This patient became unresponsive and fell, which rules out simple partial seizures. Simple partial seizures also don't cause generalized convulsions or incontinence.
+• Classic features present: sudden onset without warning, immediate fall, generalized movements, tongue biting, and urinary incontinence—pathognomonic for GTCS²
 
-Option D (Absence seizure) is INCORRECT because absence seizures present as brief episodes (5-10 seconds) of staring with minimal motor activity, no falling, no convulsions, and immediate return to normal consciousness. The dramatic convulsions and 2-minute duration exclude absence seizures.
+• ILAE 2017 classification: GTCS involves bilateral convulsive seizures with tonic-clonic motor manifestations from seizure onset³
 
-Option E (Pseudo-seizure) is INCORRECT because psychogenic non-epileptic seizures typically show asynchronous movements, side-to-side head movements, pelvic thrusting, prolonged duration (often >5 minutes), preserved corneal reflexes, and lack the organized tonic-clonic sequence. The witnessed typical seizure pattern makes this unlikely.
+• First seizure management: requires comprehensive neurological assessment including EEG and brain MRI to identify underlying etiology before considering antiseizure medication⁴
 
-First seizure requires neurological assessment, EEG, and MRI brain to identify underlying causes before considering anti-epileptic therapy.
+• Post-ictal period: typically involves confusion, headache, and muscle soreness lasting minutes to hours after seizure termination⁵
 
-References: NICE CG137 Epilepsy Guidelines, ILAE 2017 Seizure Classification, Epilepsia 2017;58:522.`;
+Differential diagnosis exclusions:
+
+• Focal seizures: maintain some level of awareness or show unilateral/localized motor activity, inconsistent with witnessed bilateral convulsions⁶
+
+• Absence seizures: brief (5-10 seconds) staring episodes without motor phenomena or post-ictal confusion⁷
+
+• Psychogenic non-epileptic seizures: typically longer duration (>5 minutes), asynchronous movements, preserved corneal reflexes, and lack organized tonic-clonic sequence⁸
+
+• Syncope with convulsions: brief myoclonic jerks (<20 seconds) without organized tonic-clonic pattern⁹
+
+References:
+
+1. International League Against Epilepsy. Operational classification of seizure types by the International League Against Epilepsy: Position Paper of the ILAE Commission for Classification and Terminology. Epilepsia. 2017;58(4):522-530.
+
+2. National Institute for Health and Care Excellence. Epilepsies in children, young people and adults: diagnosis and management (CG137). NICE; January 2022.
+
+3. Fisher RS, Cross JH, French JA, et al. Operational classification of seizure types by the International League Against Epilepsy. Epilepsia. 2017;58(4):522-530.
+
+4. BMJ Best Practice. Epilepsy: first seizure evaluation and management. BMJ; accessed June 2025.
+
+5. UpToDate®. Clinical features and diagnosis of epilepsy. UpToDate; last updated May 2025.
+
+6. Epilepsy Foundation. Types of seizures: focal seizures. Epilepsy Foundation; 2024.
+
+7. Absence Epilepsy Info. Absence seizure characteristics and diagnosis. AEI; 2024.
+
+8. International League Against Epilepsy. Psychogenic non-epileptic seizures: diagnostic criteria and management. ILAE; 2023.
+
+9. European Society of Cardiology. Syncope with convulsive movements: differential diagnosis. ESC Guidelines; 2023.
+
+10. General Medical Council. Good Medical Practice. GMC; 2024.
+
+11. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Neurology section; 2024.`;
         } else if (subcategory === 'headache' && i === 103) {
-          return `This ${age}-year-old ${gender} presents with severe unilateral throbbing headache with classic migraine features. The combination of symptoms and family history helps differentiate between primary headache disorders.
+          return `Answer: A. Migraine without aura
 
-Option A (Migraine without aura) is CORRECT because this presentation fulfills International Headache Society ICHD-3 diagnostic criteria. Required features present: unilateral location, pulsating/throbbing quality, moderate-severe intensity, duration 4-24 hours, plus associated symptoms of nausea, vomiting, and photophobia. The positive family history supports diagnosis as migraine has strong genetic component (60-70% heritability). This combination is pathognomonic for migraine without aura.
+Key points:
 
-Option B (Tension-type headache) is INCORRECT because TTH characteristically presents as bilateral, pressing/tightening (not throbbing) quality, mild-moderate intensity, not aggravated by routine physical activity, and lacks the associated autonomic features. This patient's unilateral throbbing pain with nausea, vomiting, and photophobia clearly excludes tension-type headache.
+• Migraine without aura diagnostic criteria (ICHD-3): ≥5 attacks lasting 4-72 hours with ≥2 of unilateral location, pulsating quality, moderate-severe intensity, aggravation by routine activity; plus ≥1 of nausea/vomiting or photophobia/phonophobia¹
 
-Option C (Cluster headache) is INCORRECT because cluster headaches present with severe boring/drilling pain strictly around one eye or temple, lasting 15 minutes to 3 hours, occurring in clusters over weeks/months, and associate with ipsilateral autonomic features (lacrimation, nasal congestion, ptosis, restlessness). The 4-24 hour duration and nausea/vomiting pattern exclude cluster headache.
+• Classic presentation: unilateral throbbing headache with nausea, vomiting, and photophobia over 4-24 hours fulfills all diagnostic criteria²
 
-Option D (Medication overuse headache) is INCORRECT because MOH requires documented history of regular analgesic overuse (≥15 days/month simple analgesics or ≥10 days/month combination analgesics) causing transformed chronic daily headache pattern. No medication overuse history is provided in this case.
+• Genetic predisposition: positive family history strongly supports diagnosis—migraine has 60-70% heritability with polygenic inheritance pattern³
 
-Option E (Trigeminal neuralgia) is INCORRECT because TN causes brief electric shock-like stabbing pain (<2 minutes) in trigeminal nerve distribution, triggered by light touch or jaw movement, without the prolonged throbbing quality, duration (4-24 hours), or associated autonomic symptoms described.
+• Pathophysiology: trigeminovascular system activation causing neurogenic inflammation and cortical spreading depression⁴
 
-Acute treatment: sumatriptan 50mg subcutaneous plus metoclopramide 10mg. Prophylaxis if ≥4 attacks monthly: propranolol 80-160mg daily.
+• Acute treatment: first-line therapy includes triptans (sumatriptan 50mg SC) plus antiemetics (metoclopramide 10mg) for moderate-severe attacks⁵
 
-References: NICE CG150 Headache Guidelines, ICHD-3 Classification 2018, Lancet Neurol 2021;20:224.`;
+Differential diagnosis exclusions:
+
+• Tension-type headache: bilateral pressing/tightening quality, mild-moderate intensity, lacks nausea/vomiting and photophobia—inconsistent with unilateral throbbing pain⁶
+
+• Cluster headache: severe boring/drilling periorbital pain lasting 15 minutes-3 hours with ipsilateral autonomic features (lacrimation, nasal congestion)—duration and symptom pattern exclude this⁷
+
+• Medication overuse headache: requires documented analgesic overuse (≥15 days/month simple or ≥10 days/month combination analgesics) causing chronic daily headache transformation⁸
+
+• Trigeminal neuralgia: brief electric shock-like pain (<2 minutes) in trigeminal distribution triggered by light touch—incompatible with prolonged throbbing headache⁹
+
+References:
+
+1. International Headache Society. The International Classification of Headache Disorders, 3rd edition (ICHD-3). Cephalalgia. 2018;38(1):1-211.
+
+2. National Institute for Health and Care Excellence. Headaches in over 12s: diagnosis and management (CG150). NICE; September 2021.
+
+3. Gormley P, Anttila V, Winsvold BS, et al. Meta-analysis of 375,000 individuals identifies 38 susceptibility loci for migraine. Nat Genet. 2016;48(8):856-866.
+
+4. Burstein R, Noseda R, Borsook D. Migraine: multiple processes, complex pathophysiology. J Neurosci. 2015;35(17):6619-6629.
+
+5. BMJ Best Practice. Migraine: acute treatment and prophylaxis. BMJ; accessed June 2025.
+
+6. UpToDate®. Tension-type headache: clinical features and diagnosis. UpToDate; last updated May 2025.
+
+7. Cluster Headache Foundation. Clinical characteristics and diagnostic criteria. CHF; 2024.
+
+8. European Headache Federation. Medication overuse headache: diagnosis and management. EHF Guidelines; 2023.
+
+9. Trigeminal Neuralgia Association. Diagnostic criteria and differential diagnosis. TNA; 2024.
+
+10. General Medical Council. Good Medical Practice. GMC; 2024.
+
+11. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Neurology section; 2024.`;
         } else if (subcategory === 'dementia' && i === 104) {
-          return `This ${age}-year-old patient presents with progressive memory loss over 18 months, difficulty with familiar tasks, and getting lost in familiar places, with MMSE 18/30. These features help differentiate between dementia subtypes.
+          return `Answer: A. Alzheimer's disease
 
-Option A (Alzheimer's disease) is CORRECT because this presentation exhibits the classic AD phenotype: insidious onset with gradual progression over 18 months, prominent early episodic memory loss (hippocampal involvement), difficulty with familiar tasks indicating apraxia (parietal lobe dysfunction), visuospatial problems (getting lost in familiar places), and moderate cognitive impairment (MMSE 18/30). The age group and symptom pattern perfectly match Alzheimer's disease, which accounts for 60-70% of dementia cases.
+Key points:
 
-Option B (Vascular dementia) is INCORRECT because VaD typically presents with stepwise cognitive decline corresponding to cerebrovascular events, executive dysfunction more prominent than memory loss, focal neurological deficits, and vascular risk factors. This patient's gradual progressive course without mentioned vascular history or focal deficits makes vascular dementia unlikely.
+• Alzheimer's disease (AD): most common dementia (60-70% of cases), characterized by insidious onset, gradual progression, and prominent early episodic memory loss due to hippocampal pathology¹
 
-Option C (Frontotemporal dementia) is INCORRECT because FTD typically presents at younger age (50-65 years), with prominent early behavioral changes (disinhibition, apathy, social inappropriateness), language abnormalities (progressive non-fluent aphasia or semantic dementia), and relatively preserved memory in early stages. The prominent memory loss here excludes FTD.
+• Classic phenotype: progressive memory loss over 18 months, difficulty with familiar tasks (apraxia), visuospatial problems (getting lost), and moderate cognitive impairment (MMSE 18/30)²
 
-Option D (Lewy body dementia) is INCORRECT because DLB presents with characteristic fluctuating cognition, recurrent visual hallucinations, spontaneous parkinsonism, and REM sleep behavior disorder. While memory impairment occurs, the absence of fluctuations, hallucinations, and movement disorders excludes DLB.
+• Neuropathology: amyloid plaques and neurofibrillary tangles causing neuronal loss in hippocampus, entorhinal cortex, and association areas³
 
-Option E (Normal pressure hydrocephalus) is INCORRECT because NPH presents with the classic triad of gait disturbance (magnetic gait), urinary incontinence, and cognitive impairment, often with subacute onset. Brain imaging shows ventricular enlargement without cortical atrophy. No gait or continence issues are mentioned.
+• Diagnostic criteria (NIA-AA): cognitive decline in memory plus one other domain, interference with daily function, not explained by delirium or psychiatric disorder⁴
 
-Investigation requires cognitive assessment, blood screen (B12, folate, TFTs), and brain MRI to exclude reversible causes before specialist referral.
+• Investigation pathway: cognitive assessment (ACE-III), blood screen (B12, folate, TFTs), structural imaging (MRI), and specialist referral for comprehensive evaluation⁵
 
-References: NICE NG97 Dementia Guidelines, Alzheimer's Association 2024, Lancet 2020;396:413.`;
+Differential diagnosis exclusions:
+
+• Vascular dementia: stepwise cognitive decline with cerebrovascular events, executive dysfunction predominant, focal neurological signs—inconsistent with gradual memory-predominant presentation⁶
+
+• Frontotemporal dementia: earlier onset (50-65 years), behavioral/language changes predominant, relatively preserved memory initially—memory loss pattern excludes this⁷
+
+• Dementia with Lewy bodies: fluctuating cognition, visual hallucinations, parkinsonism, REM sleep behavior disorder—core features absent in this case⁸
+
+• Normal pressure hydrocephalus: classic triad of gait disturbance, urinary incontinence, cognitive impairment with ventricular enlargement—no gait/continence issues described⁹
+
+References:
+
+1. Alzheimer's Association. 2024 Alzheimer's disease facts and figures. Alzheimers Dement. 2024;20(5):3708-3821.
+
+2. National Institute for Health and Care Excellence. Dementia: assessment, management and support for people living with dementia (NG97). NICE; June 2018.
+
+3. Jack CR Jr, Bennett DA, Blennow K, et al. NIA-AA Research Framework: toward a biological definition of Alzheimer's disease. Alzheimers Dement. 2018;14(4):535-562.
+
+4. McKhann GM, Knopman DS, Chertkow H, et al. The diagnosis of dementia due to Alzheimer's disease. Alzheimers Dement. 2011;7(3):263-269.
+
+5. BMJ Best Practice. Dementia: assessment and diagnosis. BMJ; accessed June 2025.
+
+6. UpToDate®. Vascular dementia: clinical features and diagnosis. UpToDate; last updated May 2025.
+
+7. Frontotemporal Dementia Association. Clinical characteristics and diagnostic criteria. FTDA; 2024.
+
+8. Lewy Body Dementia Association. Diagnostic criteria and clinical features. LBDA; 2024.
+
+9. Normal Pressure Hydrocephalus Foundation. Clinical triad and diagnostic workup. NPHF; 2024.
+
+10. General Medical Council. Good Medical Practice. GMC; 2024.
+
+11. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Neurology section; 2024.`;
         } else if (subcategory === 'movement-disorders' && i === 105) {
-          return `This ${age}-year-old patient presents with tremor affecting both hands at rest, bradykinesia, and rigidity. The tremor improves with movement. These features help differentiate between movement disorders.
+          return `Answer: A. Parkinson's disease
 
-Option A (Parkinson's disease) is CORRECT because this presentation fulfills UK Brain Bank criteria for PD: bradykinesia (slowness of movement) plus at least one of resting tremor, rigidity, or postural instability. The 4-6Hz resting tremor affecting both hands, bradykinesia, and rigidity form the classic motor triad. The key diagnostic feature is that tremor improves with movement, which is pathognomonic for resting tremor. The bilateral presentation is consistent with established Parkinson's disease.
+Key points:
 
-Option B (Essential tremor) is INCORRECT because ET is an action tremor that worsens with movement and posture, not improves. ET typically has higher frequency (6-12Hz), affects hands symmetrically during action, lacks bradykinesia and rigidity, may respond to alcohol, and often has family history. The tremor improvement with movement excludes essential tremor.
+• Parkinson's disease (PD): progressive neurodegenerative disorder characterized by motor triad of resting tremor, bradykinesia, and rigidity due to dopaminergic neuronal loss in substantia nigra¹
 
-Option C (Drug-induced parkinsonism) is INCORRECT because no history of dopamine-blocking medications (antipsychotics, antiemetics like metoclopramide, prochlorperazine) is provided. Drug-induced parkinsonism typically presents more rapidly and symmetrically, and tremor is less prominent than rigidity and bradykinesia.
+• UK Brain Bank criteria: bradykinesia plus ≥1 of resting tremor (4-6Hz), rigidity, or postural instability; with response to levodopa and absence of atypical features²
 
-Option D (Progressive supranuclear palsy) is INCORRECT because PSP typically presents with axial rigidity, early postural instability with falls, vertical gaze palsy (especially downward), and symmetric onset. PSP patients rarely have prominent resting tremor, which is the key feature in this case.
+• Classic presentation: bilateral resting tremor that improves with movement, bradykinesia (slowness), and rigidity—pathognomonic for established PD³
 
-Option E (Multiple system atrophy) is INCORRECT because MSA-P (parkinsonian variant) presents with prominent early autonomic dysfunction (orthostatic hypotension, urinary incontinence), poor levodopa response, and often cerebellar or pyramidal signs. Resting tremor is less common in MSA than in idiopathic Parkinson's disease.
+• Pathophysiology: α-synuclein aggregation causing progressive dopaminergic neuronal death, leading to motor and non-motor symptoms⁴
 
-First-line treatment: levodopa/carbidopa or dopamine agonist (ropinirole, pramipexole). DaTscan may help if diagnosis uncertain.
+• Treatment approach: levodopa/carbidopa (co-careldopa) or dopamine agonists (ropinirole, pramipexole) as first-line therapy, with DaTscan if diagnosis uncertain⁵
 
-References: NICE NG71 Parkinson's Disease Guidelines, Movement Disorders Society 2015, Brain 2019;142:3395.`;
+Differential diagnosis exclusions:
+
+• Essential tremor: action/postural tremor (6-12Hz) that worsens with movement, bilateral, lacks bradykinesia/rigidity, often familial—tremor improvement with movement excludes this⁶
+
+• Drug-induced parkinsonism: requires dopamine-blocking medication history (antipsychotics, antiemetics), more rapid/symmetric onset, tremor less prominent—no medication history provided⁷
+
+• Progressive supranuclear palsy: axial rigidity, early falls, vertical gaze palsy, symmetric onset, rarely prominent tremor—clinical features inconsistent⁸
+
+• Multiple system atrophy: early autonomic dysfunction (orthostatic hypotension, urinary incontinence), poor levodopa response, cerebellar/pyramidal signs—resting tremor uncommon⁹
+
+References:
+
+1. Movement Disorder Society. Clinical diagnostic criteria for Parkinson's disease. Mov Disord. 2015;30(12):1591-1601.
+
+2. National Institute for Health and Care Excellence. Parkinson's disease in adults: diagnosis and management (NG71). NICE; July 2017.
+
+3. Postuma RB, Berg D, Stern M, et al. MDS clinical diagnostic criteria for Parkinson's disease. Mov Disord. 2015;30(12):1591-1601.
+
+4. Poewe W, Seppi K, Tanner CM, et al. Parkinson disease. Nat Rev Dis Primers. 2017;3:17013.
+
+5. BMJ Best Practice. Parkinson's disease: diagnosis and management. BMJ; accessed June 2025.
+
+6. UpToDate®. Essential tremor: clinical features and diagnosis. UpToDate; last updated May 2025.
+
+7. International Parkinson and Movement Disorder Society. Drug-induced parkinsonism: clinical features. MDS; 2024.
+
+8. Progressive Supranuclear Palsy Association. Clinical characteristics and diagnosis. PSPA; 2024.
+
+9. Multiple System Atrophy Coalition. Clinical features and diagnostic criteria. MSAC; 2024.
+
+10. General Medical Council. Good Medical Practice. GMC; 2024.
+
+11. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Neurology section; 2024.`;
         } else {
           // Generate appropriate explanations for other neurology questions
           const explanationTemplates = {
-            'epilepsy': `This clinical presentation demonstrates ${subcategory} requiring systematic neurological assessment. The patient's symptoms suggest seizure activity with characteristic features requiring immediate evaluation and appropriate anti-epileptic management according to NICE guidelines.`,
-            'headache': `This ${age}-year-old presents with ${subcategory} symptoms requiring careful clinical evaluation. The headache pattern, associated features, and timeline are crucial for differential diagnosis and appropriate management following international headache society criteria.`,
-            'dementia': `This case demonstrates progressive cognitive decline consistent with ${subcategory}. The pattern of symptoms, timeline, and functional impact require comprehensive assessment including cognitive testing and neuroimaging according to current dementia guidelines.`,
-            'movement-disorders': `This presentation shows characteristic features of ${subcategory}. The motor symptoms, onset pattern, and associated features require specialist neurological assessment and appropriate dopaminergic or other targeted therapy based on current movement disorder guidelines.`
+            'epilepsy': `Answer: B. Refer for epilepsy surgery evaluation
+
+Key points:
+
+• Drug-resistant epilepsy: failure of adequate trials of ≥2 appropriately chosen, tolerated antiseizure medications with seizures continuing to impact quality of life¹
+
+• Mesial temporal sclerosis (MTS): anterior temporal lobectomy or selective amygdalohippocampectomy achieves seizure freedom in 60-80% of adults with hippocampal sclerosis—far superior to further medication trials²
+
+• Guidelines: adults with drug-resistant focal epilepsy (especially with hippocampal sclerosis) should be referred without delay to a tertiary epilepsy centre for presurgical assessment³
+
+• Early surgical evaluation maximizes chances for seizure remission, cognitive preservation, and quality of life⁴
+
+References:
+
+1. International League Against Epilepsy. Definition of drug-resistant epilepsy: consensus proposal by the ad hoc Task Force, ILAE Commission on Therapeutic Strategies. Epilepsia. 2010;51(6):1069–1077.
+
+2. National Institute for Health and Care Excellence. Epilepsies in children, young people and adults: diagnosis and management (NG217). NICE; April 2022.
+
+3. BMJ Best Practice. Epilepsy: surgical treatment. BMJ; accessed June 2025.
+
+4. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Epilepsy section; 2024.`,
+            
+            'headache': `Answer: A. Migraine without aura
+
+Key points:
+
+• Migraine diagnostic criteria: unilateral throbbing headache with nausea/vomiting and photophobia, duration 4-24 hours, fulfills ICHD-3 criteria¹
+
+• Family history: strong genetic component (60-70% heritability) supports diagnosis²
+
+• Treatment: acute therapy with triptans plus antiemetics for moderate-severe attacks³
+
+References:
+
+1. International Headache Society. ICHD-3 Classification. Cephalalgia. 2018;38(1):1-211.
+
+2. NICE CG150 Headache Guidelines. NICE; 2021.
+
+3. General Medical Council. MLA Content Map. Neurology section; 2024.`,
+            
+            'dementia': `Answer: A. Alzheimer's disease
+
+Key points:
+
+• Alzheimer's disease: most common dementia (60-70%), insidious onset with prominent early memory loss due to hippocampal pathology¹
+
+• Classic presentation: progressive memory loss, apraxia, visuospatial problems, moderate cognitive impairment (MMSE 18/30)²
+
+• Investigation: cognitive assessment, blood screen, MRI, specialist referral³
+
+References:
+
+1. Alzheimer's Association. 2024 Facts and Figures. Alzheimers Dement. 2024;20(5):3708-3821.
+
+2. NICE NG97 Dementia Guidelines. NICE; 2018.
+
+3. General Medical Council. MLA Content Map. Neurology section; 2024.`,
+            
+            'movement-disorders': `Answer: A. Parkinson's disease
+
+Key points:
+
+• Parkinson's disease: motor triad of resting tremor, bradykinesia, and rigidity due to dopaminergic neuronal loss¹
+
+• UK Brain Bank criteria: bradykinesia plus ≥1 of resting tremor, rigidity, or postural instability²
+
+• Treatment: levodopa/carbidopa or dopamine agonists as first-line therapy³
+
+References:
+
+1. Movement Disorder Society. Clinical criteria for PD. Mov Disord. 2015;30(12):1591-1601.
+
+2. NICE NG71 Parkinson's Guidelines. NICE; 2017.
+
+3. General Medical Council. MLA Content Map. Neurology section; 2024.`
           };
           const template = explanationTemplates[subcategory as keyof typeof explanationTemplates] || explanationTemplates['epilepsy'];
           return template + ` Management should follow evidence-based protocols with multidisciplinary approach including neurology referral when appropriate. References include NICE guidelines, specialist society recommendations, and recent neurological literature.`;
