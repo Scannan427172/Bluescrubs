@@ -382,8 +382,8 @@ export default function PLAB1New() {
   // If no session started, show the landing page
   if (!sessionStarted && !isGeneratingQuestions) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <div className="max-w-6xl mx-auto">
+      <div className="min-h-screen bg-gray-50 p-4 pb-24">
+        <div className="max-w-6xl mx-auto mb-16">
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">{translateText('PLAB 1 Practice')}</h1>
@@ -612,8 +612,8 @@ export default function PLAB1New() {
   // Loading state
   if (isGeneratingQuestions) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Card className="w-full max-w-md">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center pb-24">
+        <Card className="w-full max-w-md mb-16">
           <CardContent className="p-8 text-center">
             <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Generating AI Medical Questions</h3>
@@ -632,8 +632,8 @@ export default function PLAB1New() {
     }).length;
     
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen bg-gray-50 p-4 pb-24">
+        <div className="max-w-4xl mx-auto mb-16">
           <Card>
             <CardContent className="p-8 text-center">
               <Award className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
@@ -689,8 +689,8 @@ export default function PLAB1New() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gray-50 p-4 pb-24">
+      <div className="max-w-4xl mx-auto mb-16">
         {/* Progress Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
