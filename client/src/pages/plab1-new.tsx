@@ -1060,6 +1060,7 @@ export default function PLAB1New() {
                   <div className="space-y-2">
                     {currentQuestion.references.map((reference, index) => {
                       const getReferenceUrl = (ref: string) => {
+                        // NICE Guidelines - Updated 2025 URLs
                         if (ref.includes('NICE CG')) {
                           const cgNumber = ref.match(/CG(\d+)/)?.[1];
                           if (cgNumber) return `https://www.nice.org.uk/guidance/cg${cgNumber}`;
@@ -1069,16 +1070,56 @@ export default function PLAB1New() {
                           if (ngNumber) return `https://www.nice.org.uk/guidance/ng${ngNumber}`;
                         }
                         if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
+                        
+                        // European Society of Cardiology - Updated URL
                         if (ref.includes('ESC')) return 'https://www.escardio.org/Guidelines';
+                        
+                        // British Thoracic Society - Updated URL
                         if (ref.includes('BTS')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/';
+                        
+                        // British National Formulary
                         if (ref.includes('BNF')) return 'https://bnf.nice.org.uk/';
+                        
+                        // New England Journal of Medicine
                         if (ref.includes('NEJM')) return 'https://www.nejm.org/';
+                        
+                        // The Lancet
                         if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
+                        
+                        // British Medical Journal
                         if (ref.includes('BMJ')) return 'https://www.bmj.com/';
+                        
+                        // KDIGO Guidelines
                         if (ref.includes('KDIGO')) return 'https://kdigo.org/guidelines/';
+                        
+                        // World Health Organization
                         if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
+                        
+                        // International League Against Epilepsy
                         if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
+                        
+                        // Association of British Neurologists
                         if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
+                        
+                        // Additional Medical Organizations - 2025 URLs
+                        if (ref.includes('AHA/ACC')) return 'https://www.ahajournals.org/guidelines';
+                        if (ref.includes('AAN')) return 'https://www.aan.com/Guidelines/';
+                        if (ref.includes('British Thyroid Association')) return 'https://www.british-thyroid-association.org/guidelines/';
+                        if (ref.includes('Endocrine Society')) return 'https://www.endocrine.org/clinical-practice-guidelines';
+                        if (ref.includes('Renal Association')) return 'https://renal.org/guidelines/';
+                        if (ref.includes('BSH')) return 'https://b-s-h.org.uk/guidelines/';
+                        if (ref.includes('EULAR')) return 'https://www.eular.org/recommendations-management';
+                        if (ref.includes('BSR')) return 'https://www.rheumatology.org.uk/practice-quality/guidelines';
+                        if (ref.includes('IDSA')) return 'https://www.idsociety.org/practice-guideline/';
+                        if (ref.includes('PHE')) return 'https://www.gov.uk/government/organisations/uk-health-security-agency';
+                        if (ref.includes('GOLD')) return 'https://goldcopd.org/2024-gold-report/';
+                        if (ref.includes('ERS')) return 'https://ers.app/guidelines/';
+                        
+                        // Specific condition guidelines
+                        if (ref.includes('McDonald Criteria')) return 'https://www.nationalmssociety.org/What-is-MS/Diagnosing-MS/McDonald-Criteria';
+                        if (ref.includes('Movement Disorders Society')) return 'https://www.movementdisorders.org/MDS/About/Movement-Disorder-Overviews/';
+                        if (ref.includes('International Headache Society')) return 'https://ichd-3.org/';
+                        
                         return null;
                       };
 
@@ -1094,6 +1135,21 @@ export default function PLAB1New() {
                                           reference.includes('WHO') ? 'WHO' :
                                           reference.includes('ILAE') ? 'ILAE' :
                                           reference.includes('ABN') ? 'ABN' :
+                                          reference.includes('AHA/ACC') ? 'AHA' :
+                                          reference.includes('AAN') ? 'AAN' :
+                                          reference.includes('British Thyroid Association') ? 'BTA' :
+                                          reference.includes('Endocrine Society') ? 'ENDO' :
+                                          reference.includes('Renal Association') ? 'RENAL' :
+                                          reference.includes('BSH') ? 'BSH' :
+                                          reference.includes('EULAR') ? 'EULAR' :
+                                          reference.includes('BSR') ? 'BSR' :
+                                          reference.includes('IDSA') ? 'IDSA' :
+                                          reference.includes('PHE') ? 'UKHSA' :
+                                          reference.includes('GOLD') ? 'GOLD' :
+                                          reference.includes('ERS') ? 'ERS' :
+                                          reference.includes('McDonald') ? 'MS' :
+                                          reference.includes('Movement Disorders') ? 'MDS' :
+                                          reference.includes('International Headache') ? 'IHS' :
                                           'REFERENCE';
 
                       return (
