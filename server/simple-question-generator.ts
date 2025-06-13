@@ -136,7 +136,7 @@ export function generateSimpleQuestion(
           "Irritable bowel syndrome"
         ],
         correctAnswer: 1,
-        explanation: "Continuous inflammation from rectum extending proximally is characteristic of ulcerative colitis, unlike the skip lesions seen in Crohn's disease.",
+        explanation: "Option B (Ulcerative colitis) is CORRECT because continuous inflammation from rectum extending proximally is the hallmark of ulcerative colitis. BSG guidelines state UC shows continuous mucosal involvement starting from rectum, unlike Crohn's disease which has skip lesions and transmural inflammation.\n\nOption A (Crohn's disease) is INCORRECT because Crohn's shows skip lesions with normal mucosa between inflamed areas, transmural inflammation, and can affect any part of the GI tract, not continuous rectal involvement.\n\nOption C (Infectious colitis) is INCORRECT because infectious causes typically present acutely over days/weeks, not chronic 3-month symptoms, and usually resolve with appropriate treatment.\n\nOption D (IBS) is INCORRECT because IBS doesn't cause bloody diarrhea, weight loss, or endoscopic inflammation - it's a functional disorder with normal colonoscopy findings.",
         references: [
           {
             text: "NICE CG166: Inflammatory bowel disease - Section 1.1.2 'Ulcerative colitis shows continuous mucosal inflammation starting from the rectum'",
@@ -161,7 +161,7 @@ export function generateSimpleQuestion(
           "Barium meal"
         ],
         correctAnswer: 1,
-        explanation: "Coffee-ground vomiting suggests upper GI bleeding. Initial management involves IV PPI therapy and resuscitation before considering endoscopy based on severity.",
+        explanation: "Option B (IV PPI and resuscitation) is CORRECT because coffee-ground vomiting indicates upper GI bleeding requiring immediate IV PPI therapy and hemodynamic stabilization. NICE guidelines recommend IV PPI as first-line treatment for suspected non-variceal upper GI bleeding before endoscopy.\n\nOption A (Immediate endoscopy) is INCORRECT as first-line - endoscopy should be performed within 24 hours for stable patients, but IV PPI and resuscitation take priority for initial management.\n\nOption C (H. pylori testing) is INCORRECT in acute bleeding - while important for long-term management of peptic ulcer disease, acute bleeding requires immediate hemostatic measures, not diagnostic testing.\n\nOption D (Barium meal) is INCORRECT because contrast studies are contraindicated in acute GI bleeding and provide no therapeutic benefit compared to endoscopy.",
         references: [
           {
             text: "NICE CG141: Upper gastrointestinal bleeding - Section 1.2.1 'Offer IV PPI therapy to people with suspected non-variceal upper GI bleeding'",
@@ -174,6 +174,31 @@ export function generateSimpleQuestion(
           {
             text: "BSG Guidelines for Upper GI Bleeding 2015: 'Coffee-ground vomiting indicates upper GI bleeding; IV omeprazole 80mg bolus followed by 8mg/hour infusion - Gut 64:1326-1340'",
             url: "https://gut.bmj.com/content/64/9/1326"
+          }
+        ]
+      },
+      {
+        stem: "A 45-year-old woman presents with right upper quadrant pain, jaundice, and fever. Blood tests show elevated bilirubin, ALP, and WCC. What is the most likely diagnosis?",
+        options: [
+          "Cholangitis",
+          "Hepatitis A",
+          "Choledocholithiasis",
+          "Cholecystitis"
+        ],
+        correctAnswer: 0,
+        explanation: "Option A (Cholangitis) is CORRECT because the triad of jaundice, fever, and RUQ pain (Charcot's triad) with elevated inflammatory markers indicates ascending cholangitis, a life-threatening biliary infection requiring urgent antibiotic therapy and biliary decompression.\n\nOption B (Hepatitis A) is INCORRECT because viral hepatitis typically causes hepatocellular injury (elevated ALT/AST) rather than obstructive pattern (elevated ALP/bilirubin) and doesn't usually present with fever and RUQ pain.\n\nOption C (Choledocholithiasis) is INCORRECT because bile duct stones alone cause painless jaundice without the systemic inflammatory response (fever, elevated WCC) seen in cholangitis.\n\nOption D (Cholecystitis) is INCORRECT because gallbladder inflammation doesn't typically cause jaundice unless complicated by Mirizzi syndrome or choledocholithiasis with secondary cholangitis.",
+        references: [
+          {
+            text: "NICE CG188: Gallstone disease - Section 1.5.1 'Charcot triad of fever, jaundice and RUQ pain suggests acute cholangitis requiring urgent treatment'",
+            url: "https://www.nice.org.uk/guidance/cg188"
+          },
+          {
+            text: "BSG Guidelines 2019: 'Cholangitis requires urgent antibiotics and biliary decompression within 24-48 hours - Gut 68:1449-1478'",
+            url: "https://gut.bmj.com/content/68/9/1449"
+          },
+          {
+            text: "Tokyo Guidelines 2018: 'Acute cholangitis severity assessment determines timing of biliary drainage - Journal of Hepato-Biliary-Pancreatic Sciences 25:17-30'",
+            url: "https://link.springer.com/article/10.1002/jhbp.512"
           }
         ]
       }
@@ -280,6 +305,110 @@ export function generateSimpleQuestion(
           {
             text: "WHO Guidelines for Depression 2016: 'SSRIs recommended as first-line antidepressants with evidence grade A for efficacy - Mental Health Action Plan 2013-2020'",
             url: "https://www.who.int/publications/i/item/9789241549332"
+          }
+        ]
+      }
+    ],
+    nephrology: [
+      {
+        stem: "A 68-year-old diabetic patient presents with progressive fatigue and ankle swelling. Blood tests show creatinine 180 μmol/L (was 90 μmol/L 6 months ago), eGFR 28 ml/min/1.73m². Urine shows 3+ proteinuria. What is the most appropriate initial management?",
+        options: [
+          "Start ACE inhibitor",
+          "Refer for urgent dialysis",
+          "Increase diuretic dose",
+          "Start calcium channel blocker"
+        ],
+        correctAnswer: 0,
+        explanation: "Option A (Start ACE inhibitor) is CORRECT because this patient has diabetic nephropathy with declining kidney function and proteinuria. NICE guidelines recommend ACE inhibitors as first-line therapy to slow progression of diabetic kidney disease by reducing proteinuria and glomerular pressure.\n\nOption B (Urgent dialysis) is INCORRECT because eGFR 28 ml/min indicates CKD stage 4, not requiring immediate dialysis - dialysis typically starts at eGFR <10-15 ml/min or symptomatic uremia.\n\nOption C (Increase diuretic) is INCORRECT as primary therapy - while diuretics help with fluid overload, ACE inhibitors are essential for nephroprotection in diabetic kidney disease.\n\nOption D (Calcium channel blocker) is INCORRECT as first-line - while useful for blood pressure control, ACE inhibitors provide superior nephroprotection in diabetic nephropathy.",
+        references: [
+          {
+            text: "NICE CG87: Type 2 diabetes - Section 1.7.1 'Offer ACE inhibitor to people with diabetic kidney disease and hypertension or microalbuminuria'",
+            url: "https://www.nice.org.uk/guidance/cg87"
+          },
+          {
+            text: "KDIGO 2012 Guidelines: 'ACE inhibitors slow progression of diabetic nephropathy by 30-50% - Kidney International Supplements 2:337-414'",
+            url: "https://www.kidney-international.org/article/S2157-1716(12)00121-6/fulltext"
+          },
+          {
+            text: "Renal Association Guidelines 2019: 'ACE inhibitors reduce proteinuria and preserve kidney function in diabetic nephropathy - BMC Nephrology 20:285'",
+            url: "https://bmcnephrol.biomedcentral.com/articles/10.1186/s12882-019-1466-6"
+          }
+        ]
+      },
+      {
+        stem: "A 25-year-old woman presents with acute severe headache, visual disturbance, and blood pressure 200/120 mmHg. Urine dipstick shows 3+ blood and 2+ protein. What is the most likely diagnosis?",
+        options: [
+          "Essential hypertension",
+          "Acute glomerulonephritis",
+          "Malignant hypertension",
+          "Renal artery stenosis"
+        ],
+        correctAnswer: 2,
+        explanation: "Option C (Malignant hypertension) is CORRECT because severe hypertension (>180/120 mmHg) with end-organ damage (headache, visual changes, acute kidney injury with proteinuria and hematuria) defines malignant hypertension requiring immediate treatment.\n\nOption A (Essential hypertension) is INCORRECT because essential hypertension doesn't cause acute severe symptoms or rapid end-organ damage - it develops gradually over years.\n\nOption B (Acute glomerulonephritis) is INCORRECT because while it can cause hypertension and urinary abnormalities, the extreme blood pressure elevation and acute neurological symptoms point to malignant hypertension.\n\nOption D (Renal artery stenosis) is INCORRECT because while it causes secondary hypertension, the acute presentation with severe end-organ damage indicates malignant hypertension crisis.",
+        references: [
+          {
+            text: "NICE CG127: Hypertension - Section 1.4.5 'Malignant hypertension requires immediate treatment to prevent stroke and organ damage'",
+            url: "https://www.nice.org.uk/guidance/cg127"
+          },
+          {
+            text: "ESH/ESC Guidelines 2018: 'Hypertensive emergency defined as BP >180/120 with acute organ damage - European Heart Journal 39:3021-3104'",
+            url: "https://academic.oup.com/eurheartj/article/39/33/3021/5079119"
+          },
+          {
+            text: "AHA Scientific Statement 2017: 'Malignant hypertension causes acute kidney injury and requires urgent BP reduction - Hypertension 69:e13-e23'",
+            url: "https://www.ahajournals.org/doi/10.1161/HYP.0000000000000054"
+          }
+        ]
+      }
+    ],
+    haematology: [
+      {
+        stem: "A 45-year-old man presents with fatigue and bruising. Blood tests show Hb 8.5 g/dL, WCC 2.1 × 10⁹/L, platelets 25 × 10⁹/L. Blood film shows pancytopenia with reduced reticulocytes. What is the most likely diagnosis?",
+        options: [
+          "Acute leukemia",
+          "Aplastic anemia",
+          "Myelofibrosis",
+          "Hypersplenism"
+        ],
+        correctAnswer: 1,
+        explanation: "Option B (Aplastic anemia) is CORRECT because pancytopenia (anemia, leucopenia, thrombocytopenia) with reduced reticulocytes indicates bone marrow failure. The absence of abnormal cells on blood film supports aplastic anemia rather than hematological malignancy.\n\nOption A (Acute leukemia) is INCORRECT because acute leukemia typically shows blast cells on blood film and elevated WCC, not the profound pancytopenia with normal cell morphology seen here.\n\nOption C (Myelofibrosis) is INCORRECT because myelofibrosis usually shows teardrop cells, nucleated RBCs, and immature WBCs on blood film, plus splenomegaly, which aren't described.\n\nOption D (Hypersplenism) is INCORRECT because while it can cause pancytopenia, it's usually milder and associated with massive splenomegaly, which isn't mentioned.",
+        references: [
+          {
+            text: "BSH Guidelines 2016: 'Aplastic anemia diagnosis requires pancytopenia with hypocellular bone marrow - British Journal of Haematology 172:187-207'",
+            url: "https://onlinelibrary.wiley.com/doi/10.1111/bjh.13853"
+          },
+          {
+            text: "NICE CG151: Neutropenia - Section 2.1 'Pancytopenia with reticulocytopenia suggests bone marrow failure requiring urgent investigation'",
+            url: "https://www.nice.org.uk/guidance/cg151"
+          },
+          {
+            text: "ASH Guidelines 2019: 'Severe aplastic anemia defined as neutrophils <0.5×10⁹/L, platelets <20×10⁹/L - Blood 133:1428-1435'",
+            url: "https://ashpublications.org/blood/article/133/13/1428/260734"
+          }
+        ]
+      },
+      {
+        stem: "A 70-year-old man presents with bone pain and recurrent infections. Blood tests show Hb 9.2 g/dL, calcium 2.8 mmol/L, creatinine 140 μmol/L. Serum protein electrophoresis shows M-protein band. What is the most likely diagnosis?",
+        options: [
+          "Multiple myeloma",
+          "Chronic lymphocytic leukemia",
+          "Waldenstrom's macroglobulinemia",
+          "MGUS"
+        ],
+        correctAnswer: 0,
+        explanation: "Option A (Multiple myeloma) is CORRECT because the combination of bone pain, hypercalcemia, renal impairment, anemia, and M-protein band represents the classic CRAB features (Calcium elevation, Renal dysfunction, Anemia, Bone lesions) of multiple myeloma.\n\nOption B (CLL) is INCORRECT because CLL typically presents with lymphocytosis and lymphadenopathy, not the CRAB features or M-protein band characteristic of plasma cell disorders.\n\nOption C (Waldenstrom's) is INCORRECT because it usually causes IgM paraprotein with hyperviscosity symptoms (bleeding, visual disturbance) rather than the bone pain and hypercalcemia seen in myeloma.\n\nOption D (MGUS) is INCORRECT because MGUS is asymptomatic by definition - the presence of end-organ damage (anemia, hypercalcemia, renal impairment) indicates progression to multiple myeloma.",
+        references: [
+          {
+            text: "NICE NG35: Myeloma - Section 1.1.1 'Diagnose myeloma in people with CRAB features and clonal plasma cells >10%'",
+            url: "https://www.nice.org.uk/guidance/ng35"
+          },
+          {
+            text: "IMWG Criteria 2014: 'Multiple myeloma requires clonal bone marrow plasma cells ≥10% plus CRAB features - Lancet Oncology 15:e538-548'",
+            url: "https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(14)70442-5/fulltext"
+          },
+          {
+            text: "BSH Guidelines 2016: 'Serum free light chains and imaging essential for myeloma diagnosis - British Journal of Haematology 175:252-264'",
+            url: "https://onlinelibrary.wiley.com/doi/10.1111/bjh.14208"
           }
         ]
       }
