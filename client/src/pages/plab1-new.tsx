@@ -1258,7 +1258,7 @@ export default function PLAB1New() {
           <CardHeader>
             <CardTitle className="text-2xl text-center">Session Complete!</CardTitle>
             <CardDescription className="text-center">
-              You scored {stats.correct} out of {stats.total} questions ({stats.percentage}%)
+              You scored {stats.correct} out of {stats.total} questions ({stats.accuracy}%)
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -1275,44 +1275,4 @@ export default function PLAB1New() {
   }
 
   return null;
-} 
-            onClick={nextQuestion}
-            disabled={currentQuestionIndex === sessionQuestions.length - 1}
-            className={`gap-2 ${buttonStyles}`}
-          >
-            Next Question
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        )}
-      </div>
-
-      {/* Session Complete */}
-      {currentQuestionIndex === sessionQuestions.length - 1 && showExplanation && (
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Award className="w-6 h-6 text-yellow-600" />
-              Session Complete!
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center space-y-4">
-              <div className="text-lg">
-                You scored {stats.correct} out of {stats.total} ({stats.accuracy}%)
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Time taken: {formatTime(timeSpent)}
-              </div>
-              <Button onClick={endSession} className="gap-2">
-                <RotateCcw className="w-4 h-4" />
-                Start New Session
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-
-    </div>
-  );
 }
