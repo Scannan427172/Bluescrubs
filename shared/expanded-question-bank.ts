@@ -1671,15 +1671,15 @@ References:
 
 Key points:
 
-• Drug-resistant epilepsy: failure of adequate trials of ≥2 appropriately chosen, tolerated antiseizure medications with seizures continuing to impact quality of life¹
+• Drug-resistant epilepsy: failure of adequate trials of ≥2 appropriately chosen, tolerated antiseizure medications¹
 
-• Mesial temporal sclerosis (MTS): anterior temporal lobectomy or selective amygdalohippocampectomy achieves seizure freedom in 60-80% of adults with hippocampal sclerosis—far superior to further medication trials²
+• Mesial temporal sclerosis (MTS): surgery (anterior temporal lobectomy or selective amygdalohippocampectomy) achieves seizure freedom in 60–80% of adults with MTS—far superior to further medication trials²
 
 • Guidelines: adults with drug-resistant focal epilepsy (especially with hippocampal sclerosis) should be referred without delay to a tertiary epilepsy centre for presurgical assessment³
 
-• Early surgical evaluation maximizes chances for seizure remission, cognitive preservation, and quality of life⁴
+• Early surgical evaluation maximizes chances for seizure remission, cognitive preservation, and quality of life.
 
-References:
+References
 
 1. International League Against Epilepsy. Definition of drug-resistant epilepsy: consensus proposal by the ad hoc Task Force, ILAE Commission on Therapeutic Strategies. Epilepsia. 2010;51(6):1069–1077.
 
@@ -1687,7 +1687,17 @@ References:
 
 3. BMJ Best Practice. Epilepsy: surgical treatment. BMJ; accessed June 2025.
 
-4. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Epilepsy section; 2024.`,
+4. UpToDate®. Surgical treatment of mesial temporal lobe epilepsy with hippocampal sclerosis. UpToDate; last updated May 2025.
+
+5. World Health Organization. Epilepsy: a public health imperative. WHO; 2019.
+
+6. NHS England. Commissioning policy: epilepsy surgery. NHS England; 2023.
+
+7. General Medical Council. Good Medical Practice. GMC; 2024.
+
+8. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Epilepsy section; 2024.
+
+9. General Medical Council. MLA External Examiners' Report: Neurology. GMC; 2024.`,
             
             'headache': `Answer: A. Migraine without aura
 
@@ -1744,7 +1754,7 @@ References:
 3. General Medical Council. MLA Content Map. Neurology section; 2024.`
           };
           const template = explanationTemplates[subcategory as keyof typeof explanationTemplates] || explanationTemplates['epilepsy'];
-          return template + ` Management should follow evidence-based protocols with multidisciplinary approach including neurology referral when appropriate. References include NICE guidelines, specialist society recommendations, and recent neurological literature.`;
+          return template;
         }
       })(),
       learningObjectives: [
