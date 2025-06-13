@@ -629,10 +629,24 @@ export default function PLAB1New() {
                   <div className="text-sm text-blue-800">
                     <div className="space-y-1">
                       <p className="font-mono">{currentQuestion.category?.toUpperCase().replace('-', ' ') || 'MEDICAL'}-{Math.floor(Math.random() * 900) + 100}</p>
-                      <p className="text-blue-700">Scope</p>
-                      <button className="text-blue-600 hover:text-blue-800 underline text-xs">
-                        View full regulation ↗
-                      </button>
+                      <p className="text-blue-700">NICE Guidelines / GMC Good Medical Practice</p>
+                      <a 
+                        href={`https://www.nice.org.uk/guidance?q=${encodeURIComponent(currentQuestion.category || 'medical')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 underline text-xs inline-flex items-center gap-1"
+                      >
+                        View NICE Guidelines ↗
+                      </a>
+                      <br />
+                      <a 
+                        href="https://www.gmc-uk.org/ethical-guidance/ethical-guidance-for-doctors/good-medical-practice"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 underline text-xs inline-flex items-center gap-1"
+                      >
+                        GMC Good Medical Practice ↗
+                      </a>
                     </div>
                   </div>
                 </div>
