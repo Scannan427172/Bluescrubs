@@ -28,7 +28,7 @@ export function generateSimpleQuestion(
           "Immediate CABG referral"
         ],
         correctAnswer: 0,
-        explanation: "ST elevation in inferior leads (II, III, aVF) indicates inferior STEMI. Primary PCI within 90 minutes is the gold standard treatment when available, offering better outcomes than thrombolysis."
+        explanation: "Option A (Primary PCI within 90 minutes) is CORRECT because ST elevation in inferior leads (II, III, aVF) indicates inferior STEMI requiring immediate reperfusion. NICE guidelines CG167 state primary PCI is first-line treatment when available within 90 minutes, showing 30% mortality reduction vs thrombolysis (DANAMI-2 trial).\n\nOption B (Thrombolytic therapy) is INCORRECT because while effective for STEMI, primary PCI is superior when available within the 90-minute window, reducing mortality and reinfarction rates.\n\nOption C (Conservative management) is INCORRECT because STEMI requires urgent reperfusion therapy - conservative management would result in significant myocardial necrosis and potential death.\n\nOption D (Immediate CABG referral) is INCORRECT because emergency CABG is not first-line for acute STEMI - primary PCI provides faster reperfusion with better outcomes."
       },
       {
         stem: "A 55-year-old man with diabetes presents with severe chest pain radiating to the left arm. ECG shows ST depression in V3-V6. Troponin is elevated. What is the diagnosis?",
@@ -39,7 +39,7 @@ export function generateSimpleQuestion(
           "Pericarditis"
         ],
         correctAnswer: 1,
-        explanation: "ST depression with elevated troponin indicates NSTEMI (Non-ST elevation myocardial infarction). This requires urgent cardiology assessment and appropriate antiplatelet therapy."
+        explanation: "Option B (NSTEMI) is CORRECT because ST depression in V3-V6 with elevated troponin definitively indicates Non-ST elevation myocardial infarction. ESC guidelines state this combination confirms myocardial necrosis without complete coronary occlusion, requiring urgent dual antiplatelet therapy and risk stratification.\n\nOption A (Unstable angina) is INCORRECT because elevated troponin rules out unstable angina by definition - unstable angina has normal troponin levels with ischemic symptoms but no myocardial necrosis.\n\nOption C (STEMI) is INCORRECT because ST depression (not elevation) is present. STEMI requires ST elevation ≥1mm in two contiguous leads or new LBBB, indicating complete coronary occlusion.\n\nOption D (Pericarditis) is INCORRECT because pericarditis typically shows widespread ST elevation with PR depression, not localized ST depression, and troponin is usually normal unless myopericarditis."
       }
     ],
     respiratory: [

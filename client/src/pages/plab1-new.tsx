@@ -48,7 +48,7 @@ export default function PLAB1New() {
     if (isCorrect) {
       // User got it right - show why their answer is correct
       const lines = explanation.split('\n');
-      const correctLine = lines.find(line => 
+      const correctLine = lines.find((line: string) => 
         line.includes(`Option ${String.fromCharCode(65 + correctAnswerIndex)}`) && 
         line.includes('CORRECT')
       );
@@ -65,7 +65,7 @@ export default function PLAB1New() {
       let feedback = '';
       
       // Find why user's answer is wrong
-      const wrongLine = lines.find(line => 
+      const wrongLine = lines.find((line: string) => 
         line.includes(`Option ${String.fromCharCode(65 + userAnswerIndex)}`) && 
         line.includes('INCORRECT')
       );
@@ -76,7 +76,7 @@ export default function PLAB1New() {
       }
       
       // Find why correct answer is right
-      const correctLine = lines.find(line => 
+      const correctLine = lines.find((line: string) => 
         line.includes(`Option ${String.fromCharCode(65 + correctAnswerIndex)}`) && 
         line.includes('CORRECT')
       );
