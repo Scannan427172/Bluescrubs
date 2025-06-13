@@ -3,9 +3,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Brain, Send, Loader2, ExternalLink, BookOpen, 
-  MessageSquare, Lightbulb, AlertCircle 
+  MessageSquare, Lightbulb, AlertCircle, Zap 
 } from "lucide-react";
 
 interface AIResponse {
@@ -19,11 +20,63 @@ interface AIResponse {
   }[];
 }
 
+interface GeneratedQuestion {
+  id: string;
+  category: string;
+  stem: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  difficulty: string;
+}
+
 export default function AskAI() {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState<AIResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  
+  // Question generation state
+  const [selectedSpecialty, setSelectedSpecialty] = useState("cardiology");
+  const [selectedDifficulty, setSelectedDifficulty] = useState("intermediate");
+  const [generatedQuestion, setGeneratedQuestion] = useState<GeneratedQuestion | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const generateQuestion = async () => {
+    setIsGenerating(true);
+    setError("");
+    setGeneratedQuestion(null);
+
+    try {
+      const res = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          examType: 'PLAB',
+          specialty: selectedSpecialty,
+          difficulty: selectedDifficulty,
+          count: 1
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to generate question');
+      }
+
+      const data = await res.json();
+      if (data.questions && data.questions.length > 0) {
+        setGeneratedQuestion(data.questions[0]);
+      } else {
+        throw new Error('No questions generated');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to generate question');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,6 +140,112 @@ export default function AskAI() {
             </div>
           </CardHeader>
         </Card>
+
+        {/* AI Question Generator */}
+        <Card className="shadow-lg border-l-4 border-l-green-500">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Zap className="w-5 h-5 text-green-600" />
+              AI Question Generator
+            </CardTitle>
+            <CardDescription>
+              Generate medical examination questions using OpenAI integration
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">Medical Specialty</label>
+                <Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="cardiology">Cardiology</SelectItem>
+                    <SelectItem value="neurology">Neurology</SelectItem>
+                    <SelectItem value="respiratory">Respiratory</SelectItem>
+                    <SelectItem value="endocrinology">Endocrinology</SelectItem>
+                    <SelectItem value="cardiovascular">Cardiovascular</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Difficulty Level</label>
+                <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="foundation">Foundation</SelectItem>
+                    <SelectItem value="intermediate">Intermediate</SelectItem>
+                    <SelectItem value="advanced">Advanced</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <Button 
+              onClick={generateQuestion}
+              disabled={isGenerating}
+              className="w-full bg-green-600 hover:bg-green-700"
+            >
+              {isGenerating ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Generating Question...
+                </>
+              ) : (
+                <>
+                  <Zap className="w-4 h-4 mr-2" />
+                  Generate Medical Question
+                </>
+              )}
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Generated Question Display */}
+        {generatedQuestion && (
+          <Card className="shadow-lg border-l-4 border-l-blue-500">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-blue-600" />
+                Generated Question - {generatedQuestion.category}
+              </CardTitle>
+              <Badge variant="outline" className="w-fit">
+                {generatedQuestion.difficulty}
+              </Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-medium mb-2">Question:</h4>
+                <p className="text-gray-800">{generatedQuestion.stem}</p>
+              </div>
+              
+              <div>
+                <h4 className="font-medium mb-3">Options:</h4>
+                <div className="space-y-2">
+                  {generatedQuestion.options.map((option, index) => (
+                    <div 
+                      key={index}
+                      className={`p-3 rounded-lg border ${
+                        index === generatedQuestion.correctAnswer 
+                          ? 'bg-green-50 border-green-200 text-green-800' 
+                          : 'bg-gray-50 border-gray-200'
+                      }`}
+                    >
+                      <span className="font-medium">{String.fromCharCode(65 + index)}.</span> {option}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-medium mb-2">Explanation:</h4>
+                <p className="text-gray-800 whitespace-pre-wrap">{generatedQuestion.explanation}</p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Question Input */}
         <Card className="shadow-lg">
