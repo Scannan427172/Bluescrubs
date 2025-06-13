@@ -710,17 +710,19 @@ export default function PLAB1New() {
 
         {/* Question Translation Toggle */}
         <div className="flex justify-end mb-4">
-          <div className="flex items-center gap-3 bg-white rounded-lg shadow-sm p-3 border">
-            <Languages className="w-4 h-4 text-blue-600" />
-            <Switch
-              checked={translateQuestions}
-              onCheckedChange={setTranslateQuestions}
-              className="data-[state=checked]:bg-blue-600"
-            />
-            <span className="text-sm text-gray-700">Translate Questions</span>
+          <div className="flex items-center gap-3 bg-white rounded-lg shadow-sm p-3 border min-h-[48px]">
+            <Languages className="w-4 h-4 text-blue-600 flex-shrink-0" />
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={translateQuestions}
+                onCheckedChange={setTranslateQuestions}
+                className="data-[state=checked]:bg-blue-600"
+              />
+              <span className="text-sm text-gray-700 whitespace-nowrap">Translate Questions</span>
+            </div>
             {translateQuestions && (
               <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                <SelectTrigger className="w-24 h-8 text-xs border-blue-200">
+                <SelectTrigger className="w-28 h-9 text-xs border-blue-200 ml-2">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
