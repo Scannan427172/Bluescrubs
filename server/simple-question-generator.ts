@@ -283,6 +283,58 @@ export function generateSimpleQuestion(
           }
         ]
       }
+    ],
+    rheumatology: [
+      {
+        stem: "A 35-year-old woman presents with 6 weeks of morning stiffness lasting >1 hour, symmetrical swelling of MCPJs and PIPJs, and fatigue. Blood tests show positive anti-CCP antibodies and elevated CRP. What is the most appropriate initial management?",
+        options: [
+          "Prednisolone 15mg daily",
+          "Methotrexate 15mg weekly with folic acid",
+          "Sulfasalazine 2g daily",
+          "Hydroxychloroquine 400mg daily"
+        ],
+        correctAnswer: 1,
+        explanation: "Option B (Methotrexate 15mg weekly with folic acid) is CORRECT because this presentation indicates rheumatoid arthritis requiring immediate DMARD therapy. NICE guidelines recommend methotrexate as first-line DMARD for newly diagnosed RA, starting within 3 months of symptom onset to prevent joint damage.\n\nOption A (Prednisolone) is INCORRECT as first-line monotherapy - corticosteroids should only be used as bridging therapy while DMARDs take effect, not as primary treatment.\n\nOption C (Sulfasalazine) is INCORRECT as first-line therapy - it's less effective than methotrexate and reserved for patients who cannot tolerate MTX or have contraindications.\n\nOption D (Hydroxychloroquine) is INCORRECT for RA - it's used for mild inflammatory arthritis or lupus but insufficient for erosive RA requiring aggressive DMARD therapy.",
+        references: [
+          {
+            text: "NICE CG79: Rheumatoid arthritis in adults - Section 1.4.1 'Offer methotrexate as first-line DMARD therapy for newly diagnosed active RA'",
+            url: "https://www.nice.org.uk/guidance/cg79"
+          },
+          {
+            text: "BSR Guidelines 2018: 'Methotrexate should be started within 3 months of symptom onset to prevent irreversible joint damage - Rheumatology 57:e1-e45'",
+            url: "https://academic.oup.com/rheumatology/article/57/suppl_2/key004/4670780"
+          },
+          {
+            text: "EULAR Recommendations 2019: 'Early DMARD therapy with methotrexate improves long-term outcomes in RA - Annals of Rheumatic Diseases 79:685-699'",
+            url: "https://ard.bmj.com/content/79/6/685"
+          }
+        ]
+      },
+      {
+        stem: "A 45-year-old man presents with severe lower back pain and morning stiffness lasting 2 hours. He has reduced spinal flexibility and sacroiliac joint tenderness. HLA-B27 is positive. What is the most likely diagnosis?",
+        options: [
+          "Mechanical back pain",
+          "Ankylosing spondylitis",
+          "Psoriatic arthritis",
+          "Reactive arthritis"
+        ],
+        correctAnswer: 1,
+        explanation: "Option B (Ankylosing spondylitis) is CORRECT because inflammatory back pain with morning stiffness >30 minutes, reduced spinal flexibility, sacroiliac involvement, and positive HLA-B27 are classic features of ankylosing spondylitis. Modified New York criteria support this diagnosis.\n\nOption A (Mechanical back pain) is INCORRECT because mechanical pain typically worsens with activity and improves with rest, opposite to inflammatory back pain which improves with movement.\n\nOption C (Psoriatic arthritis) is INCORRECT because while it can cause spinal involvement, it typically presents with peripheral joint disease and skin/nail psoriasis, not isolated axial disease.\n\nOption D (Reactive arthritis) is INCORRECT because it usually follows infection and presents with asymmetrical peripheral arthritis, not primarily axial involvement.",
+        references: [
+          {
+            text: "NICE CG65: Spondyloarthritis - Section 1.1.1 'Consider ankylosing spondylitis in adults with chronic lower back pain that started before age 45'",
+            url: "https://www.nice.org.uk/guidance/cg65"
+          },
+          {
+            text: "ASAS Classification Criteria: 'Inflammatory back pain plus sacroiliitis on imaging or HLA-B27 plus SpA features - Annals of Rheumatic Diseases 68:777-783'",
+            url: "https://ard.bmj.com/content/68/6/777"
+          },
+          {
+            text: "BSR Guidelines 2017: 'Early diagnosis and TNF inhibitor therapy improves outcomes in axial spondyloarthritis - Rheumatology 56:1273-1284'",
+            url: "https://academic.oup.com/rheumatology/article/56/8/1273/3091299"
+          }
+        ]
+      }
     ]
   };
 
@@ -319,7 +371,17 @@ export function generateSimpleQuestion(
     ],
     correctAnswer: 0,
     explanation: `In ${category} cases, a systematic approach starting with thorough history and examination is essential for appropriate diagnosis and management.`,
-    difficulty: difficulty
+    difficulty: difficulty,
+    references: [
+      {
+        text: "NICE Guidelines: Clinical evidence and recommendations for medical practice",
+        url: "https://www.nice.org.uk/guidance"
+      },
+      {
+        text: "GMC Good Medical Practice: Professional standards for UK medical practitioners",
+        url: "https://www.gmc-uk.org/ethical-guidance/ethical-guidance-for-doctors/good-medical-practice"
+      }
+    ]
   };
 }
 
