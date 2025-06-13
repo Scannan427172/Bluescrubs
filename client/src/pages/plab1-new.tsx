@@ -151,61 +151,97 @@ export default function PLAB1New() {
     
     const medicalTranslations: Record<string, Record<string, string>> = {
       'ar': {
+        // Common medical terms
         'patient': 'مريض',
-        'presents with': 'يقدم مع',
+        'presents with': 'يعاني من',
         'chest pain': 'ألم في الصدر',
         'shortness of breath': 'ضيق في التنفس',
-        'diagnosis': 'تشخيص',
-        'treatment': 'علاج',
-        'management': 'إدارة',
+        'diagnosis': 'التشخيص',
+        'treatment': 'العلاج',
+        'management': 'العلاج',
         'What is the most appropriate': 'ما هو الأنسب',
-        'Primary PCI': 'PCI الأولي',
+        'What is the most likely': 'ما هو الأكثر احتمالاً',
+        'year-old': 'عام',
+        'years old': 'عام',
+        'old': 'عام',
+        'man': 'رجل',
+        'woman': 'امرأة',
+        'male': 'ذكر',
+        'female': 'أنثى',
+        'history of': 'تاريخ من',
+        'Blood tests show': 'تظهر فحوصات الدم',
+        'CT scan shows': 'يظهر الأشعة المقطعية',
+        'X-ray shows': 'تظهر الأشعة السينية',
+        'ECG shows': 'يظهر تخطيط القلب',
+        'Primary PCI': 'القسطرة الأولية',
         'Thrombolytic therapy': 'العلاج المذيب للجلطة',
-        'Conservative management': 'الإدارة المحافظة',
-        'monitoring': 'مراقبة',
-        'CABG': 'تطعيم شريان القلب التاجي',
-        'ECG shows': 'تخطيط القلب يظهر',
-        'ST elevation': 'ارتفاع ST',
-        'leads': 'خيوط',
-        'immediate': 'فوري'
+        'Conservative management': 'العلاج التحفظي',
+        'Immediate': 'فوري',
+        'Start': 'ابدأ',
+        'Give': 'أعط',
+        'Administer': 'أعط'
       },
       'hi': {
-        'patient': 'रोगी',
+        // Common medical terms
+        'patient': 'मरीज़',
         'presents with': 'के साथ आता है',
         'chest pain': 'सीने में दर्द',
-        'shortness of breath': 'सांस लेने में तकलीफ',
+        'shortness of breath': 'सांस लेने में कठिनाई',
         'diagnosis': 'निदान',
         'treatment': 'उपचार',
         'management': 'प्रबंधन',
         'What is the most appropriate': 'सबसे उपयुक्त क्या है',
-        'Primary PCI': 'प्राथमिक PCI',
+        'What is the most likely': 'सबसे संभावित क्या है',
+        'year-old': 'वर्षीय',
+        'years old': 'वर्षीय',
+        'old': 'वर्षीय',
+        'man': 'पुरुष',
+        'woman': 'महिला',
+        'male': 'पुरुष',
+        'female': 'महिला',
+        'history of': 'का इतिहास',
+        'Blood tests show': 'रक्त परीक्षण दिखाते हैं',
+        'CT scan shows': 'सीटी स्कैन दिखाता है',
+        'X-ray shows': 'एक्स-रे दिखाता है',
+        'ECG shows': 'ईसीजी दिखाता है',
+        'Primary PCI': 'प्राथमिक पीसीआई',
         'Thrombolytic therapy': 'थ्रोम्बोलाइटिक थेरेपी',
         'Conservative management': 'रूढ़िवादी प्रबंधन',
-        'monitoring': 'निगरानी',
-        'CABG': 'कोरोनरी आर्टरी बाईपास ग्राफ्ट',
-        'ECG shows': 'ईसीजी दिखाता है',
-        'ST elevation': 'ST उन्नयन',
-        'leads': 'लीड्स',
-        'immediate': 'तत्काल'
+        'Immediate': 'तत्काल',
+        'Start': 'शुरू करें',
+        'Give': 'दें',
+        'Administer': 'दें'
       },
       'ur': {
+        // Common medical terms
         'patient': 'مریض',
-        'presents with': 'کے ساتھ پیش آتا ہے',
+        'presents with': 'کے ساتھ آتا ہے',
         'chest pain': 'سینے میں درد',
         'shortness of breath': 'سانس لینے میں دشواری',
         'diagnosis': 'تشخیص',
         'treatment': 'علاج',
         'management': 'انتظام',
         'What is the most appropriate': 'سب سے مناسب کیا ہے',
-        'Primary PCI': 'بنیادی PCI',
+        'What is the most likely': 'سب سے زیادہ امکان کیا ہے',
+        'year-old': 'سالہ',
+        'years old': 'سالہ',
+        'old': 'سالہ',
+        'man': 'آدمی',
+        'woman': 'عورت',
+        'male': 'مرد',
+        'female': 'عورت',
+        'history of': 'کی تاریخ',
+        'Blood tests show': 'خون کے ٹیسٹ دکھاتے ہیں',
+        'CT scan shows': 'سی ٹی سکین دکھاتا ہے',
+        'X-ray shows': 'ایکس رے دکھاتا ہے',
+        'ECG shows': 'ای سی جی دکھاتا ہے',
+        'Primary PCI': 'بنیادی پی سی آئی',
         'Thrombolytic therapy': 'خون کا لوتھڑا گھولنے کا علاج',
         'Conservative management': 'قدامت پسند انتظام',
-        'monitoring': 'نگرانی',
-        'CABG': 'کورونری آرٹری بائی پاس گرافٹ',
-        'ECG shows': 'ای سی جی دکھاتا ہے',
-        'ST elevation': 'ST بلندی',
-        'leads': 'لیڈز',
-        'immediate': 'فوری'
+        'Immediate': 'فوری',
+        'Start': 'شروع کریں',
+        'Give': 'دیں',
+        'Administer': 'دیں'
       }
     };
     
@@ -708,41 +744,37 @@ export default function PLAB1New() {
           />
         </div>
 
-        {/* Question Translation Toggle */}
-        <div className="flex justify-center mb-4">
-          <div className="bg-white rounded-lg shadow-sm border p-4 w-full max-w-md">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Languages className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-gray-700">Translation Mode</span>
-              </div>
-              <Switch
-                checked={translateQuestions}
-                onCheckedChange={setTranslateQuestions}
-                className="data-[state=checked]:bg-blue-600"
-              />
-            </div>
-            {translateQuestions && (
-              <div className="mt-3 pt-3 border-t">
-                <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="en">🇬🇧 English</SelectItem>
-                    <SelectItem value="ar">🇸🇦 Arabic</SelectItem>
-                    <SelectItem value="hi">🇮🇳 Hindi</SelectItem>
-                    <SelectItem value="ur">🇵🇰 Urdu</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Question Card */}
         <Card className="mb-6">
           <CardContent className="p-6">
+            {/* Translation Toggle - Moved closer to questions */}
+            <div className="flex justify-end mb-4">
+              <div className="bg-gray-50 rounded-lg p-3 border">
+                <div className="flex items-center gap-3">
+                  <Languages className="w-4 h-4 text-blue-600" />
+                  <Switch
+                    checked={translateQuestions}
+                    onCheckedChange={setTranslateQuestions}
+                    className="data-[state=checked]:bg-blue-600"
+                  />
+                  <span className="text-sm text-gray-700">Translate</span>
+                  {translateQuestions && (
+                    <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                      <SelectTrigger className="w-20 h-8 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="en">🇬🇧 EN</SelectItem>
+                        <SelectItem value="ar">🇸🇦 AR</SelectItem>
+                        <SelectItem value="hi">🇮🇳 HI</SelectItem>
+                        <SelectItem value="ur">🇵🇰 UR</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                </div>
+              </div>
+            </div>
+
             <div className="mb-6">
               <h2 className="text-lg font-medium text-gray-900 leading-relaxed">
                 {translateMedicalContent(currentQuestion.stem || currentQuestion.question)}
