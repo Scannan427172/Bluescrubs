@@ -154,7 +154,7 @@ export class CommunityContributionSystem {
         );
 
         // Quality filter
-        const qualityFiltered = batch.filter(q => 
+        const qualityFiltered = batch.filter((q: GeneratedQuestion) => 
           this.assessQuestionQuality(q) >= qualityThreshold
         );
 
@@ -248,7 +248,7 @@ export class CommunityContributionSystem {
   private validateQuestionSubmission(questionData: Partial<GeneratedQuestion>): void {
     const required = ['stem', 'options', 'correctAnswer', 'explanation'];
     for (const field of required) {
-      if (!questionData[field]) {
+      if (!(questionData as any)[field]) {
         throw new Error(`Missing required field: ${field}`);
       }
     }
@@ -257,7 +257,8 @@ export class CommunityContributionSystem {
       throw new Error('Questions must have exactly 5 options');
     }
 
-    if (questionData.correctAnswer < 0 || questionData.correctAnswer > 4) {
+    const correctAnswer = questionData.correctAnswer;
+    if (correctAnswer === undefined || correctAnswer < 0 || correctAnswer > 4) {
       throw new Error('Correct answer must be between 0 and 4');
     }
   }
@@ -284,20 +285,15 @@ Please improve:
 
 Return enhanced version maintaining original structure.`;
 
-    // This would integrate with the AI question generator
-    // For now, return the original with basic enhancements
-    return {
-      stem: questionData.stem || '',
-      options: questionData.options || [],
-      correctAnswer: questionData.correctAnswer || 0,
-      explanation: questionData.explanation || '',
-      learningObjectives: questionData.learningObjectives || [],
-      references: questionData.references || [],
-      tags: questionData.tags || [],
-      difficulty_justification: questionData.difficulty_justification || '',
-      clinical_relevance: questionData.clinical_relevance || '',
-      regulatory_alignment: questionData.regulatory_alignment || ''
-    };
+    // Use the AI question generator to create an enhanced version
+    const enhanced = await generateMedicalQuestion(
+      specialty,
+      'general',
+      questionData.difficulty || 'intermediate'
+    );
+    
+    // Return the enhanced question with proper structure
+    return enhanced;
   }
 
   private assessQuestionQuality(question: GeneratedQuestion): number {
