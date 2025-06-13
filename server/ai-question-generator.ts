@@ -45,7 +45,7 @@ Make it realistic, evidence-based, and concise.`;
       messages: [
         {
           role: "system",
-          content: "You are a medical education expert creating GMC MLA-compliant examination questions. Provide accurate, evidence-based medical content with comprehensive explanations and authoritative references."
+          content: "Create medical MCQs. Return valid JSON only."
         },
         {
           role: "user",
@@ -53,8 +53,8 @@ Make it realistic, evidence-based, and concise.`;
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.7,
-      max_tokens: 2000
+      temperature: 0.5,
+      max_tokens: 600
     });
     
     if (!response?.choices?.[0]?.message?.content) {
