@@ -1097,6 +1097,13 @@ export default function PLAB1New() {
                     if (ref.includes('CKS Hypertension')) return 'https://cks.nice.org.uk/topics/hypertension/';
                     if (ref.includes('CKS Diabetes')) return 'https://cks.nice.org.uk/topics/diabetes-type-2/';
                     
+                    // ABN specific condition guidelines
+                    if (ref.includes('ABN Multiple Sclerosis') || ref.includes('ABN MS')) return 'https://www.theabn.org/resource/multiple-sclerosis-guidelines.html';
+                    if (ref.includes('ABN ADEM')) return 'https://www.theabn.org/resource/acute-disseminated-encephalomyelitis.html';
+                    if (ref.includes('ABN Stroke')) return 'https://www.theabn.org/resource/stroke-guidelines.html';
+                    if (ref.includes('ABN Epilepsy')) return 'https://www.theabn.org/resource/epilepsy-guidelines.html';
+                    if (ref.includes('ABN Neuromyelitis')) return 'https://www.theabn.org/resource/neuromyelitis-optica.html';
+                    
                     // Specific medical organizations with condition-specific URLs
                     if (ref.includes('ESC Heart Failure')) return 'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Heart-Failure-Guidelines';
                     if (ref.includes('ESC Atrial Fibrillation')) return 'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Atrial-Fibrillation-Guidelines';
@@ -1126,13 +1133,26 @@ export default function PLAB1New() {
                     if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
                     if (ref.includes('BMJ')) return 'https://www.bmj.com/';
                     
-                    // International organizations
+                    // International organizations - condition specific
                     if (ref.includes('WHO Epilepsy')) return 'https://www.who.int/news-room/fact-sheets/detail/epilepsy';
                     if (ref.includes('WHO Stroke')) return 'https://www.who.int/news-room/fact-sheets/detail/stroke-cerebrovascular-accident';
+                    if (ref.includes('WHO Multiple Sclerosis')) return 'https://www.who.int/news-room/fact-sheets/detail/multiple-sclerosis';
                     if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
                     
+                    // AAN condition-specific guidelines
                     if (ref.includes('AAN Epilepsy')) return 'https://www.aan.com/Guidelines/home/ByTopic?topicId=15';
+                    if (ref.includes('AAN Multiple Sclerosis')) return 'https://www.aan.com/Guidelines/home/ByTopic?topicId=31';
+                    if (ref.includes('AAN Stroke')) return 'https://www.aan.com/Guidelines/home/ByTopic?topicId=40';
+                    if (ref.includes('AAN Dementia')) return 'https://www.aan.com/Guidelines/home/ByTopic?topicId=13';
+                    if (ref.includes('AAN Parkinson')) return 'https://www.aan.com/Guidelines/home/ByTopic?topicId=34';
                     if (ref.includes('AAN')) return 'https://www.aan.com/Guidelines/';
+                    
+                    // NICE condition-specific stroke guidelines
+                    if (ref.includes('NICE Stroke')) return 'https://www.nice.org.uk/guidance/ng128';
+                    if (ref.includes('NICE Multiple Sclerosis')) return 'https://www.nice.org.uk/guidance/cg186';
+                    if (ref.includes('NICE Epilepsy')) return 'https://www.nice.org.uk/guidance/cg137';
+                    if (ref.includes('NICE Dementia')) return 'https://www.nice.org.uk/guidance/ng97';
+                    if (ref.includes('NICE Parkinson')) return 'https://www.nice.org.uk/guidance/ng71';
                     
                     // Other medical organizations
                     if (ref.includes('KDIGO')) return 'https://kdigo.org/guidelines/';
