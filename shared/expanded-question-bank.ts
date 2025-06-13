@@ -1621,23 +1621,23 @@ References:
 
 Key points:
 
-• Parkinson's disease (PD): progressive neurodegenerative disorder characterized by motor triad of resting tremor, bradykinesia, and rigidity due to dopaminergic neuronal loss in substantia nigra¹
+• Parkinson's disease (PD): progressive neurodegenerative disorder characterized by motor triad of resting tremor, bradykinesia, and rigidity due to dopaminergic neuronal loss in substantia nigra
 
-• UK Brain Bank criteria: bradykinesia plus ≥1 of resting tremor (4-6Hz), rigidity, or postural instability; with response to levodopa and absence of atypical features²
+• UK Brain Bank criteria: bradykinesia plus ≥1 of resting tremor (4-6Hz), rigidity, or postural instability; with response to levodopa and absence of atypical features
 
-• Classic presentation: bilateral resting tremor that improves with movement, bradykinesia (slowness), and rigidity—pathognomonic for established PD³
+• Classic presentation: bilateral resting tremor that improves with movement, bradykinesia (slowness), and rigidity—pathognomonic for established PD
 
-• Pathophysiology: α-synuclein aggregation causing progressive dopaminergic neuronal death, leading to motor and non-motor symptoms⁴
+• Pathophysiology: α-synuclein aggregation causing progressive dopaminergic neuronal death, leading to motor and non-motor symptoms
 
-• Treatment approach: levodopa/carbidopa (co-careldopa) or dopamine agonists (ropinirole, pramipexole) as first-line therapy, with DaTscan if diagnosis uncertain⁵
+• Treatment approach: levodopa/carbidopa (co-careldopa) or dopamine agonists (ropinirole, pramipexole) as first-line therapy, with DaTscan if diagnosis uncertain
 
 Differential diagnosis exclusions:
 
-• Essential tremor: action/postural tremor (6-12Hz) that worsens with movement, bilateral, lacks bradykinesia/rigidity, often familial—tremor improvement with movement excludes this⁶
+• Essential tremor: action/postural tremor (6-12Hz) that worsens with movement, bilateral, lacks bradykinesia/rigidity, often familial—tremor improvement with movement excludes this
 
-• Drug-induced parkinsonism: requires dopamine-blocking medication history (antipsychotics, antiemetics), more rapid/symmetric onset, tremor less prominent—no medication history provided⁷
+• Drug-induced parkinsonism: requires dopamine-blocking medication history (antipsychotics, antiemetics), more rapid/symmetric onset, tremor less prominent—no medication history provided
 
-• Progressive supranuclear palsy: axial rigidity, early falls, vertical gaze palsy, symmetric onset, rarely prominent tremor—clinical features inconsistent⁸
+• Progressive supranuclear palsy: axial rigidity, early falls, vertical gaze palsy, symmetric onset, rarely prominent tremor—clinical features inconsistent
 
 • Multiple system atrophy: early autonomic dysfunction (orthostatic hypotension, urinary incontinence), poor levodopa response, cerebellar/pyramidal signs—resting tremor uncommon`;
         } else {
