@@ -1034,245 +1034,187 @@ export default function PLAB1New() {
             <CardTitle className="text-lg">Select your answer:</CardTitle>
           </CardHeader>
           <CardContent>
-            <RadioGroup value={selectedAnswer} onValueChange={handleAnswerSelect} className="space-y-3">
+            <div className="space-y-3">
               {currentQuestion.options && Array.isArray(currentQuestion.options) ? 
-                currentQuestion.options.map((option, index) => (
-                  <div key={index} className="w-full">
-                    <Label 
-                      htmlFor={`option-${index}`} 
-                      className={`w-full flex items-start gap-4 cursor-pointer ${accommodations.largerButtons ? 'p-6' : 'p-4'} rounded-lg border transition-all duration-200 ${questionStyles} ${
-                        showExplanation && index === currentQuestion.correctAnswer
-                          ? 'bg-green-50 border-green-300 text-green-800 border-2'
-                          : showExplanation && index === parseInt(selectedAnswer) && index !== currentQuestion.correctAnswer
-                          ? 'bg-red-50 border-red-300 text-red-800 border-2'
-                          : selectedAnswer === index.toString() && !showExplanation
-                          ? 'bg-blue-50 border-blue-400 border-2 text-blue-900 shadow-md'
-                          : 'hover:bg-gray-50 border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <RadioGroupItem 
-                        value={index.toString()} 
-                        id={`option-${index}`}
-                        disabled={showExplanation}
-                        className="mt-1 flex-shrink-0"
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-start gap-3">
-                          <span className="font-bold text-gray-700 text-lg flex-shrink-0">
-                            {String.fromCharCode(65 + index)}.
-                          </span>
-                          <span className="text-base leading-relaxed">
-                            {typeof option === 'string' ? option : `Option ${String.fromCharCode(65 + index)}`}
-                          </span>
-                        </div>
-                        {showTranslation && currentLanguage !== 'en' && (
-                          <div className="mt-3 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-3 ml-6">
-                            {currentTranslations[`option-${index}`] || 'Translating...'}
+                currentQuestion.options.map((option, index) => {
+                  const isCorrectAnswer = index === currentQuestion.correctAnswer;
+                  const isSelectedAnswer = index === parseInt(selectedAnswer);
+                  const isCorrectlySelected = showExplanation && isCorrectAnswer;
+                  const isIncorrectlySelected = showExplanation && isSelectedAnswer && !isCorrectAnswer;
+                  
+                  return (
+                    <div key={index} className="w-full">
+                      <Label 
+                        htmlFor={`option-${index}`} 
+                        className={`w-full flex items-center gap-4 cursor-pointer ${accommodations.largerButtons ? 'p-6' : 'p-4'} rounded-lg border transition-all duration-200 ${questionStyles} ${
+                          isCorrectlySelected
+                            ? 'bg-green-100 border-green-400 text-green-800 border-2'
+                            : isIncorrectlySelected
+                            ? 'bg-red-100 border-red-400 text-red-800 border-2'
+                            : selectedAnswer === index.toString() && !showExplanation
+                            ? 'bg-blue-50 border-blue-400 border-2 text-blue-900 shadow-md'
+                            : 'hover:bg-gray-50 border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 w-full">
+                          <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold text-sm ${
+                            isCorrectlySelected
+                              ? 'bg-green-500 border-green-500 text-white'
+                              : isIncorrectlySelected
+                              ? 'bg-red-500 border-red-500 text-white'
+                              : selectedAnswer === index.toString() && !showExplanation
+                              ? 'bg-blue-500 border-blue-500 text-white'
+                              : 'border-gray-300 text-gray-600'
+                          }`}>
+                            {String.fromCharCode(65 + index)}
                           </div>
-                        )}
-                      </div>
-                    </Label>
-                  </div>
-                )) : 
+                          
+                          <div className="flex-1">
+                            <span className="text-base leading-relaxed">
+                              {typeof option === 'string' ? option : `Option ${String.fromCharCode(65 + index)}`}
+                            </span>
+                            {showTranslation && currentLanguage !== 'en' && (
+                              <div className="mt-2 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-3">
+                                {currentTranslations[`option-${index}`] || 'Translating...'}
+                              </div>
+                            )}
+                          </div>
+                          
+                          {showExplanation && isCorrectAnswer && (
+                            <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+                          )}
+                          {showExplanation && isIncorrectlySelected && (
+                            <XCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+                          )}
+                        </div>
+                        
+                        <input 
+                          type="radio"
+                          value={index.toString()}
+                          checked={selectedAnswer === index.toString()}
+                          onChange={() => handleAnswerSelect(index.toString())}
+                          disabled={showExplanation}
+                          className="sr-only"
+                        />
+                      </Label>
+                    </div>
+                  );
+                }) : 
                 <div className="text-red-500 text-center p-4">No options available for this question</div>
               }
-            </RadioGroup>
+            </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Answer Explanation */}
       {showExplanation && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-          <div className="flex items-center gap-2 mb-3">
+        <div className="space-y-4 mb-6">
+          {/* Feedback Section */}
+          <div className={`p-4 border rounded-lg flex items-center gap-3 ${
+            isCorrect 
+              ? 'bg-green-50 border-green-200' 
+              : 'bg-red-50 border-red-200'
+          }`}>
             {isCorrect ? (
-              <CheckCircle className="w-5 h-5 text-green-600" />
+              <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
             ) : (
-              <XCircle className="w-5 h-5 text-red-600" />
+              <XCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
             )}
-            <span className="font-medium text-red-800">
-              {isCorrect ? 'Correct!' : `Incorrect. The correct answer is ${String.fromCharCode(65 + currentQuestion.correctAnswer)}: ${currentQuestion.options[currentQuestion.correctAnswer]}`}
-            </span>
+            <div className="flex-1">
+              <p className={`font-medium ${
+                isCorrect ? 'text-green-800' : 'text-red-800'
+              }`}>
+                {isCorrect 
+                  ? 'Correct!' 
+                  : `Incorrect. The correct answer is ${String.fromCharCode(65 + currentQuestion.correctAnswer)}: ${currentQuestion.options[currentQuestion.correctAnswer]}`
+                }
+              </p>
+              
+              {/* Explanation Text */}
+              <div className={`mt-3 leading-relaxed ${
+                isCorrect ? 'text-green-700' : 'text-red-700'
+              }`}>
+                {currentQuestion.explanation.split('\n\n').map((paragraph, index) => {
+                  // Skip reference sections
+                  if (paragraph.toLowerCase().includes('reference') || 
+                      paragraph.includes('NICE') || 
+                      paragraph.includes('Guidelines') ||
+                      paragraph.includes('•')) {
+                    return null;
+                  }
+                  return (
+                    <p key={index} className="mb-2">{paragraph.trim()}</p>
+                  );
+                }).filter(Boolean)}
+              </div>
+            </div>
+            
+            {/* Audio support for explanation */}
+            {accommodations.audioSupport && (
+              <AudioSupport 
+                text={currentQuestion.explanation}
+                size="sm"
+                className="flex-shrink-0"
+              />
+            )}
           </div>
           
-          <div className="text-red-700 leading-relaxed space-y-2 mb-4">
-            {currentQuestion.explanation.split('•').map((text, index) => {
-              if (index === 0) {
-                return <p key={index}>{text.trim()}</p>;
-              }
-              return (
-                <div key={index} className="flex items-start gap-2">
-                  <span className="text-red-600 font-bold mt-1">•</span>
-                  <p className="flex-1">{text.trim()}</p>
-                </div>
-              );
-            })}
-          </div>
-          
-          {/* References */}
+          {/* Reference Section */}
           {currentQuestion.references && currentQuestion.references.length > 0 && (
-            <div className="border-t border-red-200 pt-3">
-              <div className="flex items-center gap-2 mb-2">
-                <BookOpen className="w-4 h-4 text-blue-600" />
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <BookOpen className="w-5 h-5 text-blue-600" />
                 <span className="font-medium text-blue-800">Reference:</span>
               </div>
-              <div className="space-y-2 text-sm">
-                {currentQuestion.references.map((reference, index) => {
-                  const getReferenceUrl = (ref: string) => {
-                    // NICE Clinical Guidelines - Specific URLs
-                    if (ref.includes('NICE CG186')) return 'https://www.nice.org.uk/guidance/cg186'; // Multiple sclerosis
-                    if (ref.includes('NICE CG150')) return 'https://www.nice.org.uk/guidance/cg150'; // Headaches
-                    if (ref.includes('NICE CG137')) return 'https://www.nice.org.uk/guidance/cg137'; // Epilepsies
-                    if (ref.includes('NICE CG180')) return 'https://www.nice.org.uk/guidance/cg180'; // Atrial fibrillation
-                    if (ref.includes('NICE CG181')) return 'https://www.nice.org.uk/guidance/cg181'; // Cardiovascular disease
-                    if (ref.includes('NICE CG191')) return 'https://www.nice.org.uk/guidance/cg191'; // Pneumonia
-                    if (ref.includes('NICE CG101')) return 'https://www.nice.org.uk/guidance/cg101'; // COPD
-                    
-                    // NICE New Guidelines - Specific URLs  
-                    if (ref.includes('NICE NG217')) return 'https://www.nice.org.uk/guidance/ng217'; // Epilepsy surgery
-                    if (ref.includes('NICE NG204')) return 'https://www.nice.org.uk/guidance/ng204'; // Stroke rehabilitation
-                    if (ref.includes('NICE NG128')) return 'https://www.nice.org.uk/guidance/ng128'; // Stroke and TIA
-                    if (ref.includes('NICE NG59')) return 'https://www.nice.org.uk/guidance/ng59'; // Low back pain
-                    if (ref.includes('NICE NG85')) return 'https://www.nice.org.uk/guidance/ng85'; // Dementia
-                    
-                    // Generic NICE pattern matching
-                    if (ref.includes('NICE CG')) {
-                      const cgNumber = ref.match(/CG(\d+)/)?.[1];
-                      if (cgNumber) return `https://www.nice.org.uk/guidance/cg${cgNumber}`;
-                    }
-                    if (ref.includes('NICE NG')) {
-                      const ngNumber = ref.match(/NG(\d+)/)?.[1];
-                      if (ngNumber) return `https://www.nice.org.uk/guidance/ng${ngNumber}`;
-                    }
-                    
-                    // CKS (Clinical Knowledge Summaries) - Specific conditions
-                    if (ref.includes('CKS Epilepsy')) return 'https://cks.nice.org.uk/topics/epilepsy/';
-                    if (ref.includes('CKS Headache')) return 'https://cks.nice.org.uk/topics/headache-assessment/';
-                    if (ref.includes('CKS Stroke')) return 'https://cks.nice.org.uk/topics/stroke-tia/';
-                    if (ref.includes('CKS Dementia')) return 'https://cks.nice.org.uk/topics/dementia/';
-                    if (ref.includes('CKS Parkinson')) return 'https://cks.nice.org.uk/topics/parkinsons-disease/';
-                    if (ref.includes('CKS Multiple sclerosis')) return 'https://cks.nice.org.uk/topics/multiple-sclerosis/';
-                    if (ref.includes('CKS COPD')) return 'https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/';
-                    if (ref.includes('CKS Pneumonia')) return 'https://cks.nice.org.uk/topics/chest-infections-adult/';
-                    if (ref.includes('CKS Asthma')) return 'https://cks.nice.org.uk/topics/asthma/';
-                    if (ref.includes('CKS Heart failure')) return 'https://cks.nice.org.uk/topics/heart-failure-chronic/';
-                    if (ref.includes('CKS Atrial fibrillation')) return 'https://cks.nice.org.uk/topics/atrial-fibrillation/';
-                    if (ref.includes('CKS Hypertension')) return 'https://cks.nice.org.uk/topics/hypertension/';
-                    if (ref.includes('CKS Diabetes')) return 'https://cks.nice.org.uk/topics/diabetes-type-2/';
-                    
-                    // Specific medical organizations with condition-specific URLs
-                    if (ref.includes('ESC Heart Failure')) return 'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Heart-Failure-Guidelines';
-                    if (ref.includes('ESC Atrial Fibrillation')) return 'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Atrial-Fibrillation-Guidelines';
-                    if (ref.includes('ESC')) return 'https://www.escardio.org/Guidelines';
-                    
-                    if (ref.includes('BTS Pneumonia')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pneumonia-adults/';
-                    if (ref.includes('BTS COPD')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/copd/';
-                    if (ref.includes('BTS Asthma')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/asthma/';
-                    if (ref.includes('BTS')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/';
-                    
-                    if (ref.includes('ILAE Classification')) return 'https://www.ilae.org/guidelines/definition-and-classification';
-                    if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
-                    
-                    if (ref.includes('ABN Multiple Sclerosis')) return 'https://www.theabn.org/page/ProfessionalGuidance/MS';
-                    if (ref.includes('ABN Epilepsy')) return 'https://www.theabn.org/page/ProfessionalGuidance/Epilepsy';
-                    if (ref.includes('ABN Stroke')) return 'https://www.theabn.org/page/ProfessionalGuidance/Stroke';
-                    if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
-                    
-                    // Drug references - specific sections
-                    if (ref.includes('BNF Epilepsy')) return 'https://bnf.nice.org.uk/treatment-summaries/epilepsy/';
-                    if (ref.includes('BNF Cardiovascular')) return 'https://bnf.nice.org.uk/treatment-summaries/cardiovascular-system/';
-                    if (ref.includes('BNF Respiratory')) return 'https://bnf.nice.org.uk/treatment-summaries/respiratory-system/';
-                    if (ref.includes('BNF')) return 'https://bnf.nice.org.uk/';
-                    
-                    // Journal articles and specific studies
-                    if (ref.includes('NEJM')) return 'https://www.nejm.org/';
-                    if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
-                    if (ref.includes('BMJ')) return 'https://www.bmj.com/';
-                    
-                    // International organizations
-                    if (ref.includes('WHO Epilepsy')) return 'https://www.who.int/news-room/fact-sheets/detail/epilepsy';
-                    if (ref.includes('WHO Stroke')) return 'https://www.who.int/news-room/fact-sheets/detail/stroke-cerebrovascular-accident';
-                    if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
-                    
-                    if (ref.includes('AAN Epilepsy')) return 'https://www.aan.com/Guidelines/home/ByTopic?topicId=15';
-                    if (ref.includes('AAN')) return 'https://www.aan.com/Guidelines/';
-                    
-                    // Other medical organizations
-                    if (ref.includes('KDIGO')) return 'https://kdigo.org/guidelines/';
-                    if (ref.includes('AHA/ACC')) return 'https://www.ahajournals.org/guidelines';
-                    if (ref.includes('British Thyroid Association')) return 'https://www.british-thyroid-association.org/guidelines/';
-                    if (ref.includes('Endocrine Society')) return 'https://www.endocrine.org/clinical-practice-guidelines';
-                    if (ref.includes('Renal Association')) return 'https://renal.org/guidelines/';
-                    if (ref.includes('BSH')) return 'https://b-s-h.org.uk/guidelines/';
-                    if (ref.includes('EULAR')) return 'https://www.eular.org/recommendations-management';
-                    if (ref.includes('BSR')) return 'https://www.rheumatology.org.uk/practice-quality/guidelines';
-                    if (ref.includes('IDSA')) return 'https://www.idsociety.org/practice-guideline/';
-                    if (ref.includes('GOLD')) return 'https://goldcopd.org/2024-gold-report/';
-                    if (ref.includes('ERS')) return 'https://ers.app/guidelines/';
-                    
-                    // Fallback for NICE general
-                    if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
-                    
-                    return null;
-                  };
-
-                  const url = getReferenceUrl(reference);
-                  
-                  return (
+              <div className="text-sm text-blue-700">
+                <p className="font-medium mb-2">Scope</p>
+                <div className="space-y-1">
+                  {currentQuestion.references.map((reference, index) => (
                     <div key={index} className="flex items-start gap-2">
-                      <span className="text-blue-600 font-bold mt-1">•</span>
-                      <div className="flex-1">
-                        {url ? (
-                          <a 
-                            href={url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:text-blue-800 hover:underline"
-                          >
-                            {reference}
-                          </a>
-                        ) : (
-                          <span className="text-blue-700">{reference}</span>
-                        )}
-                      </div>
+                      <span className="text-blue-600 mt-0.5">•</span>
+                      <span>{reference.replace('• ', '')}</span>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
+                {/* View full regulation link */}
+                <div className="mt-3 pt-2 border-t border-blue-200">
+                  <button className="text-blue-600 hover:text-blue-800 text-sm font-medium underline">
+                    View full regulation ↗
+                  </button>
+                </div>
               </div>
             </div>
           )}
-        </div>
-      )}
-
-      {/* Study Tip Section */}
-      {showExplanation && (
-        <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <div className="flex items-center gap-2 mb-3">
-            <Lightbulb className="w-5 h-5 text-blue-600" />
-            <span className="font-medium text-blue-800">Study Tip</span>
-          </div>
           
-          <p className="text-blue-700 mb-3">
-            Understanding medical conditions requires systematic approach: recognize clinical presentation, 
-            apply diagnostic criteria, and follow evidence-based management protocols.
-          </p>
-          
-          <div>
-            <div className="font-medium text-blue-800 text-sm mb-1">Study Method:</div>
-            <p className="text-blue-600 text-sm">
-              Use clinical reasoning frameworks to connect symptoms, investigations, and treatment options systematically.
-            </p>
+          {/* Study Tip Section */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div className="flex items-start gap-3">
+              <Lightbulb className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <h4 className="font-medium text-blue-800 mb-2">Study Tip</h4>
+                <p className="text-blue-700 text-sm leading-relaxed mb-3">
+                  AI-generated medical questions provide dynamic learning experiences. Each session creates fresh clinical scenarios to test your knowledge across different medical specialties and difficulty levels.
+                </p>
+                <div className="border-t border-blue-200 pt-2">
+                  <p className="text-blue-600 text-xs font-medium">Study Method:</p>
+                  <p className="text-blue-700 text-sm">
+                    Review explanations carefully and use the reference materials to deepen your understanding of clinical guidelines and evidence-based practice.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
 
       {/* Action Buttons */}
-      <div className="flex gap-4 justify-center">
+      <div className="flex gap-4 justify-center mb-6">
         <Button 
           variant="outline" 
           onClick={previousQuestion}
           disabled={currentQuestionIndex === 0}
-          className={`gap-2 ${buttonStyles}`}
+          className="gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
           Previous
@@ -1282,12 +1224,58 @@ export default function PLAB1New() {
           <Button 
             onClick={submitAnswer}
             disabled={!selectedAnswer}
-            className={`gap-2 ${buttonStyles}`}
+            className="gap-2"
           >
             Submit Answer
           </Button>
         ) : (
           <Button 
+            onClick={nextQuestion}
+            className="gap-2"
+          >
+            <ArrowRight className="w-4 h-4" />
+            {currentQuestionIndex < sessionQuestions.length - 1 ? 'Next Question' : 'View Results'}
+          </Button>
+        )}
+        
+        <Button 
+          variant="destructive" 
+          onClick={endSession}
+          className="gap-2"
+        >
+          End Session
+        </Button>
+      </div>
+    );
+  }
+
+  // Results view
+  if (showResults) {
+    const stats = calculateStats();
+    return (
+      <div className="max-w-4xl mx-auto space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl text-center">Session Complete!</CardTitle>
+            <CardDescription className="text-center">
+              You scored {stats.correct} out of {stats.total} questions ({stats.percentage}%)
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center">
+              <p className="text-lg mb-4">Session time: {formatTime(timeSpent)}</p>
+              <Button onClick={endSession} size="lg">
+                Return to Main Menu
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  return null;
+} 
             onClick={nextQuestion}
             disabled={currentQuestionIndex === sessionQuestions.length - 1}
             className={`gap-2 ${buttonStyles}`}
