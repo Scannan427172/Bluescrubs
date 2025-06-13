@@ -30,6 +30,24 @@ export default function PLAB1New() {
   const [timeSpent, setTimeSpent] = useState(0);
   const [questionStartTime, setQuestionStartTime] = useState(Date.now());
   const [sessionComplete, setSessionComplete] = useState(false);
+  
+  // Stopwatch and timing state
+  const [questionTimer, setQuestionTimer] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [questionTimes, setQuestionTimes] = useState<number[]>([]);
+  const [userAnswers, setUserAnswers] = useState<string[]>([]);
+  
+  // Leaderboard state
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [leaderboardData, setLeaderboardData] = useState<Array<{
+    rank: number;
+    name: string;
+    score: number;
+    time: number;
+    accuracy: number;
+    category: string;
+    date: string;
+  }>>([]);
 
   // Initialize available voices on component mount
   useEffect(() => {
@@ -62,6 +80,44 @@ export default function PLAB1New() {
       speechSynthesis.removeEventListener('voiceschanged', loadVoices);
     };
   }, [selectedVoice]);
+
+  // Timer effects
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isTimerRunning) {
+      interval = setInterval(() => {
+        setQuestionTimer(prev => prev + 100);
+      }, 100);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerRunning]);
+
+  // Start timer when new question is shown
+  useEffect(() => {
+    if (sessionStarted && !showExplanation) {
+      setQuestionTimer(0);
+      setIsTimerRunning(true);
+    } else {
+      setIsTimerRunning(false);
+    }
+  }, [currentQuestionIndex, sessionStarted, showExplanation]);
+
+  // Mock leaderboard data (replace with real API calls)
+  useEffect(() => {
+    const mockLeaderboard = [
+      { rank: 1, name: "Dr. Sarah Chen", score: 2450, time: 1245000, accuracy: 98, category: "All", date: "2024-06-13" },
+      { rank: 2, name: "Dr. Ahmed Hassan", score: 2380, time: 1320000, accuracy: 96, category: "Cardiology", date: "2024-06-12" },
+      { rank: 3, name: "Dr. Priya Sharma", score: 2320, time: 1410000, accuracy: 94, category: "All", date: "2024-06-11" },
+      { rank: 4, name: "Dr. James Wilson", score: 2290, time: 1480000, accuracy: 93, category: "Neurology", date: "2024-06-10" },
+      { rank: 5, name: "Dr. Maria Rodriguez", score: 2250, time: 1520000, accuracy: 91, category: "All", date: "2024-06-09" },
+      { rank: 6, name: "Dr. Raj Patel", score: 2210, time: 1580000, accuracy: 90, category: "Surgery", date: "2024-06-08" },
+      { rank: 7, name: "Dr. Emily Johnson", score: 2180, time: 1620000, accuracy: 89, category: "Respiratory", date: "2024-06-07" },
+      { rank: 8, name: "Dr. Omar Al-Mansouri", score: 2150, time: 1680000, accuracy: 88, category: "All", date: "2024-06-06" },
+      { rank: 9, name: "Dr. Lisa Thompson", score: 2120, time: 1720000, accuracy: 87, category: "Psychiatry", date: "2024-06-05" },
+      { rank: 10, name: "Dr. Michael Brown", score: 2090, time: 1760000, accuracy: 86, category: "All", date: "2024-06-04" }
+    ];
+    setLeaderboardData(mockLeaderboard);
+  }, []);
 
   // Text-to-Speech functions
   const speakText = (text: string) => {
@@ -526,9 +582,17 @@ export default function PLAB1New() {
   // Submit answer and show explanation
   const submitAnswer = () => {
     if (selectedAnswer) {
+      // Stop the timer and record time
+      setIsTimerRunning(false);
+      const currentQuestionTime = questionTimer;
+      
       setShowExplanation(true);
       const timeForQuestion = Date.now() - questionStartTime;
       setTimeSpent(prev => prev + timeForQuestion);
+      
+      // Record timing and answer data
+      setQuestionTimes(prev => [...prev, currentQuestionTime]);
+      setUserAnswers(prev => [...prev, selectedAnswer]);
     }
   };
 
@@ -539,8 +603,37 @@ export default function PLAB1New() {
       setSelectedAnswer("");
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
+      // Timer will restart automatically via useEffect
     } else {
+      // Session complete - calculate final score and submit to leaderboard
+      const totalTime = questionTimes.reduce((sum, time) => sum + time, 0);
+      const correctAnswers = userAnswers.filter((answer, index) => 
+        parseInt(answer) === generatedQuestions[index]?.correctAnswer
+      ).length;
+      const accuracy = Math.round((correctAnswers / generatedQuestions.length) * 100);
+      const score = Math.round((correctAnswers * 100) + (accuracy * 10) - (totalTime / 1000));
+      
+      // Submit to leaderboard (mock implementation)
+      submitToLeaderboard(score, totalTime, accuracy);
       setSessionComplete(true);
+    }
+  };
+
+  // Format timer display
+  const formatTime = (milliseconds: number) => {
+    const seconds = Math.floor(milliseconds / 1000);
+    const ms = Math.floor((milliseconds % 1000) / 10);
+    return `${seconds}.${ms.toString().padStart(2, '0')}s`;
+  };
+
+  // Submit score to leaderboard
+  const submitToLeaderboard = async (score: number, totalTime: number, accuracy: number) => {
+    try {
+      // Mock submission - replace with real API call
+      console.log('Submitting to leaderboard:', { score, totalTime, accuracy, category: selectedCategory });
+      // In real implementation, make API call to save score
+    } catch (error) {
+      console.error('Failed to submit score:', error);
     }
   };
 
@@ -860,15 +953,21 @@ export default function PLAB1New() {
   return (
     <div className="min-h-screen bg-gray-50 p-4 pb-24">
       <div className="max-w-4xl mx-auto mb-16">
-        {/* Progress Header */}
+        {/* Progress Header with Stopwatch */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
             <Badge variant="outline" className="text-sm">
               Question {currentQuestionIndex + 1} of {generatedQuestions.length}
             </Badge>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <Clock className="w-4 h-4" />
-              <span>{Math.round(timeSpent / 1000 / 60)}m</span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Clock className="w-4 h-4" />
+                <span>{Math.round(timeSpent / 1000 / 60)}m total</span>
+              </div>
+              <div className={`flex items-center gap-2 text-sm font-mono ${isTimerRunning ? 'text-green-600' : 'text-gray-600'}`}>
+                <div className={`w-2 h-2 rounded-full ${isTimerRunning ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+                <span>{formatTime(questionTimer)}</span>
+              </div>
             </div>
           </div>
           <Progress 
@@ -1115,6 +1214,78 @@ export default function PLAB1New() {
             </div>
           </div>
         )}
+
+        {/* Global Leaderboard */}
+        <Card className="mb-6">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-yellow-600" />
+                Global Leaderboard - Top 10
+              </CardTitle>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setShowLeaderboard(!showLeaderboard)}
+              >
+                {showLeaderboard ? 'Hide' : 'View All'}
+              </Button>
+            </div>
+            <CardDescription>
+              Real-time rankings of top performers worldwide
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {leaderboardData.slice(0, showLeaderboard ? 10 : 5).map((entry, index) => (
+                <div 
+                  key={entry.rank}
+                  className={`flex items-center justify-between p-3 rounded-lg border ${
+                    entry.rank <= 3 ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200' : 'bg-gray-50 border-gray-200'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                      entry.rank === 1 ? 'bg-yellow-500 text-white' :
+                      entry.rank === 2 ? 'bg-gray-400 text-white' :
+                      entry.rank === 3 ? 'bg-orange-600 text-white' :
+                      'bg-blue-100 text-blue-800'
+                    }`}>
+                      {entry.rank}
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">{entry.name}</p>
+                      <p className="text-xs text-gray-500">{entry.category} • {entry.date}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-lg text-gray-900">{entry.score}</p>
+                    <div className="flex items-center gap-3 text-xs text-gray-500">
+                      <span>{formatTime(entry.time)}</span>
+                      <span>{entry.accuracy}% accuracy</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {showLeaderboard && (
+              <div className="mt-4 pt-4 border-t">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => {
+                    // Navigate to comprehensive leaderboard page
+                    console.log('Navigate to comprehensive leaderboard page');
+                  }}
+                >
+                  View Comprehensive Rankings
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
       </div>
 
