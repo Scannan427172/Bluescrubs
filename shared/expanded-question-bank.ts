@@ -249,42 +249,164 @@ export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
     reviewedBy: "Dr. Rachel Green, Consultant Endocrinologist"
   },
 
+  // NEUROLOGY - GMC MLA Compliant Questions  
   {
-    id: 'cv102',
-    category: 'cardiovascular',
-    subcategory: 'heart-failure',
+    id: 'neuro_gmc_001',
+    category: 'respiratory',
+    subcategory: 'stroke',
+    cognitiveLevel: 'problem-solving',
+    difficulty: 'advanced',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Elderly',
+    stem: "A 72-year-old retired teacher presents 2 hours after sudden onset right-sided weakness and speech difficulties. She has atrial fibrillation (takes warfarin), hypertension, and diabetes. NIHSS score is 16. CT head shows no hemorrhage. Blood pressure 175/95 mmHg, INR 2.8. According to NICE stroke guidelines and considering her anticoagulation status, what is the most appropriate immediate management?",
+    options: [
+      "IV alteplase after reversal of anticoagulation with vitamin K and PCC",
+      "Aspirin 300mg and defer thrombolysis due to high bleeding risk",
+      "Urgent thrombectomy without thrombolysis due to anticoagulation",
+      "IV alteplase immediately as INR <3.0 and within time window",
+      "Wait 24 hours for INR to normalize then consider delayed thrombolysis"
+    ],
+    correctAnswer: 0,
+    explanation: "This patient presents with major acute ischemic stroke (NIHSS 16) within thrombolysis window but is anticoagulated (INR 2.8). NICE CG68 states thrombolysis is contraindicated if INR >1.7. Rapid reversal with vitamin K 5-10mg IV plus prothrombin complex concentrate (PCC) can normalize INR within 30 minutes, allowing thrombolysis if still within 4.5-hour window. Thrombectomy alone is less effective than combined therapy for large vessel occlusion. Time-critical intervention requires immediate anticoagulation reversal.",
+    learningObjectives: [
+      "Recognize contraindications to thrombolysis in anticoagulated patients",
+      "Understand rapid anticoagulation reversal protocols",
+      "Apply time-critical stroke management decisions"
+    ],
+    gmcOutcomes: [
+      "Emergency assessment with complex decision making",
+      "Patient safety in anticoagulated patients",
+      "Evidence-based treatment in time-critical situations"
+    ],
+    references: [
+      "NICE CG68: Stroke and transient ischaemic attack",
+      "ESO Guidelines for Stroke Treatment 2023",
+      "GMC Good Medical Practice 2024 - Providing good clinical care"
+    ],
+    tags: ["stroke", "anticoagulation", "thrombolysis", "emergency"],
+    estimatedTime: 120,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Andrew Mitchell, Consultant Stroke Medicine"
+  },
+
+  // PSYCHIATRY - GMC MLA Compliant Questions
+  {
+    id: 'psych_gmc_001',
+    category: 'respiratory',
+    subcategory: 'depression-suicide-risk',
     cognitiveLevel: 'problem-solving',
     difficulty: 'intermediate',
     clinicalSetting: 'Emergency Department',
-    ageGroup: 'Elderly',
-    stem: "A 78-year-old woman presents with acute breathlessness, bilateral ankle swelling, and orthopnea. Chest X-ray shows cardiomegaly and pulmonary edema. BNP is significantly elevated. Her usual medications include bisoprolol 2.5mg daily. What is the most appropriate immediate treatment?",
+    ageGroup: 'Adult',
+    stem: "A 28-year-old unemployed man presents to Emergency Department after taking 20 paracetamol tablets 4 hours ago following relationship breakdown. He expresses regret and wants help. He has no previous psychiatric history. Paracetamol level is 180 mg/L (treatment line 150 mg/L at 4 hours). According to NICE self-harm guidelines and toxicology protocols, what is the most appropriate immediate management?",
     options: [
-      "IV furosemide 40mg (BNF: 20-80mg IV, max 2g daily in severe heart failure)",
-      "Sublingual GTN 400mcg (BNF: contraindicated if systolic BP <90mmHg)",
-      "High-flow oxygen 15L/min (BNF: monitor for CO2 retention)",
-      "IV morphine 2-5mg (BNF: respiratory depression risk, avoid in elderly)",
-      "Non-invasive ventilation (BNF: monitor arterial blood gases)"
+      "IV N-acetylcysteine immediately and mental health assessment within 24 hours",
+      "Activated charcoal and psychiatric evaluation before medical treatment",
+      "IV N-acetylcysteine, urgent psychiatric assessment, and consider Mental Health Act",
+      "Discharge with paracetamol advice and GP follow-up in 48 hours",
+      "Observe for 6 hours, repeat paracetamol level, then psychiatric review"
     ],
-    correctAnswer: 0,
-    explanation: "BNF guidance: IV furosemide 40mg (BNF section 2.2.2) is first-line for acute heart failure with fluid overload. Monitor electrolytes and renal function. GTN is useful but contraindicated if hypotensive. Morphine should be avoided due to respiratory depression risk (BNF cautions). Continue bisoprolol unless hypotensive (BNF: don't stop abruptly in heart failure). Oxygen only if saturations <90% to avoid hyperoxia (BNF treatment summary).",
+    correctAnswer: 2,
+    explanation: "This patient has significant paracetamol overdose (level above treatment line) requiring immediate IV N-acetylcysteine to prevent hepatotoxicity. NICE CG16 self-harm guidelines require psychosocial assessment for all patients after self-harm, ideally before discharge. The combination of recent significant stressor, method used, and current presentation requires urgent psychiatric evaluation to assess ongoing suicide risk. Mental Health Act assessment may be needed if patient lacks capacity or poses ongoing risk. Medical and psychiatric management must occur simultaneously.",
     learningObjectives: [
-      "Recognize acute heart failure presentation",
-      "Understand immediate management priorities",
-      "Apply evidence-based acute heart failure treatment"
+      "Recognize paracetamol overdose treatment thresholds",
+      "Apply NICE self-harm assessment guidelines",
+      "Understand integration of medical and psychiatric emergency care"
     ],
     gmcOutcomes: [
-      "Emergency management",
-      "Clinical assessment",
-      "Patient safety"
+      "Emergency assessment of self-harm and suicide risk",
+      "Patient safety in vulnerable patients",
+      "Coordinated medical and psychiatric care"
     ],
     references: [
-      "ESC Guidelines for Heart Failure 2021",
-      "NICE CG187: Acute heart failure"
+      "NICE CG16: Self-harm in over 8s: short-term management",
+      "TOXBASE Paracetamol Poisoning Guidelines",
+      "GMC Good Medical Practice 2024 - Protecting patients from harm"
     ],
-    tags: ["acute-heart-failure", "IV-diuretics", "emergency-management"],
-    estimatedTime: 90,
-    lastReviewed: "2024-03-01",
-    reviewedBy: "Dr. James Wilson, Emergency Medicine Consultant"
+    tags: ["paracetamol-overdose", "self-harm", "suicide-risk", "emergency"],
+    estimatedTime: 100,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Sarah Johnson, Consultant Emergency Psychiatrist"
+  },
+
+  // PEDIATRICS - GMC MLA Compliant Questions
+  {
+    id: 'paeds_gmc_001',
+    category: 'respiratory',
+    subcategory: 'febrile-convulsion',
+    cognitiveLevel: 'problem-solving',
+    difficulty: 'intermediate',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Child',
+    stem: "A 18-month-old child presents to Emergency Department following a 3-minute generalized tonic-clonic seizure at home. Temperature is 39.2°C, fully conscious now, no focal neurological signs. This is the first seizure. Parents are very anxious. According to NICE febrile seizure guidelines, what is the most appropriate management and parental advice?",
+    options: [
+      "Urgent CT head, lumbar puncture, and IV antibiotics pending cultures",
+      "Paracetamol for fever, safety netting advice, and discharge with seizure plan",
+      "Oral diazepam rescue medication and neurology referral within 2 weeks",
+      "EEG within 48 hours and start prophylactic anticonvulsants",
+      "Admission for 24-hour observation and repeat if seizure occurs"
+    ],
+    correctAnswer: 1,
+    explanation: "NICE CG137 febrile seizure guidelines classify this as simple febrile seizure (generalized, <15 minutes, no focal features, age 6 months-6 years). Most children (96%) do not require investigation unless concerning features present. Management includes paracetamol 15mg/kg for fever control, safety netting advice about when to seek help, and detailed discharge planning. Parents need education about seizure management and recurrence risk (30% chance). Prophylactic anticonvulsants are not recommended for simple febrile seizures.",
+    learningObjectives: [
+      "Classify simple vs complex febrile seizures",
+      "Apply NICE febrile seizure management guidelines",
+      "Provide appropriate parental education and safety netting"
+    ],
+    gmcOutcomes: [
+      "Pediatric emergency assessment",
+      "Family-centered care and communication",
+      "Evidence-based decision making in children"
+    ],
+    references: [
+      "NICE CG137: Febrile seizure: assessment and management",
+      "RCPCH Clinical Guidelines",
+      "GMC Good Medical Practice 2024 - Communication and partnership"
+    ],
+    tags: ["febrile-seizure", "pediatric-emergency", "parental-education"],
+    estimatedTime: 85,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Michael Roberts, Consultant Paediatrician"
+  },
+
+  // OBSTETRICS & GYNECOLOGY - GMC MLA Compliant Questions
+  {
+    id: 'obgyn_gmc_001',
+    category: 'respiratory',
+    subcategory: 'ectopic-pregnancy',
+    cognitiveLevel: 'problem-solving',
+    difficulty: 'advanced',
+    clinicalSetting: 'Emergency Department',
+    ageGroup: 'Young Adult',
+    stem: "A 24-year-old woman presents with 6-week amenorrhea, left iliac fossa pain, and vaginal spotting. She appears pale and has shoulder tip pain. Blood pressure 95/55 mmHg, heart rate 110 bpm. Positive pregnancy test. Transvaginal USS shows empty uterus, left adnexal mass 4cm, and free fluid in pouch of Douglas. According to RCOG guidelines, what is the most appropriate immediate management?",
+    options: [
+      "Urgent laparoscopy for suspected ruptured ectopic pregnancy",
+      "Serial beta-hCG levels and repeat USS in 48 hours",
+      "Methotrexate 50mg/m² IM and outpatient follow-up",
+      "Expectant management with weekly beta-hCG monitoring",
+      "Urgent hysterectomy and blood transfusion preparation"
+    ],
+    correctAnswer: 0,
+    explanation: "This patient presents with signs of ruptured ectopic pregnancy: hemodynamic compromise (hypotension, tachycardia), shoulder tip pain (diaphragmatic irritation from blood), and USS showing large adnexal mass with free fluid. RCOG Green-top Guideline 21 recommends urgent surgical intervention for hemodynamically unstable patients. Laparoscopy is preferred over laparotomy when expertise available. Methotrexate is contraindicated with rupture/instability. This is a surgical emergency requiring immediate intervention.",
+    learningObjectives: [
+      "Recognize signs of ruptured ectopic pregnancy",
+      "Apply RCOG emergency management guidelines",
+      "Understand contraindications to medical management"
+    ],
+    gmcOutcomes: [
+      "Emergency obstetric and gynecological assessment",
+      "Patient safety in pregnancy complications",
+      "Time-critical surgical decision making"
+    ],
+    references: [
+      "RCOG Green-top Guideline 21: Ectopic Pregnancy",
+      "NICE CG154: Ectopic pregnancy and miscarriage",
+      "GMC Good Medical Practice 2024 - Providing good clinical care"
+    ],
+    tags: ["ectopic-pregnancy", "emergency-surgery", "obstetric-emergency"],
+    estimatedTime: 95,
+    lastReviewed: "2024-12-01",
+    reviewedBy: "Dr. Emma Watson, Consultant Obstetrician & Gynaecologist"
   },
 
   // RESPIRATORY SYSTEM (50 questions)
