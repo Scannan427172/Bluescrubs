@@ -12,10 +12,10 @@ export interface SimpleQuestion {
   difficulty: string;
 }
 
-export async function generateSimpleQuestion(
+export function generateSimpleQuestion(
   category: string,
   difficulty: string
-): Promise<SimpleQuestion> {
+): SimpleQuestion {
   // Fast question templates to reduce generation time
   const questionTemplates = {
     cardiovascular: [
@@ -178,11 +178,11 @@ export async function generateSimpleQuestion(
   };
 }
 
-export async function generateMultipleSimpleQuestions(
+export function generateMultipleSimpleQuestions(
   category: string,
   difficulty: string,
   count: number
-): Promise<SimpleQuestion[]> {
+): SimpleQuestion[] {
   console.log(`Generating ${count} questions for ${category} at ${difficulty} level`);
   
   const questions: SimpleQuestion[] = [];

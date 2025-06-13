@@ -51,10 +51,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const subcategories = subcategoriesMap[category] || ['general'];
       
-      const questionGenerationPromise = generateMultipleSimpleQuestions(category, difficulty, limitedCount);
-      
-      // Race between question generation and timeout
-      const questions = await Promise.race([questionGenerationPromise, timeoutPromise]);
+      console.log(`Generating questions for ${category} at ${difficulty} level, count: ${limitedCount}`);
+      const questions = generateMultipleSimpleQuestions(category, difficulty, limitedCount);
+      console.log(`Generated questions:`, questions.map(q => ({ id: q.id, category: q.category, hasOptions: !!q.options })));
       
       if (!questions || !Array.isArray(questions) || questions.length === 0) {
         throw new Error('No questions were generated');
