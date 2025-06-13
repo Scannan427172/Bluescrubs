@@ -28,8 +28,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Category is required" });
       }
 
-      console.log(`Generating ${count} questions for category: ${category}, difficulty: ${difficulty}`);
+      // Limit count to prevent timeout
+      const limitedCount = Math.min(count, 10);
+      console.log(`Generating ${limitedCount} questions for category: ${category}, difficulty: ${difficulty}`);
       
+      // Set timeout for the entire operation
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Question generation timeout')), 30000); // 30 second timeout
+      });
+
       // Define subcategories for each medical specialty
       const subcategoriesMap: Record<string, string[]> = {
         cardiovascular: ['heart-failure', 'arrhythmias', 'hypertension', 'coronary-artery-disease', 'valvular-disease'],
@@ -43,7 +50,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       };
 
       const subcategories = subcategoriesMap[category] || ['general'];
-      const questions = await generateMultipleQuestions(category, subcategories, difficulty, count);
+      
+      const questionGenerationPromise = generateMultipleQuestions(category, subcategories, difficulty, limitedCount);
+      
+      // Race between question generation and timeout
+      const questions = await Promise.race([questionGenerationPromise, timeoutPromise]);
+      
+      if (!questions || !Array.isArray(questions) || questions.length === 0) {
+        throw new Error('No questions were generated');
+      }
       
       res.json({ 
         questions,

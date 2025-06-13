@@ -60,7 +60,7 @@ Return the response in JSON format with these fields only: stem, options, correc
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
       messages: [
         {
           role: "system",
@@ -75,6 +75,10 @@ Return the response in JSON format with these fields only: stem, options, correc
       temperature: 0.7,
       max_tokens: 2000
     });
+    
+    if (!response || !response.choices || !response.choices[0]) {
+      throw new Error('Invalid response from OpenAI API');
+    }
 
     const generatedContent = JSON.parse(response.choices[0].message.content || '{}');
     
@@ -114,20 +118,52 @@ export async function generateMultipleQuestions(
   count: number
 ): Promise<GeneratedQuestion[]> {
   const questions: GeneratedQuestion[] = [];
+  const maxRetries = 2;
   
-  for (let i = 0; i < count; i++) {
-    const subcategory = subcategories[i % subcategories.length];
-    try {
-      const question = await generateMedicalQuestion(category, subcategory, difficulty);
-      questions.push(question);
+  // Process questions in smaller batches to avoid timeouts
+  const batchSize = 3;
+  for (let batchStart = 0; batchStart < count; batchStart += batchSize) {
+    const batchEnd = Math.min(batchStart + batchSize, count);
+    const batchPromises: Promise<GeneratedQuestion | null>[] = [];
+    
+    for (let i = batchStart; i < batchEnd; i++) {
+      const subcategory = subcategories[i % subcategories.length];
       
-      // Add small delay to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 500));
-    } catch (error) {
-      console.error(`Failed to generate question ${i + 1}:`, error);
+      const questionPromise = (async (): Promise<GeneratedQuestion | null> => {
+        for (let retry = 0; retry < maxRetries; retry++) {
+          try {
+            const question = await generateMedicalQuestion(category, subcategory, difficulty);
+            console.log(`Generated question ${i + 1}/${count} successfully`);
+            return question;
+          } catch (error) {
+            console.error(`Failed to generate question ${i + 1}, retry ${retry + 1}:`, error);
+            if (retry === maxRetries - 1) {
+              return null;
+            }
+            // Exponential backoff
+            await new Promise(resolve => setTimeout(resolve, Math.pow(2, retry) * 1000));
+          }
+        }
+        return null;
+      })();
+      
+      batchPromises.push(questionPromise);
+    }
+    
+    // Wait for current batch to complete
+    const batchResults = await Promise.all(batchPromises);
+    const validQuestions = batchResults.filter((q): q is GeneratedQuestion => q !== null);
+    questions.push(...validQuestions);
+    
+    console.log(`Batch ${Math.floor(batchStart / batchSize) + 1} completed: ${validQuestions.length}/${batchEnd - batchStart} questions generated`);
+    
+    // Small delay between batches
+    if (batchEnd < count) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
   
+  console.log(`Total questions generated: ${questions.length}/${count}`);
   return questions;
 }
 
