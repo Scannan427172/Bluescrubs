@@ -405,8 +405,8 @@ export default function PLAB1New() {
                   className="bg-purple-600 hover:bg-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <Brain className="w-6 h-6" />
-                  <span className="font-medium">Standard Quiz</span>
-                  <span className="text-xs opacity-90">20 questions</span>
+                  <span className="font-medium">{translateText('Standard Quiz')}</span>
+                  <span className="text-xs opacity-90">20 {translateText('questions')}</span>
                 </Button>
 
                 <Button 
@@ -416,8 +416,8 @@ export default function PLAB1New() {
                   className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <Clock className="w-6 h-6" />
-                  <span className="font-medium">PLAB 1 Mock</span>
-                  <span className="text-xs opacity-90">50 questions</span>
+                  <span className="font-medium">{translateText('PLAB 1 Mock')}</span>
+                  <span className="text-xs opacity-90">50 {translateText('questions')}</span>
                 </Button>
 
                 <Button 
@@ -427,8 +427,8 @@ export default function PLAB1New() {
                   className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <Target className="w-6 h-6" />
-                  <span className="font-medium">Comprehensive</span>
-                  <span className="text-xs opacity-90">100 questions</span>
+                  <span className="font-medium">{translateText('Comprehensive')}</span>
+                  <span className="text-xs opacity-90">100 {translateText('questions')}</span>
                 </Button>
               </div>
 
@@ -687,8 +687,8 @@ export default function PLAB1New() {
                     isCorrect ? 'text-green-800' : 'text-red-800'
                   }`}>
                     {isCorrect 
-                      ? 'Correct!' 
-                      : `Incorrect. The correct answer is ${String.fromCharCode(65 + currentQuestion.correctAnswer)}: ${currentQuestion.options[currentQuestion.correctAnswer]}`
+                      ? translateText('Correct!') 
+                      : `${translateText('Incorrect.')} The correct answer is ${String.fromCharCode(65 + currentQuestion.correctAnswer)}: ${currentQuestion.options[currentQuestion.correctAnswer]}`
                     }
                   </p>
                   
@@ -707,7 +707,7 @@ export default function PLAB1New() {
               <div className="flex items-start gap-2">
                 <BookOpen className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
                 <div>
-                  <p className="text-sm font-medium text-blue-900 mb-1">Reference:</p>
+                  <p className="text-sm font-medium text-blue-900 mb-1">{translateText('Reference:')}</p>
                   <div className="text-sm text-blue-800">
                     <div className="space-y-1">
                       <p className="font-mono">{currentQuestion.category?.toUpperCase().replace('-', ' ') || 'MEDICAL'}-{Math.floor(Math.random() * 900) + 100}</p>
@@ -740,7 +740,7 @@ export default function PLAB1New() {
               <div className="flex items-start gap-2">
                 <Lightbulb className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
                 <div>
-                  <p className="text-sm font-medium text-blue-900 mb-2">Study Tip</p>
+                  <p className="text-sm font-medium text-blue-900 mb-2">{translateText('Study Tip')}</p>
                   <p className="text-sm text-blue-800 leading-relaxed">
                     Review the underlying pathophysiology and connect clinical presentations to diagnostic criteria.
                   </p>
@@ -762,7 +762,7 @@ export default function PLAB1New() {
               disabled={!selectedAnswer}
               className="bg-blue-600 hover:bg-blue-700 px-8"
             >
-              Submit Answer
+              {translateText('Submit Answer')}
             </Button>
           ) : (
             <Button 
@@ -771,12 +771,12 @@ export default function PLAB1New() {
             >
               {currentQuestionIndex < generatedQuestions.length - 1 ? (
                 <>
-                  Next Question
+                  {translateText('Next Question')}
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </>
               ) : (
                 <>
-                  Complete Session
+                  {translateText('Complete Session')}
                   <Award className="w-4 h-4 ml-2" />
                 </>
               )}
