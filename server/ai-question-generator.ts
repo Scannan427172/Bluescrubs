@@ -27,36 +27,17 @@ export async function generateMedicalQuestion(
   subcategory: string,
   difficulty: 'foundation' | 'intermediate' | 'advanced'
 ): Promise<GeneratedQuestion> {
-  const prompt = `Generate a GMC MLA-compliant medical question for ${category} - ${subcategory} at ${difficulty} level.
+  const prompt = `Create a medical MCQ for ${category} (${subcategory}, ${difficulty} level).
 
-Requirements:
-1. Create a realistic clinical scenario with specific patient details (age, gender, presenting symptoms, examination findings, investigations)
-2. Provide 5 multiple choice options (A-E)
-3. Follow this exact explanation format:
+Format:
+{
+  "stem": "Clinical scenario ending with clear question",
+  "options": ["Option A", "Option B", "Option C", "Option D"],
+  "correctAnswer": 0,
+  "explanation": "Brief clinical explanation with key reasoning"
+}
 
-Answer: [Letter]. [Correct option]
-
-Key points:
-
-• [Key clinical fact with pathophysiology/diagnostic criteria]¹
-• [Key clinical fact with management/treatment details]²
-• [Key clinical fact with guidelines/evidence base]³
-• [Key clinical fact with prognosis/complications]⁴
-
-References:
-
-1. [Primary guideline or major study with full citation]
-2. [NICE or specialty society guideline with full citation]
-3. [BMJ Best Practice or UpToDate reference]
-4. [Specialty journal or textbook reference]
-5. [World Health Organization or international guideline]
-6. [NHS England or national policy document]
-7. [General Medical Council. Good Medical Practice. GMC; 2024.]
-8. [General Medical Council. Medical Licensing Assessment (MLA) Content Map. [Specialty] section; 2024.]
-
-The question should test clinical decision-making, differential diagnosis, or evidence-based management. Ensure all medical facts are accurate and current as of 2024-2025.
-
-Return the response in JSON format with these fields only: stem, options, correctAnswer, explanation, references. Do not include learningObjectives or gmcOutcomes fields.`;
+Make it realistic, evidence-based, and concise.`;
 
   try {
     const response = await openai.chat.completions.create({
@@ -94,9 +75,9 @@ Return the response in JSON format with these fields only: stem, options, correc
       clinicalSetting: generatedContent.clinicalSetting || 'Hospital',
       ageGroup: generatedContent.ageGroup || 'Adult',
       stem: generatedContent.stem,
-      options: generatedContent.options,
-      correctAnswer: generatedContent.correctAnswer,
-      explanation: generatedContent.explanation,
+      options: Array.isArray(generatedContent.options) ? generatedContent.options : [],
+      correctAnswer: typeof generatedContent.correctAnswer === 'number' ? generatedContent.correctAnswer : 0,
+      explanation: generatedContent.explanation || 'Clinical explanation provided for educational purposes.',
 
       references: generatedContent.references || [],
       tags: generatedContent.tags || [category, subcategory],
@@ -117,35 +98,38 @@ export async function generateMultipleQuestions(
   difficulty: 'foundation' | 'intermediate' | 'advanced',
   count: number
 ): Promise<GeneratedQuestion[]> {
-  const questions: GeneratedQuestion[] = [];
-  const maxRetries = 2;
+  console.log(`Starting parallel generation of ${count} questions for ${category}`);
   
-  // Generate questions sequentially to avoid rate limiting and improve reliability
-  for (let i = 0; i < count; i++) {
+  // Generate questions in parallel for much faster performance
+  const questionPromises = Array.from({ length: count }, async (_, i) => {
     const subcategory = subcategories[i % subcategories.length];
+    const maxRetries = 2;
     
     for (let retry = 0; retry < maxRetries; retry++) {
       try {
         const question = await generateMedicalQuestion(category, subcategory, difficulty);
-        questions.push(question);
         console.log(`Generated question ${i + 1}/${count} successfully`);
-        break; // Success, exit retry loop
+        return question;
       } catch (error) {
         console.error(`Failed to generate question ${i + 1}, retry ${retry + 1}:`, error);
         if (retry === maxRetries - 1) {
           console.log(`Skipping question ${i + 1} after ${maxRetries} failed attempts`);
-        } else {
-          // Short delay before retry
-          await new Promise(resolve => setTimeout(resolve, 1000));
+          return null;
         }
+        // Small delay before retry
+        await new Promise(resolve => setTimeout(resolve, 500));
       }
     }
-    
-    // Small delay between questions to avoid overwhelming the API
-    if (i < count - 1) {
-      await new Promise(resolve => setTimeout(resolve, 200));
-    }
-  }
+    return null;
+  });
+  
+  // Wait for all questions to generate in parallel
+  const results = await Promise.allSettled(questionPromises);
+  const questions = results
+    .filter((result): result is PromiseFulfilledResult<GeneratedQuestion> => 
+      result.status === 'fulfilled' && result.value !== null
+    )
+    .map(result => result.value);
   
   console.log(`Total questions generated: ${questions.length}/${count}`);
   return questions;

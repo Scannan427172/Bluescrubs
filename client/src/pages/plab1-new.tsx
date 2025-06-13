@@ -515,7 +515,7 @@ export default function PLAB1New() {
 
             {/* Answer Options - Template Style */}
             <div className="space-y-3">
-              {currentQuestion.options?.map((option: string, index: number) => {
+              {(Array.isArray(currentQuestion.options) ? currentQuestion.options : []).map((option: string, index: number) => {
                 const isCorrectAnswer = index === currentQuestion.correctAnswer;
                 const isIncorrectlySelected = showExplanation && selectedAnswer === index.toString() && !isCorrectAnswer;
                 
