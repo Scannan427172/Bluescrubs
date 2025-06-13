@@ -120,46 +120,30 @@ export async function generateMultipleQuestions(
   const questions: GeneratedQuestion[] = [];
   const maxRetries = 2;
   
-  // Process questions in smaller batches to avoid timeouts
-  const batchSize = 3;
-  for (let batchStart = 0; batchStart < count; batchStart += batchSize) {
-    const batchEnd = Math.min(batchStart + batchSize, count);
-    const batchPromises: Promise<GeneratedQuestion | null>[] = [];
+  // Generate questions sequentially to avoid rate limiting and improve reliability
+  for (let i = 0; i < count; i++) {
+    const subcategory = subcategories[i % subcategories.length];
     
-    for (let i = batchStart; i < batchEnd; i++) {
-      const subcategory = subcategories[i % subcategories.length];
-      
-      const questionPromise = (async (): Promise<GeneratedQuestion | null> => {
-        for (let retry = 0; retry < maxRetries; retry++) {
-          try {
-            const question = await generateMedicalQuestion(category, subcategory, difficulty);
-            console.log(`Generated question ${i + 1}/${count} successfully`);
-            return question;
-          } catch (error) {
-            console.error(`Failed to generate question ${i + 1}, retry ${retry + 1}:`, error);
-            if (retry === maxRetries - 1) {
-              return null;
-            }
-            // Exponential backoff
-            await new Promise(resolve => setTimeout(resolve, Math.pow(2, retry) * 1000));
-          }
+    for (let retry = 0; retry < maxRetries; retry++) {
+      try {
+        const question = await generateMedicalQuestion(category, subcategory, difficulty);
+        questions.push(question);
+        console.log(`Generated question ${i + 1}/${count} successfully`);
+        break; // Success, exit retry loop
+      } catch (error) {
+        console.error(`Failed to generate question ${i + 1}, retry ${retry + 1}:`, error);
+        if (retry === maxRetries - 1) {
+          console.log(`Skipping question ${i + 1} after ${maxRetries} failed attempts`);
+        } else {
+          // Short delay before retry
+          await new Promise(resolve => setTimeout(resolve, 1000));
         }
-        return null;
-      })();
-      
-      batchPromises.push(questionPromise);
+      }
     }
     
-    // Wait for current batch to complete
-    const batchResults = await Promise.all(batchPromises);
-    const validQuestions = batchResults.filter((q): q is GeneratedQuestion => q !== null);
-    questions.push(...validQuestions);
-    
-    console.log(`Batch ${Math.floor(batchStart / batchSize) + 1} completed: ${validQuestions.length}/${batchEnd - batchStart} questions generated`);
-    
-    // Small delay between batches
-    if (batchEnd < count) {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+    // Small delay between questions to avoid overwhelming the API
+    if (i < count - 1) {
+      await new Promise(resolve => setTimeout(resolve, 500));
     }
   }
   
