@@ -10,7 +10,10 @@ export interface SimpleQuestion {
   correctAnswer: number;
   explanation: string;
   difficulty: string;
-  references: string[];
+  references: Array<{
+    text: string;
+    url?: string;
+  }>;
 }
 
 export function generateSimpleQuestion(
@@ -31,9 +34,18 @@ export function generateSimpleQuestion(
         correctAnswer: 0,
         explanation: "Option A (Primary PCI within 90 minutes) is CORRECT because ST elevation in inferior leads (II, III, aVF) indicates inferior STEMI requiring immediate reperfusion. NICE guidelines CG167 state primary PCI is first-line treatment when available within 90 minutes, showing 30% mortality reduction vs thrombolysis (DANAMI-2 trial).\n\nOption B (Thrombolytic therapy) is INCORRECT because while effective for STEMI, primary PCI is superior when available within the 90-minute window, reducing mortality and reinfarction rates.\n\nOption C (Conservative management) is INCORRECT because STEMI requires urgent reperfusion therapy - conservative management would result in significant myocardial necrosis and potential death.\n\nOption D (Immediate CABG referral) is INCORRECT because emergency CABG is not first-line for acute STEMI - primary PCI provides faster reperfusion with better outcomes.",
         references: [
-          "NICE CG167: Myocardial infarction with ST-segment elevation - Section 1.4.1 'Offer primary PCI as the preferred reperfusion strategy for people with acute STEMI if presentation is within 12 hours of symptom onset'",
-          "DANAMI-2 Trial (2003): 'Primary angioplasty vs. thrombolysis showed 8.0% vs 9.6% mortality at 30 days (p=0.0003) - NEJM 349:733-742'",
-          "ESC 2017 STEMI Guidelines: 'Primary PCI within 90 minutes door-to-balloon time reduces mortality by 30% compared to thrombolysis'"
+          {
+            text: "NICE CG167: Myocardial infarction with ST-segment elevation - Section 1.4.1 'Offer primary PCI as the preferred reperfusion strategy for people with acute STEMI if presentation is within 12 hours of symptom onset'",
+            url: "https://www.nice.org.uk/guidance/cg167"
+          },
+          {
+            text: "DANAMI-2 Trial (2003): 'Primary angioplasty vs. thrombolysis showed 8.0% vs 9.6% mortality at 30 days (p=0.0003) - NEJM 349:733-742'",
+            url: "https://www.nejm.org/doi/full/10.1056/NEJMoa002142"
+          },
+          {
+            text: "ESC 2017 STEMI Guidelines: 'Primary PCI within 90 minutes door-to-balloon time reduces mortality by 30% compared to thrombolysis'",
+            url: "https://academic.oup.com/eurheartj/article/39/2/119/4095042"
+          }
         ]
       },
       {
@@ -47,9 +59,18 @@ export function generateSimpleQuestion(
         correctAnswer: 1,
         explanation: "Option B (NSTEMI) is CORRECT because ST depression in V3-V6 with elevated troponin definitively indicates Non-ST elevation myocardial infarction. ESC guidelines state this combination confirms myocardial necrosis without complete coronary occlusion, requiring urgent dual antiplatelet therapy and risk stratification.\n\nOption A (Unstable angina) is INCORRECT because elevated troponin rules out unstable angina by definition - unstable angina has normal troponin levels with ischemic symptoms but no myocardial necrosis.\n\nOption C (STEMI) is INCORRECT because ST depression (not elevation) is present. STEMI requires ST elevation ≥1mm in two contiguous leads or new LBBB, indicating complete coronary occlusion.\n\nOption D (Pericarditis) is INCORRECT because pericarditis typically shows widespread ST elevation with PR depression, not localized ST depression, and troponin is usually normal unless myopericarditis.",
         references: [
-          "ESC 2020 NSTEMI Guidelines: 'NSTEMI diagnosis requires elevated cardiac troponins with clinical evidence of myocardial ischemia but without persistent ST-elevation'",
-          "NICE CG94: Unstable angina and NSTEMI - Section 1.2.1 'Troponin elevation above 99th percentile indicates myocardial necrosis and rules out unstable angina'",
-          "Fourth Universal Definition of MI (2018): 'ST depression ≥0.5mm in V3-V6 with troponin rise indicates NSTEMI - European Heart Journal 40:237-269'"
+          {
+            text: "ESC 2020 NSTEMI Guidelines: 'NSTEMI diagnosis requires elevated cardiac troponins with clinical evidence of myocardial ischemia but without persistent ST-elevation'",
+            url: "https://academic.oup.com/eurheartj/article/41/4/407/5735677"
+          },
+          {
+            text: "NICE CG94: Unstable angina and NSTEMI - Section 1.2.1 'Troponin elevation above 99th percentile indicates myocardial necrosis and rules out unstable angina'",
+            url: "https://www.nice.org.uk/guidance/cg94"
+          },
+          {
+            text: "Fourth Universal Definition of MI (2018): 'ST depression ≥0.5mm in V3-V6 with troponin rise indicates NSTEMI - European Heart Journal 40:237-269'",
+            url: "https://academic.oup.com/eurheartj/article/40/3/237/5079081"
+          }
         ]
       }
     ],

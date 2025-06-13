@@ -856,9 +856,22 @@ export default function PLAB1New() {
                   <p className="text-sm font-medium text-blue-900 mb-2">{translateText('References:')}</p>
                   <div className="text-sm text-blue-800 space-y-2">
                     {currentQuestion.references && currentQuestion.references.length > 0 ? (
-                      currentQuestion.references.map((reference: string, index: number) => (
+                      currentQuestion.references.map((reference: any, index: number) => (
                         <div key={index} className="border-l-2 border-blue-200 pl-3">
-                          <p className="text-blue-700 leading-relaxed">{reference}</p>
+                          <p className="text-blue-700 leading-relaxed">
+                            {typeof reference === 'string' ? reference : reference.text}
+                          </p>
+                          {typeof reference === 'object' && reference.url && (
+                            <a 
+                              href={reference.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:text-blue-800 underline text-xs inline-flex items-center gap-1 mt-1"
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                              Access Full Guidelines
+                            </a>
+                          )}
                         </div>
                       ))
                     ) : (
