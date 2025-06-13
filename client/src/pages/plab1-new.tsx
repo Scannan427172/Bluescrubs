@@ -1246,33 +1246,6 @@ export default function PLAB1New() {
           End Session
         </Button>
       </div>
-    );
-  }
-
-  // Results view
-  if (showResults) {
-    const stats = calculateStats();
-    return (
-      <div className="max-w-4xl mx-auto space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl text-center">Session Complete!</CardTitle>
-            <CardDescription className="text-center">
-              You scored {stats.correct} out of {stats.total} questions ({stats.accuracy}%)
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center">
-              <p className="text-lg mb-4">Session time: {formatTime(timeSpent)}</p>
-              <Button onClick={endSession} size="lg">
-                Return to Main Menu
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }
