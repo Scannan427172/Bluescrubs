@@ -1283,8 +1283,6 @@ Option E (Heart failure) is incorrect because cardiac failure causes orthopnea, 
 
 Management follows NICE NG115: first-line LABA/LAMA combination (e.g., formoterol/tiotropium) for symptomatic patients. Add ICS if frequent exacerbations. Smoking cessation reduces progression rate from 60ml/year to 30ml/year FEV1 decline.
 
-References: NICE NG115 COPD Guidelines, GOLD 2023 Strategy, Lancet Respir Med 2018;6:557.`;
-        } else if (subcategory === 'lung-cancer' && i === 103) {
           return `This ${age}-year-old ${gender} with 30-pack-year smoking history presents with suspicious lung lesion: 6-week persistent cough, 6kg weight loss, hemoptysis, and 4cm right upper lobe mass on chest X-ray. This clinical picture strongly suggests primary lung cancer requiring urgent tissue diagnosis and staging.
 
 Option A (Urgent chest CT and respiratory referral) is correct because this presentation meets NICE NG12 criteria for suspected lung cancer: chest X-ray findings suggestive of malignancy in patient with significant smoking history and suspicious symptoms. The 2-week wait pathway mandates urgent CT thorax within 48 hours and respiratory specialist referral within 14 days. CT provides detailed assessment of mass characteristics, mediastinal involvement, and identifies metastatic disease.
@@ -1299,8 +1297,6 @@ Option E (CT-guided biopsy) is incorrect as immediate next step because comprehe
 
 Following CT, tissue sampling via bronchoscopy (if central) or percutaneous biopsy (if peripheral) enables histological diagnosis and molecular testing (EGFR, ALK, PD-L1) crucial for treatment selection.
 
-References: NICE NG12 Lung Cancer Guidelines, British Thoracic Society Guidelines 2013, J Clin Oncol 2017;35:2738.`;
-        } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic respiratory assessment. The clinical features, examination findings, and investigation results guide diagnosis and management decisions. Investigation with chest imaging, spirometry, and blood tests helps confirm diagnosis and assess severity. Management follows current BTS and NICE guidelines emphasizing evidence-based protocols, risk stratification, and multidisciplinary care including respiratory specialist referral when appropriate.`;
         }
       })(),
@@ -1493,28 +1489,6 @@ Differential diagnosis exclusions:
 
 • Syncope with convulsions: brief myoclonic jerks (<20 seconds) without organized tonic-clonic pattern⁹
 
-References:
-
-1. International League Against Epilepsy. Operational classification of seizure types by the International League Against Epilepsy: Position Paper of the ILAE Commission for Classification and Terminology. Epilepsia. 2017;58(4):522-530.
-
-2. National Institute for Health and Care Excellence. Epilepsies in children, young people and adults: diagnosis and management (CG137). NICE; January 2022.
-
-3. Fisher RS, Cross JH, French JA, et al. Operational classification of seizure types by the International League Against Epilepsy. Epilepsia. 2017;58(4):522-530.
-
-4. BMJ Best Practice. Epilepsy: first seizure evaluation and management. BMJ; accessed June 2025.
-
-5. UpToDate®. Clinical features and diagnosis of epilepsy. UpToDate; last updated May 2025.
-
-6. Epilepsy Foundation. Types of seizures: focal seizures. Epilepsy Foundation; 2024.
-
-7. Absence Epilepsy Info. Absence seizure characteristics and diagnosis. AEI; 2024.
-
-8. International League Against Epilepsy. Psychogenic non-epileptic seizures: diagnostic criteria and management. ILAE; 2023.
-
-9. European Society of Cardiology. Syncope with convulsive movements: differential diagnosis. ESC Guidelines; 2023.
-
-10. General Medical Council. Good Medical Practice. GMC; 2024.
-
 11. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Neurology section; 2024.`;
         } else if (subcategory === 'headache' && i === 103) {
           return `Answer: A. Migraine without aura
@@ -1540,28 +1514,6 @@ Differential diagnosis exclusions:
 • Medication overuse headache: requires documented analgesic overuse (≥15 days/month simple or ≥10 days/month combination analgesics) causing chronic daily headache transformation⁸
 
 • Trigeminal neuralgia: brief electric shock-like pain (<2 minutes) in trigeminal distribution triggered by light touch—incompatible with prolonged throbbing headache⁹
-
-References:
-
-1. International Headache Society. The International Classification of Headache Disorders, 3rd edition (ICHD-3). Cephalalgia. 2018;38(1):1-211.
-
-2. National Institute for Health and Care Excellence. Headaches in over 12s: diagnosis and management (CG150). NICE; September 2021.
-
-3. Gormley P, Anttila V, Winsvold BS, et al. Meta-analysis of 375,000 individuals identifies 38 susceptibility loci for migraine. Nat Genet. 2016;48(8):856-866.
-
-4. Burstein R, Noseda R, Borsook D. Migraine: multiple processes, complex pathophysiology. J Neurosci. 2015;35(17):6619-6629.
-
-5. BMJ Best Practice. Migraine: acute treatment and prophylaxis. BMJ; accessed June 2025.
-
-6. UpToDate®. Tension-type headache: clinical features and diagnosis. UpToDate; last updated May 2025.
-
-7. Cluster Headache Foundation. Clinical characteristics and diagnostic criteria. CHF; 2024.
-
-8. European Headache Federation. Medication overuse headache: diagnosis and management. EHF Guidelines; 2023.
-
-9. Trigeminal Neuralgia Association. Diagnostic criteria and differential diagnosis. TNA; 2024.
-
-10. General Medical Council. Good Medical Practice. GMC; 2024.
 
 11. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Neurology section; 2024.`;
         } else if (subcategory === 'dementia' && i === 104) {
@@ -1589,28 +1541,6 @@ Differential diagnosis exclusions:
 
 • Normal pressure hydrocephalus: classic triad of gait disturbance, urinary incontinence, cognitive impairment with ventricular enlargement—no gait/continence issues described⁹
 
-References:
-
-1. Alzheimer's Association. 2024 Alzheimer's disease facts and figures. Alzheimers Dement. 2024;20(5):3708-3821.
-
-2. National Institute for Health and Care Excellence. Dementia: assessment, management and support for people living with dementia (NG97). NICE; June 2018.
-
-3. Jack CR Jr, Bennett DA, Blennow K, et al. NIA-AA Research Framework: toward a biological definition of Alzheimer's disease. Alzheimers Dement. 2018;14(4):535-562.
-
-4. McKhann GM, Knopman DS, Chertkow H, et al. The diagnosis of dementia due to Alzheimer's disease. Alzheimers Dement. 2011;7(3):263-269.
-
-5. BMJ Best Practice. Dementia: assessment and diagnosis. BMJ; accessed June 2025.
-
-6. UpToDate®. Vascular dementia: clinical features and diagnosis. UpToDate; last updated May 2025.
-
-7. Frontotemporal Dementia Association. Clinical characteristics and diagnostic criteria. FTDA; 2024.
-
-8. Lewy Body Dementia Association. Diagnostic criteria and clinical features. LBDA; 2024.
-
-9. Normal Pressure Hydrocephalus Foundation. Clinical triad and diagnostic workup. NPHF; 2024.
-
-10. General Medical Council. Good Medical Practice. GMC; 2024.
-
 11. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Neurology section; 2024.`;
         } else if (subcategory === 'movement-disorders' && i === 105) {
           return `Answer: A. Parkinson's disease
@@ -1636,28 +1566,6 @@ Differential diagnosis exclusions:
 • Progressive supranuclear palsy: axial rigidity, early falls, vertical gaze palsy, symmetric onset, rarely prominent tremor—clinical features inconsistent⁸
 
 • Multiple system atrophy: early autonomic dysfunction (orthostatic hypotension, urinary incontinence), poor levodopa response, cerebellar/pyramidal signs—resting tremor uncommon⁹
-
-References:
-
-1. Movement Disorder Society. Clinical diagnostic criteria for Parkinson's disease. Mov Disord. 2015;30(12):1591-1601.
-
-2. National Institute for Health and Care Excellence. Parkinson's disease in adults: diagnosis and management (NG71). NICE; July 2017.
-
-3. Postuma RB, Berg D, Stern M, et al. MDS clinical diagnostic criteria for Parkinson's disease. Mov Disord. 2015;30(12):1591-1601.
-
-4. Poewe W, Seppi K, Tanner CM, et al. Parkinson disease. Nat Rev Dis Primers. 2017;3:17013.
-
-5. BMJ Best Practice. Parkinson's disease: diagnosis and management. BMJ; accessed June 2025.
-
-6. UpToDate®. Essential tremor: clinical features and diagnosis. UpToDate; last updated May 2025.
-
-7. International Parkinson and Movement Disorder Society. Drug-induced parkinsonism: clinical features. MDS; 2024.
-
-8. Progressive Supranuclear Palsy Association. Clinical characteristics and diagnosis. PSPA; 2024.
-
-9. Multiple System Atrophy Coalition. Clinical features and diagnostic criteria. MSAC; 2024.
-
-10. General Medical Council. Good Medical Practice. GMC; 2024.
 
 11. General Medical Council. Medical Licensing Assessment (MLA) Content Map. Neurology section; 2024.`;
         } else {
@@ -1705,12 +1613,6 @@ Key points:
 
 • Treatment: acute therapy with triptans plus antiemetics for moderate-severe attacks³
 
-References:
-
-1. International Headache Society. ICHD-3 Classification. Cephalalgia. 2018;38(1):1-211.
-
-2. NICE CG150 Headache Guidelines. NICE; 2021.
-
 3. General Medical Council. MLA Content Map. Neurology section; 2024.`,
             
             'dementia': `Answer: A. Alzheimer's disease
@@ -1723,12 +1625,6 @@ Key points:
 
 • Investigation: cognitive assessment, blood screen, MRI, specialist referral³
 
-References:
-
-1. Alzheimer's Association. 2024 Facts and Figures. Alzheimers Dement. 2024;20(5):3708-3821.
-
-2. NICE NG97 Dementia Guidelines. NICE; 2018.
-
 3. General Medical Council. MLA Content Map. Neurology section; 2024.`,
             
             'movement-disorders': `Answer: A. Parkinson's disease
@@ -1740,12 +1636,6 @@ Key points:
 • UK Brain Bank criteria: bradykinesia plus ≥1 of resting tremor, rigidity, or postural instability²
 
 • Treatment: levodopa/carbidopa or dopamine agonists as first-line therapy³
-
-References:
-
-1. Movement Disorder Society. Clinical criteria for PD. Mov Disord. 2015;30(12):1591-1601.
-
-2. NICE NG71 Parkinson's Guidelines. NICE; 2017.
 
 3. General Medical Council. MLA Content Map. Neurology section; 2024.`
           };
@@ -1833,8 +1723,6 @@ Option E (Drug-induced thyrotoxicosis) is incorrect without medication history. 
 
 Investigation requires thyroid function tests, thyroid antibodies (TSI, TRAb for Graves' disease), and imaging (thyroid uptake scan if etiology unclear). Treatment includes β-blockers for symptom control (propranolol 40mg TDS), antithyroid drugs (carbimazole 15-40mg daily), and monitoring for complications.
 
-References: NICE CG145 Thyroid Disease, British Thyroid Association Guidelines 2014, NEJM 2016;375:1552.`;
-        } else if (subcategory === 'diabetes-complications' && i === 103) {
           return `This ${age}-year-old ${gender} with 15-year type 2 diabetes presents with classic diabetic peripheral neuropathy: burning pain in both feet worse at night, with poor glycemic control (HbA1c 85 mmol/mol). This distal symmetric sensorimotor neuropathy is the most common diabetic complication, affecting 50% of patients.
 
 Option A (Diabetic peripheral neuropathy) is correct because the presentation is characteristic: bilateral distal burning pain, nocturnal exacerbation (typical of small fiber neuropathy), long diabetes duration (15 years), and poor glycemic control. DPN typically starts in toes, progresses proximally in "stocking" distribution, and combines sensory symptoms (pain, numbness) with motor weakness in advanced cases.
@@ -1849,8 +1737,6 @@ Option E (Vitamin B12 deficiency) is incorrect because B12 neuropathy typically 
 
 Management includes glycemic optimization (target HbA1c <53 mmol/mol), neuropathic pain relief with gabapentin 300mg TDS or pregabalin 75mg BD, tricyclic antidepressants (amitriptyline 10-75mg nocte), and foot care education to prevent ulceration.
 
-References: NICE NG28 Diabetes Guidelines, Diabetic Medicine 2018;35:444, Diabetes Care 2017;40:136.`;
-        } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory} disorder requiring systematic endocrine assessment. The clinical features, biochemical results, and hormonal patterns guide diagnosis and management decisions. Investigation with appropriate hormone assays, dynamic tests, and imaging helps confirm diagnosis and assess severity. Management follows current endocrine society guidelines emphasizing evidence-based protocols, hormone replacement therapy when indicated, and specialist endocrine referral for complex cases.`;
         }
       })(),
@@ -1947,8 +1833,6 @@ Option E (Conservative management) is incorrect because STEMI without reperfusio
 
 Adjunct therapy includes aspirin 300mg, clopidogrel 600mg loading, atorvastatin 80mg, metoprolol once stable, and ACE inhibitor within 24 hours. Monitor for complications: cardiogenic shock, mechanical complications, arrhythmias.
 
-References: ESC STEMI Guidelines 2017, NICE CG167 MI Guidelines, NEJM 2003;349:733 (DANAMI-2 trial).`;
-        } else if (subcategory === 'heart-failure' && i === 162) {
           return `This ${age}-year-old ${gender} presents with heart failure with reduced ejection fraction (HFrEF): progressive breathlessness, ankle swelling, fatigue over 3 months, with EF 35%. This requires evidence-based neurohormonal blockade to reduce mortality and hospitalizations.
 
 Option A (ACE inhibitor and beta-blocker) is correct because dual neurohormonal blockade forms the cornerstone of HFrEF therapy. ACE inhibitors reduce mortality by 16-20% (SOLVD, CONSENSUS trials), while beta-blockers provide additional 35% mortality reduction (MERIT-HF, CIBIS-II). Ramipril 2.5mg BD titrated to 5mg BD blocks RAAS activation. Bisoprolol 1.25mg daily titrated to 10mg daily reduces sympathetic activation and arrhythmic death.
@@ -1963,8 +1847,6 @@ Option E (Lifestyle advice only) is incorrect because while salt restriction, fl
 
 Additional therapies include aldosterone antagonists (spironolactone 25mg daily if K+ <5.0mmol/L), ARNi (sacubitril/valsartan) if ACE inhibitor intolerant, and SGLT2 inhibitors (dapagliflozin 10mg daily) for additional mortality reduction.
 
-References: ESC Heart Failure Guidelines 2021, NICE CG108 Chronic Heart Failure, NEJM 1999;341:709 (MERIT-HF).`;
-        } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring comprehensive cardiovascular assessment. The clinical presentation, hemodynamic parameters, and investigation results guide immediate management decisions. Risk stratification using validated scores helps determine appropriate intervention level. Management follows current ESC and NICE guidelines emphasizing evidence-based protocols, optimal medical therapy, and timely specialist intervention when indicated.`;
         }
       })(),
@@ -2048,8 +1930,6 @@ Option E (Chest physiotherapy only) is incorrect because pneumonia requires anti
 
 First-line therapy includes co-amoxiclav 1.2g TDS IV plus clarithromycin 500mg BD IV, targeting Streptococcus pneumoniae and atypical organisms. Monitor inflammatory markers, oxygen saturation, and clinical response. Switch to oral therapy when clinically improving with normal temperature for 24 hours.
 
-References: BTS CAP Guidelines 2009, NICE CG191 Pneumonia, Thorax 2011;66:iii1-iii23.`;
-        } else if (subcategory === 'pulmonary-embolism' && i === 152) {
           return `This ${age}-year-old ${gender} presents 5 days post-operatively with classic pulmonary embolism: sudden breathlessness, pleuritic chest pain, elevated D-dimer, and Wells score 6 (high probability). Post-operative patients have 40-fold increased PE risk, requiring immediate imaging and anticoagulation.
 
 Option A (CTPA - CT pulmonary angiogram) is correct because high Wells score (≥4) mandates immediate imaging in hemodynamically stable patients. CTPA has 95% sensitivity and 98% specificity for PE, providing definitive diagnosis and assessment of clot burden. Post-operative setting increases PE probability significantly due to immobilization, tissue trauma, and hypercoagulable state.
@@ -2064,8 +1944,6 @@ Option E (Arterial blood gas) is incorrect for diagnosis because ABG findings (h
 
 Immediate anticoagulation with treatment-dose LMWH (enoxaparin 1.5mg/kg daily) or DOAC (apixaban 10mg BD × 7 days, then 5mg BD) reduces clot extension and embolization risk. Thrombolysis considered for massive PE with hemodynamic compromise.
 
-References: ESC PE Guidelines 2019, NICE CG144 VTE, BMJ 2020;370:m2177.`;
-        } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic respiratory assessment. The clinical presentation, imaging findings, and physiological parameters guide diagnosis and management decisions. Risk stratification helps determine appropriate treatment setting and intervention intensity. Management follows current BTS and NICE guidelines emphasizing evidence-based protocols and specialist respiratory input when indicated.`;
         }
       })(),
@@ -2209,8 +2087,6 @@ Option E (IV heparin infusion) is incorrect because anticoagulation in acute isc
 
 Post-thrombolysis management includes neurological monitoring every 15 minutes for 2 hours, then hourly for 6 hours, blood pressure control <185/110 mmHg, and urgent CT if deterioration occurs. Aspirin 300mg should start at 24 hours post-thrombolysis.
 
-References: ESO/ESOC Guidelines 2019, NICE CG68 Stroke Guidelines, NEJM 2008;359:1317 (IST-3 trial).`;
-        } else if (subcategory === 'epilepsy' && i === 142) {
           return `This ${age}-year-old ${gender} with refractory epilepsy presents with breakthrough seizures despite optimal medical therapy, with MRI showing mesial temporal sclerosis. This clinical scenario represents drug-resistant epilepsy with clear structural abnormality amenable to surgical intervention.
 
 Option C (Anterior temporal lobectomy) is correct because this patient has mesial temporal lobe epilepsy (MTLE) with hippocampal sclerosis, the most common cause of drug-resistant focal epilepsy. Randomized controlled trials demonstrate that anterior temporal lobectomy achieves seizure freedom in 60-70% of patients compared to <10% with continued medical therapy. The Wiebe et al. NEJM 2001 study showed seizure freedom rates of 58% surgery vs 8% medical therapy at 1 year.
@@ -2225,8 +2101,6 @@ Option E (Ketogenic diet) is incorrect in adults because while effective in chil
 
 Pre-surgical evaluation requires video-EEG monitoring, neuropsychological assessment, Wada test or fMRI for language/memory lateralization, and sometimes intracranial monitoring. Success rates approach 80% for dominant temporal lobe resection when appropriate patient selection occurs.
 
-References: NICE CG137 Epilepsy Guidelines, NEJM 2001;345:311 (Wiebe trial), Epilepsia 2018;59:1282.`;
-        } else if (subcategory === 'multiple-sclerosis' && i === 143) {
           return `This ${age}-year-old ${gender} presents with classic relapsing-remitting multiple sclerosis: recurrent episodes of neurological dysfunction with complete recovery, involving different CNS regions (optic neuritis and limb weakness), occurring in young adult. This clinical pattern strongly suggests inflammatory demyelinating disease.
 
 Option A (Multiple sclerosis) is correct because this presentation fulfills McDonald criteria 2017 for MS diagnosis: dissemination in space (optic nerve and corticospinal tract involvement) and time (separate episodes 6 months apart with recovery). Relapsing-remitting MS accounts for 85% of initial presentations, typically affecting women 2:1, peak age 20-40 years. Optic neuritis is often the first manifestation (20% of cases), presenting with unilateral visual loss, eye pain worse with movement, and relative afferent pupillary defect.
@@ -2243,10 +2117,6 @@ Investigation should include MRI brain and spinal cord showing T2 hyperintense l
 
 Treatment with disease-modifying therapies (interferons, glatiramer acetate, or newer agents like dimethyl fumarate) reduces relapse rate by 30-50% and delays disability progression.
 
-References: NICE CG186 MS Guidelines, McDonald Criteria 2017 (Ann Neurol 2018;83:263), Lancet 2018;391:1622.`;
-        } else {
-          // Generate comprehensive explanations for other advanced neurology cases
-          const explanationTemplates = {
             'stroke': `This ${age}-year-old ${gender} presents with acute stroke requiring emergency assessment and treatment. The clinical features, timing, and neurological deficit severity guide management decisions according to current stroke guidelines. Rapid intervention within therapeutic windows is crucial for optimal outcomes.`,
             'epilepsy': `This case demonstrates ${subcategory} with specific clinical features requiring specialist neurological evaluation. The seizure pattern, response to treatment, and associated factors determine management approach following ILAE classification and current epilepsy guidelines.`,
             'headache': `This ${age}-year-old presents with complex headache syndrome requiring systematic evaluation. The headache characteristics, associated features, and temporal pattern guide diagnosis and management according to International Headache Society criteria.`,
@@ -2333,8 +2203,6 @@ The combination approach addresses multiple pathways: ACE inhibition reduces int
 
 Management includes nephrology referral, cardiovascular risk assessment, bone disease monitoring (phosphate, PTH, vitamin D), and preparation for renal replacement therapy if progression continues despite optimal medical therapy.
 
-References: NICE NG28 Diabetes Guidelines, KDIGO CKD Guidelines 2024, NEJM 2000;342:145 (HOPE trial).`;
-        } else if (subcategory === 'thyroid-disorders' && i === 137) {
           return `This ${age}-year-old ${gender} presents with Graves' disease: heat intolerance, weight loss, palpitations, suppressed TSH, elevated free T4, and diffuse increased uptake on thyroid scan. This autoimmune hyperthyroidism requires anti-thyroid medication as first-line therapy.
 
 Option A (Graves' disease) is correct because diffuse increased uptake distinguishes from toxic multinodular goiter or adenoma (focal uptake). Clinical features of sympathetic overactivity plus biochemical confirmation (TSH <0.1 mU/L, T4 >25 pmol/L) confirm thyrotoxicosis. Graves' accounts for 85% of hyperthyroidism cases.
@@ -2345,8 +2213,6 @@ Treatment options include anti-thyroid drugs (carbimazole 15-40mg daily), radioi
 
 Monitoring includes thyroid function every 4-6 weeks initially, watching for carbimazole side effects (agranulocytosis in 0.3%), and assessing for ophthalmopathy requiring specialist management.
 
-References: NICE CG145 Thyroid Disease, British Thyroid Association Guidelines 2014, Lancet 2016;388:906.`;
-        } else {
           return `This ${age}-year-old ${gender} presents with complex ${subcategory.replace('-', ' ')} requiring specialist endocrine evaluation. The hormonal patterns, clinical features, and biochemical results guide diagnosis and management decisions. Dynamic testing may be required for definitive diagnosis. Management follows current endocrine society guidelines emphasizing evidence-based protocols, hormone replacement when indicated, and specialist endocrine input for complex cases requiring advanced therapeutic interventions.`;
         }
       })(),
@@ -2405,8 +2271,6 @@ Other options are incorrect: ACE inhibitors provide antiproteinuric effects but 
 
 Management includes monitoring for steroid complications (diabetes, osteoporosis, infection), prophylactic measures (PPI, calcium/vitamin D, pneumococcal vaccination), and nephrology follow-up for relapsing disease requiring steroid-sparing agents.
 
-References: NICE CG182 Chronic Kidney Disease, KDIGO Glomerular Disease Guidelines 2021.`,
-          
           `This ${age}-year-old ${gender} with diabetes presents with diabetic kidney disease: declining eGFR 25 ml/min, proteinuria, and hypertension 160/95 mmHg. This represents CKD stage 4 requiring comprehensive management to slow progression and prepare for renal replacement therapy.
 
 Option E (All of the above except A) is correct because diabetic nephropathy requires multifaceted approach: ACE inhibitor/ARB combination is contraindicated due to increased hyperkalemia and AKI risk (ONTARGET trial). However, tight glycemic control (HbA1c <53mmol/mol), dialysis preparation, and protein restriction (0.8g/kg/day) are all evidence-based interventions.
@@ -2415,8 +2279,6 @@ Individual options: ACE inhibitor monotherapy reduces progression by 50% but com
 
 Management requires nephrology referral, cardiovascular risk reduction (statin therapy), bone disease prevention (phosphate control, vitamin D), and anemia management (ESA if Hb <100g/L with iron deficiency correction).
 
-References: NICE CG182 CKD Guidelines, KDIGO CKD Guidelines 2024, Diabetes Care 2022;45:S175.`,
-          
           `This ${age}-year-old ${gender} presents with post-infectious glomerulonephritis: AKI, oliguria, pulmonary edema following streptococcal infection, with red cell casts on urinalysis. This classic presentation requires supportive management as most cases recover spontaneously.
 
 Option A (Post-infectious glomerulonephritis) is correct because the temporal relationship with streptococcal infection, acute nephritis syndrome (hematuria, proteinuria, hypertension, edema), and red cell casts are pathognomonic. Occurs 1-3 weeks post-streptococcal pharyngitis or 3-6 weeks post-skin infection. Immune complex deposition causes glomerular inflammation.
@@ -2425,23 +2287,6 @@ Other diagnoses are less likely: IgA nephropathy typically shows concurrent hema
 
 Management includes fluid restriction, loop diuretics for pulmonary edema, antihypertensive therapy, and monitoring for recovery. Most patients recover completely within 6-8 weeks. Dialysis may be required for severe fluid overload or uremia.
 
-References: KDIGO Glomerular Disease Guidelines 2021, Clin J Am Soc Nephrol 2008;3:1271.`
-        ];
-        return scenarios[i % 3];
-      })(),
-      learningObjectives: ["Renal assessment", "GFR interpretation", "Treatment planning"],
-      gmcOutcomes: ["Clinical skills", "Laboratory interpretation", "Patient care"],
-      references: ["Renal Association Guidelines", "NICE CKD Guidelines"],
-      tags: ["nephrology", "kidney", "CKD"],
-      estimatedTime: 80 + (i % 20),
-      lastReviewed: "2024-03-01",
-      reviewedBy: "Dr. Nephrology Specialist"
-    });
-  }
-
-  // Haematology (24 more questions)
-  for (let i = 102; i <= 125; i++) {
-    additionalQuestions.push({
       id: `haem${i}`,
       category: 'haematology',
       subcategory: ['leukaemia', 'lymphoma', 'bleeding-disorders', 'transfusion'][i % 4],
@@ -2498,8 +2343,6 @@ Option E (Myelodysplastic syndrome) is incorrect because MDS typically shows <20
 
 Management requires urgent hematology referral, infection prevention (neutropenic precautions), transfusion support, and induction chemotherapy with cytarabine plus daunorubicin (7+3 regimen) aiming for complete remission.
 
-References: WHO Classification of Hematologic Malignancies 2022, NICE CG151 Haematological Cancers, Blood 2019;133:1636.`;
-        } else if (subcategory === 'lymphoma' && i === 103) {
           return `This ${age}-year-old ${gender} presents with classic Hodgkin lymphoma: painless lymphadenopathy, night sweats, weight loss (B symptoms), and Reed-Sternberg cells on lymph node biopsy. The presence of Reed-Sternberg cells is diagnostic for Hodgkin lymphoma.
 
 Option A (Hodgkin lymphoma) is correct because Reed-Sternberg cells are large multinucleated cells with prominent nucleoli, pathognomonic for HL. The clinical presentation with lymphadenopathy and B symptoms (fever >38°C, drenching night sweats, weight loss >10% in 6 months) is classic. HL shows bimodal age distribution (25-30 and >55 years).
@@ -2514,8 +2357,6 @@ Option E (Burkitt lymphoma) is incorrect because BL shows small uniform cells wi
 
 Staging includes CT/PET scanning for disease extent. Early-stage HL (stages I-II) has >90% cure rate with radiotherapy ± chemotherapy. Advanced disease requires ABVD chemotherapy with excellent long-term survival rates.
 
-References: WHO Classification of Lymphoid Neoplasms 2017, NICE CG52 Haematological Cancers, Lancet 2012;380:848.`;
-        } else {
           return `This ${age}-year-old ${gender} presents with ${subcategory.replace('-', ' ')} requiring systematic hematological assessment. The clinical features, blood film findings, and laboratory results guide diagnosis and management decisions. Investigation includes full blood count, blood film review, coagulation studies, and bone marrow examination when indicated. Management follows current guidelines emphasizing evidence-based protocols and specialist hematology input for complex cases.`;
         }
       })(),
