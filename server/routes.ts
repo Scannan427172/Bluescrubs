@@ -29,7 +29,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Limit count to prevent timeout
-      const limitedCount = Math.min(count, 10);
+      const limitedCount = Math.min(count, 5);
       console.log(`Generating ${limitedCount} questions for category: ${category}, difficulty: ${difficulty}`);
       
       // Set timeout for the entire operation

@@ -76,11 +76,11 @@ Return the response in JSON format with these fields only: stem, options, correc
       max_tokens: 2000
     });
     
-    if (!response || !response.choices || !response.choices[0]) {
+    if (!response?.choices?.[0]?.message?.content) {
       throw new Error('Invalid response from OpenAI API');
     }
 
-    const generatedContent = JSON.parse(response.choices[0].message.content || '{}');
+    const generatedContent = JSON.parse(response.choices[0].message.content);
     
     // Add metadata and generate unique ID
     const questionId = `ai_${category.slice(0,4)}_${Date.now()}`;

@@ -356,6 +356,10 @@ export default function PLAB1New() {
     setIsGeneratingQuestions(true);
     
     try {
+      // Add timeout to prevent infinite loading
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout
+      
       const response = await fetch('/api/generate-questions', {
         method: 'POST',
         headers: {
@@ -366,10 +370,14 @@ export default function PLAB1New() {
           count: questionCount,
           difficulty: selectedDifficulty
         }),
+        signal: controller.signal
       });
 
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
-        throw new Error(`Failed to generate questions: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        throw new Error(`Failed to generate questions: ${response.statusText}. ${errorData.error || ''}`);
       }
 
       const data = await response.json();
@@ -428,7 +436,15 @@ export default function PLAB1New() {
       
     } catch (error) {
       console.error('Error generating questions:', error);
-      alert('Failed to generate questions. Please try again or select a different category.');
+      
+      // Check if it's a timeout or abort error
+      if (error instanceof Error && error.name === 'AbortError') {
+        alert('Question generation timed out. This may be due to high server load. Please try again with a smaller number of questions.');
+      } else if (error instanceof Error && error.message.includes('Failed to fetch')) {
+        alert('Network error occurred. Please check your internet connection and try again.');
+      } else {
+        alert(`Failed to generate questions: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again or select a different category.`);
+      }
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -831,46 +847,46 @@ export default function PLAB1New() {
             <div className="grid md:grid-cols-4 gap-4">
               <Button 
                 size="lg" 
-                onClick={() => startPractice(25)}
+                onClick={() => startPractice(5)}
                 disabled={isGeneratingQuestions}
                 className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <ArrowRight className="w-6 h-6" />
                 <span className="font-medium">Quick Practice</span>
-                <span className="text-xs opacity-90">25 AI questions</span>
+                <span className="text-xs opacity-90">5 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
-                onClick={() => startPractice(50)}
+                onClick={() => startPractice(5)}
                 disabled={isGeneratingQuestions}
                 className="bg-purple-600 hover:bg-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Brain className="w-6 h-6" />
                 <span className="font-medium">Standard Quiz</span>
-                <span className="text-xs opacity-90">50 AI questions</span>
+                <span className="text-xs opacity-90">5 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
-                onClick={() => startPractice(180)}
+                onClick={() => startPractice(5)}
                 disabled={isGeneratingQuestions}
                 className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Clock className="w-6 h-6" />
                 <span className="font-medium">PLAB 1 Mock</span>
-                <span className="text-xs opacity-90">180 AI questions</span>
+                <span className="text-xs opacity-90">5 AI questions</span>
               </Button>
 
               <Button 
                 size="lg" 
-                onClick={() => startPractice(500)}
+                onClick={() => startPractice(5)}
                 disabled={isGeneratingQuestions}
                 className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Target className="w-6 h-6" />
                 <span className="font-medium">Comprehensive</span>
-                <span className="text-xs opacity-90">500 AI questions</span>
+                <span className="text-xs opacity-90">5 AI questions</span>
               </Button>
             </div>
           </CardContent>
