@@ -900,34 +900,40 @@ export default function PLAB1New() {
           </div>
         )}
 
-        {/* Action Buttons */}
-        <div className="flex gap-4 justify-center">
-          {!showExplanation ? (
-            <Button 
-              onClick={submitAnswer}
-              disabled={!selectedAnswer}
-              className="bg-blue-600 hover:bg-blue-700 px-8"
-            >
-              {translateText('Submit Answer')}
-            </Button>
-          ) : (
-            <Button 
-              onClick={nextQuestion}
-              className="bg-green-600 hover:bg-green-700 px-8"
-            >
-              {currentQuestionIndex < generatedQuestions.length - 1 ? (
-                <>
-                  {translateText('Next Question')}
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </>
-              ) : (
-                <>
-                  {translateText('Complete Session')}
-                  <Award className="w-4 h-4 ml-2" />
-                </>
-              )}
-            </Button>
-          )}
+      </div>
+
+      {/* Fixed Bottom Navigation - Always Stays at Bottom */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+        <div className="max-w-4xl mx-auto p-4">
+          <div className="flex gap-4 justify-center">
+            {!showExplanation ? (
+              <Button 
+                onClick={submitAnswer}
+                disabled={!selectedAnswer}
+                className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 px-8 py-3 text-base font-medium"
+              >
+                {translateText('Submit Answer')}
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            ) : (
+              <Button 
+                onClick={nextQuestion}
+                className="bg-green-600 hover:bg-green-700 px-8 py-3 text-base font-medium"
+              >
+                {currentQuestionIndex < generatedQuestions.length - 1 ? (
+                  <>
+                    {translateText('Next Question')}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </>
+                ) : (
+                  <>
+                    {translateText('Complete Session')}
+                    <Award className="w-4 h-4 ml-2" />
+                  </>
+                )}
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </div>
