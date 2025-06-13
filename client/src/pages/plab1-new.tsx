@@ -937,7 +937,7 @@ export default function PLAB1New() {
             
             {/* Question Stem - Full Width Top */}
             <div className="w-full">
-              <CardTitle className={`w-full ${questionStyles} leading-relaxed text-lg text-justify ${accommodations.keywordHighlighting ? 'font-medium' : ''} mb-4`}>
+              <CardTitle className={`w-full ${questionStyles} leading-relaxed text-lg ${accommodations.keywordHighlighting ? 'font-medium' : ''} mb-4`}>
                 {currentQuestion.stem}
               </CardTitle>
               
@@ -961,7 +961,7 @@ export default function PLAB1New() {
                     <Globe className="w-4 h-4" />
                     <span className="font-medium">Translation ({supportedLanguages.find(lang => lang.code === currentLanguage)?.name}):</span>
                   </div>
-                  <div className="text-blue-800 leading-relaxed text-lg text-justify">
+                  <div className="text-blue-800 leading-relaxed text-lg">
                     {currentTranslations['question-stem'] || (isTranslating ? 'Translating...' : 'Translation loading...')}
                   </div>
                 </div>
@@ -1003,12 +1003,12 @@ export default function PLAB1New() {
                           <span className="font-bold text-gray-700 text-lg flex-shrink-0">
                             {String.fromCharCode(65 + index)}.
                           </span>
-                          <span className="text-base leading-relaxed text-justify">
+                          <span className="text-base leading-relaxed">
                             {typeof option === 'string' ? option : `Option ${String.fromCharCode(65 + index)}`}
                           </span>
                         </div>
                         {showTranslation && currentLanguage !== 'en' && (
-                          <div className="mt-3 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-3 ml-6 text-justify">
+                          <div className="mt-3 text-sm text-gray-600 italic border-l-2 border-gray-300 pl-3 ml-6">
                             {currentTranslations[`option-${index}`] || 'Translating...'}
                           </div>
                         )}
@@ -1040,7 +1040,7 @@ export default function PLAB1New() {
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold mb-2">Explanation:</h4>
-                <p className="text-muted-foreground leading-relaxed text-justify">
+                <p className="text-muted-foreground leading-relaxed">
                   {currentQuestion.explanation}
                 </p>
               </div>
