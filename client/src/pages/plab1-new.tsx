@@ -16,6 +16,12 @@ export default function PLAB1New() {
   const [isTranslationMode, setIsTranslationMode] = useState(false);
   const [translateQuestions, setTranslateQuestions] = useState(false);
   
+  // Text-to-Speech state
+  const [speechEnabled, setSpeechEnabled] = useState(false);
+  const [selectedVoice, setSelectedVoice] = useState<string>('');
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  
   // Session state
   const [sessionStarted, setSessionStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -24,6 +30,82 @@ export default function PLAB1New() {
   const [timeSpent, setTimeSpent] = useState(0);
   const [questionStartTime, setQuestionStartTime] = useState(Date.now());
   const [sessionComplete, setSessionComplete] = useState(false);
+
+  // Initialize available voices on component mount
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        const englishVoices = voices.filter(voice => 
+          voice.lang.startsWith('en') && 
+          !voice.name.toLowerCase().includes('robot') &&
+          !voice.name.toLowerCase().includes('synthetic')
+        );
+        setAvailableVoices(englishVoices.length > 0 ? englishVoices : voices.slice(0, 5));
+        if (englishVoices.length > 0 && !selectedVoice) {
+          // Prefer female voices or voices with natural names
+          const preferredVoice = englishVoices.find(voice => 
+            voice.name.toLowerCase().includes('female') ||
+            voice.name.toLowerCase().includes('samantha') ||
+            voice.name.toLowerCase().includes('kate') ||
+            voice.name.toLowerCase().includes('susan')
+          ) || englishVoices[0];
+          setSelectedVoice(preferredVoice.name);
+        }
+      }
+    };
+
+    loadVoices();
+    speechSynthesis.addEventListener('voiceschanged', loadVoices);
+    
+    return () => {
+      speechSynthesis.removeEventListener('voiceschanged', loadVoices);
+    };
+  }, [selectedVoice]);
+
+  // Text-to-Speech functions
+  const speakText = (text: string) => {
+    if (!speechEnabled || !text.trim()) return;
+    
+    // Stop any current speech
+    speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Find selected voice
+    const voice = availableVoices.find(v => v.name === selectedVoice);
+    if (voice) {
+      utterance.voice = voice;
+    }
+    
+    // Configure speech settings for natural sound
+    utterance.rate = 0.9; // Slightly slower for clarity
+    utterance.pitch = 1.0; // Normal pitch
+    utterance.volume = 0.8; // Clear but not too loud
+    
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    
+    speechSynthesis.speak(utterance);
+  };
+
+  const stopSpeaking = () => {
+    speechSynthesis.cancel();
+    setIsSpeaking(false);
+  };
+
+  const speakCurrentQuestion = () => {
+    if (currentQuestion) {
+      const questionText = translateMedicalContent(currentQuestion.stem || currentQuestion.question);
+      const optionsText = currentQuestion.options?.map((option: string, index: number) => 
+        `Option ${String.fromCharCode(65 + index)}: ${translateMedicalContent(option)}`
+      ).join('. ') || '';
+      
+      const fullText = `${questionText}. The options are: ${optionsText}`;
+      speakText(fullText);
+    }
+  };
   
   // AI Question Generation
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -798,8 +880,9 @@ export default function PLAB1New() {
         {/* Question Card */}
         <Card className="mb-6">
           <CardContent className="p-6">
-            {/* Translation Toggle - Moved closer to questions */}
-            <div className="flex justify-end mb-4">
+            {/* Controls - Translation and Voice */}
+            <div className="flex justify-between items-start mb-4 gap-4">
+              {/* Translation Controls */}
               <div className="bg-gray-50 rounded-lg p-3 border">
                 <div className="flex items-center gap-3">
                   <Languages className="w-4 h-4 text-blue-600" />
@@ -821,6 +904,46 @@ export default function PLAB1New() {
                         <SelectItem value="ur">🇵🇰 UR</SelectItem>
                       </SelectContent>
                     </Select>
+                  )}
+                </div>
+              </div>
+
+              {/* Voice Controls */}
+              <div className="bg-gray-50 rounded-lg p-3 border">
+                <div className="flex items-center gap-3">
+                  <Volume2 className="w-4 h-4 text-green-600" />
+                  <Switch
+                    checked={speechEnabled}
+                    onCheckedChange={(checked) => {
+                      setSpeechEnabled(checked);
+                      if (!checked) stopSpeaking();
+                    }}
+                    className="data-[state=checked]:bg-green-600"
+                  />
+                  <span className="text-sm text-gray-700">Voice</span>
+                  {speechEnabled && (
+                    <>
+                      <Select value={selectedVoice} onValueChange={setSelectedVoice}>
+                        <SelectTrigger className="w-32 h-8 text-xs">
+                          <SelectValue placeholder="Voice" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {availableVoices.map((voice) => (
+                            <SelectItem key={voice.name} value={voice.name}>
+                              {voice.name.split(' ')[0]}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <Button
+                        size="sm"
+                        variant={isSpeaking ? "destructive" : "default"}
+                        onClick={isSpeaking ? stopSpeaking : speakCurrentQuestion}
+                        className="h-8 px-2"
+                      >
+                        {isSpeaking ? "Stop" : "Play"}
+                      </Button>
+                    </>
                   )}
                 </div>
               </div>
