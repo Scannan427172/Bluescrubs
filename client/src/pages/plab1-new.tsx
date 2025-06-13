@@ -14,6 +14,7 @@ export default function PLAB1New() {
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isTranslationMode, setIsTranslationMode] = useState(false);
+  const [translateQuestions, setTranslateQuestions] = useState(false);
   
   // Session state
   const [sessionStarted, setSessionStarted] = useState(false);
@@ -89,6 +90,80 @@ export default function PLAB1New() {
     };
     
     return translations[selectedLanguage]?.[text] || text;
+  };
+
+  // Function to translate medical question content
+  const translateMedicalContent = (text: string) => {
+    if (!translateQuestions || selectedLanguage === 'en') return text;
+    
+    const medicalTranslations: Record<string, Record<string, string>> = {
+      'ar': {
+        'patient': 'مريض',
+        'presents with': 'يقدم مع',
+        'chest pain': 'ألم في الصدر',
+        'shortness of breath': 'ضيق في التنفس',
+        'diagnosis': 'تشخيص',
+        'treatment': 'علاج',
+        'management': 'إدارة',
+        'What is the most appropriate': 'ما هو الأنسب',
+        'Primary PCI': 'PCI الأولي',
+        'Thrombolytic therapy': 'العلاج المذيب للجلطة',
+        'Conservative management': 'الإدارة المحافظة',
+        'monitoring': 'مراقبة',
+        'CABG': 'تطعيم شريان القلب التاجي',
+        'ECG shows': 'تخطيط القلب يظهر',
+        'ST elevation': 'ارتفاع ST',
+        'leads': 'خيوط',
+        'immediate': 'فوري'
+      },
+      'hi': {
+        'patient': 'रोगी',
+        'presents with': 'के साथ आता है',
+        'chest pain': 'सीने में दर्द',
+        'shortness of breath': 'सांस लेने में तकलीफ',
+        'diagnosis': 'निदान',
+        'treatment': 'उपचार',
+        'management': 'प्रबंधन',
+        'What is the most appropriate': 'सबसे उपयुक्त क्या है',
+        'Primary PCI': 'प्राथमिक PCI',
+        'Thrombolytic therapy': 'थ्रोम्बोलाइटिक थेरेपी',
+        'Conservative management': 'रूढ़िवादी प्रबंधन',
+        'monitoring': 'निगरानी',
+        'CABG': 'कोरोनरी आर्टरी बाईपास ग्राफ्ट',
+        'ECG shows': 'ईसीजी दिखाता है',
+        'ST elevation': 'ST उन्नयन',
+        'leads': 'लीड्स',
+        'immediate': 'तत्काल'
+      },
+      'ur': {
+        'patient': 'مریض',
+        'presents with': 'کے ساتھ پیش آتا ہے',
+        'chest pain': 'سینے میں درد',
+        'shortness of breath': 'سانس لینے میں دشواری',
+        'diagnosis': 'تشخیص',
+        'treatment': 'علاج',
+        'management': 'انتظام',
+        'What is the most appropriate': 'سب سے مناسب کیا ہے',
+        'Primary PCI': 'بنیادی PCI',
+        'Thrombolytic therapy': 'خون کا لوتھڑا گھولنے کا علاج',
+        'Conservative management': 'قدامت پسند انتظام',
+        'monitoring': 'نگرانی',
+        'CABG': 'کورونری آرٹری بائی پاس گرافٹ',
+        'ECG shows': 'ای سی جی دکھاتا ہے',
+        'ST elevation': 'ST بلندی',
+        'leads': 'لیڈز',
+        'immediate': 'فوری'
+      }
+    };
+    
+    const translations = medicalTranslations[selectedLanguage] || {};
+    let translated = text;
+    
+    Object.entries(translations).forEach(([english, native]) => {
+      translated = translated.replace(new RegExp(`\\b${english}\\b`, 'gi'), native);
+    });
+    
+    return translated;
   };
   
   // Calculate question counts for comprehensive question bank
@@ -580,11 +655,29 @@ export default function PLAB1New() {
           />
         </div>
 
-        {/* Language Flag (Template Style) */}
+        {/* Question Translation Toggle */}
         <div className="flex justify-end mb-4">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Globe className="w-4 h-4" />
-            <span>🇬🇧 English</span>
+          <div className="flex items-center gap-3 bg-white rounded-lg shadow-sm p-3 border">
+            <Languages className="w-4 h-4 text-blue-600" />
+            <Switch
+              checked={translateQuestions}
+              onCheckedChange={setTranslateQuestions}
+              className="data-[state=checked]:bg-blue-600"
+            />
+            <span className="text-sm text-gray-700">Translate Questions</span>
+            {translateQuestions && (
+              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                <SelectTrigger className="w-24 h-8 text-xs border-blue-200">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">🇬🇧 EN</SelectItem>
+                  <SelectItem value="ar">🇸🇦 AR</SelectItem>
+                  <SelectItem value="hi">🇮🇳 HI</SelectItem>
+                  <SelectItem value="ur">🇵🇰 UR</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
           </div>
         </div>
 
@@ -593,7 +686,7 @@ export default function PLAB1New() {
           <CardContent className="p-6">
             <div className="mb-6">
               <h2 className="text-lg font-medium text-gray-900 leading-relaxed">
-                {currentQuestion.stem || currentQuestion.question}
+                {translateMedicalContent(currentQuestion.stem || currentQuestion.question)}
               </h2>
             </div>
 
