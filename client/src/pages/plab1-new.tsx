@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
 import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
 import { getSourcesForQuestion } from "@shared/educational-sources";
@@ -147,10 +147,19 @@ export default function PLAB1New() {
   const [sessionComplete, setSessionComplete] = useState(false);
   const [showResults, setShowResults] = useState(false);
   
-  // Category selection
+  // Category selection and AI generation
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('intermediate');
   const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
+  const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [isBulkGenerating, setIsBulkGenerating] = useState(false);
+  const [bulkProgress, setBulkProgress] = useState<{
+    completed: number;
+    total: number;
+    currentCategory: string;
+  } | null>(null);
   
   // Language settings
   const [currentLanguage, setCurrentLanguage] = useState<string>('en');
@@ -283,6 +292,44 @@ export default function PLAB1New() {
   const handleAccommodationsChange = (accommodations: NeuroAtypicalType[]) => {
     setNeuroAccommodations(accommodations);
     localStorage.setItem('neuro-accommodations', JSON.stringify(accommodations));
+  };
+
+  // Bulk question generation function
+  const generateBulkQuestions = async () => {
+    setIsBulkGenerating(true);
+    setBulkProgress({ completed: 0, total: 18, currentCategory: 'Starting...' });
+
+    const categories = [
+      'cardiovascular', 'respiratory', 'gastroenterology', 'neurology', 
+      'endocrinology', 'psychiatry', 'obstetrics-gynaecology', 'paediatrics',
+      'surgery', 'nephrology', 'haematology', 'infectious-diseases',
+      'rheumatology', 'dermatology', 'emergency-medicine', 'ethics-law',
+      'public-health', 'clinical-pharmacology'
+    ];
+
+    try {
+      const response = await fetch('/api/generate-bulk-questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          categories,
+          questionsPerCategory: Math.ceil(5000 / categories.length)
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(`Successfully generated ${data.totalGenerated} questions across ${data.categories} categories`);
+        setBulkProgress({ completed: categories.length, total: categories.length, currentCategory: 'Complete!' });
+      }
+    } catch (error) {
+      console.error('Bulk generation failed:', error);
+    } finally {
+      setIsBulkGenerating(false);
+      setTimeout(() => setBulkProgress(null), 3000);
+    }
   };
 
   // Calculate question counts for comprehensive question bank
