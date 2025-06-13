@@ -1053,8 +1053,8 @@ export default function PLAB1New() {
                 <BookOpen className="w-4 h-4 text-blue-600" />
                 <span className="font-medium text-blue-800">Reference:</span>
               </div>
-              <div className="space-y-1 text-sm">
-                {currentQuestion.references.slice(0, 1).map((reference, index) => {
+              <div className="space-y-2 text-sm">
+                {currentQuestion.references.map((reference, index) => {
                   const getReferenceUrl = (ref: string) => {
                     if (ref.includes('NICE CG')) {
                       const cgNumber = ref.match(/CG(\d+)/)?.[1];
@@ -1074,26 +1074,40 @@ export default function PLAB1New() {
                     if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
                     if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
                     if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
+                    if (ref.includes('AAN')) return 'https://www.aan.com/Guidelines/';
+                    if (ref.includes('KDIGO')) return 'https://kdigo.org/guidelines/';
+                    if (ref.includes('AHA/ACC')) return 'https://www.ahajournals.org/guidelines';
+                    if (ref.includes('British Thyroid Association')) return 'https://www.british-thyroid-association.org/guidelines/';
+                    if (ref.includes('Endocrine Society')) return 'https://www.endocrine.org/clinical-practice-guidelines';
+                    if (ref.includes('Renal Association')) return 'https://renal.org/guidelines/';
+                    if (ref.includes('BSH')) return 'https://b-s-h.org.uk/guidelines/';
+                    if (ref.includes('EULAR')) return 'https://www.eular.org/recommendations-management';
+                    if (ref.includes('BSR')) return 'https://www.rheumatology.org.uk/practice-quality/guidelines';
+                    if (ref.includes('IDSA')) return 'https://www.idsociety.org/practice-guideline/';
+                    if (ref.includes('GOLD')) return 'https://goldcopd.org/2024-gold-report/';
+                    if (ref.includes('ERS')) return 'https://ers.app/guidelines/';
                     return null;
                   };
 
                   const url = getReferenceUrl(reference);
-                  const referenceCode = reference.split('.')[0]?.trim() || 'REF';
                   
                   return (
-                    <div key={index} className="text-blue-700">
-                      <span className="font-medium">{referenceCode}</span>
-                      <div className="text-xs text-gray-600 mt-1">Scope</div>
-                      {url && (
-                        <a 
-                          href={url} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 hover:underline text-xs block mt-1"
-                        >
-                          View full regulation ↗
-                        </a>
-                      )}
+                    <div key={index} className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold mt-1">•</span>
+                      <div className="flex-1">
+                        {url ? (
+                          <a 
+                            href={url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800 hover:underline"
+                          >
+                            {reference}
+                          </a>
+                        ) : (
+                          <span className="text-blue-700">{reference}</span>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
