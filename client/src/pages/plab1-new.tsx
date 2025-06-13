@@ -55,10 +55,10 @@ export default function PLAB1New() {
       
       if (correctLine) {
         const cleanExplanation = correctLine.replace(/Option [A-E] \([^)]+\) is CORRECT because/, '').trim();
-        return translateMedicalContent(`✓ Your answer is correct. ${cleanExplanation}`);
+        return `✓ Your answer is correct. ${cleanExplanation}`;
       }
       
-      return translateMedicalContent('✓ Correct! ' + explanation.split('\n')[0]);
+      return '✓ Correct! ' + explanation.split('\n')[0];
     } else {
       // User got it wrong - explain why their choice is wrong AND why correct answer is right
       const lines = explanation.split('\n');
