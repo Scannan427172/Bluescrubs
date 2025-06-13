@@ -1020,88 +1020,109 @@ export default function PLAB1New() {
 
       {/* Answer Explanation */}
       {showExplanation && (
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              {isCorrect ? (
-                <CheckCircle className="w-5 h-5 text-green-600" />
-              ) : (
-                <XCircle className="w-5 h-5 text-red-600" />
-              )}
-              {isCorrect ? 'Correct!' : 'Incorrect'}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-semibold mb-2">Explanation:</h4>
-                <div className="text-muted-foreground leading-relaxed space-y-2">
-                  {currentQuestion.explanation.split('•').map((text, index) => {
-                    if (index === 0) {
-                      return <p key={index}>{text.trim()}</p>;
-                    }
-                    return (
-                      <div key={index} className="flex items-start gap-2">
-                        <span className="text-blue-600 font-bold mt-1">•</span>
-                        <p className="flex-1">{text.trim()}</p>
-                      </div>
-                    );
-                  })}
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <div className="flex items-center gap-2 mb-3">
+            {isCorrect ? (
+              <CheckCircle className="w-5 h-5 text-green-600" />
+            ) : (
+              <XCircle className="w-5 h-5 text-red-600" />
+            )}
+            <span className="font-medium text-red-800">
+              {isCorrect ? 'Correct!' : `Incorrect. The correct answer is ${String.fromCharCode(65 + currentQuestion.correctAnswer)}: ${currentQuestion.options[currentQuestion.correctAnswer]}`}
+            </span>
+          </div>
+          
+          <div className="text-red-700 leading-relaxed space-y-2 mb-4">
+            {currentQuestion.explanation.split('•').map((text, index) => {
+              if (index === 0) {
+                return <p key={index}>{text.trim()}</p>;
+              }
+              return (
+                <div key={index} className="flex items-start gap-2">
+                  <span className="text-red-600 font-bold mt-1">•</span>
+                  <p className="flex-1">{text.trim()}</p>
                 </div>
-                
-                {/* References directly under explanation */}
-                {currentQuestion.references && currentQuestion.references.length > 0 && (
-                  <div className="mt-4">
-                    <h4 className="font-semibold mb-2">References:</h4>
-                    <div className="space-y-1 text-sm">
-                      {currentQuestion.references.map((reference, index) => {
-                        const getReferenceUrl = (ref: string) => {
-                          if (ref.includes('NICE CG')) {
-                            const cgNumber = ref.match(/CG(\d+)/)?.[1];
-                            if (cgNumber) return `https://www.nice.org.uk/guidance/cg${cgNumber}`;
-                          }
-                          if (ref.includes('NICE NG')) {
-                            const ngNumber = ref.match(/NG(\d+)/)?.[1];
-                            if (ngNumber) return `https://www.nice.org.uk/guidance/ng${ngNumber}`;
-                          }
-                          if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
-                          if (ref.includes('ESC')) return 'https://www.escardio.org/Guidelines';
-                          if (ref.includes('BTS')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/';
-                          if (ref.includes('BNF')) return 'https://bnf.nice.org.uk/';
-                          if (ref.includes('NEJM')) return 'https://www.nejm.org/';
-                          if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
-                          if (ref.includes('BMJ')) return 'https://www.bmj.com/';
-                          if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
-                          if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
-                          if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
-                          return null;
-                        };
+              );
+            })}
+          </div>
+          
+          {/* References */}
+          {currentQuestion.references && currentQuestion.references.length > 0 && (
+            <div className="border-t border-red-200 pt-3">
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen className="w-4 h-4 text-blue-600" />
+                <span className="font-medium text-blue-800">Reference:</span>
+              </div>
+              <div className="space-y-1 text-sm">
+                {currentQuestion.references.slice(0, 1).map((reference, index) => {
+                  const getReferenceUrl = (ref: string) => {
+                    if (ref.includes('NICE CG')) {
+                      const cgNumber = ref.match(/CG(\d+)/)?.[1];
+                      if (cgNumber) return `https://www.nice.org.uk/guidance/cg${cgNumber}`;
+                    }
+                    if (ref.includes('NICE NG')) {
+                      const ngNumber = ref.match(/NG(\d+)/)?.[1];
+                      if (ngNumber) return `https://www.nice.org.uk/guidance/ng${ngNumber}`;
+                    }
+                    if (ref.includes('NICE')) return 'https://www.nice.org.uk/guidance';
+                    if (ref.includes('ESC')) return 'https://www.escardio.org/Guidelines';
+                    if (ref.includes('BTS')) return 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/';
+                    if (ref.includes('BNF')) return 'https://bnf.nice.org.uk/';
+                    if (ref.includes('NEJM')) return 'https://www.nejm.org/';
+                    if (ref.includes('Lancet')) return 'https://www.thelancet.com/';
+                    if (ref.includes('BMJ')) return 'https://www.bmj.com/';
+                    if (ref.includes('WHO')) return 'https://www.who.int/publications/guidelines';
+                    if (ref.includes('ILAE')) return 'https://www.ilae.org/guidelines';
+                    if (ref.includes('ABN')) return 'https://www.theabn.org/page/ProfessionalGuidance';
+                    return null;
+                  };
 
-                        const url = getReferenceUrl(reference);
-                        return (
-                          <div key={index} className="text-gray-700">
-                            {index + 1}. {url ? (
-                              <a 
-                                href={url} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:text-blue-800 hover:underline"
-                              >
-                                {reference}
-                              </a>
-                            ) : (
-                              reference
-                            )}
-                          </div>
-                        );
-                      })}
+                  const url = getReferenceUrl(reference);
+                  const referenceCode = reference.split('.')[0]?.trim() || 'REF';
+                  
+                  return (
+                    <div key={index} className="text-blue-700">
+                      <span className="font-medium">{referenceCode}</span>
+                      <div className="text-xs text-gray-600 mt-1">Scope</div>
+                      {url && (
+                        <a 
+                          href={url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 hover:underline text-xs block mt-1"
+                        >
+                          View full regulation ↗
+                        </a>
+                      )}
                     </div>
-                  </div>
-                )}
+                  );
+                })}
               </div>
             </div>
-          </CardContent>
-        </Card>
+          )}
+        </div>
+      )}
+
+      {/* Study Tip Section */}
+      {showExplanation && (
+        <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <div className="flex items-center gap-2 mb-3">
+            <Lightbulb className="w-5 h-5 text-blue-600" />
+            <span className="font-medium text-blue-800">Study Tip</span>
+          </div>
+          
+          <p className="text-blue-700 mb-3">
+            Understanding medical conditions requires systematic approach: recognize clinical presentation, 
+            apply diagnostic criteria, and follow evidence-based management protocols.
+          </p>
+          
+          <div>
+            <div className="font-medium text-blue-800 text-sm mb-1">Study Method:</div>
+            <p className="text-blue-600 text-sm">
+              Use clinical reasoning frameworks to connect symptoms, investigations, and treatment options systematically.
+            </p>
+          </div>
+        </div>
       )}
 
       {/* Action Buttons */}
