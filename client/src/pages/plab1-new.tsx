@@ -848,34 +848,25 @@ export default function PLAB1New() {
               </div>
             </div>
 
-            {/* Reference Section */}
+            {/* Specific Reference Section */}
             <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
               <div className="flex items-start gap-2">
                 <BookOpen className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <p className="text-sm font-medium text-blue-900 mb-1">{translateText('Reference:')}</p>
-                  <div className="text-sm text-blue-800">
-                    <div className="space-y-1">
-                      <p className="font-mono">{currentQuestion.category?.toUpperCase().replace('-', ' ') || 'MEDICAL'}-{Math.floor(Math.random() * 900) + 100}</p>
-                      <p className="text-blue-700">NICE Guidelines / GMC Good Medical Practice</p>
-                      <a 
-                        href={`https://www.nice.org.uk/guidance?q=${encodeURIComponent(currentQuestion.category || 'medical')}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 underline text-xs inline-flex items-center gap-1"
-                      >
-                        View NICE Guidelines ↗
-                      </a>
-                      <br />
-                      <a 
-                        href="https://www.gmc-uk.org/ethical-guidance/ethical-guidance-for-doctors/good-medical-practice"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 underline text-xs inline-flex items-center gap-1"
-                      >
-                        GMC Good Medical Practice ↗
-                      </a>
-                    </div>
+                <div className="w-full">
+                  <p className="text-sm font-medium text-blue-900 mb-2">{translateText('References:')}</p>
+                  <div className="text-sm text-blue-800 space-y-2">
+                    {currentQuestion.references && currentQuestion.references.length > 0 ? (
+                      currentQuestion.references.map((reference: string, index: number) => (
+                        <div key={index} className="border-l-2 border-blue-200 pl-3">
+                          <p className="text-blue-700 leading-relaxed">{reference}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="space-y-1">
+                        <p className="text-blue-700">NICE Guidelines - Clinical evidence and recommendations</p>
+                        <p className="text-blue-700">GMC Good Medical Practice - Professional standards</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

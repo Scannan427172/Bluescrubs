@@ -155,7 +155,12 @@ export function generateSimpleQuestion(
           "Thyroid cancer"
         ],
         correctAnswer: 1,
-        explanation: "Suppressed TSH with elevated free T4, along with symptoms of palpitations, weight loss, and heat intolerance, indicates hyperthyroidism."
+        explanation: "Suppressed TSH with elevated free T4, along with symptoms of palpitations, weight loss, and heat intolerance, indicates hyperthyroidism.",
+        references: [
+          "NICE CG99: Thyroid disease assessment and management - Section 1.2.1 'Suppressed TSH with elevated free T4 confirms hyperthyroidism'",
+          "BTA Guidelines 2014: 'Classic triad of palpitations, weight loss, and heat intolerance with biochemical hyperthyroidism - Clinical Endocrinology 81:1-122'",
+          "ATA Guidelines 2016: 'TSH <0.1 mU/L with elevated free T4 indicates overt thyrotoxicosis requiring treatment - Thyroid 26:1343-1421'"
+        ]
       }
     ],
     psychiatry: [
@@ -168,7 +173,12 @@ export function generateSimpleQuestion(
           "ECT"
         ],
         correctAnswer: 1,
-        explanation: "For moderate to severe depression, SSRI antidepressants are first-line pharmacological treatment due to their efficacy and favorable side effect profile."
+        explanation: "For moderate to severe depression, SSRI antidepressants are first-line pharmacological treatment due to their efficacy and favorable side effect profile.",
+        references: [
+          "NICE CG90: Depression in adults - Section 1.5.1 'Offer an SSRI as first-line pharmacological treatment for moderate to severe depression'",
+          "SIGN 114: Non-pharmaceutical management of depression - 'SSRIs preferred over TCAs due to lower toxicity in overdose and better tolerability'",
+          "WHO Guidelines for Depression 2016: 'SSRIs recommended as first-line antidepressants with evidence grade A for efficacy - Mental Health Action Plan 2013-2020'"
+        ]
       }
     ]
   };
@@ -188,7 +198,8 @@ export function generateSimpleQuestion(
       options: [...template.options],
       correctAnswer: template.correctAnswer,
       explanation: template.explanation,
-      difficulty: difficulty
+      difficulty: difficulty,
+      references: template.references || []
     };
   }
 
