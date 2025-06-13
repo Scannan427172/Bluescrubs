@@ -163,9 +163,11 @@ export const EXPANDED_QUESTION_BANK: GMCQuestion[] = [
       "Patient safety in respiratory emergencies"
     ],
     references: [
-      "NICE CG101: Chronic obstructive pulmonary disease",
-      "GOLD Global Strategy for COPD 2023",
-      "GMC Good Medical Practice 2024 - Prescribing and managing medicines"
+      "NICE CG101: Chronic obstructive pulmonary disease - management of exacerbations and antibiotic criteria",
+      "GOLD Global Strategy for COPD 2023 - pharmacological management of exacerbations",
+      "Anthonisen NR, et al. Antibiotic therapy in exacerbations of chronic obstructive pulmonary disease. Ann Intern Med 1987;106:196-204",
+      "Niewoehner DE, et al. Effect of systemic glucocorticoids on exacerbations of chronic obstructive pulmonary disease. NEJM 1999;340:1941-1947",
+      "BNF Section 5.1.1: Penicillins - amoxicillin dosing for respiratory tract infections"
     ],
     tags: ["COPD-exacerbation", "prednisolone", "antibiotics", "Anthonisen"],
     estimatedTime: 80,
