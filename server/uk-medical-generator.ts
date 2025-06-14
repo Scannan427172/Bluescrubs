@@ -4,11 +4,33 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-// Question cache for faster responses
+// Enhanced cache for instant responses
 const questionCache = new Map<string, UKMedicalQuestion[]>();
-const CACHE_SIZE_PER_CATEGORY = 20;
-const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+const CACHE_SIZE_PER_CATEGORY = 50; // More questions cached
+const CACHE_TTL = 4 * 60 * 60 * 1000; // 4 hours
 const cacheTimestamps = new Map<string, number>();
+const MIN_CACHE_THRESHOLD = 15; // Trigger background generation
+
+// Priority categories for pre-loading
+const PRIORITY_CATEGORIES = ['all', 'cardiology', 'respiratory', 'gastroenterology', 'neurology', 'endocrinology'];
+
+// Pre-load questions for popular categories
+const preloadQuestions = async () => {
+  console.log('Pre-loading questions for instant delivery...');
+  for (const category of PRIORITY_CATEGORIES) {
+    const cacheKey = getCacheKey(category, 'intermediate');
+    try {
+      await preGenerateQuestions(cacheKey, 20);
+      console.log(`Pre-loaded ${category} questions`);
+    } catch (error) {
+      console.error(`Failed to pre-load ${category}:`, error);
+    }
+  }
+  console.log('Question pre-loading completed');
+};
+
+// Start pre-loading after a short delay
+setTimeout(preloadQuestions, 2000);
 
 export interface UKMedicalQuestion {
   scenario: string;
