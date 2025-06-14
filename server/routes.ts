@@ -117,7 +117,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           references: ukQ.references.map((ref: any) => ({
             text: ref.title,
             url: ref.url
-          }))
+          })),
+          cks_guidance: ukQ.cks_guidance,
+          additional_guidelines: ukQ.additional_guidelines
         }));
       }
       

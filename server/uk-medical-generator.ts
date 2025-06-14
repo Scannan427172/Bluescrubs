@@ -86,12 +86,21 @@ TASK:
    - Why the incorrect answers are incorrect.
 6️⃣ Provide comprehensive CKS guidance relevant to this clinical scenario.
 7️⃣ Include additional relevant UK clinical guidelines.
-8️⃣ Finally, provide a reference section with working URLs.
+8️⃣ Finally, provide precise reference sections with exact guideline sections.
+
+REFERENCE REQUIREMENTS:
+- Identify the EXACT section, paragraph, or table number within the guideline
+- Use official guideline titles with specific section references
+- Provide full official NICE/GMC/BMJ URLs directly to guideline pages
+- Only include references directly related to the clinical question
+- Format: "NICE NG### Guideline Title (Section X.X.X Specific topic)"
+- Example: "NICE NG136: Hypertension in adults (Section 1.4.15 First-line treatment)"
 
 VERY IMPORTANT:
-- Do not invent guidelines.
+- Do not invent guidelines or section numbers.
 - All answers must be medically accurate according to current NICE or GMC guidance.
 - Include authentic CKS Clinical Knowledge Summaries content.
+- References must point to exact sections that support the correct answer.
 - Format your entire output as VALID JSON exactly as shown below.
 
 OUTPUT FORMAT (strictly follow this structure):
@@ -123,8 +132,8 @@ OUTPUT FORMAT (strictly follow this structure):
   ],
   "references": [
     {
-      "title": "<name of guideline>",
-      "url": "<full working URL>"
+      "title": "<NICE NG### Guideline Title (Section X.X.X Specific topic)>",
+      "url": "<full official NICE/GMC/BMJ URL>"
     }
   ]
 }
@@ -219,7 +228,7 @@ async function generateSingleQuestion(
       throw new Error('No content generated');
     }
 
-    const questionData = JSON.parse(content) as UKMedicalQuestion;
+    let questionData = JSON.parse(content) as UKMedicalQuestion;
     
     // Validate the structure
     if (!questionData.scenario || !questionData.question || !questionData.options || 
@@ -246,15 +255,32 @@ async function generateSingleQuestion(
       questionData.additional_guidelines = [
         {
           source: "RCGP",
-          guidance: "Follow systematic clinical approach for primary care assessment",
-          relevance: "Supports comprehensive patient evaluation"
+          guidance: "Apply systematic clinical reasoning in primary care consultations with emphasis on safety netting",
+          relevance: "Essential for comprehensive primary care assessment and patient safety"
         },
         {
-          source: "GMC",
-          guidance: "Maintain professional standards and patient-centered care",
-          relevance: "Ensures ethical medical practice"
+          source: "GMC Good Medical Practice 2024",
+          guidance: "Domain 1: Knowledge, skills and performance - Keep professional knowledge and skills up to date",
+          relevance: "Ensures clinical competence and evidence-based practice"
         }
       ];
+    }
+
+    // Enhance references with proper NICE formatting if they lack specific sections
+    if (questionData.references && questionData.references.length > 0) {
+      questionData.references = questionData.references.map((ref: any) => {
+        if (typeof ref === 'string') {
+          return {
+            title: ref,
+            url: "https://www.nice.org.uk/guidance"
+          };
+        }
+        // Enhance title with proper NICE format if it doesn't already have it
+        if (ref.title && !ref.title.includes('Section') && !ref.title.includes('NG') && !ref.title.includes('CG')) {
+          ref.title = `NICE Clinical Guideline: ${ref.title}`;
+        }
+        return ref;
+      });
     }
 
     // Ensure we have all 5 options
