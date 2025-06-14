@@ -283,167 +283,88 @@ export default function PLAB1New() {
     return translations[selectedLanguage]?.[text] || text;
   };
 
-  // Function to translate medical question content
-  const translateMedicalContent = (text: string) => {
+  // Function to translate medical question content using API
+  const [translatedQuestions, setTranslatedQuestions] = useState<Record<string, any>>({});
+  const [translationLoading, setTranslationLoading] = useState<Record<string, boolean>>({});
+
+  const translateMedicalContent = async (text: string, questionId?: string) => {
     if (!translateQuestions || selectedLanguage === 'en') return text;
     
-    const medicalTranslations: Record<string, Record<string, string>> = {
+    // Return cached translation if available
+    if (questionId && translatedQuestions[`${questionId}_${selectedLanguage}`]) {
+      return translatedQuestions[`${questionId}_${selectedLanguage}`];
+    }
+    
+    // Basic fallback translations for quick UI updates
+    const quickTranslations: Record<string, Record<string, string>> = {
       'ar': {
-        // Common medical terms
-        'patient': 'مريض',
-        'presents with': 'يعاني من',
-        'chest pain': 'ألم في الصدر',
-        'shortness of breath': 'ضيق في التنفس',
-        'diagnosis': 'التشخيص',
-        'treatment': 'العلاج',
-        'management': 'العلاج',
-        'What is the most appropriate': 'ما هو الأنسب',
-        'What is the most likely': 'ما هو الأكثر احتمالاً',
-        'year-old': 'عام',
-        'years old': 'عام',
-        'old': 'عام',
-        'man': 'رجل',
-        'woman': 'امرأة',
-        'male': 'ذكر',
-        'female': 'أنثى',
-        'history of': 'تاريخ من',
-        'Blood tests show': 'تظهر فحوصات الدم',
-        'CT scan shows': 'يظهر الأشعة المقطعية',
-        'X-ray shows': 'تظهر الأشعة السينية',
-        'ECG shows': 'يظهر تخطيط القلب',
-        'Primary PCI': 'القسطرة الأولية',
-        'Thrombolytic therapy': 'العلاج المذيب للجلطة',
-        'Conservative management': 'العلاج التحفظي',
-        'Conservative': 'تحفظي',
-        'Immediate': 'فوري',
-        'Start': 'ابدأ',
-        'Give': 'أعط',
-        'Administer': 'أعط',
-        // Answer option terms
-        'Detailed history and examination': 'تاريخ مفصل وفحص',
-        'specialist referral': 'إحالة للأخصائي',
-        'Further diagnostic investigation': 'مزيد من التحقيقات التشخيصية',
-        'Urgent': 'عاجل',
-        'Emergency': 'طوارئ',
-        'Admission': 'دخول المستشفى',
-        'Discharge': 'خروج من المستشفى',
-        'Follow-up': 'متابعة',
-        'Monitoring': 'مراقبة',
-        'Observation': 'ملاحظة',
-        'Referral': 'إحالة',
-        'Investigation': 'تحقيق',
-        'Assessment': 'تقييم',
-        'Review': 'مراجعة',
-        'Consultation': 'استشارة'
+        'patient': 'مريض', 'presents with': 'يعاني من', 'chest pain': 'ألم في الصدر',
+        'diagnosis': 'التشخيص', 'treatment': 'العلاج', 'What is the most appropriate': 'ما هو الأنسب'
       },
       'hi': {
-        // Common medical terms
-        'patient': 'मरीज़',
-        'presents with': 'के साथ आता है',
-        'chest pain': 'सीने में दर्द',
-        'shortness of breath': 'सांस लेने में कठिनाई',
-        'diagnosis': 'निदान',
-        'treatment': 'उपचार',
-        'management': 'प्रबंधन',
-        'What is the most appropriate': 'सबसे उपयुक्त क्या है',
-        'What is the most likely': 'सबसे संभावित क्या है',
-        'year-old': 'वर्षीय',
-        'years old': 'वर्षीय',
-        'old': 'वर्षीय',
-        'man': 'पुरुष',
-        'woman': 'महिला',
-        'male': 'पुरुष',
-        'female': 'महिला',
-        'history of': 'का इतिहास',
-        'Blood tests show': 'रक्त परीक्षण दिखाते हैं',
-        'CT scan shows': 'सीटी स्कैन दिखाता है',
-        'X-ray shows': 'एक्स-रे दिखाता है',
-        'ECG shows': 'ईसीजी दिखाता है',
-        'Primary PCI': 'प्राथमिक पीसीआई',
-        'Thrombolytic therapy': 'थ्रोम्बोलाइटिक थेरेपी',
-        'Conservative management': 'रूढ़िवादी प्रबंधन',
-        'Conservative': 'रूढ़िवादी',
-        'Immediate': 'तत्काल',
-        'Start': 'शुरू करें',
-        'Give': 'दें',
-        'Administer': 'दें',
-        // Answer option terms
-        'Detailed history and examination': 'विस्तृत इतिहास और परीक्षा',
-        'specialist referral': 'विशेषज्ञ रेफरल',
-        'Further diagnostic investigation': 'आगे की निदान जांच',
-        'Urgent': 'तत्काल',
-        'Emergency': 'आपातकाल',
-        'Admission': 'भर्ती',
-        'Discharge': 'छुट्टी',
-        'Follow-up': 'फॉलो-अप',
-        'Monitoring': 'निगरानी',
-        'Observation': 'अवलोकन',
-        'Referral': 'रेफरल',
-        'Investigation': 'जांच',
-        'Assessment': 'मूल्यांकन',
-        'Review': 'समीक्षा',
-        'Consultation': 'परामर्श'
+        'patient': 'मरीज़', 'presents with': 'के साथ आता है', 'chest pain': 'सीने में दर्द',
+        'diagnosis': 'निदान', 'treatment': 'उपचार', 'What is the most appropriate': 'सबसे उपयुक्त क्या है'
       },
       'ur': {
-        // Common medical terms
-        'patient': 'مریض',
-        'presents with': 'کے ساتھ آتا ہے',
-        'chest pain': 'سینے میں درد',
-        'shortness of breath': 'سانس لینے میں دشواری',
-        'diagnosis': 'تشخیص',
-        'treatment': 'علاج',
-        'management': 'انتظام',
-        'What is the most appropriate': 'سب سے مناسب کیا ہے',
-        'What is the most likely': 'سب سے زیادہ امکان کیا ہے',
-        'year-old': 'سالہ',
-        'years old': 'سالہ',
-        'old': 'سالہ',
-        'man': 'آدمی',
-        'woman': 'عورت',
-        'male': 'مرد',
-        'female': 'عورت',
-        'history of': 'کی تاریخ',
-        'Blood tests show': 'خون کے ٹیسٹ دکھاتے ہیں',
-        'CT scan shows': 'سی ٹی سکین دکھاتا ہے',
-        'X-ray shows': 'ایکس رے دکھاتا ہے',
-        'ECG shows': 'ای سی جی دکھاتا ہے',
-        'Primary PCI': 'بنیادی پی سی آئی',
-        'Thrombolytic therapy': 'خون کا لوتھڑا گھولنے کا علاج',
-        'Conservative management': 'قدامت پسند انتظام',
-        'Conservative': 'قدامت پسند',
-        'Immediate': 'فوری',
-        'Start': 'شروع کریں',
-        'Give': 'دیں',
-        'Administer': 'دیں',
-        // Answer option terms
-        'Detailed history and examination': 'تفصیلی تاریخ اور معائنہ',
-        'specialist referral': 'ماہر کا ریفرل',
-        'Further diagnostic investigation': 'مزید تشخیصی تحقیقات',
-        'Urgent': 'فوری',
-        'Emergency': 'ایمرجنسی',
-        'Admission': 'ہسپتال میں داخلہ',
-        'Discharge': 'ہسپتال سے فارغ',
-        'Follow-up': 'فالو اپ',
-        'Monitoring': 'نگرانی',
-        'Observation': 'مشاہدہ',
-        'Referral': 'ریفرل',
-        'Investigation': 'تحقیقات',
-        'Assessment': 'تشخیص',
-        'Review': 'جائزہ',
-        'Consultation': 'مشاورت'
+        'patient': 'مریض', 'presents with': 'کے ساتھ آتا ہے', 'chest pain': 'سینے میں درد',
+        'diagnosis': 'تشخیص', 'treatment': 'علاج', 'What is the most appropriate': 'سب سے مناسب کیا ہے'
       }
     };
     
-    const translations = medicalTranslations[selectedLanguage] || {};
+    const fallbackTranslations = quickTranslations[selectedLanguage] || {};
     let translated = text;
     
-    Object.entries(translations).forEach(([english, native]) => {
+    Object.entries(fallbackTranslations).forEach(([english, native]) => {
       translated = translated.replace(new RegExp(`\\b${english}\\b`, 'gi'), native);
     });
     
     return translated;
   };
-  
+
+  // Function to translate entire question object using API
+  const translateFullQuestion = async (question: any) => {
+    if (!translateQuestions || selectedLanguage === 'en') return question;
+    
+    const cacheKey = `${question.id}_${selectedLanguage}`;
+    if (translatedQuestions[cacheKey]) {
+      return translatedQuestions[cacheKey];
+    }
+
+    if (translationLoading[cacheKey]) {
+      return question; // Return original while loading
+    }
+
+    setTranslationLoading(prev => ({ ...prev, [cacheKey]: true }));
+
+    try {
+      const targetLanguage = selectedLanguage === 'ar' ? 'Arabic' : 
+                           selectedLanguage === 'hi' ? 'Hindi' : 
+                           selectedLanguage === 'ur' ? 'Urdu' : 'English';
+
+      const response = await fetch('/api/translate/plab-question', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: question,
+          targetLanguage: targetLanguage
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const translated = data.translatedQuestion || question;
+        setTranslatedQuestions(prev => ({ ...prev, [cacheKey]: translated }));
+        return translated;
+      }
+    } catch (error) {
+      console.error('Translation failed:', error);
+    } finally {
+      setTranslationLoading(prev => ({ ...prev, [cacheKey]: false }));
+    }
+
+    return question;
+  };
+
   // Calculate question counts for comprehensive question bank
   const getQuestionCount = (category: string) => {
     const questionCounts: Record<string, number> = {
@@ -640,6 +561,13 @@ export default function PLAB1New() {
   // Get current question
   const currentQuestion = generatedQuestions[currentQuestionIndex];
   const isCorrect = showExplanation && selectedAnswer !== "" && parseInt(selectedAnswer) === currentQuestion?.correctAnswer;
+
+  // Effect to translate current question when language changes
+  useEffect(() => {
+    if (currentQuestion && translateQuestions && selectedLanguage !== 'en') {
+      translateFullQuestion(currentQuestion);
+    }
+  }, [currentQuestion, translateQuestions, selectedLanguage]);
 
   // If no session started, show the landing page
   if (!sessionStarted && !isGeneratingQuestions) {
@@ -1050,13 +978,54 @@ export default function PLAB1New() {
 
             <div className="mb-6">
               <h2 className="text-lg font-medium text-gray-900 leading-relaxed">
-                {translateMedicalContent(currentQuestion.stem || currentQuestion.question)}
+                {(() => {
+                  const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
+                  const translatedQ = translatedQuestions[cacheKey];
+                  if (translateQuestions && selectedLanguage !== 'en' && translatedQ) {
+                    return translatedQ.scenario || translatedQ.stem || translatedQ.question;
+                  }
+                  
+                  // Apply quick fallback translation for immediate display
+                  const text = currentQuestion.stem || currentQuestion.question;
+                  if (translateQuestions && selectedLanguage !== 'en') {
+                    const quickTranslations: Record<string, Record<string, string>> = {
+                      'ar': {
+                        'patient': 'مريض', 'presents with': 'يعاني من', 'chest pain': 'ألم في الصدر',
+                        'diagnosis': 'التشخيص', 'treatment': 'العلاج', 'What is the most appropriate': 'ما هو الأنسب'
+                      },
+                      'hi': {
+                        'patient': 'मरीज़', 'presents with': 'के साथ आता है', 'chest pain': 'सीने में दर्द',
+                        'diagnosis': 'निदान', 'treatment': 'उपचार', 'What is the most appropriate': 'सबसे उपयुक्त क्या है'
+                      },
+                      'ur': {
+                        'patient': 'مریض', 'presents with': 'کے ساتھ آتا ہے', 'chest pain': 'سینے میں درد',
+                        'diagnosis': 'تشخیص', 'treatment': 'علاج', 'What is the most appropriate': 'سب سے مناسب کیا ہے'
+                      }
+                    };
+                    
+                    const translations = quickTranslations[selectedLanguage] || {};
+                    let translated = text;
+                    Object.entries(translations).forEach(([english, native]) => {
+                      translated = translated.replace(new RegExp(`\\b${english}\\b`, 'gi'), native);
+                    });
+                    return translated;
+                  }
+                  
+                  return text;
+                })()}
               </h2>
             </div>
 
             {/* Answer Options - Template Style */}
             <div className="space-y-3">
-              {(Array.isArray(currentQuestion.options) ? currentQuestion.options : []).map((option: string, index: number) => {
+              {(() => {
+                const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
+                const translatedQ = translatedQuestions[cacheKey];
+                const options = (translateQuestions && selectedLanguage !== 'en' && translatedQ?.options) 
+                  ? translatedQ.options 
+                  : (Array.isArray(currentQuestion.options) ? currentQuestion.options : []);
+                return options;
+              })().map((option: string, index: number) => {
                 const isCorrectAnswer = index === currentQuestion.correctAnswer;
                 const isIncorrectlySelected = showExplanation && selectedAnswer === index.toString() && !isCorrectAnswer;
                 
