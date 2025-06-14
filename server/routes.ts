@@ -933,12 +933,35 @@ Translate scenario, question text, and options to ${targetLanguage}. Keep refere
         console.error('Raw response:', response.choices[0].message.content);
         
         // Simple manual translation as fallback
+        const basicTranslations: Record<string, string> = {
+          'presents with': 'के साथ प्रस्तुत करता है',
+          'elevated blood pressure': 'उच्च रक्तचाप',
+          'lifestyle changes': 'जीवनशैली में बदलाव',
+          'management step': 'प्रबंधन कदम',
+          'ACE inhibitor': 'ACE इन्हिबिटर',
+          'diagnostic investigation': 'निदान की जांच',
+          'hospital admission': 'अस्पताल में भर्ती',
+          'What is the most appropriate': 'सबसे उपयुक्त क्या है',
+          'According to NICE': 'NICE के अनुसार'
+        };
+        
+        const translateText = (text: string) => {
+          if (targetLanguage === 'Hindi' || targetLanguage === 'hi') {
+            let translated = text;
+            Object.entries(basicTranslations).forEach(([english, hindi]) => {
+              translated = translated.replace(new RegExp(english, 'gi'), hindi);
+            });
+            return translated;
+          }
+          return text;
+        };
+
         translatedQuestion = {
           ...question,
-          scenario: translateBasicText(question.scenario, targetLanguage),
-          question: translateBasicText(question.question, targetLanguage),
-          options: question.options.map((opt: string) => translateBasicText(opt, targetLanguage)),
-          explanation: translateBasicText(question.explanation, targetLanguage)
+          scenario: translateText(question.scenario),
+          question: translateText(question.question),
+          options: question.options.map((opt: string) => translateText(opt)),
+          explanation: translateText(question.explanation)
         };
       }
       
