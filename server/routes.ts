@@ -1233,6 +1233,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Mentorship API Endpoints
+  app.post("/api/mentorship/connect", async (req, res) => {
+    try {
+      const { mentorId } = req.body;
+      // In a real implementation, this would create a mentorship connection request
+      res.json({ success: true, message: "Mentor connection request sent successfully" });
+    } catch (error) {
+      console.error('Error connecting to mentor:', error);
+      res.status(500).json({ error: "Failed to connect to mentor" });
+    }
+  });
+
+  app.get("/api/mentors", async (req, res) => {
+    try {
+      const mentors = [
+        {
+          id: "dr-williams",
+          name: "Dr. Rebecca Williams",
+          avatar: "DR",
+          title: "Consultant Cardiologist",
+          institution: "Imperial College Healthcare NHS Trust",
+          specialty: "Cardiology",
+          location: "London, UK",
+          rating: 4.9,
+          reviews: 23,
+          isAvailable: true,
+          specialties: ["PLAB Guidance", "Cardiology", "NHS Applications", "Career Development"]
+        },
+        {
+          id: "dr-singh",
+          name: "Dr. James Singh",
+          avatar: "JS",
+          title: "Emergency Medicine Consultant",
+          institution: "Manchester Royal Infirmary",
+          specialty: "Emergency Medicine",
+          location: "Manchester, UK",
+          rating: 4.8,
+          reviews: 31,
+          isAvailable: false,
+          specialties: ["Emergency Medicine", "PLAB 2 OSCE", "Specialty Training", "Work-Life Balance"]
+        }
+      ];
+      res.json({ mentors });
+    } catch (error) {
+      console.error('Error fetching mentors:', error);
+      res.status(500).json({ error: "Failed to fetch mentors" });
+    }
+  });
+
   app.get("/api/users", async (req, res) => {
     try {
       // Enhanced user data with all competitive advantage metrics
