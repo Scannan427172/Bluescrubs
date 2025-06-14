@@ -8,7 +8,10 @@ import { askMedicalAI } from "./ask-ai-api";
 import { generateUKMedicalQuestion, generateMultipleUKQuestions } from "./uk-medical-generator";
 import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generator";
 import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-uk-generator";
+import { analyzeMultipleImages } from "./image-analysis";
 import OpenAI from "openai";
+import fs from "fs";
+import path from "path";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
