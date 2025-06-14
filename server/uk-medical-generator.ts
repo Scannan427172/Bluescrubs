@@ -4,6 +4,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+// Question cache for faster responses
+const questionCache = new Map<string, UKMedicalQuestion[]>();
+const CACHE_SIZE_PER_CATEGORY = 20;
+const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+const cacheTimestamps = new Map<string, number>();
+
 export interface UKMedicalQuestion {
   scenario: string;
   question: string;
@@ -79,9 +85,64 @@ STRICT RULES:
 - Each option must be distinct and plausible.
 - Keep explanations evidence-based with official references.`;
 
-export async function generateUKMedicalQuestion(
-  specialty: string = 'general medicine',
-  difficulty: string = 'intermediate'
+// Cache management functions
+function getCacheKey(specialty: string, difficulty: string): string {
+  return `${specialty}_${difficulty}`;
+}
+
+function isCacheValid(cacheKey: string): boolean {
+  const timestamp = cacheTimestamps.get(cacheKey);
+  return timestamp ? (Date.now() - timestamp) < CACHE_TTL : false;
+}
+
+function getCachedQuestion(cacheKey: string): UKMedicalQuestion | null {
+  if (!isCacheValid(cacheKey)) {
+    questionCache.delete(cacheKey);
+    cacheTimestamps.delete(cacheKey);
+    return null;
+  }
+  
+  const questions = questionCache.get(cacheKey);
+  if (questions && questions.length > 0) {
+    return questions.shift()!;
+  }
+  return null;
+}
+
+function addToCache(cacheKey: string, question: UKMedicalQuestion): void {
+  if (!questionCache.has(cacheKey)) {
+    questionCache.set(cacheKey, []);
+    cacheTimestamps.set(cacheKey, Date.now());
+  }
+  
+  const questions = questionCache.get(cacheKey)!;
+  if (questions.length < CACHE_SIZE_PER_CATEGORY) {
+    questions.push(question);
+  }
+}
+
+// Pre-generate questions for popular categories
+async function preGenerateQuestions(cacheKey: string, count: number = 5): Promise<void> {
+  const [specialty, difficulty] = cacheKey.split('_');
+  const promises = Array(count).fill(null).map(() => 
+    generateSingleQuestion(specialty, difficulty)
+  );
+  
+  try {
+    const questions = await Promise.allSettled(promises);
+    questions.forEach((result) => {
+      if (result.status === 'fulfilled') {
+        addToCache(cacheKey, result.value);
+      }
+    });
+  } catch (error) {
+    console.error('Error pre-generating questions:', error);
+  }
+}
+
+async function generateSingleQuestion(
+  specialty: string,
+  difficulty: string
 ): Promise<UKMedicalQuestion> {
   try {
     // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
@@ -129,6 +190,34 @@ export async function generateUKMedicalQuestion(
     console.error('Error generating UK medical question:', error);
     throw new Error(`Failed to generate UK medical question: ${error?.message || 'Unknown error'}`);
   }
+}
+
+export async function generateUKMedicalQuestion(
+  specialty: string = 'general medicine',
+  difficulty: string = 'intermediate'
+): Promise<UKMedicalQuestion> {
+  const cacheKey = getCacheKey(specialty, difficulty);
+  
+  // Try to get from cache first
+  const cachedQuestion = getCachedQuestion(cacheKey);
+  if (cachedQuestion) {
+    // Pre-generate more questions in background
+    if (!questionCache.get(cacheKey)?.length) {
+      preGenerateQuestions(cacheKey, 3).catch(console.error);
+    }
+    return cachedQuestion;
+  }
+  
+  // Generate new question
+  const question = await generateSingleQuestion(specialty, difficulty);
+  
+  // Add to cache for future requests
+  addToCache(cacheKey, question);
+  
+  // Pre-generate additional questions in background
+  preGenerateQuestions(cacheKey, 2).catch(console.error);
+  
+  return question;
 }
 
 export async function generateMultipleUKQuestions(

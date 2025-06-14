@@ -119,7 +119,7 @@ export default function PLAB1New() {
     setLeaderboardData(mockLeaderboard);
   }, []);
 
-  // Text-to-Speech functions
+  // Text-to-Speech functions with natural speech settings
   const speakText = (text: string) => {
     if (!speechEnabled || !text.trim()) return;
     
@@ -128,16 +128,59 @@ export default function PLAB1New() {
     
     const utterance = new SpeechSynthesisUtterance(text);
     
-    // Find selected voice
-    const voice = availableVoices.find(v => v.name === selectedVoice);
+    // Find best voice for selected language
+    const languageVoiceMap: Record<string, string> = {
+      'en': 'en-US',
+      'ar': 'ar-SA',
+      'hi': 'hi-IN',
+      'ur': 'ur-PK',
+      'bn': 'bn-IN',
+      'ta': 'ta-IN',
+      'te': 'te-IN',
+      'gu': 'gu-IN',
+      'kn': 'kn-IN',
+      'ml': 'ml-IN',
+      'pa': 'pa-IN',
+      'mr': 'mr-IN',
+      'es': 'es-ES',
+      'fr': 'fr-FR',
+      'de': 'de-DE',
+      'it': 'it-IT',
+      'pt': 'pt-BR',
+      'ru': 'ru-RU',
+      'zh': 'zh-CN',
+      'ja': 'ja-JP',
+      'ko': 'ko-KR'
+    };
+
+    const targetLang = languageVoiceMap[selectedLanguage] || 'en-US';
+    const voice = availableVoices.find(v => 
+      v.lang.startsWith(targetLang.split('-')[0]) || 
+      v.name === selectedVoice
+    );
+    
     if (voice) {
       utterance.voice = voice;
+      utterance.lang = voice.lang;
+    } else {
+      utterance.lang = targetLang;
     }
     
-    // Configure speech settings for natural sound
-    utterance.rate = 0.9; // Slightly slower for clarity
-    utterance.pitch = 1.0; // Normal pitch
-    utterance.volume = 0.8; // Clear but not too loud
+    // Enhanced natural speech settings
+    utterance.rate = selectedLanguage === 'ar' || selectedLanguage === 'ur' ? 0.8 : 0.85; // Slower for RTL languages
+    utterance.pitch = 1.1; // Slightly higher pitch for medical content clarity
+    utterance.volume = 0.9; // Higher volume for clarity
+    
+    // Add natural pauses for medical terms
+    const processedText = text
+      .replace(/\./g, '. ') // Add pause after periods
+      .replace(/,/g, ', ') // Add pause after commas
+      .replace(/:/g, ': ') // Add pause after colons
+      .replace(/;/g, '; ') // Add pause after semicolons
+      .replace(/\s+/g, ' ') // Clean up extra spaces
+      .trim();
+    
+    utterance.text = processedText;
     
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
@@ -607,14 +650,31 @@ export default function PLAB1New() {
               </div>
               {isTranslationMode && (
                 <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                  <SelectTrigger className="w-40 border-blue-200">
+                  <SelectTrigger className="w-48 border-blue-200">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="max-h-72 overflow-y-auto">
                     <SelectItem value="en">🇬🇧 English</SelectItem>
                     <SelectItem value="ar">🇸🇦 Arabic</SelectItem>
                     <SelectItem value="hi">🇮🇳 Hindi</SelectItem>
                     <SelectItem value="ur">🇵🇰 Urdu</SelectItem>
+                    <SelectItem value="bn">🇧🇩 Bengali</SelectItem>
+                    <SelectItem value="ta">🇮🇳 Tamil</SelectItem>
+                    <SelectItem value="te">🇮🇳 Telugu</SelectItem>
+                    <SelectItem value="gu">🇮🇳 Gujarati</SelectItem>
+                    <SelectItem value="kn">🇮🇳 Kannada</SelectItem>
+                    <SelectItem value="ml">🇮🇳 Malayalam</SelectItem>
+                    <SelectItem value="pa">🇮🇳 Punjabi</SelectItem>
+                    <SelectItem value="mr">🇮🇳 Marathi</SelectItem>
+                    <SelectItem value="es">🇪🇸 Spanish</SelectItem>
+                    <SelectItem value="fr">🇫🇷 French</SelectItem>
+                    <SelectItem value="de">🇩🇪 German</SelectItem>
+                    <SelectItem value="it">🇮🇹 Italian</SelectItem>
+                    <SelectItem value="pt">🇧🇷 Portuguese</SelectItem>
+                    <SelectItem value="ru">🇷🇺 Russian</SelectItem>
+                    <SelectItem value="zh">🇨🇳 Chinese</SelectItem>
+                    <SelectItem value="ja">🇯🇵 Japanese</SelectItem>
+                    <SelectItem value="ko">🇰🇷 Korean</SelectItem>
                   </SelectContent>
                 </Select>
               )}
