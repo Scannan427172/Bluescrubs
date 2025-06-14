@@ -227,15 +227,47 @@ export async function generateMultipleUKQuestions(
 ): Promise<UKMedicalQuestion[]> {
   const questions: UKMedicalQuestion[] = [];
   
-  for (let i = 0; i < count; i++) {
-    try {
-      const question = await generateUKMedicalQuestion(specialty, difficulty);
-      questions.push(question);
-    } catch (error) {
-      console.error(`Failed to generate question ${i + 1}:`, error);
-      // Continue with other questions rather than failing completely
+  const cacheKey = getCacheKey(specialty, difficulty);
+  
+  // Try to get from cache first
+  const cachedQuestions = questionCache.get(cacheKey) || [];
+  const fromCache = cachedQuestions.splice(0, Math.min(count, cachedQuestions.length));
+  questions.push(...fromCache);
+  
+  const remaining = count - fromCache.length;
+  if (remaining > 0) {
+    // Generate remaining questions in parallel batches for faster response
+    const batchSize = Math.min(remaining, 3); // Limit concurrent requests
+    const batches = Math.ceil(remaining / batchSize);
+    
+    for (let batch = 0; batch < batches; batch++) {
+      const batchCount = Math.min(batchSize, remaining - (batch * batchSize));
+      const promises = Array(batchCount).fill(null).map(() => 
+        generateSingleQuestion(specialty, difficulty)
+      );
+      
+      try {
+        const batchResults = await Promise.allSettled(promises);
+        const successfulQuestions = batchResults
+          .filter((result): result is PromiseFulfilledResult<UKMedicalQuestion> => 
+            result.status === 'fulfilled')
+          .map(result => result.value);
+        
+        questions.push(...successfulQuestions);
+        
+        // Cache extra questions for future requests
+        successfulQuestions.forEach(q => addToCache(cacheKey, q));
+        
+      } catch (error) {
+        console.error(`Error generating batch ${batch + 1}:`, error);
+      }
     }
   }
   
-  return questions;
+  // Pre-generate more questions in background for future requests
+  if (questions.length > 0) {
+    preGenerateQuestions(cacheKey, 5).catch(console.error);
+  }
+  
+  return questions.slice(0, count);
 }

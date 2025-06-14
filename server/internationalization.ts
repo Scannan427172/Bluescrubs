@@ -1,6 +1,31 @@
 // Multi-language Support System for International Medical Graduates
 // Comprehensive internationalisation with medical content localisation
 
+// Translation cache for faster responses
+const translationCache = new Map<string, any>();
+const TRANSLATION_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+const cacheTimestamps = new Map<string, number>();
+
+function getCacheKey(content: string, targetLanguage: string): string {
+  return `${targetLanguage}_${content.substring(0, 100)}`;
+}
+
+function getCachedTranslation(cacheKey: string): any | null {
+  const timestamp = cacheTimestamps.get(cacheKey);
+  if (timestamp && (Date.now() - timestamp) < TRANSLATION_CACHE_TTL) {
+    return translationCache.get(cacheKey) || null;
+  }
+  // Clean expired cache
+  translationCache.delete(cacheKey);
+  cacheTimestamps.delete(cacheKey);
+  return null;
+}
+
+function setCachedTranslation(cacheKey: string, translation: any): void {
+  translationCache.set(cacheKey, translation);
+  cacheTimestamps.set(cacheKey, Date.now());
+}
+
 export interface Language {
   code: string;
   name: string;

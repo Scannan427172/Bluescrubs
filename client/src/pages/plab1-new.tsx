@@ -1072,6 +1072,34 @@ export default function PLAB1New() {
                       'ur': {
                         'patient': 'مریض', 'presents with': 'کے ساتھ آتا ہے', 'chest pain': 'سینے میں درد',
                         'diagnosis': 'تشخیص', 'treatment': 'علاج', 'What is the most appropriate': 'سب سے مناسب کیا ہے'
+                      },
+                      'bn': {
+                        'patient': 'রোগী', 'presents with': 'নিয়ে আসে', 'chest pain': 'বুকে ব্যথা',
+                        'diagnosis': 'নির্ণয়', 'treatment': 'চিকিৎসা', 'What is the most appropriate': 'সবচেয়ে উপযুক্ত কী'
+                      },
+                      'ta': {
+                        'patient': 'நோயாளி', 'presents with': 'உடன் வருகிறார்', 'chest pain': 'மார்பு வலி',
+                        'diagnosis': 'நோய் கண்டறிதல்', 'treatment': 'சிகிச்சை', 'What is the most appropriate': 'மிகவும் பொருத்தமானது எது'
+                      },
+                      'te': {
+                        'patient': 'రోగి', 'presents with': 'తో వస్తుంది', 'chest pain': 'ఛాతీ నొప్పి',
+                        'diagnosis': 'నిర్ధారణ', 'treatment': 'చికిత్స', 'What is the most appropriate': 'అత్యంత సముచితమైనది ఏది'
+                      },
+                      'gu': {
+                        'patient': 'દર્દી', 'presents with': 'સાથે આવે છે', 'chest pain': 'છાતીમાં દુખાવો',
+                        'diagnosis': 'નિદાન', 'treatment': 'સારવાર', 'What is the most appropriate': 'સૌથી યોગ્ય શું છે'
+                      },
+                      'es': {
+                        'patient': 'paciente', 'presents with': 'presenta con', 'chest pain': 'dolor en el pecho',
+                        'diagnosis': 'diagnóstico', 'treatment': 'tratamiento', 'What is the most appropriate': 'Cuál es lo más apropiado'
+                      },
+                      'fr': {
+                        'patient': 'patient', 'presents with': 'présente avec', 'chest pain': 'douleur thoracique',
+                        'diagnosis': 'diagnostic', 'treatment': 'traitement', 'What is the most appropriate': 'Quel est le plus approprié'
+                      },
+                      'de': {
+                        'patient': 'Patient', 'presents with': 'präsentiert sich mit', 'chest pain': 'Brustschmerzen',
+                        'diagnosis': 'Diagnose', 'treatment': 'Behandlung', 'What is the most appropriate': 'Was ist am angemessensten'
                       }
                     };
                     
