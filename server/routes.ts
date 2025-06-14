@@ -505,39 +505,64 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // PLAB 2 OSCE Stations API Routes - Using UK Medical Generator
   app.get("/api/osce/stations", async (req, res) => {
     try {
-      const { type, specialty, difficulty, count = 10 } = req.query;
+      const { type, specialty, difficulty, count = 3 } = req.query;
       
-      // Generate authentic UK medical OSCE stations
-      const stationType = (type as string) || 'history-taking';
+      // Use UK medical question generator to create OSCE-style scenarios
       const stationSpecialty = (specialty as string) || 'general-medicine';
       const stationDifficulty = (difficulty as string) || 'intermediate';
-      const stationCount = Math.min(parseInt(count as string), 5);
+      const stationCount = Math.min(parseInt(count as string), 3);
       
-      console.log(`Generating ${stationCount} PLAB 2 ${stationType} stations for ${stationSpecialty}`);
+      console.log(`Generating ${stationCount} PLAB 2 OSCE stations using UK medical generator`);
       
-      const generatedStations = await generateMultiplePLAB2Stations(
-        stationCount, 
-        stationType, 
-        stationSpecialty, 
-        stationDifficulty
-      );
+      const ukQuestions = await generateMultipleUKQuestions(stationCount, stationSpecialty, stationDifficulty);
       
-      // Convert to frontend format
-      const stations = generatedStations.map((station, index) => ({
-        id: station.id,
-        title: station.title,
-        category: station.type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()),
-        difficulty: station.difficulty.charAt(0).toUpperCase() + station.difficulty.slice(1),
-        duration: station.duration,
-        description: station.scenario.substring(0, 100) + '...',
-        scenario: station.scenario,
-        instructions: station.instructions,
-        markingCriteria: station.markingCriteria,
-        keyActions: station.keyActions,
-        redFlags: station.redFlags,
-        differentialDiagnosis: station.differentialDiagnosis,
-        medications: station.medications,
-        references: station.references,
+      // Convert UK medical questions to OSCE station format
+      const stations = ukQuestions.map((ukQ, index) => ({
+        id: `osce_${stationSpecialty}_${Date.now()}_${index}`,
+        title: `Clinical Assessment - ${stationSpecialty.charAt(0).toUpperCase() + stationSpecialty.slice(1)}`,
+        category: "Clinical Assessment",
+        difficulty: stationDifficulty.charAt(0).toUpperCase() + stationDifficulty.slice(1),
+        duration: 8,
+        description: ukQ.scenario.substring(0, 100) + '...',
+        scenario: ukQ.scenario,
+        instructions: {
+          candidate: "Take a focused history and examination as appropriate. Formulate a differential diagnosis and management plan.",
+          examiner: "Observe communication skills, clinical reasoning, and professional behavior.",
+          standardizedPatient: "Present symptoms as described in the scenario. Answer questions honestly based on the case."
+        },
+        markingCriteria: [
+          {
+            category: "Communication Skills",
+            maxMarks: 5,
+            criteria: ["Clear introduction", "Appropriate questioning", "Active listening", "Empathy and rapport", "Professional manner"]
+          },
+          {
+            category: "Clinical Knowledge",
+            maxMarks: 8,
+            criteria: ["Relevant history taking", "Appropriate examination", "Correct diagnosis", "Evidence-based management"]
+          },
+          {
+            category: "Professional Behavior",
+            maxMarks: 7,
+            criteria: ["Patient safety", "Ethical considerations", "Time management", "Clear explanations"]
+          }
+        ],
+        keyActions: [
+          "Introduce yourself professionally",
+          "Obtain focused clinical history",
+          "Explain findings clearly to patient",
+          "Formulate appropriate management plan"
+        ],
+        redFlags: [
+          "Missing critical symptoms",
+          "Inappropriate examination technique",
+          "Poor communication with patient",
+          "Unsafe clinical decisions"
+        ],
+        references: ukQ.references.map(ref => ({
+          title: ref.title,
+          url: ref.url
+        })),
         completed: false,
         attempts: 0,
         bestScore: 0

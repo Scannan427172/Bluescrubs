@@ -10,14 +10,50 @@ import {
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2
 } from "lucide-react";
-import { PLAB2_OSCE_STATIONS, OSCE_STATION_TYPES, OSCE_STATION_STATS, type OSCEStation } from "@shared/plab2-osce-stations";
-import { EXPANDED_PLAB2_STATIONS, EXPANDED_STATION_STATS, type EnhancedOSCEStation } from "@shared/expanded-plab2-stations";
+import { useQuery } from "@tanstack/react-query";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
 import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
 import { AudioSupport } from "@/components/audio-support";
 
+interface OSCEStation {
+  id: string;
+  title: string;
+  category: string;
+  difficulty: string;
+  duration: number;
+  description: string;
+  scenario: string;
+  instructions: {
+    candidate: string;
+    examiner: string;
+    standardizedPatient?: string;
+  };
+  markingCriteria: Array<{
+    category: string;
+    maxMarks: number;
+    criteria: string[];
+  }>;
+  keyActions: string[];
+  redFlags: string[];
+  differentialDiagnosis?: string[];
+  medications?: Array<{
+    name: string;
+    indication: string;
+    dosage: string;
+    sideEffects: string[];
+    contraindications: string[];
+  }>;
+  references: Array<{
+    title: string;
+    url: string;
+  }>;
+  completed: boolean;
+  attempts: number;
+  bestScore: number;
+}
+
 export default function Plab2Osce() {
-  const [activeStation, setActiveStation] = useState<EnhancedOSCEStation | null>(null);
+  const [activeStation, setActiveStation] = useState<OSCEStation | null>(null);
   const [selectedType, setSelectedType] = useState<string>('all');
   const [completedStations, setCompletedStations] = useState<string[]>([]);
   const [stationScores, setStationScores] = useState<Record<string, number>>({});
@@ -44,8 +80,24 @@ export default function Plab2Osce() {
     localStorage.setItem('neuro-accommodations', JSON.stringify(accommodations));
   };
 
-  const filteredStations = EXPANDED_PLAB2_STATIONS.filter(station => 
-    selectedType === 'all' || station.type === selectedType
+  // Fetch authentic UK medical OSCE stations
+  const { data: osceStations = [], isLoading, error } = useQuery({
+    queryKey: ['/api/osce/stations', selectedType],
+    queryFn: async () => {
+      const params = new URLSearchParams({
+        type: selectedType === 'all' ? 'history-taking' : selectedType,
+        specialty: 'general-medicine',
+        difficulty: 'intermediate',
+        count: '5'
+      });
+      const response = await fetch(`/api/osce/stations?${params}`);
+      if (!response.ok) throw new Error('Failed to fetch OSCE stations');
+      return response.json();
+    }
+  });
+
+  const filteredStations = osceStations.filter((station: OSCEStation) => 
+    selectedType === 'all' || station.category.toLowerCase().includes(selectedType.toLowerCase())
   );
 
   const handleStationComplete = (stationId: string, score: number) => {
