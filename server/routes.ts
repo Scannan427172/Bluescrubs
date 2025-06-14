@@ -883,6 +883,126 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Enhanced Medical Translation API for PLAB Questions
+  app.post("/api/translate/plab-question", async (req, res) => {
+    try {
+      const { question, targetLanguage } = req.body;
+      
+      if (!question || !targetLanguage) {
+        return res.status(400).json({ error: "Question and target language are required" });
+      }
+      
+      console.log(`Translating PLAB question to ${targetLanguage}`);
+      
+      // Use OpenAI to translate while preserving medical accuracy
+      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+      
+      const translationPrompt = `You are a professional medical translator specializing in UK medical education. Translate the following medical question to ${targetLanguage} while maintaining clinical accuracy.
+
+CRITICAL REQUIREMENTS:
+1. Preserve all medical terminology accuracy
+2. Do NOT translate NICE guideline names or URLs
+3. Maintain clinical context appropriate for UK healthcare
+4. Use appropriate medical terminology for the target language
+5. Ensure translation is suitable for medical professionals
+
+Original Question:
+${JSON.stringify(question, null, 2)}
+
+Return ONLY the translated JSON with the same structure. Translate scenario, question text, and options, but keep references unchanged.`;
+
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+        messages: [{ role: "user", content: translationPrompt }],
+        temperature: 0.1 // Low temperature for consistency
+      });
+
+      let translatedQuestion;
+      try {
+        translatedQuestion = JSON.parse(response.choices[0].message.content || '{}');
+      } catch (parseError) {
+        throw new Error('Failed to parse translated response');
+      }
+      
+      res.json({
+        originalQuestion: question,
+        translatedQuestion,
+        targetLanguage,
+        translatedAt: new Date().toISOString(),
+        preservedReferences: true
+      });
+    } catch (error: any) {
+      console.error('PLAB question translation error:', error);
+      res.status(500).json({ error: "Failed to translate PLAB question" });
+    }
+  });
+
+  // Bulk Translation API for Multiple Questions
+  app.post("/api/translate/bulk-questions", async (req, res) => {
+    try {
+      const { questions, targetLanguage, batchSize = 3 } = req.body;
+      
+      if (!questions || !Array.isArray(questions) || !targetLanguage) {
+        return res.status(400).json({ error: "Questions array and target language are required" });
+      }
+      
+      console.log(`Bulk translating ${questions.length} questions to ${targetLanguage}`);
+      
+      const translatedQuestions = [];
+      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+      
+      // Process in batches to avoid rate limits
+      for (let i = 0; i < questions.length; i += batchSize) {
+        const batch = questions.slice(i, i + batchSize);
+        
+        const batchPrompt = `You are a professional medical translator specializing in UK medical education. Translate the following medical questions to ${targetLanguage} while maintaining clinical accuracy.
+
+CRITICAL REQUIREMENTS:
+1. Preserve all medical terminology accuracy
+2. Do NOT translate NICE guideline names or URLs in references
+3. Maintain clinical context appropriate for UK healthcare
+4. Use appropriate medical terminology for the target language
+5. Return as valid JSON array with same structure
+
+Questions to translate:
+${JSON.stringify(batch, null, 2)}
+
+Return ONLY the translated JSON array.`;
+
+        const response = await openai.chat.completions.create({
+          model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+          messages: [{ role: "user", content: batchPrompt }],
+          temperature: 0.1
+        });
+
+        try {
+          const batchTranslated = JSON.parse(response.choices[0].message.content || '[]');
+          translatedQuestions.push(...batchTranslated);
+        } catch (parseError) {
+          console.error('Failed to parse batch translation:', parseError);
+          // Add original questions if translation fails
+          translatedQuestions.push(...batch);
+        }
+        
+        // Small delay between batches
+        if (i + batchSize < questions.length) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+      }
+      
+      res.json({
+        originalCount: questions.length,
+        translatedQuestions,
+        targetLanguage,
+        translatedAt: new Date().toISOString(),
+        batchSize
+      });
+    } catch (error: any) {
+      console.error('Bulk translation error:', error);
+      res.status(500).json({ error: "Failed to translate questions in bulk" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
