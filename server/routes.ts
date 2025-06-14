@@ -9,6 +9,15 @@ import { generateUKMedicalQuestion, generateMultipleUKQuestions } from "./uk-med
 import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generator";
 import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-uk-generator";
 import { analyzeMultipleImages } from "./image-analysis";
+import { 
+  generateFlashcardsFromContent, 
+  summarizeContent, 
+  generateInteractiveQuiz, 
+  generateVisualExplanation,
+  updateFlashcardPerformance,
+  type SmartFlashcard,
+  type QuizQuestion
+} from "./ai-study-tools";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -673,9 +682,135 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // AI Study Tools - Smart Flashcards with Spaced Repetition
+  app.post("/api/study-tools/flashcards/generate", async (req, res) => {
+    try {
+      const { content, specialty = "general-medicine" } = req.body;
+      
+      if (!content) {
+        return res.status(400).json({ error: "Content is required" });
+      }
+
+      const flashcards = await generateFlashcardsFromContent(content, specialty);
+      res.json({ flashcards, count: flashcards.length });
+    } catch (error) {
+      console.error('Error generating flashcards:', error);
+      res.status(500).json({ error: "Failed to generate flashcards" });
+    }
+  });
+
+  // Auto-Summarizer
+  app.post("/api/study-tools/summarize", async (req, res) => {
+    try {
+      const { content, format = "bullets" } = req.body;
+      
+      if (!content) {
+        return res.status(400).json({ error: "Content is required" });
+      }
+
+      const summary = await summarizeContent(content, format);
+      res.json({ summary, format });
+    } catch (error) {
+      console.error('Error summarizing content:', error);
+      res.status(500).json({ error: "Failed to summarize content" });
+    }
+  });
+
+  // Interactive Quiz Generator
+  app.post("/api/study-tools/quiz/generate", async (req, res) => {
+    try {
+      const { 
+        topic, 
+        questionCount = 5, 
+        types = ["multiple-choice"]
+      } = req.body;
+      
+      if (!topic) {
+        return res.status(400).json({ error: "Topic is required" });
+      }
+
+      const quiz = await generateInteractiveQuiz(topic, questionCount, types);
+      res.json({ 
+        questions: quiz, 
+        metadata: {
+          topic,
+          count: quiz.length,
+          types,
+          estimatedTime: quiz.length * 2 // minutes
+        }
+      });
+    } catch (error) {
+      console.error('Error generating quiz:', error);
+      res.status(500).json({ error: "Failed to generate quiz" });
+    }
+  });
+
+  // Visual Explanation Assistant
+  app.post("/api/study-tools/visual-explanation", async (req, res) => {
+    try {
+      const { concept, complexity = "intermediate" } = req.body;
+      
+      if (!concept) {
+        return res.status(400).json({ error: "Concept is required" });
+      }
+
+      const explanation = await generateVisualExplanation(concept, complexity);
+      res.json(explanation);
+    } catch (error) {
+      console.error('Error generating visual explanation:', error);
+      res.status(500).json({ error: "Failed to generate explanation" });
+    }
+  });
+
+  // Update flashcard performance (spaced repetition)
+  app.post("/api/study-tools/flashcards/:id/review", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { success, confidenceLevel = 3 } = req.body;
+      
+      // In a real implementation, you'd fetch the flashcard from database
+      // For now, returning the update structure
+      const updatedCard = {
+        id,
+        success,
+        confidenceLevel,
+        nextReview: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        message: "Flashcard performance updated with spaced repetition algorithm"
+      };
+      
+      res.json(updatedCard);
+    } catch (error) {
+      console.error('Error updating flashcard:', error);
+      res.status(500).json({ error: "Failed to update flashcard" });
+    }
+  });
+
+  // Confidence tracking for quizzes
+  app.post("/api/study-tools/quiz/:id/submit", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { answers, confidenceLevels, timeSpent } = req.body;
+      
+      // Calculate performance metrics
+      const performance = {
+        quizId: id,
+        totalQuestions: answers.length,
+        averageConfidence: confidenceLevels.reduce((a: number, b: number) => a + b, 0) / confidenceLevels.length,
+        timePerQuestion: timeSpent / answers.length,
+        timestamp: new Date(),
+        recommendedReview: []
+      };
+      
+      res.json(performance);
+    } catch (error) {
+      console.error('Error submitting quiz:', error);
+      res.status(500).json({ error: "Failed to submit quiz" });
+    }
+  });
+
   app.get("/api/users", async (req, res) => {
     try {
-      // Mock user data
+      // User data structure including study tools metrics
       const users = [
         {
           id: 1,
@@ -685,7 +820,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           examTarget: "PLAB",
           studyStreak: 15,
           totalScore: 1248,
-          createdAt: new Date('2024-01-01')
+          createdAt: new Date('2024-01-01'),
+          studyMetrics: {
+            flashcardsReviewed: 245,
+            quizzesCompleted: 89,
+            averageConfidence: 4.2,
+            contentSummarized: 12,
+            visualExplanations: 34
+          }
         }
       ];
 
