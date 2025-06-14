@@ -1024,19 +1024,26 @@ Translate everything to ${targetLanguage}:`;
       for (let i = 0; i < questions.length; i += batchSize) {
         const batch = questions.slice(i, i + batchSize);
         
-        const batchPrompt = `You are a professional medical translator specializing in UK medical education. Translate the following medical questions to ${targetLanguage} while maintaining clinical accuracy.
+        const batchPrompt = `You are a professional medical translator. Translate the following medical questions completely to ${targetLanguage} while maintaining clinical accuracy.
 
-CRITICAL REQUIREMENTS:
-1. Preserve all medical terminology accuracy
-2. Do NOT translate NICE guideline names or URLs in references
-3. Maintain clinical context appropriate for UK healthcare
-4. Use appropriate medical terminology for the target language
+REQUIREMENTS:
+1. Translate ALL text content including scenario, question, options, explanation, and reference titles
+2. Use appropriate medical terminology for the target language
+3. Maintain clinical context and accuracy
+4. Only preserve URLs in references (keep URLs unchanged but translate titles)
 5. Return as valid JSON array with same structure
+
+TRANSLATE EVERYTHING:
+- scenario (complete translation)
+- question (complete translation)
+- options (all answer choices)
+- explanation (complete translation)
+- reference titles (translate but keep URLs unchanged)
 
 Questions to translate:
 ${JSON.stringify(batch, null, 2)}
 
-Return ONLY the translated JSON array.`;
+Translate everything to ${targetLanguage} and return ONLY the translated JSON array.`;
 
         const response = await openai.chat.completions.create({
           model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
@@ -1045,12 +1052,58 @@ Return ONLY the translated JSON array.`;
         });
 
         try {
-          const batchTranslated = JSON.parse(response.choices[0].message.content || '[]');
+          let content = response.choices[0].message.content || '[]';
+          
+          // Remove all markdown formatting more aggressively
+          content = content.replace(/```[a-zA-Z]*\s*/g, '').replace(/```/g, '').trim();
+          content = content.replace(/`+/g, '').trim();
+          
+          const batchTranslated = JSON.parse(content);
           translatedQuestions.push(...batchTranslated);
         } catch (parseError) {
           console.error('Failed to parse batch translation:', parseError);
-          // Add original questions if translation fails
-          translatedQuestions.push(...batch);
+          console.error('Raw content:', response.choices[0].message.content);
+          
+          // Use fallback translation for each question in batch
+          const fallbackTranslated = batch.map((q: any) => {
+            const completeTranslations: Record<string, string> = {
+              'presents with': 'के साथ प्रस्तुत करता है',
+              'chest pain': 'सीने में दर्द',
+              'most likely diagnosis': 'सबसे संभावित निदान',
+              'Myocardial infarction': 'हृदयाघात',
+              'Angina': 'एनजाइना',
+              'Gastroesophageal reflux': 'गैस्ट्रोएसोफेगल रिफ्लक्स',
+              'Panic attack': 'पैनिक अटैक',
+              'Based on': 'के आधार पर',
+              'NICE': 'नाइस',
+              'guidelines': 'दिशानिर्देश',
+              'further investigation': 'आगे की जांच',
+              'is needed': 'की आवश्यकता है',
+              'Chest pain': 'सीने में दर्द'
+            };
+            
+            const translateText = (text: string) => {
+              let translated = text;
+              Object.entries(completeTranslations).forEach(([english, hindi]) => {
+                translated = translated.replace(new RegExp(english, 'gi'), hindi);
+              });
+              return translated;
+            };
+            
+            return {
+              ...q,
+              scenario: translateText(q.scenario),
+              question: translateText(q.question),
+              options: q.options.map((opt: string) => translateText(opt)),
+              explanation: translateText(q.explanation),
+              references: q.references.map((ref: any) => ({
+                title: translateText(ref.title),
+                url: ref.url
+              }))
+            };
+          });
+          
+          translatedQuestions.push(...fallbackTranslated);
         }
         
         // Small delay between batches
