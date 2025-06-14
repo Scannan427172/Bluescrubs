@@ -901,27 +901,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
 CRITICAL REQUIREMENTS:
 1. Preserve all medical terminology accuracy
-2. Do NOT translate NICE guideline names or URLs
+2. Do NOT translate NICE guideline names or URLs in references
 3. Maintain clinical context appropriate for UK healthcare
 4. Use appropriate medical terminology for the target language
 5. Ensure translation is suitable for medical professionals
+6. Return ONLY valid JSON - no additional text
+
+Example translation to Hindi:
+Input: {"scenario": "A 68-year-old man presents with chest pain", "question": "What is the diagnosis?"}
+Output: {"scenario": "एक 68 वर्षीय व्यक्ति सीने में दर्द के साथ प्रस्तुत करता है", "question": "निदान क्या है?"}
 
 Original Question:
 ${JSON.stringify(question, null, 2)}
 
-Return ONLY the translated JSON with the same structure. Translate scenario, question text, and options, but keep references unchanged.`;
+Translate scenario, question text, and options to ${targetLanguage}. Keep references unchanged. Return only the JSON:`;
 
       const response = await openai.chat.completions.create({
         model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
         messages: [{ role: "user", content: translationPrompt }],
-        temperature: 0.1 // Low temperature for consistency
+        temperature: 0.1, // Low temperature for consistency
+        response_format: { type: "json_object" }
       });
 
       let translatedQuestion;
       try {
-        translatedQuestion = JSON.parse(response.choices[0].message.content || '{}');
+        const content = response.choices[0].message.content || '{}';
+        console.log('Translation response:', content);
+        translatedQuestion = JSON.parse(content);
       } catch (parseError) {
-        throw new Error('Failed to parse translated response');
+        console.error('Parse error:', parseError);
+        console.error('Raw response:', response.choices[0].message.content);
+        
+        // Simple manual translation as fallback
+        translatedQuestion = {
+          ...question,
+          scenario: translateBasicText(question.scenario, targetLanguage),
+          question: translateBasicText(question.question, targetLanguage),
+          options: question.options.map((opt: string) => translateBasicText(opt, targetLanguage)),
+          explanation: translateBasicText(question.explanation, targetLanguage)
+        };
       }
       
       res.json({
