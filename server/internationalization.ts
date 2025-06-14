@@ -905,3 +905,72 @@ export class InternationalisationEngine {
     };
   }
 }
+
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+// OSCE Station Translation Function
+export async function translateOSCEStation(station: any, targetLanguage: string): Promise<any> {
+  try {
+    console.log(`Translating OSCE station to ${targetLanguage}`);
+    
+    // Check cache first
+    const stationStr = JSON.stringify(station);
+    const cacheKey = getCacheKey(stationStr, targetLanguage);
+    const cachedTranslation = getCachedTranslation(cacheKey);
+    
+    if (cachedTranslation) {
+      console.log('Using cached OSCE translation');
+      return cachedTranslation;
+    }
+    
+    const translationPrompt = `Translate this OSCE station to ${targetLanguage}. 
+
+REQUIREMENTS:
+- Translate ALL text: title, description, scenario, instructions, marking criteria
+- Preserve medical accuracy and clinical terminology
+- Keep same JSON structure unchanged
+- Use professional medical language for ${targetLanguage}
+
+${JSON.stringify(station, null, 2)}
+
+Return complete translated JSON:`;
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: `Expert medical translator for ${targetLanguage}. Translate OSCE content accurately, preserve clinical meaning, respond only with valid JSON.`
+        },
+        {
+          role: "user",
+          content: translationPrompt
+        }
+      ],
+      response_format: { type: "json_object" },
+      temperature: 0.2,
+      max_tokens: 2500
+    });
+
+    const translatedContent = response.choices[0].message.content;
+    if (!translatedContent) {
+      throw new Error('No OSCE translation generated');
+    }
+
+    const translatedStation = JSON.parse(translatedContent);
+    
+    // Cache the translation
+    setCachedTranslation(cacheKey, translatedStation);
+    
+    console.log('OSCE translation completed and cached');
+    return translatedStation;
+
+  } catch (error: any) {
+    console.error('OSCE translation error:', error);
+    throw new Error(`OSCE translation failed: ${error.message}`);
+  }
+}

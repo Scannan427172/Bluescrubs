@@ -403,6 +403,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: 'OSCE station and target language required' });
       }
 
+      const { translateOSCEStation } = await import('./internationalization.js');
       const translatedStation = await translateOSCEStation(station, targetLanguage);
       res.json(translatedStation);
     } catch (error) {
