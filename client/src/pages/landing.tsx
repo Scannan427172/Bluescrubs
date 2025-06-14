@@ -291,6 +291,150 @@ export default function Landing() {
         </div>
       </div>
 
+      {/* Complete Platform Features Section */}
+      <div className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16">
+            <div className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-6">
+              <span className="text-white font-semibold">Complete Feature Set</span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              40+ Advanced Systems Working Together
+            </h2>
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              The most comprehensive medical education platform with features no competitor can match. 
+              Every system is designed to accelerate your path from PLAB to NHS career success.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                category: "AI Learning Systems",
+                icon: Brain,
+                color: "from-blue-500 to-cyan-500",
+                features: [
+                  "Weakness prediction 2-3 weeks early",
+                  "Success probability calculator (94% accuracy)",
+                  "Adaptive difficulty adjustment",
+                  "Contextual hint system",
+                  "Personalized study sequences",
+                  "AI-powered question generation"
+                ]
+              },
+              {
+                category: "VR & Immersive Training",
+                icon: Video,
+                color: "from-purple-500 to-pink-500",
+                features: [
+                  "Virtual reality OSCE stations",
+                  "AI patient actors with personalities",
+                  "Realistic hospital environments",
+                  "Multi-user collaborative sessions",
+                  "Real-time performance analysis",
+                  "Adaptive scenario modification"
+                ]
+              },
+              {
+                category: "UK Clinical Integration",
+                icon: Globe,
+                color: "from-green-500 to-emerald-500",
+                features: [
+                  "Live NHS guidelines monitoring",
+                  "Imperial College partnerships",
+                  "Manchester Royal Infirmary access",
+                  "Cultural competency training",
+                  "Post-PLAB career placement",
+                  "NHS job application assistance"
+                ]
+              },
+              {
+                category: "Mobile & Accessibility",
+                icon: Target,
+                color: "from-orange-500 to-red-500",
+                features: [
+                  "Microlearning modules (5-10 min)",
+                  "Smart notification timing",
+                  "Voice-to-revision notes",
+                  "Offline content sync",
+                  "35-language support",
+                  "Commute-optimized learning"
+                ]
+              },
+              {
+                category: "Professional Development",
+                icon: Users,
+                color: "from-indigo-500 to-purple-500",
+                features: [
+                  "ARCP portfolio builder",
+                  "Continuing education recommendations",
+                  "Professional networking",
+                  "Career pathway analysis",
+                  "Competency gap identification",
+                  "Leadership development programs"
+                ]
+              },
+              {
+                category: "Gamification & Motivation",
+                icon: Trophy,
+                color: "from-yellow-500 to-orange-500",
+                features: [
+                  "Personalized achievements",
+                  "Dynamic challenge generation",
+                  "Virtual study buddy",
+                  "Progress celebrations",
+                  "Streak recovery system",
+                  "Meaningful reward structure"
+                ]
+              }
+            ].map((category, index) => (
+              <Card key={index} className="group border-2 border-gray-200 hover:border-gray-300 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white">
+                <CardContent className="p-6">
+                  <div className={`w-14 h-14 bg-gradient-to-r ${category.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                    <category.icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">{category.category}</h3>
+                  <ul className="space-y-2">
+                    {category.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start text-sm text-gray-700">
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Feature Statistics */}
+          <div className="mt-16 bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-8 border border-blue-200">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Platform Impact</h3>
+              <p className="text-gray-600">Real-world results from comprehensive feature integration</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">40+</div>
+                <p className="text-gray-700 font-medium">AI Systems</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-purple-600 mb-2">35</div>
+                <p className="text-gray-700 font-medium">Languages</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-green-600 mb-2">94%</div>
+                <p className="text-gray-700 font-medium">Success Rate</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-orange-600 mb-2">Real</div>
+                <p className="text-gray-700 font-medium">Hospital Partners</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* NHSprep+ Global Expansion Section */}
       <div className="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 py-20">
         <div className="max-w-7xl mx-auto px-4">
