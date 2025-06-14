@@ -16,6 +16,7 @@ import ClinicalGuides from "@/pages/clinical-guides";
 import GlobalScoreboard from "@/pages/global-scoreboard";
 import Premium from "@/pages/premium";
 import AskAI from "@/pages/ask-ai";
+import AIStudyTools from "@/pages/ai-study-tools";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
