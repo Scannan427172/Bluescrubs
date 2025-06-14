@@ -6,11 +6,31 @@ import { analyzeVideoPerformance } from "./ai-analysis";
 import { storage } from "./storage";
 import { askMedicalAI } from "./ask-ai-api";
 import { generateUKMedicalQuestion, generateMultipleUKQuestions } from "./uk-medical-generator";
+import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generator";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
+// Load UK question bank on startup
+let ukQuestionBank: any[] = [];
+
+async function initializeQuestionBank() {
+  try {
+    ukQuestionBank = await loadUKQuestionBank();
+    console.log(`Loaded ${ukQuestionBank.length} UK medical questions from bank`);
+    
+    if (ukQuestionBank.length < 1000) {
+      console.log('Question bank insufficient, will generate questions on-demand');
+    }
+  } catch (error) {
+    console.log('Will generate UK medical questions on-demand');
+  }
+}
+
+// Initialize question bank
+initializeQuestionBank();
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -55,28 +75,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log(`Generating questions for ${category} at ${difficulty} level, count: ${limitedCount}`);
       
-      // Use UK Medical Generator for authentic NICE/GMC-compliant questions
-      const questionGenerationPromise = generateMultipleUKQuestions(limitedCount, category, difficulty);
+      let questions: any[] = [];
       
-      const result = await Promise.race([questionGenerationPromise, timeoutPromise]);
-      clearTimeout(timeoutId!);
+      // First, try to get questions from pre-loaded UK question bank
+      const availableQuestions = ukQuestionBank.filter(q => 
+        (category === 'all' || q.category === category) && 
+        q.difficulty === difficulty
+      );
       
-      const ukQuestions = result as any[];
-      
-      // Convert UK questions to standard format
-      const questions = ukQuestions.map((ukQ, index) => ({
-        id: `uk_${category}_${Date.now()}_${index}_${Math.random().toString(36).substr(2, 6)}`,
-        stem: `${ukQ.scenario}\n\n${ukQ.question}`,
-        options: [ukQ.options.A, ukQ.options.B, ukQ.options.C, ukQ.options.D, ukQ.options.E],
-        correctAnswer: ['A', 'B', 'C', 'D', 'E'].indexOf(ukQ.correct_answer),
-        explanation: ukQ.explanation,
-        category,
-        difficulty,
-        references: ukQ.references.map((ref: any) => ({
-          text: ref.title,
-          url: ref.url
-        }))
-      }));
+      if (availableQuestions.length >= limitedCount) {
+        // Use existing questions from bank
+        questions = availableQuestions
+          .sort(() => Math.random() - 0.5) // Shuffle
+          .slice(0, limitedCount)
+          .map(q => ({
+            ...q,
+            id: `bank_${category}_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`
+          }));
+        
+        console.log(`Using ${questions.length} questions from UK medical question bank`);
+      } else {
+        // Generate new UK medical questions using OpenAI
+        console.log(`Generating new UK medical questions (bank has ${availableQuestions.length}, need ${limitedCount})`);
+        
+        const questionGenerationPromise = generateMultipleUKQuestions(limitedCount, category, difficulty);
+        const result = await Promise.race([questionGenerationPromise, timeoutPromise]);
+        clearTimeout(timeoutId!);
+        
+        const ukQuestions = result as any[];
+        
+        // Convert UK questions to standard format
+        questions = ukQuestions.map((ukQ, index) => ({
+          id: `uk_${category}_${Date.now()}_${index}_${Math.random().toString(36).substr(2, 6)}`,
+          stem: `${ukQ.scenario}\n\n${ukQ.question}`,
+          options: [ukQ.options.A, ukQ.options.B, ukQ.options.C, ukQ.options.D, ukQ.options.E],
+          correctAnswer: ['A', 'B', 'C', 'D', 'E'].indexOf(ukQ.correct_answer),
+          explanation: ukQ.explanation,
+          category,
+          difficulty,
+          references: ukQ.references.map((ref: any) => ({
+            text: ref.title,
+            url: ref.url
+          }))
+        }));
+      }
       
       console.log(`Generated questions:`, questions.map(q => ({ id: q.id, category: q.category, hasOptions: !!q.options })));
       
@@ -753,6 +795,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Achievements error:", error);
       res.status(500).json({ error: "Failed to fetch achievements" });
+    }
+  });
+
+  // Bulk generate UK medical questions endpoint
+  app.post("/api/admin/generate-question-bank", async (req, res) => {
+    try {
+      const { targetCount = 5000 } = req.body;
+      
+      console.log(`Starting bulk generation of ${targetCount} UK medical questions...`);
+      
+      // Start generation in background
+      generateFullQuestionBank(targetCount).catch(error => {
+        console.error('Bulk generation failed:', error);
+      });
+      
+      res.json({ 
+        message: `Started generation of ${targetCount} UK medical questions`,
+        status: 'in_progress'
+      });
+      
+    } catch (error: any) {
+      console.error('Error starting bulk generation:', error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Get question bank status
+  app.get("/api/admin/question-bank-status", async (req, res) => {
+    try {
+      const bankQuestions = await loadUKQuestionBank();
+      
+      const specialtyBreakdown = bankQuestions.reduce((acc, q) => {
+        acc[q.category] = (acc[q.category] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>);
+      
+      const difficultyBreakdown = bankQuestions.reduce((acc, q) => {
+        acc[q.difficulty] = (acc[q.difficulty] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>);
+      
+      res.json({
+        totalQuestions: bankQuestions.length,
+        target: 5000,
+        completion: Math.round((bankQuestions.length / 5000) * 100),
+        specialtyBreakdown,
+        difficultyBreakdown,
+        lastUpdated: new Date().toISOString()
+      });
+      
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
     }
   });
 
