@@ -48,18 +48,33 @@ export interface UKMedicalQuestion {
     title: string;
     url: string;
   }>;
+  cks_guidance: {
+    summary: string;
+    key_points: string[];
+    management_approach: string;
+    red_flags?: string[];
+  };
+  additional_guidelines: Array<{
+    source: string;
+    guidance: string;
+    relevance: string;
+  }>;
 }
 
 const SYSTEM_PROMPT = `You are a highly trained AI model designed to generate UK medical exam questions for PLAB, MLA and NHSPrep app.
 
 You only use official UK medical guidelines for your answers. These include:
 - NICE Guidelines (current version)
+- CKS Clinical Knowledge Summaries
 - GMC Good Medical Practice 2024
 - GMC MLA Content Map
 - BMJ Best Practice
 - UpToDate
+- SIGN Guidelines (Scotland)
 - WHO
 - NHS clinical guidelines
+- RCGP Guidelines
+- BMA Guidelines
 
 TASK:
 1️⃣ Generate ONE clinical scenario related to general medicine.
@@ -69,13 +84,14 @@ TASK:
 5️⃣ Then write a detailed explanation that explains:
    - Why the correct answer is correct.
    - Why the incorrect answers are incorrect.
-6️⃣ Finally, provide a reference section that includes:
-   - The guideline or source used.
-   - A working URL link to the official NICE or GMC or BMJ Best Practice or UpToDate guideline page.
+6️⃣ Provide comprehensive CKS guidance relevant to this clinical scenario.
+7️⃣ Include additional relevant UK clinical guidelines.
+8️⃣ Finally, provide a reference section with working URLs.
 
 VERY IMPORTANT:
 - Do not invent guidelines.
 - All answers must be medically accurate according to current NICE or GMC guidance.
+- Include authentic CKS Clinical Knowledge Summaries content.
 - Format your entire output as VALID JSON exactly as shown below.
 
 OUTPUT FORMAT (strictly follow this structure):
@@ -92,6 +108,19 @@ OUTPUT FORMAT (strictly follow this structure):
   },
   "correct_answer": "<A, B, C, D or E>",
   "explanation": "<insert full detailed explanation>",
+  "cks_guidance": {
+    "summary": "<brief CKS summary of the condition>",
+    "key_points": ["<key clinical point 1>", "<key clinical point 2>", "<key clinical point 3>"],
+    "management_approach": "<CKS recommended management approach>",
+    "red_flags": ["<warning sign 1>", "<warning sign 2>"]
+  },
+  "additional_guidelines": [
+    {
+      "source": "<guideline source e.g., RCGP, BMA, SIGN>",
+      "guidance": "<specific guidance point>",
+      "relevance": "<how this relates to the question>"
+    }
+  ],
   "references": [
     {
       "title": "<name of guideline>",
@@ -194,7 +223,8 @@ async function generateSingleQuestion(
     
     // Validate the structure
     if (!questionData.scenario || !questionData.question || !questionData.options || 
-        !questionData.correct_answer || !questionData.explanation || !questionData.references) {
+        !questionData.correct_answer || !questionData.explanation || !questionData.references ||
+        !questionData.cks_guidance || !questionData.additional_guidelines) {
       throw new Error('Invalid question structure generated');
     }
 

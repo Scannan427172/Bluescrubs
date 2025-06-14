@@ -1258,18 +1258,86 @@ export default function PLAB1New() {
               </div>
             </div>
 
+            {/* CKS Clinical Knowledge Summaries */}
+            {currentQuestion.cks_guidance && (
+              <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg mb-4">
+                <div className="flex items-start gap-2">
+                  <BookOpen className="w-4 h-4 text-green-600 flex-shrink-0 mt-1" />
+                  <div className="w-full">
+                    <p className="text-sm font-medium text-green-900 mb-3">CKS Clinical Knowledge Summary</p>
+                    
+                    <div className="bg-white border border-green-200 rounded-lg p-4 mb-3">
+                      <p className="text-green-800 text-sm leading-relaxed mb-3">
+                        {currentQuestion.cks_guidance.summary}
+                      </p>
+                      
+                      <div className="mb-3">
+                        <p className="text-xs font-semibold text-green-900 mb-2">Key Clinical Points:</p>
+                        <ul className="list-disc list-inside space-y-1">
+                          {currentQuestion.cks_guidance.key_points?.map((point: string, index: number) => (
+                            <li key={index} className="text-xs text-green-800">{point}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="mb-3">
+                        <p className="text-xs font-semibold text-green-900 mb-1">Management Approach:</p>
+                        <p className="text-xs text-green-800">{currentQuestion.cks_guidance.management_approach}</p>
+                      </div>
+                      
+                      {currentQuestion.cks_guidance.red_flags && currentQuestion.cks_guidance.red_flags.length > 0 && (
+                        <div className="bg-red-50 border border-red-200 rounded p-2">
+                          <p className="text-xs font-semibold text-red-900 mb-1">Red Flags:</p>
+                          <ul className="list-disc list-inside space-y-1">
+                            {currentQuestion.cks_guidance.red_flags.map((flag: string, index: number) => (
+                              <li key={index} className="text-xs text-red-800">{flag}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Additional UK Guidelines */}
+            {currentQuestion.additional_guidelines && currentQuestion.additional_guidelines.length > 0 && (
+              <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r-lg mb-4">
+                <div className="flex items-start gap-2">
+                  <BookOpen className="w-4 h-4 text-purple-600 flex-shrink-0 mt-1" />
+                  <div className="w-full">
+                    <p className="text-sm font-medium text-purple-900 mb-3">Additional UK Clinical Guidelines</p>
+                    <div className="space-y-3">
+                      {currentQuestion.additional_guidelines.map((guideline: any, index: number) => (
+                        <div key={index} className="bg-white border border-purple-200 rounded-lg p-3">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-semibold text-purple-900 bg-purple-100 px-2 py-1 rounded">
+                              {guideline.source}
+                            </span>
+                          </div>
+                          <p className="text-sm text-purple-800 mb-2">{guideline.guidance}</p>
+                          <p className="text-xs text-purple-700 italic">{guideline.relevance}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Specific Reference Section */}
             <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
               <div className="flex items-start gap-2">
                 <BookOpen className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
                 <div className="w-full">
-                  <p className="text-sm font-medium text-blue-900 mb-2">{translateText('References:')}</p>
+                  <p className="text-sm font-medium text-blue-900 mb-2">{translateText('Official References:')}</p>
                   <div className="text-sm text-blue-800 space-y-2">
                     {currentQuestion.references && currentQuestion.references.length > 0 ? (
                       currentQuestion.references.map((reference: any, index: number) => (
                         <div key={index} className="bg-white border border-blue-200 rounded-lg p-3 mb-3">
                           <p className="text-blue-700 leading-relaxed mb-3 text-sm">
-                            {typeof reference === 'string' ? reference : reference.text}
+                            {typeof reference === 'string' ? reference : reference.title || reference.text}
                           </p>
                           {typeof reference === 'object' && reference.url && (
                             <a 
