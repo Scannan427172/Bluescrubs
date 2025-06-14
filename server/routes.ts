@@ -394,6 +394,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Translation endpoint for PLAB 2 OSCE stations
+  app.post('/api/translate-osce', async (req, res) => {
+    try {
+      const { station, targetLanguage } = req.body;
+      
+      if (!station || !targetLanguage) {
+        return res.status(400).json({ error: 'OSCE station and target language required' });
+      }
+
+      const translatedStation = await translateOSCEStation(station, targetLanguage);
+      res.json(translatedStation);
+    } catch (error) {
+      console.error('OSCE translation API error:', error);
+      res.status(500).json({ error: 'OSCE translation failed' });
+    }
+  });
+
   app.post("/api/mass-generate/:examType/:specialty", async (req, res) => {
     try {
       const { examType, specialty } = req.params;

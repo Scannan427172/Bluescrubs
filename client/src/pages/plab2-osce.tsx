@@ -8,8 +8,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { 
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
-  ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2
+  ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
+  Globe, Languages
 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useQuery } from "@tanstack/react-query";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
 import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
@@ -58,6 +61,13 @@ export default function Plab2Osce() {
   const [completedStations, setCompletedStations] = useState<string[]>([]);
   const [stationScores, setStationScores] = useState<Record<string, number>>({});
 
+  // Translation and language state
+  const [isTranslationMode, setIsTranslationMode] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [translateStations, setTranslateStations] = useState(false);
+  const [translatedStations, setTranslatedStations] = useState<Record<string, any>>({});
+  const [isTranslating, setIsTranslating] = useState(false);
+
   // Neurodiversity settings
   const [neuroAccommodations, setNeuroAccommodations] = useState<NeuroAtypicalType[]>(['none']);
   const { accommodations, questionStyles, buttonStyles } = useNeuroAccommodations(neuroAccommodations);
@@ -78,6 +88,102 @@ export default function Plab2Osce() {
   const handleAccommodationsChange = (accommodations: NeuroAtypicalType[]) => {
     setNeuroAccommodations(accommodations);
     localStorage.setItem('neuro-accommodations', JSON.stringify(accommodations));
+  };
+
+  // Translation and voice functions
+  const translateText = (text: string): string => {
+    if (!isTranslationMode || selectedLanguage === 'en') return text;
+    
+    // Quick fallback translations for common medical terms
+    const quickTranslations: Record<string, Record<string, string>> = {
+      'ar': {
+        'PLAB 2 OSCE': 'بلاب 2 أوسي', 'History Taking': 'أخذ التاريخ المرضي', 'Physical Examination': 'الفحص الجسدي',
+        'Communication': 'التواصل', 'Clinical Skills': 'المهارات السريرية', 'Start Station': 'بدء المحطة'
+      },
+      'hi': {
+        'PLAB 2 OSCE': 'प्लैब 2 ओएससीई', 'History Taking': 'इतिहास लेना', 'Physical Examination': 'शारीरिक परीक्षा',
+        'Communication': 'संचार', 'Clinical Skills': 'नैदानिक कौशल', 'Start Station': 'स्टेशन शुरू करें'
+      },
+      'ur': {
+        'PLAB 2 OSCE': 'پلیب 2 او ایس سی ای', 'History Taking': 'تاریخ لینا', 'Physical Examination': 'جسمانی معائنہ',
+        'Communication': 'رابطہ', 'Clinical Skills': 'طبی مہارتیں', 'Start Station': 'سٹیشن شروع کریں'
+      }
+    };
+    
+    const translations = quickTranslations[selectedLanguage] || {};
+    let translated = text;
+    Object.entries(translations).forEach(([english, native]) => {
+      translated = translated.replace(new RegExp(english, 'gi'), native);
+    });
+    return translated;
+  };
+
+  const speakText = (text: string) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+      utterance.rate = 0.85;
+      utterance.pitch = 1.1;
+      utterance.volume = 0.95;
+      
+      const voices = window.speechSynthesis.getVoices();
+      let preferredVoice;
+      
+      if (selectedLanguage && selectedLanguage !== 'en') {
+        preferredVoice = voices.find(voice => 
+          voice.lang.startsWith(selectedLanguage) && 
+          (voice.name.includes('Natural') || voice.name.includes('Enhanced'))
+        ) || voices.find(voice => voice.lang.startsWith(selectedLanguage));
+      }
+      
+      if (!preferredVoice) {
+        preferredVoice = voices.find(voice => 
+          voice.lang.startsWith('en') && 
+          (voice.name.includes('Natural') || voice.name.includes('Enhanced') || voice.name.includes('Premium'))
+        ) || voices.find(voice => voice.lang.startsWith('en')) || voices[0];
+      }
+      
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
+      }
+      
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  // Translate OSCE station content
+  const translateStation = async (station: OSCEStation) => {
+    if (!translateStations || selectedLanguage === 'en') return station;
+    
+    const cacheKey = `${station.id}_${selectedLanguage}`;
+    if (translatedStations[cacheKey]) {
+      return translatedStations[cacheKey];
+    }
+    
+    setIsTranslating(true);
+    try {
+      const response = await fetch('/api/translate-osce', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          station: station,
+          targetLanguage: selectedLanguage
+        })
+      });
+      
+      if (response.ok) {
+        const translated = await response.json();
+        setTranslatedStations(prev => ({ ...prev, [cacheKey]: translated }));
+        return translated;
+      }
+    } catch (error) {
+      console.error('Translation failed:', error);
+    } finally {
+      setIsTranslating(false);
+    }
+    
+    return station;
   };
 
   // Fetch authentic UK medical OSCE stations
@@ -290,9 +396,57 @@ export default function Plab2Osce() {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <Stethoscope className="w-8 h-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900">PLAB 2 OSCE Practice</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{translateText('PLAB 2 OSCE Practice')}</h1>
           </div>
-          <p className="text-lg text-gray-600">Comprehensive OSCE practice with 16-20 clinical stations covering history taking, examination, explanation, ethics, and acute care scenarios</p>
+          <p className="text-lg text-gray-600">{translateText('Comprehensive OSCE practice with 16-20 clinical stations covering history taking, examination, explanation, ethics, and acute care scenarios')}</p>
+          
+          {/* Language Toggle */}
+          <div className="flex items-center gap-4 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <Globe className="w-4 h-4 text-blue-600" />
+            <div className="flex items-center gap-3">
+              <Switch
+                checked={isTranslationMode}
+                onCheckedChange={(checked) => {
+                  setIsTranslationMode(checked);
+                  setTranslateStations(checked);
+                }}
+                className="data-[state=checked]:bg-blue-600"
+              />
+              <span className="text-sm font-medium text-blue-900">{translateText('Translation Mode')}</span>
+            </div>
+            {isTranslationMode && (
+              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                <SelectTrigger className="w-48 border-blue-200">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="max-h-72 overflow-y-auto">
+                  <SelectItem value="en">🇬🇧 English</SelectItem>
+                  <SelectItem value="ar">🇸🇦 Arabic</SelectItem>
+                  <SelectItem value="hi">🇮🇳 Hindi</SelectItem>
+                  <SelectItem value="ur">🇵🇰 Urdu</SelectItem>
+                  <SelectItem value="bn">🇧🇩 Bengali</SelectItem>
+                  <SelectItem value="ta">🇱🇰 Tamil</SelectItem>
+                  <SelectItem value="te">🇮🇳 Telugu</SelectItem>
+                  <SelectItem value="gu">🇮🇳 Gujarati</SelectItem>
+                  <SelectItem value="kn">🇮🇳 Kannada</SelectItem>
+                  <SelectItem value="ml">🇮🇳 Malayalam</SelectItem>
+                  <SelectItem value="pa">🇮🇳 Punjabi</SelectItem>
+                  <SelectItem value="mr">🇮🇳 Marathi</SelectItem>
+                  <SelectItem value="es">🇪🇸 Spanish</SelectItem>
+                  <SelectItem value="fr">🇫🇷 French</SelectItem>
+                  <SelectItem value="de">🇩🇪 German</SelectItem>
+                  <SelectItem value="it">🇮🇹 Italian</SelectItem>
+                  <SelectItem value="pt">🇵🇹 Portuguese</SelectItem>
+                  <SelectItem value="ru">🇷🇺 Russian</SelectItem>
+                  <SelectItem value="pl">🇵🇱 Polish</SelectItem>
+                  <SelectItem value="ro">🇷🇴 Romanian</SelectItem>
+                  <SelectItem value="zh">🇨🇳 Chinese</SelectItem>
+                  <SelectItem value="ja">🇯🇵 Japanese</SelectItem>
+                  <SelectItem value="ko">🇰🇷 Korean</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          </div>
           <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <div className="flex items-center gap-2 mb-2">
               <BookOpen className="w-5 h-5 text-blue-600" />
