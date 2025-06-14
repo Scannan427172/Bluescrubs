@@ -1125,6 +1125,7 @@ export default function VideoOsce() {
               </Card>
             </TabsContent>
           </Tabs>
+          </div>
         )}
       </div>
     </div>

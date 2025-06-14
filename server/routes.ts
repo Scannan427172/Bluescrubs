@@ -489,6 +489,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Video station translation endpoint
+  app.post('/api/translate/video-station', async (req, res) => {
+    try {
+      const { station, targetLanguage } = req.body;
+      
+      if (!station || !targetLanguage) {
+        return res.status(400).json({ error: 'Video station and target language required' });
+      }
+
+      const { translateOSCEStation } = await import('./internationalization.js');
+      const translatedStation = await translateOSCEStation(station, targetLanguage);
+      res.json(translatedStation);
+    } catch (error) {
+      console.error('Video station translation API error:', error);
+      res.status(500).json({ error: 'Video station translation failed' });
+    }
+  });
+
   // Video OSCE Analysis Route
   app.post("/api/ai/analyze-video", async (req, res) => {
     try {
