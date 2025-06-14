@@ -450,7 +450,7 @@ export default function AIStudyTools() {
                     <CardTitle className="text-lg">Generated Summary</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="whitespace-pre-wrap">{summarizeMutation.data.summary}</div>
+                    <div className="whitespace-pre-wrap">{(summarizeMutation.data as any)?.summary}</div>
                   </CardContent>
                 </Card>
               )}
@@ -714,31 +714,31 @@ export default function AIStudyTools() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="whitespace-pre-wrap">{generateExplanationMutation.data.explanation}</div>
+                      <div className="whitespace-pre-wrap">{(generateExplanationMutation.data as any)?.explanation}</div>
                     </CardContent>
                   </Card>
                   
-                  {generateExplanationMutation.data.diagram && (
+                  {(generateExplanationMutation.data as any)?.diagram && (
                     <Card>
                       <CardHeader>
                         <CardTitle>Visual Diagram</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <pre className="whitespace-pre-wrap font-mono text-sm bg-muted p-4 rounded">
-                          {generateExplanationMutation.data.diagram}
+                          {(generateExplanationMutation.data as any)?.diagram}
                         </pre>
                       </CardContent>
                     </Card>
                   )}
                   
-                  {generateExplanationMutation.data.keyPoints && generateExplanationMutation.data.keyPoints.length > 0 && (
+                  {(generateExplanationMutation.data as any)?.keyPoints && (generateExplanationMutation.data as any)?.keyPoints.length > 0 && (
                     <Card>
                       <CardHeader>
                         <CardTitle>Key Learning Points</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <ul className="space-y-2">
-                          {generateExplanationMutation.data.keyPoints.map((point: string, index: number) => (
+                          {(generateExplanationMutation.data as any)?.keyPoints.map((point: string, index: number) => (
                             <li key={index} className="flex items-start gap-2">
                               <Target className="w-4 h-4 mt-0.5 text-primary flex-shrink-0" />
                               <span>{point}</span>

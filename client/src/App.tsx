@@ -113,6 +113,15 @@ function Router() {
         </div>
       </Route>
 
+      <Route path="/ai-study-tools">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <AIStudyTools />
+          </div>
+        </div>
+      </Route>
+
       <Route component={NotFound} />
     </Switch>
   );
