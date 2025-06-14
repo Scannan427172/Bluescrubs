@@ -1196,19 +1196,40 @@ export default function PLAB1New() {
               </div>
             </div>
 
-            {/* Study Tip Section */}
+            {/* Study Tips Section with Medical Mnemonics */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-2 mb-3">
                 <Lightbulb className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
-                <div>
-                  <p className="text-sm font-medium text-blue-900 mb-2">{translateText('Study Tip')}</p>
-                  <p className="text-sm text-blue-800 leading-relaxed">
-                    Review the underlying pathophysiology and connect clinical presentations to diagnostic criteria.
-                  </p>
-                  <div className="mt-2">
-                    <p className="text-xs font-medium text-blue-900">Study Method:</p>
-                    <p className="text-xs text-blue-700">Use clinical scenarios to practice pattern recognition and differential diagnosis skills.</p>
-                  </div>
+                <div className="w-full">
+                  <p className="text-sm font-medium text-blue-900 mb-3">{translateText('Study Tips & Medical Mnemonics')}</p>
+                  
+                  {/* Display study tips from question data if available */}
+                  {currentQuestion.studyTips && currentQuestion.studyTips.length > 0 ? (
+                    <div className="space-y-3">
+                      {currentQuestion.studyTips.map((tip: any, index: number) => (
+                        <div key={index} className="bg-white border border-blue-200 rounded-lg p-3">
+                          <p className="text-sm font-semibold text-blue-900 mb-1">{tip.title}</p>
+                          <p className="text-sm text-blue-800 leading-relaxed">{tip.content}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    // Default study tips with common medical mnemonics
+                    <div className="space-y-3">
+                      <div className="bg-white border border-blue-200 rounded-lg p-3">
+                        <p className="text-sm font-semibold text-blue-900 mb-1">ECG Reading Mnemonic</p>
+                        <p className="text-sm text-blue-800">Remember "RATE, RHYTHM, AXIS, INTERVALS, ST-T": Check heart rate, rhythm regularity, electrical axis, PR/QRS/QT intervals, then ST segments and T waves</p>
+                      </div>
+                      <div className="bg-white border border-blue-200 rounded-lg p-3">
+                        <p className="text-sm font-semibold text-blue-900 mb-1">Heart Murmur Positions</p>
+                        <p className="text-sm text-blue-800">"All Physicians Take Money": Aortic (2nd right ICS), Pulmonary (2nd left ICS), Tricuspid (4th left ICS), Mitral (5th left MCL)</p>
+                      </div>
+                      <div className="bg-white border border-blue-200 rounded-lg p-3">
+                        <p className="text-sm font-semibold text-blue-900 mb-1">Acute Coronary Syndromes</p>
+                        <p className="text-sm text-blue-800">STEMI = ST elevation + troponin rise; NSTEMI = No ST elevation + troponin rise; Unstable angina = No troponin rise</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

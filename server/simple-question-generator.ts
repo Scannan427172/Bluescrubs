@@ -57,19 +57,33 @@ export function generateSimpleQuestion(
           "Pericarditis"
         ],
         correctAnswer: 1,
-        explanation: "Option B (NSTEMI) is CORRECT because ST depression in V3-V6 with elevated troponin definitively indicates Non-ST elevation myocardial infarction. ESC guidelines state this combination confirms myocardial necrosis without complete coronary occlusion, requiring urgent dual antiplatelet therapy and risk stratification.\n\nOption A (Unstable angina) is INCORRECT because elevated troponin rules out unstable angina by definition - unstable angina has normal troponin levels with ischemic symptoms but no myocardial necrosis.\n\nOption C (STEMI) is INCORRECT because ST depression (not elevation) is present. STEMI requires ST elevation ≥1mm in two contiguous leads or new LBBB, indicating complete coronary occlusion.\n\nOption D (Pericarditis) is INCORRECT because pericarditis typically shows widespread ST elevation with PR depression, not localized ST depression, and troponin is usually normal unless myopericarditis.",
+        explanation: "Option B (NSTEMI) is CORRECT because this clinical presentation fulfills the diagnostic criteria for Non-ST elevation myocardial infarction. The combination of typical ischemic chest pain, ST depression in the lateral leads (V3-V6), and elevated troponin indicates myocardial necrosis without complete coronary artery occlusion. ESC guidelines define NSTEMI as elevated cardiac biomarkers (troponin) with clinical evidence of myocardial ischemia but without persistent ST-elevation or new LBBB. This patient requires immediate antiplatelet therapy (aspirin + P2Y12 inhibitor), anticoagulation, and risk stratification for early invasive strategy within 24-72 hours depending on GRACE score.\n\nOption A (Unstable angina) is INCORRECT because elevated troponin definitively rules out unstable angina. By definition, unstable angina presents with acute coronary syndrome symptoms but has normal cardiac biomarkers. The presence of troponin elevation indicates myocardial cell death, which distinguishes NSTEMI from unstable angina. Both conditions may present with similar ECG changes (ST depression, T-wave inversion) but troponin is the key differentiator.\n\nOption C (STEMI) is INCORRECT because ST depression (not elevation) is present on the ECG. STEMI requires either ST elevation ≥1mm in two contiguous leads, new left bundle branch block, or posterior wall changes (tall R waves V1-V3 with ST depression). This patient shows horizontal ST depression in V3-V6, which is typical of subendocardial ischemia rather than transmural infarction. STEMI indicates complete coronary occlusion requiring immediate primary PCI, while NSTEMI represents partial occlusion managed with medical optimization and risk-stratified invasive approach.\n\nOption D (Pericarditis) is INCORRECT because the ECG pattern and clinical context are inconsistent with pericardial inflammation. Pericarditis typically shows widespread concave ST elevation with PR depression, particularly in leads I, II, aVL, aVF, and V2-V6. The chest pain is usually pleuritic, positional (worse lying down, better sitting forward), and accompanied by a pericardial friction rub. Troponin may be mildly elevated in myopericarditis but the localized ST depression in lateral leads strongly suggests coronary artery disease rather than pericardial pathology.",
         references: [
           {
-            text: "ESC 2020 NSTEMI Guidelines: 'NSTEMI diagnosis requires elevated cardiac troponins with clinical evidence of myocardial ischemia but without persistent ST-elevation'",
-            url: "https://academic.oup.com/eurheartj/article/41/4/407/5735677"
+            text: "ESC 2020 NSTEMI Guidelines Section 4.1: Diagnostic Criteria - 'NSTEMI requires elevated cardiac troponins with ischemic symptoms but no persistent ST-elevation on ECG'",
+            url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Acute-Coronary-Syndromes-in-patients-presenting-without-persistent-ST-segment-elevation"
           },
           {
-            text: "NICE CG94: Unstable angina and NSTEMI - Section 1.2.1 'Troponin elevation above 99th percentile indicates myocardial necrosis and rules out unstable angina'",
-            url: "https://www.nice.org.uk/guidance/cg94"
+            text: "NICE CG94 Section 1.2.1: Biomarker Interpretation - 'Troponin >99th percentile upper reference limit confirms myocardial necrosis and excludes unstable angina'",
+            url: "https://www.nice.org.uk/guidance/cg94/chapter/1-Guidance#initial-assessment-in-hospital"
           },
           {
-            text: "Fourth Universal Definition of MI (2018): 'ST depression ≥0.5mm in V3-V6 with troponin rise indicates NSTEMI - European Heart Journal 40:237-269'",
-            url: "https://academic.oup.com/eurheartj/article/40/3/237/5079081"
+            text: "Fourth Universal Definition MI 2018 Table 1: ECG Criteria - 'Horizontal/downsloping ST depression ≥0.5mm in ≥2 contiguous leads indicates subendocardial ischemia'",
+            url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Universal-Definition-of-Myocardial-Infarction"
+          }
+        ],
+        studyTips: [
+          {
+            title: "ACS Differentiation Mnemonic",
+            content: "Remember 'STUN': STEMI = ST elevation, Troponin +; Unstable angina = Normal troponin; NSTEMI = No ST elevation, Troponin +"
+          },
+          {
+            title: "ECG Lead Territories",
+            content: "Lateral wall (V3-V6): Left circumflex or diagonal arteries. Remember 'V3-V6 = LCX disease' for lateral NSTEMI"
+          },
+          {
+            title: "NSTEMI Management Timeline",
+            content: "GRACE score determines timing: High risk (>140) = invasive within 24h, Intermediate (109-140) = 72h, Low (<109) = conservative"
           }
         ]
       }
@@ -84,19 +98,33 @@ export function generateSimpleQuestion(
           "PET scan"
         ],
         correctAnswer: 1,
-        explanation: "CT chest with contrast is the next appropriate step to characterize the lung mass, assess for mediastinal involvement, and guide further management including staging and biopsy approach.",
+        explanation: "Option B (CT chest with contrast) is CORRECT as the next most appropriate investigation for suspected lung cancer. This 45-year-old smoker presents with the classic triad of persistent cough, weight loss, and hemoptysis lasting >3 weeks with a peripheral lung mass on chest X-ray - all red flag symptoms requiring urgent investigation. NICE guidelines mandate urgent CT chest within 2 weeks for adults with chest X-ray findings suggestive of lung cancer. CT chest with IV contrast provides detailed characterization of the mass (size, density, enhancement pattern), assesses for mediastinal lymphadenopathy, evaluates for distant metastases (liver, adrenals, bones), and guides optimal biopsy approach (transthoracic vs bronchoscopic vs mediastinoscopy).\n\nOption A (Sputum cytology) is INCORRECT as initial investigation. While sputum cytology may identify malignant cells, it has low sensitivity (40-60%) especially for peripheral lesions, provides no staging information, and significantly delays definitive diagnosis. Current guidelines recommend proceeding directly to CT imaging for suspected lung cancer rather than relying on sputum studies.\n\nOption C (Bronchoscopy) is INCORRECT as the immediate next step. Although bronchoscopy with endobronchial biopsy is essential for tissue diagnosis, it should be performed after CT chest to determine the optimal approach. For peripheral lesions, CT-guided transthoracic biopsy often provides better diagnostic yield than bronchoscopy. The CT findings will determine whether bronchoscopy, EBUS-TBNA, or surgical biopsy is most appropriate.\n\nOption D (PET scan) is INCORRECT at this stage. PET-CT is valuable for staging confirmed lung cancer, particularly for assessing distant metastases and determining operability, but it should not be performed before basic staging CT chest. PET scanning is typically reserved for potentially operable patients after initial CT assessment and tissue confirmation.",
         references: [
           {
-            text: "NICE NG12: Suspected cancer recognition and referral - Section 1.3.1 'Offer urgent CT chest for adults with chest X-ray findings that suggest lung cancer'",
-            url: "https://www.nice.org.uk/guidance/ng12"
+            text: "NICE NG12 Section 1.3.1: Chest X-ray Findings - 'Offer urgent CT chest (within 2 weeks) for adults with chest X-ray findings that suggest lung cancer'",
+            url: "https://www.nice.org.uk/guidance/ng12/chapter/1-Recommendations#recognition-and-referral"
           },
           {
-            text: "British Thoracic Society Guidelines: 'CT chest with contrast is first-line imaging for suspected lung cancer to assess tumor size, location, and mediastinal involvement'",
-            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/"
+            text: "British Thoracic Society Guidelines Section 3.2: Initial Investigation - 'Contrast-enhanced CT chest is mandatory first-line imaging for all suspected lung cancers'",
+            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/lung-cancer/"
           },
           {
-            text: "NCCN Lung Cancer Guidelines v3.2023: 'Contrast-enhanced CT chest recommended for initial staging of suspected lung malignancy'",
-            url: "https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1450"
+            text: "NCCN Lung Cancer Guidelines Section NSCL-4: Workup - 'CT chest with IV contrast recommended for initial staging before tissue sampling'",
+            url: "https://www.nccn.org/professionals/physician_gls/pdf/nscl.pdf"
+          }
+        ],
+        studyTips: [
+          {
+            title: "Lung Cancer Red Flags Mnemonic",
+            content: "Remember 'WHOOPS': Weight loss, Hemoptysis, Ongoing cough >3 weeks, Over 40 years + smoking, Peripheral mass, Systemic symptoms"
+          },
+          {
+            title: "CT vs Other Imaging",
+            content: "CT chest = staging and characterization; PET scan = distant mets in operable patients; Bronchoscopy = tissue diagnosis after CT planning"
+          },
+          {
+            title: "Investigation Sequence",
+            content: "Suspected lung cancer pathway: CXR → CT chest → Tissue sampling → PET if operable → MDT discussion → Treatment plan"
           }
         ]
       },
@@ -109,19 +137,33 @@ export function generateSimpleQuestion(
           "Pleural effusion"
         ],
         correctAnswer: 2,
-        explanation: "Sudden onset breathlessness and pleuritic pain in a tall, thin young man with absent lung markings suggests spontaneous pneumothorax, which is more common in this demographic.",
+        explanation: "Option C (Spontaneous pneumothorax) is CORRECT because this clinical presentation is pathognomonic for primary spontaneous pneumothorax. The patient fits the classic demographic: tall, thin, young male (20-40 years) with sudden onset severe breathlessness and pleuritic chest pain. The chest X-ray finding of absent lung markings on the right side with visible pleural edge confirms pneumothorax. Primary spontaneous pneumothorax has a male:female ratio of 6:1 and occurs due to rupture of subpleural blebs (small air cysts) at the lung apex. Risk factors include tall stature (>6 feet), low BMI, smoking, and Marfan syndrome. The condition typically presents during rest or minimal exertion rather than strenuous activity.\n\nOption A (Pulmonary embolism) is INCORRECT because while PE can cause sudden breathlessness and pleuritic pain, it doesn't cause absent lung markings on chest X-ray. PE typically shows normal chest X-ray in 50% of cases, or may demonstrate atelectasis, pleural effusion, or Hampton's hump (wedge-shaped opacity). The demographic doesn't fit typical PE risk factors (immobilization, surgery, malignancy, pregnancy).\n\nOption B (Pneumonia) is INCORRECT because pneumonia would show consolidation (increased opacity) rather than absent lung markings on chest X-ray. Pneumonia typically presents with productive cough, fever, purulent sputum, and consolidation with air bronchograms on imaging. The acute onset without systemic symptoms makes pneumonia unlikely.\n\nOption D (Pleural effusion) is INCORRECT because pleural effusion appears as increased opacity (fluid density) at the lung base with meniscus sign and costophrenic angle blunting. Large effusions cause mediastinal shift away from the affected side. Absent lung markings indicate air in the pleural space (pneumothorax) rather than fluid accumulation.",
         references: [
           {
-            text: "BTS Pleural Disease Guidelines 2010: 'Primary spontaneous pneumothorax occurs in tall, thin young males (male:female ratio 6:1) aged 20-40 years'",
-            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pleural-disease/"
+            text: "BTS Pleural Disease Guidelines Section 2.1: Primary Pneumothorax - 'Occurs in tall, thin young males aged 20-40 years with male:female ratio 6:1'",
+            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pleural-disease/#section-2"
           },
           {
-            text: "NICE CKS Pneumothorax: 'Chest X-ray shows absent lung markings and visible pleural edge in pneumothorax'",
-            url: "https://cks.nice.org.uk/topics/pneumothorax/"
+            text: "NICE CKS Pneumothorax Section 'Recognition': 'Chest X-ray shows absent lung markings and visible pleural edge separating visceral from parietal pleura'",
+            url: "https://cks.nice.org.uk/topics/pneumothorax/diagnosis/recognition/"
           },
           {
-            text: "Thorax 2010;65:ii18-ii31: 'Primary pneumothorax incidence 18-28 per 100,000 in tall men vs 1.2-6 per 100,000 in women'",
-            url: "https://thorax.bmj.com/content/65/Suppl_2/ii18"
+            text: "Thorax 2010 Section 3.2 Epidemiology: 'Primary pneumothorax incidence 18-28 per 100,000 in tall men vs 1.2-6 per 100,000 in women'",
+            url: "https://thorax.bmj.com/content/65/Suppl_2/ii18#sec-3-2"
+          }
+        ],
+        studyTips: [
+          {
+            title: "Pneumothorax Patient Profile",
+            content: "Remember 'TALL THIN MALES': Tall stature, Thin build, Males 20-40 years, Associated with smoking, Low BMI, Exercise triggers minimal, Sudden onset"
+          },
+          {
+            title: "Chest X-ray Interpretation",
+            content: "Pneumothorax = absent lung markings + visible pleural edge; Effusion = increased opacity + meniscus; Consolidation = air bronchograms"
+          },
+          {
+            title: "Primary vs Secondary",
+            content: "Primary = young healthy patients, no underlying lung disease; Secondary = older patients with COPD, asthma, ILD. Treatment differs!"
           }
         ]
       }
