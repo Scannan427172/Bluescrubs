@@ -4,9 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import { 
   Video, Play, Square, RotateCcw, Clock, Users, Target,
-  MessageCircle, CheckCircle, AlertCircle
+  MessageCircle, CheckCircle, AlertCircle, Volume2, Languages, 
+  Mic, MicOff, Globe
 } from "lucide-react";
 
 export default function VideoOsce() {
@@ -31,6 +34,40 @@ export default function VideoOsce() {
     supportsWebRTC: false
   });
   const [cameraReady, setCameraReady] = useState(false);
+  
+  // Multilingual state
+  const [translationMode, setTranslationMode] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [translatedContent, setTranslatedContent] = useState<any>(null);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // Language options with flags and names
+  const languageOptions = [
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+    { code: 'ur', name: 'اردو', flag: '🇵🇰' },
+    { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
+    { code: 'bn', name: 'বাংলা', flag: '🇧🇩' },
+    { code: 'ta', name: 'தமிழ்', flag: '🇱🇰' },
+    { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+    { code: 'pt', name: 'Português', flag: '🇵🇹' },
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+    { code: 'pl', name: 'Polski', flag: '🇵🇱' },
+    { code: 'ro', name: 'Română', flag: '🇷🇴' },
+    { code: 'zh', name: '中文', flag: '🇨🇳' },
+    { code: 'ja', name: '日本語', flag: '🇯🇵' },
+    { code: 'ko', name: '한국어', flag: '🇰🇷' },
+    { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+    { code: 'fa', name: 'فارسی', flag: '🇮🇷' },
+    { code: 'he', name: 'עברית', flag: '🇮🇱' },
+    { code: 'th', name: 'ไทย', flag: '🇹🇭' },
+    { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
+    { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩' }
+  ];
   
   // Enhanced device detection on component mount
   useEffect(() => {
@@ -126,6 +163,80 @@ export default function VideoOsce() {
 
   const categories = ["All", "History Taking", "Communication", "Examination"];
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Translation and voice synthesis functions
+  const translateStation = async (station: any) => {
+    if (selectedLanguage === 'en' || !translationMode) return station;
+    
+    setIsTranslating(true);
+    try {
+      const response = await fetch('/api/translate/video-station', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ station, targetLanguage: selectedLanguage })
+      });
+
+      if (!response.ok) throw new Error('Translation failed');
+      
+      const translated = await response.json();
+      setTranslatedContent(translated);
+      return translated;
+    } catch (error) {
+      console.error('Translation error:', error);
+      return station;
+    } finally {
+      setIsTranslating(false);
+    }
+  };
+
+  const speakText = async (text: string) => {
+    if (isSpeaking) {
+      speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
+    setIsSpeaking(true);
+    
+    try {
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+      // Enhanced voice settings for natural speech
+      utterance.rate = 0.85;
+      utterance.pitch = 1.0;
+      utterance.volume = 0.9;
+      
+      // Language matching
+      const languageMap: Record<string, string> = {
+        'ar': 'ar-SA', 'ur': 'ur-PK', 'hi': 'hi-IN', 'bn': 'bn-BD',
+        'ta': 'ta-IN', 'es': 'es-ES', 'fr': 'fr-FR', 'de': 'de-DE',
+        'it': 'it-IT', 'pt': 'pt-PT', 'ru': 'ru-RU', 'pl': 'pl-PL',
+        'ro': 'ro-RO', 'zh': 'zh-CN', 'ja': 'ja-JP', 'ko': 'ko-KR',
+        'tr': 'tr-TR', 'fa': 'fa-IR', 'he': 'he-IL', 'th': 'th-TH',
+        'vi': 'vi-VN', 'id': 'id-ID', 'en': 'en-GB'
+      };
+      
+      utterance.lang = languageMap[selectedLanguage] || 'en-GB';
+      
+      // Find appropriate voice
+      const voices = speechSynthesis.getVoices();
+      const preferredVoice = voices.find(voice => 
+        voice.lang.startsWith(utterance.lang.split('-')[0])
+      );
+      
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
+      }
+      
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      
+      speechSynthesis.speak(utterance);
+    } catch (error) {
+      console.error('Speech synthesis error:', error);
+      setIsSpeaking(false);
+    }
+  };
 
   const filteredStations = videoStations.filter(station => 
     selectedCategory === "All" || station.category === selectedCategory
@@ -720,6 +831,51 @@ export default function VideoOsce() {
             </div>
           </div>
         ) : (
+          <div>
+          {/* Multilingual Controls */}
+          <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+            <CardContent className="p-4">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center space-x-2">
+                  <Globe className="h-4 w-4 text-blue-600" />
+                  <Label htmlFor="translation-toggle" className="text-sm font-medium">
+                    Translation Mode
+                  </Label>
+                  <Switch
+                    id="translation-toggle"
+                    checked={translationMode}
+                    onCheckedChange={setTranslationMode}
+                  />
+                </div>
+                
+                {translationMode && (
+                  <div className="flex items-center space-x-2">
+                    <Languages className="h-4 w-4 text-purple-600" />
+                    <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                      <SelectTrigger className="w-48">
+                        <SelectValue placeholder="Select Language" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {languageOptions.map((lang) => (
+                          <SelectItem key={lang.code} value={lang.code}>
+                            <span className="flex items-center gap-2">
+                              <span>{lang.flag}</span>
+                              <span>{lang.name}</span>
+                            </span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+                
+                <div className="text-xs text-gray-500 bg-white px-2 py-1 rounded">
+                  23 languages supported with voice synthesis
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           <Tabs defaultValue="stations" className="space-y-6">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="stations">Practice Stations</TabsTrigger>
@@ -771,6 +927,19 @@ export default function VideoOsce() {
                           <Users className="w-4 h-4" />
                           <span>{station.attempts} attempts</span>
                         </div>
+                        {translationMode && selectedLanguage !== 'en' && (
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              speakText(station.title + '. ' + station.description);
+                            }}
+                            className="h-8 w-8 p-0 hover:bg-blue-100"
+                          >
+                            <Volume2 className={`w-4 h-4 ${isSpeaking ? 'text-blue-600' : 'text-gray-500'}`} />
+                          </Button>
+                        )}
                       </div>
                       
                       <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
