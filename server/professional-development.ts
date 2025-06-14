@@ -1,606 +1,577 @@
-// Professional Development Tools for PLAB Preparation
-// CV builder, interview preparation, foundation programme guidance, and specialty training pathways
+import OpenAI from 'openai';
 
-export interface CVProfile {
-  userId: number;
-  personalDetails: {
-    fullName: string;
-    email: string;
-    phone: string;
-    address: string;
-    gmc_number?: string;
-    right_to_work: boolean;
-  };
-  education: {
-    medicalDegree: {
-      institution: string;
-      country: string;
-      graduationYear: number;
-      classification: string;
-    };
-    additionalQualifications: {
-      qualification: string;
-      institution: string;
-      year: number;
-    }[];
-  };
-  experience: {
-    clinicalExperience: {
-      position: string;
-      hospital: string;
-      department: string;
-      startDate: Date;
-      endDate: Date;
-      responsibilities: string[];
-      achievements: string[];
-    }[];
-    research: {
-      title: string;
-      role: string;
-      institution: string;
-      year: number;
-      publications: boolean;
-    }[];
-    teaching: {
-      role: string;
-      institution: string;
-      duration: string;
-      description: string;
-    }[];
-  };
-  skills: {
-    languages: {
-      language: string;
-      proficiency: 'basic' | 'intermediate' | 'advanced' | 'native';
-      certified: boolean;
-    }[];
-    technical: string[];
-    clinical: string[];
-  };
-  achievements: {
-    awards: string[];
-    publications: string[];
-    presentations: string[];
-    certifications: string[];
-  };
-  references: {
-    name: string;
-    position: string;
-    institution: string;
-    email: string;
-    phone: string;
-    relationship: string;
-  }[];
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+// Professional Development System
+export interface ARCPPortfolio {
+  userId: string;
+  stage: 'foundation' | 'core' | 'specialty';
+  year: number;
+  competencies: Competency[];
+  assessments: Assessment[];
+  reflections: Reflection[];
+  evidence: Evidence[];
+  supervisorFeedback: SupervisorFeedback[];
+  learningAgreements: LearningAgreement[];
+  auditProjects: AuditProject[];
+  researchActivities: ResearchActivity[];
+  qualityImprovementProjects: QIProject[];
+  teachingActivities: TeachingActivity[];
+  progressStatus: 'on-track' | 'concern' | 'inadequate';
+  nextARCPDate: Date;
 }
 
-export interface InterviewPreparation {
-  userId: number;
-  targetPosition: 'foundation_year_1' | 'foundation_year_2' | 'specialty_training' | 'locum' | 'trust_grade';
-  preparationModules: {
-    id: string;
-    title: string;
-    category: 'behavioral' | 'clinical' | 'scenario' | 'portfolio';
-    questions: {
-      question: string;
-      type: 'standard' | 'competency' | 'scenario';
-      suggestedStructure: string;
-      sampleAnswer: string;
-      tips: string[];
-    }[];
-    completed: boolean;
-    score?: number;
-  }[];
-  mockInterviews: {
-    id: string;
-    date: Date;
-    duration: number;
-    interviewer: string;
-    feedback: string;
-    score: number;
-    improvementAreas: string[];
-  }[];
+export interface Competency {
+  id: string;
+  domain: string;
+  competencyStatement: string;
+  evidenceRequired: string[];
+  currentLevel: 'not-started' | 'developing' | 'meets-expectations' | 'excellent';
+  evidenceCount: number;
+  lastUpdated: Date;
+  supervisorSign off: boolean;
+  gmcOutcomes: string[];
 }
 
-export interface FoundationProgramme {
-  applicationCycle: string;
-  keyDates: {
-    applicationOpen: Date;
-    applicationDeadline: Date;
-    situationalJudgementTest: Date;
-    preferenceDeadline: Date;
-    allocationResults: Date;
+export interface Assessment {
+  id: string;
+  type: 'DOPS' | 'Mini-CEX' | 'CbD' | 'MSF' | 'ACAT' | 'Mini-PAT';
+  date: Date;
+  assessor: string;
+  setting: string;
+  focus: string;
+  competenciesAssessed: string[];
+  scores: Record<string, number>;
+  strengths: string[];
+  areasForDevelopment: string[];
+  actionPlan: string;
+  overallGrade: number;
+  feedback: string;
+}
+
+export interface Reflection {
+  id: string;
+  date: Date;
+  trigger: 'patient-encounter' | 'feedback' | 'learning-event' | 'critical-incident';
+  description: string;
+  analysisFramework: 'gibbs' | 'johns' | 'kolb' | 'borton';
+  reflection: {
+    whatHappened: string;
+    thoughtsAndFeelings: string;
+    evaluation: string;
+    analysis: string;
+    conclusion: string;
+    actionPlan: string;
   };
-  requirements: {
-    plabStatus: 'plab1_passed' | 'plab2_passed' | 'both_passed';
-    englishTest: 'ielts' | 'oet' | 'pte' | 'cambridge';
-    minimumScore: number;
-    additionalRequirements: string[];
-  };
-  deaneries: {
-    name: string;
-    region: string;
-    competitiveness: 'low' | 'medium' | 'high';
-    averageScore: number;
-    specialties: string[];
-    lifestyle: {
-      costOfLiving: 'low' | 'medium' | 'high';
-      transport: string;
-      amenities: string[];
-    };
-  }[];
-  scoringSystem: {
-    academicAchievements: number;
-    additionalDegrees: number;
-    publications: number;
-    presentations: number;
-    prizes: number;
-    intercalatedDegree: number;
-    sitScore: number;
+  learningOutcomes: string[];
+  competenciesAddressed: string[];
+  evidence: string[];
+}
+
+export interface Evidence {
+  id: string;
+  type: 'assessment' | 'certificate' | 'reflection' | 'audit' | 'research' | 'teaching' | 'feedback';
+  title: string;
+  description: string;
+  date: Date;
+  competenciesSupported: string[];
+  file: string;
+  verified: boolean;
+  supervisor: string;
+}
+
+export interface ContinuingEducation {
+  id: string;
+  type: 'formal-course' | 'conference' | 'workshop' | 'e-learning' | 'journal-club' | 'simulation';
+  title: string;
+  provider: string;
+  duration: number;
+  cpdPoints: number;
+  date: Date;
+  learningObjectives: string[];
+  competenciesAddressed: string[];
+  reflection: string;
+  impact: string;
+  certificates: string[];
+}
+
+export interface NetworkConnection {
+  id: string;
+  name: string;
+  role: string;
+  specialty: string;
+  institution: string;
+  connectionType: 'mentor' | 'peer' | 'supervisor' | 'colleague' | 'senior-doctor';
+  established: Date;
+  interactions: NetworkInteraction[];
+  availability: {
+    mentoring: boolean;
+    careerAdvice: boolean;
+    researchCollaboration: boolean;
+    referenceProvider: boolean;
   };
 }
 
-export interface SpecialtyTraining {
-  specialties: {
-    name: string;
-    overview: string;
-    duration: number;
-    competitiveness: number;
-    averageApplicationsPerPost: number;
-    entryRequirements: {
-      foundationProgramme: boolean;
-      coreTraining: boolean;
-      examinations: string[];
-      experience: string[];
-      research: boolean;
-    };
-    selectionCriteria: {
-      interviews: boolean;
-      portfolio: boolean;
-      examinations: string[];
-      msra: boolean;
-    };
-    careerPathways: {
-      consultantPosts: number;
-      averageSalary: number;
-      workLifeBalance: number;
-      privateOpportunities: boolean;
-    };
-    trainingCentres: {
-      deanery: string;
-      hospital: string;
-      reputation: number;
-      researchOpportunities: boolean;
-    }[];
-  }[];
+export interface NetworkInteraction {
+  date: Date;
+  type: 'meeting' | 'email' | 'call' | 'informal-chat' | 'formal-supervision';
+  topic: string;
+  outcome: string;
+  nextActions: string[];
 }
 
-export class ProfessionalDevelopmentEngine {
-  
-  // CV builder with NHS-specific requirements
-  async buildNHSCV(profile: CVProfile): Promise<{
-    formattedCV: string;
-    nhsCompliance: boolean;
-    improvementSuggestions: string[];
-    missingElements: string[];
-  }> {
-    
-    const improvementSuggestions: string[] = [];
-    const missingElements: string[] = [];
-    
-    // Check NHS-specific requirements
-    if (!profile.personalDetails.gmc_number) {
-      missingElements.push('GMC registration number');
-    }
-    
-    if (!profile.personalDetails.right_to_work) {
-      missingElements.push('Right to work status confirmation');
-    }
-    
-    if (profile.experience.clinicalExperience.length === 0) {
-      missingElements.push('Clinical experience details');
-    }
-    
-    if (profile.skills.languages.length === 0) {
-      missingElements.push('Language proficiency details');
-    }
-    
-    if (profile.references.length < 2) {
-      missingElements.push('At least 2 professional references');
-    }
-    
-    // Generate improvement suggestions
-    if (profile.achievements.publications.length === 0) {
-      improvementSuggestions.push('Consider adding research publications to strengthen your application');
-    }
-    
-    if (profile.experience.teaching.length === 0) {
-      improvementSuggestions.push('Include teaching experience to demonstrate educational engagement');
-    }
-    
-    if (!profile.skills.languages.some(lang => lang.language === 'English' && lang.certified)) {
-      improvementSuggestions.push('Ensure English language certification (IELTS/OET) is documented');
-    }
-    
-    const formattedCV = this.generateCVFormat(profile);
-    const nhsCompliance = missingElements.length === 0;
-    
-    return {
-      formattedCV,
-      nhsCompliance,
-      improvementSuggestions,
-      missingElements
-    };
-  }
+export interface CareerPathway {
+  specialty: string;
+  currentStage: string;
+  targetStage: string;
+  timeline: CareerMilestone[];
+  requirements: PathwayRequirement[];
+  competitionRatio: number;
+  salaryProgression: SalaryBand[];
+  workLifeBalance: {
+    typicalHours: string;
+    onCallFrequency: string;
+    flexibilityOptions: string[];
+    familyFriendly: boolean;
+  };
+  geographicalConsiderations: {
+    availability: Record<string, number>;
+    competitiveRegions: string[];
+    lessCompetitiveOptions: string[];
+  };
+}
 
-  // Interview preparation system
-  async generateInterviewPreparation(
-    targetPosition: string,
-    userBackground: any
-  ): Promise<InterviewPreparation> {
-    
-    const preparationModules = [
-      {
-        id: 'behavioral',
-        title: 'Behavioral Interview Questions',
-        category: 'behavioral' as const,
-        questions: [
+export interface CareerMilestone {
+  stage: string;
+  timeframe: string;
+  requirements: string[];
+  competencies: string[];
+  assessments: string[];
+  typicalChallenges: string[];
+  successFactors: string[];
+}
+
+export interface PathwayRequirement {
+  type: 'examination' | 'competency' | 'research' | 'audit' | 'teaching' | 'leadership';
+  description: string;
+  timeline: string;
+  preparationTime: string;
+  passingRate: number;
+  resources: string[];
+}
+
+export interface QualityMetric {
+  metric: string;
+  current: number;
+  target: number;
+  benchmark: number;
+  trend: 'improving' | 'stable' | 'declining';
+  timeframe: string;
+}
+
+export class ProfessionalDevelopmentSystem {
+  // ARCP Portfolio Builder
+  async generatePortfolioTemplate(stage: string, specialty: string, year: number): Promise<ARCPPortfolio> {
+    const prompt = `Generate a comprehensive ARCP portfolio template for a UK medical trainee.
+
+Training Stage: ${stage}
+Specialty: ${specialty}
+Training Year: ${year}
+
+Create a portfolio template that includes:
+1. Required competencies for this stage and specialty
+2. Assessment framework and requirements
+3. Evidence collection guidelines
+4. Reflection templates and frameworks
+5. Learning agreement structure
+6. Audit and QI project expectations
+7. Teaching and research requirements
+8. Timeline and milestone planning
+
+Base this on current GMC standards and Royal College requirements for ${specialty}.`;
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
           {
-            question: 'Tell me about a time when you had to work under pressure',
-            type: 'competency' as const,
-            suggestedStructure: 'STAR method: Situation, Task, Action, Result',
-            sampleAnswer: 'During my clinical rotation in emergency medicine, we had multiple critical patients arrive simultaneously...',
-            tips: [
-              'Use specific examples from clinical experience',
-              'Demonstrate learning and reflection',
-              'Show how you maintained patient safety'
-            ]
+            role: "system",
+            content: "You are a UK medical education expert specializing in postgraduate training portfolios and ARCP requirements. Provide accurate, current guidance based on GMC and Royal College standards."
           },
           {
-            question: 'Describe a situation where you had to work in a team',
-            type: 'competency' as const,
-            suggestedStructure: 'Focus on collaboration, communication, and shared goals',
-            sampleAnswer: 'While working on a complex patient case, our multidisciplinary team needed to coordinate care...',
-            tips: [
-              'Highlight your specific contribution',
-              'Show respect for other team members',
-              'Demonstrate effective communication'
-            ]
+            role: "user",
+            content: prompt
           }
         ],
-        completed: false
-      },
-      {
-        id: 'clinical',
-        title: 'Clinical Scenarios',
-        category: 'clinical' as const,
-        questions: [
+        response_format: { type: "json_object" },
+        temperature: 0.3
+      });
+
+      const portfolioData = JSON.parse(response.choices[0].message.content || '{}');
+      return this.parsePortfolioTemplate(portfolioData, stage, specialty, year);
+    } catch (error) {
+      console.error('Error generating portfolio template:', error);
+      throw new Error('Failed to generate portfolio template');
+    }
+  }
+
+  // Continuing Education Recommendations
+  async recommendContinuingEducation(
+    currentStage: string,
+    specialty: string,
+    learningNeeds: string[],
+    timeConstraints: any
+  ): Promise<ContinuingEducation[]> {
+    const prompt = `Recommend continuing education opportunities for a UK medical trainee.
+
+Current Stage: ${currentStage}
+Specialty: ${specialty}
+Learning Needs: ${JSON.stringify(learningNeeds)}
+Time Constraints: ${JSON.stringify(timeConstraints)}
+
+Recommend education that:
+1. Addresses specific learning needs and gaps
+2. Fits within time and geographical constraints
+3. Provides appropriate CPD points
+4. Supports portfolio development
+5. Enhances career prospects in ${specialty}
+
+Include a mix of:
+- Formal courses and qualifications
+- Conferences and symposiums
+- Online learning platforms
+- Simulation and practical workshops
+- Research and audit opportunities
+- Teaching and leadership development
+
+Provide specific providers, dates, costs, and registration details where possible.`;
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
           {
-            question: 'How would you manage a patient with chest pain in A&E?',
-            type: 'scenario' as const,
-            suggestedStructure: 'ABCDE approach, history, examination, investigations, management',
-            sampleAnswer: 'I would start with an ABCDE assessment to ensure the patient is stable...',
-            tips: [
-              'Follow systematic approach',
-              'Consider differential diagnoses',
-              'Discuss when to seek senior help'
-            ]
+            role: "system",
+            content: "You are a medical education advisor with extensive knowledge of UK continuing education opportunities, CPD requirements, and professional development pathways."
+          },
+          {
+            role: "user",
+            content: prompt
           }
         ],
-        completed: false
-      },
-      {
-        id: 'portfolio',
-        title: 'Portfolio Discussion',
-        category: 'portfolio' as const,
-        questions: [
-          {
-            question: 'Tell me about your most significant learning experience',
-            type: 'standard' as const,
-            suggestedStructure: 'Describe experience, learning outcomes, and future application',
-            sampleAnswer: 'During my medical degree, I encountered a patient with a rare condition...',
-            tips: [
-              'Choose meaningful experiences',
-              'Demonstrate reflection and insight',
-              'Connect to future practice'
-            ]
-          }
-        ],
-        completed: false
-      }
-    ];
-    
-    return {
-      userId: userBackground.userId,
-      targetPosition,
-      preparationModules,
-      mockInterviews: []
-    };
+        response_format: { type: "json_object" },
+        temperature: 0.4
+      });
+
+      const educationData = JSON.parse(response.choices[0].message.content || '{}');
+      return this.parseContinuingEducation(educationData);
+    } catch (error) {
+      console.error('Error recommending continuing education:', error);
+      return [];
+    }
   }
 
-  // Foundation programme guidance
-  async getFoundationProgrammeGuidance(
-    applicationYear: number
-  ): Promise<FoundationProgramme> {
-    
-    const currentCycle = `${applicationYear}/${applicationYear + 1}`;
-    
-    return {
-      applicationCycle: currentCycle,
-      keyDates: {
-        applicationOpen: new Date(`${applicationYear}-08-01`),
-        applicationDeadline: new Date(`${applicationYear}-10-15`),
-        situationalJudgementTest: new Date(`${applicationYear}-11-30`),
-        preferenceDeadline: new Date(`${applicationYear}-12-15`),
-        allocationResults: new Date(`${applicationYear + 1}-03-15`)
-      },
-      requirements: {
-        plabStatus: 'both_passed',
-        englishTest: 'ielts',
-        minimumScore: 7.0,
-        additionalRequirements: [
-          'GMC registration with licence to practise',
-          'Right to work in the UK',
-          'Occupational health clearance',
-          'DBS check',
-          'Hepatitis B immunity'
-        ]
-      },
-      deaneries: [
-        {
-          name: 'London',
-          region: 'London',
-          competitiveness: 'high',
-          averageScore: 48.5,
-          specialties: ['Emergency Medicine', 'Surgery', 'Medicine', 'Paediatrics', 'Psychiatry', 'General Practice'],
-          lifestyle: {
-            costOfLiving: 'high',
-            transport: 'Excellent public transport',
-            amenities: ['World-class hospitals', 'Research opportunities', 'Cultural activities']
-          }
-        },
-        {
-          name: 'Northern',
-          region: 'North East England',
-          competitiveness: 'medium',
-          averageScore: 42.0,
-          specialties: ['Medicine', 'Surgery', 'General Practice', 'Paediatrics'],
-          lifestyle: {
-            costOfLiving: 'low',
-            transport: 'Good local transport',
-            amenities: ['Affordable housing', 'Close-knit community', 'Good work-life balance']
-          }
-        },
-        {
-          name: 'Scotland',
-          region: 'Scotland',
-          competitiveness: 'medium',
-          averageScore: 44.2,
-          specialties: ['Emergency Medicine', 'Medicine', 'Surgery', 'General Practice', 'Psychiatry'],
-          lifestyle: {
-            costOfLiving: 'medium',
-            transport: 'Good public transport in cities',
-            amenities: ['Beautiful scenery', 'Strong medical training', 'Research opportunities']
-          }
-        }
-      ],
-      scoringSystem: {
-        academicAchievements: 50,
-        additionalDegrees: 5,
-        publications: 2,
-        presentations: 1,
-        prizes: 2,
-        intercalatedDegree: 5,
-        sitScore: 50
-      }
-    };
-  }
-
-  // Specialty training pathway guidance
-  async getSpecialtyGuidance(): Promise<SpecialtyTraining> {
-    
-    return {
-      specialties: [
-        {
-          name: 'Emergency Medicine',
-          overview: 'Acute medical care in emergency departments',
-          duration: 6,
-          competitiveness: 8,
-          averageApplicationsPerPost: 5.2,
-          entryRequirements: {
-            foundationProgramme: true,
-            coreTraining: false,
-            examinations: ['MRCEM Part A'],
-            experience: ['Emergency department experience', 'Acute medicine'],
-            research: false
-          },
-          selectionCriteria: {
-            interviews: true,
-            portfolio: true,
-            examinations: ['MRCEM Part A'],
-            msra: false
-          },
-          careerPathways: {
-            consultantPosts: 850,
-            averageSalary: 95000,
-            workLifeBalance: 6,
-            privateOpportunities: false
-          },
-          trainingCentres: [
-            {
-              deanery: 'London',
-              hospital: 'St Bartholomews Hospital',
-              reputation: 9,
-              researchOpportunities: true
-            }
-          ]
-        },
-        {
-          name: 'General Practice',
-          overview: 'Primary care medicine in community settings',
-          duration: 3,
-          competitiveness: 6,
-          averageApplicationsPerPost: 2.8,
-          entryRequirements: {
-            foundationProgramme: true,
-            coreTraining: false,
-            examinations: [],
-            experience: ['Primary care experience preferred'],
-            research: false
-          },
-          selectionCriteria: {
-            interviews: true,
-            portfolio: true,
-            examinations: [],
-            msra: true
-          },
-          careerPathways: {
-            consultantPosts: 12500,
-            averageSalary: 85000,
-            workLifeBalance: 8,
-            privateOpportunities: true
-          },
-          trainingCentres: [
-            {
-              deanery: 'Various',
-              hospital: 'Community practices',
-              reputation: 8,
-              researchOpportunities: true
-            }
-          ]
-        },
-        {
-          name: 'Internal Medicine',
-          overview: 'Comprehensive medical care for adult patients',
-          duration: 7,
-          competitiveness: 7,
-          averageApplicationsPerPost: 3.5,
-          entryRequirements: {
-            foundationProgramme: true,
-            coreTraining: true,
-            examinations: ['MRCP Part 1'],
-            experience: ['Medical rotations', 'Acute medicine'],
-            research: true
-          },
-          selectionCriteria: {
-            interviews: true,
-            portfolio: true,
-            examinations: ['MRCP Part 1'],
-            msra: false
-          },
-          careerPathways: {
-            consultantPosts: 2500,
-            averageSalary: 105000,
-            workLifeBalance: 7,
-            privateOpportunities: true
-          },
-          trainingCentres: [
-            {
-              deanery: 'London',
-              hospital: 'Imperial College Healthcare',
-              reputation: 9,
-              researchOpportunities: true
-            }
-          ]
-        }
-      ]
-    };
-  }
-
-  // Career planning and progression tracking
-  async generateCareerPlan(
-    userProfile: any,
-    targetSpecialty: string,
-    timeframe: number
+  // Professional Network Building
+  async suggestNetworkingOpportunities(
+    currentRole: string,
+    specialty: string,
+    careerGoals: string[],
+    location: string
   ): Promise<{
-    milestones: any[];
-    timeline: any[];
-    requiredSteps: string[];
-    estimatedCosts: number;
-    alternativePathways: string[];
+    mentorshipOpportunities: any[];
+    professionalSocieties: any[];
+    conferences: any[];
+    localNetworks: any[];
+    onlineNetworks: any[];
+    volunteeringOpportunities: any[];
   }> {
-    
-    const milestones = [
-      {
-        year: 1,
-        title: 'Complete PLAB examinations',
-        description: 'Pass both PLAB 1 and PLAB 2',
-        required: true,
-        estimatedCost: 500
-      },
-      {
-        year: 2,
-        title: 'Foundation Year 1',
-        description: 'Complete FY1 training programme',
-        required: true,
-        estimatedCost: 0
-      },
-      {
-        year: 3,
-        title: 'Foundation Year 2',
-        description: 'Complete FY2 with relevant rotations',
-        required: true,
-        estimatedCost: 0
-      },
-      {
-        year: 4,
-        title: `Start ${targetSpecialty} Training`,
-        description: `Begin specialty training programme`,
-        required: true,
-        estimatedCost: 2000
-      }
-    ];
-    
-    const timeline = [
-      { date: new Date(), task: 'PLAB preparation', status: 'in-progress' },
-      { date: new Date(Date.now() + 6 * 30 * 24 * 60 * 60 * 1000), task: 'Foundation applications', status: 'upcoming' },
-      { date: new Date(Date.now() + 12 * 30 * 24 * 60 * 60 * 1000), task: 'FY1 start', status: 'future' }
-    ];
-    
-    const requiredSteps = [
-      'Pass PLAB 1 examination',
-      'Pass PLAB 2 OSCE',
-      'Obtain GMC registration',
-      'Apply for Foundation Programme',
-      'Complete Foundation Years',
-      'Apply for Specialty Training'
-    ];
-    
+    const prompt = `Suggest professional networking opportunities for a UK medical professional.
+
+Current Role: ${currentRole}
+Specialty: ${specialty}
+Career Goals: ${JSON.stringify(careerGoals)}
+Location: ${location}
+
+Recommend networking opportunities that:
+1. Connect with senior professionals in ${specialty}
+2. Provide mentorship and career guidance
+3. Support specific career goals and aspirations
+4. Are accessible from ${location}
+5. Offer both formal and informal networking
+
+Include:
+- Professional societies and Royal Colleges
+- Specialty-specific associations
+- Local medical societies and groups
+- Conferences and symposiums
+- Online professional networks
+- Volunteer opportunities
+- Research collaborations
+- Teaching and training roles
+
+Provide contact details, membership requirements, and costs where available.`;
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: "You are a professional networking expert specializing in UK medical careers and professional development opportunities."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.5
+      });
+
+      return JSON.parse(response.choices[0].message.content || '{}');
+    } catch (error) {
+      console.error('Error suggesting networking opportunities:', error);
+      return {
+        mentorshipOpportunities: [],
+        professionalSocieties: [],
+        conferences: [],
+        localNetworks: [],
+        onlineNetworks: [],
+        volunteeringOpportunities: []
+      };
+    }
+  }
+
+  // Career Pathway Analysis
+  async analyzeCareerPathway(
+    currentPosition: string,
+    targetSpecialty: string,
+    personalFactors: any
+  ): Promise<CareerPathway> {
+    const prompt = `Analyze the career pathway for transitioning to ${targetSpecialty} in the UK.
+
+Current Position: ${currentPosition}
+Target Specialty: ${targetSpecialty}
+Personal Factors: ${JSON.stringify(personalFactors)}
+
+Provide detailed analysis including:
+1. Step-by-step career progression pathway
+2. Timeline and milestone requirements
+3. Competition ratios and success rates
+4. Required competencies and assessments
+5. Salary progression and financial considerations
+6. Work-life balance and lifestyle factors
+7. Geographic considerations and job availability
+8. Alternative pathways and contingency options
+
+Include realistic timelines, potential challenges, and success strategies.`;
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: "You are a UK medical career advisor with comprehensive knowledge of specialty training pathways, competition ratios, and career progression in the NHS."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.3
+      });
+
+      const pathwayData = JSON.parse(response.choices[0].message.content || '{}');
+      return this.parseCareerPathway(pathwayData, targetSpecialty);
+    } catch (error) {
+      console.error('Error analyzing career pathway:', error);
+      throw new Error('Failed to analyze career pathway');
+    }
+  }
+
+  // Competency Gap Analysis
+  async analyzeCompetencyGaps(
+    currentCompetencies: any[],
+    targetRole: string,
+    timeframe: string
+  ): Promise<{
+    gaps: any[];
+    developmentPlan: any[];
+    resources: any[];
+    timeline: any[];
+    assessmentStrategy: any[];
+  }> {
+    const prompt = `Analyze competency gaps for career progression in UK medical practice.
+
+Current Competencies: ${JSON.stringify(currentCompetencies)}
+Target Role: ${targetRole}
+Development Timeframe: ${timeframe}
+
+Identify:
+1. Critical competency gaps that need addressing
+2. Priority order for development
+3. Specific learning objectives and outcomes
+4. Available resources and training opportunities
+5. Assessment and validation methods
+6. Realistic timeline for competency development
+
+Focus on both clinical and non-clinical competencies including leadership, research, teaching, and management skills.`;
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: "You are a competency development expert specializing in UK medical education and professional development frameworks."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.4
+      });
+
+      return JSON.parse(response.choices[0].message.content || '{}');
+    } catch (error) {
+      console.error('Error analyzing competency gaps:', error);
+      return {
+        gaps: [],
+        developmentPlan: [],
+        resources: [],
+        timeline: [],
+        assessmentStrategy: []
+      };
+    }
+  }
+
+  // Leadership Development Program
+  async generateLeadershipDevelopment(
+    currentLevel: string,
+    targetLevel: string,
+    organizationalContext: string
+  ): Promise<{
+    assessmentTools: any[];
+    developmentActivities: any[];
+    mentorshipPlan: any[];
+    learningResources: any[];
+    projectOpportunities: any[];
+    measurementStrategy: any[];
+  }> {
+    const prompt = `Design a leadership development program for a UK medical professional.
+
+Current Leadership Level: ${currentLevel}
+Target Leadership Level: ${targetLevel}
+Organizational Context: ${organizationalContext}
+
+Create a comprehensive program that:
+1. Assesses current leadership capabilities
+2. Identifies development priorities
+3. Provides structured learning experiences
+4. Includes mentorship and coaching
+5. Offers practical leadership opportunities
+6. Measures progress and impact
+
+Focus on NHS leadership frameworks and medical leadership competencies including patient safety, quality improvement, and team management.`;
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: "You are a medical leadership development expert with deep knowledge of NHS leadership frameworks and healthcare management principles."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.5
+      });
+
+      return JSON.parse(response.choices[0].message.content || '{}');
+    } catch (error) {
+      console.error('Error generating leadership development program:', error);
+      return {
+        assessmentTools: [],
+        developmentActivities: [],
+        mentorshipPlan: [],
+        learningResources: [],
+        projectOpportunities: [],
+        measurementStrategy: []
+      };
+    }
+  }
+
+  private parsePortfolioTemplate(data: any, stage: string, specialty: string, year: number): ARCPPortfolio {
     return {
-      milestones,
-      timeline,
-      requiredSteps,
-      estimatedCosts: 5000,
-      alternativePathways: ['Locum work', 'Trust grade positions', 'Research fellowship']
+      userId: 'template',
+      stage: stage as any,
+      year,
+      competencies: data.competencies || [],
+      assessments: [],
+      reflections: [],
+      evidence: [],
+      supervisorFeedback: [],
+      learningAgreements: data.learningAgreements || [],
+      auditProjects: [],
+      researchActivities: [],
+      qualityImprovementProjects: [],
+      teachingActivities: [],
+      progressStatus: 'on-track',
+      nextARCPDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
     };
   }
 
-  // Helper methods
-  private generateCVFormat(profile: CVProfile): string {
-    return `
-CURRICULUM VITAE
+  private parseContinuingEducation(data: any): ContinuingEducation[] {
+    if (!data.opportunities) return [];
+    
+    return data.opportunities.map((opp: any) => ({
+      id: `ce_${Date.now()}_${Math.random()}`,
+      type: opp.type || 'e-learning',
+      title: opp.title || 'Continuing Education Opportunity',
+      provider: opp.provider || 'Unknown Provider',
+      duration: opp.duration || 1,
+      cpdPoints: opp.cpdPoints || 1,
+      date: new Date(opp.date || Date.now()),
+      learningObjectives: opp.learningObjectives || [],
+      competenciesAddressed: opp.competenciesAddressed || [],
+      reflection: '',
+      impact: '',
+      certificates: []
+    }));
+  }
 
-Personal Details:
-Name: ${profile.personalDetails.fullName}
-Email: ${profile.personalDetails.email}
-Phone: ${profile.personalDetails.phone}
-GMC Number: ${profile.personalDetails.gmc_number || 'Pending'}
-
-Education:
-Medical Degree: ${profile.education.medicalDegree.institution}
-Graduation Year: ${profile.education.medicalDegree.graduationYear}
-Classification: ${profile.education.medicalDegree.classification}
-
-Clinical Experience:
-${profile.experience.clinicalExperience.map(exp => 
-  `${exp.position} - ${exp.hospital} (${exp.startDate.getFullYear()}-${exp.endDate.getFullYear()})`
-).join('\n')}
-
-Skills:
-Languages: ${profile.skills.languages.map(lang => `${lang.language} (${lang.proficiency})`).join(', ')}
-Clinical Skills: ${profile.skills.clinical.join(', ')}
-
-References:
-${profile.references.map(ref => `${ref.name}, ${ref.position}, ${ref.institution}`).join('\n')}
-    `.trim();
+  private parseCareerPathway(data: any, specialty: string): CareerPathway {
+    return {
+      specialty,
+      currentStage: data.currentStage || 'foundation',
+      targetStage: data.targetStage || 'consultant',
+      timeline: data.timeline || [],
+      requirements: data.requirements || [],
+      competitionRatio: data.competitionRatio || 1.0,
+      salaryProgression: data.salaryProgression || [],
+      workLifeBalance: data.workLifeBalance || {
+        typicalHours: '40-48 hours per week',
+        onCallFrequency: 'Variable',
+        flexibilityOptions: [],
+        familyFriendly: true
+      },
+      geographicalConsiderations: data.geographicalConsiderations || {
+        availability: {},
+        competitiveRegions: [],
+        lessCompetitiveOptions: []
+      }
+    };
   }
 }
+
+export const professionalDevelopment = new ProfessionalDevelopmentSystem();

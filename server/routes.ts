@@ -18,6 +18,11 @@ import {
   type SmartFlashcard,
   type QuizQuestion
 } from "./ai-study-tools";
+import { advancedAI } from "./advanced-ai-system";
+import { ukClinical } from "./uk-clinical-integration";
+import { vrOSCE } from "./vr-osce-system";
+import { mobileOffline } from "./mobile-offline-system";
+import { gamification } from "./gamification-system";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -808,9 +813,265 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Advanced AI System Endpoints
+  app.post("/api/ai-system/predict-weaknesses", async (req, res) => {
+    try {
+      const { userProfile, recentPerformance } = req.body;
+      const predictions = await advancedAI.predictWeaknesses(userProfile, recentPerformance);
+      res.json({ predictions });
+    } catch (error) {
+      console.error('Error predicting weaknesses:', error);
+      res.status(500).json({ error: "Failed to predict weaknesses" });
+    }
+  });
+
+  app.post("/api/ai-system/generate-study-path", async (req, res) => {
+    try {
+      const { userProfile, examDate, availableTime } = req.body;
+      const studyPath = await advancedAI.generateStudyPath(userProfile, new Date(examDate), availableTime);
+      res.json({ studyPath });
+    } catch (error) {
+      console.error('Error generating study path:', error);
+      res.status(500).json({ error: "Failed to generate study path" });
+    }
+  });
+
+  app.post("/api/ai-system/contextual-hint", async (req, res) => {
+    try {
+      const { question, userAnswer, correctAnswer, attempts } = req.body;
+      const hint = await advancedAI.provideContextualHint(question, userAnswer, correctAnswer, attempts);
+      res.json({ hint });
+    } catch (error) {
+      console.error('Error providing hint:', error);
+      res.status(500).json({ error: "Failed to provide hint" });
+    }
+  });
+
+  app.post("/api/ai-system/exam-probability", async (req, res) => {
+    try {
+      const { userProfile, practiceResults } = req.body;
+      const analytics = await advancedAI.calculateExamSuccessProbability(userProfile, practiceResults);
+      res.json({ analytics });
+    } catch (error) {
+      console.error('Error calculating exam probability:', error);
+      res.status(500).json({ error: "Failed to calculate exam probability" });
+    }
+  });
+
+  // UK Clinical Integration Endpoints
+  app.get("/api/uk-clinical/guidelines/latest", async (req, res) => {
+    try {
+      const guidelines = await ukClinical.fetchLatestNHSGuidelines();
+      res.json({ guidelines });
+    } catch (error) {
+      console.error('Error fetching guidelines:', error);
+      res.status(500).json({ error: "Failed to fetch guidelines" });
+    }
+  });
+
+  app.get("/api/uk-clinical/hospital-partnerships", async (req, res) => {
+    try {
+      const { region } = req.query;
+      const partnerships = await ukClinical.getUKHospitalPartnerships(region as string);
+      res.json({ partnerships });
+    } catch (error) {
+      console.error('Error fetching hospital partnerships:', error);
+      res.status(500).json({ error: "Failed to fetch hospital partnerships" });
+    }
+  });
+
+  app.get("/api/uk-clinical/cultural-scenarios", async (req, res) => {
+    try {
+      const scenarios = await ukClinical.generateCulturalScenarios();
+      res.json({ scenarios });
+    } catch (error) {
+      console.error('Error generating cultural scenarios:', error);
+      res.status(500).json({ error: "Failed to generate cultural scenarios" });
+    }
+  });
+
+  app.post("/api/uk-clinical/career-guidance", async (req, res) => {
+    try {
+      const { specialty, currentStage } = req.body;
+      const guidance = await ukClinical.generateCareerGuidance(specialty, currentStage);
+      res.json({ guidance });
+    } catch (error) {
+      console.error('Error generating career guidance:', error);
+      res.status(500).json({ error: "Failed to generate career guidance" });
+    }
+  });
+
+  app.post("/api/uk-clinical/nhs-opportunities", async (req, res) => {
+    try {
+      const criteria = req.body;
+      const opportunities = await ukClinical.findNHSOpportunities(criteria);
+      res.json({ opportunities });
+    } catch (error) {
+      console.error('Error finding NHS opportunities:', error);
+      res.status(500).json({ error: "Failed to find NHS opportunities" });
+    }
+  });
+
+  // VR OSCE System Endpoints
+  app.post("/api/vr-osce/generate-station", async (req, res) => {
+    try {
+      const { specialty, difficulty, duration } = req.body;
+      const station = await vrOSCE.generateVRStation(specialty, difficulty, duration);
+      res.json({ station });
+    } catch (error) {
+      console.error('Error generating VR station:', error);
+      res.status(500).json({ error: "Failed to generate VR station" });
+    }
+  });
+
+  app.post("/api/vr-osce/patient-response", async (req, res) => {
+    try {
+      const { patientId, doctorInput, conversationContext, emotionalState } = req.body;
+      const response = await vrOSCE.generatePatientResponse(patientId, doctorInput, conversationContext, emotionalState);
+      res.json({ response });
+    } catch (error) {
+      console.error('Error generating patient response:', error);
+      res.status(500).json({ error: "Failed to generate patient response" });
+    }
+  });
+
+  app.post("/api/vr-osce/analyze-performance", async (req, res) => {
+    try {
+      const { stationId, studentActions, timeElapsed, conversationData } = req.body;
+      const analysis = await vrOSCE.analyzePerformance(stationId, studentActions, timeElapsed, conversationData);
+      res.json({ analysis });
+    } catch (error) {
+      console.error('Error analyzing performance:', error);
+      res.status(500).json({ error: "Failed to analyze performance" });
+    }
+  });
+
+  app.post("/api/vr-osce/collaborative-session", async (req, res) => {
+    try {
+      const { participants, scenario, roles } = req.body;
+      const session = await vrOSCE.createCollaborativeSession(participants, scenario, roles);
+      res.json({ session });
+    } catch (error) {
+      console.error('Error creating collaborative session:', error);
+      res.status(500).json({ error: "Failed to create collaborative session" });
+    }
+  });
+
+  // Mobile Offline System Endpoints
+  app.post("/api/mobile/microlearning", async (req, res) => {
+    try {
+      const { topic, userLevel, timeConstraint } = req.body;
+      const module = await mobileOffline.createMicrolearningModule(topic, userLevel, timeConstraint);
+      res.json({ module });
+    } catch (error) {
+      console.error('Error creating microlearning module:', error);
+      res.status(500).json({ error: "Failed to create microlearning module" });
+    }
+  });
+
+  app.post("/api/mobile/notifications", async (req, res) => {
+    try {
+      const { userId, userProfile, studyGoals } = req.body;
+      const notifications = await mobileOffline.generatePersonalizedNotifications(userId, userProfile, new Date(), studyGoals);
+      res.json({ notifications });
+    } catch (error) {
+      console.error('Error generating notifications:', error);
+      res.status(500).json({ error: "Failed to generate notifications" });
+    }
+  });
+
+  app.post("/api/mobile/voice-notes", async (req, res) => {
+    try {
+      const { audioBase64, context } = req.body;
+      const processedNote = await mobileOffline.processVoiceNote(audioBase64, context);
+      res.json({ processedNote });
+    } catch (error) {
+      console.error('Error processing voice note:', error);
+      res.status(500).json({ error: "Failed to process voice note" });
+    }
+  });
+
+  app.post("/api/mobile/optimize-offline", async (req, res) => {
+    try {
+      const { userProfile, deviceCapacity, connectionQuality } = req.body;
+      const optimization = await mobileOffline.optimizeOfflineContent(userProfile, deviceCapacity, connectionQuality);
+      res.json({ optimization });
+    } catch (error) {
+      console.error('Error optimizing offline content:', error);
+      res.status(500).json({ error: "Failed to optimize offline content" });
+    }
+  });
+
+  app.post("/api/mobile/commute-content", async (req, res) => {
+    try {
+      const { commuteProfile, learningGoals } = req.body;
+      const content = await mobileOffline.generateCommuteContent(commuteProfile, learningGoals);
+      res.json({ content });
+    } catch (error) {
+      console.error('Error generating commute content:', error);
+      res.status(500).json({ error: "Failed to generate commute content" });
+    }
+  });
+
+  // Gamification System Endpoints
+  app.post("/api/gamification/achievements", async (req, res) => {
+    try {
+      const { userProfile, currentProgress } = req.body;
+      const achievements = await gamification.generatePersonalizedAchievements(userProfile, currentProgress);
+      res.json({ achievements });
+    } catch (error) {
+      console.error('Error generating achievements:', error);
+      res.status(500).json({ error: "Failed to generate achievements" });
+    }
+  });
+
+  app.post("/api/gamification/challenge", async (req, res) => {
+    try {
+      const { participantProfiles, focusArea } = req.body;
+      const challenge = await gamification.createWeeklyChallenge(participantProfiles, focusArea);
+      res.json({ challenge });
+    } catch (error) {
+      console.error('Error creating challenge:', error);
+      res.status(500).json({ error: "Failed to create challenge" });
+    }
+  });
+
+  app.post("/api/gamification/leaderboards", async (req, res) => {
+    try {
+      const { userPool, criteria } = req.body;
+      const leaderboards = await gamification.generateSegmentedLeaderboards(userPool, criteria);
+      res.json({ leaderboards });
+    } catch (error) {
+      console.error('Error generating leaderboards:', error);
+      res.status(500).json({ error: "Failed to generate leaderboards" });
+    }
+  });
+
+  app.post("/api/gamification/study-buddy", async (req, res) => {
+    try {
+      const { userPreferences, learningStyle } = req.body;
+      const buddy = await gamification.createStudyBuddy(userPreferences, learningStyle);
+      res.json({ buddy });
+    } catch (error) {
+      console.error('Error creating study buddy:', error);
+      res.status(500).json({ error: "Failed to create study buddy" });
+    }
+  });
+
+  app.post("/api/gamification/celebration", async (req, res) => {
+    try {
+      const { achievement, userContext } = req.body;
+      const celebration = await gamification.generateCelebration(achievement, userContext);
+      res.json({ celebration });
+    } catch (error) {
+      console.error('Error generating celebration:', error);
+      res.status(500).json({ error: "Failed to generate celebration" });
+    }
+  });
+
   app.get("/api/users", async (req, res) => {
     try {
-      // User data structure including study tools metrics
+      // Enhanced user data with all competitive advantage metrics
       const users = [
         {
           id: 1,
@@ -826,7 +1087,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
             quizzesCompleted: 89,
             averageConfidence: 4.2,
             contentSummarized: 12,
-            visualExplanations: 34
+            visualExplanations: 34,
+            vrSessionsCompleted: 12,
+            microlearningModules: 67,
+            achievementsUnlocked: 23,
+            weaknessPredictions: 8,
+            studyPathOptimizations: 4
+          },
+          adaptiveLearning: {
+            learningStyle: 'visual',
+            masteryLevels: {
+              cardiology: 78,
+              respiratory: 65,
+              gastroenterology: 82,
+              neurology: 59,
+              endocrinology: 71
+            },
+            stressLevel: 45,
+            burnoutRisk: 'low',
+            optimalStudyTimes: ['09:00-11:00', '14:00-16:00', '19:00-21:00']
           }
         }
       ];
