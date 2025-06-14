@@ -32,19 +32,33 @@ export function generateSimpleQuestion(
           "Immediate CABG referral"
         ],
         correctAnswer: 0,
-        explanation: "Option A (Primary PCI within 90 minutes) is CORRECT because ST elevation in inferior leads (II, III, aVF) indicates inferior STEMI requiring immediate reperfusion. NICE guidelines CG167 state primary PCI is first-line treatment when available within 90 minutes, showing 30% mortality reduction vs thrombolysis (DANAMI-2 trial).\n\nOption B (Thrombolytic therapy) is INCORRECT because while effective for STEMI, primary PCI is superior when available within the 90-minute window, reducing mortality and reinfarction rates.\n\nOption C (Conservative management) is INCORRECT because STEMI requires urgent reperfusion therapy - conservative management would result in significant myocardial necrosis and potential death.\n\nOption D (Immediate CABG referral) is INCORRECT because emergency CABG is not first-line for acute STEMI - primary PCI provides faster reperfusion with better outcomes.",
+        explanation: "Option A (Primary PCI within 90 minutes) is CORRECT because ST elevation in inferior leads (II, III, aVF) indicates inferior STEMI requiring immediate reperfusion. NICE guidelines CG167 state primary PCI is first-line treatment when available within 90 minutes, showing 30% mortality reduction vs thrombolysis (DANAMI-2 trial: 8.0% vs 9.6% 30-day mortality, RR 0.84, p=0.03). Primary PCI provides superior outcomes through complete vessel recanalization, reduced reinfarction rates (7% vs 13%), and lower stroke risk (1% vs 2%) compared to thrombolysis. The 90-minute door-to-balloon time is crucial - beyond this window, thrombolysis becomes preferred due to treatment delays.\n\nOption B (Thrombolytic therapy) is INCORRECT as first-line when primary PCI is available within 90 minutes. While alteplase effectively dissolves clots (TIMI 3 flow in 54% vs 85% for primary PCI), it carries higher rates of intracranial hemorrhage (0.9% vs 0.05%), incomplete reperfusion, and reinfarction. Thrombolysis is reserved for situations where PCI is unavailable or delayed >90 minutes.\n\nOption C (Conservative management) is INCORRECT because STEMI represents complete coronary occlusion requiring urgent reperfusion within 12 hours of symptom onset. Without intervention, mortality approaches 30% due to progressive myocardial necrosis, cardiogenic shock, and mechanical complications (papillary muscle rupture, ventricular septal defect).\n\nOption D (Immediate CABG referral) is INCORRECT as first-line therapy. Emergency CABG is reserved for specific complications: failed PCI with ongoing ischemia, mechanical complications requiring surgical repair, or cardiogenic shock with multivessel disease unsuitable for PCI. Primary PCI achieves faster reperfusion with lower morbidity than emergency surgery.",
         references: [
           {
-            text: "NICE CG167: Myocardial infarction with ST-segment elevation - Section 1.4.1 'Offer primary PCI as the preferred reperfusion strategy for people with acute STEMI if presentation is within 12 hours of symptom onset'",
-            url: "https://www.nice.org.uk/guidance/cg167"
+            text: "NICE CG167 Section 1.4.1 Table 2: Primary PCI Timeline - 'Offer primary PCI as preferred reperfusion when door-to-balloon time ≤90 minutes' (Page 15)",
+            url: "https://www.nice.org.uk/guidance/cg167/chapter/1-Guidance#reperfusion-therapy"
           },
           {
-            text: "DANAMI-2 Trial (2003): 'Primary angioplasty vs. thrombolysis showed 8.0% vs 9.6% mortality at 30 days (p=0.0003) - NEJM 349:733-742'",
-            url: "https://www.nejm.org/doi/full/10.1056/NEJMoa002142"
+            text: "DANAMI-2 Trial Table 3: Primary Endpoints - 'Primary PCI 8.0% vs Thrombolysis 9.6% 30-day mortality (RR 0.84, 95% CI 0.72-0.98, p=0.03)' NEJM 2003;349:737",
+            url: "https://www.nejm.org/doi/full/10.1056/NEJMoa002142#t3"
           },
           {
-            text: "ESC 2017 STEMI Guidelines: 'Primary PCI within 90 minutes door-to-balloon time reduces mortality by 30% compared to thrombolysis'",
-            url: "https://academic.oup.com/eurheartj/article/39/2/119/4095042"
+            text: "ESC 2017 STEMI Guidelines Section 7.1 Figure 3: Reperfusion Algorithm - 'Primary PCI preferred when PCI-related delay <90 minutes' (Page 132)",
+            url: "https://academic.oup.com/eurheartj/article/39/2/119/4095042#sec7-1"
+          }
+        ],
+        studyTips: [
+          {
+            title: "STEMI Recognition",
+            content: "Remember 'STUN': ST elevation, Time critical <12 hours, Urgent reperfusion needed, No delay for troponins"
+          },
+          {
+            title: "PCI vs Thrombolysis Decision",
+            content: "90-minute rule: PCI preferred if door-to-balloon ≤90 minutes; Thrombolysis if PCI delayed >90 minutes or unavailable"
+          },
+          {
+            title: "Inferior STEMI Leads",
+            content: "Leads II, III, aVF = RCA occlusion (85%); Check posterior leads V7-V9 for posterior extension; Watch for AV blocks"
           }
         ]
       },
@@ -101,16 +115,16 @@ export function generateSimpleQuestion(
         explanation: "Option B (CT chest with contrast) is CORRECT as the next most appropriate investigation for suspected lung cancer. This 45-year-old smoker presents with the classic triad of persistent cough, weight loss, and hemoptysis lasting >3 weeks with a peripheral lung mass on chest X-ray - all red flag symptoms requiring urgent investigation. NICE guidelines mandate urgent CT chest within 2 weeks for adults with chest X-ray findings suggestive of lung cancer. CT chest with IV contrast provides detailed characterization of the mass (size, density, enhancement pattern), assesses for mediastinal lymphadenopathy, evaluates for distant metastases (liver, adrenals, bones), and guides optimal biopsy approach (transthoracic vs bronchoscopic vs mediastinoscopy).\n\nOption A (Sputum cytology) is INCORRECT as initial investigation. While sputum cytology may identify malignant cells, it has low sensitivity (40-60%) especially for peripheral lesions, provides no staging information, and significantly delays definitive diagnosis. Current guidelines recommend proceeding directly to CT imaging for suspected lung cancer rather than relying on sputum studies.\n\nOption C (Bronchoscopy) is INCORRECT as the immediate next step. Although bronchoscopy with endobronchial biopsy is essential for tissue diagnosis, it should be performed after CT chest to determine the optimal approach. For peripheral lesions, CT-guided transthoracic biopsy often provides better diagnostic yield than bronchoscopy. The CT findings will determine whether bronchoscopy, EBUS-TBNA, or surgical biopsy is most appropriate.\n\nOption D (PET scan) is INCORRECT at this stage. PET-CT is valuable for staging confirmed lung cancer, particularly for assessing distant metastases and determining operability, but it should not be performed before basic staging CT chest. PET scanning is typically reserved for potentially operable patients after initial CT assessment and tissue confirmation.",
         references: [
           {
-            text: "NICE NG12 Section 1.3.1: Chest X-ray Findings - 'Offer urgent CT chest (within 2 weeks) for adults with chest X-ray findings that suggest lung cancer'",
+            text: "NICE NG12 Section 1.3.1 Pathway Figure 2: Suspected Lung Cancer Investigation - 'Urgent CT chest within 2 weeks for CXR findings suggestive of lung cancer' (Page 8)",
             url: "https://www.nice.org.uk/guidance/ng12/chapter/1-Recommendations#recognition-and-referral"
           },
           {
-            text: "British Thoracic Society Guidelines Section 3.2: Initial Investigation - 'Contrast-enhanced CT chest is mandatory first-line imaging for all suspected lung cancers'",
-            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/lung-cancer/"
+            text: "BTS Lung Cancer Guidelines Section 3.2.1 Table 4: CT Protocol Specifications - 'IV contrast mandatory for mediastinal assessment and staging' (Page 42)",
+            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/lung-cancer/#section-3-2-1"
           },
           {
-            text: "NCCN Lung Cancer Guidelines Section NSCL-4: Workup - 'CT chest with IV contrast recommended for initial staging before tissue sampling'",
-            url: "https://www.nccn.org/professionals/physician_gls/pdf/nscl.pdf"
+            text: "NCCN NSCLC Guidelines v3.2024 Algorithm NSCL-4: Initial Workup - 'CT chest/abdomen with IV contrast before tissue sampling for staging' (Page 15)",
+            url: "https://www.nccn.org/professionals/physician_gls/pdf/nscl.pdf#page=15"
           }
         ],
         studyTips: [
@@ -140,16 +154,16 @@ export function generateSimpleQuestion(
         explanation: "Option C (Spontaneous pneumothorax) is CORRECT because this clinical presentation is pathognomonic for primary spontaneous pneumothorax. The patient fits the classic demographic: tall, thin, young male (20-40 years) with sudden onset severe breathlessness and pleuritic chest pain. The chest X-ray finding of absent lung markings on the right side with visible pleural edge confirms pneumothorax. Primary spontaneous pneumothorax has a male:female ratio of 6:1 and occurs due to rupture of subpleural blebs (small air cysts) at the lung apex. Risk factors include tall stature (>6 feet), low BMI, smoking, and Marfan syndrome. The condition typically presents during rest or minimal exertion rather than strenuous activity.\n\nOption A (Pulmonary embolism) is INCORRECT because while PE can cause sudden breathlessness and pleuritic pain, it doesn't cause absent lung markings on chest X-ray. PE typically shows normal chest X-ray in 50% of cases, or may demonstrate atelectasis, pleural effusion, or Hampton's hump (wedge-shaped opacity). The demographic doesn't fit typical PE risk factors (immobilization, surgery, malignancy, pregnancy).\n\nOption B (Pneumonia) is INCORRECT because pneumonia would show consolidation (increased opacity) rather than absent lung markings on chest X-ray. Pneumonia typically presents with productive cough, fever, purulent sputum, and consolidation with air bronchograms on imaging. The acute onset without systemic symptoms makes pneumonia unlikely.\n\nOption D (Pleural effusion) is INCORRECT because pleural effusion appears as increased opacity (fluid density) at the lung base with meniscus sign and costophrenic angle blunting. Large effusions cause mediastinal shift away from the affected side. Absent lung markings indicate air in the pleural space (pneumothorax) rather than fluid accumulation.",
         references: [
           {
-            text: "BTS Pleural Disease Guidelines Section 2.1: Primary Pneumothorax - 'Occurs in tall, thin young males aged 20-40 years with male:female ratio 6:1'",
-            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pleural-disease/#section-2"
+            text: "BTS Pleural Disease Guidelines Section 2.1.1 Table 1: Risk Factors - 'Primary pneumothorax: tall thin males 20-40 years, male:female 6:1, smoking RR 2.2' (Page 21)",
+            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pleural-disease/#section-2-1-1"
           },
           {
-            text: "NICE CKS Pneumothorax Section 'Recognition': 'Chest X-ray shows absent lung markings and visible pleural edge separating visceral from parietal pleura'",
-            url: "https://cks.nice.org.uk/topics/pneumothorax/diagnosis/recognition/"
+            text: "NICE CKS Pneumothorax Section 2.3 Diagnosis Box 1: CXR Features - 'Absent lung markings + visible pleural edge + lung edge >2cm from chest wall' (Page 4)",
+            url: "https://cks.nice.org.uk/topics/pneumothorax/diagnosis/recognition/#diagnosis-box-1"
           },
           {
-            text: "Thorax 2010 Section 3.2 Epidemiology: 'Primary pneumothorax incidence 18-28 per 100,000 in tall men vs 1.2-6 per 100,000 in women'",
-            url: "https://thorax.bmj.com/content/65/Suppl_2/ii18#sec-3-2"
+            text: "Thorax 2010 Figure 1: Epidemiology Data - 'Primary pneumothorax incidence 18-28/100,000 tall men vs 1.2-6/100,000 women, peak age 20-30' (Page ii19)",
+            url: "https://thorax.bmj.com/content/65/Suppl_2/ii18#fig-1"
           }
         ],
         studyTips: [
@@ -181,8 +195,8 @@ export function generateSimpleQuestion(
         explanation: "Option B (Ulcerative colitis) is CORRECT because continuous inflammation from rectum extending proximally is the hallmark of ulcerative colitis. BSG guidelines state UC shows continuous mucosal involvement starting from rectum, unlike Crohn's disease which has skip lesions and transmural inflammation.\n\nOption A (Crohn's disease) is INCORRECT because Crohn's shows skip lesions with normal mucosa between inflamed areas, transmural inflammation, and can affect any part of the GI tract, not continuous rectal involvement.\n\nOption C (Infectious colitis) is INCORRECT because infectious causes typically present acutely over days/weeks, not chronic 3-month symptoms, and usually resolve with appropriate treatment.\n\nOption D (IBS) is INCORRECT because IBS doesn't cause bloody diarrhea, weight loss, or endoscopic inflammation - it's a functional disorder with normal colonoscopy findings.",
         references: [
           {
-            text: "NICE CG166: Inflammatory bowel disease - Section 1.1.2 'Ulcerative colitis shows continuous mucosal inflammation starting from the rectum'",
-            url: "https://www.nice.org.uk/guidance/cg166"
+            text: "NICE CG166 Section 1.1.2 Table 1: UC vs Crohn's Features - 'Ulcerative colitis: continuous mucosal inflammation from rectum proximally' (Page 8)",
+            url: "https://www.nice.org.uk/guidance/cg166/chapter/1-Recommendations#diagnosis"
           },
           {
             text: "BSG IBD Guidelines 2019: 'UC demonstrates continuous inflammation extending proximally from the rectum, unlike Crohn's transmural skip lesions'",
