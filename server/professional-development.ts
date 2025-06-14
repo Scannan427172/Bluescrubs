@@ -13,12 +13,12 @@ export interface ARCPPortfolio {
   assessments: Assessment[];
   reflections: Reflection[];
   evidence: Evidence[];
-  supervisorFeedback: SupervisorFeedback[];
-  learningAgreements: LearningAgreement[];
-  auditProjects: AuditProject[];
-  researchActivities: ResearchActivity[];
-  qualityImprovementProjects: QIProject[];
-  teachingActivities: TeachingActivity[];
+  supervisorFeedback: any[];
+  learningAgreements: any[];
+  auditProjects: any[];
+  researchActivities: any[];
+  qualityImprovementProjects: any[];
+  teachingActivities: any[];
   progressStatus: 'on-track' | 'concern' | 'inadequate';
   nextARCPDate: Date;
 }
@@ -31,7 +31,7 @@ export interface Competency {
   currentLevel: 'not-started' | 'developing' | 'meets-expectations' | 'excellent';
   evidenceCount: number;
   lastUpdated: Date;
-  supervisorSign off: boolean;
+  supervisorSignOff: boolean;
   gmcOutcomes: string[];
 }
 
@@ -129,7 +129,7 @@ export interface CareerPathway {
   timeline: CareerMilestone[];
   requirements: PathwayRequirement[];
   competitionRatio: number;
-  salaryProgression: SalaryBand[];
+  salaryProgression: any[];
   workLifeBalance: {
     typicalHours: string;
     onCallFrequency: string;

@@ -23,6 +23,7 @@ import { ukClinical } from "./uk-clinical-integration";
 import { vrOSCE } from "./vr-osce-system";
 import { mobileOffline } from "./mobile-offline-system";
 import { gamification } from "./gamification-system";
+import { professionalDevelopment } from "./professional-development";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -1066,6 +1067,73 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Error generating celebration:', error);
       res.status(500).json({ error: "Failed to generate celebration" });
+    }
+  });
+
+  // Professional Development System Endpoints
+  app.post("/api/professional/portfolio-template", async (req, res) => {
+    try {
+      const { stage, specialty, year } = req.body;
+      const portfolio = await professionalDevelopment.generatePortfolioTemplate(stage, specialty, year);
+      res.json({ portfolio });
+    } catch (error) {
+      console.error('Error generating portfolio template:', error);
+      res.status(500).json({ error: "Failed to generate portfolio template" });
+    }
+  });
+
+  app.post("/api/professional/continuing-education", async (req, res) => {
+    try {
+      const { currentStage, specialty, learningNeeds, timeConstraints } = req.body;
+      const recommendations = await professionalDevelopment.recommendContinuingEducation(currentStage, specialty, learningNeeds, timeConstraints);
+      res.json({ recommendations });
+    } catch (error) {
+      console.error('Error recommending continuing education:', error);
+      res.status(500).json({ error: "Failed to recommend continuing education" });
+    }
+  });
+
+  app.post("/api/professional/networking-opportunities", async (req, res) => {
+    try {
+      const { currentRole, specialty, careerGoals, location } = req.body;
+      const opportunities = await professionalDevelopment.suggestNetworkingOpportunities(currentRole, specialty, careerGoals, location);
+      res.json({ opportunities });
+    } catch (error) {
+      console.error('Error suggesting networking opportunities:', error);
+      res.status(500).json({ error: "Failed to suggest networking opportunities" });
+    }
+  });
+
+  app.post("/api/professional/career-pathway", async (req, res) => {
+    try {
+      const { currentPosition, targetSpecialty, personalFactors } = req.body;
+      const pathway = await professionalDevelopment.analyzeCareerPathway(currentPosition, targetSpecialty, personalFactors);
+      res.json({ pathway });
+    } catch (error) {
+      console.error('Error analyzing career pathway:', error);
+      res.status(500).json({ error: "Failed to analyze career pathway" });
+    }
+  });
+
+  app.post("/api/professional/competency-gaps", async (req, res) => {
+    try {
+      const { currentCompetencies, targetRole, timeframe } = req.body;
+      const analysis = await professionalDevelopment.analyzeCompetencyGaps(currentCompetencies, targetRole, timeframe);
+      res.json({ analysis });
+    } catch (error) {
+      console.error('Error analyzing competency gaps:', error);
+      res.status(500).json({ error: "Failed to analyze competency gaps" });
+    }
+  });
+
+  app.post("/api/professional/leadership-development", async (req, res) => {
+    try {
+      const { currentLevel, targetLevel, organizationalContext } = req.body;
+      const program = await professionalDevelopment.generateLeadershipDevelopment(currentLevel, targetLevel, organizationalContext);
+      res.json({ program });
+    } catch (error) {
+      console.error('Error generating leadership development program:', error);
+      res.status(500).json({ error: "Failed to generate leadership development program" });
     }
   });
 
