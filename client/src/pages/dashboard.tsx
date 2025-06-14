@@ -14,6 +14,11 @@ const DEMO_USER: User = {
   currentStage: "plab1",
   studyStreak: 12,
   totalPoints: 2847,
+  country: "UK",
+  city: "London",
+  flagEmoji: "🇬🇧",
+  timezone: "Europe/London",
+  isLocationPublic: true,
   createdAt: new Date()
 };
 
@@ -252,10 +257,17 @@ export default function Dashboard() {
             </Button>
           </Link>
           
-          <Link href="/plab2">
+          <Link href="/plab2-osce">
             <Button variant="outline" className="w-full justify-start border-gray-300" style={{ color: '#000000' }}>
               <span className="mr-2">🏥</span>
               Practice OSCE Station
+            </Button>
+          </Link>
+          
+          <Link href="/ai-study-tools">
+            <Button variant="outline" className="w-full justify-start border-gray-300" style={{ color: '#000000' }}>
+              <span className="mr-2">🧠</span>
+              AI Study Tools
             </Button>
           </Link>
           
