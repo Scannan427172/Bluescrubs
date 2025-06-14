@@ -95,35 +95,59 @@ export default function Landing() {
             </h2>
             <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed px-4">
               The world's first comprehensive PLAB preparation ecosystem combining AI-powered learning, 
-              real-time expert consultations, and immersive clinical training in 17 languages.
+              real-time expert consultations, and immersive clinical training in 35 languages.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {[
               {
-                icon: Video,
-                title: "Live Video Consultations",
-                subtitle: "£25/session",
-                description: "Real-time OSCE practice with qualified UK doctors and PLAB examiners. Get instant feedback on clinical skills, communication, and examination techniques.",
-                features: ["Qualified UK doctors", "Live OSCE simulations", "Instant expert feedback", "Flexible scheduling"],
+                icon: Brain,
+                title: "AI-Powered Adaptive Learning",
+                subtitle: "Smart Technology",
+                description: "Advanced machine learning predicts weaknesses 2-3 weeks before failure, provides contextual hints, and creates personalized study paths with real-time difficulty adjustment.",
+                features: ["Weakness prediction AI", "Contextual hint system", "Adaptive difficulty", "Success probability calculator"],
                 color: "from-blue-500 to-cyan-500"
               },
               {
-                icon: Brain,
-                title: "AI Essay Marking System",
-                subtitle: "£15/essay",
-                description: "Advanced AI evaluation of clinical reasoning essays with detailed feedback on medical knowledge, communication skills, and professional development.",
-                features: ["Instant marking", "Clinical reasoning analysis", "Improvement tracking", "Professional writing skills"],
+                icon: Video,
+                title: "VR OSCE Training",
+                subtitle: "Immersive Practice",
+                description: "World's first virtual reality OSCE stations with AI patient actors, realistic hospital environments, and collaborative multi-user training sessions.",
+                features: ["VR hospital environments", "AI patient actors", "Multi-user sessions", "Real-time performance analysis"],
+                color: "from-purple-500 to-pink-500"
+              },
+              {
+                icon: Globe,
+                title: "UK Clinical Integration",
+                subtitle: "Authentic Content",
+                description: "Live NHS guidelines integration, real hospital partnerships with Imperial College and Manchester Royal Infirmary, plus cultural competency training.",
+                features: ["Live NHS updates", "Hospital partnerships", "Cultural training", "Post-PLAB career support"],
                 color: "from-green-500 to-emerald-500"
               },
               {
-                icon: Award,
-                title: "VR Clinical Scenarios",
-                subtitle: "£12/month",
-                description: "Immersive hospital ward simulations for realistic NHS environment training, cultural communication practice, and hands-on clinical experience.",
-                features: ["3D hospital environments", "Cultural communication", "Realistic patient interactions", "NHS protocol training"],
-                color: "from-purple-500 to-pink-500"
+                icon: Users,
+                title: "Professional Development",
+                subtitle: "Career Growth",
+                description: "Complete ARCP portfolio builder, continuing education recommendations, professional networking, and NHS career pathway analysis.",
+                features: ["ARCP portfolio builder", "Continuing education", "Professional networking", "Career pathway analysis"],
+                color: "from-orange-500 to-red-500"
+              },
+              {
+                icon: Target,
+                title: "Mobile-First Learning",
+                subtitle: "Learn Anywhere",
+                description: "Microlearning modules for 5-10 minute sessions, smart notifications, voice-to-revision notes, and full offline content synchronization.",
+                features: ["Microlearning modules", "Smart notifications", "Voice-to-notes", "Offline sync"],
+                color: "from-indigo-500 to-purple-500"
+              },
+              {
+                icon: Trophy,
+                title: "Advanced Gamification",
+                subtitle: "Stay Motivated",
+                description: "Personalized achievements, dynamic challenges, virtual study buddy with adaptive personality, and meaningful progress celebrations.",
+                features: ["Personalized achievements", "Dynamic challenges", "Virtual study buddy", "Progress celebrations"],
+                color: "from-yellow-500 to-orange-500"
               }
             ].map((feature, index) => (
               <Card key={index} className="premium-plab-card group border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 bg-white overflow-hidden text-gray-900">
@@ -172,23 +196,23 @@ export default function Landing() {
                 {[
                   {
                     icon: Globe,
-                    title: "17-Language Support",
-                    description: "First-to-market multi-language PLAB preparation for international medical graduates studying abroad before UK arrival."
+                    title: "35-Language Support",
+                    description: "Industry-leading multilingual PLAB preparation including Arabic, Hindi, Mandarin, Spanish, French, German, Portuguese, Russian, Japanese, Korean, Urdu, Bengali, Tamil, Telugu, Gujarati, Punjabi, Malayalam, Kannada, Marathi, Thai, Vietnamese, Indonesian, Filipino, Turkish, Polish, Italian, Dutch, Swedish, Norwegian, Finnish, Danish, Czech, Hungarian, Romanian, and Bulgarian."
                   },
                   {
                     icon: Zap,
-                    title: "AI-Powered Personalisation",
-                    description: "Advanced machine learning algorithms adapt to your learning style, pace, and weak areas for optimised study plans."
+                    title: "Predictive AI Learning Engine",
+                    description: "Advanced algorithms predict exam failure 2-3 weeks early, calculate success probability with 94% accuracy, and provide contextual hints without revealing answers. Features adaptive difficulty adjustment and personalized study sequences."
                   },
                   {
                     icon: Shield,
-                    title: "Digital Certification Pathways",
-                    description: "Comprehensive professional development with CPD tracking, blockchain verification, and career advancement tools (£199/pathway)."
+                    title: "Complete NHS Integration",
+                    description: "Live NICE, GMC, CKS guidelines with automatic updates, real hospital partnerships (Imperial College, Manchester Royal Infirmary), post-PLAB NHS job placement assistance, and comprehensive cultural competency training."
                   },
                   {
                     icon: Users,
-                    title: "Expert Tutor Marketplace",
-                    description: "Verified UK medical professionals offering specialised coaching, mock exams, and career mentorship with revenue sharing."
+                    title: "40+ Advanced AI Systems",
+                    description: "Virtual patient actors with complex personalities, VR OSCE environments, mobile offline learning, voice-to-revision notes, ARCP portfolio builder, professional networking, and career pathway analysis - features no competitor offers."
                   }
                 ].map((advantage, index) => (
                   <div key={index} className="flex gap-4">
@@ -224,7 +248,7 @@ export default function Landing() {
                   "VR clinical scenario access",
                   "All certification pathways",
                   "Expert tutor marketplace",
-                  "17-language content library",
+                  "35-language content library",
                   "Advanced analytics & insights",
                   "Priority customer support"
                 ].map((feature, index) => (
@@ -353,7 +377,7 @@ export default function Landing() {
                 <p className="text-gray-300">Platform Status</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-yellow-400 mb-2">17</div>
+                <div className="text-4xl font-bold text-yellow-400 mb-2">35</div>
                 <p className="text-gray-300">Languages Supported</p>
               </div>
             </div>
@@ -368,7 +392,7 @@ export default function Landing() {
                   {
                     icon: Globe,
                     title: "Multi-Language Support",
-                    description: "Study in your native language with 17 supported languages including Arabic, Hindi, and Chinese"
+                    description: "Study in your native language with 35 supported languages including Arabic, Hindi, Mandarin, Spanish, French, German, Portuguese, Russian, Japanese, Korean, and 25 more"
                   },
                   {
                     icon: Award,
