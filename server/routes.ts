@@ -7,6 +7,7 @@ import { storage } from "./storage";
 import { askMedicalAI } from "./ask-ai-api";
 import { generateUKMedicalQuestion, generateMultipleUKQuestions } from "./uk-medical-generator";
 import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generator";
+import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-uk-generator";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -501,62 +502,69 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // OSCE Stations API Routes
+  // PLAB 2 OSCE Stations API Routes - Using UK Medical Generator
   app.get("/api/osce/stations", async (req, res) => {
     try {
-      const stations = [
-        {
-          id: 1,
-          title: "History Taking - Chest Pain",
-          category: "History Taking",
-          difficulty: "Beginner",
-          duration: 8,
-          description: "Take focused history from patient presenting with acute chest pain",
-          patientInfo: {
-            name: "Mr. John Smith",
-            age: 45,
-            occupation: "Accountant",
-            background: "Presented to A&E with 2-hour history of central chest pain"
-          },
-          learningObjectives: [
-            "Obtain relevant history for chest pain",
-            "Assess cardiovascular risk factors", 
-            "Show empathy and professionalism",
-            "Explain next steps clearly"
-          ],
-          completed: true,
-          attempts: 3,
-          bestScore: 92
-        },
-        {
-          id: 2,
-          title: "Breaking Bad News - Cancer Diagnosis",
-          category: "Communication",
-          difficulty: "Advanced",
-          duration: 10,
-          description: "Break news of cancer diagnosis with sensitivity and clear communication",
-          patientInfo: {
-            name: "Mrs. Sarah Williams",
-            age: 52,
-            occupation: "Teacher",
-            background: "Awaiting test results after breast lump investigation"
-          },
-          learningObjectives: [
-            "Use appropriate breaking bad news framework",
-            "Show empathy and emotional support",
-            "Provide clear medical information",
-            "Address patient concerns and questions"
-          ],
-          completed: false,
-          attempts: 1,
-          bestScore: 85
-        }
-      ];
+      const { type, specialty, difficulty, count = 10 } = req.query;
+      
+      // Generate authentic UK medical OSCE stations
+      const stationType = (type as string) || 'history-taking';
+      const stationSpecialty = (specialty as string) || 'general-medicine';
+      const stationDifficulty = (difficulty as string) || 'intermediate';
+      const stationCount = Math.min(parseInt(count as string), 5);
+      
+      console.log(`Generating ${stationCount} PLAB 2 ${stationType} stations for ${stationSpecialty}`);
+      
+      const generatedStations = await generateMultiplePLAB2Stations(
+        stationCount, 
+        stationType, 
+        stationSpecialty, 
+        stationDifficulty
+      );
+      
+      // Convert to frontend format
+      const stations = generatedStations.map((station, index) => ({
+        id: station.id,
+        title: station.title,
+        category: station.type.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()),
+        difficulty: station.difficulty.charAt(0).toUpperCase() + station.difficulty.slice(1),
+        duration: station.duration,
+        description: station.scenario.substring(0, 100) + '...',
+        scenario: station.scenario,
+        instructions: station.instructions,
+        markingCriteria: station.markingCriteria,
+        keyActions: station.keyActions,
+        redFlags: station.redFlags,
+        differentialDiagnosis: station.differentialDiagnosis,
+        medications: station.medications,
+        references: station.references,
+        completed: false,
+        attempts: 0,
+        bestScore: 0
+      }));
 
       res.json(stations);
-    } catch (error) {
-      console.error("Error fetching OSCE stations:", error);
-      res.status(500).json({ error: "Failed to fetch stations" });
+    } catch (error: any) {
+      console.error('Error generating OSCE stations:', error);
+      res.status(500).json({ error: "Failed to generate OSCE stations" });
+    }
+  });
+
+  // Generate single PLAB 2 station endpoint
+  app.post("/api/osce/generate-station", async (req, res) => {
+    try {
+      const { type, specialty, difficulty } = req.body;
+      
+      const station = await generatePLAB2Station(
+        type || 'history-taking',
+        specialty || 'general-medicine', 
+        difficulty || 'intermediate'
+      );
+      
+      res.json(station);
+    } catch (error: any) {
+      console.error('Error generating single OSCE station:', error);
+      res.status(500).json({ error: "Failed to generate station" });
     }
   });
 
