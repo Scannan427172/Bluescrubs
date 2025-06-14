@@ -96,8 +96,13 @@ export function Navigation({ user }: NavigationProps) {
               {/* Mobile Menu Trigger */}
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="sm" className="md:hidden">
-                    <Menu className="w-5 h-5" />
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="md:hidden p-2 hover:bg-gray-100 rounded-md"
+                    aria-label="Open navigation menu"
+                  >
+                    <Menu className="w-6 h-6 text-gray-700" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[280px] sm:w-[320px] h-full overflow-hidden">
