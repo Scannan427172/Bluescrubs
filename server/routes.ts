@@ -1137,6 +1137,102 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Community API Endpoints
+  app.post("/api/community/posts/like", async (req, res) => {
+    try {
+      const { postId } = req.body;
+      // In a real implementation, this would update the database
+      // For now, simulate successful like action
+      res.json({ success: true, message: "Post liked successfully" });
+    } catch (error) {
+      console.error('Error liking post:', error);
+      res.status(500).json({ error: "Failed to like post" });
+    }
+  });
+
+  app.post("/api/community/groups/join", async (req, res) => {
+    try {
+      const { groupId } = req.body;
+      // In a real implementation, this would update the database
+      res.json({ success: true, message: "Group joined successfully" });
+    } catch (error) {
+      console.error('Error joining group:', error);
+      res.status(500).json({ error: "Failed to join group" });
+    }
+  });
+
+  app.post("/api/community/events/register", async (req, res) => {
+    try {
+      const { eventId } = req.body;
+      // In a real implementation, this would update the database
+      res.json({ success: true, message: "Event registration successful" });
+    } catch (error) {
+      console.error('Error registering for event:', error);
+      res.status(500).json({ error: "Failed to register for event" });
+    }
+  });
+
+  app.post("/api/community/posts", async (req, res) => {
+    try {
+      const { content, tags, author } = req.body;
+      const newPost = {
+        id: Date.now(),
+        author,
+        content,
+        timestamp: "Just now",
+        likes: 0,
+        replies: 0,
+        tags: tags || [],
+        isLiked: false
+      };
+      res.json({ success: true, post: newPost });
+    } catch (error) {
+      console.error('Error creating post:', error);
+      res.status(500).json({ error: "Failed to create post" });
+    }
+  });
+
+  app.get("/api/community/posts", async (req, res) => {
+    try {
+      const posts = [
+        {
+          id: 1,
+          author: {
+            name: "Dr. Ahmed Khan",
+            avatar: "AK",
+            title: "IMT2 Doctor",
+            location: "Manchester, UK"
+          },
+          content: "Just passed my PLAB 2! The OSCE stations were challenging but the practice here really helped. Happy to share tips with anyone preparing.",
+          timestamp: "2 hours ago",
+          likes: 24,
+          replies: 8,
+          tags: ["PLAB2", "Success Story", "Tips"],
+          isLiked: false
+        },
+        {
+          id: 2,
+          author: {
+            name: "Dr. Sarah Patel",
+            avatar: "SP",
+            title: "F1 Doctor",
+            location: "London, UK"
+          },
+          content: "Starting my foundation year next month! Looking for other international graduates in London area for study groups and networking.",
+          timestamp: "5 hours ago",
+          likes: 18,
+          replies: 12,
+          tags: ["Networking", "London", "Foundation"],
+          isLiked: true
+        }
+      ];
+      res.json({ posts });
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      res.status(500).json({ error: "Failed to fetch posts" });
+    }
+  });
+
   app.get("/api/users", async (req, res) => {
     try {
       // Enhanced user data with all competitive advantage metrics

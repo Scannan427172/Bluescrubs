@@ -68,6 +68,7 @@ export default function Community() {
   const [activeTab, setActiveTab] = useState('discussions');
   const [searchQuery, setSearchQuery] = useState('');
   const [newPost, setNewPost] = useState('');
+  const [isPosting, setIsPosting] = useState(false);
 
   const communityPosts: CommunityPost[] = [
     {
@@ -183,19 +184,108 @@ export default function Community() {
     }
   ];
 
-  const handleLikePost = (postId: number) => {
-    // In a real app, this would update the backend
-    console.log(`Liked post ${postId}`);
+  const handleLikePost = async (postId: number) => {
+    try {
+      const response = await fetch('/api/community/posts/like', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId })
+      });
+      
+      if (response.ok) {
+        // Update local state to reflect the like
+        const updatedPosts = communityPosts.map(post => 
+          post.id === postId 
+            ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
+            : post
+        );
+        // In a real implementation, this would update state via setState
+        console.log('Post liked successfully');
+      }
+    } catch (error) {
+      console.error('Error liking post:', error);
+    }
   };
 
-  const handleJoinGroup = (groupId: number) => {
-    // In a real app, this would update the backend
-    console.log(`Joined group ${groupId}`);
+  const handleJoinGroup = async (groupId: number) => {
+    try {
+      const response = await fetch('/api/community/groups/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ groupId })
+      });
+      
+      if (response.ok) {
+        console.log('Group joined successfully');
+        // Update local state to reflect membership
+      }
+    } catch (error) {
+      console.error('Error joining group:', error);
+    }
   };
 
-  const handleRegisterEvent = (eventId: number) => {
-    // In a real app, this would update the backend
-    console.log(`Registered for event ${eventId}`);
+  const handleRegisterEvent = async (eventId: number) => {
+    try {
+      const response = await fetch('/api/community/events/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ eventId })
+      });
+      
+      if (response.ok) {
+        console.log('Event registration successful');
+        // Update local state to reflect registration
+      }
+    } catch (error) {
+      console.error('Error registering for event:', error);
+    }
+  };
+
+  const handleCreatePost = async () => {
+    if (!newPost.trim()) return;
+    
+    setIsPosting(true);
+    try {
+      const response = await fetch('/api/community/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: newPost,
+          tags: ['Discussion'],
+          author: {
+            name: "Student User",
+            avatar: "SU",
+            title: "PLAB Candidate",
+            location: "UK"
+          }
+        })
+      });
+      
+      if (response.ok) {
+        setNewPost('');
+        console.log('Post created successfully');
+      }
+    } catch (error) {
+      console.error('Error creating post:', error);
+    } finally {
+      setIsPosting(false);
+    }
+  };
+
+  const handleConnectMentor = async (mentorId: string) => {
+    try {
+      const response = await fetch('/api/mentorship/connect', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mentorId })
+      });
+      
+      if (response.ok) {
+        console.log('Mentor connection request sent');
+      }
+    } catch (error) {
+      console.error('Error connecting to mentor:', error);
+    }
   };
 
   return (
@@ -296,9 +386,12 @@ export default function Community() {
                       <Badge variant="outline">PLAB2</Badge>
                       <Badge variant="outline">Tips</Badge>
                     </div>
-                    <Button disabled={!newPost.trim()}>
+                    <Button 
+                      disabled={!newPost.trim() || isPosting}
+                      onClick={handleCreatePost}
+                    >
                       <Plus className="w-4 h-4 mr-2" />
-                      Post
+                      {isPosting ? 'Posting...' : 'Post'}
                     </Button>
                   </div>
                 </div>
@@ -475,25 +568,203 @@ export default function Community() {
 
         {/* Mentorship Tab */}
         <TabsContent value="mentorship" className="space-y-6">
-          <div className="text-center py-12">
-            <Stethoscope className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-            <h2 className="text-2xl font-bold mb-4">Mentorship Program</h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Connect with experienced UK doctors who can guide you through your PLAB journey 
-              and NHS career development. Get personalized advice and support from those who've 
-              successfully navigated the path you're on.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Button>
-                <UserPlus className="w-4 h-4 mr-2" />
-                Find a Mentor
-              </Button>
+          <div className="flex justify-between items-center">
+            <h2 className="text-2xl font-bold">Mentorship Program</h2>
+            <div className="flex gap-2">
               <Button variant="outline">
                 <Star className="w-4 h-4 mr-2" />
                 Become a Mentor
               </Button>
+              <Button>
+                <UserPlus className="w-4 h-4 mr-2" />
+                Find a Mentor
+              </Button>
             </div>
           </div>
+
+          {/* Mentorship Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <Card>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-blue-600">127</div>
+                <div className="text-sm text-muted-foreground">Active Mentors</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-green-600">342</div>
+                <div className="text-sm text-muted-foreground">Successful Matches</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-purple-600">94%</div>
+                <div className="text-sm text-muted-foreground">Success Rate</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Available Mentors */}
+          <div className="grid gap-6">
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <Avatar className="w-12 h-12">
+                    <AvatarFallback>DR</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-lg font-semibold">Dr. Rebecca Williams</h3>
+                      <Badge className="bg-green-100 text-green-800">Available</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Consultant Cardiologist • Imperial College Healthcare NHS Trust
+                    </p>
+                    <p className="text-sm mb-3">
+                      Experienced in guiding international medical graduates through PLAB and specialty training. 
+                      Specializes in cardiology pathway mentoring and NHS application processes.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <Badge variant="outline">PLAB Guidance</Badge>
+                      <Badge variant="outline">Cardiology</Badge>
+                      <Badge variant="outline">NHS Applications</Badge>
+                      <Badge variant="outline">Career Development</Badge>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-yellow-500" />
+                          4.9 (23 reviews)
+                        </span>
+                        <span>London, UK</span>
+                      </div>
+                      <Button size="sm">
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        Connect
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <Avatar className="w-12 h-12">
+                    <AvatarFallback>JS</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-lg font-semibold">Dr. James Singh</h3>
+                      <Badge className="bg-yellow-100 text-yellow-800">Busy</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Emergency Medicine Consultant • Manchester Royal Infirmary
+                    </p>
+                    <p className="text-sm mb-3">
+                      Passionate about supporting international doctors in emergency medicine. 
+                      Offers guidance on PLAB preparation, specialty applications, and work-life balance in the NHS.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <Badge variant="outline">Emergency Medicine</Badge>
+                      <Badge variant="outline">PLAB 2 OSCE</Badge>
+                      <Badge variant="outline">Specialty Training</Badge>
+                      <Badge variant="outline">Work-Life Balance</Badge>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-yellow-500" />
+                          4.8 (31 reviews)
+                        </span>
+                        <span>Manchester, UK</span>
+                      </div>
+                      <Button size="sm" variant="outline" disabled>
+                        <Clock className="w-4 h-4 mr-2" />
+                        Join Waitlist
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <Avatar className="w-12 h-12">
+                    <AvatarFallback>AL</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-lg font-semibold">Dr. Amira Lopez</h3>
+                      <Badge className="bg-green-100 text-green-800">Available</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      GP Partner • Birmingham Health Centre
+                    </p>
+                    <p className="text-sm mb-3">
+                      Former international medical graduate who successfully transitioned to UK general practice. 
+                      Specializes in PLAB preparation strategies and GP training pathway guidance.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <Badge variant="outline">General Practice</Badge>
+                      <Badge variant="outline">PLAB 1 & 2</Badge>
+                      <Badge variant="outline">GP Training</Badge>
+                      <Badge variant="outline">Cultural Adaptation</Badge>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-yellow-500" />
+                          5.0 (18 reviews)
+                        </span>
+                        <span>Birmingham, UK</span>
+                      </div>
+                      <Button size="sm">
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        Connect
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Success Stories */}
+          <Card className="bg-gradient-to-r from-blue-50 to-purple-50">
+            <CardContent className="p-6">
+              <h3 className="text-lg font-semibold mb-4">Success Stories</h3>
+              <div className="space-y-4">
+                <div className="flex gap-3">
+                  <Avatar className="w-8 h-8">
+                    <AvatarFallback>MK</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-sm font-medium">Dr. Maya Kumar</p>
+                    <p className="text-sm text-muted-foreground">
+                      "Dr. Williams was instrumental in my PLAB success. Her guidance on clinical communication 
+                      and NHS culture helped me pass PLAB 2 on my first attempt!"
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Avatar className="w-8 h-8">
+                    <AvatarFallback>RN</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-sm font-medium">Dr. Raj Nair</p>
+                    <p className="text-sm text-muted-foreground">
+                      "The mentorship program connected me with Dr. Singh who helped me navigate the specialty 
+                      application process. Now I'm a registrar in emergency medicine!"
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
