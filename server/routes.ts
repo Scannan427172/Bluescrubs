@@ -897,24 +897,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Use OpenAI to translate while preserving medical accuracy
       const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
       
-      const translationPrompt = `You are a professional medical translator specializing in UK medical education. Translate the following medical question to ${targetLanguage} while maintaining clinical accuracy.
+      const translationPrompt = `You are a professional medical translator. Translate the following medical question completely to ${targetLanguage} while maintaining clinical accuracy.
 
-CRITICAL REQUIREMENTS:
-1. Preserve all medical terminology accuracy
-2. Do NOT translate NICE guideline names or URLs in references
-3. Maintain clinical context appropriate for UK healthcare
-4. Use appropriate medical terminology for the target language
-5. Ensure translation is suitable for medical professionals
-6. Return ONLY valid JSON - no additional text
+REQUIREMENTS:
+1. Translate ALL text content including scenario, question, options, explanation, and reference titles
+2. Use appropriate medical terminology for the target language
+3. Maintain clinical context and accuracy
+4. Only preserve URLs in references (keep URLs unchanged but translate titles)
+5. Return ONLY valid JSON - no additional text
+
+TRANSLATE EVERYTHING:
+- scenario (complete translation)
+- question (complete translation)
+- options (all answer choices)
+- explanation (complete translation)
+- reference titles (translate but keep URLs unchanged)
 
 Example translation to Hindi:
-Input: {"scenario": "A 68-year-old man presents with chest pain", "question": "What is the diagnosis?"}
-Output: {"scenario": "एक 68 वर्षीय व्यक्ति सीने में दर्द के साथ प्रस्तुत करता है", "question": "निदान क्या है?"}
+Input: {"scenario": "A 68-year-old man presents with chest pain", "explanation": "According to NICE NG95 guidelines", "references": [{"title": "NICE NG95: Chest pain guidelines", "url": "https://nice.org.uk/ng95"}]}
+Output: {"scenario": "एक 68 वर्षीय व्यक्ति सीने में दर्द के साथ प्रस्तुत करता है", "explanation": "नाइस एनजी95 दिशानिर्देशों के अनुसार", "references": [{"title": "नाइस एनजी95: सीने में दर्द दिशानिर्देश", "url": "https://nice.org.uk/ng95"}]}
 
 Original Question:
 ${JSON.stringify(question, null, 2)}
 
-Translate scenario, question text, and options to ${targetLanguage}. Keep references unchanged. Return only the JSON:`;
+Translate everything to ${targetLanguage}:`;
 
       const response = await openai.chat.completions.create({
         model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
@@ -932,8 +938,8 @@ Translate scenario, question text, and options to ${targetLanguage}. Keep refere
         console.error('Parse error:', parseError);
         console.error('Raw response:', response.choices[0].message.content);
         
-        // Simple manual translation as fallback
-        const basicTranslations: Record<string, string> = {
+        // Complete translation fallback
+        const completeTranslations: Record<string, string> = {
           'presents with': 'के साथ प्रस्तुत करता है',
           'elevated blood pressure': 'उच्च रक्तचाप',
           'lifestyle changes': 'जीवनशैली में बदलाव',
@@ -942,18 +948,39 @@ Translate scenario, question text, and options to ${targetLanguage}. Keep refere
           'diagnostic investigation': 'निदान की जांच',
           'hospital admission': 'अस्पताल में भर्ती',
           'What is the most appropriate': 'सबसे उपयुक्त क्या है',
-          'According to NICE': 'NICE के अनुसार'
+          'According to': 'के अनुसार',
+          'NICE': 'नाइस',
+          'guidelines': 'दिशानिर्देश',
+          'Hypertension': 'उच्च रक्तचाप',
+          'in adults': 'वयस्कों में',
+          'Start': 'शुरू करें',
+          'Continue': 'जारी रखें',
+          'Further': 'आगे',
+          'Conservative': 'संरक्षणात्मक',
+          'Immediate': 'तत्काल'
         };
         
         const translateText = (text: string) => {
           if (targetLanguage === 'Hindi' || targetLanguage === 'hi') {
             let translated = text;
-            Object.entries(basicTranslations).forEach(([english, hindi]) => {
+            
+            // Apply complete translations including guideline names
+            Object.entries(completeTranslations).forEach(([english, hindi]) => {
               translated = translated.replace(new RegExp(english, 'gi'), hindi);
             });
             return translated;
           }
           return text;
+        };
+        
+        const translateReference = (ref: any) => {
+          if (targetLanguage === 'Hindi' || targetLanguage === 'hi') {
+            return {
+              title: translateText(ref.title),
+              url: ref.url // Keep URL unchanged
+            };
+          }
+          return ref;
         };
 
         translatedQuestion = {
@@ -961,7 +988,8 @@ Translate scenario, question text, and options to ${targetLanguage}. Keep refere
           scenario: translateText(question.scenario),
           question: translateText(question.question),
           options: question.options.map((opt: string) => translateText(opt)),
-          explanation: translateText(question.explanation)
+          explanation: translateText(question.explanation),
+          references: question.references.map((ref: any) => translateReference(ref))
         };
       }
       
