@@ -245,8 +245,8 @@ export function generateSimpleQuestion(
         explanation: "Option A (Cholangitis) is CORRECT because the triad of jaundice, fever, and RUQ pain (Charcot's triad) with elevated inflammatory markers indicates ascending cholangitis, a life-threatening biliary infection requiring urgent antibiotic therapy and biliary decompression.\n\nOption B (Hepatitis A) is INCORRECT because viral hepatitis typically causes hepatocellular injury (elevated ALT/AST) rather than obstructive pattern (elevated ALP/bilirubin) and doesn't usually present with fever and RUQ pain.\n\nOption C (Choledocholithiasis) is INCORRECT because bile duct stones alone cause painless jaundice without the systemic inflammatory response (fever, elevated WCC) seen in cholangitis.\n\nOption D (Cholecystitis) is INCORRECT because gallbladder inflammation doesn't typically cause jaundice unless complicated by Mirizzi syndrome or choledocholithiasis with secondary cholangitis.",
         references: [
           {
-            text: "NICE CG188: Gallstone disease - Section 1.5.1 'Charcot triad of fever, jaundice and RUQ pain suggests acute cholangitis requiring urgent treatment'",
-            url: "https://www.nice.org.uk/guidance/cg188"
+            text: "NICE CG188 Section 1.5.1 Box 3: Cholangitis Recognition - 'Charcot triad: fever + jaundice + RUQ pain indicates urgent cholangitis' (Page 28)",
+            url: "https://www.nice.org.uk/guidance/cg188/chapter/1-Recommendations#acute-cholangitis"
           },
           {
             text: "BSG Guidelines 2019: 'Cholangitis requires urgent antibiotics and biliary decompression within 24-48 hours - Gut 68:1449-1478'",
