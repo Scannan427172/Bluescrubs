@@ -155,12 +155,12 @@ async function generateSingleQuestion(
         },
         {
           role: "user",
-          content: `Generate a ${difficulty} level UK medical exam question for ${specialty}. Focus on current NICE guidelines and GMC standards. Output only valid JSON format.`
+          content: `${specialty} ${difficulty} question with NICE/GMC references. JSON only.`
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.7,
-      max_tokens: 2000
+      temperature: 0.6,
+      max_tokens: 1200
     });
 
     const content = response.choices[0].message.content;

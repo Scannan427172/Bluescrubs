@@ -659,7 +659,7 @@ export default function PLAB1New() {
                     <SelectItem value="hi">🇮🇳 Hindi</SelectItem>
                     <SelectItem value="ur">🇵🇰 Urdu</SelectItem>
                     <SelectItem value="bn">🇧🇩 Bengali</SelectItem>
-                    <SelectItem value="ta">🇮🇳 Tamil</SelectItem>
+                    <SelectItem value="ta">🇱🇰 Tamil</SelectItem>
                     <SelectItem value="te">🇮🇳 Telugu</SelectItem>
                     <SelectItem value="gu">🇮🇳 Gujarati</SelectItem>
                     <SelectItem value="kn">🇮🇳 Kannada</SelectItem>
@@ -670,8 +670,10 @@ export default function PLAB1New() {
                     <SelectItem value="fr">🇫🇷 French</SelectItem>
                     <SelectItem value="de">🇩🇪 German</SelectItem>
                     <SelectItem value="it">🇮🇹 Italian</SelectItem>
-                    <SelectItem value="pt">🇧🇷 Portuguese</SelectItem>
+                    <SelectItem value="pt">🇵🇹 Portuguese</SelectItem>
                     <SelectItem value="ru">🇷🇺 Russian</SelectItem>
+                    <SelectItem value="pl">🇵🇱 Polish</SelectItem>
+                    <SelectItem value="ro">🇷🇴 Romanian</SelectItem>
                     <SelectItem value="zh">🇨🇳 Chinese</SelectItem>
                     <SelectItem value="ja">🇯🇵 Japanese</SelectItem>
                     <SelectItem value="ko">🇰🇷 Korean</SelectItem>
