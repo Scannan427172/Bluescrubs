@@ -5,6 +5,7 @@ import { communitySystem } from "./community-contribution";
 import { analyzeVideoPerformance } from "./ai-analysis";
 import { storage } from "./storage";
 import { askMedicalAI } from "./ask-ai-api";
+import { generateUKMedicalQuestion, generateMultipleUKQuestions } from "./uk-medical-generator";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -53,7 +54,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const subcategories = subcategoriesMap[category] || ['general'];
       
       console.log(`Generating questions for ${category} at ${difficulty} level, count: ${limitedCount}`);
-      const questions = generateMultipleSimpleQuestions(category, difficulty, limitedCount);
+      
+      // Use UK Medical Generator for authentic NICE/GMC-compliant questions
+      const questionGenerationPromise = generateMultipleUKQuestions(limitedCount, category, difficulty);
+      
+      const result = await Promise.race([questionGenerationPromise, timeoutPromise]);
+      clearTimeout(timeoutId!);
+      
+      const ukQuestions = result as any[];
+      
+      // Convert UK questions to standard format
+      const questions = ukQuestions.map((ukQ, index) => ({
+        id: `uk_${category}_${Date.now()}_${index}_${Math.random().toString(36).substr(2, 6)}`,
+        stem: `${ukQ.scenario}\n\n${ukQ.question}`,
+        options: [ukQ.options.A, ukQ.options.B, ukQ.options.C, ukQ.options.D, ukQ.options.E],
+        correctAnswer: ['A', 'B', 'C', 'D', 'E'].indexOf(ukQ.correct_answer),
+        explanation: ukQ.explanation,
+        category,
+        difficulty,
+        references: ukQ.references.map((ref: any) => ({
+          text: ref.title,
+          url: ref.url
+        }))
+      }));
+      
       console.log(`Generated questions:`, questions.map(q => ({ id: q.id, category: q.category, hasOptions: !!q.options })));
       
       if (!questions || !Array.isArray(questions) || questions.length === 0) {
