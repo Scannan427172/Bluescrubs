@@ -153,10 +153,22 @@ export default function PLAB1New() {
 
   const speakCurrentQuestion = () => {
     if (currentQuestion) {
-      const questionText = translateMedicalContent(currentQuestion.stem || currentQuestion.question);
-      const optionsText = currentQuestion.options?.map((option: string, index: number) => 
-        `Option ${String.fromCharCode(65 + index)}: ${translateMedicalContent(option)}`
-      ).join('. ') || '';
+      // Get translated question and options if available
+      const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
+      const translatedQ = translatedQuestions[cacheKey];
+      
+      let questionText = currentQuestion.stem || currentQuestion.question;
+      let options = Array.isArray(currentQuestion.options) ? currentQuestion.options : [];
+      
+      // Use translated content if available
+      if (translateQuestions && selectedLanguage !== 'en' && translatedQ) {
+        questionText = translatedQ.scenario || translatedQ.stem || translatedQ.question || questionText;
+        options = translatedQ.options || options;
+      }
+      
+      const optionsText = options.map((option: string, index: number) => 
+        `Option ${String.fromCharCode(65 + index)}: ${option}`
+      ).join('. ');
       
       const fullText = `${questionText}. The options are: ${optionsText}`;
       speakText(fullText);
@@ -1021,9 +1033,37 @@ export default function PLAB1New() {
               {(() => {
                 const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
                 const translatedQ = translatedQuestions[cacheKey];
-                const options = (translateQuestions && selectedLanguage !== 'en' && translatedQ?.options) 
+                let options = (translateQuestions && selectedLanguage !== 'en' && translatedQ?.options) 
                   ? translatedQ.options 
                   : (Array.isArray(currentQuestion.options) ? currentQuestion.options : []);
+                
+                // Apply quick fallback translation for options if API translation not ready
+                if (translateQuestions && selectedLanguage !== 'en' && !translatedQ?.options && Array.isArray(currentQuestion.options)) {
+                  const quickTranslations: Record<string, Record<string, string>> = {
+                    'ar': {
+                      'Primary PCI': 'القسطرة الأولية', 'Thrombolytic therapy': 'العلاج المذيب للجلطة',
+                      'Conservative management': 'العلاج التحفظي', 'Urgent': 'عاجل', 'Emergency': 'طوارئ'
+                    },
+                    'hi': {
+                      'Primary PCI': 'प्राथमिक पीसीआई', 'Thrombolytic therapy': 'थ्रोम्बोलाइटिक थेरेपी',
+                      'Conservative management': 'रूढ़िवादी प्रबंधन', 'Urgent': 'तत्काल', 'Emergency': 'आपातकाल'
+                    },
+                    'ur': {
+                      'Primary PCI': 'بنیادی پی سی آئی', 'Thrombolytic therapy': 'خون کا لوتھڑا گھولنے کا علاج',
+                      'Conservative management': 'قدامت پسند انتظام', 'Urgent': 'فوری', 'Emergency': 'ایمرجنسی'
+                    }
+                  };
+                  
+                  const translations = quickTranslations[selectedLanguage] || {};
+                  options = currentQuestion.options.map((option: string) => {
+                    let translated = option;
+                    Object.entries(translations).forEach(([english, native]) => {
+                      translated = translated.replace(new RegExp(`\\b${english}\\b`, 'gi'), native);
+                    });
+                    return translated;
+                  });
+                }
+                
                 return options;
               })().map((option: string, index: number) => {
                 const isCorrectAnswer = index === currentQuestion.correctAnswer;
@@ -1075,7 +1115,7 @@ export default function PLAB1New() {
                       
                       <div className="flex-1">
                         <span className="text-base leading-relaxed text-gray-800">
-                          {translateMedicalContent(option)}
+                          {option}
                         </span>
                       </div>
                       
