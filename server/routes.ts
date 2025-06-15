@@ -1,7 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { generateMultipleSimpleQuestions } from "./simple-question-generator";
-import { communitySystem } from "./community-contribution";
 import { analyzeVideoPerformance } from "./ai-analysis";
 import { storage } from "./storage";
 import { askMedicalAI } from "./ask-ai-api";
@@ -19,12 +18,6 @@ import {
   type SmartFlashcard,
   type QuizQuestion
 } from "./ai-study-tools";
-import { advancedAI } from "./advanced-ai-system";
-import { ukClinical } from "./uk-clinical-integration";
-import { vrOSCE } from "./vr-osce-system";
-import { mobileOffline } from "./mobile-offline-system";
-import { gamification } from "./gamification-system";
-import { professionalDevelopment } from "./professional-development";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
