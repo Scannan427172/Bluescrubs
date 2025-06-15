@@ -21,6 +21,7 @@ import Community from "@/pages/community";
 import Pricing from "@/pages/pricing";
 import AskNHSPrep from "@/pages/ask-nhs-prep";
 import PLABAIDashboard from "@/pages/plab-ai-dashboard";
+import InteractivePatientPage from "@/pages/interactive-patient-page";
 import More from "@/pages/more";
 import NotFound from "@/pages/not-found";
 
@@ -159,6 +160,15 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <PLABAIDashboard />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/interactive-patient">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <InteractivePatientPage />
           </div>
         </div>
       </Route>

@@ -81,10 +81,13 @@ export function InteractivePatient() {
 
   const startSessionMutation = useMutation({
     mutationFn: async ({ patientId, scenarioType }: { patientId: string; scenarioType: string }) => {
-      return await apiRequest(`/api/interactive-patient/start-session`, {
+      const response = await fetch('/api/interactive-patient/start-session', {
         method: 'POST',
-        body: { patientId, scenarioType }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ patientId, scenarioType })
       });
+      if (!response.ok) throw new Error('Failed to start session');
+      return await response.json();
     },
     onSuccess: (data) => {
       setCurrentSession(data.session);
@@ -94,10 +97,13 @@ export function InteractivePatient() {
 
   const conversationMutation = useMutation({
     mutationFn: async ({ sessionId, message }: { sessionId: string; message: string }) => {
-      return await apiRequest(`/api/interactive-patient/conversation`, {
+      const response = await fetch('/api/interactive-patient/conversation', {
         method: 'POST',
-        body: { sessionId, message }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, message })
       });
+      if (!response.ok) throw new Error('Failed to process conversation');
+      return await response.json();
     },
     onSuccess: (data) => {
       setCurrentSession(data.updatedSession);
@@ -268,7 +274,7 @@ export function InteractivePatient() {
             <CardContent className="flex-1 flex flex-col p-0">
               <ScrollArea className="flex-1 p-4">
                 <div className="space-y-4">
-                  {currentSession?.conversation.length === 0 && (
+                  {(!currentSession?.conversation || currentSession?.conversation.length === 0) && (
                     <div className="text-center py-8">
                       <div className="bg-blue-50 rounded-lg p-6 max-w-md mx-auto">
                         <Bot className="h-12 w-12 text-blue-600 mx-auto mb-4" />
@@ -280,7 +286,7 @@ export function InteractivePatient() {
                     </div>
                   )}
 
-                  {currentSession?.conversation.map((turn) => (
+                  {currentSession?.conversation?.map((turn) => (
                     <div key={turn.id} className={`flex gap-3 ${turn.speaker === 'doctor' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-lg rounded-lg p-3 ${
                         turn.speaker === 'doctor' 

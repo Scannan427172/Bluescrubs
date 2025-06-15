@@ -346,13 +346,14 @@ export default function PLABAIDashboard() {
 
       {/* Main Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-7">
+        <TabsList className="grid w-full grid-cols-8">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="mcqs">Adaptive MCQs</TabsTrigger>
           <TabsTrigger value="reasoning">Clinical Reasoning</TabsTrigger>
           <TabsTrigger value="guidelines">UK Guidelines</TabsTrigger>
           <TabsTrigger value="study-plan">Study Plan</TabsTrigger>
           <TabsTrigger value="mock-exam">500Q Mock Exam</TabsTrigger>
+          <TabsTrigger value="interactive-patient">Virtual Patients</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
         </TabsList>
 
@@ -978,6 +979,80 @@ export default function PLABAIDashboard() {
                     </p>
                   </div>
                 )}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Interactive Patient Tab */}
+        <TabsContent value="interactive-patient" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="w-5 h-5 text-blue-600" />
+                Virtual Patient Consultations
+              </CardTitle>
+              <CardDescription>
+                Practice clinical communication with AI-powered virtual patients for PLAB 2 preparation
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-3 gap-6">
+                <Card className="border-2 border-blue-100 hover:border-blue-300 transition-colors cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="text-center space-y-3">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+                        <MessageSquare className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <h3 className="font-semibold">History Taking</h3>
+                      <p className="text-sm text-gray-600">Practice structured history taking with virtual patients</p>
+                      <Button size="sm" className="w-full" onClick={() => window.open('/interactive-patient', '_blank')}>
+                        Start Session
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-green-100 hover:border-green-300 transition-colors cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="text-center space-y-3">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                        <FileText className="w-6 h-6 text-green-600" />
+                      </div>
+                      <h3 className="font-semibold">Patient Counselling</h3>
+                      <p className="text-sm text-gray-600">Develop counselling and explanation skills</p>
+                      <Button size="sm" className="w-full" onClick={() => window.open('/interactive-patient', '_blank')}>
+                        Start Session
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-purple-100 hover:border-purple-300 transition-colors cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="text-center space-y-3">
+                      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto">
+                        <AlertCircle className="w-6 h-6 text-purple-600" />
+                      </div>
+                      <h3 className="font-semibold">Breaking Bad News</h3>
+                      <p className="text-sm text-gray-600">Practice sensitive communication scenarios</p>
+                      <Button size="sm" className="w-full" onClick={() => window.open('/interactive-patient', '_blank')}>
+                        Start Session
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                <h4 className="font-semibold text-blue-900 mb-2">Interactive Patient Features:</h4>
+                <ul className="text-sm text-blue-800 space-y-1">
+                  <li>• Real-time communication analysis and scoring</li>
+                  <li>• Multiple patient scenarios across medical specialties</li>
+                  <li>• Immediate feedback on empathy and clinical reasoning</li>
+                  <li>• Progressive difficulty levels from foundation to advanced</li>
+                  <li>• GMC communication standards alignment</li>
+                </ul>
               </div>
             </CardContent>
           </Card>
