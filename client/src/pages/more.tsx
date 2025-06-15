@@ -174,28 +174,28 @@ export default function More() {
       title: "Video OSCE",
       description: "Advanced video-based OSCE practice stations",
       hasArrow: true,
-      link: "/video-osce"
+      link: "/plab2-osce"
     },
     {
       icon: FileText,
       title: "Practice Tests",
       description: "Full-length PLAB 1 mock exams and timed practice tests",
       hasArrow: true,
-      link: "/practice-tests"
+      link: "/plab1-new"
     },
     {
       icon: Target,
       title: "Job Placement",
       description: "NHS job search, CV review, and interview preparation",
       hasArrow: true,
-      link: "/job-placement"
+      link: "/premium"
     },
     {
       icon: MessageCircle,
       title: "Study Groups",
       description: "Join study groups and collaborate with other candidates",
       hasArrow: true,
-      link: "/study-groups"
+      link: "/community"
     },
     {
       icon: Brain,
@@ -209,14 +209,14 @@ export default function More() {
       title: "Accessibility",
       description: "Customizable learning experience for diverse needs",
       hasArrow: true,
-      link: "/accessibility"
+      link: "/dashboard"
     },
     {
       icon: Scale,
       title: "Legal & Privacy",
       description: "Privacy policy, terms of service, and data protection",
       hasArrow: true,
-      link: "/legal"
+      link: "/dashboard"
     },
     {
       icon: Zap,
@@ -230,14 +230,14 @@ export default function More() {
       title: "Neurodiverse Support",
       description: "Specialized learning tools for different cognitive styles",
       hasArrow: true,
-      link: "/neurodiverse"
+      link: "/dashboard"
     },
     {
       icon: Headphones,
       title: "Help Center",
       description: "Get support, tutorials, and frequently asked questions",
       hasArrow: true,
-      link: "/help"
+      link: "/dashboard"
     }
   ];
 
