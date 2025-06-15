@@ -184,13 +184,14 @@ export function registerRoutes(app: Express): Server {
         return res.status(400).json({ error: "Please provide a detailed medical question" });
       }
 
-      // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-      const response = await openai.chat.completions.create({
-        model: "gpt-4o",
-        messages: [
-          {
-            role: "system",
-            content: `You are NHS Prep AI, an expert medical education assistant specifically trained for PLAB 1, PLAB 2, and UK medical practice. You have comprehensive knowledge of:
+      try {
+        // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+        const response = await openai.chat.completions.create({
+          model: "gpt-4o",
+          messages: [
+            {
+              role: "system",
+              content: `You are NHS Prep AI, an expert medical education assistant specifically trained for PLAB 1, PLAB 2, and UK medical practice. You have comprehensive knowledge of:
 
 - NICE (National Institute for Health and Care Excellence) guidelines
 - CKS (Clinical Knowledge Summaries) protocols
@@ -200,28 +201,68 @@ export function registerRoutes(app: Express): Server {
 - OSCE clinical skills and communication
 
 Provide evidence-based, UK-specific medical guidance that aligns with current NHS protocols and PLAB exam requirements. Always reference relevant guidelines when applicable.`
-          },
-          {
-            role: "user",
-            content: question
-          }
-        ],
-        max_tokens: 1000,
-        temperature: 0.3,
-      });
+            },
+            {
+              role: "user",
+              content: question
+            }
+          ],
+          max_tokens: 1000,
+          temperature: 0.3,
+        });
 
-      const answer = response.choices[0].message.content;
-      
-      res.json({
-        question,
-        answer,
-        source: "NHS Prep AI",
-        timestamp: new Date().toISOString(),
-        confidence: "high"
-      });
+        const answer = response.choices[0].message.content;
+        
+        res.json({
+          answer,
+          relatedTopics: [],
+          guidelines: [],
+          confidenceLevel: 0.9,
+          examRelevance: {
+            plab1: true,
+            plab2: true,
+            osce: true
+          },
+          studyRecommendations: []
+        });
+      } catch (openaiError: any) {
+        console.error('OpenAI API error:', openaiError);
+        
+        // Handle quota exceeded error
+        if (openaiError.status === 429 || openaiError.code === 'insufficient_quota') {
+          return res.json({
+            answer: `The AI service has exceeded its current quota. To access personalized medical education guidance, please provide a fresh OpenAI API key.
+
+**For your question about: "${question}"**
+
+Please refer to these UK medical resources:
+• NICE Guidelines: https://www.nice.org.uk/guidance
+• Clinical Knowledge Summaries: https://cks.nice.org.uk/
+• GMC Standards: https://www.gmc-uk.org/ethical-guidance
+• NHS Clinical Guidelines: https://www.england.nhs.uk/
+
+To restore full AI functionality, contact support to update the OpenAI API key.`,
+            relatedTopics: ["UK Medical Guidelines", "PLAB Preparation", "NHS Protocols"],
+            guidelines: ["NICE", "CKS", "GMC", "NHS"],
+            confidenceLevel: 0.8,
+            examRelevance: {
+              plab1: true,
+              plab2: true,
+              osce: true
+            },
+            studyRecommendations: [
+              "Review NICE guidelines for this topic",
+              "Check CKS recommendations",
+              "Practice with PLAB question banks"
+            ]
+          });
+        }
+        
+        throw openaiError;
+      }
     } catch (error) {
-      console.error('NHS Prep AI error:', error);
-      res.status(500).json({ error: "Failed to get NHS Prep response" });
+      console.error('NHS Prep endpoint error:', error);
+      res.status(500).json({ error: "Failed to process NHS Prep request" });
     }
   });
 

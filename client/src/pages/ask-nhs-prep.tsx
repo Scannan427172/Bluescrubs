@@ -52,8 +52,12 @@ export default function AskNHSPrep() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submitted with question:', question);
     if (question.trim()) {
+      console.log('Submitting question to API:', question.trim());
       askQuestionMutation.mutate(question.trim());
+    } else {
+      console.log('Question is empty, not submitting');
     }
   };
 
@@ -170,7 +174,10 @@ export default function AskNHSPrep() {
                     {category.questions.map((q, qIndex) => (
                       <button
                         key={qIndex}
-                        onClick={() => setQuestion(q)}
+                        onClick={() => {
+                          console.log('Sample question clicked:', q);
+                          setQuestion(q);
+                        }}
                         className="w-full p-3 text-left bg-gray-50 hover:bg-blue-50 rounded-lg transition-colors text-sm border border-gray-200 hover:border-blue-200"
                         style={{ color: '#000000' }}
                       >
