@@ -447,6 +447,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Translation endpoint for medical questions
+  app.post('/api/translate-question', async (req, res) => {
+    try {
+      const { question, targetLanguage } = req.body;
+      
+      if (!question || !targetLanguage) {
+        return res.status(400).json({ error: 'Question and target language required' });
+      }
+
+      // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: `You are a medical translation expert. Translate medical exam questions accurately while preserving clinical terminology. Keep medical terms in English when appropriate. Respond with JSON containing: scenario, question, options (A-E), explanation.`
+          },
+          {
+            role: "user",
+            content: `Translate this medical question to ${targetLanguage}:\n\nScenario: ${question.scenario || question.stem}\nQuestion: ${question.question}\nOptions: ${JSON.stringify(question.options)}\nExplanation: ${question.explanation}`
+          }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.3
+      });
+
+      const translated = JSON.parse(response.choices[0].message.content || '{}');
+      res.json(translated);
+    } catch (error) {
+      console.error('Question translation API error:', error);
+      res.status(500).json({ error: 'Translation failed' });
+    }
+  });
+
   // Translation endpoint for PLAB 2 OSCE stations
   app.post('/api/translate-osce', async (req, res) => {
     try {

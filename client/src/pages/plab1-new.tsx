@@ -381,43 +381,56 @@ export default function PLAB1New() {
     if (!translateQuestions || selectedLanguage === 'en') return question;
     
     const cacheKey = `${question.id}_${selectedLanguage}`;
-    if (translatedQuestions[cacheKey]) {
-      return translatedQuestions[cacheKey];
+    
+    // Return if already translating or translated
+    if (translationLoading[cacheKey] || translatedQuestions[cacheKey]) {
+      return translatedQuestions[cacheKey] || question;
     }
-
-    if (translationLoading[cacheKey]) {
-      return question; // Return original while loading
-    }
-
+    
     setTranslationLoading(prev => ({ ...prev, [cacheKey]: true }));
-
+    
     try {
-      const targetLanguage = selectedLanguage === 'ar' ? 'Arabic' : 
-                           selectedLanguage === 'hi' ? 'Hindi' : 
-                           selectedLanguage === 'ur' ? 'Urdu' : 'English';
-
-      const response = await fetch('/api/translate/plab-question', {
+      const response = await fetch('/api/translate-question', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
-          question: question,
-          targetLanguage: targetLanguage
-        })
+          question: {
+            scenario: question.scenario || question.stem,
+            question: question.question,
+            options: question.options,
+            explanation: question.explanation
+          },
+          targetLanguage: selectedLanguage
+        }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        const translated = data.translatedQuestion || question;
-        setTranslatedQuestions(prev => ({ ...prev, [cacheKey]: translated }));
-        return translated;
+      if (!response.ok) {
+        throw new Error(`Translation failed: ${response.statusText}`);
       }
+
+      const translated = await response.json();
+      
+      // Store translated question
+      setTranslatedQuestions(prev => ({
+        ...prev,
+        [cacheKey]: {
+          ...question,
+          stem: translated.scenario || translated.stem,
+          question: translated.question,
+          options: translated.options,
+          explanation: translated.explanation
+        }
+      }));
+      
+      return translated;
     } catch (error) {
-      console.error('Translation failed:', error);
+      console.error('Translation error:', error);
+      return question; // Return original on error
     } finally {
       setTranslationLoading(prev => ({ ...prev, [cacheKey]: false }));
     }
-
-    return question;
   };
 
   // Calculate question counts for comprehensive question bank
