@@ -258,10 +258,42 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           });
         }
         
+        // Re-throw non-quota errors
         throw openaiError;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('NHS Prep endpoint error:', error);
+      
+      // If it's an OpenAI quota error that wasn't caught above, handle it here
+      if (error.status === 429 || error.code === 'insufficient_quota') {
+        return res.json({
+          answer: `The AI service has exceeded its current quota. To access personalized medical education guidance, please provide a fresh OpenAI API key.
+
+**For your question about: "${question}"**
+
+Please refer to these UK medical resources:
+• NICE Guidelines: https://www.nice.org.uk/guidance
+• Clinical Knowledge Summaries: https://cks.nice.org.uk/
+• GMC Standards: https://www.gmc-uk.org/ethical-guidance
+• NHS Clinical Guidelines: https://www.england.nhs.uk/
+
+To restore full AI functionality, contact support to update the OpenAI API key.`,
+          relatedTopics: ["UK Medical Guidelines", "PLAB Preparation", "NHS Protocols"],
+          guidelines: ["NICE", "CKS", "GMC", "NHS"],
+          confidenceLevel: 0.8,
+          examRelevance: {
+            plab1: true,
+            plab2: true,
+            osce: true
+          },
+          studyRecommendations: [
+            "Review NICE guidelines for this topic",
+            "Check CKS recommendations",
+            "Practice with PLAB question banks"
+          ]
+        });
+      }
+      
       res.status(500).json({ error: "Failed to process NHS Prep request" });
     }
   });
