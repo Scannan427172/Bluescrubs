@@ -28,7 +28,18 @@ const INSTANT_QUESTIONS: Record<string, UKMedicalQuestion[]> = {
         management_approach: "ABCDE approach with immediate ECG and cardiac markers",
         red_flags: ["Crushing chest pain", "Radiation to arm/jaw", "Sweating", "Pallor"]
       },
-      additional_guidelines: ["AHA/ESC Guidelines on STEMI", "Resuscitation Council UK Guidelines"]
+      additional_guidelines: [
+        {
+          source: "AHA/ESC Guidelines on STEMI",
+          guidance: "Evidence-based acute coronary syndrome management",
+          relevance: "International standard for ACS treatment protocols"
+        },
+        {
+          source: "Resuscitation Council UK Guidelines", 
+          guidance: "Emergency cardiac care procedures",
+          relevance: "UK-specific resuscitation protocols"
+        }
+      ]
     },
     {
       scenario: "A 28-year-old woman presents with a 3-day history of dysuria, frequency, and urgency. She has no fever or flank pain. Urine dipstick shows nitrites positive and leucocytes ++.",
@@ -54,7 +65,13 @@ const INSTANT_QUESTIONS: Record<string, UKMedicalQuestion[]> = {
         management_approach: "Antibiotic choice based on local guidelines and patient factors",
         red_flags: ["Fever", "Flank pain", "Vomiting", "Signs of pyelonephritis"]
       },
-      additional_guidelines: ["PHE UTI diagnosis and management guidance"]
+      additional_guidelines: [
+        {
+          source: "PHE UTI diagnosis and management guidance",
+          guidance: "Public Health England antimicrobial prescribing guidelines",
+          relevance: "UK-specific antibiotic stewardship for UTI management"
+        }
+      ]
     }
   ],
   'cardiovascular_intermediate': [
@@ -82,7 +99,13 @@ const INSTANT_QUESTIONS: Record<string, UKMedicalQuestion[]> = {
         management_approach: "Step-wise approach to heart failure management",
         red_flags: ["Acute pulmonary edema", "Hypotension", "Renal impairment"]
       },
-      additional_guidelines: ["ESC Heart failure guidelines"]
+      additional_guidelines: [
+        {
+          source: "ESC Heart failure guidelines",
+          guidance: "European Society of Cardiology heart failure management",
+          relevance: "Evidence-based heart failure treatment protocols"
+        }
+      ]
     }
   ]
 };
