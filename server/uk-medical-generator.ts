@@ -6,21 +6,21 @@ const openai = new OpenAI({
 
 // Enhanced cache for instant responses
 const questionCache = new Map<string, UKMedicalQuestion[]>();
-const CACHE_SIZE_PER_CATEGORY = 50; // More questions cached
-const CACHE_TTL = 4 * 60 * 60 * 1000; // 4 hours
+const CACHE_SIZE_PER_CATEGORY = 100; // Increased cache size for faster delivery
+const CACHE_TTL = 8 * 60 * 60 * 1000; // 8 hours for longer persistence
 const cacheTimestamps = new Map<string, number>();
-const MIN_CACHE_THRESHOLD = 15; // Trigger background generation
+const MIN_CACHE_THRESHOLD = 25; // Higher threshold for background generation
 
 // Priority categories for pre-loading
 const PRIORITY_CATEGORIES = ['all', 'cardiology', 'respiratory', 'gastroenterology', 'neurology', 'endocrinology'];
 
-// Pre-load questions for popular categories
+// Pre-load questions for popular categories with increased count
 const preloadQuestions = async () => {
   console.log('Pre-loading questions for instant delivery...');
   for (const category of PRIORITY_CATEGORIES) {
     const cacheKey = getCacheKey(category, 'intermediate');
     try {
-      await preGenerateQuestions(cacheKey, 20);
+      await preGenerateQuestions(cacheKey, 50); // Increased from 20 to 50
       console.log(`Pre-loaded ${category} questions`);
     } catch (error) {
       console.error(`Failed to pre-load ${category}:`, error);
@@ -219,8 +219,8 @@ async function generateSingleQuestion(
         }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.6,
-      max_tokens: 2000
+      temperature: 0.7, // Slightly increased for variety
+      max_tokens: 1500 // Reduced for faster generation
     });
 
     const content = response.choices[0].message.content;
@@ -343,31 +343,32 @@ export async function generateMultipleUKQuestions(
   
   const remaining = count - fromCache.length;
   if (remaining > 0) {
-    // Generate remaining questions in parallel batches for faster response
-    const batchSize = Math.min(remaining, 3); // Limit concurrent requests
-    const batches = Math.ceil(remaining / batchSize);
+    // Generate all remaining questions in parallel for maximum speed
+    const promises = Array(remaining).fill(null).map(() => 
+      generateSingleQuestion(specialty, difficulty)
+    );
     
-    for (let batch = 0; batch < batches; batch++) {
-      const batchCount = Math.min(batchSize, remaining - (batch * batchSize));
-      const promises = Array(batchCount).fill(null).map(() => 
-        generateSingleQuestion(specialty, difficulty)
-      );
+    try {
+      // Use Promise.allSettled to handle partial failures gracefully
+      const results = await Promise.allSettled(promises);
+      const successfulQuestions = results
+        .filter((result): result is PromiseFulfilledResult<UKMedicalQuestion> => 
+          result.status === 'fulfilled')
+        .map(result => result.value);
       
-      try {
-        const batchResults = await Promise.allSettled(promises);
-        const successfulQuestions = batchResults
-          .filter((result): result is PromiseFulfilledResult<UKMedicalQuestion> => 
-            result.status === 'fulfilled')
-          .map(result => result.value);
-        
-        questions.push(...successfulQuestions);
-        
-        // Cache extra questions for future requests
-        successfulQuestions.forEach(q => addToCache(cacheKey, q));
-        
-      } catch (error) {
-        console.error(`Error generating batch ${batch + 1}:`, error);
+      questions.push(...successfulQuestions);
+      
+      // Cache extra questions for future requests
+      successfulQuestions.forEach(q => addToCache(cacheKey, q));
+      
+      // If we had failures, log but don't throw
+      const failures = results.filter(result => result.status === 'rejected');
+      if (failures.length > 0) {
+        console.log(`Generated ${successfulQuestions.length}/${remaining} questions successfully`);
       }
+      
+    } catch (error) {
+      console.error('Error in parallel question generation:', error);
     }
   }
   

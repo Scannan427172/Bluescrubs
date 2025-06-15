@@ -6,6 +6,7 @@ import { analyzeVideoPerformance } from "./ai-analysis";
 import { storage } from "./storage";
 import { askMedicalAI } from "./ask-ai-api";
 import { generateUKMedicalQuestion, generateMultipleUKQuestions } from "./uk-medical-generator";
+import { getInstantQuestions, hasInstantQuestions } from "./plan1-optimization";
 import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generator";
 import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-uk-generator";
 import { analyzeMultipleImages } from "./image-analysis";
@@ -68,14 +69,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Category is required" });
       }
 
-      // Limit count to prevent timeout
-      const limitedCount = Math.min(count, 3);
+      // Limit count to prevent timeout - optimized for Plan 1
+      const limitedCount = Math.min(count, 5); // Increased from 3 to 5 for better experience
       console.log(`Generating ${limitedCount} questions for category: ${category}, difficulty: ${difficulty}`);
       
-      // Set timeout for the entire operation  
+      // Set faster timeout for responsive experience
       let timeoutId: NodeJS.Timeout;
       const timeoutPromise = new Promise((_, reject) => {
-        timeoutId = setTimeout(() => reject(new Error('Question generation timeout')), 30000); // 30 second timeout
+        timeoutId = setTimeout(() => reject(new Error('Question generation timeout')), 15000); // Reduced from 30s to 15s
       });
 
       // Define subcategories for each medical specialty
