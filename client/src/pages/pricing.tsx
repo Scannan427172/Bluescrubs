@@ -1,340 +1,338 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { CheckCircle, X, Star, Crown, Zap, Globe, Brain, Users, Video, Calendar, Award, Shield, Clock, ArrowRight } from "lucide-react";
+import { useState } from 'react';
+import { Check, Star, Zap, Crown, Building2, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Switch } from '@/components/ui/switch';
+import { Separator } from '@/components/ui/separator';
 
 export default function Pricing() {
-  const [isAnnual, setIsAnnual] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(true);
 
   const plans = [
     {
-      name: "Essential",
-      description: "Perfect for getting started with PLAB preparation",
-      monthlyPrice: 29,
-      annualPrice: 290,
-      popular: false,
+      name: 'Foundation',
+      description: 'Perfect for getting started with PLAB preparation',
+      monthlyPrice: 39,
+      annualPrice: 390,
+      originalAnnualPrice: 468,
+      icon: Star,
+      color: 'from-blue-500 to-blue-600',
       features: [
-        "1,500+ PLAB 1 practice questions",
-        "Basic performance analytics",
-        "Study progress tracking",
-        "Mobile app access",
-        "Email support",
-        "Basic multilingual support (5 languages)",
-        "Standard study materials"
+        '5,000 AI-generated PLAB questions',
+        'Basic AI study recommendations',
+        'Progress tracking & analytics',
+        'Mobile app access',
+        'Community forums',
+        '3 language support',
+        'Email support',
+        'Offline study mode'
       ],
       limitations: [
-        "No PLAB 2 OSCE practice",
-        "No AI-powered learning",
-        "No video OSCE sessions",
-        "No mentor access",
-        "Limited exam simulations"
-      ],
-      cta: "Start Essential",
-      color: "blue"
+        'Limited AI systems (5 basic)',
+        'No VR OSCE training',
+        'Standard question difficulty'
+      ]
     },
     {
-      name: "Professional",
-      description: "Complete PLAB preparation with AI-powered learning",
-      monthlyPrice: 79,
-      annualPrice: 790,
+      name: 'Professional',
+      description: 'Complete PLAB preparation with advanced AI',
+      monthlyPrice: 69,
+      annualPrice: 590,
+      originalAnnualPrice: 828,
+      icon: Zap,
+      color: 'from-purple-500 to-purple-600',
       popular: true,
       features: [
-        "5,000+ PLAB 1 & 2 practice questions",
-        "AI-powered adaptive learning",
-        "Video OSCE practice sessions",
-        "Advanced analytics & insights",
-        "Live mentor consultations (2/month)",
-        "Full multilingual support (30+ languages)",
-        "Personalized study plans",
-        "Exam simulation mode",
-        "UK culture training modules",
-        "Priority email & chat support",
-        "Mobile offline mode"
+        'Everything in Foundation',
+        '20 Advanced AI systems',
+        'VR OSCE training (10 stations)',
+        'Live NHS guidelines integration',
+        '15 language support',
+        'Predictive success analytics',
+        'Professional development tools',
+        'Priority support',
+        'Adaptive learning engine',
+        'Weakness pattern analysis',
+        'Custom study schedules'
       ],
-      limitations: [],
-      cta: "Start Professional",
-      color: "emerald"
+      limitations: []
     },
     {
-      name: "Elite",
-      description: "Premium preparation with unlimited access and personal mentoring",
-      monthlyPrice: 149,
-      annualPrice: 1490,
-      popular: false,
+      name: 'Premium',
+      description: 'Elite preparation with personalized guidance',
+      monthlyPrice: 99,
+      annualPrice: 890,
+      originalAnnualPrice: 1188,
+      icon: Crown,
+      color: 'from-gold-500 to-gold-600',
       features: [
-        "Unlimited practice questions (all exams)",
-        "1-on-1 personal mentor (weekly sessions)",
-        "Advanced AI study companion",
-        "Real-time video OSCE feedback",
-        "Global exam support (USMLE, AMC, MRCP)",
-        "Career guidance & job placement support",
-        "Priority customer support (24/7)",
-        "Advanced performance analytics",
-        "Custom study schedules",
-        "Peer study groups",
-        "Interview preparation",
-        "CV/Resume optimization",
-        "NHS application assistance"
+        'Everything in Professional',
+        'All 40+ AI systems',
+        'Complete VR OSCE suite (50+ stations)',
+        'All 35 languages',
+        'AI patient actors',
+        'Career guidance & hospital partnerships',
+        '1-on-1 mentorship matching',
+        'Custom study plans',
+        'Priority queue for new features',
+        'Phone support',
+        'Dedicated success manager',
+        'Advanced performance analytics'
       ],
-      limitations: [],
-      cta: "Start Elite",
-      color: "purple"
+      limitations: []
     }
   ];
 
-  const additionalExams = [
-    { name: "USMLE Complete", price: 89, description: "Full preparation for all USMLE steps" },
-    { name: "AMC Preparation", price: 69, description: "Australian Medical Council exam prep" },
-    { name: "MRCP Modules", price: 99, description: "Membership of Royal Colleges preparation" },
-    { name: "IELTS Medical", price: 49, description: "Medical English language training" },
-    { name: "Middle East Licensing", price: 79, description: "DHA, HAAD, SCFHS exam preparation" }
+  const enterpriseFeatures = [
+    'Bulk licenses (50+ users)',
+    'Institution branding',
+    'Admin dashboard & reporting',
+    'Custom content integration',
+    'Dedicated account manager',
+    'On-site training',
+    'API access',
+    'Custom integrations'
   ];
-
-  const features = [
-    {
-      category: "Practice & Questions",
-      items: [
-        { name: "PLAB 1 Questions", essential: "1,500+", professional: "3,000+", elite: "5,000+" },
-        { name: "PLAB 2 OSCE Cases", essential: "❌", professional: "500+", elite: "1,000+" },
-        { name: "Video OSCE Practice", essential: "❌", professional: "✅", elite: "✅ + Feedback" },
-        { name: "Exam Simulations", essential: "Basic", professional: "Advanced", elite: "Unlimited" }
-      ]
-    },
-    {
-      category: "AI & Learning",
-      items: [
-        { name: "Adaptive Learning", essential: "❌", professional: "✅", elite: "✅ Advanced" },
-        { name: "AI Study Companion", essential: "❌", professional: "Basic", elite: "Full Access" },
-        { name: "Personalized Study Plans", essential: "❌", professional: "✅", elite: "✅ Custom" },
-        { name: "Performance Prediction", essential: "❌", professional: "✅", elite: "✅ Detailed" }
-      ]
-    },
-    {
-      category: "Support & Mentoring",
-      items: [
-        { name: "Mentor Access", essential: "❌", professional: "2 sessions/month", elite: "Weekly 1-on-1" },
-        { name: "Support Response", essential: "48 hours", professional: "24 hours", elite: "4 hours" },
-        { name: "Career Guidance", essential: "❌", professional: "Basic", elite: "Comprehensive" },
-        { name: "Job Placement Support", essential: "❌", professional: "❌", elite: "✅" }
-      ]
-    }
-  ];
-
-  const getPrice = (plan: typeof plans[0]) => isAnnual ? plan.annualPrice : plan.monthlyPrice;
-  const getSavings = (plan: typeof plans[0]) => plan.monthlyPrice * 12 - plan.annualPrice;
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* Header */}
-      <div className="text-center mb-12">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <Crown className="w-8 h-8 text-yellow-500" />
-          <h1 className="text-4xl font-bold">Choose Your Plan</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      <div className="container mx-auto px-4 py-16">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: '#000000' }}>
+            Choose Your Path to PLAB Success
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Join thousands of international medical graduates who've passed PLAB with our AI-powered platform. 
+            From basic preparation to elite mentorship - we have the right plan for your journey.
+          </p>
         </div>
-        <p className="text-xl text-muted-foreground mb-8">
-          Comprehensive medical exam preparation designed for international graduates
-        </p>
-        
-        {/* Annual/Monthly Toggle */}
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <span className={`font-medium ${!isAnnual ? 'text-primary' : 'text-muted-foreground'}`}>
-            Monthly
-          </span>
-          <Switch checked={isAnnual} onCheckedChange={setIsAnnual} />
-          <span className={`font-medium ${isAnnual ? 'text-primary' : 'text-muted-foreground'}`}>
-            Annual
-          </span>
-          <Badge variant="secondary" className="ml-2">Save up to 20%</Badge>
+
+        {/* Billing Toggle */}
+        <div className="flex items-center justify-center mb-12">
+          <span className={`mr-3 ${!isAnnual ? 'font-semibold' : 'text-gray-500'}`}>Monthly</span>
+          <Switch
+            checked={isAnnual}
+            onCheckedChange={setIsAnnual}
+            className="mx-2"
+          />
+          <span className={`ml-3 ${isAnnual ? 'font-semibold' : 'text-gray-500'}`}>Annual</span>
+          <Badge variant="secondary" className="ml-3 bg-green-100 text-green-800">
+            Save up to 33%
+          </Badge>
         </div>
-      </div>
 
-      {/* Main Pricing Cards */}
-      <div className="grid lg:grid-cols-3 gap-8 mb-16">
-        {plans.map((plan) => (
-          <Card 
-            key={plan.name} 
-            className={`relative ${plan.popular ? 'border-emerald-500 border-2 shadow-lg scale-105' : ''}`}
-          >
-            {plan.popular && (
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-emerald-500 text-white px-4 py-1">
-                  <Star className="w-3 h-3 mr-1" />
-                  Most Popular
-                </Badge>
-              </div>
-            )}
-            
-            <CardHeader className="text-center pb-4">
-              <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-              <CardDescription className="text-base">{plan.description}</CardDescription>
-              
-              <div className="mt-4">
-                <div className="flex items-baseline justify-center gap-2">
-                  <span className="text-4xl font-bold">£{getPrice(plan)}</span>
-                  <span className="text-muted-foreground">/{isAnnual ? 'year' : 'month'}</span>
-                </div>
-                {isAnnual && getSavings(plan) > 0 && (
-                  <p className="text-sm text-emerald-600 mt-1">
-                    Save £{getSavings(plan)} annually
-                  </p>
-                )}
-              </div>
-            </CardHeader>
+        {/* Pricing Cards */}
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mb-16">
+          {plans.map((plan) => {
+            const Icon = plan.icon;
+            const price = isAnnual ? plan.annualPrice : plan.monthlyPrice;
+            const originalPrice = isAnnual ? plan.originalAnnualPrice : null;
+            const savings = isAnnual && originalPrice ? originalPrice - price : 0;
 
-            <CardContent className="space-y-4">
-              {/* Features */}
-              <div className="space-y-2">
-                {plan.features.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
-                    <span className="text-sm">{feature}</span>
+            return (
+              <Card 
+                key={plan.name}
+                className={`relative overflow-hidden transition-all duration-300 hover:shadow-2xl ${
+                  plan.popular ? 'ring-2 ring-purple-500 scale-105' : 'hover:scale-105'
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-center py-2 font-semibold">
+                    Most Popular Choice
                   </div>
-                ))}
-              </div>
+                )}
+                
+                <CardHeader className={`${plan.popular ? 'pt-12' : 'pt-6'} pb-4`}>
+                  <div className={`w-12 h-12 bg-gradient-to-r ${plan.color} rounded-lg flex items-center justify-center mb-4`}>
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  
+                  <CardTitle className="text-2xl font-bold" style={{ color: '#000000' }}>
+                    {plan.name}
+                  </CardTitle>
+                  <CardDescription className="text-gray-600">
+                    {plan.description}
+                  </CardDescription>
+                  
+                  <div className="flex items-baseline mt-4">
+                    <span className="text-4xl font-bold" style={{ color: '#000000' }}>
+                      £{price}
+                    </span>
+                    <span className="text-gray-500 ml-1">
+                      /{isAnnual ? 'year' : 'month'}
+                    </span>
+                    {originalPrice && isAnnual && (
+                      <span className="ml-2 text-sm text-gray-400 line-through">
+                        £{originalPrice}
+                      </span>
+                    )}
+                  </div>
+                  
+                  {savings > 0 && (
+                    <Badge variant="secondary" className="w-fit mt-2 bg-green-100 text-green-800">
+                      Save £{savings}
+                    </Badge>
+                  )}
+                  
+                  {!isAnnual && (
+                    <p className="text-sm text-gray-500 mt-2">
+                      Less than £{(price / 30).toFixed(2)}/day
+                    </p>
+                  )}
+                </CardHeader>
 
-              {/* Limitations */}
-              {plan.limitations.length > 0 && (
-                <div className="space-y-2 pt-4 border-t">
-                  {plan.limitations.map((limitation, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <X className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
-                      <span className="text-sm text-muted-foreground">{limitation}</span>
+                <CardContent className="pt-0">
+                  <Button 
+                    className={`w-full mb-6 bg-gradient-to-r ${plan.color} hover:opacity-90 text-white font-semibold py-3`}
+                    onClick={() => console.log(`Starting ${plan.name} plan`)}
+                  >
+                    Start {plan.name} Plan
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+
+                  <div className="space-y-3">
+                    {plan.features.map((feature, index) => (
+                      <div key={index} className="flex items-start">
+                        <Check className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {plan.limitations.length > 0 && (
+                    <>
+                      <Separator className="my-4" />
+                      <p className="text-xs text-gray-500 mb-2">Limitations:</p>
+                      {plan.limitations.map((limitation, index) => (
+                        <div key={index} className="flex items-start">
+                          <span className="w-5 h-5 text-gray-300 mr-3 mt-0.5 text-xs">✗</span>
+                          <span className="text-xs text-gray-500">{limitation}</span>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        {/* Enterprise Section */}
+        <Card className="mb-16 bg-gradient-to-r from-gray-50 to-blue-50 border-2 border-gray-200">
+          <CardHeader className="text-center">
+            <div className="w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <Building2 className="w-8 h-8 text-white" />
+            </div>
+            <CardTitle className="text-3xl font-bold" style={{ color: '#000000' }}>
+              Enterprise & Institutional
+            </CardTitle>
+            <CardDescription className="text-lg">
+              Perfect for medical schools, hospitals, and training institutions
+            </CardDescription>
+          </CardHeader>
+          
+          <CardContent className="text-center">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <h4 className="font-semibold mb-4" style={{ color: '#000000' }}>What's Included:</h4>
+                <div className="space-y-2">
+                  {enterpriseFeatures.map((feature, index) => (
+                    <div key={index} className="flex items-start">
+                      <Check className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700 text-left">{feature}</span>
                     </div>
                   ))}
                 </div>
-              )}
-
-              <Button 
-                className={`w-full mt-6 ${plan.popular ? 'bg-emerald-600 hover:bg-emerald-700' : ''}`}
-                size="lg"
-              >
-                {plan.cta}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Feature Comparison Table */}
-      <div className="mb-16">
-        <h2 className="text-2xl font-bold text-center mb-8">Detailed Feature Comparison</h2>
-        <div className="bg-white rounded-lg border overflow-hidden">
-          {features.map((category) => (
-            <div key={category.category}>
-              <div className="bg-gray-50 px-6 py-3 border-b">
-                <h3 className="font-semibold text-lg">{category.category}</h3>
               </div>
-              {category.items.map((item, index) => (
-                <div key={index} className="grid grid-cols-4 gap-4 px-6 py-3 border-b last:border-b-0">
-                  <div className="font-medium">{item.name}</div>
-                  <div className="text-center text-sm">{item.essential}</div>
-                  <div className="text-center text-sm">{item.professional}</div>
-                  <div className="text-center text-sm">{item.elite}</div>
+              
+              <div className="flex flex-col justify-center">
+                <div className="text-center mb-6">
+                  <p className="text-lg font-semibold mb-2" style={{ color: '#000000' }}>
+                    Starting from £25-35 per user/month
+                  </p>
+                  <p className="text-gray-600">Volume discounts available</p>
                 </div>
-              ))}
+                
+                <Button 
+                  size="lg"
+                  className="bg-gray-700 hover:bg-gray-800 text-white font-semibold"
+                  onClick={() => console.log('Requesting enterprise demo')}
+                >
+                  Request Demo
+                </Button>
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
+          </CardContent>
+        </Card>
 
-      {/* Additional Exam Modules */}
-      <div className="mb-16">
-        <h2 className="text-2xl font-bold text-center mb-8">Additional Exam Modules</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {additionalExams.map((exam) => (
-            <Card key={exam.name}>
-              <CardHeader>
-                <CardTitle className="text-lg">{exam.name}</CardTitle>
-                <CardDescription>{exam.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold">£{exam.price}/month</span>
-                  <Button variant="outline" size="sm">
-                    Add Module
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* Money Back Guarantee */}
-      <div className="bg-gradient-to-r from-blue-50 to-emerald-50 rounded-lg p-8 text-center mb-16">
-        <Shield className="w-12 h-12 text-emerald-600 mx-auto mb-4" />
-        <h3 className="text-2xl font-bold mb-4">30-Day Money-Back Guarantee</h3>
-        <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-          We're confident in our platform. If you're not completely satisfied within 30 days, 
-          we'll refund your full payment, no questions asked.
-        </p>
-        <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4" />
-            <span>Cancel anytime</span>
+        {/* Value Propositions */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="text-center">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Zap className="w-8 h-8 text-blue-600" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2" style={{ color: '#000000' }}>
+              40+ AI Systems
+            </h3>
+            <p className="text-gray-600">
+              No competitor offers this level of AI integration for personalized learning
+            </p>
           </div>
-          <div className="flex items-center gap-2">
-            <Shield className="w-4 h-4" />
-            <span>Secure payment</span>
+          
+          <div className="text-center">
+            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Crown className="w-8 h-8 text-purple-600" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2" style={{ color: '#000000' }}>
+              VR OSCE Training
+            </h3>
+            <p className="text-gray-600">
+              World's first VR clinical skills training for PLAB candidates
+            </p>
           </div>
-          <div className="flex items-center gap-2">
-            <Award className="w-4 h-4" />
-            <span>Trusted by 15,000+ doctors</span>
+          
+          <div className="text-center">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Star className="w-8 h-8 text-green-600" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2" style={{ color: '#000000' }}>
+              95% Pass Rate
+            </h3>
+            <p className="text-gray-600">
+              Our students achieve significantly higher PLAB pass rates
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* FAQ Section */}
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
-        <div className="space-y-6">
-          {[
-            {
-              question: "Can I switch plans anytime?",
-              answer: "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate the billing accordingly."
-            },
-            {
-              question: "Do you offer student discounts?",
-              answer: "Yes, we offer a 20% discount for verified medical students. Contact our support team with your student ID for verification."
-            },
-            {
-              question: "What payment methods do you accept?",
-              answer: "We accept all major credit cards, PayPal, and bank transfers. All payments are processed securely through Stripe."
-            },
-            {
-              question: "Is there a free trial available?",
-              answer: "Yes, we offer a 7-day free trial of our Professional plan. No credit card required to start your trial."
-            },
-            {
-              question: "Can I access content offline?",
-              answer: "Yes, our mobile app allows you to download practice questions and study materials for offline access."
-            }
-          ].map((faq, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="text-lg">{faq.question}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{faq.answer}</p>
-              </CardContent>
-            </Card>
-          ))}
+        {/* Guarantees */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white">
+          <h2 className="text-3xl font-bold mb-4">
+            Risk-Free Investment in Your Medical Career
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div>
+              <h4 className="font-semibold mb-2">14-Day Free Trial</h4>
+              <p className="text-blue-100">Experience the full platform before committing</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">30-Day Money Back</h4>
+              <p className="text-blue-100">Not satisfied? Get a full refund, no questions asked</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">Success Guarantee</h4>
+              <p className="text-blue-100">Pass PLAB or get additional support at no cost</p>
+            </div>
+          </div>
+          <Button 
+            size="lg"
+            className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8"
+            onClick={() => console.log('Starting free trial')}
+          >
+            Start Your Free Trial Today
+          </Button>
         </div>
-      </div>
-
-      {/* Final CTA */}
-      <div className="text-center mt-16">
-        <h2 className="text-3xl font-bold mb-4">Ready to Start Your Medical Journey?</h2>
-        <p className="text-lg text-muted-foreground mb-8">
-          Join thousands of international medical graduates preparing for their UK career
-        </p>
-        <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-          Start Your Free Trial
-          <ArrowRight className="w-4 h-4 ml-2" />
-        </Button>
       </div>
     </div>
   );

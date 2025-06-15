@@ -64,6 +64,11 @@ export default function Landing() {
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
                   </Button>
                 </Link>
+                <Link href="/pricing">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
+                    <span className="text-white">View Pricing</span>
+                  </Button>
+                </Link>
                 <Link href="/dashboard">
                   <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
                     <Play className="mr-2 w-5 h-5 text-white" />

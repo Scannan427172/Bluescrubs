@@ -18,6 +18,7 @@ import Premium from "@/pages/premium";
 import AskAI from "@/pages/ask-ai";
 import AIStudyTools from "@/pages/ai-study-tools";
 import Community from "@/pages/community";
+import Pricing from "@/pages/pricing";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -128,6 +129,15 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <Community />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/pricing">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Pricing />
           </div>
         </div>
       </Route>
