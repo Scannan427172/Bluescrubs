@@ -134,7 +134,7 @@ export default function Pricing() {
             return (
               <Card 
                 key={plan.name}
-                className={`relative overflow-hidden transition-all duration-300 hover:shadow-2xl ${
+                className={`relative overflow-hidden transition-all duration-300 hover:shadow-2xl bg-white ${
                   plan.popular ? 'ring-2 ring-purple-500 scale-105' : 'hover:scale-105'
                 }`}
               >
@@ -144,23 +144,23 @@ export default function Pricing() {
                   </div>
                 )}
                 
-                <CardHeader className={`${plan.popular ? 'pt-12' : 'pt-6'} pb-4`}>
+                <CardHeader className={`${plan.popular ? 'pt-12' : 'pt-6'} pb-4 bg-white`}>
                   <div className={`w-12 h-12 bg-gradient-to-r ${plan.color} rounded-lg flex items-center justify-center mb-4`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   
-                  <CardTitle className="text-2xl font-bold" style={{ color: '#000000' }}>
+                  <CardTitle className="text-2xl font-bold text-black">
                     {plan.name}
                   </CardTitle>
-                  <CardDescription className="text-gray-700">
+                  <CardDescription className="text-gray-900">
                     {plan.description}
                   </CardDescription>
                   
                   <div className="flex items-baseline mt-4">
-                    <span className="text-4xl font-bold" style={{ color: '#000000' }}>
+                    <span className="text-4xl font-bold text-black">
                       £{price}
                     </span>
-                    <span className="text-gray-700 ml-1">
+                    <span className="text-gray-900 ml-1">
                       /{isAnnual ? 'year' : 'month'}
                     </span>
                     {originalPrice && isAnnual && (
@@ -177,13 +177,13 @@ export default function Pricing() {
                   )}
                   
                   {!isAnnual && (
-                    <p className="text-sm text-gray-700 mt-2">
+                    <p className="text-sm text-gray-900 mt-2">
                       Less than £{(price / 30).toFixed(2)}/day
                     </p>
                   )}
                 </CardHeader>
 
-                <CardContent className="pt-0">
+                <CardContent className="pt-0 bg-white">
                   <Button 
                     className={`w-full mb-6 bg-gradient-to-r ${plan.color} hover:opacity-90 text-white font-semibold py-3`}
                     onClick={() => console.log(`Starting ${plan.name} plan`)}
@@ -196,7 +196,7 @@ export default function Pricing() {
                     {plan.features.map((feature, index) => (
                       <div key={index} className="flex items-start">
                         <Check className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-gray-800">{feature}</span>
+                        <span className="text-sm text-black">{feature}</span>
                       </div>
                     ))}
                   </div>
