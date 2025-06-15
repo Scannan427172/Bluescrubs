@@ -111,13 +111,28 @@ export default function Pricing() {
 
         {/* Billing Toggle */}
         <div className="flex items-center justify-center mb-12">
-          <span className={`mr-3 ${!isAnnual ? 'font-semibold text-gray-900' : 'text-gray-600'}`}>Monthly</span>
-          <Switch
-            checked={isAnnual}
-            onCheckedChange={setIsAnnual}
-            className="mx-2"
-          />
-          <span className={`ml-3 ${isAnnual ? 'font-semibold text-gray-900' : 'text-gray-600'}`}>Annual</span>
+          <div className="flex items-center bg-gray-100 rounded-lg p-1">
+            <button
+              onClick={() => setIsAnnual(false)}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                !isAnnual 
+                  ? 'bg-white text-gray-900 shadow-sm' 
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setIsAnnual(true)}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                isAnnual 
+                  ? 'bg-white text-gray-900 shadow-sm' 
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Annual
+            </button>
+          </div>
           <Badge variant="secondary" className="ml-3 bg-green-100 text-green-800">
             Save up to 33%
           </Badge>
