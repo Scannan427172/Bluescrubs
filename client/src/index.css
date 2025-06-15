@@ -4,35 +4,65 @@
 
 :root {
   --background: 0 0% 100%;
-  --foreground: 210 13% 16%; /* #212529 */
-  --muted: 212 10% 97%; /* #F8F9FA */
-  --muted-foreground: 210 6% 45%;
+  --foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 98%;
+  --muted-foreground: 215.4 16.3% 46.9%;
   --popover: 0 0% 100%;
-  --popover-foreground: 210 13% 16%;
+  --popover-foreground: 222.2 84% 4.9%;
   --card: 0 0% 100%;
-  --card-foreground: 210 13% 16%;
-  --border: 210 13% 91%;
-  --input: 210 13% 91%;
-  --primary: 198 70% 42%; /* #2E86AB */
-  --primary-foreground: 210 100% 98%;
-  --secondary: 332 60% 45%; /* #A23B72 */
-  --secondary-foreground: 0 0% 100%;
-  --accent: 259 45% 51%; /* #6F42C1 */
-  --accent-foreground: 0 0% 100%;
-  --success: 160 84% 44%; /* #06D6A0 */
-  --success-foreground: 0 0% 100%;
-  --warning: 35 100% 50%; /* #F18F01 */
-  --warning-foreground: 0 0% 100%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 60 9% 98%;
+  --card-foreground: 222.2 84% 4.9%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --primary: 198 70% 42%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 98%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  --accent: 210 40% 98%;
+  --accent-foreground: 222.2 84% 4.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
   --ring: 198 70% 42%;
   --radius: 0.75rem;
-  --medical-blue: 198 70% 42%; /* #2E86AB */
-  --deep-rose: 332 60% 45%; /* #A23B72 */
-  --mint-green: 160 84% 44%; /* #06D6A0 */
-  --amber-warning: 35 100% 50%; /* #F18F01 */
-  --purple-accent: 259 45% 51%; /* #6F42C1 */
-  --light-bg: 212 10% 97%; /* #F8F9FA */
+}
+
+/* Ensure proper text contrast and visibility */
+* {
+  color: inherit;
+}
+
+body {
+  color: hsl(222.2 84% 4.9%) !important;
+  background-color: hsl(0 0% 100%) !important;
+}
+
+/* Force proper contrast for all text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th, label, button {
+  color: hsl(222.2 84% 4.9%) !important;
+}
+
+/* Card and container backgrounds */
+.bg-white {
+  background-color: white !important;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.text-gray-900 {
+  color: hsl(222.2 84% 4.9%) !important;
+}
+
+.text-gray-800 {
+  color: hsl(215.4 16.3% 26.9%) !important;
+}
+
+.text-gray-700 {
+  color: hsl(215.4 16.3% 36.9%) !important;
+}
+
+.text-gray-600 {
+  color: hsl(215.4 16.3% 46.9%) !important;
 }
 
 /* Force all input fields to have black text and white background */
@@ -40,8 +70,10 @@ input[type="email"],
 input[type="password"], 
 input[type="text"], 
 input[type="tel"],
-input {
-  color: black !important;
+input,
+textarea,
+select {
+  color: hsl(222.2 84% 4.9%) !important;
   background-color: white !important;
 }
 
