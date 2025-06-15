@@ -522,7 +522,8 @@ Provide evidence-based, UK-specific medical guidance that aligns with current NH
           // Add delay to manage rate limits
           await new Promise(resolve => setTimeout(resolve, 1000));
         } catch (error) {
-          generationStats.errors.push(`${topic}: ${error.message}`);
+          const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+          generationStats.errors.push(`${topic}: ${errorMessage}`);
         }
       }
 

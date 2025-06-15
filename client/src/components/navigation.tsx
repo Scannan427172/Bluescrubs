@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 interface NavigationProps {
@@ -24,6 +24,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Global Exams", href: "/global-practice", icon: Flag, current: location === "/global-practice" },
     { name: "Languages", href: "/language-demo", icon: Accessibility, current: location === "/language-demo" },
     { name: "AI Study Tools", href: "/ai-study-tools", icon: Brain, current: location === "/ai-study-tools" },
+    { name: "PLAB AI Dashboard", href: "/plab-ai-dashboard", icon: Zap, current: location === "/plab-ai-dashboard" },
     { name: "AI Learning", href: "/adaptive-learning", icon: Route, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },
     { name: "UK Culture", href: "/cultural-training", icon: Flag, current: location === "/cultural-training" },

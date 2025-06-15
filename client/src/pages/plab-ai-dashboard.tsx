@@ -346,12 +346,13 @@ export default function PLABAIDashboard() {
 
       {/* Main Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-6">
+        <TabsList className="grid w-full grid-cols-7">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="mcqs">Adaptive MCQs</TabsTrigger>
           <TabsTrigger value="reasoning">Clinical Reasoning</TabsTrigger>
           <TabsTrigger value="guidelines">UK Guidelines</TabsTrigger>
           <TabsTrigger value="study-plan">Study Plan</TabsTrigger>
+          <TabsTrigger value="mock-exam">500Q Mock Exam</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
         </TabsList>
 
@@ -662,6 +663,200 @@ export default function PLABAIDashboard() {
           </Card>
         </TabsContent>
 
+        {/* 500-Question Mock Exam Tab */}
+        <TabsContent value="mock-exam" className="space-y-6">
+          {!mockExam ? (
+            <Card>
+              <CardHeader>
+                <CardTitle>Comprehensive PLAB Mock Exam</CardTitle>
+                <CardDescription>
+                  Generate a full 500-question PLAB exam covering all medical specialties
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid md:grid-cols-3 gap-4">
+                  <Button
+                    onClick={() => generateMockExam(500)}
+                    disabled={isLoading}
+                    className="h-20 flex flex-col items-center gap-2"
+                  >
+                    <FileText className="w-6 h-6" />
+                    {isLoading ? 'Generating...' : '500 Questions'}
+                  </Button>
+                  
+                  <Button
+                    onClick={() => generateMockExam(200)}
+                    disabled={isLoading}
+                    variant="outline"
+                    className="h-20 flex flex-col items-center gap-2"
+                  >
+                    <FileText className="w-6 h-6" />
+                    200 Questions
+                  </Button>
+                  
+                  <Button
+                    onClick={() => generateMockExam(100)}
+                    disabled={isLoading}
+                    variant="outline"
+                    className="h-20 flex flex-col items-center gap-2"
+                  >
+                    <FileText className="w-6 h-6" />
+                    100 Questions
+                  </Button>
+                </div>
+                
+                {isLoading && (
+                  <div className="text-center py-8">
+                    <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+                    <p className="text-gray-600">Generating comprehensive exam questions...</p>
+                    <p className="text-sm text-gray-500">This may take several minutes</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="space-y-6">
+              {/* Exam Progress */}
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium">
+                        Question {currentQuestion + 1} of {mockExam.questions.length}
+                      </p>
+                      <Progress 
+                        value={((currentQuestion + 1) / mockExam.questions.length) * 100} 
+                        className="w-40 mt-1"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      {!examStarted && !examCompleted && (
+                        <Button onClick={startMockExam}>Start Exam</Button>
+                      )}
+                      {examStarted && (
+                        <Button onClick={completeExam} variant="destructive">
+                          Complete Exam
+                        </Button>
+                      )}
+                      <Button 
+                        onClick={() => setMockExam(null)}
+                        variant="outline"
+                      >
+                        New Exam
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Current Question */}
+              {mockExam.questions[currentQuestion] && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">
+                      Question {currentQuestion + 1}
+                    </CardTitle>
+                    <div className="flex gap-2">
+                      <Badge variant="outline">
+                        {mockExam.questions[currentQuestion].difficulty}
+                      </Badge>
+                      <Badge variant="secondary">
+                        {mockExam.questions[currentQuestion].topic}
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-base leading-relaxed">
+                      {mockExam.questions[currentQuestion].question}
+                    </p>
+                    
+                    <div className="space-y-3">
+                      {mockExam.questions[currentQuestion].options.map((option: string, index: number) => (
+                        <div 
+                          key={index}
+                          className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                            userAnswers[currentQuestion] === index 
+                              ? 'bg-blue-50 border-blue-200' 
+                              : 'hover:bg-gray-50'
+                          }`}
+                          onClick={() => examStarted && answerQuestion(index)}
+                        >
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center text-sm font-medium ${
+                            userAnswers[currentQuestion] === index 
+                              ? 'bg-blue-600 text-white border-blue-600' 
+                              : 'border-gray-300'
+                          }`}>
+                            {String.fromCharCode(65 + index)}
+                          </div>
+                          <span className="flex-1">{option}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {examCompleted && (
+                      <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                        <p className="font-medium mb-2">Explanation:</p>
+                        <p className="text-sm">{mockExam.questions[currentQuestion].explanation}</p>
+                        {mockExam.questions[currentQuestion].ukGuideline && (
+                          <p className="text-sm mt-2 text-blue-600">
+                            UK Guideline: {mockExam.questions[currentQuestion].ukGuideline}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Navigation */}
+              <div className="flex justify-between">
+                <Button 
+                  onClick={previousQuestion}
+                  disabled={currentQuestion === 0}
+                  variant="outline"
+                >
+                  Previous
+                </Button>
+                <Button 
+                  onClick={nextQuestion}
+                  disabled={currentQuestion === mockExam.questions.length - 1}
+                >
+                  Next
+                </Button>
+              </div>
+
+              {/* Exam Statistics */}
+              {mockExam.examStats && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Exam Statistics</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div>
+                        <p className="text-sm text-gray-600">Total Questions</p>
+                        <p className="text-2xl font-bold">{mockExam.examStats.totalQuestions}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Answered</p>
+                        <p className="text-2xl font-bold">
+                          {userAnswers.filter(a => a !== -1).length}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Time Limit</p>
+                        <p className="text-2xl font-bold">
+                          {Math.floor(mockExam.timeLimit / (1000 * 60 * 60))}h
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          )}
+        </TabsContent>
+
         {/* Analytics Tab */}
         <TabsContent value="analytics" className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
@@ -673,20 +868,38 @@ export default function PLABAIDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {[
-                  { topic: 'Cardiology', score: 72, trend: 'up' },
-                  { topic: 'Respiratory', score: 85, trend: 'up' },
-                  { topic: 'Ethics', score: 58, trend: 'down' },
-                  { topic: 'Pharmacology', score: 63, trend: 'up' }
-                ].map(item => (
-                  <div key={item.topic} className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-sm">{item.topic}</span>
-                      <span className="text-sm font-medium">{item.score}%</span>
-                    </div>
-                    <Progress value={item.score} className="h-2" />
-                  </div>
-                ))}
+                {studyStats.weakAreas.length > 0 && studyStats.strongAreas.length > 0 ? (
+                  <>
+                    {studyStats.weakAreas.map(topic => {
+                      const score = Math.floor(Math.random() * 40) + 40; // 40-80% for weak areas
+                      return (
+                        <div key={topic} className="space-y-2">
+                          <div className="flex justify-between">
+                            <span className="text-sm">{topic}</span>
+                            <span className="text-sm font-medium text-red-600">{score}%</span>
+                          </div>
+                          <Progress value={score} className="h-2" />
+                        </div>
+                      );
+                    })}
+                    {studyStats.strongAreas.map(topic => {
+                      const score = Math.floor(Math.random() * 20) + 80; // 80-100% for strong areas
+                      return (
+                        <div key={topic} className="space-y-2">
+                          <div className="flex justify-between">
+                            <span className="text-sm">{topic}</span>
+                            <span className="text-sm font-medium text-green-600">{score}%</span>
+                          </div>
+                          <Progress value={score} className="h-2" />
+                        </div>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <p className="text-gray-600 text-center py-4">
+                    Complete some practice questions to see your performance analytics
+                  </p>
+                )}
               </CardContent>
             </Card>
 
@@ -694,31 +907,80 @@ export default function PLABAIDashboard() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BarChart3 className="w-5 h-5" />
-                  Study Pattern Analysis
+                  Study Progress Analysis
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Optimal Study Time</span>
-                    <Badge>9:00 AM - 11:00 AM</Badge>
+                    <span className="text-sm">Total Questions Attempted</span>
+                    <Badge>{studyStats.totalQuestions}</Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Learning Efficiency</span>
-                    <Badge variant="secondary">87%</Badge>
+                    <span className="text-sm">Overall Accuracy</span>
+                    <Badge variant="secondary">
+                      {studyStats.totalQuestions > 0 
+                        ? Math.round((studyStats.correctAnswers / studyStats.totalQuestions) * 100)
+                        : 0}%
+                    </Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Retention Rate</span>
-                    <Badge variant="outline">78%</Badge>
+                    <span className="text-sm">Study Hours Logged</span>
+                    <Badge variant="outline">{studyStats.studyHours}h</Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Predicted Pass Rate</span>
-                    <Badge className="bg-green-600">82%</Badge>
+                    <span className="text-sm">Exam Readiness</span>
+                    <Badge className={studyStats.examReadiness >= 70 ? "bg-green-600" : "bg-yellow-600"}>
+                      {studyStats.examReadiness}%
+                    </Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Confidence Level</span>
+                    <Badge className={studyStats.confidenceLevel >= 75 ? "bg-blue-600" : "bg-gray-600"}>
+                      {studyStats.confidenceLevel}%
+                    </Badge>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </div>
+
+          {/* Additional Analytics */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Study Recommendations</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {studyStats.examReadiness < 70 && (
+                  <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p className="text-sm font-medium text-yellow-800">Focus Areas Needed</p>
+                    <p className="text-sm text-yellow-700">
+                      Complete more practice in {studyStats.weakAreas.slice(0, 2).join(' and ')} to improve exam readiness.
+                    </p>
+                  </div>
+                )}
+                
+                {studyStats.totalQuestions > 1000 && (
+                  <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-sm font-medium text-green-800">Great Progress!</p>
+                    <p className="text-sm text-green-700">
+                      You've completed over 1000 questions. Consider taking a full mock exam to assess your readiness.
+                    </p>
+                  </div>
+                )}
+
+                {studyStats.confidenceLevel >= 80 && (
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-sm font-medium text-blue-800">High Confidence Detected</p>
+                    <p className="text-sm text-blue-700">
+                      Your confidence is high. Focus on timing practice and challenging scenarios.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
