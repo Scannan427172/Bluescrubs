@@ -848,6 +848,80 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Ask NHS Prep AI endpoint - comprehensive medical question answering
+  app.post("/api/ask-nhs-prep", async (req, res) => {
+    try {
+      const { question } = req.body;
+      
+      if (!question || question.trim().length < 10) {
+        return res.status(400).json({ error: "Please provide a detailed medical question" });
+      }
+
+      // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: `You are NHS Prep AI, an expert medical education assistant specifically trained for PLAB 1, PLAB 2, and UK medical practice. You have comprehensive knowledge of:
+
+- NICE (National Institute for Health and Care Excellence) guidelines
+- CKS (Clinical Knowledge Summaries) protocols
+- GMC (General Medical Council) standards
+- NHS clinical pathways and protocols
+- PLAB 1 and PLAB 2 exam content and format
+- OSCE clinical skills and communication
+- UK medical practice and healthcare system
+
+Provide evidence-based, accurate medical information that aligns with current UK medical guidelines. Always specify which guidelines your answers are based on. For PLAB-specific questions, relate your answers to exam requirements and formats.
+
+Respond in JSON format with the following structure:
+{
+  "answer": "Detailed, evidence-based answer with UK guideline references",
+  "relatedTopics": ["topic1", "topic2", "topic3"],
+  "guidelines": ["NICE Guideline reference", "CKS protocol", "NHS pathway"],
+  "confidenceLevel": 85,
+  "examRelevance": {
+    "plab1": true/false,
+    "plab2": true/false,
+    "osce": true/false
+  },
+  "studyRecommendations": ["specific study recommendation 1", "recommendation 2"]
+}`
+          },
+          {
+            role: "user",
+            content: question
+          }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.3,
+        max_tokens: 2000
+      });
+
+      const aiResponse = JSON.parse(response.choices[0].message.content || '{}');
+      
+      // Ensure response has all required fields with defaults
+      const medicalResponse = {
+        answer: aiResponse.answer || "I need more specific information to provide an accurate medical answer.",
+        relatedTopics: aiResponse.relatedTopics || [],
+        guidelines: aiResponse.guidelines || [],
+        confidenceLevel: aiResponse.confidenceLevel || 75,
+        examRelevance: {
+          plab1: aiResponse.examRelevance?.plab1 || false,
+          plab2: aiResponse.examRelevance?.plab2 || false,
+          osce: aiResponse.examRelevance?.osce || false
+        },
+        studyRecommendations: aiResponse.studyRecommendations || []
+      };
+
+      res.json(medicalResponse);
+    } catch (error) {
+      console.error('Error with NHS Prep AI:', error);
+      res.status(500).json({ error: "Failed to process medical question" });
+    }
+  });
+
   app.post("/api/ai-system/exam-probability", async (req, res) => {
     try {
       const { userProfile, practiceResults } = req.body;

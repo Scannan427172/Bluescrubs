@@ -198,6 +198,13 @@ export default function More() {
       link: "/study-groups"
     },
     {
+      icon: Brain,
+      title: "Ask NHS Prep AI",
+      description: "Get instant answers to any medical question with UK guidelines",
+      hasArrow: true,
+      link: "/ask-nhs-prep"
+    },
+    {
       icon: Accessibility,
       title: "Accessibility",
       description: "Customizable learning experience for diverse needs",

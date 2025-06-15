@@ -19,6 +19,7 @@ import AskAI from "@/pages/ask-ai";
 import AIStudyTools from "@/pages/ai-study-tools";
 import Community from "@/pages/community";
 import Pricing from "@/pages/pricing";
+import AskNHSPrep from "@/pages/ask-nhs-prep";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -138,6 +139,15 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <Pricing />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/ask-nhs-prep">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <AskNHSPrep />
           </div>
         </div>
       </Route>
