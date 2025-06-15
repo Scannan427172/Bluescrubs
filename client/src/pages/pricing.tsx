@@ -1,13 +1,85 @@
 import { useState } from 'react';
-import { Check, Star, Zap, Crown, Building2, ArrowRight } from 'lucide-react';
+import { Check, Star, Zap, Crown, Building2, ArrowRight, X, Mail, User, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true);
+  const [showDemoForm, setShowDemoForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  // Demo request form state
+  const [demoForm, setDemoForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    organization: '',
+    role: '',
+    organizationType: '',
+    numberOfUsers: '',
+    requirements: ''
+  });
+
+  const handleDemoRequest = async () => {
+    if (!demoForm.name || !demoForm.email || !demoForm.organization) {
+      toast({
+        title: "Required fields missing",
+        description: "Please fill in name, email, and organization",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/demo-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(demoForm),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Demo request submitted",
+          description: "We'll contact you within 24 hours to schedule your personalized demo",
+        });
+        setShowDemoForm(false);
+        setDemoForm({
+          name: '',
+          email: '',
+          phone: '',
+          organization: '',
+          role: '',
+          organizationType: '',
+          numberOfUsers: '',
+          requirements: ''
+        });
+      } else {
+        throw new Error('Failed to submit demo request');
+      }
+    } catch (error) {
+      toast({
+        title: "Request failed",
+        description: "Please try again or contact us directly",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const plans = [
     {
@@ -270,13 +342,154 @@ export default function Pricing() {
                   <p className="text-gray-600">Volume discounts available</p>
                 </div>
                 
-                <Button 
-                  size="lg"
-                  className="bg-gray-700 hover:bg-gray-800 text-white font-semibold"
-                  onClick={() => console.log('Requesting enterprise demo')}
-                >
-                  Request Demo
-                </Button>
+                <Dialog open={showDemoForm} onOpenChange={setShowDemoForm}>
+                  <DialogTrigger asChild>
+                    <Button 
+                      size="lg"
+                      className="bg-gray-700 hover:bg-gray-800 text-white font-semibold"
+                    >
+                      Request Demo
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[500px]">
+                    <DialogHeader>
+                      <DialogTitle className="flex items-center gap-2">
+                        <Building2 className="w-5 h-5" />
+                        Request Enterprise Demo
+                      </DialogTitle>
+                      <DialogDescription>
+                        Get a personalized demo of our complete medical education platform
+                      </DialogDescription>
+                    </DialogHeader>
+                    
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="name">Name *</Label>
+                          <Input
+                            id="name"
+                            value={demoForm.name}
+                            onChange={(e) => setDemoForm({...demoForm, name: e.target.value})}
+                            placeholder="Your full name"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="email">Email *</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            value={demoForm.email}
+                            onChange={(e) => setDemoForm({...demoForm, email: e.target.value})}
+                            placeholder="your@email.com"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="phone">Phone</Label>
+                          <Input
+                            id="phone"
+                            value={demoForm.phone}
+                            onChange={(e) => setDemoForm({...demoForm, phone: e.target.value})}
+                            placeholder="+44 123 456 7890"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="role">Your Role</Label>
+                          <Input
+                            id="role"
+                            value={demoForm.role}
+                            onChange={(e) => setDemoForm({...demoForm, role: e.target.value})}
+                            placeholder="e.g., Training Director"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="organization">Organization *</Label>
+                        <Input
+                          id="organization"
+                          value={demoForm.organization}
+                          onChange={(e) => setDemoForm({...demoForm, organization: e.target.value})}
+                          placeholder="Hospital, Medical School, or Institution"
+                        />
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="orgType">Organization Type</Label>
+                          <Select value={demoForm.organizationType} onValueChange={(value) => setDemoForm({...demoForm, organizationType: value})}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="medical-school">Medical School</SelectItem>
+                              <SelectItem value="hospital">Hospital</SelectItem>
+                              <SelectItem value="training-center">Training Center</SelectItem>
+                              <SelectItem value="government">Government Body</SelectItem>
+                              <SelectItem value="private-college">Private College</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="users">Expected Users</Label>
+                          <Select value={demoForm.numberOfUsers} onValueChange={(value) => setDemoForm({...demoForm, numberOfUsers: value})}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Number of users" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="10-50">10-50 users</SelectItem>
+                              <SelectItem value="50-100">50-100 users</SelectItem>
+                              <SelectItem value="100-500">100-500 users</SelectItem>
+                              <SelectItem value="500-1000">500-1,000 users</SelectItem>
+                              <SelectItem value="1000+">1,000+ users</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="requirements">Specific Requirements</Label>
+                        <Textarea
+                          id="requirements"
+                          value={demoForm.requirements}
+                          onChange={(e) => setDemoForm({...demoForm, requirements: e.target.value})}
+                          placeholder="Tell us about your specific needs, integration requirements, or questions..."
+                          rows={3}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-end gap-3">
+                      <Button 
+                        variant="outline" 
+                        onClick={() => setShowDemoForm(false)}
+                        disabled={isSubmitting}
+                      >
+                        Cancel
+                      </Button>
+                      <Button 
+                        onClick={handleDemoRequest}
+                        disabled={isSubmitting}
+                        className="bg-gray-700 hover:bg-gray-800"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                            Submitting...
+                          </>
+                        ) : (
+                          <>
+                            <Mail className="w-4 h-4 mr-2" />
+                            Request Demo
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </CardContent>

@@ -310,6 +310,74 @@ Provide evidence-based, UK-specific medical guidance that aligns with current NH
     }
   });
 
+  // Demo request endpoint
+  app.post("/api/demo-request", async (req, res) => {
+    try {
+      const {
+        name,
+        email,
+        phone,
+        organization,
+        role,
+        organizationType,
+        numberOfUsers,
+        requirements
+      } = req.body;
+
+      // Validate required fields
+      if (!name || !email || !organization) {
+        return res.status(400).json({ 
+          error: "Name, email, and organization are required" 
+        });
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ 
+          error: "Please provide a valid email address" 
+        });
+      }
+
+      // Store demo request (in a real app, this would go to a database)
+      const demoRequest = {
+        id: Date.now().toString(),
+        name,
+        email,
+        phone: phone || '',
+        organization,
+        role: role || '',
+        organizationType: organizationType || '',
+        numberOfUsers: numberOfUsers || '',
+        requirements: requirements || '',
+        timestamp: new Date().toISOString(),
+        status: 'pending'
+      };
+
+      // Log the demo request for now (in production, save to database)
+      console.log('Demo request received:', demoRequest);
+
+      // In a real application, you would:
+      // 1. Save to database
+      // 2. Send notification email to sales team
+      // 3. Send confirmation email to requester
+      // 4. Add to CRM system
+
+      res.json({
+        success: true,
+        message: "Demo request submitted successfully",
+        requestId: demoRequest.id,
+        nextSteps: "Our team will contact you within 24 hours to schedule your personalized demo"
+      });
+
+    } catch (error) {
+      console.error('Error processing demo request:', error);
+      res.status(500).json({ 
+        error: "Failed to submit demo request. Please try again or contact us directly." 
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
