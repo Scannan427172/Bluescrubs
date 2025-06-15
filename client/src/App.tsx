@@ -20,6 +20,7 @@ import AIStudyTools from "@/pages/ai-study-tools";
 import Community from "@/pages/community";
 import Pricing from "@/pages/pricing";
 import AskNHSPrep from "@/pages/ask-nhs-prep";
+import PLABAIDashboard from "@/pages/plab-ai-dashboard";
 import More from "@/pages/more";
 import NotFound from "@/pages/not-found";
 
@@ -149,6 +150,15 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <AskNHSPrep />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/plab-ai-dashboard">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <PLABAIDashboard />
           </div>
         </div>
       </Route>

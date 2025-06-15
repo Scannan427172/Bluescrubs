@@ -18,6 +18,7 @@ import {
   type SmartFlashcard,
   type QuizQuestion
 } from "./ai-study-tools";
+import { plabAI, type PLABStudySession, type AdaptiveFlashcard } from "./plab-ai-study-system";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -307,6 +308,158 @@ Provide evidence-based, UK-specific medical guidance that aligns with current NH
     } catch (error) {
       console.error('Error analyzing video:', error);
       res.status(500).json({ error: "Failed to analyze video" });
+    }
+  });
+
+  // Advanced PLAB AI Study System Endpoints
+  
+  // Generate adaptive PLAB MCQs
+  app.post("/api/plab-ai/generate-mcqs", async (req, res) => {
+    try {
+      const { topic, count = 10 } = req.body;
+      
+      if (!topic) {
+        return res.status(400).json({ error: "Topic is required" });
+      }
+
+      const mcqs = await plabAI.generatePLABMCQs(topic, count);
+      res.json({ 
+        mcqs, 
+        metadata: {
+          topic,
+          count: mcqs.length,
+          studyType: 'adaptive-mcq',
+          generated: new Date().toISOString()
+        }
+      });
+    } catch (error) {
+      console.error('Error generating PLAB MCQs:', error);
+      res.status(500).json({ error: "Failed to generate MCQs. Please check your OpenAI API key." });
+    }
+  });
+
+  // Clinical reasoning coach
+  app.post("/api/plab-ai/clinical-reasoning", async (req, res) => {
+    try {
+      const { scenario } = req.body;
+      
+      if (!scenario) {
+        return res.status(400).json({ error: "Clinical scenario is required" });
+      }
+
+      const response = await plabAI.startClinicalReasoningSession(scenario);
+      res.json({ 
+        examinerResponse: response,
+        sessionType: 'clinical-reasoning',
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error in clinical reasoning session:', error);
+      res.status(500).json({ error: "Failed to start clinical reasoning session" });
+    }
+  });
+
+  // Error analysis and targeted cards
+  app.post("/api/plab-ai/analyze-errors", async (req, res) => {
+    try {
+      const { errors } = req.body;
+      
+      if (!errors || !Array.isArray(errors)) {
+        return res.status(400).json({ error: "Errors array is required" });
+      }
+
+      const remedialCards = await plabAI.analyzeErrorsAndCreateCards(errors);
+      res.json({ 
+        remedialCards,
+        errorCount: errors.length,
+        analysisType: 'error-driven-learning'
+      });
+    } catch (error) {
+      console.error('Error analyzing errors:', error);
+      res.status(500).json({ error: "Failed to analyze errors" });
+    }
+  });
+
+  // UK guidelines explainer
+  app.post("/api/plab-ai/uk-guidelines", async (req, res) => {
+    try {
+      const { topic } = req.body;
+      
+      if (!topic) {
+        return res.status(400).json({ error: "Topic is required" });
+      }
+
+      const guidelines = await plabAI.explainUKGuidelines(topic);
+      res.json({ 
+        guidelines,
+        topic,
+        source: 'uk-medical-guidelines',
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error explaining UK guidelines:', error);
+      res.status(500).json({ error: "Failed to explain UK guidelines" });
+    }
+  });
+
+  // Personalized study plan
+  app.post("/api/plab-ai/study-plan", async (req, res) => {
+    try {
+      const { weakAreas, strongAreas, availableHours, examDate } = req.body;
+      
+      if (!weakAreas || !availableHours || !examDate) {
+        return res.status(400).json({ error: "Weak areas, available hours, and exam date are required" });
+      }
+
+      const studyPlan = await plabAI.createWeeklyStudyPlan(
+        weakAreas, 
+        strongAreas || [], 
+        availableHours, 
+        new Date(examDate)
+      );
+      
+      res.json({ 
+        studyPlan,
+        planType: 'personalized-weekly',
+        generated: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error creating study plan:', error);
+      res.status(500).json({ error: "Failed to create study plan" });
+    }
+  });
+
+  // Ethics and professionalism trainer
+  app.post("/api/plab-ai/ethics-scenarios", async (req, res) => {
+    try {
+      const { count = 5 } = req.body;
+      
+      const scenarios = await plabAI.generateEthicsScenarios(count);
+      res.json({ 
+        scenarios,
+        count: scenarios.length,
+        focus: 'gmc-ethics-professionalism'
+      });
+    } catch (error) {
+      console.error('Error generating ethics scenarios:', error);
+      res.status(500).json({ error: "Failed to generate ethics scenarios" });
+    }
+  });
+
+  // Mock exam generator
+  app.post("/api/plab-ai/mock-exam", async (req, res) => {
+    try {
+      const { duration = 180 } = req.body;
+      
+      const mockExam = await plabAI.generateMockExam(duration);
+      res.json({ 
+        ...mockExam,
+        examType: 'plab-mock',
+        generated: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error generating mock exam:', error);
+      res.status(500).json({ error: "Failed to generate mock exam" });
     }
   });
 
