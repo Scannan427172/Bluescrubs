@@ -173,11 +173,21 @@ export default function MCQQuestion({
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-between">
             <div className="flex space-x-3">
-              <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="flex items-center space-x-2"
+                onClick={() => console.log('Question bookmarked for later review')}
+              >
                 <Bookmark className="w-4 h-4" />
                 <span>Save for Later</span>
               </Button>
-              <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="flex items-center space-x-2"
+                onClick={() => console.log('Question issue reported')}
+              >
                 <Flag className="w-4 h-4" />
                 <span>Report Issue</span>
               </Button>

@@ -178,7 +178,7 @@ export default function Resources() {
             </p>
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">{resource.duration}</span>
-              <Button size="sm">Access Resource</Button>
+              <Button size="sm" onClick={() => console.log('Accessing resource')}>Access Resource</Button>
             </div>
           </div>
         </div>
