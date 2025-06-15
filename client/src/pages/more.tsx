@@ -60,7 +60,7 @@ export default function More() {
       title: "Who are NHSprep",
       description: "Meet the founders - NHS doctor Yasa and developer Keith Hunter",
       hasArrow: true,
-      link: "/who-are-nhsprep"
+      link: "/dashboard"
     },
     {
       icon: BookOpen,
@@ -146,28 +146,28 @@ export default function More() {
       title: "Analytics Dashboard",
       description: "Advanced performance tracking and progress analytics",
       hasArrow: true,
-      link: "/analytics"
+      link: "/dashboard"
     },
     {
       icon: MapPin,
       title: "Cultural Bridge",
       description: "UK healthcare culture and communication training",
       hasArrow: true,
-      link: "/cultural-training"
+      link: "/dashboard"
     },
     {
       icon: Building,
       title: "NHS Preparation",
       description: "Complete NHS job application and interview preparation",
       hasArrow: true,
-      link: "/nhs-prep"
+      link: "/dashboard"
     },
     {
       icon: UserCheck,
       title: "Expert Mentors",
       description: "1-on-1 guidance from qualified NHS doctors",
       hasArrow: true,
-      link: "/mentors"
+      link: "/community"
     },
     {
       icon: Video,
