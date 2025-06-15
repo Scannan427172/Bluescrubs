@@ -332,7 +332,7 @@ export default function AskNHSPrep() {
                 <Brain className="w-6 h-6 text-blue-600" />
               </div>
               <h3 className="font-semibold mb-2" style={{ color: '#000000' }}>AI-Powered Answers</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm" style={{ color: '#555555' }}>
                 Advanced AI trained on UK medical guidelines and PLAB exam content
               </p>
             </CardContent>
@@ -344,7 +344,7 @@ export default function AskNHSPrep() {
                 <BookOpen className="w-6 h-6 text-purple-600" />
               </div>
               <h3 className="font-semibold mb-2" style={{ color: '#000000' }}>Evidence-Based</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm" style={{ color: '#555555' }}>
                 All answers backed by NICE, CKS, GMC, and NHS clinical guidelines
               </p>
             </CardContent>
@@ -356,7 +356,7 @@ export default function AskNHSPrep() {
                 <Stethoscope className="w-6 h-6 text-green-600" />
               </div>
               <h3 className="font-semibold mb-2" style={{ color: '#000000' }}>PLAB Focused</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm" style={{ color: '#555555' }}>
                 Specifically designed for PLAB 1, PLAB 2, and OSCE preparation
               </p>
             </CardContent>
