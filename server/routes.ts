@@ -19,6 +19,7 @@ import {
   type QuizQuestion
 } from "./ai-study-tools";
 import { plabAI, type PLABStudySession, type AdaptiveFlashcard } from "./plab-ai-study-system";
+import { interactivePatientSystem } from "./interactive-patient";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -461,6 +462,75 @@ Provide evidence-based, UK-specific medical guidance that aligns with current NH
     } catch (error) {
       console.error('Error generating mock exam:', error);
       res.status(500).json({ error: "Failed to generate mock exam. Please check your OpenAI API key." });
+    }
+  });
+
+  // Interactive Patient API endpoints
+  app.get("/api/interactive-patient/patients", async (req, res) => {
+    try {
+      const patients = interactivePatientSystem.getAvailablePatients();
+      res.json({ patients });
+    } catch (error) {
+      console.error('Error getting available patients:', error);
+      res.status(500).json({ error: "Failed to get available patients" });
+    }
+  });
+
+  app.post("/api/interactive-patient/start-session", async (req, res) => {
+    try {
+      const { patientId, scenarioType } = req.body;
+      
+      if (!patientId || !scenarioType) {
+        return res.status(400).json({ error: "Patient ID and scenario type are required" });
+      }
+
+      const session = await interactivePatientSystem.createNewSession(patientId, scenarioType);
+      res.json({ session });
+    } catch (error) {
+      console.error('Error starting patient session:', error);
+      res.status(500).json({ error: "Failed to start patient session" });
+    }
+  });
+
+  app.post("/api/interactive-patient/conversation", async (req, res) => {
+    try {
+      const { sessionId, message } = req.body;
+      
+      if (!sessionId || !message) {
+        return res.status(400).json({ error: "Session ID and message are required" });
+      }
+
+      const result = await interactivePatientSystem.processConversation(sessionId, message);
+      res.json(result);
+    } catch (error) {
+      console.error('Error processing conversation:', error);
+      res.status(500).json({ error: "Failed to process conversation" });
+    }
+  });
+
+  app.get("/api/interactive-patient/session/:sessionId", async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      const session = interactivePatientSystem.getSession(sessionId);
+      
+      if (!session) {
+        return res.status(404).json({ error: "Session not found" });
+      }
+
+      res.json({ session });
+    } catch (error) {
+      console.error('Error getting session:', error);
+      res.status(500).json({ error: "Failed to get session" });
+    }
+  });
+
+  app.get("/api/interactive-patient/sessions", async (req, res) => {
+    try {
+      const sessions = interactivePatientSystem.getAllSessions();
+      res.json({ sessions });
+    } catch (error) {
+      console.error('Error getting all sessions:', error);
+      res.status(500).json({ error: "Failed to get sessions" });
     }
   });
 
