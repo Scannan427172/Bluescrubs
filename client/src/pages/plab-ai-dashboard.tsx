@@ -46,19 +46,50 @@ export default function PLABAIDashboard() {
   const [clinicalReasoning, setClinicalReasoning] = useState('');
   const [examinerResponse, setExaminerResponse] = useState('');
   const [guidelines, setGuidelines] = useState('');
+  const [mockExam, setMockExam] = useState<any>(null);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<number[]>([]);
+  const [examStarted, setExamStarted] = useState(false);
+  const [examCompleted, setExamCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  // Study progress tracking
+  // Study progress tracking - populated from real backend data
   const [studyStats, setStudyStats] = useState({
-    totalQuestions: 2847,
-    correctAnswers: 1821,
-    studyHours: 127,
-    weakAreas: ['Cardiology', 'Ethics', 'Pharmacology'],
-    strongAreas: ['Respiratory', 'Gastroenterology', 'Neurology'],
-    confidenceLevel: 78,
-    examReadiness: 65
+    totalQuestions: 0,
+    correctAnswers: 0,
+    studyHours: 0,
+    weakAreas: [] as string[],
+    strongAreas: [] as string[],
+    confidenceLevel: 0,
+    examReadiness: 0
   });
+
+  // Load user progress data
+  useEffect(() => {
+    const loadUserProgress = async () => {
+      try {
+        const response = await fetch('/api/user-progress');
+        if (response.ok) {
+          const data = await response.json();
+          setStudyStats(data);
+        }
+      } catch (error) {
+        console.error('Error loading user progress:', error);
+        // Set default values if API fails
+        setStudyStats({
+          totalQuestions: 0,
+          correctAnswers: 0,
+          studyHours: 0,
+          weakAreas: ['Cardiology', 'Ethics', 'Pharmacology'],
+          strongAreas: ['Respiratory', 'Gastroenterology'],
+          confidenceLevel: 0,
+          examReadiness: 0
+        });
+      }
+    };
+    loadUserProgress();
+  }, []);
 
   // Generate adaptive MCQs
   const generateMCQs = async (topic: string, count: number = 10) => {
@@ -173,6 +204,85 @@ export default function PLABAIDashboard() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Generate comprehensive 500-question mock exam
+  const generateMockExam = async (questionCount: number = 500) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/plab-ai/mock-exam', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ questionCount })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMockExam(data);
+        setCurrentQuestion(0);
+        setUserAnswers(new Array(data.questions.length).fill(-1));
+        setExamStarted(false);
+        setExamCompleted(false);
+        toast({
+          title: "Mock Exam Generated",
+          description: `Created ${data.questions.length} questions covering all PLAB topics`
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Exam Generation Failed",
+        description: "Please check your OpenAI API key configuration",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Start mock exam
+  const startMockExam = () => {
+    setExamStarted(true);
+    setCurrentQuestion(0);
+  };
+
+  // Answer question
+  const answerQuestion = (answerIndex: number) => {
+    const newAnswers = [...userAnswers];
+    newAnswers[currentQuestion] = answerIndex;
+    setUserAnswers(newAnswers);
+  };
+
+  // Navigate questions
+  const nextQuestion = () => {
+    if (currentQuestion < mockExam.questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    }
+  };
+
+  const previousQuestion = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
+  // Complete exam
+  const completeExam = () => {
+    setExamCompleted(true);
+    setExamStarted(false);
+    
+    // Calculate score
+    let correct = 0;
+    mockExam.questions.forEach((question: AdaptiveFlashcard, index: number) => {
+      if (userAnswers[index] === question.correctAnswer) {
+        correct++;
+      }
+    });
+    
+    const percentage = Math.round((correct / mockExam.questions.length) * 100);
+    toast({
+      title: "Exam Completed",
+      description: `You scored ${correct}/${mockExam.questions.length} (${percentage}%)`
+    });
   };
 
   return (

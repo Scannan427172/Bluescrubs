@@ -303,36 +303,73 @@ export class PLABAIStudySystem {
     }
   }
 
-  // Mock exam generator
-  async generateMockExam(duration: number = 180): Promise<{
+  // Mock exam generator - Creates comprehensive 500-question PLAB exams
+  async generateMockExam(questionCount: number = 500): Promise<{
     questions: AdaptiveFlashcard[];
     timeLimit: number;
     passingScore: number;
+    examStats: {
+      totalQuestions: number;
+      topicDistribution: Record<string, number>;
+      difficultyDistribution: Record<string, number>;
+    };
   }> {
     try {
-      // Generate questions across all PLAB topics
+      // Comprehensive PLAB topic coverage
       const topics = [
         'cardiology', 'respiratory', 'gastroenterology', 'neurology',
         'endocrinology', 'rheumatology', 'infectious-diseases', 'psychiatry',
         'obstetrics-gynecology', 'pediatrics', 'surgery', 'emergency-medicine',
-        'ethics-professionalism', 'pharmacology'
+        'ethics-professionalism', 'pharmacology', 'dermatology', 'ophthalmology',
+        'ent', 'urology', 'hematology', 'oncology', 'geriatrics', 'immunology'
       ];
 
-      const questionsPerTopic = Math.floor(duration / topics.length);
+      const questionsPerTopic = Math.ceil(questionCount / topics.length);
       const allQuestions: AdaptiveFlashcard[] = [];
+      const topicDistribution: Record<string, number> = {};
+      const difficultyDistribution: Record<string, number> = { basic: 0, intermediate: 0, advanced: 0 };
 
-      for (const topic of topics) {
-        const topicQuestions = await this.generatePLABMCQs(topic, questionsPerTopic);
-        allQuestions.push(...topicQuestions);
+      console.log(`Generating comprehensive ${questionCount}-question PLAB mock exam...`);
+
+      // Generate questions for each topic in batches
+      for (let i = 0; i < topics.length; i++) {
+        const topic = topics[i];
+        
+        try {
+          const topicQuestions = await this.generatePLABMCQs(topic, questionsPerTopic);
+          allQuestions.push(...topicQuestions);
+          topicDistribution[topic] = topicQuestions.length;
+          
+          // Track difficulty distribution
+          topicQuestions.forEach(q => {
+            difficultyDistribution[q.difficulty]++;
+          });
+
+          console.log(`Generated ${topicQuestions.length} questions for ${topic}`);
+          
+          // Rate limiting delay
+          if (i < topics.length - 1) {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+          }
+        } catch (error) {
+          console.error(`Failed to generate questions for ${topic}:`, error);
+          // Continue with other topics
+        }
       }
 
-      // Shuffle questions for exam format
+      // Shuffle and select final questions
       const shuffled = allQuestions.sort(() => Math.random() - 0.5);
+      const finalQuestions = shuffled.slice(0, questionCount);
 
       return {
-        questions: shuffled.slice(0, duration),
-        timeLimit: duration * 60 * 1000, // Convert to milliseconds
-        passingScore: Math.floor(duration * 0.63) // 63% passing score
+        questions: finalQuestions,
+        timeLimit: questionCount * 90 * 1000, // 90 seconds per question (12.5 hours total)
+        passingScore: Math.floor(questionCount * 0.63), // 63% passing score
+        examStats: {
+          totalQuestions: finalQuestions.length,
+          topicDistribution,
+          difficultyDistribution
+        }
       };
 
     } catch (error) {
