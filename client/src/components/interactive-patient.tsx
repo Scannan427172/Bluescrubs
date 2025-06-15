@@ -176,7 +176,7 @@ export function InteractivePatient() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {patientsData?.patients?.map((patient: PatientProfile) => (
+          {(patientsData?.patients || [])?.map((patient: PatientProfile) => (
             <Card key={patient.id} className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
