@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global text visibility override */
+@layer base {
+  * {
+    color: #1a1a1a !important;
+  }
+  
+  body {
+    color: #1a1a1a !important;
+    background-color: #ffffff !important;
+  }
+}
+
+@layer utilities {
+  .text-gray-500, .text-gray-600, .text-gray-700, .text-gray-800, .text-gray-900 {
+    color: #1a1a1a !important;
+  }
+  
+  .text-white {
+    color: #1a1a1a !important;
+  }
+  
+  .text-muted-foreground {
+    color: #1a1a1a !important;
+  }
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -25,19 +51,115 @@
   --radius: 0.75rem;
 }
 
-/* Ensure proper text contrast and visibility */
+/* Comprehensive text visibility fix */
 * {
-  color: inherit;
+  color: inherit !important;
 }
 
 body {
-  color: hsl(222.2 84% 4.9%) !important;
-  background-color: hsl(0 0% 100%) !important;
+  color: #1a1a1a !important;
+  background-color: #ffffff !important;
 }
 
-/* Force proper contrast for all text elements */
-h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th, label, button {
-  color: hsl(222.2 84% 4.9%) !important;
+/* Force proper contrast for ALL text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th, label, button, 
+.text-white, .text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500 {
+  color: #1a1a1a !important;
+}
+
+/* Specific overrides for light text that should remain light */
+.text-white.bg-blue-600,
+.text-white.bg-purple-600,
+.text-white.bg-green-600,
+button.bg-gradient-to-r *,
+.bg-blue-600 *,
+.bg-purple-600 *,
+.bg-green-600 * {
+  color: white !important;
+}
+
+/* Card and content area fixes */
+.card, .card-content, .card-header, .card-title, .card-description {
+  color: #1a1a1a !important;
+}
+
+/* Input and form elements */
+input, textarea, select, placeholder {
+  color: #1a1a1a !important;
+  background-color: #ffffff !important;
+}
+
+/* Ensure all Tailwind text utilities show dark text */
+.text-sm, .text-base, .text-lg, .text-xl, .text-2xl, .text-3xl, .text-4xl {
+  color: #1a1a1a !important;
+}
+
+/* Additional comprehensive text fixes */
+[class*="text-"], [class*="Text"], 
+.prose, .prose *, 
+.card *, .Card *, 
+.button *, .Button *,
+.container *, .Container *,
+.flex *, .grid *,
+.space-y-* *, .space-x-* *,
+.gap-* *, .p-* *, .m-* *,
+.rounded * {
+  color: #1a1a1a !important;
+}
+
+/* Force all React component text to be visible */
+div[class*="text"] *,
+span[class*="text"] *,
+p[class*="text"] *,
+h1[class*="text"] *,
+h2[class*="text"] *,
+h3[class*="text"] *,
+h4[class*="text"] *,
+h5[class*="text"] *,
+h6[class*="text"] * {
+  color: #1a1a1a !important;
+}
+
+/* Specific fixes for shadcn/ui components */
+.card-header *, .card-content *, .card-title *, .card-description *,
+.button *, .input *, .textarea *, .label *, .badge *,
+.alert *, .dialog *, .dropdown * {
+  color: #1a1a1a !important;
+}
+
+/* Ultimate text visibility fix - override everything */
+* {
+  color: #1a1a1a !important;
+}
+
+/* Force visibility on all possible selectors */
+body *, html *, div *, span *, p *, h1 *, h2 *, h3 *, h4 *, h5 *, h6 *, 
+a *, li *, ul *, ol *, button *, input *, textarea *, label *, 
+.card *, .Card *, [class*="card"] *, [class*="Card"] *,
+[class*="text"] *, [data-testid] *, [role] *, 
+.container *, .flex *, .grid *, .space-y *, .space-x *,
+.gap *, .p *, .m *, .rounded *, .border *, .shadow * {
+  color: #1a1a1a !important;
+}
+
+/* React component text visibility */
+[class] *, [className] * {
+  color: #1a1a1a !important;
+}
+
+/* Exception for elements that should remain white */
+.bg-blue-600, .bg-blue-600 *,
+.bg-purple-600, .bg-purple-600 *,
+.bg-green-600, .bg-green-600 *,
+.bg-red-600, .bg-red-600 *,
+.bg-yellow-600, .bg-yellow-600 *,
+.bg-indigo-600, .bg-indigo-600 *,
+.bg-pink-600, .bg-pink-600 *,
+.bg-gray-800, .bg-gray-800 *,
+.bg-gray-900, .bg-gray-900 *,
+.bg-black, .bg-black *,
+button[class*="bg-gradient"], button[class*="bg-gradient"] * {
+  color: white !important;
 }
 
 /* Card and container backgrounds */

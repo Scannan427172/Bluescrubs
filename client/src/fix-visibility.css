@@ -1,0 +1,78 @@
+/* Complete text visibility fix for all elements */
+
+/* Universal text color override */
+*, *::before, *::after {
+  color: #1a1a1a !important;
+}
+
+/* Body and root elements */
+html, body {
+  color: #1a1a1a !important;
+  background-color: #ffffff !important;
+}
+
+/* All text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, a, li, ul, ol, dl, dt, dd,
+button, input, textarea, select, option, label, legend, fieldset,
+table, th, td, caption, code, pre, blockquote, cite, q, abbr, dfn,
+address, time, small, strong, em, b, i, u, s, sub, sup, mark, del, ins {
+  color: #1a1a1a !important;
+}
+
+/* All class-based elements */
+[class] {
+  color: #1a1a1a !important;
+}
+
+/* React components and modern selectors */
+[data-testid], [role], [aria-label], [title] {
+  color: #1a1a1a !important;
+}
+
+/* Tailwind utility overrides */
+.text-white, .text-gray-100, .text-gray-200, .text-gray-300, .text-gray-400,
+.text-gray-500, .text-gray-600, .text-gray-700, .text-gray-800, .text-gray-900,
+.text-slate-100, .text-slate-200, .text-slate-300, .text-slate-400,
+.text-slate-500, .text-slate-600, .text-slate-700, .text-slate-800, .text-slate-900,
+.text-muted-foreground, .text-foreground {
+  color: #1a1a1a !important;
+}
+
+/* Card and component overrides */
+.card, .card-header, .card-content, .card-title, .card-description,
+.alert, .badge, .button, .input, .textarea, .select, .label,
+.dialog, .dropdown, .popover, .tooltip, .sheet, .drawer {
+  color: #1a1a1a !important;
+}
+
+/* Exception for elements that need white text on dark backgrounds */
+.bg-blue-600, .bg-blue-700, .bg-blue-800, .bg-blue-900,
+.bg-purple-600, .bg-purple-700, .bg-purple-800, .bg-purple-900,
+.bg-green-600, .bg-green-700, .bg-green-800, .bg-green-900,
+.bg-red-600, .bg-red-700, .bg-red-800, .bg-red-900,
+.bg-yellow-600, .bg-yellow-700, .bg-yellow-800, .bg-yellow-900,
+.bg-indigo-600, .bg-indigo-700, .bg-indigo-800, .bg-indigo-900,
+.bg-pink-600, .bg-pink-700, .bg-pink-800, .bg-pink-900,
+.bg-gray-700, .bg-gray-800, .bg-gray-900,
+.bg-slate-700, .bg-slate-800, .bg-slate-900,
+.bg-black,
+button[class*="bg-gradient"],
+[class*="bg-gradient"] {
+  color: white !important;
+}
+
+/* Ensure buttons with dark backgrounds have white text */
+.bg-blue-600 *, .bg-blue-700 *, .bg-blue-800 *, .bg-blue-900 *,
+.bg-purple-600 *, .bg-purple-700 *, .bg-purple-800 *, .bg-purple-900 *,
+.bg-green-600 *, .bg-green-700 *, .bg-green-800 *, .bg-green-900 *,
+.bg-red-600 *, .bg-red-700 *, .bg-red-800 *, .bg-red-900 *,
+.bg-yellow-600 *, .bg-yellow-700 *, .bg-yellow-800 *, .bg-yellow-900 *,
+.bg-indigo-600 *, .bg-indigo-700 *, .bg-indigo-800 *, .bg-indigo-900 *,
+.bg-pink-600 *, .bg-pink-700 *, .bg-pink-800 *, .bg-pink-900 *,
+.bg-gray-700 *, .bg-gray-800 *, .bg-gray-900 *,
+.bg-slate-700 *, .bg-slate-800 *, .bg-slate-900 *,
+.bg-black *,
+button[class*="bg-gradient"] *,
+[class*="bg-gradient"] * {
+  color: white !important;
+}

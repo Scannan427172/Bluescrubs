@@ -85,8 +85,8 @@ export default function AskNHSPrep() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white" style={{ color: '#1a1a1a' }}>
+      <div className="container mx-auto px-4 py-8" style={{ color: '#1a1a1a' }}>
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
@@ -124,7 +124,7 @@ export default function AskNHSPrep() {
                 maxLength={1000}
               />
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">
+                <span className="text-sm" style={{ color: '#666666' }}>
                   {question.length}/1000 characters
                 </span>
                 <Button 
