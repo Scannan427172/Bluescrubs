@@ -97,7 +97,7 @@ export default function AskNHSPrep() {
           <h1 className="text-4xl font-bold mb-4" style={{ color: '#000000' }}>
             Ask NHS Prep AI
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto" style={{ color: '#555555' }}>
             Get instant, evidence-based answers to any medical question. Powered by UK medical guidelines 
             including NICE, CKS, GMC, and NHS protocols. Perfect for PLAB 1, PLAB 2, and clinical practice.
           </p>
@@ -110,7 +110,7 @@ export default function AskNHSPrep() {
               <MessageCircle className="w-5 h-5 text-blue-600" />
               Ask Your Medical Question
             </CardTitle>
-            <CardDescription>
+            <CardDescription style={{ color: '#555555' }}>
               Ask anything about PLAB preparation, clinical conditions, treatments, guidelines, or exam techniques
             </CardDescription>
           </CardHeader>
@@ -172,9 +172,10 @@ export default function AskNHSPrep() {
                         key={qIndex}
                         onClick={() => setQuestion(q)}
                         className="w-full p-3 text-left bg-gray-50 hover:bg-blue-50 rounded-lg transition-colors text-sm border border-gray-200 hover:border-blue-200"
+                        style={{ color: '#000000' }}
                       >
                         <Search className="w-4 h-4 text-blue-600 mb-2" />
-                        {q}
+                        <span style={{ color: '#333333' }}>{q}</span>
                       </button>
                     ))}
                   </CardContent>
@@ -200,7 +201,7 @@ export default function AskNHSPrep() {
                         <MessageCircle className="w-5 h-5 text-blue-600 inline mr-2" />
                         Your Question:
                       </CardTitle>
-                      <p className="text-gray-700 bg-blue-50 p-3 rounded-lg">
+                      <p className="bg-blue-50 p-3 rounded-lg" style={{ color: '#333333' }}>
                         {item.question}
                       </p>
                     </div>
@@ -221,7 +222,7 @@ export default function AskNHSPrep() {
                       NHS Prep AI Answer:
                     </h4>
                     <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-lg border border-purple-200">
-                      <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
+                      <p className="leading-relaxed whitespace-pre-wrap" style={{ color: '#1a1a1a' }}>
                         {item.response.answer}
                       </p>
                     </div>
@@ -253,7 +254,7 @@ export default function AskNHSPrep() {
                       </h4>
                       <div className="space-y-1">
                         {item.response.guidelines.map((guideline, gIndex) => (
-                          <div key={gIndex} className="flex items-center gap-2 text-sm text-gray-700">
+                          <div key={gIndex} className="flex items-center gap-2 text-sm" style={{ color: '#333333' }}>
                             <ArrowRight className="w-4 h-4 text-blue-600" />
                             {guideline}
                           </div>
@@ -289,7 +290,7 @@ export default function AskNHSPrep() {
                         {item.response.studyRecommendations.map((rec, rIndex) => (
                           <div key={rIndex} className="flex items-start gap-2 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
                             <Star className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
-                            <span className="text-sm text-gray-700">{rec}</span>
+                            <span className="text-sm" style={{ color: '#333333' }}>{rec}</span>
                           </div>
                         ))}
                       </div>
@@ -299,7 +300,7 @@ export default function AskNHSPrep() {
                   {/* Confidence Level */}
                   <div className="flex items-center justify-between pt-4 border-t">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-gray-600">Confidence Level:</span>
+                      <span className="text-sm" style={{ color: '#555555' }}>Confidence Level:</span>
                       <div className="flex items-center gap-1">
                         {[...Array(5)].map((_, i) => (
                           <Star
@@ -312,7 +313,7 @@ export default function AskNHSPrep() {
                           />
                         ))}
                       </div>
-                      <span className="text-sm font-medium">
+                      <span className="text-sm font-medium" style={{ color: '#333333' }}>
                         {item.response.confidenceLevel}%
                       </span>
                     </div>
