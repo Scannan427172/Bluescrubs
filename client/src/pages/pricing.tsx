@@ -65,7 +65,7 @@ export default function Pricing() {
       annualPrice: 890,
       originalAnnualPrice: 1188,
       icon: Crown,
-      color: 'from-gold-500 to-gold-600',
+      color: 'from-yellow-500 to-orange-600',
       features: [
         'Everything in Professional',
         'All 40+ AI systems',
@@ -111,13 +111,13 @@ export default function Pricing() {
 
         {/* Billing Toggle */}
         <div className="flex items-center justify-center mb-12">
-          <span className={`mr-3 ${!isAnnual ? 'font-semibold' : 'text-gray-500'}`}>Monthly</span>
+          <span className={`mr-3 ${!isAnnual ? 'font-semibold text-gray-900' : 'text-gray-600'}`}>Monthly</span>
           <Switch
             checked={isAnnual}
             onCheckedChange={setIsAnnual}
             className="mx-2"
           />
-          <span className={`ml-3 ${isAnnual ? 'font-semibold' : 'text-gray-500'}`}>Annual</span>
+          <span className={`ml-3 ${isAnnual ? 'font-semibold text-gray-900' : 'text-gray-600'}`}>Annual</span>
           <Badge variant="secondary" className="ml-3 bg-green-100 text-green-800">
             Save up to 33%
           </Badge>
@@ -152,7 +152,7 @@ export default function Pricing() {
                   <CardTitle className="text-2xl font-bold" style={{ color: '#000000' }}>
                     {plan.name}
                   </CardTitle>
-                  <CardDescription className="text-gray-600">
+                  <CardDescription className="text-gray-700">
                     {plan.description}
                   </CardDescription>
                   
@@ -160,7 +160,7 @@ export default function Pricing() {
                     <span className="text-4xl font-bold" style={{ color: '#000000' }}>
                       £{price}
                     </span>
-                    <span className="text-gray-500 ml-1">
+                    <span className="text-gray-700 ml-1">
                       /{isAnnual ? 'year' : 'month'}
                     </span>
                     {originalPrice && isAnnual && (
@@ -177,7 +177,7 @@ export default function Pricing() {
                   )}
                   
                   {!isAnnual && (
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-sm text-gray-700 mt-2">
                       Less than £{(price / 30).toFixed(2)}/day
                     </p>
                   )}
@@ -196,7 +196,7 @@ export default function Pricing() {
                     {plan.features.map((feature, index) => (
                       <div key={index} className="flex items-start">
                         <Check className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-gray-700">{feature}</span>
+                        <span className="text-sm text-gray-800">{feature}</span>
                       </div>
                     ))}
                   </div>
