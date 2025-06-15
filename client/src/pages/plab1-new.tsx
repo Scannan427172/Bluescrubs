@@ -376,15 +376,20 @@ export default function PLAB1New() {
     return translated;
   };
 
-  // Function to translate entire question object using API
+  // Function to translate entire question object using fast instant translation
   const translateFullQuestion = async (question: any) => {
     if (!translateQuestions || selectedLanguage === 'en') return question;
     
     const cacheKey = `${question.id}_${selectedLanguage}`;
     
-    // Return if already translating or translated
-    if (translationLoading[cacheKey] || translatedQuestions[cacheKey]) {
-      return translatedQuestions[cacheKey] || question;
+    // Return if already translated
+    if (translatedQuestions[cacheKey]) {
+      return translatedQuestions[cacheKey];
+    }
+    
+    // Return if currently translating
+    if (translationLoading[cacheKey]) {
+      return question;
     }
     
     setTranslationLoading(prev => ({ ...prev, [cacheKey]: true }));
@@ -412,19 +417,21 @@ export default function PLAB1New() {
 
       const translated = await response.json();
       
-      // Store translated question
+      // Store translated question with proper structure
+      const translatedQuestion = {
+        ...question,
+        stem: translated.scenario || translated.stem || question.stem,
+        question: translated.question || question.question,
+        options: translated.options || question.options,
+        explanation: translated.explanation || question.explanation
+      };
+      
       setTranslatedQuestions(prev => ({
         ...prev,
-        [cacheKey]: {
-          ...question,
-          stem: translated.scenario || translated.stem,
-          question: translated.question,
-          options: translated.options,
-          explanation: translated.explanation
-        }
+        [cacheKey]: translatedQuestion
       }));
       
-      return translated;
+      return translatedQuestion;
     } catch (error) {
       console.error('Translation error:', error);
       return question; // Return original on error
@@ -668,30 +675,84 @@ export default function PLAB1New() {
                   </SelectTrigger>
                   <SelectContent className="max-h-72 overflow-y-auto">
                     <SelectItem value="en">🇬🇧 English</SelectItem>
-                    <SelectItem value="ar">🇸🇦 Arabic</SelectItem>
-                    <SelectItem value="hi">🇮🇳 Hindi</SelectItem>
-                    <SelectItem value="ur">🇵🇰 Urdu</SelectItem>
-                    <SelectItem value="bn">🇧🇩 Bengali</SelectItem>
-                    <SelectItem value="ta">🇱🇰 Tamil</SelectItem>
-                    <SelectItem value="te">🇮🇳 Telugu</SelectItem>
-                    <SelectItem value="gu">🇮🇳 Gujarati</SelectItem>
-                    <SelectItem value="kn">🇮🇳 Kannada</SelectItem>
-                    <SelectItem value="ml">🇮🇳 Malayalam</SelectItem>
-                    <SelectItem value="pa">🇮🇳 Punjabi</SelectItem>
-                    <SelectItem value="mr">🇮🇳 Marathi</SelectItem>
-                    <SelectItem value="es">🇪🇸 Spanish</SelectItem>
-                    <SelectItem value="fr">🇫🇷 French</SelectItem>
-                    <SelectItem value="de">🇩🇪 German</SelectItem>
-                    <SelectItem value="it">🇮🇹 Italian</SelectItem>
-                    <SelectItem value="pt">🇵🇹 Portuguese</SelectItem>
-                    <SelectItem value="ru">🇷🇺 Russian</SelectItem>
-                    <SelectItem value="pl">🇵🇱 Polish</SelectItem>
-                    <SelectItem value="ro">🇷🇴 Romanian</SelectItem>
-                    <SelectItem value="zh">🇨🇳 Chinese</SelectItem>
-                    <SelectItem value="ja">🇯🇵 Japanese</SelectItem>
-                    <SelectItem value="ko">🇰🇷 Korean</SelectItem>
+                    <SelectItem value="ar">🇸🇦 العربية Arabic</SelectItem>
+                    <SelectItem value="hi">🇮🇳 हिन्दी Hindi</SelectItem>
+                    <SelectItem value="ur">🇵🇰 اردو Urdu</SelectItem>
+                    <SelectItem value="bn">🇧🇩 বাংলা Bengali</SelectItem>
+                    <SelectItem value="ta">🇮🇳 தமிழ் Tamil</SelectItem>
+                    <SelectItem value="te">🇮🇳 తెలుగు Telugu</SelectItem>
+                    <SelectItem value="gu">🇮🇳 ગુજરાતી Gujarati</SelectItem>
+                    <SelectItem value="mr">🇮🇳 मराठी Marathi</SelectItem>
+                    <SelectItem value="pa">🇮🇳 ਪੰਜਾਬੀ Punjabi</SelectItem>
+                    <SelectItem value="kn">🇮🇳 ಕನ್ನಡ Kannada</SelectItem>
+                    <SelectItem value="ml">🇮🇳 മലയാളം Malayalam</SelectItem>
+                    <SelectItem value="es">🇪🇸 Español Spanish</SelectItem>
+                    <SelectItem value="fr">🇫🇷 Français French</SelectItem>
+                    <SelectItem value="de">🇩🇪 Deutsch German</SelectItem>
+                    <SelectItem value="pt">🇵🇹 Português Portuguese</SelectItem>
+                    <SelectItem value="it">🇮🇹 Italiano Italian</SelectItem>
+                    <SelectItem value="ru">🇷🇺 Русский Russian</SelectItem>
+                    <SelectItem value="zh">🇨🇳 简体中文 Chinese</SelectItem>
+                    <SelectItem value="ja">🇯🇵 日本語 Japanese</SelectItem>
+                    <SelectItem value="ko">🇰🇷 한국어 Korean</SelectItem>
+                    <SelectItem value="th">🇹🇭 ไทย Thai</SelectItem>
+                    <SelectItem value="vi">🇻🇳 Tiếng Việt Vietnamese</SelectItem>
+                    <SelectItem value="id">🇮🇩 Bahasa Indonesia</SelectItem>
+                    <SelectItem value="ms">🇲🇾 Bahasa Melayu</SelectItem>
+                    <SelectItem value="tr">🇹🇷 Türkçe Turkish</SelectItem>
+                    <SelectItem value="fa">🇮🇷 فارسی Persian</SelectItem>
+                    <SelectItem value="he">🇮🇱 עברית Hebrew</SelectItem>
+                    <SelectItem value="pl">🇵🇱 Polski Polish</SelectItem>
+                    <SelectItem value="ro">🇷🇴 Română Romanian</SelectItem>
+                    <SelectItem value="hu">🇭🇺 Magyar Hungarian</SelectItem>
+                    <SelectItem value="cs">🇨🇿 Čeština Czech</SelectItem>
+                    <SelectItem value="sk">🇸🇰 Slovenčina Slovak</SelectItem>
+                    <SelectItem value="bg">🇧🇬 Български Bulgarian</SelectItem>
+                    <SelectItem value="hr">🇭🇷 Hrvatski Croatian</SelectItem>
+                    <SelectItem value="sr">🇷🇸 Српски Serbian</SelectItem>
+                    <SelectItem value="uk">🇺🇦 Українська Ukrainian</SelectItem>
+                    <SelectItem value="sw">🇰🇪 Kiswahili Swahili</SelectItem>
                   </SelectContent>
                 </Select>
+              )}
+            </div>
+            
+            {/* Voice Control Panel */}
+            <div className="flex items-center gap-4 mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+              <Volume2 className="w-4 h-4 text-green-600" />
+              <div className="flex items-center gap-3">
+                <Switch
+                  checked={speechEnabled}
+                  onCheckedChange={setSpeechEnabled}
+                  className="data-[state=checked]:bg-green-600"
+                />
+                <span className="text-sm font-medium text-green-900">Voice Reading</span>
+              </div>
+              {speechEnabled && (
+                <div className="flex items-center gap-2">
+                  <Select value={selectedVoice} onValueChange={setSelectedVoice}>
+                    <SelectTrigger className="w-40 border-green-200">
+                      <SelectValue placeholder="Select Voice" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {availableVoices.map((voice) => (
+                        <SelectItem key={voice.name} value={voice.name}>
+                          {voice.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {isSpeaking && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={stopSpeaking}
+                      className="border-green-200 text-green-700 hover:bg-green-50"
+                    >
+                      Stop
+                    </Button>
+                  )}
+                </div>
               )}
             </div>
           </div>
@@ -1221,6 +1282,20 @@ export default function PLAB1New() {
                           {option}
                         </span>
                       </div>
+                      
+                      {speechEnabled && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            speakText(option);
+                          }}
+                          className="h-8 w-8 p-0 text-gray-500 hover:text-blue-600"
+                        >
+                          <Volume2 className="w-3 h-3" />
+                        </Button>
+                      )}
                       
                       {showExplanation && isCorrectAnswer && (
                         <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />

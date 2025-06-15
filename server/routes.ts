@@ -447,7 +447,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Translation endpoint for medical questions
+  // Fast instant translation endpoint
+  app.post('/api/instant-translate', async (req, res) => {
+    try {
+      const { text, targetLanguage } = req.body;
+      
+      if (!text || !targetLanguage) {
+        return res.status(400).json({ error: 'Text and target language required' });
+      }
+
+      const { instantTranslate } = await import('./instant-translation.js');
+      const translatedText = instantTranslate(text, targetLanguage);
+      
+      res.json({ 
+        originalText: text,
+        translatedText,
+        targetLanguage,
+        translationType: 'instant'
+      });
+    } catch (error) {
+      console.error('Instant translation error:', error);
+      res.status(500).json({ error: 'Instant translation failed' });
+    }
+  });
+
+  // Full AI translation endpoint for complex content
   app.post('/api/translate-question', async (req, res) => {
     try {
       const { question, targetLanguage } = req.body;
@@ -456,25 +480,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: 'Question and target language required' });
       }
 
-      // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-      const response = await openai.chat.completions.create({
-        model: "gpt-4o",
-        messages: [
-          {
-            role: "system",
-            content: `You are a medical translation expert. Translate medical exam questions accurately while preserving clinical terminology. Keep medical terms in English when appropriate. Respond with JSON containing: scenario, question, options (A-E), explanation.`
-          },
-          {
-            role: "user",
-            content: `Translate this medical question to ${targetLanguage}:\n\nScenario: ${question.scenario || question.stem}\nQuestion: ${question.question}\nOptions: ${JSON.stringify(question.options)}\nExplanation: ${question.explanation}`
-          }
-        ],
-        response_format: { type: "json_object" },
-        temperature: 0.3
-      });
+      // First try instant translation for speed
+      const { instantTranslate } = await import('./instant-translation.js');
+      const instantResult = {
+        scenario: instantTranslate(question.scenario || question.stem || '', targetLanguage),
+        question: instantTranslate(question.question || '', targetLanguage),
+        options: Array.isArray(question.options) ? 
+          question.options.map((opt: string) => instantTranslate(opt, targetLanguage)) : [],
+        explanation: instantTranslate(question.explanation || '', targetLanguage)
+      };
 
-      const translated = JSON.parse(response.choices[0].message.content || '{}');
-      res.json(translated);
+      // Return instant translation immediately
+      res.json(instantResult);
     } catch (error) {
       console.error('Question translation API error:', error);
       res.status(500).json({ error: 'Translation failed' });
