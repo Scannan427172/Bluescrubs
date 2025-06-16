@@ -1,8 +1,38 @@
-/* Complete text visibility fix for all elements */
+/* Ultimate text visibility fix - nuclear option */
 
-/* Universal text color override */
-*, *::before, *::after {
-  color: #1a1a1a !important;
+/* Maximum specificity CSS override */
+html body div * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-shadow: none !important;
+}
+
+html body span {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+html body p {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+html body h1, html body h2, html body h3, html body h4, html body h5, html body h6 {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Nuclear option - override everything */
+* {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Specific targeting for blue gradient backgrounds */
+.bg-gradient-to-br * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-shadow: 0 0 1px rgba(0,0,0,0.5) !important;
 }
 
 /* Body and root elements */
@@ -29,12 +59,26 @@ address, time, small, strong, em, b, i, u, s, sub, sup, mark, del, ins {
   color: #1a1a1a !important;
 }
 
-/* Tailwind utility overrides */
-.text-white, .text-gray-100, .text-gray-200, .text-gray-300, .text-gray-400,
-.text-gray-500, .text-gray-600, .text-gray-700, .text-gray-800, .text-gray-900,
-.text-slate-100, .text-slate-200, .text-slate-300, .text-slate-400,
-.text-slate-500, .text-slate-600, .text-slate-700, .text-slate-800, .text-slate-900,
-.text-muted-foreground, .text-foreground {
+/* Tailwind utility overrides with maximum specificity */
+body .text-white, body .text-gray-100, body .text-gray-200, body .text-gray-300, body .text-gray-400,
+body .text-gray-500, body .text-gray-600, body .text-gray-700, body .text-gray-800, body .text-gray-900,
+body .text-slate-100, body .text-slate-200, body .text-slate-300, body .text-slate-400,
+body .text-slate-500, body .text-slate-600, body .text-slate-700, body .text-slate-800, body .text-slate-900,
+body .text-muted-foreground, body .text-foreground,
+body .text-blue-600, body .text-blue-500, body .text-blue-400,
+body .text-indigo-600, body .text-indigo-500, body .text-indigo-400 {
+  color: #1a1a1a !important;
+}
+
+/* Force visibility on all possible CSS classes */
+[class*="text-"], [class*="Text"] {
+  color: #1a1a1a !important;
+}
+
+/* Override any inherited color properties */
+div, span, p, h1, h2, h3, h4, h5, h6, a, li, ul, ol, 
+button, input, textarea, select, label, legend, 
+table, th, td, caption, blockquote, cite, code, pre {
   color: #1a1a1a !important;
 }
 
