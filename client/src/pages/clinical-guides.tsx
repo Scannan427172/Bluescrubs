@@ -61,12 +61,13 @@ export default function ClinicalGuides() {
 
   if (selectedGuide) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6" style={{ color: '#1a1a1a' }}>
         <div className="max-w-4xl mx-auto">
           <Button 
             variant="outline" 
             onClick={() => setSelectedGuide(null)}
             className="mb-4"
+            style={{ color: '#000000', borderColor: '#000000' }}
           >
             ← Back to Guides
           </Button>
@@ -75,7 +76,7 @@ export default function ClinicalGuides() {
             <CardHeader className="pb-4">
               <div className="flex items-start justify-between">
                 <div>
-                  <CardTitle className="text-2xl font-bold text-gray-900 mb-2">
+                  <CardTitle className="text-2xl font-bold mb-2" style={{ color: '#000000' }}>
                     {selectedGuide.title}
                   </CardTitle>
                   <div className="flex flex-wrap gap-2 mb-3">
@@ -91,11 +92,11 @@ export default function ClinicalGuides() {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className={`w-3 h-3 rounded-full ${getRelevanceColor(selectedGuide.clinicalRelevance)}`}></div>
-                  <span className="text-sm text-gray-600">Clinical Priority</span>
+                  <span className="text-sm" style={{ color: '#333333' }}>Clinical Priority</span>
                 </div>
               </div>
               
-              <div className="flex items-center gap-4 text-sm text-gray-600">
+              <div className="flex items-center gap-4 text-sm" style={{ color: '#333333' }}>
                 <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
                   {selectedGuide.estimatedReadTime} min read
@@ -338,11 +339,11 @@ export default function ClinicalGuides() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6" style={{ color: '#1a1a1a' }}>
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Clinical Knowledge Hub</h1>
-          <p className="text-gray-600">Comprehensive medical guides and clinical summaries for PLAB preparation</p>
+          <h1 className="text-3xl font-bold mb-2" style={{ color: '#000000' }}>Clinical Knowledge Hub</h1>
+          <p style={{ color: '#333333' }}>Comprehensive medical guides and clinical summaries for PLAB preparation</p>
         </div>
 
         {/* Search and Filters */}
@@ -402,7 +403,7 @@ export default function ClinicalGuides() {
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <CardTitle className="text-lg font-semibold leading-tight mb-2">
+                        <CardTitle className="text-lg font-semibold leading-tight mb-2" style={{ color: '#000000' }}>
                           {guide.title}
                         </CardTitle>
                         <div className="flex flex-wrap gap-1 mb-2">
@@ -417,11 +418,11 @@ export default function ClinicalGuides() {
                   </CardHeader>
                   
                   <CardContent className="pt-0">
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-3">
+                    <p className="text-sm mb-3 line-clamp-3" style={{ color: '#333333' }}>
                       {guide.content.overview}
                     </p>
                     
-                    <div className="flex items-center justify-between text-xs text-gray-500">
+                    <div className="flex items-center justify-between text-xs" style={{ color: '#666666' }}>
                       <div className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
                         {guide.estimatedReadTime} min
@@ -439,7 +440,7 @@ export default function ClinicalGuides() {
             {filteredGuides.length === 0 && (
               <div className="text-center py-12">
                 <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500">No guides found matching your criteria</p>
+                <p style={{ color: '#666666' }}>No guides found matching your criteria</p>
               </div>
             )}
           </TabsContent>
