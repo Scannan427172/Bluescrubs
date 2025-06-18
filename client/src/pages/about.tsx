@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronLeft, Users, Stethoscope, Palette, Mail, Linkedin, 
-  Award, Target, Heart, Globe, BookOpen, Shield
+  Award, Target, Heart, Globe, BookOpen, Shield, Activity
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -80,30 +80,32 @@ export default function About() {
               </CardContent>
             </Card>
 
-            {/* Keith Hunter - Multidisciplinary Designer */}
+            {/* Keith Hunter - Sports Therapy Expert */}
             <Card className="border-purple-200 hover:shadow-lg transition-shadow">
               <CardHeader className="text-center">
                 <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Palette className="h-12 w-12 text-purple-600" />
+                  <Activity className="h-12 w-12 text-purple-600" />
                 </div>
                 <CardTitle className="text-xl text-purple-900">Keith Hunter</CardTitle>
-                <CardDescription className="text-purple-700 font-medium">Multidisciplinary Designer & Co-Founder</CardDescription>
+                <CardDescription className="text-purple-700 font-medium">Sports Therapy Expert & Co-Founder</CardDescription>
               </CardHeader>
               <CardContent className="text-center">
                 <div className="space-y-4">
                   <Badge variant="outline" className="bg-purple-50 text-purple-800 border-purple-300">
-                    Design & Technology Lead
+                    Training Design Authority
                   </Badge>
                   <p className="text-gray-700 leading-relaxed">
-                    A multidisciplinary designer with expertise in user experience, 
-                    educational technology, and accessible design. Keith focuses on 
-                    creating intuitive, inclusive learning experiences that adapt to 
-                    diverse learning styles and needs.
+                    Nationally recognised authority in training design and deep tissue therapy 
+                    with over 30 years of experience. Co-founder of Core Principles and former 
+                    Head Jumps Coach for British Athletics Paralympics. Has coached 33 English 
+                    Schools gold medallists and brings expertise in biomechanics and athletic 
+                    development to medical education technology.
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
-                    <Badge variant="secondary" className="text-xs">UX Design</Badge>
-                    <Badge variant="secondary" className="text-xs">EdTech</Badge>
-                    <Badge variant="secondary" className="text-xs">Accessibility</Badge>
+                    <Badge variant="secondary" className="text-xs">Level 4 Sports Massage</Badge>
+                    <Badge variant="secondary" className="text-xs">British Athletics Coach</Badge>
+                    <Badge variant="secondary" className="text-xs">BA Graphic Design</Badge>
+                    <Badge variant="secondary" className="text-xs">Biomechanics</Badge>
                   </div>
                 </div>
               </CardContent>
@@ -156,6 +158,42 @@ export default function About() {
             </Card>
           </div>
         </div>
+
+        {/* Keith Hunter's Professional Background */}
+        <Card className="mb-12 border-purple-200 bg-purple-50">
+          <CardHeader>
+            <CardTitle className="text-2xl text-purple-900 flex items-center gap-3">
+              <Award className="h-6 w-6" />
+              Keith Hunter's Professional Excellence
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-semibold text-purple-900 mb-3">Career Highlights</h3>
+                <ul className="text-purple-800 space-y-2 text-sm">
+                  <li>• Coached 33 English Schools gold medallists</li>
+                  <li>• Head Jumps Coach – British Athletics Paralympics</li>
+                  <li>• England Team Coach – Loughborough International 2012</li>
+                  <li>• Coached Clovis Asong (European & Commonwealth Junior Champion)</li>
+                  <li>• Mentored Lee Whiteley (World Championship Bronze, 2013)</li>
+                  <li>• Co-founder of Core Principles training organisation</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-purple-900 mb-3">Qualifications & Education</h3>
+                <ul className="text-purple-800 space-y-2 text-sm">
+                  <li>• BA Graphic Design – Leeds University (1982)</li>
+                  <li>• Level 4 Sports Massage Therapist</li>
+                  <li>• Level 4 British Athletics Coach</li>
+                  <li>• British Athletics Certified (All Phases)</li>
+                  <li>• Biomechanical Assessment Specialist</li>
+                  <li>• Sports Therapy Organisation Ambassador</li>
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Technology & Innovation */}
         <Card className="mb-12 border-gray-200">

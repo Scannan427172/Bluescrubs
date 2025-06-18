@@ -60,7 +60,7 @@ export default function More() {
     {
       icon: Users,
       title: "Who are NHSprep",
-      description: "Meet the founders - NHS doctor Yasa and multidisciplinary designer Keith Hunter",
+      description: "Meet the founders - NHS doctor Yasa and sports therapy expert Keith Hunter",
       hasArrow: true,
       link: "/about"
     },
