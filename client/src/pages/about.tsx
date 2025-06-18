@@ -96,12 +96,12 @@ export default function About() {
                   </Badge>
                   <p className="text-gray-700 leading-relaxed">
                     BA Graphic Design graduate from Leeds University (1982) and multidisciplinary freelance 
-                    digital creative with over 30 years commercial experience in web, print, motion graphics 
-                    and identity design. Also a nationally recognised authority in training design and deep 
-                    tissue therapy. Co-founder of Core Principles and former Head Jumps Coach for British 
-                    Athletics Paralympics. Has coached European and World champion long jumpers, including 
-                    33 English Schools gold medallists, bringing comprehensive creative design expertise 
-                    and elite athletic development knowledge to medical education technology.
+                    digital creative with over 30 years commercial experience in web, print, motion graphics, 
+                    identity design, app design and build. Also a nationally recognised authority in training 
+                    design and deep tissue therapy. Co-founder of Core Principles and former Head Jumps Coach 
+                    for British Athletics Paralympics. Has coached European and World champion long jumpers, 
+                    including 33 English Schools gold medallists, bringing comprehensive creative design 
+                    expertise and elite athletic development knowledge to medical education technology.
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     <Badge variant="secondary" className="text-xs">Level 4 Sports Massage</Badge>
@@ -188,6 +188,7 @@ export default function About() {
                 <ul className="text-purple-800 space-y-2 text-sm">
                   <li>• BA Graphic Design – Leeds University (1982)</li>
                   <li>• Web Design & Development Specialist</li>
+                  <li>• App Design & Development Expert</li>
                   <li>• Motion Graphics & Identity Design Expert</li>
                   <li>• Print & Corporate Design Professional</li>
                   <li>• Level 4 Sports Massage Therapist</li>
