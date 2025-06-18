@@ -11,6 +11,7 @@ import {
   Camera, Upload, Download, Settings, Volume2, VolumeX, X
 } from "lucide-react";
 import videoOsceHeroBannerImage from "@assets/3FEBA1E1-EE29-45D2-8251-602E336171C5_1750283670479.png";
+import { HeroBanner } from "@/components/ui/hero-banner";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface VideoOSCESession {
@@ -265,22 +266,12 @@ export default function VideoOSCE() {
 
   return (
     <div className="video-osce min-h-screen bg-white pb-24" data-page="video-osce">
-      {/* Hero Banner */}
-      <div className="hero-banner relative h-80 mb-8 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${videoOsceHeroBannerImage})` }}
-        >
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        </div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4" style={{ color: 'white' }}>
-          <h1 className="text-5xl font-bold mb-4" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Video OSCE Practice</h1>
-          <p className="text-xl mb-2" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Advanced video recording and AI feedback</p>
-          <Badge variant="outline" className="bg-white text-black border-gray-300" style={{ color: 'black', WebkitTextFillColor: 'black', textShadow: 'none' }}>
-            Real-time Practice Sessions
-          </Badge>
-        </div>
-      </div>
+      <HeroBanner
+        backgroundImage={videoOsceHeroBannerImage}
+        title="Video OSCE Practice"
+        subtitle="Advanced video recording and AI feedback"
+        badge="Real-time Practice Sessions"
+      />
       
       <div className="max-w-7xl mx-auto px-4">
 

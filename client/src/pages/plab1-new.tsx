@@ -96,12 +96,7 @@ export default function PLAB1New() {
     return () => clearInterval(interval);
   }, [isTimerRunning]);
 
-  // Preload hero banner image for faster loading
-  useEffect(() => {
-    const img = new Image();
-    img.onload = () => setHeroBannerLoaded(true);
-    img.src = heroBannerImage;
-  }, []);
+
 
   // Start timer when new question is shown
   useEffect(() => {
@@ -668,29 +663,12 @@ export default function PLAB1New() {
   if (!sessionStarted && !isGeneratingQuestions) {
     return (
       <div className="min-h-screen bg-gray-50 pb-24">
-        {/* Hero Banner */}
-        <div className="hero-banner relative h-80 mb-8 overflow-hidden">
-          {!heroBannerLoaded && (
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 animate-pulse">
-              <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-            </div>
-          )}
-          <div 
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500 ${
-              heroBannerLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{ backgroundImage: `url(${heroBannerImage})` }}
-          >
-            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-          </div>
-          <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4" style={{ color: 'white' }}>
-            <h1 className="text-5xl font-bold mb-4" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>{translateText('PLAB 1 Practice')}</h1>
-            <p className="text-xl mb-2" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Comprehensive AI-generated medical questions</p>
-            <Badge variant="outline" className="bg-white text-black border-gray-300" style={{ color: 'black', WebkitTextFillColor: 'black', textShadow: 'none' }}>
-              5000+ Questions Available
-            </Badge>
-          </div>
-        </div>
+        <HeroBanner
+          backgroundImage={heroBannerImage}
+          title={translateText('PLAB 1 Practice')}
+          subtitle="Comprehensive AI-generated medical questions"
+          badge="5000+ Questions Available"
+        />
         
         <div className="max-w-6xl mx-auto px-4 mb-16">
           {/* Content Section */}
