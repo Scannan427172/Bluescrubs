@@ -82,10 +82,62 @@ button, button *, .btn, .btn * {
 .video-osce .text-center h1, 
 .video-osce .text-center p,
 .video-osce h2,
-.video-osce .text-2xl {
+.video-osce .text-2xl,
+.video-osce .text-4xl,
+.video-osce .text-lg,
+.video-osce .font-bold,
+.video-osce .text-gray-900,
+.video-osce .text-gray-600 {
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
   text-shadow: none !important;
+}
+
+/* Maximum priority text override */
+[data-page="video-osce"] *, 
+.video-osce *, 
+.video-osce button *,
+.video-osce .text-center *,
+h1[class*="text"], h2[class*="text"], p[class*="text"] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Ultimate text visibility fix - targets all possible text classes */
+.text-4xl, .text-3xl, .text-2xl, .text-xl, .text-lg, .text-base, .text-sm, .text-xs,
+.font-bold, .font-semibold, .font-medium, .font-normal,
+.text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500,
+.text-white, .text-blue-600, .text-blue-700, .text-blue-800, .text-blue-900 {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Button text override */
+button, .btn, [role="button"] {
+  color: #000000 !important;
+}
+
+button span, .btn span, [role="button"] span {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Absolute final override - force black text everywhere */
+* {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Re-apply standard button styling but keep text black */
+.bg-blue-600, .bg-blue-500, .bg-green-600, .bg-red-600 {
+  background-color: var(--background-color) !important;
+}
+
+/* Preserve button backgrounds but force text visibility */
+button.bg-blue-600 *, button.bg-blue-500 *, 
+button.bg-green-600 *, button.bg-red-600 * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 /* Specific targeting for blue gradient backgrounds */
