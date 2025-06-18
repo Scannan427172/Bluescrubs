@@ -87,7 +87,7 @@ export default function About() {
                   <Activity className="h-12 w-12 text-purple-600" />
                 </div>
                 <CardTitle className="text-xl text-purple-900">Keith Hunter</CardTitle>
-                <CardDescription className="text-purple-700 font-medium">Sports Therapy Expert & Co-Founder</CardDescription>
+                <CardDescription className="text-purple-700 font-medium">Sports Therapy Expert, Graphic Designer & Co-Founder</CardDescription>
               </CardHeader>
               <CardContent className="text-center">
                 <div className="space-y-4">
@@ -95,11 +95,12 @@ export default function About() {
                     Training Design Authority
                   </Badge>
                   <p className="text-gray-700 leading-relaxed">
-                    Nationally recognised authority in training design and deep tissue therapy 
-                    with over 30 years of experience. Co-founder of Core Principles and former 
-                    Head Jumps Coach for British Athletics Paralympics. Has coached European 
-                    and World champion long jumpers, including 33 English Schools gold medallists, 
-                    bringing elite athletic development expertise to medical education technology.
+                    BA Graphic Design graduate from Leeds University (1982) and nationally recognised 
+                    authority in training design and deep tissue therapy with over 30 years of experience. 
+                    Co-founder of Core Principles and former Head Jumps Coach for British Athletics Paralympics. 
+                    Has coached European and World champion long jumpers, including 33 English Schools gold 
+                    medallists, bringing both creative design expertise and elite athletic development 
+                    knowledge to medical education technology.
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     <Badge variant="secondary" className="text-xs">Level 4 Sports Massage</Badge>
