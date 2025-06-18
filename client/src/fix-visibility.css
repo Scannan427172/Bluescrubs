@@ -255,6 +255,23 @@ select *,
   -webkit-text-fill-color: #000000 !important;
 }
 
+/* Force white backgrounds on dropdowns to ensure contrast */
+[data-radix-select-content] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+[data-radix-select-item] {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Additional dropdown targeting */
+.select-content, .select-item, .select-trigger, .select-value {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
 /* Re-apply standard button styling but keep text black */
 .bg-blue-600, .bg-blue-500, .bg-green-600, .bg-red-600 {
   background-color: var(--background-color) !important;

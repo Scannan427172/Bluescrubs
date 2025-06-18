@@ -217,6 +217,34 @@ export default function VideoOSCE() {
   // Get unique categories
   const categories = Array.from(new Set(stations.map((s: OSCEStation) => s.category)));
 
+  // Force text visibility after component mounts
+  useEffect(() => {
+    const forceTextVisibility = () => {
+      // Target all text elements and force black color
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach(el => {
+        const element = el as HTMLElement;
+        if (element.style) {
+          element.style.color = '#000000';
+          element.style.webkitTextFillColor = '#000000';
+        }
+      });
+
+      // Specifically target dropdown elements
+      const selectElements = document.querySelectorAll('[data-radix-select-content], [data-radix-select-item], [role="combobox"], [role="option"]');
+      selectElements.forEach(el => {
+        const element = el as HTMLElement;
+        element.style.color = '#000000';
+        element.style.backgroundColor = '#ffffff';
+      });
+    };
+
+    // Run immediately and after a delay to catch dynamic content
+    forceTextVisibility();
+    setTimeout(forceTextVisibility, 100);
+    setTimeout(forceTextVisibility, 500);
+  }, [stations]);
+
   return (
     <div className="video-osce min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" data-page="video-osce">
       <div className="max-w-7xl mx-auto">
@@ -245,11 +273,22 @@ export default function VideoOSCE() {
                     <SelectTrigger className="w-48" style={{ color: '#000000 !important' }}>
                       <SelectValue placeholder="Filter by category" style={{ color: '#000000 !important' }} />
                     </SelectTrigger>
-                    <SelectContent style={{ color: '#000000 !important' }}>
-                      <SelectItem value="all" style={{ color: '#000000 !important' }}>All Categories</SelectItem>
-                      {categories.filter(cat => typeof cat === 'string').map((category: string) => (
-                        <SelectItem key={category} value={category} style={{ color: '#000000' }}>{category}</SelectItem>
-                      ))}
+                    <SelectContent style={{ color: '#000000 !important', backgroundColor: '#ffffff' }}>
+                      <SelectItem value="all" style={{ color: '#000000 !important', backgroundColor: '#ffffff' }}>
+                        All Categories ({filteredStations.length})
+                      </SelectItem>
+                      {categories.filter(cat => typeof cat === 'string').map((category: string) => {
+                        const categoryCount = stations.filter((s: OSCEStation) => s.category === category).length;
+                        return (
+                          <SelectItem 
+                            key={category} 
+                            value={category} 
+                            style={{ color: '#000000 !important', backgroundColor: '#ffffff' }}
+                          >
+                            {category} ({categoryCount})
+                          </SelectItem>
+                        );
+                      })}
                     </SelectContent>
                   </Select>
                 </div>
