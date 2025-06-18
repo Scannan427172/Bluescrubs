@@ -9,44 +9,62 @@ export default function LanguageDemo() {
   const [selectedLanguage, setSelectedLanguage] = useState("English");
   
   const languages = [
-    { code: "en", name: "English", flag: "🇬🇧", speakers: "1.5B+" },
-    { code: "ar", name: "Arabic", flag: "🇸🇦", speakers: "420M+" },
-    { code: "hi", name: "Hindi", flag: "🇮🇳", speakers: "600M+" },
-    { code: "ur", name: "Urdu", flag: "🇵🇰", speakers: "230M+" },
-    { code: "bn", name: "Bengali", flag: "🇧🇩", speakers: "300M+" },
-    { code: "es", name: "Spanish", flag: "🇪🇸", speakers: "500M+" },
-    { code: "fr", name: "French", flag: "🇫🇷", speakers: "280M+" },
-    { code: "pt", name: "Portuguese", flag: "🇵🇹", speakers: "260M+" },
-    { code: "zh", name: "Chinese", flag: "🇨🇳", speakers: "1.1B+" },
-    { code: "ja", name: "Japanese", flag: "🇯🇵", speakers: "125M+" },
-    { code: "ko", name: "Korean", flag: "🇰🇷", speakers: "77M+" },
-    { code: "ru", name: "Russian", flag: "🇷🇺", speakers: "258M+" },
-    { code: "de", name: "German", flag: "🇩🇪", speakers: "132M+" },
-    { code: "it", name: "Italian", flag: "🇮🇹", speakers: "65M+" },
-    { code: "tr", name: "Turkish", flag: "🇹🇷", speakers: "88M+" },
-    { code: "pl", name: "Polish", flag: "🇵🇱", speakers: "45M+" },
-    { code: "nl", name: "Dutch", flag: "🇳🇱", speakers: "24M+" },
-    { code: "sv", name: "Swedish", flag: "🇸🇪", speakers: "10M+" },
-    { code: "da", name: "Danish", flag: "🇩🇰", speakers: "6M+" },
-    { code: "no", name: "Norwegian", flag: "🇳🇴", speakers: "5M+" },
-    { code: "fi", name: "Finnish", flag: "🇫🇮", speakers: "5.5M+" },
-    { code: "hu", name: "Hungarian", flag: "🇭🇺", speakers: "13M+" },
-    { code: "cs", name: "Czech", flag: "🇨🇿", speakers: "10M+" },
-    { code: "sk", name: "Slovak", flag: "🇸🇰", speakers: "5M+" },
-    { code: "ro", name: "Romanian", flag: "🇷🇴", speakers: "24M+" },
-    { code: "bg", name: "Bulgarian", flag: "🇧🇬", speakers: "9M+" },
-    { code: "hr", name: "Croatian", flag: "🇭🇷", speakers: "5M+" },
-    { code: "sr", name: "Serbian", flag: "🇷🇸", speakers: "12M+" },
-    { code: "sl", name: "Slovenian", flag: "🇸🇮", speakers: "2.5M+" },
-    { code: "et", name: "Estonian", flag: "🇪🇪", speakers: "1.1M+" },
-    { code: "lv", name: "Latvian", flag: "🇱🇻", speakers: "1.9M+" },
-    { code: "lt", name: "Lithuanian", flag: "🇱🇹", speakers: "3M+" },
-    { code: "mt", name: "Maltese", flag: "🇲🇹", speakers: "520K+" },
-    { code: "ga", name: "Irish", flag: "🇮🇪", speakers: "1.7M+" },
-    { code: "cy", name: "Welsh", flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", speakers: "580K+" },
-    { code: "gd", name: "Scottish Gaelic", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", speakers: "57K+" },
-    { code: "eu", name: "Basque", flag: "🇪🇸", speakers: "750K+" },
-    { code: "ca", name: "Catalan", flag: "🇪🇸", speakers: "10M+" }
+    // Core NHS Languages - Most Common Among Healthcare Workers
+    { code: "en", name: "English", flag: "🇬🇧", speakers: "1.5B+", priority: "primary", nhsRelevance: "Primary language of NHS" },
+    { code: "hi", name: "Hindi", flag: "🇮🇳", speakers: "600M+", priority: "high", nhsRelevance: "Large Indian medical workforce in NHS" },
+    { code: "ur", name: "Urdu", flag: "🇵🇰", speakers: "230M+", priority: "high", nhsRelevance: "Pakistani doctors and nurses in UK" },
+    { code: "bn", name: "Bengali", flag: "🇧🇩", speakers: "300M+", priority: "high", nhsRelevance: "Bangladeshi healthcare professionals" },
+    { code: "ta", name: "Tamil", flag: "🇮🇳", speakers: "80M+", priority: "high", nhsRelevance: "Tamil-speaking Indian medical staff" },
+    { code: "te", name: "Telugu", flag: "🇮🇳", speakers: "95M+", priority: "high", nhsRelevance: "South Indian medical professionals" },
+    { code: "ml", name: "Malayalam", flag: "🇮🇳", speakers: "38M+", priority: "high", nhsRelevance: "Kerala nurses and doctors in NHS" },
+    { code: "kn", name: "Kannada", flag: "🇮🇳", speakers: "65M+", priority: "high", nhsRelevance: "Karnataka medical graduates in UK" },
+    { code: "gu", name: "Gujarati", flag: "🇮🇳", speakers: "60M+", priority: "high", nhsRelevance: "Gujarati medical community in UK" },
+    { code: "pa", name: "Punjabi", flag: "🇮🇳", speakers: "125M+", priority: "high", nhsRelevance: "Punjabi-speaking healthcare workers" },
+    
+    // Middle Eastern & African Languages - Growing NHS Workforce
+    { code: "ar", name: "Arabic", flag: "🇸🇦", speakers: "420M+", priority: "high", nhsRelevance: "Middle Eastern doctors in NHS" },
+    { code: "fa", name: "Persian (Farsi)", flag: "🇮🇷", speakers: "70M+", priority: "medium", nhsRelevance: "Iranian medical professionals" },
+    { code: "sw", name: "Swahili", flag: "🇰🇪", speakers: "200M+", priority: "medium", nhsRelevance: "East African healthcare workers" },
+    { code: "am", name: "Amharic", flag: "🇪🇹", speakers: "57M+", priority: "medium", nhsRelevance: "Ethiopian medical professionals" },
+    { code: "ti", name: "Tigrinya", flag: "🇪🇷", speakers: "9M+", priority: "medium", nhsRelevance: "Eritrean healthcare workers" },
+    
+    // European Languages - EU Medical Workforce
+    { code: "pl", name: "Polish", flag: "🇵🇱", speakers: "45M+", priority: "high", nhsRelevance: "Large Polish nursing workforce" },
+    { code: "ro", name: "Romanian", flag: "🇷🇴", speakers: "24M+", priority: "high", nhsRelevance: "Romanian doctors and nurses" },
+    { code: "pt", name: "Portuguese", flag: "🇵🇹", speakers: "260M+", priority: "medium", nhsRelevance: "Portuguese and Brazilian healthcare staff" },
+    { code: "es", name: "Spanish", flag: "🇪🇸", speakers: "500M+", priority: "medium", nhsRelevance: "Spanish-speaking medical professionals" },
+    { code: "it", name: "Italian", flag: "🇮🇹", speakers: "65M+", priority: "medium", nhsRelevance: "Italian medical graduates" },
+    { code: "de", name: "German", flag: "🇩🇪", speakers: "132M+", priority: "medium", nhsRelevance: "German medical professionals" },
+    { code: "fr", name: "French", flag: "🇫🇷", speakers: "280M+", priority: "medium", nhsRelevance: "French and West African medical staff" },
+    { code: "hu", name: "Hungarian", flag: "🇭🇺", speakers: "13M+", priority: "medium", nhsRelevance: "Hungarian medical workforce" },
+    { code: "bg", name: "Bulgarian", flag: "🇧🇬", speakers: "9M+", priority: "medium", nhsRelevance: "Bulgarian healthcare professionals" },
+    { code: "hr", name: "Croatian", flag: "🇭🇷", speakers: "5M+", priority: "medium", nhsRelevance: "Croatian medical staff" },
+    { code: "cs", name: "Czech", flag: "🇨🇿", speakers: "10M+", priority: "medium", nhsRelevance: "Czech medical professionals" },
+    { code: "sk", name: "Slovak", flag: "🇸🇰", speakers: "5M+", priority: "medium", nhsRelevance: "Slovak healthcare workers" },
+    { code: "lt", name: "Lithuanian", flag: "🇱🇹", speakers: "3M+", priority: "medium", nhsRelevance: "Lithuanian medical staff" },
+    { code: "lv", name: "Latvian", flag: "🇱🇻", speakers: "1.9M+", priority: "medium", nhsRelevance: "Latvian healthcare professionals" },
+    { code: "et", name: "Estonian", flag: "🇪🇪", speakers: "1.1M+", priority: "medium", nhsRelevance: "Estonian medical workforce" },
+    
+    // Southeast Asian Languages - Growing Medical Migration
+    { code: "tl", name: "Filipino (Tagalog)", flag: "🇵🇭", speakers: "110M+", priority: "high", nhsRelevance: "Large Filipino nursing workforce in NHS" },
+    { code: "th", name: "Thai", flag: "🇹🇭", speakers: "69M+", priority: "medium", nhsRelevance: "Thai medical professionals" },
+    { code: "vi", name: "Vietnamese", flag: "🇻🇳", speakers: "95M+", priority: "medium", nhsRelevance: "Vietnamese healthcare workers" },
+    { code: "id", name: "Indonesian", flag: "🇮🇩", speakers: "270M+", priority: "medium", nhsRelevance: "Indonesian medical graduates" },
+    { code: "ms", name: "Malay", flag: "🇲🇾", speakers: "290M+", priority: "medium", nhsRelevance: "Malaysian medical professionals" },
+    
+    // East Asian Languages
+    { code: "zh", name: "Chinese (Mandarin)", flag: "🇨🇳", speakers: "1.1B+", priority: "medium", nhsRelevance: "Chinese medical graduates" },
+    { code: "ja", name: "Japanese", flag: "🇯🇵", speakers: "125M+", priority: "low", nhsRelevance: "Japanese medical exchange programs" },
+    { code: "ko", name: "Korean", flag: "🇰🇷", speakers: "77M+", priority: "low", nhsRelevance: "Korean medical professionals" },
+    
+    // Other European Languages
+    { code: "ru", name: "Russian", flag: "🇷🇺", speakers: "258M+", priority: "medium", nhsRelevance: "Russian-speaking medical professionals" },
+    { code: "tr", name: "Turkish", flag: "🇹🇷", speakers: "88M+", priority: "medium", nhsRelevance: "Turkish medical workforce" },
+    { code: "nl", name: "Dutch", flag: "🇳🇱", speakers: "24M+", priority: "low", nhsRelevance: "Dutch medical professionals" },
+    { code: "sv", name: "Swedish", flag: "🇸🇪", speakers: "10M+", priority: "low", nhsRelevance: "Swedish medical staff" },
+    { code: "da", name: "Danish", flag: "🇩🇰", speakers: "6M+", priority: "low", nhsRelevance: "Danish medical professionals" },
+    { code: "no", name: "Norwegian", flag: "🇳🇴", speakers: "5M+", priority: "low", nhsRelevance: "Norwegian medical staff" },
+    { code: "fi", name: "Finnish", flag: "🇫🇮", speakers: "5.5M+", priority: "low", nhsRelevance: "Finnish medical professionals" }
   ];
 
   const features = [
