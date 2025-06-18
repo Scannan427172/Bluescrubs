@@ -206,37 +206,37 @@ button:not([class*="bg-blue-6"]):not([class*="bg-blue-7"]):not([class*="bg-blue-
 
 /* Target text content specifically */
 [class*="text-"], span, div, p, a, button {
-  color: #1f2937 !important;
+  color: white !important;
 }
 
 /* Nuclear option - override everything with maximum specificity */
 html body div * {
-  color: #1f2937 !important;
-  -webkit-text-fill-color: #1f2937 !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
 }
 
 html body span * {
-  color: #1f2937 !important;
-  -webkit-text-fill-color: #1f2937 !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
 }
 
 html body a * {
-  color: #1f2937 !important;
-  -webkit-text-fill-color: #1f2937 !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
 }
 
 html body button * {
-  color: #1f2937 !important;
-  -webkit-text-fill-color: #1f2937 !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
 }
 
 /* Force all text elements */
 * {
-  color: #1f2937 !important;
-  -webkit-text-fill-color: #1f2937 !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
 }
 
-/* Preserve white text only on dark button backgrounds with highest specificity */
+/* Ensure white text on all backgrounds */
 html body .bg-blue-600, html body .bg-blue-600 *,
 html body .bg-blue-700, html body .bg-blue-700 *,
 html body .bg-purple-600, html body .bg-purple-600 *,
@@ -250,7 +250,10 @@ html body .bg-orange-700, html body .bg-orange-700 *,
 html body .bg-gray-700, html body .bg-gray-700 *,
 html body .bg-gray-800, html body .bg-gray-800 *,
 html body .bg-gray-900, html body .bg-gray-900 *,
-html body .bg-black, html body .bg-black * {
+html body .bg-black, html body .bg-black *,
+html body .bg-white, html body .bg-white *,
+html body .bg-gray-50, html body .bg-gray-50 *,
+html body .bg-gray-100, html body .bg-gray-100 * {
   color: white !important;
   -webkit-text-fill-color: white !important;
 }
