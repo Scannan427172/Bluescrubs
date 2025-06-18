@@ -128,6 +128,67 @@ button span, .btn span, [role="button"] span {
   -webkit-text-fill-color: #000000 !important;
 }
 
+/* Specific targeting for headings and key text */
+h1, h2, h3, h4, h5, h6 {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-shadow: none !important;
+}
+
+/* Target specific problematic text */
+.text-2xl.font-bold, .text-4xl.font-bold {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Force visibility on any remaining white/light text */
+[class*="text-white"], [class*="text-gray"], [class*="text-blue"] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Ultimate nuclear option - override everything with maximum specificity */
+html * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+body *, main *, div *, section *, article * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Emergency text visibility fix */
+.text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500,
+.text-gray-400, .text-gray-300, .text-gray-200, .text-gray-100, .text-white {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Direct targeting of problematic selectors */
+.text-2xl.font-bold.text-gray-900 {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Override any inline styles */
+[style*="color"] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* CSS custom properties override */
+:root {
+  --text-color: #000000 !important;
+  --heading-color: #000000 !important;
+}
+
+/* Force text color using CSS variables */
+h1, h2, h3, h4, h5, h6, p, span, div, button {
+  color: var(--text-color, #000000) !important;
+  -webkit-text-fill-color: var(--text-color, #000000) !important;
+}
+
 /* Re-apply standard button styling but keep text black */
 .bg-blue-600, .bg-blue-500, .bg-green-600, .bg-red-600 {
   background-color: var(--background-color) !important;
