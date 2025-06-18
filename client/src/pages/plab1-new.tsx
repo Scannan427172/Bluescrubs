@@ -1361,14 +1361,12 @@ export default function PLAB1New() {
                     <div className="flex items-center justify-between mb-3">
                       <p className="text-sm font-medium text-green-900">CKS Clinical Knowledge Summary</p>
                       <Button
-                        variant="outline"
                         size="sm"
                         onClick={() => window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
-                        className="border-green-300 hover:bg-green-100 hover:border-green-400"
-                        style={{ color: '#1f2937 !important' }}
+                        className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
                       >
-                        <ExternalLink className="w-3 h-3 mr-1" style={{ color: '#1f2937' }} />
-                        <span style={{ color: '#1f2937 !important' }}>View CKS Guidelines</span>
+                        <ExternalLink className="w-3 h-3 mr-1" />
+                        View CKS Guidelines
                       </Button>
                     </div>
                     
