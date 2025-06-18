@@ -25,6 +25,11 @@ import InteractivePatientPage from "@/pages/interactive-patient-page";
 import PersonalizedPaths from "@/pages/personalized-paths";
 import VideoOSCE from "@/pages/video-osce";
 import More from "@/pages/more";
+import LanguageDemo from "@/pages/language-demo";
+import GlobalPractice from "@/pages/global-practice";
+import AdaptiveLearning from "@/pages/adaptive-learning";
+import SmartPlanner from "@/pages/smart-planner";
+import CulturalTraining from "@/pages/cultural-training";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -198,6 +203,33 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <More />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/language-demo">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <LanguageDemo />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/global-practice">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <GlobalPractice />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/adaptive-learning">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <AdaptiveLearning />
           </div>
         </div>
       </Route>
