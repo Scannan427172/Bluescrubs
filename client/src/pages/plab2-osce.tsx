@@ -14,6 +14,17 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EXPANDED_PLAB2_STATIONS, EXPANDED_STATION_STATS, EnhancedOSCEStation } from "@shared/expanded-plab2-stations";
+
+// Define station types for filtering
+const OSCE_STATION_TYPES = [
+  { value: 'all', label: 'All Stations' },
+  { value: 'history', label: 'History Taking' },
+  { value: 'examination', label: 'Physical Examination' },
+  { value: 'communication', label: 'Communication Skills' },
+  { value: 'practical', label: 'Practical Procedures' },
+  { value: 'data-interpretation', label: 'Data Interpretation' },
+  { value: 'emergency', label: 'Emergency Management' }
+];
 import { useQuery } from "@tanstack/react-query";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
 import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
@@ -664,7 +675,7 @@ export default function Plab2Osce() {
 
           <TabsContent value={selectedType} className="mt-6">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {filteredStations.map((station) => {
+              {filteredStations.map((station: any) => {
                 const IconComponent = getStationTypeIcon(station.type);
                 const isCompleted = completedStations.includes(station.id);
                 const score = stationScores[station.id];
@@ -690,7 +701,7 @@ export default function Plab2Osce() {
                       </div>
                       <CardTitle className="text-lg leading-tight text-gray-900">{station.title}</CardTitle>
                       <div className="flex flex-wrap gap-1">
-                        <Badge variant="secondary" className="text-xs">{OSCE_STATION_TYPES[station.type]}</Badge>
+                        <Badge variant="secondary" className="text-xs">{OSCE_STATION_TYPES.find(t => t.value === station.type)?.label || station.type}</Badge>
                         <Badge className={`text-xs ${getDifficultyColor(station.difficulty)}`}>
                           {station.difficulty}
                         </Badge>
@@ -711,9 +722,9 @@ export default function Plab2Osce() {
                             <span className="text-xs font-medium text-green-700">Key Medications</span>
                           </div>
                           <div className="flex flex-wrap gap-1">
-                            {station.medications.slice(0, 3).map((med, index) => (
+                            {station.medications.slice(0, 3).map((med: any, index: number) => (
                               <Badge key={index} variant="outline" className="text-xs bg-white border-green-300 text-green-700">
-                                {med}
+                                {typeof med === 'string' ? med : med.name}
                               </Badge>
                             ))}
                             {station.medications.length > 3 && (
@@ -824,9 +835,9 @@ function OSCEStationView({
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-2xl mb-2 text-gray-900">Station {station.stationNumber}: {station.title}</CardTitle>
+                <CardTitle className="text-2xl mb-2 text-gray-900">Station {(station as any).stationNumber || station.id}: {station.title}</CardTitle>
                 <div className="flex gap-2">
-                  <Badge variant="secondary">{OSCE_STATION_TYPES[station.type]}</Badge>
+                  <Badge variant="secondary">{OSCE_STATION_TYPES.find(t => t.value === (station as any).type)?.label || (station as any).type}</Badge>
                   <Badge className={getDifficultyColor(station.difficulty)}>{station.difficulty}</Badge>
                   <Badge variant="outline">{station.category}</Badge>
                 </div>
