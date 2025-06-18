@@ -749,6 +749,44 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
+  // Video OSCE API routes
+  app.get("/api/video-osce/sessions", async (req, res) => {
+    try {
+      // Return empty sessions array for now - in production this would come from database
+      const sessions = [];
+      res.json(sessions);
+    } catch (error) {
+      console.error('Error fetching video sessions:', error);
+      res.status(500).json({ error: "Failed to fetch video sessions" });
+    }
+  });
+
+  app.post("/api/video-osce/upload", async (req, res) => {
+    try {
+      // In production, this would handle file upload to cloud storage
+      // and trigger AI analysis of the video
+      const { stationId, duration } = req.body;
+      
+      const sessionId = `session_${Date.now()}`;
+      const newSession = {
+        id: sessionId,
+        stationId,
+        stationTitle: "Uploaded OSCE Session",
+        category: "General",
+        duration: parseInt(duration) || 8,
+        recordingUrl: `/recordings/${sessionId}.webm`,
+        analysisResults: null,
+        status: "analyzing",
+        createdAt: new Date().toISOString()
+      };
+
+      res.json(newSession);
+    } catch (error) {
+      console.error('Error uploading video:', error);
+      res.status(500).json({ error: "Failed to upload video recording" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
