@@ -1351,7 +1351,7 @@ export default function PLAB1New() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => window.open('https://cks.nice.org.uk/', '_blank')}
+                        onClick={() => window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
                         className="text-green-700 border-green-300 hover:bg-green-100 hover:border-green-400"
                       >
                         <ExternalLink className="w-3 h-3 mr-1" />

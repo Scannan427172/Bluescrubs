@@ -53,6 +53,7 @@ export interface UKMedicalQuestion {
     key_points: string[];
     management_approach: string;
     red_flags?: string[];
+    cks_url?: string;
   };
   additional_guidelines: Array<{
     source: string;
@@ -99,7 +100,8 @@ REFERENCE REQUIREMENTS:
 VERY IMPORTANT:
 - Do not invent guidelines or section numbers.
 - All answers must be medically accurate according to current NICE or GMC guidance.
-- Include authentic CKS Clinical Knowledge Summaries content.
+- Include authentic CKS Clinical Knowledge Summaries content with the exact CKS URL.
+- For CKS guidance, provide the specific CKS topic URL (e.g., https://cks.nice.org.uk/topics/acute-coronary-syndromes/ for cardiac conditions).
 - References must point to exact sections that support the correct answer.
 - Format your entire output as VALID JSON exactly as shown below.
 
@@ -121,7 +123,8 @@ OUTPUT FORMAT (strictly follow this structure):
     "summary": "<brief CKS summary of the condition>",
     "key_points": ["<key clinical point 1>", "<key clinical point 2>", "<key clinical point 3>"],
     "management_approach": "<CKS recommended management approach>",
-    "red_flags": ["<warning sign 1>", "<warning sign 2>"]
+    "red_flags": ["<warning sign 1>", "<warning sign 2>"],
+    "cks_url": "<exact CKS URL for this specific condition, e.g., https://cks.nice.org.uk/topics/acute-coronary-syndromes/>"
   },
   "additional_guidelines": [
     {
@@ -246,8 +249,14 @@ async function generateSingleQuestion(
           "Apply NICE guidance where applicable"
         ],
         management_approach: "Systematic clinical assessment following UK medical guidelines and best practice recommendations.",
-        red_flags: ["Acute deterioration", "Signs requiring urgent intervention"]
+        red_flags: ["Acute deterioration", "Signs requiring urgent intervention"],
+        cks_url: `https://cks.nice.org.uk/search?q=${encodeURIComponent(specialty)}`
       };
+    }
+
+    // Ensure CKS URL is present
+    if (!questionData.cks_guidance.cks_url) {
+      questionData.cks_guidance.cks_url = `https://cks.nice.org.uk/search?q=${encodeURIComponent(specialty)}`;
     }
 
     // Add default additional guidelines if missing
