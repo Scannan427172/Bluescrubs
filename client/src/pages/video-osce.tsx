@@ -275,7 +275,7 @@ export default function VideoOSCE() {
         </div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4" style={{ color: 'white' }}>
           <h1 className="text-5xl font-bold mb-4" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Video OSCE Practice</h1>
-          <p className="text-xl mb-2" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Advanced video recording and AI feedback system</p>
+          <p className="text-xl mb-2" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Advanced video recording and AI feedback</p>
           <Badge variant="outline" className="bg-white text-black border-gray-300" style={{ color: 'black', WebkitTextFillColor: 'black', textShadow: 'none' }}>
             Real-time Practice Sessions
           </Badge>
