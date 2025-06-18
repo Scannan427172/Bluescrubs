@@ -189,3 +189,22 @@ html body .bg-gray-700 *, html body .bg-gray-800 *, html body .bg-gray-900 *,
 html body .bg-black * {
   color: white !important;
 }
+
+/* Specific fixes for CKS Guidelines and similar links/buttons */
+[href*="cks"], [href*="guidelines"], button[class*="External"], a[class*="External"],
+.text-blue-600, .text-blue-500, .text-blue-700, .text-blue-800, .text-blue-900,
+.text-indigo-600, .text-indigo-500, .text-indigo-700, .text-indigo-800, .text-indigo-900 {
+  color: #1f2937 !important;
+}
+
+/* Force dark text on links and buttons with external icons */
+a:not([class*="bg-blue-6"]):not([class*="bg-blue-7"]):not([class*="bg-blue-8"]):not([class*="bg-blue-9"]), 
+button:not([class*="bg-blue-6"]):not([class*="bg-blue-7"]):not([class*="bg-blue-8"]):not([class*="bg-blue-9"]),
+.external-link, .external-link * {
+  color: #1f2937 !important;
+}
+
+/* Target text content specifically */
+[class*="text-"], span, div, p, a, button {
+  color: #1f2937 !important;
+}
