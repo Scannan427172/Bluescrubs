@@ -720,6 +720,17 @@ export default function PLAB1New() {
                     <SelectItem value="sr">🇷🇸 Српски Serbian</SelectItem>
                     <SelectItem value="uk">🇺🇦 Українська Ukrainian</SelectItem>
                     <SelectItem value="sw">🇰🇪 Kiswahili Swahili</SelectItem>
+                    <SelectItem value="tl">🇵🇭 Filipino (Tagalog)</SelectItem>
+                    <SelectItem value="am">🇪🇹 አማርኛ Amharic</SelectItem>
+                    <SelectItem value="ti">🇪🇷 ትግርኛ Tigrinya</SelectItem>
+                    <SelectItem value="lt">🇱🇹 Lietuvių Lithuanian</SelectItem>
+                    <SelectItem value="lv">🇱🇻 Latviešu Latvian</SelectItem>
+                    <SelectItem value="et">🇪🇪 Eesti Estonian</SelectItem>
+                    <SelectItem value="nl">🇳🇱 Nederlands Dutch</SelectItem>
+                    <SelectItem value="sv">🇸🇪 Svenska Swedish</SelectItem>
+                    <SelectItem value="da">🇩🇰 Dansk Danish</SelectItem>
+                    <SelectItem value="no">🇳🇴 Norsk Norwegian</SelectItem>
+                    <SelectItem value="fi">🇫🇮 Suomi Finnish</SelectItem>
                   </SelectContent>
                 </Select>
               )}
