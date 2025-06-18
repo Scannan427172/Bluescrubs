@@ -189,6 +189,72 @@ h1, h2, h3, h4, h5, h6, p, span, div, button {
   -webkit-text-fill-color: var(--text-color, #000000) !important;
 }
 
+/* Radix UI Select component overrides */
+[data-radix-select-trigger] *,
+[data-radix-select-content] *,
+[data-radix-select-item] *,
+[data-radix-select-value] *,
+[role="combobox"] *,
+[role="option"] * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Additional Select component targeting */
+.select-trigger *, .select-content *, .select-item * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Category dropdown specific override */
+[data-placeholder="Filter by category"] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Nuclear option for Select components */
+*[class*="select"] *,
+*[class*="Select"] *,
+*[data-state] *,
+button[role="combobox"] *,
+div[role="combobox"] * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Force visibility on ALL possible select-related elements */
+select *, 
+[class*="trigger"] *,
+[class*="value"] *,
+[class*="content"] *,
+[class*="item"] * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Maximum specificity override - target all text nodes */
+.video-osce span[class*="text"],
+.video-osce div[class*="text"],
+.video-osce button[class*="text"] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Override any CSS-in-JS or styled-components */
+[style*="color: rgb"],
+[style*="color:rgb"],
+[style*="color: #"],
+[style*="color:#"] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Final nuclear option */
+* {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
 /* Re-apply standard button styling but keep text black */
 .bg-blue-600, .bg-blue-500, .bg-green-600, .bg-red-600 {
   background-color: var(--background-color) !important;
