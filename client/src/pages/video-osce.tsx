@@ -240,15 +240,15 @@ export default function VideoOSCE() {
             {!selectedStation ? (
               <div>
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">Select OSCE Station</h2>
+                  <h2 className="text-2xl font-bold text-gray-900" style={{ color: '#000000', WebkitTextFillColor: '#000000' }}>Select OSCE Station</h2>
                   <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                    <SelectTrigger className="w-48">
-                      <SelectValue placeholder="Filter by category" />
+                    <SelectTrigger className="w-48" style={{ color: '#000000 !important' }}>
+                      <SelectValue placeholder="Filter by category" style={{ color: '#000000 !important' }} />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Categories</SelectItem>
+                    <SelectContent style={{ color: '#000000 !important' }}>
+                      <SelectItem value="all" style={{ color: '#000000 !important' }}>All Categories</SelectItem>
                       {categories.filter(cat => typeof cat === 'string').map((category: string) => (
-                        <SelectItem key={category} value={category}>{category}</SelectItem>
+                        <SelectItem key={category} value={category} style={{ color: '#000000' }}>{category}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
