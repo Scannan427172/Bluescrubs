@@ -236,6 +236,16 @@ html body button * {
   -webkit-text-fill-color: white !important;
 }
 
+/* Hero banner specific white text override */
+.hero-banner h1,
+.hero-banner p,
+.hero-banner span,
+.hero-banner div,
+.hero-banner * {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
 /* Ensure white text on all backgrounds */
 html body .bg-blue-600, html body .bg-blue-600 *,
 html body .bg-blue-700, html body .bg-blue-700 *,

@@ -659,7 +659,7 @@ export default function PLAB1New() {
     return (
       <div className="min-h-screen bg-gray-50 pb-24">
         {/* Hero Banner */}
-        <div className="relative h-80 mb-8 overflow-hidden">
+        <div className="hero-banner relative h-80 mb-8 overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${heroBannerImage})` }}
