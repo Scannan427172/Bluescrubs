@@ -30,6 +30,8 @@ import GlobalPractice from "@/pages/global-practice";
 import AdaptiveLearning from "@/pages/adaptive-learning";
 import SmartPlanner from "@/pages/smart-planner";
 import CulturalTraining from "@/pages/cultural-training";
+import Mentors from "@/pages/mentors";
+import Gamification from "@/pages/gamification";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -230,6 +232,69 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <AdaptiveLearning />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/smart-planner">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <SmartPlanner />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/cultural-training">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <CulturalTraining />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/mentors">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Mentors />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/gamification">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Gamification />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/analytics">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <PLABAIDashboard />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/offline-mode">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Dashboard />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/nhs-prep">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <AskNHSPrep />
           </div>
         </div>
       </Route>
