@@ -1124,70 +1124,40 @@ export default function PLAB1New() {
               </div>
             </div>
 
+            {/* Clinical Scenario */}
+            {currentQuestion.scenario && (
+              <div className="mb-6 bg-blue-50 rounded-lg p-4 border border-blue-200">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mt-0.5">
+                    <span className="text-white text-xs font-bold">📋</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-sm font-semibold text-blue-900 mb-2">Clinical Scenario</h3>
+                    <p className="text-gray-700 leading-relaxed">
+                      {(() => {
+                        const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
+                        const translatedQ = translatedQuestions[cacheKey];
+                        if (translateQuestions && selectedLanguage !== 'en' && translatedQ?.scenario) {
+                          return translatedQ.scenario;
+                        }
+                        return currentQuestion.scenario;
+                      })()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Question */}
             <div className="mb-6">
-              <h2 className="text-lg font-medium text-gray-900 leading-relaxed">
+              <h2 className="text-lg font-semibold text-gray-900 leading-relaxed">
                 {(() => {
                   const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
                   const translatedQ = translatedQuestions[cacheKey];
-                  if (translateQuestions && selectedLanguage !== 'en' && translatedQ) {
-                    return translatedQ.scenario || translatedQ.stem || translatedQ.question;
+                  if (translateQuestions && selectedLanguage !== 'en' && translatedQ?.question) {
+                    return translatedQ.question;
                   }
-                  
-                  // Apply quick fallback translation for immediate display
-                  const text = currentQuestion.stem || currentQuestion.question;
-                  if (translateQuestions && selectedLanguage !== 'en') {
-                    const quickTranslations: Record<string, Record<string, string>> = {
-                      'ar': {
-                        'patient': 'مريض', 'presents with': 'يعاني من', 'chest pain': 'ألم في الصدر',
-                        'diagnosis': 'التشخيص', 'treatment': 'العلاج', 'What is the most appropriate': 'ما هو الأنسب'
-                      },
-                      'hi': {
-                        'patient': 'मरीज़', 'presents with': 'के साथ आता है', 'chest pain': 'सीने में दर्द',
-                        'diagnosis': 'निदान', 'treatment': 'उपचार', 'What is the most appropriate': 'सबसे उपयुक्त क्या है'
-                      },
-                      'ur': {
-                        'patient': 'مریض', 'presents with': 'کے ساتھ آتا ہے', 'chest pain': 'سینے میں درد',
-                        'diagnosis': 'تشخیص', 'treatment': 'علاج', 'What is the most appropriate': 'سب سے مناسب کیا ہے'
-                      },
-                      'bn': {
-                        'patient': 'রোগী', 'presents with': 'নিয়ে আসে', 'chest pain': 'বুকে ব্যথা',
-                        'diagnosis': 'নির্ণয়', 'treatment': 'চিকিৎসা', 'What is the most appropriate': 'সবচেয়ে উপযুক্ত কী'
-                      },
-                      'ta': {
-                        'patient': 'நோயாளி', 'presents with': 'உடன் வருகிறார்', 'chest pain': 'மார்பு வலி',
-                        'diagnosis': 'நோய் கண்டறிதல்', 'treatment': 'சிகிச்சை', 'What is the most appropriate': 'மிகவும் பொருத்தமானது எது'
-                      },
-                      'te': {
-                        'patient': 'రోగి', 'presents with': 'తో వస్తుంది', 'chest pain': 'ఛాతీ నొప్పి',
-                        'diagnosis': 'నిర్ధారణ', 'treatment': 'చికిత్స', 'What is the most appropriate': 'అత్యంత సముచితమైనది ఏది'
-                      },
-                      'gu': {
-                        'patient': 'દર્દી', 'presents with': 'સાથે આવે છે', 'chest pain': 'છાતીમાં દુખાવો',
-                        'diagnosis': 'નિદાન', 'treatment': 'સારવાર', 'What is the most appropriate': 'સૌથી યોગ્ય શું છે'
-                      },
-                      'es': {
-                        'patient': 'paciente', 'presents with': 'presenta con', 'chest pain': 'dolor en el pecho',
-                        'diagnosis': 'diagnóstico', 'treatment': 'tratamiento', 'What is the most appropriate': 'Cuál es lo más apropiado'
-                      },
-                      'fr': {
-                        'patient': 'patient', 'presents with': 'présente avec', 'chest pain': 'douleur thoracique',
-                        'diagnosis': 'diagnostic', 'treatment': 'traitement', 'What is the most appropriate': 'Quel est le plus approprié'
-                      },
-                      'de': {
-                        'patient': 'Patient', 'presents with': 'präsentiert sich mit', 'chest pain': 'Brustschmerzen',
-                        'diagnosis': 'Diagnose', 'treatment': 'Behandlung', 'What is the most appropriate': 'Was ist am angemessensten'
-                      }
-                    };
-                    
-                    const translations = quickTranslations[selectedLanguage] || {};
-                    let translated = text;
-                    Object.entries(translations).forEach(([english, native]) => {
-                      translated = translated.replace(new RegExp(`\\b${english}\\b`, 'gi'), native);
-                    });
-                    return translated;
-                  }
-                  
-                  return text;
+                  return currentQuestion.question || currentQuestion.stem;
                 })()}
               </h2>
             </div>
