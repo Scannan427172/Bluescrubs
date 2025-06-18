@@ -62,7 +62,7 @@ export function registerRoutes(app: Express): Server {
       }
 
       // Generate UK medical questions
-      const questions = await generateMultipleUKQuestions(category, count, difficulty);
+      const questions = await generateMultipleUKQuestions(count, category, difficulty);
       
       res.json({
         questions,

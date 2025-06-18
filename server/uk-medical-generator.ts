@@ -332,16 +332,21 @@ export async function generateMultipleUKQuestions(
   specialty: string = 'general medicine',
   difficulty: string = 'intermediate'
 ): Promise<UKMedicalQuestion[]> {
+  console.log(`generateMultipleUKQuestions called: count=${count}, specialty=${specialty}, difficulty=${difficulty}`);
   const questions: UKMedicalQuestion[] = [];
   
   const cacheKey = getCacheKey(specialty, difficulty);
+  console.log(`Cache key: ${cacheKey}`);
   
   // Try to get from cache first
   const cachedQuestions = questionCache.get(cacheKey) || [];
+  console.log(`Found ${cachedQuestions.length} cached questions`);
   const fromCache = cachedQuestions.splice(0, Math.min(count, cachedQuestions.length));
   questions.push(...fromCache);
   
   const remaining = count - fromCache.length;
+  console.log(`Need to generate ${remaining} additional questions`);
+  
   if (remaining > 0) {
     // Generate all remaining questions in parallel for maximum speed
     const promises = Array(remaining).fill(null).map(() => 
@@ -349,28 +354,37 @@ export async function generateMultipleUKQuestions(
     );
     
     try {
+      console.log(`Starting generation of ${remaining} questions...`);
       // Use Promise.allSettled to handle partial failures gracefully
       const results = await Promise.allSettled(promises);
+      console.log(`Generation completed, processing ${results.length} results`);
+      
       const successfulQuestions = results
         .filter((result): result is PromiseFulfilledResult<UKMedicalQuestion> => 
           result.status === 'fulfilled')
         .map(result => result.value);
       
+      console.log(`Successfully generated ${successfulQuestions.length} questions`);
       questions.push(...successfulQuestions);
       
       // Cache extra questions for future requests
       successfulQuestions.forEach(q => addToCache(cacheKey, q));
       
-      // If we had failures, log but don't throw
+      // Log failures for debugging
       const failures = results.filter(result => result.status === 'rejected');
       if (failures.length > 0) {
-        console.log(`Generated ${successfulQuestions.length}/${remaining} questions successfully`);
+        console.log(`Generation failures: ${failures.length}/${remaining}`);
+        failures.forEach((failure, index) => {
+          console.error(`Failure ${index + 1}:`, failure.reason);
+        });
       }
       
     } catch (error) {
       console.error('Error in parallel question generation:', error);
     }
   }
+  
+  console.log(`Returning ${questions.length} questions total`);
   
   // Pre-generate more questions in background for future requests
   if (questions.length > 0) {
