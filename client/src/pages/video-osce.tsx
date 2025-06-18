@@ -415,33 +415,35 @@ export default function VideoOSCE() {
                         <div>
                           <h3 className="font-semibold mb-2">Scenario</h3>
                           <p className="text-sm text-gray-700 bg-blue-50 p-3 rounded">
-                            {selectedStation.scenario}
+                            {selectedStation?.scenario || 'Clinical scenario will be provided by the examiner.'}
                           </p>
                         </div>
 
                         <div>
                           <h3 className="font-semibold mb-2">Instructions</h3>
                           <p className="text-sm text-gray-700 bg-green-50 p-3 rounded">
-                            {selectedStation.instructions.candidate}
+                            {selectedStation.instructions?.candidate || 'Take a comprehensive history and examination as appropriate.'}
                           </p>
                         </div>
 
-                        <div>
-                          <h3 className="font-semibold mb-2">Key Skills</h3>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedStation.keySkills.map((skill, index) => (
-                              <Badge key={index} variant="outline" className="text-xs">
-                                {skill}
-                              </Badge>
-                            ))}
+                        {(selectedStation as any).markingCriteria && (
+                          <div>
+                            <h3 className="font-semibold mb-2">Key Assessment Areas</h3>
+                            <div className="flex flex-wrap gap-2">
+                              {(selectedStation as any).markingCriteria.map((criteria: any, index: number) => (
+                                <Badge key={index} variant="outline" className="text-xs">
+                                  {criteria.category}
+                                </Badge>
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        )}
 
                         <div>
                           <h3 className="font-semibold mb-2">Duration</h3>
                           <div className="flex items-center gap-2">
                             <Clock className="w-4 h-4" />
-                            <span>{selectedStation.duration} minutes</span>
+                            <span>{selectedStation?.duration || 8} minutes</span>
                           </div>
                         </div>
                       </div>
