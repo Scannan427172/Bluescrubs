@@ -209,32 +209,7 @@ button:not([class*="bg-blue-6"]):not([class*="bg-blue-7"]):not([class*="bg-blue-
   color: white !important;
 }
 
-/* Nuclear option - override everything with maximum specificity */
-html body div * {
-  color: white !important;
-  -webkit-text-fill-color: white !important;
-}
 
-html body span * {
-  color: white !important;
-  -webkit-text-fill-color: white !important;
-}
-
-html body a * {
-  color: white !important;
-  -webkit-text-fill-color: white !important;
-}
-
-html body button * {
-  color: white !important;
-  -webkit-text-fill-color: white !important;
-}
-
-/* Force all text elements */
-* {
-  color: #1f2937 !important;
-  -webkit-text-fill-color: #1f2937 !important;
-}
 
 /* Hero banner specific white text override with maximum specificity */
 html body .hero-banner h1,
@@ -255,24 +230,14 @@ html body .hero-banner .relative.z-10 * {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
 }
 
-/* Ensure white text on all backgrounds */
-html body .bg-blue-600, html body .bg-blue-600 *,
-html body .bg-blue-700, html body .bg-blue-700 *,
-html body .bg-purple-600, html body .bg-purple-600 *,
-html body .bg-purple-700, html body .bg-purple-700 *,
-html body .bg-green-600, html body .bg-green-600 *,
-html body .bg-green-700, html body .bg-green-700 *,
-html body .bg-red-600, html body .bg-red-600 *,
-html body .bg-red-700, html body .bg-red-700 *,
-html body .bg-orange-600, html body .bg-orange-600 *,
-html body .bg-orange-700, html body .bg-orange-700 *,
-html body .bg-gray-700, html body .bg-gray-700 *,
-html body .bg-gray-800, html body .bg-gray-800 *,
-html body .bg-gray-900, html body .bg-gray-900 *,
-html body .bg-black, html body .bg-black *,
-html body .bg-white, html body .bg-white *,
-html body .bg-gray-50, html body .bg-gray-50 *,
-html body .bg-gray-100, html body .bg-gray-100 * {
-  color: white !important;
-  -webkit-text-fill-color: white !important;
+/* Video OSCE specific hero banner text - highest priority */
+html body [data-page="video-osce"] .hero-banner h1,
+html body [data-page="video-osce"] .hero-banner p,
+html body .video-osce .hero-banner h1,
+html body .video-osce .hero-banner p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
+  filter: none !important;
 }
+
