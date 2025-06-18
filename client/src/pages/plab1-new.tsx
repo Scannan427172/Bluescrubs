@@ -420,6 +420,7 @@ export default function PLAB1New() {
       // Store translated question with proper structure
       const translatedQuestion = {
         ...question,
+        scenario: translated.scenario || question.scenario,
         stem: translated.scenario || translated.stem || question.stem,
         question: translated.question || question.question,
         options: translated.options || question.options,
