@@ -635,7 +635,15 @@ export default function PLAB1New() {
 
   // Get current question
   const currentQuestion = generatedQuestions[currentQuestionIndex];
-  const isCorrect = showExplanation && selectedAnswer !== "" && parseInt(selectedAnswer) === currentQuestion?.correctAnswer;
+  const isCorrect = showExplanation && selectedAnswer !== "" && (() => {
+    if (!currentQuestion) return false;
+    let correctAnswerIndex = currentQuestion.correctAnswer;
+    if (typeof correctAnswerIndex === 'string') {
+      // Convert letter-based answers (A, B, C, D, E) to index
+      correctAnswerIndex = correctAnswerIndex.charCodeAt(0) - 65;
+    }
+    return parseInt(selectedAnswer) === correctAnswerIndex;
+  })();
 
   // Effect to translate current question when language changes
   useEffect(() => {
@@ -1167,12 +1175,22 @@ export default function PLAB1New() {
               {(() => {
                 const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
                 const translatedQ = translatedQuestions[cacheKey];
-                let options = (translateQuestions && selectedLanguage !== 'en' && translatedQ?.options) 
-                  ? translatedQ.options 
-                  : (Array.isArray(currentQuestion.options) ? currentQuestion.options : []);
+                
+                // Handle different option structures
+                let options = [];
+                if (translateQuestions && selectedLanguage !== 'en' && translatedQ?.options) {
+                  options = Array.isArray(translatedQ.options) ? translatedQ.options : Object.values(translatedQ.options);
+                } else if (currentQuestion.options) {
+                  if (Array.isArray(currentQuestion.options)) {
+                    options = currentQuestion.options;
+                  } else if (typeof currentQuestion.options === 'object') {
+                    // Handle object structure like {A: "option1", B: "option2", ...}
+                    options = Object.values(currentQuestion.options);
+                  }
+                }
                 
                 // Apply quick fallback translation for options if API translation not ready
-                if (translateQuestions && selectedLanguage !== 'en' && !translatedQ?.options && Array.isArray(currentQuestion.options)) {
+                if (translateQuestions && selectedLanguage !== 'en' && !translatedQ?.options && options.length > 0) {
                   const quickTranslations: Record<string, Record<string, string>> = {
                     'ar': {
                       'Primary PCI': 'القسطرة الأولية', 'Thrombolytic therapy': 'العلاج المذيب للجلطة',
@@ -1189,7 +1207,7 @@ export default function PLAB1New() {
                   };
                   
                   const translations = quickTranslations[selectedLanguage] || {};
-                  options = currentQuestion.options.map((option: string) => {
+                  options = options.map((option: string) => {
                     let translated = option;
                     Object.entries(translations).forEach(([english, native]) => {
                       translated = translated.replace(new RegExp(`\\b${english}\\b`, 'gi'), native);
@@ -1200,7 +1218,13 @@ export default function PLAB1New() {
                 
                 return options;
               })().map((option: string, index: number) => {
-                const isCorrectAnswer = index === currentQuestion.correctAnswer;
+                // Handle different correct answer formats
+                let correctAnswerIndex = currentQuestion.correctAnswer;
+                if (typeof correctAnswerIndex === 'string') {
+                  // Convert letter-based answers (A, B, C, D, E) to index
+                  correctAnswerIndex = correctAnswerIndex.charCodeAt(0) - 65; // A=0, B=1, etc.
+                }
+                const isCorrectAnswer = index === correctAnswerIndex;
                 const isIncorrectlySelected = showExplanation && selectedAnswer === index.toString() && !isCorrectAnswer;
                 
                 return (
