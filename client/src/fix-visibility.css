@@ -145,3 +145,47 @@ table, th, td {
 .text-gray-400:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]) {
   color: #6b7280 !important;
 }
+
+/* Force dark text on all light backgrounds - aggressive override */
+.bg-white *, .bg-gray-50 *, .bg-gray-100 *, .bg-blue-50 *, .bg-green-50 *, .bg-yellow-50 *, .bg-orange-50 *, .bg-purple-50 *, .bg-pink-50 *, .bg-indigo-50 * {
+  color: #1f2937 !important;
+}
+
+/* Specifically target white text classes */
+.text-white:not(.bg-blue-600):not(.bg-blue-700):not(.bg-purple-600):not(.bg-purple-700):not(.bg-green-600):not(.bg-green-700):not(.bg-red-600):not(.bg-red-700):not(.bg-orange-600):not(.bg-orange-700):not(.bg-gray-700):not(.bg-gray-800):not(.bg-gray-900):not(.bg-black) {
+  color: #1f2937 !important;
+  -webkit-text-fill-color: #1f2937 !important;
+}
+
+/* Emergency override for any white text */
+[style*="color: white"], [style*="color:#ffffff"], [style*="color: #ffffff"], [style*="color:white"] {
+  color: #1f2937 !important;
+}
+
+/* Target specific problematic selectors on right side/panels */
+.text-center *, .flex *, .grid *, .space-y-4 *, .space-y-6 * {
+  color: #1f2937 !important;
+}
+
+/* Override any CSS-in-JS or dynamic styles */
+div[style*="color"], span[style*="color"], p[style*="color"] {
+  color: #1f2937 !important;
+}
+
+/* Maximum specificity override - force dark text everywhere except dark backgrounds */
+html body * {
+  color: #1f2937 !important;
+}
+
+/* Preserve white text only on confirmed dark backgrounds */
+html body .bg-blue-600 *, html body .bg-blue-700 *, html body .bg-blue-800 *, html body .bg-blue-900 *,
+html body .bg-purple-600 *, html body .bg-purple-700 *, html body .bg-purple-800 *, html body .bg-purple-900 *,
+html body .bg-green-600 *, html body .bg-green-700 *, html body .bg-green-800 *, html body .bg-green-900 *,
+html body .bg-red-600 *, html body .bg-red-700 *, html body .bg-red-800 *, html body .bg-red-900 *,
+html body .bg-orange-600 *, html body .bg-orange-700 *, html body .bg-orange-800 *, html body .bg-orange-900 *,
+html body .bg-yellow-600 *, html body .bg-yellow-700 *, html body .bg-yellow-800 *, html body .bg-yellow-900 *,
+html body .bg-indigo-600 *, html body .bg-indigo-700 *, html body .bg-indigo-800 *, html body .bg-indigo-900 *,
+html body .bg-gray-700 *, html body .bg-gray-800 *, html body .bg-gray-900 *,
+html body .bg-black * {
+  color: white !important;
+}
