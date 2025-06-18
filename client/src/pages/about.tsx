@@ -97,9 +97,9 @@ export default function About() {
                   <p className="text-gray-700 leading-relaxed">
                     Nationally recognised authority in training design and deep tissue therapy 
                     with over 30 years of experience. Co-founder of Core Principles and former 
-                    Head Jumps Coach for British Athletics Paralympics. Has coached 33 English 
-                    Schools gold medallists and brings expertise in biomechanics and athletic 
-                    development to medical education technology.
+                    Head Jumps Coach for British Athletics Paralympics. Has coached European 
+                    and World champion long jumpers, including 33 English Schools gold medallists, 
+                    bringing elite athletic development expertise to medical education technology.
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     <Badge variant="secondary" className="text-xs">Level 4 Sports Massage</Badge>
@@ -172,6 +172,7 @@ export default function About() {
               <div>
                 <h3 className="text-lg font-semibold text-purple-900 mb-3">Career Highlights</h3>
                 <ul className="text-purple-800 space-y-2 text-sm">
+                  <li>• Coached European and World champion long jumpers</li>
                   <li>• Coached 33 English Schools gold medallists</li>
                   <li>• Head Jumps Coach – British Athletics Paralympics</li>
                   <li>• England Team Coach – Loughborough International 2012</li>
