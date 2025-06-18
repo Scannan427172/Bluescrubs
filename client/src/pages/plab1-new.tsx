@@ -666,10 +666,10 @@ export default function PLAB1New() {
           >
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           </div>
-          <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-            <h1 className="text-5xl font-bold mb-4 text-white" style={{ color: 'white !important' }}>{translateText('PLAB 1 Practice')}</h1>
-            <p className="text-xl mb-2 text-white" style={{ color: 'white !important' }}>Comprehensive AI-generated medical questions</p>
-            <Badge variant="secondary" className="bg-white bg-opacity-20 text-white border-white border-opacity-30" style={{ color: 'white !important' }}>
+          <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4" style={{ color: 'white' }}>
+            <h1 className="text-5xl font-bold mb-4" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>{translateText('PLAB 1 Practice')}</h1>
+            <p className="text-xl mb-2" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Comprehensive AI-generated medical questions</p>
+            <Badge variant="secondary" className="bg-white bg-opacity-20 border-white border-opacity-30" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
               5000+ Questions Available
             </Badge>
           </div>

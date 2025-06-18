@@ -232,18 +232,27 @@ html body button * {
 
 /* Force all text elements */
 * {
-  color: white !important;
-  -webkit-text-fill-color: white !important;
+  color: #1f2937 !important;
+  -webkit-text-fill-color: #1f2937 !important;
 }
 
-/* Hero banner specific white text override */
-.hero-banner h1,
-.hero-banner p,
-.hero-banner span,
-.hero-banner div,
-.hero-banner * {
+/* Hero banner specific white text override with maximum specificity */
+html body .hero-banner h1,
+html body .hero-banner p,
+html body .hero-banner span,
+html body .hero-banner div,
+html body .hero-banner * {
   color: white !important;
   -webkit-text-fill-color: white !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
+}
+
+html body .hero-banner .relative.z-10 h1,
+html body .hero-banner .relative.z-10 p,
+html body .hero-banner .relative.z-10 * {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
 }
 
 /* Ensure white text on all backgrounds */
