@@ -1364,10 +1364,11 @@ export default function PLAB1New() {
                         variant="outline"
                         size="sm"
                         onClick={() => window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
-                        className="text-green-700 border-green-300 hover:bg-green-100 hover:border-green-400"
+                        className="border-green-300 hover:bg-green-100 hover:border-green-400"
+                        style={{ color: '#1f2937 !important' }}
                       >
-                        <ExternalLink className="w-3 h-3 mr-1" />
-                        View CKS Guidelines
+                        <ExternalLink className="w-3 h-3 mr-1" style={{ color: '#1f2937' }} />
+                        <span style={{ color: '#1f2937 !important' }}>View CKS Guidelines</span>
                       </Button>
                     </div>
                     
