@@ -64,6 +64,30 @@ button, button *, .btn, .btn * {
   -webkit-text-fill-color: #000000 !important;
 }
 
+/* Specific overrides for Video OSCE page */
+.video-osce h1, .video-osce h2, .video-osce h3, .video-osce p, .video-osce span, .video-osce div {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Force visibility on gradient backgrounds */
+.bg-gradient-to-br h1, .bg-gradient-to-br h2, .bg-gradient-to-br p, 
+.bg-gradient-to-br span, .bg-gradient-to-br div,
+.bg-gradient-to-br .text-4xl, .bg-gradient-to-br .text-lg {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Nuclear override for Video OSCE page specifically */
+.video-osce .text-center h1, 
+.video-osce .text-center p,
+.video-osce h2,
+.video-osce .text-2xl {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  text-shadow: none !important;
+}
+
 /* Specific targeting for blue gradient backgrounds */
 .bg-gradient-to-br * {
   color: #000000 !important;

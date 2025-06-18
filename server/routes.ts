@@ -8,6 +8,7 @@ import { generateUKMedicalQuestion, generateMultipleUKQuestions } from "./uk-med
 import { getInstantQuestions, hasInstantQuestions } from "./plan1-optimization";
 import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generator";
 import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-uk-generator";
+import { EXPANDED_PLAB2_STATIONS } from "../shared/expanded-plab2-stations";
 import { analyzeMultipleImages } from "./image-analysis";
 import { 
   generateFlashcardsFromContent, 
@@ -749,11 +750,48 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
+  // OSCE Stations API endpoint
+  app.get("/api/osce/stations", async (req, res) => {
+    try {
+      // Return authentic OSCE stations from the expanded station bank
+      const { type, specialty, difficulty, count } = req.query;
+      let stations = EXPANDED_PLAB2_STATIONS;
+
+      // Filter by type if specified
+      if (type && type !== 'all') {
+        stations = stations.filter(station => station.type === type);
+      }
+
+      // Filter by specialty if specified
+      if (specialty && specialty !== 'all') {
+        stations = stations.filter(station => 
+          station.category.toLowerCase().includes(specialty.toString().toLowerCase())
+        );
+      }
+
+      // Filter by difficulty if specified
+      if (difficulty && difficulty !== 'all') {
+        stations = stations.filter(station => station.difficulty === difficulty);
+      }
+
+      // Limit count if specified
+      if (count) {
+        const countNum = parseInt(count.toString());
+        stations = stations.slice(0, countNum);
+      }
+
+      res.json(stations);
+    } catch (error) {
+      console.error('Error fetching OSCE stations:', error);
+      res.status(500).json({ error: "Failed to fetch OSCE stations" });
+    }
+  });
+
   // Video OSCE API routes
   app.get("/api/video-osce/sessions", async (req, res) => {
     try {
-      // Return empty sessions array for now - in production this would come from database
-      const sessions = [];
+      // Return user's video sessions - in production this would come from database
+      const sessions: any[] = [];
       res.json(sessions);
     } catch (error) {
       console.error('Error fetching video sessions:', error);
