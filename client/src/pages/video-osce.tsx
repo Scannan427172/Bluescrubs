@@ -62,6 +62,8 @@ export default function VideoOSCE() {
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
+  const [recordedBlob, setRecordedBlob] = useState<Blob | null>(null);
+  const [showSaveButton, setShowSaveButton] = useState(false);
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -116,7 +118,8 @@ export default function VideoOSCE() {
 
       mediaRecorder.onstop = async () => {
         const blob = new Blob(recordedChunksRef.current, { type: 'video/webm' });
-        await uploadRecording(blob);
+        setRecordedBlob(blob);
+        setShowSaveButton(true);
       };
 
       mediaRecorder.start();
@@ -182,6 +185,19 @@ export default function VideoOSCE() {
 
   const uploadRecording = async (blob: Blob) => {
     uploadRecordingMutation.mutate(blob);
+  };
+
+  const saveRecording = () => {
+    if (recordedBlob) {
+      uploadRecording(recordedBlob);
+      setShowSaveButton(false);
+      setRecordedBlob(null);
+    }
+  };
+
+  const discardRecording = () => {
+    setRecordedBlob(null);
+    setShowSaveButton(false);
   };
 
   // Toggle audio/video
@@ -406,6 +422,25 @@ export default function VideoOSCE() {
                             </div>
                             <div className="text-sm text-gray-600">
                               Recording in progress...
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Save Recording Buttons */}
+                        {showSaveButton && (
+                          <div className="text-center space-y-3">
+                            <div className="text-sm text-gray-600 mb-3">
+                              Recording completed! Choose what to do:
+                            </div>
+                            <div className="flex gap-3 justify-center">
+                              <Button onClick={saveRecording} className="px-6" disabled={uploadRecordingMutation.isPending}>
+                                <Upload className="w-4 h-4 mr-2" />
+                                {uploadRecordingMutation.isPending ? 'Saving...' : 'Save Recording'}
+                              </Button>
+                              <Button onClick={discardRecording} variant="outline" className="px-6">
+                                <X className="w-4 h-4 mr-2" />
+                                Discard
+                              </Button>
                             </div>
                           </div>
                         )}
