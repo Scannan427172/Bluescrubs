@@ -273,31 +273,10 @@ export default function VideoOSCE() {
         >
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4" style={{ color: 'white !important', backgroundColor: 'transparent' }}>
-          <h1 className="text-5xl font-bold mb-4" style={{ 
-            color: '#ffffff !important', 
-            WebkitTextFillColor: '#ffffff !important', 
-            textShadow: '2px 2px 4px rgba(0,0,0,0.8)', 
-            filter: 'none !important',
-            backgroundColor: 'transparent',
-            WebkitBackgroundClip: 'text',
-            WebkitTextStrokeColor: 'transparent'
-          }}>Video OSCE Practice</h1>
-          <p className="text-xl mb-2" style={{ 
-            color: '#ffffff !important', 
-            WebkitTextFillColor: '#ffffff !important', 
-            textShadow: '2px 2px 4px rgba(0,0,0,0.8)', 
-            filter: 'none !important',
-            backgroundColor: 'transparent',
-            WebkitBackgroundClip: 'text',
-            WebkitTextStrokeColor: 'transparent'
-          }}>Advanced video recording and AI feedback system</p>
-          <Badge variant="outline" className="bg-white text-black border-gray-300" style={{ 
-            color: '#000000 !important', 
-            WebkitTextFillColor: '#000000 !important', 
-            textShadow: 'none',
-            backgroundColor: '#ffffff !important'
-          }}>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4" style={{ color: 'white' }}>
+          <h1 className="text-5xl font-bold mb-4" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Video OSCE Practice</h1>
+          <p className="text-xl mb-2" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Advanced video recording and AI feedback system</p>
+          <Badge variant="outline" className="bg-white text-black border-gray-300" style={{ color: 'black', WebkitTextFillColor: 'black', textShadow: 'none' }}>
             Real-time Practice Sessions
           </Badge>
         </div>
