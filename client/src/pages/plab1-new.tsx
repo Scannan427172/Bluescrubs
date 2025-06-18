@@ -10,6 +10,7 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
+import heroBannerImage from "@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750282263502.png";
 export default function PLAB1New() {
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -656,15 +657,27 @@ export default function PLAB1New() {
   // If no session started, show the landing page
   if (!sessionStarted && !isGeneratingQuestions) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4 pb-24">
-        <div className="max-w-6xl mx-auto mb-16">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">{translateText('PLAB 1 Practice')}</h1>
-            <p className="text-lg text-gray-600">Comprehensive AI-generated medical questions</p>
-            <Badge variant="outline" className="mt-2">
+      <div className="min-h-screen bg-gray-50 pb-24">
+        {/* Hero Banner */}
+        <div className="relative h-80 mb-8 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${heroBannerImage})` }}
+          >
+            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          </div>
+          <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+            <h1 className="text-5xl font-bold mb-4">{translateText('PLAB 1 Practice')}</h1>
+            <p className="text-xl mb-2">Comprehensive AI-generated medical questions</p>
+            <Badge variant="secondary" className="bg-white bg-opacity-20 text-white border-white border-opacity-30">
               5000+ Questions Available
             </Badge>
+          </div>
+        </div>
+        
+        <div className="max-w-6xl mx-auto px-4 mb-16">
+          {/* Content Section */}
+          <div className="mb-8">
             
             {/* Language Toggle */}
             <div className="flex items-center gap-4 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
