@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { 
   Video, VideoOff, Mic, MicOff, Play, Pause, RotateCcw, 
   Clock, User, FileText, CheckCircle, AlertCircle, 
-  Camera, Upload, Download, Settings, Volume2, VolumeX
+  Camera, Upload, Download, Settings, Volume2, VolumeX, X
 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -61,6 +61,7 @@ export default function VideoOSCE() {
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -478,10 +479,20 @@ export default function VideoOSCE() {
                       </div>
                       <div className="flex gap-2">
                         {session.recordingUrl && (
-                          <Button variant="outline" size="sm">
-                            <Download className="w-4 h-4 mr-2" />
-                            Download
-                          </Button>
+                          <>
+                            <Button 
+                              variant="default" 
+                              size="sm"
+                              onClick={() => setPlayingVideo(session.id)}
+                            >
+                              <Play className="w-4 h-4 mr-2" />
+                              Play Recording
+                            </Button>
+                            <Button variant="outline" size="sm">
+                              <Download className="w-4 h-4 mr-2" />
+                              Download
+                            </Button>
+                          </>
                         )}
                         {session.analysisResults && (
                           <Button size="sm">
@@ -495,6 +506,40 @@ export default function VideoOSCE() {
                 </Card>
               ))}
             </div>
+            
+            {/* Video Player Modal */}
+            {playingVideo && (
+              <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg p-6 max-w-4xl w-full mx-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-lg font-semibold">Recording Playback</h3>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => setPlayingVideo(null)}
+                    >
+                      ✕
+                    </Button>
+                  </div>
+                  
+                  <div className="bg-gray-900 rounded-lg p-4 mb-4">
+                    <video 
+                      controls 
+                      className="w-full max-h-96 rounded"
+                      src={sessions.find((s: VideoOSCESession) => s.id === playingVideo)?.recordingUrl}
+                    >
+                      Your browser does not support video playback.
+                    </video>
+                  </div>
+                  
+                  <div className="text-sm text-gray-600">
+                    <p><strong>Station:</strong> {sessions.find((s: VideoOSCESession) => s.id === playingVideo)?.stationTitle}</p>
+                    <p><strong>Category:</strong> {sessions.find((s: VideoOSCESession) => s.id === playingVideo)?.category}</p>
+                    <p><strong>Recorded:</strong> {sessions.find((s: VideoOSCESession) => s.id === playingVideo)?.createdAt ? new Date(sessions.find((s: VideoOSCESession) => s.id === playingVideo)!.createdAt).toLocaleString() : 'Unknown'}</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </TabsContent>
 
           {/* Feedback Tab */}
