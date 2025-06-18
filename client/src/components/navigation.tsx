@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useLocation, useRouter } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -12,8 +12,19 @@ interface NavigationProps {
 }
 
 export function Navigation({ user }: NavigationProps) {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Preserve scroll position when navigating
+  const handleNavigation = (href: string, event: React.MouseEvent) => {
+    event.preventDefault();
+    const currentScrollY = window.scrollY;
+    navigate(href);
+    // Restore scroll position after navigation
+    requestAnimationFrame(() => {
+      window.scrollTo(0, currentScrollY);
+    });
+  };
 
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: Home, current: location === "/dashboard" },
@@ -154,8 +165,9 @@ export function Navigation({ user }: NavigationProps) {
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
         <div className="grid grid-cols-5 gap-1">
           {/* Essential Navigation Items */}
-          <Link
+          <a
             href="/dashboard"
+            onClick={(e) => handleNavigation("/dashboard", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/dashboard"
                 ? "text-medical-blue bg-blue-50"
@@ -164,10 +176,11 @@ export function Navigation({ user }: NavigationProps) {
           >
             <Home className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">Dashboard</span>
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/plab1-new"
+            onClick={(e) => handleNavigation("/plab1-new", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/plab1-new"
                 ? "text-medical-blue bg-blue-50"
@@ -176,10 +189,11 @@ export function Navigation({ user }: NavigationProps) {
           >
             <BookOpen className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">PLAB 1</span>
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/plab2-osce"
+            onClick={(e) => handleNavigation("/plab2-osce", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/plab2-osce"
                 ? "text-medical-blue bg-blue-50"
@@ -188,10 +202,11 @@ export function Navigation({ user }: NavigationProps) {
           >
             <GraduationCap className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">PLAB 2</span>
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/video-osce"
+            onClick={(e) => handleNavigation("/video-osce", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/video-osce"
                 ? "text-medical-blue bg-blue-50"
@@ -200,10 +215,11 @@ export function Navigation({ user }: NavigationProps) {
           >
             <Video className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">Video OSCE</span>
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/more"
+            onClick={(e) => handleNavigation("/more", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/more"
                 ? "text-medical-blue bg-blue-50"
@@ -212,7 +228,7 @@ export function Navigation({ user }: NavigationProps) {
           >
             <MoreHorizontal className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">More</span>
-          </Link>
+          </a>
         </div>
       </nav>
     </>
