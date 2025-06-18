@@ -10,7 +10,6 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
-import heroImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750281579675.png';
 export default function PLAB1New() {
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -659,68 +658,16 @@ export default function PLAB1New() {
     return (
       <div className="min-h-screen bg-gray-50 p-4 pb-24">
         <div className="max-w-6xl mx-auto mb-16">
-          {/* Hero Banner */}
-          <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 rounded-2xl mb-8 overflow-hidden">
-            <div className="absolute inset-0 bg-black/40"></div>
-            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 p-8 lg:p-12">
-              <div className="flex-1 text-white">
-                <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-                  {translateText('Master PLAB 1 with AI')}
-                </h1>
-                <p className="text-xl lg:text-2xl mb-6 text-blue-100">
-                  {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <Badge className="bg-white/20 text-white border-white/30 text-sm px-4 py-2">
-                    <Target className="w-4 h-4 mr-2" />
-                    5000+ Questions Available
-                  </Badge>
-                  <Badge className="bg-white/20 text-white border-white/30 text-sm px-4 py-2">
-                    <Brain className="w-4 h-4 mr-2" />
-                    AI-Powered Learning
-                  </Badge>
-                  <Badge className="bg-white/20 text-white border-white/30 text-sm px-4 py-2">
-                    <Award className="w-4 h-4 mr-2" />
-                    UK Guidelines
-                  </Badge>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    size="lg" 
-                    className="bg-white text-blue-600 hover:bg-blue-50 font-semibold"
-                    onClick={() => document.getElementById('practice-options')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    <ArrowRight className="w-5 h-5 mr-2" />
-                    {translateText('Start Practice Now')}
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline"
-                    className="border-white text-white hover:bg-white/10"
-                    onClick={() => document.getElementById('settings')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    <Globe className="w-5 h-5 mr-2" />
-                    {translateText('Settings & Languages')}
-                  </Button>
-                </div>
-              </div>
-              <div className="flex-shrink-0">
-                <img 
-                  src={heroImage} 
-                  alt="Medical students taking PLAB exam"
-                  className="w-full max-w-md lg:max-w-lg rounded-xl shadow-2xl"
-                />
-              </div>
-            </div>
-          </div>
-
           {/* Header */}
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">{translateText('Choose Your Practice Mode')}</h2>
-            <p className="text-lg text-gray-600">Tailored learning experience with multilingual support</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">{translateText('PLAB 1 Practice')}</h1>
+            <p className="text-lg text-gray-600">Comprehensive AI-generated medical questions</p>
+            <Badge variant="outline" className="mt-2">
+              5000+ Questions Available
+            </Badge>
             
             {/* Language Toggle */}
-            <div id="settings" className="flex items-center gap-4 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="flex items-center gap-4 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
               <Globe className="w-4 h-4 text-blue-600" />
               <div className="flex items-center gap-3">
                 <Switch
@@ -919,7 +866,7 @@ export default function PLAB1New() {
           </Card>
 
           {/* Practice Options */}
-          <Card id="practice-options" className="mb-8">
+          <Card className="mb-8">
             <CardHeader>
               <CardTitle>Start Practice Session</CardTitle>
               <CardDescription>Choose your practice format</CardDescription>
