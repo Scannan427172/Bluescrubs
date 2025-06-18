@@ -149,13 +149,31 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Full AI translation endpoint for complex content
+  // In-memory translation cache for fast responses
+  const translationCache = new Map<string, any>();
+  
+  // Full AI translation endpoint for complex content with caching
   app.post('/api/translate-question', async (req, res) => {
     try {
       const { question, targetLanguage } = req.body;
       
       if (!question || !targetLanguage) {
         return res.status(400).json({ error: 'Question and target language required' });
+      }
+
+      // Create cache key from question content and language
+      const questionContent = JSON.stringify({
+        scenario: question.scenario || question.stem || '',
+        question: question.question || '',
+        options: question.options || [],
+        explanation: question.explanation || ''
+      });
+      const cacheKey = `${Buffer.from(questionContent).toString('base64').slice(0, 50)}_${targetLanguage}`;
+      
+      // Check cache first for instant response
+      if (translationCache.has(cacheKey)) {
+        console.log(`Cache hit for ${targetLanguage} translation`);
+        return res.json(translationCache.get(cacheKey));
       }
 
       // Check if OpenAI API key is available
@@ -168,6 +186,8 @@ export function registerRoutes(app: Express): Server {
           options: Array.isArray(question.options) ? question.options : [],
           explanation: question.explanation || ''
         };
+        // Cache the fallback result too
+        translationCache.set(cacheKey, result);
         return res.json(result);
       }
 
@@ -227,14 +247,26 @@ Response format (JSON only):
         explanation: translatedContent.explanation || question.explanation || ''
       };
 
+      // Cache the translation result for future requests
+      translationCache.set(cacheKey, result);
+      
       console.log(`Translation completed for ${targetLanguage}:`, {
         originalOptionsCount: question.options?.length || 0,
-        translatedOptionsCount: result.options.length
+        translatedOptionsCount: result.options.length,
+        cached: true
       });
 
       res.json(result);
     } catch (error) {
       console.error('Question translation API error:', error);
+      // Cache the original content as fallback
+      const fallbackResult = {
+        scenario: question.scenario || question.stem || '',
+        question: question.question || '',
+        options: Array.isArray(question.options) ? question.options : [],
+        explanation: question.explanation || ''
+      };
+      translationCache.set(cacheKey, fallbackResult);
       res.status(500).json({ error: 'Translation failed' });
     }
   });

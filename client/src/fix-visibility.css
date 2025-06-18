@@ -1,378 +1,147 @@
-/* Ultimate text visibility fix - nuclear option */
+/* Smart text visibility fix with proper contrast */
 
-/* Maximum specificity CSS override */
-html body div * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  text-shadow: none !important;
+/* Fix invisible white/light text on light backgrounds only */
+.text-white:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]):not([class*="bg-black"]),
+.text-gray-100:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]):not([class*="bg-black"]),
+.text-gray-200:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]):not([class*="bg-black"]) {
+  color: #1f2937 !important;
+  -webkit-text-fill-color: #1f2937 !important;
 }
 
-html body span {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+/* Fix any completely transparent or invisible text */
+[style*="color: transparent"],
+[style*="color:transparent"],
+[style*="color: rgba(255,255,255,0)"],
+[style*="color:rgba(255,255,255,0)"] {
+  color: #1f2937 !important;
+  -webkit-text-fill-color: #1f2937 !important;
 }
 
-html body p {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+/* Ensure body text is dark on light backgrounds */
+body {
+  color: #1f2937;
+  background-color: #ffffff;
 }
 
-html body h1, html body h2, html body h3, html body h4, html body h5, html body h6 {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+/* Main content areas */
+.bg-white, .bg-gray-50, .bg-gray-100, .bg-blue-50, .bg-green-50, .bg-yellow-50 {
+  color: #1f2937 !important;
 }
 
-/* Nuclear option - override everything */
-* {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+/* Headers and main text on light backgrounds */
+.bg-white h1, .bg-white h2, .bg-white h3, .bg-white h4, .bg-white h5, .bg-white h6,
+.bg-gray-50 h1, .bg-gray-50 h2, .bg-gray-50 h3, .bg-gray-50 h4, .bg-gray-50 h5, .bg-gray-50 h6,
+.bg-gray-100 h1, .bg-gray-100 h2, .bg-gray-100 h3, .bg-gray-100 h4, .bg-gray-100 h5, .bg-gray-100 h6 {
+  color: #1f2937 !important;
 }
 
-/* Force visibility on all text elements */
-p, span, div, h1, h2, h3, h4, h5, h6, a, button, label, input, textarea {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+/* Paragraph text on light backgrounds */
+.bg-white p, .bg-white span, .bg-white div,
+.bg-gray-50 p, .bg-gray-50 span, .bg-gray-50 div,
+.bg-gray-100 p, .bg-gray-100 span, .bg-gray-100 div {
+  color: #1f2937 !important;
 }
 
-/* Override any white text specifically */
-.text-white, [style*="color: white"], [style*="color:#ffffff"], [style*="color: #ffffff"] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+/* Fix gradient background text */
+.bg-gradient-to-br *:not(button):not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]) {
+  color: #1f2937 !important;
+  text-shadow: 0 0 2px rgba(255,255,255,0.8) !important;
 }
 
-/* Target specific white text classes */
-.text-white, .text-gray-50, .text-gray-100 {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Ensure button text is visible */
-button, button *, .btn, .btn * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Force visibility on all interactive elements */
-[role="button"], [role="button"] *, .clickable, .clickable * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Emergency override for any remaining white text */
-[class*="white"], [class*="light"], [style*="white"] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Specific overrides for Video OSCE page */
-.video-osce h1, .video-osce h2, .video-osce h3, .video-osce p, .video-osce span, .video-osce div {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Force visibility on gradient backgrounds */
-.bg-gradient-to-br h1, .bg-gradient-to-br h2, .bg-gradient-to-br p, 
-.bg-gradient-to-br span, .bg-gradient-to-br div,
-.bg-gradient-to-br .text-4xl, .bg-gradient-to-br .text-lg {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Nuclear override for Video OSCE page specifically */
-.video-osce .text-center h1, 
-.video-osce .text-center p,
-.video-osce h2,
-.video-osce .text-2xl,
-.video-osce .text-4xl,
-.video-osce .text-lg,
-.video-osce .font-bold,
-.video-osce .text-gray-900,
-.video-osce .text-gray-600 {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  text-shadow: none !important;
-}
-
-/* Maximum priority text override */
-[data-page="video-osce"] *, 
-.video-osce *, 
-.video-osce button *,
-.video-osce .text-center *,
-h1[class*="text"], h2[class*="text"], p[class*="text"] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Ultimate text visibility fix - targets all possible text classes */
-.text-4xl, .text-3xl, .text-2xl, .text-xl, .text-lg, .text-base, .text-sm, .text-xs,
-.font-bold, .font-semibold, .font-medium, .font-normal,
-.text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500,
-.text-white, .text-blue-600, .text-blue-700, .text-blue-800, .text-blue-900 {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Button text override */
-button, .btn, [role="button"] {
-  color: #000000 !important;
-}
-
-button span, .btn span, [role="button"] span {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Absolute final override - force black text everywhere */
-* {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Specific targeting for headings and key text */
-h1, h2, h3, h4, h5, h6 {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  text-shadow: none !important;
-}
-
-/* Target specific problematic text */
-.text-2xl.font-bold, .text-4xl.font-bold {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Force visibility on any remaining white/light text */
-[class*="text-white"], [class*="text-gray"], [class*="text-blue"] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Ultimate nuclear option - override everything with maximum specificity */
-html * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-body *, main *, div *, section *, article * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Emergency text visibility fix */
-.text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500,
-.text-gray-400, .text-gray-300, .text-gray-200, .text-gray-100, .text-white {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Direct targeting of problematic selectors */
-.text-2xl.font-bold.text-gray-900 {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Override any inline styles */
-[style*="color"] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* CSS custom properties override */
-:root {
-  --text-color: #000000 !important;
-  --heading-color: #000000 !important;
-}
-
-/* Force text color using CSS variables */
-h1, h2, h3, h4, h5, h6, p, span, div, button {
-  color: var(--text-color, #000000) !important;
-  -webkit-text-fill-color: var(--text-color, #000000) !important;
-}
-
-/* Radix UI Select component overrides */
-[data-radix-select-trigger] *,
-[data-radix-select-content] *,
-[data-radix-select-item] *,
-[data-radix-select-value] *,
-[role="combobox"] *,
-[role="option"] * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Additional Select component targeting */
-.select-trigger *, .select-content *, .select-item * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Category dropdown specific override */
-[data-placeholder="Filter by category"] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Nuclear option for Select components */
-*[class*="select"] *,
-*[class*="Select"] *,
-*[data-state] *,
-button[role="combobox"] *,
-div[role="combobox"] * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Force visibility on ALL possible select-related elements */
-select *, 
-[class*="trigger"] *,
-[class*="value"] *,
-[class*="content"] *,
-[class*="item"] * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Maximum specificity override - target all text nodes */
-.video-osce span[class*="text"],
-.video-osce div[class*="text"],
-.video-osce button[class*="text"] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Override any CSS-in-JS or styled-components */
-[style*="color: rgb"],
-[style*="color:rgb"],
-[style*="color: #"],
-[style*="color:#"] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Final nuclear option */
-* {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Force white backgrounds on dropdowns to ensure contrast */
-[data-radix-select-content] {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-[data-radix-select-item] {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-/* Additional dropdown targeting */
-.select-content, .select-item, .select-trigger, .select-value {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-/* Re-apply standard button styling but keep text black */
-.bg-blue-600, .bg-blue-500, .bg-green-600, .bg-red-600 {
-  background-color: var(--background-color) !important;
-}
-
-/* Preserve button backgrounds but force text visibility */
-button.bg-blue-600 *, button.bg-blue-500 *, 
-button.bg-green-600 *, button.bg-red-600 * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-
-/* Specific targeting for blue gradient backgrounds */
-.bg-gradient-to-br * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  text-shadow: 0 0 1px rgba(0,0,0,0.5) !important;
-}
-
-/* Body and root elements */
-html, body {
-  color: #1a1a1a !important;
-  background-color: #ffffff !important;
-}
-
-/* All text elements */
-h1, h2, h3, h4, h5, h6, p, span, div, a, li, ul, ol, dl, dt, dd,
-button, input, textarea, select, option, label, legend, fieldset,
-table, th, td, caption, code, pre, blockquote, cite, q, abbr, dfn,
-address, time, small, strong, em, b, i, u, s, sub, sup, mark, del, ins {
-  color: #1a1a1a !important;
-}
-
-/* All class-based elements */
-[class] {
-  color: #1a1a1a !important;
-}
-
-/* React components and modern selectors */
-[data-testid], [role], [aria-label], [title] {
-  color: #1a1a1a !important;
-}
-
-/* Tailwind utility overrides with maximum specificity */
-body .text-white, body .text-gray-100, body .text-gray-200, body .text-gray-300, body .text-gray-400,
-body .text-gray-500, body .text-gray-600, body .text-gray-700, body .text-gray-800, body .text-gray-900,
-body .text-slate-100, body .text-slate-200, body .text-slate-300, body .text-slate-400,
-body .text-slate-500, body .text-slate-600, body .text-slate-700, body .text-slate-800, body .text-slate-900,
-body .text-muted-foreground, body .text-foreground,
-body .text-blue-600, body .text-blue-500, body .text-blue-400,
-body .text-indigo-600, body .text-indigo-500, body .text-indigo-400 {
-  color: #1a1a1a !important;
-}
-
-/* Force visibility on all possible CSS classes */
-[class*="text-"], [class*="Text"] {
-  color: #1a1a1a !important;
-}
-
-/* Override any inherited color properties */
-div, span, p, h1, h2, h3, h4, h5, h6, a, li, ul, ol, 
-button, input, textarea, select, label, legend, 
-table, th, td, caption, blockquote, cite, code, pre {
-  color: #1a1a1a !important;
-}
-
-/* Card and component overrides */
-.card, .card-header, .card-content, .card-title, .card-description,
-.alert, .badge, .button, .input, .textarea, .select, .label,
-.dialog, .dropdown, .popover, .tooltip, .sheet, .drawer {
-  color: #1a1a1a !important;
-}
-
-/* Exception for elements that need white text on dark backgrounds */
+/* Preserve white text on dark buttons */
 .bg-blue-600, .bg-blue-700, .bg-blue-800, .bg-blue-900,
 .bg-purple-600, .bg-purple-700, .bg-purple-800, .bg-purple-900,
 .bg-green-600, .bg-green-700, .bg-green-800, .bg-green-900,
 .bg-red-600, .bg-red-700, .bg-red-800, .bg-red-900,
+.bg-orange-600, .bg-orange-700, .bg-orange-800, .bg-orange-900,
 .bg-yellow-600, .bg-yellow-700, .bg-yellow-800, .bg-yellow-900,
 .bg-indigo-600, .bg-indigo-700, .bg-indigo-800, .bg-indigo-900,
-.bg-pink-600, .bg-pink-700, .bg-pink-800, .bg-pink-900,
 .bg-gray-700, .bg-gray-800, .bg-gray-900,
-.bg-slate-700, .bg-slate-800, .bg-slate-900,
-.bg-black,
-button[class*="bg-gradient"],
-[class*="bg-gradient"] {
+.bg-black {
   color: white !important;
 }
 
-/* Ensure buttons with dark backgrounds have white text */
+/* Ensure button text is white on dark backgrounds */
 .bg-blue-600 *, .bg-blue-700 *, .bg-blue-800 *, .bg-blue-900 *,
 .bg-purple-600 *, .bg-purple-700 *, .bg-purple-800 *, .bg-purple-900 *,
 .bg-green-600 *, .bg-green-700 *, .bg-green-800 *, .bg-green-900 *,
 .bg-red-600 *, .bg-red-700 *, .bg-red-800 *, .bg-red-900 *,
+.bg-orange-600 *, .bg-orange-700 *, .bg-orange-800 *, .bg-orange-900 *,
 .bg-yellow-600 *, .bg-yellow-700 *, .bg-yellow-800 *, .bg-yellow-900 *,
 .bg-indigo-600 *, .bg-indigo-700 *, .bg-indigo-800 *, .bg-indigo-900 *,
-.bg-pink-600 *, .bg-pink-700 *, .bg-pink-800 *, .bg-pink-900 *,
 .bg-gray-700 *, .bg-gray-800 *, .bg-gray-900 *,
-.bg-slate-700 *, .bg-slate-800 *, .bg-slate-900 *,
-.bg-black *,
-button[class*="bg-gradient"] *,
-[class*="bg-gradient"] * {
+.bg-black * {
   color: white !important;
+}
+
+/* Fix dropdown and select components */
+[data-radix-select-content] {
+  background-color: white !important;
+  color: #1f2937 !important;
+}
+
+[data-radix-select-item] {
+  color: #1f2937 !important;
+}
+
+[data-radix-select-item][data-highlighted] {
+  background-color: #f3f4f6 !important;
+  color: #1f2937 !important;
+}
+
+/* Card components */
+.card, .card-content, .card-header {
+  color: #1f2937 !important;
+}
+
+/* Navigation and menu items */
+nav, nav a, nav span, nav div {
+  color: #1f2937 !important;
+}
+
+/* Form elements */
+input, textarea, select {
+  color: #1f2937 !important;
+  background-color: white !important;
+}
+
+/* Links */
+a:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]) {
+  color: #2563eb !important;
+}
+
+/* Badge and pill components */
+.badge:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]) {
+  color: #1f2937 !important;
+}
+
+/* Tables */
+table, th, td {
+  color: #1f2937 !important;
+}
+
+/* Alert components */
+.alert:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]) {
+  color: #1f2937 !important;
+}
+
+/* Progress bars */
+.progress {
+  color: #1f2937 !important;
+}
+
+/* Specific text color overrides for light backgrounds */
+.text-muted-foreground:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]) {
+  color: #6b7280 !important;
+}
+
+/* Ensure proper contrast for all text sizes */
+.text-xs, .text-sm, .text-base, .text-lg, .text-xl, .text-2xl, .text-3xl, .text-4xl {
+  color: inherit;
+}
+
+/* Override any remaining problematic text colors */
+.text-gray-300:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]),
+.text-gray-400:not([class*="bg-blue"]):not([class*="bg-purple"]):not([class*="bg-green"]):not([class*="bg-red"]):not([class*="bg-gray-7"]):not([class*="bg-gray-8"]):not([class*="bg-gray-9"]) {
+  color: #6b7280 !important;
 }
