@@ -11,7 +11,10 @@ import {
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
 import heroBannerImage from "@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750282263502.png";
+import { HeroBanner } from "@/components/ui/hero-banner";
+
 export default function PLAB1New() {
+  
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isTranslationMode, setIsTranslationMode] = useState(false);
@@ -92,6 +95,13 @@ export default function PLAB1New() {
     }
     return () => clearInterval(interval);
   }, [isTimerRunning]);
+
+  // Preload hero banner image for faster loading
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setHeroBannerLoaded(true);
+    img.src = heroBannerImage;
+  }, []);
 
   // Start timer when new question is shown
   useEffect(() => {
@@ -660,8 +670,15 @@ export default function PLAB1New() {
       <div className="min-h-screen bg-gray-50 pb-24">
         {/* Hero Banner */}
         <div className="hero-banner relative h-80 mb-8 overflow-hidden">
+          {!heroBannerLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 animate-pulse">
+              <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+            </div>
+          )}
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500 ${
+              heroBannerLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
             style={{ backgroundImage: `url(${heroBannerImage})` }}
           >
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
