@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import moreOptionsHeroBannerImage from "@assets/9252557F-8639-4C96-BFDA-AEACAAA7E77E_1750285736194.png";
+import { HeroBanner } from "@/components/ui/hero-banner";
 
 export default function More() {
   const adminTools = [
@@ -297,22 +298,12 @@ export default function More() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Banner */}
-      <div className="hero-banner relative h-80 mb-8 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${moreOptionsHeroBannerImage})` }}
-        >
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        </div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4" style={{ color: 'white' }}>
-          <h1 className="text-5xl font-bold mb-4" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>More Options</h1>
-          <p className="text-xl mb-2" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Advanced tools and comprehensive settings</p>
-          <Badge variant="outline" className="bg-white text-black border-gray-300" style={{ color: 'black', WebkitTextFillColor: 'black', textShadow: 'none' }}>
-            Complete Platform Control
-          </Badge>
-        </div>
-      </div>
+      <HeroBanner
+        backgroundImage={moreOptionsHeroBannerImage}
+        title="More Options"
+        subtitle="Advanced tools and comprehensive settings"
+        badge="Complete Platform Control"
+      />
       
       <div className="container max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
 
