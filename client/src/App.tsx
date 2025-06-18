@@ -25,6 +25,7 @@ import InteractivePatientPage from "@/pages/interactive-patient-page";
 import PersonalizedPaths from "@/pages/personalized-paths";
 import VideoOSCE from "@/pages/video-osce";
 import More from "@/pages/more";
+import About from "@/pages/about";
 import LanguageDemo from "@/pages/language-demo";
 import GlobalPractice from "@/pages/global-practice";
 import AdaptiveLearning from "@/pages/adaptive-learning";
