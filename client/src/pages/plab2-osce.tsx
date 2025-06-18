@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { EXPANDED_PLAB2_STATIONS, EXPANDED_STATION_STATS, EnhancedOSCEStation } from "@shared/expanded-plab2-stations";
 import { useQuery } from "@tanstack/react-query";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
 import { type NeuroAtypicalType, NEURO_ACCOMMODATIONS } from "@shared/neurodiversity-schema";
@@ -56,7 +57,7 @@ interface OSCEStation {
 }
 
 export default function Plab2Osce() {
-  const [activeStation, setActiveStation] = useState<OSCEStation | null>(null);
+  const [activeStation, setActiveStation] = useState<EnhancedOSCEStation | null>(null);
   const [selectedType, setSelectedType] = useState<string>('all');
   const [completedStations, setCompletedStations] = useState<string[]>([]);
   const [stationScores, setStationScores] = useState<Record<string, number>>({});
@@ -153,7 +154,7 @@ export default function Plab2Osce() {
   };
 
   // Translate OSCE station content
-  const translateStation = async (station: OSCEStation) => {
+  const translateStation = async (station: EnhancedOSCEStation) => {
     if (!translateStations || selectedLanguage === 'en') return station;
     
     const cacheKey = `${station.id}_${selectedLanguage}`;
