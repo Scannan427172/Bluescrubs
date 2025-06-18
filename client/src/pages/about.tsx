@@ -87,20 +87,21 @@ export default function About() {
                   <Activity className="h-12 w-12 text-purple-600" />
                 </div>
                 <CardTitle className="text-xl text-purple-900">Keith Hunter</CardTitle>
-                <CardDescription className="text-purple-700 font-medium">Sports Therapy Expert, Graphic Designer & Co-Founder</CardDescription>
+                <CardDescription className="text-purple-700 font-medium">Multidisciplinary Digital Creative, Sports Therapy Expert & Co-Founder</CardDescription>
               </CardHeader>
               <CardContent className="text-center">
                 <div className="space-y-4">
                   <Badge variant="outline" className="bg-purple-50 text-purple-800 border-purple-300">
-                    Training Design Authority
+                    Multidisciplinary Digital Creative
                   </Badge>
                   <p className="text-gray-700 leading-relaxed">
-                    BA Graphic Design graduate from Leeds University (1982) and nationally recognised 
-                    authority in training design and deep tissue therapy with over 30 years of experience. 
-                    Co-founder of Core Principles and former Head Jumps Coach for British Athletics Paralympics. 
-                    Has coached European and World champion long jumpers, including 33 English Schools gold 
-                    medallists, bringing both creative design expertise and elite athletic development 
-                    knowledge to medical education technology.
+                    BA Graphic Design graduate from Leeds University (1982) and multidisciplinary freelance 
+                    digital creative with over 30 years commercial experience in web, print, motion graphics 
+                    and identity design. Also a nationally recognised authority in training design and deep 
+                    tissue therapy. Co-founder of Core Principles and former Head Jumps Coach for British 
+                    Athletics Paralympics. Has coached European and World champion long jumpers, including 
+                    33 English Schools gold medallists, bringing comprehensive creative design expertise 
+                    and elite athletic development knowledge to medical education technology.
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     <Badge variant="secondary" className="text-xs">Level 4 Sports Massage</Badge>
@@ -186,6 +187,9 @@ export default function About() {
                 <h3 className="text-lg font-semibold text-purple-900 mb-3">Qualifications & Education</h3>
                 <ul className="text-purple-800 space-y-2 text-sm">
                   <li>• BA Graphic Design – Leeds University (1982)</li>
+                  <li>• Web Design & Development Specialist</li>
+                  <li>• Motion Graphics & Identity Design Expert</li>
+                  <li>• Print & Corporate Design Professional</li>
                   <li>• Level 4 Sports Massage Therapist</li>
                   <li>• Level 4 British Athletics Coach</li>
                   <li>• British Athletics Certified (All Phases)</li>
