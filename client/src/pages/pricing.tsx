@@ -144,7 +144,7 @@ export default function Pricing() {
         'Complete VR OSCE suite (50+ stations)',
         'All 35 languages',
         'AI patient actors',
-        'Career guidance & hospital partnerships',
+        'Career guidance & NHS pathway information',
         '1-on-1 mentorship matching',
         'Custom study plans',
         'Priority queue for new features',

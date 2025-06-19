@@ -126,8 +126,8 @@ export default function Landing() {
                 icon: Globe,
                 title: "Live NHS Integration Hub",
                 subtitle: "Real-World Ready",
-                description: "Direct integration with NICE, BNF, and NHS Trust protocols. Real-time guideline updates, authentic case studies from partner hospitals, and NHS career pathway mapping.",
-                features: ["Live NICE/BNF integration", "Real hospital case studies", "NHS career mapping", "Trust protocol updates"],
+                description: "Integration with public NICE, BNF, and GMC guidelines. Real-time guideline updates, evidence-based case studies, and NHS career pathway information.",
+                features: ["Live NICE/BNF integration", "Evidence-based case studies", "NHS career information", "Guideline updates"],
                 color: "from-green-500 to-emerald-500"
               },
               {
@@ -212,7 +212,7 @@ export default function Landing() {
                   {
                     icon: Shield,
                     title: "Live NHS Ecosystem Integration",
-                    description: "Direct API integration with NICE, BNF, GMC, and CKS databases for real-time updates. Active partnerships with 15+ NHS Trusts, specialty training pathway mapping, post-PLAB job placement guarantee, and comprehensive GMC revalidation support."
+                    description: "Integration with publicly available NICE, BNF, GMC, and CKS guidelines for real-time updates. Comprehensive specialty training pathway information, career guidance resources, and GMC revalidation support materials."
                   },
                   {
                     icon: Users,
@@ -293,8 +293,8 @@ export default function Landing() {
                   <p className="text-gray-800 font-medium">Immersive Training</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-orange-600 mb-2">15+</div>
-                  <p className="text-gray-800 font-medium">NHS Trust Partners</p>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">50+</div>
+                  <p className="text-gray-800 font-medium">AI Systems</p>
                 </div>
               </div>
             </div>
@@ -352,10 +352,10 @@ export default function Landing() {
                 color: "from-green-500 to-emerald-500",
                 features: [
                   "Live NHS guidelines monitoring",
-                  "Imperial College partnerships",
-                  "Manchester Royal Infirmary access",
+                  "UK medical practice integration",
+                  "Healthcare system familiarization",
                   "Cultural competency training",
-                  "Post-PLAB career placement",
+                  "Post-PLAB career guidance",
                   "NHS job application assistance"
                 ]
               },

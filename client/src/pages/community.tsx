@@ -618,7 +618,7 @@ export default function Community() {
                       <Badge className="bg-green-100 text-green-800">Available</Badge>
                     </div>
                     <p className="text-sm text-muted-foreground mb-2">
-                      Consultant Cardiologist • Imperial College Healthcare NHS Trust
+                      Consultant Cardiologist • UK NHS Trust
                     </p>
                     <p className="text-sm mb-3">
                       Experienced in guiding international medical graduates through PLAB and specialty training. 
@@ -660,7 +660,7 @@ export default function Community() {
                       <Badge className="bg-yellow-100 text-yellow-800">Busy</Badge>
                     </div>
                     <p className="text-sm text-muted-foreground mb-2">
-                      Emergency Medicine Consultant • Manchester Royal Infirmary
+                      Emergency Medicine Consultant • UK NHS Trust
                     </p>
                     <p className="text-sm mb-3">
                       Passionate about supporting international doctors in emergency medicine. 
