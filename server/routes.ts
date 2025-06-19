@@ -449,7 +449,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
         'hypertension': {
           nice: {
             title: "NICE Guideline NG136: Hypertension in adults: diagnosis and management",
-            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-advice",
+            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-interventions",
             section: "1.4 Lifestyle advice and antihypertensive drug treatment thresholds",
             relevance: "First-line management of hypertension in adults"
           },
