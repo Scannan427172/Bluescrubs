@@ -301,7 +301,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-6">
-              <span className="text-white font-semibold">Complete Feature Set</span>
+              <span className="hero-text text-white font-semibold">Complete Feature Set</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               40+ Advanced Systems Working Together
