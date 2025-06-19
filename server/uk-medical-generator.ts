@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { getCKSReferences, searchCKSReferences, SpecificReference } from './specific-references';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -54,6 +55,7 @@ export interface UKMedicalQuestion {
     management_approach: string;
     red_flags?: string[];
     cks_url?: string;
+    specific_references?: SpecificReference[];
   };
   additional_guidelines: Array<{
     source: string;
@@ -238,6 +240,9 @@ async function generateSingleQuestion(
         !questionData.correct_answer || !questionData.explanation || !questionData.references) {
       throw new Error('Invalid question structure generated');
     }
+
+    // Enhance with detailed CKS references
+    questionData = await enhanceWithCKSReferences(questionData, specialty);
 
     // Add default CKS guidance if missing
     if (!questionData.cks_guidance) {

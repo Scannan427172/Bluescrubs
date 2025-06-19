@@ -214,6 +214,180 @@ export const SpecificReferenceDatabase = {
         subsection: "Laboratory Surveillance Guidelines"
       }
     ]
+  },
+
+  // CKS Clinical Knowledge Summaries References
+  // Structured to match NICE guideline reference format with specific sections and URLs
+  cks: {
+    acute_coronary_syndrome: [
+      {
+        text: "CKS Acute Coronary Syndromes Section 'Management in Primary Care' - 'Immediate aspirin 300mg and urgent hospital admission for suspected ACS' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/acute-coronary-syndromes/management/management-in-primary-care/",
+        section: "Management in Primary Care",
+        subsection: "Immediate Management",
+        tableOrFigure: "Primary Care Action Checklist"
+      },
+      {
+        text: "CKS Acute Coronary Syndromes Section 'Scenario: Suspected ACS' - 'Call 999 for chest pain with cardiac risk factors lasting >15 minutes' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/acute-coronary-syndromes/scenario/suspected-acs/",
+        section: "Scenario: Suspected ACS",
+        subsection: "Recognition and Referral Criteria",
+        tableOrFigure: "Emergency Referral Indicators"
+      }
+    ],
+
+    asthma_management: [
+      {
+        text: "CKS Asthma Section 'Management: Adults' - 'Step 1: SABA PRN, Step 2: Add low-dose ICS' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/asthma/management/adults/",
+        section: "Management: Adults",
+        subsection: "Stepwise Treatment Approach",
+        tableOrFigure: "Adult Asthma Treatment Steps"
+      },
+      {
+        text: "CKS Asthma Section 'Scenario: Acute Exacerbation' - 'Prednisolone 40-50mg daily for 5 days for moderate-severe exacerbations' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/asthma/scenario/acute-exacerbation-of-asthma/",
+        section: "Scenario: Acute Exacerbation",
+        subsection: "Oral Corticosteroid Dosing",
+        tableOrFigure: "Exacerbation Severity Assessment"
+      }
+    ],
+
+    diabetes_type2: [
+      {
+        text: "CKS Diabetes Type 2 Section 'Management: Adults' - 'Metformin 500mg BD, increase gradually to reduce GI side effects' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/diabetes-type-2/management/adults/",
+        section: "Management: Adults",
+        subsection: "First-line Therapy",
+        tableOrFigure: "Metformin Dosing Schedule"
+      },
+      {
+        text: "CKS Diabetes Type 2 Section 'Scenario: HbA1c Targets' - 'Target HbA1c 48mmol/mol (6.5%) for most adults on lifestyle or metformin only' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/diabetes-type-2/scenario/hba1c-targets/",
+        section: "Scenario: HbA1c Targets",
+        subsection: "Individualized Target Setting",
+        tableOrFigure: "HbA1c Target Recommendations"
+      }
+    ],
+
+    hypertension: [
+      {
+        text: "CKS Hypertension Section 'Management: Adults under 80' - 'Step 1: ACE inhibitor or ARB for under 55s, CCB for over 55s or Afro-Caribbean' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/hypertension/management/adults-under-80-years/",
+        section: "Management: Adults under 80",
+        subsection: "First-line Antihypertensive Choice",
+        tableOrFigure: "Age and Ethnicity-Based Treatment Algorithm"
+      },
+      {
+        text: "CKS Hypertension Section 'Scenario: Resistant Hypertension' - 'Add spironolactone 25mg daily if BP uncontrolled on ACE+CCB+thiazide' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/hypertension/scenario/resistant-hypertension/",
+        section: "Scenario: Resistant Hypertension",
+        subsection: "Fourth-line Therapy Options",
+        tableOrFigure: "Resistant Hypertension Management Flow"
+      }
+    ],
+
+    heart_failure: [
+      {
+        text: "CKS Heart Failure Section 'Management: Reduced Ejection Fraction' - 'ACE inhibitor + beta-blocker as first-line therapy' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/heart-failure-chronic/management/heart-failure-with-reduced-ejection-fraction/",
+        section: "Management: HFrEF",
+        subsection: "Disease-Modifying Therapy",
+        tableOrFigure: "HFrEF Treatment Pathway"
+      },
+      {
+        text: "CKS Heart Failure Section 'Scenario: Acute Deterioration' - 'Urgent same-day assessment for worsening breathlessness or fluid retention' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/heart-failure-chronic/scenario/acute-deterioration/",
+        section: "Scenario: Acute Deterioration",
+        subsection: "Urgent Referral Criteria",
+        tableOrFigure: "Heart Failure Emergency Indicators"
+      }
+    ],
+
+    copd_management: [
+      {
+        text: "CKS COPD Section 'Management: Stable COPD' - 'SABA or SAMA for breathlessness, add LABA or LAMA if symptoms persist' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/management/stable-copd/",
+        section: "Management: Stable COPD",
+        subsection: "Bronchodilator Therapy",
+        tableOrFigure: "COPD Treatment Algorithm"
+      },
+      {
+        text: "CKS COPD Section 'Scenario: Exacerbation' - 'Prednisolone 30mg daily for 5 days for exacerbations with increased breathlessness' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/scenario/exacerbation/",
+        section: "Scenario: Exacerbation",
+        subsection: "Corticosteroid Treatment",
+        tableOrFigure: "Exacerbation Management Protocol"
+      }
+    ],
+
+    depression_adults: [
+      {
+        text: "CKS Depression Section 'Management: Adults' - 'SSRI first-line, sertraline preferred for cardiac comorbidities' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/depression/management/adults/",
+        section: "Management: Adults",
+        subsection: "Antidepressant Selection",
+        tableOrFigure: "SSRI Choice Based on Comorbidities"
+      },
+      {
+        text: "CKS Depression Section 'Scenario: Treatment Resistance' - 'Increase dose, switch class, or add psychological therapy if no response at 4-6 weeks' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/depression/scenario/treatment-resistant-depression/",
+        section: "Scenario: Treatment Resistance",
+        subsection: "Optimization Strategies",
+        tableOrFigure: "Treatment Escalation Pathway"
+      }
+    ],
+
+    urinary_tract_infection: [
+      {
+        text: "CKS UTI Section 'Management: Lower UTI in Women' - 'Nitrofurantoin 100mg BD for 3 days or trimethoprim 200mg BD for 3 days' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/acute-cystitis/",
+        section: "Management: Acute Cystitis",
+        subsection: "First-line Antibiotic Choices",
+        tableOrFigure: "Uncomplicated UTI Treatment Options"
+      },
+      {
+        text: "CKS UTI Section 'Scenario: Recurrent UTI' - 'Consider prophylaxis with nitrofurantoin 50mg at night for ≥3 UTIs in 12 months' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/scenario/recurrent-lower-uti/",
+        section: "Scenario: Recurrent UTI",
+        subsection: "Prophylaxis Indications",
+        tableOrFigure: "Recurrent UTI Management Algorithm"
+      }
+    ],
+
+    gastroenteritis: [
+      {
+        text: "CKS Gastroenteritis Section 'Management: Adults' - 'Oral rehydration solution, avoid antidiarrheals in bloody diarrhea' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/gastroenteritis/management/adults/",
+        section: "Management: Adults",
+        subsection: "Supportive Care",
+        tableOrFigure: "Fluid Replacement Guidelines"
+      },
+      {
+        text: "CKS Gastroenteritis Section 'Scenario: Dehydration' - 'Urgent assessment if unable to tolerate fluids, severe dehydration, or systemic symptoms' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/gastroenteritis/scenario/dehydration/",
+        section: "Scenario: Dehydration",
+        subsection: "Hospital Referral Criteria",
+        tableOrFigure: "Dehydration Assessment Tool"
+      }
+    ],
+
+    anxiety_disorders: [
+      {
+        text: "CKS Anxiety Section 'Management: Generalized Anxiety' - 'CBT first-line, consider SSRI if moderate-severe or CBT declined' (Management Tab)",
+        url: "https://cks.nice.org.uk/topics/anxiety/management/generalized-anxiety-disorder/",
+        section: "Management: GAD",
+        subsection: "Stepped Care Approach",
+        tableOrFigure: "Anxiety Treatment Hierarchy"
+      },
+      {
+        text: "CKS Anxiety Section 'Scenario: Panic Disorder' - 'Sertraline 25mg daily initially, titrate based on response and tolerability' (Scenario Tab)",
+        url: "https://cks.nice.org.uk/topics/anxiety/scenario/panic-disorder/",
+        section: "Scenario: Panic Disorder",
+        subsection: "Pharmacological Management",
+        tableOrFigure: "Panic Disorder Treatment Algorithm"
+      }
+    ]
   }
 };
 
@@ -227,6 +401,34 @@ export function getSpecificReferences(
   
   const scenarioRefs = specialtyRefs[scenario as keyof typeof specialtyRefs];
   return scenarioRefs || [];
+}
+
+// Function to get CKS-specific references
+export function getCKSReferences(
+  condition: string
+): SpecificReference[] {
+  const cksRefs = SpecificReferenceDatabase.cks;
+  if (!cksRefs) return [];
+  
+  const conditionRefs = cksRefs[condition as keyof typeof cksRefs];
+  return conditionRefs || [];
+}
+
+// Function to search CKS references by keyword
+export function searchCKSReferences(keyword: string): SpecificReference[] {
+  const cksRefs = SpecificReferenceDatabase.cks;
+  const allCKSRefs: SpecificReference[] = [];
+  
+  Object.values(cksRefs).forEach(conditionRefs => {
+    conditionRefs.forEach(ref => {
+      if (ref.text.toLowerCase().includes(keyword.toLowerCase()) ||
+          ref.section.toLowerCase().includes(keyword.toLowerCase())) {
+        allCKSRefs.push(ref);
+      }
+    });
+  });
+  
+  return allCKSRefs;
 }
 
 // Function to format reference for display
