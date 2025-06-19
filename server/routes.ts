@@ -484,28 +484,77 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
 
   // Advanced PLAB AI Study System Endpoints
   
-  // Generate adaptive PLAB MCQs
+  // Generate specialist-level PLAB MCQs
   app.post("/api/plab-ai/generate-mcqs", async (req, res) => {
     try {
-      const { topic, count = 10 } = req.body;
+      const { specialty, count = 10, difficulty = "specialist" } = req.body;
       
-      if (!topic) {
-        return res.status(400).json({ error: "Topic is required" });
+      if (!specialty) {
+        return res.status(400).json({ error: "Medical specialty is required" });
       }
 
-      const mcqs = await plabAI.generatePLABMCQs(topic, count);
+      const { generateSpecialistQuestions } = await import('./specialist-question-generator');
+      const mcqs = await generateSpecialistQuestions(specialty, count, difficulty);
+      
       res.json({ 
         mcqs, 
         metadata: {
-          topic,
+          specialty,
           count: mcqs.length,
-          studyType: 'adaptive-mcq',
-          generated: new Date().toISOString()
+          difficulty,
+          specialist: mcqs[0]?.specialist || "Medical Specialist",
+          generated_at: new Date().toISOString()
         }
       });
     } catch (error) {
-      console.error('Error generating PLAB MCQs:', error);
-      res.status(500).json({ error: "Failed to generate MCQs. Please check your OpenAI API key." });
+      console.error('Error generating specialist MCQs:', error);
+      res.status(500).json({ error: "Failed to generate specialist questions" });
+    }
+  });
+
+  // Generate mixed specialty questions for comprehensive practice
+  app.post("/api/plab-ai/generate-mixed-mcqs", async (req, res) => {
+    try {
+      const { count = 20, difficulty = "specialist" } = req.body;
+      
+      const { generateMixedSpecialistQuestions } = await import('./specialist-question-generator');
+      const mcqs = await generateMixedSpecialistQuestions(count, difficulty);
+      
+      res.json({ 
+        mcqs, 
+        metadata: {
+          count: mcqs.length,
+          difficulty,
+          specialties_included: Array.from(new Set(mcqs.map(q => q.category))),
+          generated_at: new Date().toISOString()
+        }
+      });
+    } catch (error) {
+      console.error('Error generating mixed specialist MCQs:', error);
+      res.status(500).json({ error: "Failed to generate mixed specialist questions" });
+    }
+  });
+
+  // Get available medical specialties
+  app.get("/api/plab-ai/specialties", async (req, res) => {
+    try {
+      const { getAllSpecialties, MEDICAL_SPECIALTIES } = await import('./specialist-question-generator');
+      const specialties = getAllSpecialties();
+      
+      const specialtyDetails = specialties.map(key => ({
+        code: key,
+        name: MEDICAL_SPECIALTIES[key as keyof typeof MEDICAL_SPECIALTIES].name,
+        specialist: MEDICAL_SPECIALTIES[key as keyof typeof MEDICAL_SPECIALTIES].specialist,
+        expertise_areas: MEDICAL_SPECIALTIES[key as keyof typeof MEDICAL_SPECIALTIES].expertise.slice(0, 3)
+      }));
+      
+      res.json({ 
+        specialties: specialtyDetails,
+        total_count: specialties.length
+      });
+    } catch (error) {
+      console.error('Error fetching specialties:', error);
+      res.status(500).json({ error: "Failed to fetch medical specialties" });
     }
   });
 
