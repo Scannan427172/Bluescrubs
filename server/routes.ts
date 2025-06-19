@@ -455,7 +455,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           },
           cks: {
             title: "CKS Topic: Hypertension",
-            url: "https://cks.nice.org.uk/topics/hypertension/management/antihypertensive-drugs/",
+            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment",
             section: "Management - Antihypertensive drugs",
             relevance: "Primary care management of hypertension"
           }
@@ -469,7 +469,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           },
           cks: {
             title: "CKS Topic: Heart failure - chronic",
-            url: "https://cks.nice.org.uk/topics/heart-failure-chronic/management/drug-treatment/",
+            url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance#pharmacological-treatment",
             section: "Management - Drug treatment",
             relevance: "Primary care heart failure management"
           }
@@ -483,7 +483,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           },
           cks: {
             title: "CKS Topic: Diabetes - type 2",
-            url: "https://cks.nice.org.uk/topics/diabetes-type-2/management/blood-glucose-management/",
+            url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations#first-line-drug-treatment",
             section: "Management - Blood glucose management",
             relevance: "Primary care diabetes management"
           }
@@ -497,7 +497,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           },
           cks: {
             title: "CKS Topic: Asthma",
-            url: "https://cks.nice.org.uk/topics/asthma/management/drug-treatment/",
+            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#inhaled-therapy",
             section: "Management - Drug treatment",
             relevance: "Primary care asthma management"
           }
@@ -511,7 +511,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           },
           cks: {
             title: "CKS Topic: Depression",
-            url: "https://cks.nice.org.uk/topics/depression/management/adults-with-depression/",
+            url: "https://www.nice.org.uk/guidance/cg90/chapter/1-Guidance#treatment-choices-in-primary-care",
             section: "Management - Adults with depression",
             relevance: "Primary care depression management"
           }
