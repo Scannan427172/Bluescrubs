@@ -315,17 +315,7 @@ export default function More() {
           <p className="text-xl lg:text-2xl mb-6 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
             Advanced tools and comprehensive medical education resources
           </p>
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            <Badge className="bg-white text-black px-4 py-2 font-medium">
-              Premium Features
-            </Badge>
-            <Badge className="bg-white text-black px-4 py-2 font-medium">
-              Expert Support
-            </Badge>
-            <Badge className="bg-white text-black px-4 py-2 font-medium">
-              NHS Preparation
-            </Badge>
-          </div>
+
         </div>
       </div>
 
