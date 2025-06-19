@@ -28,9 +28,6 @@ export default function PLAB1New() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [showExplanation, setShowExplanation] = useState(false);
-  
-  // Click debounce state
-  const [lastClickTime, setLastClickTime] = useState(0);
   const [timeSpent, setTimeSpent] = useState(0);
   const [questionStartTime, setQuestionStartTime] = useState(Date.now());
   const [sessionComplete, setSessionComplete] = useState(false);
@@ -1417,29 +1414,15 @@ export default function PLAB1New() {
                     <div className="flex items-center justify-between mb-3">
                       <p className="text-sm font-medium text-green-900">CKS Clinical Knowledge Summary</p>
                       <div className="flex flex-col gap-1">
-                        <Button
-                          size="sm"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            e.nativeEvent.stopImmediatePropagation();
-                            
-                            const now = Date.now();
-                            if (now - lastClickTime < 1000) {
-                              return; // Prevent rapid clicks
-                            }
-                            setLastClickTime(now);
-                            
-                            const url = currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/';
-                            console.log('Opening CKS URL:', url);
-                            window.open(url, '_blank', 'noopener,noreferrer');
-                          }}
-                          className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
-                          type="button"
+                        <a
+                          href={currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 h-9 px-3"
                         >
                           <ExternalLink className="w-3 h-3 mr-1" />
                           View CKS Guidelines
-                        </Button>
+                        </a>
                         <p className="text-xs text-green-700 italic">
                           Note: CKS access may be restricted outside the UK
                         </p>
@@ -1479,28 +1462,15 @@ export default function PLAB1New() {
                                       <p className="text-xs text-green-700 italic">{ref.subsection}</p>
                                     )}
                                   </div>
-                                  <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      e.stopPropagation();
-                                      e.nativeEvent.stopImmediatePropagation();
-                                      
-                                      const now = Date.now();
-                                      if (now - lastClickTime < 1000) {
-                                        return; // Prevent rapid clicks
-                                      }
-                                      setLastClickTime(now);
-                                      
-                                      window.open(ref.url, '_blank', 'noopener,noreferrer');
-                                    }}
-                                    className="h-6 px-2 text-xs border-green-300 text-green-700 hover:bg-green-50"
-                                    type="button"
+                                  <a
+                                    href={ref.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center rounded-md text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-green-300 text-green-700 hover:bg-green-50 h-6 px-2"
                                   >
                                     <ExternalLink className="w-2 h-2 mr-1" />
                                     View
-                                  </Button>
+                                  </a>
                                 </div>
                                 <p className="text-xs text-green-800 leading-relaxed mb-1">
                                   {ref.text}
