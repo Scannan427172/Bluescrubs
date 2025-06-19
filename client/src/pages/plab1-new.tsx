@@ -10,7 +10,7 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
-import heroImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750281579675.png';
+
 export default function PLAB1New() {
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -703,13 +703,6 @@ export default function PLAB1New() {
                     {translateText('Settings & Languages')}
                   </Button>
                 </div>
-              </div>
-              <div className="flex-shrink-0">
-                <img 
-                  src={heroImage} 
-                  alt="Medical students taking PLAB exam"
-                  className="w-full max-w-md lg:max-w-lg rounded-xl shadow-2xl"
-                />
               </div>
             </div>
           </div>
