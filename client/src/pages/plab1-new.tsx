@@ -1442,6 +1442,46 @@ export default function PLAB1New() {
                         <p className="text-xs text-green-800">{currentQuestion.cks_guidance.management_approach}</p>
                       </div>
                       
+                      {/* Specific CKS References - Enhanced Detail */}
+                      {currentQuestion.cks_guidance.specific_references && currentQuestion.cks_guidance.specific_references.length > 0 && (
+                        <div className="mb-3 bg-green-25 border border-green-300 rounded-lg p-3">
+                          <p className="text-xs font-semibold text-green-900 mb-2">Specific CKS Guidance References:</p>
+                          <div className="space-y-2">
+                            {currentQuestion.cks_guidance.specific_references.map((ref: any, index: number) => (
+                              <div key={index} className="bg-white border border-green-200 rounded p-2">
+                                <div className="flex items-start justify-between gap-2 mb-1">
+                                  <div className="flex-1">
+                                    <p className="text-xs font-medium text-green-900">{ref.section}</p>
+                                    {ref.subsection && (
+                                      <p className="text-xs text-green-700 italic">{ref.subsection}</p>
+                                    )}
+                                  </div>
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => window.open(ref.url, '_blank')}
+                                    className="h-6 px-2 text-xs border-green-300 text-green-700 hover:bg-green-50"
+                                  >
+                                    <ExternalLink className="w-2 h-2 mr-1" />
+                                    View
+                                  </Button>
+                                </div>
+                                <p className="text-xs text-green-800 leading-relaxed mb-1">
+                                  {ref.text}
+                                </p>
+                                {ref.tableOrFigure && (
+                                  <div className="flex items-center gap-1 mt-1">
+                                    <span className="text-xs bg-green-100 text-green-800 px-1 rounded">
+                                      📊 {ref.tableOrFigure}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
                       {currentQuestion.cks_guidance.red_flags && currentQuestion.cks_guidance.red_flags.length > 0 && (
                         <div className="bg-red-50 border border-red-200 rounded p-2">
                           <p className="text-xs font-semibold text-red-900 mb-1">Red Flags:</p>

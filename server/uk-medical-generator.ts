@@ -33,6 +33,73 @@ const preloadQuestions = async () => {
 // Start pre-loading after a short delay
 setTimeout(preloadQuestions, 2000);
 
+// Function to enhance questions with specific CKS references
+async function enhanceWithCKSReferences(
+  question: UKMedicalQuestion,
+  specialty: string
+): Promise<UKMedicalQuestion> {
+  try {
+    // Map specialty to CKS condition keywords
+    const specialtyToCKSMap: Record<string, string[]> = {
+      'cardiology': ['acute_coronary_syndrome', 'heart_failure', 'hypertension'],
+      'cardiovascular': ['acute_coronary_syndrome', 'heart_failure', 'hypertension'],
+      'respiratory': ['asthma_management', 'copd_management'],
+      'endocrinology': ['diabetes_type2'],
+      'psychiatry': ['depression_adults', 'anxiety_disorders'],
+      'gastroenterology': ['gastroenteritis'],
+      'urology': ['urinary_tract_infection'],
+      'general': ['hypertension', 'diabetes_type2', 'asthma_management']
+    };
+
+    const cksConditions = specialtyToCKSMap[specialty.toLowerCase()] || [];
+    
+    // Try to find relevant CKS references
+    let specificReferences: SpecificReference[] = [];
+    
+    for (const condition of cksConditions) {
+      const refs = getCKSReferences(condition);
+      specificReferences.push(...refs);
+    }
+
+    // If no specific references found, search by keywords from the scenario
+    if (specificReferences.length === 0) {
+      const keywords = extractKeywords(question.scenario + ' ' + question.question);
+      for (const keyword of keywords) {
+        const refs = searchCKSReferences(keyword);
+        specificReferences.push(...refs.slice(0, 2)); // Limit to 2 per keyword
+      }
+    }
+
+    // Add specific references to CKS guidance
+    if (specificReferences.length > 0 && question.cks_guidance) {
+      question.cks_guidance.specific_references = specificReferences.slice(0, 3); // Limit to 3 total
+      
+      // Update CKS URL to most relevant reference
+      const primaryRef = specificReferences[0];
+      if (primaryRef) {
+        question.cks_guidance.cks_url = primaryRef.url;
+      }
+    }
+
+    return question;
+  } catch (error) {
+    console.error('Error enhancing with CKS references:', error);
+    return question; // Return original question if enhancement fails
+  }
+}
+
+// Helper function to extract medical keywords from text
+function extractKeywords(text: string): string[] {
+  const medicalKeywords = [
+    'chest pain', 'hypertension', 'diabetes', 'asthma', 'heart failure',
+    'depression', 'anxiety', 'copd', 'gastroenteritis', 'uti', 'infection',
+    'coronary', 'cardiac', 'respiratory', 'breathlessness', 'pneumonia'
+  ];
+  
+  const lowerText = text.toLowerCase();
+  return medicalKeywords.filter(keyword => lowerText.includes(keyword));
+}
+
 export interface UKMedicalQuestion {
   scenario: string;
   question: string;
