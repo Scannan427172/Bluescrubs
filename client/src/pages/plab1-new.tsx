@@ -28,6 +28,9 @@ export default function PLAB1New() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [showExplanation, setShowExplanation] = useState(false);
+  
+  // Click debounce state
+  const [lastClickTime, setLastClickTime] = useState(0);
   const [timeSpent, setTimeSpent] = useState(0);
   const [questionStartTime, setQuestionStartTime] = useState(Date.now());
   const [sessionComplete, setSessionComplete] = useState(false);
@@ -1419,9 +1422,20 @@ export default function PLAB1New() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
+                            e.nativeEvent.stopImmediatePropagation();
+                            
+                            const now = Date.now();
+                            if (now - lastClickTime < 1000) {
+                              return; // Prevent rapid clicks
+                            }
+                            setLastClickTime(now);
+                            
+                            const url = currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/';
+                            console.log('Opening CKS URL:', url);
+                            window.open(url, '_blank', 'noopener,noreferrer');
                           }}
                           className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
+                          type="button"
                         >
                           <ExternalLink className="w-3 h-3 mr-1" />
                           View CKS Guidelines
@@ -1471,9 +1485,18 @@ export default function PLAB1New() {
                                     onClick={(e) => {
                                       e.preventDefault();
                                       e.stopPropagation();
-                                      window.open(ref.url, '_blank');
+                                      e.nativeEvent.stopImmediatePropagation();
+                                      
+                                      const now = Date.now();
+                                      if (now - lastClickTime < 1000) {
+                                        return; // Prevent rapid clicks
+                                      }
+                                      setLastClickTime(now);
+                                      
+                                      window.open(ref.url, '_blank', 'noopener,noreferrer');
                                     }}
                                     className="h-6 px-2 text-xs border-green-300 text-green-700 hover:bg-green-50"
+                                    type="button"
                                   >
                                     <ExternalLink className="w-2 h-2 mr-1" />
                                     View
