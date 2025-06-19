@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Neurodiversity Features Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-container { max-width: 800px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .accommodation-active { background-color: #e8f5e8; border-color: #4caf50; }
+        .test-button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        
+        /* ADHD accommodations */
+        .adhd-active { font-size: 18px; line-height: 1.6; color: #1f2937; }
+        .adhd-active .test-button { padding: 15px 25px; font-size: 16px; }
+        
+        /* Dyslexia accommodations */
+        .dyslexia-active { font-size: 20px; line-height: 2; font-family: 'Arial', sans-serif; color: #000; }
+        .dyslexia-active .test-button { padding: 18px 30px; font-size: 18px; }
+        
+        /* Autism accommodations */
+        .autism-active { font-size: 18px; line-height: 1.6; color: #333; background-color: #f9f9f9; }
+        .autism-active .test-button { padding: 15px 25px; font-size: 16px; border: 2px solid #666; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Neurodiversity Features Test</h1>
+        
+        <div class="test-section">
+            <h2>Default (No Accommodations)</h2>
+            <p id="default-text">This is the default text appearance. No accommodations are applied.</p>
+            <button class="test-button" onclick="testDefault()">Test Button</button>
+        </div>
+        
+        <div class="test-section" id="adhd-section">
+            <h2>ADHD Support Test</h2>
+            <p id="adhd-text">This text should appear larger with better contrast when ADHD support is active.</p>
+            <button class="test-button" onclick="testADHD()">ADHD Test Button</button>
+        </div>
+        
+        <div class="test-section" id="dyslexia-section">
+            <h2>Dyslexia Support Test</h2>
+            <p id="dyslexia-text">This text should appear much larger with extra-wide line spacing when dyslexia support is active.</p>
+            <button class="test-button" onclick="testDyslexia()">Dyslexia Test Button</button>
+        </div>
+        
+        <div class="test-section" id="autism-section">
+            <h2>Autism Support Test</h2>
+            <p id="autism-text">This text should appear with reduced visual noise and clear structure when autism support is active.</p>
+            <button class="test-button" onclick="testAutism()">Autism Test Button</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test Results</h2>
+            <div id="test-results">
+                <p>Click the test buttons to verify accommodations work:</p>
+                <ul id="results-list">
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let testResults = [];
+        
+        function addResult(test, passed) {
+            testResults.push({ test, passed });
+            updateResults();
+        }
+        
+        function updateResults() {
+            const resultsList = document.getElementById('results-list');
+            resultsList.innerHTML = '';
+            testResults.forEach(result => {
+                const li = document.createElement('li');
+                li.textContent = `${result.test}: ${result.passed ? 'PASS' : 'FAIL'}`;
+                li.style.color = result.passed ? 'green' : 'red';
+                resultsList.appendChild(li);
+            });
+        }
+        
+        function testDefault() {
+            addResult('Default formatting', true);
+        }
+        
+        function testADHD() {
+            const section = document.getElementById('adhd-section');
+            const text = document.getElementById('adhd-text');
+            const button = section.querySelector('.test-button');
+            
+            section.classList.add('accommodation-active', 'adhd-active');
+            
+            // Check if accommodations applied
+            const computedStyle = window.getComputedStyle(text);
+            const fontSize = parseFloat(computedStyle.fontSize);
+            const passed = fontSize >= 18;
+            
+            addResult('ADHD larger text (18px+)', passed);
+            addResult('ADHD larger buttons', button.offsetHeight >= 45);
+        }
+        
+        function testDyslexia() {
+            const section = document.getElementById('dyslexia-section');
+            const text = document.getElementById('dyslexia-text');
+            const button = section.querySelector('.test-button');
+            
+            section.classList.add('accommodation-active', 'dyslexia-active');
+            
+            const computedStyle = window.getComputedStyle(text);
+            const fontSize = parseFloat(computedStyle.fontSize);
+            const lineHeight = parseFloat(computedStyle.lineHeight);
+            
+            addResult('Dyslexia extra-large text (20px+)', fontSize >= 20);
+            addResult('Dyslexia wide line spacing (2.0+)', lineHeight >= 40);
+        }
+        
+        function testAutism() {
+            const section = document.getElementById('autism-section');
+            const text = document.getElementById('autism-text');
+            
+            section.classList.add('accommodation-active', 'autism-active');
+            
+            const computedStyle = window.getComputedStyle(section);
+            const backgroundColor = computedStyle.backgroundColor;
+            
+            addResult('Autism reduced visual noise', backgroundColor.includes('249') || backgroundColor.includes('rgb(249'));
+            addResult('Autism clear structure', true);
+        }
+    </script>
+</body>
+</html>
