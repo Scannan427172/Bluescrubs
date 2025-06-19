@@ -525,7 +525,7 @@ export default function PLAB1New() {
         'hypertension': {
           nice: {
             title: "NICE Guideline NG136: Hypertension in adults: diagnosis and management",
-            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-advice",
+            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations",
             section: "1.4 Lifestyle advice and antihypertensive drug treatment thresholds",
             relevance: "First-line management of hypertension in adults"
           },
@@ -539,7 +539,7 @@ export default function PLAB1New() {
         'heart_failure': {
           nice: {
             title: "NICE Guideline CG108: Chronic heart failure in adults: diagnosis and management",
-            url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance#pharmacological-treatment-heart-failure-with-reduced-ejection-fraction",
+            url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance",
             section: "1.3 Pharmacological treatment: heart failure with reduced ejection fraction",
             relevance: "Evidence-based heart failure management"
           },
@@ -553,7 +553,7 @@ export default function PLAB1New() {
         'diabetes_type2': {
           nice: {
             title: "NICE Guideline NG28: Type 2 diabetes in adults: management",
-            url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations#drug-treatment",
+            url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations",
             section: "1.6 Drug treatment",
             relevance: "Evidence-based management of type 2 diabetes"
           },
@@ -567,7 +567,7 @@ export default function PLAB1New() {
         'asthma': {
           nice: {
             title: "NICE Guideline NG80: Asthma: diagnosis, monitoring and chronic asthma management",
-            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#pharmacological-management",
+            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations",
             section: "1.2 Pharmacological management",
             relevance: "Step-wise approach to asthma treatment"
           },
@@ -581,7 +581,7 @@ export default function PLAB1New() {
         'depression': {
           nice: {
             title: "NICE Guideline CG90: Depression in adults: recognition and management",
-            url: "https://www.nice.org.uk/guidance/cg90/chapter/1-Guidance#care-of-all-people-with-depression",
+            url: "https://www.nice.org.uk/guidance/cg90/chapter/1-Guidance",
             section: "1.5 Care of all people with depression",
             relevance: "Evidence-based depression management"
           },
