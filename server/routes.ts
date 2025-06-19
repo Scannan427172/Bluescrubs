@@ -870,6 +870,52 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
+  // NHSPrep AI - Generate questions for PLAB practice buttons
+  app.post("/api/nhsprep/generate-questions", async (req, res) => {
+    try {
+      const { specialty, topic, count = 5, difficulty = 'foundation' } = req.body;
+      
+      if (!specialty || !topic) {
+        return res.status(400).json({ error: "Specialty and topic are required" });
+      }
+
+      const questions = await generateNHSPrepQuestions(specialty, topic, count, difficulty);
+      
+      res.json({
+        questions: questions.map(q => ({
+          question: q.scenario,
+          options: q.options.map((opt, idx) => `${String.fromCharCode(65 + idx)}. ${opt.text}`),
+          correctAnswer: q.options.findIndex(opt => opt.isCorrect),
+          explanation: q.explanation,
+          study_tip: q.study_tip,
+          category: specialty,
+          difficulty: difficulty,
+          niceGuidanceLinks: [{
+            title: q.guidelines?.nice?.title || "NICE Guidance",
+            url: q.guidelines?.nice?.url || "https://www.nice.org.uk/guidance",
+            relevance: q.guidelines?.nice?.relevance || "UK clinical guidance"
+          }],
+          cksLinks: [{
+            title: q.guidelines?.cks?.title || "CKS Topic", 
+            url: q.guidelines?.cks?.url || "https://cks.nice.org.uk/",
+            relevance: q.guidelines?.cks?.relevance || "Clinical knowledge summary"
+          }],
+          additionalReferences: []
+        })),
+        metadata: {
+          specialty,
+          topic,
+          count: questions.length,
+          difficulty,
+          generated: new Date().toISOString()
+        }
+      });
+    } catch (error) {
+      console.error('Error generating NHSPrep questions:', error);
+      res.status(500).json({ error: "Failed to generate questions" });
+    }
+  });
+
   // Batch MCQ generation endpoint for efficient question creation
   app.post("/api/plab-ai/batch-generate", async (req, res) => {
     try {

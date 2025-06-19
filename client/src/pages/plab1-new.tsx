@@ -508,60 +508,79 @@ export default function PLAB1New() {
     setCurrentQuestionIndex(0);
     
     try {
-      let endpoint = '/api/plab-ai/generate-mcqs';
-      let requestBody: any = {
-        count: questionCount,
-        difficulty: selectedDifficulty
+      // Use the working NHSPrep endpoint that generates authentic NICE/CKS questions
+      const specialtyMapping: Record<string, string> = {
+        'cardiovascular': 'cardiology',
+        'respiratory': 'respiratory', 
+        'gastroenterology': 'gastroenterology',
+        'neurology': 'neurology',
+        'endocrinology': 'endocrinology',
+        'psychiatry': 'psychiatry',
+        'surgery': 'surgery',
+        'emergency-medicine': 'emergency'
       };
 
-      // If specific specialty selected, use specialist questions
-      if (selectedCategory !== 'all') {
-        // Map category names to specialist codes for core specialties
-        const specialtyMapping: Record<string, string> = {
-          'cardiovascular': 'cardiology',
-          'respiratory': 'respiratory',
-          'gastroenterology': 'gastroenterology',
-          'neurology': 'neurology',
-          'endocrinology': 'endocrinology',
-          'psychiatry': 'psychiatry',
-          'surgery': 'surgery',
-          'emergency-medicine': 'emergency'
-        };
+      const questions = [];
+      const questionsPerRequest = 5; // Generate in batches to avoid timeouts
+      const totalBatches = Math.ceil(questionCount / questionsPerRequest);
+
+      for (let batch = 0; batch < totalBatches; batch++) {
+        const remainingQuestions = questionCount - (batch * questionsPerRequest);
+        const currentBatchSize = Math.min(questionsPerRequest, remainingQuestions);
         
-        const specialtyCode = specialtyMapping[selectedCategory];
-        if (specialtyCode) {
-          // Use specialist-generated questions for core specialties
-          requestBody.specialty = specialtyCode;
-        } else {
-          // For other categories, use general question generation but with category focus
-          endpoint = '/api/generate-questions';
-          requestBody.category = selectedCategory;
+        let specialty = 'cardiology'; // Default
+        let topic = 'hypertension'; // Default working topic
+        
+        if (selectedCategory !== 'all') {
+          const specialtyCode = specialtyMapping[selectedCategory];
+          if (specialtyCode) {
+            specialty = specialtyCode;
+            // Set appropriate topic based on specialty
+            const topicMapping: Record<string, string> = {
+              'cardiology': 'hypertension',
+              'endocrinology': 'diabetes_type2',
+              'respiratory': 'asthma',
+              'gastroenterology': 'crohns_disease',
+              'psychiatry': 'depression',
+              'neurology': 'stroke',
+              'surgery': 'appendicitis',
+              'emergency': 'sepsis'
+            };
+            topic = topicMapping[specialty] || 'hypertension';
+          }
         }
-      } else {
-        // For 'all' categories, use mixed specialist questions
-        endpoint = '/api/plab-ai/generate-mixed-mcqs';
+
+        // Use the working NHSPrep endpoint for authentic NICE/CKS questions
+        const response = await fetch('/api/nhsprep/generate-questions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            specialty,
+            topic,
+            count: currentBatchSize,
+            difficulty: selectedDifficulty
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.questions && data.questions.length > 0) {
+            questions.push(...data.questions);
+          }
+        }
       }
 
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setGeneratedQuestions(data.mcqs || []);
-        if (data.mcqs && data.mcqs.length > 0) {
-          setSessionStarted(true);
-          setQuestionStartTime(Date.now());
-        }
+      if (questions.length > 0) {
+        setGeneratedQuestions(questions);
+        setSessionStarted(true);
+        setQuestionStartTime(Date.now());
       } else {
-        console.error('Failed to generate specialist questions');
+        console.error('No questions generated');
       }
     } catch (error) {
-      console.error('Error generating specialist questions:', error);
+      console.error('Error generating questions:', error);
     } finally {
       setIsGeneratingQuestions(false);
     }
