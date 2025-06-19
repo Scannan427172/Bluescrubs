@@ -284,13 +284,13 @@ export default function VideoOSCE() {
             Record yourself performing OSCE stations and get AI-powered feedback
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Badge className="bg-white text-black px-4 py-2">
+            <Badge className="bg-white/20 text-white border border-white/30 px-4 py-2">
               Video Recording
             </Badge>
-            <Badge className="bg-white text-black px-4 py-2">
+            <Badge className="bg-white/20 text-white border border-white/30 px-4 py-2">
               AI Feedback
             </Badge>
-            <Badge className="bg-white text-black px-4 py-2">
+            <Badge className="bg-white/20 text-white border border-white/30 px-4 py-2">
               Performance Analysis
             </Badge>
           </div>
