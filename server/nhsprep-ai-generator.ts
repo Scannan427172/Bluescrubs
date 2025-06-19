@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { findSpecificGuidelineLinks, GuidelineSearchResult } from "./dynamic-guideline-search";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -525,8 +526,8 @@ export async function generateNHSPrepQuestions(
     // Get verified guidelines for the specialty/topic
     const guidelineData = getVerifiedGuidelines(specialty, topic);
     
-    // Get authentic NICE/CKS links for this topic
-    const guidelineLinks = getGuidelineLinksForSpecialty(specialty, topic);
+    // Find specific NICE/CKS links for this clinical topic
+    const specificGuidelines = await findSpecificGuidelineLinks(topic, specialty);
     
     const prompt = `You are NHSPrep AI — a clinical exam question generator for PLAB, MLA, and NHSPrep candidates.
 
@@ -544,9 +545,9 @@ TASK: Generate ${count} SINGLE-BEST-ANSWER exam questions for:
 VERIFIED GUIDELINES FOR THIS TOPIC:
 ${guidelineData}
 
-AUTHENTIC GUIDELINE LINKS (use these exact URLs):
-- NICE: ${guidelineLinks.nice || 'https://www.nice.org.uk/guidance'}
-- CKS: ${guidelineLinks.cks || 'https://cks.nice.org.uk/topics/'}
+SPECIFIC GUIDELINE REFERENCES (use these exact details):
+- NICE: ${specificGuidelines.nice?.title || 'NICE Guidance'} - ${specificGuidelines.nice?.url || 'https://www.nice.org.uk/guidance'}
+- CKS: ${specificGuidelines.cks?.title || 'CKS Topic'} - ${specificGuidelines.cks?.url || 'https://cks.nice.org.uk/topics/'}
 
 Each question must follow UK NHS clinical guidelines and be appropriate for candidates preparing for PLAB/MLA/NHS licensing exams.
 
@@ -583,7 +584,7 @@ Return ONLY a JSON array in this exact format:
     "reference": {
       "title": "Exact NICE/CKS guideline title",
       "section": "Specific section or recommendation quoted",
-      "url": "${guidelineLinks.nice || guidelineLinks.cks || 'https://www.nice.org.uk/guidance'}"
+      "url": "${specificGuidelines.nice?.url || specificGuidelines.cks?.url || 'https://www.nice.org.uk/guidance'}"
     }
   }
 ]
