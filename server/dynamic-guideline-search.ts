@@ -124,7 +124,7 @@ function getFallbackGuidelines(topic: string, specialty: string): GuidelineSearc
       },
       cks: {
         title: "CKS Topic: Hypertension",
-        url: "https://cks.nice.org.uk/topics/hypertension/management/antihypertensive-drugs/",
+        url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment",
         section: "Management - Antihypertensive drugs",
         relevance: "Primary care management of hypertension"
       }
