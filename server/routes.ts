@@ -11,6 +11,7 @@ import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPE
 import { EXPANDED_PLAB2_STATIONS } from "../shared/expanded-plab2-stations";
 import { analyzeMultipleImages } from "./image-analysis";
 import { registerAuthenticQuestions } from "./authentic-nice-questions";
+import { registerTemplateQuestion } from "./template-authentic-question";
 import { 
   generateFlashcardsFromContent, 
   summarizeContent, 
@@ -1478,6 +1479,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
 
   // Register authentic NICE-sourced questions
   registerAuthenticQuestions(app);
+  registerTemplateQuestion(app);
 
   const httpServer = createServer(app);
   return httpServer;
