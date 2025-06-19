@@ -567,70 +567,7 @@ export default function PLAB1New() {
     }
   };
 
-  // Guideline-based practice function
-  const startGuidelineBasedPractice = async (questionCount: number) => {
-    setIsGeneratingQuestions(true);
-    setGeneratedQuestions([]);
-    setSessionStarted(false);
-    setShowExplanation(false);
-    setCurrentQuestionIndex(0);
-    
-    try {
-      // Generate questions using the guideline-based system
-      const specialties = ['cardiology', 'respiratory', 'endocrinology', 'gastroenterology', 'neurology'];
-      const topics = ['hypertension', 'asthma', 'diabetes', 'heart_failure', 'copd'];
-      
-      const questionsToGenerate = [];
-      for (let i = 0; i < questionCount; i++) {
-        const specialty = specialties[i % specialties.length];
-        const topic = topics[i % topics.length];
-        questionsToGenerate.push({ specialty, topic });
-      }
-      
-      const allQuestions = [];
-      
-      for (const { specialty, topic } of questionsToGenerate) {
-        try {
-          const response = await fetch('/api/plab-ai/generate-mcqs', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              specialty,
-              topic,
-              count: 1
-            }),
-          });
-          
-          if (response.ok) {
-            const data = await response.json();
-            if (data.mcqs && data.mcqs.length > 0) {
-              allQuestions.push(...data.mcqs);
-            }
-          }
-        } catch (error) {
-          console.error(`Error generating question for ${specialty}/${topic}:`, error);
-        }
-      }
-      
-      if (allQuestions.length > 0) {
-        setGeneratedQuestions(allQuestions);
-        setSessionStarted(true);
-        setQuestionStartTime(Date.now());
-      } else {
-        // Fallback to regular question generation if guideline-based fails
-        await startPractice(questionCount);
-      }
-      
-    } catch (error) {
-      console.error('Error starting guideline-based practice:', error);
-      // Fallback to regular question generation if guideline-based fails
-      await startPractice(questionCount);
-    } finally {
-      setIsGeneratingQuestions(false);
-    }
-  };
+
 
   // Bulk specialist question generation function
   const generateBulkQuestions = async () => {
@@ -1042,7 +979,7 @@ export default function PLAB1New() {
               <div className="grid md:grid-cols-2 gap-6">
                 <Button 
                   size="lg" 
-                  onClick={() => startGuidelineBasedPractice(10)}
+                  onClick={() => startPractice(10)}
                   disabled={isGeneratingQuestions}
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white h-32 flex flex-col items-center justify-center gap-3 disabled:opacity-50 shadow-lg"
                 >
@@ -1058,7 +995,7 @@ export default function PLAB1New() {
 
                 <Button 
                   size="lg" 
-                  onClick={() => startGuidelineBasedPractice(25)}
+                  onClick={() => startPractice(25)}
                   disabled={isGeneratingQuestions}
                   className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white h-32 flex flex-col items-center justify-center gap-3 disabled:opacity-50 shadow-lg"
                 >
