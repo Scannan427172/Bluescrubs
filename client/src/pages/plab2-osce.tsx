@@ -411,8 +411,8 @@ export default function Plab2Osce() {
       <HeroBanner
         backgroundImage={plab2HeroBannerImage}
         title={translateText('PLAB 2 OSCE Practice')}
-        subtitle="Comprehensive OSCE practice with clinical stations"
-        badge="16-20 Stations Available"
+        subtitle="Specialist consultant-generated OSCE stations across 8 medical specialties"
+        badge="Specialist-Level Stations"
       />
       
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -561,7 +561,7 @@ export default function Plab2Osce() {
             <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
               <Play className="w-4 h-4 text-blue-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">OSCE Practice Stations</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Specialist OSCE Practice Stations</h2>
           </div>
 
           {/* Progress Overview */}
@@ -651,36 +651,6 @@ export default function Plab2Osce() {
                   </div>
                 </TabsTrigger>
               ))}
-              <TabsTrigger 
-                value="examination" 
-                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
-              >
-                Exam ({EXPANDED_STATION_STATS.byType.examination})
-              </TabsTrigger>
-              <TabsTrigger 
-                value="explanation" 
-                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
-              >
-                Explain ({EXPANDED_STATION_STATS.byType.explanation})
-              </TabsTrigger>
-              <TabsTrigger 
-                value="ethics" 
-                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
-              >
-                Ethics ({EXPANDED_STATION_STATS.byType.ethics})
-              </TabsTrigger>
-              <TabsTrigger 
-                value="acute-care" 
-                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
-              >
-                Acute ({EXPANDED_STATION_STATS.byType['acute-care']})
-              </TabsTrigger>
-              <TabsTrigger 
-                value="practical-skills" 
-                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
-              >
-                Skills ({EXPANDED_STATION_STATS.byType['practical-skills']})
-              </TabsTrigger>
             </TabsList>
 
           <TabsContent value={selectedType} className="mt-6">
