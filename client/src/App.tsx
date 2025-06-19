@@ -25,7 +25,6 @@ import InteractivePatientPage from "@/pages/interactive-patient-page";
 import PersonalizedPaths from "@/pages/personalized-paths";
 import VideoOSCE from "@/pages/video-osce";
 import More from "@/pages/more";
-import About from "@/pages/about";
 import LanguageDemo from "@/pages/language-demo";
 import GlobalPractice from "@/pages/global-practice";
 import AdaptiveLearning from "@/pages/adaptive-learning";
@@ -33,8 +32,6 @@ import SmartPlanner from "@/pages/smart-planner";
 import CulturalTraining from "@/pages/cultural-training";
 import Mentors from "@/pages/mentors";
 import Gamification from "@/pages/gamification";
-import SpecialistQuestions from "@/pages/specialist-questions";
-import NHSPrepAI from "@/pages/nhsprep-ai";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -212,15 +209,6 @@ function Router() {
         </div>
       </Route>
 
-      <Route path="/about">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <About />
-          </div>
-        </div>
-      </Route>
-
       <Route path="/language-demo">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
@@ -280,24 +268,6 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <Gamification />
-          </div>
-        </div>
-      </Route>
-
-      <Route path="/specialist-questions">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <SpecialistQuestions />
-          </div>
-        </div>
-      </Route>
-
-      <Route path="/nhsprep-ai">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <NHSPrepAI />
           </div>
         </div>
       </Route>

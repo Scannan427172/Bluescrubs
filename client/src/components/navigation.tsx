@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link, useLocation, useRouter } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap, Heart } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 interface NavigationProps {
@@ -12,24 +12,12 @@ interface NavigationProps {
 }
 
 export function Navigation({ user }: NavigationProps) {
-  const [location, navigate] = useLocation();
+  const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Preserve scroll position when navigating
-  const handleNavigation = (href: string, event: React.MouseEvent) => {
-    event.preventDefault();
-    const currentScrollY = window.scrollY;
-    navigate(href);
-    // Restore scroll position after navigation
-    requestAnimationFrame(() => {
-      window.scrollTo(0, currentScrollY);
-    });
-  };
 
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: Home, current: location === "/dashboard" },
     { name: "PLAB 1", href: "/plab1-new", icon: BookOpen, current: location === "/plab1-new" },
-    { name: "Specialist Questions", href: "/specialist-questions", icon: Heart, current: location === "/specialist-questions" },
     { name: "PLAB 2", href: "/plab2-osce", icon: Video, current: location === "/plab2-osce" },
     { name: "Clinical Guides", href: "/clinical-guides", icon: FileText, current: location === "/clinical-guides" },
     { name: "Learning Path", href: "/personalized-paths", icon: Route, current: location === "/personalized-paths" },
@@ -166,9 +154,8 @@ export function Navigation({ user }: NavigationProps) {
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
         <div className="grid grid-cols-5 gap-1">
           {/* Essential Navigation Items */}
-          <a
+          <Link
             href="/dashboard"
-            onClick={(e) => handleNavigation("/dashboard", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/dashboard"
                 ? "text-medical-blue bg-blue-50"
@@ -177,11 +164,10 @@ export function Navigation({ user }: NavigationProps) {
           >
             <Home className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">Dashboard</span>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/plab1-new"
-            onClick={(e) => handleNavigation("/plab1-new", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/plab1-new"
                 ? "text-medical-blue bg-blue-50"
@@ -190,11 +176,10 @@ export function Navigation({ user }: NavigationProps) {
           >
             <BookOpen className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">PLAB 1</span>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/plab2-osce"
-            onClick={(e) => handleNavigation("/plab2-osce", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/plab2-osce"
                 ? "text-medical-blue bg-blue-50"
@@ -203,11 +188,10 @@ export function Navigation({ user }: NavigationProps) {
           >
             <GraduationCap className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">PLAB 2</span>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/video-osce"
-            onClick={(e) => handleNavigation("/video-osce", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/video-osce"
                 ? "text-medical-blue bg-blue-50"
@@ -216,11 +200,10 @@ export function Navigation({ user }: NavigationProps) {
           >
             <Video className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">Video OSCE</span>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/more"
-            onClick={(e) => handleNavigation("/more", e)}
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
               location === "/more"
                 ? "text-medical-blue bg-blue-50"
@@ -229,7 +212,7 @@ export function Navigation({ user }: NavigationProps) {
           >
             <MoreHorizontal className="w-5 h-5 mb-1" />
             <span className="text-xs font-medium">More</span>
-          </a>
+          </Link>
         </div>
       </nav>
     </>

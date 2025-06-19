@@ -10,8 +10,6 @@ import {
   Clock, User, FileText, CheckCircle, AlertCircle, 
   Camera, Upload, Download, Settings, Volume2, VolumeX, X
 } from "lucide-react";
-import videoOsceHeroBannerImage from "@assets/3FEBA1E1-EE29-45D2-8251-602E336171C5_1750283670479.png";
-import { HeroBanner } from "@/components/ui/hero-banner";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface VideoOSCESession {
@@ -265,15 +263,15 @@ export default function VideoOSCE() {
   }, [stations]);
 
   return (
-    <div className="video-osce min-h-screen bg-white pb-24" data-page="video-osce">
-      <HeroBanner
-        backgroundImage={videoOsceHeroBannerImage}
-        title="Video OSCE Practice"
-        subtitle="Advanced video recording and AI feedback"
-        badge="Real-time Practice Sessions"
-      />
-      
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="video-osce min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" data-page="video-osce">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Video OSCE Practice</h1>
+          <p className="text-lg text-gray-600">
+            Record yourself performing OSCE stations and get AI-powered feedback
+          </p>
+        </div>
 
         <Tabs defaultValue="practice" className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-8">

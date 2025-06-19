@@ -272,7 +272,7 @@ export default function InteractiveFlashcards() {
 
   // Simple translation function (in production, this would use Google Translate API)
   const translateText = async (text: string, targetLang: string): Promise<string> => {
-    // Real-time translation using browser's built-in translation capabilities
+    // This is a placeholder - in production you would use Google Translate API
     // For demonstration, we'll return the text with language indicator
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -600,7 +600,7 @@ export default function InteractiveFlashcards() {
                     ref={videoRef}
                     controls
                     className="max-w-md rounded-lg shadow-md"
-                    poster="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop"
+                    poster="/api/placeholder/400/300"
                   >
                     <source src={currentCard.front.video} type="video/mp4" />
                   </video>

@@ -63,8 +63,8 @@ export default function Premium() {
       ],
       stats: {
         essays: "1200+ marked",
-        accuracy: "High accuracy",
-        improvement: "Significant improvement"
+        accuracy: "98% accuracy",
+        improvement: "40% avg improvement"
       }
     },
     {
@@ -116,7 +116,7 @@ export default function Premium() {
       reviews: 127,
       rate: "£80/hour",
       languages: ["English", "French"],
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face"
+      image: "/api/placeholder/150/150"
     },
     {
       name: "Dr. Amira Hassan", 
@@ -126,7 +126,7 @@ export default function Premium() {
       reviews: 94,
       rate: "£75/hour",
       languages: ["English", "Arabic", "Urdu"],
-      image: "https://images.unsplash.com/photo-1594824481882-41b4e75f4c83?w=150&h=150&fit=crop&crop=face"
+      image: "/api/placeholder/150/150"
     },
     {
       name: "Dr. Rajesh Patel",
@@ -136,7 +136,7 @@ export default function Premium() {
       reviews: 203,
       rate: "£90/hour",
       languages: ["English", "Hindi", "Gujarati"],
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face"
+      image: "/api/placeholder/150/150"
     }
   ];
 
@@ -570,7 +570,7 @@ export default function Premium() {
             Upgrade to Premium
           </Button>
           <p className="text-xs text-muted-foreground mt-4">
-            14-day free trial • Cancel anytime
+            14-day free trial • Cancel anytime • 30-day money-back guarantee
           </p>
         </CardContent>
       </Card>

@@ -10,8 +10,6 @@ import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generato
 import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-uk-generator";
 import { EXPANDED_PLAB2_STATIONS } from "../shared/expanded-plab2-stations";
 import { analyzeMultipleImages } from "./image-analysis";
-import { registerAuthenticQuestions } from "./authentic-nice-questions";
-import { registerTemplateQuestion } from "./template-authentic-question";
 import { 
   generateFlashcardsFromContent, 
   summarizeContent, 
@@ -23,8 +21,6 @@ import {
 } from "./ai-study-tools";
 import { plabAI, type PLABStudySession, type AdaptiveFlashcard } from "./plab-ai-study-system";
 import { interactivePatientSystem } from "./interactive-patient";
-import { registerCommunityRoutes } from "./community-api";
-import { generateNHSPrepQuestions, VALID_SPECIALTIES, getTopicsForSpecialty } from "./nhsprep-ai-generator";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -398,235 +394,6 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
-  // Test endpoint for guideline-based options
-  app.post('/api/nhsprep/test-options', async (req, res) => {
-    try {
-      const { topic, specialty } = req.body;
-      
-      // Import the guideline content extractor
-      const { extractGuidelineBasedOptions } = await import('./guideline-content-extractor');
-      const { findSpecificGuidelineLinks } = await import('./dynamic-guideline-search');
-      
-      // Get specific guidelines
-      const guidelines = await findSpecificGuidelineLinks(topic, specialty);
-      
-      // Extract authentic options
-      const options = await extractGuidelineBasedOptions(
-        topic, 
-        specialty, 
-        guidelines.nice!, 
-        guidelines.cks!
-      );
-      
-      res.json({
-        topic,
-        specialty,
-        guidelines,
-        options: options.map((option, index) => ({
-          letter: String.fromCharCode(65 + index),
-          text: option.text,
-          isCorrect: option.isCorrect,
-          source: option.source,
-          reference: option.reference,
-          rationale: option.rationale
-        })),
-        timestamp: new Date().toISOString()
-      });
-    } catch (error) {
-      console.error('Error testing guideline options:', error);
-      res.status(500).json({ 
-        error: 'Failed to test options',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
-  // Direct guideline mapping with specific section links (restored from 5 days ago)
-  app.post('/api/dynamic-guideline-search', async (req, res) => {
-    try {
-      const { questionCount, specialty, difficulty } = req.body;
-      
-      // Direct mapping from the working implementation
-      const specificGuidelines: Record<string, any> = {
-        'hypertension': {
-          nice: {
-            title: "NICE Guideline NG136: Hypertension in adults: diagnosis and management",
-            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-interventions",
-            section: "1.4 Lifestyle advice and antihypertensive drug treatment thresholds",
-            relevance: "First-line management of hypertension in adults"
-          },
-          cks: {
-            title: "CKS Topic: Hypertension",
-            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment",
-            section: "Management - Antihypertensive drugs",
-            relevance: "Primary care management of hypertension"
-          }
-        },
-        'heart_failure': {
-          nice: {
-            title: "NICE Guideline CG108: Chronic heart failure in adults: diagnosis and management",
-            url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance#pharmacological-treatment-heart-failure-with-reduced-ejection-fraction",
-            section: "1.3 Pharmacological treatment: heart failure with reduced ejection fraction",
-            relevance: "Evidence-based heart failure management"
-          },
-          cks: {
-            title: "CKS Topic: Heart failure - chronic",
-            url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance#pharmacological-treatment",
-            section: "Management - Drug treatment",
-            relevance: "Primary care heart failure management"
-          }
-        },
-        'diabetes_type2': {
-          nice: {
-            title: "NICE Guideline NG28: Type 2 diabetes in adults: management",
-            url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations#drug-treatment",
-            section: "1.6 Drug treatment",
-            relevance: "Evidence-based management of type 2 diabetes"
-          },
-          cks: {
-            title: "CKS Topic: Diabetes - type 2",
-            url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations#first-line-drug-treatment",
-            section: "Management - Blood glucose management",
-            relevance: "Primary care diabetes management"
-          }
-        },
-        'asthma': {
-          nice: {
-            title: "NICE Guideline NG80: Asthma: diagnosis, monitoring and chronic asthma management",
-            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#pharmacological-management",
-            section: "1.2 Pharmacological management",
-            relevance: "Step-wise approach to asthma treatment"
-          },
-          cks: {
-            title: "CKS Topic: Asthma",
-            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#inhaled-therapy",
-            section: "Management - Drug treatment",
-            relevance: "Primary care asthma management"
-          }
-        },
-        'depression': {
-          nice: {
-            title: "NICE Guideline CG90: Depression in adults: recognition and management",
-            url: "https://www.nice.org.uk/guidance/cg90/chapter/1-Guidance#care-of-all-people-with-depression",
-            section: "1.5 Care of all people with depression",
-            relevance: "Evidence-based depression management"
-          },
-          cks: {
-            title: "CKS Topic: Depression",
-            url: "https://www.nice.org.uk/guidance/cg90/chapter/1-Guidance#treatment-choices-in-primary-care",
-            section: "Management - Adults with depression",
-            relevance: "Primary care depression management"
-          }
-        }
-      };
-      
-      const topicMap: Record<string, string[]> = {
-        'cardiology': ['hypertension', 'heart_failure'],
-        'respiratory': ['asthma'],
-        'endocrinology': ['diabetes_type2'],
-        'psychiatry': ['depression'],
-        'mixed': ['hypertension', 'diabetes_type2', 'asthma', 'depression', 'heart_failure']
-      };
-      
-      const topics = topicMap[specialty] || topicMap['mixed'];
-      const questions = [];
-      
-      for (let i = 0; i < questionCount; i++) {
-        const topic = topics[i % topics.length];
-        const guidelines = specificGuidelines[topic];
-        
-        if (guidelines) {
-          const question = {
-            question: `Clinical scenario for ${topic.replace('_', ' ')} management according to NICE guidelines.`,
-            options: [
-              "A. First-line treatment option",
-              "B. Second-line treatment option", 
-              "C. Third-line treatment option",
-              "D. Lifestyle intervention only",
-              "E. Specialist referral required"
-            ],
-            correctAnswer: 0,
-            explanation: `Correct Answer: A. Evidence-based first-line treatment according to NICE guidelines.`,
-            study_tip: `${topic.replace('_', ' ')}: Follow NICE step-wise approach`,
-            category: specialty,
-            difficulty: difficulty,
-            niceGuidanceLinks: [{
-              title: guidelines.nice.title,
-              url: guidelines.nice.url,
-              relevance: guidelines.nice.relevance
-            }],
-            cksLinks: [{
-              title: guidelines.cks.title,
-              url: guidelines.cks.url,
-              relevance: guidelines.cks.relevance
-            }],
-            additionalReferences: []
-          };
-          
-          questions.push(question);
-        }
-      }
-      
-      res.json({
-        questions,
-        metadata: {
-          specialty,
-          difficulty,
-          count: questions.length,
-          timestamp: new Date().toISOString()
-        }
-      });
-    } catch (error) {
-      console.error('Dynamic guideline search error:', error);
-      res.status(500).json({ 
-        error: 'Failed to search guidelines',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
-  // Test full question generation with specific URLs
-  app.post('/api/nhsprep/test-question', async (req, res) => {
-    try {
-      const { topic, specialty } = req.body;
-      
-      const { generateNHSPrepQuestions } = await import('./nhsprep-ai-generator');
-      
-      const questions = await generateNHSPrepQuestions(specialty, topic, 1);
-      
-      if (questions && questions.length > 0) {
-        const question = questions[0];
-        
-        // Analyze URL specificity
-        const isSpecificNICE = question.reference.url.includes('ng136') || 
-                               question.reference.url.includes('chapter') ||
-                               question.reference.url.includes('ng28') ||
-                               question.reference.url.includes('ng80');
-        const isSpecificCKS = question.reference.url.includes('management') || 
-                              question.reference.url.includes('topics/');
-        
-        res.json({
-          question,
-          urlAnalysis: {
-            isSpecificNICE,
-            isSpecificCKS,
-            status: (isSpecificNICE || isSpecificCKS) ? "SPECIFIC" : "GENERAL",
-            url: question.reference.url
-          },
-          timestamp: new Date().toISOString()
-        });
-      } else {
-        res.status(500).json({ error: 'No questions generated' });
-      }
-    } catch (error) {
-      console.error('Error testing question generation:', error);
-      res.status(500).json({ 
-        error: 'Failed to generate test question',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
   // AI Study Tools endpoints
   app.post("/api/study-tools/flashcards/generate", async (req, res) => {
     try {
@@ -716,77 +483,28 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
 
   // Advanced PLAB AI Study System Endpoints
   
-  // Generate specialist-level PLAB MCQs
+  // Generate adaptive PLAB MCQs
   app.post("/api/plab-ai/generate-mcqs", async (req, res) => {
     try {
-      const { specialty, count = 10, difficulty = "specialist" } = req.body;
+      const { topic, count = 10 } = req.body;
       
-      if (!specialty) {
-        return res.status(400).json({ error: "Medical specialty is required" });
+      if (!topic) {
+        return res.status(400).json({ error: "Topic is required" });
       }
 
-      const { generateSpecialistQuestions } = await import('./specialist-question-generator');
-      const mcqs = await generateSpecialistQuestions(specialty, count, difficulty);
-      
+      const mcqs = await plabAI.generatePLABMCQs(topic, count);
       res.json({ 
         mcqs, 
         metadata: {
-          specialty,
+          topic,
           count: mcqs.length,
-          difficulty,
-          specialist: mcqs[0]?.specialist || "Medical Specialist",
-          generated_at: new Date().toISOString()
+          studyType: 'adaptive-mcq',
+          generated: new Date().toISOString()
         }
       });
     } catch (error) {
-      console.error('Error generating specialist MCQs:', error);
-      res.status(500).json({ error: "Failed to generate specialist questions" });
-    }
-  });
-
-  // Generate mixed specialty questions for comprehensive practice
-  app.post("/api/plab-ai/generate-mixed-mcqs", async (req, res) => {
-    try {
-      const { count = 20, difficulty = "specialist" } = req.body;
-      
-      const { generateMixedSpecialistQuestions } = await import('./specialist-question-generator');
-      const mcqs = await generateMixedSpecialistQuestions(count, difficulty);
-      
-      res.json({ 
-        mcqs, 
-        metadata: {
-          count: mcqs.length,
-          difficulty,
-          specialties_included: Array.from(new Set(mcqs.map(q => q.category))),
-          generated_at: new Date().toISOString()
-        }
-      });
-    } catch (error) {
-      console.error('Error generating mixed specialist MCQs:', error);
-      res.status(500).json({ error: "Failed to generate mixed specialist questions" });
-    }
-  });
-
-  // Get available medical specialties
-  app.get("/api/plab-ai/specialties", async (req, res) => {
-    try {
-      const { getAllSpecialties, MEDICAL_SPECIALTIES } = await import('./specialist-question-generator');
-      const specialties = getAllSpecialties();
-      
-      const specialtyDetails = specialties.map(key => ({
-        code: key,
-        name: MEDICAL_SPECIALTIES[key as keyof typeof MEDICAL_SPECIALTIES].name,
-        specialist: MEDICAL_SPECIALTIES[key as keyof typeof MEDICAL_SPECIALTIES].specialist,
-        expertise_areas: MEDICAL_SPECIALTIES[key as keyof typeof MEDICAL_SPECIALTIES].expertise.slice(0, 3)
-      }));
-      
-      res.json({ 
-        specialties: specialtyDetails,
-        total_count: specialties.length
-      });
-    } catch (error) {
-      console.error('Error fetching specialties:', error);
-      res.status(500).json({ error: "Failed to fetch medical specialties" });
+      console.error('Error generating PLAB MCQs:', error);
+      res.status(500).json({ error: "Failed to generate MCQs. Please check your OpenAI API key." });
     }
   });
 
@@ -1016,227 +734,6 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
-  // Fast question generation using pre-built authentic NICE/CKS questions
-  app.post("/api/nhsprep/generate-questions", async (req, res) => {
-    try {
-      const { specialty, topic, count = 5, difficulty = 'foundation' } = req.body;
-      
-      // Pre-built authentic questions with real NICE/CKS references
-      const fastQuestions = [
-        {
-          question: "A 65-year-old man with hypertension presents for routine follow-up. His current BP is 145/95 mmHg on amlodipine 5mg daily. According to NICE guidelines, what is the most appropriate next step?",
-          options: [
-            "A. Increase amlodipine to 10mg daily",
-            "B. Add ACE inhibitor (ramipril)",
-            "C. Switch to bendroflumethiazide",
-            "D. Add beta-blocker (bisoprolol)",
-            "E. Refer to cardiology"
-          ],
-          correctAnswer: 1,
-          explanation: "Correct Answer: B. Add ACE inhibitor (ramipril). NICE NG136 recommends ACE inhibitor as step 2 treatment when calcium channel blocker alone is insufficient for hypertension control.",
-          study_tip: "Remember NICE hypertension steps: Step 1 CCB, Step 2 add ACE inhibitor",
-          category: specialty,
-          difficulty: difficulty,
-          niceGuidanceLinks: [{
-            title: "NICE NG136: Hypertension in adults",
-            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#pharmacological-treatment",
-            relevance: "Step-wise antihypertensive treatment protocol"
-          }],
-          cksLinks: [{
-            title: "CKS: Hypertension",
-            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment",
-            relevance: "Primary care hypertension management"
-          }],
-          additionalReferences: []
-        },
-        {
-          question: "A 45-year-old woman with newly diagnosed type 2 diabetes (HbA1c 58 mmol/mol) has no contraindications to first-line therapy. What is the most appropriate initial treatment according to NICE guidelines?",
-          options: [
-            "A. Metformin",
-            "B. Gliclazide",
-            "C. Insulin",
-            "D. Lifestyle advice only",
-            "E. SGLT-2 inhibitor"
-          ],
-          correctAnswer: 0,
-          explanation: "Correct Answer: A. Metformin. NICE NG28 recommends metformin as first-line pharmacological treatment for type 2 diabetes when lifestyle measures alone are insufficient.",
-          study_tip: "Metformin is always first-line for type 2 diabetes unless contraindicated",
-          category: specialty,
-          difficulty: difficulty,
-          niceGuidanceLinks: [{
-            title: "NICE NG28: Type 2 diabetes in adults",
-            url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations#drug-treatment",
-            relevance: "First-line diabetes management"
-          }],
-          cksLinks: [{
-            title: "CKS: Diabetes - type 2",
-            url: "https://cks.nice.org.uk/topics/diabetes-type-2/management/blood-glucose-management/",
-            relevance: "Primary care diabetes management"
-          }],
-          additionalReferences: []
-        },
-        {
-          question: "A 28-year-old woman with asthma uses salbutamol 4-5 times per week and wakes at night twice monthly due to symptoms. According to NICE guidelines, what is the most appropriate next step?",
-          options: [
-            "A. Continue current treatment",
-            "B. Start low-dose inhaled corticosteroid",
-            "C. Add long-acting beta-agonist",
-            "D. Start oral prednisolone",
-            "E. Increase salbutamol frequency"
-          ],
-          correctAnswer: 1,
-          explanation: "Correct Answer: B. Start low-dose inhaled corticosteroid. NICE NG80 recommends ICS as first-line preventer therapy when asthma symptoms require SABA use more than 3 times per week.",
-          study_tip: "SABA use >3 times/week = start ICS preventer therapy",
-          category: specialty,
-          difficulty: difficulty,
-          niceGuidanceLinks: [{
-            title: "NICE NG80: Asthma diagnosis and management",
-            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#pharmacological-management",
-            relevance: "Step-wise asthma treatment approach"
-          }],
-          cksLinks: [{
-            title: "CKS: Asthma",
-            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#inhaled-therapy",
-            relevance: "Primary care asthma management"
-          }],
-          additionalReferences: []
-        },
-        {
-          question: "A 70-year-old man with heart failure and reduced ejection fraction (35%) is started on ramipril. According to NICE guidelines, which medication should be added next?",
-          options: [
-            "A. Spironolactone",
-            "B. Beta-blocker (bisoprolol)",
-            "C. Digoxin",
-            "D. Loop diuretic only",
-            "E. ARB (candesartan)"
-          ],
-          correctAnswer: 1,
-          explanation: "Correct Answer: B. Beta-blocker (bisoprolol). NICE CG108 recommends adding beta-blocker as second drug after ACE inhibitor is established in heart failure with reduced ejection fraction.",
-          study_tip: "HFrEF: ACE inhibitor first, then beta-blocker, then aldosterone antagonist",
-          category: specialty,
-          difficulty: difficulty,
-          niceGuidanceLinks: [{
-            title: "NICE CG108: Chronic heart failure",
-            url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance#pharmacological-treatment-heart-failure-with-reduced-ejection-fraction",
-            relevance: "Heart failure pharmacological treatment sequence"
-          }],
-          cksLinks: [{
-            title: "CKS: Heart failure - chronic",
-            url: "https://cks.nice.org.uk/topics/heart-failure-chronic/management/drug-treatment/",
-            relevance: "Primary care heart failure management"
-          }],
-          additionalReferences: []
-        },
-        {
-          question: "A 35-year-old woman presents with moderate depression (PHQ-9 score 14). She has no previous psychiatric history. According to NICE guidelines, what is the most appropriate first-line treatment?",
-          options: [
-            "A. Fluoxetine 20mg daily",
-            "B. Cognitive behavioral therapy (CBT)",
-            "C. Sertraline 50mg daily",
-            "D. Counseling only",
-            "E. Combination antidepressant and CBT"
-          ],
-          correctAnswer: 1,
-          explanation: "Correct Answer: B. Cognitive behavioral therapy (CBT). NICE CG90 recommends high-intensity psychological interventions as first-line for moderate depression, with antidepressants if patient preference or if psychological therapy declined.",
-          study_tip: "Moderate depression: CBT first-line, medications if CBT declined/unavailable",
-          category: specialty,
-          difficulty: difficulty,
-          niceGuidanceLinks: [{
-            title: "NICE CG90: Depression in adults",
-            url: "https://www.nice.org.uk/guidance/cg90/chapter/1-Guidance#care-of-all-people-with-depression",
-            relevance: "Depression treatment guidelines"
-          }],
-          cksLinks: [{
-            title: "CKS: Depression",
-            url: "https://cks.nice.org.uk/topics/depression/management/adults-with-depression/",
-            relevance: "Primary care depression management"
-          }],
-          additionalReferences: []
-        }
-      ];
-
-      // Additional questions for larger sets
-      const moreQuestions = [
-        {
-          question: "A 55-year-old man with COPD (FEV1 65% predicted) experiences breathlessness on moderate exertion. He uses salbutamol PRN. According to NICE guidelines, what is the most appropriate next step?",
-          options: [
-            "A. Add LABA (salmeterol)",
-            "B. Start LAMA (tiotropium)", 
-            "C. Start prednisolone",
-            "D. Refer for pulmonary rehabilitation",
-            "E. Add theophylline"
-          ],
-          correctAnswer: 1,
-          explanation: "Correct Answer: B. Start LAMA (tiotropium). NICE NG115 recommends LAMA as first-line maintenance therapy for COPD patients with persistent symptoms.",
-          study_tip: "COPD maintenance: LAMA first, then LABA, then LABA+ICS if eosinophilic",
-          category: specialty,
-          difficulty: difficulty,
-          niceGuidanceLinks: [{
-            title: "NICE NG115: COPD in over 16s",
-            url: "https://www.nice.org.uk/guidance/ng115/chapter/Recommendations#managing-stable-copd",
-            relevance: "COPD pharmacological management"
-          }],
-          cksLinks: [{
-            title: "CKS: COPD",
-            url: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/management/drug-treatment/",
-            relevance: "Primary care COPD management"
-          }],
-          additionalReferences: []
-        },
-        {
-          question: "A 40-year-old woman presents with recurrent episodes of central abdominal pain, nausea, and loose stools. Colonoscopy shows skip lesions with transmural inflammation. According to NICE guidelines, what is the first-line treatment for inducing remission?",
-          options: [
-            "A. Prednisolone",
-            "B. Mesalazine",
-            "C. Azathioprine",
-            "D. Infliximab",
-            "E. Metronidazole"
-          ],
-          correctAnswer: 0,
-          explanation: "Correct Answer: A. Prednisolone. NICE NG129 recommends corticosteroids as first-line therapy for inducing remission in Crohn's disease.",
-          study_tip: "Crohn's remission induction: Steroids first-line, then biologics if steroid-dependent",
-          category: specialty,
-          difficulty: difficulty,
-          niceGuidanceLinks: [{
-            title: "NICE NG129: Crohn's disease management",
-            url: "https://www.nice.org.uk/guidance/ng129/chapter/Recommendations#inducing-remission",
-            relevance: "Crohn's disease treatment protocols"
-          }],
-          cksLinks: [{
-            title: "CKS: Inflammatory bowel disease",
-            url: "https://cks.nice.org.uk/topics/inflammatory-bowel-disease/management/crohns-disease/",
-            relevance: "Primary care IBD management"
-          }],
-          additionalReferences: []
-        }
-      ];
-
-      // Combine all questions
-      const allQuestions = [...fastQuestions, ...moreQuestions];
-      
-      // If we need more questions than available, cycle through them
-      const selectedQuestions = [];
-      for (let i = 0; i < count; i++) {
-        selectedQuestions.push(allQuestions[i % allQuestions.length]);
-      }
-      
-      res.json({
-        questions: selectedQuestions,
-        metadata: {
-          specialty,
-          topic,
-          count: selectedQuestions.length,
-          difficulty,
-          generated: new Date().toISOString(),
-          type: 'fast-authentic-questions'
-        }
-      });
-    } catch (error) {
-      console.error('Error generating fast questions:', error);
-      res.status(500).json({ error: "Failed to generate questions" });
-    }
-  });
-
   // Batch MCQ generation endpoint for efficient question creation
   app.post("/api/plab-ai/batch-generate", async (req, res) => {
     try {
@@ -1348,57 +845,6 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
-  // NHSPrep AI - Clinical Exam Question Generator
-  app.post("/api/nhsprep/generate", async (req, res) => {
-    try {
-      const { specialty, topic, count } = req.body;
-      
-      if (!specialty) {
-        return res.status(400).json({ error: "Specialty is required" });
-      }
-      
-      const questionCount = Math.min(Math.max(parseInt(count) || 1, 1), 10);
-      
-      const questions = await generateNHSPrepQuestions(
-        specialty,
-        topic || "",
-        questionCount
-      );
-      
-      res.json({
-        questions,
-        metadata: {
-          specialty,
-          topic: topic || "General",
-          count: questions.length,
-          guidelines_used: "NICE, CKS, BMJ Best Practice",
-          generated_at: new Date().toISOString()
-        }
-      });
-      
-    } catch (error) {
-      console.error("Error generating NHSPrep questions:", error);
-      res.status(500).json({ 
-        error: "Failed to generate questions",
-        details: error instanceof Error ? error.message : "Unknown error"
-      });
-    }
-  });
-
-  // Get available specialties and topics
-  app.get("/api/nhsprep/specialties", (req, res) => {
-    const specialties = VALID_SPECIALTIES.map(specialty => ({
-      value: specialty,
-      label: specialty.charAt(0).toUpperCase() + specialty.slice(1).replace('_', ' '),
-      topics: getTopicsForSpecialty(specialty).map(topic => ({
-        value: topic,
-        label: topic.charAt(0).toUpperCase() + topic.slice(1).replace('_', ' ')
-      }))
-    }));
-    
-    res.json({ specialties });
-  });
-
   // OSCE Stations API endpoint
   app.get("/api/osce/stations", async (req, res) => {
     try {
@@ -1473,13 +919,6 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
       res.status(500).json({ error: "Failed to upload video recording" });
     }
   });
-
-  // Register community routes
-  registerCommunityRoutes(app);
-
-  // Register authentic NICE-sourced questions
-  registerAuthenticQuestions(app);
-  registerTemplateQuestion(app);
 
   const httpServer = createServer(app);
   return httpServer;

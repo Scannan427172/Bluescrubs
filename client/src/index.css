@@ -704,24 +704,6 @@ input[type="radio"]:focus {
   color: white !important;
 }
 
-/* Video OSCE hero banner white text override */
-[data-page="video-osce"] .hero-banner h1,
-[data-page="video-osce"] .hero-banner p,
-.video-osce .hero-banner h1,
-.video-osce .hero-banner p {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
-}
-
-/* More Options hero banner white text override */
-.hero-banner h1,
-.hero-banner p {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
-}
-
 /* Removed conflicting blue text styling - handled by consistent button styling below */
 
 /* Comprehensive button styling for all primary buttons */

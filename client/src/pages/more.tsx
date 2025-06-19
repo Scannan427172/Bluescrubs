@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { 
   ChevronLeft,
   ChevronRight,
@@ -35,8 +34,6 @@ import {
   Zap
 } from "lucide-react";
 import { Link } from "wouter";
-import moreOptionsHeroBannerImage from "@assets/9252557F-8639-4C96-BFDA-AEACAAA7E77E_1750285736194.png";
-import { HeroBanner } from "@/components/ui/hero-banner";
 
 export default function More() {
   const adminTools = [
@@ -61,9 +58,9 @@ export default function More() {
     {
       icon: Users,
       title: "Who are NHSprep",
-      description: "Meet the founders - NHS doctor Yasa and multidisciplinary digital creative Keith Hunter",
+      description: "Meet the founders - NHS doctor Yasa and developer Keith Hunter",
       hasArrow: true,
-      link: "/about"
+      link: "/dashboard"
     },
     {
       icon: BookOpen,
@@ -182,7 +179,7 @@ export default function More() {
     {
       icon: FileText,
       title: "Practice Tests",
-      description: "Full-length PLAB 1 practice exams and timed assessment tests",
+      description: "Full-length PLAB 1 mock exams and timed practice tests",
       hasArrow: true,
       link: "/plab1-new"
     },
@@ -298,14 +295,14 @@ export default function More() {
 
   return (
     <div className="min-h-screen bg-white">
-      <HeroBanner
-        backgroundImage={moreOptionsHeroBannerImage}
-        title="More Options"
-        subtitle="Advanced tools and comprehensive settings"
-        badge="Complete Platform Control"
-      />
-      
       <div className="container max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-8">
+          <Link href="/dashboard" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <ChevronLeft className="h-5 w-5 text-gray-600" />
+          </Link>
+          <h1 className="text-2xl font-bold text-gray-900">More Options</h1>
+        </div>
 
         {/* Admin Tools Section */}
         <div className="mb-12">

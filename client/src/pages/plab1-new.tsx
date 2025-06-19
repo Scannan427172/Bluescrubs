@@ -10,11 +10,8 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
-import heroBannerImage from "@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750282263502.png";
-import { HeroBanner } from "@/components/ui/hero-banner";
-
+import heroImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750281579675.png';
 export default function PLAB1New() {
-  
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isTranslationMode, setIsTranslationMode] = useState(false);
@@ -95,8 +92,6 @@ export default function PLAB1New() {
     }
     return () => clearInterval(interval);
   }, [isTimerRunning]);
-
-
 
   // Start timer when new question is shown
   useEffect(() => {
@@ -235,8 +230,6 @@ export default function PLAB1New() {
     total: number;
     currentCategory: string;
   } | null>(null);
-
-
 
   // Function to provide targeted explanations based on user's answer
   const getTargetedExplanation = (question: any, userAnswer: string, isCorrect: boolean): string => {
@@ -476,30 +469,30 @@ export default function PLAB1New() {
     return questionCounts[category] || 100;
   };
 
-  // Comprehensive specialist categories with specialist-based question generation
+  // Available categories with question counts
   const availableCategories = [
-    { value: 'all' as const, label: 'All Categories', count: getQuestionCount('all'), description: 'Mixed questions from all specialties' },
-    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: getQuestionCount('cardiovascular'), description: 'Specialist Cardiology questions' },
-    { value: 'respiratory' as const, label: 'Respiratory', count: getQuestionCount('respiratory'), description: 'Specialist Respiratory Medicine questions' },
-    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: getQuestionCount('gastroenterology'), description: 'Specialist Gastroenterology questions' },
-    { value: 'neurology' as const, label: 'Neurology', count: getQuestionCount('neurology'), description: 'Specialist Neurology questions' },
-    { value: 'endocrinology' as const, label: 'Endocrinology', count: getQuestionCount('endocrinology'), description: 'Specialist Endocrinology questions' },
-    { value: 'psychiatry' as const, label: 'Psychiatry', count: getQuestionCount('psychiatry'), description: 'Specialist Psychiatry questions' },
-    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: getQuestionCount('obstetrics-gynaecology'), description: 'O&G specialist questions' },
-    { value: 'paediatrics' as const, label: 'Paediatrics', count: getQuestionCount('paediatrics'), description: 'Paediatric specialist questions' },
-    { value: 'surgery' as const, label: 'Surgery', count: getQuestionCount('surgery'), description: 'Specialist Surgery questions' },
-    { value: 'nephrology' as const, label: 'Nephrology', count: getQuestionCount('nephrology'), description: 'Specialist Nephrology questions' },
-    { value: 'haematology' as const, label: 'Haematology', count: getQuestionCount('haematology'), description: 'Specialist Haematology questions' },
-    { value: 'infectious-diseases' as const, label: 'Infectious Diseases', count: getQuestionCount('infectious-diseases'), description: 'Infectious Disease specialist questions' },
-    { value: 'rheumatology' as const, label: 'Rheumatology', count: getQuestionCount('rheumatology'), description: 'Specialist Rheumatology questions' },
-    { value: 'dermatology' as const, label: 'Dermatology', count: getQuestionCount('dermatology'), description: 'Specialist Dermatology questions' },
-    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: getQuestionCount('emergency-medicine'), description: 'Specialist Emergency Medicine questions' },
-    { value: 'ethics-law' as const, label: 'Ethics & Law', count: getQuestionCount('ethics-law'), description: 'Medical Ethics & Law questions' },
-    { value: 'public-health' as const, label: 'Public Health', count: getQuestionCount('public-health'), description: 'Public Health specialist questions' },
-    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: getQuestionCount('clinical-pharmacology'), description: 'Clinical Pharmacology questions' }
+    { value: 'all' as const, label: 'All Categories', count: getQuestionCount('all') },
+    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: getQuestionCount('cardiovascular') },
+    { value: 'respiratory' as const, label: 'Respiratory', count: getQuestionCount('respiratory') },
+    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: getQuestionCount('gastroenterology') },
+    { value: 'neurology' as const, label: 'Neurology', count: getQuestionCount('neurology') },
+    { value: 'endocrinology' as const, label: 'Endocrinology', count: getQuestionCount('endocrinology') },
+    { value: 'psychiatry' as const, label: 'Psychiatry', count: getQuestionCount('psychiatry') },
+    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: getQuestionCount('obstetrics-gynaecology') },
+    { value: 'paediatrics' as const, label: 'Paediatrics', count: getQuestionCount('paediatrics') },
+    { value: 'surgery' as const, label: 'Surgery', count: getQuestionCount('surgery') },
+    { value: 'nephrology' as const, label: 'Nephrology', count: getQuestionCount('nephrology') },
+    { value: 'haematology' as const, label: 'Haematology', count: getQuestionCount('haematology') },
+    { value: 'infectious-diseases' as const, label: 'Infectious Diseases', count: getQuestionCount('infectious-diseases') },
+    { value: 'rheumatology' as const, label: 'Rheumatology', count: getQuestionCount('rheumatology') },
+    { value: 'dermatology' as const, label: 'Dermatology', count: getQuestionCount('dermatology') },
+    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: getQuestionCount('emergency-medicine') },
+    { value: 'ethics-law' as const, label: 'Ethics & Law', count: getQuestionCount('ethics-law') },
+    { value: 'public-health' as const, label: 'Public Health', count: getQuestionCount('public-health') },
+    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: getQuestionCount('clinical-pharmacology') }
   ];
 
-  // Generate specialist-level questions using category-based approach
+  // Generate AI questions
   const startPractice = async (questionCount: number) => {
     setIsGeneratingQuestions(true);
     setGeneratedQuestions([]);
@@ -508,78 +501,27 @@ export default function PLAB1New() {
     setCurrentQuestionIndex(0);
     
     try {
-      // Use the working NHSPrep endpoint that generates authentic NICE/CKS questions
-      const specialtyMapping: Record<string, string> = {
-        'cardiovascular': 'cardiology',
-        'respiratory': 'respiratory', 
-        'gastroenterology': 'gastroenterology',
-        'neurology': 'neurology',
-        'endocrinology': 'endocrinology',
-        'psychiatry': 'psychiatry',
-        'surgery': 'surgery',
-        'emergency-medicine': 'emergency'
-      };
+      const response = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          category: selectedCategory,
+          count: questionCount,
+          difficulty: selectedDifficulty
+        }),
+      });
 
-      // Use the working test-options endpoint with authentic NICE/CKS links
-      const topicCycle = [
-        { specialty: 'cardiology', topic: 'hypertension' },
-        { specialty: 'endocrinology', topic: 'diabetes_type2' },
-        { specialty: 'respiratory', topic: 'asthma' },
-        { specialty: 'cardiology', topic: 'heart_failure' },
-        { specialty: 'psychiatry', topic: 'depression' }
-      ];
-
-      const questions = [];
-
-      for (let i = 0; i < questionCount; i++) {
-        const { specialty, topic } = topicCycle[i % topicCycle.length];
-        
-        try {
-          const response = await fetch('/api/nhsprep/test-options', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ specialty, topic }),
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            
-            const question = {
-              question: `A clinical scenario for ${topic.replace('_', ' ')} management according to NICE guidelines.`,
-              options: data.options.map((opt: any, idx: number) => `${String.fromCharCode(65 + idx)}. ${opt.text}`),
-              correctAnswer: data.options.findIndex((opt: any) => opt.isCorrect),
-              explanation: `Correct Answer: ${String.fromCharCode(65 + data.options.findIndex((opt: any) => opt.isCorrect))}. ${data.options.find((opt: any) => opt.isCorrect)?.text}. ${data.options.find((opt: any) => opt.isCorrect)?.rationale}`,
-              study_tip: `${specialty}: ${data.options.find((opt: any) => opt.isCorrect)?.rationale}`,
-              category: selectedCategory !== 'all' ? selectedCategory : 'mixed',
-              difficulty: selectedDifficulty,
-              niceGuidanceLinks: [{
-                title: data.guidelines.nice.title,
-                url: data.guidelines.nice.url,
-                relevance: data.guidelines.nice.relevance
-              }],
-              cksLinks: [{
-                title: data.guidelines.cks.title,
-                url: data.guidelines.cks.url,
-                relevance: data.guidelines.cks.relevance
-              }],
-              additionalReferences: []
-            };
-            
-            questions.push(question);
-          }
-        } catch (error) {
-          console.error(`Error fetching question for ${specialty}/${topic}:`, error);
+      if (response.ok) {
+        const data = await response.json();
+        setGeneratedQuestions(data.questions || []);
+        if (data.questions && data.questions.length > 0) {
+          setSessionStarted(true);
+          setQuestionStartTime(Date.now());
         }
-      }
-
-      if (questions.length > 0) {
-        setGeneratedQuestions(questions);
-        setSessionStarted(true);
-        setQuestionStartTime(Date.now());
       } else {
-        console.error('No questions generated');
+        console.error('Failed to generate questions');
       }
     } catch (error) {
       console.error('Error generating questions:', error);
@@ -588,15 +530,12 @@ export default function PLAB1New() {
     }
   };
 
-
-
-  // Bulk specialist question generation function
+  // Bulk question generation function
   const generateBulkQuestions = async () => {
     setIsBulkGenerating(true);
-    setBulkProgress({ completed: 0, total: 18, currentCategory: 'Starting comprehensive generation...' });
+    setBulkProgress({ completed: 0, total: 18, currentCategory: 'Starting...' });
 
-    // Generate questions for all categories
-    const allCategories = [
+    const categories = [
       'cardiovascular', 'respiratory', 'gastroenterology', 'neurology', 
       'endocrinology', 'psychiatry', 'obstetrics-gynaecology', 'paediatrics',
       'surgery', 'nephrology', 'haematology', 'infectious-diseases',
@@ -605,64 +544,22 @@ export default function PLAB1New() {
     ];
 
     try {
-      let totalGenerated = 0;
-      
-      for (let i = 0; i < allCategories.length; i++) {
-        const category = allCategories[i];
-        setBulkProgress({ 
-          completed: i, 
-          total: allCategories.length, 
-          currentCategory: `Generating ${category} questions...` 
-        });
-
-        // Use specialist generation for core specialties, general for others
-        const specialtyMapping: Record<string, string> = {
-          'cardiovascular': 'cardiology',
-          'respiratory': 'respiratory',
-          'gastroenterology': 'gastroenterology',
-          'neurology': 'neurology',
-          'endocrinology': 'endocrinology',
-          'psychiatry': 'psychiatry',
-          'surgery': 'surgery',
-          'emergency-medicine': 'emergency'
-        };
-
-        const specialtyCode = specialtyMapping[category];
-        let endpoint = '/api/generate-questions';
-        let requestBody: any = {
-          category: category,
-          count: Math.ceil(5000 / allCategories.length),
-          difficulty: 'specialist'
-        };
-
-        if (specialtyCode) {
-          endpoint = '/api/plab-ai/generate-mcqs';
-          requestBody = {
-            specialty: specialtyCode,
-            count: Math.ceil(5000 / allCategories.length),
-            difficulty: 'specialist'
-          };
-        }
-
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          totalGenerated += (data.mcqs?.length || data.questions?.length || 0);
-        }
-      }
-      
-      setBulkProgress({ 
-        completed: allCategories.length, 
-        total: allCategories.length, 
-        currentCategory: `Complete! Generated ${totalGenerated} questions across all specialties` 
+      const response = await fetch('/api/generate-bulk-questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          categories,
+          questionsPerCategory: Math.ceil(5000 / categories.length)
+        }),
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(`Successfully generated ${data.totalGenerated} questions across ${data.categories} categories`);
+        setBulkProgress({ completed: categories.length, total: categories.length, currentCategory: 'Complete!' });
+      }
     } catch (error) {
       console.error('Bulk generation failed:', error);
     } finally {
@@ -760,20 +657,70 @@ export default function PLAB1New() {
   // If no session started, show the landing page
   if (!sessionStarted && !isGeneratingQuestions) {
     return (
-      <div className="min-h-screen bg-gray-50 pb-24">
-        <HeroBanner
-          backgroundImage={heroBannerImage}
-          title={translateText('PLAB 1 Practice')}
-          subtitle="Comprehensive AI-generated medical questions"
-          badge="5000+ Questions Available"
-        />
-        
-        <div className="max-w-6xl mx-auto px-4 mb-16">
-          {/* Content Section */}
-          <div className="mb-8">
+      <div className="min-h-screen bg-gray-50 p-4 pb-24">
+        <div className="max-w-6xl mx-auto mb-16">
+          {/* Hero Banner */}
+          <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 rounded-2xl mb-8 overflow-hidden">
+            <div className="absolute inset-0 bg-black/40"></div>
+            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 p-8 lg:p-12">
+              <div className="flex-1 text-white">
+                <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+                  {translateText('Master PLAB 1 with AI')}
+                </h1>
+                <p className="text-xl lg:text-2xl mb-6 text-blue-100">
+                  {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                  <Badge className="bg-white/20 text-white border-white/30 text-sm px-4 py-2">
+                    <Target className="w-4 h-4 mr-2" />
+                    5000+ Questions Available
+                  </Badge>
+                  <Badge className="bg-white/20 text-white border-white/30 text-sm px-4 py-2">
+                    <Brain className="w-4 h-4 mr-2" />
+                    AI-Powered Learning
+                  </Badge>
+                  <Badge className="bg-white/20 text-white border-white/30 text-sm px-4 py-2">
+                    <Award className="w-4 h-4 mr-2" />
+                    UK Guidelines
+                  </Badge>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-blue-600 hover:bg-blue-50 font-semibold"
+                    onClick={() => document.getElementById('practice-options')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    <ArrowRight className="w-5 h-5 mr-2" />
+                    {translateText('Start Practice Now')}
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-white text-white hover:bg-white/10"
+                    onClick={() => document.getElementById('settings')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    <Globe className="w-5 h-5 mr-2" />
+                    {translateText('Settings & Languages')}
+                  </Button>
+                </div>
+              </div>
+              <div className="flex-shrink-0">
+                <img 
+                  src={heroImage} 
+                  alt="Medical students taking PLAB exam"
+                  className="w-full max-w-md lg:max-w-lg rounded-xl shadow-2xl"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">{translateText('Choose Your Practice Mode')}</h2>
+            <p className="text-lg text-gray-600">Tailored learning experience with multilingual support</p>
             
             {/* Language Toggle */}
-            <div className="flex items-center gap-4 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <div id="settings" className="flex items-center gap-4 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
               <Globe className="w-4 h-4 text-blue-600" />
               <div className="flex items-center gap-3">
                 <Switch
@@ -930,7 +877,7 @@ export default function PLAB1New() {
           <Card className="mb-8">
             <CardHeader>
               <CardTitle>Select Practice Category</CardTitle>
-              <CardDescription>Choose from 18 medical specialties with specialist-level questions for core areas</CardDescription>
+              <CardDescription>Choose a medical specialty to focus your practice</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 gap-6">
@@ -945,11 +892,7 @@ export default function PLAB1New() {
                     <SelectContent>
                       {availableCategories.map((category) => (
                         <SelectItem key={category.value} value={category.value}>
-                          <div className="flex flex-col">
-                            <span className="font-medium">{category.label}</span>
-                            <span className="text-xs text-gray-500">{category.description}</span>
-                            <span className="text-xs text-blue-600">{category.count} questions</span>
-                          </div>
+                          {category.label} ({category.count} questions)
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -965,24 +908,9 @@ export default function PLAB1New() {
                       <SelectValue placeholder="Select difficulty" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="foundation">
-                        <div className="flex flex-col">
-                          <span className="font-medium">Foundation Level</span>
-                          <span className="text-xs text-gray-500">Junior doctor level questions</span>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="specialist">
-                        <div className="flex flex-col">
-                          <span className="font-medium">Specialist Level</span>
-                          <span className="text-xs text-gray-500">Registrar/specialty trainee level</span>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="consultant">
-                        <div className="flex flex-col">
-                          <span className="font-medium">Consultant Level</span>
-                          <span className="text-xs text-gray-500">Senior consultant expertise</span>
-                        </div>
-                      </SelectItem>
+                      <SelectItem value="foundation">Foundation</SelectItem>
+                      <SelectItem value="intermediate">Intermediate</SelectItem>
+                      <SelectItem value="advanced">Advanced</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -991,73 +919,56 @@ export default function PLAB1New() {
           </Card>
 
           {/* Practice Options */}
-          <Card className="mb-8">
+          <Card id="practice-options" className="mb-8">
             <CardHeader>
               <CardTitle>Start Practice Session</CardTitle>
               <CardDescription>Choose your practice format</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="grid md:grid-cols-4 gap-4">
                 <Button 
                   size="lg" 
                   onClick={() => startPractice(5)}
                   disabled={isGeneratingQuestions}
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
+                  className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  <ArrowRight className="w-5 h-5" />
-                  <span className="font-bold text-sm">5 Questions</span>
-                  <span className="text-xs opacity-90">Quick Practice</span>
-                </Button>
-
-                <Button 
-                  size="lg" 
-                  onClick={() => startPractice(10)}
-                  disabled={isGeneratingQuestions}
-                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
-                >
-                  <Brain className="w-5 h-5" />
-                  <span className="font-bold text-sm">10 Questions</span>
-                  <span className="text-xs opacity-90">Standard Set</span>
+                  <ArrowRight className="w-6 h-6" />
+                  <span className="font-medium">{translateText('Quick Practice')}</span>
+                  <span className="text-xs opacity-90">5 {translateText('questions')}</span>
                 </Button>
 
                 <Button 
                   size="lg" 
                   onClick={() => startPractice(20)}
                   disabled={isGeneratingQuestions}
-                  className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
+                  className="bg-purple-600 hover:bg-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  <Clock className="w-5 h-5" />
-                  <span className="font-bold text-sm">20 Questions</span>
-                  <span className="text-xs opacity-90">Extended Quiz</span>
+                  <Brain className="w-6 h-6" />
+                  <span className="font-medium">{translateText('Standard Quiz')}</span>
+                  <span className="text-xs opacity-90">20 {translateText('questions')}</span>
                 </Button>
 
                 <Button 
                   size="lg" 
-                  onClick={() => startPractice(40)}
+                  onClick={() => startPractice(50)}
                   disabled={isGeneratingQuestions}
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
+                  className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  <Target className="w-5 h-5" />
-                  <span className="font-bold text-sm">40 Questions</span>
-                  <span className="text-xs opacity-90">Mock Test</span>
+                  <Clock className="w-6 h-6" />
+                  <span className="font-medium">{translateText('PLAB 1 Mock')}</span>
+                  <span className="text-xs opacity-90">50 {translateText('questions')}</span>
                 </Button>
 
                 <Button 
                   size="lg" 
-                  onClick={() => startPractice(80)}
+                  onClick={() => startPractice(100)}
                   disabled={isGeneratingQuestions}
-                  className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
+                  className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  <Award className="w-5 h-5" />
-                  <span className="font-bold text-sm">80 Questions</span>
-                  <span className="text-xs opacity-90">Full Exam</span>
+                  <Target className="w-6 h-6" />
+                  <span className="font-medium">{translateText('Comprehensive')}</span>
+                  <span className="text-xs opacity-90">100 {translateText('questions')}</span>
                 </Button>
-              </div>
-
-              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-sm text-blue-800 text-center">
-                  All questions include authentic NICE & CKS references with direct links to specific guideline sections
-                </p>
               </div>
 
               {/* Bulk Question Generation Section */}
@@ -1065,7 +976,7 @@ export default function PLAB1New() {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900">Build Complete Question Bank</h3>
-                    <p className="text-sm text-gray-600">Generate comprehensive question database across all 18 medical specialties</p>
+                    <p className="text-sm text-gray-600">Generate comprehensive AI question database across all specialties</p>
                   </div>
                   <Button
                     onClick={generateBulkQuestions}
@@ -1577,56 +1488,7 @@ export default function PLAB1New() {
               <div className="flex items-start gap-2">
                 <BookOpen className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
                 <div className="w-full">
-                  <p className="text-sm font-medium text-blue-900 mb-3">{translateText('Official References:')}</p>
-                  
-                  {/* NICE and CKS Guideline Buttons */}
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    {currentQuestion.nice_guidance && (
-                      <Button
-                        onClick={() => window.open(currentQuestion.nice_guidance.url || 'https://www.nice.org.uk/guidance', '_blank')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
-                        size="sm"
-                      >
-                        <ExternalLink className="w-3 h-3 mr-1" />
-                        NICE Guideline: {currentQuestion.nice_guidance.code}
-                      </Button>
-                    )}
-                    
-                    {currentQuestion.cks_guidance && (
-                      <Button
-                        onClick={() => window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
-                        className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
-                        size="sm"
-                      >
-                        <ExternalLink className="w-3 h-3 mr-1" />
-                        CKS: {currentQuestion.cks_guidance.topic || 'Clinical Knowledge'}
-                      </Button>
-                    )}
-                    
-                    {/* Fallback buttons if specific guidance not available */}
-                    {!currentQuestion.nice_guidance && !currentQuestion.cks_guidance && (
-                      <>
-                        <Button
-                          onClick={() => window.open('https://www.nice.org.uk/guidance', '_blank')}
-                          className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
-                          size="sm"
-                        >
-                          <ExternalLink className="w-3 h-3 mr-1" />
-                          NICE Guidelines
-                        </Button>
-                        
-                        <Button
-                          onClick={() => window.open('https://cks.nice.org.uk/', '_blank')}
-                          className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
-                          size="sm"
-                        >
-                          <ExternalLink className="w-3 h-3 mr-1" />
-                          CKS Guidelines
-                        </Button>
-                      </>
-                    )}
-                  </div>
-                  
+                  <p className="text-sm font-medium text-blue-900 mb-2">{translateText('Official References:')}</p>
                   <div className="text-sm text-blue-800 space-y-2">
                     {currentQuestion.references && currentQuestion.references.length > 0 ? (
                       currentQuestion.references.map((reference: any, index: number) => (

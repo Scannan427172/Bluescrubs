@@ -9,25 +9,21 @@ import {
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
-  Globe, Languages, ExternalLink
+  Globe, Languages
 } from "lucide-react";
-import plab2HeroBannerImage from "@assets/6675ABC6-B1E7-4E4C-92C4-D90C32FA1CB4_1750283049812.png";
-import { HeroBanner } from "@/components/ui/hero-banner";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EXPANDED_PLAB2_STATIONS, EXPANDED_STATION_STATS, EnhancedOSCEStation } from "@shared/expanded-plab2-stations";
 
-// Define specialist-based station types for filtering
+// Define station types for filtering
 const OSCE_STATION_TYPES = [
-  { value: 'all', label: 'Mixed Specialties (All)', description: 'Stations from all specialist consultants' },
-  { value: 'cardiology', label: 'Cardiology', description: 'Consultant Cardiologist stations' },
-  { value: 'respiratory', label: 'Respiratory Medicine', description: 'Consultant Respiratory Physician stations' },
-  { value: 'gastroenterology', label: 'Gastroenterology', description: 'Consultant Gastroenterologist stations' },
-  { value: 'neurology', label: 'Neurology', description: 'Consultant Neurologist stations' },
-  { value: 'endocrinology', label: 'Endocrinology', description: 'Consultant Endocrinologist stations' },
-  { value: 'psychiatry', label: 'Psychiatry', description: 'Consultant Psychiatrist stations' },
-  { value: 'surgery', label: 'General Surgery', description: 'Consultant General Surgeon stations' },
-  { value: 'emergency', label: 'Emergency Medicine', description: 'Consultant Emergency Physician stations' }
+  { value: 'all', label: 'All Stations' },
+  { value: 'history', label: 'History Taking' },
+  { value: 'examination', label: 'Physical Examination' },
+  { value: 'communication', label: 'Communication Skills' },
+  { value: 'practical', label: 'Practical Procedures' },
+  { value: 'data-interpretation', label: 'Data Interpretation' },
+  { value: 'emergency', label: 'Emergency Management' }
 ];
 import { useQuery } from "@tanstack/react-query";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
@@ -408,15 +404,13 @@ export default function Plab2Osce() {
 
   return (
     <div className="min-h-screen bg-white">
-      <HeroBanner
-        backgroundImage={plab2HeroBannerImage}
-        title={translateText('PLAB 2 OSCE Practice')}
-        subtitle="Specialist consultant-generated OSCE stations across 8 medical specialties"
-        badge="Specialist-Level Stations"
-      />
-      
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <Stethoscope className="w-8 h-8 text-blue-600" />
+            <h1 className="text-3xl font-bold text-gray-900">{translateText('PLAB 2 OSCE Practice')}</h1>
+          </div>
+          <p className="text-lg text-gray-600">{translateText('Comprehensive OSCE practice with 16-20 clinical stations covering history taking, examination, explanation, ethics, and acute care scenarios')}</p>
           
           {/* Language Toggle */}
           <div className="flex items-center gap-4 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
@@ -561,7 +555,7 @@ export default function Plab2Osce() {
             <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
               <Play className="w-4 h-4 text-blue-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">Specialist OSCE Practice Stations</h2>
+            <h2 className="text-2xl font-bold text-gray-900">OSCE Practice Stations</h2>
           </div>
 
           {/* Progress Overview */}
@@ -632,25 +626,51 @@ export default function Plab2Osce() {
           </Card>
         </div>
 
-          {/* Specialist Station Filters */}
+          {/* Station Type Filters */}
           <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Select Specialist Category</h3>
-              <p className="text-sm text-gray-600">Choose stations created by specialist consultants in their area of expertise</p>
-            </div>
-            <TabsList className="grid w-full grid-cols-5 lg:grid-cols-9 gap-1">
-              {OSCE_STATION_TYPES.map((type) => (
-                <TabsTrigger 
-                  key={type.value}
-                  value={type.value} 
-                  className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
-                >
-                  <div className="flex flex-col">
-                    <span className="font-medium">{type.label.split(' ')[0]}</span>
-                    <span className="text-xs opacity-70">Specialist</span>
-                  </div>
-                </TabsTrigger>
-              ))}
+            <TabsList className="grid w-full grid-cols-7 gap-1">
+              <TabsTrigger 
+                value="all" 
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
+              >
+                All ({EXPANDED_PLAB2_STATIONS.length})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="history" 
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
+              >
+                History ({EXPANDED_STATION_STATS.byType.history})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="examination" 
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
+              >
+                Exam ({EXPANDED_STATION_STATS.byType.examination})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="explanation" 
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
+              >
+                Explain ({EXPANDED_STATION_STATS.byType.explanation})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="ethics" 
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
+              >
+                Ethics ({EXPANDED_STATION_STATS.byType.ethics})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="acute-care" 
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
+              >
+                Acute ({EXPANDED_STATION_STATS.byType['acute-care']})
+              </TabsTrigger>
+              <TabsTrigger 
+                value="practical-skills" 
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
+              >
+                Skills ({EXPANDED_STATION_STATS.byType['practical-skills']})
+              </TabsTrigger>
             </TabsList>
 
           <TabsContent value={selectedType} className="mt-6">
@@ -899,88 +919,6 @@ function OSCEStationView({
                   onChange={(e) => setUserNotes(e.target.value)}
                   className="min-h-32"
                 />
-              </CardContent>
-            </Card>
-
-            {/* Official References Section */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-gray-900 flex items-center gap-2">
-                  <BookOpen className="w-5 h-5" />
-                  Official References
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-3 mb-4">
-                  {(station as any).nice_guidance && (
-                    <Button
-                      onClick={() => window.open((station as any).nice_guidance.url || 'https://www.nice.org.uk/guidance', '_blank')}
-                      className="bg-blue-600 hover:bg-blue-700 text-white"
-                      size="sm"
-                    >
-                      <ExternalLink className="w-3 h-3 mr-1" />
-                      NICE Guideline: {(station as any).nice_guidance.code}
-                    </Button>
-                  )}
-                  
-                  {(station as any).cks_guidance && (
-                    <Button
-                      onClick={() => window.open((station as any).cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
-                      className="bg-green-600 hover:bg-green-700 text-white"
-                      size="sm"
-                    >
-                      <ExternalLink className="w-3 h-3 mr-1" />
-                      CKS: {(station as any).cks_guidance.topic || 'Clinical Knowledge'}
-                    </Button>
-                  )}
-                  
-                  {/* Fallback buttons if specific guidance not available */}
-                  {!(station as any).nice_guidance && !(station as any).cks_guidance && (
-                    <>
-                      <Button
-                        onClick={() => window.open('https://www.nice.org.uk/guidance', '_blank')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white"
-                        size="sm"
-                      >
-                        <ExternalLink className="w-3 h-3 mr-1" />
-                        NICE Guidelines
-                      </Button>
-                      
-                      <Button
-                        onClick={() => window.open('https://cks.nice.org.uk/', '_blank')}
-                        className="bg-green-600 hover:bg-green-700 text-white"
-                        size="sm"
-                      >
-                        <ExternalLink className="w-3 h-3 mr-1" />
-                        CKS Guidelines
-                      </Button>
-                    </>
-                  )}
-                </div>
-                
-                {station.references && station.references.length > 0 && (
-                  <div className="space-y-2">
-                    <h4 className="font-medium text-gray-900">Additional References:</h4>
-                    {station.references.map((reference: any, index: number) => (
-                      <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-3">
-                        <p className="text-gray-700 text-sm mb-2">
-                          {typeof reference === 'string' ? reference : reference.title || reference.text}
-                        </p>
-                        {typeof reference === 'object' && reference.url && (
-                          <a 
-                            href={reference.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm inline-flex items-center gap-2 font-medium transition-colors"
-                          >
-                            <ExternalLink className="w-3 h-3" />
-                            View Guidelines
-                          </a>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
               </CardContent>
             </Card>
 
