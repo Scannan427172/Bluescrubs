@@ -219,17 +219,24 @@ export function registerCommunityRoutes(app: Express) {
   app.post('/api/community/posts', async (req, res) => {
     try {
       const { content, tags } = req.body;
-      const userId = req.user?.id || 1; // Default to user 1 for now
-
-      const [newPost] = await db
-        .insert(communityPosts)
-        .values({
-          authorId: userId,
-          content,
-          tags: tags || []
-        })
-        .returning();
-
+      const newPost = {
+        id: mockPosts.length + 1,
+        content,
+        tags: tags || [],
+        likes: 0,
+        replies: 0,
+        createdAt: new Date().toISOString(),
+        authorId: 1,
+        author: {
+          id: 1,
+          username: "CurrentUser",
+          currentStage: "Medical Student",
+          country: "United Kingdom",
+          city: "London"
+        }
+      };
+      
+      mockPosts.unshift(newPost);
       res.json(newPost);
     } catch (error) {
       console.error('Error creating post:', error);
@@ -241,41 +248,13 @@ export function registerCommunityRoutes(app: Express) {
   app.post('/api/community/posts/:postId/like', async (req, res) => {
     try {
       const postId = parseInt(req.params.postId);
-      const userId = req.user?.id || 1;
-
-      // Check if user already liked this post
-      const existingLike = await db
-        .select()
-        .from(communityLikes)
-        .where(eq(communityLikes.postId, postId))
-        .where(eq(communityLikes.userId, userId))
-        .limit(1);
-
-      if (existingLike.length > 0) {
-        // Unlike the post
-        await db
-          .delete(communityLikes)
-          .where(eq(communityLikes.postId, postId))
-          .where(eq(communityLikes.userId, userId));
-
-        await db
-          .update(communityPosts)
-          .set({ likes: sql`${communityPosts.likes} - 1` })
-          .where(eq(communityPosts.id, postId));
-
-        res.json({ liked: false });
+      const post = mockPosts.find(p => p.id === postId);
+      
+      if (post) {
+        post.likes += 1;
+        res.json({ liked: true, likes: post.likes });
       } else {
-        // Like the post
-        await db
-          .insert(communityLikes)
-          .values({ postId, userId });
-
-        await db
-          .update(communityPosts)
-          .set({ likes: sql`${communityPosts.likes} + 1` })
-          .where(eq(communityPosts.id, postId));
-
-        res.json({ liked: true });
+        res.status(404).json({ error: 'Post not found' });
       }
     } catch (error) {
       console.error('Error toggling like:', error);
@@ -286,27 +265,7 @@ export function registerCommunityRoutes(app: Express) {
   // Get study groups
   app.get('/api/community/study-groups', async (req, res) => {
     try {
-      const groups = await db
-        .select({
-          id: communityStudyGroups.id,
-          name: communityStudyGroups.name,
-          description: communityStudyGroups.description,
-          specialty: communityStudyGroups.specialty,
-          meetingTime: communityStudyGroups.meetingTime,
-          location: communityStudyGroups.location,
-          members: communityStudyGroups.members,
-          maxMembers: communityStudyGroups.maxMembers,
-          createdAt: communityStudyGroups.createdAt,
-          creator: {
-            username: users.username
-          }
-        })
-        .from(communityStudyGroups)
-        .leftJoin(users, eq(communityStudyGroups.creatorId, users.id))
-        .where(eq(communityStudyGroups.isPublic, true))
-        .orderBy(desc(communityStudyGroups.createdAt));
-
-      res.json(groups);
+      res.json(mockStudyGroups);
     } catch (error) {
       console.error('Error fetching study groups:', error);
       res.status(500).json({ error: 'Failed to fetch study groups' });
@@ -317,32 +276,18 @@ export function registerCommunityRoutes(app: Express) {
   app.post('/api/community/study-groups/:groupId/join', async (req, res) => {
     try {
       const groupId = parseInt(req.params.groupId);
-      const userId = req.user?.id || 1;
-
-      // Check if already a member
-      const existingMembership = await db
-        .select()
-        .from(studyGroupMemberships)
-        .where(eq(studyGroupMemberships.groupId, groupId))
-        .where(eq(studyGroupMemberships.userId, userId))
-        .limit(1);
-
-      if (existingMembership.length > 0) {
-        return res.json({ joined: true, message: 'Already a member' });
+      const group = mockStudyGroups.find(g => g.id === groupId);
+      
+      if (!group) {
+        return res.status(404).json({ error: 'Study group not found' });
       }
-
-      // Add membership
-      await db
-        .insert(studyGroupMemberships)
-        .values({ groupId, userId });
-
-      // Update member count
-      await db
-        .update(communityStudyGroups)
-        .set({ members: sql`${communityStudyGroups.members} + 1` })
-        .where(eq(communityStudyGroups.id, groupId));
-
-      res.json({ joined: true });
+      
+      if (group.members >= group.maxMembers) {
+        return res.status(400).json({ error: 'Study group is full' });
+      }
+      
+      group.members += 1;
+      res.json({ success: true, members: group.members });
     } catch (error) {
       console.error('Error joining study group:', error);
       res.status(500).json({ error: 'Failed to join study group' });
@@ -352,25 +297,7 @@ export function registerCommunityRoutes(app: Express) {
   // Get community events
   app.get('/api/community/events', async (req, res) => {
     try {
-      const events = await db
-        .select({
-          id: communityEvents.id,
-          title: communityEvents.title,
-          type: communityEvents.type,
-          date: communityEvents.date,
-          time: communityEvents.time,
-          description: communityEvents.description,
-          attendees: communityEvents.attendees,
-          maxAttendees: communityEvents.maxAttendees,
-          host: {
-            username: users.username
-          }
-        })
-        .from(communityEvents)
-        .leftJoin(users, eq(communityEvents.hostId, users.id))
-        .orderBy(communityEvents.date);
-
-      res.json(events);
+      res.json(mockEvents);
     } catch (error) {
       console.error('Error fetching events:', error);
       res.status(500).json({ error: 'Failed to fetch events' });
@@ -381,32 +308,18 @@ export function registerCommunityRoutes(app: Express) {
   app.post('/api/community/events/:eventId/register', async (req, res) => {
     try {
       const eventId = parseInt(req.params.eventId);
-      const userId = req.user?.id || 1;
-
-      // Check if already registered
-      const existingRegistration = await db
-        .select()
-        .from(eventRegistrations)
-        .where(eq(eventRegistrations.eventId, eventId))
-        .where(eq(eventRegistrations.userId, userId))
-        .limit(1);
-
-      if (existingRegistration.length > 0) {
-        return res.json({ registered: true, message: 'Already registered' });
+      const event = mockEvents.find(e => e.id === eventId);
+      
+      if (!event) {
+        return res.status(404).json({ error: 'Event not found' });
       }
-
-      // Add registration
-      await db
-        .insert(eventRegistrations)
-        .values({ eventId, userId });
-
-      // Update attendee count
-      await db
-        .update(communityEvents)
-        .set({ attendees: sql`${communityEvents.attendees} + 1` })
-        .where(eq(communityEvents.id, eventId));
-
-      res.json({ registered: true });
+      
+      if (event.attendees >= event.maxAttendees) {
+        return res.status(400).json({ error: 'Event is full' });
+      }
+      
+      event.attendees += 1;
+      res.json({ success: true, attendees: event.attendees });
     } catch (error) {
       console.error('Error registering for event:', error);
       res.status(500).json({ error: 'Failed to register for event' });
@@ -416,112 +329,11 @@ export function registerCommunityRoutes(app: Express) {
   // Get mentors
   app.get('/api/community/mentors', async (req, res) => {
     try {
-      const mentors = await db
-        .select({
-          id: communityMentors.id,
-          title: communityMentors.title,
-          specialty: communityMentors.specialty,
-          experience: communityMentors.experience,
-          availability: communityMentors.availability,
-          rating: communityMentors.rating,
-          totalSessions: communityMentors.totalSessions,
-          hourlyRate: communityMentors.hourlyRate,
-          languages: communityMentors.languages,
-          user: {
-            username: users.username,
-            country: users.country
-          }
-        })
-        .from(communityMentors)
-        .leftJoin(users, eq(communityMentors.userId, users.id))
-        .orderBy(desc(communityMentors.rating));
-
-      res.json(mentors);
+      res.json(mockMentors);
     } catch (error) {
       console.error('Error fetching mentors:', error);
       res.status(500).json({ error: 'Failed to fetch mentors' });
     }
   });
 
-  // Book a mentor session
-  app.post('/api/community/mentors/:mentorId/book', async (req, res) => {
-    try {
-      const mentorId = parseInt(req.params.mentorId);
-      const userId = req.user?.id || 1;
-      const { scheduledAt, duration, notes } = req.body;
-
-      const [session] = await db
-        .insert(mentorSessions)
-        .values({
-          mentorId,
-          menteeId: userId,
-          scheduledAt: new Date(scheduledAt),
-          duration: duration || 60,
-          notes
-        })
-        .returning();
-
-      res.json(session);
-    } catch (error) {
-      console.error('Error booking mentor session:', error);
-      res.status(500).json({ error: 'Failed to book session' });
-    }
-  });
-
-  // Get comments for a post
-  app.get('/api/community/posts/:postId/comments', async (req, res) => {
-    try {
-      const postId = parseInt(req.params.postId);
-
-      const comments = await db
-        .select({
-          id: communityComments.id,
-          content: communityComments.content,
-          likes: communityComments.likes,
-          createdAt: communityComments.createdAt,
-          author: {
-            username: users.username,
-            currentStage: users.currentStage
-          }
-        })
-        .from(communityComments)
-        .leftJoin(users, eq(communityComments.authorId, users.id))
-        .where(eq(communityComments.postId, postId))
-        .orderBy(communityComments.createdAt);
-
-      res.json(comments);
-    } catch (error) {
-      console.error('Error fetching comments:', error);
-      res.status(500).json({ error: 'Failed to fetch comments' });
-    }
-  });
-
-  // Add a comment to a post
-  app.post('/api/community/posts/:postId/comments', async (req, res) => {
-    try {
-      const postId = parseInt(req.params.postId);
-      const userId = req.user?.id || 1;
-      const { content } = req.body;
-
-      const [comment] = await db
-        .insert(communityComments)
-        .values({
-          postId,
-          authorId: userId,
-          content
-        })
-        .returning();
-
-      // Update reply count
-      await db
-        .update(communityPosts)
-        .set({ replies: sql`${communityPosts.replies} + 1` })
-        .where(eq(communityPosts.id, postId));
-
-      res.json(comment);
-    } catch (error) {
-      console.error('Error adding comment:', error);
-      res.status(500).json({ error: 'Failed to add comment' });
-    }
-  });
 }
