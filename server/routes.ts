@@ -21,6 +21,7 @@ import {
 } from "./ai-study-tools";
 import { plabAI, type PLABStudySession, type AdaptiveFlashcard } from "./plab-ai-study-system";
 import { interactivePatientSystem } from "./interactive-patient";
+import plabIntelligenceAPI from "./plab-intelligence-api";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -919,6 +920,9 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
       res.status(500).json({ error: "Failed to upload video recording" });
     }
   });
+
+  // Mount PLAB Intelligence API
+  app.use(plabIntelligenceAPI);
 
   const httpServer = createServer(app);
   return httpServer;

@@ -33,6 +33,7 @@ import CulturalTraining from "@/pages/cultural-training";
 import Mentors from "@/pages/mentors";
 import Gamification from "@/pages/gamification";
 import AdvancedDashboard from "@/pages/advanced-dashboard";
+import InternationalExams from "@/pages/international-exams";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
