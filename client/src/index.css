@@ -705,8 +705,17 @@ input[type="radio"]:focus {
 }
 
 /* Target landing page hero text to make it white */
-#landing-hero-text {
+#landing-hero-text,
+.hero-text,
+.hero-text *,
+.hero-text h1,
+.hero-text h2,
+.hero-text h3,
+.hero-text p,
+.hero-text span,
+.hero-text div {
   color: white !important;
+  -webkit-text-fill-color: white !important;
 }
 
 /* Removed conflicting blue text styling - handled by consistent button styling below */

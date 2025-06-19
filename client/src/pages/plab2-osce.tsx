@@ -416,11 +416,11 @@ export default function Plab2Osce() {
         }}
       >
 
-        <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-4 hero-text-white drop-shadow-2xl" style={{color: '#ffffff !important', textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+        <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16 hero-text">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
             PLAB 2 OSCE Practice
           </h1>
-          <p className="text-xl lg:text-2xl mb-6 hero-text-white drop-shadow-2xl" style={{color: '#ffffff !important', textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+          <p className="text-xl lg:text-2xl mb-6 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
             Master clinical skills with comprehensive OSCE stations
           </p>
           <div className="flex flex-wrap justify-center gap-3">
