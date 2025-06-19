@@ -1414,15 +1414,6 @@ export default function PLAB1New() {
                     <div className="flex items-center justify-between mb-3">
                       <p className="text-sm font-medium text-green-900">CKS Clinical Knowledge Summary</p>
                       <div className="flex flex-col gap-1">
-                        <a
-                          href={currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/'}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 h-9 px-3"
-                        >
-                          <ExternalLink className="w-3 h-3 mr-1" />
-                          View CKS Guidelines
-                        </a>
                         <p className="text-xs text-green-700 italic">
                           Note: CKS access may be restricted outside the UK
                         </p>
@@ -1498,6 +1489,21 @@ export default function PLAB1New() {
                           </ul>
                         </div>
                       )}
+                    </div>
+                    
+                    {/* Main CKS button moved to end so it opens last */}
+                    <div className="mt-4 pt-3 border-t border-green-200">
+                      <div className="flex justify-center">
+                        <a
+                          href={currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 h-9 px-4"
+                        >
+                          <ExternalLink className="w-3 h-3 mr-1" />
+                          View Full CKS Guidelines
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
