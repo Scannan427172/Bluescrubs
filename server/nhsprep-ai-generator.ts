@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { getVerifiedGuidelineLinks, GuidelineLinks } from "./guideline-fetcher";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -524,6 +525,9 @@ export async function generateNHSPrepQuestions(
   try {
     // Get verified guidelines for the specialty/topic
     const guidelineData = getVerifiedGuidelines(specialty, topic);
+    
+    // Fetch authentic NICE/CKS links for this topic
+    const guidelineLinks = await getVerifiedGuidelineLinks(specialty, topic);
     
     const prompt = `You are NHSPrep AI — a clinical exam question generator for PLAB, MLA, and NHSPrep candidates.
 
