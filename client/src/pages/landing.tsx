@@ -100,7 +100,7 @@ export default function Landing() {
             </h2>
             <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed px-4">
               A comprehensive PLAB preparation ecosystem combining AI-powered learning, 
-              real-time expert consultations, and immersive clinical training in 35 languages.
+              real-time expert consultations, and immersive clinical training in 40+ languages.
             </p>
           </div>
 
@@ -368,7 +368,7 @@ export default function Landing() {
                   "Smart notification timing",
                   "Voice-to-revision notes",
                   "Offline content sync",
-                  "35-language support",
+                  "40+ language support",
                   "Commute-optimized learning"
                 ]
               },
@@ -547,7 +547,7 @@ export default function Landing() {
                   {
                     icon: Globe,
                     title: "Multi-Language Support",
-                    description: "Study in your native language with 35 supported languages including Arabic, Hindi, Mandarin, Spanish, French, German, Portuguese, Russian, Japanese, Korean, and 25 more"
+                    description: "Study in your native language with 40+ supported languages including Arabic, Hindi, Mandarin, Spanish, French, German, Portuguese, Russian, Japanese, Korean, and 30+ more"
                   },
                   {
                     icon: Award,
