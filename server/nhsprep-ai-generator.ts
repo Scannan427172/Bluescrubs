@@ -549,7 +549,7 @@ CRITICAL REQUIREMENTS:
 3. Provide working URLs to the guidelines
 4. Clinical scenarios must be realistic UK NHS cases
 5. All 5 options must be plausible but only one correct
-6. Explanations must cite specific guideline recommendations
+6. Explanations must be comprehensive (200-250 words) with detailed clinical reasoning, pathophysiology, differential diagnosis considerations, why incorrect options are wrong, and UK-specific clinical protocols
 
 Return ONLY a JSON array in this exact format:
 
