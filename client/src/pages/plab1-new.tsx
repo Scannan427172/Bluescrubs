@@ -1415,7 +1415,11 @@ export default function PLAB1New() {
                       <p className="text-sm font-medium text-green-900">CKS Clinical Knowledge Summary</p>
                       <Button
                         size="sm"
-                        onClick={() => window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
+                        }}
                         className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
                       >
                         <ExternalLink className="w-3 h-3 mr-1" />
@@ -1459,7 +1463,11 @@ export default function PLAB1New() {
                                   <Button
                                     size="sm"
                                     variant="outline"
-                                    onClick={() => window.open(ref.url, '_blank')}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      window.open(ref.url, '_blank');
+                                    }}
                                     className="h-6 px-2 text-xs border-green-300 text-green-700 hover:bg-green-50"
                                   >
                                     <ExternalLink className="w-2 h-2 mr-1" />
@@ -1537,15 +1545,18 @@ export default function PLAB1New() {
                             {typeof reference === 'string' ? reference : reference.title || reference.text}
                           </p>
                           {typeof reference === 'object' && reference.url && (
-                            <a 
-                              href={reference.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm inline-flex items-center gap-2 font-medium transition-colors"
+                            <Button
+                              size="sm"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                window.open(reference.url, '_blank');
+                              }}
+                              className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                             >
-                              <ExternalLink className="w-4 h-4" />
+                              <ExternalLink className="w-4 h-4 mr-1" />
                               View Full Guidelines
-                            </a>
+                            </Button>
                           )}
                         </div>
                       ))
