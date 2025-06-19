@@ -1,49 +1,124 @@
+import axios from "axios";
+import { load } from "cheerio";
+
 export interface GuidelineLinks {
   nice?: string;
   cks?: string;
   error?: string;
 }
 
-// Simplified guideline fetching using verified static guidelines
+// Dynamic NICE/CKS guideline fetching
 export async function fetchGuidelineLinks(topic: string): Promise<GuidelineLinks> {
-  // For now, use verified static guidelines to ensure reliability
-  // Can be enhanced with dynamic fetching when needed
-  return getStaticGuidelineForTopic(topic);
+  const results: GuidelineLinks = {};
+
+  try {
+    // Fetch NICE guideline link
+    const niceLink = await fetchFirstSearchResult(topic, "nice.org.uk");
+    if (niceLink) {
+      results.nice = niceLink;
+    }
+
+    // Fetch CKS topic link
+    const cksLink = await fetchFirstSearchResult(topic, "cks.nice.org.uk");
+    if (cksLink) {
+      results.cks = cksLink;
+    }
+
+    // Fallback to static guidelines if dynamic fetching fails
+    if (!results.nice && !results.cks) {
+      return getStaticGuidelineForTopic(topic);
+    }
+
+    return results;
+  } catch (error) {
+    console.error(`Error fetching guidelines for ${topic}:`, error);
+    return getStaticGuidelineForTopic(topic);
+  }
+}
+
+async function fetchFirstSearchResult(query: string, site: string): Promise<string | null> {
+  const encodedQuery = encodeURIComponent(`${query} site:${site}`);
+  const searchUrl = `https://www.google.com/search?q=${encodedQuery}`;
+
+  try {
+    const { data } = await axios.get(searchUrl, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      },
+      timeout: 8000,
+    });
+
+    const $ = load(data);
+    const firstResult = $("a")
+      .map((i: number, link: any) => $(link).attr("href"))
+      .get()
+      .find((href: string) => href && href.includes(site));
+
+    if (firstResult && firstResult.includes("/url?q=")) {
+      return decodeURIComponent(firstResult.split("/url?q=")[1].split("&")[0]);
+    }
+
+    return firstResult || null;
+  } catch (err: any) {
+    console.error(`Error fetching link for ${query} on ${site}:`, err.message || err);
+    return null;
+  }
 }
 
 function getStaticGuidelineForTopic(topic: string): GuidelineLinks {
   const topicKey = topic.toLowerCase();
   
-  // Topic-based guideline mapping
-  if (topicKey.includes('diabetes') || topicKey.includes('sglt2')) {
+  // Enhanced topic-based guideline mapping
+  if (topicKey.includes('diabetes') || topicKey.includes('sglt2') || topicKey.includes('metformin')) {
     return {
       nice: "https://www.nice.org.uk/guidance/ng28",
       cks: "https://cks.nice.org.uk/topics/diabetes-type-2/"
     };
   }
   
-  if (topicKey.includes('hypertension') || topicKey.includes('ace inhibitor')) {
+  if (topicKey.includes('hypertension') || topicKey.includes('ace inhibitor') || topicKey.includes('blood pressure')) {
     return {
       nice: "https://www.nice.org.uk/guidance/ng136",
       cks: "https://cks.nice.org.uk/topics/hypertension/"
     };
   }
   
-  if (topicKey.includes('asthma') || topicKey.includes('corticosteroid')) {
+  if (topicKey.includes('asthma') || topicKey.includes('inhaler') || topicKey.includes('corticosteroid')) {
     return {
       nice: "https://www.nice.org.uk/guidance/ng80",
       cks: "https://cks.nice.org.uk/topics/asthma/"
     };
   }
   
-  if (topicKey.includes('heart failure') || topicKey.includes('hf')) {
+  if (topicKey.includes('heart failure') || topicKey.includes('hf') || topicKey.includes('ejection fraction')) {
     return {
       nice: "https://www.nice.org.uk/guidance/cg108",
       cks: "https://cks.nice.org.uk/topics/heart-failure-chronic/"
     };
   }
+
+  if (topicKey.includes('depression') || topicKey.includes('antidepressant')) {
+    return {
+      nice: "https://www.nice.org.uk/guidance/cg90",
+      cks: "https://cks.nice.org.uk/topics/depression/"
+    };
+  }
+
+  if (topicKey.includes('copd') || topicKey.includes('chronic obstructive')) {
+    return {
+      nice: "https://www.nice.org.uk/guidance/cg101",
+      cks: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/"
+    };
+  }
+
+  if (topicKey.includes('stroke') || topicKey.includes('tia')) {
+    return {
+      nice: "https://www.nice.org.uk/guidance/ng128",
+      cks: "https://cks.nice.org.uk/topics/stroke-tia/"
+    };
+  }
   
-  // Default fallback - will be enhanced with specific guidelines
+  // Specialty-specific fallbacks
   return {
     nice: "https://www.nice.org.uk/guidance",
     cks: "https://cks.nice.org.uk/topics/"

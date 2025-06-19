@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { getVerifiedGuidelineLinks, GuidelineLinks } from "./guideline-fetcher";
+import { fetchGuidelineLinks, GuidelineLinks } from "./guideline-fetcher";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -527,7 +527,8 @@ export async function generateNHSPrepQuestions(
     const guidelineData = getVerifiedGuidelines(specialty, topic);
     
     // Fetch authentic NICE/CKS links for this topic
-    const guidelineLinks = await getVerifiedGuidelineLinks(specialty, topic);
+    const searchTopic = `${topic} ${specialty} first line treatment`;
+    const guidelineLinks = await fetchGuidelineLinks(searchTopic);
     
     const prompt = `You are NHSPrep AI — a clinical exam question generator for PLAB, MLA, and NHSPrep candidates.
 
@@ -545,12 +546,16 @@ TASK: Generate ${count} SINGLE-BEST-ANSWER exam questions for:
 VERIFIED GUIDELINES FOR THIS TOPIC:
 ${guidelineData}
 
+AUTHENTIC GUIDELINE LINKS (use these exact URLs):
+- NICE: ${guidelineLinks.nice || 'https://www.nice.org.uk/guidance'}
+- CKS: ${guidelineLinks.cks || 'https://cks.nice.org.uk/topics/'}
+
 Each question must follow UK NHS clinical guidelines and be appropriate for candidates preparing for PLAB/MLA/NHS licensing exams.
 
 CRITICAL REQUIREMENTS:
 1. Use ONLY the verified UK guidelines provided above
 2. Include specific NICE/CKS reference with exact section
-3. Provide working URLs to the guidelines - MUST be direct links to specific guidelines (e.g., NICE NG28 for Type 2 Diabetes), NOT general homepages
+3. Use the authentic guideline URLs provided above - these are direct links to specific guidelines
 4. Clinical scenarios must be realistic UK NHS cases
 5. All 5 options must be plausible but only one correct
 6. Explanations must be comprehensive (200-250 words) starting with "Correct Answer: [Letter]. [Option text]" followed by:
@@ -580,7 +585,7 @@ Return ONLY a JSON array in this exact format:
     "reference": {
       "title": "Exact NICE/CKS guideline title",
       "section": "Specific section or recommendation quoted",
-      "url": "Direct working URL to the guideline page"
+      "url": "${guidelineLinks.nice || guidelineLinks.cks || 'https://www.nice.org.uk/guidance'}"
     }
   }
 ]
