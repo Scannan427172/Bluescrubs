@@ -168,7 +168,7 @@ function getFallbackGuidelines(topic: string, specialty: string): GuidelineSearc
       },
       cks: {
         title: "CKS Topic: Diabetes - type 2",
-        url: "https://cks.nice.org.uk/topics/diabetes-type-2/management/blood-glucose-management/",
+        url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations#first-line-drug-treatment",
         section: "Management - Blood glucose management",
         relevance: "Primary care diabetes management"
       }
