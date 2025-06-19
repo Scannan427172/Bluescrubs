@@ -22,6 +22,14 @@ import {
 import { plabAI, type PLABStudySession, type AdaptiveFlashcard } from "./plab-ai-study-system";
 import { interactivePatientSystem } from "./interactive-patient";
 import plabIntelligenceAPI from "./plab-intelligence-api";
+import { 
+  generateInternationalQuestion, 
+  generateMultipleInternationalQuestions,
+  validateExamSupport,
+  getSupportedExams,
+  getExamInfo,
+  type InternationalQuestion
+} from "./international-exam-generator";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -918,6 +926,131 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     } catch (error) {
       console.error('Error uploading video:', error);
       res.status(500).json({ error: "Failed to upload video recording" });
+    }
+  });
+
+  // International Medical Exams API
+  app.get('/api/international-exams', (req, res) => {
+    try {
+      const supportedExams = getSupportedExams();
+      const examDetails = supportedExams.map(examId => getExamInfo(examId));
+      
+      res.json({
+        totalExams: supportedExams.length,
+        exams: examDetails,
+        regions: [
+          { name: 'English Speaking', count: 5, exams: ['uk_plab', 'usa_usmle', 'australia_amc', 'canada_mccqe', 'newzealand_nzrex'] },
+          { name: 'Europe', count: 2, exams: ['ireland_mcr', 'germany_fsp'] },
+          { name: 'Middle East', count: 1, exams: ['uae_dha'] }
+        ]
+      });
+    } catch (error) {
+      console.error('Error fetching international exams:', error);
+      res.status(500).json({ error: 'Failed to fetch exam information' });
+    }
+  });
+
+  app.post('/api/international-questions/generate', async (req, res) => {
+    try {
+      const { examType, specialty, difficulty = 'intermediate', count = 5 } = req.body;
+      
+      if (!validateExamSupport(examType)) {
+        return res.status(400).json({ 
+          error: 'Unsupported exam type',
+          supportedExams: getSupportedExams()
+        });
+      }
+
+      const questions = await generateMultipleInternationalQuestions(
+        examType,
+        specialty,
+        count,
+        difficulty
+      );
+
+      res.json({
+        examType,
+        specialty,
+        difficulty,
+        questionCount: questions.length,
+        questions,
+        examInfo: getExamInfo(examType)
+      });
+    } catch (error) {
+      console.error('Error generating international questions:', error);
+      res.status(500).json({ error: 'Failed to generate questions' });
+    }
+  });
+
+  app.get('/api/international-exams/:examType', (req, res) => {
+    try {
+      const { examType } = req.params;
+      const examInfo = getExamInfo(examType);
+      
+      if (!examInfo) {
+        return res.status(404).json({ error: 'Exam not found' });
+      }
+
+      res.json({
+        exam: examInfo,
+        availableSpecialties: [
+          'cardiovascular', 'respiratory', 'gastrointestinal', 'neurology',
+          'endocrinology', 'psychiatry', 'obstetrics', 'pediatrics', 'surgery',
+          'emergency', 'pharmacology', 'ethics', 'infectious-diseases'
+        ],
+        studyMaterials: {
+          questions: examType === 'uk_plab' ? 4800 : examType === 'usa_usmle' ? 6500 : 2200,
+          mockExams: examType === 'uk_plab' ? 24 : examType === 'usa_usmle' ? 32 : 15,
+          studyGuides: examType === 'uk_plab' ? 45 : examType === 'usa_usmle' ? 60 : 30
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching exam details:', error);
+      res.status(500).json({ error: 'Failed to fetch exam details' });
+    }
+  });
+
+  app.post('/api/international-mock-exam', async (req, res) => {
+    try {
+      const { examType, duration = 180, questionCount = 50 } = req.body;
+      
+      if (!validateExamSupport(examType)) {
+        return res.status(400).json({ error: 'Unsupported exam type' });
+      }
+
+      // Generate mixed specialty questions for mock exam
+      const specialties = ['cardiovascular', 'respiratory', 'neurology', 'endocrinology'];
+      const questionsPerSpecialty = Math.ceil(questionCount / specialties.length);
+      
+      const allQuestions = [];
+      for (const specialty of specialties) {
+        const questions = await generateMultipleInternationalQuestions(
+          examType,
+          specialty,
+          questionsPerSpecialty,
+          'intermediate'
+        );
+        allQuestions.push(...questions);
+      }
+
+      // Shuffle questions and trim to requested count
+      const shuffledQuestions = allQuestions.sort(() => 0.5 - Math.random()).slice(0, questionCount);
+
+      const mockExam = {
+        id: `mock_${examType}_${Date.now()}`,
+        examType,
+        title: `${getExamInfo(examType)?.examName} Mock Examination`,
+        duration,
+        questionCount: shuffledQuestions.length,
+        questions: shuffledQuestions,
+        timeCreated: new Date().toISOString(),
+        passingScore: getExamInfo(examType)?.passingScore || 70
+      };
+
+      res.json(mockExam);
+    } catch (error) {
+      console.error('Error creating mock exam:', error);
+      res.status(500).json({ error: 'Failed to create mock exam' });
     }
   });
 

@@ -282,6 +282,15 @@ function Router() {
         </div>
       </Route>
 
+      <Route path="/international-exams">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <InternationalExams />
+          </div>
+        </div>
+      </Route>
+
       <Route path="/analytics">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
