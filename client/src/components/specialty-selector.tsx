@@ -44,7 +44,7 @@ export function SpecialtySelector({
     queryKey: ["/api/plab-ai/specialties"],
   });
 
-  const specialties: Specialty[] = specialtiesData?.specialties || [];
+  const specialties: Specialty[] = (specialtiesData as any)?.specialties || [];
 
   const handleGenerateClick = () => {
     if (selectedSpecialty) {
