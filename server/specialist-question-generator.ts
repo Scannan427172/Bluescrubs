@@ -127,17 +127,23 @@ Requirements:
 5. Ensure diagnostic reasoning reflects specialist-level thinking
 6. Include investigations and management options appropriate to your expertise level
 
-Format each question as JSON with:
-- question: The clinical scenario and question
-- options: Array of 5 plausible options (A, B, C, D, E)
-- correct_answer: The correct option letter
-- explanation: Detailed explanation referencing UK guidelines and specialist knowledge
-- category: "${specialtyInfo.name}"
-- difficulty: "${difficulty}"
-- specialty_focus: Array of 2-3 key learning points from your specialty
-- uk_guidelines: Relevant UK clinical guidelines referenced
+Format as JSON object with 'questions' array. Each question must have:
+{
+  "questions": [
+    {
+      "question": "Clinical scenario ending with question",
+      "options": ["A. First option", "B. Second option", "C. Third option", "D. Fourth option", "E. Fifth option"],
+      "correctAnswer": 1,
+      "explanation": "Detailed explanation with UK guidelines",
+      "category": "${specialtyInfo.name}",
+      "difficulty": "${difficulty}",
+      "specialty_focus": ["Key point 1", "Key point 2"],
+      "uk_guidelines": ["NICE guidance", "Other guidelines"]
+    }
+  ]
+}
 
-Respond with JSON array of questions only.`;
+CRITICAL: correctAnswer must be a number (0-4) indicating the index of the correct option.`;
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
@@ -156,14 +162,33 @@ Respond with JSON array of questions only.`;
       max_tokens: 4000
     });
 
-    const result = JSON.parse(response.choices[0].message.content || "{}");
+    const content = response.choices[0].message.content || "{}";
+    let result;
+    
+    try {
+      result = JSON.parse(content);
+    } catch (e) {
+      console.error('Failed to parse OpenAI response:', content);
+      throw new Error("Invalid JSON response from OpenAI");
+    }
     
     if (!result.questions || !Array.isArray(result.questions)) {
-      throw new Error("Invalid response format from OpenAI");
+      console.error('Invalid question format:', result);
+      throw new Error("Response missing questions array");
+    }
+
+    // Validate and fix question format
+    const validQuestions = result.questions.filter((q: any) => {
+      return q.question && q.options && Array.isArray(q.options) && 
+             typeof q.correctAnswer === 'number' && q.explanation;
+    });
+
+    if (validQuestions.length === 0) {
+      throw new Error("No valid questions in response");
     }
 
     // Add unique IDs and timestamp to each question
-    return result.questions.map((q: any, index: number) => ({
+    return validQuestions.map((q: any, index: number) => ({
       ...q,
       id: `${specialty}_${Date.now()}_${index}`,
       generated_at: new Date().toISOString(),
@@ -173,7 +198,9 @@ Respond with JSON array of questions only.`;
 
   } catch (error) {
     console.error(`Error generating ${specialty} questions:`, error);
-    throw error;
+    
+    // Fallback: return empty array instead of throwing to prevent cascade failures
+    return [];
   }
 }
 
@@ -201,7 +228,25 @@ export async function generateMixedSpecialistQuestions(
     
   } catch (error) {
     console.error("Error generating mixed specialist questions:", error);
-    throw error;
+    
+    // Filter out failed requests and return successful ones
+    const allQuestions = await Promise.allSettled(
+      specialties.map(specialty => 
+        generateSpecialistQuestions(specialty, questionsPerSpecialty, difficulty)
+      )
+    );
+
+    const successfulQuestions = allQuestions
+      .filter((result): result is PromiseFulfilledResult<any[]> => result.status === 'fulfilled')
+      .map(result => result.value)
+      .flat();
+
+    if (successfulQuestions.length === 0) {
+      throw new Error("No questions could be generated from any specialty");
+    }
+
+    const shuffled = successfulQuestions.sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, Math.min(totalQuestions, successfulQuestions.length));
   }
 }
 
