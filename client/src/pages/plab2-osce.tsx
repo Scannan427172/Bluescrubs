@@ -14,6 +14,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EXPANDED_PLAB2_STATIONS, EXPANDED_STATION_STATS, EnhancedOSCEStation } from "@shared/expanded-plab2-stations";
+import plab2BgImage from '@assets/6675ABC6-B1E7-4E4C-92C4-D90C32FA1CB4_1750366172462.png';
 
 // Define station types for filtering
 const OSCE_STATION_TYPES = [
@@ -404,11 +405,43 @@ export default function Plab2Osce() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Hero Banner */}
+      <div 
+        className="relative bg-gradient-to-r from-blue-600 to-purple-700 rounded-2xl mb-8 overflow-hidden"
+        style={{
+          backgroundImage: `url(${plab2BgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundBlendMode: 'multiply'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-8 py-16">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
+            PLAB 2 OSCE Practice
+          </h1>
+          <p className="text-xl lg:text-2xl mb-6 text-white/90">
+            Master clinical skills with comprehensive OSCE stations
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Badge className="bg-white text-black px-4 py-2">
+              16-20 Stations
+            </Badge>
+            <Badge className="bg-white text-black px-4 py-2">
+              Clinical Skills
+            </Badge>
+            <Badge className="bg-white text-black px-4 py-2">
+              Video Practice
+            </Badge>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <Stethoscope className="w-8 h-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900">{translateText('PLAB 2 OSCE Practice')}</h1>
+            <h2 className="text-3xl font-bold text-gray-900">{translateText('Practice Overview')}</h2>
           </div>
           <p className="text-lg text-gray-600">{translateText('Comprehensive OSCE practice with 16-20 clinical stations covering history taking, examination, explanation, ethics, and acute care scenarios')}</p>
           

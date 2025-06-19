@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { 
   ChevronLeft,
   ChevronRight,
@@ -34,6 +35,7 @@ import {
   Zap
 } from "lucide-react";
 import { Link } from "wouter";
+import moreBgImage from '@assets/9252557F-8639-4C96-BFDA-AEACAAA7E77E_1750366172462.png';
 
 export default function More() {
   const adminTools = [
@@ -295,13 +297,45 @@ export default function More() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Hero Banner */}
+      <div 
+        className="relative bg-gradient-to-r from-blue-600 to-purple-700 rounded-2xl mb-8 overflow-hidden"
+        style={{
+          backgroundImage: `url(${moreBgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundBlendMode: 'multiply'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-8 py-16">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
+            More Resources
+          </h1>
+          <p className="text-xl lg:text-2xl mb-6 text-white/90">
+            Advanced tools and comprehensive medical education resources
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Badge className="bg-white text-black px-4 py-2">
+              Premium Features
+            </Badge>
+            <Badge className="bg-white text-black px-4 py-2">
+              Expert Support
+            </Badge>
+            <Badge className="bg-white text-black px-4 py-2">
+              NHS Preparation
+            </Badge>
+          </div>
+        </div>
+      </div>
+
       <div className="container max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
-        {/* Header */}
+        {/* Navigation */}
         <div className="flex items-center gap-3 mb-8">
           <Link href="/dashboard" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
             <ChevronLeft className="h-5 w-5 text-gray-600" />
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">More Options</h1>
+          <h2 className="text-2xl font-bold text-gray-900">All Features</h2>
         </div>
 
         {/* Admin Tools Section */}
