@@ -9,7 +9,7 @@ import {
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
-  Globe, Languages
+  Globe, Languages, ExternalLink
 } from "lucide-react";
 import plab2HeroBannerImage from "@assets/6675ABC6-B1E7-4E4C-92C4-D90C32FA1CB4_1750283049812.png";
 import { HeroBanner } from "@/components/ui/hero-banner";

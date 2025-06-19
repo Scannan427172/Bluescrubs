@@ -22,6 +22,14 @@ interface Question {
   uk_guidelines: string[];
   specialist: string;
   specialty_code: string;
+  nice_guidance?: {
+    code: string;
+    url: string;
+  };
+  cks_guidance?: {
+    topic: string;
+    cks_url: string;
+  };
 }
 
 interface QuestionResult {
