@@ -202,7 +202,7 @@ Difficulty level: ${difficulty}
 
 Requirements:
 1. Questions must be clinically authentic and based on real UK medical practice
-2. Reference specific UK guidelines with actual URLs:
+2. Reference specific UK guidelines with actual URLs - MUST be direct links to specific guidelines (e.g., NICE NG28 for Type 2 Diabetes), NOT general homepages:
    - NICE Clinical Guidelines (CG): https://www.nice.org.uk/guidance/cg[number]
    - NICE Guidelines (NG): https://www.nice.org.uk/guidance/ng[number] 
    - NICE Technology Appraisals (TA): https://www.nice.org.uk/guidance/ta[number]
@@ -213,6 +213,7 @@ Requirements:
 5. Ensure diagnostic reasoning reflects specialist-level thinking
 6. Include investigations and management options appropriate to your expertise level
 7. Each question MUST include specific NICE guidance codes and CKS topic links relevant to the clinical scenario
+8. Explanations must include exam-relevant clinical tips in brackets [Clinical Tip: ...]
 
 Common ${specialtyInfo.name} NICE Guidelines:
 ${specialtyGuidelines}
@@ -228,6 +229,7 @@ Format as JSON object with 'questions' array. Each question must have:
       "options": ["A. First option", "B. Second option", "C. Third option", "D. Fourth option", "E. Fifth option"],
       "correctAnswer": 1,
       "explanation": "Start with 'Correct Answer: [Letter]. [Option text]' then provide comprehensive 200-250 word explanation including: clinical reasoning why correct answer is right, brief mentions why other options are incorrect, pathophysiology, exam-relevant clinical tips in brackets [Clinical Tip: ...], and UK-specific protocols.",
+      "study_tip": "Specific learning point with exam strategy or memory aid for this topic",
       "category": "${specialtyInfo.name}",
       "difficulty": "${difficulty}",
       "niceGuidanceLinks": [
