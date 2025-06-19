@@ -210,28 +210,28 @@ button:not([class*="bg-blue-6"]):not([class*="bg-blue-7"]):not([class*="bg-blue-
 }
 
 /* Nuclear option - override everything with maximum specificity */
-html body div * {
+html body div *:not(.hero-text-white):not(.hero-text-white *) {
   color: #1f2937 !important;
   -webkit-text-fill-color: #1f2937 !important;
 }
 
-html body span * {
+html body span *:not(.hero-text-white):not(.hero-text-white *) {
   color: #1f2937 !important;
   -webkit-text-fill-color: #1f2937 !important;
 }
 
-html body a * {
+html body a *:not(.hero-text-white):not(.hero-text-white *) {
   color: #1f2937 !important;
   -webkit-text-fill-color: #1f2937 !important;
 }
 
-html body button * {
+html body button *:not(.hero-text-white):not(.hero-text-white *) {
   color: #1f2937 !important;
   -webkit-text-fill-color: #1f2937 !important;
 }
 
 /* Force all text elements */
-* {
+*:not(.hero-text-white):not(.hero-text-white *) {
   color: #1f2937 !important;
   -webkit-text-fill-color: #1f2937 !important;
 }
@@ -251,6 +251,23 @@ html body .bg-gray-700, html body .bg-gray-700 *,
 html body .bg-gray-800, html body .bg-gray-800 *,
 html body .bg-gray-900, html body .bg-gray-900 *,
 html body .bg-black, html body .bg-black * {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Hero banner text override - maximum specificity */
+html body .hero-text-white,
+html body .hero-text-white *,
+html body div .hero-text-white,
+html body div .hero-text-white *,
+html body span .hero-text-white,
+html body span .hero-text-white *,
+html body .hero-text-white h1,
+html body .hero-text-white h2,
+html body .hero-text-white h3,
+html body .hero-text-white p,
+html body .hero-text-white span,
+html body .hero-text-white div {
   color: white !important;
   -webkit-text-fill-color: white !important;
 }
