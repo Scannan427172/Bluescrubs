@@ -236,6 +236,8 @@ export default function PLAB1New() {
     currentCategory: string;
   } | null>(null);
 
+
+
   // Function to provide targeted explanations based on user's answer
   const getTargetedExplanation = (question: any, userAnswer: string, isCorrect: boolean): string => {
     if (!question.explanation) return 'Clinical explanation provided for educational purposes.';
@@ -560,6 +562,71 @@ export default function PLAB1New() {
       }
     } catch (error) {
       console.error('Error generating specialist questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
+
+  // Guideline-based practice function
+  const startGuidelineBasedPractice = async (questionCount: number) => {
+    setIsGeneratingQuestions(true);
+    setGeneratedQuestions([]);
+    setSessionStarted(false);
+    setShowExplanation(false);
+    setCurrentQuestionIndex(0);
+    
+    try {
+      // Generate questions using the guideline-based system
+      const specialties = ['cardiology', 'respiratory', 'endocrinology', 'gastroenterology', 'neurology'];
+      const topics = ['hypertension', 'asthma', 'diabetes', 'heart_failure', 'copd'];
+      
+      const questionsToGenerate = [];
+      for (let i = 0; i < questionCount; i++) {
+        const specialty = specialties[i % specialties.length];
+        const topic = topics[i % topics.length];
+        questionsToGenerate.push({ specialty, topic });
+      }
+      
+      const allQuestions = [];
+      
+      for (const { specialty, topic } of questionsToGenerate) {
+        try {
+          const response = await fetch('/api/plab-ai/generate-mcqs', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              specialty,
+              topic,
+              count: 1
+            }),
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            if (data.mcqs && data.mcqs.length > 0) {
+              allQuestions.push(...data.mcqs);
+            }
+          }
+        } catch (error) {
+          console.error(`Error generating question for ${specialty}/${topic}:`, error);
+        }
+      }
+      
+      if (allQuestions.length > 0) {
+        setGeneratedQuestions(allQuestions);
+        setSessionStarted(true);
+        setQuestionStartTime(Date.now());
+      } else {
+        // Fallback to regular question generation if guideline-based fails
+        await startPractice(questionCount);
+      }
+      
+    } catch (error) {
+      console.error('Error starting guideline-based practice:', error);
+      // Fallback to regular question generation if guideline-based fails
+      await startPractice(questionCount);
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -972,49 +1039,37 @@ export default function PLAB1New() {
               <CardDescription>Choose your practice format</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid md:grid-cols-4 gap-4">
+              <div className="grid md:grid-cols-2 gap-6">
                 <Button 
                   size="lg" 
-                  onClick={() => startPractice(5)}
+                  onClick={() => startGuidelineBasedPractice(10)}
                   disabled={isGeneratingQuestions}
-                  className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white h-32 flex flex-col items-center justify-center gap-3 disabled:opacity-50 shadow-lg"
                 >
-                  <ArrowRight className="w-6 h-6" />
-                  <span className="font-medium">{translateText('Quick Practice')}</span>
-                  <span className="text-xs opacity-90">5 {translateText('questions')}</span>
+                  <div className="flex items-center gap-2">
+                    <Brain className="w-7 h-7" />
+                    <span className="font-bold text-lg">{translateText('NICE Guideline Questions')}</span>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-sm opacity-90">10 questions with authentic NICE & CKS references</span>
+                    <div className="text-xs mt-1 opacity-80">Direct links to specific guideline sections</div>
+                  </div>
                 </Button>
 
                 <Button 
                   size="lg" 
-                  onClick={() => startPractice(20)}
+                  onClick={() => startGuidelineBasedPractice(25)}
                   disabled={isGeneratingQuestions}
-                  className="bg-purple-600 hover:bg-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
+                  className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white h-32 flex flex-col items-center justify-center gap-3 disabled:opacity-50 shadow-lg"
                 >
-                  <Brain className="w-6 h-6" />
-                  <span className="font-medium">{translateText('Standard Quiz')}</span>
-                  <span className="text-xs opacity-90">20 {translateText('questions')}</span>
-                </Button>
-
-                <Button 
-                  size="lg" 
-                  onClick={() => startPractice(50)}
-                  disabled={isGeneratingQuestions}
-                  className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  <Clock className="w-6 h-6" />
-                  <span className="font-medium">{translateText('PLAB 1 Mock')}</span>
-                  <span className="text-xs opacity-90">50 {translateText('questions')}</span>
-                </Button>
-
-                <Button 
-                  size="lg" 
-                  onClick={() => startPractice(100)}
-                  disabled={isGeneratingQuestions}
-                  className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  <Target className="w-6 h-6" />
-                  <span className="font-medium">{translateText('Comprehensive')}</span>
-                  <span className="text-xs opacity-90">100 {translateText('questions')}</span>
+                  <div className="flex items-center gap-2">
+                    <Target className="w-7 h-7" />
+                    <span className="font-bold text-lg">{translateText('PLAB Mock Exam')}</span>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-sm opacity-90">25 questions from verified UK guidelines</span>
+                    <div className="text-xs mt-1 opacity-80">Comprehensive clinical scenarios</div>
+                  </div>
                 </Button>
               </div>
 
