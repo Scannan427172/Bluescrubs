@@ -138,7 +138,7 @@ function getFallbackGuidelines(topic: string, specialty: string): GuidelineSearc
       },
       cks: {
         title: "CKS Topic: Heart failure - chronic",
-        url: "https://cks.nice.org.uk/topics/heart-failure-chronic/management/drug-treatment/",
+        url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance#pharmacological-treatment",
         section: "Management - Drug treatment",
         relevance: "Primary care heart failure management"
       }
@@ -212,7 +212,7 @@ function getFallbackGuidelines(topic: string, specialty: string): GuidelineSearc
       },
       cks: {
         title: "CKS Topic: Asthma",
-        url: "https://cks.nice.org.uk/topics/asthma/management/drug-treatment/",
+        url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#inhaled-therapy",
         section: "Management - Drug treatment",
         relevance: "Primary care asthma management"
       }

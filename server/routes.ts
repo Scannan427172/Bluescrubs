@@ -1094,7 +1094,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           }],
           cksLinks: [{
             title: "CKS: Asthma",
-            url: "https://cks.nice.org.uk/topics/asthma/management/drug-treatment/",
+            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#inhaled-therapy",
             relevance: "Primary care asthma management"
           }],
           additionalReferences: []
