@@ -186,88 +186,29 @@ export async function generateSpecialistQuestions(
     const specialtyGuidelines = getSpecialtyGuidelines(specialty);
     const specialtyCKSTopics = getSpecialtyCKSTopics(specialty);
     
-    const prompt = `You are a ${specialtyInfo.specialist} with expertise in ${specialtyInfo.name}. 
-    
-Your areas of expertise include: ${specialtyInfo.expertise.join(', ')}.
-You follow guidelines including: ${specialtyInfo.guidelines.join(', ')}.
-Your level of expertise: ${specialtyInfo.level}.
+    const prompt = `Generate ${count} clinical MCQ questions for ${specialtyInfo.name}. Return ONLY valid JSON without any additional text or formatting.
 
-Generate ${count} high-quality PLAB 1 style questions that reflect your specialist expertise in ${specialtyInfo.name}. 
-Each question should demonstrate the depth of knowledge and clinical reasoning that a ${specialtyInfo.specialist} would expect from medical students.
-
-Difficulty level: ${difficulty}
-- Foundation: Basic specialty knowledge suitable for medical students
-- Specialist: Advanced knowledge for junior doctors  
-- Consultant: Expert-level clinical reasoning and complex case management
-
-Requirements:
-1. Questions must be clinically authentic and based on real UK medical practice
-2. Reference specific UK guidelines with actual URLs - MUST be direct links to specific guidelines (e.g., NICE NG28 for Type 2 Diabetes), NOT general homepages:
-   - NICE Clinical Guidelines (CG): https://www.nice.org.uk/guidance/cg[number]
-   - NICE Guidelines (NG): https://www.nice.org.uk/guidance/ng[number] 
-   - NICE Technology Appraisals (TA): https://www.nice.org.uk/guidance/ta[number]
-   - CKS Topics: https://cks.nice.org.uk/topics/[topic-name]/
-   - Specialty guidelines (BTS, BSG, ESC, etc.)
-3. Include realistic patient scenarios with appropriate demographic details
-4. Focus on your specialty's core competencies and common presentations
-5. Ensure diagnostic reasoning reflects specialist-level thinking
-6. Include investigations and management options appropriate to your expertise level
-7. Each question MUST include specific NICE guidance codes and CKS topic links relevant to the clinical scenario
-8. Explanations must include exam-relevant clinical tips in brackets [Clinical Tip: ...]
-
-Common ${specialtyInfo.name} NICE Guidelines:
-${specialtyGuidelines}
-
-Common ${specialtyInfo.name} CKS Topics:
-${specialtyCKSTopics}
-
-Format as JSON object with 'questions' array. Each question must have:
 {
   "questions": [
     {
-      "question": "Clinical scenario ending with question",
-      "options": ["A. First option", "B. Second option", "C. Third option", "D. Fourth option", "E. Fifth option"],
-      "correctAnswer": 1,
-      "explanation": "Start with 'Correct Answer: [Letter]. [Option text]' then provide comprehensive 200-250 word explanation including: clinical reasoning why correct answer is right, brief mentions why other options are incorrect, pathophysiology, exam-relevant clinical tips in brackets [Clinical Tip: ...], and UK-specific protocols.",
-      "study_tip": "Specific learning point with exam strategy or memory aid for this topic",
+      "question": "Patient scenario with clinical details ending with a question",
+      "options": ["A. Option 1", "B. Option 2", "C. Option 3", "D. Option 4", "E. Option 5"],
+      "correctAnswer": 0,
+      "explanation": "Correct Answer: A. Brief explanation why this is correct and others are wrong.",
+      "study_tip": "Key learning point or memory aid",
       "category": "${specialtyInfo.name}",
       "difficulty": "${difficulty}",
-      "niceGuidanceLinks": [
-        {
-          "title": "Specific NICE guideline title",
-          "url": "https://www.nice.org.uk/guidance/[specific-code]",
-          "relevance": "How this guideline applies to the question"
-        }
-      ],
-      "cksLinks": [
-        {
-          "title": "Specific CKS topic title", 
-          "url": "https://cks.nice.org.uk/topics/[specific-topic]/",
-          "relevance": "How this CKS topic applies to the question"
-        }
-      ],
-      "additionalReferences": [
-        {
-          "title": "Additional UK clinical reference",
-          "url": "Relevant URL if applicable",
-          "source": "BTS/BSG/RCP/etc"
-        }
-      ]
+      "niceGuidanceLinks": [{"title": "NICE guideline", "url": "https://www.nice.org.uk/guidance/ng28", "relevance": "Relevant guidance"}],
+      "cksLinks": [{"title": "CKS topic", "url": "https://cks.nice.org.uk/topics/hypertension/", "relevance": "Clinical knowledge"}],
+      "additionalReferences": []
     }
   ]
 }
 
-CRITICAL: 
-- correctAnswer must be a number (0-4) indicating the index of the correct option
-- Include specific NICE guidance URLs with real guideline codes
-- Include specific CKS topic URLs with actual topic names
-- Reference actual UK clinical guidelines relevant to the clinical scenario
+Use authentic UK clinical practice. Include specific NICE/CKS references with real URLs.
 
-Common ${specialtyInfo.name} NICE Guidelines:
-${specialtyGuidelines}
-
-Common ${specialtyInfo.name} CKS Topics:
-${specialtyCKSTopics}`;
+Guidelines: ${specialtyGuidelines}
+CKS Topics: ${specialtyCKSTopics}`;
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
@@ -290,9 +231,28 @@ ${specialtyCKSTopics}`;
     let result;
     
     try {
-      result = JSON.parse(content);
+      // Clean the content to ensure valid JSON
+      let cleanContent = content.trim();
+      
+      // Remove any markdown code blocks if present
+      if (cleanContent.startsWith('```json')) {
+        cleanContent = cleanContent.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+      } else if (cleanContent.startsWith('```')) {
+        cleanContent = cleanContent.replace(/^```\s*/, '').replace(/\s*```$/, '');
+      }
+      
+      // Find JSON content between braces
+      const jsonStart = cleanContent.indexOf('{');
+      const jsonEnd = cleanContent.lastIndexOf('}');
+      
+      if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+        cleanContent = cleanContent.substring(jsonStart, jsonEnd + 1);
+      }
+      
+      result = JSON.parse(cleanContent);
     } catch (e) {
-      console.error('Failed to parse OpenAI response:', content);
+      console.error('Failed to parse OpenAI response:', content.substring(0, 500) + '...');
+      console.error('Parse error:', e);
       throw new Error("Invalid JSON response from OpenAI");
     }
     

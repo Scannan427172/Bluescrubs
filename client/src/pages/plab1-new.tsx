@@ -976,38 +976,67 @@ export default function PLAB1New() {
               <CardDescription>Choose your practice format</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <Button 
                   size="lg" 
-                  onClick={() => startPractice(10)}
+                  onClick={() => startPractice(5)}
                   disabled={isGeneratingQuestions}
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white h-32 flex flex-col items-center justify-center gap-3 disabled:opacity-50 shadow-lg"
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
                 >
-                  <div className="flex items-center gap-2">
-                    <Brain className="w-7 h-7" />
-                    <span className="font-bold text-lg">{translateText('NICE Guideline Questions')}</span>
-                  </div>
-                  <div className="text-center">
-                    <span className="text-sm opacity-90">10 questions with authentic NICE & CKS references</span>
-                    <div className="text-xs mt-1 opacity-80">Direct links to specific guideline sections</div>
-                  </div>
+                  <ArrowRight className="w-5 h-5" />
+                  <span className="font-bold text-sm">5 Questions</span>
+                  <span className="text-xs opacity-90">Quick Practice</span>
                 </Button>
 
                 <Button 
                   size="lg" 
-                  onClick={() => startPractice(25)}
+                  onClick={() => startPractice(10)}
                   disabled={isGeneratingQuestions}
-                  className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white h-32 flex flex-col items-center justify-center gap-3 disabled:opacity-50 shadow-lg"
+                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
                 >
-                  <div className="flex items-center gap-2">
-                    <Target className="w-7 h-7" />
-                    <span className="font-bold text-lg">{translateText('PLAB Mock Exam')}</span>
-                  </div>
-                  <div className="text-center">
-                    <span className="text-sm opacity-90">25 questions from verified UK guidelines</span>
-                    <div className="text-xs mt-1 opacity-80">Comprehensive clinical scenarios</div>
-                  </div>
+                  <Brain className="w-5 h-5" />
+                  <span className="font-bold text-sm">10 Questions</span>
+                  <span className="text-xs opacity-90">Standard Set</span>
                 </Button>
+
+                <Button 
+                  size="lg" 
+                  onClick={() => startPractice(20)}
+                  disabled={isGeneratingQuestions}
+                  className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
+                >
+                  <Clock className="w-5 h-5" />
+                  <span className="font-bold text-sm">20 Questions</span>
+                  <span className="text-xs opacity-90">Extended Quiz</span>
+                </Button>
+
+                <Button 
+                  size="lg" 
+                  onClick={() => startPractice(40)}
+                  disabled={isGeneratingQuestions}
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
+                >
+                  <Target className="w-5 h-5" />
+                  <span className="font-bold text-sm">40 Questions</span>
+                  <span className="text-xs opacity-90">Mock Test</span>
+                </Button>
+
+                <Button 
+                  size="lg" 
+                  onClick={() => startPractice(80)}
+                  disabled={isGeneratingQuestions}
+                  className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 shadow-md"
+                >
+                  <Award className="w-5 h-5" />
+                  <span className="font-bold text-sm">80 Questions</span>
+                  <span className="text-xs opacity-90">Full Exam</span>
+                </Button>
+              </div>
+
+              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-sm text-blue-800 text-center">
+                  All questions include authentic NICE & CKS references with direct links to specific guideline sections
+                </p>
               </div>
 
               {/* Bulk Question Generation Section */}
