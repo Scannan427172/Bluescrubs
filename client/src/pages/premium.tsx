@@ -63,8 +63,8 @@ export default function Premium() {
       ],
       stats: {
         essays: "1200+ marked",
-        accuracy: "98% accuracy",
-        improvement: "40% avg improvement"
+        accuracy: "High accuracy",
+        improvement: "Significant improvement"
       }
     },
     {
@@ -570,7 +570,7 @@ export default function Premium() {
             Upgrade to Premium
           </Button>
           <p className="text-xs text-muted-foreground mt-4">
-            14-day free trial • Cancel anytime • 30-day money-back guarantee
+            14-day free trial • Cancel anytime
           </p>
         </CardContent>
       </Card>

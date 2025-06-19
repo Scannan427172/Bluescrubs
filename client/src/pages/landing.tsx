@@ -110,8 +110,8 @@ export default function Landing() {
                 icon: Brain,
                 title: "Next-Gen AI Learning Engine",
                 subtitle: "Smart Technology",
-                description: "Revolutionary machine learning predicts exam failure 3-4 weeks early with 96% accuracy. Features adaptive neural networks, real-time cognitive load analysis, and predictive performance modeling.",
-                features: ["96% accuracy failure prediction", "Neural adaptive pathways", "Cognitive load optimization", "Predictive performance modeling"],
+                description: "Advanced machine learning analyzes your study patterns to identify areas needing improvement. Features adaptive learning algorithms, performance tracking, and personalized study recommendations.",
+                features: ["Early weakness detection", "Adaptive learning pathways", "Performance optimization", "Personalized recommendations"],
                 color: "from-blue-500 to-cyan-500"
               },
               {
@@ -206,8 +206,8 @@ export default function Landing() {
                   },
                   {
                     icon: Zap,
-                    title: "Quantum-Enhanced Learning AI",
-                    description: "Next-generation neural networks predict exam failure 3-4 weeks early with 96% accuracy. Features quantum-inspired optimization algorithms, real-time cognitive load monitoring, adaptive neural pathways, and personalized learning velocity adjustment."
+                    title: "Advanced Learning AI",
+                    description: "Advanced neural networks analyze study patterns to identify areas needing improvement early. Features optimization algorithms, real-time performance monitoring, adaptive learning pathways, and personalized study pace adjustment."
                   },
                   {
                     icon: Shield,
@@ -313,8 +313,8 @@ export default function Landing() {
               50+ Revolutionary AI Systems Working Together
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              The world's most advanced medical education ecosystem with quantum-enhanced AI, immersive VR/AR training, 
-              and live NHS integration. Technology stack that sets the global standard for medical education.
+              Advanced medical education platform with AI-powered learning, immersive VR/AR training, 
+              and NHS guideline integration. Comprehensive technology stack for medical education excellence.
             </p>
           </div>
 
