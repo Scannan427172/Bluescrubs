@@ -34,6 +34,7 @@ import CulturalTraining from "@/pages/cultural-training";
 import Mentors from "@/pages/mentors";
 import Gamification from "@/pages/gamification";
 import SpecialistQuestions from "@/pages/specialist-questions";
+import NHSPrepAI from "@/pages/nhsprep-ai";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -288,6 +289,15 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <SpecialistQuestions />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/nhsprep-ai">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <NHSPrepAI />
           </div>
         </div>
       </Route>
