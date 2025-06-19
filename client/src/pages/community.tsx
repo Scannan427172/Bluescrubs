@@ -124,9 +124,7 @@ export default function Community() {
   // Like post mutation
   const likePostMutation = useMutation({
     mutationFn: async (postId: number) => {
-      return apiRequest(`/api/community/posts/${postId}/like`, {
-        method: 'POST'
-      });
+      return apiRequest(`/api/community/posts/${postId}/like`, 'POST');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/community/posts'] });
@@ -136,9 +134,7 @@ export default function Community() {
   // Join study group mutation
   const joinGroupMutation = useMutation({
     mutationFn: async (groupId: number) => {
-      return apiRequest(`/api/community/study-groups/${groupId}/join`, {
-        method: 'POST'
-      });
+      return apiRequest(`/api/community/study-groups/${groupId}/join`, 'POST');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/community/study-groups'] });
@@ -148,9 +144,7 @@ export default function Community() {
   // Register for event mutation
   const registerEventMutation = useMutation({
     mutationFn: async (eventId: number) => {
-      return apiRequest(`/api/community/events/${eventId}/register`, {
-        method: 'POST'
-      });
+      return apiRequest(`/api/community/events/${eventId}/register`, 'POST');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/community/events'] });
