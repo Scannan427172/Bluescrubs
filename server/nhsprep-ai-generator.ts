@@ -554,9 +554,13 @@ TASK: Generate ${count} SINGLE-BEST-ANSWER exam questions for:
 VERIFIED GUIDELINES FOR THIS TOPIC:
 ${guidelineData}
 
-SPECIFIC GUIDELINE REFERENCES (use these exact details):
-- NICE: ${specificGuidelines.nice?.title || 'NICE Guidance'} - ${specificGuidelines.nice?.url || 'https://www.nice.org.uk/guidance'}
-- CKS: ${specificGuidelines.cks?.title || 'CKS Topic'} - ${specificGuidelines.cks?.url || 'https://cks.nice.org.uk/topics/'}
+SPECIFIC GUIDELINE REFERENCES (use these exact URLs - do not modify):
+- NICE: ${specificGuidelines.nice?.title || 'NICE Guidance'} 
+  URL: ${specificGuidelines.nice?.url || 'https://www.nice.org.uk/guidance'}
+  Section: ${specificGuidelines.nice?.section || 'Clinical recommendations'}
+- CKS: ${specificGuidelines.cks?.title || 'CKS Topic'}
+  URL: ${specificGuidelines.cks?.url || 'https://cks.nice.org.uk/topics/'}
+  Section: ${specificGuidelines.cks?.section || 'Management guidance'}
 
 AUTHENTIC CLINICAL OPTIONS (use these exact treatment options from guidelines):
 ${guidelineOptions.map((option, index) => 
@@ -596,9 +600,9 @@ Return ONLY a JSON array in this exact format:
     "explanation": "Start with 'Correct Answer: [Letter]. [Option text]' then provide comprehensive 200-250 word explanation with clinical reasoning, why other options are incorrect, and exam tips in brackets [Clinical Tip: ...]",
     "study_tip": "Specific learning point reinforcing this guideline recommendation",
     "reference": {
-      "title": "Exact NICE/CKS guideline title",
-      "section": "Specific section or recommendation quoted",
-      "url": "${specificGuidelines.nice?.url || specificGuidelines.cks?.url || 'https://www.nice.org.uk/guidance'}"
+      "title": "${specificGuidelines.nice?.title || 'NICE Guideline'}",
+      "section": "${specificGuidelines.nice?.section || 'Clinical recommendations'}",
+      "url": "${specificGuidelines.nice?.url || 'https://www.nice.org.uk/guidance'}"
     }
   }
 ]
