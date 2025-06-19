@@ -423,14 +423,14 @@ export default function Plab2Osce() {
           <p className="text-xl lg:text-2xl mb-6 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
             Master clinical skills with comprehensive OSCE stations
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Badge className="bg-white text-black px-4 py-2">
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <Badge className="bg-white text-black px-4 py-2 font-medium">
               16-20 Stations
             </Badge>
-            <Badge className="bg-white text-black px-4 py-2">
+            <Badge className="bg-white text-black px-4 py-2 font-medium">
               Clinical Skills
             </Badge>
-            <Badge className="bg-white text-black px-4 py-2">
+            <Badge className="bg-white text-black px-4 py-2 font-medium">
               Video Practice
             </Badge>
           </div>

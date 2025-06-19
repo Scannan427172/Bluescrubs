@@ -718,6 +718,19 @@ input[type="radio"]:focus {
   -webkit-text-fill-color: white !important;
 }
 
+/* Ensure badge text stays black even in hero sections */
+.hero-text .bg-white,
+.hero-text .bg-white *,
+.bg-white.text-black,
+.bg-white.text-black *,
+Badge.bg-white,
+Badge.bg-white *,
+.hero-text Badge.bg-white,
+.hero-text Badge.bg-white * {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
 /* Removed conflicting blue text styling - handled by consistent button styling below */
 
 /* Comprehensive button styling for all primary buttons */
