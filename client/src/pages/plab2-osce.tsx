@@ -17,15 +17,17 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EXPANDED_PLAB2_STATIONS, EXPANDED_STATION_STATS, EnhancedOSCEStation } from "@shared/expanded-plab2-stations";
 
-// Define station types for filtering
+// Define specialist-based station types for filtering
 const OSCE_STATION_TYPES = [
-  { value: 'all', label: 'All Stations' },
-  { value: 'history', label: 'History Taking' },
-  { value: 'examination', label: 'Physical Examination' },
-  { value: 'communication', label: 'Communication Skills' },
-  { value: 'practical', label: 'Practical Procedures' },
-  { value: 'data-interpretation', label: 'Data Interpretation' },
-  { value: 'emergency', label: 'Emergency Management' }
+  { value: 'all', label: 'Mixed Specialties (All)', description: 'Stations from all specialist consultants' },
+  { value: 'cardiology', label: 'Cardiology', description: 'Consultant Cardiologist stations' },
+  { value: 'respiratory', label: 'Respiratory Medicine', description: 'Consultant Respiratory Physician stations' },
+  { value: 'gastroenterology', label: 'Gastroenterology', description: 'Consultant Gastroenterologist stations' },
+  { value: 'neurology', label: 'Neurology', description: 'Consultant Neurologist stations' },
+  { value: 'endocrinology', label: 'Endocrinology', description: 'Consultant Endocrinologist stations' },
+  { value: 'psychiatry', label: 'Psychiatry', description: 'Consultant Psychiatrist stations' },
+  { value: 'surgery', label: 'General Surgery', description: 'Consultant General Surgeon stations' },
+  { value: 'emergency', label: 'Emergency Medicine', description: 'Consultant Emergency Physician stations' }
 ];
 import { useQuery } from "@tanstack/react-query";
 import { NeuroSettings, useNeuroAccommodations } from "@/components/neurodiversity-settings";
@@ -630,21 +632,25 @@ export default function Plab2Osce() {
           </Card>
         </div>
 
-          {/* Station Type Filters */}
+          {/* Specialist Station Filters */}
           <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-            <TabsList className="grid w-full grid-cols-7 gap-1">
-              <TabsTrigger 
-                value="all" 
-                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
-              >
-                All ({EXPANDED_PLAB2_STATIONS.length})
-              </TabsTrigger>
-              <TabsTrigger 
-                value="history" 
-                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
-              >
-                History ({EXPANDED_STATION_STATS.byType.history})
-              </TabsTrigger>
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">Select Specialist Category</h3>
+              <p className="text-sm text-gray-600">Choose stations created by specialist consultants in their area of expertise</p>
+            </div>
+            <TabsList className="grid w-full grid-cols-5 lg:grid-cols-9 gap-1">
+              {OSCE_STATION_TYPES.map((type) => (
+                <TabsTrigger 
+                  key={type.value}
+                  value={type.value} 
+                  className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
+                >
+                  <div className="flex flex-col">
+                    <span className="font-medium">{type.label.split(' ')[0]}</span>
+                    <span className="text-xs opacity-70">Specialist</span>
+                  </div>
+                </TabsTrigger>
+              ))}
               <TabsTrigger 
                 value="examination" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}

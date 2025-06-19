@@ -834,9 +834,9 @@ export default function PLAB1New() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-green-600" />
-                  <span className="text-sm font-medium text-gray-600">Medical Specialties</span>
+                  <span className="text-sm font-medium text-gray-600">Specialist Consultants</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">18</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">8</p>
               </CardContent>
             </Card>
             
@@ -861,11 +861,11 @@ export default function PLAB1New() {
             </Card>
           </div>
 
-          {/* Category Selection */}
+          {/* Specialist Category Selection */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Select Practice Category</CardTitle>
-              <CardDescription>Choose a medical specialty to focus your practice</CardDescription>
+              <CardTitle>Select Specialist Practice Category</CardTitle>
+              <CardDescription>Choose a medical specialty where specialist consultants will generate questions at their expertise level</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 gap-6">
@@ -900,9 +900,24 @@ export default function PLAB1New() {
                       <SelectValue placeholder="Select difficulty" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="foundation">Foundation</SelectItem>
-                      <SelectItem value="intermediate">Intermediate</SelectItem>
-                      <SelectItem value="advanced">Advanced</SelectItem>
+                      <SelectItem value="foundation">
+                        <div className="flex flex-col">
+                          <span className="font-medium">Foundation Level</span>
+                          <span className="text-xs text-gray-500">Junior doctor level questions</span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="specialist">
+                        <div className="flex flex-col">
+                          <span className="font-medium">Specialist Level</span>
+                          <span className="text-xs text-gray-500">Registrar/specialty trainee level</span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="consultant">
+                        <div className="flex flex-col">
+                          <span className="font-medium">Consultant Level</span>
+                          <span className="text-xs text-gray-500">Senior consultant expertise</span>
+                        </div>
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -967,8 +982,8 @@ export default function PLAB1New() {
               <div className="mt-8 pt-8 border-t border-gray-200">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Build Complete Question Bank</h3>
-                    <p className="text-sm text-gray-600">Generate comprehensive AI question database across all specialties</p>
+                    <h3 className="text-lg font-semibold text-gray-900">Build Complete Specialist Question Bank</h3>
+                    <p className="text-sm text-gray-600">Generate comprehensive question database from 8 specialist consultants</p>
                   </div>
                   <Button
                     onClick={generateBulkQuestions}
@@ -983,7 +998,7 @@ export default function PLAB1New() {
                     ) : (
                       <>
                         <Plus className="w-4 h-4 mr-2" />
-                        Generate 5000 Questions
+                        Generate 5000 Specialist Questions
                       </>
                     )}
                   </Button>
