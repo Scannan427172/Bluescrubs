@@ -258,18 +258,7 @@ export const insertStudyPlanSchema = createInsertSchema(studyPlan).pick({
   completed: true,
 });
 
-export const insertCommunityPostSchema = createInsertSchema(communityPosts).pick({
-  userId: true,
-  title: true,
-  content: true,
-  category: true,
-});
-
-export const insertPostReplySchema = createInsertSchema(postReplies).pick({
-  postId: true,
-  userId: true,
-  content: true,
-});
+// Community schemas defined later in file with actual table definitions
 
 export const insertOsceStationSchema = createInsertSchema(osceStations).pick({
   title: true,
