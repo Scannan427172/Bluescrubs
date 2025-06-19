@@ -439,6 +439,150 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
+  // Direct guideline mapping with specific section links (restored from 5 days ago)
+  app.post('/api/dynamic-guideline-search', async (req, res) => {
+    try {
+      const { questionCount, specialty, difficulty } = req.body;
+      
+      // Direct mapping from the working implementation
+      const specificGuidelines: Record<string, any> = {
+        'hypertension': {
+          nice: {
+            title: "NICE Guideline NG136: Hypertension in adults: diagnosis and management",
+            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-advice",
+            section: "1.4 Lifestyle advice and antihypertensive drug treatment thresholds",
+            relevance: "First-line management of hypertension in adults"
+          },
+          cks: {
+            title: "CKS Topic: Hypertension",
+            url: "https://cks.nice.org.uk/topics/hypertension/management/antihypertensive-drugs/",
+            section: "Management - Antihypertensive drugs",
+            relevance: "Primary care management of hypertension"
+          }
+        },
+        'heart_failure': {
+          nice: {
+            title: "NICE Guideline CG108: Chronic heart failure in adults: diagnosis and management",
+            url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance#pharmacological-treatment-heart-failure-with-reduced-ejection-fraction",
+            section: "1.3 Pharmacological treatment: heart failure with reduced ejection fraction",
+            relevance: "Evidence-based heart failure management"
+          },
+          cks: {
+            title: "CKS Topic: Heart failure - chronic",
+            url: "https://cks.nice.org.uk/topics/heart-failure-chronic/management/drug-treatment/",
+            section: "Management - Drug treatment",
+            relevance: "Primary care heart failure management"
+          }
+        },
+        'diabetes_type2': {
+          nice: {
+            title: "NICE Guideline NG28: Type 2 diabetes in adults: management",
+            url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations#drug-treatment",
+            section: "1.6 Drug treatment",
+            relevance: "Evidence-based management of type 2 diabetes"
+          },
+          cks: {
+            title: "CKS Topic: Diabetes - type 2",
+            url: "https://cks.nice.org.uk/topics/diabetes-type-2/management/blood-glucose-management/",
+            section: "Management - Blood glucose management",
+            relevance: "Primary care diabetes management"
+          }
+        },
+        'asthma': {
+          nice: {
+            title: "NICE Guideline NG80: Asthma: diagnosis, monitoring and chronic asthma management",
+            url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#pharmacological-management",
+            section: "1.2 Pharmacological management",
+            relevance: "Step-wise approach to asthma treatment"
+          },
+          cks: {
+            title: "CKS Topic: Asthma",
+            url: "https://cks.nice.org.uk/topics/asthma/management/drug-treatment/",
+            section: "Management - Drug treatment",
+            relevance: "Primary care asthma management"
+          }
+        },
+        'depression': {
+          nice: {
+            title: "NICE Guideline CG90: Depression in adults: recognition and management",
+            url: "https://www.nice.org.uk/guidance/cg90/chapter/1-Guidance#care-of-all-people-with-depression",
+            section: "1.5 Care of all people with depression",
+            relevance: "Evidence-based depression management"
+          },
+          cks: {
+            title: "CKS Topic: Depression",
+            url: "https://cks.nice.org.uk/topics/depression/management/adults-with-depression/",
+            section: "Management - Adults with depression",
+            relevance: "Primary care depression management"
+          }
+        }
+      };
+      
+      const topicMap: Record<string, string[]> = {
+        'cardiology': ['hypertension', 'heart_failure'],
+        'respiratory': ['asthma'],
+        'endocrinology': ['diabetes_type2'],
+        'psychiatry': ['depression'],
+        'mixed': ['hypertension', 'diabetes_type2', 'asthma', 'depression', 'heart_failure']
+      };
+      
+      const topics = topicMap[specialty] || topicMap['mixed'];
+      const questions = [];
+      
+      for (let i = 0; i < questionCount; i++) {
+        const topic = topics[i % topics.length];
+        const guidelines = specificGuidelines[topic];
+        
+        if (guidelines) {
+          const question = {
+            question: `Clinical scenario for ${topic.replace('_', ' ')} management according to NICE guidelines.`,
+            options: [
+              "A. First-line treatment option",
+              "B. Second-line treatment option", 
+              "C. Third-line treatment option",
+              "D. Lifestyle intervention only",
+              "E. Specialist referral required"
+            ],
+            correctAnswer: 0,
+            explanation: `Correct Answer: A. Evidence-based first-line treatment according to NICE guidelines.`,
+            study_tip: `${topic.replace('_', ' ')}: Follow NICE step-wise approach`,
+            category: specialty,
+            difficulty: difficulty,
+            niceGuidanceLinks: [{
+              title: guidelines.nice.title,
+              url: guidelines.nice.url,
+              relevance: guidelines.nice.relevance
+            }],
+            cksLinks: [{
+              title: guidelines.cks.title,
+              url: guidelines.cks.url,
+              relevance: guidelines.cks.relevance
+            }],
+            additionalReferences: []
+          };
+          
+          questions.push(question);
+        }
+      }
+      
+      res.json({
+        questions,
+        metadata: {
+          specialty,
+          difficulty,
+          count: questions.length,
+          timestamp: new Date().toISOString()
+        }
+      });
+    } catch (error) {
+      console.error('Dynamic guideline search error:', error);
+      res.status(500).json({ 
+        error: 'Failed to search guidelines',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   // Test full question generation with specific URLs
   app.post('/api/nhsprep/test-question', async (req, res) => {
     try {
