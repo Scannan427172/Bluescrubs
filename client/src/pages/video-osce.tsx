@@ -277,10 +277,10 @@ export default function VideoOSCE() {
       >
 
         <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white drop-shadow-lg">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
             Video OSCE Practice
           </h1>
-          <p className="text-xl lg:text-2xl mb-6 text-white drop-shadow-lg">
+          <p className="text-xl lg:text-2xl mb-6 text-white drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
             Record yourself performing OSCE stations and get AI-powered feedback
           </p>
           <div className="flex flex-wrap justify-center gap-3">
