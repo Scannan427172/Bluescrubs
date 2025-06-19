@@ -416,7 +416,7 @@ export default function Plab2Osce() {
         }}
       >
         <div className="absolute inset-0 bg-black/80"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-8 py-16">
+        <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white drop-shadow-lg">
             PLAB 2 OSCE Practice
           </h1>
