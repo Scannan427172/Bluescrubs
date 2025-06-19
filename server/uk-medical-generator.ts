@@ -39,10 +39,10 @@ async function enhanceWithCKSReferences(
   specialty: string
 ): Promise<UKMedicalQuestion> {
   try {
-    // Map specialty to CKS condition keywords
+    // Map specialty to CKS condition keywords - using correct working URLs
     const specialtyToCKSMap: Record<string, string[]> = {
-      'cardiology': ['acute_coronary_syndrome', 'heart_failure', 'hypertension'],
-      'cardiovascular': ['acute_coronary_syndrome', 'heart_failure', 'hypertension'],
+      'cardiology': ['atrial_fibrillation', 'heart_failure', 'hypertension'],
+      'cardiovascular': ['atrial_fibrillation', 'heart_failure', 'hypertension'],
       'respiratory': ['asthma_management', 'copd_management'],
       'endocrinology': ['diabetes_type2'],
       'psychiatry': ['depression_adults', 'anxiety_disorders'],
@@ -322,13 +322,13 @@ async function generateSingleQuestion(
         ],
         management_approach: "Systematic clinical assessment following UK medical guidelines and best practice recommendations.",
         red_flags: ["Acute deterioration", "Signs requiring urgent intervention"],
-        cks_url: `https://cks.nice.org.uk/search?q=${encodeURIComponent(specialty)}`
+        cks_url: `https://cks.nice.org.uk/`
       };
     }
 
-    // Ensure CKS URL is present
-    if (!questionData.cks_guidance.cks_url) {
-      questionData.cks_guidance.cks_url = `https://cks.nice.org.uk/search?q=${encodeURIComponent(specialty)}`;
+    // Ensure CKS URL points to a working page
+    if (!questionData.cks_guidance.cks_url || questionData.cks_guidance.cks_url.includes('search?q=')) {
+      questionData.cks_guidance.cks_url = `https://cks.nice.org.uk/`;
     }
 
     // Add default additional guidelines if missing

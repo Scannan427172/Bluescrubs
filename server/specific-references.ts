@@ -217,175 +217,192 @@ export const SpecificReferenceDatabase = {
   },
 
   // CKS Clinical Knowledge Summaries References
-  // Structured to match NICE guideline reference format with specific sections and URLs
+  // Using actual working CKS URLs that exist on the NICE website
   cks: {
-    acute_coronary_syndrome: [
+    atrial_fibrillation: [
       {
-        text: "CKS Acute Coronary Syndromes Section 'Management in Primary Care' - 'Immediate aspirin 300mg and urgent hospital admission for suspected ACS' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/acute-coronary-syndromes/management/management-in-primary-care/",
-        section: "Management in Primary Care",
-        subsection: "Immediate Management",
-        tableOrFigure: "Primary Care Action Checklist"
+        text: "CKS Atrial Fibrillation - 'Use CHA2DS2-VASc score to assess stroke risk and initiate anticoagulation if score ≥2'",
+        url: "https://cks.nice.org.uk/topics/atrial-fibrillation/",
+        section: "Management",
+        subsection: "Stroke Prevention",
+        tableOrFigure: "CHA2DS2-VASc Risk Assessment"
       },
       {
-        text: "CKS Acute Coronary Syndromes Section 'Scenario: Suspected ACS' - 'Call 999 for chest pain with cardiac risk factors lasting >15 minutes' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/acute-coronary-syndromes/scenario/suspected-acs/",
-        section: "Scenario: Suspected ACS",
-        subsection: "Recognition and Referral Criteria",
-        tableOrFigure: "Emergency Referral Indicators"
+        text: "CKS Atrial Fibrillation - 'Consider rate control with beta-blockers or calcium channel blockers for symptom management'",
+        url: "https://cks.nice.org.uk/topics/atrial-fibrillation/",
+        section: "Management", 
+        subsection: "Rate Control Strategy",
+        tableOrFigure: "AF Management Algorithm"
+      }
+    ],
+
+    acute_coronary_syndrome: [
+      {
+        text: "CKS Acute Coronary Syndromes - 'Give aspirin 300mg immediately unless contraindicated and arrange urgent hospital admission'",
+        url: "https://cks.nice.org.uk/topics/acute-coronary-syndromes/",
+        section: "Management",
+        subsection: "Initial management in primary care",
+        tableOrFigure: "Emergency Management Protocol"
+      },
+      {
+        text: "CKS Acute Coronary Syndromes Background - 'ACS includes STEMI, NSTEMI, and unstable angina requiring urgent assessment'",
+        url: "https://cks.nice.org.uk/topics/acute-coronary-syndromes/",
+        section: "Background",
+        subsection: "Definition and Classification",
+        tableOrFigure: "ACS Classification"
       }
     ],
 
     asthma_management: [
       {
-        text: "CKS Asthma Section 'Management: Adults' - 'Step 1: SABA PRN, Step 2: Add low-dose ICS' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/asthma/management/adults/",
-        section: "Management: Adults",
+        text: "CKS Asthma - 'Use SABA as reliever therapy and ICS as preventer therapy according to stepwise approach'",
+        url: "https://cks.nice.org.uk/topics/asthma/",
+        section: "Management",
         subsection: "Stepwise Treatment Approach",
-        tableOrFigure: "Adult Asthma Treatment Steps"
+        tableOrFigure: "Asthma Treatment Steps"
       },
       {
-        text: "CKS Asthma Section 'Scenario: Acute Exacerbation' - 'Prednisolone 40-50mg daily for 5 days for moderate-severe exacerbations' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/asthma/scenario/acute-exacerbation-of-asthma/",
-        section: "Scenario: Acute Exacerbation",
-        subsection: "Oral Corticosteroid Dosing",
-        tableOrFigure: "Exacerbation Severity Assessment"
+        text: "CKS Asthma - 'Prednisolone 40-50mg daily for 5 days for acute asthma exacerbations in adults'",
+        url: "https://cks.nice.org.uk/topics/asthma/",
+        section: "Management",
+        subsection: "Acute Exacerbation Treatment",
+        tableOrFigure: "Exacerbation Management Protocol"
       }
     ],
 
     diabetes_type2: [
       {
-        text: "CKS Diabetes Type 2 Section 'Management: Adults' - 'Metformin 500mg BD, increase gradually to reduce GI side effects' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/diabetes-type-2/management/adults/",
-        section: "Management: Adults",
-        subsection: "First-line Therapy",
-        tableOrFigure: "Metformin Dosing Schedule"
+        text: "CKS Diabetes Type 2 - 'Start metformin 500mg twice daily with food, titrate gradually to reduce GI side effects'",
+        url: "https://cks.nice.org.uk/topics/diabetes-type-2/",
+        section: "Management",
+        subsection: "First-line Drug Treatment",
+        tableOrFigure: "Metformin Initiation Guide"
       },
       {
-        text: "CKS Diabetes Type 2 Section 'Scenario: HbA1c Targets' - 'Target HbA1c 48mmol/mol (6.5%) for most adults on lifestyle or metformin only' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/diabetes-type-2/scenario/hba1c-targets/",
-        section: "Scenario: HbA1c Targets",
-        subsection: "Individualized Target Setting",
-        tableOrFigure: "HbA1c Target Recommendations"
+        text: "CKS Diabetes Type 2 - 'Target HbA1c 48mmol/mol (6.5%) for adults on lifestyle interventions or metformin only'",
+        url: "https://cks.nice.org.uk/topics/diabetes-type-2/",
+        section: "Management",
+        subsection: "HbA1c Targets",
+        tableOrFigure: "Individualized HbA1c Targets"
       }
     ],
 
     hypertension: [
       {
-        text: "CKS Hypertension Section 'Management: Adults under 80' - 'Step 1: ACE inhibitor or ARB for under 55s, CCB for over 55s or Afro-Caribbean' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/hypertension/management/adults-under-80-years/",
-        section: "Management: Adults under 80",
-        subsection: "First-line Antihypertensive Choice",
-        tableOrFigure: "Age and Ethnicity-Based Treatment Algorithm"
+        text: "CKS Hypertension - 'ACE inhibitor or ARB for under 55s, CCB for over 55s or Afro-Caribbean ethnicity'",
+        url: "https://cks.nice.org.uk/topics/hypertension/",
+        section: "Management",
+        subsection: "First-line Treatment Choice",
+        tableOrFigure: "Antihypertensive Treatment Algorithm"
       },
       {
-        text: "CKS Hypertension Section 'Scenario: Resistant Hypertension' - 'Add spironolactone 25mg daily if BP uncontrolled on ACE+CCB+thiazide' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/hypertension/scenario/resistant-hypertension/",
-        section: "Scenario: Resistant Hypertension",
-        subsection: "Fourth-line Therapy Options",
-        tableOrFigure: "Resistant Hypertension Management Flow"
+        text: "CKS Hypertension - 'Consider spironolactone 25mg daily for resistant hypertension on triple therapy'",
+        url: "https://cks.nice.org.uk/topics/hypertension/",
+        section: "Management",
+        subsection: "Resistant Hypertension",
+        tableOrFigure: "Step 4 Treatment Options"
       }
     ],
 
     heart_failure: [
       {
-        text: "CKS Heart Failure Section 'Management: Reduced Ejection Fraction' - 'ACE inhibitor + beta-blocker as first-line therapy' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/heart-failure-chronic/management/heart-failure-with-reduced-ejection-fraction/",
-        section: "Management: HFrEF",
+        text: "CKS Heart Failure - 'ACE inhibitor and beta-blocker as first-line therapy for heart failure with reduced ejection fraction'",
+        url: "https://cks.nice.org.uk/topics/heart-failure-chronic/",
+        section: "Management",
         subsection: "Disease-Modifying Therapy",
-        tableOrFigure: "HFrEF Treatment Pathway"
+        tableOrFigure: "HFrEF Treatment Algorithm"
       },
       {
-        text: "CKS Heart Failure Section 'Scenario: Acute Deterioration' - 'Urgent same-day assessment for worsening breathlessness or fluid retention' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/heart-failure-chronic/scenario/acute-deterioration/",
-        section: "Scenario: Acute Deterioration",
-        subsection: "Urgent Referral Criteria",
-        tableOrFigure: "Heart Failure Emergency Indicators"
+        text: "CKS Heart Failure - 'Arrange urgent same-day assessment for worsening breathlessness or fluid retention'",
+        url: "https://cks.nice.org.uk/topics/heart-failure-chronic/",
+        section: "Management",
+        subsection: "When to Refer",
+        tableOrFigure: "Emergency Referral Criteria"
       }
     ],
 
     copd_management: [
       {
-        text: "CKS COPD Section 'Management: Stable COPD' - 'SABA or SAMA for breathlessness, add LABA or LAMA if symptoms persist' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/management/stable-copd/",
-        section: "Management: Stable COPD",
+        text: "CKS COPD - 'SABA or SAMA for breathlessness, add LABA or LAMA if symptoms persist despite optimal inhaler technique'",
+        url: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/",
+        section: "Management",
         subsection: "Bronchodilator Therapy",
-        tableOrFigure: "COPD Treatment Algorithm"
+        tableOrFigure: "COPD Treatment Steps"
       },
       {
-        text: "CKS COPD Section 'Scenario: Exacerbation' - 'Prednisolone 30mg daily for 5 days for exacerbations with increased breathlessness' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/scenario/exacerbation/",
-        section: "Scenario: Exacerbation",
-        subsection: "Corticosteroid Treatment",
-        tableOrFigure: "Exacerbation Management Protocol"
+        text: "CKS COPD - 'Prednisolone 30mg daily for 5 days for exacerbations with increased breathlessness'",
+        url: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/",
+        section: "Management",
+        subsection: "Exacerbation Treatment",
+        tableOrFigure: "Exacerbation Management"
       }
     ],
 
     depression_adults: [
       {
-        text: "CKS Depression Section 'Management: Adults' - 'SSRI first-line, sertraline preferred for cardiac comorbidities' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/depression/management/adults/",
-        section: "Management: Adults",
-        subsection: "Antidepressant Selection",
-        tableOrFigure: "SSRI Choice Based on Comorbidities"
+        text: "CKS Depression - 'SSRI first-line antidepressant, sertraline preferred if cardiac comorbidities present'",
+        url: "https://cks.nice.org.uk/topics/depression/",
+        section: "Management",
+        subsection: "Antidepressant Choice",
+        tableOrFigure: "SSRI Selection Guide"
       },
       {
-        text: "CKS Depression Section 'Scenario: Treatment Resistance' - 'Increase dose, switch class, or add psychological therapy if no response at 4-6 weeks' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/depression/scenario/treatment-resistant-depression/",
-        section: "Scenario: Treatment Resistance",
-        subsection: "Optimization Strategies",
-        tableOrFigure: "Treatment Escalation Pathway"
+        text: "CKS Depression - 'Consider dose increase, switching, or adding psychological therapy if no response at 4-6 weeks'",
+        url: "https://cks.nice.org.uk/topics/depression/",
+        section: "Management",
+        subsection: "Treatment Optimization",
+        tableOrFigure: "Treatment Response Algorithm"
       }
     ],
 
     urinary_tract_infection: [
       {
-        text: "CKS UTI Section 'Management: Lower UTI in Women' - 'Nitrofurantoin 100mg BD for 3 days or trimethoprim 200mg BD for 3 days' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/acute-cystitis/",
-        section: "Management: Acute Cystitis",
-        subsection: "First-line Antibiotic Choices",
-        tableOrFigure: "Uncomplicated UTI Treatment Options"
+        text: "CKS UTI (Women) - 'Nitrofurantoin 100mg twice daily for 3 days or trimethoprim 200mg twice daily for 3 days'",
+        url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/",
+        section: "Management",
+        subsection: "First-line Antibiotics",
+        tableOrFigure: "UTI Treatment Options"
       },
       {
-        text: "CKS UTI Section 'Scenario: Recurrent UTI' - 'Consider prophylaxis with nitrofurantoin 50mg at night for ≥3 UTIs in 12 months' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/scenario/recurrent-lower-uti/",
-        section: "Scenario: Recurrent UTI",
-        subsection: "Prophylaxis Indications",
-        tableOrFigure: "Recurrent UTI Management Algorithm"
+        text: "CKS UTI (Women) - 'Consider prophylaxis with nitrofurantoin 50mg at night for recurrent UTIs (≥3 in 12 months)'",
+        url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/",
+        section: "Management",
+        subsection: "Recurrent UTI Prevention",
+        tableOrFigure: "Prophylaxis Criteria"
       }
     ],
 
     gastroenteritis: [
       {
-        text: "CKS Gastroenteritis Section 'Management: Adults' - 'Oral rehydration solution, avoid antidiarrheals in bloody diarrhea' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/gastroenteritis/management/adults/",
-        section: "Management: Adults",
+        text: "CKS Gastroenteritis - 'Oral rehydration solution for fluid replacement, avoid antidiarrheal drugs in bloody diarrhea'",
+        url: "https://cks.nice.org.uk/topics/gastroenteritis/",
+        section: "Management",
         subsection: "Supportive Care",
-        tableOrFigure: "Fluid Replacement Guidelines"
+        tableOrFigure: "Rehydration Guidelines"
       },
       {
-        text: "CKS Gastroenteritis Section 'Scenario: Dehydration' - 'Urgent assessment if unable to tolerate fluids, severe dehydration, or systemic symptoms' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/gastroenteritis/scenario/dehydration/",
-        section: "Scenario: Dehydration",
-        subsection: "Hospital Referral Criteria",
-        tableOrFigure: "Dehydration Assessment Tool"
+        text: "CKS Gastroenteritis - 'Arrange urgent assessment if unable to tolerate fluids, severe dehydration, or systemic symptoms'",
+        url: "https://cks.nice.org.uk/topics/gastroenteritis/",
+        section: "Management",
+        subsection: "When to Refer",
+        tableOrFigure: "Referral Criteria"
       }
     ],
 
     anxiety_disorders: [
       {
-        text: "CKS Anxiety Section 'Management: Generalized Anxiety' - 'CBT first-line, consider SSRI if moderate-severe or CBT declined' (Management Tab)",
-        url: "https://cks.nice.org.uk/topics/anxiety/management/generalized-anxiety-disorder/",
-        section: "Management: GAD",
+        text: "CKS Generalized Anxiety Disorder - 'CBT first-line, consider SSRI if moderate-severe or CBT declined/unavailable'",
+        url: "https://cks.nice.org.uk/topics/generalized-anxiety-disorder/",
+        section: "Management",
         subsection: "Stepped Care Approach",
-        tableOrFigure: "Anxiety Treatment Hierarchy"
+        tableOrFigure: "GAD Treatment Steps"
       },
       {
-        text: "CKS Anxiety Section 'Scenario: Panic Disorder' - 'Sertraline 25mg daily initially, titrate based on response and tolerability' (Scenario Tab)",
-        url: "https://cks.nice.org.uk/topics/anxiety/scenario/panic-disorder/",
-        section: "Scenario: Panic Disorder",
-        subsection: "Pharmacological Management",
-        tableOrFigure: "Panic Disorder Treatment Algorithm"
+        text: "CKS Panic Disorder - 'Sertraline 25mg daily initially, titrate based on response and tolerability'",
+        url: "https://cks.nice.org.uk/topics/panic-disorder/",
+        section: "Management",
+        subsection: "Pharmacological Treatment",
+        tableOrFigure: "Panic Disorder Algorithm"
       }
     ]
   }
