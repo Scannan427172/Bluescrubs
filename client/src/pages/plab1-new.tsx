@@ -474,17 +474,27 @@ export default function PLAB1New() {
     return questionCounts[category] || 100;
   };
 
-  // Specialist categories matching our specialist question generation system
+  // Comprehensive specialist categories with specialist-based question generation
   const availableCategories = [
-    { value: 'all' as const, label: 'Mixed Specialties (All)', count: 5000, description: 'Questions from all medical specialists' },
-    { value: 'cardiovascular' as const, label: 'Cardiology', count: 625, description: 'Consultant Cardiologist questions' },
-    { value: 'respiratory' as const, label: 'Respiratory Medicine', count: 625, description: 'Consultant Respiratory Physician questions' },
-    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: 625, description: 'Consultant Gastroenterologist questions' },
-    { value: 'neurology' as const, label: 'Neurology', count: 625, description: 'Consultant Neurologist questions' },
-    { value: 'endocrinology' as const, label: 'Endocrinology', count: 625, description: 'Consultant Endocrinologist questions' },
-    { value: 'psychiatry' as const, label: 'Psychiatry', count: 625, description: 'Consultant Psychiatrist questions' },
-    { value: 'surgery' as const, label: 'General Surgery', count: 625, description: 'Consultant General Surgeon questions' },
-    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: 625, description: 'Consultant Emergency Physician questions' }
+    { value: 'all' as const, label: 'All Categories', count: getQuestionCount('all'), description: 'Mixed questions from all specialties' },
+    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: getQuestionCount('cardiovascular'), description: 'Specialist Cardiology questions' },
+    { value: 'respiratory' as const, label: 'Respiratory', count: getQuestionCount('respiratory'), description: 'Specialist Respiratory Medicine questions' },
+    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: getQuestionCount('gastroenterology'), description: 'Specialist Gastroenterology questions' },
+    { value: 'neurology' as const, label: 'Neurology', count: getQuestionCount('neurology'), description: 'Specialist Neurology questions' },
+    { value: 'endocrinology' as const, label: 'Endocrinology', count: getQuestionCount('endocrinology'), description: 'Specialist Endocrinology questions' },
+    { value: 'psychiatry' as const, label: 'Psychiatry', count: getQuestionCount('psychiatry'), description: 'Specialist Psychiatry questions' },
+    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: getQuestionCount('obstetrics-gynaecology'), description: 'O&G specialist questions' },
+    { value: 'paediatrics' as const, label: 'Paediatrics', count: getQuestionCount('paediatrics'), description: 'Paediatric specialist questions' },
+    { value: 'surgery' as const, label: 'Surgery', count: getQuestionCount('surgery'), description: 'Specialist Surgery questions' },
+    { value: 'nephrology' as const, label: 'Nephrology', count: getQuestionCount('nephrology'), description: 'Specialist Nephrology questions' },
+    { value: 'haematology' as const, label: 'Haematology', count: getQuestionCount('haematology'), description: 'Specialist Haematology questions' },
+    { value: 'infectious-diseases' as const, label: 'Infectious Diseases', count: getQuestionCount('infectious-diseases'), description: 'Infectious Disease specialist questions' },
+    { value: 'rheumatology' as const, label: 'Rheumatology', count: getQuestionCount('rheumatology'), description: 'Specialist Rheumatology questions' },
+    { value: 'dermatology' as const, label: 'Dermatology', count: getQuestionCount('dermatology'), description: 'Specialist Dermatology questions' },
+    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: getQuestionCount('emergency-medicine'), description: 'Specialist Emergency Medicine questions' },
+    { value: 'ethics-law' as const, label: 'Ethics & Law', count: getQuestionCount('ethics-law'), description: 'Medical Ethics & Law questions' },
+    { value: 'public-health' as const, label: 'Public Health', count: getQuestionCount('public-health'), description: 'Public Health specialist questions' },
+    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: getQuestionCount('clinical-pharmacology'), description: 'Clinical Pharmacology questions' }
   ];
 
   // Generate specialist-level questions using category-based approach
@@ -504,7 +514,7 @@ export default function PLAB1New() {
 
       // If specific specialty selected, use specialist questions
       if (selectedCategory !== 'all') {
-        // Map category names to specialist codes
+        // Map category names to specialist codes for core specialties
         const specialtyMapping: Record<string, string> = {
           'cardiovascular': 'cardiology',
           'respiratory': 'respiratory',
@@ -518,10 +528,12 @@ export default function PLAB1New() {
         
         const specialtyCode = specialtyMapping[selectedCategory];
         if (specialtyCode) {
+          // Use specialist-generated questions for core specialties
           requestBody.specialty = specialtyCode;
         } else {
-          // For other categories, use mixed specialist questions
-          endpoint = '/api/plab-ai/generate-mixed-mcqs';
+          // For other categories, use general question generation but with category focus
+          endpoint = '/api/generate-questions';
+          requestBody.category = selectedCategory;
         }
       } else {
         // For 'all' categories, use mixed specialist questions
@@ -556,50 +568,78 @@ export default function PLAB1New() {
   // Bulk specialist question generation function
   const generateBulkQuestions = async () => {
     setIsBulkGenerating(true);
-    setBulkProgress({ completed: 0, total: 8, currentCategory: 'Starting specialist generation...' });
+    setBulkProgress({ completed: 0, total: 18, currentCategory: 'Starting comprehensive generation...' });
 
-    // Use specialist categories that match our specialist-question-generator
-    const specialistCategories = [
-      'cardiology', 'respiratory', 'gastroenterology', 'neurology', 
-      'endocrinology', 'psychiatry', 'surgery', 'emergency'
+    // Generate questions for all categories
+    const allCategories = [
+      'cardiovascular', 'respiratory', 'gastroenterology', 'neurology', 
+      'endocrinology', 'psychiatry', 'obstetrics-gynaecology', 'paediatrics',
+      'surgery', 'nephrology', 'haematology', 'infectious-diseases',
+      'rheumatology', 'dermatology', 'emergency-medicine', 'ethics-law',
+      'public-health', 'clinical-pharmacology'
     ];
 
     try {
       let totalGenerated = 0;
       
-      for (let i = 0; i < specialistCategories.length; i++) {
-        const specialty = specialistCategories[i];
+      for (let i = 0; i < allCategories.length; i++) {
+        const category = allCategories[i];
         setBulkProgress({ 
           completed: i, 
-          total: specialistCategories.length, 
-          currentCategory: `Generating ${specialty} questions...` 
+          total: allCategories.length, 
+          currentCategory: `Generating ${category} questions...` 
         });
 
-        const response = await fetch('/api/plab-ai/generate-mcqs', {
+        // Use specialist generation for core specialties, general for others
+        const specialtyMapping: Record<string, string> = {
+          'cardiovascular': 'cardiology',
+          'respiratory': 'respiratory',
+          'gastroenterology': 'gastroenterology',
+          'neurology': 'neurology',
+          'endocrinology': 'endocrinology',
+          'psychiatry': 'psychiatry',
+          'surgery': 'surgery',
+          'emergency-medicine': 'emergency'
+        };
+
+        const specialtyCode = specialtyMapping[category];
+        let endpoint = '/api/generate-questions';
+        let requestBody: any = {
+          category: category,
+          count: Math.ceil(5000 / allCategories.length),
+          difficulty: 'specialist'
+        };
+
+        if (specialtyCode) {
+          endpoint = '/api/plab-ai/generate-mcqs';
+          requestBody = {
+            specialty: specialtyCode,
+            count: Math.ceil(5000 / allCategories.length),
+            difficulty: 'specialist'
+          };
+        }
+
+        const response = await fetch(endpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            specialty: specialty,
-            count: Math.ceil(5000 / specialistCategories.length),
-            difficulty: 'specialist'
-          }),
+          body: JSON.stringify(requestBody),
         });
 
         if (response.ok) {
           const data = await response.json();
-          totalGenerated += data.mcqs?.length || 0;
+          totalGenerated += (data.mcqs?.length || data.questions?.length || 0);
         }
       }
       
       setBulkProgress({ 
-        completed: specialistCategories.length, 
-        total: specialistCategories.length, 
-        currentCategory: `Complete! Generated ${totalGenerated} specialist questions` 
+        completed: allCategories.length, 
+        total: allCategories.length, 
+        currentCategory: `Complete! Generated ${totalGenerated} questions across all specialties` 
       });
     } catch (error) {
-      console.error('Specialist bulk generation failed:', error);
+      console.error('Bulk generation failed:', error);
     } finally {
       setIsBulkGenerating(false);
       setTimeout(() => setBulkProgress(null), 3000);
@@ -834,9 +874,9 @@ export default function PLAB1New() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-green-600" />
-                  <span className="text-sm font-medium text-gray-600">Specialist Consultants</span>
+                  <span className="text-sm font-medium text-gray-600">Medical Specialties</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">8</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">18</p>
               </CardContent>
             </Card>
             
@@ -861,11 +901,11 @@ export default function PLAB1New() {
             </Card>
           </div>
 
-          {/* Specialist Category Selection */}
+          {/* Category Selection */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Select Specialist Practice Category</CardTitle>
-              <CardDescription>Choose a medical specialty where specialist consultants will generate questions at their expertise level</CardDescription>
+              <CardTitle>Select Practice Category</CardTitle>
+              <CardDescription>Choose from 18 medical specialties with specialist-level questions for core areas</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 gap-6">
@@ -883,7 +923,7 @@ export default function PLAB1New() {
                           <div className="flex flex-col">
                             <span className="font-medium">{category.label}</span>
                             <span className="text-xs text-gray-500">{category.description}</span>
-                            <span className="text-xs text-blue-600">{category.count} specialist questions</span>
+                            <span className="text-xs text-blue-600">{category.count} questions</span>
                           </div>
                         </SelectItem>
                       ))}
@@ -982,8 +1022,8 @@ export default function PLAB1New() {
               <div className="mt-8 pt-8 border-t border-gray-200">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Build Complete Specialist Question Bank</h3>
-                    <p className="text-sm text-gray-600">Generate comprehensive question database from 8 specialist consultants</p>
+                    <h3 className="text-lg font-semibold text-gray-900">Build Complete Question Bank</h3>
+                    <p className="text-sm text-gray-600">Generate comprehensive question database across all 18 medical specialties</p>
                   </div>
                   <Button
                     onClick={generateBulkQuestions}
@@ -998,7 +1038,7 @@ export default function PLAB1New() {
                     ) : (
                       <>
                         <Plus className="w-4 h-4 mr-2" />
-                        Generate 5000 Specialist Questions
+                        Generate 5000 Questions
                       </>
                     )}
                   </Button>
