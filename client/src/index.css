@@ -28,6 +28,11 @@
   .text-muted-foreground {
     color: #1a1a1a !important;
   }
+  
+  /* Hero banner text override */
+  .hero-text-white, .hero-text-white * {
+    color: #ffffff !important;
+  }
 }
 
 :root {
