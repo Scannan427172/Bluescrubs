@@ -99,7 +99,7 @@ export default function Landing() {
               Why We're Different
             </h2>
             <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed px-4">
-              The world's first comprehensive PLAB preparation ecosystem combining AI-powered learning, 
+              A comprehensive PLAB preparation ecosystem combining AI-powered learning, 
               real-time expert consultations, and immersive clinical training in 35 languages.
             </p>
           </div>
@@ -552,7 +552,7 @@ export default function Landing() {
                   {
                     icon: Award,
                     title: "Regional Job Placement",
-                    description: "Direct partnerships with 156 hospitals across 6 countries for guaranteed placement opportunities"
+                    description: "Career guidance and resources for job opportunities across multiple countries with comprehensive support"
                   },
                   {
                     icon: Brain,
