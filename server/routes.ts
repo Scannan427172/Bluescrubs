@@ -10,6 +10,7 @@ import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generato
 import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-uk-generator";
 import { EXPANDED_PLAB2_STATIONS } from "../shared/expanded-plab2-stations";
 import { analyzeMultipleImages } from "./image-analysis";
+import { registerAuthenticQuestions } from "./authentic-nice-questions";
 import { 
   generateFlashcardsFromContent, 
   summarizeContent, 
@@ -1474,6 +1475,9 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
 
   // Register community routes
   registerCommunityRoutes(app);
+
+  // Register authentic NICE-sourced questions
+  registerAuthenticQuestions(app);
 
   const httpServer = createServer(app);
   return httpServer;
