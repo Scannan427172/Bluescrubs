@@ -672,10 +672,10 @@ export default function PLAB1New() {
           >
             <div className="absolute inset-0 bg-black/60"></div>
             <div className="relative z-10 flex flex-col items-center justify-center text-center px-8 py-16">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white drop-shadow-lg">
                 {translateText('Master PLAB 1 with AI')}
               </h1>
-              <p className="text-xl lg:text-2xl mb-6 text-white/90">
+              <p className="text-xl lg:text-2xl mb-6 text-white drop-shadow-lg">
                 {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
               </p>
               <div className="flex flex-wrap justify-center gap-3 mb-6">
