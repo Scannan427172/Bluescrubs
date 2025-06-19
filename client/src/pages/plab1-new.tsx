@@ -1413,18 +1413,23 @@ export default function PLAB1New() {
                   <div className="w-full">
                     <div className="flex items-center justify-between mb-3">
                       <p className="text-sm font-medium text-green-900">CKS Clinical Knowledge Summary</p>
-                      <Button
-                        size="sm"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
-                        }}
-                        className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
-                      >
-                        <ExternalLink className="w-3 h-3 mr-1" />
-                        View CKS Guidelines
-                      </Button>
+                      <div className="flex flex-col gap-1">
+                        <Button
+                          size="sm"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
+                          }}
+                          className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
+                        >
+                          <ExternalLink className="w-3 h-3 mr-1" />
+                          View CKS Guidelines
+                        </Button>
+                        <p className="text-xs text-green-700 italic">
+                          Note: CKS access may be restricted outside the UK
+                        </p>
+                      </div>
                     </div>
                     
                     <div className="bg-white border border-green-200 rounded-lg p-4 mb-3">
