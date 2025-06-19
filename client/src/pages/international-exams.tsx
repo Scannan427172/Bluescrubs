@@ -62,10 +62,10 @@ export default function InternationalExams() {
       description: 'Professional and Linguistic Assessments Board test for GMC registration',
       keyFeatures: ['NICE Guidelines Integration', 'UK Clinical Context', 'OSCE Skills Assessment'],
       availableContent: {
-        questions: 4800,
-        osceStations: 120,
-        mockExams: 24,
-        studyGuides: 45
+        questions: 800,
+        osceStations: 18,
+        mockExams: 6,
+        studyGuides: 12
       }
     },
     {
@@ -266,7 +266,7 @@ export default function InternationalExams() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-green-100">Total Questions</p>
-                  <p className="text-3xl font-bold">21.1K+</p>
+                  <p className="text-3xl font-bold">2.5K+</p>
                 </div>
                 <BookOpen className="h-12 w-12 text-green-200" />
               </div>
@@ -278,7 +278,7 @@ export default function InternationalExams() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-purple-100">OSCE Stations</p>
-                  <p className="text-3xl font-bold">560+</p>
+                  <p className="text-3xl font-bold">120+</p>
                 </div>
                 <Users className="h-12 w-12 text-purple-200" />
               </div>
@@ -290,7 +290,7 @@ export default function InternationalExams() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-orange-100">Mock Exams</p>
-                  <p className="text-3xl font-bold">125+</p>
+                  <p className="text-3xl font-bold">24+</p>
                 </div>
                 <Award className="h-12 w-12 text-orange-200" />
               </div>
