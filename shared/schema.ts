@@ -1,6 +1,7 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb, real, date } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, jsonb, real, date, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { relations } from "drizzle-orm";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -112,24 +113,7 @@ export const studyReminders = pgTable("study_reminders", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-export const communityPosts = pgTable("community_posts", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull(),
-  title: text("title").notNull(),
-  content: text("content").notNull(),
-  category: text("category").notNull(), // plab1, plab2, study-groups, nhs-prep, success-stories
-  likes: integer("likes").notNull().default(0),
-  replies: integer("replies").notNull().default(0),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
-
-export const postReplies = pgTable("post_replies", {
-  id: serial("id").primaryKey(),
-  postId: integer("post_id").notNull(),
-  userId: integer("user_id").notNull(),
-  content: text("content").notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
+// Community posts handled in main community section below
 
 export const osceStations = pgTable("osce_stations", {
   id: serial("id").primaryKey(),
@@ -438,6 +422,102 @@ export const studyGroupMembers = pgTable("study_group_members", {
   joinedAt: timestamp("joined_at").defaultNow().notNull(),
 });
 
+// Community System Tables
+export const communityPosts = pgTable("community_posts", {
+  id: serial("id").primaryKey(),
+  authorId: integer("author_id").notNull().references(() => users.id),
+  content: text("content").notNull(),
+  tags: text("tags").array(),
+  likes: integer("likes").notNull().default(0),
+  replies: integer("replies").notNull().default(0),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const communityComments = pgTable("community_comments", {
+  id: serial("id").primaryKey(),
+  postId: integer("post_id").notNull().references(() => communityPosts.id),
+  authorId: integer("author_id").notNull().references(() => users.id),
+  content: text("content").notNull(),
+  likes: integer("likes").notNull().default(0),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const communityLikes = pgTable("community_likes", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  postId: integer("post_id").references(() => communityPosts.id),
+  commentId: integer("comment_id").references(() => communityComments.id),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const communityStudyGroups = pgTable("community_study_groups", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  specialty: text("specialty").notNull(),
+  meetingTime: text("meeting_time"),
+  location: text("location"),
+  members: integer("members").notNull().default(0),
+  maxMembers: integer("max_members").notNull().default(50),
+  creatorId: integer("creator_id").notNull().references(() => users.id),
+  isPublic: boolean("is_public").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const studyGroupMemberships = pgTable("study_group_memberships", {
+  id: serial("id").primaryKey(),
+  groupId: integer("group_id").notNull().references(() => communityStudyGroups.id),
+  userId: integer("user_id").notNull().references(() => users.id),
+  joinedAt: timestamp("joined_at").defaultNow().notNull(),
+});
+
+export const communityEvents = pgTable("community_events", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  type: text("type").notNull(), // Educational, Practice, Career
+  date: text("date").notNull(),
+  time: text("time").notNull(),
+  description: text("description"),
+  hostId: integer("host_id").notNull().references(() => users.id),
+  attendees: integer("attendees").notNull().default(0),
+  maxAttendees: integer("max_attendees").notNull().default(100),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const eventRegistrations = pgTable("event_registrations", {
+  id: serial("id").primaryKey(),
+  eventId: integer("event_id").notNull().references(() => communityEvents.id),
+  userId: integer("user_id").notNull().references(() => users.id),
+  registeredAt: timestamp("registered_at").defaultNow().notNull(),
+});
+
+export const communityMentors = pgTable("community_mentors", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  title: text("title").notNull(),
+  specialty: text("specialty").notNull(),
+  experience: text("experience"),
+  availability: text("availability").notNull().default("Available"),
+  rating: real("rating").notNull().default(5.0),
+  totalSessions: integer("total_sessions").notNull().default(0),
+  hourlyRate: integer("hourly_rate"),
+  languages: text("languages").array(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const mentorSessions = pgTable("mentor_sessions", {
+  id: serial("id").primaryKey(),
+  mentorId: integer("mentor_id").notNull().references(() => communityMentors.id),
+  menteeId: integer("mentee_id").notNull().references(() => users.id),
+  scheduledAt: timestamp("scheduled_at").notNull(),
+  duration: integer("duration").notNull().default(60),
+  status: text("status").notNull().default("scheduled"), // scheduled, completed, cancelled
+  notes: text("notes"),
+  rating: integer("rating"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const countryStats = pgTable("country_stats", {
   id: serial("id").primaryKey(),
   country: text("country").notNull().unique(),
@@ -459,10 +539,27 @@ export type UserProgress = typeof userProgress.$inferSelect;
 export type InsertUserProgress = z.infer<typeof insertUserProgressSchema>;
 export type StudyPlan = typeof studyPlan.$inferSelect;
 export type InsertStudyPlan = z.infer<typeof insertStudyPlanSchema>;
+// Community Types
 export type CommunityPost = typeof communityPosts.$inferSelect;
-export type InsertCommunityPost = z.infer<typeof insertCommunityPostSchema>;
-export type PostReply = typeof postReplies.$inferSelect;
-export type InsertPostReply = z.infer<typeof insertPostReplySchema>;
+export type CommunityComment = typeof communityComments.$inferSelect;
+export type CommunityLike = typeof communityLikes.$inferSelect;
+export type CommunityStudyGroup = typeof communityStudyGroups.$inferSelect;
+export type StudyGroupMembership = typeof studyGroupMemberships.$inferSelect;
+export type CommunityEvent = typeof communityEvents.$inferSelect;
+export type EventRegistration = typeof eventRegistrations.$inferSelect;
+export type CommunityMentor = typeof communityMentors.$inferSelect;
+export type MentorSession = typeof mentorSessions.$inferSelect;
+
+// Community Insert Types
+export type InsertCommunityPost = typeof communityPosts.$inferInsert;
+export type InsertCommunityComment = typeof communityComments.$inferInsert;
+export type InsertCommunityLike = typeof communityLikes.$inferInsert;
+export type InsertCommunityStudyGroup = typeof communityStudyGroups.$inferInsert;
+export type InsertStudyGroupMembership = typeof studyGroupMemberships.$inferInsert;
+export type InsertCommunityEvent = typeof communityEvents.$inferInsert;
+export type InsertEventRegistration = typeof eventRegistrations.$inferInsert;
+export type InsertCommunityMentor = typeof communityMentors.$inferInsert;
+export type InsertMentorSession = typeof mentorSessions.$inferInsert;
 export type OsceStation = typeof osceStations.$inferSelect;
 export type InsertOsceStation = z.infer<typeof insertOsceStationSchema>;
 export type UserOsceAttempt = typeof userOsceAttempts.$inferSelect;
