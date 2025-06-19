@@ -304,7 +304,7 @@ export default function Landing() {
               <span className="hero-text text-white font-semibold">Complete Feature Set</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              40+ Advanced Systems Working Together
+              Comprehensive Learning Systems Working Together
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
               The most comprehensive medical education platform with features no competitor can match. 
@@ -320,7 +320,7 @@ export default function Landing() {
                 color: "from-blue-500 to-cyan-500",
                 features: [
                   "Weakness prediction 2-3 weeks early",
-                  "Success probability calculator (94% accuracy)",
+                  "Success probability calculator",
                   "Adaptive difficulty adjustment",
                   "Contextual hint system",
                   "Personalized study sequences",
@@ -328,16 +328,16 @@ export default function Landing() {
                 ]
               },
               {
-                category: "VR & Immersive Training",
+                category: "Video & Interactive Training",
                 icon: Video,
                 color: "from-purple-500 to-pink-500",
                 features: [
-                  "Virtual reality OSCE stations",
-                  "AI patient actors with personalities",
-                  "Realistic hospital environments",
-                  "Multi-user collaborative sessions",
-                  "Real-time performance analysis",
-                  "Adaptive scenario modification"
+                  "Video-based OSCE practice",
+                  "Interactive patient scenarios",
+                  "Clinical environment simulations",
+                  "Recorded session analysis",
+                  "Performance feedback system",
+                  "Adaptive learning pathways"
                 ]
               },
               {
@@ -345,9 +345,9 @@ export default function Landing() {
                 icon: Globe,
                 color: "from-green-500 to-emerald-500",
                 features: [
-                  "Live NHS guidelines monitoring",
-                  "Imperial College partnerships",
-                  "Manchester Royal Infirmary access",
+                  "Live NHS guidelines integration",
+                  "UK medical school alignment",
+                  "Hospital scenario simulations",
                   "Cultural competency training",
                   "Post-PLAB career placement",
                   "NHS job application assistance"
@@ -362,7 +362,7 @@ export default function Landing() {
                   "Smart notification timing",
                   "Voice-to-revision notes",
                   "Offline content sync",
-                  "35-language support",
+                  "45-language support",
                   "Commute-optimized learning"
                 ]
               },
@@ -581,8 +581,8 @@ export default function Landing() {
               
               <div className="space-y-3 mb-8">
                 {[
-                  "All 15+ international medical exams",
-                  "17-language content library",
+                  "8 major international medical exams",
+                  "45-language content library",
                   "Global job placement network",
                   "Country-specific AI tutoring",
                   "Cultural adaptation training",

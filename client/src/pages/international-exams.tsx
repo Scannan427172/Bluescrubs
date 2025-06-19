@@ -417,7 +417,7 @@ export default function InternationalExams() {
                   <h4 className="font-semibold mb-3">Available Study Materials</h4>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-blue-600">{currentExam.availableContent.questions.toLocaleString()}</p>
+                      <p className="text-2xl font-bold text-blue-600">500+</p>
                       <p className="text-sm text-gray-600">Practice Questions</p>
                     </div>
                     <div className="text-center">
