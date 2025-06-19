@@ -474,30 +474,20 @@ export default function PLAB1New() {
     return questionCounts[category] || 100;
   };
 
-  // Available categories with question counts
+  // Specialist categories matching our specialist question generation system
   const availableCategories = [
-    { value: 'all' as const, label: 'All Categories', count: getQuestionCount('all') },
-    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: getQuestionCount('cardiovascular') },
-    { value: 'respiratory' as const, label: 'Respiratory', count: getQuestionCount('respiratory') },
-    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: getQuestionCount('gastroenterology') },
-    { value: 'neurology' as const, label: 'Neurology', count: getQuestionCount('neurology') },
-    { value: 'endocrinology' as const, label: 'Endocrinology', count: getQuestionCount('endocrinology') },
-    { value: 'psychiatry' as const, label: 'Psychiatry', count: getQuestionCount('psychiatry') },
-    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: getQuestionCount('obstetrics-gynaecology') },
-    { value: 'paediatrics' as const, label: 'Paediatrics', count: getQuestionCount('paediatrics') },
-    { value: 'surgery' as const, label: 'Surgery', count: getQuestionCount('surgery') },
-    { value: 'nephrology' as const, label: 'Nephrology', count: getQuestionCount('nephrology') },
-    { value: 'haematology' as const, label: 'Haematology', count: getQuestionCount('haematology') },
-    { value: 'infectious-diseases' as const, label: 'Infectious Diseases', count: getQuestionCount('infectious-diseases') },
-    { value: 'rheumatology' as const, label: 'Rheumatology', count: getQuestionCount('rheumatology') },
-    { value: 'dermatology' as const, label: 'Dermatology', count: getQuestionCount('dermatology') },
-    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: getQuestionCount('emergency-medicine') },
-    { value: 'ethics-law' as const, label: 'Ethics & Law', count: getQuestionCount('ethics-law') },
-    { value: 'public-health' as const, label: 'Public Health', count: getQuestionCount('public-health') },
-    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: getQuestionCount('clinical-pharmacology') }
+    { value: 'all' as const, label: 'Mixed Specialties (All)', count: 5000, description: 'Questions from all medical specialists' },
+    { value: 'cardiovascular' as const, label: 'Cardiology', count: 625, description: 'Consultant Cardiologist questions' },
+    { value: 'respiratory' as const, label: 'Respiratory Medicine', count: 625, description: 'Consultant Respiratory Physician questions' },
+    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: 625, description: 'Consultant Gastroenterologist questions' },
+    { value: 'neurology' as const, label: 'Neurology', count: 625, description: 'Consultant Neurologist questions' },
+    { value: 'endocrinology' as const, label: 'Endocrinology', count: 625, description: 'Consultant Endocrinologist questions' },
+    { value: 'psychiatry' as const, label: 'Psychiatry', count: 625, description: 'Consultant Psychiatrist questions' },
+    { value: 'surgery' as const, label: 'General Surgery', count: 625, description: 'Consultant General Surgeon questions' },
+    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: 625, description: 'Consultant Emergency Physician questions' }
   ];
 
-  // Generate AI questions
+  // Generate specialist-level questions using category-based approach
   const startPractice = async (questionCount: number) => {
     setIsGeneratingQuestions(true);
     setGeneratedQuestions([]);
@@ -506,67 +496,110 @@ export default function PLAB1New() {
     setCurrentQuestionIndex(0);
     
     try {
-      const response = await fetch('/api/generate-questions', {
+      let endpoint = '/api/plab-ai/generate-mcqs';
+      let requestBody: any = {
+        count: questionCount,
+        difficulty: selectedDifficulty
+      };
+
+      // If specific specialty selected, use specialist questions
+      if (selectedCategory !== 'all') {
+        // Map category names to specialist codes
+        const specialtyMapping: Record<string, string> = {
+          'cardiovascular': 'cardiology',
+          'respiratory': 'respiratory',
+          'gastroenterology': 'gastroenterology',
+          'neurology': 'neurology',
+          'endocrinology': 'endocrinology',
+          'psychiatry': 'psychiatry',
+          'surgery': 'surgery',
+          'emergency-medicine': 'emergency'
+        };
+        
+        const specialtyCode = specialtyMapping[selectedCategory];
+        if (specialtyCode) {
+          requestBody.specialty = specialtyCode;
+        } else {
+          // For other categories, use mixed specialist questions
+          endpoint = '/api/plab-ai/generate-mixed-mcqs';
+        }
+      } else {
+        // For 'all' categories, use mixed specialist questions
+        endpoint = '/api/plab-ai/generate-mixed-mcqs';
+      }
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          category: selectedCategory,
-          count: questionCount,
-          difficulty: selectedDifficulty
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       if (response.ok) {
         const data = await response.json();
-        setGeneratedQuestions(data.questions || []);
-        if (data.questions && data.questions.length > 0) {
+        setGeneratedQuestions(data.mcqs || []);
+        if (data.mcqs && data.mcqs.length > 0) {
           setSessionStarted(true);
           setQuestionStartTime(Date.now());
         }
       } else {
-        console.error('Failed to generate questions');
+        console.error('Failed to generate specialist questions');
       }
     } catch (error) {
-      console.error('Error generating questions:', error);
+      console.error('Error generating specialist questions:', error);
     } finally {
       setIsGeneratingQuestions(false);
     }
   };
 
-  // Bulk question generation function
+  // Bulk specialist question generation function
   const generateBulkQuestions = async () => {
     setIsBulkGenerating(true);
-    setBulkProgress({ completed: 0, total: 18, currentCategory: 'Starting...' });
+    setBulkProgress({ completed: 0, total: 8, currentCategory: 'Starting specialist generation...' });
 
-    const categories = [
-      'cardiovascular', 'respiratory', 'gastroenterology', 'neurology', 
-      'endocrinology', 'psychiatry', 'obstetrics-gynaecology', 'paediatrics',
-      'surgery', 'nephrology', 'haematology', 'infectious-diseases',
-      'rheumatology', 'dermatology', 'emergency-medicine', 'ethics-law',
-      'public-health', 'clinical-pharmacology'
+    // Use specialist categories that match our specialist-question-generator
+    const specialistCategories = [
+      'cardiology', 'respiratory', 'gastroenterology', 'neurology', 
+      'endocrinology', 'psychiatry', 'surgery', 'emergency'
     ];
 
     try {
-      const response = await fetch('/api/generate-bulk-questions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          categories,
-          questionsPerCategory: Math.ceil(5000 / categories.length)
-        }),
-      });
+      let totalGenerated = 0;
+      
+      for (let i = 0; i < specialistCategories.length; i++) {
+        const specialty = specialistCategories[i];
+        setBulkProgress({ 
+          completed: i, 
+          total: specialistCategories.length, 
+          currentCategory: `Generating ${specialty} questions...` 
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(`Successfully generated ${data.totalGenerated} questions across ${data.categories} categories`);
-        setBulkProgress({ completed: categories.length, total: categories.length, currentCategory: 'Complete!' });
+        const response = await fetch('/api/plab-ai/generate-mcqs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            specialty: specialty,
+            count: Math.ceil(5000 / specialistCategories.length),
+            difficulty: 'specialist'
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          totalGenerated += data.mcqs?.length || 0;
+        }
       }
+      
+      setBulkProgress({ 
+        completed: specialistCategories.length, 
+        total: specialistCategories.length, 
+        currentCategory: `Complete! Generated ${totalGenerated} specialist questions` 
+      });
     } catch (error) {
-      console.error('Bulk generation failed:', error);
+      console.error('Specialist bulk generation failed:', error);
     } finally {
       setIsBulkGenerating(false);
       setTimeout(() => setBulkProgress(null), 3000);
@@ -847,7 +880,11 @@ export default function PLAB1New() {
                     <SelectContent>
                       {availableCategories.map((category) => (
                         <SelectItem key={category.value} value={category.value}>
-                          {category.label} ({category.count} questions)
+                          <div className="flex flex-col">
+                            <span className="font-medium">{category.label}</span>
+                            <span className="text-xs text-gray-500">{category.description}</span>
+                            <span className="text-xs text-blue-600">{category.count} specialist questions</span>
+                          </div>
                         </SelectItem>
                       ))}
                     </SelectContent>
