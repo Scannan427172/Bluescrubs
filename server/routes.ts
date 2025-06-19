@@ -22,6 +22,7 @@ import {
 import { plabAI, type PLABStudySession, type AdaptiveFlashcard } from "./plab-ai-study-system";
 import { interactivePatientSystem } from "./interactive-patient";
 import { registerCommunityRoutes } from "./community-api";
+import { generateNHSPrepQuestions, VALID_SPECIALTIES, getTopicsForSpecialty } from "./nhsprep-ai-generator";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -893,6 +894,57 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
         error: "Failed to submit demo request. Please try again or contact us directly." 
       });
     }
+  });
+
+  // NHSPrep AI - Clinical Exam Question Generator
+  app.post("/api/nhsprep/generate", async (req, res) => {
+    try {
+      const { specialty, topic, count } = req.body;
+      
+      if (!specialty) {
+        return res.status(400).json({ error: "Specialty is required" });
+      }
+      
+      const questionCount = Math.min(Math.max(parseInt(count) || 1, 1), 10);
+      
+      const questions = await generateNHSPrepQuestions(
+        specialty,
+        topic || "",
+        questionCount
+      );
+      
+      res.json({
+        questions,
+        metadata: {
+          specialty,
+          topic: topic || "General",
+          count: questions.length,
+          guidelines_used: "NICE, CKS, BMJ Best Practice",
+          generated_at: new Date().toISOString()
+        }
+      });
+      
+    } catch (error) {
+      console.error("Error generating NHSPrep questions:", error);
+      res.status(500).json({ 
+        error: "Failed to generate questions",
+        details: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  // Get available specialties and topics
+  app.get("/api/nhsprep/specialties", (req, res) => {
+    const specialties = VALID_SPECIALTIES.map(specialty => ({
+      value: specialty,
+      label: specialty.charAt(0).toUpperCase() + specialty.slice(1).replace('_', ' '),
+      topics: getTopicsForSpecialty(specialty).map(topic => ({
+        value: topic,
+        label: topic.charAt(0).toUpperCase() + topic.slice(1).replace('_', ' ')
+      }))
+    }));
+    
+    res.json({ specialties });
   });
 
   // OSCE Stations API endpoint
