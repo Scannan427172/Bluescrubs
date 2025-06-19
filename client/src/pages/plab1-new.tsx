@@ -662,7 +662,7 @@ export default function PLAB1New() {
         <div className="max-w-6xl mx-auto mb-16">
           {/* Hero Banner */}
           <div 
-            className="relative bg-gradient-to-r from-blue-600 to-purple-700 rounded-2xl mb-8 overflow-hidden"
+            className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden"
             style={{
               backgroundImage: `url(${plab1BgImage})`,
               backgroundSize: 'cover',
