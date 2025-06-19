@@ -1,5 +1,4 @@
 import OpenAI from "openai";
-import { fetchGuidelineLinks, GuidelineLinks } from "./guideline-fetcher";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -526,9 +525,8 @@ export async function generateNHSPrepQuestions(
     // Get verified guidelines for the specialty/topic
     const guidelineData = getVerifiedGuidelines(specialty, topic);
     
-    // Fetch authentic NICE/CKS links for this topic
-    const searchTopic = `${topic} ${specialty} first line treatment`;
-    const guidelineLinks = await fetchGuidelineLinks(searchTopic);
+    // Get authentic NICE/CKS links for this topic
+    const guidelineLinks = getGuidelineLinksForSpecialty(specialty, topic);
     
     const prompt = `You are NHSPrep AI — a clinical exam question generator for PLAB, MLA, and NHSPrep candidates.
 
@@ -684,6 +682,55 @@ Key Sections: ${guideline.sections.join(', ')}`;
   }).join('\n');
   
   return `Available ${specialty} Guidelines:\n${allGuidelines}`;
+}
+
+// Get authentic guideline links for specialty and topic
+function getGuidelineLinksForSpecialty(specialty: string, topic: string) {
+  const specialtyKey = specialty.toLowerCase().replace(/\s+/g, '_');
+  const topicKey = topic.toLowerCase().replace(/\s+/g, '_');
+  
+  const guidelineMap: Record<string, any> = {
+    cardiology: {
+      hypertension: {
+        nice: "https://www.nice.org.uk/guidance/ng136",
+        cks: "https://cks.nice.org.uk/topics/hypertension/"
+      },
+      heart_failure: {
+        nice: "https://www.nice.org.uk/guidance/cg108", 
+        cks: "https://cks.nice.org.uk/topics/heart-failure-chronic/"
+      },
+      atrial_fibrillation: {
+        nice: "https://www.nice.org.uk/guidance/cg180",
+        cks: "https://cks.nice.org.uk/topics/atrial-fibrillation/"
+      }
+    },
+    endocrinology: {
+      diabetes_type2: {
+        nice: "https://www.nice.org.uk/guidance/ng28",
+        cks: "https://cks.nice.org.uk/topics/diabetes-type-2/"
+      },
+      diabetes_type1: {
+        nice: "https://www.nice.org.uk/guidance/ng17",
+        cks: "https://cks.nice.org.uk/topics/diabetes-type-1/"
+      }
+    },
+    respiratory: {
+      asthma: {
+        nice: "https://www.nice.org.uk/guidance/ng80",
+        cks: "https://cks.nice.org.uk/topics/asthma/"
+      },
+      copd: {
+        nice: "https://www.nice.org.uk/guidance/cg101",
+        cks: "https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/"
+      }
+    }
+  };
+
+  const links = guidelineMap[specialtyKey]?.[topicKey];
+  return links || {
+    nice: "https://www.nice.org.uk/guidance",
+    cks: "https://cks.nice.org.uk/topics/"
+  };
 }
 
 // Export specialty mapping for validation
