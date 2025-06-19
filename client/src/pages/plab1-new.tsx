@@ -10,6 +10,7 @@ import {
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
+import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 
 export default function PLAB1New() {
   // Translation state
@@ -660,48 +661,52 @@ export default function PLAB1New() {
       <div className="min-h-screen bg-gray-50 p-4 pb-24">
         <div className="max-w-6xl mx-auto mb-16">
           {/* Hero Banner */}
-          <div className="relative bg-white border border-gray-200 rounded-2xl mb-8 overflow-hidden shadow-sm">
-            <div className="flex flex-col lg:flex-row items-center gap-8 p-8 lg:p-12">
-              <div className="flex-1 text-gray-900">
-                <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-                  {translateText('Master PLAB 1 with AI')}
-                </h1>
-                <p className="text-xl lg:text-2xl mb-6 text-gray-600">
-                  {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                  <Badge className="bg-blue-50 text-blue-700 border-blue-200 text-sm px-4 py-2">
-                    <Target className="w-4 h-4 mr-2" />
-                    5000+ Questions Available
-                  </Badge>
-                  <Badge className="bg-purple-50 text-purple-700 border-purple-200 text-sm px-4 py-2">
-                    <Brain className="w-4 h-4 mr-2" />
-                    AI-Powered Learning
-                  </Badge>
-                  <Badge className="bg-green-50 text-green-700 border-green-200 text-sm px-4 py-2">
-                    <Award className="w-4 h-4 mr-2" />
-                    UK Guidelines
-                  </Badge>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    size="lg" 
-                    className="bg-blue-600 text-white hover:bg-blue-700 font-semibold"
-                    onClick={() => document.getElementById('practice-options')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    <ArrowRight className="w-5 h-5 mr-2" />
-                    {translateText('Start Practice Now')}
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline"
-                    className="border-gray-300 text-gray-700 hover:bg-gray-50"
-                    onClick={() => document.getElementById('settings')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    <Globe className="w-5 h-5 mr-2" />
-                    {translateText('Settings & Languages')}
-                  </Button>
-                </div>
+          <div 
+            className="relative bg-gradient-to-r from-blue-600 to-purple-700 rounded-2xl mb-8 overflow-hidden"
+            style={{
+              backgroundImage: `url(${plab1BgImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'multiply'
+            }}
+          >
+            <div className="absolute inset-0 bg-black/60"></div>
+            <div className="relative z-10 flex flex-col items-center justify-center text-center px-8 py-16">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
+                {translateText('Master PLAB 1 with AI')}
+              </h1>
+              <p className="text-xl lg:text-2xl mb-6 text-white/90">
+                {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 mb-6">
+                <Badge className="bg-white text-black px-4 py-2">
+                  5000+ Questions
+                </Badge>
+                <Badge className="bg-white text-black px-4 py-2">
+                  AI-Powered Learning
+                </Badge>
+                <Badge className="bg-white text-black px-4 py-2">
+                  UK Guidelines
+                </Badge>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-blue-600 hover:bg-blue-50 font-semibold"
+                  onClick={() => document.getElementById('practice-options')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <ArrowRight className="w-5 h-5 mr-2" />
+                  {translateText('Start Practice Now')}
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="border-white text-white hover:bg-white/10"
+                  onClick={() => document.getElementById('settings')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  <Globe className="w-5 h-5 mr-2" />
+                  {translateText('Settings & Languages')}
+                </Button>
               </div>
             </div>
           </div>

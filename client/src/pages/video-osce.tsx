@@ -11,6 +11,7 @@ import {
   Camera, Upload, Download, Settings, Volume2, VolumeX, X
 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import videoBgImage from '@assets/3FEBA1E1-EE29-45D2-8251-602E336171C5_1750366172462.png';
 
 interface VideoOSCESession {
   id: string;
@@ -263,13 +264,45 @@ export default function VideoOSCE() {
   }, [stations]);
 
   return (
-    <div className="video-osce min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" data-page="video-osce">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Video OSCE Practice</h1>
-          <p className="text-lg text-gray-600">
+    <div className="video-osce min-h-screen bg-white" data-page="video-osce">
+      {/* Hero Banner */}
+      <div 
+        className="relative bg-gradient-to-r from-blue-600 to-purple-700 rounded-2xl mb-8 overflow-hidden"
+        style={{
+          backgroundImage: `url(${videoBgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundBlendMode: 'multiply'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-8 py-16">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
+            Video OSCE Practice
+          </h1>
+          <p className="text-xl lg:text-2xl mb-6 text-white/90">
             Record yourself performing OSCE stations and get AI-powered feedback
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Badge className="bg-white text-black px-4 py-2">
+              Video Recording
+            </Badge>
+            <Badge className="bg-white text-black px-4 py-2">
+              AI Feedback
+            </Badge>
+            <Badge className="bg-white text-black px-4 py-2">
+              Performance Analysis
+            </Badge>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto p-4">
+        {/* Navigation */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">Practice Sessions</h2>
+          <p className="text-lg text-gray-600">
+            Choose a station, record your performance, and receive detailed feedback
           </p>
         </div>
 
