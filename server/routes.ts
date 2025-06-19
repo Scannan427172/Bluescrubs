@@ -439,6 +439,48 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
+  // Test full question generation with specific URLs
+  app.post('/api/nhsprep/test-question', async (req, res) => {
+    try {
+      const { topic, specialty } = req.body;
+      
+      const { generateNHSPrepQuestions } = await import('./nhsprep-ai-generator');
+      
+      const questions = await generateNHSPrepQuestions(specialty, topic, 1);
+      
+      if (questions && questions.length > 0) {
+        const question = questions[0];
+        
+        // Analyze URL specificity
+        const isSpecificNICE = question.reference.url.includes('ng136') || 
+                               question.reference.url.includes('chapter') ||
+                               question.reference.url.includes('ng28') ||
+                               question.reference.url.includes('ng80');
+        const isSpecificCKS = question.reference.url.includes('management') || 
+                              question.reference.url.includes('topics/');
+        
+        res.json({
+          question,
+          urlAnalysis: {
+            isSpecificNICE,
+            isSpecificCKS,
+            status: (isSpecificNICE || isSpecificCKS) ? "SPECIFIC" : "GENERAL",
+            url: question.reference.url
+          },
+          timestamp: new Date().toISOString()
+        });
+      } else {
+        res.status(500).json({ error: 'No questions generated' });
+      }
+    } catch (error) {
+      console.error('Error testing question generation:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate test question',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   // AI Study Tools endpoints
   app.post("/api/study-tools/flashcards/generate", async (req, res) => {
     try {
