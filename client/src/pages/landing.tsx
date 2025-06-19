@@ -47,7 +47,7 @@ export default function Landing() {
                 </h1>
                 
                 <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl" style={{ color: 'white' }}>
-                  <span style={{ color: 'white' }}>The world's most advanced AI-powered platform for NHSprep featuring{" "}</span>
+                  <span style={{ color: 'white' }}>Advanced AI-powered platform for NHSprep featuring{" "}</span>
                   <span className="text-blue-400 font-semibold">video OSCE simulations</span><span style={{ color: 'white' }}>,{" "}</span>
                   <span className="text-purple-400 font-semibold">adaptive learning</span><span style={{ color: 'white' }}>, and{" "}</span>
                   <span className="text-green-400 font-semibold">expert mentorship</span><span style={{ color: 'white' }}>.</span>
@@ -202,7 +202,7 @@ export default function Landing() {
                   {
                     icon: Globe,
                     title: "40+ Language AI Translation",
-                    description: "Revolutionary multilingual platform with real-time AI translation, native speaker voice synthesis, cultural context adaptation, and localized medical terminology. Includes Arabic, Hindi, Mandarin, Spanish, French, German, Portuguese, Russian, Japanese, Korean, Urdu, Bengali, Tamil, Telugu, Gujarati, Punjabi, Malayalam, Kannada, Marathi, plus 20+ additional languages."
+                    description: "Comprehensive multilingual platform with AI translation, voice synthesis, cultural context adaptation, and localized medical terminology. Includes Arabic, Hindi, Mandarin, Spanish, French, German, Portuguese, Russian, Japanese, Korean, Urdu, Bengali, Tamil, Telugu, Gujarati, Punjabi, Malayalam, Kannada, Marathi, plus 20+ additional languages."
                   },
                   {
                     icon: Zap,
@@ -243,7 +243,7 @@ export default function Landing() {
               <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <h4 style={{ color: '#ffffff', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', textAlign: 'center', WebkitTextFillColor: '#ffffff' }}>Ultimate PLAB Mastery Package</h4>
                 <div style={{ color: '#ffffff', fontSize: '3rem', fontWeight: 'bold', marginBottom: '0.5rem', textAlign: 'center', WebkitTextFillColor: '#ffffff' }}>£89<span style={{ color: '#ffffff', fontSize: '1.25rem', WebkitTextFillColor: '#ffffff' }}>/month</span></div>
-                <p style={{ color: '#ffffff', textAlign: 'center', WebkitTextFillColor: '#ffffff' }}>Complete ecosystem for guaranteed PLAB success</p>
+                <p style={{ color: '#ffffff', textAlign: 'center', WebkitTextFillColor: '#ffffff' }}>Complete ecosystem for PLAB preparation excellence</p>
               </div>
               
               <div className="space-y-4 mb-8">
@@ -278,11 +278,11 @@ export default function Landing() {
           {/* Revenue Projections & Market Position */}
           <div className="mt-20 text-center">
             <div className="premium-plab-card bg-white rounded-3xl p-8 shadow-xl border-2 border-gray-200">
-              <h4 className="text-2xl font-bold text-gray-900 mb-6">Revolutionary Medical Education Ecosystem</h4>
+              <h4 className="text-2xl font-bold text-gray-900 mb-6">Advanced Medical Education Ecosystem</h4>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                  <div className="text-3xl font-bold text-blue-600 mb-2">96%</div>
-                  <p className="text-gray-800 font-medium">AI Prediction Accuracy</p>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">High</div>
+                  <p className="text-gray-800 font-medium">AI Accuracy</p>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-green-600 mb-2">40+</div>
@@ -310,7 +310,7 @@ export default function Landing() {
               <span className="text-white font-semibold" style={{ color: 'white', WebkitTextFillColor: 'white' }}>Complete Feature Set</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              50+ Revolutionary AI Systems Working Together
+              50+ Advanced AI Systems Working Together
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
               Advanced medical education platform with AI-powered learning, immersive VR/AR training, 

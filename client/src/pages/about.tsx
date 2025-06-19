@@ -38,7 +38,7 @@ export default function About() {
           </CardHeader>
           <CardContent>
             <p className="text-blue-800 text-lg leading-relaxed">
-              To democratize medical education by providing cutting-edge, AI-powered learning 
+              To democratize medical education by providing advanced, AI-powered learning 
               tools that help international medical graduates succeed in their PLAB examinations 
               and integrate successfully into the UK healthcare system.
             </p>

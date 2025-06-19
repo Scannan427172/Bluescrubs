@@ -117,7 +117,7 @@ export default function AIStudyBuddy() {
           </Badge>
         </div>
         <p className="text-lg text-muted-foreground">
-          Revolutionary AI that adapts to your emotions, cultural background, and learning style for personalized medical education.
+          Advanced AI that adapts to your emotions, cultural background, and learning style for personalized medical education.
         </p>
       </div>
 
