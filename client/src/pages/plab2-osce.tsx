@@ -902,6 +902,88 @@ function OSCEStationView({
               </CardContent>
             </Card>
 
+            {/* Official References Section */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-gray-900 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5" />
+                  Official References
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-3 mb-4">
+                  {(station as any).nice_guidance && (
+                    <Button
+                      onClick={() => window.open((station as any).nice_guidance.url || 'https://www.nice.org.uk/guidance', '_blank')}
+                      className="bg-blue-600 hover:bg-blue-700 text-white"
+                      size="sm"
+                    >
+                      <ExternalLink className="w-3 h-3 mr-1" />
+                      NICE Guideline: {(station as any).nice_guidance.code}
+                    </Button>
+                  )}
+                  
+                  {(station as any).cks_guidance && (
+                    <Button
+                      onClick={() => window.open((station as any).cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                      size="sm"
+                    >
+                      <ExternalLink className="w-3 h-3 mr-1" />
+                      CKS: {(station as any).cks_guidance.topic || 'Clinical Knowledge'}
+                    </Button>
+                  )}
+                  
+                  {/* Fallback buttons if specific guidance not available */}
+                  {!(station as any).nice_guidance && !(station as any).cks_guidance && (
+                    <>
+                      <Button
+                        onClick={() => window.open('https://www.nice.org.uk/guidance', '_blank')}
+                        className="bg-blue-600 hover:bg-blue-700 text-white"
+                        size="sm"
+                      >
+                        <ExternalLink className="w-3 h-3 mr-1" />
+                        NICE Guidelines
+                      </Button>
+                      
+                      <Button
+                        onClick={() => window.open('https://cks.nice.org.uk/', '_blank')}
+                        className="bg-green-600 hover:bg-green-700 text-white"
+                        size="sm"
+                      >
+                        <ExternalLink className="w-3 h-3 mr-1" />
+                        CKS Guidelines
+                      </Button>
+                    </>
+                  )}
+                </div>
+                
+                {station.references && station.references.length > 0 && (
+                  <div className="space-y-2">
+                    <h4 className="font-medium text-gray-900">Additional References:</h4>
+                    {station.references.map((reference: any, index: number) => (
+                      <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                        <p className="text-gray-700 text-sm mb-2">
+                          {typeof reference === 'string' ? reference : reference.title || reference.text}
+                        </p>
+                        {typeof reference === 'object' && reference.url && (
+                          <a 
+                            href={reference.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm inline-flex items-center gap-2 font-medium transition-colors"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            View Guidelines
+                          </a>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle className="text-gray-900">Self-Assessment</CardTitle>

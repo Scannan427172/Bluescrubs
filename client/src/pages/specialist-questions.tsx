@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SpecialtySelector } from "@/components/specialty-selector";
-import { CheckCircle, XCircle, Clock, BookOpen, User, AlertCircle } from "lucide-react";
+import { CheckCircle, XCircle, Clock, BookOpen, User, AlertCircle, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Question {
@@ -286,9 +286,60 @@ export default function SpecialistQuestions() {
                     <CardContent className="space-y-4">
                       <p className="leading-relaxed">{currentQuestion.explanation}</p>
                       
+                      {/* NICE and CKS Guideline Buttons */}
+                      <div className="space-y-3">
+                        <h4 className="font-medium">Official References:</h4>
+                        <div className="flex flex-wrap gap-3">
+                          {currentQuestion.nice_guidance && (
+                            <Button
+                              onClick={() => window.open(currentQuestion.nice_guidance.url || 'https://www.nice.org.uk/guidance', '_blank')}
+                              className="bg-blue-600 hover:bg-blue-700 text-white"
+                              size="sm"
+                            >
+                              <ExternalLink className="w-3 h-3 mr-1" />
+                              NICE Guideline: {currentQuestion.nice_guidance.code}
+                            </Button>
+                          )}
+                          
+                          {currentQuestion.cks_guidance && (
+                            <Button
+                              onClick={() => window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
+                              className="bg-green-600 hover:bg-green-700 text-white"
+                              size="sm"
+                            >
+                              <ExternalLink className="w-3 h-3 mr-1" />
+                              CKS: {currentQuestion.cks_guidance.topic || 'Clinical Knowledge'}
+                            </Button>
+                          )}
+                          
+                          {/* Fallback buttons if specific guidance not available */}
+                          {!currentQuestion.nice_guidance && !currentQuestion.cks_guidance && (
+                            <>
+                              <Button
+                                onClick={() => window.open('https://www.nice.org.uk/guidance', '_blank')}
+                                className="bg-blue-600 hover:bg-blue-700 text-white"
+                                size="sm"
+                              >
+                                <ExternalLink className="w-3 h-3 mr-1" />
+                                NICE Guidelines
+                              </Button>
+                              
+                              <Button
+                                onClick={() => window.open('https://cks.nice.org.uk/', '_blank')}
+                                className="bg-green-600 hover:bg-green-700 text-white"
+                                size="sm"
+                              >
+                                <ExternalLink className="w-3 h-3 mr-1" />
+                                CKS Guidelines
+                              </Button>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
                       {currentQuestion.uk_guidelines && currentQuestion.uk_guidelines.length > 0 && (
                         <div>
-                          <h4 className="font-medium mb-2">UK Guidelines Referenced:</h4>
+                          <h4 className="font-medium mb-2">Additional UK Guidelines Referenced:</h4>
                           <div className="flex flex-wrap gap-2">
                             {currentQuestion.uk_guidelines.map((guideline, index) => (
                               <Badge key={index} variant="secondary">

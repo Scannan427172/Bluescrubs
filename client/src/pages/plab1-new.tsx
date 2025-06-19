@@ -1535,7 +1535,56 @@ export default function PLAB1New() {
               <div className="flex items-start gap-2">
                 <BookOpen className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
                 <div className="w-full">
-                  <p className="text-sm font-medium text-blue-900 mb-2">{translateText('Official References:')}</p>
+                  <p className="text-sm font-medium text-blue-900 mb-3">{translateText('Official References:')}</p>
+                  
+                  {/* NICE and CKS Guideline Buttons */}
+                  <div className="flex flex-wrap gap-3 mb-4">
+                    {currentQuestion.nice_guidance && (
+                      <Button
+                        onClick={() => window.open(currentQuestion.nice_guidance.url || 'https://www.nice.org.uk/guidance', '_blank')}
+                        className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
+                        size="sm"
+                      >
+                        <ExternalLink className="w-3 h-3 mr-1" />
+                        NICE Guideline: {currentQuestion.nice_guidance.code}
+                      </Button>
+                    )}
+                    
+                    {currentQuestion.cks_guidance && (
+                      <Button
+                        onClick={() => window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank')}
+                        className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
+                        size="sm"
+                      >
+                        <ExternalLink className="w-3 h-3 mr-1" />
+                        CKS: {currentQuestion.cks_guidance.topic || 'Clinical Knowledge'}
+                      </Button>
+                    )}
+                    
+                    {/* Fallback buttons if specific guidance not available */}
+                    {!currentQuestion.nice_guidance && !currentQuestion.cks_guidance && (
+                      <>
+                        <Button
+                          onClick={() => window.open('https://www.nice.org.uk/guidance', '_blank')}
+                          className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
+                          size="sm"
+                        >
+                          <ExternalLink className="w-3 h-3 mr-1" />
+                          NICE Guidelines
+                        </Button>
+                        
+                        <Button
+                          onClick={() => window.open('https://cks.nice.org.uk/', '_blank')}
+                          className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
+                          size="sm"
+                        >
+                          <ExternalLink className="w-3 h-3 mr-1" />
+                          CKS Guidelines
+                        </Button>
+                      </>
+                    )}
+                  </div>
+                  
                   <div className="text-sm text-blue-800 space-y-2">
                     {currentQuestion.references && currentQuestion.references.length > 0 ? (
                       currentQuestion.references.map((reference: any, index: number) => (
