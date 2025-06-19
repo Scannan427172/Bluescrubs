@@ -1419,7 +1419,10 @@ export default function PLAB1New() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
+                            e.nativeEvent.stopImmediatePropagation();
+                            setTimeout(() => {
+                              window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
+                            }, 100);
                           }}
                           className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
                         >
@@ -1471,7 +1474,10 @@ export default function PLAB1New() {
                                     onClick={(e) => {
                                       e.preventDefault();
                                       e.stopPropagation();
-                                      window.open(ref.url, '_blank');
+                                      e.nativeEvent.stopImmediatePropagation();
+                                      setTimeout(() => {
+                                        window.open(ref.url, '_blank');
+                                      }, 100);
                                     }}
                                     className="h-6 px-2 text-xs border-green-300 text-green-700 hover:bg-green-50"
                                   >
@@ -1555,7 +1561,10 @@ export default function PLAB1New() {
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                window.open(reference.url, '_blank');
+                                e.nativeEvent.stopImmediatePropagation();
+                                setTimeout(() => {
+                                  window.open(reference.url, '_blank');
+                                }, 100);
                               }}
                               className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                             >
