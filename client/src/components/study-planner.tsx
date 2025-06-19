@@ -76,7 +76,7 @@ export function StudyPlanner({ userId, selectedDate }: StudyPlannerProps) {
         id: "4",
         title: "Mock Exam Review",
         description: "Analyze previous errors",
-        type: "mock",
+        type: "practice-exam",
         duration: 40,
         completed: false,
         progress: 0,
@@ -121,7 +121,7 @@ export function StudyPlanner({ userId, selectedDate }: StudyPlannerProps) {
       mcq: "📋",
       osce: "🎭",
       review: "📚",
-      mock: "⏱️",
+      "practice-exam": "⏱️",
     };
     return iconMap[type as keyof typeof iconMap] || "📝";
   };
@@ -131,7 +131,7 @@ export function StudyPlanner({ userId, selectedDate }: StudyPlannerProps) {
       mcq: "bg-primary/10 text-primary",
       osce: "bg-secondary/10 text-secondary",
       review: "bg-accent/10 text-accent",
-      mock: "bg-warning/10 text-warning",
+      "practice-exam": "bg-warning/10 text-warning",
     };
     return colorMap[type as keyof typeof colorMap] || "bg-muted text-muted-foreground";
   };

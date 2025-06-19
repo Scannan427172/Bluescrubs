@@ -182,7 +182,7 @@ export default function More() {
     {
       icon: FileText,
       title: "Practice Tests",
-      description: "Full-length PLAB 1 mock exams and timed practice tests",
+      description: "Full-length PLAB 1 practice exams and timed assessment tests",
       hasArrow: true,
       link: "/plab1-new"
     },

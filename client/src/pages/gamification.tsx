@@ -68,7 +68,7 @@ export default function Gamification() {
     {
       id: 5,
       title: "PLAB Perfectionist",
-      description: "Score 100% on a 50-question mock exam",
+      description: "Score 100% on a 50-question practice exam",
       icon: Crown,
       category: "Excellence",
       points: 1000,
