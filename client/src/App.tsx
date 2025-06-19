@@ -32,6 +32,7 @@ import SmartPlanner from "@/pages/smart-planner";
 import CulturalTraining from "@/pages/cultural-training";
 import Mentors from "@/pages/mentors";
 import Gamification from "@/pages/gamification";
+import AdvancedDashboard from "@/pages/advanced-dashboard";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -57,6 +58,14 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <Dashboard />
+          </div>
+        </div>
+      </Route>
+      <Route path="/advanced-dashboard">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <AdvancedDashboard />
           </div>
         </div>
       </Route>
