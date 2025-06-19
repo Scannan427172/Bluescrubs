@@ -396,6 +396,49 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
+  // Test endpoint for guideline-based options
+  app.post('/api/nhsprep/test-options', async (req, res) => {
+    try {
+      const { topic, specialty } = req.body;
+      
+      // Import the guideline content extractor
+      const { extractGuidelineBasedOptions } = await import('./guideline-content-extractor');
+      const { findSpecificGuidelineLinks } = await import('./dynamic-guideline-search');
+      
+      // Get specific guidelines
+      const guidelines = await findSpecificGuidelineLinks(topic, specialty);
+      
+      // Extract authentic options
+      const options = await extractGuidelineBasedOptions(
+        topic, 
+        specialty, 
+        guidelines.nice!, 
+        guidelines.cks!
+      );
+      
+      res.json({
+        topic,
+        specialty,
+        guidelines,
+        options: options.map((option, index) => ({
+          letter: String.fromCharCode(65 + index),
+          text: option.text,
+          isCorrect: option.isCorrect,
+          source: option.source,
+          reference: option.reference,
+          rationale: option.rationale
+        })),
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error testing guideline options:', error);
+      res.status(500).json({ 
+        error: 'Failed to test options',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   // AI Study Tools endpoints
   app.post("/api/study-tools/flashcards/generate", async (req, res) => {
     try {

@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { findSpecificGuidelineLinks, GuidelineSearchResult } from "./dynamic-guideline-search";
+import { extractGuidelineBasedOptions, generateGuidelineBasedExplanation } from "./guideline-content-extractor";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -529,6 +530,14 @@ export async function generateNHSPrepQuestions(
     // Find specific NICE/CKS links for this clinical topic
     const specificGuidelines = await findSpecificGuidelineLinks(topic, specialty);
     
+    // Extract authentic guideline-based options
+    const guidelineOptions = await extractGuidelineBasedOptions(
+      topic, 
+      specialty, 
+      specificGuidelines.nice!, 
+      specificGuidelines.cks!
+    );
+    
     const prompt = `You are NHSPrep AI — a clinical exam question generator for PLAB, MLA, and NHSPrep candidates.
 
 You ONLY use verified UK clinical guidelines:
@@ -549,19 +558,24 @@ SPECIFIC GUIDELINE REFERENCES (use these exact details):
 - NICE: ${specificGuidelines.nice?.title || 'NICE Guidance'} - ${specificGuidelines.nice?.url || 'https://www.nice.org.uk/guidance'}
 - CKS: ${specificGuidelines.cks?.title || 'CKS Topic'} - ${specificGuidelines.cks?.url || 'https://cks.nice.org.uk/topics/'}
 
+AUTHENTIC CLINICAL OPTIONS (use these exact treatment options from guidelines):
+${guidelineOptions.map((option, index) => 
+  `${String.fromCharCode(65 + index)}. ${option.text} - ${option.isCorrect ? 'CORRECT' : 'INCORRECT'} (${option.source}: ${option.reference})`
+).join('\n')}
+
 Each question must follow UK NHS clinical guidelines and be appropriate for candidates preparing for PLAB/MLA/NHS licensing exams.
 
 CRITICAL REQUIREMENTS:
-1. Use ONLY the verified UK guidelines provided above
-2. Include specific NICE/CKS reference with exact section
-3. Use the authentic guideline URLs provided above - these are direct links to specific guidelines
+1. Use ONLY the verified UK guidelines and authentic clinical options provided above
+2. The answer options must come directly from the authentic clinical options listed above
+3. Use the exact treatment recommendations and clinical references provided
 4. Clinical scenarios must be realistic UK NHS cases
-5. All 5 options must be plausible but only one correct
+5. Use the 5 authentic options provided above (A-E) with their exact sources
 6. Explanations must be comprehensive (200-250 words) starting with "Correct Answer: [Letter]. [Option text]" followed by:
-   - Clear reasoning why the correct answer is correct using clinical reasoning
-   - Brief mentions of why other options are incorrect
-   - Exam-relevant clinical tips in brackets [Clinical Tip: ...]
-   - UK-specific clinical protocols and pathophysiology
+   - Quote the specific guideline reference for the correct answer
+   - Explain why other options are incorrect using their listed rationales
+   - Include exam-relevant clinical tips in brackets [Clinical Tip: ...]
+   - Reference the specific NICE/CKS sections provided for each option
 
 Return ONLY a JSON array in this exact format:
 
