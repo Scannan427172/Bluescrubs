@@ -567,14 +567,14 @@ export default function PLAB1New() {
             category: specialty,
             difficulty: selectedDifficulty,
             niceGuidanceLinks: [{
-              title: "NICE NG136: Hypertension in adults",
-              url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#pharmacological-treatment",
-              relevance: "Step-wise antihypertensive treatment protocol"
+              title: "NICE NG136: Hypertension in adults (Section 1.4.14 First-line treatment)",
+              url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#antihypertensive-drug-treatment-thresholds-and-targets",
+              relevance: "Step 2 treatment: Add ACE inhibitor when CCB alone insufficient"
             }],
             cksLinks: [{
-              title: "CKS: Hypertension",
-              url: "https://cks.nice.org.uk/topics/hypertension/management/drug-treatment/",
-              relevance: "Primary care hypertension management"
+              title: "CKS: Hypertension - Antihypertensive drugs",
+              url: "https://cks.nice.org.uk/topics/hypertension/management/antihypertensive-drugs/",
+              relevance: "Primary care step-wise hypertension management"
             }]
           },
           {
@@ -592,14 +592,14 @@ export default function PLAB1New() {
             category: specialty,
             difficulty: selectedDifficulty,
             niceGuidanceLinks: [{
-              title: "NICE NG28: Type 2 diabetes in adults",
+              title: "NICE NG28: Type 2 diabetes in adults (Section 1.6.2 First-line treatment)",
               url: "https://www.nice.org.uk/guidance/ng28/chapter/1-Recommendations#drug-treatment",
-              relevance: "First-line diabetes management"
+              relevance: "Metformin as first-line glucose-lowering therapy"
             }],
             cksLinks: [{
-              title: "CKS: Diabetes - type 2",
+              title: "CKS: Diabetes type 2 - Blood glucose management",
               url: "https://cks.nice.org.uk/topics/diabetes-type-2/management/blood-glucose-management/",
-              relevance: "Primary care diabetes management"
+              relevance: "Primary care diabetes pharmacological management"
             }]
           },
           {
@@ -617,14 +617,14 @@ export default function PLAB1New() {
             category: specialty,
             difficulty: selectedDifficulty,
             niceGuidanceLinks: [{
-              title: "NICE NG80: Asthma diagnosis and management",
+              title: "NICE NG80: Asthma diagnosis and management (Section 1.2.1 ICS preventer therapy)",
               url: "https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#pharmacological-management",
-              relevance: "Step-wise asthma treatment approach"
+              relevance: "Low-dose ICS as first-line preventer when SABA use >3 times/week"
             }],
             cksLinks: [{
-              title: "CKS: Asthma",
+              title: "CKS: Asthma - Drug treatment",
               url: "https://cks.nice.org.uk/topics/asthma/management/drug-treatment/",
-              relevance: "Primary care asthma management"
+              relevance: "Primary care step-wise asthma pharmacological management"
             }]
           },
           {
@@ -642,14 +642,14 @@ export default function PLAB1New() {
             category: specialty,
             difficulty: selectedDifficulty,
             niceGuidanceLinks: [{
-              title: "NICE CG108: Chronic heart failure",
+              title: "NICE CG108: Chronic heart failure (Section 1.3.3 Beta-blocker therapy)",
               url: "https://www.nice.org.uk/guidance/cg108/chapter/1-Guidance#pharmacological-treatment-heart-failure-with-reduced-ejection-fraction",
-              relevance: "Heart failure pharmacological treatment sequence"
+              relevance: "Add beta-blocker as second drug after ACE inhibitor established in HFrEF"
             }],
             cksLinks: [{
-              title: "CKS: Heart failure - chronic", 
+              title: "CKS: Heart failure chronic - Drug treatment", 
               url: "https://cks.nice.org.uk/topics/heart-failure-chronic/management/drug-treatment/",
-              relevance: "Primary care heart failure management"
+              relevance: "Primary care HFrEF pharmacological management sequence"
             }]
           },
           {
@@ -667,14 +667,14 @@ export default function PLAB1New() {
             category: specialty,
             difficulty: selectedDifficulty,
             niceGuidanceLinks: [{
-              title: "NICE CG90: Depression in adults",
+              title: "NICE CG90: Depression in adults (Section 1.5.2.1 Psychological interventions)",
               url: "https://www.nice.org.uk/guidance/cg90/chapter/1-Guidance#care-of-all-people-with-depression",
-              relevance: "Depression treatment guidelines"
+              relevance: "High-intensity psychological interventions as first-line for moderate depression"
             }],
             cksLinks: [{
-              title: "CKS: Depression",
+              title: "CKS: Depression - Adults with depression",
               url: "https://cks.nice.org.uk/topics/depression/management/adults-with-depression/",
-              relevance: "Primary care depression management"
+              relevance: "Primary care depression management including CBT referral pathways"
             }]
           }
         ];
