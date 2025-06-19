@@ -546,10 +546,14 @@ Each question must follow UK NHS clinical guidelines and be appropriate for cand
 CRITICAL REQUIREMENTS:
 1. Use ONLY the verified UK guidelines provided above
 2. Include specific NICE/CKS reference with exact section
-3. Provide working URLs to the guidelines
+3. Provide working URLs to the guidelines - MUST be direct links to specific guidelines (e.g., NICE NG28 for Type 2 Diabetes), NOT general homepages
 4. Clinical scenarios must be realistic UK NHS cases
 5. All 5 options must be plausible but only one correct
-6. Explanations must be comprehensive (200-250 words) with detailed clinical reasoning, pathophysiology, differential diagnosis considerations, why incorrect options are wrong, and UK-specific clinical protocols
+6. Explanations must be comprehensive (200-250 words) starting with "Correct Answer: [Letter]. [Option text]" followed by:
+   - Clear reasoning why the correct answer is correct using clinical reasoning
+   - Brief mentions of why other options are incorrect
+   - Exam-relevant clinical tips in brackets [Clinical Tip: ...]
+   - UK-specific clinical protocols and pathophysiology
 
 Return ONLY a JSON array in this exact format:
 
@@ -567,7 +571,7 @@ Return ONLY a JSON array in this exact format:
       "E": "Option E text"
     },
     "correct_answer": "A",
-    "explanation": "Detailed explanation citing specific NICE/CKS recommendations. Why correct answer is right and why others are wrong.",
+    "explanation": "Start with 'Correct Answer: [Letter]. [Option text]' then provide comprehensive 200-250 word explanation with clinical reasoning, why other options are incorrect, and exam tips in brackets [Clinical Tip: ...]",
     "study_tip": "Specific learning point reinforcing this guideline recommendation",
     "reference": {
       "title": "Exact NICE/CKS guideline title",

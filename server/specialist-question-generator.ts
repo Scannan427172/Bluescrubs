@@ -227,7 +227,7 @@ Format as JSON object with 'questions' array. Each question must have:
       "question": "Clinical scenario ending with question",
       "options": ["A. First option", "B. Second option", "C. Third option", "D. Fourth option", "E. Fifth option"],
       "correctAnswer": 1,
-      "explanation": "Comprehensive explanation with clinical reasoning (200-250 words). Include pathophysiology, differential diagnosis considerations, why incorrect options are wrong, clinical decision-making process, and relevant UK-specific clinical protocols. Explain the underlying medical principles and connect to broader clinical knowledge.",
+      "explanation": "Start with 'Correct Answer: [Letter]. [Option text]' then provide comprehensive 200-250 word explanation including: clinical reasoning why correct answer is right, brief mentions why other options are incorrect, pathophysiology, exam-relevant clinical tips in brackets [Clinical Tip: ...], and UK-specific protocols.",
       "category": "${specialtyInfo.name}",
       "difficulty": "${difficulty}",
       "niceGuidanceLinks": [
