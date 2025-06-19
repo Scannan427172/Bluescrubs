@@ -71,11 +71,13 @@ export function HeroBanner({
         {badge && (
           <Badge 
             variant="outline" 
-            className="bg-white text-black border-gray-300" 
+            className="bg-blue-600 text-white border-blue-400" 
             style={{ 
-              color: 'black', 
-              WebkitTextFillColor: 'black', 
-              textShadow: 'none' 
+              color: 'white', 
+              WebkitTextFillColor: 'white', 
+              textShadow: 'none',
+              backgroundColor: '#2563eb',
+              borderColor: '#60a5fa'
             }}
           >
             {badge}
