@@ -46,7 +46,7 @@ function getSpecialtyCKSTopics(specialty: string): string {
   const cksTopics: Record<string, string> = {
     cardiology: `- Atrial fibrillation (https://cks.nice.org.uk/topics/atrial-fibrillation/)
 - Heart failure - chronic (https://cks.nice.org.uk/topics/heart-failure-chronic/)
-- Hypertension (https://cks.nice.org.uk/topics/hypertension/)
+- Hypertension (https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment)
 - Angina (https://cks.nice.org.uk/topics/angina/)`,
     respiratory: `- Asthma (https://cks.nice.org.uk/topics/asthma/)
 - COPD (https://cks.nice.org.uk/topics/chronic-obstructive-pulmonary-disease/)
@@ -199,7 +199,7 @@ export async function generateSpecialistQuestions(
       "category": "${specialtyInfo.name}",
       "difficulty": "${difficulty}",
       "niceGuidanceLinks": [{"title": "NICE guideline", "url": "https://www.nice.org.uk/guidance/ng28", "relevance": "Relevant guidance"}],
-      "cksLinks": [{"title": "CKS topic", "url": "https://cks.nice.org.uk/topics/hypertension/", "relevance": "Clinical knowledge"}],
+      "cksLinks": [{"title": "CKS topic", "url": "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment", "relevance": "Clinical knowledge"}],
       "additionalReferences": []
     }
   ]

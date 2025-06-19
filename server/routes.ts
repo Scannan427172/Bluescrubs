@@ -1042,7 +1042,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           }],
           cksLinks: [{
             title: "CKS: Hypertension",
-            url: "https://cks.nice.org.uk/topics/hypertension/management/drug-treatment/",
+            url: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment",
             relevance: "Primary care hypertension management"
           }],
           additionalReferences: []

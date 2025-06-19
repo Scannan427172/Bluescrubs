@@ -46,8 +46,8 @@ const UK_CLINICAL_GUIDELINES = {
       cks: "Hypertension",
       sections: ["Diagnosis", "Treatment thresholds", "Lifestyle advice"],
       urls: {
-        nice: "https://www.nice.org.uk/guidance/ng136",
-        cks: "https://cks.nice.org.uk/topics/hypertension/"
+        nice: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-interventions",
+        cks: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment"
       }
     },
     atrial_fibrillation: {
@@ -711,8 +711,8 @@ function getGuidelineLinksForSpecialty(specialty: string, topic: string) {
   const guidelineMap: Record<string, any> = {
     cardiology: {
       hypertension: {
-        nice: "https://www.nice.org.uk/guidance/ng136",
-        cks: "https://cks.nice.org.uk/topics/hypertension/"
+        nice: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-interventions",
+        cks: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment"
       },
       heart_failure: {
         nice: "https://www.nice.org.uk/guidance/cg108", 

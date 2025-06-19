@@ -78,8 +78,8 @@ function getStaticGuidelineForTopic(topic: string): GuidelineLinks {
   
   if (topicKey.includes('hypertension') || topicKey.includes('ace inhibitor') || topicKey.includes('blood pressure')) {
     return {
-      nice: "https://www.nice.org.uk/guidance/ng136",
-      cks: "https://cks.nice.org.uk/topics/hypertension/"
+      nice: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-interventions",
+      cks: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment"
     };
   }
   
@@ -145,8 +145,8 @@ function getStaticGuidelineLinks(specialty: string, topic: string): GuidelineLin
   const staticGuidelines: Record<string, Record<string, GuidelineLinks>> = {
     cardiology: {
       hypertension: {
-        nice: "https://www.nice.org.uk/guidance/ng136",
-        cks: "https://cks.nice.org.uk/topics/hypertension/"
+        nice: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#lifestyle-interventions",
+        cks: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#starting-antihypertensive-drug-treatment"
       },
       heart_failure: {
         nice: "https://www.nice.org.uk/guidance/cg108",
