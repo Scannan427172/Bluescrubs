@@ -1126,14 +1126,67 @@ export default function PLAB1New() {
                   <span className="text-sm text-gray-700">Translate</span>
                   {translateQuestions && (
                     <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
-                      <SelectTrigger className="w-20 h-8 text-xs">
+                      <SelectTrigger className="w-36 h-8 text-xs">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="en">🇬🇧 EN</SelectItem>
-                        <SelectItem value="ar">🇸🇦 AR</SelectItem>
-                        <SelectItem value="hi">🇮🇳 HI</SelectItem>
-                        <SelectItem value="ur">🇵🇰 UR</SelectItem>
+                      <SelectContent className="max-h-64 overflow-y-auto">
+                        <SelectItem value="en">🇬🇧 English</SelectItem>
+                        <SelectItem value="ar">🇸🇦 Arabic</SelectItem>
+                        <SelectItem value="hi">🇮🇳 Hindi</SelectItem>
+                        <SelectItem value="ur">🇵🇰 Urdu</SelectItem>
+                        <SelectItem value="bn">🇧🇩 Bengali</SelectItem>
+                        <SelectItem value="ta">🇮🇳 Tamil</SelectItem>
+                        <SelectItem value="te">🇮🇳 Telugu</SelectItem>
+                        <SelectItem value="gu">🇮🇳 Gujarati</SelectItem>
+                        <SelectItem value="mr">🇮🇳 Marathi</SelectItem>
+                        <SelectItem value="pa">🇮🇳 Punjabi</SelectItem>
+                        <SelectItem value="kn">🇮🇳 Kannada</SelectItem>
+                        <SelectItem value="ml">🇮🇳 Malayalam</SelectItem>
+                        <SelectItem value="ne">🇳🇵 Nepali</SelectItem>
+                        <SelectItem value="si">🇱🇰 Sinhala</SelectItem>
+                        <SelectItem value="my">🇲🇲 Myanmar</SelectItem>
+                        <SelectItem value="th">🇹🇭 Thai</SelectItem>
+                        <SelectItem value="vi">🇻🇳 Vietnamese</SelectItem>
+                        <SelectItem value="id">🇮🇩 Indonesian</SelectItem>
+                        <SelectItem value="ms">🇲🇾 Malay</SelectItem>
+                        <SelectItem value="tl">🇵🇭 Filipino</SelectItem>
+                        <SelectItem value="zh">🇨🇳 Chinese</SelectItem>
+                        <SelectItem value="ja">🇯🇵 Japanese</SelectItem>
+                        <SelectItem value="ko">🇰🇷 Korean</SelectItem>
+                        <SelectItem value="es">🇪🇸 Spanish</SelectItem>
+                        <SelectItem value="pt">🇵🇹 Portuguese</SelectItem>
+                        <SelectItem value="fr">🇫🇷 French</SelectItem>
+                        <SelectItem value="de">🇩🇪 German</SelectItem>
+                        <SelectItem value="it">🇮🇹 Italian</SelectItem>
+                        <SelectItem value="ru">🇷🇺 Russian</SelectItem>
+                        <SelectItem value="tr">🇹🇷 Turkish</SelectItem>
+                        <SelectItem value="fa">🇮🇷 Persian</SelectItem>
+                        <SelectItem value="ps">🇦🇫 Pashto</SelectItem>
+                        <SelectItem value="sw">🇰🇪 Swahili</SelectItem>
+                        <SelectItem value="am">🇪🇹 Amharic</SelectItem>
+                        <SelectItem value="ha">🇳🇬 Hausa</SelectItem>
+                        <SelectItem value="yo">🇳🇬 Yoruba</SelectItem>
+                        <SelectItem value="ig">🇳🇬 Igbo</SelectItem>
+                        <SelectItem value="zu">🇿🇦 Zulu</SelectItem>
+                        <SelectItem value="af">🇿🇦 Afrikaans</SelectItem>
+                        <SelectItem value="nl">🇳🇱 Dutch</SelectItem>
+                        <SelectItem value="pl">🇵🇱 Polish</SelectItem>
+                        <SelectItem value="cs">🇨🇿 Czech</SelectItem>
+                        <SelectItem value="hu">🇭🇺 Hungarian</SelectItem>
+                        <SelectItem value="ro">🇷🇴 Romanian</SelectItem>
+                        <SelectItem value="bg">🇧🇬 Bulgarian</SelectItem>
+                        <SelectItem value="hr">🇭🇷 Croatian</SelectItem>
+                        <SelectItem value="sr">🇷🇸 Serbian</SelectItem>
+                        <SelectItem value="sl">🇸🇮 Slovenian</SelectItem>
+                        <SelectItem value="el">🇬🇷 Greek</SelectItem>
+                        <SelectItem value="he">🇮🇱 Hebrew</SelectItem>
+                        <SelectItem value="uk">🇺🇦 Ukrainian</SelectItem>
+                        <SelectItem value="ka">🇬🇪 Georgian</SelectItem>
+                        <SelectItem value="hy">🇦🇲 Armenian</SelectItem>
+                        <SelectItem value="az">🇦🇿 Azerbaijani</SelectItem>
+                        <SelectItem value="kk">🇰🇿 Kazakh</SelectItem>
+                        <SelectItem value="uz">🇺🇿 Uzbek</SelectItem>
+                        <SelectItem value="mn">🇲🇳 Mongolian</SelectItem>
                       </SelectContent>
                     </Select>
                   )}
