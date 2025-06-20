@@ -590,31 +590,14 @@ export default function PLAB1New() {
     }
   };
 
-  // Submit answer and show explanation
-  const submitAnswer = () => {
-    if (selectedAnswer) {
-      // Stop the timer and record time
-      setIsTimerRunning(false);
-      const currentQuestionTime = questionTimer;
-      
-      setShowExplanation(true);
-      const timeForQuestion = Date.now() - questionStartTime;
-      setTimeSpent(prev => prev + timeForQuestion);
-      
-      // Record timing and answer data
-      setQuestionTimes(prev => [...prev, currentQuestionTime]);
-      setUserAnswers(prev => [...prev, selectedAnswer]);
-    }
-  };
-
-  // Go to next question
-  const nextQuestion = () => {
+  // Handle next question navigation
+  const handleNextQuestion = () => {
     if (currentQuestionIndex < generatedQuestions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer("");
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
-      // Timer will restart automatically via useEffect
+      setIsTimerRunning(true);
     } else {
       // Session complete - calculate final score and submit to leaderboard
       const totalTime = questionTimes.reduce((sum, time) => sum + time, 0);
@@ -629,6 +612,8 @@ export default function PLAB1New() {
       setSessionComplete(true);
     }
   };
+
+
 
   // Format timer display
   const formatTime = (milliseconds: number) => {
