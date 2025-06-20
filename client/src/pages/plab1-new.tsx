@@ -1492,6 +1492,9 @@ export default function PLAB1New() {
                         <ExternalLink className="w-4 h-4 mr-1" />
                         View Full CKS Guidelines
                       </Button>
+                      <p className="text-xs text-green-600 mt-2 italic">
+                        Note: You will need to accept CKS terms and conditions for full access
+                      </p>
                     </div>
 
                   </div>
@@ -1578,6 +1581,9 @@ export default function PLAB1New() {
                           <ExternalLink className="w-4 h-4 mr-1" />
                           View Full CKS Guidelines
                         </Button>
+                        <p className="text-xs text-green-600 mt-2 italic">
+                          Note: You will need to accept CKS terms and conditions for full access
+                        </p>
                       </div>
                     )}
                   </div>
