@@ -1526,7 +1526,14 @@ export default function PLAB1New() {
                     
                     <div className="bg-white border border-green-200 rounded-lg p-4 mb-3">
                       <p className="text-green-800 text-sm leading-relaxed mb-3">
-                        {currentQuestion.cks_guidance.summary}
+                        {(() => {
+                          let summary = currentQuestion.cks_guidance.summary || '';
+                          // Remove redundant header text patterns
+                          summary = summary.replace(/^NICE Clinical Guideline:\s*CKS:\s*\[.*?\]\s*/i, '');
+                          summary = summary.replace(/^CKS:\s*\[.*?\]\s*/i, '');
+                          summary = summary.replace(/^NICE:\s*\[.*?\]\s*/i, '');
+                          return summary.trim();
+                        })()}
                       </p>
                       
                       <div className="mb-3">
@@ -1594,25 +1601,6 @@ export default function PLAB1New() {
                         </div>
                       )}
                     </div>
-                    
-                    {/* CKS Guidelines Button */}
-                    <div className="mt-3 pt-3 border-t border-green-200">
-                      <Button
-                        size="sm"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
-                        }}
-                        className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        View NICE CKS Guidelines
-                      </Button>
-                      <p className="text-xs text-green-600 mt-2 italic">
-                        Note: You will need to accept CKS terms and conditions for full access
-                      </p>
-                    </div>
 
                   </div>
                 </div>
@@ -1677,6 +1665,27 @@ export default function PLAB1New() {
                       <div className="space-y-1">
                         <p className="text-blue-700">NICE Guidelines - Clinical evidence and recommendations</p>
                         <p className="text-blue-700">GMC Good Medical Practice - Professional standards</p>
+                      </div>
+                    )}
+                    
+                    {/* CKS Guidelines Button */}
+                    {currentQuestion.cks_guidance && (
+                      <div className="mt-4 pt-3 border-t border-blue-200">
+                        <Button
+                          size="sm"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
+                          }}
+                          className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
+                        >
+                          <ExternalLink className="w-4 h-4 mr-1" />
+                          View NICE CKS Guidelines
+                        </Button>
+                        <p className="text-xs text-blue-600 mt-2 italic">
+                          Note: You will need to accept CKS terms and conditions for full access
+                        </p>
                       </div>
                     )}
                   </div>
