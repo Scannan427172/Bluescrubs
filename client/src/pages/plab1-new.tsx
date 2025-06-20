@@ -1331,11 +1331,21 @@ export default function PLAB1New() {
                     <div className="flex-1">
                       <span className={`text-base leading-relaxed ${
                         showExplanation && isCorrectAnswer 
-                          ? 'text-green-800 font-medium' 
+                          ? 'text-green-800 font-semibold' 
                           : showExplanation && isIncorrectlySelected
                           ? 'text-red-800'
                           : 'text-gray-800'
                       }`}>
+                        {showExplanation && isCorrectAnswer && (
+                          <span className="inline-flex items-center gap-1 mr-2">
+                            <span className="text-green-600 font-bold">✓ CORRECT:</span>
+                          </span>
+                        )}
+                        {showExplanation && isIncorrectlySelected && (
+                          <span className="inline-flex items-center gap-1 mr-2">
+                            <span className="text-red-600 font-bold">✗ YOUR CHOICE:</span>
+                          </span>
+                        )}
                         {option}
                       </span>
                     </div>
@@ -1383,6 +1393,46 @@ export default function PLAB1New() {
         {/* Answer Explanation - PassMedicine Style */}
         {showExplanation && (
           <div className="space-y-6 mb-8">
+            {/* Result Banner */}
+            <div className={`p-4 rounded-lg border-2 ${
+              isCorrect 
+                ? 'bg-green-50 border-green-500 text-green-800' 
+                : 'bg-red-50 border-red-500 text-red-800'
+            }`}>
+              <div className="flex items-center gap-3">
+                {isCorrect ? (
+                  <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+                ) : (
+                  <XCircle className="w-6 h-6 text-red-600 flex-shrink-0" />
+                )}
+                <div className="flex-1">
+                  {isCorrect ? (
+                    <p className="font-semibold text-lg">Correct!</p>
+                  ) : (
+                    <div>
+                      <p className="font-semibold text-lg mb-2">Incorrect</p>
+                      <div className="bg-green-100 border border-green-300 rounded-lg p-3">
+                        <p className="text-green-800 font-medium">
+                          ✓ The correct answer was <strong>{String.fromCharCode(65 + currentQuestion.correctAnswer)}</strong>
+                        </p>
+                        <p className="text-green-700 text-sm mt-1">
+                          {(() => {
+                            let options = currentQuestion.options;
+                            if (Array.isArray(options)) {
+                              return options[currentQuestion.correctAnswer];
+                            } else if (typeof options === 'object') {
+                              return Object.values(options)[currentQuestion.correctAnswer];
+                            }
+                            return 'Option not available';
+                          })()}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
             {/* Simple explanation text like PassMedicine */}
             <div className="text-gray-800 leading-relaxed space-y-4">
               {(() => {
