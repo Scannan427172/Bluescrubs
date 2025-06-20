@@ -122,10 +122,10 @@ export function registerRoutes(app: Express): Server {
       const { count = 5 } = req.query;
       
       if (hasInstantQuestions(category)) {
-        const questions = getInstantQuestions(category, parseInt(count as string));
+        const questions = getInstantQuestions(category);
         res.json({ questions, source: 'instant' });
       } else {
-        const questions = await generateMultipleUKQuestions(category, parseInt(count as string));
+        const questions = await generateMultipleUKQuestions(parseInt(count as string), category);
         res.json({ questions, source: 'generated' });
       }
     } catch (error) {
@@ -264,68 +264,14 @@ ${JSON.stringify({
       res.status(500).json({ error: 'Translation service unavailable' });
     }
   });
-{
-  "scenario": "translated scenario in ${targetLanguage}",
-  "question": "translated question in ${targetLanguage}",
-  "options": ["translated option 1", "translated option 2", "translated option 3", "translated option 4"],
-  "explanation": "translated explanation in ${targetLanguage}"
-}`;
 
-      const response = await openai.chat.completions.create({
-        model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-        messages: [
-          {
-            role: "system",
-            content: `You are an expert medical translator specializing in ${targetLanguage}. Your task is to translate medical content accurately while preserving clinical meaning. Always respond with valid JSON containing all translated components.`
-          },
-          {
-            role: "user",
-            content: translationPrompt
-          }
-        ],
-        response_format: { type: "json_object" },
-        temperature: 0.2,
-        max_tokens: 2000
-      });
-
-      if (!response.choices[0]?.message?.content) {
-        throw new Error('No translation content received from OpenAI');
-      }
-
-      const translatedContent = JSON.parse(response.choices[0].message.content);
-      
-      // Validate and ensure we have all required fields
-      const result = {
-        scenario: translatedContent.scenario || question.scenario || question.stem || '',
-        question: translatedContent.question || question.question || '',
-        options: Array.isArray(translatedContent.options) && translatedContent.options.length > 0 ? 
-                translatedContent.options : 
-                (Array.isArray(question.options) ? question.options : []),
-        explanation: translatedContent.explanation || question.explanation || ''
-      };
-
-      // Cache the translation result for future requests
-      translationCache.set(cacheKey, result);
-      
-      console.log(`Translation completed for ${targetLanguage}:`, {
-        originalOptionsCount: question.options?.length || 0,
-        translatedOptionsCount: result.options.length,
-        cached: true
-      });
-
-      res.json(result);
-    } catch (error) {
-      console.error('Question translation API error:', error);
-      // Cache the original content as fallback
-      const fallbackResult = {
-        scenario: question.scenario || question.stem || '',
-        question: question.question || '',
-        options: Array.isArray(question.options) ? question.options : [],
-        explanation: question.explanation || ''
-      };
-      translationCache.set(cacheKey, fallbackResult);
-      res.status(500).json({ error: 'Translation failed' });
-    }
+  // Performance tracking endpoint
+  app.get('/api/performance-stats', (req, res) => {
+    res.json({
+      questionBank: ukQuestionBank.length,
+      totalAttempts: 0,
+      averageScore: 0
+    });
   });
 
   // Ask NHS Prep AI endpoint
