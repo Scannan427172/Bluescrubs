@@ -1607,30 +1607,7 @@ export default function PLAB1New() {
               </div>
             )}
 
-            {/* Additional UK Guidelines */}
-            {currentQuestion.additional_guidelines && currentQuestion.additional_guidelines.length > 0 && (
-              <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r-lg mb-4">
-                <div className="flex items-start gap-2">
-                  <BookOpen className="w-4 h-4 text-purple-600 flex-shrink-0 mt-1" />
-                  <div className="w-full">
-                    <p className="text-sm font-medium text-purple-900 mb-3">Additional UK Clinical Guidelines</p>
-                    <div className="space-y-3">
-                      {currentQuestion.additional_guidelines.map((guideline: any, index: number) => (
-                        <div key={index} className="bg-white border border-purple-200 rounded-lg p-3">
-                          <div className="flex items-center gap-2 mb-2">
-                            <span className="text-xs font-semibold text-purple-900 bg-purple-100 px-2 py-1 rounded">
-                              {guideline.source}
-                            </span>
-                          </div>
-                          <p className="text-sm text-purple-800 mb-2">{guideline.guidance}</p>
-                          <p className="text-xs text-purple-700 italic">{guideline.relevance}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+
 
             {/* Specific Reference Section */}
             <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
