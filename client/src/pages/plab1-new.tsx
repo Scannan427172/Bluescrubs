@@ -1485,8 +1485,7 @@ export default function PLAB1New() {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          const url = currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/';
-                          window.open(url, '_blank', 'noopener,noreferrer');
+                          window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
                         }}
                         className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
                       >
@@ -1544,7 +1543,7 @@ export default function PLAB1New() {
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                window.open(reference.url, '_blank', 'noopener,noreferrer');
+                                window.open(reference.url, '_blank');
                               }}
                               className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                             >
@@ -1572,8 +1571,7 @@ export default function PLAB1New() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            const url = currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/';
-                            window.open(url, '_blank', 'noopener,noreferrer');
+                            window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
                           }}
                           className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
                         >
