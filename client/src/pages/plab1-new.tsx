@@ -1416,11 +1416,27 @@ export default function PLAB1New() {
                         Incorrect - The correct answer was <strong className="text-green-600">
                           {(() => {
                             let correctAnswerIndex = currentQuestion.correctAnswer;
+                            console.log('Debug correct answer:', correctAnswerIndex, typeof correctAnswerIndex);
+                            
+                            // Handle different answer formats
                             if (typeof correctAnswerIndex === 'string') {
-                              return correctAnswerIndex; // Already a letter like "A", "B", etc.
-                            } else {
-                              return String.fromCharCode(65 + correctAnswerIndex); // Convert index to letter
+                              // If it's already a letter like "A", "B", etc.
+                              if (correctAnswerIndex.length === 1 && correctAnswerIndex >= 'A' && correctAnswerIndex <= 'E') {
+                                return correctAnswerIndex;
+                              }
+                              // If it's "correct_answer" field value, convert to index first
+                              const letterMatch = correctAnswerIndex.match(/^[A-E]$/);
+                              if (letterMatch) {
+                                return letterMatch[0];
+                              }
+                            } else if (typeof correctAnswerIndex === 'number') {
+                              // Convert number index to letter
+                              return String.fromCharCode(65 + correctAnswerIndex);
                             }
+                            
+                            // Fallback - try to find correct answer from question structure
+                            console.log('Fallback - checking question structure:', currentQuestion);
+                            return 'Unknown';
                           })()}
                         </strong>
                       </p>
