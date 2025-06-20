@@ -1480,19 +1480,24 @@ export default function PLAB1New() {
                     
                     {/* CKS Guidelines Button */}
                     <div className="mt-3 pt-3 border-t border-green-200">
-                      <Button
-                        size="sm"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          const url = currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/';
-                          window.open(url, '_blank', 'noopener,noreferrer');
-                        }}
-                        className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        View Full CKS Guidelines
-                      </Button>
+                      <div className="flex flex-col gap-2">
+                        <Button
+                          size="sm"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const url = currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/';
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
+                        >
+                          <ExternalLink className="w-4 h-4 mr-1" />
+                          View Full CKS Guidelines
+                        </Button>
+                        <p className="text-xs text-green-700 italic">
+                          Note: CKS may require license verification. Close any popup and accept terms to access guidelines.
+                        </p>
+                      </div>
                     </div>
 
                   </div>
@@ -1567,19 +1572,24 @@ export default function PLAB1New() {
                         <p className="text-green-700 leading-relaxed mb-3 text-sm font-medium">
                           CKS Clinical Knowledge Summaries - Evidence-based clinical guidance
                         </p>
-                        <Button
-                          size="sm"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            const url = currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/';
-                            window.open(url, '_blank', 'noopener,noreferrer');
-                          }}
-                          className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
-                        >
-                          <ExternalLink className="w-4 h-4 mr-1" />
-                          View Full CKS Guidelines
-                        </Button>
+                        <div className="flex flex-col gap-2">
+                          <Button
+                            size="sm"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              const url = currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/';
+                              window.open(url, '_blank', 'noopener,noreferrer');
+                            }}
+                            className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
+                          >
+                            <ExternalLink className="w-4 h-4 mr-1" />
+                            View Full CKS Guidelines
+                          </Button>
+                          <p className="text-xs text-green-700 italic">
+                            Note: CKS may require license verification. Close any popup and accept terms to access guidelines.
+                          </p>
+                        </div>
                       </div>
                     )}
                   </div>
