@@ -1411,19 +1411,42 @@ export default function PLAB1New() {
                   ) : (
                     <div>
                       <p className="font-semibold text-lg mb-2">
-                        Incorrect - The correct answer was <strong className="text-green-600">{String.fromCharCode(65 + currentQuestion.correctAnswer)}</strong>
+                        Incorrect - The correct answer was <strong className="text-green-600">
+                          {(() => {
+                            let correctAnswerIndex = currentQuestion.correctAnswer;
+                            if (typeof correctAnswerIndex === 'string') {
+                              return correctAnswerIndex; // Already a letter like "A", "B", etc.
+                            } else {
+                              return String.fromCharCode(65 + correctAnswerIndex); // Convert index to letter
+                            }
+                          })()}
+                        </strong>
                       </p>
                       <div className="bg-green-100 border border-green-300 rounded-lg p-3">
                         <p className="text-green-800 font-medium">
-                          ✓ Answer {String.fromCharCode(65 + currentQuestion.correctAnswer)}:
+                          ✓ Answer {(() => {
+                            let correctAnswerIndex = currentQuestion.correctAnswer;
+                            if (typeof correctAnswerIndex === 'string') {
+                              return correctAnswerIndex;
+                            } else {
+                              return String.fromCharCode(65 + correctAnswerIndex);
+                            }
+                          })()}:
                         </p>
                         <p className="text-green-700 text-base mt-1 font-medium">
                           {(() => {
                             let options = currentQuestion.options;
+                            let correctIndex = currentQuestion.correctAnswer;
+                            
+                            // Convert string answer to index if needed
+                            if (typeof correctIndex === 'string') {
+                              correctIndex = correctIndex.charCodeAt(0) - 65;
+                            }
+                            
                             if (Array.isArray(options)) {
-                              return options[currentQuestion.correctAnswer];
+                              return options[correctIndex];
                             } else if (typeof options === 'object') {
-                              return Object.values(options)[currentQuestion.correctAnswer];
+                              return Object.values(options)[correctIndex];
                             }
                             return 'Option not available';
                           })()}
