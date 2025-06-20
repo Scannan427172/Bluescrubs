@@ -1563,7 +1563,7 @@ export default function PLAB1New() {
                       </div>
                     )}
                     
-                    {/* NICE CKS Guidelines Button in Reference Section */}
+                    {/* Duplicate CKS Guidelines Button in Reference Section */}
                     {currentQuestion.cks_guidance && (
                       <div className="bg-white border border-green-200 rounded-lg p-3 mb-3 mt-4">
                         <p className="text-green-700 leading-relaxed mb-3 text-sm font-medium">
@@ -1586,7 +1586,6 @@ export default function PLAB1New() {
                         </p>
                       </div>
                     )}
-
                   </div>
                 </div>
               </div>
