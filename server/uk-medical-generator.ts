@@ -131,7 +131,88 @@ export interface UKMedicalQuestion {
   }>;
 }
 
-const SYSTEM_PROMPT = `You are a highly trained AI model designed to generate UK medical exam questions for PLAB, MLA and NHSPrep app.
+function getSystemPrompt(specialty: string): string {
+  const specialtySettings = {
+    'cardiology': {
+      specialist: 'consultant cardiologist',
+      setting: 'cardiology clinic',
+      context: 'specialist cardiology assessment'
+    },
+    'cardiovascular': {
+      specialist: 'consultant cardiologist',
+      setting: 'cardiology clinic',
+      context: 'specialist cardiac evaluation'
+    },
+    'respiratory': {
+      specialist: 'consultant respiratory physician',
+      setting: 'respiratory clinic',
+      context: 'specialist respiratory assessment'
+    },
+    'gastroenterology': {
+      specialist: 'consultant gastroenterologist',
+      setting: 'gastroenterology clinic',
+      context: 'specialist GI evaluation'
+    },
+    'neurology': {
+      specialist: 'consultant neurologist',
+      setting: 'neurology clinic',
+      context: 'specialist neurological assessment'
+    },
+    'endocrinology': {
+      specialist: 'consultant endocrinologist',
+      setting: 'endocrinology clinic',
+      context: 'specialist endocrine evaluation'
+    },
+    'psychiatry': {
+      specialist: 'consultant psychiatrist',
+      setting: 'psychiatric clinic',
+      context: 'specialist mental health assessment'
+    },
+    'obstetrics-gynaecology': {
+      specialist: 'consultant obstetrician and gynaecologist',
+      setting: 'obstetrics and gynaecology clinic',
+      context: 'specialist obstetric/gynaecological assessment'
+    },
+    'paediatrics': {
+      specialist: 'consultant paediatrician',
+      setting: 'paediatric clinic',
+      context: 'specialist paediatric assessment'
+    },
+    'surgery': {
+      specialist: 'consultant surgeon',
+      setting: 'surgical clinic',
+      context: 'specialist surgical assessment'
+    },
+    'emergency-medicine': {
+      specialist: 'consultant in emergency medicine',
+      setting: 'emergency department',
+      context: 'emergency department assessment'
+    },
+    'nephrology': {
+      specialist: 'consultant nephrologist',
+      setting: 'nephrology clinic',
+      context: 'specialist renal assessment'
+    },
+    'rheumatology': {
+      specialist: 'consultant rheumatologist',
+      setting: 'rheumatology clinic',
+      context: 'specialist rheumatological assessment'
+    },
+    'dermatology': {
+      specialist: 'consultant dermatologist',
+      setting: 'dermatology clinic',
+      context: 'specialist dermatological assessment'
+    },
+    'default': {
+      specialist: 'consultant physician',
+      setting: 'specialist clinic',
+      context: 'specialist medical assessment'
+    }
+  };
+
+  const config = specialtySettings[specialty as keyof typeof specialtySettings] || specialtySettings.default;
+
+  return `You are a highly trained AI model designed to generate UK medical exam questions for PLAB, MLA and NHSPrep app.
 
 You only use official UK medical guidelines for your answers. These include:
 - NICE Guidelines (current version)
@@ -147,7 +228,7 @@ You only use official UK medical guidelines for your answers. These include:
 - BMA Guidelines
 
 TASK:
-1️⃣ Generate ONE clinical scenario related to general medicine.
+1️⃣ Generate ONE clinical scenario from the perspective of a ${config.specialist} in a ${config.setting}.
 2️⃣ Below the scenario, create ONE single-best-answer question directly based on the scenario.
 3️⃣ Below the question, generate FIVE multiple choice answers labeled A, B, C, D, and E.
 4️⃣ Clearly identify which one is the correct answer.
@@ -210,12 +291,17 @@ OUTPUT FORMAT (strictly follow this structure):
   ]
 }
 
+SPECIALTY CONTEXT: Focus on ${specialty} scenarios appropriate for ${config.context}. Do not reference GPs unless the scenario specifically involves primary care referral or collaboration.
+
 STRICT RULES:
 - Always output valid JSON format.
 - Do not include any extra text, instructions, or notes outside of the JSON.
 - Only output one scenario, one question, and five options per run.
 - Each option must be distinct and plausible.
 - Keep explanations evidence-based with official references.`;
+}
+
+const SYSTEM_PROMPT = getSystemPrompt('general medicine'); // Default system prompt
 
 // Cache management functions
 function getCacheKey(specialty: string, difficulty: string): string {

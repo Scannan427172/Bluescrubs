@@ -1277,7 +1277,8 @@ export default function PLAB1New() {
                   correctAnswerIndex = correctAnswerIndex.charCodeAt(0) - 65; // A=0, B=1, etc.
                 }
                 const isCorrectAnswer = index === correctAnswerIndex;
-                const isIncorrectlySelected = showExplanation && selectedAnswer === index.toString() && !isCorrectAnswer;
+                const isSelectedAnswer = selectedAnswer === index.toString();
+                const isIncorrectlySelected = showExplanation && isSelectedAnswer && !isCorrectAnswer;
                 
                 return (
                   <div 
@@ -1285,9 +1286,9 @@ export default function PLAB1New() {
                     className={`border-2 rounded-lg transition-all duration-200 ${
                       showExplanation 
                         ? isCorrectAnswer
-                          ? 'border-green-400 bg-green-100'
+                          ? 'border-green-500 bg-green-50'
                           : isIncorrectlySelected
-                          ? 'border-red-400 bg-red-100' 
+                          ? 'border-red-500 bg-red-50' 
                           : 'border-gray-200 bg-gray-50'
                         : selectedAnswer === index.toString()
                         ? 'border-blue-500 bg-blue-50'
@@ -1312,9 +1313,9 @@ export default function PLAB1New() {
                       <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-medium ${
                         showExplanation 
                           ? isCorrectAnswer
-                            ? 'border-green-500 bg-green-500 text-white'
+                            ? 'border-green-600 bg-green-600 text-white'
                             : isIncorrectlySelected
-                            ? 'border-red-500 bg-red-500 text-white'
+                            ? 'border-red-600 bg-red-600 text-white'
                             : 'border-gray-300 bg-gray-100 text-gray-600'
                           : selectedAnswer === index.toString()
                           ? 'border-blue-500 bg-blue-500 text-white'
@@ -1361,31 +1362,52 @@ export default function PLAB1New() {
         {showExplanation && (
           <div className="space-y-4 mb-6">
             {/* Feedback Section */}
-            <div className={`p-4 border-2 rounded-lg ${
+            <div className={`p-5 border-2 rounded-lg ${
               isCorrect 
-                ? 'bg-green-100 border-green-400' 
-                : 'bg-red-100 border-red-400'
+                ? 'bg-green-50 border-green-500' 
+                : 'bg-red-50 border-red-500'
             }`}>
               <div className="flex items-start gap-3">
                 {isCorrect ? (
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
                 ) : (
-                  <XCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
                 )}
                 <div className="flex-1">
-                  <p className={`font-medium text-base ${
+                  <p className={`font-semibold text-lg mb-3 ${
                     isCorrect ? 'text-green-800' : 'text-red-800'
                   }`}>
                     {isCorrect 
-                      ? translateText('Correct!') 
-                      : `${translateText('Incorrect.')} The correct answer is ${String.fromCharCode(65 + currentQuestion.correctAnswer)}: ${currentQuestion.options[currentQuestion.correctAnswer]}`
+                      ? 'Correct Answer!' 
+                      : 'Incorrect Answer'
                     }
                   </p>
                   
+                  {!isCorrect && (
+                    <div className="mb-4 p-3 bg-green-100 border border-green-400 rounded-lg">
+                      <p className="font-medium text-green-800 mb-2">
+                        ✓ The correct answer is {String.fromCharCode(65 + currentQuestion.correctAnswer)}
+                      </p>
+                      <p className="text-green-700 text-base">
+                        {(() => {
+                          // Get correct answer text safely
+                          let options = currentQuestion.options;
+                          if (Array.isArray(options)) {
+                            return options[currentQuestion.correctAnswer];
+                          } else if (typeof options === 'object') {
+                            return Object.values(options)[currentQuestion.correctAnswer];
+                          }
+                          return 'Option not available';
+                        })()}
+                      </p>
+                    </div>
+                  )}
+                  
                   {/* Targeted Explanation Text */}
-                  <div className={`mt-3 text-base leading-relaxed ${
-                    isCorrect ? 'text-green-700' : 'text-red-700'
+                  <div className={`text-base leading-relaxed ${
+                    isCorrect ? 'text-green-700' : 'text-gray-700'
                   }`} style={{ whiteSpace: 'pre-line' }}>
+                    <h4 className="font-medium mb-2">Explanation:</h4>
                     {getTargetedExplanation(currentQuestion, selectedAnswer, isCorrect)}
                   </div>
                 </div>
