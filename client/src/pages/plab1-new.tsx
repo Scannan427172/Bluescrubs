@@ -1640,7 +1640,13 @@ export default function PLAB1New() {
                   <p className="text-sm font-medium text-blue-900 mb-2">{translateText('Official References:')}</p>
                   <div className="text-sm text-blue-800 space-y-2">
                     {currentQuestion.references && currentQuestion.references.length > 0 ? (
-                      currentQuestion.references.map((reference: any, index: number) => (
+                      currentQuestion.references
+                        .filter((reference: any, index: number) => {
+                          const title = typeof reference === 'string' ? reference : reference.title || reference.text || '';
+                          // Filter out CKS references that duplicate what's already in the CKS button
+                          return !title.toLowerCase().includes('cks:') && !title.toLowerCase().includes('clinical guideline: cks');
+                        })
+                        .map((reference: any, index: number) => (
                         <div key={index} className="bg-white border border-blue-200 rounded-lg p-3 mb-3">
                           <p className="text-blue-700 leading-relaxed mb-3 text-sm">
                             {typeof reference === 'string' ? reference : reference.title || reference.text}
