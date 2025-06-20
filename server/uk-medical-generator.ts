@@ -255,20 +255,26 @@ Generate a complete PLAB 1 style clinical scenario following this structure:
    - Exact page/section numbers where the guidance is found
 
 REFERENCE REQUIREMENTS:
-- Identify the EXACT section, paragraph, or table number within the guideline
-- Use official guideline titles with specific section references
-- Provide full official NICE/GMC/BMJ URLs directly to guideline pages
-- Only include references directly related to the clinical question
-- Format: "NICE NG### Guideline Title (Section X.X.X Specific topic)"
-- Example: "NICE NG136: Hypertension in adults (Section 1.4.15 First-line treatment)"
+- Use authentic NICE guideline numbers (NG145, NG80, NG136, etc.) with real URLs
+- Provide direct links to specific sections using anchor tags (#section-name)
+- Use actual CKS topic URLs that exist: https://cks.nice.org.uk/topics/[condition]/management/[specific-treatment]/
+- Format references exactly like this working example:
+  * "NICE: [Treatment of primary hypothyroidism – NG145](https://www.nice.org.uk/guidance/ng145/chapter/Recommendations#treatment-of-primary-hypothyroidism)"
+  * "CKS: [Levothyroxine treatment – Hypothyroidism CKS](https://cks.nice.org.uk/topics/hypothyroidism/management/levothyroxine-treatment/)"
 
-VERY IMPORTANT:
-- Do not invent guidelines or section numbers.
-- All answers must be medically accurate according to current NICE or GMC guidance.
-- Include authentic CKS Clinical Knowledge Summaries content with the exact CKS URL.
-- For CKS guidance, provide the specific CKS topic URL (e.g., https://cks.nice.org.uk/topics/acute-coronary-syndromes/ for cardiac conditions).
-- References must point to exact sections that support the correct answer.
-- Format your entire output as VALID JSON exactly as shown below.
+AUTHENTIC NICE GUIDELINES TO USE:
+- NG145: Thyroid disease assessment and management
+- NG80: Asthma diagnosis and monitoring
+- NG136: Hypertension in adults
+- NG28: Type 2 diabetes in adults
+- NG106: Chronic heart failure in adults
+- NG185: Atrial fibrillation management
+- NG12: Suspected cancer recognition and referral
+
+AUTHENTIC CKS TOPICS TO USE:
+- hypothyroidism, asthma, hypertension, diabetes-type2, heart-failure, atrial-fibrillation, depression, anxiety-disorder
+
+Format your entire output as VALID JSON exactly as shown below.
 
 EXAMPLE FORMAT (follow this PLAB 1 structure):
 
@@ -296,14 +302,24 @@ OUTPUT FORMAT (strictly follow this JSON structure):
   "explanation": "<comprehensive explanation covering: 1) Diagnosis confirmation, 2) Why correct answer is best per UK guidelines, 3) Mechanism/rationale, 4) Specific dosing/monitoring advice, 5) Why other options are incorrect, 6) Follow-up requirements>",
   "references": [
     {
-      "title": "NICE NG### Guideline Title (Section X.X.X Specific topic)",
-      "url": "https://www.nice.org.uk/guidance/ng###/chapter/..."
+      "title": "NICE: [Treatment Topic – NG###]",
+      "url": "https://www.nice.org.uk/guidance/ng###/chapter/Recommendations#specific-section",
+      "description": "This section explains the specific treatment recommendations and guidelines."
     },
     {
-      "title": "CKS: Condition Name – Management section", 
-      "url": "https://cks.nice.org.uk/topics/condition-name/management/"
+      "title": "CKS: [Treatment/Management – Condition Name CKS]",
+      "url": "https://cks.nice.org.uk/topics/condition-name/management/specific-treatment/",
+      "description": "Covers practical management, monitoring, and patient advice."
     }
   ]
+
+REFERENCE EXAMPLES TO FOLLOW:
+- NICE: [Treatment of primary hypothyroidism – NG145](https://www.nice.org.uk/guidance/ng145/chapter/Recommendations#treatment-of-primary-hypothyroidism)
+- CKS: [Levothyroxine treatment – Hypothyroidism CKS](https://cks.nice.org.uk/topics/hypothyroidism/management/levothyroxine-treatment/)
+- NICE: [Asthma diagnosis and monitoring – NG80](https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#diagnosis-of-asthma)
+- CKS: [Asthma management – Asthma CKS](https://cks.nice.org.uk/topics/asthma/management/chronic-asthma-management/)
+
+Use these exact URL patterns with real guideline numbers and specific anchor sections.
 }
 
 SPECIALTY CONTEXT: Focus on ${specialty} scenarios appropriate for ${config.context}. 
