@@ -1490,7 +1490,7 @@ export default function PLAB1New() {
                         className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
                       >
                         <ExternalLink className="w-4 h-4 mr-1" />
-                        View Full CKS Guidelines
+                        View NICE CKS Guidelines
                       </Button>
                       <p className="text-xs text-green-600 mt-2 italic">
                         Note: You will need to accept CKS terms and conditions for full access
@@ -1567,7 +1567,7 @@ export default function PLAB1New() {
                     {currentQuestion.cks_guidance && (
                       <div className="bg-white border border-green-200 rounded-lg p-3 mb-3 mt-4">
                         <p className="text-green-700 leading-relaxed mb-3 text-sm font-medium">
-                          CKS Clinical Knowledge Summaries - Evidence-based clinical guidance
+                          NICE CKS (Clinical Knowledge Summaries) - Evidence-based primary care guidance
                         </p>
                         <Button
                           size="sm"
@@ -1579,7 +1579,7 @@ export default function PLAB1New() {
                           className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
                         >
                           <ExternalLink className="w-4 h-4 mr-1" />
-                          View Full CKS Guidelines
+                          View NICE CKS Guidelines
                         </Button>
                         <p className="text-xs text-green-600 mt-2 italic">
                           Note: You will need to accept CKS terms and conditions for full access
