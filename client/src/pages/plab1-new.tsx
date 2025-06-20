@@ -1306,13 +1306,13 @@ export default function PLAB1New() {
                 return (
                   <label 
                     key={index} 
-                    className={`flex items-center p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
+                    className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
                       showExplanation 
                         ? isCorrectAnswer
-                          ? 'border-green-500 bg-green-50'
+                          ? 'border-green-500 bg-green-100 shadow-lg shadow-green-200'
                           : isIncorrectlySelected
                           ? 'border-red-500 bg-red-50' 
-                          : 'border-gray-200 bg-gray-50'
+                          : 'border-gray-200 bg-gray-50 opacity-60'
                         : isSelectedAnswer
                         ? 'border-blue-500 bg-blue-50'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
@@ -1331,14 +1331,14 @@ export default function PLAB1New() {
                     <div className="flex-1">
                       <span className={`text-base leading-relaxed ${
                         showExplanation && isCorrectAnswer 
-                          ? 'text-green-800 font-semibold' 
+                          ? 'text-green-900 font-bold' 
                           : showExplanation && isIncorrectlySelected
                           ? 'text-red-800'
                           : 'text-gray-800'
                       }`}>
                         {showExplanation && isCorrectAnswer && (
                           <span className="inline-flex items-center gap-1 mr-2">
-                            <span className="text-green-600 font-bold">✓ CORRECT:</span>
+                            <span className="text-green-700 font-bold text-lg">✓ CORRECT:</span>
                           </span>
                         )}
                         {showExplanation && isIncorrectlySelected && (
@@ -1346,7 +1346,9 @@ export default function PLAB1New() {
                             <span className="text-red-600 font-bold">✗ YOUR CHOICE:</span>
                           </span>
                         )}
-                        {option}
+                        <span className={showExplanation && isCorrectAnswer ? 'text-green-900 font-bold' : ''}>
+                          {option}
+                        </span>
                       </span>
                     </div>
                     
