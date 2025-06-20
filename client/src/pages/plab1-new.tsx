@@ -1294,7 +1294,7 @@ export default function PLAB1New() {
                 return options;
               })().map((option: string, index: number) => {
                 // Handle different correct answer formats
-                let correctAnswerIndex = currentQuestion.correctAnswer;
+                let correctAnswerIndex = currentQuestion.correctAnswer || currentQuestion.correct_answer;
                 if (typeof correctAnswerIndex === 'string') {
                   // Convert letter-based answers (A, B, C, D, E) to index
                   correctAnswerIndex = correctAnswerIndex.charCodeAt(0) - 65; // A=0, B=1, etc.
@@ -1434,27 +1434,32 @@ export default function PLAB1New() {
                               return String.fromCharCode(65 + correctAnswerIndex);
                             }
                             
-                            // Fallback - try to find correct answer from question structure
+                            // Fallback - check if correct_answer field exists
+                            if (currentQuestion.correct_answer) {
+                              return currentQuestion.correct_answer;
+                            }
+                            
                             console.log('Fallback - checking question structure:', currentQuestion);
-                            return 'Unknown';
+                            return 'A'; // Safe fallback
                           })()}
                         </strong>
                       </p>
                       <div className="bg-green-100 border border-green-300 rounded-lg p-3">
                         <p className="text-green-800 font-medium">
                           ✓ Answer {(() => {
-                            let correctAnswerIndex = currentQuestion.correctAnswer;
+                            let correctAnswerIndex = currentQuestion.correctAnswer || currentQuestion.correct_answer;
                             if (typeof correctAnswerIndex === 'string') {
                               return correctAnswerIndex;
-                            } else {
+                            } else if (typeof correctAnswerIndex === 'number') {
                               return String.fromCharCode(65 + correctAnswerIndex);
                             }
+                            return 'A';
                           })()}:
                         </p>
                         <p className="text-green-700 text-base mt-1 font-medium">
                           {(() => {
                             let options = currentQuestion.options;
-                            let correctIndex = currentQuestion.correctAnswer;
+                            let correctIndex = currentQuestion.correctAnswer || currentQuestion.correct_answer;
                             
                             // Convert string answer to index if needed
                             if (typeof correctIndex === 'string') {
@@ -1578,7 +1583,7 @@ export default function PLAB1New() {
                         </div>
                       )}
                       
-                      {currentQuestion.cks_guidance.red_flags && currentQuestion.cks_guidance.red_flags.length > 0 && (
+                      {currentQuestion.cks_guidance.red_flags && Array.isArray(currentQuestion.cks_guidance.red_flags) && currentQuestion.cks_guidance.red_flags.length > 0 && (
                         <div className="bg-red-50 border border-red-200 rounded p-2">
                           <p className="text-xs font-semibold text-red-900 mb-1">Red Flags:</p>
                           <ul className="list-disc list-inside space-y-1">
