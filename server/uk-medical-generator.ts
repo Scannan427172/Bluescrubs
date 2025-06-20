@@ -369,7 +369,7 @@ async function generateSingleQuestion(
       messages: [
         {
           role: "system",
-          content: SYSTEM_PROMPT
+          content: getSystemPrompt(specialty)
         },
         {
           role: "user",
