@@ -181,41 +181,89 @@ export function registerRoutes(app: Express): Server {
       
       // Check cache first for instant response
       if (translationCache.has(cacheKey)) {
-        console.log(`Cache hit for ${targetLanguage} translation`);
+        console.log(`Translation completed for ${targetLanguage}: { originalOptionsCount: ${question.options?.length || 0}, translatedOptionsCount: ${translationCache.get(cacheKey).options?.length || 0}, cached: true }`);
         return res.json(translationCache.get(cacheKey));
       }
 
       // Check if OpenAI API key is available
       if (!process.env.OPENAI_API_KEY) {
         console.error('OpenAI API key not found for translation');
-        // Return original content if no API key
         const result = {
           scenario: question.scenario || question.stem || '',
           question: question.question || '',
           options: Array.isArray(question.options) ? question.options : [],
           explanation: question.explanation || ''
         };
-        // Cache the fallback result too
         translationCache.set(cacheKey, result);
         return res.json(result);
       }
 
-      // Use OpenAI for comprehensive translation
-      const translationPrompt = `Translate the following medical question components from English to ${targetLanguage}. Maintain medical terminology accuracy and cultural appropriateness. Return ONLY a JSON object with the translated components:
+      // Use faster GPT-4o-mini for quicker translations
+      try {
+        const { OpenAI } = await import('openai');
+        const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-Medical Question to Translate:
-Scenario: "${question.scenario || question.stem || ''}"
-Question: "${question.question || ''}"
-Options: ${question.options ? JSON.stringify(question.options) : '[]'}
-Explanation: "${question.explanation || ''}"
+        const translationPrompt = `Translate this medical question to ${targetLanguage}. Keep it concise and medically accurate. Return JSON with scenario, question, options, explanation:
 
-Requirements:
-- Translate ALL components to ${targetLanguage}
-- Preserve medical accuracy
-- Keep the same structure
-- Ensure options array has exactly the same number of elements
+${JSON.stringify({
+  scenario: question.scenario || question.stem || '',
+  question: question.question || '',
+  options: question.options || [],
+  explanation: question.explanation || ''
+})}`;
 
-Response format (JSON only):
+        const response = await openai.chat.completions.create({
+          model: "gpt-4o-mini", // Much faster model
+          messages: [
+            {
+              role: "system",
+              content: `Expert medical translator for ${targetLanguage}. Return valid JSON only.`
+            },
+            {
+              role: "user",
+              content: translationPrompt
+            }
+          ],
+          response_format: { type: "json_object" },
+          temperature: 0.1,
+          max_tokens: 1500
+        });
+
+        if (!response.choices[0]?.message?.content) {
+          throw new Error('No translation received');
+        }
+
+        const translatedContent = JSON.parse(response.choices[0].message.content);
+        
+        const result = {
+          scenario: translatedContent.scenario || question.scenario || question.stem || '',
+          question: translatedContent.question || question.question || '',
+          options: Array.isArray(translatedContent.options) && translatedContent.options.length > 0 ? 
+                  translatedContent.options : 
+                  (Array.isArray(question.options) ? question.options : []),
+          explanation: translatedContent.explanation || question.explanation || ''
+        };
+
+        // Cache the successful translation
+        translationCache.set(cacheKey, result);
+        console.log(`Translation completed for ${targetLanguage}: { originalOptionsCount: ${question.options?.length || 0}, translatedOptionsCount: ${result.options?.length || 0}, cached: false }`);
+        
+        res.json(result);
+      } catch (error) {
+        console.error('Translation failed, using fallback:', error);
+        const fallbackResult = {
+          scenario: question.scenario || question.stem || '',
+          question: question.question || '',
+          options: Array.isArray(question.options) ? question.options : [],
+          explanation: question.explanation || ''
+        };
+        res.json(fallbackResult);
+      }
+    } catch (error) {
+      console.error('Translation endpoint error:', error);
+      res.status(500).json({ error: 'Translation service unavailable' });
+    }
+  });
 {
   "scenario": "translated scenario in ${targetLanguage}",
   "question": "translated question in ${targetLanguage}",
