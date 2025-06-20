@@ -62,7 +62,7 @@ export default function More() {
       title: "Who are NHSprep",
       description: "Meet the founders - NHS doctor Yasa and developer Keith Hunter",
       hasArrow: true,
-      link: "/dashboard"
+      link: "/about-team"
     },
     {
       icon: BookOpen,
