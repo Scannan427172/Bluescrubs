@@ -578,6 +578,18 @@ export default function PLAB1New() {
     }
   };
 
+  // Handle answer submission
+  const handleSubmitAnswer = () => {
+    if (selectedAnswer && !showExplanation) {
+      const timeForQuestion = Date.now() - questionStartTime;
+      setQuestionTimes(prev => [...prev, timeForQuestion]);
+      setUserAnswers(prev => [...prev, selectedAnswer]);
+      setTimeSpent(prev => prev + timeForQuestion);
+      setShowExplanation(true);
+      setIsTimerRunning(false);
+    }
+  };
+
   // Submit answer and show explanation
   const submitAnswer = () => {
     if (selectedAnswer) {
@@ -1222,8 +1234,8 @@ export default function PLAB1New() {
               </h2>
             </div>
 
-            {/* Answer Options - Template Style */}
-            <div className="space-y-3">
+            {/* Answer Options - PassMedicine Style */}
+            <div className="space-y-2 mb-8">
               {(() => {
                 const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
                 const translatedQ = translatedQuestions[cacheKey];
@@ -1241,33 +1253,6 @@ export default function PLAB1New() {
                   }
                 }
                 
-                // Apply quick fallback translation for options if API translation not ready
-                if (translateQuestions && selectedLanguage !== 'en' && !translatedQ?.options && options.length > 0) {
-                  const quickTranslations: Record<string, Record<string, string>> = {
-                    'ar': {
-                      'Primary PCI': 'القسطرة الأولية', 'Thrombolytic therapy': 'العلاج المذيب للجلطة',
-                      'Conservative management': 'العلاج التحفظي', 'Urgent': 'عاجل', 'Emergency': 'طوارئ'
-                    },
-                    'hi': {
-                      'Primary PCI': 'प्राथमिक पीसीआई', 'Thrombolytic therapy': 'थ्रोम्बोलाइटिक थेरेपी',
-                      'Conservative management': 'रूढ़िवादी प्रबंधन', 'Urgent': 'तत्काल', 'Emergency': 'आपातकाल'
-                    },
-                    'ur': {
-                      'Primary PCI': 'بنیادی پی سی آئی', 'Thrombolytic therapy': 'خون کا لوتھڑا گھولنے کا علاج',
-                      'Conservative management': 'قدامت پسند انتظام', 'Urgent': 'فوری', 'Emergency': 'ایمرجنسی'
-                    }
-                  };
-                  
-                  const translations = quickTranslations[selectedLanguage] || {};
-                  options = options.map((option: string) => {
-                    let translated = option;
-                    Object.entries(translations).forEach(([english, native]) => {
-                      translated = translated.replace(new RegExp(`\\b${english}\\b`, 'gi'), native);
-                    });
-                    return translated;
-                  });
-                }
-                
                 return options;
               })().map((option: string, index: number) => {
                 // Handle different correct answer formats
@@ -1281,136 +1266,110 @@ export default function PLAB1New() {
                 const isIncorrectlySelected = showExplanation && isSelectedAnswer && !isCorrectAnswer;
                 
                 return (
-                  <div 
+                  <label 
                     key={index} 
-                    className={`border-2 rounded-lg transition-all duration-200 ${
+                    className={`flex items-center p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
                       showExplanation 
                         ? isCorrectAnswer
                           ? 'border-green-500 bg-green-50'
                           : isIncorrectlySelected
                           ? 'border-red-500 bg-red-50' 
                           : 'border-gray-200 bg-gray-50'
-                        : selectedAnswer === index.toString()
+                        : isSelectedAnswer
                         ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 bg-white hover:border-gray-300'
+                        : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
                     }`}
                   >
-                    <button
-                      onClick={() => handleAnswerSelect(index.toString())}
+                    <input
+                      type="radio"
+                      name="answer"
+                      value={index.toString()}
+                      checked={selectedAnswer === index.toString()}
+                      onChange={() => !showExplanation && handleAnswerSelect(index.toString())}
                       disabled={showExplanation}
-                      className={`w-full flex items-center gap-3 p-4 text-left transition-all duration-200 ${
-                        showExplanation 
-                          ? isCorrectAnswer
-                            ? 'cursor-default'
-                            : isIncorrectlySelected
-                            ? 'cursor-default'
-                            : 'cursor-default'
-                          : selectedAnswer === index.toString()
-                          ? 'cursor-pointer'
-                          : 'cursor-pointer hover:bg-gray-50'
-                      }`}
-                    >
-                      <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-medium ${
-                        showExplanation 
-                          ? isCorrectAnswer
-                            ? 'border-green-600 bg-green-600 text-white'
-                            : isIncorrectlySelected
-                            ? 'border-red-600 bg-red-600 text-white'
-                            : 'border-gray-300 bg-gray-100 text-gray-600'
-                          : selectedAnswer === index.toString()
-                          ? 'border-blue-500 bg-blue-500 text-white'
-                          : 'border-gray-300 bg-white text-gray-600'
+                      className="w-4 h-4 mr-3 text-blue-600"
+                    />
+                    
+                    <div className="flex-1">
+                      <span className={`text-base leading-relaxed ${
+                        showExplanation && isCorrectAnswer 
+                          ? 'text-green-800 font-medium' 
+                          : showExplanation && isIncorrectlySelected
+                          ? 'text-red-800'
+                          : 'text-gray-800'
                       }`}>
-                        {String.fromCharCode(65 + index)}
-                      </div>
-                      
-                      <div className="flex-1">
-                        <span className="text-base leading-relaxed text-gray-800">
-                          {option}
-                        </span>
-                      </div>
-                      
-                      {speechEnabled && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            speakText(option);
-                          }}
-                          className="h-8 w-8 p-0 text-gray-500 hover:text-blue-600"
-                        >
-                          <Volume2 className="w-3 h-3" />
-                        </Button>
-                      )}
-                      
-                      {showExplanation && isCorrectAnswer && (
-                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                      )}
-                      {showExplanation && isIncorrectlySelected && (
-                        <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
-                      )}
-                    </button>
-                  </div>
+                        {option}
+                      </span>
+                    </div>
+                    
+                    {speechEnabled && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          speakText(option);
+                        }}
+                        className="h-8 w-8 p-0 text-gray-500 hover:text-blue-600 ml-2"
+                      >
+                        <Volume2 className="w-3 h-3" />
+                      </Button>
+                    )}
+                    
+                    {showExplanation && isCorrectAnswer && (
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 ml-2" />
+                    )}
+                    {showExplanation && isIncorrectlySelected && (
+                      <XCircle className="w-5 h-5 text-red-600 flex-shrink-0 ml-2" />
+                    )}
+                  </label>
                 );
               })}
             </div>
+
+            {/* Submit Answer Button - PassMedicine Style */}
+            {!showExplanation && selectedAnswer && (
+              <div className="mb-6">
+                <Button
+                  onClick={handleSubmitAnswer}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg font-medium"
+                  size="lg"
+                >
+                  Submit answer
+                </Button>
+              </div>
+            )}
           </CardContent>
         </Card>
 
-        {/* Answer Explanation - Template Style */}
+        {/* Answer Explanation - PassMedicine Style */}
         {showExplanation && (
-          <div className="space-y-4 mb-6">
-            {/* Feedback Section */}
-            <div className={`p-5 border-2 rounded-lg ${
-              isCorrect 
-                ? 'bg-green-50 border-green-500' 
-                : 'bg-red-50 border-red-500'
-            }`}>
-              <div className="flex items-start gap-3">
-                {isCorrect ? (
-                  <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
-                ) : (
-                  <XCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
-                )}
-                <div className="flex-1">
-                  <p className={`font-semibold text-lg mb-3 ${
-                    isCorrect ? 'text-green-800' : 'text-red-800'
-                  }`}>
-                    {isCorrect 
-                      ? 'Correct Answer!' 
-                      : 'Incorrect Answer'
-                    }
+          <div className="space-y-6 mb-8">
+            {/* Simple explanation text like PassMedicine */}
+            <div className="text-gray-800 leading-relaxed space-y-4">
+              {(() => {
+                // Get explanation and format it cleanly
+                const explanation = currentQuestion.explanation || '';
+                
+                // Split explanation into paragraphs for better readability
+                const paragraphs = explanation.split('\n\n').filter((p: string) => p.trim());
+                
+                return paragraphs.map((paragraph: string, index: number) => (
+                  <p key={index} className="text-base leading-relaxed">
+                    {paragraph.trim()}
                   </p>
-                  
-                  {!isCorrect && (
-                    <div className="mb-4 p-3 bg-green-100 border border-green-400 rounded-lg">
-                      <p className="font-medium text-green-800 mb-2">
-                        ✓ The correct answer is {String.fromCharCode(65 + currentQuestion.correctAnswer)}
-                      </p>
-                      <p className="text-green-700 text-base">
-                        {(() => {
-                          // Get correct answer text safely
-                          let options = currentQuestion.options;
-                          if (Array.isArray(options)) {
-                            return options[currentQuestion.correctAnswer];
-                          } else if (typeof options === 'object') {
-                            return Object.values(options)[currentQuestion.correctAnswer];
-                          }
-                          return 'Option not available';
-                        })()}
-                      </p>
-                    </div>
-                  )}
-                  
-                  {/* Targeted Explanation Text */}
-                  <div className={`text-base leading-relaxed ${
-                    isCorrect ? 'text-green-700' : 'text-gray-700'
-                  }`} style={{ whiteSpace: 'pre-line' }}>
-                    <h4 className="font-medium mb-2">Explanation:</h4>
-                    {getTargetedExplanation(currentQuestion, selectedAnswer, isCorrect)}
-                  </div>
-                </div>
+                ));
+              })()}
+            </div>
+
+            {/* Topic heading like PassMedicine */}
+            <div className="pt-4 border-t border-gray-200">
+              <h3 className="text-xl font-normal text-blue-600 mb-2">
+                {currentQuestion.category ? currentQuestion.category.charAt(0).toUpperCase() + currentQuestion.category.slice(1) : 'Medical Topic'}
+              </h3>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">★</span>
+                <span className="text-sm text-gray-600">Reference material</span>
               </div>
             </div>
 
@@ -1703,37 +1662,79 @@ export default function PLAB1New() {
 
       </div>
 
-      {/* Fixed Bottom Navigation - Always Stays at Bottom */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      {/* PassMedicine-Style Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="max-w-4xl mx-auto p-4">
-          <div className="flex gap-4 justify-center">
-            {!showExplanation ? (
-              <Button 
-                onClick={submitAnswer}
-                disabled={!selectedAnswer}
-                className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 px-8 py-3 text-base font-medium"
-              >
-                {translateText('Submit Answer')}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            ) : (
-              <Button 
-                onClick={nextQuestion}
-                className="bg-green-600 hover:bg-green-700 px-8 py-3 text-base font-medium"
-              >
-                {currentQuestionIndex < generatedQuestions.length - 1 ? (
-                  <>
-                    {translateText('Next Question')}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </>
-                ) : (
-                  <>
-                    {translateText('Complete Session')}
-                    <Award className="w-4 h-4 ml-2" />
-                  </>
-                )}
-              </Button>
-            )}
+          <div className="flex items-center justify-between">
+            {/* Previous Button */}
+            <Button
+              onClick={() => {
+                if (currentQuestionIndex > 0) {
+                  setCurrentQuestionIndex(prev => prev - 1);
+                  setSelectedAnswer("");
+                  setShowExplanation(false);
+                  setQuestionStartTime(Date.now());
+                }
+              }}
+              disabled={currentQuestionIndex === 0}
+              variant="outline"
+              className="w-12 h-12 p-0 bg-gray-100 hover:bg-gray-200 disabled:opacity-30"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+
+            {/* Center Content */}
+            <div className="flex-1 flex justify-center">
+              {!showExplanation && selectedAnswer ? (
+                <Button 
+                  onClick={handleSubmitAnswer}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium"
+                >
+                  Submit answer
+                </Button>
+              ) : showExplanation ? (
+                <Button 
+                  onClick={handleNextQuestion}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium flex items-center gap-2"
+                >
+                  {currentQuestionIndex < generatedQuestions.length - 1 ? (
+                    <>
+                      Next question
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  ) : (
+                    <>
+                      Complete session
+                      <Award className="w-4 h-4" />
+                    </>
+                  )}
+                </Button>
+              ) : null}
+            </div>
+
+            {/* Next Button */}
+            <Button
+              onClick={() => {
+                if (currentQuestionIndex < generatedQuestions.length - 1) {
+                  setCurrentQuestionIndex(prev => prev + 1);
+                  setSelectedAnswer("");
+                  setShowExplanation(false);
+                  setQuestionStartTime(Date.now());
+                }
+              }}
+              disabled={currentQuestionIndex >= generatedQuestions.length - 1}
+              variant="outline"
+              className="w-12 h-12 p-0 bg-gray-100 hover:bg-gray-200 disabled:opacity-30"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </Button>
+          </div>
+
+          {/* Question counter */}
+          <div className="text-center mt-2">
+            <span className="text-sm text-gray-500">
+              {currentQuestionIndex + 1} of {generatedQuestions.length}
+            </span>
           </div>
         </div>
       </div>
