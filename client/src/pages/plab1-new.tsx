@@ -1410,12 +1410,14 @@ export default function PLAB1New() {
                     <p className="font-semibold text-lg">Correct!</p>
                   ) : (
                     <div>
-                      <p className="font-semibold text-lg mb-2">Incorrect</p>
+                      <p className="font-semibold text-lg mb-2">
+                        Incorrect - The correct answer was <strong className="text-green-600">{String.fromCharCode(65 + currentQuestion.correctAnswer)}</strong>
+                      </p>
                       <div className="bg-green-100 border border-green-300 rounded-lg p-3">
                         <p className="text-green-800 font-medium">
-                          ✓ The correct answer was <strong>{String.fromCharCode(65 + currentQuestion.correctAnswer)}</strong>
+                          ✓ Answer {String.fromCharCode(65 + currentQuestion.correctAnswer)}:
                         </p>
-                        <p className="text-green-700 text-sm mt-1">
+                        <p className="text-green-700 text-base mt-1 font-medium">
                           {(() => {
                             let options = currentQuestion.options;
                             if (Array.isArray(options)) {
