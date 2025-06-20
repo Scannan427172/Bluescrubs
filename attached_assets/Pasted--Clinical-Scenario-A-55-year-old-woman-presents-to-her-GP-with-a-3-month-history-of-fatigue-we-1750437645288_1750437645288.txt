@@ -1,0 +1,72 @@
+# 🩺 Clinical Scenario
+
+A 55-year-old woman presents to her GP with a 3-month history of fatigue, weight gain, and feeling cold. She reports low mood and constipation. On examination, her skin is dry, her heart rate is 58 bpm, and ankle reflexes show delayed relaxation. Blood tests reveal:
+
+- TSH: 16 mU/L (↑)
+- Free T4: 8 pmol/L (↓)
+
+These findings are consistent with primary hypothyroidism.
+
+---
+
+## ❓ Question
+
+What is the most appropriate initial treatment for this patient?
+
+A. Carbimazole  
+✅ **B. Levothyroxine**  
+C. Methimazole  
+D. Propylthiouracil  
+E. Liothyronine
+
+---
+
+## 🧠 Explanation
+
+Levothyroxine is the treatment of choice for **primary hypothyroidism**, a condition where the thyroid gland fails to produce sufficient thyroid hormone. This patient's biochemical profile — elevated TSH and low free T4 — confirms the diagnosis. NICE and CKS guidelines both state clearly that levothyroxine should be started once hypothyroidism is confirmed.
+
+Levothyroxine is a synthetic form of thyroxine (T4), the hormone typically secreted by the thyroid. In the body, it is converted to T3 — the active hormone that regulates metabolism. For most healthy adults under 65, an initial dose of **1.6 micrograms/kg/day** is appropriate. In older patients or those with cardiac disease, treatment should begin at a lower dose to reduce the risk of myocardial ischaemia or arrhythmia.
+
+TSH levels should be reassessed **6–8 weeks after starting or adjusting the dose**. Once TSH normalises, patients typically remain on levothyroxine for life. It's vital to advise patients to take it on an **empty stomach**, ideally 30–60 minutes before breakfast, and to avoid taking it with calcium or iron supplements, as absorption may be impaired.
+
+Antithyroid drugs (e.g. carbimazole, methimazole, propylthiouracil) are used for hyperthyroidism and are not indicated in hypothyroidism. Liothyronine is reserved for specific cases like myxoedema coma or specialist referral and is not routinely used for long-term management.
+
+---
+
+## 📚 References
+
+- NICE: [Treatment of primary hypothyroidism – NG145](https://www.nice.org.uk/guidance/ng145/chapter/Recommendations#treatment-of-primary-hypothyroidism)  
+  _This section explains the dosing, initiation, and monitoring of levothyroxine in primary hypothyroidism._
+
+- CKS: [Levothyroxine treatment – Hypothyroidism CKS](https://cks.nice.org.uk/topics/hypothyroidism/management/levothyroxine-treatment/)  
+  _Covers starting doses, TSH monitoring, patient advice, and when to refer._
+
+---
+
+## 🛠️ Tooltips
+
+- TSH ↑ and T4 ↓ = Primary hypothyroidism  
+- Levothyroxine replaces T4 and restores euthyroidism  
+- Start **low** in elderly/cardiac patients  
+- Monitor **TSH after 6–8 weeks**  
+- Take **before food**, away from calcium/iron
+
+---
+
+## 💡 Mnemonic Tip
+
+**SLOW** symptoms of hypothyroidism:  
+- **S**kin dry  
+- **L**ethargy  
+- **O**verweight  
+- **W**eak reflexes (delayed)
+
+Or use:  
+**THYROID**  
+- **T**iredness  
+- **H**air thinning  
+- **Y**awning (fatigue)  
+- **R**eflexes delayed  
+- **O**verweight  
+- **I**ntolerance to cold  
+- **D**ry skin
