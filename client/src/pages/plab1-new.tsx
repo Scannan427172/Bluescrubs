@@ -1562,30 +1562,7 @@ export default function PLAB1New() {
                         <p className="text-blue-700">GMC Good Medical Practice - Professional standards</p>
                       </div>
                     )}
-                    
-                    {/* Duplicate CKS Guidelines Button in Reference Section */}
-                    {currentQuestion.cks_guidance && (
-                      <div className="bg-white border border-green-200 rounded-lg p-3 mb-3 mt-4">
-                        <p className="text-green-700 leading-relaxed mb-3 text-sm font-medium">
-                          NICE CKS (Clinical Knowledge Summaries) - Evidence-based primary care guidance
-                        </p>
-                        <Button
-                          size="sm"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            window.open(currentQuestion.cks_guidance.cks_url || 'https://cks.nice.org.uk/', '_blank');
-                          }}
-                          className="bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700"
-                        >
-                          <ExternalLink className="w-4 h-4 mr-1" />
-                          View NICE CKS Guidelines
-                        </Button>
-                        <p className="text-xs text-green-600 mt-2 italic">
-                          Note: You will need to accept CKS terms and conditions for full access
-                        </p>
-                      </div>
-                    )}
+
                   </div>
                 </div>
               </div>
