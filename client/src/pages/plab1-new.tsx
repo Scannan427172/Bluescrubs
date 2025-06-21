@@ -72,21 +72,32 @@ export default function PLAB1New() {
       };
 
       const handleLoadedData = () => {
+        console.log('Video loaded successfully');
         video.play().then(() => {
+          console.log('Video started playing');
           setShowPlayButton(false);
-        }).catch(() => {
+        }).catch((error) => {
+          console.log('Video autoplay failed:', error);
           setShowPlayButton(true);
         });
+      };
+
+      const handleError = (e: any) => {
+        console.error('Video loading error:', e);
+        console.error('Video error code:', video.error?.code);
+        setShowPlayButton(true);
       };
 
       video.addEventListener('play', handlePlay);
       video.addEventListener('pause', handlePause);
       video.addEventListener('loadeddata', handleLoadedData);
+      video.addEventListener('error', handleError);
 
       return () => {
         video.removeEventListener('play', handlePlay);
         video.removeEventListener('pause', handlePause);
         video.removeEventListener('loadeddata', handleLoadedData);
+        video.removeEventListener('error', handleError);
       };
     }
   }, []);
@@ -716,7 +727,7 @@ export default function PLAB1New() {
               poster={plab1BgImage}
               className="absolute inset-0 w-full h-full object-cover"
             >
-              <source src={demoVideo} type="video/mp4" />
+              <source src="/demo-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
