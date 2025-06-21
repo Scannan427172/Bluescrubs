@@ -6,6 +6,7 @@ import { Link } from "wouter";
 import { User } from "@shared/schema";
 import { Flame, Award } from "lucide-react";
 import dashboardHeroImage from '@assets/B584B977-70BB-4134-8338-FD9B4B07B0D0_1750518606574.png';
+import type { UserStats } from "@/lib/types";
 
 // Mock user for demo - in real app this would come from auth
 const DEMO_USER: User = {
@@ -27,7 +28,7 @@ const DEMO_USER: User = {
 export default function Dashboard() {
   const user = DEMO_USER;
 
-  const { data: userStats } = useQuery({
+  const { data: userStats } = useQuery<UserStats>({
     queryKey: ["/api/users", user.id, "stats"],
   });
 
@@ -121,7 +122,7 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Questions Answered</p>
-                  <p className="text-2xl font-bold text-gray-900">{(userStats as any)?.totalAnswered || 0}</p>
+                  <p className="text-2xl font-bold text-gray-900">{userStats?.totalAnswered || 0}</p>
                 </div>
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                   <span className="text-blue-600">📝</span>
@@ -136,7 +137,7 @@ export default function Dashboard() {
                 <div>
                   <p className="text-sm font-medium text-gray-600">Accuracy Rate</p>
                   <p className="text-2xl font-bold text-gray-900">
-                    {userStats?.totalAnswered ? Math.round(((userStats as any).correctAnswers / userStats.totalAnswered) * 100) : 0}%
+                    {userStats?.totalAnswered ? Math.round((userStats.correctAnswers / userStats.totalAnswered) * 100) : 0}%
                   </p>
                 </div>
                 <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
