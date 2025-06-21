@@ -76,6 +76,22 @@ export default function PLAB1New() {
         });
       };
 
+      // Enable autoplay after any user interaction on iOS
+      const enableAutoplay = () => {
+        if (isIOS && video.paused) {
+          video.play().then(() => {
+            console.log('Video started after user interaction');
+            setShowPlayButton(false);
+          }).catch(() => {
+            setShowPlayButton(true);
+          });
+        }
+      };
+
+      // Listen for any user interaction on the page
+      document.addEventListener('touchstart', enableAutoplay, { once: true });
+      document.addEventListener('click', enableAutoplay, { once: true });
+
       const handlePlay = () => {
         setIsVideoPlaying(true);
         setShowPlayButton(false);
@@ -102,6 +118,8 @@ export default function PLAB1New() {
         video.removeEventListener('play', handlePlay);
         video.removeEventListener('pause', handlePause);
         video.removeEventListener('error', handleError);
+        document.removeEventListener('touchstart', enableAutoplay);
+        document.removeEventListener('click', enableAutoplay);
       };
     }
   }, [isVideoPlaying]);
