@@ -58,10 +58,29 @@ export default function PLAB1New() {
     date: string;
   }>>([]);
 
-  // Handle video playback
+  // Handle video playback with iOS mobile support
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      
+      const handleCanPlay = () => {
+        console.log('Video can play');
+        if (!isIOS) {
+          // Desktop/Android: try autoplay
+          video.play().then(() => {
+            console.log('Video started playing');
+            setShowPlayButton(false);
+          }).catch((error) => {
+            console.log('Video autoplay failed:', error);
+            setShowPlayButton(true);
+          });
+        } else {
+          // iOS: show play button due to autoplay restrictions
+          setShowPlayButton(true);
+        }
+      };
+
       const handlePlay = () => {
         setIsVideoPlaying(true);
         setShowPlayButton(false);
@@ -69,17 +88,7 @@ export default function PLAB1New() {
 
       const handlePause = () => {
         setIsVideoPlaying(false);
-      };
-
-      const handleLoadedData = () => {
-        console.log('Video loaded successfully');
-        video.play().then(() => {
-          console.log('Video started playing');
-          setShowPlayButton(false);
-        }).catch((error) => {
-          console.log('Video autoplay failed:', error);
-          setShowPlayButton(true);
-        });
+        if (!isVideoPlaying) setShowPlayButton(true);
       };
 
       const handleError = (e: any) => {
@@ -88,19 +97,19 @@ export default function PLAB1New() {
         setShowPlayButton(true);
       };
 
+      video.addEventListener('canplay', handleCanPlay);
       video.addEventListener('play', handlePlay);
       video.addEventListener('pause', handlePause);
-      video.addEventListener('loadeddata', handleLoadedData);
       video.addEventListener('error', handleError);
 
       return () => {
+        video.removeEventListener('canplay', handleCanPlay);
         video.removeEventListener('play', handlePlay);
         video.removeEventListener('pause', handlePause);
-        video.removeEventListener('loadeddata', handleLoadedData);
         video.removeEventListener('error', handleError);
       };
     }
-  }, []);
+  }, [isVideoPlaying]);
 
   const handlePlayClick = () => {
     const video = videoRef.current;
@@ -719,13 +728,14 @@ export default function PLAB1New() {
           <div className="relative w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden rounded-lg">
             <video 
               ref={videoRef}
-              autoPlay 
               muted 
               loop 
               playsInline
-              preload="auto"
+              webkit-playsinline="true"
+              preload="metadata"
               poster={plab1BgImage}
               className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectFit: 'cover' }}
             >
               <source src="/demo-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
@@ -733,15 +743,18 @@ export default function PLAB1New() {
 
             {/* Play button overlay - shown when video is paused or autoplay blocked */}
             {showPlayButton && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-40">
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-40">
+                <div className="bg-white/90 backdrop-blur-sm rounded-full p-4 mb-4 shadow-2xl">
+                  <Play className="w-12 h-12 text-blue-600 fill-current" />
+                </div>
                 <Button
                   onClick={handlePlayClick}
                   size="lg"
-                  className="bg-white/20 border-white text-white hover:bg-white/30 backdrop-blur-sm"
+                  className="bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-xl px-8 py-3 text-lg font-semibold"
                 >
-                  <Play className="w-8 h-8 mr-2 fill-current" />
-                  Play Demo
+                  Watch Platform Demo
                 </Button>
+                <p className="text-white/80 text-sm mt-2">Tap to see how it works</p>
               </div>
             )}
             
