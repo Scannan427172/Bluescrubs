@@ -8,12 +8,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, Play
 } from "lucide-react";
+import { useRef } from "react";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 import demoVideo from '@assets/ScreenRecording_06-20-2025 20-48-38_1_1750511664060.mp4';
 
 export default function PLAB1New() {
+  // Video ref for autoplay control
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [showPlayButton, setShowPlayButton] = useState(true);
+
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isTranslationMode, setIsTranslationMode] = useState(false);
@@ -51,6 +57,36 @@ export default function PLAB1New() {
     category: string;
     date: string;
   }>>([]);
+
+  // Ensure video plays on component mount
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const playVideo = () => {
+        video.play().catch((error) => {
+          console.log('Video autoplay blocked:', error);
+        });
+      };
+
+      // Try to play immediately
+      playVideo();
+
+      // Also try on user interaction
+      const handleInteraction = () => {
+        playVideo();
+        document.removeEventListener('click', handleInteraction);
+        document.removeEventListener('touchstart', handleInteraction);
+      };
+
+      document.addEventListener('click', handleInteraction);
+      document.addEventListener('touchstart', handleInteraction);
+
+      return () => {
+        document.removeEventListener('click', handleInteraction);
+        document.removeEventListener('touchstart', handleInteraction);
+      };
+    }
+  }, []);
 
   // Initialize available voices on component mount
   useEffect(() => {
@@ -661,12 +697,17 @@ export default function PLAB1New() {
           {/* Hero Banner with Video */}
           <div className="relative w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden rounded-lg">
             <video 
+              ref={videoRef}
               autoPlay 
               muted 
               loop 
+              playsInline
+              preload="auto"
+              poster={plab1BgImage}
               className="absolute inset-0 w-full h-full object-cover"
             >
               <source src={demoVideo} type="video/mp4" />
+              Your browser does not support the video tag.
             </video>
             
             {/* Overlay for text readability */}
