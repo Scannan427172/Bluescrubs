@@ -689,7 +689,7 @@ export default function PLAB1New() {
                 {translateText('with AI')}
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl mb-6 drop-shadow-2xl leading-relaxed" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
-                {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
+                {translateText('Authentic UK Comprehensive exam preparation')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3">
