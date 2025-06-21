@@ -925,16 +925,14 @@ export default function PLAB1New() {
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-4 gap-4">
-                <Button 
-                  size="lg" 
+                <div 
                   onClick={() => startPractice(5)}
-                  disabled={isGeneratingQuestions}
-                  className="bg-blue-600 hover:bg-blue-700 h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 force-white-text"
+                  className={`bg-blue-600 hover:bg-blue-700 h-24 flex flex-col items-center justify-center gap-2 rounded-md cursor-pointer transition-colors practice-button-white ${isGeneratingQuestions ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   <ArrowRight className="w-6 h-6" />
                   <span className="font-medium">{translateText('Quick Practice')}</span>
                   <span className="text-xs opacity-90">5 {translateText('questions')}</span>
-                </Button>
+                </div>
 
                 <Button 
                   size="lg" 

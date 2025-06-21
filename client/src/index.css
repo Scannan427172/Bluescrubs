@@ -32,12 +32,34 @@
   .text-muted-foreground { color: #6b7280 !important; }
   
   /* Force white text on practice buttons */
-  .bg-blue-600 span, .bg-blue-600 svg {
+  button.bg-blue-600 span,
+  button.bg-blue-600 svg,
+  .bg-blue-600 span, 
+  .bg-blue-600 svg {
     color: white !important;
   }
   
-  .force-white-text, .force-white-text * {
+  .force-white-text,
+  .force-white-text *,
+  .force-white-text span,
+  .force-white-text .font-medium,
+  .force-white-text .text-xs {
     color: white !important;
+    fill: white !important;
+  }
+  
+  /* Override any text color classes with white for practice buttons */
+  .bg-blue-600.cursor-pointer span.text-white,
+  .bg-blue-600.cursor-pointer .text-white {
+    color: white !important;
+  }
+  
+  .practice-button-white,
+  .practice-button-white *,
+  .practice-button-white span,
+  .practice-button-white svg {
+    color: white !important;
+    fill: white !important;
   }
 }
 
