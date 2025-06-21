@@ -11,6 +11,7 @@ import {
   TrendingUp, Calendar, Award, Flame, Heart, Brain, Stethoscope 
 } from "lucide-react";
 import type { User, UserStats, Question, CommunityPost, StudyPlan } from "@/lib/types";
+import dashboardHeroImage from '@assets/B584B977-70BB-4134-8338-FD9B4B07B0D0_1750518606574.png';
 
 // Mock user for demo - in real app this would come from auth
 const DEMO_USER: User = {
@@ -21,6 +22,11 @@ const DEMO_USER: User = {
   currentStage: "plab1",
   studyStreak: 12,
   totalPoints: 2847,
+  country: "UK",
+  city: "London",
+  flagEmoji: "🇬🇧",
+  timezone: "Europe/London",
+  isLocationPublic: true,
   createdAt: new Date()
 };
 
@@ -60,69 +66,52 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-light-bg pb-20 md:pb-0">
-      {/* Welcome Hero Section */}
-      <section className="bg-white py-16" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl font-bold mb-4" style={{ color: '#000000' }}>
-                Welcome back, {DEMO_USER.username.split(' ')[1]}! 👋
-              </h1>
-              <p className="text-xl mb-8 opacity-90" style={{ color: '#000000' }}>
-                Continue your PLAB journey with personalized study plans and comprehensive practice.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <div className="bg-gray-100 rounded-lg px-6 py-4 border" style={{ backgroundColor: '#f8f9fa', color: '#000000' }}>
-                  <div className="flex items-center space-x-2 mb-1">
-                    <Flame className="w-5 h-5 text-amber-warning" />
-                    <span className="text-sm font-medium" style={{ color: '#000000' }}>Study Streak</span>
-                  </div>
-                  <div className="text-2xl font-bold" style={{ color: '#000000' }}>{DEMO_USER.studyStreak} days</div>
+      {/* Dashboard Hero Section */}
+      <section className="relative bg-gradient-to-r from-teal-600 to-blue-700 min-h-[400px] overflow-hidden">
+        <img 
+          src={dashboardHeroImage}
+          alt="Medical Dashboard"
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          loading="eager"
+          decoding="async"
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-2xl">
+              Welcome back, {DEMO_USER.username.split(' ')[1]}!
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 drop-shadow-lg opacity-95">
+              Continue your PLAB journey with personalized study plans and comprehensive practice.
+            </p>
+            
+            <div className="flex justify-center gap-4">
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-4 border border-white/30">
+                <div className="flex items-center space-x-2 mb-1">
+                  <Flame className="w-5 h-5 text-white" />
+                  <span className="text-sm font-medium text-white">Study Streak</span>
                 </div>
-                <div className="bg-gray-100 rounded-lg px-6 py-4 border" style={{ backgroundColor: '#f8f9fa', color: '#000000' }}>
-                  <div className="flex items-center space-x-2 mb-1">
-                    <Award className="w-5 h-5 text-mint-green" />
-                    <span className="text-sm font-medium" style={{ color: '#000000' }}>Total Points</span>
-                  </div>
-                  <div className="text-2xl font-bold" style={{ color: '#000000' }}>{DEMO_USER.totalPoints.toLocaleString()}</div>
-                </div>
+                <div className="text-2xl font-bold text-white">{DEMO_USER.studyStreak} days</div>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/plab1">
-                  <Button id="continue-learning-btn" className="font-semibold px-8 py-3">
-                    Continue Learning
-                  </Button>
-                </Link>
-                <Link href="/dashboard">
-                  <Button variant="outline" className="border-gray-300 hover:bg-gray-100 px-8 py-3" style={{ color: '#000000', borderColor: '#000000' }}>
-                    View Progress
-                  </Button>
-                </Link>
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-4 border border-white/30">
+                <div className="flex items-center space-x-2 mb-1">
+                  <Award className="w-5 h-5 text-white" />
+                  <span className="text-sm font-medium text-white">Total Points</span>
+                </div>
+                <div className="text-2xl font-bold text-white">{DEMO_USER.totalPoints.toLocaleString()}</div>
               </div>
             </div>
 
-            <div className="relative">
-              <div className="bg-gray-100 rounded-2xl p-8 border" style={{ backgroundColor: '#f8f9fa', color: '#000000' }}>
-                <h3 className="text-xl font-bold mb-6" style={{ color: '#000000' }}>Quick Stats</h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span style={{ color: '#000000' }}>Questions Completed</span>
-                    <span className="font-bold" style={{ color: '#000000' }}>{userStats?.totalAnswered || 0}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span style={{ color: '#000000' }}>Accuracy Rate</span>
-                    <span className="font-bold" style={{ color: '#000000' }}>
-                      {userStats?.totalAnswered ? Math.round((userStats.correctAnswers / userStats.totalAnswered) * 100) : 0}%
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span style={{ color: '#000000' }}>Current Focus</span>
-                    <Badge className="bg-blue-100 border border-blue-300" style={{ color: '#2E86AB', backgroundColor: '#e3f2fd' }}>PLAB 1</Badge>
-                  </div>
-                </div>
-              </div>
+            <div className="flex justify-center gap-4 mt-8">
+              <Link href="/plab1">
+                <Button size="lg" className="bg-white text-teal-700 hover:bg-gray-100 font-semibold px-8 py-3">
+                  Continue Learning
+                </Button>
+              </Link>
+              <Link href="/plab1-new">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10 px-8 py-3">
+                  View Progress
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
