@@ -45,7 +45,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-light-bg pb-20 md:pb-0">
       {/* Dashboard Hero Section */}
-      <section className="relative min-h-[400px] overflow-hidden">
+      <section className="relative min-h-[400px] overflow-hidden dashboard-hero">
         <img 
           src={dashboardHeroImage}
           alt="Medical Dashboard"

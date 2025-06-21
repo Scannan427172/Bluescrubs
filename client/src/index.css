@@ -76,6 +76,49 @@
   .hero-text-white span {
     color: white !important;
   }
+  
+  /* Specific dashboard hero text override */
+  .relative.z-10 h1,
+  .relative.z-10 p,
+  .relative.z-10 span,
+  .relative.z-10 div {
+    color: white !important;
+  }
+  
+  /* Target all text in dashboard hero section */
+  section.relative h1,
+  section.relative p,
+  section.relative span,
+  section.relative div {
+    color: white !important;
+  }
+  
+  /* Force white text for dashboard text elements */
+  .text-4xl, .text-5xl, .text-lg, .text-xl, .text-2xl {
+    color: white !important;
+  }
+  
+  /* Dashboard hero section force white text */
+  .dashboard-hero *,
+  .dashboard-hero h1,
+  .dashboard-hero p,
+  .dashboard-hero span,
+  .dashboard-hero div {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
+  }
+  
+  /* Override any existing text color classes */
+  .dashboard-hero .text-4xl,
+  .dashboard-hero .text-5xl,
+  .dashboard-hero .text-lg,
+  .dashboard-hero .text-xl,
+  .dashboard-hero .text-2xl,
+  .dashboard-hero .text-sm,
+  .dashboard-hero .font-bold,
+  .dashboard-hero .font-medium {
+    color: white !important;
+  }
 }
 
 :root {
