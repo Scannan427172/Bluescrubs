@@ -1015,6 +1015,7 @@ export default function PLAB1New() {
             </CardContent>
           </Card>
         </div>
+        </div>
       </div>
     );
   }
