@@ -24,7 +24,6 @@ import PLABAIDashboard from "@/pages/plab-ai-dashboard";
 import InteractivePatientPage from "@/pages/interactive-patient-page";
 import PersonalizedPaths from "@/pages/personalized-paths";
 import VideoOSCE from "@/pages/video-osce";
-import VideoTest from "@/pages/video-test";
 import More from "@/pages/more";
 import LanguageDemo from "@/pages/language-demo";
 import GlobalPractice from "@/pages/global-practice";
@@ -210,10 +209,6 @@ function Router() {
             <VideoOSCE />
           </div>
         </div>
-      </Route>
-
-      <Route path="/video-test">
-        <VideoTest />
       </Route>
 
       <Route path="/more">

@@ -8,22 +8,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, Play
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
-import { useRef } from "react";
-import { useLocation } from "wouter";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
-import demoVideo from '@assets/ScreenRecording_06-20-2025 20-48-38_1_1750511664060.mp4';
 
 export default function PLAB1New() {
-  // Navigation
-  const [location, setLocation] = useLocation();
-  
-  // Video ref for autoplay control
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [showPlayButton, setShowPlayButton] = useState(false);
-
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isTranslationMode, setIsTranslationMode] = useState(false);
@@ -37,7 +26,6 @@ export default function PLAB1New() {
   
   // Session state
   const [sessionStarted, setSessionStarted] = useState(false);
-  const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [showExplanation, setShowExplanation] = useState(false);
@@ -51,8 +39,6 @@ export default function PLAB1New() {
   const [questionTimes, setQuestionTimes] = useState<number[]>([]);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   
-
-
   // Leaderboard state
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [leaderboardData, setLeaderboardData] = useState<Array<{
@@ -64,133 +50,6 @@ export default function PLAB1New() {
     category: string;
     date: string;
   }>>([]);
-
-  // Handle video playback with iOS mobile support
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      
-      const handleCanPlay = () => {
-        console.log('Video can play, attempting autoplay');
-        console.log('Video readyState:', video.readyState);
-        console.log('Video paused:', video.paused);
-        console.log('Video muted:', video.muted);
-        console.log('Video src:', video.src);
-        
-        // Try autoplay on all devices
-        video.play().then(() => {
-          console.log('Video started playing automatically');
-          setShowPlayButton(false);
-        }).catch((error) => {
-          console.log('Video autoplay blocked, showing play button:', error);
-          setShowPlayButton(true);
-        });
-      };
-
-      // Enable autoplay after any user interaction on iOS
-      const enableAutoplay = () => {
-        console.log('User interaction detected, attempting video play');
-        console.log('Video paused before interaction:', video.paused);
-        if (video.paused) {
-          video.play().then(() => {
-            console.log('Video started after user interaction');
-            setShowPlayButton(false);
-          }).catch((error) => {
-            console.log('Video play failed after interaction:', error);
-            setShowPlayButton(true);
-          });
-        }
-      };
-
-      // Listen for any user interaction on the page
-      document.addEventListener('touchstart', enableAutoplay, { once: true });
-      document.addEventListener('click', enableAutoplay, { once: true });
-
-      const handlePlay = () => {
-        setIsVideoPlaying(true);
-        setShowPlayButton(false);
-      };
-
-      const handlePause = () => {
-        setIsVideoPlaying(false);
-        if (!isVideoPlaying) setShowPlayButton(true);
-      };
-
-      const handleError = (e: any) => {
-        console.error('Video loading error:', e);
-        console.error('Video error code:', video.error?.code);
-        setShowPlayButton(true);
-      };
-
-      video.addEventListener('canplay', handleCanPlay);
-      video.addEventListener('play', handlePlay);
-      video.addEventListener('pause', handlePause);
-      video.addEventListener('error', handleError);
-
-      return () => {
-        video.removeEventListener('canplay', handleCanPlay);
-        video.removeEventListener('play', handlePlay);
-        video.removeEventListener('pause', handlePause);
-        video.removeEventListener('error', handleError);
-        document.removeEventListener('touchstart', enableAutoplay);
-        document.removeEventListener('click', enableAutoplay);
-      };
-    }
-  }, [isVideoPlaying]);
-
-  // Separate effect for landing page video initialization
-  useEffect(() => {
-    if (!sessionStarted && !isGeneratingQuestions) {
-      const video = videoRef.current;
-      if (video) {
-        console.log('Initializing landing page video');
-        setShowPlayButton(true);
-        
-        const tryAutoplay = () => {
-          video.play().then(() => {
-            console.log('Landing page video started');
-            setIsVideoPlaying(true);
-            setShowPlayButton(false);
-          }).catch((error) => {
-            console.log('Landing page autoplay blocked:', error);
-            setShowPlayButton(true);
-          });
-        };
-
-        // Try autoplay when video can play
-        video.addEventListener('canplay', tryAutoplay, { once: true });
-        
-        // Also try on any user interaction
-        const handleInteraction = () => {
-          if (video.paused) {
-            tryAutoplay();
-          }
-        };
-        
-        document.addEventListener('touchstart', handleInteraction, { once: true });
-        document.addEventListener('click', handleInteraction, { once: true });
-        
-        return () => {
-          video.removeEventListener('canplay', tryAutoplay);
-          document.removeEventListener('touchstart', handleInteraction);
-          document.removeEventListener('click', handleInteraction);
-        };
-      }
-    }
-  }, [sessionStarted, isGeneratingQuestions]);
-
-  const handlePlayClick = () => {
-    const video = videoRef.current;
-    if (video) {
-      video.play().then(() => {
-        setIsVideoPlaying(true);
-        setShowPlayButton(false);
-      }).catch((error) => {
-        console.log('Manual play failed:', error);
-      });
-    }
-  };
 
   // Initialize available voices on component mount
   useEffect(() => {
@@ -361,12 +220,17 @@ export default function PLAB1New() {
     }
   };
   
-  // Initialize current question from generated questions
-  useEffect(() => {
-    if (generatedQuestions.length > 0 && currentQuestionIndex < generatedQuestions.length) {
-      setCurrentQuestion(generatedQuestions[currentQuestionIndex]);
-    }
-  }, [generatedQuestions, currentQuestionIndex]);
+  // AI Question Generation
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string>('intermediate');
+  const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
+  const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
+  const [isBulkGenerating, setIsBulkGenerating] = useState(false);
+  const [bulkProgress, setBulkProgress] = useState<{
+    completed: number;
+    total: number;
+    currentCategory: string;
+  } | null>(null);
 
   // Function to provide targeted explanations based on user's answer
   const getTargetedExplanation = (question: any, userAnswer: string, isCorrect: boolean): string => {
@@ -793,59 +657,22 @@ export default function PLAB1New() {
     return (
       <div className="min-h-screen bg-gray-50 p-4 pb-24">
         <div className="max-w-6xl mx-auto mb-16">
-          {/* Hero Banner with Video */}
-          <div className="relative w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden rounded-lg">
-            <video 
-              ref={videoRef}
-              autoPlay
-              muted 
-              loop 
-              playsInline
-              controls={false}
-              preload="auto"
-              poster={plab1BgImage}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectFit: 'cover' }}
-              onLoadStart={() => console.log('Video load started')}
-              onLoadedMetadata={() => console.log('Video metadata loaded')}
-              onCanPlay={() => console.log('Video can play')}
-              onError={(e) => console.error('Video error:', e)}
-            >
-              <source src="/demo-video.mp4" type="video/mp4" />
-              <source src={plab1BgImage} type="image/png" />
-              Your browser does not support the video tag.
-            </video>
+          {/* Hero Banner */}
+          <div 
+            className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden"
+            style={{
+              backgroundImage: `url(${plab1BgImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'multiply'
+            }}
+          >
 
-            {/* Debug info - remove after testing */}
-            <div className="absolute top-2 left-2 bg-black/80 text-white text-xs p-2 rounded z-50">
-              Playing: {isVideoPlaying ? 'Yes' : 'No'} | Show Button: {showPlayButton ? 'Yes' : 'No'}
-            </div>
-
-            {/* Play button overlay - shown when video is paused or autoplay blocked */}
-            {showPlayButton && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 z-40">
-                <div className="bg-white/90 backdrop-blur-sm rounded-full p-4 mb-4 shadow-2xl">
-                  <Play className="w-12 h-12 text-blue-600 fill-current" />
-                </div>
-                <Button
-                  onClick={handlePlayClick}
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-xl px-8 py-3 text-lg font-semibold"
-                >
-                  Watch Platform Demo
-                </Button>
-                <p className="text-white/80 text-sm mt-2">Tap to see how it works</p>
-              </div>
-            )}
-            
-            {/* Overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/70"></div>
-
-            <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16 h-full">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+            <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16 hero-text">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
                 {translateText('Master PLAB 1 with AI')}
               </h1>
-              <p className="text-xl lg:text-2xl mb-6 text-white drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+              <p className="text-xl lg:text-2xl mb-6 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
                 {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
               </p>
 
