@@ -66,6 +66,11 @@ export default function PLAB1New() {
       
       const handleCanPlay = () => {
         console.log('Video can play, attempting autoplay');
+        console.log('Video readyState:', video.readyState);
+        console.log('Video paused:', video.paused);
+        console.log('Video muted:', video.muted);
+        console.log('Video src:', video.src);
+        
         // Try autoplay on all devices
         video.play().then(() => {
           console.log('Video started playing automatically');
@@ -78,11 +83,14 @@ export default function PLAB1New() {
 
       // Enable autoplay after any user interaction on iOS
       const enableAutoplay = () => {
-        if (isIOS && video.paused) {
+        console.log('User interaction detected, attempting video play');
+        console.log('Video paused before interaction:', video.paused);
+        if (video.paused) {
           video.play().then(() => {
             console.log('Video started after user interaction');
             setShowPlayButton(false);
-          }).catch(() => {
+          }).catch((error) => {
+            console.log('Video play failed after interaction:', error);
             setShowPlayButton(true);
           });
         }
@@ -759,6 +767,11 @@ export default function PLAB1New() {
               <source src={plab1BgImage} type="image/png" />
               Your browser does not support the video tag.
             </video>
+
+            {/* Debug info - remove after testing */}
+            <div className="absolute top-2 left-2 bg-black/80 text-white text-xs p-2 rounded z-50">
+              Playing: {isVideoPlaying ? 'Yes' : 'No'} | Show Button: {showPlayButton ? 'Yes' : 'No'}
+            </div>
 
             {/* Play button overlay - shown when video is paused or autoplay blocked */}
             {showPlayButton && (
