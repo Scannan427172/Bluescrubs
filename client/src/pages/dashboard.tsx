@@ -45,11 +45,11 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-light-bg pb-20 md:pb-0">
       {/* Dashboard Hero Section */}
-      <section className="relative bg-gradient-to-r from-teal-600 to-blue-700 min-h-[400px] overflow-hidden">
+      <section className="relative min-h-[400px] overflow-hidden">
         <img 
           src={dashboardHeroImage}
           alt="Medical Dashboard"
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
           decoding="async"
         />
