@@ -11,6 +11,7 @@ import {
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
+import demoVideo from '@assets/ScreenRecording_06-20-2025 20-48-38_1_1750511664060.mp4';
 
 export default function PLAB1New() {
   // Translation state
@@ -812,6 +813,30 @@ export default function PLAB1New() {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Demo Video Section */}
+          <div className="mb-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-center text-gray-900">Platform Demo</CardTitle>
+                <CardDescription className="text-center">
+                  See how the PLAB 1 preparation platform works
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
+                  <video 
+                    controls 
+                    className="w-full h-full object-cover"
+                    poster={plab1BgImage}
+                  >
+                    <source src={demoVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Statistics Cards */}
