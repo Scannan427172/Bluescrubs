@@ -61,6 +61,21 @@
     color: white !important;
     fill: white !important;
   }
+  
+  /* Force white text on dashboard hero section */
+  section h1,
+  section p,
+  section span {
+    color: white !important;
+  }
+  
+  .hero-text-white,
+  .hero-text-white *,
+  .hero-text-white h1,
+  .hero-text-white p,
+  .hero-text-white span {
+    color: white !important;
+  }
 }
 
 :root {
