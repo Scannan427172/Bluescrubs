@@ -665,9 +665,10 @@ export default function PLAB1New() {
   // If no session started, show the landing page
   if (!sessionStarted && !isGeneratingQuestions) {
     return (
-      <div className="min-h-screen bg-gray-50 pb-24">
-        {/* Hero Banner - Full Width */}
-        <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
+      <div className="min-h-screen bg-gray-50 p-4 pb-24">
+        <div className="max-w-6xl mx-auto mb-16">
+          {/* Hero Banner */}
+          <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
             {!heroImageLoaded && (
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
                 <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -711,10 +712,8 @@ export default function PLAB1New() {
                 </Button>
               </div>
             </div>
-        </div>
+          </div>
 
-        {/* Content Container */}
-        <div className="max-w-6xl mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">{translateText('Choose Your Practice Mode')}</h2>
