@@ -929,7 +929,7 @@ export default function PLAB1New() {
                   onClick={() => startPractice(5)}
                   className={`bg-blue-600 hover:bg-blue-700 h-24 flex flex-col items-center justify-center gap-2 rounded-md cursor-pointer transition-colors practice-button-white ${isGeneratingQuestions ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  <ArrowRight className="w-6 h-6" />
+                  <ArrowRight className="w-6 h-6" style={{ color: 'white' }} />
                   <span className="font-medium">{translateText('Quick Practice')}</span>
                   <span className="text-xs opacity-90">5 {translateText('questions')}</span>
                 </div>
