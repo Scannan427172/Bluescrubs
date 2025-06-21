@@ -58,35 +58,45 @@ export default function PLAB1New() {
     date: string;
   }>>([]);
 
-  // Ensure video plays on component mount
+  // Handle video playback
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      const playVideo = () => {
-        video.play().catch((error) => {
-          console.log('Video autoplay blocked:', error);
+      const handlePlay = () => {
+        setIsVideoPlaying(true);
+        setShowPlayButton(false);
+      };
+
+      const handlePause = () => {
+        setIsVideoPlaying(false);
+      };
+
+      const handleLoadedData = () => {
+        video.play().then(() => {
+          setShowPlayButton(false);
+        }).catch(() => {
+          setShowPlayButton(true);
         });
       };
 
-      // Try to play immediately
-      playVideo();
-
-      // Also try on user interaction
-      const handleInteraction = () => {
-        playVideo();
-        document.removeEventListener('click', handleInteraction);
-        document.removeEventListener('touchstart', handleInteraction);
-      };
-
-      document.addEventListener('click', handleInteraction);
-      document.addEventListener('touchstart', handleInteraction);
+      video.addEventListener('play', handlePlay);
+      video.addEventListener('pause', handlePause);
+      video.addEventListener('loadeddata', handleLoadedData);
 
       return () => {
-        document.removeEventListener('click', handleInteraction);
-        document.removeEventListener('touchstart', handleInteraction);
+        video.removeEventListener('play', handlePlay);
+        video.removeEventListener('pause', handlePause);
+        video.removeEventListener('loadeddata', handleLoadedData);
       };
     }
   }, []);
+
+  const handlePlayClick = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.play();
+    }
+  };
 
   // Initialize available voices on component mount
   useEffect(() => {
@@ -709,6 +719,20 @@ export default function PLAB1New() {
               <source src={demoVideo} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+
+            {/* Play button overlay - shown when video is paused or autoplay blocked */}
+            {showPlayButton && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-40">
+                <Button
+                  onClick={handlePlayClick}
+                  size="lg"
+                  className="bg-white/20 border-white text-white hover:bg-white/30 backdrop-blur-sm"
+                >
+                  <Play className="w-8 h-8 mr-2 fill-current" />
+                  Play Demo
+                </Button>
+              </div>
+            )}
             
             {/* Overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/70"></div>
