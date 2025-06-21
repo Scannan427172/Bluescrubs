@@ -119,6 +119,19 @@
   .dashboard-hero .font-medium {
     color: white !important;
   }
+  
+  /* High specificity override for dashboard text */
+  section.dashboard-hero .relative.z-10 h1,
+  section.dashboard-hero .relative.z-10 p,
+  section.dashboard-hero .relative.z-10 span,
+  section.dashboard-hero .relative.z-10 div {
+    color: white !important;
+  }
+  
+  /* Force white text on all dashboard hero elements */
+  .dashboard-hero .text-center * {
+    color: white !important;
+  }
 }
 
 :root {

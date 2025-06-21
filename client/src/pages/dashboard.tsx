@@ -56,10 +56,10 @@ export default function Dashboard() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/40 to-red-600/40"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center hero-text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+            <h1 className="font-bold mb-6" style={{color: 'white', fontSize: '2.25rem', textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
               Welcome back, {user.username.split(' ')[1]}!
             </h1>
-            <p className="text-lg md:text-xl mb-2" style={{color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+            <p className="mb-2" style={{color: 'white', fontSize: '1.125rem', textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
               {currentDate} • Ready to continue your PLAB journey?
             </p>
             
@@ -67,23 +67,23 @@ export default function Dashboard() {
               <div className="bg-white/30 backdrop-blur-sm rounded-lg px-6 py-4 border border-white/50">
                 <div className="flex items-center space-x-2 mb-1">
                   <Flame className="w-5 h-5" style={{color: 'white'}} />
-                  <span className="text-sm font-medium" style={{color: 'white', textShadow: '1px 1px 2px rgba(0,0,0,0.7)'}}>Day Streak</span>
+                  <span className="font-medium" style={{color: 'white', fontSize: '0.875rem', textShadow: '1px 1px 2px rgba(0,0,0,0.7)'}}>Day Streak</span>
                 </div>
-                <div className="text-2xl font-bold" style={{color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>{user.studyStreak}</div>
+                <div className="font-bold" style={{color: 'white', fontSize: '1.5rem', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>{user.studyStreak}</div>
               </div>
               <div className="bg-white/30 backdrop-blur-sm rounded-lg px-6 py-4 border border-white/50">
                 <div className="flex items-center space-x-2 mb-1">
                   <Award className="w-5 h-5" style={{color: 'white'}} />
-                  <span className="text-sm font-medium" style={{color: 'white', textShadow: '1px 1px 2px rgba(0,0,0,0.7)'}}>Total Points</span>
+                  <span className="font-medium" style={{color: 'white', fontSize: '0.875rem', textShadow: '1px 1px 2px rgba(0,0,0,0.7)'}}>Total Points</span>
                 </div>
-                <div className="text-2xl font-bold" style={{color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>{user.totalPoints.toLocaleString()}</div>
+                <div className="font-bold" style={{color: 'white', fontSize: '1.5rem', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>{user.totalPoints.toLocaleString()}</div>
               </div>
               <div className="bg-white/30 backdrop-blur-sm rounded-lg px-6 py-4 border border-white/50">
                 <div className="flex items-center space-x-2 mb-1">
-                  <span className="text-2xl">📚</span>
-                  <span className="text-sm font-medium" style={{color: 'white', textShadow: '1px 1px 2px rgba(0,0,0,0.7)'}}>Questions Correct</span>
+                  <span style={{fontSize: '1.5rem'}}>📚</span>
+                  <span className="font-medium" style={{color: 'white', fontSize: '0.875rem', textShadow: '1px 1px 2px rgba(0,0,0,0.7)'}}>Questions Correct</span>
                 </div>
-                <div className="text-2xl font-bold" style={{color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>0</div>
+                <div className="font-bold" style={{color: 'white', fontSize: '1.5rem', textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>0</div>
               </div>
             </div>
 
