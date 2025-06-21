@@ -13,6 +13,16 @@ import {
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 
 export default function PLAB1New() {
+  // Hero image loading state
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+  
+  // Preload hero image for faster loading
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setHeroImageLoaded(true);
+    img.src = plab1BgImage;
+  }, []);
+
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isTranslationMode, setIsTranslationMode] = useState(false);
@@ -658,15 +668,20 @@ export default function PLAB1New() {
       <div className="min-h-screen bg-gray-50 p-4 pb-24">
         <div className="max-w-6xl mx-auto mb-16">
           {/* Hero Banner */}
-          <div 
-            className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden"
-            style={{
-              backgroundImage: `url(${plab1BgImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'multiply'
-            }}
-          >
+          <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
+            {!heroImageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
+                <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
+            <img 
+              src={plab1BgImage}
+              alt="PLAB 1 Practice"
+              className={`absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-300 ${heroImageLoaded ? 'opacity-60' : 'opacity-0'}`}
+              loading="eager"
+              decoding="async"
+              onLoad={() => setHeroImageLoaded(true)}
+            />
 
             <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16 hero-text">
               <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
