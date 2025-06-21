@@ -658,22 +658,25 @@ export default function PLAB1New() {
     return (
       <div className="min-h-screen bg-gray-50 p-4 pb-24">
         <div className="max-w-6xl mx-auto mb-16">
-          {/* Hero Banner */}
-          <div 
-            className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden"
-            style={{
-              backgroundImage: `url(${plab1BgImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'multiply'
-            }}
-          >
+          {/* Hero Banner with Video */}
+          <div className="relative w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden rounded-lg">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src={demoVideo} type="video/mp4" />
+            </video>
+            
+            {/* Overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/70"></div>
 
-            <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16 hero-text">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+            <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16 h-full">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-4 text-white drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
                 {translateText('Master PLAB 1 with AI')}
               </h1>
-              <p className="text-xl lg:text-2xl mb-6 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+              <p className="text-xl lg:text-2xl mb-6 text-white drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
                 {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
               </p>
 
@@ -813,30 +816,6 @@ export default function PLAB1New() {
                 </div>
               )}
             </div>
-          </div>
-
-          {/* Demo Video Section */}
-          <div className="mb-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-center text-gray-900">Platform Demo</CardTitle>
-                <CardDescription className="text-center">
-                  See how the PLAB 1 preparation platform works
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
-                  <video 
-                    controls 
-                    className="w-full h-full object-cover"
-                    poster={plab1BgImage}
-                  >
-                    <source src={demoVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </CardContent>
-            </Card>
           </div>
 
           {/* Statistics Cards */}
