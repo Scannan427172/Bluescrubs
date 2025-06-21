@@ -30,6 +30,15 @@
   .text-gray-900 { color: #111827 !important; }
   
   .text-muted-foreground { color: #6b7280 !important; }
+  
+  /* Force white text on practice buttons */
+  .bg-blue-600 span, .bg-blue-600 svg {
+    color: white !important;
+  }
+  
+  .force-white-text, .force-white-text * {
+    color: white !important;
+  }
 }
 
 :root {

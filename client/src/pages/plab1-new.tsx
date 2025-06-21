@@ -929,11 +929,11 @@ export default function PLAB1New() {
                   size="lg" 
                   onClick={() => startPractice(5)}
                   disabled={isGeneratingQuestions}
-                  className="bg-blue-600 hover:bg-blue-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
+                  className="bg-blue-600 hover:bg-blue-700 h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50 force-white-text"
                 >
-                  <ArrowRight className="w-6 h-6 text-white" />
-                  <span className="font-medium text-white">{translateText('Quick Practice')}</span>
-                  <span className="text-xs text-white opacity-90">5 {translateText('questions')}</span>
+                  <ArrowRight className="w-6 h-6" />
+                  <span className="font-medium">{translateText('Quick Practice')}</span>
+                  <span className="text-xs opacity-90">5 {translateText('questions')}</span>
                 </Button>
 
                 <Button 
