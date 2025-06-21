@@ -684,10 +684,11 @@ export default function PLAB1New() {
             />
 
             <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16 hero-text">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
-                {translateText('Master PLAB 1 with AI')}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 drop-shadow-2xl leading-tight" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+                {translateText('Master PLAB 1')}<br />
+                {translateText('with AI')}
               </h1>
-              <p className="text-xl lg:text-2xl mb-6 drop-shadow-2xl" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
+              <p className="text-lg md:text-xl lg:text-2xl mb-6 drop-shadow-2xl leading-relaxed" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
                 {translateText('Comprehensive exam preparation with authentic UK medical guidelines')}
               </p>
 
