@@ -18,7 +18,7 @@ export default function PLAB1New() {
   // Video ref for autoplay control
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [showPlayButton, setShowPlayButton] = useState(true);
+  const [showPlayButton, setShowPlayButton] = useState(false);
 
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -132,10 +132,56 @@ export default function PLAB1New() {
     }
   }, [isVideoPlaying]);
 
+  // Separate effect for landing page video initialization
+  useEffect(() => {
+    if (!sessionStarted && !isGeneratingQuestions) {
+      const video = videoRef.current;
+      if (video) {
+        console.log('Initializing landing page video');
+        setShowPlayButton(true);
+        
+        const tryAutoplay = () => {
+          video.play().then(() => {
+            console.log('Landing page video started');
+            setIsVideoPlaying(true);
+            setShowPlayButton(false);
+          }).catch((error) => {
+            console.log('Landing page autoplay blocked:', error);
+            setShowPlayButton(true);
+          });
+        };
+
+        // Try autoplay when video can play
+        video.addEventListener('canplay', tryAutoplay, { once: true });
+        
+        // Also try on any user interaction
+        const handleInteraction = () => {
+          if (video.paused) {
+            tryAutoplay();
+          }
+        };
+        
+        document.addEventListener('touchstart', handleInteraction, { once: true });
+        document.addEventListener('click', handleInteraction, { once: true });
+        
+        return () => {
+          video.removeEventListener('canplay', tryAutoplay);
+          document.removeEventListener('touchstart', handleInteraction);
+          document.removeEventListener('click', handleInteraction);
+        };
+      }
+    }
+  }, [sessionStarted, isGeneratingQuestions]);
+
   const handlePlayClick = () => {
     const video = videoRef.current;
     if (video) {
-      video.play();
+      video.play().then(() => {
+        setIsVideoPlaying(true);
+        setShowPlayButton(false);
+      }).catch((error) => {
+        console.log('Manual play failed:', error);
+      });
     }
   };
 
