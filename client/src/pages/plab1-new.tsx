@@ -11,10 +11,14 @@ import {
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, Play
 } from "lucide-react";
 import { useRef } from "react";
+import { useLocation } from "wouter";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 import demoVideo from '@assets/ScreenRecording_06-20-2025 20-48-38_1_1750511664060.mp4';
 
 export default function PLAB1New() {
+  // Navigation
+  const [location, setLocation] = useLocation();
+  
   // Video ref for autoplay control
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -33,6 +37,7 @@ export default function PLAB1New() {
   
   // Session state
   const [sessionStarted, setSessionStarted] = useState(false);
+  const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [showExplanation, setShowExplanation] = useState(false);
@@ -46,6 +51,8 @@ export default function PLAB1New() {
   const [questionTimes, setQuestionTimes] = useState<number[]>([]);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   
+
+
   // Leaderboard state
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [leaderboardData, setLeaderboardData] = useState<Array<{
@@ -354,17 +361,12 @@ export default function PLAB1New() {
     }
   };
   
-  // AI Question Generation
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string>('intermediate');
-  const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
-  const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
-  const [isBulkGenerating, setIsBulkGenerating] = useState(false);
-  const [bulkProgress, setBulkProgress] = useState<{
-    completed: number;
-    total: number;
-    currentCategory: string;
-  } | null>(null);
+  // Initialize current question from generated questions
+  useEffect(() => {
+    if (generatedQuestions.length > 0 && currentQuestionIndex < generatedQuestions.length) {
+      setCurrentQuestion(generatedQuestions[currentQuestionIndex]);
+    }
+  }, [generatedQuestions, currentQuestionIndex]);
 
   // Function to provide targeted explanations based on user's answer
   const getTargetedExplanation = (question: any, userAnswer: string, isCorrect: boolean): string => {
