@@ -65,7 +65,9 @@ export default function PLAB1New() {
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       
       const handleCanPlay = () => {
-        console.log('Video can play');
+        console.log('Video can play, readyState:', video.readyState);
+        console.log('Video src:', video.src);
+        console.log('Video duration:', video.duration);
         if (!isIOS) {
           // Desktop/Android: try autoplay
           video.play().then(() => {
@@ -77,6 +79,7 @@ export default function PLAB1New() {
           });
         } else {
           // iOS: show play button due to autoplay restrictions
+          console.log('iOS detected, showing play button');
           setShowPlayButton(true);
         }
       };
@@ -731,13 +734,18 @@ export default function PLAB1New() {
               muted 
               loop 
               playsInline
-              webkit-playsinline="true"
-              preload="metadata"
+              controls={false}
+              preload="none"
               poster={plab1BgImage}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ objectFit: 'cover' }}
+              onLoadStart={() => console.log('Video load started')}
+              onLoadedMetadata={() => console.log('Video metadata loaded')}
+              onCanPlay={() => console.log('Video can play')}
+              onError={(e) => console.error('Video error:', e)}
             >
               <source src="/demo-video.mp4" type="video/mp4" />
+              <source src={plab1BgImage} type="image/png" />
               Your browser does not support the video tag.
             </video>
 
