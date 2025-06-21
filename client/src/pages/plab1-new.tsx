@@ -65,23 +65,15 @@ export default function PLAB1New() {
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       
       const handleCanPlay = () => {
-        console.log('Video can play, readyState:', video.readyState);
-        console.log('Video src:', video.src);
-        console.log('Video duration:', video.duration);
-        if (!isIOS) {
-          // Desktop/Android: try autoplay
-          video.play().then(() => {
-            console.log('Video started playing');
-            setShowPlayButton(false);
-          }).catch((error) => {
-            console.log('Video autoplay failed:', error);
-            setShowPlayButton(true);
-          });
-        } else {
-          // iOS: show play button due to autoplay restrictions
-          console.log('iOS detected, showing play button');
+        console.log('Video can play, attempting autoplay');
+        // Try autoplay on all devices
+        video.play().then(() => {
+          console.log('Video started playing automatically');
+          setShowPlayButton(false);
+        }).catch((error) => {
+          console.log('Video autoplay blocked, showing play button:', error);
           setShowPlayButton(true);
-        }
+        });
       };
 
       const handlePlay = () => {
@@ -731,11 +723,12 @@ export default function PLAB1New() {
           <div className="relative w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden rounded-lg">
             <video 
               ref={videoRef}
+              autoPlay
               muted 
               loop 
               playsInline
               controls={false}
-              preload="none"
+              preload="auto"
               poster={plab1BgImage}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ objectFit: 'cover' }}
