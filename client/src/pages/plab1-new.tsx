@@ -1995,7 +1995,7 @@ export default function PLAB1New() {
             )}
 
             {/* BTS Guidelines */}
-            {true && (
+            {currentQuestion.bts_guidance && (
               <div className="bg-teal-50 border-l-4 border-teal-400 p-4 rounded-r-lg mb-4">
                 <div className="flex items-start gap-2">
                   <BookOpen className="w-4 h-4 text-teal-600 flex-shrink-0 mt-1" />
@@ -2006,13 +2006,37 @@ export default function PLAB1New() {
                         <p className="text-xs text-teal-700 italic">
                           British Thoracic Society
                         </p>
+                        {currentQuestion.bts_guidance.evidence_level && (
+                          <span className="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded-full">
+                            {currentQuestion.bts_guidance.evidence_level}
+                          </span>
+                        )}
                       </div>
                     </div>
                     
                     <div className="bg-white border border-teal-200 rounded-lg p-4 mb-3">
                       <p className="text-teal-800 text-sm leading-relaxed mb-3">
-                        Comprehensive respiratory medicine guidelines covering asthma, COPD, pneumonia, and emergency oxygen therapy protocols.
+                        {currentQuestion.bts_guidance.summary}
                       </p>
+                      
+                      <div className="mb-3">
+                        <p className="font-medium text-teal-900 text-xs mb-2">Key Points:</p>
+                        <ul className="text-xs text-teal-800 space-y-1">
+                          {currentQuestion.bts_guidance.key_points.map((point: string, index: number) => (
+                            <li key={index} className="flex items-start gap-2">
+                              <span className="w-1 h-1 bg-teal-600 rounded-full mt-1.5 flex-shrink-0"></span>
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mb-3">
+                        <p className="font-medium text-teal-900 text-xs mb-2">Clinical Approach:</p>
+                        <p className="text-xs text-teal-800 leading-relaxed">
+                          {currentQuestion.bts_guidance.clinical_approach}
+                        </p>
+                      </div>
                       
                       <div className="flex justify-between items-center pt-2 border-t border-teal-200">
                         <p className="text-xs text-teal-700">BTS Clinical Guidelines</p>
@@ -2021,7 +2045,7 @@ export default function PLAB1New() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.open('https://www.brit-thoracic.org.uk/quality-improvement/guidelines/', '_blank');
+                            window.open(currentQuestion.bts_guidance.bts_url || 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/', '_blank');
                           }}
                           className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                         >
