@@ -1,12 +1,26 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb, real, date } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, jsonb, real, date, varchar, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+// Session storage table for Replit Auth
+export const sessions = pgTable(
+  "sessions",
+  {
+    sid: varchar("sid").primaryKey(),
+    sess: jsonb("sess").notNull(),
+    expire: timestamp("expire").notNull(),
+  },
+  (table) => [index("IDX_session_expire").on(table.expire)],
+);
+
+// User storage table for Replit Auth
 export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  email: text("email").notNull().unique(),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  id: varchar("id").primaryKey().notNull(), // Replit user ID
+  email: varchar("email").unique(),
+  firstName: varchar("first_name"),
+  lastName: varchar("last_name"),
+  username: varchar("username").unique(), // derived from first/last name or email
+  profileImageUrl: varchar("profile_image_url"),
   currentStage: text("current_stage").notNull().default("onboarding"), // onboarding, plab1, plab2, nhs
   studyStreak: integer("study_streak").notNull().default(0),
   totalPoints: integer("total_points").notNull().default(0),
@@ -15,7 +29,8 @@ export const users = pgTable("users", {
   flagEmoji: text("flag_emoji"),
   timezone: text("timezone"),
   isLocationPublic: boolean("is_location_public").notNull().default(true),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const questions = pgTable("questions", {
@@ -32,11 +47,50 @@ export const questions = pgTable("questions", {
 
 export const userProgress = pgTable("user_progress", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull(),
+  userId: varchar("user_id").notNull(),
   questionId: integer("question_id").notNull(),
   isCorrect: boolean("is_correct").notNull(),
   timeSpent: integer("time_spent").notNull(), // in seconds
   attemptedAt: timestamp("attempted_at").defaultNow().notNull(),
+});
+
+// File uploads table
+export const uploads = pgTable("uploads", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id").notNull(),
+  filename: text("filename").notNull(),
+  originalName: text("original_name").notNull(),
+  mimeType: text("mime_type").notNull(),
+  size: integer("size").notNull(),
+  uploadPath: text("upload_path").notNull(),
+  uploadType: text("upload_type").notNull(), // cv, profile_image, document
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// Notifications table
+export const notifications = pgTable("notifications", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id").notNull(),
+  type: text("type").notNull(), // study_reminder, achievement, placement_update
+  title: text("title").notNull(),
+  message: text("message").notNull(),
+  isRead: boolean("is_read").notNull().default(false),
+  data: jsonb("data"), // additional notification data
+  scheduledFor: timestamp("scheduled_for"),
+  sentAt: timestamp("sent_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// Study reminders table
+export const studyRemindersTable = pgTable("study_reminders", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id").notNull(),
+  title: text("title").notNull(),
+  message: text("message").notNull(),
+  reminderTime: text("reminder_time").notNull(), // HH:MM format
+  days: jsonb("days").notNull(), // array of day numbers (0-6)
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const studyPlan = pgTable("study_plan", {
