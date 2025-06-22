@@ -14,6 +14,7 @@ import PLAB1New from "@/pages/plab1-new";
 import InteractiveFlashcards from "@/pages/interactive-flashcards";
 import ClinicalGuides from "@/pages/clinical-guides";
 import GlobalScoreboard from "@/pages/global-scoreboard";
+import Leaderboards from "@/pages/leaderboards";
 import Premium from "@/pages/premium";
 import AskAI from "@/pages/ask-ai";
 import AIStudyTools from "@/pages/ai-study-tools";
@@ -109,6 +110,14 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <GlobalScoreboard />
+          </div>
+        </div>
+      </Route>
+      <Route path="/leaderboards">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Leaderboards />
           </div>
         </div>
       </Route>

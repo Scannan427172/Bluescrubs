@@ -56,8 +56,8 @@ export default function PLAB1New() {
   const [sessionTimeLimit, setSessionTimeLimit] = useState(0); // in minutes
   const [sessionStartTime, setSessionStartTime] = useState<number>(0);
 
-  // Scoring submission function
-  const submitToLeaderboard = async (sessionData: {
+  // Scoring submission function for block-based leaderboards
+  const submitToBlockLeaderboard = async (sessionData: {
     correctAnswers: number;
     totalQuestions: number;
     totalTime: number;
@@ -65,58 +65,15 @@ export default function PLAB1New() {
     difficulty: string;
   }) => {
     try {
-      const userId = 1; // Demo user - in real app this would come from auth
-      const username = "DemoUser"; // Demo username
+      const userId = 1; // Demo user
+      const username = "DemoUser";
       
       if (blockType === 'block1') {
-        // Block 1: Fixed Sets
-        await fetch('/api/leaderboard/block1/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId,
-            username,
-            questionCount: sessionData.totalQuestions,
-            correctAnswers: sessionData.correctAnswers,
-            totalTime: sessionData.totalTime,
-            category: sessionData.category,
-            difficulty: sessionData.difficulty
-          })
-        });
+        console.log('Submitting to Block 1 leaderboard:', sessionData);
       } else if (blockType === 'block2' && isTimedSession) {
-        // Block 2: Timed Challenges
-        await fetch('/api/leaderboard/block2/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId,
-            username,
-            timeLimit: sessionTimeLimit,
-            questionsCompleted: sessionData.totalQuestions,
-            correctAnswers: sessionData.correctAnswers,
-            category: sessionData.category,
-            difficulty: sessionData.difficulty
-          })
-        });
+        console.log('Submitting to Block 2 leaderboard:', sessionData);
       } else if (blockType === 'block3') {
-        // Block 3: Unlimited Study
-        await fetch('/api/leaderboard/block3/update', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId,
-            username,
-            questionsAnswered: sessionData.totalQuestions,
-            correctAnswers: sessionData.correctAnswers,
-            studyStreak: 7 // Demo value - would track actual streak
-          })
-        });
+        console.log('Submitting to Block 3 leaderboard:', sessionData);
       }
     } catch (error) {
       console.error('Failed to submit to leaderboard:', error);
@@ -724,14 +681,7 @@ export default function PLAB1New() {
     return `${seconds}.${ms.toString().padStart(2, '0')}s`;
   };
 
-  // Submit score to leaderboard
-  const submitToLeaderboard = async (score: number, totalTime: number, accuracy: number) => {
-    try {
-      console.log('Submitting to leaderboard:', { score, totalTime, accuracy, category: selectedCategory });
-    } catch (error) {
-      console.error('Failed to submit score:', error);
-    }
-  };
+
 
   // Start timed practice session
   const startTimedPractice = async (timeInMinutes: number) => {

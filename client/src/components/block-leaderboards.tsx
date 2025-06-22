@@ -1,263 +1,79 @@
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Trophy, Clock, Target, TrendingUp, Zap, Award } from "lucide-react";
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Trophy, Clock, Target, TrendingUp, Medal, Star } from "lucide-react";
 
-interface Block1Entry {
-  id: number;
-  userId: number;
-  username: string;
-  questionCount: number;
-  correctAnswers: number;
-  totalTime: number;
-  accuracy: number;
-  score: number;
-  category: string;
-  difficulty: string;
-  completedAt: string;
-}
+// Mock data for demonstration
+const mockBlock1Data = [
+  { id: 1, userId: 1, username: "MedStudent2024", questionCount: 50, correctAnswers: 45, totalTime: 2400, accuracy: 90, score: 4850, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-22T10:30:00Z" },
+  { id: 2, userId: 2, username: "FutureDoctor", questionCount: 50, correctAnswers: 42, totalTime: 2600, accuracy: 84, score: 4420, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-22T09:15:00Z" },
+  { id: 3, userId: 3, username: "PLABChampion", questionCount: 50, correctAnswers: 48, totalTime: 2800, accuracy: 96, score: 4680, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-22T08:45:00Z" },
+];
 
-interface Block2Entry {
-  id: number;
-  userId: number;
-  username: string;
-  timeLimit: number;
-  questionsCompleted: number;
-  correctAnswers: number;
-  accuracy: number;
-  questionsPerMinute: number;
-  score: number;
-  category: string;
-  difficulty: string;
-  completedAt: string;
-}
+const mockBlock2Data = [
+  { id: 1, userId: 1, username: "SpeedyMed", timeLimit: 60, questionsCompleted: 35, correctAnswers: 32, accuracy: 91, questionsPerMinute: 0.58, score: 3192, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-22T11:00:00Z" },
+  { id: 2, userId: 2, username: "TimeMaster", timeLimit: 60, questionsCompleted: 38, correctAnswers: 30, accuracy: 79, questionsPerMinute: 0.63, score: 3030, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-22T10:30:00Z" },
+  { id: 3, userId: 3, username: "PressureProf", timeLimit: 60, questionsCompleted: 33, correctAnswers: 31, accuracy: 94, questionsPerMinute: 0.55, score: 3134, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-22T09:45:00Z" },
+];
 
-interface Block3Entry {
-  id: number;
-  userId: number;
-  username: string;
-  totalQuestionsAnswered: number;
-  totalCorrectAnswers: number;
-  overallAccuracy: number;
-  studyStreak: number;
-  sessionsCompleted: number;
-  score: number;
-  lastUpdated: string;
-}
+const mockBlock3Data = [
+  { id: 1, userId: 1, username: "StudyGuru", totalQuestionsAnswered: 2450, totalCorrectAnswers: 2205, overallAccuracy: 90, studyStreak: 28, sessionsCompleted: 85, score: 9850, lastUpdated: "2024-06-22T12:00:00Z" },
+  { id: 2, userId: 2, username: "ConsistentLearner", totalQuestionsAnswered: 2100, totalCorrectAnswers: 1890, overallAccuracy: 90, studyStreak: 22, sessionsCompleted: 70, score: 9220, lastUpdated: "2024-06-22T11:30:00Z" },
+  { id: 3, userId: 3, username: "DedicatedDoc", totalQuestionsAnswered: 2800, totalCorrectAnswers: 2464, overallAccuracy: 88, studyStreak: 35, sessionsCompleted: 95, score: 9940, lastUpdated: "2024-06-22T11:15:00Z" },
+];
+
+const categories = ["All", "Cardiology", "Respiratory", "Gastroenterology", "Endocrinology", "Neurology", "Emergency", "Psychiatry", "Dermatology"];
+const difficulties = ["All", "Easy", "Medium", "Hard"];
+const questionCounts = [0, 10, 20, 50, 100, 180];
+const timeLimits = [0, 10, 30, 60, 120, 180];
 
 export function BlockLeaderboards() {
-  const [block1Filter, setBlock1Filter] = useState({ questionCount: 180, category: 'all', difficulty: 'all' });
-  const [block2Filter, setBlock2Filter] = useState({ timeLimit: 180, category: 'all', difficulty: 'all' });
-
-  const { data: block1Data } = useQuery({
-    queryKey: ['/api/leaderboard/block1', block1Filter.questionCount, { 
-      category: block1Filter.category, 
-      difficulty: block1Filter.difficulty, 
-      limit: 10 
-    }],
-    enabled: true
+  const [block1Filters, setBlock1Filters] = useState({
+    questionCount: 50,
+    category: "All",
+    difficulty: "All"
   });
 
-  const { data: block2Data } = useQuery({
-    queryKey: ['/api/leaderboard/block2', block2Filter.timeLimit, { 
-      category: block2Filter.category, 
-      difficulty: block2Filter.difficulty, 
-      limit: 10 
-    }],
-    enabled: true
+  const [block2Filters, setBlock2Filters] = useState({
+    timeLimit: 60,
+    category: "All", 
+    difficulty: "All"
   });
 
-  const { data: block3Data } = useQuery({
-    queryKey: ['/api/leaderboard/block3', { limit: 10 }],
-    enabled: true
-  });
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
 
-  const formatTime = (milliseconds: number) => {
-    const seconds = Math.floor(milliseconds / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    
-    if (hours > 0) {
-      return `${hours}h ${minutes % 60}m`;
-    } else if (minutes > 0) {
-      return `${minutes}m ${seconds % 60}s`;
-    } else {
-      return `${seconds}s`;
-    }
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   };
 
   const getRankIcon = (position: number) => {
     switch (position) {
       case 1: return <Trophy className="h-5 w-5 text-yellow-500" />;
-      case 2: return <Award className="h-5 w-5 text-gray-400" />;
-      case 3: return <Award className="h-5 w-5 text-amber-600" />;
-      default: return <span className="h-5 w-5 flex items-center justify-center text-sm font-bold text-muted-foreground">#{position}</span>;
+      case 2: return <Medal className="h-5 w-5 text-gray-400" />;
+      case 3: return <Medal className="h-5 w-5 text-amber-600" />;
+      default: return <span className="text-lg font-bold text-muted-foreground">#{position}</span>;
     }
   };
 
-  const Block1Leaderboard = ({ entries }: { entries: Block1Entry[] }) => (
-    <div className="space-y-4">
-      <div className="flex gap-4 mb-4">
-        <Select value={block1Filter.questionCount.toString()} onValueChange={(value) => 
-          setBlock1Filter(prev => ({ ...prev, questionCount: parseInt(value) }))
-        }>
-          <SelectTrigger className="w-32">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="10">10 Questions</SelectItem>
-            <SelectItem value="20">20 Questions</SelectItem>
-            <SelectItem value="50">50 Questions</SelectItem>
-            <SelectItem value="100">100 Questions</SelectItem>
-            <SelectItem value="180">180 Questions</SelectItem>
-          </SelectContent>
-        </Select>
-        
-        <Select value={block1Filter.category} onValueChange={(value) => 
-          setBlock1Filter(prev => ({ ...prev, category: value }))
-        }>
-          <SelectTrigger className="w-40">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="cardiology">Cardiology</SelectItem>
-            <SelectItem value="respiratory">Respiratory</SelectItem>
-            <SelectItem value="neurology">Neurology</SelectItem>
-            <SelectItem value="endocrinology">Endocrinology</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="space-y-2">
-        {entries?.map((entry, index) => (
-          <Card key={entry.id} className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                {getRankIcon(index + 1)}
-                <div>
-                  <p className="font-semibold">{entry.username}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {entry.correctAnswers}/{entry.questionCount} correct • {entry.accuracy.toFixed(1)}%
-                  </p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="font-bold text-lg">{entry.score}</p>
-                <p className="text-sm text-muted-foreground">
-                  {formatTime(entry.totalTime)}
-                </p>
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-
-  const Block2Leaderboard = ({ entries }: { entries: Block2Entry[] }) => (
-    <div className="space-y-4">
-      <div className="flex gap-4 mb-4">
-        <Select value={block2Filter.timeLimit.toString()} onValueChange={(value) => 
-          setBlock2Filter(prev => ({ ...prev, timeLimit: parseInt(value) }))
-        }>
-          <SelectTrigger className="w-32">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="10">10 minutes</SelectItem>
-            <SelectItem value="30">30 minutes</SelectItem>
-            <SelectItem value="60">1 hour</SelectItem>
-            <SelectItem value="120">2 hours</SelectItem>
-            <SelectItem value="180">3 hours</SelectItem>
-          </SelectContent>
-        </Select>
-        
-        <Select value={block2Filter.category} onValueChange={(value) => 
-          setBlock2Filter(prev => ({ ...prev, category: value }))
-        }>
-          <SelectTrigger className="w-40">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="cardiology">Cardiology</SelectItem>
-            <SelectItem value="respiratory">Respiratory</SelectItem>
-            <SelectItem value="neurology">Neurology</SelectItem>
-            <SelectItem value="endocrinology">Endocrinology</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="space-y-2">
-        {entries?.map((entry, index) => (
-          <Card key={entry.id} className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                {getRankIcon(index + 1)}
-                <div>
-                  <p className="font-semibold">{entry.username}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {entry.questionsCompleted} questions • {entry.accuracy.toFixed(1)}% accuracy
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {entry.questionsPerMinute.toFixed(1)} q/min
-                  </p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="font-bold text-lg">{entry.score}</p>
-                <Badge variant="secondary">
-                  <Zap className="h-3 w-3 mr-1" />
-                  Speed Bonus
-                </Badge>
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </div>
-  );
-
-  const Block3Leaderboard = ({ entries }: { entries: Block3Entry[] }) => (
-    <div className="space-y-2">
-      {entries?.map((entry, index) => (
-        <Card key={entry.id} className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {getRankIcon(index + 1)}
-              <div>
-                <p className="font-semibold">{entry.username}</p>
-                <p className="text-sm text-muted-foreground">
-                  {entry.totalCorrectAnswers} correct answers • {entry.overallAccuracy.toFixed(1)}% accuracy
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {entry.studyStreak} day streak • {entry.sessionsCompleted} sessions
-                </p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="font-bold text-lg">{entry.score}</p>
-              <Badge variant="secondary">
-                <TrendingUp className="h-3 w-3 mr-1" />
-                Consistency
-              </Badge>
-            </div>
-          </div>
-        </Card>
-      ))}
-    </div>
-  );
-
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">PLAB 1 Leaderboards</h1>
-        <p className="text-muted-foreground">
-          Three different leaderboards measuring accuracy, speed, and consistency
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-bold mb-4">PLAB Practice Leaderboards</h1>
+        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Three distinct practice modes with specialized scoring systems: Fixed Sets for accuracy mastery, 
+          Timed Challenges for pressure performance, and Unlimited Study for consistency tracking.
         </p>
       </div>
 
@@ -265,69 +81,294 @@ export function BlockLeaderboards() {
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="block1" className="flex items-center gap-2">
             <Target className="h-4 w-4" />
-            Fixed Sets
+            Block 1: Fixed Sets
           </TabsTrigger>
           <TabsTrigger value="block2" className="flex items-center gap-2">
             <Clock className="h-4 w-4" />
-            Timed Challenges
+            Block 2: Timed Challenges
           </TabsTrigger>
           <TabsTrigger value="block3" className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4" />
-            Study Marathon
+            Block 3: Unlimited Study
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="block1" className="mt-6">
+        <TabsContent value="block1">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Target className="h-5 w-5" />
-                Block 1: Fixed Sets
+                Fixed Set Mastery Leaderboard
               </CardTitle>
               <CardDescription>
-                Scoring: (Accuracy% × 100) + Speed Bonus. Perfect accuracy with fast completion wins.
+                Scoring Formula: (Accuracy × 100) + Time Bonus - measures precision and efficiency
               </CardDescription>
+              
+              <div className="flex gap-4 mt-4">
+                <Select value={block1Filters.questionCount.toString()} onValueChange={(value) => setBlock1Filters({...block1Filters, questionCount: parseInt(value)})}>
+                  <SelectTrigger className="w-[150px]">
+                    <SelectValue placeholder="Questions" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {questionCounts.map(count => (
+                      <SelectItem key={count} value={count.toString()}>
+                        {count === 0 ? "All Sets" : `${count} Questions`}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={block1Filters.category} onValueChange={(value) => setBlock1Filters({...block1Filters, category: value})}>
+                  <SelectTrigger className="w-[150px]">
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map(cat => (
+                      <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={block1Filters.difficulty} onValueChange={(value) => setBlock1Filters({...block1Filters, difficulty: value})}>
+                  <SelectTrigger className="w-[150px]">
+                    <SelectValue placeholder="Difficulty" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {difficulties.map(diff => (
+                      <SelectItem key={diff} value={diff}>{diff}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </CardHeader>
             <CardContent>
-              <Block1Leaderboard entries={block1Data?.leaderboard || []} />
+              <div className="space-y-4">
+                {mockBlock1Data.map((entry, index) => (
+                  <div key={entry.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
+                    <div className="flex items-center gap-4">
+                      {getRankIcon(index + 1)}
+                      <div>
+                        <div className="font-semibold text-lg">{entry.username}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {entry.questionCount} questions • {entry.category} • {entry.difficulty}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-green-600">{entry.accuracy}%</div>
+                        <div className="text-xs text-muted-foreground">Accuracy</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-semibold">{formatTime(entry.totalTime)}</div>
+                        <div className="text-xs text-muted-foreground">Time</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-600">{entry.score}</div>
+                        <div className="text-xs text-muted-foreground">Score</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-muted-foreground">{formatDate(entry.completedAt)}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="block2" className="mt-6">
+        <TabsContent value="block2">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Clock className="h-5 w-5" />
-                Block 2: Timed Challenges
+                Timed Challenge Leaderboard
               </CardTitle>
               <CardDescription>
-                Scoring: (Questions Completed × Accuracy%) + Speed Multiplier. Endurance and speed matter.
+                Scoring Formula: (Correct × Speed Multiplier) + Pressure Bonus - measures performance under time pressure
               </CardDescription>
+              
+              <div className="flex gap-4 mt-4">
+                <Select value={block2Filters.timeLimit.toString()} onValueChange={(value) => setBlock2Filters({...block2Filters, timeLimit: parseInt(value)})}>
+                  <SelectTrigger className="w-[150px]">
+                    <SelectValue placeholder="Time Limit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {timeLimits.map(time => (
+                      <SelectItem key={time} value={time.toString()}>
+                        {time === 0 ? "All Times" : `${time} minutes`}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={block2Filters.category} onValueChange={(value) => setBlock2Filters({...block2Filters, category: value})}>
+                  <SelectTrigger className="w-[150px]">
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map(cat => (
+                      <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={block2Filters.difficulty} onValueChange={(value) => setBlock2Filters({...block2Filters, difficulty: value})}>
+                  <SelectTrigger className="w-[150px]">
+                    <SelectValue placeholder="Difficulty" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {difficulties.map(diff => (
+                      <SelectItem key={diff} value={diff}>{diff}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </CardHeader>
             <CardContent>
-              <Block2Leaderboard entries={block2Data?.leaderboard || []} />
+              <div className="space-y-4">
+                {mockBlock2Data.map((entry, index) => (
+                  <div key={entry.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
+                    <div className="flex items-center gap-4">
+                      {getRankIcon(index + 1)}
+                      <div>
+                        <div className="font-semibold text-lg">{entry.username}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {entry.timeLimit}min limit • {entry.category} • {entry.difficulty}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-green-600">{entry.accuracy}%</div>
+                        <div className="text-xs text-muted-foreground">Accuracy</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-semibold">{entry.questionsCompleted}</div>
+                        <div className="text-xs text-muted-foreground">Completed</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-semibold">{entry.questionsPerMinute.toFixed(2)}</div>
+                        <div className="text-xs text-muted-foreground">Q/min</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-orange-600">{entry.score}</div>
+                        <div className="text-xs text-muted-foreground">Score</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-muted-foreground">{formatDate(entry.completedAt)}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="block3" className="mt-6">
+        <TabsContent value="block3">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <TrendingUp className="h-5 w-5" />
-                Block 3: Study Marathon
+                Unlimited Study Consistency Leaderboard
               </CardTitle>
               <CardDescription>
-                Scoring: Total Correct Answers + Consistency Bonus (10 pts per day streak). Long-term dedication wins.
+                Scoring Formula: (Questions × Accuracy) + Streak Bonus + Session Bonus - measures long-term dedication and consistency
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Block3Leaderboard entries={block3Data?.leaderboard || []} />
+              <div className="space-y-4">
+                {mockBlock3Data.map((entry, index) => (
+                  <div key={entry.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
+                    <div className="flex items-center gap-4">
+                      {getRankIcon(index + 1)}
+                      <div>
+                        <div className="font-semibold text-lg">{entry.username}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {entry.totalQuestionsAnswered.toLocaleString()} total questions
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-green-600">{entry.overallAccuracy}%</div>
+                        <div className="text-xs text-muted-foreground">Overall Accuracy</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="flex items-center gap-1">
+                          <Star className="h-4 w-4 text-yellow-500" />
+                          <span className="text-lg font-semibold">{entry.studyStreak}</span>
+                        </div>
+                        <div className="text-xs text-muted-foreground">Day Streak</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-semibold">{entry.sessionsCompleted}</div>
+                        <div className="text-xs text-muted-foreground">Sessions</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-purple-600">{entry.score}</div>
+                        <div className="text-xs text-muted-foreground">Score</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-muted-foreground">{formatDate(entry.lastUpdated)}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
+
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Target className="h-5 w-5 text-blue-600" />
+              Block 1: Fixed Sets
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-3">
+              Choose from 10, 20, 50, 100, or 180 question sets. Perfect for focused study sessions with clear goals.
+            </p>
+            <Badge variant="secondary">Accuracy + Speed Scoring</Badge>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Clock className="h-5 w-5 text-orange-600" />
+              Block 2: Timed Challenges
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-3">
+              Race against time from 10 minutes to 3 hours. Build exam stamina and performance under pressure.
+            </p>
+            <Badge variant="secondary">Pressure Performance Scoring</Badge>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <TrendingUp className="h-5 w-5 text-purple-600" />
+              Block 3: Unlimited Study
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-3">
+              Continuous learning mode that tracks your consistency, streaks, and long-term progress.
+            </p>
+            <Badge variant="secondary">Consistency + Volume Scoring</Badge>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

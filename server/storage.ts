@@ -1942,18 +1942,24 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getBlock1Leaderboard(questionCount: number, category: string, difficulty: string, limit: number): Promise<Block1LeaderboardEntry[]> {
-    let query = db.select().from(block1Leaderboard);
+    const conditions = [];
     
     if (questionCount > 0) {
-      query = query.where(eq(block1Leaderboard.questionCount, questionCount));
+      conditions.push(eq(block1Leaderboard.questionCount, questionCount));
     }
     
     if (category !== 'all') {
-      query = query.where(eq(block1Leaderboard.category, category));
+      conditions.push(eq(block1Leaderboard.category, category));
     }
     
     if (difficulty !== 'all') {
-      query = query.where(eq(block1Leaderboard.difficulty, difficulty));
+      conditions.push(eq(block1Leaderboard.difficulty, difficulty));
+    }
+    
+    let query = db.select().from(block1Leaderboard);
+    
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
     }
     
     return await query
@@ -1962,18 +1968,24 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getBlock2Leaderboard(timeLimit: number, category: string, difficulty: string, limit: number): Promise<Block2LeaderboardEntry[]> {
-    let query = db.select().from(block2Leaderboard);
+    const conditions = [];
     
     if (timeLimit > 0) {
-      query = query.where(eq(block2Leaderboard.timeLimit, timeLimit));
+      conditions.push(eq(block2Leaderboard.timeLimit, timeLimit));
     }
     
     if (category !== 'all') {
-      query = query.where(eq(block2Leaderboard.category, category));
+      conditions.push(eq(block2Leaderboard.category, category));
     }
     
     if (difficulty !== 'all') {
-      query = query.where(eq(block2Leaderboard.difficulty, difficulty));
+      conditions.push(eq(block2Leaderboard.difficulty, difficulty));
+    }
+    
+    let query = db.select().from(block2Leaderboard);
+    
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
     }
     
     return await query
