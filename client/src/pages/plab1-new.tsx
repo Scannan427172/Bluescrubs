@@ -1800,7 +1800,7 @@ export default function PLAB1New() {
             )}
 
             {/* ESC Guidelines */}
-            {currentQuestion.category?.toLowerCase().includes('cardio') && (
+            {true && (
               <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg mb-4">
                 <div className="flex items-start gap-2">
                   <BookOpen className="w-4 h-4 text-red-600 flex-shrink-0 mt-1" />
@@ -1841,7 +1841,7 @@ export default function PLAB1New() {
             )}
 
             {/* ADA Guidelines */}
-            {(currentQuestion.category?.toLowerCase().includes('endo') || currentQuestion.category?.toLowerCase().includes('diabetes')) && (
+            {true && (
               <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r-lg mb-4">
                 <div className="flex items-start gap-2">
                   <BookOpen className="w-4 h-4 text-purple-600 flex-shrink-0 mt-1" />
@@ -1882,7 +1882,7 @@ export default function PLAB1New() {
             )}
 
             {/* SIGN Guidelines */}
-            {(currentQuestion.category?.toLowerCase().includes('resp') || currentQuestion.category?.toLowerCase().includes('neuro') || currentQuestion.category?.toLowerCase().includes('psych')) && (
+            {true && (
               <div className="bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded-r-lg mb-4">
                 <div className="flex items-start gap-2">
                   <BookOpen className="w-4 h-4 text-indigo-600 flex-shrink-0 mt-1" />
@@ -1923,7 +1923,7 @@ export default function PLAB1New() {
             )}
 
             {/* BTS Guidelines */}
-            {currentQuestion.category?.toLowerCase().includes('resp') && (
+            {true && (
               <div className="bg-teal-50 border-l-4 border-teal-400 p-4 rounded-r-lg mb-4">
                 <div className="flex items-start gap-2">
                   <BookOpen className="w-4 h-4 text-teal-600 flex-shrink-0 mt-1" />
