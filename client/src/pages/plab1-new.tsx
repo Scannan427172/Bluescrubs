@@ -1019,7 +1019,7 @@ export default function PLAB1New() {
                     <SelectContent>
                       {availableCategories.map((category) => (
                         <SelectItem key={category.value} value={category.value}>
-                          {category.label} ({category.count} questions)
+                          {category.label}
                         </SelectItem>
                       ))}
                     </SelectContent>
