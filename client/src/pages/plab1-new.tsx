@@ -1367,17 +1367,7 @@ export default function PLAB1New() {
             </div>
 
             {/* Submit Answer Button - PassMedicine Style */}
-            {!showExplanation && selectedAnswer && (
-              <div className="mb-6">
-                <Button
-                  onClick={handleSubmitAnswer}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-lg font-medium"
-                  size="lg"
-                >
-                  Submit answer
-                </Button>
-              </div>
-            )}
+
           </CardContent>
         </Card>
 
@@ -1385,20 +1375,32 @@ export default function PLAB1New() {
         {showExplanation && (
           <div className="space-y-6 mb-8">
 
-            {/* Simple explanation text like PassMedicine */}
+            {/* Bullet-point explanation format */}
             <div className="text-gray-800 leading-relaxed space-y-4">
               {(() => {
-                // Get explanation and format it cleanly
                 const explanation = currentQuestion.explanation || '';
                 
-                // Split explanation into paragraphs for better readability
-                const paragraphs = explanation.split('\n\n').filter((p: string) => p.trim());
+                // Convert explanation to bullet points
+                const formatExplanationWithBullets = (text: string) => {
+                  // Split by periods and clean up
+                  const sentences = text.split('.').filter(s => s.trim().length > 10);
+                  
+                  return (
+                    <div className="space-y-3">
+                      <h4 className="font-semibold text-gray-900 mb-3">Explanation:</h4>
+                      <ul className="space-y-2 ml-4">
+                        {sentences.map((sentence, index) => (
+                          <li key={index} className="flex items-start gap-2">
+                            <span className="text-blue-600 mt-1">•</span>
+                            <span className="text-base leading-relaxed">{sentence.trim()}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                };
                 
-                return paragraphs.map((paragraph: string, index: number) => (
-                  <p key={index} className="text-base leading-relaxed">
-                    {paragraph.trim()}
-                  </p>
-                ));
+                return formatExplanationWithBullets(explanation);
               })()}
             </div>
 
