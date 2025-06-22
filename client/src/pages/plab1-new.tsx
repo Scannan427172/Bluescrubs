@@ -11,6 +11,7 @@ import {
   ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus
 } from "lucide-react";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
+import { apiRequest } from "@/lib/queryClient";
 
 export default function PLAB1New() {
   // Hero image loading state
@@ -49,6 +50,78 @@ export default function PLAB1New() {
   const [questionTimes, setQuestionTimes] = useState<number[]>([]);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   
+  // Block configuration for leaderboard submission
+  const [blockType, setBlockType] = useState<'block1' | 'block2' | 'block3'>('block1');
+  const [isTimedSession, setIsTimedSession] = useState(false);
+  const [sessionTimeLimit, setSessionTimeLimit] = useState(0); // in minutes
+  const [sessionStartTime, setSessionStartTime] = useState<number>(0);
+
+  // Scoring submission function
+  const submitToLeaderboard = async (sessionData: {
+    correctAnswers: number;
+    totalQuestions: number;
+    totalTime: number;
+    category: string;
+    difficulty: string;
+  }) => {
+    try {
+      const userId = 1; // Demo user - in real app this would come from auth
+      const username = "DemoUser"; // Demo username
+      
+      if (blockType === 'block1') {
+        // Block 1: Fixed Sets
+        await fetch('/api/leaderboard/block1/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId,
+            username,
+            questionCount: sessionData.totalQuestions,
+            correctAnswers: sessionData.correctAnswers,
+            totalTime: sessionData.totalTime,
+            category: sessionData.category,
+            difficulty: sessionData.difficulty
+          })
+        });
+      } else if (blockType === 'block2' && isTimedSession) {
+        // Block 2: Timed Challenges
+        await fetch('/api/leaderboard/block2/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId,
+            username,
+            timeLimit: sessionTimeLimit,
+            questionsCompleted: sessionData.totalQuestions,
+            correctAnswers: sessionData.correctAnswers,
+            category: sessionData.category,
+            difficulty: sessionData.difficulty
+          })
+        });
+      } else if (blockType === 'block3') {
+        // Block 3: Unlimited Study
+        await fetch('/api/leaderboard/block3/update', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId,
+            username,
+            questionsAnswered: sessionData.totalQuestions,
+            correctAnswers: sessionData.correctAnswers,
+            studyStreak: 7 // Demo value - would track actual streak
+          })
+        });
+      }
+    } catch (error) {
+      console.error('Failed to submit to leaderboard:', error);
+    }
+  };
 
 
   // Initialize available voices on component mount
@@ -628,11 +701,16 @@ export default function PLAB1New() {
       const correctAnswers = userAnswers.filter((answer, index) => 
         parseInt(answer) === generatedQuestions[index]?.correctAnswer
       ).length;
-      const accuracy = Math.round((correctAnswers / generatedQuestions.length) * 100);
-      const score = Math.round((correctAnswers * 100) + (accuracy * 10) - (totalTime / 1000));
       
-      // Submit to leaderboard (mock implementation)
-      submitToLeaderboard(score, totalTime, accuracy);
+      // Submit to appropriate leaderboard based on session type
+      submitToLeaderboard({
+        correctAnswers,
+        totalQuestions: generatedQuestions.length,
+        totalTime,
+        category: selectedCategory,
+        difficulty: selectedDifficulty
+      });
+      
       setSessionComplete(true);
     }
   };
