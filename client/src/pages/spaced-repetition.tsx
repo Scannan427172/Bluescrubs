@@ -50,17 +50,55 @@ export default function SpacedRepetition() {
   const [confidence, setConfidence] = useState<number>(3);
   const queryClient = useQueryClient();
 
-  const { data: session, isLoading } = useQuery<StudySession>({
-    queryKey: ['/api/spaced-repetition/session'],
-  });
+  // Mock data for demonstration - replace with real API calls
+  const session: StudySession = {
+    dueCards: [
+      {
+        id: '1',
+        questionId: 101,
+        specialty: 'Cardiology',
+        difficulty: 'intermediate',
+        concept: 'Heart Failure Management',
+        nextReviewDate: '2024-01-22',
+        interval: 1,
+        easeFactor: 2.5,
+        repetitions: 0,
+        lastReviewed: '2024-01-21',
+        confidence: 3,
+        question: {
+          content: 'A 65-year-old patient presents with shortness of breath and ankle swelling. What is the first-line treatment for heart failure?',
+          options: ['ACE inhibitors', 'Beta blockers', 'Diuretics', 'Digoxin'],
+          correctAnswer: 'ACE inhibitors',
+          explanation: 'ACE inhibitors are first-line treatment for heart failure as they reduce mortality and improve symptoms.'
+        }
+      }
+    ],
+    newCards: [],
+    reviewStats: {
+      totalDue: 1,
+      completed: 0,
+      accuracy: 0,
+      averageConfidence: 3
+    }
+  };
 
-  const { data: schedule } = useQuery({
-    queryKey: ['/api/spaced-repetition/schedule'],
-  });
+  const schedule = [
+    { date: '2024-01-22', dueCount: 5, newCount: 3 },
+    { date: '2024-01-23', dueCount: 8, newCount: 2 },
+    { date: '2024-01-24', dueCount: 3, newCount: 5 }
+  ];
 
-  const { data: progressStats } = useQuery({
-    queryKey: ['/api/spaced-repetition/progress'],
-  });
+  const progressStats = {
+    retentionRate: 85,
+    masteryLevel: 72,
+    specialties: {
+      'Cardiology': { retention: 88, mastery: 75 },
+      'Respiratory': { retention: 82, mastery: 68 },
+      'Neurology': { retention: 79, mastery: 71 }
+    }
+  };
+
+  const isLoading = false;
 
   const reviewCardMutation = useMutation({
     mutationFn: (data: { cardId: string; confidence: number; correct: boolean; timeSpent: number }) =>

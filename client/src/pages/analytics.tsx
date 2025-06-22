@@ -101,17 +101,92 @@ export default function Analytics() {
     }
   };
 
-  const { data: analytics, isLoading } = useQuery<AnalyticsData>({
-    queryKey: ['/api/analytics/user'],
-  });
+  // Mock data for demonstration
+  const analytics: AnalyticsData = {
+    userId: 1,
+    totalQuestions: 1247,
+    correctAnswers: 934,
+    accuracyRate: 75,
+    averageTimePerQuestion: 42,
+    studyStreak: 12,
+    specialtyBreakdown: {
+      'Cardiology': {
+        total: 156,
+        correct: 134,
+        accuracy: 86,
+        weaknessScore: 14,
+        improvementTrend: 8
+      },
+      'Respiratory': {
+        total: 142,
+        correct: 98,
+        accuracy: 69,
+        weaknessScore: 31,
+        improvementTrend: -5
+      },
+      'Neurology': {
+        total: 134,
+        correct: 89,
+        accuracy: 66,
+        weaknessScore: 34,
+        improvementTrend: 12
+      },
+      'Gastroenterology': {
+        total: 128,
+        correct: 102,
+        accuracy: 80,
+        weaknessScore: 20,
+        improvementTrend: 3
+      }
+    },
+    weeklyProgress: {
+      questionsThisWeek: 147,
+      accuracyThisWeek: 78,
+      timeStudiedThisWeek: 1260
+    },
+    recommendations: [
+      "Focus on Respiratory Medicine - your accuracy is 69%, below your target of 75%",
+      "Review Psychiatry fundamentals - consider additional practice sessions",
+      "Excellent progress in Cardiology - maintain current study approach",
+      "Neurology showing improvement trend (+12%) - continue current methods"
+    ],
+    achievements: [
+      {
+        id: 1,
+        name: "Study Streak Champion",
+        description: "Maintained 12-day study streak",
+        unlockedAt: new Date(),
+        category: "Consistency",
+        points: 150
+      },
+      {
+        id: 2,
+        name: "Cardiology Expert",
+        description: "Achieved 86% accuracy in Cardiology",
+        unlockedAt: new Date(),
+        category: "Specialty",
+        points: 200
+      }
+    ]
+  };
 
-  const { data: performanceHistory } = useQuery({
-    queryKey: ['/api/analytics/performance-history', selectedPeriod],
-  });
+  const performanceHistory = [
+    { date: '2024-01-15', accuracy: 72, questionsAnswered: 25 },
+    { date: '2024-01-16', accuracy: 74, questionsAnswered: 30 },
+    { date: '2024-01-17', accuracy: 78, questionsAnswered: 28 },
+    { date: '2024-01-18', accuracy: 75, questionsAnswered: 32 },
+    { date: '2024-01-19', accuracy: 80, questionsAnswered: 35 },
+    { date: '2024-01-20', accuracy: 77, questionsAnswered: 29 },
+    { date: '2024-01-21', accuracy: 82, questionsAnswered: 38 }
+  ];
 
-  const { data: studyHeatmap } = useQuery({
-    queryKey: ['/api/analytics/study-heatmap'],
-  });
+  const studyHeatmap = Array.from({ length: 28 }, (_, i) => ({
+    date: `2024-01-${i + 1}`,
+    questions: Math.floor(Math.random() * 40),
+    intensity: Math.floor(Math.random() * 5)
+  }));
+
+  const isLoading = false;
 
   const getAccuracyColor = (accuracy: number) => {
     if (accuracy >= 90) return 'text-green-600';

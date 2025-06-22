@@ -18,7 +18,7 @@ const DEMO_USER: User = {
   id: 1,
   email: "demo@example.com",
   username: "Dr. Sarah Ahmed",
-  password: "",
+
   currentStage: "plab1",
   studyStreak: 12,
   totalPoints: 2847,
@@ -27,7 +27,7 @@ const DEMO_USER: User = {
   flagEmoji: "🇬🇧",
   timezone: "Europe/London",
   isLocationPublic: true,
-  createdAt: new Date()
+  createdAt: new Date().toISOString()
 };
 
 export default function Home() {
