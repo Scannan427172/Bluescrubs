@@ -47,6 +47,25 @@ export const studyPlan = pgTable("study_plan", {
   completed: boolean("completed").notNull().default(false),
 });
 
+// Advanced Leaderboard and Analytics Tables
+export const globalLeaderboard = pgTable("global_scoreboard", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  totalScore: integer("total_score").notNull().default(0),
+  questionsAnswered: integer("questions_answered").notNull().default(0),
+  correctAnswers: integer("correct_answers").notNull().default(0),
+  accuracyRate: real("accuracy_rate").notNull().default(0),
+  studyStreak: integer("study_streak").notNull().default(0),
+  totalStudyTime: integer("total_study_time").notNull().default(0), // minutes
+  plabCategory: text("plab_category").notNull().default("plab1"),
+  rank: integer("rank").notNull().default(0),
+  countryRank: integer("country_rank").notNull().default(0),
+  lastActive: timestamp("last_active").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// Removed duplicate table definitions - keeping the ones below
+
 // Block-based leaderboard tables
 export const block1Leaderboard = pgTable("block1_leaderboard", {
   id: serial("id").primaryKey(),
