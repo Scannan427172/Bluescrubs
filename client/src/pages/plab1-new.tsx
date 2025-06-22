@@ -1732,17 +1732,16 @@ export default function PLAB1New() {
                             <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
                           </>
                         )}
-                        {!currentQuestion.category?.toLowerCase().includes('cardio') && 
-                         !currentQuestion.category?.toLowerCase().includes('diabetes') && 
-                         !currentQuestion.category?.toLowerCase().includes('endocrin') && (
-                          <>
-                            <p className="text-blue-700">• NICE Guidelines - Clinical evidence and recommendations</p>
-                            <p className="text-blue-700">• BNF - British National Formulary for medications</p>
-                            <p className="text-blue-700">• GMC Good Medical Practice - Professional standards</p>
-                            <p className="text-blue-700">• MLA Competency Framework - Medical Licensing Assessment standards</p>
-                            <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
-                          </>
-                        )}
+                        {/* Always show core UK medical references */}
+                        <>
+                          <p className="text-blue-700">• NICE Guidelines - Clinical evidence and recommendations</p>
+                          <p className="text-blue-700">• BNF - British National Formulary for medications</p>
+                          <p className="text-blue-700">• GMC Good Medical Practice - Professional standards</p>
+                          <p className="text-blue-700">• MLA Competency Framework - Medical Licensing Assessment standards</p>
+                          <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
+                          <p className="text-blue-700">• RCGP Guidelines - Royal College of General Practitioners clinical standards</p>
+                          <p className="text-blue-700">• SIGN Guidelines - Scottish Intercollegiate Guidelines Network evidence</p>
+                        </>)
                       </div>
                     )}
                     
@@ -1955,7 +1954,7 @@ export default function PLAB1New() {
             <div className="flex-1 flex justify-center">
               <div className="text-center">
                 <p className="text-sm text-gray-600">
-                  Question {currentQuestionIndex + 1} of {questions.length}
+                  Question {currentQuestionIndex + 1} of {generatedQuestions.length}
                 </p>
                 {selectedAnswer && !showExplanation && (
                   <p className="text-xs text-blue-600 mt-1">Answer selected - submit button above</p>
