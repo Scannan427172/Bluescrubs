@@ -649,11 +649,73 @@ export default function PLAB1New() {
   // Submit score to leaderboard
   const submitToLeaderboard = async (score: number, totalTime: number, accuracy: number) => {
     try {
-      // Mock submission - replace with real API call
       console.log('Submitting to leaderboard:', { score, totalTime, accuracy, category: selectedCategory });
-      // In real implementation, make API call to save score
     } catch (error) {
       console.error('Failed to submit score:', error);
+    }
+  };
+
+  // Start timed practice session
+  const startTimedPractice = async (timeInMinutes: number) => {
+    setIsGeneratingQuestions(true);
+    try {
+      const response = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: selectedCategory,
+          difficulty: selectedDifficulty,
+          count: 100 // Generate enough questions for timed session
+        })
+      });
+      const data = await response.json();
+      setGeneratedQuestions(data.questions);
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+      setSessionStarted(true);
+      setIsTimerRunning(true);
+      
+      // Set timer for timed practice
+      setTimeout(() => {
+        setIsTimerRunning(false);
+        setSessionComplete(true);
+      }, timeInMinutes * 60 * 1000);
+      
+    } catch (error) {
+      console.error('Error generating questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
+
+  // Start unlimited practice session
+  const startUnlimitedPractice = async () => {
+    setIsGeneratingQuestions(true);
+    try {
+      const response = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: selectedCategory,
+          difficulty: selectedDifficulty,
+          count: 20 // Start with 20, will generate more as needed
+        })
+      });
+      const data = await response.json();
+      setGeneratedQuestions(data.questions);
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+      setSessionStarted(true);
+      setIsTimerRunning(false); // No timer for unlimited
+      
+    } catch (error) {
+      console.error('Error generating questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
     }
   };
 
@@ -932,98 +994,134 @@ export default function PLAB1New() {
             </CardContent>
           </Card>
 
-          {/* Practice Options */}
+          {/* Practice Options - Block System */}
           <Card id="practice-options" className="mb-8">
             <CardHeader>
-              <CardTitle>Start Practice Session</CardTitle>
-              <CardDescription>Choose your practice format</CardDescription>
+              <CardTitle>Choose Practice Mode</CardTitle>
+              <CardDescription>Select your preferred study format</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-4 gap-4">
-                <div 
-                  onClick={() => startPractice(5)}
-                  className={`bg-blue-600 hover:bg-blue-700 h-24 flex flex-col items-center justify-center gap-2 rounded-md cursor-pointer transition-colors practice-button-white ${isGeneratingQuestions ? 'opacity-50 cursor-not-allowed' : ''}`}
-                >
-                  <ArrowRight className="w-6 h-6" />
-                  <span className="font-medium">{translateText('Quick Practice')}</span>
-                  <span className="text-xs opacity-90">5 {translateText('questions')}</span>
-                </div>
-
-                <Button 
-                  size="lg" 
-                  onClick={() => startPractice(20)}
-                  disabled={isGeneratingQuestions}
-                  className="bg-purple-600 hover:bg-purple-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  <Brain className="w-6 h-6" />
-                  <span className="font-medium">{translateText('Standard Quiz')}</span>
-                  <span className="text-xs opacity-90">20 {translateText('questions')}</span>
-                </Button>
-
-                <Button 
-                  size="lg" 
-                  onClick={() => startPractice(50)}
-                  disabled={isGeneratingQuestions}
-                  className="bg-orange-600 hover:bg-orange-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  <Clock className="w-6 h-6" />
-                  <span className="font-medium">{translateText('PLAB 1 Mock')}</span>
-                  <span className="text-xs opacity-90">50 {translateText('questions')}</span>
-                </Button>
-
-                <Button 
-                  size="lg" 
-                  onClick={() => startPractice(100)}
-                  disabled={isGeneratingQuestions}
-                  className="bg-green-600 hover:bg-green-700 text-white h-24 flex flex-col items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  <Target className="w-6 h-6" />
-                  <span className="font-medium">{translateText('Comprehensive')}</span>
-                  <span className="text-xs opacity-90">100 {translateText('questions')}</span>
-                </Button>
-              </div>
-
-              {/* Bulk Question Generation Section */}
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Build Complete Question Bank</h3>
-                    <p className="text-sm text-gray-600">Generate comprehensive AI question database across all specialties</p>
-                  </div>
-                  <Button
-                    onClick={generateBulkQuestions}
-                    disabled={isBulkGenerating}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 disabled:opacity-50"
+            <CardContent className="space-y-6">
+              
+              {/* Block 1: Fixed Question Count */}
+              <div className="border rounded-lg p-4 bg-blue-50">
+                <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                  <Target className="w-5 h-5" />
+                  Block 1: Fixed Question Sets
+                </h3>
+                <p className="text-sm text-blue-700 mb-4">Complete a specific number of questions at your own pace</p>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <Button 
+                    onClick={() => startPractice(10)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
                   >
-                    {isBulkGenerating ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                        Generating...
-                      </>
-                    ) : (
-                      <>
-                        <Plus className="w-4 h-4 mr-2" />
-                        Generate 5000 Questions
-                      </>
-                    )}
+                    <span className="font-bold text-lg">10</span>
+                    <span className="text-xs">Questions</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startPractice(20)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">20</span>
+                    <span className="text-xs">Questions</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startPractice(50)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">50</span>
+                    <span className="text-xs">Questions</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startPractice(100)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">100</span>
+                    <span className="text-xs">Questions</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startPractice(180)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">180</span>
+                    <span className="text-xs">PLAB Mock</span>
                   </Button>
                 </div>
-                
-                {bulkProgress && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-blue-900">Generation Progress</span>
-                      <span className="text-sm text-blue-700">{bulkProgress.completed}/{bulkProgress.total} categories</span>
-                    </div>
-                    <div className="w-full bg-blue-200 rounded-full h-2">
-                      <div 
-                        className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${(bulkProgress.completed / bulkProgress.total) * 100}%` }}
-                      />
-                    </div>
-                    <p className="text-xs text-blue-600 mt-2">Current: {bulkProgress.currentCategory}</p>
+              </div>
+
+              {/* Block 2: Timed Tests */}
+              <div className="border rounded-lg p-4 bg-orange-50">
+                <h3 className="font-semibold text-orange-900 mb-3 flex items-center gap-2">
+                  <Clock className="w-5 h-5" />
+                  Block 2: Timed Challenges
+                </h3>
+                <p className="text-sm text-orange-700 mb-4">Answer as many questions as possible within the time limit</p>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <Button 
+                    onClick={() => startTimedPractice(10)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">10m</span>
+                    <span className="text-xs">Sprint</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startTimedPractice(30)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">30m</span>
+                    <span className="text-xs">Focus</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startTimedPractice(60)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">60m</span>
+                    <span className="text-xs">Endurance</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startTimedPractice(120)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">2h</span>
+                    <span className="text-xs">Marathon</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startTimedPractice(180)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">3h</span>
+                    <span className="text-xs">Ultra</span>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Block 3: Unlimited Practice */}
+              <div className="border rounded-lg p-4 bg-green-50">
+                <h3 className="font-semibold text-green-900 mb-3 flex items-center gap-2">
+                  <Brain className="w-5 h-5" />
+                  Block 3: Unlimited Study
+                </h3>
+                <p className="text-sm text-green-700 mb-4">Study without time pressure - continue as long as you want</p>
+                <Button 
+                  onClick={() => startUnlimitedPractice()}
+                  disabled={isGeneratingQuestions}
+                  className="bg-green-600 hover:bg-green-700 text-white h-16 px-8 flex items-center justify-center gap-3"
+                >
+                  <ArrowRight className="w-6 h-6" />
+                  <div className="text-left">
+                    <div className="font-bold">Start Unlimited Practice</div>
+                    <div className="text-xs opacity-90">No time limit - study at your pace</div>
                   </div>
-                )}
+                </Button>
               </div>
             </CardContent>
           </Card>
