@@ -301,11 +301,11 @@ OUTPUT FORMAT (strictly follow this JSON structure):
   "correct_answer": "<A, B, C, D or E>",
   "explanation": "<comprehensive explanation covering: 1) Diagnosis confirmation, 2) Why correct answer is best per UK guidelines, 3) Mechanism/rationale, 4) Specific dosing/monitoring advice, 5) Why other options are incorrect, 6) Follow-up requirements>",
   "study_tips": {
-    "mnemonic": "<create a specific mnemonic directly related to this clinical scenario, diagnosis, or treatment - make it memorable and relevant to the exact question being asked>",
+    "mnemonic": "<create a highly specific mnemonic that directly relates to the exact clinical condition, treatment, or diagnostic approach in THIS question - not generic specialty mnemonics. For example: if the question is about hypothyroidism treatment, create a mnemonic specifically for levothyroxine dosing or monitoring; if about heart failure, create one specific to the ACE inhibitor mentioned in the correct answer>",
     "key_learning_points": [
-      "<specific learning point 1 related to this case>",
-      "<specific learning point 2 related to this case>",
-      "<specific learning point 3 related to this case>"
+      "<specific learning point directly tied to this exact case and correct answer>",
+      "<clinical pearl specific to this diagnosis and management approach>",
+      "<practical tip specific to this medication/investigation/procedure>"
     ]
   },
   "references": [
