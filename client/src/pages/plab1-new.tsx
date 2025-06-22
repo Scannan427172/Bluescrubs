@@ -1894,6 +1894,8 @@ export default function PLAB1New() {
                         {/* Always show core UK medical references with MLA content map integration */}
                         <>
                           <p className="text-blue-700">• NICE Guidelines - Clinical evidence and recommendations</p>
+                          <p className="text-blue-700">• BMJ Best Practice - Evidence-based clinical guidance and management</p>
+                          <p className="text-blue-700">• CKS Clinical Knowledge Summaries - Practical primary care guidance</p>
                           <p className="text-blue-700">• BNF - British National Formulary for medications and prescribing</p>
                           <p className="text-blue-700">• GMC Good Medical Practice - Professional standards and ethics</p>
                           <p className="text-blue-700">• MLA Content Map - Applied Medical Sciences, Clinical Skills, Professional Behaviour</p>
