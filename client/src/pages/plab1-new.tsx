@@ -56,20 +56,40 @@ export default function PLAB1New() {
     const loadVoices = () => {
       const voices = speechSynthesis.getVoices();
       if (voices.length > 0) {
-        const englishVoices = voices.filter(voice => 
-          voice.lang.startsWith('en') && 
+        // Filter and categorize voices for better selection
+        const qualityVoices = voices.filter(voice => 
           !voice.name.toLowerCase().includes('robot') &&
-          !voice.name.toLowerCase().includes('synthetic')
+          !voice.name.toLowerCase().includes('synthetic') &&
+          !voice.name.toLowerCase().includes('compact')
         );
-        setAvailableVoices(englishVoices.length > 0 ? englishVoices : voices.slice(0, 5));
-        if (englishVoices.length > 0 && !selectedVoice) {
-          // Prefer female voices or voices with natural names
-          const preferredVoice = englishVoices.find(voice => 
-            voice.name.toLowerCase().includes('female') ||
+        
+        // Prioritize English voices but include multilingual options
+        const englishVoices = qualityVoices.filter(voice => voice.lang.startsWith('en'));
+        const otherLanguageVoices = qualityVoices.filter(voice => 
+          !voice.lang.startsWith('en') && 
+          ['ar', 'hi', 'es', 'fr', 'de', 'pt', 'it', 'ru', 'zh', 'ja', 'ko'].some(lang => 
+            voice.lang.startsWith(lang)
+          )
+        );
+        
+        // Combine voices with English first, then other languages
+        const allVoices = [...englishVoices, ...otherLanguageVoices].slice(0, 15);
+        setAvailableVoices(allVoices);
+        
+        if (allVoices.length > 0 && !selectedVoice) {
+          // Prefer natural-sounding voices
+          const preferredVoice = allVoices.find(voice => 
+            voice.name.toLowerCase().includes('enhanced') ||
+            voice.name.toLowerCase().includes('premium') ||
+            voice.name.toLowerCase().includes('neural') ||
+            voice.name.toLowerCase().includes('natural') ||
             voice.name.toLowerCase().includes('samantha') ||
-            voice.name.toLowerCase().includes('kate') ||
-            voice.name.toLowerCase().includes('susan')
-          ) || englishVoices[0];
+            voice.name.toLowerCase().includes('alex') ||
+            voice.name.toLowerCase().includes('susan') ||
+            voice.name.toLowerCase().includes('daniel') ||
+            voice.name.toLowerCase().includes('karen') ||
+            voice.name.toLowerCase().includes('moira')
+          ) || allVoices[0];
           setSelectedVoice(preferredVoice.name);
         }
       }
@@ -187,20 +207,39 @@ export default function PLAB1New() {
       const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
       const translatedQ = translatedQuestions[cacheKey];
       
-      let questionText = currentQuestion.stem || currentQuestion.question;
-      let options = Array.isArray(currentQuestion.options) ? currentQuestion.options : [];
+      let scenarioText = currentQuestion.scenario || '';
+      let questionText = currentQuestion.stem || currentQuestion.question || '';
+      let options = Array.isArray(currentQuestion.options) 
+        ? currentQuestion.options 
+        : Object.values(currentQuestion.options || {});
       
       // Use translated content if available
       if (translateQuestions && selectedLanguage !== 'en' && translatedQ) {
-        questionText = translatedQ.scenario || translatedQ.stem || translatedQ.question || questionText;
-        options = translatedQ.options || options;
+        scenarioText = translatedQ.scenario || scenarioText;
+        questionText = translatedQ.question || translatedQ.stem || questionText;
+        if (translatedQ.options) {
+          options = Array.isArray(translatedQ.options) ? translatedQ.options : Object.values(translatedQ.options);
+        }
       }
       
-      const optionsText = options.map((option: string, index: number) => 
-        `Option ${String.fromCharCode(65 + index)}: ${option}`
-      ).join('. ');
+      // Build comprehensive text for reading
+      let fullText = '';
       
-      const fullText = `${questionText}. The options are: ${optionsText}`;
+      if (scenarioText) {
+        fullText += `Clinical Scenario: ${scenarioText}. `;
+      }
+      
+      if (questionText) {
+        fullText += `Question: ${questionText}. `;
+      }
+      
+      if (options && options.length > 0) {
+        const optionsText = options.map((option: string, index: number) => 
+          `Option ${String.fromCharCode(65 + index)}: ${option}`
+        ).join('. ');
+        fullText += `The answer options are: ${optionsText}.`;
+      }
+      
       speakText(fullText);
     }
   };
@@ -1198,15 +1237,34 @@ export default function PLAB1New() {
                   {speechEnabled && (
                     <>
                       <Select value={selectedVoice} onValueChange={setSelectedVoice}>
-                        <SelectTrigger className="w-32 h-8 text-xs">
-                          <SelectValue placeholder="Voice" />
+                        <SelectTrigger className="w-48 h-8 text-xs">
+                          <SelectValue placeholder="Select Voice" />
                         </SelectTrigger>
-                        <SelectContent>
-                          {availableVoices.map((voice) => (
-                            <SelectItem key={voice.name} value={voice.name}>
-                              {voice.name.split(' ')[0]}
-                            </SelectItem>
-                          ))}
+                        <SelectContent className="max-h-64 overflow-y-auto">
+                          {availableVoices.map((voice) => {
+                            const isEnglish = voice.lang.startsWith('en');
+                            const countryCode = voice.lang.split('-')[1] || '';
+                            const flagEmoji = {
+                              'US': '🇺🇸', 'GB': '🇬🇧', 'AU': '🇦🇺', 'CA': '🇨🇦',
+                              'AR': '🇸🇦', 'ES': '🇪🇸', 'FR': '🇫🇷', 'DE': '🇩🇪',
+                              'IT': '🇮🇹', 'PT': '🇵🇹', 'RU': '🇷🇺', 'CN': '🇨🇳',
+                              'JP': '🇯🇵', 'KR': '🇰🇷', 'IN': '🇮🇳'
+                            }[countryCode] || '🌐';
+                            
+                            const voiceName = voice.name.length > 20 
+                              ? voice.name.substring(0, 17) + '...'
+                              : voice.name;
+                            
+                            return (
+                              <SelectItem key={voice.name} value={voice.name}>
+                                <div className="flex items-center gap-2">
+                                  <span>{flagEmoji}</span>
+                                  <span className="text-xs">{voiceName}</span>
+                                  {isEnglish && <span className="text-xs text-blue-600">★</span>}
+                                </div>
+                              </SelectItem>
+                            );
+                          })}
                         </SelectContent>
                       </Select>
                       <Button
@@ -1232,16 +1290,26 @@ export default function PLAB1New() {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-sm font-semibold text-blue-900 mb-2">Clinical Scenario</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      {(() => {
-                        const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
-                        const translatedQ = translatedQuestions[cacheKey];
-                        if (translateQuestions && selectedLanguage !== 'en' && translatedQ?.scenario) {
-                          return translatedQ.scenario;
-                        }
-                        return currentQuestion.scenario;
-                      })()}
-                    </p>
+                    {(() => {
+                      const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
+                      const translatedQ = translatedQuestions[cacheKey];
+                      
+                      if (translateQuestions && selectedLanguage !== 'en' && translatedQ?.scenario) {
+                        return (
+                          <div className="space-y-3">
+                            <div className="bg-white p-3 rounded border border-gray-200">
+                              <p className="text-xs text-gray-500 mb-1">English:</p>
+                              <p className="text-gray-700 leading-relaxed">{currentQuestion.scenario}</p>
+                            </div>
+                            <div className="bg-blue-100 p-3 rounded border border-blue-300">
+                              <p className="text-xs text-blue-600 mb-1">Translation:</p>
+                              <p className="text-gray-700 leading-relaxed">{translatedQ.scenario}</p>
+                            </div>
+                          </div>
+                        );
+                      }
+                      return <p className="text-gray-700 leading-relaxed">{currentQuestion.scenario}</p>;
+                    })()}
                   </div>
                 </div>
               </div>
@@ -1249,16 +1317,34 @@ export default function PLAB1New() {
 
             {/* Question */}
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-gray-900 leading-relaxed">
-                {(() => {
-                  const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
-                  const translatedQ = translatedQuestions[cacheKey];
-                  if (translateQuestions && selectedLanguage !== 'en' && translatedQ?.question) {
-                    return translatedQ.question;
-                  }
-                  return currentQuestion.question || currentQuestion.stem;
-                })()}
-              </h2>
+              {(() => {
+                const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
+                const translatedQ = translatedQuestions[cacheKey];
+                
+                if (translateQuestions && selectedLanguage !== 'en' && translatedQ?.question) {
+                  return (
+                    <div className="space-y-3">
+                      <div className="bg-white p-3 rounded border border-gray-200">
+                        <p className="text-xs text-gray-500 mb-1">English:</p>
+                        <h2 className="text-lg font-semibold text-gray-900 leading-relaxed">
+                          {currentQuestion.question || currentQuestion.stem}
+                        </h2>
+                      </div>
+                      <div className="bg-blue-100 p-3 rounded border border-blue-300">
+                        <p className="text-xs text-blue-600 mb-1">Translation:</p>
+                        <h2 className="text-lg font-semibold text-gray-900 leading-relaxed">
+                          {translatedQ.question}
+                        </h2>
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <h2 className="text-lg font-semibold text-gray-900 leading-relaxed">
+                    {currentQuestion.question || currentQuestion.stem}
+                  </h2>
+                );
+              })()}
             </div>
 
             {/* Answer Options - PassMedicine Style */}
@@ -1318,27 +1404,79 @@ export default function PLAB1New() {
                     />
                     
                     <div className="flex-1">
-                      <span className={`text-base leading-relaxed ${
-                        showExplanation && isCorrectAnswer 
-                          ? 'text-green-900 font-bold' 
-                          : showExplanation && isIncorrectlySelected
-                          ? 'text-red-800'
-                          : 'text-gray-800'
-                      }`}>
-                        {showExplanation && isCorrectAnswer && (
-                          <span className="inline-flex items-center gap-1 mr-2">
-                            <span className="text-green-700 font-bold text-lg">✓ CORRECT:</span>
+                      {(() => {
+                        const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
+                        const translatedQ = translatedQuestions[cacheKey];
+                        const originalOptions = Array.isArray(currentQuestion.options) 
+                          ? currentQuestion.options 
+                          : Object.values(currentQuestion.options || {});
+                        const originalOption = originalOptions[index];
+                        
+                        if (translateQuestions && selectedLanguage !== 'en' && translatedQ?.options) {
+                          return (
+                            <div className="space-y-2">
+                              {showExplanation && isCorrectAnswer && (
+                                <span className="inline-flex items-center gap-1 mb-2">
+                                  <span className="text-green-700 font-bold text-lg">✓ CORRECT:</span>
+                                </span>
+                              )}
+                              {showExplanation && isIncorrectlySelected && (
+                                <span className="inline-flex items-center gap-1 mb-2">
+                                  <span className="text-red-600 font-bold">✗ YOUR CHOICE:</span>
+                                </span>
+                              )}
+                              <div className="bg-white/70 p-2 rounded border border-gray-200">
+                                <p className="text-xs text-gray-500 mb-1">English:</p>
+                                <span className={`text-base leading-relaxed ${
+                                  showExplanation && isCorrectAnswer 
+                                    ? 'text-green-900 font-bold' 
+                                    : showExplanation && isIncorrectlySelected
+                                    ? 'text-red-800'
+                                    : 'text-gray-800'
+                                }`}>
+                                  {originalOption}
+                                </span>
+                              </div>
+                              <div className="bg-blue-50 p-2 rounded border border-blue-200">
+                                <p className="text-xs text-blue-600 mb-1">Translation:</p>
+                                <span className={`text-base leading-relaxed ${
+                                  showExplanation && isCorrectAnswer 
+                                    ? 'text-green-900 font-bold' 
+                                    : showExplanation && isIncorrectlySelected
+                                    ? 'text-red-800'
+                                    : 'text-gray-800'
+                                }`}>
+                                  {option}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        }
+                        
+                        return (
+                          <span className={`text-base leading-relaxed ${
+                            showExplanation && isCorrectAnswer 
+                              ? 'text-green-900 font-bold' 
+                              : showExplanation && isIncorrectlySelected
+                              ? 'text-red-800'
+                              : 'text-gray-800'
+                          }`}>
+                            {showExplanation && isCorrectAnswer && (
+                              <span className="inline-flex items-center gap-1 mr-2">
+                                <span className="text-green-700 font-bold text-lg">✓ CORRECT:</span>
+                              </span>
+                            )}
+                            {showExplanation && isIncorrectlySelected && (
+                              <span className="inline-flex items-center gap-1 mr-2">
+                                <span className="text-red-600 font-bold">✗ YOUR CHOICE:</span>
+                              </span>
+                            )}
+                            <span className={showExplanation && isCorrectAnswer ? 'text-green-900 font-bold' : ''}>
+                              {option}
+                            </span>
                           </span>
-                        )}
-                        {showExplanation && isIncorrectlySelected && (
-                          <span className="inline-flex items-center gap-1 mr-2">
-                            <span className="text-red-600 font-bold">✗ YOUR CHOICE:</span>
-                          </span>
-                        )}
-                        <span className={showExplanation && isCorrectAnswer ? 'text-green-900 font-bold' : ''}>
-                          {option}
-                        </span>
-                      </span>
+                        );
+                      })()}
                     </div>
                     
                     {speechEnabled && (
