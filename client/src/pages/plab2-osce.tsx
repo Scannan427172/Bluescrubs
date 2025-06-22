@@ -9,7 +9,7 @@ import {
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
-  Globe, Languages
+  Globe, Languages, MessageCircle, Bot
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -84,6 +84,12 @@ export default function Plab2Osce() {
   // Neurodiversity settings
   const [neuroAccommodations, setNeuroAccommodations] = useState<NeuroAtypicalType[]>(['none']);
   const { accommodations, questionStyles, buttonStyles } = useNeuroAccommodations(neuroAccommodations);
+
+  // AI Tutor state
+  const [showAITutor, setShowAITutor] = useState(false);
+  const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
+  const [tutorInput, setTutorInput] = useState('');
+  const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
 
   // Load neurodiversity settings from localStorage
   useEffect(() => {
@@ -255,6 +261,53 @@ export default function Plab2Osce() {
     return scores.length > 0 ? scores.reduce((sum, score) => sum + score, 0) / scores.length : 0;
   };
 
+  // AI Tutor functionality
+  const handleAskTutor = async (question: string) => {
+    if (!question.trim()) return;
+    
+    const userMessage = { role: 'user' as const, content: question };
+    setTutorMessages(prev => [...prev, userMessage]);
+    setTutorInput('');
+    setIsLoadingTutorResponse(true);
+
+    try {
+      const context = activeStation ? {
+        stationType: 'PLAB 2 OSCE',
+        stationTitle: activeStation.title,
+        scenario: activeStation.scenario,
+        instructions: activeStation.instructions,
+        keyActions: activeStation.keyActions,
+        redFlags: activeStation.redFlags
+      } : { stationType: 'PLAB 2 OSCE General' };
+
+      const response = await fetch('/api/ai-tutor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question,
+          context,
+          specialty: 'clinical-skills',
+          examType: 'plab2-osce'
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to get tutor response');
+      
+      const data = await response.json();
+      const assistantMessage = { role: 'assistant' as const, content: data.response };
+      setTutorMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('AI Tutor error:', error);
+      const errorMessage = { 
+        role: 'assistant' as const, 
+        content: 'I apologize, but I encountered an error. Please try asking your question again.' 
+      };
+      setTutorMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoadingTutorResponse(false);
+    }
+  };
+
   if (activeStation) {
     return (
       <div className="min-h-screen bg-white">
@@ -378,6 +431,80 @@ export default function Plab2Osce() {
                     </ul>
                   </div>
                 )}
+
+                {/* AI Tutor Chat Interface */}
+                <div className="mt-6 border border-gray-200 rounded-lg">
+                  <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Bot className="w-5 h-5 text-blue-600" />
+                        <h4 className="font-semibold text-blue-800">AI Clinical Skills Tutor</h4>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowAITutor(!showAITutor)}
+                      >
+                        {showAITutor ? 'Hide' : 'Show'} Tutor
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  {showAITutor && (
+                    <div className="p-4">
+                      <div className="space-y-4 mb-4 max-h-64 overflow-y-auto">
+                        {tutorMessages.length === 0 && (
+                          <div className="text-center text-gray-500 py-8">
+                            <MessageCircle className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                            <p>Ask me about this OSCE station, clinical skills, or exam techniques!</p>
+                            <p className="text-sm mt-1">Examples: "What are key communication skills for this scenario?" or "How should I approach the physical examination?"</p>
+                          </div>
+                        )}
+                        {tutorMessages.map((message, index) => (
+                          <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                            <div className={`max-w-[80%] p-3 rounded-lg ${
+                              message.role === 'user' 
+                                ? 'bg-blue-600 text-white' 
+                                : 'bg-gray-100 text-gray-800'
+                            }`}>
+                              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                            </div>
+                          </div>
+                        ))}
+                        {isLoadingTutorResponse && (
+                          <div className="flex justify-start">
+                            <div className="bg-gray-100 p-3 rounded-lg">
+                              <p className="text-sm text-gray-600">AI Tutor is thinking...</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="flex gap-2">
+                        <Textarea
+                          value={tutorInput}
+                          onChange={(e) => setTutorInput(e.target.value)}
+                          placeholder="Ask about clinical skills, examination techniques, or this OSCE station..."
+                          className="flex-1"
+                          rows={2}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                              e.preventDefault();
+                              handleAskTutor(tutorInput);
+                            }
+                          }}
+                        />
+                        <Button
+                          onClick={() => handleAskTutor(tutorInput)}
+                          disabled={!tutorInput.trim() || isLoadingTutorResponse}
+                          className="self-end"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
                 <div className="mt-8 p-4 bg-blue-50 rounded-lg">
                   <div className="flex items-center gap-2 mb-2">

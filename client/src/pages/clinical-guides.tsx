@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   BookOpen, Clock, User, AlertTriangle, CheckCircle2, 
   Stethoscope, Heart, Brain, Pill, Search, Filter,
-  ChevronRight, Star, Calendar, Users
+  ChevronRight, Star, Calendar, Users, MessageCircle, Bot
 } from "lucide-react";
 import { CLINICAL_GUIDES, QUICK_CLINICAL_SUMMARIES, CLINICAL_PATHWAYS, type ClinicalGuide, type QuickClinicalSummary } from "@shared/clinical-guides";
 
@@ -18,6 +18,12 @@ export default function ClinicalGuides() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedSpecialty, setSelectedSpecialty] = useState("all");
   const [activeTab, setActiveTab] = useState("guides");
+
+  // AI Tutor state
+  const [showAITutor, setShowAITutor] = useState(false);
+  const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
+  const [tutorInput, setTutorInput] = useState('');
+  const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
 
   const filteredGuides = CLINICAL_GUIDES.filter(guide => {
     const matchesSearch = guide.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -56,6 +62,53 @@ export default function ClinicalGuides() {
       case 'medium': return 'bg-yellow-500';
       case 'low': return 'bg-green-500';
       default: return 'bg-gray-500';
+    }
+  };
+
+  // AI Tutor functionality for clinical guides
+  const handleAskTutor = async (question: string) => {
+    if (!question.trim()) return;
+    
+    const userMessage = { role: 'user' as const, content: question };
+    setTutorMessages(prev => [...prev, userMessage]);
+    setTutorInput('');
+    setIsLoadingTutorResponse(true);
+
+    try {
+      const context = selectedGuide ? {
+        guideType: 'Clinical Guide',
+        guideTitle: selectedGuide.title,
+        category: selectedGuide.category,
+        specialty: selectedGuide.specialty,
+        overview: selectedGuide.content.overview,
+        keyPoints: selectedGuide.content.keyPoints
+      } : { guideType: 'Clinical Guides General' };
+
+      const response = await fetch('/api/ai-tutor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question,
+          context,
+          specialty: selectedGuide?.specialty || 'general-medicine',
+          examType: 'clinical-knowledge'
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to get tutor response');
+      
+      const data = await response.json();
+      const assistantMessage = { role: 'assistant' as const, content: data.response };
+      setTutorMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('AI Tutor error:', error);
+      const errorMessage = { 
+        role: 'assistant' as const, 
+        content: 'I apologize, but I encountered an error. Please try asking your question again.' 
+      };
+      setTutorMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoadingTutorResponse(false);
     }
   };
 
@@ -230,6 +283,80 @@ export default function ClinicalGuides() {
                       </CardContent>
                     </Card>
                   </div>
+                </TabsContent>
+
+                {/* AI Tutor Integration for Clinical Guides */}
+                <TabsContent value="tutor" className="space-y-4">
+                  <Card>
+                    <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Bot className="w-5 h-5 text-blue-600" />
+                          <CardTitle className="text-blue-800">AI Clinical Knowledge Tutor</CardTitle>
+                        </div>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setShowAITutor(!showAITutor)}
+                        >
+                          {showAITutor ? 'Hide' : 'Show'} Tutor
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    
+                    {showAITutor && (
+                      <CardContent className="p-4">
+                        <div className="space-y-4 mb-4 max-h-96 overflow-y-auto">
+                          {tutorMessages.length === 0 && (
+                            <div className="text-center text-gray-500 py-8">
+                              <MessageCircle className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                              <p>Ask me about this clinical guide, medical conditions, or treatment protocols!</p>
+                              <p className="text-sm mt-1">Examples: "Explain the pathophysiology" or "What are the differential diagnoses?"</p>
+                            </div>
+                          )}
+                          {tutorMessages.map((message, index) => (
+                            <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                              <div className={`max-w-[80%] p-3 rounded-lg ${
+                                message.role === 'user' 
+                                  ? 'bg-blue-600 text-white' 
+                                  : 'bg-gray-100 text-gray-800'
+                              }`}>
+                                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                              </div>
+                            </div>
+                          ))}
+                          {isLoadingTutorResponse && (
+                            <div className="flex justify-start">
+                              <div className="bg-gray-100 p-3 rounded-lg">
+                                <p className="text-sm text-gray-600">AI Tutor is analyzing...</p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        
+                        <div className="flex gap-2">
+                          <Input
+                            value={tutorInput}
+                            onChange={(e) => setTutorInput(e.target.value)}
+                            placeholder="Ask about clinical knowledge, guidelines, or medical concepts..."
+                            className="flex-1"
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
+                                handleAskTutor(tutorInput);
+                              }
+                            }}
+                          />
+                          <Button
+                            onClick={() => handleAskTutor(tutorInput)}
+                            disabled={!tutorInput.trim() || isLoadingTutorResponse}
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    )}
+                  </Card>
                 </TabsContent>
 
                 <TabsContent value="management" className="space-y-4">
