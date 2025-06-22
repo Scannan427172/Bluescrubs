@@ -1629,20 +1629,114 @@ export default function PLAB1New() {
                       ))}
                     </div>
                   ) : (
-                    // Default study tips with common medical mnemonics
+                    // Category-specific mnemonics based on question topic
                     <div className="space-y-3">
-                      <div className="bg-white border border-blue-200 rounded-lg p-3">
-                        <p className="text-sm font-semibold text-blue-900 mb-1">ECG Reading Mnemonic</p>
-                        <p className="text-sm text-blue-800">Remember "RATE, RHYTHM, AXIS, INTERVALS, ST-T": Check heart rate, rhythm regularity, electrical axis, PR/QRS/QT intervals, then ST segments and T waves</p>
-                      </div>
-                      <div className="bg-white border border-blue-200 rounded-lg p-3">
-                        <p className="text-sm font-semibold text-blue-900 mb-1">Heart Murmur Positions</p>
-                        <p className="text-sm text-blue-800">"All Physicians Take Money": Aortic (2nd right ICS), Pulmonary (2nd left ICS), Tricuspid (4th left ICS), Mitral (5th left MCL)</p>
-                      </div>
-                      <div className="bg-white border border-blue-200 rounded-lg p-3">
-                        <p className="text-sm font-semibold text-blue-900 mb-1">Acute Coronary Syndromes</p>
-                        <p className="text-sm text-blue-800">STEMI = ST elevation + troponin rise; NSTEMI = No ST elevation + troponin rise; Unstable angina = No troponin rise</p>
-                      </div>
+                      {/* Cardiology Mnemonics */}
+                      {currentQuestion.category?.toLowerCase().includes('cardio') && (
+                        <>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">ECG Reading: "RATE-RHYTHM-AXIS"</p>
+                            <p className="text-sm text-blue-800">Rate → Rhythm → Axis → Intervals (PR, QRS, QT) → ST-T changes</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Heart Murmurs: "All Physicians Take Money"</p>
+                            <p className="text-sm text-blue-800">Aortic (2nd R ICS) → Pulmonary (2nd L ICS) → Tricuspid (4th L ICS) → Mitral (5th L MCL)</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Heart Failure: "FACES"</p>
+                            <p className="text-sm text-blue-800">Fatigue, Activity limitation, Congestion/Edema, Shortness of breath</p>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Respiratory Mnemonics */}
+                      {currentQuestion.category?.toLowerCase().includes('respiratory') && (
+                        <>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Asthma Management: "SABA-MART"</p>
+                            <p className="text-sm text-blue-800">SABA reliever → Maintenance and Reliever Therapy → Add-on treatments</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">COPD Exacerbation: "STAMP"</p>
+                            <p className="text-sm text-blue-800">Steroids, Theophylline, Antibiotics, Mucolytics, Physiotherapy</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Pneumonia Severity: "CURB-65"</p>
+                            <p className="text-sm text-blue-800">Confusion, Urea above 7, Respiratory rate 30+, BP below 90/60, age 65+</p>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Endocrinology/Diabetes Mnemonics */}
+                      {(currentQuestion.category?.toLowerCase().includes('diabetes') || 
+                        currentQuestion.category?.toLowerCase().includes('endocrin')) && (
+                        <>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Diabetes Complications: "REINS"</p>
+                            <p className="text-sm text-blue-800">Retinopathy, Erectile dysfunction, Infection, Neuropathy, Stroke/CVD</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">DKA Management: "INSULIN"</p>
+                            <p className="text-sm text-blue-800">IV fluids, Normal saline, Serum glucose, Urea/electrolytes, Labs, IV insulin, Nursing care</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Thyroid Function: "T3-T4-TSH"</p>
+                            <p className="text-sm text-blue-800">High TSH + Low T4 = Hypothyroid; Low TSH + High T4 = Hyperthyroid</p>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Gastroenterology Mnemonics */}
+                      {currentQuestion.category?.toLowerCase().includes('gastro') && (
+                        <>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">IBD vs IBS: "CROWS vs DOVES"</p>
+                            <p className="text-sm text-blue-800">IBD: Chronic, Rectal bleeding, Obstruction, Weight loss, Systemic symptoms</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Liver Function: "ALT-AST-ALP"</p>
+                            <p className="text-sm text-blue-800">ALT/AST raised = hepatocellular; ALP raised = cholestatic pattern</p>
+                          </div>
+                        </>
+                      )}
+
+                      {/* Neurology Mnemonics */}
+                      {currentQuestion.category?.toLowerCase().includes('neuro') && (
+                        <>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Stroke Assessment: "FAST-BEFAST"</p>
+                            <p className="text-sm text-blue-800">Balance, Eyes, Face, Arms, Speech, Time + Blood pressure, Emergency response</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Seizure Types: "TONIC-CLONIC"</p>
+                            <p className="text-sm text-blue-800">Tonic (stiffening) → Clonic (jerking) → Post-ictal confusion</p>
+                          </div>
+                        </>
+                      )}
+
+                      {/* General Medicine Mnemonics */}
+                      {(!currentQuestion.category || 
+                        (!currentQuestion.category.toLowerCase().includes('cardio') && 
+                         !currentQuestion.category.toLowerCase().includes('respiratory') && 
+                         !currentQuestion.category.toLowerCase().includes('diabetes') && 
+                         !currentQuestion.category.toLowerCase().includes('endocrin') && 
+                         !currentQuestion.category.toLowerCase().includes('gastro') && 
+                         !currentQuestion.category.toLowerCase().includes('neuro'))) && (
+                        <>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Clinical Assessment: "SOCRATES"</p>
+                            <p className="text-sm text-blue-800">Site, Onset, Character, Radiation, Associated symptoms, Timing, Exacerbating factors, Severity</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Drug History: "WIPE"</p>
+                            <p className="text-sm text-blue-800">What drugs, Including OTC/herbal, Past reactions, Effectiveness of current treatment</p>
+                          </div>
+                          <div className="bg-white border border-blue-200 rounded-lg p-3">
+                            <p className="text-sm font-semibold text-blue-900 mb-1">Examination Approach: "IPPA"</p>
+                            <p className="text-sm text-blue-800">Inspection → Palpation → Percussion → Auscultation</p>
+                          </div>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
