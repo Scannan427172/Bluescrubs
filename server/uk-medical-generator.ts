@@ -325,31 +325,49 @@ function generateESCKeyPoints(condition: string, scenarioText: string): string[]
       'ACE inhibitors/ARBs as first-line therapy for HFrEF',
       'Beta-blockers proven to reduce mortality in stable HF',
       'Diuretics for symptom relief and fluid management',
-      'Device therapy (CRT/ICD) for selected patients'
+      'Device therapy (CRT/ICD) for selected patients',
+      'SGLT2 inhibitors reduce HF hospitalizations'
     ],
     'atrial_fibrillation': [
       'CHA2DS2-VASc score guides anticoagulation decisions',
       'Rate vs rhythm control strategy selection',
       'Direct oral anticoagulants preferred over warfarin',
-      'Cardioversion timing and anticoagulation protocols'
+      'Cardioversion timing and anticoagulation protocols',
+      'Catheter ablation for symptomatic paroxysmal AF'
     ],
     'acute_coronary_syndrome': [
       'Dual antiplatelet therapy (DAPT) duration guidelines',
       'Primary PCI preferred reperfusion strategy for STEMI',
       'Risk stratification using TIMI/GRACE scores',
-      'Secondary prevention with optimal medical therapy'
+      'Secondary prevention with optimal medical therapy',
+      'P2Y12 inhibitor selection based on bleeding risk'
     ],
     'hypertension': [
       'Target BP <140/90 mmHg for most patients',
       'ACE inhibitors/ARBs preferred in diabetes',
       'Combination therapy for BP >160/100 mmHg',
-      'Lifestyle modifications as first-line intervention'
+      'Lifestyle modifications as first-line intervention',
+      'Resistant hypertension requires specialist referral'
+    ],
+    'valvular_disease': [
+      'Echocardiographic assessment of valve severity',
+      'Surgical vs transcatheter intervention timing',
+      'Anticoagulation for mechanical valve prostheses',
+      'Endocarditis prophylaxis in high-risk patients',
+      'Exercise testing in asymptomatic severe AS'
+    ],
+    'cardiovascular_risk_management': [
+      'SCORE2 risk calculator for primary prevention',
+      'Statin therapy based on cardiovascular risk',
+      'Blood pressure targets vary by comorbidities',
+      'Lifestyle interventions reduce CV events by 30%',
+      'Diabetes screening in high-risk populations'
     ]
   };
   
   return escKeyPoints[condition] || [
     'Evidence-based diagnostic criteria',
-    'Structured treatment algorithms',
+    'Structured treatment algorithms', 
     'Risk stratification protocols',
     'Follow-up and monitoring guidelines'
   ];
@@ -361,19 +379,36 @@ function generateADAKeyPoints(condition: string, scenarioText: string): string[]
       'HbA1c target <7% for most adults with diabetes',
       'Metformin as first-line therapy for type 2 diabetes',
       'Annual screening for diabetic complications',
-      'Lifestyle modification as cornerstone of treatment'
+      'Lifestyle modification as cornerstone of treatment',
+      'SGLT2 inhibitors for cardiovascular protection'
     ],
     'glycemic_control': [
       'Individualized glycemic targets based on patient factors',
       'Continuous glucose monitoring for intensive insulin therapy',
       'Hypoglycemia awareness and prevention strategies',
-      'Insulin adjustment protocols for hospitalized patients'
+      'Insulin adjustment protocols for hospitalized patients',
+      'Time-in-range goals for CGM users (70-180 mg/dL)'
     ],
     'diabetic_complications': [
       'Annual dilated eye examination for retinopathy screening',
       'ACE inhibitors/ARBs for diabetic nephropathy',
       'Foot examination and neuropathy assessment',
-      'Cardiovascular risk reduction strategies'
+      'Cardiovascular risk reduction strategies',
+      'Annual urine albumin and eGFR monitoring'
+    ],
+    'metabolic_management': [
+      'Weight management strategies for obesity',
+      'Bariatric surgery consideration for BMI >35',
+      'Lipid targets: LDL <70 mg/dL for high CV risk',
+      'Blood pressure target <130/80 mmHg',
+      'Comprehensive metabolic panel monitoring'
+    ],
+    'obesity_management': [
+      'Caloric restriction and portion control',
+      'Physical activity: 150 minutes moderate weekly',
+      'Behavioral modification programs',
+      'Pharmacotherapy for weight loss when indicated',
+      'Multidisciplinary team approach to care'
     ]
   };
   
