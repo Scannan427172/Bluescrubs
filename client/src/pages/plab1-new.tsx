@@ -1828,7 +1828,7 @@ export default function PLAB1New() {
                             e.stopPropagation();
                             window.open('https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines', '_blank');
                           }}
-                          className="bg-red-600 hover:bg-red-700 text-white border-red-600 hover:border-red-700"
+                          className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                         >
                           <ExternalLink className="w-4 h-4 mr-1" />
                           View ESC Guidelines
@@ -1869,7 +1869,7 @@ export default function PLAB1New() {
                             e.stopPropagation();
                             window.open('https://diabetesjournals.org/care/issue/46/Supplement_1', '_blank');
                           }}
-                          className="bg-purple-600 hover:bg-purple-700 text-white border-purple-600 hover:border-purple-700"
+                          className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                         >
                           <ExternalLink className="w-4 h-4 mr-1" />
                           View ADA Standards

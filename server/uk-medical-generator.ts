@@ -97,6 +97,414 @@ async function enhanceWithCKSReferences(
   }
 }
 
+// Function to add question-specific ESC Guidelines
+function addESCGuidance(
+  question: UKMedicalQuestion,
+  specialty: string
+): UKMedicalQuestion {
+  try {
+    const scenarioText = (question.scenario + ' ' + question.question).toLowerCase();
+    const keywords = extractKeywords(scenarioText);
+    
+    // Map keywords to ESC-specific conditions
+    const escConditions = mapKeywordsToESCConditions(keywords, specialty);
+    
+    if (escConditions.length > 0) {
+      question.esc_guidance = {
+        summary: `ESC clinical guidelines for ${escConditions[0]} management based on latest European Cardiology Society recommendations.`,
+        key_points: generateESCKeyPoints(escConditions[0], scenarioText),
+        clinical_approach: generateESCClinicalApproach(escConditions[0]),
+        evidence_level: "Class I, Level A",
+        esc_url: `https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/${escConditions[0].replace(/\s+/g, '-').toLowerCase()}`
+      };
+    }
+    
+    return question;
+  } catch (error) {
+    console.error('Error adding ESC guidance:', error);
+    return question;
+  }
+}
+
+// Function to add question-specific ADA Standards
+function addADAGuidance(
+  question: UKMedicalQuestion,
+  specialty: string
+): UKMedicalQuestion {
+  try {
+    const scenarioText = (question.scenario + ' ' + question.question).toLowerCase();
+    const keywords = extractKeywords(scenarioText);
+    
+    // Map keywords to ADA-specific conditions
+    const adaConditions = mapKeywordsToADAConditions(keywords, specialty);
+    
+    if (adaConditions.length > 0) {
+      question.ada_guidance = {
+        summary: `ADA Standards of Care for ${adaConditions[0]} following American Diabetes Association evidence-based recommendations.`,
+        key_points: generateADAKeyPoints(adaConditions[0], scenarioText),
+        clinical_approach: generateADAClinicalApproach(adaConditions[0]),
+        evidence_level: "Grade A Evidence",
+        ada_url: `https://care.diabetesjournals.org/content/standards-of-care`
+      };
+    }
+    
+    return question;
+  } catch (error) {
+    console.error('Error adding ADA guidance:', error);
+    return question;
+  }
+}
+
+// Function to add question-specific SIGN Guidelines
+function addSIGNGuidance(
+  question: UKMedicalQuestion,
+  specialty: string
+): UKMedicalQuestion {
+  try {
+    const scenarioText = (question.scenario + ' ' + question.question).toLowerCase();
+    const keywords = extractKeywords(scenarioText);
+    
+    // Map keywords to SIGN-specific conditions
+    const signConditions = mapKeywordsToSIGNConditions(keywords, specialty);
+    
+    if (signConditions.length > 0) {
+      question.sign_guidance = {
+        summary: `SIGN evidence-based guidelines for ${signConditions[0]} management from Scottish Intercollegiate Guidelines Network.`,
+        key_points: generateSIGNKeyPoints(signConditions[0], scenarioText),
+        clinical_approach: generateSIGNClinicalApproach(signConditions[0]),
+        evidence_level: "Grade A Recommendation",
+        sign_url: `https://www.sign.ac.uk/our-guidelines/${signConditions[0].replace(/\s+/g, '-').toLowerCase()}`
+      };
+    }
+    
+    return question;
+  } catch (error) {
+    console.error('Error adding SIGN guidance:', error);
+    return question;
+  }
+}
+
+// Function to add question-specific BTS Guidelines
+function addBTSGuidance(
+  question: UKMedicalQuestion,
+  specialty: string
+): UKMedicalQuestion {
+  try {
+    const scenarioText = (question.scenario + ' ' + question.question).toLowerCase();
+    const keywords = extractKeywords(scenarioText);
+    
+    // Map keywords to BTS-specific conditions
+    const btsConditions = mapKeywordsToBTSConditions(keywords, specialty);
+    
+    if (btsConditions.length > 0) {
+      question.bts_guidance = {
+        summary: `BTS clinical guidelines for ${btsConditions[0]} management from British Thoracic Society evidence-based recommendations.`,
+        key_points: generateBTSKeyPoints(btsConditions[0], scenarioText),
+        clinical_approach: generateBTSClinicalApproach(btsConditions[0]),
+        evidence_level: "Strong Recommendation",
+        bts_url: `https://www.brit-thoracic.org.uk/quality-standards-and-guidelines/guidelines/${btsConditions[0].replace(/\s+/g, '-').toLowerCase()}`
+      };
+    }
+    
+    return question;
+  } catch (error) {
+    console.error('Error adding BTS guidance:', error);
+    return question;
+  }
+}
+
+// Helper functions for condition mapping
+function mapKeywordsToESCConditions(keywords: string[], specialty: string): string[] {
+  const escConditionMap: Record<string, string[]> = {
+    'cardiology': ['heart_failure', 'atrial_fibrillation', 'acute_coronary_syndrome', 'hypertension'],
+    'cardiovascular': ['heart_failure', 'atrial_fibrillation', 'acute_coronary_syndrome', 'hypertension'],
+    'general': ['hypertension', 'heart_failure']
+  };
+  
+  const conditions = escConditionMap[specialty.toLowerCase()] || [];
+  const keywordConditionMap: Record<string, string> = {
+    'heart': 'heart_failure',
+    'cardiac': 'heart_failure', 
+    'failure': 'heart_failure',
+    'fibrillation': 'atrial_fibrillation',
+    'arrhythmia': 'atrial_fibrillation',
+    'chest': 'acute_coronary_syndrome',
+    'angina': 'acute_coronary_syndrome',
+    'myocardial': 'acute_coronary_syndrome',
+    'hypertension': 'hypertension',
+    'blood pressure': 'hypertension'
+  };
+  
+  for (const keyword of keywords) {
+    const condition = keywordConditionMap[keyword];
+    if (condition && conditions.includes(condition)) {
+      return [condition];
+    }
+  }
+  
+  return conditions.slice(0, 1);
+}
+
+function mapKeywordsToADAConditions(keywords: string[], specialty: string): string[] {
+  const adaConditionMap: Record<string, string[]> = {
+    'endocrinology': ['diabetes_management', 'glycemic_control', 'diabetic_complications'],
+    'general': ['diabetes_management', 'glycemic_control']
+  };
+  
+  const conditions = adaConditionMap[specialty.toLowerCase()] || [];
+  const keywordConditionMap: Record<string, string> = {
+    'diabetes': 'diabetes_management',
+    'diabetic': 'diabetes_management',
+    'glucose': 'glycemic_control',
+    'sugar': 'glycemic_control',
+    'insulin': 'diabetes_management',
+    'hba1c': 'glycemic_control',
+    'nephropathy': 'diabetic_complications',
+    'retinopathy': 'diabetic_complications',
+    'neuropathy': 'diabetic_complications'
+  };
+  
+  for (const keyword of keywords) {
+    const condition = keywordConditionMap[keyword];
+    if (condition && conditions.includes(condition)) {
+      return [condition];
+    }
+  }
+  
+  return conditions.slice(0, 1);
+}
+
+function mapKeywordsToSIGNConditions(keywords: string[], specialty: string): string[] {
+  const signConditionMap: Record<string, string[]> = {
+    'neurology': ['stroke_management', 'epilepsy', 'headache_disorders'],
+    'psychiatry': ['depression', 'anxiety_disorders', 'bipolar_disorder'],
+    'respiratory': ['asthma', 'copd'],
+    'general': ['stroke_management', 'depression']
+  };
+  
+  const conditions = signConditionMap[specialty.toLowerCase()] || [];
+  const keywordConditionMap: Record<string, string> = {
+    'stroke': 'stroke_management',
+    'seizure': 'epilepsy',
+    'epilepsy': 'epilepsy',
+    'headache': 'headache_disorders',
+    'migraine': 'headache_disorders',
+    'depression': 'depression',
+    'anxiety': 'anxiety_disorders',
+    'bipolar': 'bipolar_disorder',
+    'asthma': 'asthma',
+    'copd': 'copd',
+    'breathless': 'asthma'
+  };
+  
+  for (const keyword of keywords) {
+    const condition = keywordConditionMap[keyword];
+    if (condition && conditions.includes(condition)) {
+      return [condition];
+    }
+  }
+  
+  return conditions.slice(0, 1);
+}
+
+function mapKeywordsToBTSConditions(keywords: string[], specialty: string): string[] {
+  const btsConditionMap: Record<string, string[]> = {
+    'respiratory': ['asthma_management', 'copd_management', 'pneumonia', 'pulmonary_embolism'],
+    'general': ['asthma_management', 'pneumonia']
+  };
+  
+  const conditions = btsConditionMap[specialty.toLowerCase()] || [];
+  const keywordConditionMap: Record<string, string> = {
+    'asthma': 'asthma_management',
+    'copd': 'copd_management',
+    'pneumonia': 'pneumonia',
+    'chest': 'pneumonia',
+    'cough': 'asthma_management',
+    'breathless': 'asthma_management',
+    'wheeze': 'asthma_management',
+    'embolism': 'pulmonary_embolism',
+    'pe': 'pulmonary_embolism'
+  };
+  
+  for (const keyword of keywords) {
+    const condition = keywordConditionMap[keyword];
+    if (condition && conditions.includes(condition)) {
+      return [condition];
+    }
+  }
+  
+  return conditions.slice(0, 1);
+}
+
+// Key points generation functions
+function generateESCKeyPoints(condition: string, scenarioText: string): string[] {
+  const escKeyPoints: Record<string, string[]> = {
+    'heart_failure': [
+      'ACE inhibitors/ARBs as first-line therapy for HFrEF',
+      'Beta-blockers proven to reduce mortality in stable HF',
+      'Diuretics for symptom relief and fluid management',
+      'Device therapy (CRT/ICD) for selected patients'
+    ],
+    'atrial_fibrillation': [
+      'CHA2DS2-VASc score guides anticoagulation decisions',
+      'Rate vs rhythm control strategy selection',
+      'Direct oral anticoagulants preferred over warfarin',
+      'Cardioversion timing and anticoagulation protocols'
+    ],
+    'acute_coronary_syndrome': [
+      'Dual antiplatelet therapy (DAPT) duration guidelines',
+      'Primary PCI preferred reperfusion strategy for STEMI',
+      'Risk stratification using TIMI/GRACE scores',
+      'Secondary prevention with optimal medical therapy'
+    ],
+    'hypertension': [
+      'Target BP <140/90 mmHg for most patients',
+      'ACE inhibitors/ARBs preferred in diabetes',
+      'Combination therapy for BP >160/100 mmHg',
+      'Lifestyle modifications as first-line intervention'
+    ]
+  };
+  
+  return escKeyPoints[condition] || [
+    'Evidence-based diagnostic criteria',
+    'Structured treatment algorithms',
+    'Risk stratification protocols',
+    'Follow-up and monitoring guidelines'
+  ];
+}
+
+function generateADAKeyPoints(condition: string, scenarioText: string): string[] {
+  const adaKeyPoints: Record<string, string[]> = {
+    'diabetes_management': [
+      'HbA1c target <7% for most adults with diabetes',
+      'Metformin as first-line therapy for type 2 diabetes',
+      'Annual screening for diabetic complications',
+      'Lifestyle modification as cornerstone of treatment'
+    ],
+    'glycemic_control': [
+      'Individualized glycemic targets based on patient factors',
+      'Continuous glucose monitoring for intensive insulin therapy',
+      'Hypoglycemia awareness and prevention strategies',
+      'Insulin adjustment protocols for hospitalized patients'
+    ],
+    'diabetic_complications': [
+      'Annual dilated eye examination for retinopathy screening',
+      'ACE inhibitors/ARBs for diabetic nephropathy',
+      'Foot examination and neuropathy assessment',
+      'Cardiovascular risk reduction strategies'
+    ]
+  };
+  
+  return adaKeyPoints[condition] || [
+    'Evidence-based glucose management',
+    'Comprehensive diabetes care approach',
+    'Complication prevention strategies',
+    'Patient-centered treatment goals'
+  ];
+}
+
+function generateSIGNKeyPoints(condition: string, scenarioText: string): string[] {
+  const signKeyPoints: Record<string, string[]> = {
+    'stroke_management': [
+      'Thrombolysis within 4.5 hours for acute ischemic stroke',
+      'Aspirin 300mg daily for 2 weeks post-stroke',
+      'Blood pressure management in acute stroke',
+      'Early mobilization and rehabilitation protocols'
+    ],
+    'depression': [
+      'PHQ-9 questionnaire for depression screening',
+      'CBT as first-line psychological intervention',
+      'SSRI antidepressants for moderate-severe depression',
+      'Suicide risk assessment and management protocols'
+    ],
+    'epilepsy': [
+      'Sodium valproate first-line for generalized seizures',
+      'Carbamazepine/lamotrigine for focal seizures',
+      'Seizure diary and trigger identification',
+      'Driving regulations and safety counseling'
+    ]
+  };
+  
+  return signKeyPoints[condition] || [
+    'Evidence-based Scottish guidelines',
+    'Systematic diagnostic approach',
+    'Structured treatment protocols',
+    'Quality improvement recommendations'
+  ];
+}
+
+function generateBTSKeyPoints(condition: string, scenarioText: string): string[] {
+  const btsKeyPoints: Record<string, string[]> = {
+    'asthma_management': [
+      'Stepwise approach to asthma treatment',
+      'Peak flow monitoring and action plans',
+      'Inhaler technique assessment and education',
+      'Trigger identification and avoidance strategies'
+    ],
+    'copd_management': [
+      'Spirometry essential for COPD diagnosis',
+      'Bronchodilators as first-line maintenance therapy',
+      'Pulmonary rehabilitation for all suitable patients',
+      'Smoking cessation as priority intervention'
+    ],
+    'pneumonia': [
+      'CURB-65 score for severity assessment',
+      'Antibiotic selection based on severity and risk factors',
+      'Chest X-ray for diagnosis and follow-up',
+      'Oxygen therapy targets and monitoring'
+    ]
+  };
+  
+  return btsKeyPoints[condition] || [
+    'British Thoracic Society evidence-based guidelines',
+    'Respiratory condition management protocols',
+    'Patient safety and quality standards',
+    'Clinical audit and improvement measures'
+  ];
+}
+
+// Clinical approach generation functions
+function generateESCClinicalApproach(condition: string): string {
+  const approaches: Record<string, string> = {
+    'heart_failure': 'Systematic approach to HF management including guideline-directed medical therapy, device consideration, and regular monitoring of symptoms and biomarkers.',
+    'atrial_fibrillation': 'Structured AF management focusing on stroke prevention, symptom control, and rhythm management with individualized treatment strategies.',
+    'acute_coronary_syndrome': 'Evidence-based ACS management with rapid diagnosis, appropriate reperfusion therapy, and comprehensive secondary prevention.',
+    'hypertension': 'Stepwise approach to hypertension management with lifestyle interventions, appropriate drug therapy, and cardiovascular risk assessment.'
+  };
+  
+  return approaches[condition] || 'Systematic evidence-based approach following European Society of Cardiology guidelines with individualized patient care.';
+}
+
+function generateADAClinicalApproach(condition: string): string {
+  const approaches: Record<string, string> = {
+    'diabetes_management': 'Comprehensive diabetes care approach focusing on glycemic control, cardiovascular risk reduction, and prevention of microvascular complications.',
+    'glycemic_control': 'Individualized glycemic management strategy balancing efficacy with hypoglycemia risk and patient-specific factors.',
+    'diabetic_complications': 'Systematic screening and management approach for diabetic complications with emphasis on early detection and intervention.'
+  };
+  
+  return approaches[condition] || 'Evidence-based diabetes management following American Diabetes Association standards with patient-centered care principles.';
+}
+
+function generateSIGNClinicalApproach(condition: string): string {
+  const approaches: Record<string, string> = {
+    'stroke_management': 'Integrated stroke care pathway from acute management through rehabilitation with emphasis on evidence-based interventions.',
+    'depression': 'Stepped care approach to depression management with psychological and pharmacological interventions based on severity.',
+    'epilepsy': 'Comprehensive epilepsy management including accurate diagnosis, appropriate drug therapy, and lifestyle counseling.'
+  };
+  
+  return approaches[condition] || 'Systematic evidence-based approach following Scottish Intercollegiate Guidelines Network recommendations.';
+}
+
+function generateBTSClinicalApproach(condition: string): string {
+  const approaches: Record<string, string> = {
+    'asthma_management': 'Stepwise asthma management approach with emphasis on inhaler technique, trigger avoidance, and personalized action plans.',
+    'copd_management': 'Comprehensive COPD care including accurate diagnosis, appropriate therapy escalation, and pulmonary rehabilitation.',
+    'pneumonia': 'Systematic pneumonia management with severity assessment, appropriate antibiotic therapy, and supportive care.'
+  };
+  
+  return approaches[condition] || 'Evidence-based respiratory care following British Thoracic Society guidelines with focus on patient safety and quality outcomes.';
+}
+
 // Function to add question-specific BMJ Best Practice guidance
 function addBMJGuidance(
   question: UKMedicalQuestion,
@@ -285,6 +693,34 @@ export interface UKMedicalQuestion {
     evidence_level?: string;
     bmj_url?: string;
   };
+  esc_guidance?: {
+    summary: string;
+    key_points: string[];
+    clinical_approach: string;
+    evidence_level?: string;
+    esc_url?: string;
+  };
+  ada_guidance?: {
+    summary: string;
+    key_points: string[];
+    clinical_approach: string;
+    evidence_level?: string;
+    ada_url?: string;
+  };
+  sign_guidance?: {
+    summary: string;
+    key_points: string[];
+    clinical_approach: string;
+    evidence_level?: string;
+    sign_url?: string;
+  };
+  bts_guidance?: {
+    summary: string;
+    key_points: string[];
+    clinical_approach: string;
+    evidence_level?: string;
+    bts_url?: string;
+  };
   additional_guidelines: Array<{
     source: string;
     guidance: string;
@@ -436,8 +872,11 @@ async function generateSingleQuestion(
     // Enhance with detailed CKS references
     questionData = await enhanceWithCKSReferences(questionData, specialty);
 
-    // Add question-specific BMJ Best Practice guidance
-    questionData = addBMJGuidance(questionData, specialty);
+    // Add question-specific reference guidance
+    questionData = addESCGuidance(questionData, specialty);
+    questionData = addADAGuidance(questionData, specialty);
+    questionData = addSIGNGuidance(questionData, specialty);
+    questionData = addBTSGuidance(questionData, specialty);
 
     // Add default CKS guidance if missing
     if (!questionData.cks_guidance) {
