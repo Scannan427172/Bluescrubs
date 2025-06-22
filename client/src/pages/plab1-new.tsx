@@ -1508,7 +1508,24 @@ export default function PLAB1New() {
               })}
             </div>
 
-            {/* Submit Answer Button - PassMedicine Style */}
+            {/* Submit Answer Button - Positioned directly under questions */}
+            <div className="mt-6 flex justify-center">
+              {!showExplanation && selectedAnswer ? (
+                <Button 
+                  onClick={handleSubmitAnswer}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium"
+                >
+                  Submit Answer
+                </Button>
+              ) : showExplanation ? (
+                <Button 
+                  onClick={handleNextQuestion}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium flex items-center gap-2"
+                >
+                  Next Question <ArrowRight className="w-4 h-4" />
+                </Button>
+              ) : null}
+            </div>
 
           </CardContent>
         </Card>
@@ -1934,33 +1951,16 @@ export default function PLAB1New() {
               <ArrowLeft className="w-5 h-5" />
             </Button>
 
-            {/* Center Content */}
+            {/* Center Content - Question Progress */}
             <div className="flex-1 flex justify-center">
-              {!showExplanation && selectedAnswer ? (
-                <Button 
-                  onClick={handleSubmitAnswer}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium"
-                >
-                  Submit answer
-                </Button>
-              ) : showExplanation ? (
-                <Button 
-                  onClick={handleNextQuestion}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium flex items-center gap-2"
-                >
-                  {currentQuestionIndex < generatedQuestions.length - 1 ? (
-                    <>
-                      Next question
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  ) : (
-                    <>
-                      Complete session
-                      <Award className="w-4 h-4" />
-                    </>
-                  )}
-                </Button>
-              ) : null}
+              <div className="text-center">
+                <p className="text-sm text-gray-600">
+                  Question {currentQuestionIndex + 1} of {questions.length}
+                </p>
+                {selectedAnswer && !showExplanation && (
+                  <p className="text-xs text-blue-600 mt-1">Answer selected - submit button above</p>
+                )}
+              </div>
             </div>
 
             {/* Next Button */}
