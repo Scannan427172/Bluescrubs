@@ -115,7 +115,7 @@ function addESCGuidance(
         key_points: generateESCKeyPoints(escConditions[0], scenarioText),
         clinical_approach: generateESCClinicalApproach(escConditions[0]),
         evidence_level: "Class I, Level A",
-        esc_url: `https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/${escConditions[0].replace(/\s+/g, '-').toLowerCase()}`
+        esc_url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines"
       };
     }
     
@@ -144,7 +144,7 @@ function addADAGuidance(
         key_points: generateADAKeyPoints(adaConditions[0], scenarioText),
         clinical_approach: generateADAClinicalApproach(adaConditions[0]),
         evidence_level: "Grade A Evidence",
-        ada_url: `https://care.diabetesjournals.org/content/standards-of-care`
+        ada_url: "https://diabetesjournals.org/care/issue/47/Supplement_1"
       };
     }
     
@@ -173,7 +173,7 @@ function addSIGNGuidance(
         key_points: generateSIGNKeyPoints(signConditions[0], scenarioText),
         clinical_approach: generateSIGNClinicalApproach(signConditions[0]),
         evidence_level: "Grade A Recommendation",
-        sign_url: `https://www.sign.ac.uk/our-guidelines/${signConditions[0].replace(/\s+/g, '-').toLowerCase()}`
+        sign_url: "https://www.sign.ac.uk/our-guidelines/"
       };
     }
     
@@ -202,7 +202,7 @@ function addBTSGuidance(
         key_points: generateBTSKeyPoints(btsConditions[0], scenarioText),
         clinical_approach: generateBTSClinicalApproach(btsConditions[0]),
         evidence_level: "Strong Recommendation",
-        bts_url: `https://www.brit-thoracic.org.uk/quality-standards-and-guidelines/guidelines/${btsConditions[0].replace(/\s+/g, '-').toLowerCase()}`
+        bts_url: "https://www.brit-thoracic.org.uk/quality-standards-and-guidelines/guidelines/"
       };
     }
     
