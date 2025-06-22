@@ -5,12 +5,16 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-// Enhanced cache for instant responses
+// Enhanced cache for instant responses - cleared for specific mnemonics
 const questionCache = new Map<string, UKMedicalQuestion[]>();
-const CACHE_SIZE_PER_CATEGORY = 100; // Increased cache size for faster delivery
-const CACHE_TTL = 8 * 60 * 60 * 1000; // 8 hours for longer persistence
+const CACHE_SIZE_PER_CATEGORY = 100; 
+const CACHE_TTL = 8 * 60 * 60 * 1000; 
 const cacheTimestamps = new Map<string, number>();
-const MIN_CACHE_THRESHOLD = 25; // Higher threshold for background generation
+const MIN_CACHE_THRESHOLD = 25;
+
+// Clear all cached questions to force regeneration with specific mnemonics
+questionCache.clear();
+cacheTimestamps.clear();
 
 // Priority categories for pre-loading
 const PRIORITY_CATEGORIES = ['all', 'cardiology', 'respiratory', 'gastroenterology', 'neurology', 'endocrinology'];
@@ -301,11 +305,11 @@ OUTPUT FORMAT (strictly follow this JSON structure):
   "correct_answer": "<A, B, C, D or E>",
   "explanation": "<comprehensive explanation covering: 1) Diagnosis confirmation, 2) Why correct answer is best per UK guidelines, 3) Mechanism/rationale, 4) Specific dosing/monitoring advice, 5) Why other options are incorrect, 6) Follow-up requirements>",
   "study_tips": {
-    "mnemonic": "<create a highly specific mnemonic that directly relates to the exact clinical condition, treatment, or diagnostic approach in THIS question - not generic specialty mnemonics. For example: if the question is about hypothyroidism treatment, create a mnemonic specifically for levothyroxine dosing or monitoring; if about heart failure, create one specific to the ACE inhibitor mentioned in the correct answer>",
+    "mnemonic": "<CRITICAL: Create a mnemonic that is 100% specific to THIS EXACT question. Use the patient's age, condition, symptoms, and the CORRECT ANSWER to create the mnemonic. For example: If a 45-year-old presents with chest pain and the correct answer is 'GTN spray', create a mnemonic about GTN specifically. If it's about levothyroxine for hypothyroidism, make the mnemonic about levothyroxine dosing/timing. DO NOT use generic cardiology or specialty mnemonics - make it question-specific.>",
     "key_learning_points": [
-      "<specific learning point directly tied to this exact case and correct answer>",
-      "<clinical pearl specific to this diagnosis and management approach>",
-      "<practical tip specific to this medication/investigation/procedure>"
+      "<learning point about the exact medication/procedure in the correct answer>",
+      "<clinical pearl about this specific patient presentation and diagnosis>", 
+      "<practical tip about the specific management approach chosen as correct>"
     ]
   },
   "references": [
