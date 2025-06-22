@@ -5,6 +5,7 @@ import { analyzeVideoPerformance } from "./ai-analysis";
 import { storage } from "./storage";
 import { askMedicalAI } from "./ask-ai-api";
 import { generateUKMedicalQuestion, generateMultipleUKQuestions } from "./uk-medical-generator";
+import { generateTutorResponse } from "./ai-tutor";
 import { getInstantQuestions, hasInstantQuestions } from "./plan1-optimization";
 import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generator";
 import { generatePLAB2Station, generateMultiplePLAB2Stations, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-uk-generator";
@@ -1232,6 +1233,23 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     } catch (error) {
       console.error('Error creating mock exam:', error);
       res.status(500).json({ error: 'Failed to create mock exam' });
+    }
+  });
+
+  // AI Tutor endpoint
+  app.post('/api/ai-tutor', async (req, res) => {
+    try {
+      const { query, context } = req.body;
+      
+      if (!query) {
+        return res.status(400).json({ error: 'Query is required' });
+      }
+
+      const tutorResponse = await generateTutorResponse(query, context);
+      res.json(tutorResponse);
+    } catch (error) {
+      console.error('AI Tutor error:', error);
+      res.status(500).json({ error: 'Failed to generate tutor response' });
     }
   });
 
