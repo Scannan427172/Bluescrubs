@@ -1,0 +1,53 @@
+{
+  "name": "NHS Prep - PLAB Medical Exam Preparation",
+  "short_name": "NHS Prep",
+  "description": "AI-powered medical education platform for PLAB exam preparation with adaptive learning, analytics, and clinical placements.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["education", "medical", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "PLAB 1 Practice",
+      "short_name": "PLAB 1",
+      "description": "Start PLAB 1 practice questions",
+      "url": "/plab1-new"
+    },
+    {
+      "name": "Analytics",
+      "short_name": "Analytics", 
+      "description": "View your performance analytics",
+      "url": "/analytics"
+    },
+    {
+      "name": "Leaderboards",
+      "short_name": "Leaderboards",
+      "description": "Check your ranking",
+      "url": "/leaderboard"
+    },
+    {
+      "name": "Clinical Placements",
+      "short_name": "Placements",
+      "description": "Find clinical placements",
+      "url": "/placements"
+    }
+  ]
+}
