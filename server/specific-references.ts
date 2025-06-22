@@ -216,6 +216,123 @@ export const SpecificReferenceDatabase = {
     ]
   },
 
+  // BMJ Best Practice References
+  // Using actual BMJ Best Practice URLs with specific topic sections
+  bmj: {
+    acute_mi: [
+      {
+        text: "BMJ Best Practice MI - 'Primary PCI within 90 minutes reduces mortality vs thrombolysis (NNT=43)'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000022/treatment",
+        section: "Treatment",
+        subsection: "Primary Percutaneous Coronary Intervention",
+        tableOrFigure: "Algorithm: Reperfusion Strategy Decision"
+      },
+      {
+        text: "BMJ Best Practice MI - 'Dual antiplatelet therapy: aspirin 75mg + clopidogrel 75mg daily for 12 months'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000022/treatment#referencePop3",
+        section: "Treatment",
+        subsection: "Antiplatelet Therapy",
+        tableOrFigure: "Table: DAPT Duration Recommendations"
+      }
+    ],
+    heart_failure: [
+      {
+        text: "BMJ Best Practice HF - 'ACE inhibitors reduce mortality by 23% in HFrEF (ARR 4.6%)'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000032/treatment",
+        section: "Treatment",
+        subsection: "ACE Inhibitors in HFrEF",
+        tableOrFigure: "Evidence Summary: ACE Inhibitor Trials"
+      },
+      {
+        text: "BMJ Best Practice HF - 'BNP >400 pg/mL or NT-proBNP >2000 pg/mL indicates heart failure'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000032/diagnosis",
+        section: "Diagnosis",
+        subsection: "Biomarker Interpretation",
+        tableOrFigure: "Table: Natriuretic Peptide Cut-offs"
+      }
+    ],
+    atrial_fibrillation: [
+      {
+        text: "BMJ Best Practice AF - 'CHA2DS2-VASc ≥2 requires anticoagulation (stroke risk 2.2% annually)'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000098/treatment",
+        section: "Treatment",
+        subsection: "Stroke Prevention",
+        tableOrFigure: "CHA2DS2-VASc Risk Calculator"
+      },
+      {
+        text: "BMJ Best Practice AF - 'Direct oral anticoagulants preferred over warfarin (reduced ICH risk)'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000098/treatment#referencePop12",
+        section: "Treatment",
+        subsection: "Anticoagulant Selection",
+        tableOrFigure: "Comparison: DOAC vs Warfarin Outcomes"
+      }
+    ],
+    asthma: [
+      {
+        text: "BMJ Best Practice Asthma - 'Peak flow <50% predicted indicates severe exacerbation'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000097/diagnosis",
+        section: "Diagnosis",
+        subsection: "Severity Assessment",
+        tableOrFigure: "Table: Asthma Exacerbation Severity"
+      },
+      {
+        text: "BMJ Best Practice Asthma - 'Step-up therapy: ICS + LABA when ICS alone insufficient'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000097/treatment",
+        section: "Treatment",
+        subsection: "Step-wise Management",
+        tableOrFigure: "Algorithm: Asthma Treatment Steps"
+      }
+    ],
+    pneumonia: [
+      {
+        text: "BMJ Best Practice CAP - 'CURB-65 ≥2 indicates hospital admission required'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000148/diagnosis",
+        section: "Diagnosis",
+        subsection: "Severity Scoring",
+        tableOrFigure: "CURB-65 Assessment Tool"
+      },
+      {
+        text: "BMJ Best Practice CAP - 'Amoxicillin 500mg TDS first-line for mild-moderate CAP'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000148/treatment",
+        section: "Treatment",
+        subsection: "Antibiotic Selection",
+        tableOrFigure: "Table: CAP Antibiotic Protocols"
+      }
+    ],
+    diabetes_t2: [
+      {
+        text: "BMJ Best Practice T2DM - 'Metformin 500mg BD first-line, titrate to 1g BD'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000107/treatment",
+        section: "Treatment",
+        subsection: "First-line Therapy",
+        tableOrFigure: "Algorithm: Metformin Initiation"
+      },
+      {
+        text: "BMJ Best Practice T2DM - 'HbA1c target 48-58 mmol/mol (6.5-7.5%) for most patients'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000107/prognosis",
+        section: "Prognosis",
+        subsection: "Glycemic Targets",
+        tableOrFigure: "Table: Individualized HbA1c Goals"
+      }
+    ],
+    hypothyroidism: [
+      {
+        text: "BMJ Best Practice Hypothyroidism - 'Levothyroxine 1.6 mcg/kg daily starting dose'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000114/treatment",
+        section: "Treatment",
+        subsection: "Levothyroxine Dosing",
+        tableOrFigure: "Dosing Calculator: Weight-based L-T4"
+      },
+      {
+        text: "BMJ Best Practice Hypothyroidism - 'TSH 0.4-4.0 mIU/L normal range, recheck 6-8 weeks after dose change'",
+        url: "https://bestpractice.bmj.com/topics/en-us/3000114/follow-up",
+        section: "Follow-up",
+        subsection: "Monitoring Protocol",
+        tableOrFigure: "Timeline: TSH Monitoring Schedule"
+      }
+    ]
+  },
+
   // CKS Clinical Knowledge Summaries References
   // Using actual working CKS URLs that exist on the NICE website
   cks: {

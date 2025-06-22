@@ -355,8 +355,10 @@ OUTPUT FORMAT (strictly follow this JSON structure):
 REFERENCE EXAMPLES TO FOLLOW:
 - NICE: [Treatment of primary hypothyroidism – NG145](https://www.nice.org.uk/guidance/ng145/chapter/Recommendations#treatment-of-primary-hypothyroidism)
 - CKS: [Levothyroxine treatment – Hypothyroidism CKS](https://cks.nice.org.uk/topics/hypothyroidism/management/levothyroxine-treatment/)
+- BMJ: [Hypothyroidism treatment – BMJ Best Practice](https://bestpractice.bmj.com/topics/en-us/3000114/treatment)
 - NICE: [Asthma diagnosis and monitoring – NG80](https://www.nice.org.uk/guidance/ng80/chapter/Recommendations#diagnosis-of-asthma)
 - CKS: [Asthma management – Asthma CKS](https://cks.nice.org.uk/topics/asthma/management/chronic-asthma-management/)
+- BMJ: [Asthma management – BMJ Best Practice](https://bestpractice.bmj.com/topics/en-us/3000097/treatment)
 
 Use these exact URL patterns with real guideline numbers and specific anchor sections.
 }

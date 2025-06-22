@@ -2,7 +2,7 @@ export interface EducationalSource {
   id: string;
   title: string;
   url: string;
-  type: "nhs" | "guideline" | "educational" | "government";
+  type: "nhs" | "guideline" | "educational" | "government" | "bmj";
   categories: string[];
   description?: string;
 }
@@ -295,6 +295,120 @@ export const EDUCATIONAL_SOURCES: Record<string, EducationalSource> = {
     url: "https://www.nhs.uk/conditions/vaccinations/mmr-vaccine/",
     type: "nhs",
     categories: ["paediatrics", "public-health"]
+  },
+
+  // BMJ Best Practice Sources
+  "bmj-acute-mi": {
+    id: "bmj-acute-mi",
+    title: "BMJ Best Practice - Acute myocardial infarction",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000022",
+    type: "bmj",
+    categories: ["cardiovascular", "emergency"],
+    description: "Evidence-based diagnosis and management of acute MI"
+  },
+  "bmj-heart-failure": {
+    id: "bmj-heart-failure",
+    title: "BMJ Best Practice - Heart failure",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000032",
+    type: "bmj",
+    categories: ["cardiovascular"],
+    description: "Comprehensive approach to heart failure management"
+  },
+  "bmj-atrial-fibrillation": {
+    id: "bmj-atrial-fibrillation",
+    title: "BMJ Best Practice - Atrial fibrillation",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000098",
+    type: "bmj",
+    categories: ["cardiovascular"],
+    description: "AF diagnosis, anticoagulation, and rhythm management"
+  },
+  "bmj-asthma": {
+    id: "bmj-asthma",
+    title: "BMJ Best Practice - Asthma",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000097",
+    type: "bmj",
+    categories: ["respiratory"],
+    description: "Evidence-based asthma diagnosis and treatment"
+  },
+  "bmj-pneumonia": {
+    id: "bmj-pneumonia",
+    title: "BMJ Best Practice - Community-acquired pneumonia",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000148",
+    type: "bmj",
+    categories: ["respiratory", "infectious-diseases"],
+    description: "CAP assessment, severity scoring, and antibiotic selection"
+  },
+  "bmj-copd": {
+    id: "bmj-copd",
+    title: "BMJ Best Practice - COPD",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000069",
+    type: "bmj",
+    categories: ["respiratory"],
+    description: "COPD diagnosis, spirometry interpretation, and management"
+  },
+  "bmj-diabetes-t2": {
+    id: "bmj-diabetes-t2",
+    title: "BMJ Best Practice - Type 2 diabetes mellitus",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000107",
+    type: "bmj",
+    categories: ["endocrinology"],
+    description: "T2DM diagnosis, HbA1c targets, and medication algorithms"
+  },
+  "bmj-hypothyroidism": {
+    id: "bmj-hypothyroidism",
+    title: "BMJ Best Practice - Hypothyroidism",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000114",
+    type: "bmj",
+    categories: ["endocrinology"],
+    description: "Thyroid function testing and levothyroxine therapy"
+  },
+  "bmj-depression": {
+    id: "bmj-depression",
+    title: "BMJ Best Practice - Depression",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000101",
+    type: "bmj",
+    categories: ["psychiatry"],
+    description: "Depression screening, risk assessment, and treatment algorithms"
+  },
+  "bmj-stroke": {
+    id: "bmj-stroke",
+    title: "BMJ Best Practice - Acute ischaemic stroke",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000124",
+    type: "bmj",
+    categories: ["neurology", "emergency"],
+    description: "Acute stroke protocols, thrombolysis, and secondary prevention"
+  },
+  "bmj-peptic-ulcer": {
+    id: "bmj-peptic-ulcer",
+    title: "BMJ Best Practice - Peptic ulcer disease",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000146",
+    type: "bmj",
+    categories: ["gastroenterology"],
+    description: "H. pylori testing, PPI therapy, and ulcer complications"
+  },
+  "bmj-appendicitis": {  
+    id: "bmj-appendicitis",
+    title: "BMJ Best Practice - Acute appendicitis",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000025",
+    type: "bmj",
+    categories: ["surgery", "emergency"],
+    description: "Appendicitis diagnosis, imaging, and surgical management"
+  },
+  "bmj-cholecystitis": {
+    id: "bmj-cholecystitis",
+    title: "BMJ Best Practice - Acute cholecystitis",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000043",
+    type: "bmj",
+    categories: ["surgery", "gastroenterology"],
+    description: "Gallbladder inflammation diagnosis and laparoscopic surgery"
+  },
+  "bmj-inguinal-hernia": {
+    id: "bmj-inguinal-hernia",
+    title: "BMJ Best Practice - Inguinal hernia",
+    url: "https://bestpractice.bmj.com/topics/en-us/3000116",
+    type: "bmj",
+    categories: ["surgery"],
+    description: "Hernia examination, surgical techniques, and mesh repair"
   }
 };
 
