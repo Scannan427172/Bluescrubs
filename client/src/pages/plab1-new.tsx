@@ -52,6 +52,13 @@ export default function PLAB1New() {
   
   // AI Tutor state
   const [showAITutor, setShowAITutor] = useState(false);
+  
+  // Session results tracking
+  const [sessionResults, setSessionResults] = useState<Array<{
+    correct: boolean;
+    timeSpent: number;
+    questionId: string;
+  }>>([]);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   
   // Block configuration for leaderboard submission
@@ -640,9 +647,21 @@ export default function PLAB1New() {
   const handleSubmitAnswer = () => {
     if (selectedAnswer && !showExplanation) {
       const timeForQuestion = Date.now() - questionStartTime;
+      const currentQuestion = generatedQuestions[currentQuestionIndex];
+      const isCorrect = parseInt(selectedAnswer) === currentQuestion?.correct_answer;
+      
+      // Update question times and user answers
       setQuestionTimes(prev => [...prev, timeForQuestion]);
       setUserAnswers(prev => [...prev, selectedAnswer]);
       setTimeSpent(prev => prev + timeForQuestion);
+      
+      // Update session results for AI tutor
+      setSessionResults(prev => [...prev, {
+        correct: isCorrect,
+        timeSpent: timeForQuestion,
+        questionId: currentQuestion?.id || `q_${currentQuestionIndex}`
+      }]);
+      
       setShowExplanation(true);
       setIsTimerRunning(false);
     }
