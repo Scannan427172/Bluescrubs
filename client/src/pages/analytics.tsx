@@ -12,6 +12,7 @@ import {
   TrendingUp, TrendingDown, Target, Clock, Brain, Award, 
   Calendar, Book, Star, Zap, CheckCircle, XCircle, MessageCircle, Bot 
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface AnalyticsData {
   userId: number;
@@ -552,7 +553,7 @@ export default function Analytics() {
                   </Button>
                 </div>
                 <CardDescription className="text-purple-600">
-                  Get personalized insights about your study performance and improvement strategies
+                  Get personalised insights about your study performance and improvement strategies
                 </CardDescription>
               </CardHeader>
               
@@ -621,7 +622,7 @@ export default function Analytics() {
                   AI-Powered Insights
                 </CardTitle>
                 <CardDescription>
-                  Personalized recommendations for improvement
+                  Personalised recommendations for improvement
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -636,7 +637,7 @@ export default function Analytics() {
                     <div className="text-center py-8">
                       <Brain className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                       <p className="text-gray-600 dark:text-gray-300">
-                        Answer more questions to receive personalized insights
+                        Answer more questions to receive personalised insights
                       </p>
                     </div>
                   )}

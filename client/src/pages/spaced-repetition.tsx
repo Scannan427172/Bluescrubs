@@ -174,7 +174,7 @@ export default function SpacedRepetition() {
             Spaced Repetition Learning
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-lg">
-            Scientifically optimized review system for long-term retention
+            Scientifically optimised review system for long-term retention
           </p>
         </div>
 

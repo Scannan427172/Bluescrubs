@@ -27,7 +27,7 @@ import Pricing from "@/pages/pricing";
 import AskNHSPrep from "@/pages/ask-nhs-prep";
 import PLABAIDashboard from "@/pages/plab-ai-dashboard";
 import InteractivePatientPage from "@/pages/interactive-patient-page";
-import PersonalizedPaths from "@/pages/personalized-paths";
+import PersonalisedPaths from "@/pages/personalised-paths";
 import VideoOSCE from "@/pages/video-osce";
 import More from "@/pages/more";
 import LanguageDemo from "@/pages/language-demo";
@@ -210,7 +210,7 @@ function Router() {
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
-            <PersonalizedPaths />
+            <PersonalisedPaths />
           </div>
         </div>
       </Route>

@@ -81,7 +81,7 @@ export default function Home() {
               Welcome back, {DEMO_USER.username.split(' ')[1]}!
             </h1>
             <p className="text-xl md:text-2xl mb-8 drop-shadow-lg opacity-95">
-              Continue your PLAB journey with personalized study plans and comprehensive practice.
+              Continue your PLAB journey with personalised study plans and comprehensive practice.
             </p>
             
             <div className="flex justify-center gap-4">
