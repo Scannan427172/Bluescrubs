@@ -17,27 +17,52 @@ questionCache.clear();
 cacheTimestamps.clear();
 console.log('Cache cleared - all new questions will have scenario-specific memory aids');
 
-// Pre-load popular categories
+// Pre-load all difficulty levels across all specialties
 const preloadQuestions = async () => {
   console.log('Pre-loading questions for instant delivery...');
-  const categories = [
-    'all_intermediate',
-    'cardiology_intermediate', 
-    'respiratory_intermediate',
-    'gastroenterology_intermediate',
-    'neurology_intermediate',
-    'endocrinology_intermediate'
+  
+  const specialties = [
+    'all',
+    'cardiology', 
+    'respiratory',
+    'gastroenterology',
+    'neurology',
+    'endocrinology',
+    'psychiatry',
+    'dermatology',
+    'rheumatology',
+    'haematology',
+    'oncology',
+    'infectious_diseases',
+    'nephrology',
+    'immunology',
+    'emergency_medicine',
+    'surgery',
+    'obstetrics_gynaecology',
+    'paediatrics',
+    'ophthalmology',
+    'ent',
+    'orthopaedics',
+    'anaesthetics',
+    'radiology',
+    'pathology',
+    'pharmacology'
   ];
   
-  for (const category of categories) {
-    try {
-      await preGenerateQuestions(category, 50);
-      console.log(`Pre-loaded ${category} questions`);
-    } catch (error) {
-      console.error(`Error pre-loading ${category}:`, error);
+  const difficulties = ['basic', 'intermediate', 'advanced'];
+  
+  for (const specialty of specialties) {
+    for (const difficulty of difficulties) {
+      const category = `${specialty}_${difficulty}`;
+      try {
+        await preGenerateQuestions(category, 30);
+        console.log(`Pre-loaded ${category} questions`);
+      } catch (error) {
+        console.error(`Error pre-loading ${category}:`, error);
+      }
     }
   }
-  console.log('Question pre-loading completed');
+  console.log('Question pre-loading completed for all levels and specialties');
 };
 
 // Start pre-loading after a short delay
