@@ -1551,9 +1551,32 @@ export default function PLAB1New() {
                         </div>
                       ))
                     ) : (
-                      <div className="space-y-1">
-                        <p className="text-blue-700">NICE Guidelines - Clinical evidence and recommendations</p>
-                        <p className="text-blue-700">GMC Good Medical Practice - Professional standards</p>
+                      <div className="space-y-2">
+                        {/* Specialty-specific references based on question category */}
+                        {currentQuestion.category?.toLowerCase().includes('cardio') && (
+                          <>
+                            <p className="text-blue-700">• ESC Guidelines - European Society of Cardiology evidence-based recommendations</p>
+                            <p className="text-blue-700">• NICE Guidelines - Cardiovascular disease prevention and management</p>
+                            <p className="text-blue-700">• BNF - British National Formulary for cardiac medications</p>
+                          </>
+                        )}
+                        {(currentQuestion.category?.toLowerCase().includes('diabetes') || 
+                          currentQuestion.category?.toLowerCase().includes('endocrin')) && (
+                          <>
+                            <p className="text-blue-700">• ADA Guidelines - American Diabetes Association standards of care</p>
+                            <p className="text-blue-700">• NICE Guidelines - Type 1 and Type 2 diabetes management</p>
+                            <p className="text-blue-700">• BNF - British National Formulary for diabetes medications</p>
+                          </>
+                        )}
+                        {!currentQuestion.category?.toLowerCase().includes('cardio') && 
+                         !currentQuestion.category?.toLowerCase().includes('diabetes') && 
+                         !currentQuestion.category?.toLowerCase().includes('endocrin') && (
+                          <>
+                            <p className="text-blue-700">• NICE Guidelines - Clinical evidence and recommendations</p>
+                            <p className="text-blue-700">• BNF - British National Formulary for medications</p>
+                            <p className="text-blue-700">• GMC Good Medical Practice - Professional standards</p>
+                          </>
+                        )}
                       </div>
                     )}
                     
