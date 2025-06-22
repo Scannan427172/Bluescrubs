@@ -21,7 +21,7 @@ import {
   PlayCircle
 } from 'lucide-react';
 
-export default function PersonalizedPaths() {
+export default function PersonalisedPaths() {
   const [selectedPath, setSelectedPath] = useState('plab1');
 
   const learningPaths = {
@@ -189,7 +189,7 @@ export default function PersonalizedPaths() {
             </div>
             <div>
               <h1 className="text-3xl font-bold" style={{ color: '#000000' }}>
-                Personalized Learning Paths
+                Personalised Learning Paths
               </h1>
               <p className="text-lg" style={{ color: '#555555' }}>
                 AI-curated study pathways tailored to your goals and progress
