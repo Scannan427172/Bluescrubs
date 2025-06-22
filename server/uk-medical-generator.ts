@@ -12,9 +12,11 @@ const CACHE_TTL = 8 * 60 * 60 * 1000;
 const cacheTimestamps = new Map<string, number>();
 const MIN_CACHE_THRESHOLD = 25;
 
-// Clear all cached questions to force regeneration with specific mnemonics
+// Clear all cached questions to force regeneration with question-specific mnemonics
+console.log('Clearing question cache to implement question-specific mnemonics...');
 questionCache.clear();
 cacheTimestamps.clear();
+console.log('Cache cleared - all new questions will have scenario-specific memory aids');
 
 // Priority categories for pre-loading
 const PRIORITY_CATEGORIES = ['all', 'cardiology', 'respiratory', 'gastroenterology', 'neurology', 'endocrinology'];
@@ -330,11 +332,11 @@ OUTPUT FORMAT (strictly follow this JSON structure):
   "correct_answer": "<A, B, C, D or E>",
   "explanation": "<comprehensive explanation covering: 1) Diagnosis confirmation, 2) Why correct answer is best per UK guidelines, 3) Mechanism/rationale, 4) Specific dosing/monitoring advice, 5) Why other options are incorrect, 6) Follow-up requirements>",
   "study_tips": {
-    "mnemonic": "<CRITICAL: Create a mnemonic that is 100% specific to THIS EXACT question. Use the patient's age, condition, symptoms, and the CORRECT ANSWER to create the mnemonic. For example: If a 45-year-old presents with chest pain and the correct answer is 'GTN spray', create a mnemonic about GTN specifically. If it's about levothyroxine for hypothyroidism, make the mnemonic about levothyroxine dosing/timing. DO NOT use generic cardiology or specialty mnemonics - make it question-specific.>",
-    "key_learning_points": [
-      "<learning point about the exact medication/procedure in the correct answer>",
-      "<clinical pearl about this specific patient presentation and diagnosis>", 
-      "<practical tip about the specific management approach chosen as correct>"
+    "mnemonic": "<Create a highly specific mnemonic using elements from THIS EXACT scenario: patient's age, presenting symptoms, examination findings, and the CORRECT ANSWER. Example formats: 'For 55-year-old with Hypothyroid symptoms needing Levothyroxine: H-L-55 = Hypothyroid Lady at 55 needs Levothyroxine' OR 'For chest pain needing GTN: Give The Nitrate for chest pain relief' OR 'For AF needing Warfarin: Atrial Fibrillation Warrants Warfarin'. Make it memorable and question-specific, not generic.>",
+    "question_specific_tips": [
+      "<Tip specifically about the correct treatment/investigation chosen>",
+      "<Memory aid for this exact patient demographic and presentation>", 
+      "<Clinical reasoning specific to why this answer beats the other 4 options>"
     ]
   },
   "references": [

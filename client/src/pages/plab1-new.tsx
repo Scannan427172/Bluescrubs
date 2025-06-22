@@ -660,7 +660,7 @@ export default function PLAB1New() {
       ).length;
       
       // Submit to appropriate leaderboard based on session type
-      submitToLeaderboard({
+      submitToBlockLeaderboard({
         correctAnswers,
         totalQuestions: generatedQuestions.length,
         totalTime,
