@@ -2,7 +2,7 @@ export interface EducationalSource {
   id: string;
   title: string;
   url: string;
-  type: "nhs" | "guideline" | "educational" | "government" | "bmj";
+  type: "nhs" | "guideline" | "educational" | "government" | "bmj" | "esc" | "ada" | "sign" | "bts";
   categories: string[];
   description?: string;
 }
@@ -297,118 +297,140 @@ export const EDUCATIONAL_SOURCES: Record<string, EducationalSource> = {
     categories: ["paediatrics", "public-health"]
   },
 
-  // BMJ Best Practice Sources
-  "bmj-acute-mi": {
-    id: "bmj-acute-mi",
-    title: "BMJ Best Practice - Acute myocardial infarction",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000022",
-    type: "bmj",
+  // ESC (European Society of Cardiology) Guidelines
+  "esc-heart-failure": {
+    id: "esc-heart-failure",
+    title: "ESC Guidelines - Heart Failure",
+    url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Acute-and-Chronic-Heart-Failure",
+    type: "esc",
+    categories: ["cardiovascular"],
+    description: "European guidelines for acute and chronic heart failure management"
+  },
+  "esc-atrial-fibrillation": {
+    id: "esc-atrial-fibrillation", 
+    title: "ESC Guidelines - Atrial Fibrillation",
+    url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Atrial-Fibrillation",
+    type: "esc",
+    categories: ["cardiovascular"],
+    description: "Management of atrial fibrillation and stroke prevention"
+  },
+  "esc-acute-coronary": {
+    id: "esc-acute-coronary",
+    title: "ESC Guidelines - Acute Coronary Syndromes",
+    url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Acute-Coronary-Syndromes",
+    type: "esc",
     categories: ["cardiovascular", "emergency"],
-    description: "Evidence-based diagnosis and management of acute MI"
+    description: "STEMI and NSTEMI management protocols"
   },
-  "bmj-heart-failure": {
-    id: "bmj-heart-failure",
-    title: "BMJ Best Practice - Heart failure",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000032",
-    type: "bmj",
+  "esc-hypertension": {
+    id: "esc-hypertension",
+    title: "ESC Guidelines - Hypertension",
+    url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Arterial-Hypertension",
+    type: "esc",
     categories: ["cardiovascular"],
-    description: "Comprehensive approach to heart failure management"
+    description: "European hypertension management guidelines"
   },
-  "bmj-atrial-fibrillation": {
-    id: "bmj-atrial-fibrillation",
-    title: "BMJ Best Practice - Atrial fibrillation",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000098",
-    type: "bmj",
-    categories: ["cardiovascular"],
-    description: "AF diagnosis, anticoagulation, and rhythm management"
+
+  // ADA (American Diabetes Association) Guidelines
+  "ada-diabetes-care": {
+    id: "ada-diabetes-care",
+    title: "ADA Standards - Diabetes Care",
+    url: "https://diabetesjournals.org/care/article/46/Supplement_1/S1/148055/Introduction-and-Methodology-Standards-of-Care-in",
+    type: "ada",
+    categories: ["endocrinology", "diabetes"],
+    description: "Comprehensive diabetes management standards"
   },
-  "bmj-asthma": {
-    id: "bmj-asthma",
-    title: "BMJ Best Practice - Asthma",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000097",
-    type: "bmj",
+  "ada-glycemic-targets": {
+    id: "ada-glycemic-targets",
+    title: "ADA Guidelines - Glycemic Targets", 
+    url: "https://diabetesjournals.org/care/article/46/Supplement_1/S97/148057/Glycemic-Targets-Standards-of-Care-in-Diabetes",
+    type: "ada",
+    categories: ["endocrinology", "diabetes"],
+    description: "Evidence-based glycemic control recommendations"
+  },
+  "ada-cardiovascular": {
+    id: "ada-cardiovascular",
+    title: "ADA Guidelines - Cardiovascular Disease in Diabetes",
+    url: "https://diabetesjournals.org/care/article/46/Supplement_1/S158/148061/Cardiovascular-Disease-and-Risk-Management",
+    type: "ada",
+    categories: ["endocrinology", "cardiovascular", "diabetes"],
+    description: "Cardiovascular risk management in diabetes"
+  },
+
+  // SIGN (Scottish Intercollegiate Guidelines Network)
+  "sign-asthma": {
+    id: "sign-asthma",
+    title: "SIGN Guidelines - Asthma",
+    url: "https://www.sign.ac.uk/our-guidelines/british-guideline-on-the-management-of-asthma/",
+    type: "sign",
     categories: ["respiratory"],
-    description: "Evidence-based asthma diagnosis and treatment"
+    description: "British guideline on asthma management"
   },
-  "bmj-pneumonia": {
-    id: "bmj-pneumonia",
-    title: "BMJ Best Practice - Community-acquired pneumonia",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000148",
-    type: "bmj",
-    categories: ["respiratory", "infectious-diseases"],
-    description: "CAP assessment, severity scoring, and antibiotic selection"
-  },
-  "bmj-copd": {
-    id: "bmj-copd",
-    title: "BMJ Best Practice - COPD",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000069",
-    type: "bmj",
+  "sign-copd": {
+    id: "sign-copd",
+    title: "SIGN Guidelines - COPD",
+    url: "https://www.sign.ac.uk/our-guidelines/management-of-chronic-obstructive-pulmonary-disease/",
+    type: "sign",
     categories: ["respiratory"],
-    description: "COPD diagnosis, spirometry interpretation, and management"
+    description: "Management of chronic obstructive pulmonary disease"
   },
-  "bmj-diabetes-t2": {
-    id: "bmj-diabetes-t2",
-    title: "BMJ Best Practice - Type 2 diabetes mellitus",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000107",
-    type: "bmj",
-    categories: ["endocrinology"],
-    description: "T2DM diagnosis, HbA1c targets, and medication algorithms"
+  "sign-stroke": {
+    id: "sign-stroke",
+    title: "SIGN Guidelines - Stroke Rehabilitation",
+    url: "https://www.sign.ac.uk/our-guidelines/management-of-patients-with-stroke-rehabilitation-prevention-and-management-of-complications-and-discharge-planning/",
+    type: "sign",
+    categories: ["neurology"],
+    description: "Stroke rehabilitation and secondary prevention"
   },
-  "bmj-hypothyroidism": {
-    id: "bmj-hypothyroidism",
-    title: "BMJ Best Practice - Hypothyroidism",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000114",
-    type: "bmj",
-    categories: ["endocrinology"],
-    description: "Thyroid function testing and levothyroxine therapy"
-  },
-  "bmj-depression": {
-    id: "bmj-depression",
-    title: "BMJ Best Practice - Depression",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000101",
-    type: "bmj",
+  "sign-depression": {
+    id: "sign-depression",
+    title: "SIGN Guidelines - Depression",
+    url: "https://www.sign.ac.uk/our-guidelines/non-pharmaceutical-management-of-depression-in-adults/",
+    type: "sign",
     categories: ["psychiatry"],
-    description: "Depression screening, risk assessment, and treatment algorithms"
+    description: "Non-pharmaceutical management of depression"
   },
-  "bmj-stroke": {
-    id: "bmj-stroke",
-    title: "BMJ Best Practice - Acute ischaemic stroke",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000124",
-    type: "bmj",
-    categories: ["neurology", "emergency"],
-    description: "Acute stroke protocols, thrombolysis, and secondary prevention"
+
+  // BTS (British Thoracic Society) Guidelines
+  "bts-pneumonia": {
+    id: "bts-pneumonia",
+    title: "BTS Guidelines - Community Acquired Pneumonia",
+    url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pneumonia-adults/",
+    type: "bts",
+    categories: ["respiratory", "infectious-diseases"],
+    description: "Management of community acquired pneumonia in adults"
   },
-  "bmj-peptic-ulcer": {
-    id: "bmj-peptic-ulcer",
-    title: "BMJ Best Practice - Peptic ulcer disease",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000146",
-    type: "bmj",
-    categories: ["gastroenterology"],
-    description: "H. pylori testing, PPI therapy, and ulcer complications"
+  "bts-asthma": {
+    id: "bts-asthma",
+    title: "BTS Guidelines - Asthma Management",
+    url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/asthma/",
+    type: "bts",
+    categories: ["respiratory"],
+    description: "British guidelines on asthma management"
   },
-  "bmj-appendicitis": {  
-    id: "bmj-appendicitis",
-    title: "BMJ Best Practice - Acute appendicitis",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000025",
-    type: "bmj",
-    categories: ["surgery", "emergency"],
-    description: "Appendicitis diagnosis, imaging, and surgical management"
+  "bts-copd": {
+    id: "bts-copd",
+    title: "BTS Guidelines - COPD",
+    url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/copd/",
+    type: "bts",
+    categories: ["respiratory"],
+    description: "COPD guidelines for optimal management"
   },
-  "bmj-cholecystitis": {
-    id: "bmj-cholecystitis",
-    title: "BMJ Best Practice - Acute cholecystitis",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000043",
-    type: "bmj",
-    categories: ["surgery", "gastroenterology"],
-    description: "Gallbladder inflammation diagnosis and laparoscopic surgery"
+  "bts-pleural": {
+    id: "bts-pleural",
+    title: "BTS Guidelines - Pleural Disease",
+    url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pleural-disease/",
+    type: "bts",
+    categories: ["respiratory"],
+    description: "Investigation and management of pleural disease"
   },
-  "bmj-inguinal-hernia": {
-    id: "bmj-inguinal-hernia",
-    title: "BMJ Best Practice - Inguinal hernia",
-    url: "https://bestpractice.bmj.com/topics/en-us/3000116",
-    type: "bmj",
-    categories: ["surgery"],
-    description: "Hernia examination, surgical techniques, and mesh repair"
+  "bts-oxygen": {
+    id: "bts-oxygen",
+    title: "BTS Guidelines - Emergency Oxygen",
+    url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/emergency-oxygen/",
+    type: "bts",
+    categories: ["respiratory", "emergency"],
+    description: "Emergency oxygen use in adult patients"
   }
 };
 
