@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap, Building } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 interface NavigationProps {
@@ -22,6 +22,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Analytics", href: "/analytics", icon: BarChart3, current: location === "/analytics" },
     { name: "Spaced Learning", href: "/spaced-repetition", icon: Brain, current: location === "/spaced-repetition" },
     { name: "PLAB 2", href: "/plab2-osce", icon: Video, current: location === "/plab2-osce" },
+    { name: "Placements", href: "/placements", icon: Building, current: location === "/placements" },
     { name: "Clinical Guides", href: "/clinical-guides", icon: FileText, current: location === "/clinical-guides" },
     { name: "AI Study Tools", href: "/ai-study-tools", icon: Brain, current: location === "/ai-study-tools" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },

@@ -18,6 +18,7 @@ import Leaderboards from "@/pages/leaderboards";
 import Leaderboard from "@/pages/leaderboard";
 import Analytics from "@/pages/analytics";
 import SpacedRepetition from "@/pages/spaced-repetition";
+import Placements from "@/pages/placements";
 import Premium from "@/pages/premium";
 import AskAI from "@/pages/ask-ai";
 import AIStudyTools from "@/pages/ai-study-tools";
@@ -336,6 +337,15 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <SpacedRepetition />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/placements">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Placements />
           </div>
         </div>
       </Route>
