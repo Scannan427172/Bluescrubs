@@ -83,7 +83,7 @@ export default function Placements() {
       benefits: ['Teaching program', 'Research opportunities', 'Mentorship', 'Career guidance'],
       contact: {
         phone: '+44 20 3416 5000',
-        email: 'placements@bartshealth.nhs.uk',
+        email: 'enquiries@NHSprep.co.uk',
         website: 'www.bartshealth.nhs.uk'
       },
       isApplied: false,
