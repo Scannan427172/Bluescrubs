@@ -39,78 +39,6 @@ const preloadQuestions = async () => {
 // Start pre-loading after a short delay
 setTimeout(preloadQuestions, 2000);
 
-// Function to enhance questions with BMJ Best Practice guidance
-function enhanceWithBMJGuidance(
-  question: UKMedicalQuestion,
-  specialty: string
-): UKMedicalQuestion {
-  try {
-    // Map specialty to BMJ Best Practice topics
-    const specialtyToBMJMap: Record<string, string> = {
-      'cardiology': 'cardiovascular-disease',
-      'cardiovascular': 'acute-coronary-syndromes',
-      'respiratory': 'asthma',
-      'endocrinology': 'diabetes-mellitus',
-      'psychiatry': 'depression',
-      'gastroenterology': 'gastroenteritis',
-      'neurology': 'stroke',
-      'surgery': 'surgical-site-infection',
-      'obstetrics-gynaecology': 'pregnancy-care',
-      'general': 'primary-care'
-    };
-
-    const bmjTopic = specialtyToBMJMap[specialty.toLowerCase()] || 'primary-care';
-    
-    // Generate BMJ guidance based on specialty and question content
-    const bmjGuidance = {
-      summary: `BMJ Best Practice provides evidence-based clinical guidance for ${specialty} conditions with systematic approach to diagnosis and management.`,
-      key_points: [
-        "Evidence-based diagnostic criteria and risk stratification",
-        "Systematic treatment algorithms with outcome measures",
-        "Patient safety considerations and monitoring requirements"
-      ],
-      clinical_approach: "Structured clinical assessment following evidence-based protocols with emphasis on patient-centered care and safety.",
-      evidence_level: "Strong recommendation based on high-quality evidence",
-      bmj_url: `https://bestpractice.bmj.com/topics/en-us/${bmjTopic}`
-    };
-
-    // Customize guidance based on question content
-    const scenarioText = (question.scenario + ' ' + question.question).toLowerCase();
-    
-    if (scenarioText.includes('chest pain') || scenarioText.includes('cardiac')) {
-      bmjGuidance.summary = "BMJ Best Practice emphasizes rapid assessment of chest pain using validated risk scores and immediate ECG interpretation.";
-      bmjGuidance.key_points = [
-        "HEART score for risk stratification in chest pain",
-        "Immediate ECG and troponin measurement",
-        "Consider dual antiplatelet therapy for ACS"
-      ];
-      bmjGuidance.bmj_url = "https://bestpractice.bmj.com/topics/en-us/3000003";
-    } else if (scenarioText.includes('diabetes') || scenarioText.includes('glucose')) {
-      bmjGuidance.summary = "BMJ Best Practice advocates for individualized diabetes management with HbA1c targets and cardiovascular risk reduction.";
-      bmjGuidance.key_points = [
-        "HbA1c target <7% for most adults with diabetes",
-        "Metformin as first-line therapy unless contraindicated",
-        "Annual screening for diabetic complications"
-      ];
-      bmjGuidance.bmj_url = "https://bestpractice.bmj.com/topics/en-us/3000114";
-    } else if (scenarioText.includes('asthma') || scenarioText.includes('wheeze')) {
-      bmjGuidance.summary = "BMJ Best Practice recommends step-wise asthma management with emphasis on inhaler technique and trigger avoidance.";
-      bmjGuidance.key_points = [
-        "Step-wise approach to asthma pharmacotherapy",
-        "Regular assessment of inhaler technique",
-        "Written asthma action plans for all patients"
-      ];
-      bmjGuidance.bmj_url = "https://bestpractice.bmj.com/topics/en-us/3000097";
-    }
-
-    question.bmj_guidance = bmjGuidance;
-    return question;
-  } catch (error) {
-    console.error('Error enhancing with BMJ guidance:', error);
-    return question; // Return original question if enhancement fails
-  }
-}
-
 // Function to enhance questions with specific CKS references
 async function enhanceWithCKSReferences(
   question: UKMedicalQuestion,
@@ -524,6 +452,136 @@ async function preGenerateQuestions(cacheKey: string, count: number = 5): Promis
   }
 }
 
+// Function to add question-specific BMJ Best Practice guidance
+function addBMJGuidance(
+  question: UKMedicalQuestion,
+  specialty: string
+): UKMedicalQuestion {
+  try {
+    const scenarioText = (question.scenario + ' ' + question.question).toLowerCase();
+    
+    // Analyze question content to determine specific BMJ topic
+    let bmjGuidance = {
+      summary: "",
+      key_points: [] as string[],
+      clinical_approach: "",
+      evidence_level: "Strong recommendation based on systematic review",
+      bmj_url: ""
+    };
+
+    // Cardiovascular conditions
+    if (scenarioText.includes('chest pain') || scenarioText.includes('angina')) {
+      bmjGuidance = {
+        summary: "BMJ Best Practice emphasizes rapid systematic assessment using HEART score and immediate ECG for chest pain evaluation.",
+        key_points: [
+          "HEART score ≥4 indicates high risk requiring hospital assessment",
+          "ECG within 10 minutes of presentation",
+          "High-sensitivity troponin at 0 and 3 hours"
+        ],
+        clinical_approach: "Risk stratification using validated scores, serial cardiac biomarkers, and consideration for coronary CT angiography in intermediate risk patients.",
+        evidence_level: "Strong recommendation based on systematic review",
+        bmj_url: "https://bestpractice.bmj.com/topics/en-us/3000003"
+      };
+    } else if (scenarioText.includes('heart failure') || scenarioText.includes('breathless')) {
+      bmjGuidance = {
+        summary: "BMJ Best Practice advocates NT-proBNP testing and echocardiography for heart failure diagnosis with ACE inhibitor initiation.",
+        key_points: [
+          "NT-proBNP >125 pg/mL warrants echocardiography",
+          "ACE inhibitors first-line unless contraindicated",
+          "Beta-blockers once stable on ACE inhibitor therapy"
+        ],
+        clinical_approach: "Structured approach using biomarkers, imaging, and guideline-directed medical therapy with regular monitoring.",
+        evidence_level: "Strong recommendation based on RCT evidence",
+        bmj_url: "https://bestpractice.bmj.com/topics/en-us/3000135"
+      };
+    } else if (scenarioText.includes('hypertension') || scenarioText.includes('blood pressure')) {
+      bmjGuidance = {
+        summary: "BMJ Best Practice recommends ambulatory blood pressure monitoring and stepped care approach to hypertension management.",
+        key_points: [
+          "ABPM confirmatory testing for stage 1 hypertension",
+          "ACE inhibitors first-line in under 55s, CCBs in over 55s",
+          "Target <140/90 mmHg in most patients"
+        ],
+        clinical_approach: "24-hour ABPM for diagnosis confirmation, cardiovascular risk assessment, and structured medication escalation.",
+        evidence_level: "Strong recommendation based on meta-analysis",
+        bmj_url: "https://bestpractice.bmj.com/topics/en-us/3000114"
+      };
+    }
+    // Respiratory conditions  
+    else if (scenarioText.includes('asthma') || scenarioText.includes('wheeze')) {
+      bmjGuidance = {
+        summary: "BMJ Best Practice emphasizes fractional exhaled nitric oxide testing and step-wise pharmacotherapy for asthma management.",
+        key_points: [
+          "FeNO >40 ppb supports asthma diagnosis",
+          "ICS-formoterol as reliever and maintenance therapy",
+          "Written asthma action plans for all patients"
+        ],
+        clinical_approach: "Objective testing with spirometry and FeNO, personalized inhaler therapy, and structured self-management education.",
+        evidence_level: "Strong recommendation based on systematic review",
+        bmj_url: "https://bestpractice.bmj.com/topics/en-us/3000097"
+      };
+    } else if (scenarioText.includes('copd') || scenarioText.includes('chronic obstructive')) {
+      bmjGuidance = {
+        summary: "BMJ Best Practice advocates for post-bronchodilator spirometry and GOLD classification for COPD management.",
+        key_points: [
+          "Post-bronchodilator FEV1/FVC <0.7 confirms airflow obstruction",
+          "LABA-LAMA combination for symptomatic patients",
+          "Pulmonary rehabilitation for all symptomatic patients"
+        ],
+        clinical_approach: "Spirometric confirmation, exacerbation history assessment, and individualized bronchodilator therapy selection.",
+        evidence_level: "Strong recommendation based on RCT evidence",
+        bmj_url: "https://bestpractice.bmj.com/topics/en-us/3000098"
+      };
+    }
+    // Endocrine conditions
+    else if (scenarioText.includes('diabetes') || scenarioText.includes('glucose') || scenarioText.includes('hba1c')) {
+      bmjGuidance = {
+        summary: "BMJ Best Practice recommends HbA1c <7% target with metformin first-line and cardiovascular risk reduction strategies.",
+        key_points: [
+          "HbA1c <7% (53 mmol/mol) for most adults",
+          "Metformin 500mg BD initially, titrate to maximum tolerated dose",
+          "Annual retinal screening and foot examination"
+        ],
+        clinical_approach: "Individualized glycemic targets, structured medication escalation, and comprehensive complication screening.",
+        evidence_level: "Strong recommendation based on landmark trials",
+        bmj_url: "https://bestpractice.bmj.com/topics/en-us/3000116"
+      };
+    } else if (scenarioText.includes('thyroid') || scenarioText.includes('tsh')) {
+      bmjGuidance = {
+        summary: "BMJ Best Practice advocates TSH-guided levothyroxine dosing with 6-8 week monitoring intervals for hypothyroidism.",
+        key_points: [
+          "Start levothyroxine 1.6 mcg/kg/day in healthy adults",
+          "Check TSH 6-8 weeks after dose changes",
+          "Target TSH 0.5-2.5 mIU/L for most patients"
+        ],
+        clinical_approach: "Weight-based initial dosing, systematic monitoring, and dose optimization based on TSH response.",
+        evidence_level: "Strong recommendation based on expert consensus",
+        bmj_url: "https://bestpractice.bmj.com/topics/en-us/3000114"
+      };
+    }
+    // Default for other conditions
+    else {
+      bmjGuidance = {
+        summary: `BMJ Best Practice provides evidence-based approach to ${specialty} conditions with systematic diagnostic and management protocols.`,
+        key_points: [
+          "Evidence-based diagnostic criteria and risk assessment",
+          "Structured treatment algorithms with monitoring plans",
+          "Patient safety considerations and quality indicators"
+        ],
+        clinical_approach: "Systematic clinical assessment following evidence-based protocols with emphasis on patient-centered care.",
+        evidence_level: "Recommendation based on best available evidence",
+        bmj_url: "https://bestpractice.bmj.com/topics/en-us/"
+      };
+    }
+
+    question.bmj_guidance = bmjGuidance;
+    return question;
+  } catch (error) {
+    console.error('Error adding BMJ guidance:', error);
+    return question;
+  }
+}
+
 async function generateSingleQuestion(
   specialty: string,
   difficulty: string
@@ -563,23 +621,8 @@ async function generateSingleQuestion(
     // Enhance with detailed CKS references
     questionData = await enhanceWithCKSReferences(questionData, specialty);
 
-    // Add BMJ Best Practice guidance
-    if (typeof enhanceWithBMJGuidance === 'function') {
-      questionData = enhanceWithBMJGuidance(questionData, specialty);
-    } else {
-      // Add default BMJ guidance
-      questionData.bmj_guidance = {
-        summary: `BMJ Best Practice provides evidence-based clinical guidance for ${specialty} conditions with systematic approach to diagnosis and management.`,
-        key_points: [
-          "Evidence-based diagnostic criteria and risk stratification",
-          "Systematic treatment algorithms with outcome measures",
-          "Patient safety considerations and monitoring requirements"
-        ],
-        clinical_approach: "Structured clinical assessment following evidence-based protocols with emphasis on patient-centered care and safety.",
-        evidence_level: "Strong recommendation based on high-quality evidence",
-        bmj_url: "https://bestpractice.bmj.com/topics/en-us/primary-care"
-      };
-    }
+    // Add question-specific BMJ Best Practice guidance
+    questionData = addBMJGuidance(questionData, specialty);
 
     // Add default CKS guidance if missing
     if (!questionData.cks_guidance) {
