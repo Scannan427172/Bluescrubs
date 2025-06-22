@@ -130,6 +130,13 @@ export interface UKMedicalQuestion {
     cks_url?: string;
     specific_references?: SpecificReference[];
   };
+  bmj_guidance?: {
+    summary: string;
+    key_points: string[];
+    clinical_approach: string;
+    evidence_level?: string;
+    bmj_url?: string;
+  };
   additional_guidelines: Array<{
     source: string;
     guidance: string;
@@ -483,6 +490,9 @@ async function generateSingleQuestion(
 
     // Enhance with detailed CKS references
     questionData = await enhanceWithCKSReferences(questionData, specialty);
+
+    // Add BMJ Best Practice guidance
+    questionData = await enhanceWithBMJGuidance(questionData, specialty);
 
     // Add default CKS guidance if missing
     if (!questionData.cks_guidance) {

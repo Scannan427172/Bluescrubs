@@ -1799,7 +1799,60 @@ export default function PLAB1New() {
               </div>
             )}
 
-
+            {/* BMJ Best Practice */}
+            {currentQuestion.bmj_guidance && (
+              <div className="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg mb-4">
+                <div className="flex items-start gap-2">
+                  <BookOpen className="w-4 h-4 text-orange-600 flex-shrink-0 mt-1" />
+                  <div className="w-full">
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-sm font-medium text-orange-900">BMJ Best Practice</p>
+                      <div className="flex flex-col gap-1">
+                        <p className="text-xs text-orange-700 italic">
+                          Evidence-based clinical guidance
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-white border border-orange-200 rounded-lg p-4 mb-3">
+                      <p className="text-orange-800 text-sm leading-relaxed mb-3">
+                        {currentQuestion.bmj_guidance.summary}
+                      </p>
+                      
+                      <div className="mb-3">
+                        <p className="text-xs font-semibold text-orange-900 mb-2">Evidence-Based Recommendations:</p>
+                        <ul className="list-disc list-inside space-y-1">
+                          {Array.isArray(currentQuestion.bmj_guidance.key_points) && 
+                           currentQuestion.bmj_guidance.key_points.map((point: string, index: number) => (
+                            <li key={index} className="text-xs text-orange-800">{point}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="mb-3">
+                        <p className="text-xs font-semibold text-orange-900 mb-1">Clinical Approach:</p>
+                        <p className="text-xs text-orange-800">{currentQuestion.bmj_guidance.clinical_approach}</p>
+                      </div>
+                      
+                      {currentQuestion.bmj_guidance.bmj_url && (
+                        <div className="flex justify-between items-center pt-2 border-t border-orange-200">
+                          <p className="text-xs text-orange-700">Full BMJ Best Practice Topic</p>
+                          <a
+                            href={currentQuestion.bmj_guidance.bmj_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center rounded-md text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-orange-300 text-orange-700 hover:bg-orange-50 h-7 px-3"
+                          >
+                            <ExternalLink className="w-3 h-3 mr-1" />
+                            View BMJ Best Practice
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Specific Reference Section */}
             <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
