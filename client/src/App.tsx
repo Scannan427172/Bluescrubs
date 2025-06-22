@@ -13,9 +13,7 @@ import Plab2Osce from "@/pages/plab2-osce";
 import PLAB1New from "@/pages/plab1-new";
 import InteractiveFlashcards from "@/pages/interactive-flashcards";
 import ClinicalGuides from "@/pages/clinical-guides";
-import GlobalScoreboard from "@/pages/global-scoreboard";
 import Leaderboards from "@/pages/leaderboards";
-import Leaderboard from "@/pages/leaderboard";
 import Analytics from "@/pages/analytics";
 import SpacedRepetition from "@/pages/spaced-repetition";
 import Placements from "@/pages/placements";
@@ -24,22 +22,18 @@ import AskAI from "@/pages/ask-ai";
 import AIStudyTools from "@/pages/ai-study-tools";
 import Community from "@/pages/community";
 import Pricing from "@/pages/pricing";
-import AskNHSPrep from "@/pages/ask-nhs-prep";
-import PLABAIDashboard from "@/pages/plab-ai-dashboard";
+
 import InteractivePatientPage from "@/pages/interactive-patient-page";
 import PersonalisedPaths from "@/pages/personalised-paths";
 import VideoOSCE from "@/pages/video-osce";
 import More from "@/pages/more";
-import LanguageDemo from "@/pages/language-demo";
-import GlobalPractice from "@/pages/global-practice";
+
 import AdaptiveLearning from "@/pages/adaptive-learning";
 import SmartPlanner from "@/pages/smart-planner";
 import CulturalTraining from "@/pages/cultural-training";
 import Mentors from "@/pages/mentors";
 import Gamification from "@/pages/gamification";
-import AdvancedDashboard from "@/pages/advanced-dashboard";
 import InternationalExams from "@/pages/international-exams";
-import AboutTeam from "@/pages/about-team";
 import NotFound from "@/pages/not-found";
 
 // Mock user for demo - in real app this would come from auth context
@@ -68,14 +62,7 @@ function Router() {
           </div>
         </div>
       </Route>
-      <Route path="/advanced-dashboard">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <AdvancedDashboard />
-          </div>
-        </div>
-      </Route>
+
 
       <Route path="/plab1-new">
         <div className="flex flex-col min-h-screen">
@@ -109,14 +96,7 @@ function Router() {
           </div>
         </div>
       </Route>
-      <Route path="/global-scoreboard">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <GlobalScoreboard />
-          </div>
-        </div>
-      </Route>
+
       <Route path="/leaderboards">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
@@ -179,23 +159,7 @@ function Router() {
         </div>
       </Route>
 
-      <Route path="/ask-nhs-prep">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <AskNHSPrep />
-          </div>
-        </div>
-      </Route>
 
-      <Route path="/plab-ai-dashboard">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <PLABAIDashboard />
-          </div>
-        </div>
-      </Route>
 
       <Route path="/interactive-patient">
         <div className="flex flex-col min-h-screen">
@@ -233,32 +197,7 @@ function Router() {
         </div>
       </Route>
 
-      <Route path="/about-team">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <AboutTeam />
-          </div>
-        </div>
-      </Route>
 
-      <Route path="/language-demo">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <LanguageDemo />
-          </div>
-        </div>
-      </Route>
-
-      <Route path="/global-practice">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <GlobalPractice />
-          </div>
-        </div>
-      </Route>
 
       <Route path="/adaptive-learning">
         <div className="flex flex-col min-h-screen">
@@ -318,7 +257,7 @@ function Router() {
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
-            <Leaderboard />
+            <Leaderboards />
           </div>
         </div>
       </Route>
@@ -359,14 +298,7 @@ function Router() {
         </div>
       </Route>
 
-      <Route path="/nhs-prep">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <AskNHSPrep />
-          </div>
-        </div>
-      </Route>
+
 
       <Route component={NotFound} />
     </Switch>
