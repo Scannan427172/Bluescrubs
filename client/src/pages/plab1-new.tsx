@@ -1712,14 +1712,25 @@ export default function PLAB1New() {
                       ))
                     ) : (
                       <div className="space-y-2">
-                        {/* Specialty-specific references based on question category */}
+                        {/* Specialty-specific references with comprehensive guidelines */}
                         {currentQuestion.category?.toLowerCase().includes('cardio') && (
                           <>
                             <p className="text-blue-700">• ESC Guidelines - European Society of Cardiology evidence-based recommendations</p>
                             <p className="text-blue-700">• NICE Guidelines - Cardiovascular disease prevention and management</p>
+                            <p className="text-blue-700">• SIGN Guidelines - Scottish cardiovascular evidence and recommendations</p>
                             <p className="text-blue-700">• BNF - British National Formulary for cardiac medications</p>
-                            <p className="text-blue-700">• MLA Competency Framework - Medical Licensing Assessment standards</p>
-                            <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
+                            <p className="text-blue-700">• MLA Content Map - Applied Medical Sciences: Cardiovascular pathophysiology</p>
+                            <p className="text-blue-700">• Foundation Programme - Acute care and emergency medicine competencies</p>
+                          </>
+                        )}
+                        {currentQuestion.category?.toLowerCase().includes('respiratory') && (
+                          <>
+                            <p className="text-blue-700">• BTS Guidelines - British Thoracic Society respiratory standards</p>
+                            <p className="text-blue-700">• NICE Guidelines - Asthma, COPD and respiratory disease management</p>
+                            <p className="text-blue-700">• SIGN Guidelines - Scottish respiratory evidence and recommendations</p>
+                            <p className="text-blue-700">• BNF - British National Formulary for respiratory medications</p>
+                            <p className="text-blue-700">• MLA Content Map - Clinical Skills: Respiratory examination and procedures</p>
+                            <p className="text-blue-700">• Foundation Programme - Safe prescribing and therapeutics</p>
                           </>
                         )}
                         {(currentQuestion.category?.toLowerCase().includes('diabetes') || 
@@ -1727,20 +1738,43 @@ export default function PLAB1New() {
                           <>
                             <p className="text-blue-700">• ADA Guidelines - American Diabetes Association standards of care</p>
                             <p className="text-blue-700">• NICE Guidelines - Type 1 and Type 2 diabetes management</p>
+                            <p className="text-blue-700">• SIGN Guidelines - Scottish diabetes evidence and recommendations</p>
                             <p className="text-blue-700">• BNF - British National Formulary for diabetes medications</p>
-                            <p className="text-blue-700">• MLA Competency Framework - Medical Licensing Assessment standards</p>
-                            <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
+                            <p className="text-blue-700">• MLA Content Map - Applied Medical Sciences: Endocrine pathophysiology</p>
+                            <p className="text-blue-700">• Foundation Programme - Quality improvement and patient safety</p>
                           </>
                         )}
-                        {/* Always show core UK medical references */}
+                        {currentQuestion.category?.toLowerCase().includes('gastro') && (
+                          <>
+                            <p className="text-blue-700">• BSG Guidelines - British Society of Gastroenterology clinical standards</p>
+                            <p className="text-blue-700">• NICE Guidelines - Gastrointestinal conditions and procedures</p>
+                            <p className="text-blue-700">• SIGN Guidelines - Scottish GI evidence and recommendations</p>
+                            <p className="text-blue-700">• BNF - British National Formulary for GI medications</p>
+                            <p className="text-blue-700">• MLA Content Map - Clinical Skills: Abdominal examination techniques</p>
+                            <p className="text-blue-700">• Foundation Programme - Infection prevention and antimicrobial stewardship</p>
+                          </>
+                        )}
+                        {(currentQuestion.category?.toLowerCase().includes('obstetric') || 
+                          currentQuestion.category?.toLowerCase().includes('gynaecol')) && (
+                          <>
+                            <p className="text-blue-700">• RCOG Guidelines - Royal College of Obstetricians and Gynaecologists standards</p>
+                            <p className="text-blue-700">• NICE Guidelines - Antenatal, intrapartum and postnatal care</p>
+                            <p className="text-blue-700">• SIGN Guidelines - Scottish women's health evidence</p>
+                            <p className="text-blue-700">• BNF - British National Formulary for women's health medications</p>
+                            <p className="text-blue-700">• MLA Content Map - Professional Behaviour: Women's health communication</p>
+                            <p className="text-blue-700">• Foundation Programme - Health inequalities and social determinants</p>
+                          </>
+                        )}
+                        {/* Always show core UK medical references with MLA content map integration */}
                         <>
                           <p className="text-blue-700">• NICE Guidelines - Clinical evidence and recommendations</p>
-                          <p className="text-blue-700">• BNF - British National Formulary for medications</p>
-                          <p className="text-blue-700">• GMC Good Medical Practice - Professional standards</p>
-                          <p className="text-blue-700">• MLA Competency Framework - Medical Licensing Assessment standards</p>
-                          <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
+                          <p className="text-blue-700">• BNF - British National Formulary for medications and prescribing</p>
+                          <p className="text-blue-700">• GMC Good Medical Practice - Professional standards and ethics</p>
+                          <p className="text-blue-700">• MLA Content Map - Applied Medical Sciences, Clinical Skills, Professional Behaviour</p>
+                          <p className="text-blue-700">• Foundation Programme Curriculum - Acute care, safe prescribing, quality improvement</p>
                           <p className="text-blue-700">• RCGP Guidelines - Royal College of General Practitioners clinical standards</p>
                           <p className="text-blue-700">• SIGN Guidelines - Scottish Intercollegiate Guidelines Network evidence</p>
+                          <p className="text-blue-700">• CKS Clinical Knowledge Summaries - Practical management guidance</p>
                         </>)
                       </div>
                     )}

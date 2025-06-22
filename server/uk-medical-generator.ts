@@ -274,9 +274,34 @@ AUTHENTIC NICE GUIDELINES TO USE:
 - NG106: Chronic heart failure in adults
 - NG185: Atrial fibrillation management
 - NG12: Suspected cancer recognition and referral
+- NG17: Type 1 diabetes in adults
+- NG203: COVID-19 rapid guideline
+- NG159: Depression in adults
+- NG116: Mental health problems in people with learning disabilities
+
+MLA CONTENT MAP DOMAINS TO REFERENCE:
+- Applied Medical Sciences (anatomy, physiology, pathology, pharmacology)
+- Clinical Skills (history taking, examination, procedures)
+- Professional Behaviour (ethics, communication, teamwork)
+- Population Health (epidemiology, health promotion, disease prevention)
+
+FOUNDATION PROGRAMME CURRICULUM AREAS:
+- Acute care and emergency medicine
+- Safe prescribing and therapeutics
+- Infection prevention and antimicrobial stewardship
+- Quality improvement and patient safety
+- Health inequalities and social determinants
+
+SPECIALIST SOCIETY GUIDELINES TO INCLUDE:
+- ESC (European Society of Cardiology): cardiovascular conditions
+- BTS (British Thoracic Society): respiratory conditions
+- ADA (American Diabetes Association): diabetes management
+- SIGN (Scottish Intercollegiate Guidelines Network): evidence-based care
+- RCOG (Royal College of Obstetricians and Gynaecologists): women's health
+- BSG (British Society of Gastroenterology): GI conditions
 
 AUTHENTIC CKS TOPICS TO USE:
-- hypothyroidism, asthma, hypertension, diabetes-type2, heart-failure, atrial-fibrillation, depression, anxiety-disorder
+- hypothyroidism, asthma, hypertension, diabetes-type2, heart-failure, atrial-fibrillation, depression, anxiety-disorder, copd, pneumonia, uti, contraception
 
 Format your entire output as VALID JSON exactly as shown below.
 
@@ -336,12 +361,18 @@ Use these exact URL patterns with real guideline numbers and specific anchor sec
 
 SPECIALTY CONTEXT: Focus on ${specialty} scenarios appropriate for ${config.context}. 
 
+MLA CONTENT MAP INTEGRATION:
+- Align questions with MLA domains: Applied Medical Sciences, Clinical Skills, Professional Behaviour, Population Health
+- Include Foundation Programme curriculum elements where relevant
+- Reference appropriate competency frameworks in explanations
+
 CONTENT REQUIREMENTS:
 - Create realistic clinical presentations with specific vital signs, investigation results, and examination findings
 - Use authentic UK medical terminology and reference ranges
 - Include age-appropriate conditions and presentations
 - Ensure all treatment options reflect current UK prescribing guidelines
 - Base explanations on established pathophysiology and evidence-based medicine
+- Include relevant specialist society guidelines (ESC, BTS, ADA, SIGN, RCOG, BSG) where applicable
 
 STRICT RULES:
 - Always output valid JSON format
