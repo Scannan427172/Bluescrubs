@@ -115,7 +115,7 @@ function addESCGuidance(
         key_points: generateESCKeyPoints(escConditions[0], scenarioText),
         clinical_approach: generateESCClinicalApproach(escConditions[0]),
         evidence_level: "Class I, Level A",
-        esc_url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines"
+        esc_url: "https://www.escardio.org"
       };
     }
     
@@ -144,7 +144,7 @@ function addADAGuidance(
         key_points: generateADAKeyPoints(adaConditions[0], scenarioText),
         clinical_approach: generateADAClinicalApproach(adaConditions[0]),
         evidence_level: "Grade A Evidence",
-        ada_url: "https://diabetesjournals.org/care/issue/47/Supplement_1"
+        ada_url: "https://diabetes.org/tools-support/clinical-practice-resources"
       };
     }
     
