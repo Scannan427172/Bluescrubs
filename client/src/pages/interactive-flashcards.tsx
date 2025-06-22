@@ -11,7 +11,7 @@ import {
   VideoIcon, Image as ImageIcon, Mic, Speaker, Languages, Globe
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import { COMPREHENSIVE_FLASHCARD_COLLECTION, FLASHCARD_STATS, type Flashcard } from "@shared/high-yield-flashcards";
+import { HIGH_YIELD_MEDICAL_FLASHCARDS, getRandomFlashcards, type Flashcard } from "@shared/high-yield-flashcards";
 
 export default function InteractiveFlashcards() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -82,8 +82,8 @@ export default function InteractiveFlashcards() {
     { value: 'advanced', label: 'Advanced' }
   ];
 
-  // Filter flashcards
-  const filteredCards = COMPREHENSIVE_FLASHCARD_COLLECTION.filter((card: Flashcard) => {
+  // Generate flashcards dynamically
+  const filteredCards = getRandomFlashcards(20).filter((card: Flashcard) => {
     const categoryMatch = selectedCategory === 'all' || card.category === selectedCategory;
     const difficultyMatch = selectedDifficulty === 'all' || card.difficulty === selectedDifficulty;
     return categoryMatch && difficultyMatch;
