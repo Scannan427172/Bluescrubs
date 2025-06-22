@@ -1403,6 +1403,10 @@ export default function PLAB1New() {
                       className="w-4 h-4 mr-3 text-blue-600"
                     />
                     
+                    <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-3 font-bold text-sm">
+                      {String.fromCharCode(65 + index)}
+                    </div>
+                    
                     <div className="flex-1">
                       {(() => {
                         const cacheKey = `${currentQuestion.id}_${selectedLanguage}`;
@@ -1583,7 +1587,8 @@ export default function PLAB1New() {
                       <div className="mb-3">
                         <p className="text-xs font-semibold text-green-900 mb-2">Key Clinical Points:</p>
                         <ul className="list-disc list-inside space-y-1">
-                          {currentQuestion.cks_guidance.key_points?.map((point: string, index: number) => (
+                          {Array.isArray(currentQuestion.cks_guidance.key_points) && 
+                           currentQuestion.cks_guidance.key_points.map((point: string, index: number) => (
                             <li key={index} className="text-xs text-green-800">{point}</li>
                           ))}
                         </ul>
@@ -1756,15 +1761,36 @@ export default function PLAB1New() {
                 <div className="w-full">
                   <p className="text-sm font-medium text-blue-900 mb-3">{translateText('Study Tips & Medical Mnemonics')}</p>
                   
-                  {/* Display study tips from question data if available */}
-                  {currentQuestion.studyTips && currentQuestion.studyTips.length > 0 ? (
+                  {/* Display question-specific study tips */}
+                  {currentQuestion.study_tips ? (
                     <div className="space-y-3">
-                      {currentQuestion.studyTips.map((tip: any, index: number) => (
-                        <div key={index} className="bg-white border border-blue-200 rounded-lg p-3">
-                          <p className="text-sm font-semibold text-blue-900 mb-1">{tip.title}</p>
-                          <p className="text-sm text-blue-800 leading-relaxed">{tip.content}</p>
+                      {/* Question-specific mnemonic */}
+                      {currentQuestion.study_tips.mnemonic && (
+                        <div className="bg-white border border-blue-200 rounded-lg p-3 border-l-4 border-l-yellow-400">
+                          <div className="flex items-start gap-2">
+                            <span className="text-lg">💡</span>
+                            <div>
+                              <p className="text-sm font-semibold text-blue-900 mb-1">Memory Aid:</p>
+                              <p className="text-sm text-blue-800 leading-relaxed font-medium">{currentQuestion.study_tips.mnemonic}</p>
+                            </div>
+                          </div>
                         </div>
-                      ))}
+                      )}
+                      
+                      {/* Key learning points */}
+                      {currentQuestion.study_tips.key_learning_points && currentQuestion.study_tips.key_learning_points.length > 0 && (
+                        <div className="bg-white border border-blue-200 rounded-lg p-3">
+                          <p className="text-sm font-semibold text-blue-900 mb-2">Key Learning Points:</p>
+                          <ul className="space-y-1">
+                            {currentQuestion.study_tips.key_learning_points.map((point: string, index: number) => (
+                              <li key={index} className="text-sm text-blue-800 flex items-start gap-2">
+                                <span className="text-blue-600 mt-1">•</span>
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     // Category-specific mnemonics based on question topic

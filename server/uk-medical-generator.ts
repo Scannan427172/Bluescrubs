@@ -300,6 +300,14 @@ OUTPUT FORMAT (strictly follow this JSON structure):
   },
   "correct_answer": "<A, B, C, D or E>",
   "explanation": "<comprehensive explanation covering: 1) Diagnosis confirmation, 2) Why correct answer is best per UK guidelines, 3) Mechanism/rationale, 4) Specific dosing/monitoring advice, 5) Why other options are incorrect, 6) Follow-up requirements>",
+  "study_tips": {
+    "mnemonic": "<create a specific mnemonic directly related to this clinical scenario, diagnosis, or treatment - make it memorable and relevant to the exact question being asked>",
+    "key_learning_points": [
+      "<specific learning point 1 related to this case>",
+      "<specific learning point 2 related to this case>",
+      "<specific learning point 3 related to this case>"
+    ]
+  },
   "references": [
     {
       "title": "NICE: [Treatment Topic – NG###]",
