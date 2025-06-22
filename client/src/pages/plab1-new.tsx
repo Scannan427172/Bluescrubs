@@ -1800,7 +1800,7 @@ export default function PLAB1New() {
             )}
 
             {/* ESC Guidelines */}
-            {true && (
+            {currentQuestion.esc_guidance && (
               <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg mb-4">
                 <div className="flex items-start gap-2">
                   <BookOpen className="w-4 h-4 text-red-600 flex-shrink-0 mt-1" />
@@ -1811,13 +1811,37 @@ export default function PLAB1New() {
                         <p className="text-xs text-red-700 italic">
                           European Society of Cardiology
                         </p>
+                        {currentQuestion.esc_guidance.evidence_level && (
+                          <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">
+                            {currentQuestion.esc_guidance.evidence_level}
+                          </span>
+                        )}
                       </div>
                     </div>
                     
                     <div className="bg-white border border-red-200 rounded-lg p-4 mb-3">
                       <p className="text-red-800 text-sm leading-relaxed mb-3">
-                        Evidence-based European cardiovascular guidelines for optimal patient care and clinical outcomes.
+                        {currentQuestion.esc_guidance.summary}
                       </p>
+                      
+                      <div className="mb-3">
+                        <p className="font-medium text-red-900 text-xs mb-2">Key Points:</p>
+                        <ul className="text-xs text-red-800 space-y-1">
+                          {currentQuestion.esc_guidance.key_points.map((point: string, index: number) => (
+                            <li key={index} className="flex items-start gap-2">
+                              <span className="w-1 h-1 bg-red-600 rounded-full mt-1.5 flex-shrink-0"></span>
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mb-3">
+                        <p className="font-medium text-red-900 text-xs mb-2">Clinical Approach:</p>
+                        <p className="text-xs text-red-800 leading-relaxed">
+                          {currentQuestion.esc_guidance.clinical_approach}
+                        </p>
+                      </div>
                       
                       <div className="flex justify-between items-center pt-2 border-t border-red-200">
                         <p className="text-xs text-red-700">ESC Clinical Practice Guidelines</p>
@@ -1826,7 +1850,7 @@ export default function PLAB1New() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.open('https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines', '_blank');
+                            window.open(currentQuestion.esc_guidance.esc_url || 'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines', '_blank');
                           }}
                           className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                         >
@@ -1841,7 +1865,7 @@ export default function PLAB1New() {
             )}
 
             {/* ADA Guidelines */}
-            {true && (
+            {currentQuestion.ada_guidance && (
               <div className="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r-lg mb-4">
                 <div className="flex items-start gap-2">
                   <BookOpen className="w-4 h-4 text-purple-600 flex-shrink-0 mt-1" />
@@ -1852,13 +1876,37 @@ export default function PLAB1New() {
                         <p className="text-xs text-purple-700 italic">
                           American Diabetes Association
                         </p>
+                        {currentQuestion.ada_guidance.evidence_level && (
+                          <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">
+                            {currentQuestion.ada_guidance.evidence_level}
+                          </span>
+                        )}
                       </div>
                     </div>
                     
                     <div className="bg-white border border-purple-200 rounded-lg p-4 mb-3">
                       <p className="text-purple-800 text-sm leading-relaxed mb-3">
-                        Comprehensive diabetes care standards including glycemic targets, cardiovascular risk management, and evidence-based treatment protocols.
+                        {currentQuestion.ada_guidance.summary}
                       </p>
+                      
+                      <div className="mb-3">
+                        <p className="font-medium text-purple-900 text-xs mb-2">Key Points:</p>
+                        <ul className="text-xs text-purple-800 space-y-1">
+                          {currentQuestion.ada_guidance.key_points.map((point: string, index: number) => (
+                            <li key={index} className="flex items-start gap-2">
+                              <span className="w-1 h-1 bg-purple-600 rounded-full mt-1.5 flex-shrink-0"></span>
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mb-3">
+                        <p className="font-medium text-purple-900 text-xs mb-2">Clinical Approach:</p>
+                        <p className="text-xs text-purple-800 leading-relaxed">
+                          {currentQuestion.ada_guidance.clinical_approach}
+                        </p>
+                      </div>
                       
                       <div className="flex justify-between items-center pt-2 border-t border-purple-200">
                         <p className="text-xs text-purple-700">ADA Standards of Care</p>
@@ -1867,7 +1915,7 @@ export default function PLAB1New() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.open('https://diabetesjournals.org/care/issue/46/Supplement_1', '_blank');
+                            window.open(currentQuestion.ada_guidance.ada_url || 'https://care.diabetesjournals.org/content/standards-of-care', '_blank');
                           }}
                           className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                         >
@@ -1882,7 +1930,7 @@ export default function PLAB1New() {
             )}
 
             {/* SIGN Guidelines */}
-            {true && (
+            {currentQuestion.sign_guidance && (
               <div className="bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded-r-lg mb-4">
                 <div className="flex items-start gap-2">
                   <BookOpen className="w-4 h-4 text-indigo-600 flex-shrink-0 mt-1" />
@@ -1893,13 +1941,37 @@ export default function PLAB1New() {
                         <p className="text-xs text-indigo-700 italic">
                           Scottish Intercollegiate Guidelines Network
                         </p>
+                        {currentQuestion.sign_guidance.evidence_level && (
+                          <span className="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">
+                            {currentQuestion.sign_guidance.evidence_level}
+                          </span>
+                        )}
                       </div>
                     </div>
                     
                     <div className="bg-white border border-indigo-200 rounded-lg p-4 mb-3">
                       <p className="text-indigo-800 text-sm leading-relaxed mb-3">
-                        Evidence-based clinical guidelines developed through systematic review and expert consensus for optimal patient outcomes.
+                        {currentQuestion.sign_guidance.summary}
                       </p>
+                      
+                      <div className="mb-3">
+                        <p className="font-medium text-indigo-900 text-xs mb-2">Key Points:</p>
+                        <ul className="text-xs text-indigo-800 space-y-1">
+                          {currentQuestion.sign_guidance.key_points.map((point: string, index: number) => (
+                            <li key={index} className="flex items-start gap-2">
+                              <span className="w-1 h-1 bg-indigo-600 rounded-full mt-1.5 flex-shrink-0"></span>
+                              {point}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mb-3">
+                        <p className="font-medium text-indigo-900 text-xs mb-2">Clinical Approach:</p>
+                        <p className="text-xs text-indigo-800 leading-relaxed">
+                          {currentQuestion.sign_guidance.clinical_approach}
+                        </p>
+                      </div>
                       
                       <div className="flex justify-between items-center pt-2 border-t border-indigo-200">
                         <p className="text-xs text-indigo-700">SIGN Clinical Guidelines</p>
@@ -1908,9 +1980,9 @@ export default function PLAB1New() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.open('https://www.sign.ac.uk/our-guidelines/', '_blank');
+                            window.open(currentQuestion.sign_guidance.sign_url || 'https://www.sign.ac.uk/our-guidelines/', '_blank');
                           }}
-                          className="bg-indigo-600 hover:bg-indigo-700 text-white border-indigo-600 hover:border-indigo-700"
+                          className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                         >
                           <ExternalLink className="w-4 h-4 mr-1" />
                           View SIGN Guidelines
@@ -1951,7 +2023,7 @@ export default function PLAB1New() {
                             e.stopPropagation();
                             window.open('https://www.brit-thoracic.org.uk/quality-improvement/guidelines/', '_blank');
                           }}
-                          className="bg-teal-600 hover:bg-teal-700 text-white border-teal-600 hover:border-teal-700"
+                          className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                         >
                           <ExternalLink className="w-4 h-4 mr-1" />
                           View BTS Guidelines
