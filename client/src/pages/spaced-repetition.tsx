@@ -387,13 +387,13 @@ export default function SpacedRepetition() {
                       <div>
                         <h3 className="font-semibold mb-4">Specialty Progress</h3>
                         <div className="space-y-3">
-                          {progressStats.specialties?.map((specialty: any) => (
-                            <div key={specialty.name} className="flex items-center justify-between">
-                              <span className="capitalize">{specialty.name}</span>
+                          {Object.entries(progressStats.specialties).map(([specialtyName, stats]: [string, any]) => (
+                            <div key={specialtyName} className="flex items-center justify-between">
+                              <span className="capitalize">{specialtyName}</span>
                               <div className="flex items-center gap-2">
-                                <Progress value={specialty.mastery} className="h-2 w-24" />
+                                <Progress value={stats.mastery} className="h-2 w-24" />
                                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                                  {specialty.mastery}%
+                                  {stats.mastery}%
                                 </span>
                               </div>
                             </div>
