@@ -49,6 +49,9 @@ export default function PLAB1New() {
   const [questionTimer, setQuestionTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [questionTimes, setQuestionTimes] = useState<number[]>([]);
+  
+  // AI Tutor state
+  const [showAITutor, setShowAITutor] = useState(false);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   
   // Block configuration for leaderboard submission
@@ -2409,6 +2412,31 @@ export default function PLAB1New() {
           </div>
         </div>
       </div>
+
+      {/* AI Tutor Floating Button */}
+      {sessionStarted && (
+        <Button
+          onClick={() => setShowAITutor(true)}
+          className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg z-50 flex items-center justify-center"
+          title="Ask AI Tutor"
+        >
+          <MessageCircle className="w-6 h-6 text-white" />
+        </Button>
+      )}
+
+      {/* AI Tutor Modal */}
+      <AITutor
+        currentQuestion={generatedQuestions[currentQuestionIndex]}
+        userPerformance={{
+          correctAnswers: sessionResults.filter(r => r.correct).length,
+          totalAnswered: sessionResults.length,
+          averageTime: sessionResults.length > 0 
+            ? sessionResults.reduce((sum, r) => sum + r.timeSpent, 0) / sessionResults.length 
+            : 0
+        }}
+        onClose={() => setShowAITutor(false)}
+        isVisible={showAITutor}
+      />
     </div>
   );
 }
