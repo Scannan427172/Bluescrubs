@@ -29,9 +29,10 @@ export interface ClinicalGuide {
     differentialDiagnosis: string[];
     redFlags: string[];
     guidelines: {
-      source: string;
+      source: 'NICE' | 'CKS' | 'ESC' | 'ADA' | 'SIGN' | 'BTS' | 'RCOG' | 'RCPCH' | 'RCPsych' | 'BSG' | 'BHS' | 'DVLA' | 'GMC' | 'MHRA' | 'PHE' | 'WHO' | 'EASD' | 'EHRA' | 'ESH' | 'ESMO' | 'ASCO' | 'NCCN' | 'KDIGO' | 'ATS' | 'GOLD' | 'GINA' | 'BSR' | 'ACR' | 'EULAR' | 'IDSA' | 'ECDC' | 'UKHSA';
       year: number;
       keyRecommendations: string[];
+      url?: string;
     }[];
     mnemonics: string[];
     casesStudies: {
