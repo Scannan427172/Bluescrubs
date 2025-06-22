@@ -1558,6 +1558,8 @@ export default function PLAB1New() {
                             <p className="text-blue-700">• ESC Guidelines - European Society of Cardiology evidence-based recommendations</p>
                             <p className="text-blue-700">• NICE Guidelines - Cardiovascular disease prevention and management</p>
                             <p className="text-blue-700">• BNF - British National Formulary for cardiac medications</p>
+                            <p className="text-blue-700">• MLA Competency Framework - Medical Licensing Assessment standards</p>
+                            <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
                           </>
                         )}
                         {(currentQuestion.category?.toLowerCase().includes('diabetes') || 
@@ -1566,6 +1568,8 @@ export default function PLAB1New() {
                             <p className="text-blue-700">• ADA Guidelines - American Diabetes Association standards of care</p>
                             <p className="text-blue-700">• NICE Guidelines - Type 1 and Type 2 diabetes management</p>
                             <p className="text-blue-700">• BNF - British National Formulary for diabetes medications</p>
+                            <p className="text-blue-700">• MLA Competency Framework - Medical Licensing Assessment standards</p>
+                            <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
                           </>
                         )}
                         {!currentQuestion.category?.toLowerCase().includes('cardio') && 
@@ -1575,6 +1579,8 @@ export default function PLAB1New() {
                             <p className="text-blue-700">• NICE Guidelines - Clinical evidence and recommendations</p>
                             <p className="text-blue-700">• BNF - British National Formulary for medications</p>
                             <p className="text-blue-700">• GMC Good Medical Practice - Professional standards</p>
+                            <p className="text-blue-700">• MLA Competency Framework - Medical Licensing Assessment standards</p>
+                            <p className="text-blue-700">• Foundation Programme Competency Framework - UK medical training requirements</p>
                           </>
                         )}
                       </div>
