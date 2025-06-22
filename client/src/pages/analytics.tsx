@@ -145,26 +145,34 @@ export default function Analytics() {
       timeStudiedThisWeek: 1260
     },
     recommendations: [
-      "Focus on Respiratory Medicine - your accuracy is 69%, below your target of 75%",
-      "Review Psychiatry fundamentals - consider additional practice sessions",
-      "Excellent progress in Cardiology - maintain current study approach",
-      "Neurology showing improvement trend (+12%) - continue current methods"
+      "Focus on Basic level questions across all specialties to build foundation knowledge",
+      "Advanced level questions show excellent engagement - continue challenging yourself",
+      "Intermediate questions with NICE/BTS guidelines showing strong performance",
+      "Multi-language practice sessions improving comprehension scores by 15%"
     ],
     achievements: [
       {
         id: 1,
-        name: "Study Streak Champion",
-        description: "Maintained 12-day study streak",
+        name: "Three-Level Mastery",
+        description: "Completed Basic, Intermediate, and Advanced levels",
         unlockedAt: new Date(),
-        category: "Consistency",
-        points: 150
+        category: "Progression",
+        points: 300
       },
       {
         id: 2,
-        name: "Cardiology Expert",
-        description: "Achieved 86% accuracy in Cardiology",
+        name: "Guidelines Expert",
+        description: "Perfect score on NICE/BTS guideline questions",
         unlockedAt: new Date(),
-        category: "Specialty",
+        category: "Medical Knowledge",
+        points: 250
+      },
+      {
+        id: 3,
+        name: "Multi-Language Scholar",
+        description: "Practiced in 5+ languages",
+        unlockedAt: new Date(),
+        category: "Language",
         points: 200
       }
     ]

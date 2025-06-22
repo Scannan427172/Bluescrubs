@@ -963,9 +963,10 @@ export default function PLAB1New() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-gray-600">Total Questions</span>
+                  <span className="text-sm font-medium text-gray-600">Question Categories</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">5,000</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">75</p>
+                <p className="text-xs text-gray-500 mt-1">25 specialties × 3 levels</p>
               </CardContent>
             </Card>
             
@@ -973,9 +974,10 @@ export default function PLAB1New() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-green-600" />
-                  <span className="text-sm font-medium text-gray-600">Medical Specialties</span>
+                  <span className="text-sm font-medium text-gray-600">Difficulty Levels</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">18</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">3</p>
+                <p className="text-xs text-gray-500 mt-1">Basic, Intermediate, Advanced</p>
               </CardContent>
             </Card>
             
@@ -983,9 +985,10 @@ export default function PLAB1New() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2">
                   <Brain className="w-5 h-5 text-purple-600" />
-                  <span className="text-sm font-medium text-gray-600">AI Generated</span>
+                  <span className="text-sm font-medium text-gray-600">Medical Guidelines</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">100%</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">30+</p>
+                <p className="text-xs text-gray-500 mt-1">NICE, CKS, BTS, ESC, ADA</p>
               </CardContent>
             </Card>
             
@@ -993,9 +996,10 @@ export default function PLAB1New() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2">
                   <Award className="w-5 h-5 text-yellow-600" />
-                  <span className="text-sm font-medium text-gray-600">PLAB Focused</span>
+                  <span className="text-sm font-medium text-gray-600">Languages</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">Yes</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">70+</p>
+                <p className="text-xs text-gray-500 mt-1">Multi-language support</p>
               </CardContent>
             </Card>
           </div>

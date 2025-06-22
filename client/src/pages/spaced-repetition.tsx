@@ -92,9 +92,10 @@ export default function SpacedRepetition() {
     retentionRate: 85,
     masteryLevel: 72,
     specialties: {
-      'Cardiology': { retention: 88, mastery: 75 },
-      'Respiratory': { retention: 82, mastery: 68 },
-      'Neurology': { retention: 79, mastery: 71 }
+      'Basic Level Questions': { retention: 92, mastery: 88 },
+      'Intermediate + Guidelines': { retention: 85, mastery: 75 },
+      'Advanced Multi-system': { retention: 78, mastery: 68 },
+      'Multi-language Practice': { retention: 81, mastery: 73 }
     }
   };
 
