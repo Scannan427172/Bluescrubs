@@ -215,13 +215,6 @@ function addBTSGuidance(
 
 // Helper functions for condition mapping
 function mapKeywordsToESCConditions(keywords: string[], specialty: string): string[] {
-  const escConditionMap: Record<string, string[]> = {
-    'cardiology': ['heart_failure', 'atrial_fibrillation', 'acute_coronary_syndrome', 'hypertension'],
-    'cardiovascular': ['heart_failure', 'atrial_fibrillation', 'acute_coronary_syndrome', 'hypertension'],
-    'general': ['hypertension', 'heart_failure']
-  };
-  
-  const conditions = escConditionMap[specialty.toLowerCase()] || [];
   const keywordConditionMap: Record<string, string> = {
     'heart': 'heart_failure',
     'cardiac': 'heart_failure', 
@@ -232,26 +225,24 @@ function mapKeywordsToESCConditions(keywords: string[], specialty: string): stri
     'angina': 'acute_coronary_syndrome',
     'myocardial': 'acute_coronary_syndrome',
     'hypertension': 'hypertension',
-    'blood pressure': 'hypertension'
+    'blood pressure': 'hypertension',
+    'cardiovascular': 'cardiovascular_risk_management',
+    'stroke': 'stroke_prevention',
+    'anticoagulation': 'anticoagulation_therapy'
   };
   
   for (const keyword of keywords) {
     const condition = keywordConditionMap[keyword];
-    if (condition && conditions.includes(condition)) {
+    if (condition) {
       return [condition];
     }
   }
   
-  return conditions.slice(0, 1);
+  // Always return a cardiovascular condition for ESC guidelines
+  return ['cardiovascular_risk_management'];
 }
 
 function mapKeywordsToADAConditions(keywords: string[], specialty: string): string[] {
-  const adaConditionMap: Record<string, string[]> = {
-    'endocrinology': ['diabetes_management', 'glycemic_control', 'diabetic_complications'],
-    'general': ['diabetes_management', 'glycemic_control']
-  };
-  
-  const conditions = adaConditionMap[specialty.toLowerCase()] || [];
   const keywordConditionMap: Record<string, string> = {
     'diabetes': 'diabetes_management',
     'diabetic': 'diabetes_management',
@@ -261,79 +252,70 @@ function mapKeywordsToADAConditions(keywords: string[], specialty: string): stri
     'hba1c': 'glycemic_control',
     'nephropathy': 'diabetic_complications',
     'retinopathy': 'diabetic_complications',
-    'neuropathy': 'diabetic_complications'
+    'neuropathy': 'diabetic_complications',
+    'metabolic': 'metabolic_management',
+    'obesity': 'obesity_management'
   };
   
   for (const keyword of keywords) {
     const condition = keywordConditionMap[keyword];
-    if (condition && conditions.includes(condition)) {
+    if (condition) {
       return [condition];
     }
   }
   
-  return conditions.slice(0, 1);
+  // Always return a diabetes-related condition for ADA standards
+  return ['diabetes_management'];
 }
 
 function mapKeywordsToSIGNConditions(keywords: string[], specialty: string): string[] {
-  const signConditionMap: Record<string, string[]> = {
-    'neurology': ['stroke_management', 'epilepsy', 'headache_disorders'],
-    'psychiatry': ['depression', 'anxiety_disorders', 'bipolar_disorder'],
-    'respiratory': ['asthma', 'copd'],
-    'general': ['stroke_management', 'depression']
-  };
-  
-  const conditions = signConditionMap[specialty.toLowerCase()] || [];
   const keywordConditionMap: Record<string, string> = {
     'stroke': 'stroke_management',
-    'seizure': 'epilepsy',
     'epilepsy': 'epilepsy',
     'headache': 'headache_disorders',
-    'migraine': 'headache_disorders',
     'depression': 'depression',
     'anxiety': 'anxiety_disorders',
     'bipolar': 'bipolar_disorder',
-    'asthma': 'asthma',
-    'copd': 'copd',
-    'breathless': 'asthma'
+    'respiratory': 'respiratory_conditions',
+    'infection': 'infection_management',
+    'tuberculosis': 'infection_management'
   };
   
   for (const keyword of keywords) {
     const condition = keywordConditionMap[keyword];
-    if (condition && conditions.includes(condition)) {
+    if (condition) {
       return [condition];
     }
   }
   
-  return conditions.slice(0, 1);
+  // Always return a general clinical condition for SIGN guidelines
+  return ['clinical_management'];
 }
 
 function mapKeywordsToBTSConditions(keywords: string[], specialty: string): string[] {
-  const btsConditionMap: Record<string, string[]> = {
-    'respiratory': ['asthma_management', 'copd_management', 'pneumonia', 'pulmonary_embolism'],
-    'general': ['asthma_management', 'pneumonia']
-  };
-  
-  const conditions = btsConditionMap[specialty.toLowerCase()] || [];
   const keywordConditionMap: Record<string, string> = {
     'asthma': 'asthma_management',
     'copd': 'copd_management',
     'pneumonia': 'pneumonia',
     'chest': 'pneumonia',
-    'cough': 'asthma_management',
-    'breathless': 'asthma_management',
+    'cough': 'respiratory_conditions',
+    'breathless': 'respiratory_conditions',
     'wheeze': 'asthma_management',
     'embolism': 'pulmonary_embolism',
-    'pe': 'pulmonary_embolism'
+    'pe': 'pulmonary_embolism',
+    'respiratory': 'respiratory_conditions',
+    'lung': 'respiratory_conditions'
   };
   
   for (const keyword of keywords) {
     const condition = keywordConditionMap[keyword];
-    if (condition && conditions.includes(condition)) {
+    if (condition) {
       return [condition];
     }
   }
   
-  return conditions.slice(0, 1);
+  // Always return a respiratory condition for BTS guidelines
+  return ['respiratory_conditions'];
 }
 
 // Key points generation functions
