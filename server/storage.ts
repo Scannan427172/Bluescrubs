@@ -2,6 +2,7 @@ import {
   users, questions, userProgress, studyPlan, communityPosts, postReplies, 
   osceStations, userOsceAttempts, studySessions, userPreferences, performanceMetrics, studyReminders,
   globalScoreboard, weeklyLeaderboard, countryStats, achievements, userAchievements,
+  block1Leaderboard, block2Leaderboard, block3Leaderboard,
   type User, type InsertUser, type Question, type InsertQuestion,
   type UserProgress, type InsertUserProgress, type StudyPlan, type InsertStudyPlan,
   type CommunityPost, type InsertCommunityPost, type PostReply, type InsertPostReply,
@@ -10,7 +11,10 @@ import {
   type PerformanceMetrics, type InsertPerformanceMetrics, type StudyReminder, type InsertStudyReminder,
   type GlobalScoreboard, type InsertGlobalScoreboard, type WeeklyLeaderboard, type InsertWeeklyLeaderboard,
   type CountryStats, type InsertCountryStats, type Achievement, type InsertAchievement,
-  type UserAchievement, type InsertUserAchievement
+  type UserAchievement, type InsertUserAchievement,
+  type Block1LeaderboardEntry, type InsertBlock1Entry,
+  type Block2LeaderboardEntry, type InsertBlock2Entry,
+  type Block3LeaderboardEntry, type InsertBlock3Entry
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, sql } from "drizzle-orm";
@@ -86,6 +90,16 @@ export interface IStorage {
   updateScoreboard(userId: number, scoreData: { questionsAnswered: number; correctAnswers: number; studyTime: number; category: string }): Promise<void>;
   createAchievement(achievement: InsertAchievement): Promise<Achievement>;
   getUserAchievements(userId: number): Promise<(UserAchievement & { achievement: Achievement })[]>;
+
+  // Block-based Leaderboards
+  insertBlock1Entry(entry: InsertBlock1Entry): Promise<Block1LeaderboardEntry>;
+  insertBlock2Entry(entry: InsertBlock2Entry): Promise<Block2LeaderboardEntry>;
+  insertBlock3Entry(entry: InsertBlock3Entry): Promise<Block3LeaderboardEntry>;
+  getBlock1Leaderboard(questionCount: number, category: string, difficulty: string, limit: number): Promise<Block1LeaderboardEntry[]>;
+  getBlock2Leaderboard(timeLimit: number, category: string, difficulty: string, limit: number): Promise<Block2LeaderboardEntry[]>;
+  getBlock3Leaderboard(limit: number): Promise<Block3LeaderboardEntry[]>;
+  getBlock3EntryByUser(userId: number): Promise<Block3LeaderboardEntry | undefined>;
+  updateBlock3Entry(userId: number, updates: Partial<Block3LeaderboardEntry>): Promise<Block3LeaderboardEntry>;
 }
 
 export class MemStorage implements IStorage {
@@ -1909,6 +1923,90 @@ export class DatabaseStorage implements IStorage {
       .leftJoin(achievements, eq(userAchievements.achievementId, achievements.id))
       .where(eq(userAchievements.userId, userId))
       .orderBy(userAchievements.unlockedAt);
+  }
+
+  // Block-based Leaderboard Methods
+  async insertBlock1Entry(entry: InsertBlock1Entry): Promise<Block1LeaderboardEntry> {
+    const [newEntry] = await db.insert(block1Leaderboard).values(entry).returning();
+    return newEntry;
+  }
+
+  async insertBlock2Entry(entry: InsertBlock2Entry): Promise<Block2LeaderboardEntry> {
+    const [newEntry] = await db.insert(block2Leaderboard).values(entry).returning();
+    return newEntry;
+  }
+
+  async insertBlock3Entry(entry: InsertBlock3Entry): Promise<Block3LeaderboardEntry> {
+    const [newEntry] = await db.insert(block3Leaderboard).values(entry).returning();
+    return newEntry;
+  }
+
+  async getBlock1Leaderboard(questionCount: number, category: string, difficulty: string, limit: number): Promise<Block1LeaderboardEntry[]> {
+    let query = db.select().from(block1Leaderboard);
+    
+    if (questionCount > 0) {
+      query = query.where(eq(block1Leaderboard.questionCount, questionCount));
+    }
+    
+    if (category !== 'all') {
+      query = query.where(eq(block1Leaderboard.category, category));
+    }
+    
+    if (difficulty !== 'all') {
+      query = query.where(eq(block1Leaderboard.difficulty, difficulty));
+    }
+    
+    return await query
+      .orderBy(sql`${block1Leaderboard.score} DESC`)
+      .limit(limit);
+  }
+
+  async getBlock2Leaderboard(timeLimit: number, category: string, difficulty: string, limit: number): Promise<Block2LeaderboardEntry[]> {
+    let query = db.select().from(block2Leaderboard);
+    
+    if (timeLimit > 0) {
+      query = query.where(eq(block2Leaderboard.timeLimit, timeLimit));
+    }
+    
+    if (category !== 'all') {
+      query = query.where(eq(block2Leaderboard.category, category));
+    }
+    
+    if (difficulty !== 'all') {
+      query = query.where(eq(block2Leaderboard.difficulty, difficulty));
+    }
+    
+    return await query
+      .orderBy(sql`${block2Leaderboard.score} DESC`)
+      .limit(limit);
+  }
+
+  async getBlock3Leaderboard(limit: number): Promise<Block3LeaderboardEntry[]> {
+    return await db
+      .select()
+      .from(block3Leaderboard)
+      .orderBy(sql`${block3Leaderboard.score} DESC`)
+      .limit(limit);
+  }
+
+  async getBlock3EntryByUser(userId: number): Promise<Block3LeaderboardEntry | undefined> {
+    const [entry] = await db
+      .select()
+      .from(block3Leaderboard)
+      .where(eq(block3Leaderboard.userId, userId))
+      .limit(1);
+    
+    return entry;
+  }
+
+  async updateBlock3Entry(userId: number, updates: Partial<Block3LeaderboardEntry>): Promise<Block3LeaderboardEntry> {
+    const [updatedEntry] = await db
+      .update(block3Leaderboard)
+      .set(updates)
+      .where(eq(block3Leaderboard.userId, userId))
+      .returning();
+    
+    return updatedEntry;
   }
 }
 

@@ -397,6 +397,193 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
+  // Block-based Leaderboard System
+  app.post("/api/leaderboard/block1/submit", async (req, res) => {
+    try {
+      const { 
+        userId, 
+        username, 
+        questionCount, 
+        correctAnswers, 
+        totalTime, 
+        category, 
+        difficulty 
+      } = req.body;
+
+      const accuracy = (correctAnswers / questionCount) * 100;
+      
+      // Block 1 scoring: (Accuracy% × 100) + Time bonus (faster = higher score)
+      const timeBonus = Math.max(0, 100 - (totalTime / 1000 / questionCount)); // Bonus for speed
+      const score = Math.round((accuracy * 100) + timeBonus);
+
+      const entry = await storage.insertBlock1Entry({
+        userId,
+        username,
+        questionCount,
+        correctAnswers,
+        totalTime,
+        accuracy,
+        score,
+        category,
+        difficulty
+      });
+
+      res.json({ success: true, score, accuracy, entry });
+    } catch (error) {
+      console.error('Error submitting Block 1 score:', error);
+      res.status(500).json({ error: "Failed to submit score" });
+    }
+  });
+
+  app.post("/api/leaderboard/block2/submit", async (req, res) => {
+    try {
+      const { 
+        userId, 
+        username, 
+        timeLimit, 
+        questionsCompleted, 
+        correctAnswers, 
+        category, 
+        difficulty 
+      } = req.body;
+
+      const accuracy = questionsCompleted > 0 ? (correctAnswers / questionsCompleted) * 100 : 0;
+      const questionsPerMinute = questionsCompleted / timeLimit;
+      
+      // Block 2 scoring: (Questions completed × Accuracy%) + Speed multiplier
+      const speedMultiplier = Math.round(questionsPerMinute * 50); // Bonus for speed
+      const score = Math.round((questionsCompleted * accuracy) + speedMultiplier);
+
+      const entry = await storage.insertBlock2Entry({
+        userId,
+        username,
+        timeLimit,
+        questionsCompleted,
+        correctAnswers,
+        accuracy,
+        questionsPerMinute,
+        score,
+        category,
+        difficulty
+      });
+
+      res.json({ success: true, score, accuracy, questionsPerMinute, entry });
+    } catch (error) {
+      console.error('Error submitting Block 2 score:', error);
+      res.status(500).json({ error: "Failed to submit score" });
+    }
+  });
+
+  app.post("/api/leaderboard/block3/update", async (req, res) => {
+    try {
+      const { 
+        userId, 
+        username, 
+        questionsAnswered, 
+        correctAnswers, 
+        studyStreak 
+      } = req.body;
+
+      // Get existing Block 3 entry or create new one
+      let existingEntry = await storage.getBlock3EntryByUser(userId);
+      
+      if (existingEntry) {
+        // Update existing entry
+        const newTotalQuestions = existingEntry.totalQuestionsAnswered + questionsAnswered;
+        const newTotalCorrect = existingEntry.totalCorrectAnswers + correctAnswers;
+        const newAccuracy = (newTotalCorrect / newTotalQuestions) * 100;
+        const newSessionsCompleted = existingEntry.sessionsCompleted + 1;
+        
+        // Block 3 scoring: Total correct answers + Consistency bonus for regular practice
+        const consistencyBonus = studyStreak * 10; // 10 points per day streak
+        const score = newTotalCorrect + consistencyBonus;
+
+        const updatedEntry = await storage.updateBlock3Entry(userId, {
+          totalQuestionsAnswered: newTotalQuestions,
+          totalCorrectAnswers: newTotalCorrect,
+          overallAccuracy: newAccuracy,
+          studyStreak,
+          sessionsCompleted: newSessionsCompleted,
+          score
+        });
+
+        res.json({ success: true, score, accuracy: newAccuracy, entry: updatedEntry });
+      } else {
+        // Create new entry
+        const accuracy = questionsAnswered > 0 ? (correctAnswers / questionsAnswered) * 100 : 0;
+        const consistencyBonus = studyStreak * 10;
+        const score = correctAnswers + consistencyBonus;
+
+        const entry = await storage.insertBlock3Entry({
+          userId,
+          username,
+          totalQuestionsAnswered: questionsAnswered,
+          totalCorrectAnswers: correctAnswers,
+          overallAccuracy: accuracy,
+          studyStreak,
+          sessionsCompleted: 1,
+          score
+        });
+
+        res.json({ success: true, score, accuracy, entry });
+      }
+    } catch (error) {
+      console.error('Error updating Block 3 score:', error);
+      res.status(500).json({ error: "Failed to update score" });
+    }
+  });
+
+  app.get("/api/leaderboard/block1/:questionCount", async (req, res) => {
+    try {
+      const { questionCount } = req.params;
+      const { category = 'all', difficulty = 'all', limit = 10 } = req.query;
+      
+      const leaderboard = await storage.getBlock1Leaderboard(
+        parseInt(questionCount), 
+        category as string, 
+        difficulty as string, 
+        parseInt(limit as string)
+      );
+      
+      res.json({ leaderboard, type: 'block1', questionCount });
+    } catch (error) {
+      console.error('Error fetching Block 1 leaderboard:', error);
+      res.status(500).json({ error: "Failed to fetch leaderboard" });
+    }
+  });
+
+  app.get("/api/leaderboard/block2/:timeLimit", async (req, res) => {
+    try {
+      const { timeLimit } = req.params;
+      const { category = 'all', difficulty = 'all', limit = 10 } = req.query;
+      
+      const leaderboard = await storage.getBlock2Leaderboard(
+        parseInt(timeLimit), 
+        category as string, 
+        difficulty as string, 
+        parseInt(limit as string)
+      );
+      
+      res.json({ leaderboard, type: 'block2', timeLimit });
+    } catch (error) {
+      console.error('Error fetching Block 2 leaderboard:', error);
+      res.status(500).json({ error: "Failed to fetch leaderboard" });
+    }
+  });
+
+  app.get("/api/leaderboard/block3", async (req, res) => {
+    try {
+      const { limit = 10 } = req.query;
+      
+      const leaderboard = await storage.getBlock3Leaderboard(parseInt(limit as string));
+      
+      res.json({ leaderboard, type: 'block3' });
+    } catch (error) {
+      console.error('Error fetching Block 3 leaderboard:', error);
+      res.status(500).json({ error: "Failed to fetch leaderboard" });
+    }
+  });
+
   // AI Study Tools endpoints
   app.post("/api/study-tools/flashcards/generate", async (req, res) => {
     try {

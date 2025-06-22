@@ -47,6 +47,49 @@ export const studyPlan = pgTable("study_plan", {
   completed: boolean("completed").notNull().default(false),
 });
 
+// Block-based leaderboard tables
+export const block1Leaderboard = pgTable("block1_leaderboard", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  username: text("username").notNull(),
+  questionCount: integer("question_count").notNull(), // 10, 20, 50, 100, 180
+  correctAnswers: integer("correct_answers").notNull(),
+  totalTime: integer("total_time").notNull(), // milliseconds
+  accuracy: real("accuracy").notNull(), // percentage
+  score: integer("score").notNull(), // calculated score
+  category: text("category").notNull(),
+  difficulty: text("difficulty").notNull(),
+  completedAt: timestamp("completed_at").defaultNow().notNull(),
+});
+
+export const block2Leaderboard = pgTable("block2_leaderboard", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  username: text("username").notNull(),
+  timeLimit: integer("time_limit").notNull(), // minutes
+  questionsCompleted: integer("questions_completed").notNull(),
+  correctAnswers: integer("correct_answers").notNull(),
+  accuracy: real("accuracy").notNull(), // percentage
+  questionsPerMinute: real("questions_per_minute").notNull(),
+  score: integer("score").notNull(), // calculated score
+  category: text("category").notNull(),
+  difficulty: text("difficulty").notNull(),
+  completedAt: timestamp("completed_at").defaultNow().notNull(),
+});
+
+export const block3Leaderboard = pgTable("block3_leaderboard", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull(),
+  username: text("username").notNull(),
+  totalQuestionsAnswered: integer("total_questions_answered").notNull(),
+  totalCorrectAnswers: integer("total_correct_answers").notNull(),
+  overallAccuracy: real("overall_accuracy").notNull(), // percentage
+  studyStreak: integer("study_streak").notNull(), // consecutive days
+  sessionsCompleted: integer("sessions_completed").notNull(),
+  score: integer("score").notNull(), // calculated score
+  lastUpdated: timestamp("last_updated").defaultNow().notNull(),
+});
+
 export const studySessions = pgTable("study_sessions", {
   id: text("id").primaryKey(),
   userId: integer("user_id").notNull(),
@@ -240,6 +283,31 @@ export const userCulturalProgress = pgTable("user_cultural_progress", {
   score: integer("score"),
   completedAt: timestamp("completed_at")
 });
+
+// Insert schemas for leaderboards
+export const insertBlock1LeaderboardSchema = createInsertSchema(block1Leaderboard).omit({
+  id: true,
+  completedAt: true,
+});
+
+export const insertBlock2LeaderboardSchema = createInsertSchema(block2Leaderboard).omit({
+  id: true,
+  completedAt: true,
+});
+
+export const insertBlock3LeaderboardSchema = createInsertSchema(block3Leaderboard).omit({
+  id: true,
+  lastUpdated: true,
+});
+
+// Types for leaderboards
+export type Block1LeaderboardEntry = typeof block1Leaderboard.$inferSelect;
+export type Block2LeaderboardEntry = typeof block2Leaderboard.$inferSelect;
+export type Block3LeaderboardEntry = typeof block3Leaderboard.$inferSelect;
+
+export type InsertBlock1Entry = z.infer<typeof insertBlock1LeaderboardSchema>;
+export type InsertBlock2Entry = z.infer<typeof insertBlock2LeaderboardSchema>;
+export type InsertBlock3Entry = z.infer<typeof insertBlock3LeaderboardSchema>;
 
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).pick({
