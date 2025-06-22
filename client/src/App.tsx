@@ -15,6 +15,9 @@ import InteractiveFlashcards from "@/pages/interactive-flashcards";
 import ClinicalGuides from "@/pages/clinical-guides";
 import GlobalScoreboard from "@/pages/global-scoreboard";
 import Leaderboards from "@/pages/leaderboards";
+import Leaderboard from "@/pages/leaderboard";
+import Analytics from "@/pages/analytics";
+import SpacedRepetition from "@/pages/spaced-repetition";
 import Premium from "@/pages/premium";
 import AskAI from "@/pages/ask-ai";
 import AIStudyTools from "@/pages/ai-study-tools";
@@ -310,11 +313,29 @@ function Router() {
         </div>
       </Route>
 
+      <Route path="/leaderboard">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Leaderboard />
+          </div>
+        </div>
+      </Route>
+
       <Route path="/analytics">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
-            <PLABAIDashboard />
+            <Analytics />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/spaced-repetition">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <SpacedRepetition />
           </div>
         </div>
       </Route>
