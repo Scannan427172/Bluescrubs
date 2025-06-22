@@ -172,11 +172,12 @@ export default function ClinicalGuides() {
               </div>
 
               <Tabs defaultValue="key-points" className="w-full">
-                <TabsList className="grid w-full grid-cols-5">
+                <TabsList className="grid w-full grid-cols-6">
                   <TabsTrigger value="key-points">Key Points</TabsTrigger>
                   <TabsTrigger value="clinical">Clinical</TabsTrigger>
                   <TabsTrigger value="management">Management</TabsTrigger>
                   <TabsTrigger value="guidelines">Guidelines</TabsTrigger>
+                  <TabsTrigger value="tutor">AI Tutor</TabsTrigger>
                   <TabsTrigger value="cases">Cases</TabsTrigger>
                 </TabsList>
                 

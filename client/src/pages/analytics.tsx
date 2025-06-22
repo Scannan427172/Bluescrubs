@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 import { 
   TrendingUp, TrendingDown, Target, Clock, Brain, Award, 
-  Calendar, Book, Star, Zap, CheckCircle, XCircle 
+  Calendar, Book, Star, Zap, CheckCircle, XCircle, MessageCircle, Bot 
 } from 'lucide-react';
 
 interface AnalyticsData {
@@ -46,6 +46,60 @@ interface AnalyticsData {
 export default function Analytics() {
   const [selectedPeriod, setSelectedPeriod] = useState('7d');
   
+  // AI Tutor state for analytics insights
+  const [showAITutor, setShowAITutor] = useState(false);
+  const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
+  const [tutorInput, setTutorInput] = useState('');
+  const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
+  
+  // AI Tutor functionality for analytics insights
+  const handleAskTutor = async (question: string) => {
+    if (!question.trim()) return;
+    
+    const userMessage = { role: 'user' as const, content: question };
+    setTutorMessages(prev => [...prev, userMessage]);
+    setTutorInput('');
+    setIsLoadingTutorResponse(true);
+
+    try {
+      const context = analytics ? {
+        analyticsType: 'Performance Analytics',
+        accuracyRate: analytics.accuracyRate,
+        totalQuestions: analytics.totalQuestions,
+        correctAnswers: analytics.correctAnswers,
+        studyStreak: analytics.studyStreak,
+        specialtyBreakdown: analytics.specialtyBreakdown,
+        recommendations: analytics.recommendations
+      } : { analyticsType: 'Performance Analytics General' };
+
+      const response = await fetch('/api/ai-tutor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question,
+          context,
+          specialty: 'study-analytics',
+          examType: 'performance-improvement'
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to get tutor response');
+      
+      const data = await response.json();
+      const assistantMessage = { role: 'assistant' as const, content: data.response };
+      setTutorMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('AI Tutor error:', error);
+      const errorMessage = { 
+        role: 'assistant' as const, 
+        content: 'I apologize, but I encountered an error. Please try asking your question again.' 
+      };
+      setTutorMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoadingTutorResponse(false);
+    }
+  };
+
   const { data: analytics, isLoading } = useQuery<AnalyticsData>({
     queryKey: ['/api/analytics/user'],
   });
@@ -195,11 +249,12 @@ export default function Analytics() {
         </div>
 
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-6">
+          <TabsList className="grid w-full grid-cols-6 mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="specialties">Specialties</TabsTrigger>
             <TabsTrigger value="progress">Progress</TabsTrigger>
             <TabsTrigger value="achievements">Achievements</TabsTrigger>
+            <TabsTrigger value="tutor">AI Tutor</TabsTrigger>
             <TabsTrigger value="recommendations">Insights</TabsTrigger>
           </TabsList>
 
@@ -477,6 +532,84 @@ export default function Analytics() {
                   </div>
                 )}
               </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="tutor" className="space-y-6">
+            <Card>
+              <CardHeader className="bg-gradient-to-r from-purple-50 to-indigo-50">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Bot className="w-5 h-5 text-purple-600" />
+                    <CardTitle className="text-purple-800">AI Performance Tutor</CardTitle>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowAITutor(!showAITutor)}
+                  >
+                    {showAITutor ? 'Hide' : 'Show'} Tutor
+                  </Button>
+                </div>
+                <CardDescription className="text-purple-600">
+                  Get personalized insights about your study performance and improvement strategies
+                </CardDescription>
+              </CardHeader>
+              
+              {showAITutor && (
+                <CardContent className="p-4">
+                  <div className="space-y-4 mb-4 max-h-96 overflow-y-auto">
+                    {tutorMessages.length === 0 && (
+                      <div className="text-center text-gray-500 py-8">
+                        <MessageCircle className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                        <p>Ask me about your performance analytics and study strategies!</p>
+                        <p className="text-sm mt-1">Examples: "How can I improve my weak areas?" or "What's my best study schedule?"</p>
+                      </div>
+                    )}
+                    {tutorMessages.map((message, index) => (
+                      <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        <div className={`max-w-[80%] p-3 rounded-lg ${
+                          message.role === 'user' 
+                            ? 'bg-purple-600 text-white' 
+                            : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                        </div>
+                      </div>
+                    ))}
+                    {isLoadingTutorResponse && (
+                      <div className="flex justify-start">
+                        <div className="bg-gray-100 p-3 rounded-lg">
+                          <p className="text-sm text-gray-600">AI Tutor is analyzing your performance...</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={tutorInput}
+                      onChange={(e) => setTutorInput(e.target.value)}
+                      placeholder="Ask about your performance, study strategies, or improvement tips..."
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleAskTutor(tutorInput);
+                        }
+                      }}
+                    />
+                    <Button
+                      onClick={() => handleAskTutor(tutorInput)}
+                      disabled={!tutorInput.trim() || isLoadingTutorResponse}
+                      className="bg-purple-600 hover:bg-purple-700"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </CardContent>
+              )}
             </Card>
           </TabsContent>
 
