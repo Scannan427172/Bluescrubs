@@ -1874,18 +1874,15 @@ export default function PLAB1New() {
                             {typeof reference === 'string' ? reference : reference.title || reference.text}
                           </p>
                           {typeof reference === 'object' && reference.url && (
-                            <Button
-                              size="sm"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                window.open(reference.url, '_blank');
-                              }}
-                              className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
+                            <a
+                              href={reference.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium"
                             >
-                              <ExternalLink className="w-4 h-4 mr-1" />
-                              View Full Guidelines
-                            </Button>
+                              <ExternalLink className="w-3 h-3 mr-1" />
+                              View Guidelines
+                            </a>
                           )}
                         </div>
                       ))
