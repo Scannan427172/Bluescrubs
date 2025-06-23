@@ -458,6 +458,149 @@ export const CLINICAL_GUIDES: ClinicalGuide[] = [
       "NICE NG80: Asthma diagnosis, monitoring and chronic asthma management, 2021",
       "Global Initiative for Asthma (GINA) Strategy, 2023"
     ]
+  },
+  {
+    id: 'guide_005',
+    title: 'Urinary Tract Infections in Women: Evidence-Based Management',
+    category: 'Infectious Diseases',
+    specialty: 'General Practice',
+    difficulty: 'foundation',
+    estimatedReadTime: 10,
+    lastUpdated: new Date('2024-01-20'),
+    author: 'Dr. Emma Williams, GP Partner',
+    reviewedBy: ['Dr. Sarah Ahmed', 'Dr. Michael Chen'],
+    clinicalRelevance: 'very-high',
+    examRelevance: 'both',
+    content: {
+      overview: "Lower urinary tract infections in women are common presentations requiring evidence-based management. NICE guidelines emphasize empirical treatment for uncomplicated cases without routine culture.",
+      keyPoints: [
+        "Empirical antibiotics for women <65 with ≥2 typical symptoms",
+        "No routine urine culture required for uncomplicated UTI",
+        "First-line: nitrofurantoin or trimethoprim",
+        "3-day course sufficient for most cases",
+        "Safety netting advice essential"
+      ],
+      clinicalPresentation: {
+        symptoms: [
+          "Dysuria (burning sensation)",
+          "Urinary frequency",
+          "Urinary urgency",
+          "Suprapubic pain or discomfort",
+          "Nocturia",
+          "Haematuria (may be present)"
+        ],
+        signs: [
+          "Suprapubic tenderness",
+          "No fever in uncomplicated cases",
+          "No flank pain or costovertebral angle tenderness",
+          "Normal vital signs",
+          "Clear urine or mild cloudiness"
+        ],
+        investigations: [
+          "Urinalysis (dipstick) if diagnostic uncertainty",
+          "Urine culture only if recurrent, atypical, or treatment failure",
+          "MSU for culture in pregnancy or immunocompromised",
+          "Consider STI screening if sexually active"
+        ]
+      },
+      management: {
+        immediate: [
+          "Empirical antibiotics without culture",
+          "Nitrofurantoin 100mg BD for 3 days (first-line)",
+          "Trimethoprim 200mg BD for 3 days (if local resistance <20%)",
+          "Increase fluid intake",
+          "Paracetamol for symptom relief"
+        ],
+        longTerm: [
+          "Prevention advice: post-coital voiding",
+          "Adequate hydration",
+          "Complete bladder emptying",
+          "Cranberry products may help prevention",
+          "Consider prophylaxis if ≥3 episodes/year"
+        ],
+        complications: [
+          "Pyelonephritis if untreated",
+          "Recurrent infections",
+          "Chronic cystitis",
+          "Renal scarring (rare)",
+          "Sepsis (very rare in healthy women)"
+        ]
+      },
+      differentialDiagnosis: [
+        "Sexually transmitted infections (chlamydia, gonorrhoea)",
+        "Vaginal candidiasis",
+        "Bacterial vaginosis",
+        "Urethral syndrome",
+        "Interstitial cystitis",
+        "Bladder cancer (in older patients)"
+      ],
+      redFlags: [
+        "Fever >38°C",
+        "Flank pain or costovertebral angle tenderness",
+        "Rigors or signs of sepsis",
+        "Haematuria in women >40",
+        "Recurrent infections",
+        "Symptoms not improving after 48 hours"
+      ],
+      guidelines: [
+        {
+          source: "NICE",
+          year: 2018,
+          keyRecommendations: [
+            "Empirical treatment without culture for uncomplicated UTI",
+            "Use local antibiogram to guide first-line choice",
+            "3-day course for most antibiotics",
+            "Safety netting advice essential"
+          ],
+          url: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#treatment-of-lower-uti-in-non-pregnant-women-aged-16-and-over"
+        },
+        {
+          source: "CKS",
+          year: 2023,
+          keyRecommendations: [
+            "Immediate empirical antibiotic treatment",
+            "Consider resistance patterns locally",
+            "Avoid fluoroquinolones as first-line",
+            "Follow-up if symptoms persist"
+          ],
+          url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/empirical-antibiotic-treatment/"
+        },
+        {
+          source: "BNF",
+          year: 2024,
+          keyRecommendations: [
+            "Nitrofurantoin 100mg twice daily for 3 days",
+            "Trimethoprim 200mg twice daily for 3 days",
+            "Avoid in pregnancy: trimethoprim (first trimester)",
+            "Consider local resistance patterns"
+          ],
+          url: "https://bnf.nice.org.uk/treatment-summary/urinary-tract-infections-utis/#uncomplicated-lower-uti-in-nonpregnant-wom"
+        }
+      ],
+      mnemonics: [
+        "DUS = Dysuria + Urgency + Suprapubic pain → Treat empirically",
+        "UTI treatment: No Culture Unless Complicated",
+        "3-day rule: Most UTIs need 3 days of antibiotics"
+      ],
+      casesStudies: [
+        {
+          scenario: "24-year-old woman with dysuria, frequency, and suprapubic pain for 2 days. No fever or flank pain.",
+          diagnosis: "Uncomplicated lower UTI",
+          reasoning: "Classic symptoms in young woman without red flags. Treat empirically with nitrofurantoin without culture per NICE guidance."
+        },
+        {
+          scenario: "45-year-old woman with recurrent UTIs (4th episode in 6 months), current symptoms include fever and back pain.",
+          diagnosis: "Complicated UTI with possible pyelonephritis",
+          reasoning: "Recurrent nature plus systemic symptoms require urine culture and consideration of specialist referral."
+        }
+      ]
+    },
+    tags: ['uti', 'cystitis', 'antibiotics', 'womens-health', 'primary-care', 'nice'],
+    references: [
+      "NICE NG109: Urinary tract infection (lower): antimicrobial prescribing, 2018",
+      "Clinical Knowledge Summaries: Urinary tract infection (lower) - women, 2023",
+      "British National Formulary: Urinary tract infections, 2024"
+    ]
   }
 ];
 
