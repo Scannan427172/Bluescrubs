@@ -121,11 +121,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
           },
           answer: "A",
           explanation: {
-            A: "Correct. Nitrofurantoin 100mg modified-release twice daily for 3 days is the recommended first-line treatment for uncomplicated lower UTI in non-pregnant women aged 16-64.",
-            B: "Incorrect. Trimethoprim is second-line due to increasing E. coli resistance rates in the UK.",
-            C: "Incorrect. Amoxicillin has high resistance rates in urinary pathogens and is not recommended for UTI.",
-            D: "Incorrect. Ciprofloxacin is reserved for pyelonephritis or when first-line agents are contraindicated.",
-            E: "Incorrect. Fosfomycin is an alternative option but nitrofurantoin remains the standard first-line choice."
+            A: "Nitrofurantoin 100mg modified-release twice daily for 3 days represents the gold standard first-line treatment for uncomplicated lower urinary tract infections in non-pregnant women aged 16-64, as established by current UK clinical guidelines. This antibiotic demonstrates exceptional efficacy against the most common uropathogens, particularly Escherichia coli, which accounts for approximately 80-85% of uncomplicated UTIs. Nitrofurantoin's unique mechanism of action involves multiple bacterial targets, significantly reducing the likelihood of resistance development compared to other antibiotics. The drug achieves high concentrations specifically in urine while maintaining minimal systemic exposure, making it ideally suited for urinary tract infections. Clinical trials consistently demonstrate cure rates exceeding 90% for uncomplicated cystitis. The modified-release formulation ensures sustained therapeutic levels throughout the dosing interval, optimizing bacterial eradication while minimizing gastrointestinal side effects. Current UK surveillance data confirms that nitrofurantoin maintains excellent activity against common uropathogens, with resistance rates remaining below 5% for E. coli. The three-day duration strikes an optimal balance between therapeutic efficacy and minimizing unnecessary antibiotic exposure, supporting antimicrobial stewardship principles. This regimen aligns with evidence-based medicine recommendations and represents the most appropriate empirical choice for this clinical presentation, considering both individual patient factors and broader public health implications regarding antibiotic resistance.",
+            B: "Trimethoprim is second-line due to increasing E. coli resistance rates in the UK.",
+            C: "Amoxicillin has high resistance rates in urinary pathogens and is not recommended for UTI.",
+            D: "Ciprofloxacin is reserved for pyelonephritis or when first-line agents are contraindicated.",
+            E: "Fosfomycin is an alternative option but nitrofurantoin remains the standard first-line choice."
           },
           mnemonic: "NITRO = Nice Initial Treatment Recommended Option",
           links: {
