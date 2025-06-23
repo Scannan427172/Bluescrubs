@@ -1447,19 +1447,20 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {Object.entries(currentQuestion.explanation).map(([option, explanation]) => (
-                <div key={option} className="border-l-4 border-gray-200 pl-4">
-                  <div className="flex items-start gap-2">
-                    <Badge 
-                      variant={option === currentQuestion.answer ? "default" : "secondary"}
-                      className="mt-1"
-                    >
-                      {option}
-                    </Badge>
-                    <p className="text-gray-700 leading-relaxed">{String(explanation)}</p>
+              <div className="border-l-4 border-green-200 pl-4 bg-green-50 p-4 rounded-r-lg">
+                <div className="flex items-start gap-2">
+                  <Badge 
+                    variant="default"
+                    className="mt-1 bg-green-600"
+                  >
+                    {currentQuestion.answer}
+                  </Badge>
+                  <div>
+                    <h4 className="font-semibold text-green-800 mb-2">Correct Answer Explanation</h4>
+                    <p className="text-gray-700 leading-relaxed">{typeof currentQuestion.explanation === 'string' ? currentQuestion.explanation : currentQuestion.explanation[currentQuestion.answer]}</p>
                   </div>
                 </div>
-              ))}
+              </div>
             </CardContent>
           </Card>
         )}

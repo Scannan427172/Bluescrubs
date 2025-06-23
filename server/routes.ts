@@ -120,19 +120,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
             E: "Fosfomycin 3g single dose"
           },
           answer: "A",
-          explanation: {
-            A: "Nitrofurantoin 100mg modified-release twice daily for 3 days represents the gold standard first-line treatment for uncomplicated lower urinary tract infections in non-pregnant women aged 16-64, as established by current UK clinical guidelines. This antibiotic demonstrates exceptional efficacy against the most common uropathogens, particularly Escherichia coli, which accounts for approximately 80-85% of uncomplicated UTIs. Nitrofurantoin's unique mechanism of action involves multiple bacterial targets, significantly reducing the likelihood of resistance development compared to other antibiotics. The drug achieves high concentrations specifically in urine while maintaining minimal systemic exposure, making it ideally suited for urinary tract infections. Clinical trials consistently demonstrate cure rates exceeding 90% for uncomplicated cystitis. The modified-release formulation ensures sustained therapeutic levels throughout the dosing interval, optimizing bacterial eradication while minimizing gastrointestinal side effects. Current UK surveillance data confirms that nitrofurantoin maintains excellent activity against common uropathogens, with resistance rates remaining below 5% for E. coli. The three-day duration strikes an optimal balance between therapeutic efficacy and minimizing unnecessary antibiotic exposure, supporting antimicrobial stewardship principles. This regimen aligns with evidence-based medicine recommendations and represents the most appropriate empirical choice for this clinical presentation, considering both individual patient factors and broader public health implications regarding antibiotic resistance.",
-            B: "Trimethoprim is second-line due to increasing E. coli resistance rates in the UK.",
-            C: "Amoxicillin has high resistance rates in urinary pathogens and is not recommended for UTI.",
-            D: "Ciprofloxacin is reserved for pyelonephritis or when first-line agents are contraindicated.",
-            E: "Fosfomycin is an alternative option but nitrofurantoin remains the standard first-line choice."
-          },
+          explanation: "Nitrofurantoin 100mg modified-release twice daily for 3 days represents the gold standard first-line treatment for uncomplicated lower urinary tract infections in non-pregnant women aged 16-64, as established by current UK clinical guidelines. This antibiotic demonstrates exceptional efficacy against the most common uropathogens, particularly Escherichia coli, which accounts for approximately 80-85% of uncomplicated UTIs. Nitrofurantoin's unique mechanism of action involves multiple bacterial targets, significantly reducing the likelihood of resistance development compared to other antibiotics. The drug achieves high concentrations specifically in urine while maintaining minimal systemic exposure, making it ideally suited for urinary tract infections. Clinical trials consistently demonstrate cure rates exceeding 90% for uncomplicated cystitis. The modified-release formulation ensures sustained therapeutic levels throughout the dosing interval, optimizing bacterial eradication while minimizing gastrointestinal side effects. Current UK surveillance data confirms that nitrofurantoin maintains excellent activity against common uropathogens, with resistance rates remaining below 5% for E. coli. The three-day duration strikes an optimal balance between therapeutic efficacy and minimizing unnecessary antibiotic exposure, supporting antimicrobial stewardship principles. This regimen aligns with evidence-based medicine recommendations and represents the most appropriate empirical choice for this clinical presentation, considering both individual patient factors and broader public health implications regarding antibiotic resistance.",
           mnemonic: "NITRO = Nice Initial Treatment Recommended Option",
           links: {
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#choice-of-antibiotic",
-            "NHS BNF": "https://www.nhs.uk/medicines/nitrofurantoin/",
-            "BMJ UTI": "https://www.bmj.com/content/372/bmj.n725",
-            "Gov UK": "https://www.gov.uk/government/publications/urinary-tract-infection-diagnosis"
+            "NHS Medicines": "https://www.nhs.uk/medicines/nitrofurantoin/",
+            "BMJ UTI Guide": "https://bestpractice.bmj.com/topics/en-gb/111",
+            "Gov UK Antimicrobial": "https://www.gov.uk/government/publications/managing-common-infections-guidance-for-primary-care"
           }
         },
         {
@@ -147,20 +141,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
             E: "Switch to simvastatin 40mg"
           },
           answer: "C",
-          explanation: {
-            A: "Incorrect. Dose reduction doesn't eliminate risk — all statins are contraindicated in pregnancy.",
-            B: "Incorrect. Statins must be discontinued when pregnancy is planned due to teratogenic potential.",
-            C: "Correct. NICE and CKS recommend stopping statins at least 3 months before conception in women with FH.",
-            D: "Incorrect. Ezetimibe is also not recommended in pregnancy due to limited safety data.",
-            E: "Incorrect. Switching statins doesn't change teratogenic risk."
-          },
+          explanation: "Stopping atorvastatin before trying to conceive represents the evidence-based standard of care for women with familial hypercholesterolaemia planning pregnancy, as comprehensively outlined in current UK clinical guidelines. All HMG-CoA reductase inhibitors (statins) are classified as pregnancy category X medications due to demonstrated teratogenic potential in animal studies and case reports of birth defects in humans. The mechanism involves interference with cholesterol biosynthesis, which is crucial for normal fetal development, particularly affecting neural tube formation and limb development. NICE guidelines specifically recommend discontinuation at least three months before planned conception to ensure complete drug clearance and metabolite elimination. This timeframe accounts for atorvastatin's elimination half-life and allows for one complete ovarian cycle before conception attempts. While temporary statin cessation may result in elevated cholesterol levels, the cardiovascular risk during pregnancy remains relatively low in young women, even those with familial hypercholesterolaemia. Alternative lipid management strategies during pregnancy include dietary modification, bile acid sequestrants (which have minimal systemic absorption), and careful monitoring. The decision prioritizes fetal safety while acknowledging that short-term lipid elevation poses minimal maternal risk compared to potential teratogenic effects. Post-delivery, statin therapy can be safely resumed, though breastfeeding considerations require evaluation of individual circumstances and alternative lipid-lowering strategies may be preferred during lactation.",
           mnemonic: "🚫 S.T.A.T.I.N. = Stop Three months Ahead To Inhibit Neonatal risk",
           links: {
             NICE: "https://www.nice.org.uk/guidance/cg181/chapter/1-Recommendations#recommendations-for-women-of-childbearing-potential",
-            CKS: "https://cks.nice.org.uk/topics/familial-hypercholesterolaemia/pregnancy-and-breastfeeding/pregnancy/#advice-for-women-planning-pregnancy",
-            BNF: "https://bnf.nice.org.uk/drug/atorvastatin.html#pregnancy",
-            UKMI: "https://www.sps.nhs.uk/articles/what-is-the-ukmi-position-on-the-use-of-statins-during-pregnancy/",
-            GMC: "https://www.gmc-uk.org/ethical-guidance/ethical-hub/prescribing-safely"
+            "CKS FH Guide": "https://cks.nice.org.uk/topics/familial-hypercholesterolaemia/",
+            "BNF Statins": "https://bnf.nice.org.uk/treatment-summaries/statins/",
+            "UKMI Pregnancy": "https://www.medicinesinpregnancy.org/Medicine--pregnancy/Statins/",
+            "RCP Guidelines": "https://www.rcplondon.ac.uk/guidelines-policy/familial-hypercholesterolaemia"
           }
         }
       ];
