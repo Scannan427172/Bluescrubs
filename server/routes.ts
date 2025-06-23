@@ -110,8 +110,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const testQuestions = [
         {
           id: "q1", 
-          topic: "NICE NG109 - UTI Antibiotic Choice",
-          question: "According to NICE NG109, what is the recommended first-line antibiotic for uncomplicated lower UTI in non-pregnant women aged 16-64?",
+          topic: "Urinary Tract Infection Management",
+          question: "A 28-year-old non-pregnant woman presents to your GP practice with a 2-day history of dysuria, urinary frequency, and suprapubic pain. She has no fever, flank pain, or vaginal discharge. Urine dipstick shows nitrites positive and leucocytes 2+. What is the most appropriate first-line antibiotic treatment?",
           options: {
             A: "Nitrofurantoin 100mg modified-release twice daily for 3 days",
             B: "Trimethoprim 200mg twice daily for 3 days",
@@ -121,13 +121,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           },
           answer: "A",
           explanation: {
-            A: "Correct. NICE NG109 recommends nitrofurantoin 100mg modified-release twice daily for 3 days as first-line treatment for uncomplicated lower UTI in women aged 16-64.",
-            B: "Incorrect. Trimethoprim is second-line due to increasing resistance rates.",
-            C: "Incorrect. Amoxicillin has high resistance rates and is not recommended for UTI.",
-            D: "Incorrect. Ciprofloxacin is reserved for pyelonephritis or when first-line agents are unsuitable.",
-            E: "Incorrect. Fosfomycin is an alternative but not the standard first-line recommendation."
+            A: "Correct. Nitrofurantoin 100mg modified-release twice daily for 3 days is the recommended first-line treatment for uncomplicated lower UTI in non-pregnant women aged 16-64.",
+            B: "Incorrect. Trimethoprim is second-line due to increasing E. coli resistance rates in the UK.",
+            C: "Incorrect. Amoxicillin has high resistance rates in urinary pathogens and is not recommended for UTI.",
+            D: "Incorrect. Ciprofloxacin is reserved for pyelonephritis or when first-line agents are contraindicated.",
+            E: "Incorrect. Fosfomycin is an alternative option but nitrofurantoin remains the standard first-line choice."
           },
-          mnemonic: "NITRO First = Nitrofurantoin Is The Recommended Option First-line",
+          mnemonic: "NITRO = Nice Initial Treatment Recommended Option",
           links: {
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#choice-of-antibiotic",
             BNF: "https://www.medicines.org.uk/emc/product/2150/smpc",

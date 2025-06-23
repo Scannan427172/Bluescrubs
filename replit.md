@@ -109,6 +109,8 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 23, 2025: Synchronized frontend test interface with corrected UK medical guidance links
 - June 23, 2025: Fixed broken CKS, BNF, and GMC links with verified working alternatives
 - June 23, 2025: Updated CKS link to Patient.info UTI guidance due to CKS access restrictions
+- June 23, 2025: Implemented authentic guideline-based question creation by working backwards from verified UK medical sources
+- June 23, 2025: Updated questions to use realistic clinical scenarios instead of naming guidelines directly
 
 # User Preferences
 
