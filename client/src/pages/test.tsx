@@ -354,6 +354,27 @@ export default function Test() {
 
   const currentQuestion = questions?.[currentQuestionIndex];
 
+  // Speech function for current question (defined after currentQuestion)
+  const speakCurrentQuestion = () => {
+    if (currentQuestion) {
+      // Get translated question if available
+      const cacheKey = `q1_${selectedLanguage}`;
+      const translatedQ = translatedQuestions[cacheKey];
+      
+      const questionToRead = translatedQ || currentQuestion;
+      
+      // Speak question and options
+      let textToSpeak = questionToRead.question + ". ";
+      textToSpeak += "Option A: " + questionToRead.options.A + ". ";
+      textToSpeak += "Option B: " + questionToRead.options.B + ". ";
+      textToSpeak += "Option C: " + questionToRead.options.C + ". ";
+      textToSpeak += "Option D: " + questionToRead.options.D + ". ";
+      textToSpeak += "Option E: " + questionToRead.options.E + ".";
+      
+      speakText(textToSpeak);
+    }
+  };
+
   // Effect to translate current question when language changes
   useEffect(() => {
     if (currentQuestion && translateQuestions && selectedLanguage !== 'en') {
@@ -494,6 +515,66 @@ export default function Test() {
               Evidence-Based Learning
             </Badge>
           </div>
+
+          {/* Translation and Voice Controls */}
+          <div className="mt-8 flex flex-wrap gap-4 items-center justify-center">
+            {/* Language Selector */}
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+              <Globe className="w-4 h-4 text-white" />
+              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                <SelectTrigger className="w-40 bg-transparent border-white/30 text-white">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {languages.map((lang) => (
+                    <SelectItem key={lang.code} value={lang.code}>
+                      {lang.flag} {lang.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Translation Toggle */}
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+              <Languages className="w-4 h-4 text-white" />
+              <Label htmlFor="translate-mode" className="text-white text-sm">
+                Auto-translate
+              </Label>
+              <Switch
+                id="translate-mode"
+                checked={translateQuestions}
+                onCheckedChange={setTranslateQuestions}
+              />
+            </div>
+
+            {/* Voice Controls */}
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+              {isSpeaking ? (
+                <VolumeX className="w-4 h-4 text-white" />
+              ) : (
+                <Volume2 className="w-4 h-4 text-white" />
+              )}
+              <Label htmlFor="speech-enabled" className="text-white text-sm">
+                Voice
+              </Label>
+              <Switch
+                id="speech-enabled"
+                checked={speechEnabled}
+                onCheckedChange={setSpeechEnabled}
+              />
+              {speechEnabled && (
+                <Button
+                  onClick={isSpeaking ? stopSpeaking : speakCurrentQuestion}
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-white/20"
+                >
+                  {isSpeaking ? "Stop" : "Read"}
+                </Button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -526,25 +607,59 @@ export default function Test() {
               </div>
             </CardTitle>
             <CardDescription className="text-base text-gray-700 leading-relaxed">
-              {currentQuestion.question}
+              {(() => {
+                const cacheKey = `q1_${selectedLanguage}`;
+                const translatedQ = translatedQuestions[cacheKey];
+                return translatedQ?.question || translateText(currentQuestion.question) || currentQuestion.question;
+              })()}
             </CardDescription>
+            
+            {/* Voice Controls in Question */}
+            {speechEnabled && (
+              <div className="flex justify-end">
+                <Button
+                  onClick={isSpeaking ? stopSpeaking : speakCurrentQuestion}
+                  variant="ghost"
+                  size="sm"
+                  className="text-blue-600 hover:bg-blue-50"
+                >
+                  {isSpeaking ? (
+                    <>
+                      <VolumeX className="w-4 h-4 mr-2" />
+                      Stop Reading
+                    </>
+                  ) : (
+                    <>
+                      <Volume2 className="w-4 h-4 mr-2" />
+                      Read Question
+                    </>
+                  )}
+                </Button>
+              </div>
+            )}
           </CardHeader>
           
           <CardContent className="space-y-3">
-            {Object.entries(currentQuestion.options).map(([option, text]) => (
-              <button
-                key={option}
-                onClick={() => handleAnswerSelect(option)}
-                disabled={submitted}
-                className={`w-full p-4 border-2 rounded-lg text-left transition-all duration-200 flex items-center justify-between ${getOptionButtonClass(option)}`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="font-semibold text-lg">{option}.</span>
-                  <span>{String(text)}</span>
-                </div>
-                {getOptionIcon(option)}
-              </button>
-            ))}
+            {Object.entries(currentQuestion.options).map(([option, text]) => {
+              const cacheKey = `q1_${selectedLanguage}`;
+              const translatedQ = translatedQuestions[cacheKey];
+              const displayText = translatedQ?.options?.[option] || translateText(String(text)) || String(text);
+              
+              return (
+                <button
+                  key={option}
+                  onClick={() => handleAnswerSelect(option)}
+                  disabled={submitted}
+                  className={`w-full p-4 border-2 rounded-lg text-left transition-all duration-200 flex items-center justify-between ${getOptionButtonClass(option)}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="font-semibold text-lg">{option}.</span>
+                    <span>{displayText}</span>
+                  </div>
+                  {getOptionIcon(option)}
+                </button>
+              );
+            })}
 
             {/* Action Buttons */}
             <div className="flex gap-3 pt-4">
