@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 
 interface Question {
+  id: string;
   question: string;
   options: {
     A: string;
@@ -39,12 +43,308 @@ export default function Test() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
+  // Translation state
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [isTranslationMode, setIsTranslationMode] = useState(false);
+  const [translateQuestions, setTranslateQuestions] = useState(false);
+  const [translatedQuestions, setTranslatedQuestions] = useState<Record<string, any>>({});
+  const [translationLoading, setTranslationLoading] = useState<Record<string, boolean>>({});
+  
+  // Text-to-Speech state
+  const [speechEnabled, setSpeechEnabled] = useState(false);
+  const [selectedVoice, setSelectedVoice] = useState<string>('');
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // Language definitions
+  const languages = [
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+    { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
+    { code: 'ur', name: 'اردو', flag: '🇵🇰' },
+    { code: 'bn', name: 'বাংলা', flag: '🇧🇩' },
+    { code: 'ta', name: 'தமிழ்', flag: '🇮🇳' },
+    { code: 'te', name: 'తెలుగు', flag: '🇮🇳' },
+    { code: 'gu', name: 'ગુજરાતી', flag: '🇮🇳' },
+    { code: 'kn', name: 'ಕನ್ನಡ', flag: '🇮🇳' },
+    { code: 'ml', name: 'മലയാളം', flag: '🇮🇳' },
+    { code: 'pa', name: 'ਪੰਜਾਬੀ', flag: '🇮🇳' },
+    { code: 'mr', name: 'मराठी', flag: '🇮🇳' },
+    { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+    { code: 'pt', name: 'Português', flag: '🇧🇷' },
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+    { code: 'zh', name: '中文', flag: '🇨🇳' },
+    { code: 'ja', name: '日本語', flag: '🇯🇵' },
+    { code: 'ko', name: '한국어', flag: '🇰🇷' },
+    { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+    { code: 'pl', name: 'Polski', flag: '🇵🇱' },
+    { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+    { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
+  ];
+
   // Preload hero image for faster loading
   useEffect(() => {
     const img = new Image();
     img.onload = () => setHeroImageLoaded(true);
     img.src = plab1BgImage;
   }, []);
+
+  // Load available voices for TTS
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = speechSynthesis.getVoices();
+      setAvailableVoices(voices);
+      
+      // Auto-select best voice for current language
+      if (voices.length > 0 && !selectedVoice) {
+        const languageVoiceMap: Record<string, string> = {
+          'en': 'en-US',
+          'ar': 'ar-SA',
+          'hi': 'hi-IN',
+          'ur': 'ur-PK',
+          'bn': 'bn-IN',
+          'ta': 'ta-IN',
+          'te': 'te-IN',
+          'gu': 'gu-IN',
+          'kn': 'kn-IN',
+          'ml': 'ml-IN',
+          'pa': 'pa-IN',
+          'mr': 'mr-IN',
+          'es': 'es-ES',
+          'fr': 'fr-FR',
+          'de': 'de-DE',
+          'it': 'it-IT',
+          'pt': 'pt-BR',
+          'ru': 'ru-RU',
+          'zh': 'zh-CN',
+          'ja': 'ja-JP',
+          'ko': 'ko-KR'
+        };
+
+        const targetLang = languageVoiceMap[selectedLanguage] || 'en-US';
+        const voice = voices.find(v => v.lang.startsWith(targetLang.split('-')[0]));
+        if (voice) {
+          setSelectedVoice(voice.name);
+        }
+      }
+    };
+
+    loadVoices();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }, [selectedLanguage, selectedVoice]);
+
+  // Translation functions
+  const translateFullQuestion = async (question: any) => {
+    if (!translateQuestions || selectedLanguage === 'en') return question;
+    
+    const cacheKey = `${question.id}_${selectedLanguage}`;
+    
+    // Return if already translated
+    if (translatedQuestions[cacheKey]) {
+      return translatedQuestions[cacheKey];
+    }
+    
+    // Return if currently translating
+    if (translationLoading[cacheKey]) {
+      return question;
+    }
+    
+    setTranslationLoading(prev => ({ ...prev, [cacheKey]: true }));
+    
+    try {
+      const response = await fetch('/api/translate-question', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          question: {
+            question: question.question,
+            options: question.options,
+            explanation: question.explanation
+          },
+          targetLanguage: selectedLanguage
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Translation failed: ${response.statusText}`);
+      }
+
+      const translated = await response.json();
+      
+      // Store translated question with proper structure
+      const translatedQuestion = {
+        ...question,
+        question: translated.question || question.question,
+        options: translated.options || question.options,
+        explanation: translated.explanation || question.explanation
+      };
+      
+      setTranslatedQuestions(prev => ({
+        ...prev,
+        [cacheKey]: translatedQuestion
+      }));
+      
+      return translatedQuestion;
+    } catch (error) {
+      console.error('Translation error:', error);
+      return question; // Return original on error
+    } finally {
+      setTranslationLoading(prev => ({ ...prev, [cacheKey]: false }));
+    }
+  };
+
+  const translateText = (text: string) => {
+    if (!isTranslationMode || selectedLanguage === 'en') return text;
+    
+    const translations: Record<string, Record<string, string>> = {
+      'ar': {
+        'PLAB Practice Test': 'اختبار ممارسة PLAB',
+        'Submit Answer': 'إرسال الإجابة',
+        'Next Question': 'السؤال التالي',
+        'Previous Question': 'السؤال السابق',
+        'Correct!': 'صحيح!',
+        'Incorrect.': 'غير صحيح.',
+        'Clinical Guidelines': 'الإرشادات السريرية',
+        'Mnemonic': 'مساعد الذاكرة',
+        'Reference': 'مرجع',
+        'Explanation': 'شرح'
+      },
+      'hi': {
+        'PLAB Practice Test': 'PLAB अभ्यास परीक्षा',
+        'Submit Answer': 'उत्तर जमा करें',
+        'Next Question': 'अगला प्रश्न',
+        'Previous Question': 'पिछला प्रश्न',
+        'Correct!': 'सही!',
+        'Incorrect.': 'गलत।',
+        'Clinical Guidelines': 'क्लिनिकल दिशानिर्देश',
+        'Mnemonic': 'स्मरण सहायक',
+        'Reference': 'संदर्भ',
+        'Explanation': 'व्याख्या'
+      },
+      'ur': {
+        'PLAB Practice Test': 'PLAB پریکٹس ٹیسٹ',
+        'Submit Answer': 'جواب جمع کریں',
+        'Next Question': 'اگلا سوال',
+        'Previous Question': 'پچھلا سوال',
+        'Correct!': 'درست!',
+        'Incorrect.': 'غلط۔',
+        'Clinical Guidelines': 'کلینیکل رہنمائی',
+        'Mnemonic': 'یادداشت مددگار',
+        'Reference': 'حوالہ',
+        'Explanation': 'وضاحت'
+      },
+      'fr': {
+        'PLAB Practice Test': 'Test de pratique PLAB',
+        'Submit Answer': 'Soumettre la réponse',
+        'Next Question': 'Question suivante',
+        'Previous Question': 'Question précédente',
+        'Correct!': 'Correct!',
+        'Incorrect.': 'Incorrect.',
+        'Clinical Guidelines': 'Directives cliniques',
+        'Mnemonic': 'Moyen mnémotechnique',
+        'Reference': 'Référence',
+        'Explanation': 'Explication'
+      },
+      'es': {
+        'PLAB Practice Test': 'Prueba de práctica PLAB',
+        'Submit Answer': 'Enviar respuesta',
+        'Next Question': 'Siguiente pregunta',
+        'Previous Question': 'Pregunta anterior',
+        'Correct!': '¡Correcto!',
+        'Incorrect.': 'Incorrecto.',
+        'Clinical Guidelines': 'Guías clínicas',
+        'Mnemonic': 'Mnemónico',
+        'Reference': 'Referencia',
+        'Explanation': 'Explicación'
+      }
+    };
+    
+    return translations[selectedLanguage]?.[text] || text;
+  };
+
+  // Text-to-Speech functions
+  const speakText = (text: string) => {
+    if (!speechEnabled || !text.trim()) return;
+    
+    // Stop any current speech
+    speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Find best voice for selected language
+    const languageVoiceMap: Record<string, string> = {
+      'en': 'en-US',
+      'ar': 'ar-SA',
+      'hi': 'hi-IN',
+      'ur': 'ur-PK',
+      'bn': 'bn-IN',
+      'ta': 'ta-IN',
+      'te': 'te-IN',
+      'gu': 'gu-IN',
+      'kn': 'kn-IN',
+      'ml': 'ml-IN',
+      'pa': 'pa-IN',
+      'mr': 'mr-IN',
+      'es': 'es-ES',
+      'fr': 'fr-FR',
+      'de': 'de-DE',
+      'it': 'it-IT',
+      'pt': 'pt-BR',
+      'ru': 'ru-RU',
+      'zh': 'zh-CN',
+      'ja': 'ja-JP',
+      'ko': 'ko-KR'
+    };
+
+    const targetLang = languageVoiceMap[selectedLanguage] || 'en-US';
+    const voice = availableVoices.find(v => 
+      v.lang.startsWith(targetLang.split('-')[0]) || 
+      v.name === selectedVoice
+    );
+    
+    if (voice) {
+      utterance.voice = voice;
+      utterance.lang = voice.lang;
+    } else {
+      utterance.lang = targetLang;
+    }
+    
+    // Enhanced natural speech settings
+    utterance.rate = selectedLanguage === 'ar' || selectedLanguage === 'ur' ? 0.8 : 0.85;
+    utterance.pitch = 1.1;
+    utterance.volume = 0.9;
+    
+    // Add natural pauses for medical terms
+    const processedText = text
+      .replace(/\./g, '. ')
+      .replace(/,/g, ', ')
+      .replace(/:/g, ': ')
+      .replace(/;/g, '; ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    
+    utterance.text = processedText;
+    
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    
+    speechSynthesis.speak(utterance);
+  };
+
+  const stopSpeaking = () => {
+    speechSynthesis.cancel();
+    setIsSpeaking(false);
+  };
+
+
 
   // Fetch questions from API
   const { data: questions, isLoading, error } = useQuery<Question[]>({
@@ -53,6 +353,13 @@ export default function Test() {
   });
 
   const currentQuestion = questions?.[currentQuestionIndex];
+
+  // Effect to translate current question when language changes
+  useEffect(() => {
+    if (currentQuestion && translateQuestions && selectedLanguage !== 'en') {
+      translateFullQuestion(currentQuestion);
+    }
+  }, [currentQuestion, translateQuestions, selectedLanguage]);
 
   const handleAnswerSelect = (option: string) => {
     if (!submitted) {
