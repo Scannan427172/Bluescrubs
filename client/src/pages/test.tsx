@@ -1655,33 +1655,20 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   <span className="font-medium text-gray-900">NICE</span>
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
-                <a
-                  href={currentQuestion.links["NHS BNF"]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-medium text-gray-900">NHS BNF</span>
-                  <ExternalLink className="w-4 h-4 text-gray-500" />
-                </a>
-                <a
-                  href={currentQuestion.links["BMJ UTI"]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-medium text-gray-900">BMJ UTI</span>
-                  <ExternalLink className="w-4 h-4 text-gray-500" />
-                </a>
-                <a
-                  href={currentQuestion.links["Gov UK"]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-medium text-gray-900">Gov UK</span>
-                  <ExternalLink className="w-4 h-4 text-gray-500" />
-                </a>
+                {Object.entries(currentQuestion.links)
+                  .filter(([key]) => key !== "NICE")
+                  .map(([key, url]) => (
+                    <a
+                      key={key}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="font-medium text-gray-900">{key}</span>
+                      <ExternalLink className="w-4 h-4 text-gray-500" />
+                    </a>
+                  ))}
               </div>
             </CardContent>
           </Card>
