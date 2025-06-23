@@ -73,26 +73,33 @@ export default function Test() {
   const [practiceMode, setPracticeMode] = useState<'selection' | 'practice'>('selection');
   const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
 
-  // Medical Specialty Categories
+  // Question Statistics
+  const { data: questionStats } = useQuery({
+    queryKey: ["/api/performance-stats"],
+    retry: false,
+  });
+
+  // Medical Specialty Categories - Dynamic based on available questions
+  const totalQuestions = (questionStats as any)?.questionBank || 2;
   const medicalCategories = [
-    { id: "all", name: "All Categories", icon: "🏥", count: "5000+" },
-    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", count: "350+" },
-    { id: "respiratory", name: "Respiratory", icon: "🫁", count: "300+" },
-    { id: "gastrointestinal", name: "Gastrointestinal", icon: "🦠", count: "280+" },
-    { id: "neurology", name: "Neurology", icon: "🧠", count: "320+" },
-    { id: "endocrinology", name: "Endocrinology", icon: "⚡", count: "250+" },
-    { id: "psychiatry", name: "Psychiatry", icon: "🧘", count: "200+" },
-    { id: "obstetrics-gynaecology", name: "Obstetrics & Gynaecology", icon: "👶", count: "280+" },
-    { id: "paediatrics", name: "Paediatrics", icon: "🧸", count: "300+" },
-    { id: "surgery", name: "Surgery", icon: "🔪", count: "220+" },
-    { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨", count: "250+" },
-    { id: "infectious-diseases", name: "Infectious Diseases", icon: "🦠", count: "180+" },
-    { id: "rheumatology", name: "Rheumatology", icon: "🦴", count: "150+" },
-    { id: "dermatology", name: "Dermatology", icon: "👁️", count: "120+" },
-    { id: "ophthalmology", name: "Ophthalmology", icon: "👁️", count: "100+" },
-    { id: "ent", name: "ENT", icon: "👂", count: "80+" },
-    { id: "pharmacology", name: "Pharmacology", icon: "💊", count: "200+" },
-    { id: "ethics-law", name: "Ethics & Law", icon: "⚖️", count: "150+" }
+    { id: "all", name: "All Categories", icon: "🏥", count: totalQuestions.toString() },
+    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", count: "1" },
+    { id: "infectious-diseases", name: "Infectious Diseases", icon: "🦠", count: "1" },
+    { id: "respiratory", name: "Respiratory", icon: "🫁", count: "0" },
+    { id: "gastrointestinal", name: "Gastrointestinal", icon: "🦠", count: "0" },
+    { id: "neurology", name: "Neurology", icon: "🧠", count: "0" },
+    { id: "endocrinology", name: "Endocrinology", icon: "⚡", count: "0" },
+    { id: "psychiatry", name: "Psychiatry", icon: "🧘", count: "0" },
+    { id: "obstetrics-gynaecology", name: "Obstetrics & Gynaecology", icon: "👶", count: "0" },
+    { id: "paediatrics", name: "Paediatrics", icon: "🧸", count: "0" },
+    { id: "surgery", name: "Surgery", icon: "🔪", count: "0" },
+    { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨", count: "0" },
+    { id: "rheumatology", name: "Rheumatology", icon: "🦴", count: "0" },
+    { id: "dermatology", name: "Dermatology", icon: "👁️", count: "0" },
+    { id: "ophthalmology", name: "Ophthalmology", icon: "👁️", count: "0" },
+    { id: "ent", name: "ENT", icon: "👂", count: "0" },
+    { id: "pharmacology", name: "Pharmacology", icon: "💊", count: "0" },
+    { id: "ethics-law", name: "Ethics & Law", icon: "⚖️", count: "0" }
   ];
 
   const difficultyLevels = [
@@ -816,7 +823,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
     return (
       <div className="min-h-screen bg-gray-50">
         {/* Hero Banner */}
-        <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
+        <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-80 md:h-96 lg:h-[450px] mb-8 overflow-hidden">
           {!heroImageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
               <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -908,10 +915,10 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               <CardContent className="p-6">
                 <div className="flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm font-medium text-gray-600">Question Categories</span>
+                  <span className="text-sm font-medium text-gray-600">Total Questions</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">18</p>
-                <p className="text-xs text-gray-500 mt-1">Medical specialties covered</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{totalQuestions}</p>
+                <p className="text-xs text-gray-500 mt-1">Available practice questions</p>
               </CardContent>
             </Card>
             
@@ -919,10 +926,10 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               <CardContent className="p-6">
                 <div className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-green-600" />
-                  <span className="text-sm font-medium text-gray-600">Difficulty Levels</span>
+                  <span className="text-sm font-medium text-gray-600">Active Categories</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">5</p>
-                <p className="text-xs text-gray-500 mt-1">From basic to exam-style</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">2</p>
+                <p className="text-xs text-gray-500 mt-1">Cardiovascular, Infectious Diseases</p>
               </CardContent>
             </Card>
             
@@ -932,8 +939,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   <Brain className="w-5 h-5 text-purple-600" />
                   <span className="text-sm font-medium text-gray-600">Medical Guidelines</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">30+</p>
-                <p className="text-xs text-gray-500 mt-1">NICE, CKS, BTS, ESC, ADA</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">4</p>
+                <p className="text-xs text-gray-500 mt-1">NICE, NHS, BMJ, Gov UK</p>
               </CardContent>
             </Card>
             
