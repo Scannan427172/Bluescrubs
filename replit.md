@@ -114,6 +114,7 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 23, 2025: Final fix of all clinical guideline links with verified working UK medical resources
 - June 23, 2025: Replaced CKS and BNF links with verified NHS and RPS alternatives (all links now functional)
 - June 23, 2025: Fixed frontend-backend synchronization issue - clinical guideline links now fully interactive
+- June 23, 2025: Replaced broken NHS Medicines link with verified BMJ and Gov UK alternatives (all links confirmed working)
 
 # User Preferences
 
