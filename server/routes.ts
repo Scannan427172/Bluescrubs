@@ -1152,6 +1152,31 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#treatment-of-lower-uti-in-non-pregnant-women-aged-16-and-over",
             BNF: "https://bnf.nice.org.uk/treatment-summary/urinary-tract-infections-utis/"
           }
+        },
+        {
+          id: "q4",
+          question: "A 33-year-old woman with familial hypercholesterolaemia is planning pregnancy. She is currently on atorvastatin 80 mg. What is the most appropriate advice?",
+          options: {
+            A: "Switch to atorvastatin 10mg",
+            B: "Continue current dose",
+            C: "Stop atorvastatin before trying to conceive",
+            D: "Switch to ezetimibe",
+            E: "Switch to simvastatin 40mg"
+          },
+          answer: "C",
+          explanation: {
+            A: "Incorrect. Even low-dose statins are contraindicated in pregnancy due to teratogenicity.",
+            B: "Incorrect. Continuing statins while trying to conceive increases risk of fetal malformations.",
+            C: "Correct. NICE advises stopping statins 3 months before conception. Non-pharmacological management should be prioritised during pregnancy.",
+            D: "Incorrect. Ezetimibe is not recommended during pregnancy due to insufficient safety data.",
+            E: "Incorrect. Switching statins does not eliminate teratogenic risk."
+          },
+          mnemonic: "🚫 S.T.A.T.I.N. = Stop Three months Ahead To Inhibit Neonatal risk",
+          links: {
+            NICE: "https://www.nice.org.uk/guidance/cg181/chapter/1-Recommendations#lipid-modification-therapy-for-the-primary-and-secondary-prevention-of-cvd",
+            CKS: "https://cks.nice.org.uk/topics/familial-hypercholesterolaemia/pregnancy-and-breastfeeding/pregnancy/",
+            BNF: "https://bnf.nice.org.uk/drug/atorvastatin.html"
+          }
         }
       ];
 
