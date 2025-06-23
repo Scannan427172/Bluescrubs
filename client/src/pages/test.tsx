@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 
 interface Question {
   question: string;
@@ -36,6 +37,14 @@ export default function Test() {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+
+  // Preload hero image for faster loading
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setHeroImageLoaded(true);
+    img.src = plab1BgImage;
+  }, []);
 
   // Fetch questions from API
   const { data: questions, isLoading, error } = useQuery<Question[]>({
@@ -146,19 +155,43 @@ export default function Test() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 pb-24">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">PLAB Style Test</h1>
-            <p className="text-gray-600">PassMedicine-style MCQ with detailed explanations</p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Banner */}
+      <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
+        {!heroImageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
+            <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
           </div>
-          <div className="flex items-center gap-4">
-            <Badge variant="outline" className="px-3 py-1">
+        )}
+        <img 
+          src={plab1BgImage}
+          alt="PLAB Test Practice"
+          className={`absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-300 ${heroImageLoaded ? 'opacity-60' : 'opacity-0'}`}
+          loading="eager"
+          decoding="async"
+          onLoad={() => setHeroImageLoaded(true)}
+        />
+
+        <div className="relative z-50 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+            PLAB Practice Test
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-3xl leading-relaxed">
+            PassMedicine-style questions with detailed clinical explanations and verified UK medical guidance
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
+            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-white/20 text-white border-white/30">
               Question {currentQuestionIndex + 1} of {questions.length}
             </Badge>
+            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-white/20 text-white border-white/30">
+              Evidence-Based Learning
+            </Badge>
           </div>
+        </div>
+      </div>
+
+      <div className="p-4 pb-24">
+        <div className="max-w-4xl mx-auto">
         </div>
 
         {/* Question Card */}
