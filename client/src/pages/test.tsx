@@ -823,7 +823,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
     return (
       <div className="min-h-screen bg-gray-50">
         {/* Hero Banner */}
-        <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-80 md:h-96 lg:h-[450px] mb-8 overflow-hidden">
+        <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[500px] lg:h-[550px] mb-8 overflow-hidden">
           {!heroImageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
               <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
