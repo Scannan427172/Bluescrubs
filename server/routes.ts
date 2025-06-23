@@ -23,6 +23,7 @@ import {
 import { plabAI, type PLABStudySession, type AdaptiveFlashcard } from "./plab-ai-study-system";
 import { interactivePatientSystem } from "./interactive-patient";
 import plabIntelligenceAPI from "./plab-intelligence-api";
+import { BNF_MEDICATIONS } from "../shared/bnf-integration";
 import { 
   generateInternationalQuestion, 
   generateMultipleInternationalQuestions,
@@ -1076,6 +1077,11 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
   // PassMedicine-style test questions
   app.get("/api/test/questions", async (req, res) => {
     try {
+      // Get BNF medication data for integrated guidance
+      const nitrofurantoinInfo = BNF_MEDICATIONS['nitrofurantoin'];
+      const trimethoprimInfo = BNF_MEDICATIONS['trimethoprim'];
+      const atorvastatinInfo = BNF_MEDICATIONS['atorvastatin'];
+
       // Sample PassMedicine-style questions with detailed explanations
       const testQuestions = [
         {
@@ -1089,6 +1095,10 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
             E: "Pelvic ultrasound"
           },
           answer: "A",
+          medications: ["nitrofurantoin", "trimethoprim"],
+          bnfGuidance: nitrofurantoinInfo && trimethoprimInfo ? 
+            `First-line antibiotics: Nitrofurantoin ${nitrofurantoinInfo.dosing.adult} or Trimethoprim ${trimethoprimInfo.dosing.adult}. Monitor: ${nitrofurantoinInfo.monitoring.join(', ')}. Contraindications: ${nitrofurantoinInfo.contraindications.join(', ')}.` : 
+            "Medication information unavailable",
           explanation: {
             A: "This is the correct approach for managing uncomplicated lower urinary tract infections in women. According to NICE guideline NG109 and CKS recommendations, women under 65 years presenting with two or more symptoms of lower UTI (dysuria, urgency, frequency, suprapubic pain) should receive empirical antibiotic treatment without routine urine testing. This patient presents with classic symptoms: dysuria, frequency, and suprapubic discomfort, with no red flag symptoms like fever, flank pain, or signs of upper UTI. The absence of vaginal discharge also supports a UTI diagnosis rather than sexually transmitted infection. First-line treatment typically includes nitrofurantoin 100mg twice daily for 3 days or trimethoprim 200mg twice daily for 3 days, depending on local resistance patterns. This approach reduces unnecessary delays in treatment, improves patient satisfaction, and is cost-effective while maintaining excellent clinical outcomes in straightforward cases.",
             B: "While urine culture can be valuable, it is not routinely required for uncomplicated lower UTI in non-pregnant women under 65. NICE NG109 specifically states that urine culture should be reserved for cases where symptoms persist after treatment, there are signs of upper UTI, the patient is pregnant, or there are recurrent infections. In this straightforward case with typical symptoms and no complicating factors, empirical treatment is more appropriate and avoids treatment delays.",
@@ -1114,6 +1124,10 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
             E: "Switch to simvastatin 40mg"
           },
           answer: "C",
+          medications: ["atorvastatin"],
+          bnfGuidance: atorvastatinInfo ? 
+            `Atorvastatin: ${atorvastatinInfo.pregnancyCategory}. ${atorvastatinInfo.contraindications.includes('Pregnancy') ? 'Contraindicated in pregnancy' : 'Pregnancy advice: ' + (atorvastatinInfo.pregnancyCategory || 'Avoid')}. Must discontinue before conception.` : 
+            "Medication information unavailable",
           explanation: {
             A: "Reducing the statin dose does not eliminate teratogenic risk during pregnancy. All statins, regardless of dose, are classified as pregnancy category X medications due to their potential to cause fetal harm. The mechanism involves disruption of cholesterol synthesis pathways essential for fetal development, particularly affecting the central nervous system and limb formation. Even low-dose atorvastatin crosses the placental barrier and can interfere with normal embryogenesis during critical developmental windows.",
             B: "Continuing current statin therapy during pregnancy planning poses significant teratogenic risks. Statins inhibit HMG-CoA reductase, blocking cholesterol synthesis which is crucial for normal fetal development, especially neural tube formation and limb development. Clinical studies have demonstrated increased risks of congenital malformations when statins are used during pregnancy, leading to their contraindication. The high dose (80mg) particularly increases exposure and potential harm.",

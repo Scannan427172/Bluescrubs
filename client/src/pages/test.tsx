@@ -23,10 +23,12 @@ interface Question {
     E: string;
   };
   mnemonic: string;
+  medications?: string[];
+  bnfGuidance?: string;
   links: {
     NICE: string;
-    BNF: string;
     CKS: string;
+    "NHS UK": string;
   };
 }
 
@@ -250,6 +252,35 @@ export default function Test() {
                   </div>
                 </div>
               ))}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* BNF Medication Guidance */}
+        {submitted && currentQuestion.bnfGuidance && (
+          <Card className="mb-6 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-blue-500" />
+                BNF Medication Guidance
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                <p className="text-gray-800 leading-relaxed">{currentQuestion.bnfGuidance}</p>
+                {currentQuestion.medications && currentQuestion.medications.length > 0 && (
+                  <div className="mt-3">
+                    <div className="text-sm font-medium text-blue-700 mb-2">Key Medications:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {currentQuestion.medications.map((med, index) => (
+                        <Badge key={index} variant="outline" className="bg-white border-blue-300 text-blue-700">
+                          {med}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </CardContent>
           </Card>
         )}
