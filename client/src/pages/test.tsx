@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 
 interface Question {
@@ -55,6 +57,12 @@ export default function Test() {
   const [selectedVoice, setSelectedVoice] = useState<string>('');
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
+
+  // AI Tutor state
+  const [showAITutor, setShowAITutor] = useState(false);
+  const [tutorInput, setTutorInput] = useState('');
+  const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
+  const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
 
   // Language definitions
   const languages = [
@@ -381,6 +389,234 @@ export default function Test() {
       translateFullQuestion(currentQuestion);
     }
   }, [currentQuestion, translateQuestions, selectedLanguage]);
+
+  // Mock AI Tutor functions
+  const getMockTutorResponse = (userMessage: string): string => {
+    const message = userMessage.toLowerCase();
+    
+    if (message.includes('uti') || message.includes('urinary') || message.includes('nitrofurantoin')) {
+      return `Excellent question about urinary tract infections! 
+
+**Clinical Reasoning:**
+The case presents a classic uncomplicated lower UTI in a young, non-pregnant woman. The key features are:
+- Dysuria, frequency, suprapubic pain (classic lower UTI symptoms)
+- No fever/flank pain (excludes pyelonephritis)
+- No vaginal discharge (excludes vaginitis)
+- Positive nitrites + leucocytes 2+ (confirms bacterial infection)
+
+**Why Nitrofurantoin is First-Line:**
+1. **High efficacy**: 90-95% cure rates for E. coli
+2. **Low resistance**: <5% resistance rates in UK
+3. **Narrow spectrum**: Minimal impact on normal flora
+4. **Concentrated in urine**: Achieves therapeutic levels specifically in urinary tract
+
+**Study Tips:**
+- Remember "FANTAS" for UTI antibiotics: Fosfomycin, Amoxicillin (avoid), Nitrofurantoin (1st line), Trimethoprim (2nd line), Amoxicillin-clavulanate, Sulfamethoxazole
+- Duration: 3 days for uncomplicated, 7 days for complicated
+- Always check pregnancy status before prescribing nitrofurantoin
+
+Would you like me to explain the resistance patterns or differential diagnoses?`;
+    }
+    
+    if (message.includes('explain') || message.includes('why')) {
+      return `I'd be happy to break down the clinical reasoning for you!
+
+**Evidence-Based Approach:**
+This question tests your understanding of UK antimicrobial guidelines and clinical decision-making. The scenario is carefully designed to present a textbook case of uncomplicated cystitis.
+
+**Key Learning Points:**
+1. **Risk stratification**: Young, healthy, non-pregnant = uncomplicated
+2. **Symptom recognition**: Classic triad of dysuria, frequency, suprapubic pain
+3. **Diagnostic confirmation**: Dipstick positive for nitrites + leucocytes
+4. **Guideline adherence**: Following NICE NG109 recommendations
+
+**Clinical Pearls:**
+- Nitrites are specific for gram-negative bacteria (especially E. coli)
+- Leucocyte esterase indicates inflammatory response
+- Absence of systemic symptoms rules out upper UTI
+
+**PLAB Exam Strategy:**
+Look for these key words in UTI questions: "uncomplicated," "non-pregnant," "nitrites positive" → Think nitrofurantoin first-line.
+
+What specific aspect would you like me to elaborate on?`;
+    }
+    
+    if (message.includes('mnemonic') || message.includes('remember')) {
+      return `Great question! Here are some powerful mnemonics for UTI management:
+
+**"NITRO" for First-Line Treatment:**
+- **N**ice guidelines recommend it
+- **I**deals for uncomplicated UTI
+- **T**argets E. coli effectively  
+- **R**esistance rates remain low
+- **O**ptimal urinary concentration
+
+**"CUTE" for UTI Symptoms:**
+- **C**ystitis symptoms (dysuria, frequency)
+- **U**rinary urgency
+- **T**enderness suprapubic
+- **E**xclude systemic features
+
+**"FANT" for Antibiotic Choice:**
+- **F**osfomycin (alternative)
+- **A**void amoxicillin (high resistance)
+- **N**itrofurantoin (first-line)
+- **T**rimethoprim (second-line)
+
+**Memory Tip for Duration:**
+"3 days for simple, 7 for complex" - uncomplicated UTI needs only 3 days of nitrofurantoin.
+
+These mnemonics will help you quickly identify the correct answer in PLAB questions. Would you like mnemonics for other conditions?`;
+    }
+    
+    if (message.includes('differential') || message.includes('diagnosis')) {
+      return `Excellent clinical thinking! Let's work through the differential diagnosis systematically:
+
+**Primary Differential for Dysuria in Young Women:**
+
+1. **Uncomplicated Cystitis** ✓ (Most likely here)
+   - Dysuria + frequency + suprapubic pain
+   - Positive nitrites + leucocytes
+   - No systemic symptoms
+
+2. **Pyelonephritis** ✗
+   - Would have fever, flank pain, systemic symptoms
+   - Often nausea/vomiting
+
+3. **Urethritis (STI)** ✗
+   - Usually gradual onset
+   - May have urethral discharge
+   - Sexual history important
+
+4. **Vulvovaginitis** ✗
+   - Would have vaginal discharge
+   - External dysuria vs internal
+   - Vulvar irritation/itching
+
+5. **Interstitial Cystitis** ✗
+   - Chronic symptoms (months/years)
+   - Negative urine cultures
+   - Pelvic pain syndrome
+
+**Red Flags to Exclude:**
+- Fever >38°C (pyelonephritis)
+- Flank pain (upper UTI)
+- Vaginal discharge (vaginitis)
+- Pregnancy (changes management)
+
+The positive nitrites are particularly helpful as they're 95% specific for bacterial UTI. This case fits perfectly with uncomplicated cystitis requiring standard first-line treatment.
+
+Would you like me to explain the diagnostic approach or treatment modifications?`;
+    }
+    
+    if (message.includes('guidelines') || message.includes('nice')) {
+      return `Perfect question! Understanding UK guidelines is crucial for PLAB success.
+
+**NICE NG109 - Urinary Tract Infections:**
+
+**First-Line Treatment (Non-pregnant women 16-64):**
+- Nitrofurantoin 100mg MR BD for 3 days
+- OR Trimethoprim 200mg BD for 3 days (if nitrofurantoin unsuitable)
+
+**Second-Line Options:**
+- Fosfomycin 3g single dose
+- Pivmecillinam 400mg TDS for 3 days
+
+**When NOT to Use Nitrofurantoin:**
+- Pregnancy at term (36+ weeks)
+- eGFR <45 ml/min/1.73m²
+- Acute pyelonephritis
+- Men (poor tissue penetration)
+
+**Key Guideline Updates (2018):**
+- Reduced duration from 7 to 3 days
+- Nitrofurantoin now preferred over trimethoprim
+- Emphasis on narrow-spectrum antibiotics
+
+**PLAB Exam Tips:**
+- Questions often specify "following current UK guidelines"
+- Look for non-pregnant women → nitrofurantoin
+- Complicated UTI → longer course (7 days)
+- Men with UTI → different antibiotics needed
+
+**Supporting Evidence:**
+- Cochrane reviews show 3 days as effective as 7 days
+- Antimicrobial stewardship principles
+- Reducing C. diff risk
+
+Would you like me to explain the evidence behind these recommendations?`;
+    }
+
+    // Default responses for general queries
+    const defaultResponses = [
+      `I'm here to help with your PLAB preparation! I can explain medical concepts, clinical reasoning, UK guidelines, and exam strategies. 
+
+**I can help with:**
+- Breaking down complex clinical scenarios
+- Explaining pathophysiology and pharmacology
+- UK medical guidelines (NICE, CKS, BNF)
+- PLAB exam techniques and mnemonics
+- Differential diagnoses and clinical reasoning
+
+Try asking me about specific aspects of this UTI question, or any other medical topic you're studying!`,
+
+      `Great to see you're actively engaging with the material! 
+
+**For this UTI question, I can explain:**
+- Why nitrofurantoin is the best choice
+- Clinical reasoning behind the diagnosis
+- UK antibiotic guidelines
+- Differential diagnosis approach
+- Memory techniques and mnemonics
+
+**Study Strategy:**
+Focus on understanding the clinical reasoning rather than just memorizing answers. This will help you tackle similar scenarios with confidence.
+
+What would you like to explore first?`,
+
+      `As your AI tutor, I'm designed to help you think like a UK clinician preparing for PLAB!
+
+**Key Learning Approach:**
+1. **Clinical reasoning** - Why this diagnosis?
+2. **Guidelines knowledge** - What do NICE/CKS say?
+3. **Exam strategy** - How to spot correct answers quickly
+
+**This UTI Case Teaches:**
+- Pattern recognition for uncomplicated cystitis
+- First-line antibiotic selection
+- Duration of treatment principles
+
+Feel free to ask about any aspect of this question or other medical topics you're studying. I'm here to help you succeed!`
+    ];
+
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+  };
+
+  const handleAskTutor = (query: string) => {
+    if (!query.trim()) return;
+    
+    setIsLoadingTutorResponse(true);
+    
+    // Add user message
+    const userMessage = { role: 'user' as const, content: query };
+    setTutorMessages(prev => [...prev, userMessage]);
+    
+    // Simulate AI processing delay
+    setTimeout(() => {
+      const response = getMockTutorResponse(query);
+      const assistantMessage = { role: 'assistant' as const, content: response };
+      setTutorMessages(prev => [...prev, assistantMessage]);
+      setIsLoadingTutorResponse(false);
+      setTutorInput('');
+    }, 1500);
+  };
+
+  const getQuestionHelp = () => {
+    if (!currentQuestion) return;
+    
+    const helpQuery = `Please explain this UTI question and provide study guidance: ${currentQuestion.question}`;
+    handleAskTutor(helpQuery);
+  };
 
   const handleAnswerSelect = (option: string) => {
     if (!submitted) {
@@ -710,6 +946,131 @@ export default function Test() {
             </CardContent>
           </Card>
         )}
+
+        {/* AI Tutor Section */}
+        <Card className="mb-6 shadow-sm">
+          <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Bot className="w-5 h-5 text-blue-600" />
+                <CardTitle className="text-blue-800">AI Medical Tutor</CardTitle>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowAITutor(!showAITutor)}
+              >
+                {showAITutor ? 'Hide' : 'Show'} Tutor
+              </Button>
+            </div>
+            <CardDescription className="text-blue-600">
+              Get personalized explanations, study tips, and clinical insights for PLAB preparation
+            </CardDescription>
+          </CardHeader>
+          
+          {showAITutor && (
+            <CardContent className="p-4">
+              {/* Quick Help Buttons */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                <Button
+                  onClick={getQuestionHelp}
+                  variant="outline"
+                  size="sm"
+                  className="text-blue-600 border-blue-200 hover:bg-blue-50"
+                >
+                  <Lightbulb className="w-4 h-4 mr-2" />
+                  Explain This Question
+                </Button>
+                <Button
+                  onClick={() => handleAskTutor('Give me mnemonics for UTI management')}
+                  variant="outline"
+                  size="sm"
+                  className="text-purple-600 border-purple-200 hover:bg-purple-50"
+                >
+                  <Brain className="w-4 h-4 mr-2" />
+                  Memory Aids
+                </Button>
+                <Button
+                  onClick={() => handleAskTutor('What are the differential diagnoses?')}
+                  variant="outline"
+                  size="sm"
+                  className="text-green-600 border-green-200 hover:bg-green-50"
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Differentials
+                </Button>
+                <Button
+                  onClick={() => handleAskTutor('Explain UK guidelines for UTI treatment')}
+                  variant="outline"
+                  size="sm"
+                  className="text-orange-600 border-orange-200 hover:bg-orange-50"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  UK Guidelines
+                </Button>
+              </div>
+
+              {/* Chat Messages */}
+              <div className="space-y-4 mb-4 max-h-96 overflow-y-auto border rounded-lg p-4 bg-gray-50">
+                {tutorMessages.length === 0 && (
+                  <div className="text-center text-gray-500 py-8">
+                    <MessageCircle className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                    <p className="font-medium">Ask me anything about this medical question!</p>
+                    <p className="text-sm mt-1">Try: "Explain why nitrofurantoin is first-line" or "Give me study tips"</p>
+                  </div>
+                )}
+                
+                {tutorMessages.map((message, index) => (
+                  <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[85%] p-3 rounded-lg ${
+                      message.role === 'user' 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-white text-gray-800 border border-gray-200 shadow-sm'
+                    }`}>
+                      <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                    </div>
+                  </div>
+                ))}
+                
+                {isLoadingTutorResponse && (
+                  <div className="flex justify-start">
+                    <div className="bg-white border border-gray-200 p-3 rounded-lg shadow-sm">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                        <span className="text-sm text-gray-600 ml-2">AI Tutor is thinking...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
+              {/* Input Area */}
+              <div className="flex gap-2">
+                <Input
+                  value={tutorInput}
+                  onChange={(e) => setTutorInput(e.target.value)}
+                  placeholder="Ask about clinical reasoning, guidelines, mnemonics, or study tips..."
+                  className="flex-1"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleAskTutor(tutorInput);
+                    }
+                  }}
+                />
+                <Button
+                  onClick={() => handleAskTutor(tutorInput)}
+                  disabled={!tutorInput.trim() || isLoadingTutorResponse}
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  <Send className="w-4 h-4" />
+                </Button>
+              </div>
+            </CardContent>
+          )}
+        </Card>
 
         {/* BNF Medication Guidance */}
         {submitted && currentQuestion.bnfGuidance && (
