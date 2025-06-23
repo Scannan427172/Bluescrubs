@@ -1098,9 +1098,9 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           },
           mnemonic: "DUS = Dysuria + Urgency + Suprapubic → Treat uncomplicated UTI",
           links: {
-            CKS: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/management/",
+            CKS: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/antibiotic-treatment/",
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#treatment-of-lower-uti-in-non-pregnant-women-aged-16-and-over",
-            BNF: "https://bnf.nice.org.uk/treatment-summary/urinary-tract-infections-utis/"
+            BNF: "https://bnf.nice.org.uk/treatment-summaries/urinary-tract-infections/#urinary-tract-infections-in-adults"
           }
         },
         {
@@ -1125,7 +1125,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           links: {
             NICE: "https://www.nice.org.uk/guidance/cg181/chapter/1-Recommendations#lipid-modification-therapy-for-the-primary-and-secondary-prevention-of-cvd",
             CKS: "https://cks.nice.org.uk/topics/familial-hypercholesterolaemia/pregnancy-and-breastfeeding/pregnancy/",
-            BNF: "https://bnf.nice.org.uk/drug/atorvastatin.html"
+            BNF: "https://bnf.nice.org.uk/drugs/atorvastatin/#pregnancy"
           }
         }
       ];
