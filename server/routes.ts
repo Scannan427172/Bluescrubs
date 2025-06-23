@@ -32,6 +32,14 @@ import {
   getExamInfo,
   type InternationalQuestion
 } from "./international-exam-generator";
+import { 
+  trackSession, 
+  trackPageView, 
+  trackTestActivity, 
+  getUsageStats, 
+  generateSessionId,
+  cleanupOldSessions 
+} from "./usage-analytics";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
@@ -1074,9 +1082,50 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
     }
   });
 
+  // Analytics endpoint to show current testing activity
+  app.get("/api/analytics/live", async (req, res) => {
+    try {
+      const stats = getUsageStats();
+      res.json({
+        currentTestTakers: stats.currentTestTakers,
+        activeUsers: stats.activeUsers,
+        todayTests: stats.todayTests,
+        testPerformance: stats.testPerformance,
+        popularPages: stats.popularPages,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error fetching analytics:', error);
+      res.status(500).json({ error: "Failed to fetch analytics" });
+    }
+  });
+
+  // Track test completion
+  app.post("/api/analytics/test-completion", async (req, res) => {
+    try {
+      const { sessionId, testType, questionsAnswered, correctAnswers, timeSpent } = req.body;
+      
+      trackTestActivity(sessionId || generateSessionId(), {
+        testType: testType || 'PassMedicine-style',
+        questionsAnswered: questionsAnswered || 0,
+        correctAnswers: correctAnswers || 0,
+        timeSpent: timeSpent || 0,
+        completedAt: new Date()
+      });
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Error tracking test completion:', error);
+      res.status(500).json({ error: "Failed to track test" });
+    }
+  });
+
   // PassMedicine-style test questions
   app.get("/api/test/questions", async (req, res) => {
     try {
+      // Track page view
+      const sessionId = req.headers['x-session-id'] || generateSessionId();
+      trackPageView(sessionId, '/test');
       // Get BNF medication data for integrated guidance
       const nitrofurantoinInfo = BNF_MEDICATIONS['nitrofurantoin'];
       const trimethoprimInfo = BNF_MEDICATIONS['trimethoprim'];

@@ -323,12 +323,12 @@ export default function Test() {
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={currentQuestion.links.BNF}
+                  href={currentQuestion.links["NHS UK"]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-medium text-gray-900">BNF</span>
+                  <span className="font-medium text-gray-900">NHS UK</span>
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
