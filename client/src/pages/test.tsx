@@ -312,7 +312,7 @@ export default function Test() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <a
                   href={currentQuestion.links.NICE}
                   target="_blank"
@@ -323,21 +323,30 @@ export default function Test() {
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={currentQuestion.links["NHS UK"]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-medium text-gray-900">NHS UK</span>
-                  <ExternalLink className="w-4 h-4 text-gray-500" />
-                </a>
-                <a
                   href={currentQuestion.links.CKS}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   <span className="font-medium text-gray-900">CKS</span>
+                  <ExternalLink className="w-4 h-4 text-gray-500" />
+                </a>
+                <a
+                  href={currentQuestion.links.BNF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  <span className="font-medium text-gray-900">BNF</span>
+                  <ExternalLink className="w-4 h-4 text-gray-500" />
+                </a>
+                <a
+                  href={currentQuestion.links.GMC}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  <span className="font-medium text-gray-900">GMC</span>
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
               </div>

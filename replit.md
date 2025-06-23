@@ -103,7 +103,10 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - **Error Handling**: Comprehensive error boundaries and logging
 
 # Changelog
-- June 23, 2025. Initial setup
+- June 23, 2025: Initial setup
+- June 23, 2025: Updated clinical guidelines with corrected NICE, CKS, BNF, and GMC URLs for UTI management
+- June 23, 2025: Suspended all OpenAI activity per user request
+- June 23, 2025: Synchronized frontend test interface with corrected UK medical guidance links
 
 # User Preferences
 
