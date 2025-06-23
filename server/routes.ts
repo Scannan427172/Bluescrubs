@@ -131,8 +131,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           links: {
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#choice-of-antibiotic",
             BNF: "https://www.medicines.org.uk/emc/product/2150/smpc",
-            UKHSA: "https://www.gov.uk/government/collections/urinary-tract-infection-uti-guidance-data-and-analysis",
-            "Patient UK": "https://patient.info/doctor/urinary-tract-infection-in-adults"
+            "NHS UK": "https://www.nhs.uk/conditions/urinary-tract-infections-utis/",
+            "Gov UK": "https://www.gov.uk/government/publications/urinary-tract-infection-diagnosis"
           }
         },
         {
