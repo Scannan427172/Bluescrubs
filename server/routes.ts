@@ -1080,56 +1080,6 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
       const testQuestions = [
         {
           id: "q1",
-          question: "A 33-year-old woman with FH is planning pregnancy. She takes atorvastatin 80mg. What is the most appropriate advice?",
-          options: {
-            A: "Switch to atorvastatin 10mg",
-            B: "Continue same dose",
-            C: "Stop atorvastatin before trying to conceive",
-            D: "Switch to ezetimibe",
-            E: "Switch to simvastatin 40mg"
-          },
-          answer: "C",
-          explanation: {
-            A: "Incorrect: All statins are contraindicated in pregnancy regardless of dose.",
-            B: "Incorrect: Continuing high-dose statins risks teratogenicity.",
-            C: "Correct: NICE says stop statins 3 months before conception.",
-            D: "Incorrect: Ezetimibe is also not safe in pregnancy.",
-            E: "Incorrect: Changing statin doesn't eliminate fetal risk."
-          },
-          mnemonic: "🚫 S.T.A.T.I.N. = Stop Three months Ahead To Inhibit Neonatal risk",
-          links: {
-            NICE: "https://cks.nice.org.uk/topics/lipid-modification/",
-            BNF: "https://bnf.nice.org.uk/drug/atorvastatin.html",
-            CKS: "https://cks.nice.org.uk/topics/familial-hypercholesterolaemia/"
-          }
-        },
-        {
-          id: "q2",
-          question: "A 45-year-old man presents with chest pain. ECG shows ST-elevation in leads II, III, aVF. What is the most likely coronary artery involved?",
-          options: {
-            A: "Left anterior descending artery",
-            B: "Right coronary artery",
-            C: "Left circumflex artery",
-            D: "Left main stem",
-            E: "Posterior descending artery"
-          },
-          answer: "B",
-          explanation: {
-            A: "Incorrect: LAD occlusion typically causes anterior STEMI (V1-V6).",
-            B: "Correct: RCA occlusion causes inferior STEMI (II, III, aVF).",
-            C: "Incorrect: LCX causes lateral STEMI (I, aVL, V5-V6).",
-            D: "Incorrect: Left main causes widespread ST changes.",
-            E: "Incorrect: PDA is a branch, not the primary vessel."
-          },
-          mnemonic: "🫀 I.R.A. = Inferior Right Artery (RCA supplies inferior wall)",
-          links: {
-            NICE: "https://cks.nice.org.uk/topics/myocardial-infarction/",
-            BNF: "https://bnf.nice.org.uk/treatment-summary/acute-coronary-syndromes.html",
-            CKS: "https://cks.nice.org.uk/topics/chest-pain/"
-          }
-        },
-        {
-          id: "q3",
           question: "A 24-year-old woman presents with dysuria, urinary frequency, and suprapubic discomfort for 2 days. She has no fever, flank pain, or vaginal discharge. What is the most appropriate next step?",
           options: {
             A: "Urinalysis and empirical antibiotics",
@@ -1154,7 +1104,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
           }
         },
         {
-          id: "q4",
+          id: "q2",
           question: "A 33-year-old woman with familial hypercholesterolaemia is planning pregnancy. She is currently on atorvastatin 80 mg. What is the most appropriate advice?",
           options: {
             A: "Switch to atorvastatin 10mg",
