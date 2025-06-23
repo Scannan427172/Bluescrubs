@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
@@ -68,6 +68,10 @@ export default function Test() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("mixed");
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
+
+  // Practice Mode Selection
+  const [practiceMode, setPracticeMode] = useState<'selection' | 'practice'>('selection');
+  const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
 
   // Medical Specialty Categories
   const medicalCategories = [
@@ -653,6 +657,49 @@ Feel free to ask about any aspect of this question or other medical topics you'r
     handleAskTutor(helpQuery);
   };
 
+  // Practice Mode Handlers (Mock implementations)
+  const startFixedPractice = (questionCount: number) => {
+    setIsGeneratingQuestions(true);
+    // Mock delay for question generation
+    setTimeout(() => {
+      setIsGeneratingQuestions(false);
+      setPracticeMode('practice');
+    }, 2000);
+  };
+
+  const startTimedPractice = (timeInMinutes: number) => {
+    setIsGeneratingQuestions(true);
+    // Mock delay for question generation
+    setTimeout(() => {
+      setIsGeneratingQuestions(false);
+      setPracticeMode('practice');
+    }, 2000);
+  };
+
+  const startUnlimitedPractice = () => {
+    setIsGeneratingQuestions(true);
+    // Mock delay for question generation
+    setTimeout(() => {
+      setIsGeneratingQuestions(false);
+      setPracticeMode('practice');
+    }, 2000);
+  };
+
+  const startAuthenticPractice = (questionCount: number) => {
+    setIsGeneratingQuestions(true);
+    // Mock delay for question generation
+    setTimeout(() => {
+      setIsGeneratingQuestions(false);
+      setPracticeMode('practice');
+    }, 2000);
+  };
+
+  const backToModeSelection = () => {
+    setPracticeMode('selection');
+    setSelectedAnswer("");
+    setSubmitted(false);
+  };
+
   const handleAnswerSelect = (option: string) => {
     if (!submitted) {
       setSelectedAnswer(option);
@@ -749,12 +796,364 @@ Feel free to ask about any aspect of this question or other medical topics you'r
     );
   }
 
+  // Loading state for question generation
+  if (isGeneratingQuestions) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardContent className="p-8 text-center">
+            <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Generating Questions</h3>
+            <p className="text-gray-600">Creating personalized questions for {selectedCategory} practice...</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Practice Mode Selection Screen
+  if (practiceMode === 'selection') {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        {/* Hero Banner */}
+        <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
+          {!heroImageLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
+              <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
+          <img 
+            src={plab1BgImage}
+            alt="PLAB Test Practice"
+            className={`absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-300 ${heroImageLoaded ? 'opacity-60' : 'opacity-0'}`}
+            loading="eager"
+            decoding="async"
+            onLoad={() => setHeroImageLoaded(true)}
+          />
+
+          <div className="relative z-50 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+              PLAB Practice Test
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-3xl leading-relaxed">
+              Choose your practice mode and start your medical preparation journey
+            </p>
+
+            {/* Category and Difficulty Filters */}
+            <div className="mt-6 flex flex-wrap gap-4 items-center justify-center">
+              {/* Category Filter */}
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                <Filter className="w-4 h-4 text-white" />
+                <Label htmlFor="category-filter" className="text-white text-sm">
+                  Specialty
+                </Label>
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="w-48 bg-transparent border-white/30 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-96 overflow-y-auto">
+                    {medicalCategories.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        <div className="flex items-center gap-2">
+                          <span>{category.icon}</span>
+                          <span>{category.name}</span>
+                          <Badge variant="secondary" className="ml-2 text-xs">
+                            {category.count}
+                          </Badge>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Difficulty Filter */}
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                <Target className="w-4 h-4 text-white" />
+                <Label htmlFor="difficulty-filter" className="text-white text-sm">
+                  Level
+                </Label>
+                <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+                  <SelectTrigger className="w-40 bg-transparent border-white/30 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {difficultyLevels.map((level) => (
+                      <SelectItem key={level.id} value={level.id}>
+                        <div className="flex flex-col">
+                          <span className="font-medium">{level.name}</span>
+                          <span className="text-xs text-gray-500">{level.description}</span>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Question Count Indicator */}
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                <BookOpen className="w-4 h-4 text-white" />
+                <span className="text-white text-sm">
+                  {medicalCategories.find(cat => cat.id === selectedCategory)?.count || "5000+"} Questions
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Statistics Overview Cards */}
+        <div className="container mx-auto px-4 pb-12">
+          <div className="grid md:grid-cols-4 gap-4 mb-8">
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-blue-600" />
+                  <span className="text-sm font-medium text-gray-600">Question Categories</span>
+                </div>
+                <p className="text-2xl font-bold text-gray-900 mt-1">18</p>
+                <p className="text-xs text-gray-500 mt-1">Medical specialties covered</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center gap-2">
+                  <Target className="w-5 h-5 text-green-600" />
+                  <span className="text-sm font-medium text-gray-600">Difficulty Levels</span>
+                </div>
+                <p className="text-2xl font-bold text-gray-900 mt-1">5</p>
+                <p className="text-xs text-gray-500 mt-1">From basic to exam-style</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center gap-2">
+                  <Brain className="w-5 h-5 text-purple-600" />
+                  <span className="text-sm font-medium text-gray-600">Medical Guidelines</span>
+                </div>
+                <p className="text-2xl font-bold text-gray-900 mt-1">30+</p>
+                <p className="text-xs text-gray-500 mt-1">NICE, CKS, BTS, ESC, ADA</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center gap-2">
+                  <Globe className="w-5 h-5 text-orange-600" />
+                  <span className="text-sm font-medium text-gray-600">Languages</span>
+                </div>
+                <p className="text-2xl font-bold text-gray-900 mt-1">25</p>
+                <p className="text-xs text-gray-500 mt-1">Multi-language support</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Choose Practice Mode</CardTitle>
+              <CardDescription>Select your preferred study format based on your goals</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              
+              {/* Block 1: Fixed Question Count */}
+              <div className="border rounded-lg p-4 bg-blue-50">
+                <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                  <Target className="w-5 h-5" />
+                  Block 1: Fixed Question Sets
+                </h3>
+                <p className="text-sm text-blue-700 mb-4">Complete a specific number of questions at your own pace</p>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <Button 
+                    onClick={() => startFixedPractice(10)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">10</span>
+                    <span className="text-xs">Questions</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startFixedPractice(20)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">20</span>
+                    <span className="text-xs">Questions</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startFixedPractice(50)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">50</span>
+                    <span className="text-xs">Questions</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startFixedPractice(100)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">100</span>
+                    <span className="text-xs">Questions</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startFixedPractice(180)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">180</span>
+                    <span className="text-xs">PLAB Mock</span>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Block 2: Timed Challenges */}
+              <div className="border rounded-lg p-4 bg-orange-50">
+                <h3 className="font-semibold text-orange-900 mb-3 flex items-center gap-2">
+                  <Clock className="w-5 h-5" />
+                  Block 2: Timed Challenges
+                </h3>
+                <p className="text-sm text-orange-700 mb-4">Answer as many questions as possible within the time limit</p>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <Button 
+                    onClick={() => startTimedPractice(10)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">10m</span>
+                    <span className="text-xs">Sprint</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startTimedPractice(30)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">30m</span>
+                    <span className="text-xs">Focus</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startTimedPractice(60)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">60m</span>
+                    <span className="text-xs">Endurance</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startTimedPractice(120)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">2h</span>
+                    <span className="text-xs">Marathon</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startTimedPractice(180)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-orange-600 hover:bg-orange-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">3h</span>
+                    <span className="text-xs">Ultra</span>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Block 3: Unlimited Practice */}
+              <div className="border rounded-lg p-4 bg-green-50">
+                <h3 className="font-semibold text-green-900 mb-3 flex items-center gap-2">
+                  <Brain className="w-5 h-5" />
+                  Block 3: Unlimited Study
+                </h3>
+                <p className="text-sm text-green-700 mb-4">Study without time pressure - continue as long as you want</p>
+                <Button 
+                  onClick={() => startUnlimitedPractice()}
+                  disabled={isGeneratingQuestions}
+                  className="bg-green-600 hover:bg-green-700 text-white h-16 px-8 flex items-center justify-center gap-3"
+                >
+                  <ArrowRight className="w-6 h-6" />
+                  <div className="text-left">
+                    <div className="font-bold">Start Unlimited Practice</div>
+                    <div className="text-xs opacity-90">No time limit - study at your pace</div>
+                  </div>
+                </Button>
+              </div>
+
+              {/* Block 4: Authentic PLAB 1 Simulation */}
+              <div className="border rounded-lg p-4 bg-purple-50">
+                <h3 className="font-semibold text-purple-900 mb-3 flex items-center gap-2">
+                  <Award className="w-5 h-5" />
+                  Block 4: Authentic PLAB 1 Simulation
+                </h3>
+                <p className="text-sm text-purple-700 mb-4">Real exam conditions - exactly 1 minute per question</p>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <Button 
+                    onClick={() => startAuthenticPractice(10)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">10</span>
+                    <span className="text-xs">10 mins</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startAuthenticPractice(20)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">20</span>
+                    <span className="text-xs">20 mins</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startAuthenticPractice(50)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">50</span>
+                    <span className="text-xs">50 mins</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startAuthenticPractice(60)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">60</span>
+                    <span className="text-xs">1 hour</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startAuthenticPractice(180)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">180</span>
+                    <span className="text-xs">Full PLAB</span>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // Practice Mode Active - Show Question Interface
   if (!currentQuestion) {
     return null;
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Back to Mode Selection */}
+      <div className="container mx-auto px-4 pt-4">
+        <Button
+          onClick={backToModeSelection}
+          variant="outline"
+          className="mb-4"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Practice Modes
+        </Button>
+      </div>
+
       {/* Hero Banner */}
       <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
         {!heroImageLoaded && (
