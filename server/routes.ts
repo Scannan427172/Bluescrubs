@@ -1127,6 +1127,31 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
             BNF: "https://bnf.nice.org.uk/treatment-summary/acute-coronary-syndromes.html",
             CKS: "https://cks.nice.org.uk/topics/chest-pain/"
           }
+        },
+        {
+          id: "q3",
+          question: "A 24-year-old woman presents with dysuria, urinary frequency, and suprapubic discomfort for 2 days. She has no fever, flank pain, or vaginal discharge. What is the most appropriate next step?",
+          options: {
+            A: "Urinalysis and empirical antibiotics",
+            B: "Send urine for culture and await results",
+            C: "Prescribe antifungals",
+            D: "Refer to urology",
+            E: "Pelvic ultrasound"
+          },
+          answer: "A",
+          explanation: {
+            A: "Correct. According to CKS and NICE NG109, empirical antibiotics are appropriate for women under 65 with ≥2 symptoms of uncomplicated lower UTI.",
+            B: "Incorrect. A midstream urine culture is unnecessary unless the presentation is atypical or symptoms persist.",
+            C: "Incorrect. There is no evidence of fungal infection in this scenario.",
+            D: "Incorrect. Referral is only considered in recurrent or complicated infections.",
+            E: "Incorrect. Imaging is not indicated in typical cases."
+          },
+          mnemonic: "DUS = Dysuria + Urgency + Suprapubic → Treat uncomplicated UTI",
+          links: {
+            CKS: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/management/",
+            NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#treatment-of-lower-uti-in-non-pregnant-women-aged-16-and-over",
+            BNF: "https://bnf.nice.org.uk/treatment-summary/urinary-tract-infections-utis/"
+          }
         }
       ];
 
