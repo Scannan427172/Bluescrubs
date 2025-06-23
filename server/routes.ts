@@ -131,8 +131,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           links: {
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#treatment-of-lower-uti-in-non-pregnant-women-aged-16-and-over",
             CKS: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/empirical-antibiotic-treatment/",
-            BNF: "https://bnf.nice.org.uk/treatment-summary/urinary-tract-infections-utis/#uncomplicated-lower-uti-in-nonpregnant-wom",
-            GMC: "https://www.gmc-uk.org/ethical-guidance/ethical-hub/decision-making-and-consent"
+            BNF: "https://www.nhs.uk/medicines/nitrofurantoin/",
+            GMC: "https://www.gmc-uk.org/"
           }
         },
         {
