@@ -332,21 +332,21 @@ export default function Test() {
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={currentQuestion.links["NHS Medicines"]}
+                  href={currentQuestion.links["BMJ UTI"]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-medium text-gray-900">NHS Medicines</span>
+                  <span className="font-medium text-gray-900">BMJ UTI</span>
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={currentQuestion.links["RPS Guide"]}
+                  href={currentQuestion.links["Gov UK"]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-medium text-gray-900">RPS Guide</span>
+                  <span className="font-medium text-gray-900">Gov UK</span>
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
               </div>
