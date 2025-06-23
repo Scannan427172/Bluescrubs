@@ -1131,10 +1131,10 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
       const trimethoprimInfo = BNF_MEDICATIONS['trimethoprim'];
       const atorvastatinInfo = BNF_MEDICATIONS['atorvastatin'];
 
-      // Sample PassMedicine-style questions with detailed explanations
       const testQuestions = [
         {
           id: "q1",
+          topic: "Urinary Tract Infection (Women)",
           question: "A 24-year-old woman presents with dysuria, urinary frequency, and suprapubic discomfort for 2 days. She has no fever, flank pain, or vaginal discharge. What is the most appropriate next step?",
           options: {
             A: "Urinalysis and empirical antibiotics",
@@ -1144,26 +1144,24 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
             E: "Pelvic ultrasound"
           },
           answer: "A",
-          medications: ["nitrofurantoin", "trimethoprim"],
-          bnfGuidance: nitrofurantoinInfo && trimethoprimInfo ? 
-            `First-line antibiotics: Nitrofurantoin ${nitrofurantoinInfo.dosing.adult} or Trimethoprim ${trimethoprimInfo.dosing.adult}. Monitor: ${nitrofurantoinInfo.monitoring.join(', ')}. Contraindications: ${nitrofurantoinInfo.contraindications.join(', ')}.` : 
-            "Medication information unavailable",
           explanation: {
-            A: "This is the correct approach for managing uncomplicated lower urinary tract infections in women. According to NICE guideline NG109 and CKS recommendations, women under 65 years presenting with two or more symptoms of lower UTI (dysuria, urgency, frequency, suprapubic pain) should receive empirical antibiotic treatment without routine urine testing. This patient presents with classic symptoms: dysuria, frequency, and suprapubic discomfort, with no red flag symptoms like fever, flank pain, or signs of upper UTI. The absence of vaginal discharge also supports a UTI diagnosis rather than sexually transmitted infection. First-line treatment typically includes nitrofurantoin 100mg twice daily for 3 days or trimethoprim 200mg twice daily for 3 days, depending on local resistance patterns. This approach reduces unnecessary delays in treatment, improves patient satisfaction, and is cost-effective while maintaining excellent clinical outcomes in straightforward cases.",
-            B: "While urine culture can be valuable, it is not routinely required for uncomplicated lower UTI in non-pregnant women under 65. NICE NG109 specifically states that urine culture should be reserved for cases where symptoms persist after treatment, there are signs of upper UTI, the patient is pregnant, or there are recurrent infections. In this straightforward case with typical symptoms and no complicating factors, empirical treatment is more appropriate and avoids treatment delays.",
-            C: "Antifungal medication would be inappropriate here as there are no symptoms suggesting fungal infection such as vaginal candidiasis. The symptoms described (dysuria, frequency, suprapubic pain) are classic for bacterial UTI. Fungal UTIs are rare and typically occur in immunocompromised patients or those with indwelling catheters.",
-            D: "Urological referral is not indicated for uncomplicated lower UTI. Referral should be considered for recurrent UTIs (≥3 episodes in 12 months), suspected structural abnormalities, persistent symptoms despite appropriate treatment, or signs of upper urinary tract involvement. This case represents a straightforward lower UTI requiring primary care management.",
-            E: "Pelvic ultrasound is not indicated for uncomplicated lower UTI. Imaging should be reserved for cases with suspected complications, recurrent infections requiring investigation for structural abnormalities, or when upper urinary tract involvement is suspected. The clinical presentation here is typical of lower UTI without complications."
+            A: "Correct. NICE NG109 recommends empirical antibiotic treatment without urine culture for women under 65 with ≥2 typical symptoms (dysuria, urgency, frequency, suprapubic pain).",
+            B: "Incorrect. Culture is only recommended if symptoms are atypical, recurrent, or not improving.",
+            C: "Incorrect. No features suggest fungal UTI.",
+            D: "Incorrect. Specialist referral is not necessary in uncomplicated lower UTI.",
+            E: "Incorrect. Imaging is not indicated in the absence of red flags or systemic symptoms."
           },
-          mnemonic: "DUS = Dysuria + Urgency + Suprapubic → Treat uncomplicated UTI",
+          mnemonic: "DUS = Dysuria, Urgency, Suprapubic pain → Treat empirically",
           links: {
-            CKS: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/antibiotic-treatment/",
-            NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#treatment-of-lower-uti-in-non-pregnant-women-aged-16-and-over",
-            "NHS UK": "https://www.nhs.uk/conditions/urinary-tract-infections-utis/treatment/"
+            NICE: "https://www.nice.org.uk/guidance/ng109/resources/visual-summary-pdf-6535835117#page=2",
+            CKS: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/management/empirical-antibiotic-treatment/",
+            BNF: "https://bnf.nice.org.uk/treatment-summary/urinary-tract-infections-utis/#uncomplicated-lower-uti-in-nonpregnant-women",
+            GMC: "https://www.gmc-uk.org/ethical-guidance/ethical-hub/decision-making-and-consent"
           }
         },
         {
           id: "q2",
+          topic: "Familial Hypercholesterolaemia",
           question: "A 33-year-old woman with familial hypercholesterolaemia is planning pregnancy. She is currently on atorvastatin 80 mg. What is the most appropriate advice?",
           options: {
             A: "Switch to atorvastatin 10mg",
@@ -1173,22 +1171,20 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
             E: "Switch to simvastatin 40mg"
           },
           answer: "C",
-          medications: ["atorvastatin"],
-          bnfGuidance: atorvastatinInfo ? 
-            `Atorvastatin: ${atorvastatinInfo.pregnancyCategory}. ${atorvastatinInfo.contraindications.includes('Pregnancy') ? 'Contraindicated in pregnancy' : 'Pregnancy advice: ' + (atorvastatinInfo.pregnancyCategory || 'Avoid')}. Must discontinue before conception.` : 
-            "Medication information unavailable",
           explanation: {
-            A: "Reducing the statin dose does not eliminate teratogenic risk during pregnancy. All statins, regardless of dose, are classified as pregnancy category X medications due to their potential to cause fetal harm. The mechanism involves disruption of cholesterol synthesis pathways essential for fetal development, particularly affecting the central nervous system and limb formation. Even low-dose atorvastatin crosses the placental barrier and can interfere with normal embryogenesis during critical developmental windows.",
-            B: "Continuing current statin therapy during pregnancy planning poses significant teratogenic risks. Statins inhibit HMG-CoA reductase, blocking cholesterol synthesis which is crucial for normal fetal development, especially neural tube formation and limb development. Clinical studies have demonstrated increased risks of congenital malformations when statins are used during pregnancy, leading to their contraindication. The high dose (80mg) particularly increases exposure and potential harm.",
-            C: "This represents the evidence-based approach for managing familial hypercholesterolaemia in women planning pregnancy. NICE guidelines specifically recommend discontinuing statins at least 3 months before attempting conception to allow complete drug clearance and metabolite elimination. During pregnancy, management focuses on intensive lifestyle modifications including strict dietary interventions, regular exercise, and close monitoring of lipid levels. LDL apheresis may be considered in severe cases where cardiovascular risk is extremely high. The 3-month period ensures complete washout of the medication and its active metabolites, minimizing any residual teratogenic risk. Post-delivery, statin therapy can be resumed, though breastfeeding compatibility must be considered. This approach balances maternal cardiovascular protection with fetal safety, representing current best practice in reproductive cardiology.",
-            D: "Ezetimibe, while having a different mechanism of action from statins, lacks sufficient safety data for use during pregnancy and preconception. Current evidence is limited regarding its teratogenic potential, and regulatory agencies advise against its use during pregnancy. The cholesterol absorption inhibitor mechanism could potentially interfere with fetal development, though specific risks are not well-characterized. Given the availability of safer non-pharmacological alternatives during pregnancy, ezetimibe substitution is not recommended.",
-            E: "Changing to a different statin does not address the fundamental issue of teratogenic risk associated with this entire drug class. All statins share the same mechanism of action through HMG-CoA reductase inhibition, leading to similar pregnancy-related contraindications. Simvastatin, like atorvastatin, is pregnancy category X and carries equivalent risks for fetal malformations. The switch would merely substitute one contraindicated medication for another without reducing teratogenic potential."
+            A: "Incorrect. Dose reduction doesn't eliminate risk — all statins are contraindicated in pregnancy.",
+            B: "Incorrect. Statins must be discontinued when pregnancy is planned due to teratogenic potential.",
+            C: "Correct. NICE and CKS recommend stopping statins at least 3 months before conception in women with FH.",
+            D: "Incorrect. Ezetimibe is also not recommended in pregnancy due to limited safety data.",
+            E: "Incorrect. Switching statins doesn't change teratogenic risk."
           },
           mnemonic: "🚫 S.T.A.T.I.N. = Stop Three months Ahead To Inhibit Neonatal risk",
           links: {
-            NICE: "https://www.nice.org.uk/guidance/cg181/chapter/1-Recommendations#lipid-modification-therapy-for-the-primary-and-secondary-prevention-of-cvd",
-            CKS: "https://cks.nice.org.uk/topics/familial-hypercholesterolaemia/pregnancy-and-breastfeeding/pregnancy/",
-            "NHS UK": "https://www.nhs.uk/conditions/familial-hypercholesterolaemia/"
+            NICE: "https://www.nice.org.uk/guidance/cg181/chapter/1-Recommendations#recommendations-for-women-of-childbearing-potential",
+            CKS: "https://cks.nice.org.uk/topics/familial-hypercholesterolaemia/pregnancy-and-breastfeeding/pregnancy/#advice-for-women-planning-pregnancy",
+            BNF: "https://bnf.nice.org.uk/drug/atorvastatin.html#pregnancy",
+            UKMI: "https://www.sps.nhs.uk/articles/what-is-the-ukmi-position-on-the-use-of-statins-during-pregnancy/",
+            GMC: "https://www.gmc-uk.org/ethical-guidance/ethical-hub/prescribing-safely"
           }
         }
       ];
