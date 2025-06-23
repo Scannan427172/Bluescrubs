@@ -845,67 +845,83 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             <p className="text-lg sm:text-xl md:text-2xl text-white mb-6 sm:mb-8 max-w-3xl leading-relaxed drop-shadow-md font-medium">
               Choose your practice mode and start your medical preparation journey
             </p>
-
-            {/* Category and Difficulty Filters */}
-            <div className="mt-6 flex flex-wrap gap-4 items-center justify-center">
-              {/* Category Filter */}
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-                <Filter className="w-4 h-4 text-white" />
-                <Label htmlFor="category-filter" className="text-white text-sm">
-                  Specialty
-                </Label>
-                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger className="w-48 bg-transparent border-white/30 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="max-h-96 overflow-y-auto">
-                    {medicalCategories.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>
-                        <div className="flex items-center gap-2">
-                          <span>{category.icon}</span>
-                          <span>{category.name}</span>
-                          <Badge variant="secondary" className="ml-2 text-xs">
-                            {category.count}
-                          </Badge>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Difficulty Filter */}
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-                <Target className="w-4 h-4 text-white" />
-                <Label htmlFor="difficulty-filter" className="text-white text-sm">
-                  Level
-                </Label>
-                <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
-                  <SelectTrigger className="w-40 bg-transparent border-white/30 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {difficultyLevels.map((level) => (
-                      <SelectItem key={level.id} value={level.id}>
-                        <div className="flex flex-col">
-                          <span className="font-medium">{level.name}</span>
-                          <span className="text-xs text-gray-500">{level.description}</span>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Question Count Indicator */}
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-                <BookOpen className="w-4 h-4 text-white" />
-                <span className="text-white text-sm">
-                  {medicalCategories.find(cat => cat.id === selectedCategory)?.count || "5000+"} Questions
-                </span>
-              </div>
-            </div>
           </div>
+        </div>
+
+        {/* Filter Section */}
+        <div className="container mx-auto px-4 py-8">
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Filter className="w-5 h-5 text-blue-600" />
+                Customize Your Practice
+              </CardTitle>
+              <CardDescription>Select your specialty and difficulty level to personalize your study experience</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Category Filter */}
+                <div className="space-y-2">
+                  <Label htmlFor="category-filter" className="text-sm font-medium text-gray-700">
+                    Medical Specialty
+                  </Label>
+                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select specialty" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-96 overflow-y-auto">
+                      {medicalCategories.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          <div className="flex items-center gap-2">
+                            <span>{category.icon}</span>
+                            <span>{category.name}</span>
+                            <Badge variant="secondary" className="ml-2 text-xs">
+                              {category.count}
+                            </Badge>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Difficulty Filter */}
+                <div className="space-y-2">
+                  <Label htmlFor="difficulty-filter" className="text-sm font-medium text-gray-700">
+                    Difficulty Level
+                  </Label>
+                  <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select difficulty" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {difficultyLevels.map((level) => (
+                        <SelectItem key={level.id} value={level.id}>
+                          <div className="flex flex-col">
+                            <span className="font-medium">{level.name}</span>
+                            <span className="text-xs text-gray-500">{level.description}</span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Question Count Display */}
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium text-gray-700">
+                    Available Questions
+                  </Label>
+                  <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-md border">
+                    <BookOpen className="w-4 h-4 text-blue-600" />
+                    <span className="font-semibold text-gray-900">
+                      {medicalCategories.find(cat => cat.id === selectedCategory)?.count || totalQuestions} Questions
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Statistics Overview Cards */}
