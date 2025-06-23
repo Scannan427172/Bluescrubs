@@ -838,7 +838,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             onLoad={() => setHeroImageLoaded(true)}
           />
 
-          <div className="relative z-50 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+          <div className="relative z-50 flex flex-col items-center justify-center text-center px-4 sm:px-8 h-full hero-text" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg">
               PLAB Practice Test
             </h1>
