@@ -109,30 +109,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const testQuestions = [
         {
-          id: "q1",
-          topic: "Urinary Tract Infection (Women)",
-          question: "A 24-year-old woman presents with dysuria, urinary frequency, and suprapubic discomfort for 2 days. She has no fever, flank pain, or vaginal discharge. What is the most appropriate next step?",
+          id: "q1", 
+          topic: "NICE NG109 - UTI Antibiotic Choice",
+          question: "According to NICE NG109, what is the recommended first-line antibiotic for uncomplicated lower UTI in non-pregnant women aged 16-64?",
           options: {
-            A: "Urinalysis and empirical antibiotics",
-            B: "Send urine for culture and await results",
-            C: "Prescribe antifungals",
-            D: "Refer to urology",
-            E: "Pelvic ultrasound"
+            A: "Nitrofurantoin 100mg modified-release twice daily for 3 days",
+            B: "Trimethoprim 200mg twice daily for 3 days",
+            C: "Amoxicillin 500mg three times daily for 3 days", 
+            D: "Ciprofloxacin 250mg twice daily for 3 days",
+            E: "Fosfomycin 3g single dose"
           },
           answer: "A",
           explanation: {
-            A: "Correct. NICE NG109 recommends empirical antibiotic treatment without urine culture for women under 65 with ≥2 typical symptoms (dysuria, urgency, frequency, suprapubic pain).",
-            B: "Incorrect. Culture is only recommended if symptoms are atypical, recurrent, or not improving.",
-            C: "Incorrect. No features suggest fungal UTI.",
-            D: "Incorrect. Specialist referral is not necessary in uncomplicated lower UTI.",
-            E: "Incorrect. Imaging is not indicated in the absence of red flags or systemic symptoms."
+            A: "Correct. NICE NG109 recommends nitrofurantoin 100mg modified-release twice daily for 3 days as first-line treatment for uncomplicated lower UTI in women aged 16-64.",
+            B: "Incorrect. Trimethoprim is second-line due to increasing resistance rates.",
+            C: "Incorrect. Amoxicillin has high resistance rates and is not recommended for UTI.",
+            D: "Incorrect. Ciprofloxacin is reserved for pyelonephritis or when first-line agents are unsuitable.",
+            E: "Incorrect. Fosfomycin is an alternative but not the standard first-line recommendation."
           },
-          mnemonic: "DUS = Dysuria, Urgency, Suprapubic pain → Treat empirically",
+          mnemonic: "NITRO First = Nitrofurantoin Is The Recommended Option First-line",
           links: {
-            NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#treatment-of-lower-uti-in-non-pregnant-women-aged-16-and-over",
-            CKS: "https://patient.info/doctor/urinary-tract-infection-in-adults",
-            BNF: "https://www.medicines.org.uk/emc/product/2150/smpc",
-            GMC: "https://www.gov.uk/government/publications/managing-common-infections-guidance-for-primary-care"
+            NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#choice-of-antibiotic",
+            "NHS England": "https://www.england.nhs.uk/wp-content/uploads/2019/01/managing-common-infections-guidance-for-primary-care.pdf",
+            MHRA: "https://www.gov.uk/drug-safety-update/nitrofurantoin-new-indication-and-posology-for-uncomplicated-urinary-tract-infections",
+            "Patient UK": "https://patient.info/doctor/urinary-tract-infection-in-adults"
           }
         },
         {
