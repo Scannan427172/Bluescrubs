@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
@@ -63,6 +63,41 @@ export default function Test() {
   const [tutorInput, setTutorInput] = useState('');
   const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
   const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
+
+  // Test Categories and Filtering
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string>("mixed");
+  const [showCategoryFilter, setShowCategoryFilter] = useState(false);
+
+  // Medical Specialty Categories
+  const medicalCategories = [
+    { id: "all", name: "All Categories", icon: "🏥", count: "5000+" },
+    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", count: "350+" },
+    { id: "respiratory", name: "Respiratory", icon: "🫁", count: "300+" },
+    { id: "gastrointestinal", name: "Gastrointestinal", icon: "🦠", count: "280+" },
+    { id: "neurology", name: "Neurology", icon: "🧠", count: "320+" },
+    { id: "endocrinology", name: "Endocrinology", icon: "⚡", count: "250+" },
+    { id: "psychiatry", name: "Psychiatry", icon: "🧘", count: "200+" },
+    { id: "obstetrics-gynaecology", name: "Obstetrics & Gynaecology", icon: "👶", count: "280+" },
+    { id: "paediatrics", name: "Paediatrics", icon: "🧸", count: "300+" },
+    { id: "surgery", name: "Surgery", icon: "🔪", count: "220+" },
+    { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨", count: "250+" },
+    { id: "infectious-diseases", name: "Infectious Diseases", icon: "🦠", count: "180+" },
+    { id: "rheumatology", name: "Rheumatology", icon: "🦴", count: "150+" },
+    { id: "dermatology", name: "Dermatology", icon: "👁️", count: "120+" },
+    { id: "ophthalmology", name: "Ophthalmology", icon: "👁️", count: "100+" },
+    { id: "ent", name: "ENT", icon: "👂", count: "80+" },
+    { id: "pharmacology", name: "Pharmacology", icon: "💊", count: "200+" },
+    { id: "ethics-law", name: "Ethics & Law", icon: "⚖️", count: "150+" }
+  ];
+
+  const difficultyLevels = [
+    { id: "mixed", name: "Mixed Difficulty", description: "Balanced mix of question levels" },
+    { id: "basic", name: "Basic Level", description: "Foundation knowledge questions" },
+    { id: "intermediate", name: "Intermediate", description: "Standard PLAB 1 level" },
+    { id: "advanced", name: "Advanced", description: "Complex clinical scenarios" },
+    { id: "exam-style", name: "Exam Style", description: "Authentic PLAB 1 format" }
+  ];
 
   // Language definitions
   const languages = [
@@ -809,6 +844,66 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   {isSpeaking ? "Stop" : "Read"}
                 </Button>
               )}
+            </div>
+
+            {/* Category and Difficulty Filters */}
+            <div className="mt-6 flex flex-wrap gap-4 items-center justify-center">
+              {/* Category Filter */}
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                <Filter className="w-4 h-4 text-white" />
+                <Label htmlFor="category-filter" className="text-white text-sm">
+                  Specialty
+                </Label>
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="w-48 bg-transparent border-white/30 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-96 overflow-y-auto">
+                    {medicalCategories.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        <div className="flex items-center gap-2">
+                          <span>{category.icon}</span>
+                          <span>{category.name}</span>
+                          <Badge variant="secondary" className="ml-2 text-xs">
+                            {category.count}
+                          </Badge>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Difficulty Filter */}
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                <Target className="w-4 h-4 text-white" />
+                <Label htmlFor="difficulty-filter" className="text-white text-sm">
+                  Level
+                </Label>
+                <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+                  <SelectTrigger className="w-40 bg-transparent border-white/30 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {difficultyLevels.map((level) => (
+                      <SelectItem key={level.id} value={level.id}>
+                        <div className="flex flex-col">
+                          <span className="font-medium">{level.name}</span>
+                          <span className="text-xs text-gray-500">{level.description}</span>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Question Count Indicator */}
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                <BookOpen className="w-4 h-4 text-white" />
+                <span className="text-white text-sm">
+                  {medicalCategories.find(cat => cat.id === selectedCategory)?.count || "5000+"} Questions
+                </span>
+              </div>
             </div>
           </div>
         </div>
