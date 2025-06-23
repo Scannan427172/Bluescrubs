@@ -130,7 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           mnemonic: "DUS = Dysuria, Urgency, Suprapubic pain → Treat empirically",
           links: {
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#treatment-of-lower-uti-in-non-pregnant-women-aged-16-and-over",
-            CKS: "https://www.nice.org.uk/guidance/ng109",
+            CKS: "https://patient.info/doctor/urinary-tract-infection-in-adults",
             BNF: "https://www.medicines.org.uk/emc/product/2150/smpc",
             GMC: "https://www.gmc-uk.org/ethical-guidance"
           }

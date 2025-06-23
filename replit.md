@@ -108,6 +108,7 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 23, 2025: Suspended all OpenAI activity per user request
 - June 23, 2025: Synchronized frontend test interface with corrected UK medical guidance links
 - June 23, 2025: Fixed broken CKS, BNF, and GMC links with verified working alternatives
+- June 23, 2025: Updated CKS link to Patient.info UTI guidance due to CKS access restrictions
 
 # User Preferences
 
