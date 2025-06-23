@@ -741,6 +741,45 @@ export default function PLAB1New() {
     }
   };
 
+  // Start authentic PLAB 1 timed practice session (1 minute per question)
+  const startAuthenticTimedPractice = async (questionCount: number) => {
+    setIsGeneratingQuestions(true);
+    try {
+      const response = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: selectedCategory,
+          difficulty: selectedDifficulty,
+          count: questionCount // Generate exact number of questions
+        })
+      });
+      const data = await response.json();
+      
+      // Slice to exact count in case more were generated
+      const exactQuestions = data.questions.slice(0, questionCount);
+      setGeneratedQuestions(exactQuestions);
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+      setSessionStarted(true);
+      setIsTimerRunning(true);
+      
+      // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
+      const totalTimeMs = questionCount * 60 * 1000; // 1 minute per question
+      setTimeout(() => {
+        setIsTimerRunning(false);
+        setSessionComplete(true);
+      }, totalTimeMs);
+      
+    } catch (error) {
+      console.error('Error generating questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
+
   // Start unlimited practice session
   const startUnlimitedPractice = async () => {
     setIsGeneratingQuestions(true);
@@ -1108,7 +1147,7 @@ export default function PLAB1New() {
                 </div>
               </div>
 
-              {/* Block 2: Timed Tests */}
+              {/* Block 2: Timed Challenges */}
               <div className="border rounded-lg p-4 bg-orange-50">
                 <h3 className="font-semibold text-orange-900 mb-3 flex items-center gap-2">
                   <Clock className="w-5 h-5" />
@@ -1177,6 +1216,57 @@ export default function PLAB1New() {
                     <div className="text-xs opacity-90">No time limit - study at your pace</div>
                   </div>
                 </Button>
+              </div>
+
+              {/* Block 4: Authentic PLAB 1 Simulation */}
+              <div className="border rounded-lg p-4 bg-purple-50">
+                <h3 className="font-semibold text-purple-900 mb-3 flex items-center gap-2">
+                  <Award className="w-5 h-5" />
+                  Block 4: Authentic PLAB 1 Simulation
+                </h3>
+                <p className="text-sm text-purple-700 mb-4">Real exam conditions - exactly 1 minute per question</p>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <Button 
+                    onClick={() => startAuthenticTimedPractice(10)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">10</span>
+                    <span className="text-xs">10 mins</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startAuthenticTimedPractice(20)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">20</span>
+                    <span className="text-xs">20 mins</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startAuthenticTimedPractice(50)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">50</span>
+                    <span className="text-xs">50 mins</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startAuthenticTimedPractice(60)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">60</span>
+                    <span className="text-xs">1 hour</span>
+                  </Button>
+                  <Button 
+                    onClick={() => startAuthenticTimedPractice(180)}
+                    disabled={isGeneratingQuestions}
+                    className="bg-purple-600 hover:bg-purple-700 text-white h-16 flex flex-col items-center justify-center gap-1"
+                  >
+                    <span className="font-bold text-lg">180</span>
+                    <span className="text-xs">Full PLAB</span>
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
