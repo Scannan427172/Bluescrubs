@@ -36,7 +36,7 @@ export default function Test() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   // Fetch questions from API
-  const { data: questions, isLoading, error } = useQuery({
+  const { data: questions, isLoading, error } = useQuery<Question[]>({
     queryKey: ["/api/test/questions"],
     retry: false,
   });
@@ -77,18 +77,18 @@ export default function Test() {
   };
 
   const getOptionButtonClass = (option: string) => {
-    if (!submitted) {
+    if (!submitted || !currentQuestion) {
       return selectedAnswer === option 
         ? "border-blue-500 bg-blue-50 text-blue-700"
         : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50";
     }
 
     // After submission
-    if (option === question.answer) {
+    if (option === currentQuestion.answer) {
       return "border-green-500 bg-green-50 text-green-700";
     }
     
-    if (selectedAnswer === option && option !== question.answer) {
+    if (selectedAnswer === option && option !== currentQuestion.answer) {
       return "border-red-500 bg-red-50 text-red-700";
     }
 
@@ -96,41 +96,100 @@ export default function Test() {
   };
 
   const getOptionIcon = (option: string) => {
-    if (!submitted) return null;
+    if (!submitted || !currentQuestion) return null;
     
-    if (option === question.answer) {
+    if (option === currentQuestion.answer) {
       return <CheckCircle className="w-5 h-5 text-green-600" />;
     }
     
-    if (selectedAnswer === option && option !== question.answer) {
+    if (selectedAnswer === option && option !== currentQuestion.answer) {
       return <XCircle className="w-5 h-5 text-red-600" />;
     }
 
     return null;
   };
 
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardContent className="p-8 text-center">
+            <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Loading Questions</h3>
+            <p className="text-gray-600">Preparing PassMedicine-style questions...</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !questions || questions.length === 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardContent className="p-8 text-center">
+            <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Load Questions</h3>
+            <p className="text-gray-600">Please try refreshing the page.</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (!currentQuestion) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 p-4 pb-24">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">PLAB Style Test</h1>
-          <p className="text-gray-600">PassMedicine-style MCQ with detailed explanations</p>
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">PLAB Style Test</h1>
+            <p className="text-gray-600">PassMedicine-style MCQ with detailed explanations</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <Badge variant="outline" className="px-3 py-1">
+              Question {currentQuestionIndex + 1} of {questions.length}
+            </Badge>
+          </div>
         </div>
 
         {/* Question Card */}
         <Card className="mb-6 shadow-sm">
           <CardHeader className="pb-4">
-            <CardTitle className="text-lg font-medium text-gray-900">
-              Question 1
+            <CardTitle className="text-lg font-medium text-gray-900 flex items-center justify-between">
+              Question {currentQuestionIndex + 1}
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePrevQuestion}
+                  disabled={currentQuestionIndex === 0}
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleNextQuestion}
+                  disabled={currentQuestionIndex === questions.length - 1}
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </div>
             </CardTitle>
             <CardDescription className="text-base text-gray-700 leading-relaxed">
-              {question.question}
+              {currentQuestion.question}
             </CardDescription>
           </CardHeader>
           
           <CardContent className="space-y-3">
-            {Object.entries(question.options).map(([option, text]) => (
+            {Object.entries(currentQuestion.options).map(([option, text]) => (
               <button
                 key={option}
                 onClick={() => handleAnswerSelect(option)}
@@ -139,7 +198,7 @@ export default function Test() {
               >
                 <div className="flex items-center gap-3">
                   <span className="font-semibold text-lg">{option}.</span>
-                  <span>{text}</span>
+                  <span>{String(text)}</span>
                 </div>
                 {getOptionIcon(option)}
               </button>
@@ -178,16 +237,16 @@ export default function Test() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {Object.entries(question.explanation).map(([option, explanation]) => (
+              {Object.entries(currentQuestion.explanation).map(([option, explanation]) => (
                 <div key={option} className="border-l-4 border-gray-200 pl-4">
                   <div className="flex items-start gap-2">
                     <Badge 
-                      variant={option === question.answer ? "default" : "secondary"}
+                      variant={option === currentQuestion.answer ? "default" : "secondary"}
                       className="mt-1"
                     >
                       {option}
                     </Badge>
-                    <p className="text-gray-700 leading-relaxed">{explanation}</p>
+                    <p className="text-gray-700 leading-relaxed">{String(explanation)}</p>
                   </div>
                 </div>
               ))}
@@ -206,7 +265,7 @@ export default function Test() {
             </CardHeader>
             <CardContent>
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
-                <p className="text-gray-800 font-medium">{question.mnemonic}</p>
+                <p className="text-gray-800 font-medium">{currentQuestion.mnemonic}</p>
               </div>
             </CardContent>
           </Card>
@@ -224,7 +283,7 @@ export default function Test() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <a
-                  href={question.links.NICE}
+                  href={currentQuestion.links.NICE}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
@@ -233,7 +292,7 @@ export default function Test() {
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={question.links.BNF}
+                  href={currentQuestion.links.BNF}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
@@ -242,7 +301,7 @@ export default function Test() {
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={question.links.CKS}
+                  href={currentQuestion.links.CKS}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
