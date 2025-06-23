@@ -130,9 +130,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           mnemonic: "NITRO = Nice Initial Treatment Recommended Option",
           links: {
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#choice-of-antibiotic",
-            BNF: "https://www.medicines.org.uk/emc/product/2150/smpc",
-            "NHS UK": "https://www.nhs.uk/conditions/urinary-tract-infections-utis/",
-            "Gov UK": "https://www.gov.uk/government/publications/urinary-tract-infection-diagnosis"
+            "NHS BNF": "https://www.nhs.uk/medicines/nitrofurantoin/",
+            "NHS Medicines": "https://www.medicinesresources.nhs.uk/en/Communities/NHS/SPS-E-and-SE-England/Rapid-Medicines-Reviews/Antimicrobials/UTI-guidelines/",
+            "RPS Guide": "https://www.rpharms.com/resources/ultimate-guides-and-hubs/antimicrobial-stewardship/urinary-tract-infections"
           }
         },
         {
