@@ -323,30 +323,30 @@ export default function Test() {
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={currentQuestion.links.CKS}
+                  href={currentQuestion.links["NHS BNF"]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-medium text-gray-900">CKS</span>
+                  <span className="font-medium text-gray-900">NHS BNF</span>
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={currentQuestion.links.BNF}
+                  href={currentQuestion.links["NHS Medicines"]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-medium text-gray-900">BNF</span>
+                  <span className="font-medium text-gray-900">NHS Medicines</span>
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
                 <a
-                  href={currentQuestion.links.GMC}
+                  href={currentQuestion.links["RPS Guide"]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-medium text-gray-900">GMC</span>
+                  <span className="font-medium text-gray-900">RPS Guide</span>
                   <ExternalLink className="w-4 h-4 text-gray-500" />
                 </a>
               </div>
