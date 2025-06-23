@@ -130,8 +130,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           mnemonic: "NITRO First = Nitrofurantoin Is The Recommended Option First-line",
           links: {
             NICE: "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations#choice-of-antibiotic",
-            "NHS England": "https://www.england.nhs.uk/wp-content/uploads/2019/01/managing-common-infections-guidance-for-primary-care.pdf",
-            MHRA: "https://www.gov.uk/drug-safety-update/nitrofurantoin-new-indication-and-posology-for-uncomplicated-urinary-tract-infections",
+            BNF: "https://www.medicines.org.uk/emc/product/2150/smpc",
+            UKHSA: "https://www.gov.uk/government/collections/urinary-tract-infection-uti-guidance-data-and-analysis",
             "Patient UK": "https://patient.info/doctor/urinary-tract-infection-in-adults"
           }
         },
