@@ -49,7 +49,7 @@ export default function Landing() {
                   </div>
                 </h1>
                 
-                <p className="text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl">
+                <p className="text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl">
                   The world's most advanced AI-powered platform for NHSprep featuring{" "}
                   <span className="text-blue-400 font-semibold">video OSCE simulations</span>,{" "}
                   <span className="text-purple-400 font-semibold">adaptive learning</span>, and{" "}
