@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle, Target, Zap, Shield, Star, Play, CheckCircle, Globe, Award } from "lucide-react";
 import { Logo } from "@/components/logo";
-import nhsPrepWomanImg from "@assets/image_1749071491789.png";
-import heroBackgroundImg from "@assets/image_1749074194942.jpeg";
+
 import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
 import heroVideo from "@assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4";
 
@@ -25,8 +24,7 @@ export default function Landing() {
           <source src={heroVideo} type="video/mp4" />
         </video>
         
-        {/* Video Overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
+
         
         {/* Hero Content - Portrait Layout */}
         <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
@@ -87,83 +85,7 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.05)_50%,transparent_75%,transparent_100%)] bg-[length:250px_250px] animate-[move_20s_linear_infinite]"></div>
-        </div>
-        
-        {/* Background Image for Right Side */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <div className="absolute inset-0 bg-blue-600/40 z-10"></div>
-          <img 
-            src={heroBackgroundImg} 
-            alt="Hero background"
-            className="w-full h-full object-cover object-center opacity-80"
-          />
-        </div>
-        
-        {/* Hero Content */}
-        <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
-          <div className="max-w-7xl mx-auto w-full">
-            {/* Left Side - Content */}
-            <div className="hero-text text-white space-y-8 max-w-2xl">
-              <div className="space-y-6">
-                <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
-                  <Star className="w-5 h-5 mr-3 text-yellow-400" />
-                  <span className="text-sm font-semibold">Comprehensive Medical Exam Preparation</span>
-                </div>
-                
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight" style={{ color: 'white' }}>
-                  <span style={{ color: 'white' }}>Master Your</span>{" "}
-                  <div className="inline-flex items-center">
-                    <Logo size="xl" />
-                  </div>{" "}
-                  <span style={{ color: 'white' }}>Journey</span>
-                </h1>
-                
-                <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl" style={{ color: 'white' }}>
-                  <span style={{ color: 'white' }}>The world's most advanced AI-powered platform for NHSprep featuring{" "}</span>
-                  <span className="text-blue-400 font-semibold">video OSCE simulations</span><span style={{ color: 'white' }}>,{" "}</span>
-                  <span className="text-purple-400 font-semibold">adaptive learning</span><span style={{ color: 'white' }}>, and{" "}</span>
-                  <span className="text-green-400 font-semibold">expert mentorship</span><span style={{ color: 'white' }}>.</span>
-                </p>
-              </div>
-              
 
-              
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/auth">
-                  <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
-                    <span className="text-white">Start Your Free Trial</span>
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
-                  </Button>
-                </Link>
-                <Link href="/pricing">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
-                    <span className="text-white">View Pricing</span>
-                  </Button>
-                </Link>
-                <Link href="/dashboard">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
-                    <Play className="mr-2 w-5 h-5 text-white" />
-                    <span className="text-white">Try Demo</span>
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Scroll Indicator - Centered and lower to avoid button overlap */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center cursor-pointer hover:border-white/60 transition-colors">
-            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-          </div>
-        </div>
-      </div>
 
       {/* Why We're Different Section - Core NHSprep Features */}
       <div className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
