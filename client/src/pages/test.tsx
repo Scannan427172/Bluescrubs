@@ -82,26 +82,26 @@ export default function Test() {
   });
 
   // Medical Specialty Categories - Dynamic based on available questions
-  const totalQuestions = (questionStats as any)?.questionBank || 5000;
+  const totalQuestions = (questionStats as any)?.questionBank || 2;
   const medicalCategories = [
     { id: "all", name: "All Categories", icon: "🏥", count: totalQuestions.toString() },
-    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", count: "Available" },
-    { id: "infectious-diseases", name: "Infectious Diseases", icon: "🦠", count: "Available" },
-    { id: "respiratory", name: "Respiratory", icon: "🫁", count: "Available" },
-    { id: "gastrointestinal", name: "Gastrointestinal", icon: "🦠", count: "Available" },
-    { id: "neurology", name: "Neurology", icon: "🧠", count: "Available" },
-    { id: "endocrinology", name: "Endocrinology", icon: "⚡", count: "Available" },
-    { id: "psychiatry", name: "Psychiatry", icon: "🧘", count: "Available" },
-    { id: "obstetrics-gynaecology", name: "Obstetrics & Gynaecology", icon: "👶", count: "Available" },
-    { id: "paediatrics", name: "Paediatrics", icon: "🧸", count: "Available" },
-    { id: "surgery", name: "Surgery", icon: "🔪", count: "Available" },
-    { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨", count: "Available" },
-    { id: "rheumatology", name: "Rheumatology", icon: "🦴", count: "Available" },
-    { id: "dermatology", name: "Dermatology", icon: "👁️", count: "Available" },
-    { id: "ophthalmology", name: "Ophthalmology", icon: "👁️", count: "Available" },
-    { id: "ent", name: "ENT", icon: "👂", count: "Available" },
-    { id: "pharmacology", name: "Pharmacology", icon: "💊", count: "Available" },
-    { id: "ethics-law", name: "Ethics & Law", icon: "⚖️", count: "Available" }
+    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", count: "1" },
+    { id: "infectious-diseases", name: "Infectious Diseases", icon: "🦠", count: "1" },
+    { id: "respiratory", name: "Respiratory", icon: "🫁", count: "0" },
+    { id: "gastrointestinal", name: "Gastrointestinal", icon: "🦠", count: "0" },
+    { id: "neurology", name: "Neurology", icon: "🧠", count: "0" },
+    { id: "endocrinology", name: "Endocrinology", icon: "⚡", count: "0" },
+    { id: "psychiatry", name: "Psychiatry", icon: "🧘", count: "0" },
+    { id: "obstetrics-gynaecology", name: "Obstetrics & Gynaecology", icon: "👶", count: "0" },
+    { id: "paediatrics", name: "Paediatrics", icon: "🧸", count: "0" },
+    { id: "surgery", name: "Surgery", icon: "🔪", count: "0" },
+    { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨", count: "0" },
+    { id: "rheumatology", name: "Rheumatology", icon: "🦴", count: "0" },
+    { id: "dermatology", name: "Dermatology", icon: "👁️", count: "0" },
+    { id: "ophthalmology", name: "Ophthalmology", icon: "👁️", count: "0" },
+    { id: "ent", name: "ENT", icon: "👂", count: "0" },
+    { id: "pharmacology", name: "Pharmacology", icon: "💊", count: "0" },
+    { id: "ethics-law", name: "Ethics & Law", icon: "⚖️", count: "0" }
   ];
 
   const difficultyLevels = [
