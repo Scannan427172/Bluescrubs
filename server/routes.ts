@@ -98,7 +98,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // PassMedicine-style test questions - Static content only
+  // PLAB practice test questions - Static content only
   app.get("/api/test/questions", async (req, res) => {
     try {
       // Track page view
