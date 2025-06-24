@@ -206,7 +206,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.log(`\n📚 Generating ${specialty.count} ${specialty.category} questions...`);
         
         // Generate in smaller batches to avoid token limits
-        const batchSize = 10;
+        const batchSize = 5; // Reduced for cost efficiency
         const batches = Math.ceil(specialty.count / batchSize);
         
         for (let batch = 0; batch < batches; batch++) {
