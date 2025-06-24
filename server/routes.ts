@@ -248,6 +248,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const questionsInBatch = Math.min(batchSize, specialty.count - (batch * batchSize));
           
           try {
+            console.log(`Starting batch ${batch + 1}/${batches} for ${specialty.category}...`);
             const batchQuestions = await generateMedicalQuestions(
               templateQuestions,
               specialty.category,
@@ -255,23 +256,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
               questionsInBatch
             );
             
-            ukQuestionBank.push(...batchQuestions);
-            totalGenerated += batchQuestions.length;
-            saveQuestionBank();
+            if (batchQuestions && batchQuestions.length > 0) {
+              ukQuestionBank.push(...batchQuestions);
+              totalGenerated += batchQuestions.length;
+              saveQuestionBank();
+              
+              generationResults.push({
+                specialty: specialty.category,
+                batch: batch + 1,
+                generated: batchQuestions.length,
+                total: totalGenerated
+              });
+              
+              console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/5000)`);
+            } else {
+              console.log(`No questions generated in batch ${batch + 1} for ${specialty.category}`);
+            }
             
-            generationResults.push({
-              specialty: specialty.category,
-              batch: batch + 1,
-              generated: batchQuestions.length,
-              total: totalGenerated
-            });
-            
-            // Log progress and small delay to respect API limits
-            console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/5000)`);
             await new Promise(resolve => setTimeout(resolve, 500));
             
           } catch (error) {
             console.error(`Error generating batch ${batch + 1} for ${specialty.category}:`, error);
+            await new Promise(resolve => setTimeout(resolve, 2000));
           }
         }
       }
