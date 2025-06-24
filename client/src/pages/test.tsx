@@ -140,35 +140,24 @@ export default function Test() {
     { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
   ];
 
-  // Debug video setup
+  // Video setup for new banner
   useEffect(() => {
-    console.log('Hero video path:', heroVideo);
-    console.log('Video buttons should be visible with red background');
+    console.log('Setting up banner video:', heroVideo);
     
-    const setupVideos = () => {
-      const videos = document.querySelectorAll('video');
-      console.log('Found videos:', videos.length);
-      
-      videos.forEach((video, index) => {
-        console.log(`Setting up video ${index + 1}`);
+    const setupBannerVideo = () => {
+      const video = document.querySelector('video[key="hero-video-banner"]') as HTMLVideoElement;
+      if (video) {
         video.muted = true;
         video.playsInline = true;
         video.loop = true;
         
-        video.addEventListener('loadedmetadata', () => {
-          console.log(`Video ${index + 1} metadata loaded`);
-          setHeroVideoLoaded(true);
-        });
-        
         video.play().catch(() => {
-          console.log(`Autoplay blocked for video ${index + 1} - manual play available`);
+          console.log('Banner video autoplay blocked - manual control available');
         });
-      });
+      }
     };
     
-    setupVideos();
-    const timer = setTimeout(setupVideos, 100);
-    
+    const timer = setTimeout(setupBannerVideo, 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -848,7 +837,65 @@ Feel free to ask about any aspect of this question or other medical topics you'r
   if (practiceMode === 'selection') {
     return (
       <div className="min-h-screen bg-gray-50">
-        {/* Hero Banner */}
+        {/* Video Hero Banner */}
+        <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden bg-black mb-4">
+          <video 
+            key="hero-video-banner"
+            className="absolute inset-0 w-full h-full object-cover"
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            disablePictureInPicture
+            onLoadedData={() => {
+              console.log('Banner video loaded');
+              setHeroVideoLoaded(true);
+            }}
+            onError={(e) => {
+              console.error('Banner video error:', e);
+              setVideoError(true);
+            }}
+          >
+            <source src={heroVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          
+          {/* Video Play Button */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <button
+              onClick={async () => {
+                const video = document.querySelector('video[key="hero-video-banner"]') as HTMLVideoElement;
+                if (video) {
+                  try {
+                    if (video.paused) {
+                      await video.play();
+                      console.log('Banner video started');
+                    } else {
+                      video.pause();
+                      console.log('Banner video paused');
+                    }
+                  } catch (error) {
+                    console.error('Banner video control failed:', error);
+                  }
+                }
+              }}
+              className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-6 rounded-full shadow-lg transition-all duration-300 text-3xl border-2 border-white/30"
+              title="Play/Pause video"
+            >
+              ▶️
+            </button>
+          </div>
+          
+          {/* Video Overlay Text */}
+          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+            <div className="text-center text-white">
+              <h2 className="text-2xl md:text-4xl font-bold mb-2">Interactive Medical Learning</h2>
+              <p className="text-lg md:text-xl opacity-90">Experience dynamic PLAB preparation</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Master Your Prep Banner */}
         <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[500px] lg:h-[550px] mb-8 overflow-hidden hero-banner">
           {!heroVideoLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
@@ -858,75 +905,9 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           {videoError && (
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700"></div>
           )}
-          <video 
-            key="hero-video-selection"
-            className="absolute inset-0 w-full h-full object-cover opacity-70"
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            disablePictureInPicture
-            onLoadedData={() => {
-              console.log('Selection video loaded');
-              setHeroVideoLoaded(true);
-            }}
-            onError={(e) => {
-              console.error('Selection video error:', e);
-              setVideoError(true);
-            }}
-          >
-            <source src={heroVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+
           
-          {/* Video Play Button - Force Visible */}
-          <div 
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            style={{ 
-              zIndex: 9999,
-              position: 'fixed',
-              pointerEvents: 'auto'
-            }}
-          >
-            <button
-              onClick={async (e) => {
-                e.stopPropagation();
-                console.log('Play button clicked');
-                const video = document.querySelector('video[key="hero-video-selection"]') as HTMLVideoElement;
-                console.log('Video element found:', video);
-                if (video) {
-                  try {
-                    if (video.paused) {
-                      await video.play();
-                      console.log('Video started playing');
-                    } else {
-                      video.pause();
-                      console.log('Video paused');
-                    }
-                  } catch (error) {
-                    console.error('Video control failed:', error);
-                  }
-                } else {
-                  console.error('Video element not found');
-                }
-              }}
-              className="bg-red-500 hover:bg-red-600 text-white rounded-full shadow-2xl transition-all duration-300 font-bold border-4 border-white"
-              title="Play/Pause background video"
-              style={{ 
-                pointerEvents: 'auto',
-                padding: '24px',
-                fontSize: '32px',
-                lineHeight: '1',
-                minWidth: '80px',
-                minHeight: '80px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              ▶️
-            </button>
-          </div>
+
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
           <div className="relative z-50 flex flex-col items-center justify-end pb-8 text-center px-4 sm:px-8 h-full hero-text" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
