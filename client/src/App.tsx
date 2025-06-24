@@ -37,6 +37,7 @@ import InternationalExams from "@/pages/international-exams";
 import NotFound from "@/pages/not-found";
 import Test from "@/pages/test";
 import LiveAnalytics from "@/pages/live-analytics";
+import GenerationStatus from "@/pages/generation-status";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -312,6 +313,15 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <Dashboard />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/generation">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <GenerationStatus />
           </div>
         </div>
       </Route>

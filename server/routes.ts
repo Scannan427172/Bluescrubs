@@ -17,7 +17,7 @@ import path from "path";
 // AI Question Generation Functions
 async function generateMedicalQuestions(templates: any[], category: string, difficulty: string, count: number) {
   try {
-    const OpenAI = require('openai');
+    const { default: OpenAI } = await import('openai');
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
