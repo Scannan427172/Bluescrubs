@@ -40,11 +40,13 @@ export default function Landing() {
                 </div>
                 
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-white">
-                  <span>Master Your</span>{" "}
-                  <div className="inline-flex items-center">
-                    <Logo size="xl" />
-                  </div>{" "}
-                  <span>Journey</span>
+                  <div className="flex flex-col items-start">
+                    <span>Master Your</span>
+                    <div className="flex flex-col items-start">
+                      <Logo size="xl" />
+                      <span>Journey</span>
+                    </div>
+                  </div>
                 </h1>
                 
                 <p className="text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl">
