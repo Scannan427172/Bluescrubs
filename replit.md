@@ -119,6 +119,7 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 24, 2025: Created 10 comprehensive medical scenarios with detailed explanations and verified reference links
 - June 24, 2025: Fixed all broken reference URLs - replaced 403/405 error BNF and specialty society links with verified NHS alternatives
 - June 24, 2025: Enhanced question navigation with prominent Previous/Next buttons and disabled non-functional auto-translate feature
+- June 24, 2025: Successfully integrated video hero banner with medical professional content - video loads and plays properly in PLAB practice selection interface
 
 # User Preferences
 
