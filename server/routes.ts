@@ -204,8 +204,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const templateQuestions = [];
       
       // Fetch the 8 existing template questions
-      const testQuestionsResponse = await fetch(`http://localhost:5000/api/test/questions`);
-      const existingQuestions = await testQuestionsResponse.json();
+      try {
+        const testQuestionsResponse = await fetch(`http://localhost:5000/api/test/questions`);
+        const existingQuestions = await testQuestionsResponse.json();
+        templateQuestions.push(...existingQuestions.slice(0, 8));
+      } catch (error) {
+        console.error('Failed to fetch template questions:', error);
+        return res.status(500).json({ error: 'Cannot access template questions' });
+      }
 
       templateQuestions.push(...existingQuestions);
 
@@ -261,8 +267,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             });
             
             // Log progress and small delay to respect API limits
-            console.log(`Batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/5000)`);
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/5000)`);
+            await new Promise(resolve => setTimeout(resolve, 500));
             
           } catch (error) {
             console.error(`Error generating batch ${batch + 1} for ${specialty.category}:`, error);
