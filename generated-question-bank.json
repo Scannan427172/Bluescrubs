@@ -1,0 +1,716 @@
+[
+  {
+    "id": "generated_cardiovascular_1750803833808_0",
+    "topic": "Hypertension Management",
+    "question": "A 55-year-old man presents to your clinic with persistent high blood pressure readings. His average BP over 3 visits is 160/95 mmHg. He has no significant past medical history and is otherwise healthy. What is the most appropriate initial antihypertensive treatment according to NICE guidelines?",
+    "options": {
+      "A": "Amlodipine 5mg once daily",
+      "B": "Lisinopril 10mg once daily",
+      "C": "Losartan 50mg once daily",
+      "D": "Bendroflumethiazide 2.5mg once daily",
+      "E": "Atenolol 50mg once daily"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Amlodipine 5mg once daily is correct because:\n\n• First-line treatment in patients aged over 55 or of African or Caribbean origin.\n• Calcium channel blockers are recommended due to their effectiveness in lowering blood pressure and reducing cardiovascular risk in this population.\n• NICE guidelines suggest a calcium channel blocker as initial therapy unless contraindicated.",
+      "B": "Lisinopril 10mg once daily is incorrect:\n\n• ACE inhibitors are first-line for patients under 55 or with diabetes.\n• This patient does not fit the criteria where ACE inhibitors are preferred as first-line.",
+      "C": "Losartan 50mg once daily is incorrect:\n\n• ARBs are alternatives for those intolerant to ACE inhibitors.\n• Not typically first-line unless the patient is under 55 or has diabetic nephropathy.",
+      "D": "Bendroflumethiazide 2.5mg once daily is incorrect:\n\n• Thiazide-like diuretics like indapamide or chlortalidone are preferred over traditional thiazides.\n• Used more often as an add-on rather than initial therapy.",
+      "E": "Atenolol 50mg once daily is incorrect:\n\n• Beta-blockers are not first-line for hypertension management according to current guidelines.\n• Reserved for specific indications such as heart failure or post-MI management."
+    },
+    "mnemonic": "OLDER = Over 55 Leads to Dihydropyridine",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "Hypertension in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Hypertension Summary",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - Hypertension treatment protocols"
+        },
+        {
+          "title": "NHS Hypertension Overview",
+          "url": "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/",
+          "description": "NHS overview of hypertension management"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803833808_1",
+    "topic": "Heart Failure Management",
+    "question": "A 70-year-old female with a history of hypertension presents with worsening shortness of breath and ankle swelling. Her examination reveals bilateral basal crackles and pitting edema. Echocardiogram shows ejection fraction of 35%. What is the most appropriate first-line medication to initiate?",
+    "options": {
+      "A": "Furosemide 40mg once daily",
+      "B": "Ramipril 5mg once daily",
+      "C": "Spironolactone 25mg once daily",
+      "D": "Bisoprolol 5mg once daily",
+      "E": "Digoxin 125mcg once daily"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Furosemide 40mg once daily is incorrect:\n\n• Diuretics are used for symptomatic relief of fluid overload but do not improve long-term outcomes.\n• They do not address the underlying neurohormonal changes in heart failure.",
+      "B": "Ramipril 5mg once daily is correct:\n\n• ACE inhibitors are first-line therapy for heart failure with reduced ejection fraction (HFrEF).\n• They improve symptoms, reduce hospitalizations, and improve survival by addressing the renin-angiotensin system.",
+      "C": "Spironolactone 25mg once daily is incorrect:\n\n• Aldosterone antagonists are typically used in addition to ACE inhibitors and beta-blockers in patients with severe heart failure or post-MI.\n• Not first-line as monotherapy.",
+      "D": "Bisoprolol 5mg once daily is incorrect:\n\n• Beta-blockers are important in heart failure management but are usually added after stabilization on ACE inhibitors.",
+      "E": "Digoxin 125mcg once daily is incorrect:\n\n• Digoxin is used for symptom control in heart failure or rate control in atrial fibrillation.\n• Does not reduce mortality in heart failure."
+    },
+    "mnemonic": "ACE = Always Considered Essential",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "Chronic heart failure in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Heart Failure Summary",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - Heart failure treatment protocols"
+        },
+        {
+          "title": "NHS Heart Failure Overview",
+          "url": "https://www.nhs.uk/conditions/heart-failure/",
+          "description": "NHS overview of heart failure management"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803833808_2",
+    "topic": "Arrhythmia Management",
+    "question": "A 60-year-old man presents to the emergency department with palpitations and dizziness. ECG shows atrial fibrillation with a ventricular rate of 140 bpm. He is hemodynamically stable. What is the first-line pharmacological therapy to control his rate?",
+    "options": {
+      "A": "Amiodarone 200mg orally",
+      "B": "Digoxin 125mcg orally",
+      "C": "Verapamil 80mg orally",
+      "D": "Bisoprolol 5mg orally",
+      "E": "Flecainide 50mg orally"
+    },
+    "answer": "D",
+    "explanation": {
+      "A": "Amiodarone 200mg orally is incorrect:\n\n• Used for rhythm control rather than rate control in atrial fibrillation.\n• Not first-line for rate control in stable patients.",
+      "B": "Digoxin 125mcg orally is incorrect:\n\n• Useful for rate control in patients with heart failure but less effective in controlling rate during exertion.\n• Not first-line for rate control in atrial fibrillation without heart failure.",
+      "C": "Verapamil 80mg orally is incorrect:\n\n• Non-dihydropyridine calcium channel blockers are used for rate control but should be avoided in patients with heart failure.\n• Not first-line due to potential negative inotropic effects.",
+      "D": "Bisoprolol 5mg orally is correct:\n\n• Beta-blockers are first-line agents for rate control in atrial fibrillation, especially in patients without contraindications.\n• Effective in controlling rate both at rest and during exertion.",
+      "E": "Flecainide 50mg orally is incorrect:\n\n• Used for rhythm control in atrial fibrillation.\n• Not indicated for rate control."
+    },
+    "mnemonic": "BEAT = Beta-blockers for atrial fibrillation",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng196",
+        "description": "Atrial fibrillation: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Arrhythmia Summary",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/arrhythmias/",
+          "description": "British National Formulary - Arrhythmia treatment protocols"
+        },
+        {
+          "title": "NHS Arrhythmia Overview",
+          "url": "https://www.nhs.uk/conditions/arrhythmia/",
+          "description": "NHS overview of arrhythmia management"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803833808_3",
+    "topic": "Valvular Heart Disease",
+    "question": "A 75-year-old woman with a history of rheumatic fever presents with shortness of breath and fatigue. On examination, a diastolic murmur is heard at the apex. Echocardiogram confirms mitral stenosis. What is the most appropriate initial management?",
+    "options": {
+      "A": "Balloon valvuloplasty",
+      "B": "Mitral valve replacement",
+      "C": "Beta-blockers",
+      "D": "Diuretics",
+      "E": "Anticoagulation with warfarin"
+    },
+    "answer": "D",
+    "explanation": {
+      "A": "Balloon valvuloplasty is incorrect:\n\n• Considered for symptomatic relief in patients with severe mitral stenosis but not the first step in management.\n• Typically used when medical therapy is insufficient.",
+      "B": "Mitral valve replacement is incorrect:\n\n• Surgical intervention is reserved for severe cases where other treatments have failed.\n• Not first-line due to its invasive nature.",
+      "C": "Beta-blockers are incorrect:\n\n• Can be used to control heart rate in patients with associated atrial fibrillation.\n• Not the primary treatment for mitral stenosis itself.",
+      "D": "Diuretics are correct:\n\n• First-line for symptomatic relief of pulmonary congestion in mitral stenosis.\n• Help reduce fluid overload and ease symptoms of breathlessness.",
+      "E": "Anticoagulation with warfarin is incorrect:\n\n• Used in patients with atrial fibrillation or history of thromboembolism.\n• Not first-line for mitral stenosis without AF."
+    },
+    "mnemonic": "DIA for Diuretics in Diastolic Murmur",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng208",
+        "description": "Heart valve disease presenting in adults: investigation and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Valvular Disease Summary",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-valve-disease/",
+          "description": "British National Formulary - Valvular disease treatment protocols"
+        },
+        {
+          "title": "NHS Valvular Heart Disease Overview",
+          "url": "https://www.nhs.uk/conditions/heart-valve-disease/",
+          "description": "NHS overview of valvular heart disease management"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803833808_4",
+    "topic": "Acute Coronary Syndrome Management",
+    "question": "A 62-year-old woman with a history of type 2 diabetes presents with chest pain lasting 30 minutes. ECG shows ST depression in leads V2-V4. Troponin levels are elevated. What is the most appropriate next step in management?",
+    "options": {
+      "A": "Immediate coronary angiography",
+      "B": "Aspirin and ticagrelor loading doses",
+      "C": "Thrombolytic therapy",
+      "D": "Nitrate infusion",
+      "E": "Coronary artery bypass grafting"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Immediate coronary angiography is correct:\n\n• Urgent coronary angiography is indicated to assess and manage unstable angina/NSTEMI in high-risk patients.\n• Allows for potential percutaneous coronary intervention (PCI) if indicated.",
+      "B": "Aspirin and ticagrelor loading doses are incorrect:\n\n• Important as part of antiplatelet therapy but does not address the need for immediate coronary evaluation and potential intervention.",
+      "C": "Thrombolytic therapy is incorrect:\n\n• Not indicated for NSTEMI management.\n• Reserved for STEMI when PCI is not available.",
+      "D": "Nitrate infusion is incorrect:\n\n• Can relieve chest pain but does not address the underlying coronary artery disease.\n• Not a definitive management step.",
+      "E": "Coronary artery bypass grafting is incorrect:\n\n• Surgical intervention considered in severe multivessel disease or left main coronary artery disease.\n• Not the first-line approach for initial management."
+    },
+    "mnemonic": "ANGIO = Assess for Non-STEMI Go Immediately",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng185",
+        "description": "Acute coronary syndromes in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Acute Coronary Syndrome Summary",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/acute-coronary-syndrome/",
+          "description": "British National Formulary - Acute coronary syndrome treatment protocols"
+        },
+        {
+          "title": "NHS Heart Attack Overview",
+          "url": "https://www.nhs.uk/conditions/heart-attack/",
+          "description": "NHS overview of acute coronary syndrome management"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803868704_0",
+    "topic": "Hypertension Management",
+    "question": "A 55-year-old man presents to your clinic with a blood pressure of 160/100 mmHg. He has a history of type 2 diabetes and is currently on metformin. He has no history of heart disease or kidney problems. What is the most appropriate first-line antihypertensive treatment for this patient?",
+    "options": {
+      "A": "Amlodipine 5mg once daily",
+      "B": "Lisinopril 10mg once daily",
+      "C": "Hydrochlorothiazide 25mg once daily",
+      "D": "Atenolol 50mg once daily",
+      "E": "Losartan 50mg once daily"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Amlodipine is a calcium channel blocker and can be used in hypertensive patients. However, in patients with diabetes, ACE inhibitors like lisinopril are preferred due to their renal protective effects.",
+      "B": "Lisinopril is an ACE inhibitor, which is recommended as first-line treatment for hypertension in patients with diabetes according to NICE guidelines due to its benefits in diabetic nephropathy.",
+      "C": "Thiazide diuretics like hydrochlorothiazide can be used for hypertension but are not the first choice in diabetic patients without heart failure or edema.",
+      "D": "Beta-blockers like atenolol are not recommended as first-line treatment for hypertension according to NICE guidelines, especially in diabetic patients, as they can mask hypoglycemia and are less effective than ACE inhibitors.",
+      "E": "Losartan is an angiotensin receptor blocker (ARB) and can be used if an ACE inhibitor is not tolerated, but ACE inhibitors are preferred as first-line treatment."
+    },
+    "mnemonic": "LISINOPRIL = Lifts Systolic In Non-Insulin Patients with Renal Issues Long-term",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "NICE NG136: Hypertension in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Hypertension Guidance",
+          "url": "https://cks.nice.org.uk/topics/hypertension/",
+          "description": "Clinical Knowledge Summaries - hypertension management"
+        },
+        {
+          "title": "BNF Hypertension Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - hypertension treatment protocols"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803868704_1",
+    "topic": "Heart Failure Management",
+    "question": "A 72-year-old woman with a history of chronic heart failure presents to the clinic with increasing shortness of breath and ankle swelling. Her current medications include furosemide 40mg daily and bisoprolol 5mg daily. Her blood pressure is 130/80 mmHg, and heart rate is 75 bpm. Her recent echocardiogram shows an ejection fraction of 35%. What is the most appropriate addition to her heart failure management?",
+    "options": {
+      "A": "Spironolactone 25mg once daily",
+      "B": "Digoxin 250mcg once daily",
+      "C": "Losartan 50mg once daily",
+      "D": "Hydrochlorothiazide 25mg once daily",
+      "E": "Amlodipine 5mg once daily"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Spironolactone is a mineralocorticoid receptor antagonist recommended for patients with heart failure with reduced ejection fraction who remain symptomatic despite treatment with an ACE inhibitor and beta-blocker, as per NICE guidelines.",
+      "B": "Digoxin can be used in heart failure with reduced ejection fraction especially in patients with concomitant atrial fibrillation, but it is not the first choice for adding to current treatment.",
+      "C": "Losartan is an angiotensin receptor blocker and can be used for heart failure, especially if the patient is intolerant to ACE inhibitors, but spironolactone is preferred here due to its added benefit in symptomatic heart failure.",
+      "D": "Hydrochlorothiazide is a diuretic but not typically used in heart failure management; spironolactone provides additional mortality benefit.",
+      "E": "Amlodipine is not indicated specifically for heart failure management and does not provide mortality benefit in heart failure with reduced ejection fraction."
+    },
+    "mnemonic": "SPIRONOLACTONE = Supports Pulmonary Insufficiency, Reduces Overload, Normalizes Output, Lessens Arrhythmias, Controls Tiredness, Optimizes New Ejection",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "NICE NG106: Chronic heart failure in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Heart Failure Guidance",
+          "url": "https://cks.nice.org.uk/topics/heart-failure/",
+          "description": "Clinical Knowledge Summaries - heart failure management"
+        },
+        {
+          "title": "BNF Heart Failure Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - heart failure treatment protocols"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871801_0",
+    "topic": "Hypertension Management",
+    "category": "Cardiovascular",
+    "question": "A 55-year-old woman with a history of type 2 diabetes presents to your GP practice for a routine check-up. Her blood pressure readings over the last three visits were 150/95 mmHg, 148/92 mmHg, and 152/94 mmHg. She is currently not on any antihypertensive medication. What is the most appropriate first-line treatment for her hypertension?",
+    "options": {
+      "A": "Lisinopril 10mg once daily",
+      "B": "Amlodipine 5mg once daily",
+      "C": "Hydrochlorothiazide 25mg once daily",
+      "D": "Atenolol 50mg once daily",
+      "E": "Losartan 50mg once daily"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Lisinopril 10mg once daily is correct as ACE inhibitors are recommended as first-line therapy for hypertension in patients with diabetes due to their renal protective effects.",
+      "B": "Amlodipine is effective for hypertension but is not the first choice in diabetic patients due to lack of renal protective benefits.",
+      "C": "Thiazide diuretics are a common choice for hypertension but are not recommended as first-line in diabetes due to potential metabolic side effects.",
+      "D": "Beta-blockers like atenolol are not typically first-line for hypertension in diabetics due to metabolic side effects and less favorable outcomes.",
+      "E": "Losartan is an ARB and can be used if ACE inhibitors are not tolerated, but ACE inhibitors are preferred initially."
+    },
+    "mnemonic": "ACE = ACE inhibitors for diabetes",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "Hypertension in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Hypertension",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - Hypertension treatment summaries"
+        },
+        {
+          "title": "CKS Hypertension",
+          "url": "https://cks.nice.org.uk/topics/hypertension/",
+          "description": "Clinical Knowledge Summaries - Hypertension management"
+        }
+      ]
+    },
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871801_1",
+    "topic": "Heart Failure Management",
+    "category": "Cardiovascular",
+    "question": "A 72-year-old man with a history of ischemic heart disease presents with increasing breathlessness on exertion and ankle swelling. On examination, there are bilateral basal crackles and an elevated jugular venous pressure. Echocardiogram confirms reduced ejection fraction of 35%. Which medication should be initiated to improve his survival?",
+    "options": {
+      "A": "Furosemide 40mg once daily",
+      "B": "Amlodipine 5mg once daily",
+      "C": "Ramipril 5mg once daily",
+      "D": "Digoxin 125mcg once daily",
+      "E": "Spironolactone 25mg once daily"
+    },
+    "answer": "C",
+    "explanation": {
+      "A": "Furosemide is used for symptom control of fluid overload but does not improve survival in heart failure.",
+      "B": "Amlodipine is not primarily used for heart failure and does not confer survival benefits.",
+      "C": "Ramipril, an ACE inhibitor, improves survival in heart failure with reduced ejection fraction by decreasing cardiac remodeling.",
+      "D": "Digoxin may be used for rate control in atrial fibrillation but does not improve survival in heart failure.",
+      "E": "Spironolactone can improve survival in severe heart failure, but ACE inhibitors are typically initiated first."
+    },
+    "mnemonic": "ACE for reduced ejection fraction",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "Chronic heart failure in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Heart Failure",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - Heart Failure treatment summaries"
+        },
+        {
+          "title": "CKS Heart Failure",
+          "url": "https://cks.nice.org.uk/topics/heart-failure/",
+          "description": "Clinical Knowledge Summaries - Heart Failure management"
+        }
+      ]
+    },
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871801_2",
+    "topic": "Arrhythmia Management",
+    "category": "Cardiovascular",
+    "question": "A 65-year-old woman presents with palpitations and lightheadedness. ECG shows an irregularly irregular rhythm with no distinct P waves, consistent with atrial fibrillation (AF). Her heart rate is 110 bpm. She has a history of hypertension. What is the most appropriate initial management to control her heart rate?",
+    "options": {
+      "A": "Amiodarone 200mg once daily",
+      "B": "Digoxin 125mcg once daily",
+      "C": "Atenolol 50mg once daily",
+      "D": "Verapamil 80mg three times a day",
+      "E": "Warfarin 5mg once daily"
+    },
+    "answer": "C",
+    "explanation": {
+      "A": "Amiodarone is primarily used for rhythm control, not initial rate control in AF.",
+      "B": "Digoxin is used for rate control, especially in sedentary patients, but beta-blockers are preferred for initial rate control.",
+      "C": "Atenolol, a beta-blocker, is effective for initial rate control in atrial fibrillation.",
+      "D": "Verapamil can be used for rate control but is not the first choice in patients with heart failure risk.",
+      "E": "Warfarin is used for anticoagulation, not rate control."
+    },
+    "mnemonic": "ABCs - Atenolol for Atrial fibrillation",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng196",
+        "description": "Atrial fibrillation: management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Atrial Fibrillation",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/atrial-fibrillation/",
+          "description": "British National Formulary - Atrial Fibrillation treatment summaries"
+        },
+        {
+          "title": "CKS Atrial Fibrillation",
+          "url": "https://cks.nice.org.uk/topics/atrial-fibrillation/",
+          "description": "Clinical Knowledge Summaries - Atrial Fibrillation management"
+        }
+      ]
+    },
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871801_3",
+    "topic": "Valvular Heart Disease",
+    "category": "Cardiovascular",
+    "question": "A 68-year-old man presents with exertional dyspnea and chest discomfort. Examination reveals a harsh systolic murmur best heard at the right second intercostal space, radiating to the carotids. Echocardiography confirms severe aortic stenosis. What is the most appropriate management option?",
+    "options": {
+      "A": "Balloon aortic valvuloplasty",
+      "B": "Aortic valve replacement",
+      "C": "Beta-blocker therapy",
+      "D": "Statin therapy",
+      "E": "Watchful waiting with regular follow-up"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Balloon aortic valvuloplasty is rarely used as a definitive treatment and is more appropriate as a bridge to surgery.",
+      "B": "Aortic valve replacement is the definitive treatment for symptomatic severe aortic stenosis.",
+      "C": "Beta-blockers are not the primary treatment for aortic stenosis and may worsen symptoms.",
+      "D": "Statins are not indicated for symptomatic severe aortic stenosis.",
+      "E": "Watchful waiting is not appropriate for symptomatic severe aortic stenosis, which requires intervention."
+    },
+    "mnemonic": "AVR = Aortic Valve Replacement for Aortic Stenosis",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng208",
+        "description": "Heart valve disease presenting in adults: investigation and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Valvular Disease",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/valvular-heart-disease/",
+          "description": "British National Formulary - Valvular Heart Disease treatment summaries"
+        },
+        {
+          "title": "CKS Valvular Heart Disease",
+          "url": "https://cks.nice.org.uk/topics/valvular-heart-disease/",
+          "description": "Clinical Knowledge Summaries - Valvular Heart Disease management"
+        }
+      ]
+    },
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871801_4",
+    "topic": "Acute Coronary Syndrome Management",
+    "category": "Cardiovascular",
+    "question": "A 60-year-old woman presents with sudden onset of severe central chest pain and shortness of breath. ECG shows ST elevation in leads V1-V4. Her blood pressure is 130/80 mmHg and heart rate is 100 bpm. What is the most appropriate immediate management?",
+    "options": {
+      "A": "Primary percutaneous coronary intervention (PCI)",
+      "B": "Thrombolytic therapy with streptokinase",
+      "C": "Immediate coronary artery bypass grafting (CABG)",
+      "D": "High-dose aspirin 300mg",
+      "E": "Initiate atorvastatin 80mg"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Primary PCI is the gold standard for ST-elevation myocardial infarction (STEMI) if it can be performed within 120 minutes.",
+      "B": "Thrombolytic therapy is considered if PCI is unavailable within the recommended timeframe.",
+      "C": "CABG is not typically an emergency management for STEMI; PCI is preferred.",
+      "D": "Aspirin is given as part of management but does not address the need for immediate reperfusion.",
+      "E": "Atorvastatin is used for secondary prevention, not immediate reperfusion in STEMI."
+    },
+    "mnemonic": "PCI = Primary Choice for STEMI",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng185",
+        "description": "Acute coronary syndromes in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Coronary Syndromes",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/acute-coronary-syndrome/",
+          "description": "British National Formulary - Acute Coronary Syndromes treatment summaries"
+        },
+        {
+          "title": "CKS Acute Coronary Syndrome",
+          "url": "https://cks.nice.org.uk/topics/acute-coronary-syndrome/",
+          "description": "Clinical Knowledge Summaries - Acute Coronary Syndrome management"
+        }
+      ]
+    },
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871877_0",
+    "topic": "Hypertension Management",
+    "question": "A 55-year-old man presents to your clinic with a blood pressure of 160/100 mmHg. He has a history of type 2 diabetes. He is currently on no medication. What is the most appropriate initial antihypertensive treatment for this patient?",
+    "options": {
+      "A": "Amlodipine 5mg once daily",
+      "B": "Ramipril 5mg once daily",
+      "C": "Bendroflumethiazide 2.5mg once daily",
+      "D": "Atenolol 50mg once daily",
+      "E": "Losartan 50mg once daily"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Amlodipine is a calcium channel blocker but not the first choice for a patient with diabetes and hypertension according to NICE guidelines.",
+      "B": "Ramipril is an ACE inhibitor, and NICE guidelines recommend ACE inhibitors as the first-line treatment in patients with hypertension and type 2 diabetes.",
+      "C": "Bendroflumethiazide is a thiazide diuretic, which is not the first-line treatment in this scenario.",
+      "D": "Atenolol is a beta-blocker and is not recommended as first choice for hypertension in diabetic patients.",
+      "E": "Losartan is an angiotensin receptor blocker (ARB) and may be used if ACE inhibitors are not tolerated, but ACE inhibitors are preferred first."
+    },
+    "mnemonic": "RAAM for Ramipril: ACE in Diabetes",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "NICE NG136: Hypertension in adults - diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS Guidance",
+          "url": "https://cks.nice.org.uk/topics/hypertension/",
+          "description": "Clinical Knowledge Summaries - hypertension management"
+        },
+        {
+          "title": "BNF Hypertension",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - hypertension treatment guidelines"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871877_1",
+    "topic": "Heart Failure Treatment",
+    "question": "A 72-year-old woman with heart failure and reduced ejection fraction (HFrEF) presents with worsening symptoms. She is currently taking ramipril and furosemide. Her blood pressure is 110/70 mmHg, and heart rate is 75 bpm. What additional medication should be considered to improve her symptoms and prognosis?",
+    "options": {
+      "A": "Atenolol",
+      "B": "Bisoprolol",
+      "C": "Verapamil",
+      "D": "Digoxin",
+      "E": "Nifedipine"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Atenolol is a beta-blocker, but bisoprolol is preferred for heart failure management.",
+      "B": "Bisoprolol is a beta-blocker recommended by NICE guidelines for heart failure with reduced ejection fraction to improve symptoms and prognosis.",
+      "C": "Verapamil is contraindicated in heart failure due to its negative inotropic effects.",
+      "D": "Digoxin is used in heart failure for rate control in atrial fibrillation, not as a primary treatment to improve prognosis.",
+      "E": "Nifedipine is a calcium channel blocker not used in heart failure with reduced ejection fraction."
+    },
+    "mnemonic": "Beta for Better: Bisoprolol for Heart",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "NICE NG106: Heart failure - chronic heart failure management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS Guidance",
+          "url": "https://cks.nice.org.uk/topics/heart-failure/",
+          "description": "Clinical Knowledge Summaries - heart failure management"
+        },
+        {
+          "title": "BNF Heart Failure",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - heart failure treatment guidelines"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871877_2",
+    "topic": "Atrial Fibrillation Management",
+    "question": "A 68-year-old woman with a history of hypertension and atrial fibrillation presents for a routine check-up. She is asymptomatic and currently taking warfarin with an INR of 2.5. What is the most appropriate next step in her anticoagulation management?",
+    "options": {
+      "A": "Continue warfarin and schedule a follow-up INR check in 4 weeks",
+      "B": "Switch to aspirin",
+      "C": "Switch to clopidogrel",
+      "D": "Increase warfarin dose",
+      "E": "Switch to a direct oral anticoagulant (DOAC)"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Her INR is within the therapeutic range for atrial fibrillation, so continuing warfarin is appropriate.",
+      "B": "Aspirin is not sufficient for stroke prevention in atrial fibrillation according to NICE guidelines.",
+      "C": "Clopidogrel is not recommended as monotherapy for stroke prevention in atrial fibrillation.",
+      "D": "Increasing the warfarin dose is not necessary as INR is currently therapeutic.",
+      "E": "Switching to a DOAC is an option but not necessary if INR is stable and therapeutic on warfarin."
+    },
+    "mnemonic": "WINR: Warfarin INR in Range",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng196",
+        "description": "NICE NG196: Atrial fibrillation - management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS Guidance",
+          "url": "https://cks.nice.org.uk/topics/atrial-fibrillation/",
+          "description": "Clinical Knowledge Summaries - atrial fibrillation management"
+        },
+        {
+          "title": "BNF Anticoagulation",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/anticoagulants/",
+          "description": "British National Formulary - anticoagulant guidelines"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871877_3",
+    "topic": "Valvular Heart Disease",
+    "question": "A 75-year-old man presents with exertional dyspnea and a systolic murmur best heard at the right second intercostal space. Echocardiography reveals severe aortic stenosis with a valve area of 0.8 cm². What is the most appropriate management for this patient?",
+    "options": {
+      "A": "Start beta-blocker therapy",
+      "B": "Initiate diuretics",
+      "C": "Aortic valve replacement",
+      "D": "Balloon valvuloplasty",
+      "E": "Conservative monitoring"
+    },
+    "answer": "C",
+    "explanation": {
+      "A": "Beta-blockers are not indicated for symptomatic aortic stenosis.",
+      "B": "Diuretics can be used for symptom management but do not address the underlying stenosis.",
+      "C": "Aortic valve replacement is the definitive treatment for severe symptomatic aortic stenosis.",
+      "D": "Balloon valvuloplasty is a temporary measure and not definitive treatment for severe aortic stenosis.",
+      "E": "Conservative monitoring is inappropriate for symptomatic severe aortic stenosis."
+    },
+    "mnemonic": "REPLACE in Stenosis: Aortic Valve Replacement",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng208",
+        "description": "NICE NG208: Heart valve disease presenting in adults - investigation and management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS Guidance",
+          "url": "https://cks.nice.org.uk/topics/heart-valve-disease/",
+          "description": "Clinical Knowledge Summaries - heart valve disease management"
+        },
+        {
+          "title": "BNF Valvular Disease",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/valvular-heart-disease/",
+          "description": "British National Formulary - valvular heart disease guidelines"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750803871877_4",
+    "topic": "Acute Coronary Syndrome Complications",
+    "question": "A 60-year-old man is admitted with a STEMI. Two days post-PCI, he develops sudden shortness of breath and hypotension. Examination reveals a new pansystolic murmur at the left sternal edge. What is the most likely diagnosis?",
+    "options": {
+      "A": "Acute mitral regurgitation",
+      "B": "Ventricular septal rupture",
+      "C": "Left ventricular aneurysm",
+      "D": "Pericardial tamponade",
+      "E": "Pulmonary embolism"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Acute mitral regurgitation can cause a murmur but is typically associated with papillary muscle rupture, not at the left sternal edge.",
+      "B": "Ventricular septal rupture typically presents with a new harsh pansystolic murmur at the left sternal edge and acute heart failure post-MI.",
+      "C": "Left ventricular aneurysm develops over weeks and presents with persistent ST elevation.",
+      "D": "Pericardial tamponade would present with muffled heart sounds, not a pansystolic murmur.",
+      "E": "Pulmonary embolism may cause shortness of breath and hypotension but not a new murmur."
+    },
+    "mnemonic": "VSR: Ventricle Split Rupture",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng185",
+        "description": "NICE NG185: Acute coronary syndromes (including myocardial infarction) - management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS Guidance",
+          "url": "https://cks.nice.org.uk/topics/acute-coronary-syndrome/",
+          "description": "Clinical Knowledge Summaries - acute coronary syndrome management"
+        },
+        {
+          "title": "BNF ACS",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/acute-coronary-syndrome/",
+          "description": "British National Formulary - acute coronary syndrome treatment guidelines"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  }
+]
