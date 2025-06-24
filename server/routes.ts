@@ -47,6 +47,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
+  // Translation endpoint - simple fallback without AI
+  app.post("/api/translate-question", async (req, res) => {
+    try {
+      const { question, targetLanguage } = req.body;
+      
+      // Since AI is suspended, return original content with a note
+      res.json({
+        question: question.question + " (Translation temporarily unavailable)",
+        options: question.options,
+        explanation: question.explanation + " (Translation temporarily unavailable)"
+      });
+    } catch (error) {
+      console.error("Translation endpoint error:", error);
+      res.status(500).json({ error: "Translation service unavailable" });
+    }
+  });
+
   app.post("/api/tutor", async (req, res) => {
     res.status(503).json({ 
       error: "AI services suspended", 

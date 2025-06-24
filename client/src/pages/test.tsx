@@ -1228,16 +1228,17 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               </Select>
             </div>
 
-            {/* Translation Toggle */}
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+            {/* Translation Toggle - Disabled */}
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 opacity-50">
               <Languages className="w-4 h-4 text-white" />
               <Label htmlFor="translate-mode" className="text-white text-sm">
-                Auto-translate
+                Auto-translate (unavailable)
               </Label>
               <Switch
                 id="translate-mode"
-                checked={translateQuestions}
-                onCheckedChange={setTranslateQuestions}
+                checked={false}
+                onCheckedChange={() => {}}
+                disabled={true}
               />
             </div>
 
@@ -1339,22 +1340,31 @@ Feel free to ask about any aspect of this question or other medical topics you'r
         <Card className="mb-6 shadow-sm">
           <CardHeader className="pb-4">
             <CardTitle className="text-lg font-medium text-gray-900 flex items-center justify-between">
-              Question {currentQuestionIndex + 1}
+              <div className="flex items-center gap-2">
+                <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
+                <Badge variant="secondary" className="text-xs">
+                  {currentQuestion.topic}
+                </Badge>
+              </div>
               <div className="flex gap-2">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handlePrevQuestion}
                   disabled={currentQuestionIndex === 0}
+                  className="flex items-center gap-1"
                 >
                   <ArrowLeft className="w-4 h-4" />
+                  Previous
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleNextQuestion}
                   disabled={currentQuestionIndex === questions.length - 1}
+                  className="flex items-center gap-1"
                 >
+                  Next
                   <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
