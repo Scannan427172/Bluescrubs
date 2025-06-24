@@ -830,7 +830,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             src={examRoomImg} 
             alt="Students taking PLAB exam"
             className="absolute inset-0 w-full h-full object-cover opacity-60"
-            style={{ objectPosition: 'center 60%' }}
+            style={{ objectPosition: 'center 80%', transform: 'scale(1.2)' }}
           />
 
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
@@ -1181,7 +1181,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           src={examRoomImg} 
           alt="Students taking PLAB exam"
           className="absolute inset-0 w-full h-full object-cover opacity-70"
-          style={{ objectPosition: 'center 60%' }}
+          style={{ objectPosition: 'center 80%', transform: 'scale(1.2)' }}
         />
         
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
