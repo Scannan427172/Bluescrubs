@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle } from "lucide-react";
+import nhsPrepWomanImg from "@assets/image_1749071491789.png";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
@@ -820,16 +821,20 @@ Feel free to ask about any aspect of this question or other medical topics you'r
         
 
 
-        {/* Master Your Prep Section */}
+        {/* Master Your Prep Section with PLAB Image */}
         <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[400px] lg:h-[450px] mb-8 overflow-hidden">
-
-          
+          {/* Background Image */}
+          <img 
+            src={nhsPrepWomanImg} 
+            alt="Medical professional studying PLAB"
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          />
 
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
           <div className="relative z-50 flex flex-col items-center justify-end pb-8 text-center px-4 sm:px-8 h-full hero-text" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg">
-              PLAB Practice Test
+              PLAB 1 Practice Test
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-white mb-6 sm:mb-8 max-w-3xl leading-relaxed drop-shadow-md font-medium">
               Choose your practice mode and start your medical preparation journey
