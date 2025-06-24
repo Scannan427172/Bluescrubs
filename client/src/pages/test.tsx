@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
@@ -1636,8 +1636,103 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           </Card>
         )}
 
-        {/* Clinical Guidelines Links */}
-        {submitted && (
+        {/* Clinical Guidelines & Evidence */}
+        {submitted && currentQuestion.guidelineSummary && (
+          <Card className="shadow-sm">
+            <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50">
+              <CardTitle className="flex items-center gap-2 text-blue-800">
+                <ExternalLink className="w-5 h-5" />
+                Clinical Guidelines & Evidence
+              </CardTitle>
+              <CardDescription className="text-blue-600">
+                Comprehensive guideline summary with authentic UK medical references
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              {/* 250-word Guideline Summary */}
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                  <BookOpen className="w-4 h-4" />
+                  {currentQuestion.guidelineSummary.title}
+                </h4>
+                <div className="prose prose-sm max-w-none text-gray-700">
+                  {currentQuestion.guidelineSummary.content.split('\n\n').map((paragraph, index) => (
+                    <div key={index} className="mb-3 leading-relaxed" dangerouslySetInnerHTML={{ 
+                      __html: paragraph
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/• /g, '• ')
+                    }} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Primary Reference */}
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Star className="w-4 h-4 text-blue-600" />
+                  Primary UK Guidance
+                </h4>
+                <a
+                  href={currentQuestion.links.primary.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 p-4 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors bg-white"
+                >
+                  <div className="bg-blue-100 p-2 rounded-lg">
+                    <ExternalLink className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h5 className="font-medium text-blue-900">{currentQuestion.links.primary.title}</h5>
+                    <p className="text-sm text-gray-600 mt-1">{currentQuestion.links.primary.description}</p>
+                  </div>
+                </a>
+              </div>
+
+              {/* Supplementary References */}
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Library className="w-4 h-4 text-gray-600" />
+                  Further Reading & Guidelines
+                </h4>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {currentQuestion.links.supplementary.map((link, index) => (
+                    <a
+                      key={index}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+                    >
+                      <div className="bg-gray-100 group-hover:bg-gray-200 p-2 rounded-lg transition-colors">
+                        <ExternalLink className="w-4 h-4 text-gray-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h5 className="font-medium text-gray-900 text-sm">{link.title}</h5>
+                        <p className="text-xs text-gray-600 mt-1">{link.description}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Study Tip */}
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <div className="flex items-start gap-2">
+                  <Lightbulb className="w-5 h-5 text-yellow-600 mt-0.5" />
+                  <div>
+                    <h5 className="font-medium text-yellow-800">Foundation Doctor Study Tip</h5>
+                    <p className="text-sm text-yellow-700 mt-1">
+                      Use this 250-word summary for quick revision, then explore the supplementary guidelines for deeper understanding. Each reference provides specific protocols used in UK clinical practice.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Fallback for questions without comprehensive guidelines */}
+        {submitted && !currentQuestion.guidelineSummary && (
           <Card className="shadow-sm">
             <CardHeader>
               <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
@@ -1647,29 +1742,18 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <a
-                  href={currentQuestion.links.NICE}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-medium text-gray-900">NICE</span>
-                  <ExternalLink className="w-4 h-4 text-gray-500" />
-                </a>
-                {Object.entries(currentQuestion.links)
-                  .filter(([key]) => key !== "NICE")
-                  .map(([key, url]) => (
-                    <a
-                      key={key}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      <span className="font-medium text-gray-900">{key}</span>
-                      <ExternalLink className="w-4 h-4 text-gray-500" />
-                    </a>
-                  ))}
+                {Object.entries(currentQuestion.links || {}).map(([key, url]) => (
+                  <a
+                    key={key}
+                    href={typeof url === 'string' ? url : (url as any).url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <span className="font-medium text-gray-900">{key}</span>
+                    <ExternalLink className="w-4 h-4 text-gray-500" />
+                  </a>
+                ))}
               </div>
             </CardContent>
           </Card>
