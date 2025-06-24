@@ -781,7 +781,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           <CardContent className="p-8 text-center">
             <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Loading Questions</h3>
-            <p className="text-gray-600">Preparing PassMedicine-style questions...</p>
+            <p className="text-gray-600">Preparing PLAB practice questions...</p>
           </CardContent>
         </Card>
       </div>
@@ -1198,7 +1198,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             PLAB Practice Test
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-3xl leading-relaxed">
-            PassMedicine-style questions with detailed clinical explanations and verified UK medical guidance
+            PLAB practice questions with detailed clinical explanations and verified UK medical guidance
           </p>
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-white/20 text-white border-white/30">
