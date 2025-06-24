@@ -140,26 +140,28 @@ export default function Test() {
     { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
   ];
 
-  // Simple video setup with proper loading
+  // Debug video setup
   useEffect(() => {
     console.log('Hero video path:', heroVideo);
+    console.log('Video buttons should be visible with red background');
     
     const setupVideos = () => {
       const videos = document.querySelectorAll('video');
-      videos.forEach((video) => {
+      console.log('Found videos:', videos.length);
+      
+      videos.forEach((video, index) => {
+        console.log(`Setting up video ${index + 1}`);
         video.muted = true;
         video.playsInline = true;
         video.loop = true;
         
-        // Show video element once metadata loads
         video.addEventListener('loadedmetadata', () => {
-          console.log('Video metadata loaded');
+          console.log(`Video ${index + 1} metadata loaded`);
           setHeroVideoLoaded(true);
         });
         
-        // Try autoplay quietly
         video.play().catch(() => {
-          console.log('Autoplay blocked - manual play available');
+          console.log(`Autoplay blocked for video ${index + 1} - manual play available`);
         });
       });
     };
@@ -877,11 +879,14 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             Your browser does not support the video tag.
           </video>
           
-          {/* Video Controls */}
-          <div className="absolute inset-0 z-40 flex items-center justify-center">
+          {/* Video Play Button - Always Visible */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[60] pointer-events-auto">
             <button
-              onClick={async () => {
+              onClick={async (e) => {
+                e.stopPropagation();
+                console.log('Play button clicked');
                 const video = document.querySelector('video[key="hero-video-selection"]') as HTMLVideoElement;
+                console.log('Video element found:', video);
                 if (video) {
                   try {
                     if (video.paused) {
@@ -894,10 +899,13 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   } catch (error) {
                     console.error('Video control failed:', error);
                   }
+                } else {
+                  console.error('Video element not found');
                 }
               }}
-              className="bg-black/50 hover:bg-black/70 text-white p-6 rounded-full backdrop-blur-sm transition-all duration-300 text-2xl"
-              title="Play/Pause video"
+              className="bg-red-500 hover:bg-red-600 text-white p-6 rounded-full shadow-2xl transition-all duration-300 text-4xl font-bold border-4 border-white"
+              title="Play/Pause background video"
+              style={{ pointerEvents: 'auto' }}
             >
               ▶️
             </button>
@@ -1274,11 +1282,14 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           Your browser does not support the video tag.
         </video>
         
-        {/* Video Controls */}
-        <div className="absolute inset-0 z-40 flex items-center justify-center">
+        {/* Video Play Button - Always Visible */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[60] pointer-events-auto">
           <button
-            onClick={async () => {
+            onClick={async (e) => {
+              e.stopPropagation();
+              console.log('Play button clicked');
               const video = document.querySelector('video[key="hero-video-main"]') as HTMLVideoElement;
+              console.log('Video element found:', video);
               if (video) {
                 try {
                   if (video.paused) {
@@ -1291,17 +1302,20 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                 } catch (error) {
                   console.error('Video control failed:', error);
                 }
+              } else {
+                console.error('Video element not found');
               }
             }}
-            className="bg-black/50 hover:bg-black/70 text-white p-6 rounded-full backdrop-blur-sm transition-all duration-300 text-2xl"
-            title="Play/Pause video"
+            className="bg-red-500 hover:bg-red-600 text-white p-6 rounded-full shadow-2xl transition-all duration-300 text-4xl font-bold border-4 border-white"
+            title="Play/Pause background video"
+            style={{ pointerEvents: 'auto' }}
           >
             ▶️
           </button>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
-        <div className="relative z-50 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
+        <div className="relative z-40 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
             PLAB Practice Test
           </h1>
