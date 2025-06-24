@@ -1222,5 +1222,270 @@
     },
     "category": "cardiovascular",
     "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805341208_0",
+    "topic": "Heart Failure Management",
+    "question": "A 70-year-old man with a history of type 2 diabetes and hypertension presents to the emergency department with increasing shortness of breath, orthopnea, and paroxysmal nocturnal dyspnea. On examination, he has bilateral basal crackles and pitting edema to the mid-shins. His blood pressure is 150/90 mmHg, heart rate is 110 bpm, and oxygen saturation is 92% on room air. ECG shows sinus tachycardia. What is the most appropriate first-line treatment to improve his symptoms?",
+    "options": {
+      "A": "Intravenous furosemide",
+      "B": "Oral spironolactone",
+      "C": "Oral bisoprolol",
+      "D": "Sublingual glyceryl trinitrate",
+      "E": "Intravenous morphine"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Intravenous furosemide is the first-line treatment for acute heart failure to rapidly reduce fluid overload. It acts as a loop diuretic, increasing renal excretion of sodium and water, and providing symptomatic relief by reducing pulmonary congestion.",
+      "B": "Oral spironolactone is used as an adjunctive therapy in chronic heart failure to reduce morbidity and mortality, but it is not appropriate for immediate symptom relief in acute decompensation.",
+      "C": "Oral bisoprolol, a beta-blocker, is beneficial in chronic heart failure for reducing mortality but is not suitable for acute exacerbations due to its negative inotropic effects.",
+      "D": "Sublingual glyceryl trinitrate can be used for symptom relief in acute coronary syndrome but is not the first-line treatment for fluid overload in acute heart failure.",
+      "E": "Intravenous morphine can be used adjunctively for severe distress and anxiety in acute heart failure but is not a primary treatment for fluid overload."
+    },
+    "mnemonic": "FLUIDS = Furosemide Lowers Urgent Intravenous Diuresis Symptoms",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "NICE NG106: Heart failure: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF - Heart Failure Management",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - Heart failure treatment protocols"
+        },
+        {
+          "title": "NHS Heart Failure Overview",
+          "url": "https://www.nhs.uk/conditions/heart-failure/",
+          "description": "NHS overview and management of heart failure"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805341208_1",
+    "topic": "Hypertension Management",
+    "question": "A 55-year-old woman with no significant past medical history presents to your GP practice with a blood pressure reading of 160/100 mmHg on two separate occasions, three weeks apart. She has no signs of end-organ damage. According to NICE guidelines, what is the most appropriate initial step in her management?",
+    "options": {
+      "A": "Initiate lifestyle modifications and monitor",
+      "B": "Start amlodipine 5mg once daily",
+      "C": "Prescribe lisinopril 10mg once daily",
+      "D": "Commence atenolol 50mg once daily",
+      "E": "Refer to a cardiologist for further evaluation"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Lifestyle modifications are important but not sufficient alone for stage 1 hypertension with a blood pressure above 140/90 mmHg in patients under 80 without organ damage.",
+      "B": "Amlodipine, a calcium channel blocker, is recommended as the first-line treatment for hypertension in patients over 55 or of African or Caribbean descent, regardless of age.",
+      "C": "Lisinopril, an ACE inhibitor, is typically first-line for patients under 55 who are not of African or Caribbean descent.",
+      "D": "Atenolol, a beta-blocker, is not recommended as first-line treatment for primary hypertension according to current NICE guidelines.",
+      "E": "Referral to a cardiologist is not necessary for uncomplicated hypertension; initial management should be handled in primary care."
+    },
+    "mnemonic": "Amlodipine = Age Makes Lisinopril Optional, Dihydropyridine Is Preferred In New Elderly",
+    "links": {
+      "primary": {
+        "title": "NICE Hypertension Guideline",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "NICE NG136: Hypertension in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS Hypertension Management",
+          "url": "https://cks.nice.org.uk/topics/hypertension/",
+          "description": "Clinical Knowledge Summaries - Hypertension management in primary care"
+        },
+        {
+          "title": "NHS Hypertension Information",
+          "url": "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/",
+          "description": "NHS information on high blood pressure"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750805358952_0",
+    "topic": "Asthma Management",
+    "question": "A 22-year-old woman presents to the emergency department with worsening shortness of breath, wheezing, and chest tightness for the past 3 hours. Her peak flow is 45% of her personal best. She has used her salbutamol inhaler with minimal relief. On examination, she is tachypneic with a respiratory rate of 28/min, heart rate 110 bpm, and oxygen saturation of 92% on room air. What is the most appropriate immediate treatment?",
+    "options": {
+      "A": "Intravenous magnesium sulfate",
+      "B": "Nebulized salbutamol and ipratropium bromide",
+      "C": "Oral prednisolone",
+      "D": "Intravenous aminophylline",
+      "E": "High-dose inhaled corticosteroid"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Intravenous magnesium sulfate is reserved for severe asthma unresponsive to initial treatments, typically after nebulized bronchodilators and systemic corticosteroids.",
+      "B": "Nebulized salbutamol and ipratropium bromide provide rapid bronchodilation and are first-line in acute asthma exacerbations per BTS/SIGN guidelines.",
+      "C": "Oral prednisolone is important for reducing inflammation but acts more slowly, taking several hours to exhibit effects, and should be used in conjunction with immediate bronchodilation.",
+      "D": "Intravenous aminophylline is not a first-line treatment due to potential side effects and is used when standard therapies fail.",
+      "E": "High-dose inhaled corticosteroids are used for maintenance therapy rather than acute relief in severe exacerbations."
+    },
+    "mnemonic": "SABA-IPRA = Salbutamol And Ipratropium Rapidly Alleviate",
+    "links": {
+      "primary": {
+        "title": "BTS/SIGN Asthma Guideline",
+        "url": "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/asthma/",
+        "description": "British Thoracic Society and Scottish Intercollegiate Guidelines Network - Asthma Management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Guidance",
+          "url": "https://www.nice.org.uk/guidance/ng80",
+          "description": "NICE NG80: Asthma - diagnosis, monitoring, and chronic asthma management"
+        },
+        {
+          "title": "NHS Asthma",
+          "url": "https://www.nhs.uk/conditions/asthma/",
+          "description": "NHS overview on asthma symptoms and treatments"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750805358952_1",
+    "topic": "COPD Exacerbation Management",
+    "question": "A 68-year-old man with a history of COPD presents with increased breathlessness, productive cough with green sputum, and wheezing over the past 48 hours. His respiratory rate is 25/min, heart rate 88 bpm, and oxygen saturation is 89% on room air. What is the most appropriate initial management in the emergency department?",
+    "options": {
+      "A": "Oral prednisolone and amoxicillin",
+      "B": "High-flow oxygen via non-rebreather mask",
+      "C": "Nebulized salbutamol and ipratropium bromide",
+      "D": "Intravenous aminophylline",
+      "E": "Non-invasive ventilation (NIV)"
+    },
+    "answer": "C",
+    "explanation": {
+      "A": "Oral prednisolone and antibiotics are important but not immediate measures for symptom relief in the emergency setting. Antibiotics should be given if there's a suspicion of bacterial infection.",
+      "B": "High-flow oxygen can cause CO2 retention in COPD patients. Controlled oxygen therapy through a Venturi mask or nasal cannula is preferred.",
+      "C": "Nebulized salbutamol and ipratropium bromide provide prompt bronchodilation, improving airflow and oxygenation, and are recommended as first-line treatments in COPD exacerbations.",
+      "D": "Intravenous aminophylline is not a first-line treatment and is typically reserved for severe cases unresponsive to initial treatments.",
+      "E": "Non-invasive ventilation is considered if there is persistent respiratory acidosis or severe hypoxemia despite medical management."
+    },
+    "mnemonic": "COPD = Calm Oxygenation, Pulmonary Dilators",
+    "links": {
+      "primary": {
+        "title": "NICE COPD Guideline",
+        "url": "https://www.nice.org.uk/guidance/ng115",
+        "description": "NICE NG115: Chronic obstructive pulmonary disease in over 16s: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "GOLD Report",
+          "url": "https://goldcopd.org/",
+          "description": "Global Initiative for Chronic Obstructive Lung Disease - for COPD management strategies"
+        },
+        {
+          "title": "NHS COPD",
+          "url": "https://www.nhs.uk/conditions/chronic-obstructive-pulmonary-disease-copd/",
+          "description": "NHS guidance on COPD symptoms and treatment"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_infectious-diseases_1750805380495_0",
+    "topic": "Sepsis Management",
+    "question": "A 72-year-old woman with a history of diabetes presents to the emergency department with confusion, fever, and a heart rate of 110 bpm. Her blood pressure is 90/60 mmHg, and respiratory rate is 24 breaths per minute. Blood tests show a white cell count of 18 x 10^9/L and lactate of 4 mmol/L. What is the most appropriate initial management step in this case?",
+    "options": {
+      "A": "Administer broad-spectrum IV antibiotics immediately",
+      "B": "Administer IV fluids and monitor blood pressure",
+      "C": "Start norepinephrine infusion",
+      "D": "Obtain blood cultures and wait for results",
+      "E": "Perform lumbar puncture"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Administering broad-spectrum IV antibiotics immediately is critical but should follow initial fluid resuscitation to stabilize hemodynamics.",
+      "B": "Correct: Administering IV fluids is the first step to manage hypotension and stabilize the patient, as per the Surviving Sepsis Campaign guidelines.",
+      "C": "Vasopressors like norepinephrine are indicated if hypotension persists after adequate fluid resuscitation.",
+      "D": "Blood cultures are important but should not delay immediate resuscitation and fluid administration.",
+      "E": "A lumbar puncture is not indicated in this initial management of sepsis unless meningitis is suspected, and should not delay resuscitation."
+    },
+    "mnemonic": "FLUIDS = First Line in Unstable Infections, Deliver Swiftly",
+    "guidelineSummary": {
+      "title": "Sepsis Management (250-word Summary)",
+      "content": "• **Recognition and Diagnosis**: \n  - Sepsis is life-threatening organ dysfunction due to dysregulated host response to infection.\n  - Look for infection signs, organ dysfunction, and qSOFA criteria (altered mentation, systolic BP ≤100 mmHg, RR ≥22).\n\n• **Immediate Management**: \n  - Initiate fluid resuscitation with crystalloids within the first hour.\n  - Administer broad-spectrum antibiotics as soon as possible, ideally within the first hour.\n  - Obtain blood cultures before antibiotics if this does not delay treatment.\n\n• **Further Management**: \n  - Monitor hemodynamic status and consider vasopressors if hypotension persists after fluids.\n  - Reassess the patient frequently and adjust treatment based on response.\n\n• **Antibiotic Stewardship**: \n  - De-escalate antibiotics based on culture results and clinical response.\n  - Review and rationalize antibiotic therapy daily."
+    },
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng51",
+        "description": "NICE NG51: Sepsis - recognition, diagnosis, and early management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/sepsis/",
+          "description": "Clinical Knowledge Summaries - Sepsis management"
+        },
+        {
+          "title": "BNF Sepsis Guide",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/sepsis/",
+          "description": "British National Formulary - Sepsis treatment protocols"
+        },
+        {
+          "title": "NHS Sepsis Information",
+          "url": "https://www.nhs.uk/conditions/sepsis/",
+          "description": "NHS guidance on recognizing and managing sepsis"
+        }
+      ]
+    },
+    "category": "Infectious Diseases",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_infectious-diseases_1750805380495_1",
+    "topic": "Meningitis Management",
+    "question": "A 19-year-old university student presents to the emergency department with a severe headache, fever, photophobia, and a non-blanching rash. His temperature is 39°C, and his heart rate is 110 bpm. What is the most appropriate initial step in management?",
+    "options": {
+      "A": "Perform lumbar puncture to confirm diagnosis",
+      "B": "Administer intravenous ceftriaxone and dexamethasone immediately",
+      "C": "Start acyclovir for potential viral meningitis",
+      "D": "Obtain CT scan of the head",
+      "E": "Administer oral paracetamol for fever"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "A lumbar puncture is important for diagnosis but should not delay immediate antibiotic treatment in suspected bacterial meningitis.",
+      "B": "Correct: Administering intravenous ceftriaxone is crucial for suspected meningococcal meningitis, with dexamethasone to reduce inflammatory complications.",
+      "C": "Acyclovir is used for suspected viral meningitis, particularly HSV, but antibiotics are priority in acute bacterial suspicion.",
+      "D": "A CT scan is not routinely required before lumbar puncture unless there is a risk of raised intracranial pressure.",
+      "E": "Paracetamol can manage fever but is not a priority in the management of suspected meningitis."
+    },
+    "mnemonic": "CEF-MEN = Ceftriaxone for Meningitis Emergency Now",
+    "guidelineSummary": {
+      "title": "Meningitis Management (250-word Summary)",
+      "content": "• **Recognition and Diagnosis**: \n  - Classic triad: fever, neck stiffness, altered mental status; may have headache and photophobia.\n  - Perform a rapid assessment for signs of meningitis and shock.\n\n• **Immediate Management**: \n  - Administer empirical antibiotics immediately for suspected bacterial meningitis.\n  - Ceftriaxone is commonly used, with dexamethasone to reduce neurological complications.\n  - Consider adding acyclovir if viral meningitis, especially HSV, is suspected.\n\n• **Diagnostic Procedures**: \n  - Perform lumbar puncture to obtain CSF for analysis if safe.\n  - Blood cultures should be obtained before antibiotics, but do not delay treatment if not possible.\n\n• **Further Management**: \n  - Monitor for complications such as septic shock and raised intracranial pressure.\n  - Initiate supportive care and consider ICU transfer if necessary."
+    },
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/qs19",
+        "description": "NICE QS19: Meningitis (bacterial) and meningococcal septicaemia in children and young people"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/meningitis/",
+          "description": "Clinical Knowledge Summaries - Meningitis management"
+        },
+        {
+          "title": "NHS Meningitis Information",
+          "url": "https://www.nhs.uk/conditions/meningitis/",
+          "description": "NHS guidance on meningitis symptoms and treatment"
+        }
+      ]
+    },
+    "category": "Infectious Diseases",
+    "difficulty": "mixed"
   }
 ]
