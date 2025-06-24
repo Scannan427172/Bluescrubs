@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle } from "lucide-react";
-import examRoomImg from "@assets/IMG_2472.png";
+import examRoomImg from "@assets/image_1750775004743.png";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
