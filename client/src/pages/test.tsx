@@ -72,9 +72,6 @@ export default function Test() {
 
   // Practice Mode Selection
   const [practiceMode, setPracticeMode] = useState<'selection' | 'practice'>('selection');
-  
-  // Force debug banner to always show at top
-  console.log('Current practiceMode:', practiceMode);
   const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
 
   // Question Statistics
@@ -143,24 +140,21 @@ export default function Test() {
     { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
   ];
 
-  // Video setup for new banner
+  // Video autoplay setup
   useEffect(() => {
-    console.log('Setting up banner video:', heroVideo);
-    
-    const setupBannerVideo = () => {
-      const video = document.querySelector('video[key="hero-video-banner"]') as HTMLVideoElement;
+    const setupVideo = () => {
+      const video = document.querySelector('video') as HTMLVideoElement;
       if (video) {
         video.muted = true;
         video.playsInline = true;
         video.loop = true;
-        
         video.play().catch(() => {
-          console.log('Banner video autoplay blocked - manual control available');
+          // Autoplay blocked - video will show first frame
         });
       }
     };
     
-    const timer = setTimeout(setupBannerVideo, 100);
+    const timer = setTimeout(setupVideo, 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -840,45 +834,40 @@ Feel free to ask about any aspect of this question or other medical topics you'r
   if (practiceMode === 'selection') {
     return (
       <div className="min-h-screen bg-gray-50">
-        {/* DEBUG BANNER */}
-        <div className="w-full h-20 bg-red-500 text-white text-center py-4 text-xl font-bold">
-          DEBUG: PRACTICE MODE SELECTION ACTIVE
-        </div>
-        
-        {/* Video Hero Banner - Direct Test */}
-        <div className="w-full h-auto bg-purple-500 mb-4 p-8">
-          <div className="text-center text-white mb-4">
-            <h2 className="text-2xl font-bold mb-2">VIDEO TEST</h2>
-            <p>Video path: {heroVideo || 'undefined'}</p>
-          </div>
+        {/* Video Hero Banner */}
+        <div className="relative w-full h-80 md:h-96 lg:h-[500px] overflow-hidden bg-black mb-8">
+          <video 
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
           
-          {/* Direct video element */}
-          <div className="flex justify-center">
-            <video 
-              src={heroVideo}
-              className="max-w-full h-64 border-4 border-white"
-              controls
-              preload="metadata"
-              onError={(e) => console.error('Video error:', e)}
-              onLoadedData={() => console.log('Video loaded successfully')}
-            >
-              <source src={heroVideo} type="video/mp4" />
-              <p className="text-white">Your browser does not support the video tag.</p>
-            </video>
-          </div>
-          
-          {/* Fallback: Try direct file path */}
-          <div className="mt-4 text-center">
-            <p className="text-white mb-2">Fallback test with direct path:</p>
-            <video 
-              src="/attached_assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4"
-              className="max-w-full h-64 border-4 border-yellow-300"
-              controls
-              preload="metadata"
-            >
-              <source src="/attached_assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4" type="video/mp4" />
-              <p className="text-white">Direct path failed.</p>
-            </video>
+          {/* Video Overlay */}
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <div className="text-center text-white max-w-4xl px-6">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                Master Your PLAB Journey
+              </h1>
+              <p className="text-lg md:text-xl lg:text-2xl mb-8 opacity-90">
+                Interactive medical learning with video simulations and adaptive practice
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={() => setPracticeMode('practice')}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  Start Practice
+                </button>
+                <button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border border-white/30 px-8 py-3 rounded-lg font-semibold transition-colors">
+                  Learn More
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -931,8 +920,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           </div>
         </div>
 
-        {/* Master Your Prep Banner */}
-        <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[500px] lg:h-[550px] mb-8 overflow-hidden hero-banner">
+        {/* Master Your Prep Section */}
+        <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[400px] lg:h-[450px] mb-8 overflow-hidden">
           {!heroVideoLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
               <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
