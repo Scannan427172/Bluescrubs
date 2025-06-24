@@ -353,9 +353,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Hypertension in pregnancy - diagnosis and management"
               },
               {
-                title: "BNF Cardiovascular Guidance",
-                url: "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
-                description: "British National Formulary - hypertension treatment protocols"
+                title: "NHS Hypertension Guidance",
+                url: "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/treatment/",
+                description: "NHS hypertension treatment protocols"
               },
               {
                 title: "NHS Blood Pressure Guidance",
@@ -402,9 +402,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Apixaban for preventing stroke in atrial fibrillation"
               },
               {
-                title: "BNF Anticoagulation Guidance",
-                url: "https://bnf.nice.org.uk/treatment-summaries/anticoagulants/",
-                description: "British National Formulary - anticoagulation protocols"
+                title: "NHS Anticoagulation Guidance",
+                url: "https://www.nhs.uk/conditions/anticoagulants/",
+                description: "NHS anticoagulation protocols and guidance"
               },
               {
                 title: "ESC AF Guidelines",
@@ -451,9 +451,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Depression in adults with chronic physical health problems"
               },
               {
-                title: "BNF Mental Health",
-                url: "https://bnf.nice.org.uk/treatment-summaries/mental-health/",
-                description: "British National Formulary - mental health treatment protocols"
+                title: "NHS Mental Health",
+                url: "https://www.nhs.uk/mental-health/conditions/depression-in-adults/",
+                description: "NHS mental health treatment protocols"
               },
               {
                 title: "NHS IAPT",
@@ -500,9 +500,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Chronic obstructive pulmonary disease in over 16s"
               },
               {
-                title: "BNF Respiratory Guidance",
-                url: "https://bnf.nice.org.uk/treatment-summaries/chronic-obstructive-pulmonary-disease/",
-                description: "British National Formulary - COPD treatment protocols"
+                title: "NHS COPD Guidance",
+                url: "https://www.nhs.uk/conditions/chronic-obstructive-pulmonary-disease-copd/",
+                description: "NHS COPD treatment protocols"
               },
               {
                 title: "British Thoracic Society",
@@ -549,9 +549,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Barrett's oesophagus and stage 1 oesophageal adenocarcinoma"
               },
               {
-                title: "BNF Gastroenterology",
-                url: "https://bnf.nice.org.uk/treatment-summaries/gastro-intestinal-system/",
-                description: "British National Formulary - gastrointestinal treatment protocols"
+                title: "NHS Gastroenterology",
+                url: "https://www.nhs.uk/conditions/heartburn-and-acid-reflux/",
+                description: "NHS gastrointestinal treatment protocols"
               },
               {
                 title: "BSG Guidelines",
@@ -598,9 +598,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Bisphosphonates for treating osteoporosis"
               },
               {
-                title: "BNF Bone Metabolism",
-                url: "https://bnf.nice.org.uk/treatment-summaries/bone-metabolism/",
-                description: "British National Formulary - bone metabolism disorders"
+                title: "NHS Osteoporosis Guidance",
+                url: "https://www.nhs.uk/conditions/osteoporosis/",
+                description: "NHS bone health and osteoporosis guidance"
               },
               {
                 title: "Royal Osteoporosis Society",
