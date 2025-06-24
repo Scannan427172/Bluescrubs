@@ -147,8 +147,37 @@ async function generateMedicalGuidanceResponse(question: string, context: any) {
 
 // AI enabled for question generation
 
-// Pre-loaded question bank for instant delivery
+// Pre-loaded question bank for instant delivery with persistence
 let ukQuestionBank: any[] = [];
+
+// Initialize question bank with persistent storage
+const loadQuestionBank = () => {
+  try {
+    const filePath = path.join(process.cwd(), 'generated-question-bank.json');
+    if (fs.existsSync(filePath)) {
+      const savedQuestions = fs.readFileSync(filePath, 'utf8');
+      ukQuestionBank = JSON.parse(savedQuestions);
+      console.log(`Loaded ${ukQuestionBank.length} questions from storage`);
+    }
+  } catch (error) {
+    console.log('Starting with empty question bank');
+    ukQuestionBank = [];
+  }
+};
+
+// Save question bank to persistent storage
+const saveQuestionBank = () => {
+  try {
+    const filePath = path.join(process.cwd(), 'generated-question-bank.json');
+    fs.writeFileSync(filePath, JSON.stringify(ukQuestionBank, null, 2));
+    console.log(`Saved ${ukQuestionBank.length} questions to storage`);
+  } catch (error) {
+    console.error('Failed to save question bank:', error);
+  }
+};
+
+// Initialize on startup
+loadQuestionBank();
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
@@ -222,6 +251,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             
             ukQuestionBank.push(...batchQuestions);
             totalGenerated += batchQuestions.length;
+            saveQuestionBank();
             
             generationResults.push({
               specialty: specialty.category,
@@ -231,8 +261,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             });
             
             // Log progress and small delay to respect API limits
-            console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated})`);
-            await new Promise(resolve => setTimeout(resolve, 500));
+            console.log(`✅ Batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/5000)`);
+            await new Promise(resolve => setTimeout(resolve, 1000));
             
           } catch (error) {
             console.error(`Error generating batch ${batch + 1} for ${specialty.category}:`, error);
@@ -240,9 +270,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
 
-      // Save the generated questions to a file for persistence
+      // Final save
+      saveQuestionBank();
       const questionBankFile = path.join(process.cwd(), 'generated-question-bank.json');
-      fs.writeFileSync(questionBankFile, JSON.stringify(ukQuestionBank, null, 2));
 
       res.json({
         success: true,
@@ -284,8 +314,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         count
       );
       
-      // Add to question bank
+      // Add to question bank and save
       ukQuestionBank.push(...generatedQuestions);
+      saveQuestionBank();
       
       res.json({
         success: true,
