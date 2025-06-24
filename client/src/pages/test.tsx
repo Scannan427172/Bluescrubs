@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle } from "lucide-react";
 import examRoomImg from "@assets/image_1750775004743.png";
-import heroVideo from "@assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4";
+
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
@@ -45,8 +45,7 @@ export default function Test() {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
+
 
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -1184,75 +1183,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
         {videoError && (
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700"></div>
         )}
-        <video 
-          key="hero-video-main"
-          className="absolute inset-0 w-full h-full object-cover opacity-70"
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          disablePictureInPicture
-          onLoadedData={() => {
-            console.log('Main video loaded');
-            setHeroVideoLoaded(true);
-          }}
-          onError={(e) => {
-            console.error('Main video error:', e);
-            setVideoError(true);
-          }}
-        >
-          <source src={heroVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        
-        {/* Video Play Button - Force Visible */}
-        <div 
-          className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          style={{ 
-            zIndex: 9999,
-            position: 'fixed',
-            pointerEvents: 'auto'
-          }}
-        >
-          <button
-            onClick={async (e) => {
-              e.stopPropagation();
-              console.log('Play button clicked');
-              const video = document.querySelector('video[key="hero-video-main"]') as HTMLVideoElement;
-              console.log('Video element found:', video);
-              if (video) {
-                try {
-                  if (video.paused) {
-                    await video.play();
-                    console.log('Video started playing');
-                  } else {
-                    video.pause();
-                    console.log('Video paused');
-                  }
-                } catch (error) {
-                  console.error('Video control failed:', error);
-                }
-              } else {
-                console.error('Video element not found');
-              }
-            }}
-            className="bg-red-500 hover:bg-red-600 text-white rounded-full shadow-2xl transition-all duration-300 font-bold border-4 border-white"
-            title="Play/Pause background video"
-            style={{ 
-              pointerEvents: 'auto',
-              padding: '24px',
-              fontSize: '32px',
-              lineHeight: '1',
-              minWidth: '80px',
-              minHeight: '80px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            ▶️
-          </button>
-        </div>
+
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
         <div className="relative z-40 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
