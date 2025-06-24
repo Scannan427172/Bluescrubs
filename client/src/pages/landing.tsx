@@ -5,7 +5,7 @@ import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle
 import { Logo } from "@/components/logo";
 
 import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
-import heroVideo from "@assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4";
+import heroImage from "@assets/791EDD4A-2173-4B21-A04F-EFAB0FF94DA6_1750798351845.png";
 
 
 export default function Landing() {
@@ -13,17 +13,11 @@ export default function Landing() {
     <div className="min-h-screen bg-white">
       {/* Video Hero Banner - Portrait Layout */}
       <div className="relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-blue-600 to-purple-700 mb-0">
-        <video 
-          src={heroVideo}
+        <img 
+          src={heroImage}
+          alt="Medical professional"
           className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        />
         
 
         
