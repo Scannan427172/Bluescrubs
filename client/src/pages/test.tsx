@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle } from "lucide-react";
 import examRoomImg from "@assets/image_1750775004743.png";
+import heroVideo from "@assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
