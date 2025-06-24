@@ -123,6 +123,7 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 24, 2025: Final video hero banner implementation - clean video background with "Master Your PLAB Journey" overlay text, removed static image overlay to keep focus on video content
 - June 24, 2025: Swapped routing - Test page content moved to PLAB 1 routes (/plab1, /plab1-new), original PLAB1New component moved to /test route
 - June 24, 2025: Removed all video elements and play buttons from PLAB 1 practice test interface, replaced with clean exam room image background
+- June 24, 2025: Updated landing page hero banner to use new video without logo branding for clean professional presentation
 
 # User Preferences
 
