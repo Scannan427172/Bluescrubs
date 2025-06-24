@@ -26,7 +26,7 @@ export default function Landing() {
         </video>
         
         {/* Video Overlay */}
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
         
         {/* Hero Content - Portrait Layout */}
         <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
