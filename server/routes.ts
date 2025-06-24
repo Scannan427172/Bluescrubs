@@ -159,6 +159,447 @@ export async function registerRoutes(app: Express): Promise<Server> {
         },
         {
           id: "q2",
+          topic: "Acute Coronary Syndrome Management",
+          question: "A 58-year-old man presents to the emergency department with severe central chest pain radiating to his left arm, lasting 45 minutes. He appears sweaty and nauseous. ECG shows ST elevation >2mm in leads II, III, and aVF. His blood pressure is 140/85 mmHg, heart rate 95 bpm. What is the most appropriate immediate management?",
+          options: {
+            A: "Primary percutaneous coronary intervention (PCI) within 120 minutes",
+            B: "Thrombolytic therapy with alteplase immediately",
+            C: "High-dose atorvastatin and dual antiplatelet therapy",
+            D: "Coronary angiography within 24 hours",
+            E: "Conservative management with aspirin and clopidogrel"
+          },
+          answer: "A",
+          explanation: "Why Primary PCI within 120 minutes is correct:\n\n• NICE CG167 Gold Standard Treatment: \n  - Primary PCI represents the definitive reperfusion strategy for STEMI when delivered within 120 minutes of first medical contact\n  - European Society of Cardiology and American Heart Association guidelines consistently rank primary PCI as Class I recommendation\n  - Achieves superior outcomes compared to thrombolytic therapy in terms of mortality, reinfarction, and stroke reduction\n  - Forms the cornerstone of contemporary acute coronary syndrome management in healthcare systems with PCI capability\n\n• Superior Clinical Outcomes: \n  - Meta-analyses of randomized controlled trials demonstrate 25-30% relative risk reduction in 30-day mortality compared to thrombolysis\n  - Significantly reduces risk of intracranial hemorrhage (0.05% vs 0.7% with thrombolysis)\n  - Lower rates of reinfarction, target vessel revascularization, and major bleeding complications\n  - Provides immediate restoration of epicardial and microvascular flow with TIMI 3 flow achievement >95%\n\n• Optimal Timing Advantages: \n  - 120-minute door-to-balloon time threshold balances logistical feasibility with clinical benefit\n  - Every 30-minute delay in reperfusion increases relative mortality risk by 7.5%\n  - Time-dependent myocardial salvage maximized when intervention occurs within therapeutic window\n  - Modern cardiac networks designed to achieve primary PCI within recommended timeframes\n\n• Comprehensive Mechanical Revascularization: \n  - Allows complete assessment of coronary anatomy and multivessel disease evaluation\n  - Enables treatment of culprit vessel with optimal stent selection (drug-eluting vs bare metal)\n  - Provides immediate hemodynamic support capability if cardiogenic shock develops\n  - Permits assessment of left ventricular function and mechanical complications\n\n• Evidence-Based Guideline Compliance: \n  - NICE CG167 specifically recommends primary PCI as first-line reperfusion strategy\n  - Myocardial Infarction National Audit Project data supports improved outcomes with primary PCI\n  - Quality indicators and clinical governance frameworks emphasize door-to-balloon time optimization\n  - Aligns with international best practice and reduces medico-legal risk\n\n• Resource Utilization Efficiency: \n  - Single procedure addresses both diagnosis and treatment simultaneously\n  - Reduces hospital length of stay compared to thrombolysis with subsequent angiography\n  - Lower long-term healthcare costs through reduced readmissions and complications\n  - Optimal use of specialist cardiac intervention facilities and expertise",
+          incorrectExplanation: "• Option B (Thrombolytic therapy with alteplase) - Suboptimal Reperfusion Strategy: \n  - Reserved for situations where primary PCI cannot be delivered within 120 minutes of first medical contact\n  - NICE CG167 relegates thrombolysis to second-line therapy when PCI facilities unavailable\n  - Higher rates of intracranial hemorrhage, reinfarction, and incomplete reperfusion compared to primary PCI\n  - Requires subsequent angiography within 24 hours, essentially delaying definitive treatment\n  - Contraindicated in patients with recent surgery, stroke, or bleeding disorders\n  - Does not provide immediate assessment of coronary anatomy or multivessel disease\n\n• Option C (High-dose atorvastatin and dual antiplatelet therapy) - Important but Insufficient: \n  - Represents essential adjunctive therapy but does not address acute vessel occlusion requiring immediate reperfusion\n  - Dual antiplatelet therapy alone cannot restore flow in completely occluded coronary arteries\n  - High-dose statin therapy provides plaque stabilization but requires days to weeks for clinical benefit\n  - Delays definitive reperfusion therapy during critical therapeutic window\n  - Should be initiated alongside, not instead of, primary PCI\n  - Time-dependent myocardial necrosis continues without mechanical intervention\n\n• Option D (Coronary angiography within 24 hours) - Inappropriate Delay: \n  - Represents non-primary PCI approach suitable for NSTEMI, not STEMI management\n  - 24-hour delay results in significant irreversible myocardial necrosis and adverse remodeling\n  - NICE guidelines specifically emphasize emergency reperfusion within 120 minutes for STEMI\n  - Misses critical therapeutic window where myocardial salvage remains possible\n  - Associated with worse clinical outcomes including higher mortality and heart failure rates\n  - Does not align with time-sensitive nature of ST-elevation myocardial infarction\n\n• Option E (Conservative management) - Contraindicated Approach: \n  - Completely inappropriate for STEMI requiring immediate reperfusion therapy\n  - Results in completed myocardial infarction with maximum infarct size and worst clinical outcomes\n  - Associated with highest mortality rates, mechanical complications, and long-term heart failure\n  - Contradicts all major international guidelines for acute coronary syndrome management\n  - Represents substandard care with significant medico-legal implications\n  - Antiplatelet therapy alone cannot restore flow in acutely occluded epicardial coronary arteries",
+          mnemonic: "PCI = Primary Choice Immediately",
+          guidelineSummary: {
+            title: "STEMI Management (250-word Summary)",
+            content: "• Definition & Recognition: \n  - ST elevation >2mm in chest leads or >1mm in limb leads in clinical context of acute coronary syndrome\n  - Symptoms include severe central chest pain, radiation to arms/jaw, associated autonomic features\n  - ECG changes reflect acute coronary occlusion requiring immediate reperfusion\n\n• Primary PCI Strategy: \n  - Gold standard reperfusion when achievable within 120 minutes of first medical contact\n  - Superior to thrombolysis for mortality, reinfarction, stroke, and bleeding outcomes\n  - Requires immediate activation of cardiac catheterization laboratory\n\n• Thrombolytic Therapy: \n  - Second-line when PCI unavailable within therapeutic window\n  - Alteplase, tenecteplase, or streptokinase depending on contraindications\n  - Requires subsequent angiography within 24 hours\n\n• Adjunctive Pharmacotherapy: \n  - Dual antiplatelet therapy (aspirin 300mg loading, clopidogrel 600mg or ticagrelor 180mg)\n  - High-dose atorvastatin 80mg immediately\n  - Anticoagulation with unfractionated heparin or bivalirudin\n\n• Secondary Prevention: \n  - ACE inhibitor within 24 hours if no contraindications\n  - Beta-blocker when hemodynamically stable\n  - Long-term dual antiplatelet therapy duration per guidelines\n\n• Complications Monitoring: \n  - Mechanical complications (papillary muscle rupture, ventricular septal defect)\n  - Arrhythmias requiring continuous cardiac monitoring\n  - Heart failure and cardiogenic shock assessment"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/cg167",
+              description: "NICE CG167: Myocardial infarction - cardiac rehabilitation and prevention"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/ng185",
+                description: "Acute coronary syndromes - comprehensive management pathway"
+              },
+              {
+                title: "BNF Cardiac Guidance",
+                url: "https://bnf.nice.org.uk/treatment-summaries/cardiovascular-system/",
+                description: "British National Formulary - cardiovascular treatment protocols"
+              },
+              {
+                title: "ESC Guidelines",
+                url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines",
+                description: "European Society of Cardiology - STEMI management guidelines"
+              },
+              {
+                title: "British Cardiovascular Society",
+                url: "https://www.britishcardiovascularsociety.org",
+                description: "Professional guidance for cardiac interventions"
+              }
+            ]
+          }
+        },
+        {
+          id: "q3",
+          topic: "Type 2 Diabetes Management",
+          question: "A 52-year-old woman with newly diagnosed type 2 diabetes has an HbA1c of 75 mmol/mol (9.0%). Her BMI is 32 kg/m², blood pressure 145/90 mmHg, and eGFR 85 ml/min/1.73m². She has no contraindications to medications. What is the most appropriate initial pharmacological management?",
+          options: {
+            A: "Metformin 500mg twice daily with lifestyle modifications",
+            B: "Insulin detemir 10 units once daily",
+            C: "Gliclazide 80mg twice daily",
+            D: "Metformin plus empagliflozin combination",
+            E: "Lifestyle modifications only for 6 months"
+          },
+          answer: "A",
+          explanation: "Why Metformin 500mg twice daily with lifestyle modifications is correct:\n\n• NICE NG28 First-Line Treatment Standard: \n  - Metformin represents the evidence-based first-line pharmacological intervention for type 2 diabetes across all major international guidelines\n  - Demonstrated efficacy in reducing HbA1c by 1.0-1.5% (11-16 mmol/mol) when combined with lifestyle interventions\n  - Extensive clinical trial evidence spanning over three decades supports metformin as initial therapy\n  - UK Prospective Diabetes Study established metformin's role in reducing macrovascular complications\n\n• Superior Cardiovascular Protection: \n  - Metformin provides significant cardiovascular benefits beyond glycemic control\n  - Reduces risk of myocardial infarction by 39% and all-cause mortality by 36% compared to conventional therapy\n  - Cardioprotective effects demonstrated across diverse patient populations including those with established cardiovascular disease\n  - Neutral or beneficial effects on heart failure outcomes unlike some other antidiabetic agents\n\n• Optimal Weight Management Profile: \n  - Weight-neutral or modest weight reduction effects particularly beneficial in overweight patients (BMI 32 kg/m²)\n  - Contrasts favorably with insulin and sulfonylureas which typically cause weight gain\n  - Supports long-term metabolic health through improved insulin sensitivity\n  - Enhances effectiveness of concurrent lifestyle modifications\n\n• Comprehensive Metabolic Benefits: \n  - Improves insulin sensitivity at hepatic and peripheral muscle sites\n  - Reduces hepatic glucose production through AMP-activated protein kinase pathway activation\n  - Beneficial effects on lipid profile including modest reduction in LDL cholesterol\n  - May improve endothelial function and reduce inflammation markers\n\n• Excellent Safety and Tolerability Profile: \n  - Low risk of hypoglycemia when used as monotherapy\n  - Contraindications limited to severe renal impairment (eGFR <30), acute illness, or lactic acidosis risk\n  - Gastrointestinal side effects typically mild and transient, minimized by gradual dose escalation\n  - Extensive post-marketing surveillance confirms long-term safety\n\n• Cost-Effectiveness and Accessibility: \n  - Generic formulations available ensuring affordability across healthcare systems\n  - Well-established prescribing patterns and clinical familiarity among healthcare providers\n  - Lower overall healthcare costs through prevention of diabetes complications\n  - Suitable for resource-limited settings with proven efficacy",
+          incorrectExplanation: "• Option B (Insulin detemir 10 units once daily) - Premature Intensive Therapy: \n  - Reserved for patients with severe hyperglycemia, ketosis, or failure of oral antidiabetic agents\n  - NICE NG28 recommends insulin initiation only after metformin optimization and consideration of additional oral agents\n  - Associated with significant weight gain (2-4 kg average) particularly problematic in overweight patients\n  - Higher risk of severe hypoglycemia requiring emergency intervention\n  - More complex dosing regimen requiring blood glucose monitoring and dose adjustment\n  - Does not address underlying insulin resistance characteristic of type 2 diabetes\n\n• Option C (Gliclazide 80mg twice daily) - Suboptimal First-Line Choice: \n  - Sulfonylureas relegated to second-line therapy due to hypoglycemia risk and weight gain\n  - Mechanism of action (insulin secretagogue) does not address insulin resistance\n  - Associated with 2-5 kg weight gain potentially exacerbating metabolic dysfunction\n  - Higher cardiovascular mortality concerns raised in some observational studies\n  - Progressive beta-cell exhaustion with prolonged use leading to secondary failure\n  - Lack of cardiovascular protection compared to metformin\n\n• Option D (Metformin plus empagliflozin combination) - Inappropriate Initial Intensification: \n  - Combination therapy reserved for patients failing to achieve targets on metformin monotherapy\n  - NICE guidelines emphasize stepwise approach starting with metformin optimization\n  - Empagliflozin more expensive than metformin alone without additional benefit as initial therapy\n  - Increased risk of genitourinary infections and diabetic ketoacidosis\n  - Should be considered only after 3-6 months of metformin therapy if targets not achieved\n  - Lacks evidence for superior initial efficacy compared to metformin monotherapy\n\n• Option E (Lifestyle modifications only) - Inadequate for Severe Hyperglycemia: \n  - HbA1c of 75 mmol/mol represents significant hyperglycemia requiring immediate pharmacological intervention\n  - NICE guidelines recommend immediate metformin initiation when HbA1c >58 mmol/mol (7.5%)\n  - Lifestyle modifications alone insufficient to achieve target HbA1c reduction from this elevated baseline\n  - Delays appropriate treatment potentially increasing risk of diabetic complications\n  - May result in progressive beta-cell dysfunction and more difficult future glycemic control\n  - Contradicts evidence-based approach to diabetes management in moderate to severe hyperglycemia",
+          mnemonic: "MET = Metformin Every Time (first-line)",
+          guidelineSummary: {
+            title: "Type 2 Diabetes Management (250-word Summary)",
+            content: "• Definition & Diagnosis: \n  - HbA1c ≥48 mmol/mol (6.5%) or fasting glucose ≥7.0 mmol/L in symptomatic patients\n  - Confirmed with repeat testing unless symptomatic with random glucose ≥11.1 mmol/L\n  - Consider MODY, LADA in atypical presentations\n\n• First-Line Pharmacotherapy: \n  - Metformin 500mg twice daily, increase to 1g twice daily if tolerated\n  - Contraindicated if eGFR <30 ml/min/1.73m² or acute illness\n  - Continue alongside lifestyle modifications throughout treatment\n\n• HbA1c Targets: \n  - Standard target 53 mmol/mol (7.0%) for most adults\n  - Individualized targets considering age, comorbidities, hypoglycemia risk\n  - Relaxed targets (58-64 mmol/mol) in elderly or high bleeding risk\n\n• Second-Line Options: \n  - Add sulfonylurea, pioglitazone, DPP4 inhibitor, SGLT2 inhibitor, or GLP1 agonist\n  - Choice depends on patient factors: weight, cardiovascular risk, renal function\n  - Consider insulin if HbA1c >75 mmol/mol despite dual therapy\n\n• Cardiovascular Protection: \n  - SGLT2 inhibitors or GLP1 agonists for established cardiovascular disease\n  - Blood pressure target <140/90 mmHg (or <130/80 with kidney/eye disease)\n  - Statin therapy for primary prevention if QRISK >10%\n\n• Complications Screening: \n  - Annual diabetic retinopathy screening\n  - Foot examination annually\n  - Urine albumin:creatinine ratio and eGFR monitoring"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/ng28",
+              description: "NICE NG28: Type 2 diabetes in adults - management"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/ng17",
+                description: "Type 1 and 2 diabetes in children and young people"
+              },
+              {
+                title: "BNF Diabetes Guidance",
+                url: "https://bnf.nice.org.uk/treatment-summaries/diabetes/",
+                description: "British National Formulary - diabetes treatment protocols"
+              },
+              {
+                title: "Diabetes UK Guidelines",
+                url: "https://www.diabetes.org.uk/professionals",
+                description: "Professional guidance for diabetes management"
+              },
+              {
+                title: "SIGN Diabetes Guidelines",
+                url: "https://www.sign.ac.uk/our-guidelines/management-of-diabetes/",
+                description: "Scottish diabetes management recommendations"
+              }
+            ]
+          }
+        },
+        {
+          id: "q4",
+          topic: "Community-Acquired Pneumonia",
+          question: "A 45-year-old previously healthy man presents with a 3-day history of fever, productive cough with purulent sputum, and right-sided chest pain. His temperature is 38.8°C, respiratory rate 24/min, blood pressure 110/70 mmHg, pulse 95 bpm, oxygen saturation 94% on air. Chest X-ray shows right lower lobe consolidation. What is the most appropriate initial antibiotic treatment?",
+          options: {
+            A: "Amoxicillin 500mg three times daily for 5 days",
+            B: "Co-amoxiclav 625mg three times daily for 7 days",
+            C: "Clarithromycin 500mg twice daily for 5 days",
+            D: "Levofloxacin 500mg once daily for 5 days",
+            E: "Doxycycline 200mg loading then 100mg daily"
+          },
+          answer: "A",
+          explanation: "Why Amoxicillin 500mg three times daily for 5 days is correct:\n\n• NICE CG191 First-Line Evidence-Based Treatment: \n  - Amoxicillin represents the definitive first-line antibiotic for community-acquired pneumonia in previously healthy adults\n  - British Thoracic Society guidelines consistently recommend amoxicillin for low-severity CAP management\n  - Extensive clinical trial evidence demonstrates non-inferiority to broader spectrum agents for typical bacterial pneumonia\n  - Cost-effective choice reducing unnecessary antibiotic resistance pressure\n\n• Optimal Streptococcus pneumoniae Coverage: \n  - Targets the most common cause of bacterial community-acquired pneumonia (30-50% of cases)\n  - Excellent activity against penicillin-sensitive pneumococcal strains prevalent in UK\n  - Bactericidal activity through beta-lactam mechanism disrupting bacterial cell wall synthesis\n  - Achieves therapeutic concentrations in respiratory tract tissues and alveolar fluid\n\n• Appropriate Spectrum for Typical Bacteria: \n  - Effective against Haemophilus influenzae, the second most common CAP pathogen\n  - Covers Moraxella catarrhalis in patients without significant risk factors\n  - Avoids unnecessary broad-spectrum coverage in immunocompetent patients\n  - Preserves effectiveness of broader agents for complicated or resistant infections\n\n• Proven Clinical Efficacy Profile: \n  - Randomized controlled trials demonstrate 85-90% clinical cure rates for mild-moderate CAP\n  - Equivalent outcomes to combination therapies in appropriately selected patients\n  - Shorter duration (5 days) proven non-inferior to traditional 7-10 day courses\n  - Well-tolerated with minimal adverse effects in healthy adults\n\n• Antimicrobial Stewardship Compliance: \n  - Narrow-spectrum approach supports global antimicrobial resistance reduction efforts\n  - Minimizes selective pressure on gram-negative organisms and anaerobic flora\n  - Reduces risk of Clostridioides difficile infection compared to broader spectrum alternatives\n  - Aligns with NICE antimicrobial prescribing guidelines and local formularies\n\n• Pharmacokinetic Advantages: \n  - Excellent oral bioavailability (74-92%) ensuring adequate systemic exposure\n  - Predictable pharmacokinetics allowing standard dosing without monitoring\n  - Minimal drug interactions compared to macrolides and fluoroquinolones\n  - Safe in patients with mild-moderate renal impairment",
+          incorrectExplanation: "• Option B (Co-amoxiclav 625mg three times daily) - Unnecessarily Broad Spectrum: \n  - Beta-lactamase inhibitor combination adds no benefit for typical community-acquired pneumonia\n  - NICE CG191 reserves co-amoxiclav for patients with specific risk factors or treatment failure\n  - Higher rates of gastrointestinal side effects including antibiotic-associated diarrhea\n  - Increased selective pressure on resistant organisms without additional clinical benefit\n  - More expensive than amoxicillin without improved outcomes in this clinical scenario\n  - Should be considered for patients with chronic lung disease or previous antibiotic exposure\n\n• Option C (Clarithromycin 500mg twice daily) - Inappropriate Monotherapy: \n  - Macrolide monotherapy inadequate for pneumococcal pneumonia due to resistance concerns\n  - UK pneumococcal resistance rates to macrolides approach 15-20% in some regions\n  - Risk of treatment failure particularly in severe pneumococcal infections\n  - Reserved for atypical pathogen coverage or penicillin-allergic patients\n  - Should be used in combination with beta-lactam for severe CAP, not as monotherapy\n  - Drug interactions with multiple medications through CYP3A4 inhibition\n\n• Option D (Levofloxacin 500mg once daily) - Excessive Broad-Spectrum Coverage: \n  - Fluoroquinolone therapy reserved for treatment failure or specific clinical indications\n  - NICE guidelines emphasize preservation of fluoroquinolones for resistant organisms\n  - Associated with increased risk of Clostridioides difficile infection and tendon rupture\n  - Contributes to fluoroquinolone resistance in pneumococci and gram-negative bacteria\n  - More expensive than first-line alternatives without superior efficacy\n  - Should be avoided in uncomplicated CAP to preserve effectiveness\n\n• Option E (Doxycycline loading dose regimen) - Suboptimal Pneumococcal Activity: \n  - Tetracycline antibiotics demonstrate variable activity against Streptococcus pneumoniae\n  - Pneumococcal resistance to tetracyclines reported in 10-15% of isolates\n  - Primarily indicated for atypical pathogen coverage (Mycoplasma, Chlamydia)\n  - Gastrointestinal side effects and photosensitivity reactions common\n  - Less reliable than beta-lactam antibiotics for typical bacterial pneumonia\n  - Should be considered for atypical pathogen suspected infections or penicillin allergy",
+          mnemonic: "AMOX = Always Most Optimal eXcellent choice",
+          guidelineSummary: {
+            title: "Community-Acquired Pneumonia Management (250-word Summary)",
+            content: "• Clinical Assessment: \n  - CURB-65 score guides severity assessment and management location\n  - Score 0-1: home treatment, 2: consider hospital, 3-5: hospital admission\n  - Symptoms include fever, cough, dyspnea, chest pain, sputum production\n\n• First-Line Antibiotic Therapy: \n  - Amoxicillin 500mg TDS for 5 days in previously healthy adults\n  - Co-amoxiclav if risk factors for resistance or structural lung disease\n  - Add clarithromycin if atypical pathogens suspected\n\n• Severe CAP Management: \n  - Combination therapy: co-amoxiclav plus clarithromycin\n  - Consider levofloxacin monotherapy in selected cases\n  - ICU admission if CURB-65 ≥4 or clinical deterioration\n\n• Special Considerations: \n  - Penicillin allergy: clarithromycin, doxycycline, or levofloxacin\n  - Suspected aspiration: co-amoxiclav or clindamycin\n  - Recent hospitalization: consider broader spectrum coverage\n\n• Treatment Duration: \n  - 5 days standard for uncomplicated CAP\n  - Extend to 7-10 days if slow clinical response\n  - Clinical improvement expected within 48-72 hours\n\n• Follow-up and Safety Netting: \n  - Chest X-ray if no improvement at 6 weeks\n  - Return if worsening symptoms or new concerning features\n  - Consider complications: empyema, lung abscess, sepsis"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/cg191",
+              description: "NICE CG191: Pneumonia in adults - diagnosis and management"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/ng138",
+                description: "Antimicrobial prescribing for respiratory tract infections"
+              },
+              {
+                title: "BNF Respiratory Guidance",
+                url: "https://bnf.nice.org.uk/treatment-summaries/respiratory-system/",
+                description: "British National Formulary - respiratory infection protocols"
+              },
+              {
+                title: "British Thoracic Society",
+                url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/",
+                description: "BTS guidelines for respiratory medicine"
+              },
+              {
+                title: "PHE Respiratory Guidelines",
+                url: "https://www.gov.uk/government/collections/respiratory-diseases-guidance-data-and-analysis",
+                description: "Public Health England respiratory infection guidance"
+              }
+            ]
+          }
+        },
+        {
+          id: "q5",
+          topic: "Hypertension Management",
+          question: "A 65-year-old Afro-Caribbean woman presents for routine blood pressure monitoring. Her readings over 3 visits are: 165/95, 158/92, and 162/90 mmHg. She has no other cardiovascular risk factors, normal renal function (eGFR 78), and no contraindications to medications. What is the most appropriate first-line antihypertensive treatment?",
+          options: {
+            A: "Amlodipine 5mg once daily",
+            B: "Ramipril 2.5mg once daily",
+            C: "Bendroflumethiazide 2.5mg once daily",
+            D: "Atenolol 50mg once daily",
+            E: "Losartan 50mg once daily"
+          },
+          answer: "A",
+          explanation: "Why Amlodipine 5mg once daily is correct:\n\n• NICE NG136 Evidence-Based Ethnic-Specific Recommendations: \n  - Calcium channel blockers represent first-line therapy for hypertension in patients of African or Caribbean family origin\n  - Based on extensive clinical trial evidence demonstrating superior efficacy compared to ACE inhibitors in this population\n  - ALLHAT trial and subsequent meta-analyses confirm optimal cardiovascular outcomes with calcium channel blockers in Black patients\n  - Addresses genetic polymorphisms affecting renin-angiotensin system responsiveness in Afro-Caribbean populations\n\n• Superior Antihypertensive Efficacy in Target Population: \n  - Achieves greater blood pressure reduction (15-20 mmHg systolic) compared to ACE inhibitors in Afro-Caribbean patients\n  - Addresses low-renin hypertension phenotype common in patients of African ancestry\n  - Overcomes genetic variations in ACE gene polymorphisms that reduce ACE inhibitor effectiveness\n  - Provides consistent 24-hour blood pressure control with once-daily dosing\n\n• Optimal Cardiovascular Protection Profile: \n  - Reduces stroke risk by 35-40% in clinical trials involving predominantly Black populations\n  - Significant reduction in coronary events and heart failure hospitalizations\n  - Excellent end-organ protection including renal and retinal benefits\n  - Neutral effects on glucose metabolism and lipid profiles\n\n• Comprehensive Mechanism of Action: \n  - Blocks L-type calcium channels in vascular smooth muscle causing direct vasodilation\n  - Reduces peripheral vascular resistance without significantly affecting cardiac contractility\n  - Long half-life (35-50 hours) provides sustained antihypertensive effect\n  - Minimal reflex tachycardia compared to immediate-release calcium channel blockers\n\n• Excellent Tolerability and Safety: \n  - Well-tolerated with predictable side effect profile\n  - Ankle edema occurs in 10-15% of patients but rarely requires discontinuation\n  - No significant drug interactions with common medications\n  - Safe in patients with diabetes, chronic kidney disease, and coronary artery disease\n\n• Cost-Effectiveness and Accessibility: \n  - Generic formulations widely available reducing healthcare costs\n  - Once-daily dosing improves medication adherence\n  - Established safety profile with decades of clinical experience\n  - Suitable for long-term management with proven cardiovascular benefits",
+          incorrectExplanation: "• Option B (Ramipril 2.5mg once daily) - Suboptimal for Afro-Caribbean Patients: \n  - ACE inhibitors demonstrate reduced efficacy in patients of African or Caribbean family origin\n  - NICE NG136 specifically recommends ACE inhibitors as second-line therapy in this population\n  - Genetic polymorphisms in ACE and angiotensinogen genes reduce therapeutic response\n  - Higher rates of angioedema (0.1-0.7%) in Black patients compared to other ethnicities\n  - Should be considered as add-on therapy rather than initial monotherapy\n  - Less effective at preventing stroke, the most common cardiovascular complication in this population\n\n• Option C (Bendroflumethiazide 2.5mg once daily) - Second-Line Diuretic Choice: \n  - Thiazide-like diuretics effective but not preferred first-line in current NICE guidelines\n  - May cause electrolyte disturbances requiring monitoring (hyponatremia, hypokalemia)\n  - Potential adverse effects on glucose tolerance and lipid profiles\n  - Less convenient dosing schedule compared to modern antihypertensives\n  - Associated with higher rates of erectile dysfunction in men\n  - Reserved for combination therapy or specific clinical indications\n\n• Option D (Atenolol 50mg once daily) - Inappropriate Beta-Blocker Selection: \n  - Beta-blockers not recommended as first-line therapy for uncomplicated hypertension\n  - NICE guidelines restrict beta-blockers to specific indications (heart failure, post-MI, arrhythmias)\n  - Associated with increased stroke risk compared to other antihypertensive classes\n  - May mask hypoglycemic symptoms in diabetic patients\n  - Potential for withdrawal syndrome if discontinued abruptly\n  - Less effective at preventing cardiovascular events in elderly patients\n\n• Option E (Losartan 50mg once daily) - Similar Limitations to ACE Inhibitors: \n  - Angiotensin receptor blockers share similar efficacy limitations in Afro-Caribbean populations\n  - Target the same renin-angiotensin pathway with reduced activity in low-renin hypertension\n  - More expensive than calcium channel blockers without superior efficacy in this population\n  - Should be considered for patients intolerant of ACE inhibitors\n  - Better tolerated than ACE inhibitors but still second-line choice per NICE guidance\n  - Useful in combination therapy but not optimal as initial monotherapy",
+          mnemonic: "CCB = Calcium Channel Blocker for Caribbean/Black patients",
+          guidelineSummary: {
+            title: "Hypertension Management (250-word Summary)",
+            content: "• Definition & Diagnosis: \n  - Persistent blood pressure ≥140/90 mmHg confirmed by ambulatory or home monitoring\n  - Stage 1: 140-159/90-99 mmHg, Stage 2: 160-179/100-109 mmHg, Stage 3: ≥180/110 mmHg\n  - Consider white coat hypertension if clinic BP elevated but ambulatory/home BP normal\n\n• Ethnic-Specific First-Line Treatment: \n  - Afro-Caribbean patients: Calcium channel blocker (amlodipine 5mg) or thiazide-like diuretic\n  - Other ethnicities <55 years: ACE inhibitor or ARB\n  - All patients ≥55 years: Calcium channel blocker or thiazide-like diuretic\n\n• Treatment Targets: \n  - <80 years: <140/90 mmHg (or <135/85 home/ambulatory)\n  - ≥80 years: <150/90 mmHg\n  - Diabetes/CKD: <130/80 mmHg\n\n• Combination Therapy: \n  - Step 2: Add ACE inhibitor/ARB to CCB/diuretic or vice versa\n  - Step 3: Triple therapy (ACE inhibitor + CCB + diuretic)\n  - Step 4: Add spironolactone or alpha/beta blocker\n\n• Lifestyle Modifications: \n  - Weight reduction, dietary sodium restriction (<6g/day)\n  - Regular exercise (150 minutes moderate activity/week)\n  - Alcohol moderation, smoking cessation\n\n• Monitoring and Follow-up: \n  - Annual review once controlled\n  - Monitor renal function and electrolytes\n  - Assess cardiovascular risk factors and end-organ damage"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/ng136",
+              description: "NICE NG136: Hypertension in adults - diagnosis and management"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/cg127",
+                description: "Hypertension in pregnancy - diagnosis and management"
+              },
+              {
+                title: "BNF Cardiovascular Guidance",
+                url: "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+                description: "British National Formulary - hypertension treatment protocols"
+              },
+              {
+                title: "British Hypertension Society",
+                url: "https://bihsoc.org/resources/bp-measurement/",
+                description: "Professional guidance for blood pressure management"
+              },
+              {
+                title: "Stroke Association Guidelines",
+                url: "https://www.stroke.org.uk/what-is-stroke/are-you-at-risk-of-stroke",
+                description: "Stroke prevention and hypertension management"
+              }
+            ]
+          }
+        },
+        {
+          id: "q6",
+          topic: "Atrial Fibrillation Management",
+          question: "A 72-year-old man with newly diagnosed atrial fibrillation presents for anticoagulation assessment. He has a history of hypertension and type 2 diabetes but no previous stroke or bleeding history. His CHA₂DS₂-VASc score is 4. Renal function is normal. What is the most appropriate anticoagulation strategy?",
+          options: {
+            A: "Apixaban 5mg twice daily",
+            B: "Warfarin with target INR 2.0-3.0",
+            C: "Aspirin 75mg once daily",
+            D: "Rivaroxaban 20mg once daily",
+            E: "No anticoagulation, rate control only"
+          },
+          answer: "A",
+          explanation: "Why Apixaban 5mg twice daily is correct:\n\n• NICE CG180 Direct Oral Anticoagulant Preference: \n  - DOACs represent first-line anticoagulation for stroke prevention in atrial fibrillation\n  - Apixaban demonstrates superior efficacy and safety profile compared to warfarin in landmark ARISTOTLE trial\n  - Reduced stroke risk by 21% and major bleeding by 31% compared to warfarin\n  - NICE guidelines recommend DOACs over warfarin for newly diagnosed atrial fibrillation\n\n• Optimal Stroke Prevention Efficacy: \n  - CHA₂DS₂-VASc score of 4 indicates high stroke risk requiring definitive anticoagulation\n  - Annual stroke risk of 8-10% without anticoagulation versus 2-3% with effective treatment\n  - Factor Xa inhibition provides consistent anticoagulant effect without vitamin K dependence\n  - Proven stroke prevention in both paroxysmal and persistent atrial fibrillation\n\n• Superior Safety Profile Compared to Warfarin: \n  - 50% reduction in intracranial hemorrhage risk, the most feared anticoagulation complication\n  - Lower rates of major bleeding requiring hospitalization or transfusion\n  - Reduced gastrointestinal bleeding compared to rivaroxaban and dabigatran\n  - No requirement for routine anticoagulation monitoring\n\n• Practical Clinical Advantages: \n  - Fixed-dose regimen without need for INR monitoring\n  - Minimal food interactions allowing flexible dosing schedule\n  - Fewer drug interactions compared to warfarin's extensive interaction profile\n  - Rapid onset and offset of action beneficial for procedures\n\n• Patient-Centered Benefits: \n  - Improved quality of life through elimination of frequent blood tests\n  - Better treatment adherence due to simplified dosing regimen\n  - Lower healthcare utilization costs despite higher drug acquisition costs\n  - Reduced dietary restrictions compared to warfarin therapy\n\n• Evidence-Based Dosing Strategy: \n  - Standard dose 5mg twice daily appropriate for patients without dose reduction criteria\n  - Dose reduction to 2.5mg twice daily only if ≥2 of: age ≥80, weight ≤60kg, creatinine ≥133 μmol/L\n  - Twice-daily dosing provides consistent anticoagulant effect throughout 24-hour period\n  - Extensive pharmacokinetic studies confirm optimal dosing strategy",
+          incorrectExplanation: "• Option B (Warfarin with target INR 2.0-3.0) - Second-Line Vitamin K Antagonist: \n  - NICE CG180 relegates warfarin to second-line choice when DOACs contraindicated or unsuitable\n  - Requires frequent INR monitoring with associated healthcare resource utilization\n  - Time in therapeutic range typically 60-70% even in specialized anticoagulation clinics\n  - Higher intracranial bleeding risk compared to DOACs\n  - Extensive drug and food interactions complicating management\n  - Should be reserved for patients with contraindications to DOACs or mechanical heart valves\n\n• Option C (Aspirin 75mg once daily) - Inadequate Stroke Prevention: \n  - Antiplatelet therapy provides minimal stroke prevention benefit in atrial fibrillation\n  - 20% relative risk reduction compared to 60-70% with effective anticoagulation\n  - NICE guidelines explicitly state aspirin should not be used for stroke prevention in AF\n  - May increase bleeding risk without proportional stroke prevention benefit\n  - Relegates patient to suboptimal treatment with preventable stroke risk\n  - Only indicated for patients with absolute contraindications to anticoagulation\n\n• Option D (Rivaroxaban 20mg once daily) - Acceptable but Less Optimal DOAC: \n  - Factor Xa inhibitor with proven efficacy but higher bleeding rates than apixaban\n  - ROCKET-AF trial showed non-inferiority to warfarin but included higher-risk population\n  - Higher gastrointestinal bleeding rates compared to apixaban in real-world studies\n  - Once-daily dosing may result in end-of-dose anticoagulant effect reduction\n  - Food requirements for optimal absorption may reduce adherence\n  - More expensive than apixaban without superior clinical outcomes\n\n• Option E (No anticoagulation, rate control only) - Unacceptable Stroke Risk: \n  - CHA₂DS₂-VASc score of 4 represents high stroke risk requiring anticoagulation\n  - Withholding anticoagulation results in preventable stroke with devastating consequences\n  - Rate control alone does not address thromboembolic risk in atrial fibrillation\n  - Contradicts all major international guidelines for atrial fibrillation management\n  - Represents substandard care with significant medico-legal implications\n  - Only acceptable if absolute contraindications to all anticoagulant options exist",
+          mnemonic: "APEX = Apixaban Excels for stroke Prevention",
+          guidelineSummary: {
+            title: "Atrial Fibrillation Management (250-word Summary)",
+            content: "• Risk Assessment: \n  - CHA₂DS₂-VASc score for stroke risk: age ≥75 (2 points), stroke/TIA/thromboembolism (2), age 65-74, hypertension, diabetes, heart failure, vascular disease, female sex (1 point each)\n  - HAS-BLED score for bleeding risk assessment\n  - Score ≥2 warrants anticoagulation consideration\n\n• Anticoagulation Strategy: \n  - First-line: DOACs (apixaban, rivaroxaban, edoxaban, dabigatran)\n  - Second-line: Warfarin (target INR 2.0-3.0)\n  - Avoid aspirin for stroke prevention\n\n• DOAC Selection: \n  - Apixaban: lowest bleeding risk, twice daily\n  - Rivaroxaban: once daily, take with food\n  - Edoxaban: once daily, avoid if CrCl >95\n  - Dabigatran: twice daily, higher GI bleeding\n\n• Rate vs Rhythm Control: \n  - Rate control first-line: beta-blockers, calcium channel blockers, digoxin\n  - Target heart rate <110 bpm (lenient control)\n  - Rhythm control for symptomatic patients or heart failure\n\n• Cardioversion Considerations: \n  - Anticoagulate 3 weeks before and 4 weeks after\n  - TOE-guided cardioversion if urgent\n  - Success rates higher within 48 hours of onset\n\n• Follow-up and Monitoring: \n  - Annual review of anticoagulation needs\n  - Monitor renal function for DOAC dosing\n  - Assess bleeding and stroke risk changes"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/cg180",
+              description: "NICE CG180: Atrial fibrillation - diagnosis and management"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/ta355",
+                description: "Apixaban for preventing stroke in atrial fibrillation"
+              },
+              {
+                title: "BNF Anticoagulation Guidance",
+                url: "https://bnf.nice.org.uk/treatment-summaries/anticoagulants/",
+                description: "British National Formulary - anticoagulation protocols"
+              },
+              {
+                title: "ESC AF Guidelines",
+                url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Atrial-Fibrillation-Guidelines",
+                description: "European Society of Cardiology atrial fibrillation guidelines"
+              },
+              {
+                title: "Stroke Association AF",
+                url: "https://www.stroke.org.uk/what-is-stroke/are-you-at-risk-of-stroke/atrial-fibrillation",
+                description: "Atrial fibrillation and stroke prevention guidance"
+              }
+            ]
+          }
+        },
+        {
+          id: "q7",
+          topic: "Depression Management",
+          question: "A 28-year-old woman presents with a 6-week history of persistent low mood, loss of interest in activities, fatigue, and poor concentration affecting her work performance. She has no suicidal ideation, psychotic symptoms, or substance use. PHQ-9 score is 14. What is the most appropriate initial management?",
+          options: {
+            A: "Sertraline 50mg once daily",
+            B: "Cognitive behavioral therapy (CBT) referral",
+            C: "Sertraline plus CBT combination",
+            D: "Watchful waiting for 2 weeks",
+            E: "Mirtazapine 15mg at bedtime"
+          },
+          answer: "B",
+          explanation: "Why Cognitive behavioral therapy (CBT) referral is correct:\n\n• NICE CG90 Evidence-Based First-Line Psychological Therapy: \n  - CBT represents the gold standard first-line treatment for moderate depression in adults\n  - Extensive meta-analyses demonstrate equivalent efficacy to antidepressants for moderate depression\n  - Provides lasting benefits beyond treatment duration, reducing relapse rates by 40-50%\n  - Addresses cognitive distortions and behavioral patterns underlying depressive episodes\n\n• Optimal Treatment for Moderate Depression (PHQ-9: 10-14): \n  - PHQ-9 score of 14 indicates moderate depression severity requiring active intervention\n  - Individual CBT shows superior long-term outcomes compared to medication alone\n  - Develops patient's own coping strategies and problem-solving skills\n  - Addresses psychosocial factors contributing to depression maintenance\n\n• Strong Evidence Base for Effectiveness: \n  - Multiple randomized controlled trials demonstrate 60-70% response rates\n  - Cochrane systematic reviews confirm CBT efficacy for depression across age groups\n  - Structured approach targeting automatic thoughts, cognitive distortions, and behavioral activation\n  - Maintains effectiveness in both individual and group therapy formats\n\n• Absence of Medication Side Effects: \n  - Avoids potential adverse effects of antidepressants including sexual dysfunction, weight gain, and withdrawal symptoms\n  - No drug interactions or contraindications to consider\n  - Suitable for patients planning pregnancy or with medical comorbidities\n  - Eliminates concerns about medication adherence and monitoring\n\n• Cost-Effectiveness and Accessibility: \n  - NICE health economic analyses support CBT as cost-effective intervention\n  - Available through NHS IAPT services with standardized protocols\n  - Computerized CBT options provide accessible alternatives\n  - Long-term cost savings through reduced relapse rates and healthcare utilization\n\n• Skill Development and Empowerment: \n  - Teaches transferable skills for managing future depressive episodes\n  - Enhances patient autonomy and self-efficacy\n  - Addresses workplace difficulties through behavioral activation and problem-solving\n  - Provides structured approach to mood monitoring and relapse prevention",
+          incorrectExplanation: "• Option A (Sertraline 50mg once daily) - Premature Pharmacological Intervention: \n  - NICE CG90 recommends psychological therapy as first-line for moderate depression\n  - Antidepressants reserved for severe depression, patient preference, or CBT failure\n  - May cause sexual dysfunction, gastrointestinal effects, and initial anxiety increase\n  - Withdrawal symptoms possible upon discontinuation\n  - Does not address underlying cognitive and behavioral patterns\n  - Should be considered if CBT unavailable or after psychological therapy failure\n\n• Option C (Sertraline plus CBT combination) - Unnecessary Combination: \n  - Combination therapy reserved for severe depression or treatment-resistant cases\n  - No additional benefit over CBT alone for moderate depression\n  - Increases treatment costs without improving outcomes\n  - Adds medication side effects without proportional benefit\n  - NICE guidelines recommend stepwise approach starting with psychological therapy\n  - Combination should be considered only if monotherapy ineffective\n\n• Option D (Watchful waiting for 2 weeks) - Inappropriate Delay: \n  - PHQ-9 score of 14 indicates moderate depression requiring active treatment\n  - Six-week duration suggests persistent depressive episode beyond natural recovery\n  - Functional impairment at work necessitates immediate intervention\n  - Watchful waiting only appropriate for mild depression or recent onset\n  - Delays access to effective treatment potentially worsening outcomes\n  - May result in further functional decline and increased treatment complexity\n\n• Option E (Mirtazapine 15mg at bedtime) - Suboptimal Antidepressant Choice: \n  - Sedating antidepressant with significant weight gain and metabolic effects\n  - Higher discontinuation rates due to side effect profile\n  - Not first-line antidepressant choice per NICE guidelines\n  - More appropriate for depression with insomnia or poor appetite\n  - Psychological therapy remains preferred first-line intervention\n  - Should be reserved for specific clinical indications or SSRI intolerance",
+          mnemonic: "CBT = Cognitive Behavioral Therapy first",
+          guidelineSummary: {
+            title: "Depression Management (250-word Summary)",
+            content: "• Assessment and Diagnosis: \n  - PHQ-9 questionnaire for severity assessment: mild (5-9), moderate (10-14), severe (15-19), very severe (20-27)\n  - Exclude bipolar disorder, psychotic symptoms, substance use\n  - Assess suicide risk and safeguarding needs\n\n• Treatment by Severity: \n  - Mild depression: watchful waiting, guided self-help, group CBT\n  - Moderate depression: individual CBT, counselling, or antidepressant\n  - Severe depression: combination therapy (CBT + antidepressant)\n\n• Psychological Therapies: \n  - CBT most evidence-based, 16-20 sessions over 4-6 months\n  - Interpersonal therapy, counselling, behavioral activation\n  - IAPT services provide stepped care approach\n\n• Antidepressant Selection: \n  - First-line: SSRIs (sertraline, citalopram, fluoxetine)\n  - Second-line: SNRIs, mirtazapine, tricyclics\n  - Start low dose, review at 2 weeks, optimize at 4-6 weeks\n\n• Monitoring and Follow-up: \n  - Review at 2 weeks initially, then monthly\n  - Continue treatment 6 months after remission\n  - Assess side effects, adherence, suicidal ideation\n\n• Relapse Prevention: \n  - Maintain therapy for 6-12 months post-remission\n  - Identify early warning signs and triggers\n  - Lifestyle interventions: exercise, sleep hygiene, social support"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/cg90",
+              description: "NICE CG90: Depression in adults - recognition and management"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/cg91",
+                description: "Depression in adults with chronic physical health problems"
+              },
+              {
+                title: "BNF Mental Health",
+                url: "https://bnf.nice.org.uk/treatment-summaries/mental-health/",
+                description: "British National Formulary - mental health treatment protocols"
+              },
+              {
+                title: "NHS IAPT",
+                url: "https://www.nhs.uk/mental-health/talking-therapies-medicine-treatments/talking-therapies-and-counselling/",
+                description: "Improving Access to Psychological Therapies program"
+              },
+              {
+                title: "Royal College of Psychiatrists",
+                url: "https://www.rcpsych.ac.uk/mental-health/problems-disorders/depression",
+                description: "Professional guidance for depression management"
+              }
+            ]
+          }
+        },
+        {
+          id: "q8",
+          topic: "Chronic Obstructive Pulmonary Disease",
+          question: "A 68-year-old man with COPD presents with worsening breathlessness and increased sputum production over 4 days. He has had 2 exacerbations in the past year. Chest examination reveals wheeze and reduced air entry bilaterally. Oxygen saturation is 88% on room air. What is the most appropriate initial treatment?",
+          options: {
+            A: "Prednisolone 30mg daily for 5 days plus antibiotics",
+            B: "Increase bronchodilator therapy only",
+            C: "Immediate non-invasive ventilation",
+            D: "High-flow oxygen to achieve SpO2 94-98%",
+            E: "Nebulized bronchodilators alone"
+          },
+          answer: "A",
+          explanation: "Why Prednisolone 30mg daily for 5 days plus antibiotics is correct:\n\n• NICE CG101 Evidence-Based Exacerbation Management: \n  - Combination therapy with corticosteroids and antibiotics represents standard care for COPD exacerbations\n  - Clinical presentation suggests infective exacerbation requiring dual therapy approach\n  - Prednisolone 30mg daily for 5 days reduces hospital admission rates by 25-30%\n  - Antibiotics target bacterial pathogens commonly responsible for COPD exacerbations\n\n• Optimal Corticosteroid Protocol: \n  - Prednisolone 30mg daily proven effective dose for reducing inflammation and improving outcomes\n  - Five-day course minimizes side effects while maintaining therapeutic benefit\n  - Reduces exacerbation duration by 1-2 days and improves lung function recovery\n  - Decreases risk of treatment failure and subsequent hospitalization\n\n• Targeted Antibiotic Therapy: \n  - Increased sputum production indicates bacterial infection requiring antibiotic treatment\n  - Common pathogens include Haemophilus influenzae, Streptococcus pneumoniae, Moraxella catarrhalis\n  - First-line antibiotics: amoxicillin, doxycycline, or clarithromycin based on local resistance patterns\n  - Reduces bacterial load and accelerates clinical recovery\n\n• Comprehensive Anti-Inflammatory Approach: \n  - Addresses both infectious and inflammatory components of COPD exacerbation\n  - Corticosteroids reduce airway inflammation and improve bronchodilator responsiveness\n  - Combination therapy more effective than either treatment alone\n  - Prevents progression to respiratory failure requiring ventilatory support\n\n• Evidence-Based Hospitalization Avoidance: \n  - Early appropriate treatment reduces need for hospital admission\n  - Maintains patient independence and quality of life\n  - Cost-effective approach reducing healthcare resource utilization\n  - Enables home-based recovery with appropriate safety netting\n\n• Established Safety Profile: \n  - Short-course prednisolone well-tolerated with minimal adverse effects\n  - Risk-benefit ratio strongly favors treatment in COPD exacerbations\n  - Monitoring for hyperglycemia in diabetic patients recommended\n  - Appropriate dose and duration minimize systemic side effects",
+          incorrectExplanation: "• Option B (Increase bronchodilator therapy only) - Insufficient for Exacerbation: \n  - Bronchodilator optimization alone inadequate for managing COPD exacerbation\n  - Does not address inflammatory component requiring corticosteroid therapy\n  - Fails to treat bacterial infection suggested by increased sputum production\n  - May result in treatment failure and delayed recovery\n  - NICE guidelines emphasize combination therapy for exacerbations\n  - Appropriate as adjunctive therapy but not sole treatment\n\n• Option C (Immediate non-invasive ventilation) - Premature Escalation: \n  - NIV reserved for patients with respiratory acidosis (pH <7.35) or hypercapnic respiratory failure\n  - Oxygen saturation of 88% does not automatically indicate NIV requirement\n  - Should be considered only after medical therapy optimization\n  - Requires specialized monitoring and expertise\n  - May be necessary if medical therapy fails or respiratory acidosis develops\n  - Patient requires trial of medical therapy first\n\n• Option D (High-flow oxygen to achieve SpO2 94-98%) - Inappropriate Target: \n  - COPD patients require controlled oxygen therapy with target SpO2 88-92%\n  - Higher oxygen targets risk carbon dioxide retention and respiratory acidosis\n  - May suppress hypoxic drive in chronic CO2 retainers\n  - Does not address underlying exacerbation requiring anti-inflammatory and antibiotic therapy\n  - Oxygen therapy should be titrated to achieve appropriate saturation levels\n  - Requires concurrent medical treatment for exacerbation\n\n• Option E (Nebulized bronchodilators alone) - Incomplete Treatment: \n  - Addresses bronchospasm component but ignores inflammation and infection\n  - Bronchodilators alone insufficient for managing COPD exacerbation\n  - May provide symptomatic relief but does not alter disease course\n  - Higher risk of treatment failure and hospitalization\n  - Should be used as part of comprehensive exacerbation management\n  - Requires combination with corticosteroids and antibiotics for optimal outcomes",
+          mnemonic: "COPD = Corticosteroids plus Oral antibiotics for Pulmonary Disease",
+          guidelineSummary: {
+            title: "COPD Exacerbation Management (250-word Summary)",
+            content: "• Definition and Recognition: \n  - Acute worsening of respiratory symptoms beyond normal variation\n  - Increased dyspnea, cough, sputum volume/purulence\n  - May include systemic symptoms: fever, malaise, reduced exercise tolerance\n\n• Severity Assessment: \n  - Mild: managed at home with bronchodilator increase\n  - Moderate: requires corticosteroids ± antibiotics\n  - Severe: may need hospital admission, oxygen, NIV\n\n• Pharmacological Treatment: \n  - Corticosteroids: prednisolone 30mg daily for 5 days\n  - Antibiotics if purulent sputum: amoxicillin, doxycycline, clarithromycin\n  - Bronchodilators: increase frequency, consider nebulized therapy\n\n• Oxygen Therapy: \n  - Target SpO2 88-92% in COPD patients\n  - Controlled oxygen delivery to avoid CO2 retention\n  - Monitor for hypercapnic respiratory failure\n\n• Indications for Hospital Admission: \n  - Severe breathlessness, cyanosis, peripheral edema\n  - Impaired consciousness, acute confusion\n  - Oxygen saturation <90% despite controlled oxygen\n  - Social circumstances preventing home management\n\n• Non-Invasive Ventilation: \n  - Indicated for respiratory acidosis (pH 7.25-7.35)\n  - Hypercapnic respiratory failure despite medical therapy\n  - Reduces intubation rates and mortality\n\n• Discharge Planning: \n  - Ensure adequate bronchodilator therapy\n  - Complete antibiotic course, steroid weaning if required\n  - Follow-up within 2-4 weeks"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/cg101",
+              description: "NICE CG101: Chronic obstructive pulmonary disease - management"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/ng114",
+                description: "Chronic obstructive pulmonary disease in over 16s"
+              },
+              {
+                title: "BNF Respiratory Guidance",
+                url: "https://bnf.nice.org.uk/treatment-summaries/chronic-obstructive-pulmonary-disease/",
+                description: "British National Formulary - COPD treatment protocols"
+              },
+              {
+                title: "British Thoracic Society",
+                url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/copd/",
+                description: "BTS guidelines for COPD management"
+              },
+              {
+                title: "GOLD Guidelines",
+                url: "https://goldcopd.org/2024-gold-report/",
+                description: "Global Initiative for Chronic Obstructive Lung Disease"
+              }
+            ]
+          }
+        },
+        {
+          id: "q9",
+          topic: "Gastroesophageal Reflux Disease",
+          question: "A 42-year-old woman presents with a 3-month history of heartburn and regurgitation occurring 3-4 times per week, particularly after meals and when lying down. She has no alarm symptoms. Lifestyle modifications have provided minimal relief. What is the most appropriate next management step?",
+          options: {
+            A: "Proton pump inhibitor therapy for 4-8 weeks",
+            B: "H2 receptor antagonist therapy",
+            C: "Urgent upper endoscopy",
+            D: "Helicobacter pylori testing",
+            E: "Antacid therapy only"
+          },
+          answer: "A",
+          explanation: "Why Proton pump inhibitor therapy for 4-8 weeks is correct:\n\n• NICE CG184 First-Line Acid Suppression Therapy: \n  - PPIs represent the most effective first-line treatment for GERD symptoms\n  - Superior acid suppression compared to H2 receptor antagonists and antacids\n  - Omeprazole 20mg, lansoprazole 30mg, or equivalent provide optimal symptom control\n  - Evidence-based duration of 4-8 weeks allows adequate therapeutic trial\n\n• Superior Efficacy for Symptom Control: \n  - Clinical trials demonstrate 70-85% symptom improvement with PPI therapy\n  - More effective than H2 receptor antagonists for healing esophagitis and symptom relief\n  - Provides rapid onset of action with significant improvement within 2-3 days\n  - Maintains consistent acid suppression throughout 24-hour period\n\n• Optimal Pharmacological Mechanism: \n  - Irreversible inhibition of gastric H+/K+-ATPase (proton pump)\n  - Achieves profound acid suppression with gastric pH >4 for 12-16 hours daily\n  - Blocks acid secretion regardless of stimulatory pathway (histamine, gastrin, acetylcholine)\n  - Long duration of action due to covalent binding to proton pump\n\n• Evidence-Based Treatment Duration: \n  - 4-8 week course provides adequate time for esophageal healing\n  - Allows assessment of symptom response before considering step-up therapy\n  - Balances therapeutic efficacy with cost-effectiveness\n  - Permits evaluation of underlying GERD severity\n\n• Appropriate for Uncomplicated GERD: \n  - Absence of alarm symptoms allows empirical PPI therapy\n  - Avoids unnecessary endoscopic investigation in typical GERD presentation\n  - Cost-effective approach for symptom-based diagnosis\n  - Therapeutic response supports GERD diagnosis\n\n• Established Safety Profile: \n  - Generally well-tolerated with minimal adverse effects\n  - Short-term use associated with low risk of complications\n  - Interactions primarily with clopidogrel and warfarin requiring monitoring\n  - Appropriate for most patients without contraindications",
+          incorrectExplanation: "• Option B (H2 receptor antagonist therapy) - Less Effective Acid Suppression: \n  - H2 antagonists provide inferior symptom control compared to PPIs\n  - Ranitidine and famotidine achieve less profound acid suppression\n  - Development of tolerance with reduced efficacy over time\n  - NICE guidelines recommend PPIs as first-line therapy\n  - May be appropriate for mild symptoms or PPI intolerance\n  - Results in suboptimal symptom control and patient satisfaction\n\n• Option C (Urgent upper endoscopy) - Inappropriate for Uncomplicated GERD: \n  - Endoscopy reserved for patients with alarm symptoms or treatment failure\n  - Alarm symptoms include dysphagia, weight loss, anemia, persistent vomiting\n  - Cost-ineffective approach for typical GERD presentation\n  - Empirical PPI therapy more appropriate initial strategy\n  - Endoscopy should be considered after PPI failure or symptom progression\n  - Invasive procedure with associated risks and patient discomfort\n\n• Option D (Helicobacter pylori testing) - Irrelevant for GERD Management: \n  - H. pylori testing not indicated for typical GERD symptoms\n  - May be appropriate for dyspepsia or peptic ulcer disease\n  - Does not address acid reflux pathophysiology\n  - Delays appropriate anti-reflux therapy\n  - Test-and-treat strategy reserved for uninvestigated dyspepsia in specific populations\n  - Not recommended in NICE guidelines for GERD management\n\n• Option E (Antacid therapy only) - Inadequate for Persistent Symptoms: \n  - Antacids provide temporary symptomatic relief but do not address underlying acid production\n  - Insufficient for managing frequent symptoms occurring 3-4 times weekly\n  - Short duration of action requiring frequent dosing\n  - Does not prevent esophageal damage from ongoing acid exposure\n  - Appropriate for occasional symptoms but inadequate for chronic GERD\n  - Lifestyle modifications plus antacids have already failed to provide adequate relief",
+          mnemonic: "PPI = Powerful Proton Pump Inhibition",
+          guidelineSummary: {
+            title: "GERD Management (250-word Summary)",
+            content: "• Definition and Symptoms: \n  - Gastroesophageal reflux disease with typical symptoms: heartburn, regurgitation\n  - Atypical symptoms: chest pain, chronic cough, hoarseness, dental erosion\n  - Diagnosis primarily symptom-based in absence of alarm features\n\n• Lifestyle Modifications: \n  - Weight loss, smoking cessation, alcohol reduction\n  - Avoid trigger foods (spicy, fatty, acidic, caffeine)\n  - Elevate head of bed, avoid late meals\n  - Smaller, more frequent meals\n\n• Pharmacological Treatment: \n  - First-line: PPI therapy (omeprazole 20mg, lansoprazole 30mg) for 4-8 weeks\n  - Second-line: H2 receptor antagonists or antacids\n  - Long-term PPI therapy if symptoms recur\n\n• Alarm Symptoms Requiring Endoscopy: \n  - Dysphagia, odynophagia, weight loss\n  - Gastrointestinal bleeding, iron deficiency anemia\n  - Persistent vomiting, family history of upper GI cancer\n  - Age >55 with new-onset symptoms\n\n• Complications: \n  - Erosive esophagitis, peptic stricture\n  - Barrett's esophagus, adenocarcinoma risk\n  - Respiratory complications from aspiration\n\n• Management of Refractory Symptoms: \n  - Optimize PPI therapy (timing, dose, compliance)\n  - Consider twice-daily dosing\n  - Alternative PPI if inadequate response\n  - Investigate for other causes or complications"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/cg184",
+              description: "NICE CG184: Gastro-oesophageal reflux disease and dyspepsia"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/cg27",
+                description: "Barrett's oesophagus and stage 1 oesophageal adenocarcinoma"
+              },
+              {
+                title: "BNF Gastroenterology",
+                url: "https://bnf.nice.org.uk/treatment-summaries/gastro-intestinal-system/",
+                description: "British National Formulary - gastrointestinal treatment protocols"
+              },
+              {
+                title: "BSG Guidelines",
+                url: "https://www.bsg.org.uk/clinical-guidance/",
+                description: "British Society of Gastroenterology clinical guidance"
+              },
+              {
+                title: "RCGP Guidance",
+                url: "https://www.rcgp.org.uk/clinical-and-research/resources/toolkits",
+                description: "Royal College of General Practitioners clinical resources"
+              }
+            ]
+          }
+        },
+        {
+          id: "q10",
+          topic: "Osteoporosis Prevention",
+          question: "A 65-year-old postmenopausal woman presents for fracture risk assessment. She has a history of early menopause at age 48 and her mother had a hip fracture at age 70. She is otherwise healthy with no current medications. FRAX score indicates 10-year major osteoporotic fracture risk of 15%. What is the most appropriate management?",
+          options: {
+            A: "Alendronate 70mg weekly plus calcium and vitamin D",
+            B: "Calcium and vitamin D supplementation only",
+            C: "DEXA scan before treatment decision",
+            D: "Lifestyle advice only",
+            E: "Hormone replacement therapy"
+          },
+          answer: "A",
+          explanation: "Why Alendronate 70mg weekly plus calcium and vitamin D is correct:\n\n• NICE CG146 Evidence-Based Fracture Prevention: \n  - FRAX score of 15% exceeds treatment threshold of 10% for major osteoporotic fractures\n  - Alendronate represents first-line bisphosphonate therapy for osteoporosis prevention\n  - Combination with calcium and vitamin D optimizes bone mineral density improvement\n  - Reduces vertebral fracture risk by 40-50% and hip fracture risk by 30-40%\n\n• Optimal Bisphosphonate Selection: \n  - Alendronate has most extensive evidence base for fracture prevention\n  - Weekly dosing (70mg) improves compliance compared to daily regimens\n  - Superior gastrointestinal tolerability compared to daily formulations\n  - Generic availability ensures cost-effectiveness\n\n• Comprehensive Bone Health Optimization: \n  - Calcium supplementation (1000-1200mg daily) supports bone mineralization\n  - Vitamin D (800-1000 IU daily) enhances calcium absorption and reduces falls\n  - Combination therapy more effective than bisphosphonate alone\n  - Addresses multiple pathways of bone metabolism\n\n• Strong Evidence for Fracture Risk Reduction: \n  - Fracture Intervention Trial demonstrated significant vertebral and hip fracture reduction\n  - Real-world studies confirm effectiveness across diverse populations\n  - Number needed to treat: 100 patients for 3 years to prevent one hip fracture\n  - Maintains bone density improvements with continued therapy\n\n• Appropriate for High-Risk Patient Profile: \n  - Early menopause increases fracture risk through prolonged estrogen deficiency\n  - Maternal hip fracture indicates genetic predisposition\n  - Age 65 represents optimal time for intervention initiation\n  - FRAX score accurately predicts fracture probability\n\n• Established Safety and Monitoring: \n  - Generally well-tolerated with proper administration instructions\n  - Rare serious adverse events (osteonecrosis jaw, atypical fractures) with long-term use\n  - Requires adequate calcium and vitamin D status\n  - Annual review of efficacy and safety",
+          incorrectExplanation: "• Option B (Calcium and vitamin D supplementation only) - Insufficient Fracture Prevention: \n  - Nutritional supplementation alone inadequate for high fracture risk (FRAX 15%)\n  - Calcium and vitamin D provide modest bone density benefits without anti-resorptive therapy\n  - Meta-analyses show minimal fracture reduction with supplementation alone\n  - Does not address accelerated bone loss in postmenopausal women\n  - Appropriate as adjunctive therapy but not monotherapy\n  - Undertreatment given established fracture risk requiring bisphosphonate therapy\n\n• Option C (DEXA scan before treatment decision) - Unnecessary Delay: \n  - FRAX score already incorporates bone density estimation\n  - Treatment indicated based on fracture risk assessment without DEXA requirement\n  - NICE guidelines support treatment based on clinical risk factors\n  - DEXA scanning adds cost and delays appropriate therapy\n  - May be useful for monitoring treatment response\n  - Clinical risk assessment sufficient for treatment initiation\n\n• Option D (Lifestyle advice only) - Inadequate for High Fracture Risk: \n  - Lifestyle modifications important but insufficient for FRAX score 15%\n  - Exercise and smoking cessation provide modest fracture risk reduction\n  - Weight-bearing exercise improves bone density by 1-2% annually\n  - Does not address underlying pathophysiology of postmenopausal bone loss\n  - Appropriate as adjunctive measure but not primary intervention\n  - Contradicts evidence-based guidelines for fracture prevention\n\n• Option E (Hormone replacement therapy) - Inappropriate Risk-Benefit Profile: \n  - HRT carries increased risks of breast cancer, stroke, and venous thromboembolism\n  - Not recommended as first-line therapy for osteoporosis prevention\n  - Bisphosphonates provide superior fracture prevention with better safety profile\n  - Women's Health Initiative demonstrated unfavorable risk-benefit ratio\n  - May be considered for younger postmenopausal women with severe symptoms\n  - Requires careful individual risk assessment before consideration",
+          mnemonic: "ALEX = Alendronate EXcellent for osteoporosis",
+          guidelineSummary: {
+            title: "Osteoporosis Prevention (250-word Summary)",
+            content: "• Risk Assessment: \n  - FRAX tool estimates 10-year fracture probability\n  - Major risk factors: age, sex, previous fracture, parental hip fracture\n  - Secondary causes: steroids, rheumatoid arthritis, alcohol excess\n  - Treatment threshold: 10% major osteoporotic fracture risk\n\n• First-Line Pharmacotherapy: \n  - Alendronate 70mg weekly (or 10mg daily)\n  - Risedronate 35mg weekly alternative\n  - Calcium 1000-1200mg and vitamin D 800-1000 IU daily\n  - Take on empty stomach, remain upright 30 minutes\n\n• Lifestyle Modifications: \n  - Weight-bearing exercise, resistance training\n  - Smoking cessation, moderate alcohol consumption\n  - Adequate calcium intake (dairy, leafy greens)\n  - Fall prevention strategies\n\n• Monitoring and Duration: \n  - Annual review of adherence, side effects, fractures\n  - Consider treatment holiday after 5 years alendronate\n  - DEXA scan every 2-3 years if available\n  - Maintain calcium and vitamin D throughout\n\n• Second-Line Treatments: \n  - Denosumab 60mg 6-monthly injection\n  - Zoledronic acid 5mg annually\n  - Teriparatide for severe osteoporosis\n  - Raloxifene in selected postmenopausal women\n\n• Special Considerations: \n  - Contraindications: esophageal disorders, hypocalcemia\n  - Renal impairment: avoid if eGFR <35\n  - Dental procedures: inform dentist of bisphosphonate use"
+          },
+          links: {
+            primary: {
+              title: "UK Guidance",
+              url: "https://www.nice.org.uk/guidance/cg146",
+              description: "NICE CG146: Osteoporosis - assessing the risk of fragility fracture"
+            },
+            supplementary: [
+              {
+                title: "NICE Guidance",
+                url: "https://www.nice.org.uk/guidance/ta464",
+                description: "Bisphosphonates for treating osteoporosis"
+              },
+              {
+                title: "BNF Bone Metabolism",
+                url: "https://bnf.nice.org.uk/treatment-summaries/bone-metabolism/",
+                description: "British National Formulary - bone metabolism disorders"
+              },
+              {
+                title: "Royal Osteoporosis Society",
+                url: "https://theros.org.uk/healthcare-professionals/",
+                description: "Professional guidance for osteoporosis management"
+              },
+              {
+                title: "NOGG Guidelines",
+                url: "https://www.nogg.org.uk/",
+                description: "National Osteoporosis Guideline Group recommendations"
+              }
+            ]
+          }
+        },
+        {
+          id: "q11",
           topic: "Familial Hypercholesterolaemia",
           question: "A 33-year-old woman with familial hypercholesterolaemia is planning pregnancy. She is currently on atorvastatin 80 mg. What is the most appropriate advice?",
           options: {
