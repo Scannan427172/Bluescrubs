@@ -273,11 +273,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
               console.log(`No questions generated in batch ${batch + 1} for ${specialty.category}`);
             }
             
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 200));
             
           } catch (error) {
             console.error(`Error generating batch ${batch + 1} for ${specialty.category}:`, error);
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 500));
           }
         }
       }
