@@ -228,11 +228,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const generationResults = [];
 
       // Generate questions in batches for each specialty
-      console.log(`\n🚀 Starting 5000 question generation at ${new Date().toISOString()}`);
-      console.log(`📊 Breakdown: ${medicalSpecialties.map(s => `${s.category}: ${s.count}`).join(', ')}`);
+      console.log(`Starting 5000 question generation at ${new Date().toISOString()}`);
+      console.log(`Breakdown: ${medicalSpecialties.map(s => `${s.category}: ${s.count}`).join(', ')}`);
       
       for (const specialty of medicalSpecialties) {
-        console.log(`\n📚 Generating ${specialty.count} ${specialty.category} questions...`);
+        console.log(`Generating ${specialty.count} ${specialty.category} questions...`);
         
         // Generate in smaller batches to avoid token limits
         const batchSize = 5; // Reduced for cost efficiency
@@ -261,7 +261,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             });
             
             // Log progress and small delay to respect API limits
-            console.log(`✅ Batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/5000)`);
+            console.log(`Batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/5000)`);
             await new Promise(resolve => setTimeout(resolve, 1000));
             
           } catch (error) {
