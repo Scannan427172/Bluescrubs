@@ -206,9 +206,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Acute coronary syndromes - comprehensive management pathway"
               },
               {
-                title: "BNF Cardiac Guidance",
-                url: "https://bnf.nice.org.uk/treatment-summaries/cardiovascular-system/",
-                description: "British National Formulary - cardiovascular treatment protocols"
+                title: "NHS Cardiac Guidance",
+                url: "https://www.nhs.uk/conditions/heart-attack/",
+                description: "NHS guidance on heart attack management and treatment"
               },
               {
                 title: "ESC Guidelines",
@@ -255,12 +255,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Type 1 and 2 diabetes in children and young people"
               },
               {
-                title: "BNF Diabetes Guidance",
-                url: "https://bnf.nice.org.uk/treatment-summaries/diabetes/",
-                description: "British National Formulary - diabetes treatment protocols"
+                title: "NHS Diabetes Guidance",
+                url: "https://www.nhs.uk/conditions/type-2-diabetes/",
+                description: "NHS guidance on type 2 diabetes management"
               },
               {
-                title: "Diabetes UK Guidelines",
+                title: "Diabetes UK Guidelines", 
                 url: "https://www.diabetes.org.uk/professionals",
                 description: "Professional guidance for diabetes management"
               },
@@ -304,9 +304,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "Antimicrobial prescribing for respiratory tract infections"
               },
               {
-                title: "BNF Respiratory Guidance",
-                url: "https://bnf.nice.org.uk/treatment-summaries/respiratory-system/",
-                description: "British National Formulary - respiratory infection protocols"
+                title: "NHS Respiratory Guidance",
+                url: "https://www.nhs.uk/conditions/pneumonia/",
+                description: "NHS guidance on pneumonia treatment and management"
               },
               {
                 title: "British Thoracic Society",
@@ -358,9 +358,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "British National Formulary - hypertension treatment protocols"
               },
               {
-                title: "British Hypertension Society",
-                url: "https://bihsoc.org/resources/bp-measurement/",
-                description: "Professional guidance for blood pressure management"
+                title: "NHS Blood Pressure Guidance",
+                url: "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/",
+                description: "NHS guidance for blood pressure management"
               },
               {
                 title: "Stroke Association Guidelines",
