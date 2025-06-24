@@ -44,6 +44,7 @@ export default function Test() {
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -139,18 +140,44 @@ export default function Test() {
     { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
   ];
 
-  // Preload hero video for faster loading
+  // Enhanced video loading with autoplay handling
   useEffect(() => {
     console.log('Hero video path:', heroVideo);
-    const video = document.createElement('video');
-    video.onloadeddata = () => {
-      console.log('Video preload successful');
-      setHeroVideoLoaded(true);
+    
+    const handleVideoAutoplay = () => {
+      const videos = document.querySelectorAll('video');
+      videos.forEach((video) => {
+        if (video.paused) {
+          video.muted = true;
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              console.log('Video playing successfully');
+              setHeroVideoLoaded(true);
+            }).catch(error => {
+              console.log('Autoplay prevented:', error.message);
+              // Show video anyway, user can click to play
+              setHeroVideoLoaded(true);
+            });
+          }
+        }
+      });
     };
-    video.onerror = (e) => {
-      console.error('Video preload failed:', e);
+    
+    // Try autoplay after a short delay to ensure DOM is ready
+    const timer = setTimeout(handleVideoAutoplay, 500);
+    
+    // Also try on user interaction
+    const handleFirstClick = () => {
+      handleVideoAutoplay();
+      document.removeEventListener('click', handleFirstClick);
     };
-    video.src = heroVideo;
+    document.addEventListener('click', handleFirstClick);
+    
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('click', handleFirstClick);
+    };
   }, []);
 
   // Load available voices for TTS
@@ -837,20 +864,30 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             </div>
           )}
           <video 
-            src={heroVideo}
-            className={`absolute inset-0 w-full h-full object-cover opacity-70 transition-opacity duration-300 ${heroVideoLoaded ? 'opacity-70' : 'opacity-0'}`}
+            key="hero-video-selection"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${heroVideoLoaded ? 'opacity-70' : 'opacity-0'}`}
             autoPlay
             muted
             loop
             playsInline
-            onLoadedData={() => {
-              console.log('Video loaded successfully');
+            preload="metadata"
+            disablePictureInPicture
+            onCanPlay={() => {
+              console.log('Selection video can play');
+              setHeroVideoLoaded(true);
+            }}
+            onLoadedMetadata={() => {
+              console.log('Selection video metadata loaded');
               setHeroVideoLoaded(true);
             }}
             onError={(e) => {
-              console.error('Video failed to load:', e);
+              console.error('Selection video failed:', e);
+              setVideoError(true);
             }}
-          />
+          >
+            <source src={heroVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
           <div className="relative z-50 flex flex-col items-center justify-end pb-8 text-center px-4 sm:px-8 h-full hero-text" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
@@ -1206,6 +1243,13 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           muted
           loop
           playsInline
+          preload="auto"
+          controls={false}
+          webkit-playsinline="true"
+          onCanPlay={() => {
+            console.log('Hero video can play');
+            setHeroVideoLoaded(true);
+          }}
           onLoadedData={() => {
             console.log('Hero video loaded successfully');
             setHeroVideoLoaded(true);
