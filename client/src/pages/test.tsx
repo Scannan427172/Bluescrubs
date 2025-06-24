@@ -822,14 +822,6 @@ Feel free to ask about any aspect of this question or other medical topics you'r
 
         {/* Master Your Prep Section */}
         <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[400px] lg:h-[450px] mb-8 overflow-hidden">
-          {!heroVideoLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
-              <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          )}
-          {videoError && (
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700"></div>
-          )}
 
           
 
