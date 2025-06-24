@@ -16,6 +16,7 @@ export default function Landing() {
         <video 
           src={heroVideo}
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ transform: 'scale(0.8)', transformOrigin: 'center' }}
           autoPlay
           muted
           loop
