@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
+import heroVideo from '@assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4';
 
 interface Question {
   id: string;
@@ -44,6 +45,7 @@ export default function Test() {
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
 
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -1179,19 +1181,21 @@ Feel free to ask about any aspect of this question or other medical topics you'r
 
       {/* Hero Banner */}
       <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
-        {!heroImageLoaded && (
+        {!heroVideoLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
             <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
-        <img 
-          src={plab1BgImage}
-          alt="PLAB Test Practice"
-          className={`absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-300 ${heroImageLoaded ? 'opacity-60' : 'opacity-0'}`}
-          loading="eager"
-          decoding="async"
-          onLoad={() => setHeroImageLoaded(true)}
+        <video 
+          src={heroVideo}
+          className={`absolute inset-0 w-full h-full object-cover opacity-70 transition-opacity duration-300 ${heroVideoLoaded ? 'opacity-70' : 'opacity-0'}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onLoadedData={() => setHeroVideoLoaded(true)}
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
         <div className="relative z-50 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
