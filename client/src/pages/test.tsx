@@ -845,18 +845,40 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           DEBUG: PRACTICE MODE SELECTION ACTIVE
         </div>
         
-        {/* Video Hero Banner */}
-        <div className="w-full h-64 bg-blue-500 mb-4 flex items-center justify-center">
-          <div className="text-center text-white">
-            <h2 className="text-2xl font-bold mb-4">VIDEO BANNER TEST</h2>
+        {/* Video Hero Banner - Direct Test */}
+        <div className="w-full h-auto bg-purple-500 mb-4 p-8">
+          <div className="text-center text-white mb-4">
+            <h2 className="text-2xl font-bold mb-2">VIDEO TEST</h2>
+            <p>Video path: {heroVideo || 'undefined'}</p>
+          </div>
+          
+          {/* Direct video element */}
+          <div className="flex justify-center">
             <video 
               src={heroVideo}
-              className="w-full max-w-md h-48 object-cover border-4 border-white"
+              className="max-w-full h-64 border-4 border-white"
               controls
-              muted
-              loop
-              playsInline
-            />
+              preload="metadata"
+              onError={(e) => console.error('Video error:', e)}
+              onLoadedData={() => console.log('Video loaded successfully')}
+            >
+              <source src={heroVideo} type="video/mp4" />
+              <p className="text-white">Your browser does not support the video tag.</p>
+            </video>
+          </div>
+          
+          {/* Fallback: Try direct file path */}
+          <div className="mt-4 text-center">
+            <p className="text-white mb-2">Fallback test with direct path:</p>
+            <video 
+              src="/attached_assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4"
+              className="max-w-full h-64 border-4 border-yellow-300"
+              controls
+              preload="metadata"
+            >
+              <source src="/attached_assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4" type="video/mp4" />
+              <p className="text-white">Direct path failed.</p>
+            </video>
           </div>
         </div>
         
