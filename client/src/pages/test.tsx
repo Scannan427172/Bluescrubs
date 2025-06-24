@@ -1457,7 +1457,9 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   </Badge>
                   <div>
                     <h4 className="font-semibold text-green-800 mb-2">Correct Answer Explanation</h4>
-                    <p className="text-gray-700 leading-relaxed">{typeof currentQuestion.explanation === 'string' ? currentQuestion.explanation : currentQuestion.explanation[currentQuestion.answer]}</p>
+                    <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                      {typeof currentQuestion.explanation === 'string' ? currentQuestion.explanation : currentQuestion.explanation[currentQuestion.answer]}
+                    </div>
                   </div>
                 </div>
               </div>
