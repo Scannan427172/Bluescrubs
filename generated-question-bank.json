@@ -205319,5 +205319,283 @@
     },
     "category": "Gastroenterology",
     "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750807421308_0",
+    "topic": "Hypertension Management",
+    "question": "A 65-year-old man with a history of type 2 diabetes and chronic kidney disease stage 3 presents to your clinic with blood pressure readings consistently around 160/90 mmHg. He is currently on metformin and atorvastatin. What is the most appropriate first-line antihypertensive treatment?",
+    "options": {
+      "A": "Amlodipine 5mg once daily",
+      "B": "Lisinopril 10mg once daily",
+      "C": "Losartan 50mg once daily",
+      "D": "Hydrochlorothiazide 25mg once daily",
+      "E": "Bisoprolol 5mg once daily"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Amlodipine (a calcium channel blocker) is often used as a first-line agent for hypertension but not preferred in the presence of chronic kidney disease and diabetes where an ACE inhibitor is indicated.",
+      "B": "Lisinopril, an ACE inhibitor, is the correct choice as it offers renal protection in patients with diabetes and chronic kidney disease. NICE guidelines recommend ACE inhibitors as first-line therapy in such cases.",
+      "C": "Losartan is an ARB and can be used if an ACE inhibitor is not tolerated, but ACE inhibitors are typically preferred as first-line for renal protection.",
+      "D": "Thiazide diuretics are not recommended first-line in chronic kidney disease due to reduced efficacy in patients with reduced renal function.",
+      "E": "Beta-blockers like bisoprolol are not first-line antihypertensive agents unless there are other indications such as heart failure or angina."
+    },
+    "mnemonic": "ACE for renal ACEtivation",
+    "guidelineSummary": {
+      "title": "Hypertension with CKD (250-word Summary)",
+      "content": "• **Definition & Diagnosis**: \n  - Hypertension is defined as persistently elevated blood pressure ≥140/90 mmHg\n  - Diagnosis confirmed with ambulatory/home BP monitoring\n\n• **First-line Treatment**: \n  - ACE inhibitors are recommended for patients with diabetes and chronic kidney disease due to renal protective effects\n  - Examples include lisinopril and ramipril\n\n• **Alternative Options**: \n  - Angiotensin II receptor blockers (ARBs) like losartan if ACE inhibitors are not tolerated\n  - Calcium channel blockers if additional control needed\n\n• **Monitoring**: \n  - Regular monitoring of renal function and electrolytes when on ACE inhibitors\n  - Adjust doses based on GFR and clinical response\n\n• **Lifestyle Modifications**: \n  - Encourage healthy diet, regular exercise, and smoking cessation\n  - Limit salt intake and manage weight effectively\n\n• **Safety Netting**: \n  - Advise patients to report symptoms such as persistent cough or angioedema\n  - Regular follow-up appointments to adjust treatment as needed"
+    },
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng28",
+        "description": "NICE NG28: Hypertension in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/hypertension/",
+          "description": "Clinical Knowledge Summaries - Hypertension overview"
+        },
+        {
+          "title": "NHS Hypertension Guidance",
+          "url": "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/treatment/",
+          "description": "NHS treatment guidelines for hypertension"
+        },
+        {
+          "title": "BNF Hypertension Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - Hypertension treatment protocols"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750807421308_1",
+    "topic": "Heart Failure Management",
+    "question": "A 72-year-old woman with a history of ischemic heart disease and reduced ejection fraction heart failure presents with worsening dyspnea and ankle swelling. Her current medications include aspirin, atorvastatin, and lisinopril. Her blood pressure is 130/75 mmHg, and heart rate is 88 bpm. What is the most appropriate medication to add for optimizing her heart failure management?",
+    "options": {
+      "A": "Amlodipine 5mg once daily",
+      "B": "Furosemide 40mg once daily",
+      "C": "Bisoprolol 2.5mg once daily",
+      "D": "Spironolactone 25mg once daily",
+      "E": "Digoxin 125mcg once daily"
+    },
+    "answer": "C",
+    "explanation": {
+      "A": "Amlodipine, a calcium channel blocker, is not typically used in heart failure with reduced ejection fraction due to potential negative inotropic effects.",
+      "B": "Furosemide, a loop diuretic, can help with symptom control by reducing fluid overload but does not improve mortality or disease progression.",
+      "C": "Bisoprolol, a beta-blocker, is correct as it reduces mortality and hospitalizations in heart failure with reduced ejection fraction. Initiation should be done carefully and gradually.",
+      "D": "Spironolactone is an aldosterone antagonist that can be used in heart failure to improve outcomes but is usually added after optimizing ACE inhibitors and beta-blockers.",
+      "E": "Digoxin is used in heart failure primarily to control symptoms and rate in atrial fibrillation rather than improving mortality in heart failure with reduced ejection fraction."
+    },
+    "mnemonic": "Beta-blockers Build the heart",
+    "guidelineSummary": {
+      "title": "Heart Failure with Reduced Ejection Fraction (250-word Summary)",
+      "content": "• **Definition & Diagnosis**: \n  - Heart failure with reduced ejection fraction (HFrEF) is characterized by symptoms of heart failure and an ejection fraction <40%\n\n• **First-line Treatment**: \n  - Combination of ACE inhibitors and beta-blockers is foundational\n  - Bisoprolol, carvedilol, or metoprolol succinate are recommended beta-blockers\n\n• **Additional Therapies**: \n  - Diuretics like furosemide for symptom control of fluid overload\n  - Aldosterone antagonists like spironolactone for additional mortality reduction\n\n• **Monitoring & Adjustment**: \n  - Regular follow-up to monitor renal function and electrolytes\n  - Gradual titration of beta-blockers and ACE inhibitors to target doses\n\n• **Lifestyle Modifications**: \n  - Sodium restriction, fluid balance, and regular exercise within limits\n  - Smoking cessation and alcohol moderation\n\n• **Safety Netting**: \n  - Advise patients to report increased weight gain, worsening symptoms, or side effects\n  - Regular review of medication adherence and tolerance"
+    },
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "NICE NG106: Chronic heart failure in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/heart-failure/",
+          "description": "Clinical Knowledge Summaries - Heart failure management"
+        },
+        {
+          "title": "NHS Heart Failure Guidance",
+          "url": "https://www.nhs.uk/conditions/heart-failure/treatment/",
+          "description": "NHS heart failure treatment guidelines"
+        },
+        {
+          "title": "BNF Heart Failure Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - Heart failure treatment protocols"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750807449698_0",
+    "topic": "Hypertension Management",
+    "question": "A 55-year-old man with no known medical history presents to your clinic for a routine check-up. His blood pressure is measured at 160/95 mmHg on two separate occasions. He has no symptoms and his physical examination is unremarkable. What is the most appropriate initial management to recommend?",
+    "options": {
+      "A": "Start amlodipine 5mg once daily",
+      "B": "Initiate lifestyle modifications and review in 3 months",
+      "C": "Prescribe lisinopril 10mg once daily",
+      "D": "Commence losartan 50mg once daily",
+      "E": "Refer to a cardiologist for further management"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Why Amlodipine 5mg once daily is correct:\n\n• NICE NG136 Recommendation:\n  - Amlodipine is the first-line treatment for hypertension in patients aged over 55 or of African or Caribbean descent\n  - Calcium channel blockers like amlodipine are preferred due to better efficacy in this demographic\n  - Endorsed by British Hypertension Society and consistent with international guidelines\n\n• Clinical Evidence:\n  - Proven to effectively lower blood pressure and reduce cardiovascular events\n  - Well-tolerated with a favorable side-effect profile\n  - Provides 24-hour blood pressure control with once-daily dosing\n\n• Mechanism of Action:\n  - Blocks calcium influx into vascular smooth muscle, causing vasodilation\n  - Reduces peripheral vascular resistance and lowers blood pressure\n\n• Safety Profile:\n  - Minimal impact on renal function, making it suitable for a wide range of patients\n  - Low incidence of significant drug interactions\n  - Common side effects include ankle swelling, which is typically mild\n\n• Practical Considerations:\n  - Easy to titrate dose if further blood pressure control is needed\n  - Can be combined with other antihypertensives if monotherapy is insufficient",
+      "B": "Why Lifestyle Modifications and Review in 3 months is incorrect:\n\n• Insufficient Initial Step:\n  - While lifestyle changes are essential, they should not delay pharmacotherapy in patients with stage 2 hypertension (BP > 160/100 mmHg)\n  - NICE guidelines recommend immediate drug therapy alongside lifestyle advice in such cases\n  - Delaying treatment could increase risk of cardiovascular events\n\n• Evidence-Based Practice:\n  - Studies show significant risk reduction when pharmacotherapy is initiated promptly\n  - Lifestyle modifications should complement, not replace, pharmacological intervention\n\n• Clinical Guidelines:\n  - NICE NG136 specifies starting antihypertensive medication in patients with stage 2 hypertension without waiting for lifestyle changes to take effect\n  - Prioritizes reducing immediate cardiovascular risk through effective blood pressure control",
+      "C": "Why Lisinopril 10mg once daily is incorrect:\n\n• Not First-line for this Demographic:\n  - NICE guidelines recommend ACE inhibitors for patients under 55 with hypertension\n  - Less effective as monotherapy in patients over 55 or of African or Caribbean descent\n\n• Efficacy Considerations:\n  - Calcium channel blockers or thiazide-like diuretics are preferred for better blood pressure control in this group\n  - Lisinopril may be added as a second-line agent if needed\n\n• Pharmacological Indications:\n  - ACE inhibitors like lisinopril are beneficial for patients with heart failure or diabetes with nephropathy\n  - Initial use in this patient would not align with current guidelines for a 55-year-old with primary hypertension",
+      "D": "Why Losartan 50mg once daily is incorrect:\n\n• Second-line Agent:\n  - ARBs like losartan are typically reserved for patients intolerant to ACE inhibitors\n  - Not recommended as first-line treatment for hypertension in patients over 55 without compelling indications\n\n• Clinical Guidelines:\n  - NICE NG136 suggests starting with a calcium channel blocker or thiazide-like diuretic in this age group\n  - Losartan may be considered if other first-line agents are contraindicated or not tolerated\n\n• Treatment Pathway:\n  - Should follow a stepwise approach, adding ARBs if initial therapy does not achieve target blood pressure\n  - Not the primary choice for monotherapy in this demographic",
+      "E": "Why Referral to a Cardiologist is incorrect:\n\n• Not Indicated for Initial Management:\n  - Primary hypertension management should begin in primary care settings\n  - Cardiologist referral reserved for resistant hypertension or secondary causes\n\n• Clinical Pathway:\n  - NICE guidelines emphasize initial management by primary care providers\n  - Referral may be considered after failure of initial treatment strategies or if complex conditions are suspected\n\n• Resource Utilization:\n  - Unnecessary specialist referral can delay treatment and increase healthcare costs\n  - Initial management with guideline-based therapy is effective for most cases of primary hypertension"
+    },
+    "mnemonic": "AMLO = Age More than 55, Let's Opt for Calcium Channel Blocker",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "NICE NG136: Hypertension in adults - diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "British Hypertension Society",
+          "url": "https://bihsoc.org/",
+          "description": "British Hypertension Society guidelines and resources"
+        },
+        {
+          "title": "BNF Hypertension Guidelines",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - Hypertension management protocols"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750807449699_1",
+    "topic": "Atrial Fibrillation Management",
+    "question": "A 70-year-old woman with a history of hypertension presents to your clinic with palpitations and shortness of breath. ECG confirms atrial fibrillation with a ventricular rate of 140 bpm. Her blood pressure is 130/80 mmHg. Echocardiogram shows normal left ventricular function. What is the most appropriate initial management?",
+    "options": {
+      "A": "Start bisoprolol 5mg once daily",
+      "B": "Initiate warfarin therapy immediately",
+      "C": "Refer for electrical cardioversion",
+      "D": "Prescribe digoxin 125mcg once daily",
+      "E": "Start amiodarone 200mg twice daily"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Why Bisoprolol 5mg once daily is correct:\n\n• NICE CG180 Recommendation:\n  - Beta-blockers like bisoprolol are first-line for rate control in atrial fibrillation\n  - Preferred due to efficacy in controlling heart rate and improving symptoms\n\n• Clinical Evidence:\n  - Studies show beta-blockers effectively control ventricular rate in atrial fibrillation\n  - Improve exercise tolerance and reduce symptoms such as palpitations\n\n• Mechanism of Action:\n  - Bisoprolol blocks beta-adrenergic receptors, reducing heart rate and myocardial oxygen demand\n  - Provides effective control of rapid ventricular response\n\n• Safety and Tolerability:\n  - Well-tolerated with a low incidence of adverse effects\n  - Can be titrated to achieve optimal heart rate control\n\n• Practical Considerations:\n  - Once-daily dosing improves compliance\n  - Can be combined with other agents if additional rate control is needed",
+      "B": "Why Warfarin Therapy Immediately is incorrect:\n\n• Not Primary Rate Control Agent:\n  - Warfarin is used for stroke prevention in atrial fibrillation, not for rate control\n  - Initiating anticoagulation is important but does not address acute heart rate control\n\n• Clinical Guidelines:\n  - NICE CG180 emphasizes rate control as initial management step in symptomatic atrial fibrillation\n  - Anticoagulation should be assessed separately based on stroke risk scores like CHA2DS2-VASc\n\n• Timing and Indications:\n  - Warfarin initiation should follow rate control management and stroke risk assessment\n  - Immediate rate control is prioritized to relieve symptoms and prevent hemodynamic instability",
+      "C": "Why Referral for Electrical Cardioversion is incorrect:\n\n• Not First-line for New Onset AF:\n  - Electrical cardioversion is considered for rhythm control in persistent or symptomatic AF\n  - Initial rate control is prioritized for acute management\n\n• Clinical Context:\n  - Patient is hemodynamically stable; no immediate need for electrical cardioversion\n  - NICE guidelines suggest considering cardioversion if rate control fails or if rhythm control is preferred long-term strategy\n\n• Treatment Strategy:\n  - Cardioversion may be considered after rate control and anticoagulation initiation in suitable candidates\n  - Not indicated as initial step without prior rate management attempt",
+      "D": "Why Digoxin 125mcg once daily is incorrect:\n\n• Not First-line for Rate Control in AF:\n  - Digoxin is used for rate control primarily in sedentary patients\n  - Less effective than beta-blockers or calcium channel blockers during exertion\n\n• Clinical Limitations:\n  - Provides insufficient rate control during physical activity\n  - Reserved for heart failure patients or when other agents are contraindicated\n\n• Mechanism of Action:\n  - Positive inotropic and negative chronotropic effects, but limited in high sympathetic states\n  - Beta-blockers offer superior rate control in active patients with atrial fibrillation\n\n• Guidelines Positioning:\n  - NICE CG180 supports digoxin as adjunctive therapy rather than primary agent in this context",
+      "E": "Why Amiodarone 200mg twice daily is incorrect:\n\n• Not First-line for Rate Control:\n  - Amiodarone is primarily used for rhythm control, not initial rate management\n  - Considered for rhythm control in patients with structural heart disease or when other agents fail\n\n• Side-effect Profile:\n  - Associated with significant side effects, including pulmonary and thyroid issues\n  - Reserved for specific indications where benefits outweigh risks\n\n• Clinical Guidelines:\n  - NICE CG180 recommends amiodarone for rhythm control in specific scenarios, not for initial rate management\n  - Beta-blockers and rate-limiting calcium channel blockers preferred for initial rate control strategy\n\n• Treatment Indications:\n  - Consider amiodarone in rhythm control strategy or when other rate control measures are inadequate\n  - Should not be used as first-line for rapid rate control in atrial fibrillation"
+    },
+    "mnemonic": "BETA = Best Early Treatment for Atrial fibrillation",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/cg180",
+        "description": "NICE CG180: Atrial fibrillation - management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Atrial Fibrillation Guidelines",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/atrial-fibrillation/",
+          "description": "British National Formulary - Atrial Fibrillation management protocols"
+        },
+        {
+          "title": "ESC Atrial Fibrillation Guidelines",
+          "url": "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines",
+          "description": "European Society of Cardiology - Atrial Fibrillation management guidelines"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750807453575_0",
+    "topic": "Acute Asthma Exacerbation Management",
+    "question": "A 25-year-old woman with a history of asthma presents to the emergency department with worsening shortness of breath and wheezing for the past 6 hours. She has used her salbutamol inhaler with little relief. Her respiratory rate is 28/min, oxygen saturation is 92% on room air, and peak expiratory flow is 50% of her personal best. What is the most appropriate immediate management?",
+    "options": {
+      "A": "Oral prednisolone 40mg",
+      "B": "Nebulised salbutamol 5mg",
+      "C": "Intravenous aminophylline",
+      "D": "Intramuscular adrenaline 0.5mg",
+      "E": "High-flow oxygen therapy"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Oral prednisolone 40mg is important for reducing inflammation in asthma but is not the immediate first step in acute exacerbation management.",
+      "B": "Nebulised salbutamol 5mg provides rapid bronchodilation and is the first-line treatment for acute asthma exacerbation in the emergency setting.",
+      "C": "Intravenous aminophylline is used in severe cases when there is no response to initial treatments but is not first-line due to potential side effects.",
+      "D": "Intramuscular adrenaline 0.5mg is used for anaphylaxis, not asthma exacerbation, unless there is a suspected allergic component.",
+      "E": "High-flow oxygen therapy is necessary for hypoxemia but should be used alongside bronchodilator therapy."
+    },
+    "mnemonic": "SALBUTAMOL = Start Asthma Liberation By Using This Acute Medication Orally (via nebuliser)",
+    "guidelineSummary": {
+      "title": "Asthma Exacerbation Management (250-word Summary)",
+      "content": "• Definition & Identification: \n  - Acute asthma exacerbation is characterized by increased respiratory symptoms and reduced peak expiratory flow.\n  - Symptoms include dyspnea, wheezing, chest tightness, and cough.\n\n• Immediate Management: \n  - Administer nebulised salbutamol 5mg for rapid bronchodilation.\n  - Oral corticosteroids (e.g., prednisolone 40mg) should be given to reduce airway inflammation.\n  - Oxygen therapy to maintain saturation >94%.\n\n• Additional Therapies: \n  - Ipratropium bromide may be added to nebulised treatment for severe cases.\n  - Assess need for intravenous magnesium sulfate if poor response to initial treatment.\n\n• Monitoring and Follow-up: \n  - Monitor respiratory rate, oxygen saturation, and peak flow.\n  - Reassess frequently and escalate care if response is inadequate.\n  - Discharge with a clear asthma action plan and follow-up arrangements."
+    },
+    "links": {
+      "primary": {
+        "title": "NICE Guideline",
+        "url": "https://www.nice.org.uk/guidance/ng80",
+        "description": "NICE NG80: Asthma: diagnosis, monitoring and chronic asthma management"
+      },
+      "supplementary": [
+        {
+          "title": "British Thoracic Society Guidelines",
+          "url": "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/asthma/",
+          "description": "British Thoracic Society Guidelines for the management of asthma"
+        },
+        {
+          "title": "NHS Asthma Overview",
+          "url": "https://www.nhs.uk/conditions/asthma/",
+          "description": "NHS overview of asthma, its symptoms, causes, and treatments"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750807453575_1",
+    "topic": "COPD Exacerbation Management",
+    "question": "A 68-year-old man with a history of chronic obstructive pulmonary disease (COPD) presents with increased breathlessness, productive cough with green sputum, and wheezing for 3 days. He is on regular inhaled tiotropium and salmeterol. His respiratory rate is 26/min, oxygen saturation is 87% on room air. What is the most appropriate immediate management step?",
+    "options": {
+      "A": "Start nebulised salbutamol and ipratropium",
+      "B": "Administer intravenous hydrocortisone",
+      "C": "Prescribe oral antibiotics",
+      "D": "Initiate non-invasive ventilation",
+      "E": "Provide high-flow oxygen therapy"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Nebulised salbutamol and ipratropium provide immediate bronchodilation, which is crucial in managing acute COPD exacerbation.",
+      "B": "Intravenous hydrocortisone may be required for severe exacerbations but is not the first step in management.",
+      "C": "Antibiotics are indicated if there are signs of bacterial infection but should be part of a broader management plan.",
+      "D": "Non-invasive ventilation is used for severe respiratory failure but is not the initial step without trying bronchodilators first.",
+      "E": "Supplemental oxygen should be used cautiously in COPD to avoid hypercapnia, aiming for saturations of 88-92%."
+    },
+    "mnemonic": "SABAs & SAMAs = Start And Manage Airways",
+    "guidelineSummary": {
+      "title": "COPD Exacerbation Management (250-word Summary)",
+      "content": "• Definition & Presentation: \n  - Exacerbations include increased dyspnea, cough, and sputum purulence.\n  - Typically caused by infections or environmental factors.\n\n• Immediate Management: \n  - Administer nebulised bronchodilators (salbutamol and ipratropium) immediately.\n  - Consider oral corticosteroids to reduce inflammation.\n\n• Oxygen Therapy: \n  - Use supplemental oxygen to maintain saturation between 88-92%.\n  - Avoid high-flow oxygen to prevent CO2 retention.\n\n• Further Interventions: \n  - Antibiotics if bacterial infection is suspected.\n  - Consider non-invasive ventilation for respiratory acidosis or severe hypoxemia.\n\n• Follow-up and Prevention: \n  - Ensure follow-up with primary care or respiratory specialist.\n  - Encourage smoking cessation and pneumococcal/flu vaccinations."
+    },
+    "links": {
+      "primary": {
+        "title": "NICE Guideline",
+        "url": "https://www.nice.org.uk/guidance/ng115",
+        "description": "NICE NG115: Chronic obstructive pulmonary disease in over 16s: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "British Thoracic Society Guidelines",
+          "url": "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/copd/",
+          "description": "British Thoracic Society Guidelines for the management of COPD"
+        },
+        {
+          "title": "NHS COPD Overview",
+          "url": "https://www.nhs.uk/conditions/chronic-obstructive-pulmonary-disease-copd/",
+          "description": "NHS overview of COPD, its symptoms, causes, and treatments"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
   }
 ]
