@@ -11,8 +11,8 @@ import heroVideo from "@assets/Standard_Mode_Have_her_walk_toward_camera_stop_17
 export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Video Hero Banner */}
-      <div className="relative w-full h-96 md:h-[500px] lg:h-[600px] overflow-hidden bg-gradient-to-r from-blue-600 to-purple-700 mb-0">
+      {/* Video Hero Banner - Portrait Layout */}
+      <div className="relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-blue-600 to-purple-700 mb-0">
         <video 
           src={heroVideo}
           className="absolute inset-0 w-full h-full object-cover"
@@ -28,27 +28,61 @@ export default function Landing() {
         {/* Video Overlay */}
         <div className="absolute inset-0 bg-black/50"></div>
         
-        {/* Hero Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-8">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Master Your PLAB Journey
-          </h1>
-          <p className="text-xl sm:text-2xl text-white/90 mb-8 max-w-4xl leading-relaxed">
-            Interactive medical learning with video simulations and adaptive practice
-          </p>
-          
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/dashboard">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-xl">
-                Start Practice
-              </Button>
-            </Link>
-            <Link href="/pricing">
-              <Button variant="outline" size="lg" className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl">
-                Learn More
-              </Button>
-            </Link>
+        {/* Hero Content - Portrait Layout */}
+        <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
+          <div className="max-w-7xl mx-auto w-full">
+            {/* Left Side - Content */}
+            <div className="hero-text text-white space-y-8 max-w-2xl">
+              <div className="space-y-6">
+                <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
+                  <Star className="w-5 h-5 mr-3 text-yellow-400" />
+                  <span className="text-sm font-semibold text-white">Comprehensive Medical Exam Preparation</span>
+                </div>
+                
+                <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-white">
+                  <span>Master Your</span>{" "}
+                  <div className="inline-flex items-center">
+                    <Logo size="xl" />
+                  </div>{" "}
+                  <span>Journey</span>
+                </h1>
+                
+                <p className="text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl">
+                  The world's most advanced AI-powered platform for NHSprep featuring{" "}
+                  <span className="text-blue-400 font-semibold">video OSCE simulations</span>,{" "}
+                  <span className="text-purple-400 font-semibold">adaptive learning</span>, and{" "}
+                  <span className="text-green-400 font-semibold">expert mentorship</span>.
+                </p>
+              </div>
+              
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Link href="/auth">
+                  <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
+                    <span className="text-white">Start Your Free Trial</span>
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
+                  </Button>
+                </Link>
+                <Link href="/pricing">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
+                    <span className="text-white">View Pricing</span>
+                  </Button>
+                </Link>
+                <Link href="/dashboard">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
+                    <Play className="mr-2 w-5 h-5 text-white" />
+                    <span className="text-white">Try Demo</span>
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center cursor-pointer hover:border-white/60 transition-colors">
+            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </div>
