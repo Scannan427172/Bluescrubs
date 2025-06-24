@@ -27,26 +27,26 @@ export default function Landing() {
         
 
         
-        {/* Hero Content - Portrait Layout */}
-        <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
+        {/* Hero Content - Repositioned to show more of video */}
+        <div className="relative z-10 flex items-end justify-start min-h-screen px-4 pb-20">
           <div className="max-w-7xl mx-auto w-full">
-            {/* Left Side - Content */}
-            <div className="hero-text text-white space-y-8 max-w-2xl">
+            {/* Left Side - Content moved to bottom */}
+            <div className="hero-text text-white space-y-6 max-w-2xl">
               <div className="space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
                   <Star className="w-5 h-5 mr-3 text-yellow-400" />
                   <span className="text-sm font-semibold text-white">Comprehensive Medical Exam Preparation</span>
                 </div>
                 
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-white">
+                <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-white">
                   <span>Master Your</span>{" "}
                   <div className="inline-flex items-center">
-                    <Logo size="xl" />
+                    <Logo size="lg" />
                   </div>{" "}
                   <span>Journey</span>
                 </h1>
                 
-                <p className="text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl">
+                <p className="text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl">
                   The world's most advanced AI-powered platform for NHSprep featuring{" "}
                   <span className="text-blue-400 font-semibold">video OSCE simulations</span>,{" "}
                   <span className="text-purple-400 font-semibold">adaptive learning</span>, and{" "}
