@@ -11,12 +11,12 @@ import heroVideo from "@assets/ScreenRecording_06-20-2025 20-48-38_1_17507984545
 export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Video Hero Banner - Portrait Layout */}
-      <div className="relative w-full min-h-screen overflow-hidden bg-gradient-to-r from-blue-600 to-purple-700 mb-0">
+      {/* Video Hero Banner - Full Screen */}
+      <div className="relative w-full h-screen overflow-hidden bg-gradient-to-r from-blue-600 to-purple-700 mb-0">
         <video 
           src={heroVideo}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ transform: 'scale(0.8)', transformOrigin: 'center' }}
+          style={{ objectFit: 'cover' }}
           autoPlay
           muted
           loop
