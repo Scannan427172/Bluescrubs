@@ -124,6 +124,8 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 24, 2025: Swapped routing - Test page content moved to PLAB 1 routes (/plab1, /plab1-new), original PLAB1New component moved to /test route
 - June 24, 2025: Removed all video elements and play buttons from PLAB 1 practice test interface, replaced with clean exam room image background
 - June 24, 2025: Updated landing page hero banner to use new video without logo branding for clean professional presentation
+- June 24, 2025: Made video hero banner full screen and repositioned "Journey" text under NHS prep logo with matching font sizes
+- June 24, 2025: Expanded question bank to 8 authentic medical questions including 3 cardiovascular scenarios with verified UK guideline links
 
 # User Preferences
 

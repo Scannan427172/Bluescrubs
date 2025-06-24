@@ -729,7 +729,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(question);
       }
 
-      // Return the actual questions without duplication
+      // Return the actual questions
       res.json(testQuestions);
     } catch (error) {
       console.error('Error fetching test questions:', error);
