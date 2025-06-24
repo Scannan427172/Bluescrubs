@@ -157,7 +157,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({
       status: getAIStatus(),
       enabled: isAIEnabled(),
-      message: "All AI features are currently suspended"
+      message: isAIEnabled() ? "AI services active" : "AI services suspended"
     });
   });
 
@@ -174,36 +174,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get the 8 template questions from current question bank
       const templateQuestions = [];
       
-      // Fetch existing questions to use as templates
-      const existingQuestions = [
-        {
-          id: "q1", 
-          topic: "Urinary Tract Infection Management",
-          category: "Infectious Diseases",
-          question: "A 28-year-old non-pregnant woman presents to your GP practice with a 2-day history of dysuria, urinary frequency, and suprapubic pain. She has no fever, flank pain, or vaginal discharge. Urine dipstick shows nitrites positive and leucocytes 2+. What is the most appropriate first-line antibiotic treatment?",
-          options: {
-            A: "Nitrofurantoin 100mg modified-release twice daily for 3 days",
-            B: "Trimethoprim 200mg twice daily for 3 days",
-            C: "Amoxicillin 500mg three times daily for 3 days", 
-            D: "Ciprofloxacin 250mg twice daily for 3 days",
-            E: "Fosfomycin 3g single dose"
-          },
-          answer: "A",
-          explanation: {
-            A: "Correct. NICE NG109 specifically recommends nitrofurantoin as first-line therapy for uncomplicated lower UTIs in non-pregnant women aged 16-64.",
-            B: "Incorrect. UK surveillance data demonstrates 20-30% resistance rates among E. coli isolates.",
-            C: "Incorrect. Poor intrinsic activity against gram-negative uropathogens.",
-            D: "Incorrect. Fluoroquinolone class reserved for complicated UTIs per NICE guidance.",
-            E: "Incorrect. Currently recommended for treatment failures or specific clinical circumstances."
-          },
-          mnemonic: "NITRO = Nice Initial Treatment Recommended Option",
-          links: {
-            NICE: "https://www.nice.org.uk/guidance/ng109",
-            CKS: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/",
-            BNF: "https://bnf.nice.org.uk/treatment-summaries/urinary-tract-infections/"
-          }
-        }
-      ];
+      // Fetch the 8 existing template questions
+      const testQuestionsResponse = await fetch(`http://localhost:5000/api/test/questions`);
+      const existingQuestions = await testQuestionsResponse.json();
 
       templateQuestions.push(...existingQuestions);
 
@@ -230,7 +203,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.log(`Generating ${specialty.count} ${specialty.category} questions...`);
         
         // Generate in smaller batches to avoid token limits
-        const batchSize = 50;
+        const batchSize = 10;
         const batches = Math.ceil(specialty.count / batchSize);
         
         for (let batch = 0; batch < batches; batch++) {
