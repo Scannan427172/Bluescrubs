@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Calculator, DollarSign, Zap } from 'lucide-react';
 
 export default function CostCalculator() {
-  const [questionCount, setQuestionCount] = useState(5000);
+  const [questionCount, setQuestionCount] = useState(500);
   const [batchSize, setBatchSize] = useState(5);
 
   const calculateCost = () => {
