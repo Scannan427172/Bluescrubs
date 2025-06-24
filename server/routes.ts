@@ -219,33 +219,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Template questions already added above
 
-      // Define medical specialties for 500 question generation
+      // Define medical specialties for 10 question generation
       const medicalSpecialties = [
-        { category: "cardiovascular", count: 80 },
-        { category: "respiratory", count: 60 },
-        { category: "infectious-diseases", count: 50 },
-        { category: "endocrinology", count: 50 },
-        { category: "gastroenterology", count: 50 },
-        { category: "neurology", count: 50 },
-        { category: "psychiatry", count: 40 },
-        { category: "emergency-medicine", count: 40 },
-        { category: "obstetrics-gynaecology", count: 30 },
-        { category: "paediatrics", count: 25 },
-        { category: "surgery", count: 15 }
+        { category: "cardiovascular", count: 2 },
+        { category: "respiratory", count: 2 },
+        { category: "infectious-diseases", count: 2 },
+        { category: "endocrinology", count: 2 },
+        { category: "gastroenterology", count: 2 }
       ];
 
       let totalGenerated = 0;
       const generationResults = [];
 
       // Generate questions in batches for each specialty
-      console.log(`Starting 500 question generation at ${new Date().toISOString()}`);
+      console.log(`Starting 10 question generation at ${new Date().toISOString()}`);
       console.log(`Breakdown: ${medicalSpecialties.map(s => `${s.category}: ${s.count}`).join(', ')}`);
       
       for (const specialty of medicalSpecialties) {
         console.log(`Generating ${specialty.count} ${specialty.category} questions...`);
         
         // Generate in smaller batches to avoid token limits
-        const batchSize = 3; // Smaller batches for reliability
+        const batchSize = 2; // Very small batches for reliability
         const batches = Math.ceil(specialty.count / batchSize);
         
         for (let batch = 0; batch < batches; batch++) {
@@ -277,7 +271,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               console.log(`No questions generated in batch ${batch + 1} for ${specialty.category}`);
             }
             
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 500));
             
           } catch (error) {
             console.error(`Error generating batch ${batch + 1} for ${specialty.category}:`, error);

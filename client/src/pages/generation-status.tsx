@@ -69,8 +69,8 @@ export default function GenerationStatus() {
       setStatus({
         success: true,
         totalGenerated: size,
-        target: 500,
-        progress: `${size}/500`,
+        target: 10,
+        progress: `${size}/10`,
         results: [],
         questionBankSize: size
       });
@@ -87,7 +87,7 @@ export default function GenerationStatus() {
     return () => clearInterval(interval);
   }, []);
 
-  const progressPercentage = status ? Math.min((status.totalGenerated / 500) * 100, 100) : 0;
+  const progressPercentage = status ? Math.min((status.totalGenerated / 10) * 100, 100) : 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
@@ -97,7 +97,7 @@ export default function GenerationStatus() {
             PLAB Question Bank Generation
           </h1>
           <p className="text-gray-600">
-            Generating 500 authentic medical questions using your 8 template questions
+            Generating 10 authentic medical questions using your 8 template questions
           </p>
         </div>
 
