@@ -837,7 +837,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
 
           <div className="relative z-50 flex flex-col items-center justify-end pb-8 text-center px-4 sm:px-8 h-full hero-text" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg">
-              PLAB 1 Practice Test
+              PLAB 1 Practice
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-white mb-6 sm:mb-8 max-w-3xl leading-relaxed drop-shadow-md font-medium">
               Choose your practice mode and start your medical preparation journey
@@ -1257,7 +1257,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
 
         <div className="relative z-40 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-            PLAB Practice Test
+            PLAB 1 Practice
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-3xl leading-relaxed">
             PLAB practice questions with detailed clinical explanations and verified UK medical guidance
