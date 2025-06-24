@@ -123,18 +123,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
           explanation: "Nitrofurantoin 100mg modified-release twice daily for 3 days represents the gold standard first-line treatment for uncomplicated lower urinary tract infections in non-pregnant women aged 16-64, as established by current UK clinical guidelines. This antibiotic demonstrates exceptional efficacy against the most common uropathogens, particularly Escherichia coli, which accounts for approximately 80-85% of uncomplicated UTIs. Nitrofurantoin's unique mechanism of action involves multiple bacterial targets, significantly reducing the likelihood of resistance development compared to other antibiotics. The drug achieves high concentrations specifically in urine while maintaining minimal systemic exposure, making it ideally suited for urinary tract infections. Clinical trials consistently demonstrate cure rates exceeding 90% for uncomplicated cystitis. The modified-release formulation ensures sustained therapeutic levels throughout the dosing interval, optimizing bacterial eradication while minimizing gastrointestinal side effects. Current UK surveillance data confirms that nitrofurantoin maintains excellent activity against common uropathogens, with resistance rates remaining below 5% for E. coli. The three-day duration strikes an optimal balance between therapeutic efficacy and minimizing unnecessary antibiotic exposure, supporting antimicrobial stewardship principles. This regimen aligns with evidence-based medicine recommendations and represents the most appropriate empirical choice for this clinical presentation, considering both individual patient factors and broader public health implications regarding antibiotic resistance.",
           mnemonic: "NITRO = Nice Initial Treatment Recommended Option",
           guidelineSummary: {
-            title: "UTI Management in Primary Care (250-word Summary)",
-            content: "• **Definition & Diagnosis**: Uncomplicated UTI presents with dysuria, frequency, urgency, suprapubic pain in healthy non-pregnant women aged 16-64. Diagnosis confirmed by positive urine dipstick (nitrites/leucocytes) or MSU culture. Consider alternative diagnoses in atypical presentations.\n\n• **First-line Treatment**: Nitrofurantoin 100mg modified-release BD for 3 days remains gold standard due to excellent E. coli coverage (>95% sensitivity), minimal resistance development, and concentrated urinary excretion. Avoid in eGFR <45ml/min.\n\n• **Alternative Options**: Trimethoprim 200mg BD for 3 days (second-line due to 20-30% E. coli resistance). Fosfomycin 3g single dose for treatment failures or intolerance. Avoid quinolones unless specifically indicated.\n\n• **When to Culture**: Suspected pyelonephritis, treatment failure, recurrent UTIs (≥2 episodes in 6 months), pregnancy, immunocompromised patients, or atypical organisms suspected.\n\n• **Safety Netting**: Advise patients to return if symptoms persist >48 hours post-treatment, develop fever/flank pain, or experience severe systemic symptoms. Provide written information on fluid intake and symptom monitoring.\n\n• **Prevention**: Recommend adequate hydration, complete bladder emptying, post-coital voiding for sexually active women. Consider cranberry products for recurrent cases, though evidence remains limited.\n\n• **Antibiotic Stewardship**: Reserve broad-spectrum antibiotics for complicated cases. Encourage symptom diaries for recurrent infections to identify triggers and optimize prevention strategies."
+            title: "UTI Management (250-word Summary)",
+            content: "• **Definition & Diagnosis**: \n  - Uncomplicated UTI presents with dysuria, frequency, urgency, suprapubic pain in healthy non-pregnant women aged 16-64\n  - Diagnosis confirmed by positive urine dipstick (nitrites/leucocytes) or MSU culture\n  - Consider alternative diagnoses in atypical presentations\n\n• **First-line Treatment**: \n  - Nitrofurantoin 100mg modified-release BD for 3 days remains gold standard\n  - Excellent E. coli coverage (>95% sensitivity), minimal resistance development\n  - Concentrated urinary excretion\n  - Avoid in eGFR <45ml/min\n\n• **Alternative Options**: \n  - Trimethoprim 200mg BD for 3 days (second-line due to 20-30% E. coli resistance)\n  - Fosfomycin 3g single dose for treatment failures or intolerance\n  - Avoid quinolones unless specifically indicated\n\n• **When to Culture**: \n  - Suspected pyelonephritis, treatment failure, recurrent UTIs (≥2 episodes in 6 months)\n  - Pregnancy, immunocompromised patients, or atypical organisms suspected\n\n• **Safety Netting**: \n  - Advise patients to return if symptoms persist >48 hours post-treatment\n  - Develop fever/flank pain, or experience severe systemic symptoms\n  - Provide written information on fluid intake and symptom monitoring\n\n• **Prevention**: \n  - Recommend adequate hydration, complete bladder emptying\n  - Post-coital voiding for sexually active women\n  - Consider cranberry products for recurrent cases, though evidence remains limited\n\n• **Antibiotic Stewardship**: \n  - Reserve broad-spectrum antibiotics for complicated cases\n  - Encourage symptom diaries for recurrent infections to identify triggers and optimize prevention strategies"
           },
           links: {
             primary: {
-              title: "Primary UK Guidance",
+              title: "UK Guidance",
               url: "https://www.nice.org.uk/guidance/ng109",
               description: "NICE NG109: Urinary tract infection (lower) - antimicrobial prescribing"
             },
             supplementary: [
               {
-                title: "CKS UTI Management",
+                title: "NICE Guidance",
                 url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/",
                 description: "Clinical Knowledge Summaries - comprehensive UTI guidance"
               },
@@ -176,7 +176,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           },
           links: {
             primary: {
-              title: "Primary UK Guidance",
+              title: "UK Guidance",
               url: "https://www.nice.org.uk/guidance/cg181",
               description: "NICE CG181: Familial hypercholesterolaemia - identification and management"
             },
