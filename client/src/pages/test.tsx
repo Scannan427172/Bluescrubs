@@ -879,8 +879,15 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             Your browser does not support the video tag.
           </video>
           
-          {/* Video Play Button - Always Visible */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[60] pointer-events-auto">
+          {/* Video Play Button - Force Visible */}
+          <div 
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            style={{ 
+              zIndex: 9999,
+              position: 'fixed',
+              pointerEvents: 'auto'
+            }}
+          >
             <button
               onClick={async (e) => {
                 e.stopPropagation();
@@ -903,9 +910,19 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   console.error('Video element not found');
                 }
               }}
-              className="bg-red-500 hover:bg-red-600 text-white p-6 rounded-full shadow-2xl transition-all duration-300 text-4xl font-bold border-4 border-white"
+              className="bg-red-500 hover:bg-red-600 text-white rounded-full shadow-2xl transition-all duration-300 font-bold border-4 border-white"
               title="Play/Pause background video"
-              style={{ pointerEvents: 'auto' }}
+              style={{ 
+                pointerEvents: 'auto',
+                padding: '24px',
+                fontSize: '32px',
+                lineHeight: '1',
+                minWidth: '80px',
+                minHeight: '80px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
             >
               ▶️
             </button>
@@ -1282,8 +1299,15 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           Your browser does not support the video tag.
         </video>
         
-        {/* Video Play Button - Always Visible */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[60] pointer-events-auto">
+        {/* Video Play Button - Force Visible */}
+        <div 
+          className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            zIndex: 9999,
+            position: 'fixed',
+            pointerEvents: 'auto'
+          }}
+        >
           <button
             onClick={async (e) => {
               e.stopPropagation();
@@ -1306,9 +1330,19 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                 console.error('Video element not found');
               }
             }}
-            className="bg-red-500 hover:bg-red-600 text-white p-6 rounded-full shadow-2xl transition-all duration-300 text-4xl font-bold border-4 border-white"
+            className="bg-red-500 hover:bg-red-600 text-white rounded-full shadow-2xl transition-all duration-300 font-bold border-4 border-white"
             title="Play/Pause background video"
-            style={{ pointerEvents: 'auto' }}
+            style={{ 
+              pointerEvents: 'auto',
+              padding: '24px',
+              fontSize: '32px',
+              lineHeight: '1',
+              minWidth: '80px',
+              minHeight: '80px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
             ▶️
           </button>
