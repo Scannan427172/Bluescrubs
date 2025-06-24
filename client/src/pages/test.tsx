@@ -44,6 +44,7 @@ export default function Test() {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
 
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
