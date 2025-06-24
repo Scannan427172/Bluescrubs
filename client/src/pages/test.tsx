@@ -1173,17 +1173,15 @@ Feel free to ask about any aspect of this question or other medical topics you'r
         </Button>
       </div>
 
-      {/* Hero Banner */}
+      {/* Hero Banner with Exam Room Image */}
       <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
-        {!heroVideoLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
-            <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
-        {videoError && (
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700"></div>
-        )}
-
+        {/* Background Image */}
+        <img 
+          src={examRoomImg} 
+          alt="Students taking PLAB exam"
+          className="absolute inset-0 w-full h-full object-cover opacity-70"
+        />
+        
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
         <div className="relative z-40 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
