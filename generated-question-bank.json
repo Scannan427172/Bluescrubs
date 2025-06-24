@@ -1749,5 +1749,741 @@
     },
     "category": "Infectious Diseases",
     "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805624108_0",
+    "topic": "Hypertension Management",
+    "question": "A 62-year-old woman presents to your clinic for routine follow-up. She has a history of hypertension, for which she is currently taking ramipril 10mg once daily. Her blood pressure readings over the past three months have averaged 160/95 mmHg. She denies any symptoms. What is the most appropriate next step in management?",
+    "options": {
+      "A": "Increase ramipril to 20mg once daily",
+      "B": "Add amlodipine 5mg once daily",
+      "C": "Switch to losartan 50mg once daily",
+      "D": "Start hydrochlorothiazide 12.5mg once daily",
+      "E": "Reassess blood pressure in 3 months"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Increasing ramipril to 20mg is not recommended as the maximum licensed dose is 10mg for hypertension management.",
+      "B": "Adding amlodipine 5mg is correct because NICE guidelines recommend a calcium channel blocker as a second-line agent in patients already taking an ACE inhibitor like ramipril, particularly if hypertension is not adequately controlled.",
+      "C": "Switching to losartan is not appropriate as this patient is already on an ACE inhibitor, and the guideline suggests adding a calcium channel blocker before considering an ARB swap.",
+      "D": "Starting hydrochlorothiazide is an option but not the first recommended add-on therapy according to NICE guidelines, which prefer a calcium channel blocker.",
+      "E": "Reassessing in 3 months would delay necessary treatment adjustments, risking ongoing uncontrolled hypertension."
+    },
+    "mnemonic": "RAM to AMLO - Ramp up with Amlodipine",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "NICE NG136: Hypertension in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Hypertension Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - Hypertension treatment protocols"
+        },
+        {
+          "title": "NHS Hypertension Overview",
+          "url": "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/",
+          "description": "NHS overview of high blood pressure management"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805624108_1",
+    "topic": "Heart Failure Management",
+    "question": "A 75-year-old man with a history of chronic heart failure presents to your clinic with increased breathlessness and ankle swelling. He is currently on bisoprolol 5mg once daily and furosemide 40mg once daily. His blood pressure is 130/80 mmHg and pulse is 68 bpm. What is the most appropriate next step in management?",
+    "options": {
+      "A": "Increase bisoprolol to 10mg once daily",
+      "B": "Add spironolactone 25mg once daily",
+      "C": "Switch furosemide to bumetanide 1mg once daily",
+      "D": "Add digoxin 125mcg once daily",
+      "E": "Increase furosemide to 80mg once daily"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Increasing bisoprolol is not indicated as the patient is already on an optimal dose for heart failure.",
+      "B": "Adding spironolactone is correct as it is recommended by NICE as an additional therapy in heart failure patients who remain symptomatic despite optimal doses of an ACE inhibitor and a beta-blocker.",
+      "C": "Switching to bumetanide is not necessary unless there is a specific reason such as poor furosemide efficacy or availability issues.",
+      "D": "Adding digoxin is not routinely recommended unless there are specific indications like atrial fibrillation or refractory symptoms.",
+      "E": "Increasing furosemide could be considered, but adding spironolactone provides added benefit of neurohormonal blockade and has mortality benefits in heart failure."
+    },
+    "mnemonic": "SPIR - Spironolactone for Persistent In Remission",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "NICE NG106: Chronic heart failure in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Heart Failure Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - Heart Failure treatment protocols"
+        },
+        {
+          "title": "NHS Heart Failure Overview",
+          "url": "https://www.nhs.uk/conditions/heart-failure/",
+          "description": "NHS overview of heart failure management"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805645699_0",
+    "topic": "Hypertension Management",
+    "question": "A 55-year-old man with a history of type 2 diabetes and dyslipidemia presents to your GP practice for a routine check-up. His blood pressure is 155/95 mmHg on two separate occasions. He has no history of cardiovascular disease or kidney impairment. What is the most appropriate first-line antihypertensive treatment?",
+    "options": {
+      "A": "Amlodipine 5mg once daily",
+      "B": "Ramipril 5mg once daily",
+      "C": "Bendroflumethiazide 2.5mg once daily",
+      "D": "Atenolol 50mg once daily",
+      "E": "Doxazosin 4mg once daily"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Amlodipine 5mg once daily - While calcium channel blockers like amlodipine are suitable for initial therapy in hypertension, particularly in older adults or those of African or Caribbean descent, ACE inhibitors like ramipril are preferred in patients with diabetes to provide renal protection.",
+      "B": "Ramipril 5mg once daily - This is the correct answer because NICE guidelines recommend ACE inhibitors as first-line treatment for hypertension in patients with diabetes, as they provide additional renal protective benefits.",
+      "C": "Bendroflumethiazide 2.5mg once daily - Thiazide diuretics are often used as first-line treatment in patients over 55 or those of African or Caribbean descent but are not the first choice for patients with diabetes.",
+      "D": "Atenolol 50mg once daily - Beta-blockers are generally not recommended as first-line therapy for hypertension unless there are compelling indications such as heart failure or angina.",
+      "E": "Doxazosin 4mg once daily - Alpha-blockers like doxazosin are not typically used as first-line agents in hypertension management and are usually reserved for specific cases such as resistant hypertension."
+    },
+    "mnemonic": "RAM for Renal And Metabolic",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "NICE NG136: Hypertension in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/hypertension/",
+          "description": "Clinical Knowledge Summaries - hypertension management"
+        },
+        {
+          "title": "BNF Antihypertensive Guidance",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - hypertension treatment protocols"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805645699_1",
+    "topic": "Heart Failure Management",
+    "question": "A 70-year-old woman presents to the emergency department with increasing shortness of breath and ankle swelling over the past week. On examination, she has bilateral basal crackles, elevated jugular venous pressure, and pitting edema to her shins. An echocardiogram shows an ejection fraction of 35%. What is the most appropriate initial treatment to improve her symptoms?",
+    "options": {
+      "A": "Furosemide 40mg orally",
+      "B": "Bisoprolol 2.5mg orally",
+      "C": "Spironolactone 25mg orally",
+      "D": "Ramipril 10mg orally",
+      "E": "Digoxin 125mcg orally"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Furosemide 40mg orally - This is the correct answer as loop diuretics like furosemide are effective in rapidly relieving symptoms of fluid overload in acute heart failure by promoting diuresis.",
+      "B": "Bisoprolol 2.5mg orally - Beta-blockers are important in the long-term management of heart failure but are not used for immediate symptomatic relief of fluid overload.",
+      "C": "Spironolactone 25mg orally - While beneficial in chronic heart failure management to counteract aldosterone effects, it is not the first choice for immediate relief of fluid overload.",
+      "D": "Ramipril 10mg orally - ACE inhibitors are essential in heart failure management to reduce mortality but do not provide rapid symptom relief in fluid overload.",
+      "E": "Digoxin 125mcg orally - Digoxin can be used in heart failure with atrial fibrillation to control heart rate but is not first-line for fluid overload symptoms."
+    },
+    "mnemonic": "Furosemide FOR Fluid Overload Relief",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "NICE NG106: Chronic heart failure in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/heart-failure/",
+          "description": "Clinical Knowledge Summaries - heart failure management"
+        },
+        {
+          "title": "BNF Heart Failure Guidance",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - heart failure treatment protocols"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750805646804_0",
+    "topic": "Asthma Management",
+    "question": "A 30-year-old woman presents to the emergency department with worsening shortness of breath, wheezing, and chest tightness over the past 2 hours. Her peak expiratory flow rate (PEFR) is 50% of her normal best. She has used her salbutamol inhaler with no significant improvement. On examination, she has a respiratory rate of 30 breaths per minute, pulse rate of 110 bpm, and oxygen saturation of 92% on room air. What is the most appropriate initial management step?",
+    "options": {
+      "A": "Nebulized salbutamol and ipratropium bromide",
+      "B": "Oral prednisolone",
+      "C": "Intravenous aminophylline",
+      "D": "Intravenous magnesium sulfate",
+      "E": "Intramuscular adrenaline"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Nebulized salbutamol and ipratropium bromide is correct because:\n\n• NICE NG80 Guidelines: \n  - Recommend nebulized beta-2 agonists as first-line for acute asthma exacerbations not responding to inhalers\n  - Combining with ipratropium enhances bronchodilation in moderate to severe attacks\n\n• Rapid Bronchodilation: \n  - Nebulized delivery provides immediate relief by directly relaxing airway smooth muscles\n  - Effective in rapidly reversing bronchospasm and improving airflow\n\n• Enhanced Airway Relaxation: \n  - Ipratropium adds anticholinergic effects, reducing mucus secretion and further dilating airways\n\n• Clinical Trials: \n  - Demonstrate improved outcomes and reduced hospitalization rates when combination used early in exacerbations",
+      "B": "Oral prednisolone is also crucial but acts over several hours to reduce inflammation, not immediately. It should be administered after initial bronchodilation therapy.",
+      "C": "Intravenous aminophylline is not first-line due to side effects and limited additional benefit over nebulized therapy. Reserved for severe cases unresponsive to initial treatments.",
+      "D": "Intravenous magnesium sulfate is a second-line option for severe cases after initial bronchodilators and steroids. It is not the immediate step.",
+      "E": "Intramuscular adrenaline is used in anaphylaxis, not asthma, and could cause unnecessary side effects in this scenario."
+    },
+    "mnemonic": "SABA = Salbutamol And Bromide (ipratropium) for Asthma",
+    "guidelineSummary": {
+      "title": "Asthma Exacerbation Management (250-word Summary)",
+      "content": "• **Initial Assessment:** \n  - Evaluate severity using PEFR, vital signs, and symptomatology\n  - Oxygen to maintain saturation >94%\n\n• **Immediate Therapy:** \n  - Nebulized salbutamol with ipratropium for moderate/severe cases\n  - Oral corticosteroids (prednisolone 40-50mg)\n\n• **Further Management:** \n  - Consider IV magnesium sulfate in life-threatening exacerbations\n  - Continuous monitoring for response and vital signs\n\n• **Discharge Planning:** \n  - Ensure patient receives asthma action plan\n  - Educate on trigger avoidance and inhaler technique\n\n• **Follow-up:** \n  - Arrange GP or asthma nurse review within 48 hours\n  - Reassessment of long-term control and medication adjustment"
+    },
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng80",
+        "description": "NICE NG80: Asthma: diagnosis, monitoring and chronic asthma management"
+      },
+      "supplementary": [
+        {
+          "title": "NHS Asthma Overview",
+          "url": "https://www.nhs.uk/conditions/asthma/",
+          "description": "NHS - Overview of asthma symptoms and management"
+        },
+        {
+          "title": "British Thoracic Society",
+          "url": "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/asthma/",
+          "description": "BTS/SIGN Asthma Management Guidelines"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750805646804_1",
+    "topic": "Pulmonary Embolism Diagnosis",
+    "question": "A 45-year-old woman presents to the emergency department with sudden onset of pleuritic chest pain and shortness of breath. She has a history of recent knee surgery 3 weeks ago. Her respiratory rate is 28 breaths per minute, pulse rate 110 bpm, blood pressure 120/80 mmHg, and oxygen saturation 90% on room air. A chest X-ray is normal. What is the next most appropriate investigation to confirm the diagnosis?",
+    "options": {
+      "A": "D-dimer test",
+      "B": "CT pulmonary angiography",
+      "C": "Ventilation-perfusion (V/Q) scan",
+      "D": "Echocardiogram",
+      "E": "Lower limb Doppler ultrasound"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "D-dimer test is useful for ruling out PE in low-risk cases, but not confirmatory. With high clinical suspicion post-surgery, a definitive test like CTPA is preferred.",
+      "B": "CT pulmonary angiography is correct because:\n\n• Gold Standard Imaging: \n  - Provides direct visualization of pulmonary arteries and detection of emboli\n  - High sensitivity and specificity for PE diagnosis\n\n• NICE NG158 Recommendations: \n  - Advocates CTPA as first-line confirmatory test in patients with high clinical suspicion\n\n• Rapid and Comprehensive: \n  - Quick procedure with ability to assess alternative diagnoses if PE is excluded\n\n• Widely Available: \n  - Accessible in most emergency settings, facilitating prompt diagnosis and management",
+      "C": "Ventilation-perfusion (V/Q) scan is an alternative when CTPA contraindicated (e.g., contrast allergy) but less specific and slower, not first-line in high suspicion cases.",
+      "D": "Echocardiogram can show right heart strain but does not confirm diagnosis of PE. It is supportive in cases of massive PE.",
+      "E": "Lower limb Doppler ultrasound detects DVT, which may suggest PE, but does not confirm its presence in the lungs. Used adjunctively."
+    },
+    "mnemonic": "CTPA = Check The Pulmonary Arteries",
+    "guidelineSummary": {
+      "title": "Pulmonary Embolism Management (250-word Summary)",
+      "content": "• **Risk Assessment:** \n  - Use Wells score to evaluate PE likelihood\n\n• **Initial Investigations:** \n  - D-dimer in low-risk patients to rule out PE\n\n• **Definitive Imaging:** \n  - CT pulmonary angiography for high-risk or positive D-dimer\n  - V/Q scan in cases where CTPA contraindicated\n\n• **Treatment Initiation:** \n  - Anticoagulation therapy upon suspicion if imaging delayed\n  - Low-molecular-weight heparin or direct oral anticoagulants\n\n• **Monitoring and Prevention:** \n  - Assess for bleeding risks\n  - Educate on long-term anticoagulation need\n  - Consider thromboprophylaxis in high-risk surgical patients"
+    },
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng158",
+        "description": "NICE NG158: Venous thromboembolism in over 16s: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "NHS Pulmonary Embolism",
+          "url": "https://www.nhs.uk/conditions/pulmonary-embolism/",
+          "description": "NHS - Information on pulmonary embolism symptoms and treatment"
+        },
+        {
+          "title": "BTS Guidelines",
+          "url": "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/venous-thromboembolic-disease/",
+          "description": "British Thoracic Society - VTE guidelines"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_infectious-diseases_1750805661969_0",
+    "topic": "Bacterial Meningitis Management",
+    "question": "A 19-year-old university student presents to the emergency department with a 6-hour history of severe headache, fever, and neck stiffness. On examination, he is photophobic and has a positive Kernig's sign. Blood cultures are taken, and a lumbar puncture reveals cloudy cerebrospinal fluid with elevated white blood cell count, predominantly neutrophils, low glucose, and high protein. What is the most appropriate empirical antibiotic therapy?",
+    "options": {
+      "A": "Ceftriaxone 2g IV every 12 hours",
+      "B": "Amoxicillin 2g IV every 6 hours",
+      "C": "Vancomycin 1g IV every 12 hours",
+      "D": "Cefotaxime 2g IV every 6 hours",
+      "E": "Metronidazole 500mg IV every 8 hours"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Ceftriaxone 2g IV every 12 hours is the correct choice for empirical treatment of suspected bacterial meningitis in adults, particularly for Neisseria meningitidis and Streptococcus pneumoniae, which are the most common causative organisms. NICE guidelines recommend ceftriaxone as first-line therapy due to its broad-spectrum coverage and excellent CNS penetration.",
+      "B": "Amoxicillin 2g IV every 6 hours is not the first choice for empirical therapy in this age group. It is typically added for Listeria monocytogenes coverage in older adults (>50 years) or those who are immunocompromised.",
+      "C": "Vancomycin 1g IV every 12 hours may be added if there is a suspicion of methicillin-resistant Staphylococcus aureus (MRSA) or penicillin-resistant pneumococci, but it is not the primary empirical choice.",
+      "D": "Cefotaxime 2g IV every 6 hours is an alternative to ceftriaxone, but ceftriaxone is more commonly used due to its longer half-life, allowing less frequent dosing.",
+      "E": "Metronidazole 500mg IV every 8 hours is not indicated for bacterial meningitis, as it covers anaerobic bacteria and is not effective against the typical organisms causing meningitis."
+    },
+    "mnemonic": "MENINgitis = Meningitis Empirical Needs Immediate Ceftriaxone",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng102",
+        "description": "NICE NG102: Bacterial meningitis and meningococcal septicaemia"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Meningitis Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/meningitis/",
+          "description": "British National Formulary - meningitis treatment protocols"
+        },
+        {
+          "title": "CKS Meningitis",
+          "url": "https://cks.nice.org.uk/topics/meningitis-bacterial/",
+          "description": "Clinical Knowledge Summaries - bacterial meningitis guidance"
+        }
+      ]
+    },
+    "category": "Infectious Diseases",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_infectious-diseases_1750805661969_1",
+    "topic": "Sepsis Recognition and Initial Management",
+    "question": "A 65-year-old woman is admitted to the hospital with a 2-day history of fever, chills, and confusion. Her vital signs are temperature 39.5°C, heart rate 110 bpm, blood pressure 90/60 mmHg, and respiratory rate 24 breaths per minute. Blood tests reveal elevated white cell count and lactate of 4.5 mmol/L. What is the most appropriate initial step in managing this patient?",
+    "options": {
+      "A": "Administer intravenous fluids and broad-spectrum antibiotics",
+      "B": "Start norepinephrine infusion immediately",
+      "C": "Order a CT scan of the abdomen and pelvis",
+      "D": "Administer antipyretics and monitor",
+      "E": "Initiate low-dose corticosteroids"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Administering intravenous fluids and broad-spectrum antibiotics is the cornerstone of initial sepsis management. NICE guidelines emphasize the importance of fluid resuscitation to maintain perfusion and timely administration of antibiotics to address the underlying infection.",
+      "B": "Starting norepinephrine infusion is indicated if the patient remains hypotensive after adequate fluid resuscitation, but it is not the first step.",
+      "C": "Ordering a CT scan can be part of identifying the source of infection, but it should not delay the immediate management of sepsis with fluids and antibiotics.",
+      "D": "Antipyretics can help with comfort but do not address the life-threatening aspects of sepsis such as hypotension and organ dysfunction.",
+      "E": "Low-dose corticosteroids may be considered in refractory septic shock, but not as an initial step in the management of sepsis."
+    },
+    "mnemonic": "SEPSIS = Start Early Protocol (Fluids & Antibiotics) in Septic Shock",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng51",
+        "description": "NICE NG51: Sepsis: recognition, diagnosis and early management"
+      },
+      "supplementary": [
+        {
+          "title": "Sepsis Trust",
+          "url": "https://sepsistrust.org/professional-resources/clinical-toolkit/",
+          "description": "UK Sepsis Trust - clinical toolkit for healthcare professionals"
+        },
+        {
+          "title": "NHS Sepsis Guidelines",
+          "url": "https://www.nhs.uk/conditions/sepsis/",
+          "description": "NHS guidance on sepsis management"
+        }
+      ]
+    },
+    "category": "Infectious Diseases",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750805670488_0",
+    "topic": "Asthma Management",
+    "question": "A 22-year-old woman with a history of asthma presents to the emergency department with acute shortness of breath, wheezing, and chest tightness. Her peak expiratory flow rate is 50% of her personal best. She has already taken 10 puffs of her salbutamol inhaler with minimal relief. Oxygen saturation is 91% on room air. What is the most appropriate next step in her management?",
+    "options": {
+      "A": "Administer high-flow oxygen",
+      "B": "Administer nebulized salbutamol",
+      "C": "Administer oral prednisolone",
+      "D": "Initiate non-invasive ventilation",
+      "E": "Refer for immediate intubation"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "High-flow oxygen is important but should be given in conjunction with bronchodilators. In asthmatic patients, nebulized bronchodilators have a more immediate effect on airway dilation.",
+      "B": "Nebulized salbutamol is the correct choice as it provides more effective bronchodilation for severe asthma exacerbations compared to inhaler use alone. It allows for larger doses and prolonged administration.",
+      "C": "Oral prednisolone is crucial for resolving inflammation but takes hours to exert its full effect. It should be administered after initial bronchodilator therapy.",
+      "D": "Non-invasive ventilation is not a first-line treatment for asthma exacerbations and is more appropriate for COPD exacerbations or when there is respiratory acidosis.",
+      "E": "Intubation is reserved for cases where there is impending respiratory failure or exhaustion despite maximal medical therapy."
+    },
+    "mnemonic": "SABA = Salbutamol Administered By Aerosol",
+    "guidelineSummary": {
+      "title": "Acute Asthma Exacerbation Management (250-word Summary)",
+      "content": "• Definition & Diagnosis: \n  - Acute asthma exacerbation characterized by increased wheezing, shortness of breath, chest tightness, and reduction in peak flow\n  - Diagnosis confirmed through clinical history and measured reduction in peak expiratory flow rate (PEFR)\n\n• Initial Management: \n  - Administer high-dose bronchodilator therapy: salbutamol 5mg nebulized with oxygen\n  - Supplementary oxygen to maintain saturation >94%\n  - Early administration of systemic corticosteroids (prednisolone 40-50mg oral)\n\n• Monitoring & Escalation: \n  - Monitor PEFR, respiratory rate, heart rate, and oxygen saturation\n  - Repeat bronchodilation every 15-30 minutes as needed\n  - Consider ipratropium bromide for additional bronchodilation in severe cases\n\n• Indications for Further Intervention: \n  - Failure to respond to initial treatment\n  - Signs of exhaustion, silent chest, or reduced consciousness\n  - Consideration for ICU admission and potential intubation in life-threatening asthma\n\n• Antimicrobial Stewardship: \n  - Antibiotics not routinely indicated unless bacterial infection suspected\n  - Emphasize adherence to asthma action plans post-exacerbation"
+    },
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng80",
+        "description": "Asthma: diagnosis, monitoring and chronic asthma management"
+      },
+      "supplementary": [
+        {
+          "title": "Asthma UK",
+          "url": "https://www.asthma.org.uk/advice/manage-your-asthma/what-to-do-in-an-asthma-attack/",
+          "description": "Guidance on managing asthma attacks"
+        },
+        {
+          "title": "BNF Asthma Management",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/asthma/",
+          "description": "British National Formulary - asthma treatment protocols"
+        },
+        {
+          "title": "NHS Asthma Advice",
+          "url": "https://www.nhs.uk/conditions/asthma/",
+          "description": "NHS guidance on asthma symptoms and treatment"
+        },
+        {
+          "title": "SIGN Asthma Guidelines",
+          "url": "https://www.sign.ac.uk/our-guidelines/asthma/",
+          "description": "Scottish Intercollegiate Guidelines Network - asthma management"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750805670488_1",
+    "topic": "Pulmonary Embolism Diagnosis",
+    "question": "A 35-year-old woman presents to the clinic with sudden onset pleuritic chest pain and shortness of breath. She recently returned from a long-haul flight and has a history of deep vein thrombosis three years ago. Her blood pressure is 110/70 mmHg, heart rate 110 bpm, and oxygen saturation is 94% on room air. D-dimer test is elevated. What is the most appropriate next step in her management?",
+    "options": {
+      "A": "Administer low molecular weight heparin",
+      "B": "Perform a CT pulmonary angiogram",
+      "C": "Order a chest X-ray",
+      "D": "Initiate oral anticoagulation with warfarin",
+      "E": "Conduct a ventilation-perfusion scan"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "While anticoagulation is the treatment for confirmed pulmonary embolism, the diagnosis must be confirmed with imaging before initiating treatment.",
+      "B": "CT pulmonary angiogram is the preferred diagnostic test for pulmonary embolism due to its high sensitivity and specificity. It provides direct visualization of thrombi in the pulmonary arteries.",
+      "C": "Chest X-ray is useful for ruling out other causes of chest pain but does not confirm or exclude pulmonary embolism.",
+      "D": "Oral anticoagulation should be initiated after confirmation of the diagnosis. Warfarin requires bridging with heparin until therapeutic INR is achieved.",
+      "E": "Ventilation-perfusion scan is an alternative when CT pulmonary angiogram is contraindicated (e.g., contrast allergy, renal impairment) but is not the first choice when CTA is available."
+    },
+    "mnemonic": "CT PE = Confirm Thrombus with Pulmonary Embolism Scan",
+    "guidelineSummary": {
+      "title": "Pulmonary Embolism Diagnosis and Management (250-word Summary)",
+      "content": "• Definition & Recognition: \n  - Pulmonary embolism presents with acute onset pleuritic chest pain, dyspnea, tachypnea, and hypoxemia\n  - Risk factors include immobilization, recent surgery, previous DVT/PE, and thrombophilia\n\n• Diagnostic Approach: \n  - Assess clinical probability using Wells score or revised Geneva score\n  - D-dimer testing to rule out PE in low-risk patients\n  - CT pulmonary angiogram as first-line imaging for suspected PE\n  - Ventilation-perfusion scan for patients with contraindications to CTA\n\n• Initial Management: \n  - Anticoagulation with low molecular weight heparin or direct oral anticoagulants upon confirmation\n  - Consider thrombolysis in hemodynamically unstable patients with massive PE\n\n• Long-term Management: \n  - Transition to oral anticoagulation for 3-6 months depending on provoked vs unprovoked PE\n  - Evaluate for underlying thrombophilia in recurrent or unprovoked cases\n\n• Monitoring & Complications: \n  - Monitor for bleeding complications and adjust anticoagulant dosing accordingly\n  - Follow-up imaging to assess resolution if clinically indicated"
+    },
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng158",
+        "description": "Venous thromboembolic diseases: diagnosis, management and thrombophilia testing"
+      },
+      "supplementary": [
+        {
+          "title": "NHS PE Overview",
+          "url": "https://www.nhs.uk/conditions/pulmonary-embolism/",
+          "description": "NHS guidance on pulmonary embolism symptoms and treatment"
+        },
+        {
+          "title": "BNF Anticoagulation",
+          "url": "https://bnf.nice.org.uk/drug/anticoagulants.html",
+          "description": "British National Formulary - anticoagulation protocols"
+        },
+        {
+          "title": "SIGN VTE Guidelines",
+          "url": "https://www.sign.ac.uk/our-guidelines/venous-thromboembolism/",
+          "description": "Scottish Intercollegiate Guidelines Network - VTE management"
+        },
+        {
+          "title": "BTS PE Guidelines",
+          "url": "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/pulmonary-embolism/",
+          "description": "British Thoracic Society - pulmonary embolism guidance"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805681458_0",
+    "topic": "Heart Failure Management",
+    "question": "A 72-year-old man with a history of ischemic heart disease presents to the clinic with increasing shortness of breath, ankle swelling, and fatigue over the past month. On examination, he has bilateral pitting edema up to the knees, jugular venous distention, and crackles at the lung bases. His blood pressure is 140/90 mmHg, and heart rate is 85 bpm. An echocardiogram shows left ventricular ejection fraction of 35%. What is the most appropriate initial treatment to improve his symptoms and reduce mortality?",
+    "options": {
+      "A": "Furosemide 40mg once daily",
+      "B": "Spironolactone 25mg once daily",
+      "C": "Ramipril 2.5mg once daily",
+      "D": "Bisoprolol 5mg once daily",
+      "E": "Ivabradine 5mg twice daily"
+    },
+    "answer": "C",
+    "explanation": {
+      "A": "Furosemide 40mg once daily primarily provides symptomatic relief by reducing fluid overload but does not significantly impact mortality in heart failure.",
+      "B": "Spironolactone is beneficial in heart failure with reduced ejection fraction but is usually added after ACE inhibitors and beta-blockers.",
+      "C": "Ramipril 2.5mg once daily is correct as it addresses both symptoms and mortality by reducing afterload, counteracting neurohormonal activation, and preventing cardiac remodeling.",
+      "D": "Bisoprolol is essential for long-term management and mortality reduction; however, it should be introduced after stabilization on an ACE inhibitor.",
+      "E": "Ivabradine is used to reduce heart rate in patients who remain symptomatic despite optimal beta-blocker therapy and is not first-line therapy."
+    },
+    "mnemonic": "RAAS = Ramipril Always Added in Systolic heart failure",
+    "guidelineSummary": {
+      "title": "Heart Failure Management (250-word Summary)",
+      "content": "• **Diagnosis & Symptoms**: \n  - Heart failure presents with dyspnea, fatigue, peripheral edema, and signs of pulmonary congestion\n  - Echocardiogram assesses ejection fraction and cardiac function\n\n• **Initial Treatment**: \n  - ACE inhibitors (e.g., ramipril) form the cornerstone of management for heart failure with reduced ejection fraction\n  - Reduce mortality and hospitalization rates by inhibiting RAAS and reducing cardiac afterload\n\n• **Adjunctive Therapies**: \n  - Beta-blockers (e.g., bisoprolol) introduced after stabilization on ACE inhibitors\n  - Diuretics (e.g., furosemide) for symptom control in volume overload\n  - Mineralocorticoid receptor antagonists (e.g., spironolactone) for further mortality reduction in advanced cases\n\n• **Monitoring & Follow-up**: \n  - Regular monitoring of renal function and electrolytes\n  - Titration of medications to maximum tolerated doses\n  - Lifestyle modifications including sodium restriction, fluid management, and exercise"
+    },
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "NICE NG106: Chronic heart failure in adults - diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Heart Failure Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/heart-failure/",
+          "description": "British National Formulary - heart failure treatment protocols"
+        },
+        {
+          "title": "NHS Heart Failure",
+          "url": "https://www.nhs.uk/conditions/heart-failure/",
+          "description": "NHS overview of heart failure symptoms and treatments"
+        },
+        {
+          "title": "ESC Heart Failure Guidelines",
+          "url": "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines",
+          "description": "European Society of Cardiology - heart failure guidelines"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805681458_1",
+    "topic": "Hypertension Management",
+    "question": "A 50-year-old woman with no significant medical history presents to the clinic for a routine check-up. Her blood pressure readings over three separate visits are 160/98 mmHg, 162/100 mmHg, and 158/96 mmHg. She has no symptoms and her BMI is 28 kg/m². According to NICE guidelines, what is the most appropriate first-line treatment for her hypertension?",
+    "options": {
+      "A": "Amlodipine 5mg once daily",
+      "B": "Ramipril 5mg once daily",
+      "C": "Bisoprolol 5mg once daily",
+      "D": "Hydrochlorothiazide 25mg once daily",
+      "E": "Spironolactone 25mg once daily"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Amlodipine 5mg once daily is correct as it is recommended for initial treatment of hypertension in patients over 55 or of African or Caribbean family origin.",
+      "B": "Ramipril is indicated if the patient is under 55 years or has diabetes, but not as first-line in this scenario due to her age and ethnicity.",
+      "C": "Bisoprolol is typically used when there are specific indications such as ischemic heart disease or when other first-line options are contraindicated.",
+      "D": "Hydrochlorothiazide is used in combination therapy for hypertension but not as a first-line option.",
+      "E": "Spironolactone is usually reserved for resistant hypertension and is not used as initial therapy in uncomplicated cases."
+    },
+    "mnemonic": "AMLODIPINE = Age More than 50, Lower with Dihydropyridine",
+    "guidelineSummary": {
+      "title": "Hypertension Management (250-word Summary)",
+      "content": "• **Diagnosis & Classification**: \n  - Hypertension diagnosed with consistent elevated readings (≥140/90 mmHg)\n  - Use ambulatory or home blood pressure monitoring for confirmation\n\n• **First-line Treatment**: \n  - Calcium channel blockers (e.g., amlodipine) recommended for individuals over 55 or black patients of any age\n  - ACE inhibitors (e.g., ramipril) for individuals under 55\n\n• **Lifestyle Modifications**: \n  - Advise on salt reduction, regular physical activity, and weight management\n  - Limit alcohol intake and smoking cessation\n\n• **Monitoring & Follow-up**: \n  - Regular blood pressure monitoring to assess treatment efficacy\n  - Evaluate for adverse effects and adjust therapy as needed\n  - Consider combination therapy if target blood pressure is not achieved"
+    },
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "NICE NG136: Hypertension in adults - diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Hypertension Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/hypertension/",
+          "description": "British National Formulary - hypertension treatment protocols"
+        },
+        {
+          "title": "NHS Hypertension Advice",
+          "url": "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/",
+          "description": "NHS overview of hypertension management and treatment"
+        },
+        {
+          "title": "ESC Hypertension Guidelines",
+          "url": "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines",
+          "description": "European Society of Cardiology - hypertension guidelines"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_infectious-diseases_1750805686654_0",
+    "topic": "Bacterial Meningitis Management",
+    "question": "A 22-year-old man presents to the emergency department with a 12-hour history of severe headache, fever, neck stiffness, and photophobia. His temperature is 38.9°C, blood pressure is 120/80 mmHg, and heart rate is 105 bpm. A lumbar puncture shows a cloudy cerebrospinal fluid with a high white cell count predominantly neutrophils, low glucose, and elevated protein. What is the most appropriate initial antibiotic regimen?",
+    "options": {
+      "A": "Ceftriaxone 2g IV twice daily",
+      "B": "Amoxicillin 1g IV every 4 hours",
+      "C": "Vancomycin 1g IV every 12 hours",
+      "D": "Ceftriaxone 2g IV twice daily and vancomycin 1g IV every 12 hours",
+      "E": "Meropenem 2g IV every 8 hours"
+    },
+    "answer": "D",
+    "explanation": {
+      "A": "Ceftriaxone alone may not cover penicillin-resistant Streptococcus pneumoniae, which is why vancomycin is added.",
+      "B": "Amoxicillin is not appropriate as monotherapy for bacterial meningitis due to inadequate coverage, especially for resistant strains.",
+      "C": "Vancomycin alone does not provide adequate coverage for Neisseria meningitidis or Haemophilus influenzae.",
+      "D": "Combination of ceftriaxone and vancomycin provides broad coverage for common bacterial pathogens including resistant strains of S. pneumoniae.",
+      "E": "Meropenem is a broad-spectrum antibiotic but not the first choice for empirical therapy in this setting."
+    },
+    "mnemonic": "Meningitis Coverage: Ceftriaxone + Vancomycin Complements",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng102",
+        "description": "NICE NG102: Meningitis (bacterial) and meningococcal septicaemia in under 16s: recognition, diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Antimicrobial Guidance",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/meningitis/",
+          "description": "British National Formulary - Meningitis treatment protocols"
+        },
+        {
+          "title": "GMC Guidance",
+          "url": "https://www.gmc-uk.org/ethical-guidance/ethical-guidance-for-doctors",
+          "description": "General Medical Council - ethical guidance for medical practice"
+        }
+      ]
+    },
+    "category": "Infectious Diseases",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_infectious-diseases_1750805686654_1",
+    "topic": "Sepsis Management",
+    "question": "A 65-year-old woman with a history of type 2 diabetes presents to the emergency department with confusion, fever, and a productive cough. Her temperature is 39.5°C, blood pressure is 90/60 mmHg, heart rate is 120 bpm, and respiratory rate is 26 breaths per minute. Blood tests reveal elevated white cell count and lactate of 4 mmol/L. What is the most appropriate immediate management?",
+    "options": {
+      "A": "Administer high-flow oxygen and start broad-spectrum antibiotics",
+      "B": "Administer fluids and await blood culture results before starting antibiotics",
+      "C": "Start vasopressors to maintain blood pressure",
+      "D": "Conduct a CT scan of the chest to confirm pneumonia diagnosis",
+      "E": "Administer antipyretics and reassess in 1 hour"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Immediate administration of high-flow oxygen and broad-spectrum antibiotics is crucial in managing sepsis to improve tissue oxygenation and control infection.",
+      "B": "Delaying antibiotics until blood cultures are available can lead to deterioration in sepsis and is not recommended.",
+      "C": "Vasopressors are used after adequate fluid resuscitation if hypotension persists.",
+      "D": "Imaging should not delay immediate sepsis management, which prioritizes stabilizing the patient.",
+      "E": "Antipyretics alone are insufficient and do not address the underlying infection and hemodynamic instability."
+    },
+    "mnemonic": "Sepsis Steps: Oxygen, Antibiotics, Fluid, Pressors",
+    "links": {
+      "primary": {
+        "title": "UK Sepsis Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng51",
+        "description": "NICE NG51: Sepsis: recognition, diagnosis and early management"
+      },
+      "supplementary": [
+        {
+          "title": "NHS Sepsis Advice",
+          "url": "https://www.nhs.uk/conditions/sepsis/",
+          "description": "NHS - Information on sepsis management and symptoms"
+        },
+        {
+          "title": "Sepsis Trust",
+          "url": "https://sepsistrust.org",
+          "description": "UK Sepsis Trust - Resources and information for healthcare professionals"
+        }
+      ]
+    },
+    "category": "Infectious Diseases",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_endocrinology_1750805688085_0",
+    "topic": "Diabetes Management",
+    "question": "A 45-year-old man with type 2 diabetes presents for a routine follow-up. He is currently on metformin 500mg twice daily. His latest HbA1c is 8.5% (69 mmol/mol). He has no history of cardiovascular disease and his current blood pressure is 130/80 mmHg. What is the most appropriate next step in his management?",
+    "options": {
+      "A": "Increase metformin to 1000mg twice daily",
+      "B": "Add gliclazide 40mg once daily",
+      "C": "Initiate insulin therapy",
+      "D": "Add sitagliptin 100mg once daily",
+      "E": "Initiate lifestyle modifications only"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Increasing metformin is correct because: \n\n• NICE NG28 recommends titrating metformin to the maximum tolerated dose before adding other agents in type 2 diabetes without contraindications. \n• Metformin at full dosage can significantly improve glycemic control, evidenced by lowering HbA1c by approximately 1-2%.\n• Well tolerated with minimal risk of hypoglycemia and weight neutrality. \n• Cost-effective and aligns with first-line management strategies for type 2 diabetes.",
+      "B": "Gliclazide is incorrect because: \n\n• Second-line addition is appropriate after optimizing metformin, especially if HbA1c targets are unmet.\n• Gliclazide increases risk of hypoglycemia and weight gain compared to metformin.\n• NICE guidelines prefer metformin optimization before adding sulfonylureas in patients without contraindications.",
+      "C": "Insulin therapy is incorrect because: \n\n• Reserved for patients with significantly elevated HbA1c despite maximal oral therapy or specific indications like acute illness.\n• Introduces complexity with injection requirements and monitoring.\n• Not first line in relatively early type 2 diabetes management.",
+      "D": "Sitagliptin is incorrect because: \n\n• DPP-4 inhibitors like sitagliptin are considered after optimizing metformin and other oral agents.\n• Generally added when there is a need for a third agent after maximizing the first-line treatment.\n• Sitagliptin is less effective in reducing HbA1c compared to maximizing metformin dose.",
+      "E": "Lifestyle modifications only are incorrect because: \n\n• While essential, they should complement pharmacological therapy, especially when HbA1c is significantly above target.\n• NICE guidelines emphasize medication titration alongside lifestyle changes for effective diabetes management.\n• Not sufficient as standalone intervention given current HbA1c levels."
+    },
+    "mnemonic": "MET MORE: Metformin Maximum Optimization Reaches Effectiveness",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng28",
+        "description": "NICE NG28: Type 2 diabetes in adults - management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/diabetes-type-2/",
+          "description": "Clinical Knowledge Summaries - type 2 diabetes management"
+        },
+        {
+          "title": "NHS Diabetes Information",
+          "url": "https://www.nhs.uk/conditions/type-2-diabetes/",
+          "description": "NHS overview of type 2 diabetes management"
+        },
+        {
+          "title": "BNF Diabetes Guidance",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/diabetes/",
+          "description": "British National Formulary - diabetes treatment protocols"
+        }
+      ]
+    },
+    "category": "Endocrinology",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_endocrinology_1750805688085_1",
+    "topic": "Thyroid Disorder Diagnosis",
+    "question": "A 30-year-old woman presents with fatigue, weight gain, and constipation. On examination, she has dry skin and slow reflexes. Her thyroid function tests reveal TSH 12 mU/L (0.5-4.5 mU/L) and free T4 8 pmol/L (10-22 pmol/L). What is the most likely diagnosis?",
+    "options": {
+      "A": "Primary hypothyroidism",
+      "B": "Subclinical hypothyroidism",
+      "C": "Pituitary adenoma",
+      "D": "Euthyroid sick syndrome",
+      "E": "Graves' disease"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Primary hypothyroidism is correct because: \n\n• Characterized by elevated TSH and low free T4 levels, indicating inadequate thyroid hormone production.\n• Common symptoms include fatigue, weight gain, constipation, dry skin, and bradycardia.\n• Consistent with the clinical presentation and thyroid function test results.",
+      "B": "Subclinical hypothyroidism is incorrect because: \n\n• Defined by elevated TSH with normal free T4 levels.\n• Patient's free T4 is below the normal range, indicating overt hypothyroidism.\n• Requires different management approach compared to primary hypothyroidism.",
+      "C": "Pituitary adenoma is incorrect because: \n\n• Typically causes low TSH and low free T4 due to secondary hypothyroidism.\n• Presentation and lab results are more consistent with primary thyroid gland failure.\n• Would expect symptoms related to pituitary mass effect if present.",
+      "D": "Euthyroid sick syndrome is incorrect because: \n\n• Occurs in acute illness with normal TSH and altered T3/T4 levels.\n• Not consistent with elevated TSH and free T4 levels, nor typical hypothyroid symptoms in this patient.\n• Reversible upon recovery from illness without thyroid hormone replacement.",
+      "E": "Graves' disease is incorrect because: \n\n• Causes hyperthyroidism with low TSH and high free T4.\n• Symptoms include weight loss, heat intolerance, and palpitations, opposite to this patient's presentation.\n• Thyroid function tests do not align with typical Graves' disease findings."
+    },
+    "mnemonic": "HYPO TIRED: Hypothyroidism, TSH Increased, Reduced Energy, Dryness",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng145",
+        "description": "NICE NG145: Thyroid disease - assessment and management"
+      },
+      "supplementary": [
+        {
+          "title": "NHS Thyroid Information",
+          "url": "https://www.nhs.uk/conditions/underactive-thyroid-hypothyroidism/",
+          "description": "NHS overview of underactive thyroid (hypothyroidism)"
+        },
+        {
+          "title": "CKS Thyroid Disorders",
+          "url": "https://cks.nice.org.uk/topics/hypothyroidism/",
+          "description": "Clinical Knowledge Summaries - hypothyroidism management"
+        },
+        {
+          "title": "BNF Thyroid Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/thyroid-hormone-thyroid-function-tests/",
+          "description": "British National Formulary - thyroid disorders treatments"
+        }
+      ]
+    },
+    "category": "Endocrinology",
+    "difficulty": "mixed"
   }
 ]
