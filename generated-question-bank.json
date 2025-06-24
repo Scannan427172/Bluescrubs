@@ -1487,5 +1487,267 @@
     },
     "category": "Infectious Diseases",
     "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805464240_0",
+    "topic": "Hypertension Management",
+    "question": "A 45-year-old woman with no significant past medical history presents to your clinic for a routine health check. Her blood pressure readings over the past three visits are 150/95 mmHg, 148/92 mmHg, and 152/96 mmHg. She has no symptoms and is otherwise healthy. What is the most appropriate initial management step?",
+    "options": {
+      "A": "Start lisinopril 10mg daily",
+      "B": "Prescribe atenolol 50mg daily",
+      "C": "Advise lifestyle changes and reassess in 3 months",
+      "D": "Refer for ambulatory blood pressure monitoring",
+      "E": "Initiate hydrochlorothiazide 25mg daily"
+    },
+    "answer": "C",
+    "explanation": {
+      "A": "Lisinopril is an ACE inhibitor used for hypertension, but lifestyle changes are recommended first for stage 1 hypertension without target organ damage.",
+      "B": "Atenolol is a beta-blocker, not usually first-line for uncomplicated hypertension unless there are other specific indications.",
+      "C": "For a patient with stage 1 hypertension and no end-organ damage, lifestyle modifications are the first recommended step according to NICE guidelines.",
+      "D": "Ambulatory blood pressure monitoring is useful for confirming diagnosis but is not the immediate next step after confirming hypertension over several visits.",
+      "E": "Thiazide diuretics can be used in hypertension, but initial management in uncomplicated cases focuses on lifestyle changes."
+    },
+    "mnemonic": "LIFESTYLE = Lower Initial First Step Towards Your Life's Enhancement",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng136",
+        "description": "Hypertension in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS Hypertension",
+          "url": "https://cks.nice.org.uk/topics/hypertension/",
+          "description": "Clinical Knowledge Summaries - Hypertension management"
+        },
+        {
+          "title": "NHS Hypertension Overview",
+          "url": "https://www.nhs.uk/conditions/high-blood-pressure-hypertension/",
+          "description": "NHS conditions guide on high blood pressure"
+        },
+        {
+          "title": "BNF Hypertension Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summary/hypertension.html",
+          "description": "British National Formulary - Treatment of hypertension"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_cardiovascular_1750805464240_1",
+    "topic": "Heart Failure Management",
+    "question": "A 62-year-old man with a history of ischemic heart disease presents with increasing breathlessness, orthopnea, and ankle swelling. Examination reveals elevated jugular venous pressure, bilateral crepitations, and pitting edema. His blood pressure is 110/70 mmHg, heart rate 80 bpm. Echocardiogram shows an ejection fraction of 35%. What is the most appropriate medication to start?",
+    "options": {
+      "A": "Atenolol",
+      "B": "Lisinopril",
+      "C": "Furosemide",
+      "D": "Digoxin",
+      "E": "Nifedipine"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Beta-blockers like atenolol can be used in heart failure, but usually after ACE inhibitors or ARBs have been initiated.",
+      "B": "ACE inhibitors like lisinopril are first-line treatments for heart failure with reduced ejection fraction, improving symptoms and survival.",
+      "C": "Furosemide is for symptomatic relief of fluid overload, but it does not modify disease progression.",
+      "D": "Digoxin is used in heart failure with atrial fibrillation or for symptom relief, not as a first-line therapy.",
+      "E": "Nifedipine is a calcium channel blocker and is not typically used in heart failure with reduced ejection fraction."
+    },
+    "mnemonic": "ACE = Always Consider Early",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng106",
+        "description": "Heart failure: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "CKS Heart Failure",
+          "url": "https://cks.nice.org.uk/topics/heart-failure/",
+          "description": "Clinical Knowledge Summaries - Heart failure management"
+        },
+        {
+          "title": "NHS Heart Failure Overview",
+          "url": "https://www.nhs.uk/conditions/heart-failure/",
+          "description": "NHS conditions guide on heart failure"
+        },
+        {
+          "title": "BNF Heart Failure Treatment",
+          "url": "https://bnf.nice.org.uk/treatment-summary/heart-failure.html",
+          "description": "British National Formulary - Treatment of heart failure"
+        }
+      ]
+    },
+    "category": "Cardiovascular",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750805487726_0",
+    "topic": "Asthma Management",
+    "question": "A 25-year-old woman presents to the emergency department with a 3-day history of worsening shortness of breath, wheezing, and cough. She has a history of asthma and uses a salbutamol inhaler as needed. On examination, she is tachypnoeic with a respiratory rate of 28 breaths per minute, oxygen saturation of 92% on room air, and bilateral wheeze on auscultation. What is the most appropriate initial management step?",
+    "options": {
+      "A": "Nebulized salbutamol and ipratropium bromide",
+      "B": "Oral prednisolone 40mg daily",
+      "C": "Intravenous magnesium sulfate",
+      "D": "High-flow nasal cannula oxygen",
+      "E": "Oral montelukast 10mg"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Nebulized salbutamol and ipratropium bromide is correct: \n\n• First-line therapy for acute asthma exacerbation in the emergency setting.\n• Provides rapid bronchodilation by stimulating beta-2 adrenergic receptors and muscarinic receptor blockade.\n• NICE guidelines recommend combination nebulization for severe exacerbations.\n• Quickly improves airflow and oxygen saturation within minutes.",
+      "B": "Oral prednisolone 40mg daily - Correct medication but not immediate: \n\n• Important for reducing airway inflammation but takes hours to exert effect.\n• Should be initiated after bronchodilators but not the first step in acute management.\n• NICE guidelines state systemic steroids should follow initial bronchodilator therapy.",
+      "C": "Intravenous magnesium sulfate - Reserved for life-threatening cases: \n\n• Indicated when there is poor response to initial bronchodilator treatment.\n• Acts as a smooth muscle relaxant but not first-line for moderate exacerbations.\n• NICE suggests use in severe cases unresponsive to nebulized therapy.",
+      "D": "High-flow nasal cannula oxygen - Oxygen therapy not first-line: \n\n• Oxygen delivery improves hypoxemia but does not address bronchoconstriction.\n• Should accompany, not replace, bronchodilator therapy.\n• NICE guidelines recommend maintaining oxygen saturation above 94% during treatment.",
+      "E": "Oral montelukast 10mg - Not suitable for acute management: \n\n• Leukotriene receptor antagonist used for chronic control, not acute exacerbations.\n• Takes days to achieve therapeutic effects, inappropriate for emergency relief.\n• Not mentioned in acute management sections of NICE guidelines."
+    },
+    "mnemonic": "SALI: Salbutamol And Ipratropium are Lifesavers Immediately",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng80",
+        "description": "NICE NG80: Asthma: diagnosis, monitoring and chronic asthma management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/asthma/",
+          "description": "Clinical Knowledge Summaries - management of asthma exacerbations"
+        },
+        {
+          "title": "NHS Management Pathway",
+          "url": "https://www.nhs.uk/conditions/asthma/treatment/",
+          "description": "NHS guidance on asthma treatment"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_respiratory_1750805487726_1",
+    "topic": "COPD Exacerbation Management",
+    "question": "A 68-year-old man with a history of COPD presents with increased breathlessness, productive cough, and purulent sputum for 4 days. He smokes 20 cigarettes per day and uses salbutamol and tiotropium inhalers. On examination, he has a respiratory rate of 24 breaths per minute, oxygen saturation of 88% on room air, and bilateral coarse crackles. What is the most appropriate immediate management?",
+    "options": {
+      "A": "Oral prednisolone 30mg daily",
+      "B": "Nebulized salbutamol and ipratropium",
+      "C": "High-flow oxygen therapy",
+      "D": "Intravenous antibiotics",
+      "E": "Oral doxycycline 200mg daily"
+    },
+    "answer": "B",
+    "explanation": {
+      "A": "Oral prednisolone 30mg daily - Important but not immediate: \n\n• Reduces airway inflammation but takes time to work.\n• Should be part of management but not immediately effective for acute bronchodilation.\n• NICE guidelines suggest using after initial bronchodilator therapy.",
+      "B": "Nebulized salbutamol and ipratropium is correct: \n\n• Provides rapid bronchodilation, improving ventilation and oxygenation.\n• First-line for symptomatic relief in acute exacerbations per NICE guidelines.\n• Addresses bronchoconstriction immediately, improving airflow and reducing work of breathing.",
+      "C": "High-flow oxygen therapy - Requires caution in COPD: \n\n• Risk of hypercapnia due to hypoxic drive suppression.\n• Oxygen should be titrated to maintain saturations between 88-92%.\n• NICE guidelines recommend controlled oxygen delivery, not high-flow indiscriminately.",
+      "D": "Intravenous antibiotics - Not first-line unless severe: \n\n• Oral antibiotics appropriate for mild to moderate exacerbations if infection present.\n• Intravenous reserved for severe cases or oral intolerance.\n• NICE suggests oral antibiotics first unless hospitalization required.",
+      "E": "Oral doxycycline 200mg daily - Not immediate: \n\n• Important for suspected bacterial infection but not immediate symptomatic relief.\n• Takes hours to days to impact infection and symptoms.\n• Should be considered after initial bronchodilator therapy per NICE guidance."
+    },
+    "mnemonic": "COPD: Clear Out Pulmonary Distress with bronchodilators",
+    "links": {
+      "primary": {
+        "title": "UK Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng115",
+        "description": "NICE NG115: Chronic obstructive pulmonary disease in over 16s: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "NICE Guidance",
+          "url": "https://cks.nice.org.uk/topics/copd/",
+          "description": "Clinical Knowledge Summaries - COPD management"
+        },
+        {
+          "title": "NHS COPD Pathway",
+          "url": "https://www.nhs.uk/conditions/chronic-obstructive-pulmonary-disease-copd/treatment/",
+          "description": "NHS guidance on COPD treatment"
+        }
+      ]
+    },
+    "category": "Respiratory",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_infectious-diseases_1750805505648_0",
+    "topic": "Community-Acquired Pneumonia Management",
+    "question": "A 67-year-old man with a history of COPD presents to the emergency department with a 3-day history of fever, productive cough, and pleuritic chest pain. On examination, he is tachycardic with a heart rate of 110 bpm, febrile at 38.5°C, and has crackles in the right lower lung field. A chest X-ray confirms right lower lobe consolidation. What is the most appropriate antibiotic treatment?",
+    "options": {
+      "A": "Amoxicillin 500mg three times daily",
+      "B": "Clarithromycin 500mg twice daily",
+      "C": "Co-amoxiclav 625mg three times daily",
+      "D": "Ciprofloxacin 500mg twice daily",
+      "E": "Doxycycline 200mg on the first day followed by 100mg daily"
+    },
+    "answer": "C",
+    "explanation": {
+      "A": "Amoxicillin 500mg three times daily is often used as first-line treatment for community-acquired pneumonia in patients without comorbidities. However, in patients with COPD, co-amoxiclav is preferred due to its broader spectrum, covering potential beta-lactamase producing organisms.",
+      "B": "Clarithromycin 500mg twice daily is not the first choice in this scenario due to the patient's COPD and the need for broader coverage, which includes beta-lactamase producing bacteria often present in COPD patients.",
+      "C": "Co-amoxiclav 625mg three times daily is correct as it covers common organisms causing pneumonia, including Haemophilus influenzae and Moraxella catarrhalis, which are more prevalent in COPD patients. NICE guidelines recommend co-amoxiclav for patients with comorbidities.",
+      "D": "Ciprofloxacin 500mg twice daily is not typically recommended for community-acquired pneumonia due to its inadequate coverage of Streptococcus pneumoniae.",
+      "E": "Doxycycline 200mg on the first day followed by 100mg daily can be used in cases of penicillin allergy but is not first-line for this patient with COPD and suspected bacterial pneumonia."
+    },
+    "mnemonic": "CO-Amoxiclav for COPD",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng138",
+        "description": "NICE NG138: Pneumonia in adults: diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Antimicrobial Guidance",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/respiratory-tract-infections/",
+          "description": "British National Formulary - Respiratory tract infections treatment protocols"
+        },
+        {
+          "title": "NHS Pneumonia Overview",
+          "url": "https://www.nhs.uk/conditions/pneumonia/",
+          "description": "NHS overview of pneumonia, including treatment options"
+        }
+      ]
+    },
+    "category": "Infectious Diseases",
+    "difficulty": "mixed"
+  },
+  {
+    "id": "generated_infectious-diseases_1750805505648_1",
+    "topic": "Bacterial Meningitis Management",
+    "question": "A 19-year-old university student presents to the emergency department with a sudden onset of fever, headache, and neck stiffness. On examination, he has a temperature of 39°C, a purpuric rash on his trunk, and photophobia. What is the most appropriate initial empirical antibiotic therapy?",
+    "options": {
+      "A": "Ceftriaxone 2g IV every 12 hours",
+      "B": "Vancomycin 1g IV every 12 hours",
+      "C": "Amoxicillin 1g IV every 6 hours",
+      "D": "Benzylpenicillin 1.2g IV every 4 hours",
+      "E": "Metronidazole 500mg IV every 8 hours"
+    },
+    "answer": "A",
+    "explanation": {
+      "A": "Ceftriaxone 2g IV every 12 hours is correct as it provides broad-spectrum coverage for Neisseria meningitidis and Streptococcus pneumoniae, the most common causes of bacterial meningitis in young adults. It is recommended by NICE for initial empirical treatment.",
+      "B": "Vancomycin 1g IV every 12 hours is used for resistant gram-positive infections and is not typically first-line for meningitis unless there is a concern for resistant organisms, such as MRSA.",
+      "C": "Amoxicillin 1g IV every 6 hours is not adequate as monotherapy for bacterial meningitis due to its limited spectrum against gram-negative bacteria.",
+      "D": "Benzylpenicillin 1.2g IV every 4 hours would be used in the case of confirmed meningococcal meningitis but is not broad enough for initial empirical treatment.",
+      "E": "Metronidazole 500mg IV every 8 hours is used for anaerobic infections and does not cover typical meningitis pathogens."
+    },
+    "mnemonic": "CEFtriaxone for Central Fever",
+    "links": {
+      "primary": {
+        "title": "NICE Guidance",
+        "url": "https://www.nice.org.uk/guidance/ng102",
+        "description": "NICE NG102: Meningitis (bacterial) and meningococcal septicaemia in under 16s: recognition, diagnosis and management"
+      },
+      "supplementary": [
+        {
+          "title": "BNF Antimicrobial Guidance",
+          "url": "https://bnf.nice.org.uk/treatment-summaries/infections/",
+          "description": "British National Formulary - treatment protocols for infections"
+        },
+        {
+          "title": "NHS Meningitis Overview",
+          "url": "https://www.nhs.uk/conditions/meningitis/",
+          "description": "NHS overview of meningitis, including symptoms and treatments"
+        }
+      ]
+    },
+    "category": "Infectious Diseases",
+    "difficulty": "mixed"
   }
 ]

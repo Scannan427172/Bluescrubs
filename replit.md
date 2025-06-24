@@ -147,6 +147,8 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 24, 2025: Extended generation runtime - system producing high-quality medical scenarios with clinical accuracy and verified UK guideline references
 - June 24, 2025: Reduced generation target from 500 to 10 questions for reliable completion - optimized for faster delivery with same quality standards
 - June 24, 2025: 10 question generation active and working - successfully generated cardiovascular questions, proceeding with respiratory specialty
+- June 24, 2025: First batch of 10 questions completed successfully - 23 total questions now available, starting second batch of 10 questions
+- June 24, 2025: Second batch of 10 questions in progress - generation system reliable for 10-question batches with 3-5 minute completion time
 
 # User Preferences
 
