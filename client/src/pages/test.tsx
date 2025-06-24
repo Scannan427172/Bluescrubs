@@ -9,7 +9,6 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 import heroVideo from '@assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4';
 
 interface Question {
@@ -44,7 +43,6 @@ export default function Test() {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
   const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
 
   // Translation state
@@ -141,11 +139,18 @@ export default function Test() {
     { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
   ];
 
-  // Preload hero image for faster loading
+  // Preload hero video for faster loading
   useEffect(() => {
-    const img = new Image();
-    img.onload = () => setHeroImageLoaded(true);
-    img.src = plab1BgImage;
+    console.log('Hero video path:', heroVideo);
+    const video = document.createElement('video');
+    video.onloadeddata = () => {
+      console.log('Video preload successful');
+      setHeroVideoLoaded(true);
+    };
+    video.onerror = (e) => {
+      console.error('Video preload failed:', e);
+    };
+    video.src = heroVideo;
   }, []);
 
   // Load available voices for TTS
@@ -826,19 +831,27 @@ Feel free to ask about any aspect of this question or other medical topics you'r
       <div className="min-h-screen bg-gray-50">
         {/* Hero Banner */}
         <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[500px] lg:h-[550px] mb-8 overflow-hidden hero-banner">
-          {!heroImageLoaded && (
+          {!heroVideoLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
               <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
-          <img 
-            src={plab1BgImage}
-            alt="PLAB Test Practice"
-            className={`absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-300 ${heroImageLoaded ? 'opacity-60' : 'opacity-0'}`}
-            loading="eager"
-            decoding="async"
-            onLoad={() => setHeroImageLoaded(true)}
+          <video 
+            src={heroVideo}
+            className={`absolute inset-0 w-full h-full object-cover opacity-70 transition-opacity duration-300 ${heroVideoLoaded ? 'opacity-70' : 'opacity-0'}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            onLoadedData={() => {
+              console.log('Video loaded successfully');
+              setHeroVideoLoaded(true);
+            }}
+            onError={(e) => {
+              console.error('Video failed to load:', e);
+            }}
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
           <div className="relative z-50 flex flex-col items-center justify-end pb-8 text-center px-4 sm:px-8 h-full hero-text" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg">
@@ -1193,7 +1206,13 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           muted
           loop
           playsInline
-          onLoadedData={() => setHeroVideoLoaded(true)}
+          onLoadedData={() => {
+            console.log('Hero video loaded successfully');
+            setHeroVideoLoaded(true);
+          }}
+          onError={(e) => {
+            console.error('Hero video failed to load:', e);
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
