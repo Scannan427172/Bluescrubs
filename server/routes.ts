@@ -675,17 +675,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(question);
       }
 
-      // Duplicate questions to make 12 total
-      const extendedQuestions = [];
-      for (let i = 0; i < 12; i++) {
-        const baseQuestion = testQuestions[i % testQuestions.length];
-        extendedQuestions.push({
-          ...baseQuestion,
-          id: `q${i + 1}`,
-          question: baseQuestion.question.replace(/patient/g, i % 2 === 0 ? 'patient' : 'individual')
-        });
+      // Load complete 5000 question bank
+      const { COMPLETE_5000_QUESTIONS } = await import('./complete-5000-questions');
+      
+      // If requesting specific question
+      if (questionId) {
+        const question = COMPLETE_5000_QUESTIONS.find(q => q.id === questionId);
+        if (!question) {
+          return res.status(404).json({ error: "Question not found" });
+        }
+        return res.json(question);
       }
-      res.json(extendedQuestions);
+      
+      // Return random sample of 50 questions from the 5000 question bank
+      const shuffled = COMPLETE_5000_QUESTIONS.sort(() => 0.5 - Math.random());
+      const sampleQuestions = shuffled.slice(0, 50);
+      res.json(sampleQuestions);
     } catch (error) {
       console.error('Error fetching test questions:', error);
       res.status(500).json({ error: "Failed to fetch questions" });
@@ -695,7 +700,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Performance tracking endpoint
   app.get('/api/performance-stats', (req, res) => {
     res.json({
-      questionBank: 12, // Updated count for 12 test questions
+      questionBank: 5000, // Updated count for 5000 questions
       totalAttempts: 0,
       averageScore: 0,
       aiStatus: getAIStatus()

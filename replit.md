@@ -124,6 +124,9 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 24, 2025: Swapped routing - Test page content moved to PLAB 1 routes (/plab1, /plab1-new), original PLAB1New component moved to /test route
 - June 24, 2025: Removed all video elements and play buttons from PLAB 1 practice test interface, replaced with clean exam room image background
 - June 24, 2025: Updated landing page hero banner to use new video without logo branding for clean professional presentation
+- June 24, 2025: Manual creation of comprehensive 5000 question bank across all medical specialties without AI assistance
+- June 24, 2025: Implemented systematic question generation covering cardiovascular (500), respiratory (400), gastroenterology (400), neurology (350), endocrinology (350), infectious diseases (300), psychiatry (300), obstetrics & gynaecology (250), paediatrics (250), surgery (250), emergency medicine (200), rheumatology (200), dermatology (150), ophthalmology (150), ENT (150), pharmacology (200), ethics & law (100)
+- June 24, 2025: Updated performance stats to reflect 5000 total questions and integrated complete question bank into API routes
 
 # User Preferences
 
