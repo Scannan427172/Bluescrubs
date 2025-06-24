@@ -85,7 +85,7 @@ export default function Test() {
   const totalQuestions = (questionStats as any)?.questionBank || 2;
   const medicalCategories = [
     { id: "all", name: "All Categories", icon: "🏥", count: totalQuestions.toString() },
-    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", count: "1" },
+    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", count: "3" },
     { id: "infectious-diseases", name: "Infectious Diseases", icon: "🦠", count: "1" },
     { id: "respiratory", name: "Respiratory", icon: "🫁", count: "0" },
     { id: "gastrointestinal", name: "Gastrointestinal", icon: "🦠", count: "0" },

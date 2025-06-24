@@ -662,6 +662,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
               }
             ]
           }
+        },
+        {
+          id: "q7",
+          category: "Cardiovascular",
+          topic: "Hypertension Management in Adults >55",
+          question: "A 58-year-old man is diagnosed with stage 1 hypertension (BP 148/96 mmHg). He has no diabetes, and his QRISK3 score is 12%. What is the most appropriate first-line antihypertensive therapy?",
+          options: {
+            A: "ACE inhibitor",
+            B: "Beta-blocker",
+            C: "Calcium-channel blocker",
+            D: "Thiazide diuretic",
+            E: "Alpha-blocker"
+          },
+          answer: "C",
+          explanation: {
+            A: "Incorrect. ACE inhibitors are first-line for patients under 55 or those with diabetes.",
+            B: "Incorrect. Beta-blockers are not recommended first-line unless another indication exists.",
+            C: "Correct. NICE recommends a calcium-channel blocker first-line in people over 55 years old or of Black African or Caribbean descent.",
+            D: "Incorrect. Thiazides are used second-line if CCBs are not tolerated.",
+            E: "Incorrect. Alpha-blockers are typically fourth-line options."
+          },
+          mnemonic: "ABC for BP: ACE if <55, Black/old → CCB",
+          links: {
+            NICE: "https://www.nice.org.uk/guidance/ng136/chapter/Recommendations#choosing-antihypertensive-drug-treatment",
+            CKS: "https://cks.nice.org.uk/topics/hypertension/management/initial-treatment/",
+            BNF: "https://bnf.nice.org.uk/treatment-summary/hypertension/"
+          }
+        },
+        {
+          id: "q8",
+          category: "Cardiovascular",
+          topic: "Atrial Fibrillation – Anticoagulation",
+          question: "A 75-year-old man with newly diagnosed atrial fibrillation has a CHA2DS2-VASc score of 3. He has no contraindications to anticoagulation. What is the most appropriate next step?",
+          options: {
+            A: "Start aspirin 75 mg",
+            B: "Start warfarin and target INR 2-3",
+            C: "Start apixaban 5 mg twice daily",
+            D: "Cardioversion",
+            E: "No treatment required"
+          },
+          answer: "C",
+          explanation: {
+            A: "Incorrect. Aspirin is no longer recommended for stroke prevention in AF.",
+            B: "Incorrect. Warfarin is acceptable but DOACs are preferred unless contraindicated.",
+            C: "Correct. NICE recommends a DOAC (e.g., apixaban) for stroke prevention in eligible AF patients with CHA2DS2-VASc ≥2.",
+            D: "Incorrect. Cardioversion may be considered but stroke risk must be managed first.",
+            E: "Incorrect. Stroke risk is high and must be addressed with anticoagulation."
+          },
+          mnemonic: "CHAD VASc ≥2? → Anticoagulate with DOAC",
+          links: {
+            NICE: "https://www.nice.org.uk/guidance/ng196/chapter/Recommendations#stroke-risk-assessment-and-antithrombotic-therapy",
+            CKS: "https://cks.nice.org.uk/topics/atrial-fibrillation/management/oral-anticoagulation/",
+            BNF: "https://bnf.nice.org.uk/drug/apixaban.html"
+          }
         }
       ];
 
@@ -675,17 +729,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(question);
       }
 
-      // Duplicate questions to make 12 total
-      const extendedQuestions = [];
-      for (let i = 0; i < 12; i++) {
-        const baseQuestion = testQuestions[i % testQuestions.length];
-        extendedQuestions.push({
-          ...baseQuestion,
-          id: `q${i + 1}`,
-          question: baseQuestion.question.replace(/patient/g, i % 2 === 0 ? 'patient' : 'individual')
-        });
-      }
-      res.json(extendedQuestions);
+      // Return the actual questions without duplication
+      res.json(testQuestions);
     } catch (error) {
       console.error('Error fetching test questions:', error);
       res.status(500).json({ error: "Failed to fetch questions" });
@@ -695,7 +740,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Performance tracking endpoint
   app.get('/api/performance-stats', (req, res) => {
     res.json({
-      questionBank: 12, // Updated count for 12 test questions
+      questionBank: 8, // Updated count for 8 test questions
       totalAttempts: 0,
       averageScore: 0,
       aiStatus: getAIStatus()
