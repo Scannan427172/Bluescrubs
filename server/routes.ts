@@ -199,8 +199,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const generationResults = [];
 
       // Generate questions in batches for each specialty
+      console.log(`\n🚀 Starting 5000 question generation at ${new Date().toISOString()}`);
+      console.log(`📊 Breakdown: ${medicalSpecialties.map(s => `${s.category}: ${s.count}`).join(', ')}`);
+      
       for (const specialty of medicalSpecialties) {
-        console.log(`Generating ${specialty.count} ${specialty.category} questions...`);
+        console.log(`\n📚 Generating ${specialty.count} ${specialty.category} questions...`);
         
         // Generate in smaller batches to avoid token limits
         const batchSize = 10;
@@ -227,8 +230,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
               total: totalGenerated
             });
             
-            // Small delay to respect API limits
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Log progress and small delay to respect API limits
+            console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated})`);
+            await new Promise(resolve => setTimeout(resolve, 500));
             
           } catch (error) {
             console.error(`Error generating batch ${batch + 1} for ${specialty.category}:`, error);
