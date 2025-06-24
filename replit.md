@@ -121,6 +121,7 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 24, 2025: Enhanced question navigation with prominent Previous/Next buttons and disabled non-functional auto-translate feature
 - June 24, 2025: Successfully integrated video hero banner with medical professional content - video loads and plays properly in PLAB practice selection interface
 - June 24, 2025: Final video hero banner implementation - clean video background with "Master Your PLAB Journey" overlay text, removed static image overlay to keep focus on video content
+- June 24, 2025: Swapped routing - Test page content moved to PLAB 1 routes (/plab1, /plab1-new), original PLAB1New component moved to /test route
 
 # User Preferences
 
