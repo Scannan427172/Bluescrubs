@@ -72,6 +72,9 @@ export default function Test() {
 
   // Practice Mode Selection
   const [practiceMode, setPracticeMode] = useState<'selection' | 'practice'>('selection');
+  
+  // Force debug banner to always show at top
+  console.log('Current practiceMode:', practiceMode);
   const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
 
   // Question Statistics
@@ -837,8 +840,28 @@ Feel free to ask about any aspect of this question or other medical topics you'r
   if (practiceMode === 'selection') {
     return (
       <div className="min-h-screen bg-gray-50">
+        {/* DEBUG BANNER */}
+        <div className="w-full h-20 bg-red-500 text-white text-center py-4 text-xl font-bold">
+          DEBUG: PRACTICE MODE SELECTION ACTIVE
+        </div>
+        
+        {/* Video Hero Banner */}
+        <div className="w-full h-64 bg-blue-500 mb-4 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h2 className="text-2xl font-bold mb-4">VIDEO BANNER TEST</h2>
+            <video 
+              src={heroVideo}
+              className="w-full max-w-md h-48 object-cover border-4 border-white"
+              controls
+              muted
+              loop
+              playsInline
+            />
+          </div>
+        </div>
+        
         {/* Video Hero Banner - Debug Version */}
-        <div className="w-full h-64 md:h-80 lg:h-96 bg-red-500 mb-4 flex items-center justify-center">
+        <div className="w-full h-64 md:h-80 lg:h-96 bg-blue-500 mb-4 flex items-center justify-center">
           <div className="text-center text-white">
             <h2 className="text-2xl md:text-4xl font-bold mb-4">VIDEO BANNER TEST</h2>
             <p className="text-lg mb-4">Video path: {heroVideo}</p>
