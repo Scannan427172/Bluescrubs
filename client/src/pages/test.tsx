@@ -1438,7 +1438,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
         </Card>
 
         {/* Explanation Section */}
-        {submitted && (
+        {submitted && currentQuestion && (
           <Card className="mb-6 shadow-sm">
             <CardHeader>
               <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
@@ -1458,7 +1458,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   <div>
                     <h4 className="font-semibold text-green-800 mb-2">Correct Answer Explanation</h4>
                     <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                      {typeof currentQuestion.explanation === 'string' ? currentQuestion.explanation : currentQuestion.explanation[currentQuestion.answer]}
+                      {currentQuestion.explanation || 'No explanation available'}
                     </div>
                   </div>
                 </div>
