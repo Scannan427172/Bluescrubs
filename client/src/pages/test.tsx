@@ -9,7 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import heroVideo from '@assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4';
+
 
 interface Question {
   id: string;
@@ -43,8 +43,6 @@ export default function Test() {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
 
   // Translation state
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -140,23 +138,7 @@ export default function Test() {
     { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
   ];
 
-  // Video autoplay setup
-  useEffect(() => {
-    const setupVideo = () => {
-      const video = document.querySelector('video') as HTMLVideoElement;
-      if (video) {
-        video.muted = true;
-        video.playsInline = true;
-        video.loop = true;
-        video.play().catch(() => {
-          // Autoplay blocked - video will show first frame
-        });
-      }
-    };
-    
-    const timer = setTimeout(setupVideo, 100);
-    return () => clearTimeout(timer);
-  }, []);
+
 
   // Load available voices for TTS
   useEffect(() => {
