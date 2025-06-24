@@ -6,6 +6,7 @@ import { Logo } from "@/components/logo";
 
 import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
 import heroVideo from "@assets/Standard_Mode_Have_her_walk_toward_camera_stop_1750766548573.mp4";
+import nhsPrepWomanImg from "@assets/image_1749071491789.png";
 
 export default function Landing() {
   return (
@@ -28,9 +29,9 @@ export default function Landing() {
         
         {/* Hero Content - Portrait Layout */}
         <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
-          <div className="max-w-7xl mx-auto w-full">
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left Side - Content */}
-            <div className="hero-text text-white space-y-8 max-w-2xl">
+            <div className="hero-text text-white space-y-8">
               <div className="space-y-6">
                 <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
                   <Star className="w-5 h-5 mr-3 text-yellow-400" />
@@ -74,8 +75,21 @@ export default function Landing() {
                 </Link>
               </div>
             </div>
+
+            {/* Right Side - PLAB Image */}
+            <div className="hidden lg:flex justify-center items-center">
+              <div className="relative">
+                <img 
+                  src={nhsPrepWomanImg} 
+                  alt="Medical professional studying PLAB"
+                  className="w-full max-w-md h-auto object-cover rounded-2xl shadow-2xl border-4 border-white/20 backdrop-blur-sm"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
           </div>
         </div>
+
         
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
