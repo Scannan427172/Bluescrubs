@@ -1437,13 +1437,13 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           </CardContent>
         </Card>
 
-        {/* Explanation Section */}
+        {/* Correct Answer Explanation Section */}
         {submitted && currentQuestion && (
           <Card className="mb-6 shadow-sm">
             <CardHeader>
               <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
-                <BookOpen className="w-5 h-5" />
-                Detailed Explanation
+                <BookOpen className="w-5 h-5 text-green-600" />
+                Correct Answer Explanation
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -1456,11 +1456,29 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                     {currentQuestion.answer}
                   </Badge>
                   <div>
-                    <h4 className="font-semibold text-green-800 mb-2">Correct Answer Explanation</h4>
                     <div className="text-gray-700 leading-relaxed whitespace-pre-line">
                       {currentQuestion.explanation || 'No explanation available'}
                     </div>
                   </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Why Other Options Are Inappropriate Section */}
+        {submitted && currentQuestion && currentQuestion.incorrectExplanation && (
+          <Card className="mb-6 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 text-red-600" />
+                Why Other Options Are Inappropriate
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="border-l-4 border-red-200 pl-4 bg-red-50 p-4 rounded-r-lg">
+                <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  {currentQuestion.incorrectExplanation}
                 </div>
               </div>
             </CardContent>
