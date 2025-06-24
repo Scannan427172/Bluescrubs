@@ -140,44 +140,72 @@ export default function Test() {
     { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
   ];
 
-  // Enhanced video loading with autoplay handling
+  // Robust video autoplay with fallback handling
   useEffect(() => {
     console.log('Hero video path:', heroVideo);
     
-    const handleVideoAutoplay = () => {
+    const tryVideoPlay = async () => {
       const videos = document.querySelectorAll('video');
-      videos.forEach((video) => {
-        if (video.paused) {
+      
+      for (const video of videos) {
+        try {
+          // Ensure video is properly configured
           video.muted = true;
-          const playPromise = video.play();
-          if (playPromise !== undefined) {
-            playPromise.then(() => {
-              console.log('Video playing successfully');
-              setHeroVideoLoaded(true);
-            }).catch(error => {
-              console.log('Autoplay prevented:', error.message);
-              // Show video anyway, user can click to play
-              setHeroVideoLoaded(true);
+          video.playsInline = true;
+          video.loop = true;
+          
+          // Always show the video element
+          setHeroVideoLoaded(true);
+          
+          // Try to play
+          await video.play();
+          console.log('Video autoplay successful');
+          
+        } catch (error) {
+          console.log('Autoplay blocked - adding click handler:', error.message);
+          
+          // Add visual indicator for manual play
+          const playButton = document.createElement('div');
+          playButton.innerHTML = '▶️ Click to play video';
+          playButton.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 60;
+            font-size: 16px;
+            user-select: none;
+          `;
+          
+          const heroSection = video.closest('.hero-banner');
+          if (heroSection && !heroSection.querySelector('[data-play-button]')) {
+            playButton.setAttribute('data-play-button', 'true');
+            heroSection.appendChild(playButton);
+            
+            playButton.addEventListener('click', async () => {
+              try {
+                await video.play();
+                playButton.remove();
+                console.log('Manual video play successful');
+              } catch (playError) {
+                console.error('Manual play failed:', playError);
+              }
             });
           }
         }
-      });
+      }
     };
     
-    // Try autoplay after a short delay to ensure DOM is ready
-    const timer = setTimeout(handleVideoAutoplay, 500);
+    // Try immediately and after DOM is ready
+    tryVideoPlay();
+    const timer = setTimeout(tryVideoPlay, 500);
     
-    // Also try on user interaction
-    const handleFirstClick = () => {
-      handleVideoAutoplay();
-      document.removeEventListener('click', handleFirstClick);
-    };
-    document.addEventListener('click', handleFirstClick);
-    
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener('click', handleFirstClick);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Load available voices for TTS
@@ -863,31 +891,50 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
+          {videoError && (
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700"></div>
+          )}
           <video 
             key="hero-video-selection"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${heroVideoLoaded ? 'opacity-70' : 'opacity-0'}`}
-            autoPlay
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
             muted
             loop
             playsInline
             preload="metadata"
             disablePictureInPicture
-            onCanPlay={() => {
-              console.log('Selection video can play');
-              setHeroVideoLoaded(true);
-            }}
-            onLoadedMetadata={() => {
-              console.log('Selection video metadata loaded');
+            onLoadedData={() => {
+              console.log('Selection video loaded');
               setHeroVideoLoaded(true);
             }}
             onError={(e) => {
-              console.error('Selection video failed:', e);
+              console.error('Selection video error:', e);
               setVideoError(true);
             }}
           >
             <source src={heroVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          
+          {/* Manual Play Button */}
+          <div className="absolute top-4 right-4 z-50">
+            <button
+              onClick={async () => {
+                const video = document.querySelector('video[key="hero-video-selection"]') as HTMLVideoElement;
+                if (video) {
+                  try {
+                    await video.play();
+                    console.log('Manual play successful');
+                  } catch (error) {
+                    console.error('Manual play failed:', error);
+                  }
+                }
+              }}
+              className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
+              title="Play background video"
+            >
+              ▶️
+            </button>
+          </div>
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
           <div className="relative z-50 flex flex-col items-center justify-end pb-8 text-center px-4 sm:px-8 h-full hero-text" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
@@ -1236,28 +1283,50 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
+        {videoError && (
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700"></div>
+        )}
         <video 
-          src={heroVideo}
-          className={`absolute inset-0 w-full h-full object-cover opacity-70 transition-opacity duration-300 ${heroVideoLoaded ? 'opacity-70' : 'opacity-0'}`}
-          autoPlay
+          key="hero-video-main"
+          className="absolute inset-0 w-full h-full object-cover opacity-70"
           muted
           loop
           playsInline
-          preload="auto"
-          controls={false}
-          webkit-playsinline="true"
-          onCanPlay={() => {
-            console.log('Hero video can play');
-            setHeroVideoLoaded(true);
-          }}
+          preload="metadata"
+          disablePictureInPicture
           onLoadedData={() => {
-            console.log('Hero video loaded successfully');
+            console.log('Main video loaded');
             setHeroVideoLoaded(true);
           }}
           onError={(e) => {
-            console.error('Hero video failed to load:', e);
+            console.error('Main video error:', e);
+            setVideoError(true);
           }}
-        />
+        >
+          <source src={heroVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        
+        {/* Manual Play Button */}
+        <div className="absolute top-4 right-4 z-50">
+          <button
+            onClick={async () => {
+              const video = document.querySelector('video[key="hero-video-main"]') as HTMLVideoElement;
+              if (video) {
+                try {
+                  await video.play();
+                  console.log('Manual play successful');
+                } catch (error) {
+                  console.error('Manual play failed:', error);
+                }
+              }
+            }}
+            className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
+            title="Play background video"
+          >
+            ▶️
+          </button>
+        </div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/40 to-purple-700/40"></div>
 
         <div className="relative z-50 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
