@@ -63,20 +63,28 @@ export default function GenerationStatus() {
     }
   };
 
+  const pollProgress = async () => {
+    const size = await checkQuestionBankSize();
+    if (size > 8) {
+      setStatus({
+        success: true,
+        totalGenerated: size,
+        target: 5000,
+        progress: `${size}/5000`,
+        results: [],
+        questionBankSize: size
+      });
+    }
+  };
+
   useEffect(() => {
-    checkQuestionBankSize().then(size => {
-      if (size > 8) {
-        // Questions already generated
-        setStatus({
-          success: true,
-          totalGenerated: size,
-          target: 5000,
-          progress: `${size}/5000`,
-          results: [],
-          questionBankSize: size
-        });
-      }
-    });
+    // Initial check
+    pollProgress();
+    
+    // Poll every 10 seconds for updates
+    const interval = setInterval(pollProgress, 10000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const progressPercentage = status ? (status.totalGenerated / status.target) * 100 : 0;

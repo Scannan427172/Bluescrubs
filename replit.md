@@ -130,6 +130,8 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 24, 2025: Created cost calculator and generation status pages for monitoring 5000 question batch generation process
 - June 24, 2025: Started 5000 question generation across 11 medical specialties with estimated cost of $15-25
 - June 24, 2025: Confirmed AI generation working - question bank expanded from 8 to 13+ questions using template quality standards
+- June 24, 2025: Fixed persistent storage system for question bank - questions now saved to generated-question-bank.json
+- June 24, 2025: Implemented real-time progress monitoring for 5000 question generation with automatic status updates
 
 # User Preferences
 
