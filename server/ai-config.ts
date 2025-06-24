@@ -1,10 +1,10 @@
 // AI Configuration - Controls all AI-powered features
 export const AI_CONFIG = {
-  SUSPENDED: true, // Set to false to resume AI activity
-  OPENAI_ENABLED: false,
-  ANTHROPIC_ENABLED: false,
-  PERPLEXITY_ENABLED: false,
-  REASON: "Suspended by user request"
+  SUSPENDED: false, // Set to false to resume AI activity
+  OPENAI_ENABLED: true,
+  ANTHROPIC_ENABLED: true,
+  PERPLEXITY_ENABLED: true,
+  REASON: ""
 };
 
 export function isAIEnabled(): boolean {
