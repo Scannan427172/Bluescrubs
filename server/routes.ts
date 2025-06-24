@@ -213,7 +213,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(500).json({ error: 'Cannot access template questions' });
       }
 
-      templateQuestions.push(...existingQuestions);
+      // Template questions already added above
 
       // Define medical specialties for comprehensive coverage
       const medicalSpecialties = [
