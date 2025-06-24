@@ -69,8 +69,8 @@ export default function GenerationStatus() {
       setStatus({
         success: true,
         totalGenerated: size,
-        target: 5000,
-        progress: `${size}/5000`,
+        target: 500,
+        progress: `${size}/500`,
         results: [],
         questionBankSize: size
       });
@@ -87,7 +87,7 @@ export default function GenerationStatus() {
     return () => clearInterval(interval);
   }, []);
 
-  const progressPercentage = status ? (status.totalGenerated / status.target) * 100 : 0;
+  const progressPercentage = status ? Math.min((status.totalGenerated / 500) * 100, 100) : 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
@@ -97,7 +97,7 @@ export default function GenerationStatus() {
             PLAB Question Bank Generation
           </h1>
           <p className="text-gray-600">
-            Generating 5000 authentic medical questions using your 8 template questions
+            Generating 500 authentic medical questions using your 8 template questions
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export default function GenerationStatus() {
             {!status && !isGenerating && (
               <div className="text-center py-8">
                 <Button onClick={startGeneration} size="lg">
-                  Start 5000 Question Generation
+                  Start 500 Question Generation
                 </Button>
                 <p className="text-sm text-gray-500 mt-2">
                   This will generate questions across all medical specialties

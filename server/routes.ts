@@ -215,26 +215,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Template questions already added above
 
-      // Define medical specialties for comprehensive coverage
+      // Define medical specialties for 500 question generation
       const medicalSpecialties = [
-        { category: "cardiovascular", count: 800 },
-        { category: "respiratory", count: 600 },
-        { category: "infectious-diseases", count: 500 },
-        { category: "endocrinology", count: 500 },
-        { category: "gastroenterology", count: 500 },
-        { category: "neurology", count: 500 },
-        { category: "psychiatry", count: 400 },
-        { category: "emergency-medicine", count: 400 },
-        { category: "obstetrics-gynaecology", count: 300 },
-        { category: "paediatrics", count: 300 },
-        { category: "surgery", count: 200 }
+        { category: "cardiovascular", count: 80 },
+        { category: "respiratory", count: 60 },
+        { category: "infectious-diseases", count: 50 },
+        { category: "endocrinology", count: 50 },
+        { category: "gastroenterology", count: 50 },
+        { category: "neurology", count: 50 },
+        { category: "psychiatry", count: 40 },
+        { category: "emergency-medicine", count: 40 },
+        { category: "obstetrics-gynaecology", count: 30 },
+        { category: "paediatrics", count: 25 },
+        { category: "surgery", count: 15 }
       ];
 
       let totalGenerated = 0;
       const generationResults = [];
 
       // Generate questions in batches for each specialty
-      console.log(`Starting 5000 question generation at ${new Date().toISOString()}`);
+      console.log(`Starting 500 question generation at ${new Date().toISOString()}`);
       console.log(`Breakdown: ${medicalSpecialties.map(s => `${s.category}: ${s.count}`).join(', ')}`);
       
       for (const specialty of medicalSpecialties) {
@@ -268,7 +268,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 total: totalGenerated
               });
               
-              console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/5000)`);
+              console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/500)`);
             } else {
               console.log(`No questions generated in batch ${batch + 1} for ${specialty.category}`);
             }
@@ -289,8 +289,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({
         success: true,
         totalGenerated,
-        target: 5000,
-        progress: `${totalGenerated}/5000`,
+        target: 500,
+        progress: `${totalGenerated}/500`,
         results: generationResults,
         questionBankSize: ukQuestionBank.length,
         savedToFile: questionBankFile
