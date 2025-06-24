@@ -41,10 +41,10 @@ export default function Landing() {
                 
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-white">
                   <div className="flex flex-col items-start">
-                    <span>Master Your</span>
+                    <span className="text-5xl lg:text-7xl">Master Your</span>
                     <div className="flex flex-col items-start">
                       <Logo size="xl" />
-                      <span>Journey</span>
+                      <span className="text-5xl lg:text-7xl">Journey</span>
                     </div>
                   </div>
                 </h1>
