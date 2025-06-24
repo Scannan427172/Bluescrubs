@@ -363,9 +363,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "NHS guidance for blood pressure management"
               },
               {
-                title: "Stroke Association Guidelines",
-                url: "https://www.stroke.org.uk/what-is-stroke/are-you-at-risk-of-stroke",
-                description: "Stroke prevention and hypertension management"
+                title: "NHS Stroke Prevention",
+                url: "https://www.nhs.uk/conditions/stroke/",
+                description: "NHS stroke prevention and risk factor management"
               }
             ]
           }
@@ -412,9 +412,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 description: "European Society of Cardiology atrial fibrillation guidelines"
               },
               {
-                title: "Stroke Association AF",
-                url: "https://www.stroke.org.uk/what-is-stroke/are-you-at-risk-of-stroke/atrial-fibrillation",
-                description: "Atrial fibrillation and stroke prevention guidance"
+                title: "NHS Atrial Fibrillation",
+                url: "https://www.nhs.uk/conditions/atrial-fibrillation/",
+                description: "NHS atrial fibrillation and stroke prevention guidance"
               }
             ]
           }
