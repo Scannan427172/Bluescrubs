@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle } from "lucide-react";
-import nhsPrepWomanImg from "@assets/image_1749071491789.png";
+import examRoomImg from "@assets/IMG_2472.png";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
@@ -825,8 +825,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
         <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[400px] lg:h-[450px] mb-8 overflow-hidden">
           {/* Background Image */}
           <img 
-            src={nhsPrepWomanImg} 
-            alt="Medical professional studying PLAB"
+            src={examRoomImg} 
+            alt="Students taking PLAB exam"
             className="absolute inset-0 w-full h-full object-cover opacity-60"
           />
 
