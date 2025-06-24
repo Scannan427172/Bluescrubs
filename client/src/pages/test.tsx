@@ -140,70 +140,32 @@ export default function Test() {
     { code: 'sv', name: 'Svenska', flag: '🇸🇪' }
   ];
 
-  // Robust video autoplay with fallback handling
+  // Simple video setup with proper loading
   useEffect(() => {
     console.log('Hero video path:', heroVideo);
     
-    const tryVideoPlay = async () => {
+    const setupVideos = () => {
       const videos = document.querySelectorAll('video');
-      
-      for (const video of videos) {
-        try {
-          // Ensure video is properly configured
-          video.muted = true;
-          video.playsInline = true;
-          video.loop = true;
-          
-          // Always show the video element
+      videos.forEach((video) => {
+        video.muted = true;
+        video.playsInline = true;
+        video.loop = true;
+        
+        // Show video element once metadata loads
+        video.addEventListener('loadedmetadata', () => {
+          console.log('Video metadata loaded');
           setHeroVideoLoaded(true);
-          
-          // Try to play
-          await video.play();
-          console.log('Video autoplay successful');
-          
-        } catch (error) {
-          console.log('Autoplay blocked - adding click handler:', error.message);
-          
-          // Add visual indicator for manual play
-          const playButton = document.createElement('div');
-          playButton.innerHTML = '▶️ Click to play video';
-          playButton.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            z-index: 60;
-            font-size: 16px;
-            user-select: none;
-          `;
-          
-          const heroSection = video.closest('.hero-banner');
-          if (heroSection && !heroSection.querySelector('[data-play-button]')) {
-            playButton.setAttribute('data-play-button', 'true');
-            heroSection.appendChild(playButton);
-            
-            playButton.addEventListener('click', async () => {
-              try {
-                await video.play();
-                playButton.remove();
-                console.log('Manual video play successful');
-              } catch (playError) {
-                console.error('Manual play failed:', playError);
-              }
-            });
-          }
-        }
-      }
+        });
+        
+        // Try autoplay quietly
+        video.play().catch(() => {
+          console.log('Autoplay blocked - manual play available');
+        });
+      });
     };
     
-    // Try immediately and after DOM is ready
-    tryVideoPlay();
-    const timer = setTimeout(tryVideoPlay, 500);
+    setupVideos();
+    const timer = setTimeout(setupVideos, 100);
     
     return () => clearTimeout(timer);
   }, []);
@@ -915,22 +877,27 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             Your browser does not support the video tag.
           </video>
           
-          {/* Manual Play Button */}
-          <div className="absolute top-4 right-4 z-50">
+          {/* Video Controls */}
+          <div className="absolute inset-0 z-40 flex items-center justify-center">
             <button
               onClick={async () => {
                 const video = document.querySelector('video[key="hero-video-selection"]') as HTMLVideoElement;
                 if (video) {
                   try {
-                    await video.play();
-                    console.log('Manual play successful');
+                    if (video.paused) {
+                      await video.play();
+                      console.log('Video started playing');
+                    } else {
+                      video.pause();
+                      console.log('Video paused');
+                    }
                   } catch (error) {
-                    console.error('Manual play failed:', error);
+                    console.error('Video control failed:', error);
                   }
                 }
               }}
-              className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
-              title="Play background video"
+              className="bg-black/50 hover:bg-black/70 text-white p-6 rounded-full backdrop-blur-sm transition-all duration-300 text-2xl"
+              title="Play/Pause video"
             >
               ▶️
             </button>
@@ -1307,22 +1274,27 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           Your browser does not support the video tag.
         </video>
         
-        {/* Manual Play Button */}
-        <div className="absolute top-4 right-4 z-50">
+        {/* Video Controls */}
+        <div className="absolute inset-0 z-40 flex items-center justify-center">
           <button
             onClick={async () => {
               const video = document.querySelector('video[key="hero-video-main"]') as HTMLVideoElement;
               if (video) {
                 try {
-                  await video.play();
-                  console.log('Manual play successful');
+                  if (video.paused) {
+                    await video.play();
+                    console.log('Video started playing');
+                  } else {
+                    video.pause();
+                    console.log('Video paused');
+                  }
                 } catch (error) {
-                  console.error('Manual play failed:', error);
+                  console.error('Video control failed:', error);
                 }
               }
             }}
-            className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
-            title="Play background video"
+            className="bg-black/50 hover:bg-black/70 text-white p-6 rounded-full backdrop-blur-sm transition-all duration-300 text-2xl"
+            title="Play/Pause video"
           >
             ▶️
           </button>
