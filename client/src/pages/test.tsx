@@ -816,91 +816,9 @@ Feel free to ask about any aspect of this question or other medical topics you'r
   if (practiceMode === 'selection') {
     return (
       <div className="min-h-screen bg-gray-50">
-        {/* Video Hero Banner */}
-        <div className="relative w-full h-80 md:h-96 lg:h-[500px] overflow-hidden bg-black mb-8">
-          <video 
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-          >
-            <source src={heroVideo} type="video/mp4" />
-          </video>
-          
-          {/* Video Overlay */}
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="text-center text-white max-w-4xl px-6">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-                Master Your PLAB Journey
-              </h1>
-              <p className="text-lg md:text-xl lg:text-2xl mb-8 opacity-90">
-                Interactive medical learning with video simulations and adaptive practice
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => setPracticeMode('practice')}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
-                >
-                  Start Practice
-                </button>
-                <button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border border-white/30 px-8 py-3 rounded-lg font-semibold transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+
         
-        {/* Video Hero Banner - Debug Version */}
-        <div className="w-full h-64 md:h-80 lg:h-96 bg-blue-500 mb-4 flex items-center justify-center">
-          <div className="text-center text-white">
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">VIDEO BANNER TEST</h2>
-            <p className="text-lg mb-4">Video path: {heroVideo}</p>
-            <video 
-              key="hero-video-banner"
-              className="w-full max-w-md h-48 object-cover border-4 border-white"
-              controls
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              onLoadedData={() => {
-                console.log('Banner video loaded successfully');
-              }}
-              onError={(e) => {
-                console.error('Banner video error:', e);
-              }}
-            >
-              <source src={heroVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <div className="mt-4">
-              <button
-                onClick={async () => {
-                  const video = document.querySelector('video[key="hero-video-banner"]') as HTMLVideoElement;
-                  if (video) {
-                    try {
-                      if (video.paused) {
-                        await video.play();
-                        console.log('Banner video started');
-                      } else {
-                        video.pause();
-                        console.log('Banner video paused');
-                      }
-                    } catch (error) {
-                      console.error('Banner video control failed:', error);
-                    }
-                  }
-                }}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded font-bold"
-              >
-                Play/Pause Video
-              </button>
-            </div>
-          </div>
-        </div>
+
 
         {/* Master Your Prep Section */}
         <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-96 md:h-[400px] lg:h-[450px] mb-8 overflow-hidden">
