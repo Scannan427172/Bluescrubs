@@ -38,12 +38,12 @@ export default function Landing() {
                 <span className="text-xs font-semibold text-white">Comprehensive Medical Exam Preparation</span>
               </div>
               
-              <h1 className="text-3xl lg:text-5xl font-bold leading-tight text-white">
+              <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-white">
                 <div className="flex flex-col items-start">
-                  <span className="text-3xl lg:text-5xl">Master Your</span>
+                  <span className="text-4xl lg:text-6xl">Master Your</span>
                   <div className="flex flex-col items-start">
-                    <Logo size="lg" />
-                    <span className="text-3xl lg:text-5xl">Journey</span>
+                    <Logo size="xl" />
+                    <span className="text-4xl lg:text-6xl">Journey</span>
                   </div>
                 </div>
               </h1>
@@ -51,7 +51,7 @@ export default function Landing() {
           </div>
           
           {/* Bottom Content - Subtext and Button */}
-          <div className="max-w-7xl mx-auto w-full pb-12">
+          <div className="max-w-7xl mx-auto w-full pb-8">
             <div className="hero-text text-white space-y-4 max-w-xl">
               <p className="text-xs lg:text-sm text-white/90 leading-relaxed max-w-lg">
                 The world's most comprehensive independent medical platform featuring{" "}
