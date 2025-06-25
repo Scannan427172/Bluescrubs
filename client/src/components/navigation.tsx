@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap, Building } from "lucide-react";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap, Building, Settings } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 interface NavigationProps {
@@ -201,6 +201,18 @@ export function Navigation({ user }: NavigationProps) {
             >
               <BarChart3 className={`w-6 h-6 mb-1 ${location === "/analytics" ? "scale-110" : ""}`} />
               <span className="text-xs font-medium">Stats</span>
+            </Link>
+
+            <Link
+              href="/more"
+              className={`flex flex-col items-center justify-center py-2 px-2 rounded-xl transition-all duration-200 ${
+                location === "/more"
+                  ? "text-blue-600 bg-blue-100/80 scale-105"
+                  : "text-gray-500 hover:text-gray-700 active:scale-95"
+              }`}
+            >
+              <Settings className={`w-6 h-6 mb-1 ${location === "/more" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">More</span>
             </Link>
           </div>
         </div>
