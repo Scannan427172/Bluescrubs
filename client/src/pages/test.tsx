@@ -1483,19 +1483,19 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               <div className="border-l-4 border-red-200 pl-4 bg-red-50 p-4 rounded-r-lg">
                 <div className="text-gray-700 leading-relaxed">
                   {currentQuestion.incorrectExplanation.split('\n').map((line, index) => {
-                    // Check if line starts with "Option X" pattern
-                    const optionMatch = line.match(/^(Option\s+)([A-F])(.*)/);
+                    // Check if line starts with "• Option X" pattern
+                    const optionMatch = line.match(/^(•\s*Option\s+)([A-F])(.*)/);
                     if (optionMatch) {
                       const [, prefix, letter, rest] = optionMatch;
                       return (
                         <div key={index} className="mb-3 flex items-start gap-2">
                           <Badge 
                             variant="outline"
-                            className="mt-0.5 bg-red-600 text-black border-red-600 min-w-[24px] h-6 flex items-center justify-center text-sm font-semibold"
+                            className="mt-0.5 bg-red-600 text-black border-red-600 min-w-[24px] h-6 flex items-center justify-center text-sm font-semibold rounded-full"
                           >
                             {letter}
                           </Badge>
-                          <span className="flex-1">{rest}</span>
+                          <span className="flex-1">•{rest}</span>
                         </div>
                       );
                     }
