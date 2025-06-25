@@ -170,58 +170,73 @@ export default function MCQQuestion({
             </div>
           )}
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-between">
-            <div className="flex space-x-3">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="flex items-center space-x-2"
-                onClick={() => console.log('Question bookmarked for later review')}
-              >
-                <Bookmark className="w-4 h-4" />
-                <span>Save for Later</span>
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="flex items-center space-x-2"
-                onClick={() => console.log('Question issue reported')}
-              >
-                <Flag className="w-4 h-4" />
-                <span>Report Issue</span>
-              </Button>
-            </div>
-            
-            <div className="flex space-x-3">
-              <Button
-                variant="outline"
-                onClick={onPrevious}
-                disabled={questionNumber === 1}
-              >
-                Previous
-              </Button>
-              
-              {!isAnswered ? (
-                <Button
-                  onClick={handleSubmit}
-                  disabled={!selectedAnswer}
-                  className="bg-medical-blue hover:bg-medical-blue/90"
-                >
-                  Submit Answer
-                </Button>
-              ) : (
-                <Button
-                  onClick={onNext}
-                  className="bg-medical-blue hover:bg-medical-blue/90"
-                >
-                  {questionNumber === totalQuestions ? "Complete Quiz" : "Next Question"}
-                </Button>
-              )}
-            </div>
+          {/* Action Buttons - Only utility buttons at top */}
+          <div className="flex justify-center space-x-3 mb-6">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex items-center space-x-2"
+              onClick={() => console.log('Question bookmarked for later review')}
+            >
+              <Bookmark className="w-4 h-4" />
+              <span>Save for Later</span>
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex items-center space-x-2"
+              onClick={() => console.log('Question issue reported')}
+            >
+              <Flag className="w-4 h-4" />
+              <span>Report Issue</span>
+            </Button>
           </div>
         </CardContent>
       </Card>
+
+      {/* Fixed Bottom Navigation - Sticky to the very bottom */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+        <div className="max-w-4xl mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <Button
+              variant="outline"
+              onClick={onPrevious}
+              disabled={questionNumber === 1}
+              className="min-w-[100px] h-12"
+            >
+              Previous
+            </Button>
+            
+            <div className="text-center flex-1 mx-4">
+              <div className="text-sm font-medium text-gray-700">
+                {questionNumber} of {totalQuestions}
+              </div>
+              <div className="text-xs text-gray-500">
+                {formatTime(timeSpent)}
+              </div>
+            </div>
+            
+            {!isAnswered ? (
+              <Button
+                onClick={handleSubmit}
+                disabled={!selectedAnswer}
+                className="bg-medical-blue hover:bg-medical-blue/90 min-w-[100px] h-12"
+              >
+                Submit
+              </Button>
+            ) : (
+              <Button
+                onClick={onNext}
+                className="bg-medical-blue hover:bg-medical-blue/90 min-w-[100px] h-12"
+              >
+                {questionNumber === totalQuestions ? "Complete" : "Next"}
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+      {/* Add bottom padding to prevent content from being hidden behind fixed navigation */}
+      <div className="pb-20"></div>
     </div>
   );
 }
