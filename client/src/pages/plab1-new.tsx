@@ -2641,16 +2641,14 @@ export default function PLAB1New() {
         </Button>
       )}
 
-      {/* NICE NG136 Guide Floating Button */}
-      {sessionStarted && (
-        <Button
-          onClick={() => setShowNiceGuide(true)}
-          className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-green-600 hover:bg-green-700 shadow-lg z-50 flex items-center justify-center"
-          title="NICE NG136 + PLAB MCQ"
-        >
-          <FileText className="w-6 h-6 text-white" />
-        </Button>
-      )}
+      {/* NICE NG136 Guide Floating Button - Always visible */}
+      <Button
+        onClick={() => setShowNiceGuide(true)}
+        className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-green-600 hover:bg-green-700 shadow-lg z-50 flex items-center justify-center"
+        title="NICE NG136 + PLAB MCQ"
+      >
+        <FileText className="w-6 h-6 text-white" />
+      </Button>
 
       {/* AI Tutor Modal */}
       <AITutor
