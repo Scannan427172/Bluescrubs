@@ -33,13 +33,24 @@ import {
   getIndependentTranslationStats,
   MEDICAL_TERMINOLOGY_DICTIONARY 
 } from './independent-translation';
+import { 
+  generateQuestionFromTemplate, 
+  generateOSCEStationFromTemplate, 
+  generateMedicalGuidanceIndependently,
+  createIndependentAlternatives,
+  exportCompleteIndependentSystem 
+} from './independent-content';
+import { 
+  analyzeVideoPerformanceIndependently, 
+  generateIndependentFeedback,
+  analyzeImageIndependently 
+} from './independent-analysis';
 
-// AI Question Generation Functions
+// Independent Question Generation Functions (No AI dependency)
 async function generateMedicalQuestions(templates: any[], category: string, difficulty: string, count: number) {
   try {
-    if (!process.env.OPENAI_API_KEY) {
-      throw new Error('OpenAI API key not found');
-    }
+    // Use template-based generation instead of AI
+    return generateQuestionFromTemplate(category, count);
     
     const { default: OpenAI } = await import('openai');
     const openai = new OpenAI({
@@ -1811,6 +1822,81 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
       });
     } catch (error) {
       res.status(500).json({ error: 'Failed to get dictionary' });
+    }
+  });
+
+  // Independent Analysis API (Replaces all AI-powered analysis)
+  app.post('/api/independent-analysis/video', (req, res) => {
+    try {
+      const { stationTitle, stationCategory, learningObjectives = [], recordingDuration = 480 } = req.body;
+      
+      const analysis = analyzeVideoPerformanceIndependently(
+        stationTitle || 'Clinical Station',
+        stationCategory || 'General',
+        learningObjectives,
+        recordingDuration
+      );
+      
+      res.json({
+        ...analysis,
+        method: 'structured_assessment',
+        aiDependency: 'none',
+        assessmentStandard: 'PLAB_2_criteria'
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to analyze performance' });
+    }
+  });
+
+  app.post('/api/independent-analysis/feedback', (req, res) => {
+    try {
+      const { topic, userResponse } = req.body;
+      
+      const feedback = generateIndependentFeedback(topic || 'medical scenario', userResponse || '');
+      
+      res.json({
+        feedback,
+        method: 'template_based',
+        aiDependency: 'none'
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to generate feedback' });
+    }
+  });
+
+  app.post('/api/independent-analysis/image', (req, res) => {
+    try {
+      const { imagePath, context } = req.body;
+      
+      const analysis = analyzeImageIndependently(imagePath || '', context || '');
+      
+      res.json(analysis);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to analyze image' });
+    }
+  });
+
+  app.get('/api/independence/complete-status', (req, res) => {
+    try {
+      const system = exportCompleteIndependentSystem();
+      const alternatives = createIndependentAlternatives();
+      
+      res.json({
+        ...system,
+        independentFeatures: alternatives,
+        aiReplacement: {
+          questionGeneration: 'template_based',
+          videoAnalysis: 'structured_assessment', 
+          translation: 'dictionary_based',
+          imageAnalysis: 'structured_observation',
+          feedback: 'template_responses',
+          guidance: 'protocol_based'
+        },
+        completeDependency: 'none',
+        offlineCapable: true
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get complete independence status' });
     }
   });
 
