@@ -26,6 +26,7 @@ import {
   createTranslationManifest,
   CULTURAL_ADAPTATIONS 
 } from './translation-system';
+import { AdaptiveAIEngine } from './adaptive-ai-engine';
 import { 
   translateStationIndependently, 
   batchTranslateStations, 
