@@ -1663,7 +1663,7 @@ export default function PLAB1New() {
                       className="w-4 h-4 mr-3 text-blue-600"
                     />
                     
-                    <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-3 font-bold text-sm">
+                    <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center mr-3 font-bold text-sm">
                       {String.fromCharCode(65 + index)}
                     </div>
                     

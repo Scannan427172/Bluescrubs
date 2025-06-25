@@ -222,6 +222,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: MOBILE LANDSCAPE NAVIGATION FIX - Fixed text overlap in iPhone 15 Pro Max landscape mode by reducing navigation items and removing user profile section for cleaner mobile experience
 - June 25, 2025: IPHONE-STYLE ANDROID NAVIGATION - Updated Android navigation to mimic iPhone design with glassmorphism effects, rounded corners, smooth animations, and improved visual hierarchy
 - June 25, 2025: NICE VISUAL SUMMARY INTEGRATION - Added NICE NG136 visual summary PDF link to supplementary references for enhanced clinical guidance access
+- June 25, 2025: CONSISTENT OPTION LETTER STYLING - Updated all option letters (A, B, C, D, E) to have uniform white text on red background styling across all test interfaces
 
 # User Preferences
 
