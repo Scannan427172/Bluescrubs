@@ -948,6 +948,11 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
             },
             supplementary: [
               {
+                title: "NICE Visual Summary",
+                url: "https://www.nice.org.uk/guidance/ng136/resources/visual-summary-pdf-6899919517",
+                description: "NICE NG136 Visual Summary - Hypertension treatment flowchart"
+              },
+              {
                 title: "NICE Guidance",
                 url: "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/",
                 description: "Clinical Knowledge Summaries - comprehensive UTI guidance"

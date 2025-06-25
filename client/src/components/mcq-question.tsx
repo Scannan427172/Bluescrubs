@@ -140,16 +140,7 @@ export default function MCQQuestion({
                 >
                   <div className="flex items-center space-x-3">
                     <div
-                      className={cn(
-                        "w-8 h-8 rounded-full flex items-center justify-center transition-colors font-semibold text-sm",
-                        isAnswered
-                          ? isCorrect
-                            ? "bg-mint-green text-white"
-                            : isSelected && !isCorrect
-                            ? "bg-deep-rose text-white"
-                            : "bg-red-600 text-white"
-                          : "bg-red-600 text-white"
-                      )}
+                      className="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm bg-red-600 text-white"
                     >
                       <span>{optionLetter}</span>
                     </div>
