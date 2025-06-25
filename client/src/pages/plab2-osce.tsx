@@ -9,7 +9,7 @@ import {
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
-  Globe, Languages, MessageCircle, Bot
+  Globe, Languages, MessageCircle, Bot, Activity
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -707,11 +707,77 @@ export default function Plab2Osce() {
             <h2 className="text-2xl font-bold text-gray-900">OSCE Practice Stations</h2>
           </div>
 
+          {/* Progress Overview */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg text-gray-900">Overall Progress</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-blue-600 mb-2">
+                {completedStations.length}/{EXPANDED_PLAB2_STATIONS.length}
+              </div>
+              <Progress value={getOverallProgress()} className="mb-2" />
+              <p className="text-sm text-gray-600">{Math.round(getOverallProgress())}% Complete</p>
+            </CardContent>
+          </Card>
 
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg text-gray-900">Average Score</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-green-600 mb-2">
+                {getAverageScore().toFixed(1)}/20
+              </div>
+              <p className="text-sm text-gray-600">
+                {getAverageScore() >= 13 ? 'Good Performance' : getAverageScore() >= 10 ? 'Borderline' : 'Needs Improvement'}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg text-gray-900">Station Types</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {Object.entries(EXPANDED_STATION_STATS.byType).map(([type, count]) => (
+                  <div key={type} className="flex justify-between text-sm text-gray-700">
+                    <span className="capitalize">{type.replace('-', ' ')}</span>
+                    <span className="font-medium">{count}</span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg text-gray-900">Exam Format</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2 text-sm text-gray-700">
+                <div className="flex justify-between">
+                  <span>Duration:</span>
+                  <span className="font-medium">8-10 min/station</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Total Stations:</span>
+                  <span className="font-medium">16-20</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Pass Mark:</span>
+                  <span className="font-medium">50%</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
           {/* Station Type Filters with 3D Anatomy */}
           <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-            <TabsList className="grid w-full grid-cols-4 md:grid-cols-8 gap-1">
+            <TabsList className="grid w-full grid-cols-4 md:grid-cols-7 gap-1">
               <TabsTrigger 
                 value="all" 
                 className={accommodations.largerButtons ? 'text-[10px] md:text-sm py-2 text-gray-700' : 'text-[9px] md:text-xs text-gray-700'}
@@ -754,7 +820,6 @@ export default function Plab2Osce() {
               >
                 Skills
               </TabsTrigger>
-
             </TabsList>
 
 
