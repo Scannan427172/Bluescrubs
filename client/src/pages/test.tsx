@@ -1408,7 +1408,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   className={`w-full p-4 border-2 rounded-lg text-left transition-all duration-200 flex items-center justify-between ${getOptionButtonClass(option)}`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-semibold text-sm">
+                    <div className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-semibold text-sm shrink-0">
                       {option}
                     </div>
                     <span>{displayText}</span>
@@ -1489,12 +1489,9 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                       const [, prefix, letter, rest] = optionMatch;
                       return (
                         <div key={index} className="mb-3 flex items-start gap-2">
-                          <Badge 
-                            variant="outline"
-                            className="mt-0.5 bg-red-600 text-black border-red-600 min-w-[24px] h-6 flex items-center justify-center text-sm font-semibold rounded-full"
-                          >
+                          <div className="w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center font-semibold text-sm shrink-0 mt-0.5">
                             {letter}
-                          </Badge>
+                          </div>
                           <span className="flex-1">•{rest}</span>
                         </div>
                       );

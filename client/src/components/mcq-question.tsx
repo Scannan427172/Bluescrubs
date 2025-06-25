@@ -139,10 +139,8 @@ export default function MCQQuestion({
                   )}
                 >
                   <div className="flex items-center space-x-3">
-                    <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm bg-red-600 text-white"
-                    >
-                      <span>{optionLetter}</span>
+                    <div className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-semibold text-sm shrink-0">
+                      {optionLetter}
                     </div>
                     <span className="text-gray-700 group-hover:text-gray-900">{option}</span>
                   </div>
