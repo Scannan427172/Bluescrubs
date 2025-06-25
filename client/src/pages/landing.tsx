@@ -31,25 +31,25 @@ export default function Landing() {
         {/* Hero Content - Portrait Layout */}
         <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
           <div className="max-w-7xl mx-auto w-full">
-            {/* Left Side - Content */}
-            <div className="hero-text text-white space-y-8 max-w-2xl">
-              <div className="space-y-6">
-                <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
-                  <Star className="w-5 h-5 mr-3 text-yellow-400" />
-                  <span className="text-sm font-semibold text-white">Comprehensive Medical Exam Preparation</span>
+            {/* Left Side - Content - Compact */}
+            <div className="hero-text text-white space-y-6 max-w-xl">
+              <div className="space-y-4">
+                <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
+                  <Star className="w-4 h-4 mr-2 text-yellow-400" />
+                  <span className="text-xs font-semibold text-white">Comprehensive Medical Exam Preparation</span>
                 </div>
                 
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-white">
+                <h1 className="text-3xl lg:text-5xl font-bold leading-tight text-white">
                   <div className="flex flex-col items-start">
-                    <span className="text-5xl lg:text-7xl">Master Your</span>
+                    <span className="text-3xl lg:text-5xl">Master Your</span>
                     <div className="flex flex-col items-start">
-                      <Logo size="xl" />
-                      <span className="text-5xl lg:text-7xl">Journey</span>
+                      <Logo size="lg" />
+                      <span className="text-3xl lg:text-5xl">Journey</span>
                     </div>
                   </div>
                 </h1>
                 
-                <p className="text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl">
+                <p className="text-sm lg:text-base text-white/90 leading-relaxed max-w-xl">
                   The world's most comprehensive independent medical platform featuring{" "}
                   <span className="text-blue-400 font-semibold">5,528 authentic stations</span>,{" "}
                   <span className="text-purple-400 font-semibold">hybrid AI enhancement</span>, and{" "}
@@ -57,29 +57,29 @@ export default function Landing() {
                 </p>
               </div>
               
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              {/* CTA Buttons - Smaller */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-3">
                 <Link href="/premium">
-                  <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
+                  <Button size="default" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-base font-semibold rounded-lg shadow-xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
                     <span className="text-white">Start Premium Trial</span>
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform text-white" />
                   </Button>
                 </Link>
                 <Link href="/hybrid-ai">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
-                    <Shield className="mr-2 w-5 h-5 text-white" />
+                  <Button variant="outline" size="default" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 group">
+                    <Shield className="mr-2 w-4 h-4 text-white" />
                     <span className="text-white">Hybrid AI System</span>
                   </Button>
                 </Link>
                 <Link href="/content-independence">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
-                    <Shield className="mr-2 w-5 h-5 text-white" />
+                  <Button variant="outline" size="default" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 group">
+                    <Shield className="mr-2 w-4 h-4 text-white" />
                     <span className="text-white">Content Independence</span>
                   </Button>
                 </Link>
                 <Link href="/translation-dashboard">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
-                    <Globe className="mr-2 w-5 h-5 text-white" />
+                  <Button variant="outline" size="default" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 group">
+                    <Globe className="mr-2 w-4 h-4 text-white" />
                     <span className="text-white">39 Languages</span>
                   </Button>
                 </Link>
