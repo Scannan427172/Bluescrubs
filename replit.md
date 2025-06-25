@@ -230,10 +230,6 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: TEAM SECTION ADDITION - Added comprehensive team section to More page featuring Dr. Yasar Ahmad (Medical Director) and Keith Hunter (Co-Founder & Creative Director) with complete professional backgrounds and achievements
 - June 25, 2025: KEITH HUNTER PROFILE ENHANCEMENT - Updated qualifications to "BA Hons Dip CSD", added complete massage therapy certifications, prestigious awards (Coach of the Year 2012, Queens Award 2020), and corrected athletic achievements (1 European bronze medalist, 1 European long jump champion, 1 world champion bronze medalist)
 - June 25, 2025: ZYGOTE BODY 3D ANATOMY INTEGRATION - Added interactive 3D human anatomy viewer to PLAB 2 section using free Zygote Body platform, includes usage instructions, system highlights for cardiovascular/neurological/respiratory anatomy, and clinical examination preparation tools
-- June 25, 2025: ZYGOTE BODY REMOVAL - Removed Zygote Body 3D anatomy viewer from PLAB 2 section per user request, restored original 7-tab layout without anatomy integration
-- June 25, 2025: INNERBODY ANATOMY INTEGRATION - Added InnerBody free anatomy viewer to PLAB 2 section with interactive exploration, usage guide, and four system highlights (cardiovascular, neurological, respiratory, musculoskeletal)
-- June 25, 2025: ANATOMOGRAPHY INTEGRATION - Replaced InnerBody with Anatomography 3D viewer (lifesciencedb.jp/bp3d) featuring interactive 3D models, cross-sectional anatomy, and medical imaging integration for enhanced PLAB 2 preparation
-- June 25, 2025: ANATOMOGRAPHY REMOVAL - Removed Anatomography 3D viewer from PLAB 2 section per user request, restored original 7-tab layout without anatomy integration
 
 # User Preferences
 
