@@ -81,27 +81,26 @@ export default function Test() {
     retry: false,
   });
 
-  // Medical Specialty Categories - Dynamic based on available questions
-  const totalQuestions = (questionStats as any)?.questionBank || 2;
+  // Medical Specialty Categories - Clean display without numbers
   const medicalCategories = [
-    { id: "all", name: "All Categories", icon: "🏥", count: totalQuestions.toString() },
-    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", count: "3" },
-    { id: "infectious-diseases", name: "Infectious Diseases", icon: "🦠", count: "1" },
-    { id: "respiratory", name: "Respiratory", icon: "🫁", count: "0" },
-    { id: "gastrointestinal", name: "Gastrointestinal", icon: "🦠", count: "0" },
-    { id: "neurology", name: "Neurology", icon: "🧠", count: "0" },
-    { id: "endocrinology", name: "Endocrinology", icon: "⚡", count: "0" },
-    { id: "psychiatry", name: "Psychiatry", icon: "🧘", count: "0" },
-    { id: "obstetrics-gynaecology", name: "Obstetrics & Gynaecology", icon: "👶", count: "0" },
-    { id: "paediatrics", name: "Paediatrics", icon: "🧸", count: "0" },
-    { id: "surgery", name: "Surgery", icon: "🔪", count: "0" },
-    { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨", count: "0" },
-    { id: "rheumatology", name: "Rheumatology", icon: "🦴", count: "0" },
-    { id: "dermatology", name: "Dermatology", icon: "👁️", count: "0" },
-    { id: "ophthalmology", name: "Ophthalmology", icon: "👁️", count: "0" },
-    { id: "ent", name: "ENT", icon: "👂", count: "0" },
-    { id: "pharmacology", name: "Pharmacology", icon: "💊", count: "0" },
-    { id: "ethics-law", name: "Ethics & Law", icon: "⚖️", count: "0" }
+    { id: "all", name: "All Categories", icon: "🏥" },
+    { id: "cardiovascular", name: "Cardiovascular", icon: "❤️" },
+    { id: "infectious-diseases", name: "Infectious Diseases", icon: "🦠" },
+    { id: "respiratory", name: "Respiratory", icon: "🫁" },
+    { id: "gastrointestinal", name: "Gastrointestinal", icon: "🦠" },
+    { id: "neurology", name: "Neurology", icon: "🧠" },
+    { id: "endocrinology", name: "Endocrinology", icon: "⚡" },
+    { id: "psychiatry", name: "Psychiatry", icon: "🧘" },
+    { id: "obstetrics-gynaecology", name: "Obstetrics & Gynaecology", icon: "👶" },
+    { id: "paediatrics", name: "Paediatrics", icon: "🧸" },
+    { id: "surgery", name: "Surgery", icon: "🔪" },
+    { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨" },
+    { id: "rheumatology", name: "Rheumatology", icon: "🦴" },
+    { id: "dermatology", name: "Dermatology", icon: "👁️" },
+    { id: "ophthalmology", name: "Ophthalmology", icon: "👁️" },
+    { id: "ent", name: "ENT", icon: "👂" },
+    { id: "pharmacology", name: "Pharmacology", icon: "💊" },
+    { id: "ethics-law", name: "Ethics & Law", icon: "⚖️" }
   ];
 
   const difficultyLevels = [
@@ -870,9 +869,6 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                           <div className="flex items-center gap-2">
                             <span>{category.icon}</span>
                             <span>{category.name}</span>
-                            <Badge variant="secondary" className="ml-2 text-xs">
-                              {category.count}
-                            </Badge>
                           </div>
                         </SelectItem>
                       ))}
@@ -910,7 +906,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-md border">
                     <BookOpen className="w-4 h-4 text-blue-600" />
                     <span className="font-semibold text-gray-900">
-                      {medicalCategories.find(cat => cat.id === selectedCategory)?.count || totalQuestions} Questions
+                      Practice Questions Available
                     </span>
                   </div>
                 </div>
@@ -928,7 +924,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   <BookOpen className="w-5 h-5 text-blue-600" />
                   <span className="text-sm font-medium text-gray-600">Total Questions</span>
                 </div>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{totalQuestions}</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">5000+</p>
                 <p className="text-xs text-gray-500 mt-1">Available practice questions</p>
               </CardContent>
             </Card>
