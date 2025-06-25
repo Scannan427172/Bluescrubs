@@ -141,11 +141,11 @@ export function Navigation({ user }: NavigationProps) {
       {/* Mobile Bottom Navigation - iPhone Style */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200/50 md:hidden z-40 shadow-lg">
         <div className="safe-area-pb">
-          <div className="grid grid-cols-5 gap-0 px-0.5 py-1">
+          <div className="flex items-center justify-between px-1 py-1">
             {/* Essential Navigation Items */}
             <Link
               href="/dashboard"
-              className={`flex flex-col items-center justify-center py-1 px-0.5 rounded-md transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/dashboard"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
@@ -157,7 +157,7 @@ export function Navigation({ user }: NavigationProps) {
 
             <Link
               href="/plab1-new"
-              className={`flex flex-col items-center justify-center py-1 px-0.5 rounded-md transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/plab1-new"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
@@ -169,7 +169,7 @@ export function Navigation({ user }: NavigationProps) {
 
             <Link
               href="/plab2-osce"
-              className={`flex flex-col items-center justify-center py-1 px-0.5 rounded-md transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/plab2-osce"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
@@ -181,7 +181,7 @@ export function Navigation({ user }: NavigationProps) {
 
             <Link
               href="/adaptive-learning"
-              className={`flex flex-col items-center justify-center py-1 px-0.5 rounded-md transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/adaptive-learning"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
@@ -193,7 +193,7 @@ export function Navigation({ user }: NavigationProps) {
 
             <Link
               href="/more"
-              className={`flex flex-col items-center justify-center py-1 px-0.5 rounded-md transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/more"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
