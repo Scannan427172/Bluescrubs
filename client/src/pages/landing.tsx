@@ -51,7 +51,7 @@ export default function Landing() {
           </div>
           
           {/* Bottom Content - Subtext and Button */}
-          <div className="max-w-7xl mx-auto w-full pb-20">
+          <div className="max-w-7xl mx-auto w-full pb-12">
             <div className="hero-text text-white space-y-4 max-w-xl">
               <p className="text-xs lg:text-sm text-white/90 leading-relaxed max-w-lg">
                 The world's most comprehensive independent medical platform featuring{" "}
