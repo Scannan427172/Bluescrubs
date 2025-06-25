@@ -496,7 +496,7 @@ link: "/ask-ai"
                   <div className="bg-white/50 p-3 rounded-lg">
                     <h4 className="font-semibold text-blue-900 mb-2">Athletic Achievements</h4>
                     <ul className="text-gray-700 space-y-1">
-                      <li>• Coached 2 European golf bronze medalists</li>
+                      <li>• Coached 1 European bronze medalist</li>
                       <li>• One European long jump champion</li>
                       <li>• One world champion bronze medalist</li>
                     </ul>

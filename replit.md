@@ -228,6 +228,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: OPTION LETTER STYLING ENHANCEMENT - Updated "Why Other Options Are Inappropriate" section to display option letters (A-F) as red circular badges with black letters, matching the green badge style in "Correct Answer Explanation" section
 - June 25, 2025: MEMORY AID BULLET POINTS - Converted memory aid section to bullet point format with yellow markers for improved readability
 - June 25, 2025: TEAM SECTION ADDITION - Added comprehensive team section to More page featuring Dr. Yasar Ahmad (Medical Director) and Keith Hunter (Co-Founder & Creative Director) with complete professional backgrounds and achievements
+- June 25, 2025: KEITH HUNTER PROFILE ENHANCEMENT - Updated qualifications to "BA Hons Dip CSD", added complete massage therapy certifications, prestigious awards (Coach of the Year 2012, Queens Award 2020), and corrected athletic achievements (1 European bronze medalist, 1 European long jump champion, 1 world champion bronze medalist)
 
 # User Preferences
 
