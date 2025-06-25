@@ -600,7 +600,7 @@ export default function InteractiveFlashcards() {
                     ref={videoRef}
                     controls
                     className="max-w-md rounded-lg shadow-md"
-                    poster="/api/placeholder/400/300"
+                    poster="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop"
                   >
                     <source src={currentCard.front.video} type="video/mp4" />
                   </video>

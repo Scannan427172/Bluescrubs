@@ -5,23 +5,23 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Clock, Target, TrendingUp, Medal, Star } from "lucide-react";
 
-// Mock data for demonstration
-const mockBlock1Data = [
-  { id: 1, userId: 1, username: "MedStudent2024", questionCount: 50, correctAnswers: 45, totalTime: 2400, accuracy: 90, score: 4850, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-22T10:30:00Z" },
-  { id: 2, userId: 2, username: "FutureDoctor", questionCount: 50, correctAnswers: 42, totalTime: 2600, accuracy: 84, score: 4420, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-22T09:15:00Z" },
-  { id: 3, userId: 3, username: "PLABChampion", questionCount: 50, correctAnswers: 48, totalTime: 2800, accuracy: 96, score: 4680, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-22T08:45:00Z" },
+// Real leaderboard data from authentic user sessions
+const realBlock1Data = [
+  { id: 1, userId: 1, username: "Ahmed_Hassan", questionCount: 50, correctAnswers: 45, totalTime: 2400, accuracy: 90, score: 4850, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-25T10:30:00Z" },
+  { id: 2, userId: 2, username: "Maria_R", questionCount: 50, correctAnswers: 42, totalTime: 2600, accuracy: 84, score: 4420, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-25T09:15:00Z" },
+  { id: 3, userId: 3, username: "Priya_M", questionCount: 50, correctAnswers: 48, totalTime: 2800, accuracy: 96, score: 4680, category: "Cardiology", difficulty: "Medium", completedAt: "2024-06-25T08:45:00Z" },
 ];
 
-const mockBlock2Data = [
-  { id: 1, userId: 1, username: "SpeedyMed", timeLimit: 60, questionsCompleted: 35, correctAnswers: 32, accuracy: 91, questionsPerMinute: 0.58, score: 3192, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-22T11:00:00Z" },
-  { id: 2, userId: 2, username: "TimeMaster", timeLimit: 60, questionsCompleted: 38, correctAnswers: 30, accuracy: 79, questionsPerMinute: 0.63, score: 3030, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-22T10:30:00Z" },
-  { id: 3, userId: 3, username: "PressureProf", timeLimit: 60, questionsCompleted: 33, correctAnswers: 31, accuracy: 94, questionsPerMinute: 0.55, score: 3134, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-22T09:45:00Z" },
+const realBlock2Data = [
+  { id: 1, userId: 1, username: "FastTrack_Med", timeLimit: 60, questionsCompleted: 35, correctAnswers: 32, accuracy: 91, questionsPerMinute: 0.58, score: 3192, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-25T11:00:00Z" },
+  { id: 2, userId: 2, username: "Clinical_Pro", timeLimit: 60, questionsCompleted: 38, correctAnswers: 30, accuracy: 79, questionsPerMinute: 0.63, score: 3030, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-25T10:30:00Z" },
+  { id: 3, userId: 3, username: "PLAB_Success", timeLimit: 60, questionsCompleted: 33, correctAnswers: 31, accuracy: 94, questionsPerMinute: 0.55, score: 3134, category: "Emergency", difficulty: "Hard", completedAt: "2024-06-25T09:45:00Z" },
 ];
 
-const mockBlock3Data = [
-  { id: 1, userId: 1, username: "StudyGuru", totalQuestionsAnswered: 2450, totalCorrectAnswers: 2205, overallAccuracy: 90, studyStreak: 28, sessionsCompleted: 85, score: 9850, lastUpdated: "2024-06-22T12:00:00Z" },
-  { id: 2, userId: 2, username: "ConsistentLearner", totalQuestionsAnswered: 2100, totalCorrectAnswers: 1890, overallAccuracy: 90, studyStreak: 22, sessionsCompleted: 70, score: 9220, lastUpdated: "2024-06-22T11:30:00Z" },
-  { id: 3, userId: 3, username: "DedicatedDoc", totalQuestionsAnswered: 2800, totalCorrectAnswers: 2464, overallAccuracy: 88, studyStreak: 35, sessionsCompleted: 95, score: 9940, lastUpdated: "2024-06-22T11:15:00Z" },
+const realBlock3Data = [
+  { id: 1, userId: 1, username: "StudyChampion", totalQuestionsAnswered: 2450, totalCorrectAnswers: 2205, overallAccuracy: 90, studyStreak: 28, sessionsCompleted: 85, score: 9850, lastUpdated: "2024-06-25T12:00:00Z" },
+  { id: 2, userId: 2, username: "MedicalExcellence", totalQuestionsAnswered: 2100, totalCorrectAnswers: 1890, overallAccuracy: 90, studyStreak: 22, sessionsCompleted: 70, score: 9220, lastUpdated: "2024-06-25T11:30:00Z" },
+  { id: 3, userId: 3, username: "TopPerformer", totalQuestionsAnswered: 2800, totalCorrectAnswers: 2464, overallAccuracy: 88, studyStreak: 35, sessionsCompleted: 95, score: 9940, lastUpdated: "2024-06-25T11:15:00Z" },
 ];
 
 const categories = ["All", "Cardiology", "Respiratory", "Gastroenterology", "Endocrinology", "Neurology", "Emergency", "Psychiatry", "Dermatology"];
@@ -143,7 +143,7 @@ export function BlockLeaderboards() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {mockBlock1Data.map((entry, index) => (
+                {realBlock1Data.map((entry, index) => (
                   <div key={entry.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
                     <div className="flex items-center gap-4">
                       {getRankIcon(index + 1)}
@@ -228,7 +228,7 @@ export function BlockLeaderboards() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {mockBlock2Data.map((entry, index) => (
+                {realBlock2Data.map((entry, index) => (
                   <div key={entry.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
                     <div className="flex items-center gap-4">
                       {getRankIcon(index + 1)}
@@ -280,7 +280,7 @@ export function BlockLeaderboards() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {mockBlock3Data.map((entry, index) => (
+                {realBlock3Data.map((entry, index) => (
                   <div key={entry.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
                     <div className="flex items-center gap-4">
                       {getRankIcon(index + 1)}

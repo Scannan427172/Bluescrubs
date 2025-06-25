@@ -116,7 +116,7 @@ export default function Premium() {
       reviews: 127,
       rate: "£80/hour",
       languages: ["English", "French"],
-      image: "/api/placeholder/150/150"
+      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face"
     },
     {
       name: "Dr. Amira Hassan", 
