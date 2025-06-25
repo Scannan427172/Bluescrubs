@@ -1406,6 +1406,72 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     });
   });
 
+  // User Format Stations endpoints
+  app.get('/api/user-format/stations', (req, res) => {
+    const stations = loadUserFormatStations();
+    res.json(stations);
+  });
+
+  app.post('/api/generate-user-format-3000-stations', async (req, res) => {
+    if (!isAIEnabled()) {
+      return res.status(503).json({ 
+        error: "AI services unavailable", 
+        message: getAIStatus()
+      });
+    }
+
+    try {
+      const currentCount = getUserFormatStationCount();
+      const targetCount = 3000;
+      const remaining = targetCount - currentCount;
+      
+      if (remaining <= 0) {
+        return res.json({ 
+          success: true, 
+          message: `Target achieved! ${currentCount} stations available`,
+          totalStations: currentCount 
+        });
+      }
+      
+      console.log(`Generating user format stations: ${remaining} remaining toward ${targetCount} target`);
+      
+      const batchSize = 5;
+      const stations = await generateUserFormatStations(Math.min(batchSize, remaining));
+      
+      if (stations.length > 0) {
+        const totalStations = saveUserFormatStations(stations);
+        console.log(`Generated ${stations.length} user format stations (Total: ${totalStations}/${targetCount})`);
+        
+        res.json({ 
+          success: true, 
+          generated: stations.length,
+          totalStations,
+          remaining: Math.max(0, targetCount - totalStations),
+          targetReached: totalStations >= targetCount
+        });
+      } else {
+        res.json({ success: false, error: 'No stations generated' });
+      }
+    } catch (error) {
+      console.error('Error generating user format stations:', error);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+
+  app.get('/api/user-format/status', (req, res) => {
+    const totalStations = getUserFormatStationCount();
+    const targetCount = 3000;
+    const remaining = Math.max(0, targetCount - totalStations);
+    
+    res.json({
+      totalStations,
+      targetCount,
+      remaining,
+      percentComplete: Math.round((totalStations / targetCount) * 100),
+      targetReached: totalStations >= targetCount
+    });
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
