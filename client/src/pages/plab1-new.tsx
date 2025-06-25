@@ -1091,26 +1091,30 @@ export default function PLAB1New() {
             </CardContent>
           </Card>
 
-          {/* NICE NG136 + PLAB MCQ Format Guide */}
-          <Card className="mb-8 cursor-pointer hover:shadow-lg transition-shadow border-green-200" onClick={() => setShowNiceGuide(true)}>
-            <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 transition-colors">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <FileText className="w-6 h-6 text-green-600" />
-                  <div>
-                    <CardTitle className="text-green-800">NICE NG136 + PLAB MCQ Format</CardTitle>
-                    <CardDescription className="text-green-600 mt-1">
-                      Clinical scenario framework, risk assessment tools, and structured learning approach
-                    </CardDescription>
+          {/* NICE NG136 + PLAB MCQ Format Guide - Prominent Display */}
+          <div className="mb-8 p-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg shadow-lg">
+            <Card className="cursor-pointer hover:shadow-xl transition-all duration-300 border-0" onClick={() => setShowNiceGuide(true)}>
+              <CardHeader className="bg-white hover:bg-green-50 transition-colors p-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-green-100 rounded-full">
+                      <FileText className="w-8 h-8 text-green-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-green-800 text-xl font-bold">NICE NG136 + PLAB MCQ Format</CardTitle>
+                      <CardDescription className="text-green-700 mt-2 text-base">
+                        📋 Clinical scenario framework, risk assessment tools, and structured learning approach
+                      </CardDescription>
+                    </div>
                   </div>
+                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white border-0 px-6 py-3">
+                    <BookOpen className="w-5 h-5 mr-2" />
+                    View Guide
+                  </Button>
                 </div>
-                <Button variant="outline" size="sm" className="text-green-600 border-green-200 hover:bg-green-50">
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  View Guide
-                </Button>
-              </div>
-            </CardHeader>
-          </Card>
+              </CardHeader>
+            </Card>
+          </div>
 
           {/* Practice Options - Block System */}
           <Card id="practice-options" className="mb-8">
