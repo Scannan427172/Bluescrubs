@@ -55,12 +55,9 @@ Current context: ${context ? JSON.stringify(context, null, 2) : 'No specific con
       ]
     });
 
-    const content = response.content[0];
-    if (content.type !== 'text') {
-      throw new Error('Unexpected response type from AI');
-    }
-
-    return parseAIResponse(content.text);
+    const content = response.choices[0]?.message?.content || '';
+    
+    return parseAIResponse(content);
   } catch (error) {
     console.error('AI Tutor generation error:', error);
     
