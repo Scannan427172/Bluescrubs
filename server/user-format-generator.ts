@@ -63,12 +63,21 @@ Return only the JSON object, no additional text.`;
       const content = response.choices[0]?.message?.content?.trim();
       if (content) {
         try {
-          const station = JSON.parse(content);
+          // Clean the response to extract JSON
+          let cleanContent = content;
+          if (content.includes('```json')) {
+            cleanContent = content.split('```json')[1].split('```')[0].trim();
+          } else if (content.includes('```')) {
+            cleanContent = content.split('```')[1].trim();
+          }
+          
+          const station = JSON.parse(cleanContent);
           station.id = `user-format-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
           stations.push(station);
           console.log(`Generated ${stationType} station for ${specialty}`);
         } catch (parseError) {
           console.error('JSON parse error:', parseError);
+          console.error('Raw content:', content);
         }
       }
     } catch (error) {
