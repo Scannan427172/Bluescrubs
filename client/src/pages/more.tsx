@@ -107,7 +107,7 @@ export default function More() {
   const features = [
     {
       icon: Users,
-      title: "Who are NHSprep",
+      title: "Who are BlueScrubsPrep",
       description: "Meet the founders - NHS doctor Yasa and developer Keith Hunter",
       hasArrow: true,
       link: "/about-team"
@@ -249,7 +249,7 @@ export default function More() {
     },
     {
       icon: Brain,
-      title: "Ask NHS Prep AI",
+      title: "Ask BlueScrubsPrep AI",
       description: "Get instant answers to any medical question with UK guidelines",
       hasArrow: true,
       link: "/ask-nhs-prep"
