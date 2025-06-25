@@ -1,6 +1,6 @@
 # Overview
 
-This repository contains a comprehensive PLAB (Professional and Linguistic Assessments Board) exam preparation platform designed for international medical graduates seeking to practice medicine in the UK. The application integrates PLAB 1 knowledge testing with PLAB 2 clinical skills training, incorporating UK medical guidelines (NICE, CKS, GMC) and neurodiversity accommodations.
+This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and Linguistic Assessments Board) exam preparation platform designed for international medical graduates seeking to practice medicine in the UK. The application integrates PLAB 1 knowledge testing with PLAB 2 clinical skills training, incorporating UK medical guidelines (NICE, CKS, GMC) and neurodiversity accommodations.
 
 # System Architecture
 
@@ -207,6 +207,7 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 25, 2025: HYBRID AI SYSTEM DEPLOYED - Created smart hybrid approach: question banks remain AI-free for authenticity, while video analysis and feedback can use AI enhancement with independent fallbacks - provides optional AI benefits without compromising medical accuracy
 - June 25, 2025: LANDING PAGE UPDATED - Refreshed all cards and statistics to reflect current system: 5,528 authentic stations, independent content system, hybrid AI capabilities, 39-language support, and zero external dependencies
 - June 25, 2025: ENHANCED AI TUTOR SYSTEM - Upgraded to match Neural Consult capabilities: voice interaction, content upload processing, flashcard generation, podcast creation, performance tracking, and study session management while maintaining complete independence
+- June 25, 2025: COMPLETE BRAND UPDATE - Changed all instances of "NHSprep" to "BlueScrubsPrep" throughout the platform, updated logo, landing page, documentation, and service worker cache names
 
 # User Preferences
 

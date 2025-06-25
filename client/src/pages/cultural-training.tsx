@@ -11,7 +11,7 @@ export default function CulturalTraining() {
 
   const culturalModules = [
     {
-      title: "NHS Communication Style",
+      title: "UK Healthcare Communication Style",
       progress: 85,
       topics: ["Professional Courtesy", "Patient-Centered Language", "Hierarchy Understanding"],
       duration: "45 minutes",
@@ -65,7 +65,7 @@ export default function CulturalTraining() {
         "Apologize for inconvenience",
         "Provide realistic timeframes"
       ],
-      culturalNotes: "British patients value politeness and fair queuing. Explain NHS resource constraints."
+      culturalNotes: "British patients value politeness and fair queuing. Explain UK healthcare resource constraints."
     },
     {
       title: "Religious Considerations",
@@ -155,7 +155,7 @@ export default function CulturalTraining() {
             <h1 className="text-3xl font-bold text-gray-900">UK Healthcare Culture Training</h1>
           </div>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            Master UK healthcare culture, NHS values, and professional communication standards. 
+            Master UK healthcare culture, medical values, and professional communication standards. 
             Essential preparation for working effectively in the British healthcare system.
           </p>
         </div>
@@ -164,7 +164,7 @@ export default function CulturalTraining() {
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="modules">Training Modules</TabsTrigger>
             <TabsTrigger value="scenarios">Communication Scenarios</TabsTrigger>
-            <TabsTrigger value="values">NHS Values</TabsTrigger>
+            <TabsTrigger value="values">UK Healthcare Values</TabsTrigger>
             <TabsTrigger value="tips">Practical Tips</TabsTrigger>
           </TabsList>
 
@@ -277,13 +277,13 @@ export default function CulturalTraining() {
             </Card>
           </TabsContent>
 
-          {/* NHS Values */}
+          {/* UK Healthcare Values */}
           <TabsContent value="values" className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Heart className="w-5 h-5 text-red-600" />
-                  NHS Constitution Values
+                  UK Healthcare Constitution Values
                 </CardTitle>
               </CardHeader>
               <CardContent>
