@@ -38,12 +38,12 @@ export default function Landing() {
                 <span className="text-xs font-semibold text-white">Comprehensive Medical Exam Preparation</span>
               </div>
               
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-white">
+              <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold leading-tight text-white">
                 <div className="flex flex-col items-start">
-                  <span className="text-4xl lg:text-6xl">Master Your</span>
+                  <span className="text-4xl lg:text-6xl xl:text-7xl">Master Your</span>
                   <div className="flex flex-col items-start">
                     <Logo size="xl" />
-                    <span className="text-4xl lg:text-6xl">Journey</span>
+                    <span className="text-4xl lg:text-6xl xl:text-7xl">Journey</span>
                   </div>
                 </div>
               </h1>
