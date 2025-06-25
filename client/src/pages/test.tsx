@@ -1672,7 +1672,19 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             </CardHeader>
             <CardContent>
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
-                <p className="text-gray-800 font-medium">{currentQuestion.mnemonic}</p>
+                <div className="text-gray-800 font-medium">
+                  {currentQuestion.mnemonic.split('\n').map((line, index) => {
+                    if (line.trim()) {
+                      return (
+                        <div key={index} className="flex items-start gap-2 mb-2">
+                          <span className="text-yellow-600 font-bold mt-1">•</span>
+                          <span className="flex-1">{line.trim()}</span>
+                        </div>
+                      );
+                    }
+                    return <div key={index} className="mb-2"></div>;
+                  })}
+                </div>
               </div>
             </CardContent>
           </Card>
