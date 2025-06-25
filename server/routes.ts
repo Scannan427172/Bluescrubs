@@ -805,19 +805,57 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
   // Initialize adaptive AI engine with question bank
   const initializeAdaptiveAI = () => {
     try {
-      // Use the existing ukQuestionBank that's already loaded
-      if (ukQuestionBank && ukQuestionBank.length > 0) {
-        AdaptiveAIEngine.initialize(ukQuestionBank);
-        console.log(`Adaptive AI Engine initialized with ${ukQuestionBank.length} questions`);
-      } else {
-        console.log('Adaptive AI Engine: No questions available for initialization');
-        // Initialize with empty array for now
-        AdaptiveAIEngine.initialize([]);
+      // First try to load existing question bank
+      loadQuestionBank();
+      
+      // Use the loaded ukQuestionBank or create from test questions
+      let questions = ukQuestionBank;
+      
+      if (!questions || questions.length === 0) {
+        // Use the test questions from the API as starter questions for adaptive AI
+        const testQuestions = [
+          {
+            id: "q1", 
+            topic: "Urinary Tract Infection Management",
+            category: "Infectious Diseases",
+            difficulty: "medium",
+            question: "A 28-year-old non-pregnant woman presents with a 2-day history of dysuria, urinary frequency, and suprapubic discomfort. Urine dipstick shows positive nitrites and leucocytes. What is the most appropriate first-line antibiotic treatment according to current UK guidelines?",
+            options: ["Nitrofurantoin 100mg modified-release twice daily for 3 days", "Trimethoprim 200mg twice daily for 3 days", "Ciprofloxacin 500mg twice daily for 3 days", "Amoxicillin 500mg three times daily for 5 days", "Co-trimoxazole 960mg twice daily for 3 days"],
+            correctAnswer: "Nitrofurantoin 100mg modified-release twice daily for 3 days",
+            explanation: "Nitrofurantoin remains the first-line treatment for uncomplicated UTIs in non-pregnant women according to NICE guidelines, with excellent E. coli coverage and minimal resistance."
+          },
+          {
+            id: "q2",
+            topic: "Acute Coronary Syndrome Management", 
+            category: "Cardiology",
+            difficulty: "hard",
+            question: "A 58-year-old man presents with severe central chest pain radiating to his left arm, lasting 45 minutes. ECG shows ST elevation >2mm in leads II, III, and aVF. What is the most appropriate immediate management?",
+            options: ["Primary percutaneous coronary intervention (PCI) within 120 minutes", "Thrombolytic therapy with alteplase immediately", "High-dose atorvastatin and dual antiplatelet therapy", "Coronary angiography within 24 hours", "Conservative management with aspirin and clopidogrel"],
+            correctAnswer: "Primary percutaneous coronary intervention (PCI) within 120 minutes",
+            explanation: "Primary PCI within 120 minutes is the gold standard for STEMI management, providing superior outcomes compared to thrombolytic therapy."
+          }
+        ];
+        questions = testQuestions;
+        console.log('Using starter questions for Adaptive AI Engine initialization');
       }
+      
+      AdaptiveAIEngine.initialize(questions);
+      console.log(`Adaptive AI Engine initialized with ${questions.length} questions`);
     } catch (error) {
       console.error('Failed to initialize Adaptive AI Engine:', error);
-      // Initialize with empty array as fallback
-      AdaptiveAIEngine.initialize([]);
+      // Initialize with minimal question set as absolute fallback
+      const fallbackQuestions = [{
+        id: "fallback1",
+        topic: "General Medicine",
+        category: "General",
+        difficulty: "medium",
+        question: "Which organization provides clinical guidelines for UK healthcare?",
+        options: ["NICE", "WHO", "FDA", "EMA"],
+        correctAnswer: "NICE",
+        explanation: "NICE (National Institute for Health and Care Excellence) provides evidence-based clinical guidelines for UK healthcare."
+      }];
+      AdaptiveAIEngine.initialize(fallbackQuestions);
+      console.log('Adaptive AI Engine initialized with fallback questions');
     }
   };
   
