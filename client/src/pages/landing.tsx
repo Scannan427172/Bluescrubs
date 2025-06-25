@@ -30,8 +30,8 @@ export default function Landing() {
         
         {/* Hero Content - Portrait Layout */}
         <div className="relative z-10 flex flex-col justify-between min-h-screen px-4">
-          <div className="max-w-7xl mx-auto w-full flex-1 flex items-center">
-            {/* Main Title - Centered */}
+          <div className="max-w-7xl mx-auto w-full pt-16">
+            {/* Main Title - Higher Position */}
             <div className="hero-text text-white space-y-6 max-w-xl">
               <h1 className="text-3xl lg:text-5xl font-bold leading-tight text-white">
                 <div className="flex flex-col items-start">
