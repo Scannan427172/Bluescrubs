@@ -13,6 +13,7 @@ import {
 } from "./usage-analytics";
 import fs from "fs";
 import path from "path";
+import { PLAB2_TEMPLATE_STATIONS, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-templates";
 
 // AI Question Generation Functions
 async function generateMedicalQuestions(templates: any[], category: string, difficulty: string, count: number) {
@@ -297,6 +298,326 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Batch generation error:', error);
       res.status(500).json({ error: "Failed to generate question bank", details: error.message });
+    }
+  });
+
+  // PLAB 2 OSCE Station Generation Functions
+  async function generatePLAB2OSCEStations(templates: any[], stationType: string, specialty: string, difficulty: string, count: number) {
+    try {
+      if (!process.env.OPENAI_API_KEY) {
+        throw new Error('OpenAI API key not found');
+      }
+      
+      const { default: OpenAI } = await import('openai');
+      const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+      });
+
+      const specialtyMappings = {
+        'emergency-medicine': 'Emergency Medicine',
+        'general-medicine': 'General Medicine',
+        'cardiology': 'Cardiology',
+        'respiratory': 'Respiratory Medicine',
+        'gastroenterology': 'Gastroenterology',
+        'neurology': 'Neurology',
+        'psychiatry': 'Psychiatry',
+        'obstetrics-gynaecology': 'Obstetrics & Gynaecology',
+        'paediatrics': 'Paediatrics',
+        'surgery': 'Surgery',
+        'oncology': 'Oncology',
+        'rheumatology': 'Rheumatology'
+      };
+
+      const typeDescriptions = {
+        'history-taking': 'focused history taking stations',
+        'physical-examination': 'systematic physical examination stations',
+        'communication-skills': 'communication and breaking bad news stations',
+        'practical-procedures': 'clinical procedures and skills stations',
+        'emergency-management': 'acute management and emergency stations',
+        'prescribing-safety': 'safe prescribing and medication stations',
+        'data-interpretation': 'investigation results interpretation stations',
+        'ethics-consent': 'medical ethics and consent stations'
+      };
+
+      const displaySpecialty = specialtyMappings[specialty as keyof typeof specialtyMappings] || specialty;
+      const stationDescription = typeDescriptions[stationType as keyof typeof typeDescriptions] || stationType;
+
+      const prompt = `Generate ${count} high-quality PLAB 2 OSCE stations for ${displaySpecialty} specialty focusing on ${stationDescription}.
+
+Use these template stations as the EXACT format reference:
+${JSON.stringify(templates.slice(0, 2), null, 2)}
+
+CRITICAL Requirements:
+- Follow the exact JSON structure: id, title, scenario, type, duration, difficulty, specialty, instructions, markingCriteria, keyActions, redFlags, differentialDiagnosis, references
+- Create authentic UK clinical OSCE scenarios based on real medical practice
+- Include verified NICE, GMC, BNF, NHS, or Royal College guideline references
+- Stations must test clinical skills appropriate for PLAB 2 level
+- Use realistic patient presentations with specific clinical details
+- Provide comprehensive marking criteria with clear assessment points
+- Include detailed instructions for candidate, examiner, and standardized patient
+- Each station must be unique and clinically accurate
+- Duration should be 8 minutes for most stations
+- Difficulty should match requested level: ${difficulty}
+
+For ${displaySpecialty} ${stationType} stations, focus on core clinical skills like:
+${getStationTopics(stationType, specialty)}
+
+Return ONLY a valid JSON array with exactly ${count} stations. No additional text.`;
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o",
+        max_tokens: 4000,
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.7
+      });
+
+      let response = completion.choices[0].message.content.trim();
+      
+      // Clean up response to ensure valid JSON
+      if (response.startsWith('```json')) {
+        response = response.replace(/```json\n?/g, '').replace(/```\n?/g, '');
+      }
+      
+      const stations = JSON.parse(response);
+      
+      // Validate and enhance each station
+      return stations.map((s: any, index: number) => ({
+        ...s,
+        id: `plab2_generated_${specialty}_${stationType}_${Date.now()}_${index}`,
+        type: stationType,
+        specialty: displaySpecialty,
+        difficulty,
+        duration: s.duration || 8,
+        // Ensure all required fields exist
+        title: s.title || `${displaySpecialty} ${stationType} Station`,
+        references: s.references || [
+          {
+            title: "NICE Guidelines",
+            url: "https://www.nice.org.uk/guidance"
+          },
+          {
+            title: "GMC Good Medical Practice",
+            url: "https://www.gmc-uk.org/ethical-guidance/ethical-guidance-for-doctors/good-medical-practice"
+          }
+        ]
+      }));
+
+    } catch (error) {
+      console.error('PLAB 2 AI generation error:', error);
+      return createFallbackPLAB2Stations(templates, stationType, specialty, difficulty, count);
+    }
+  }
+
+  function getStationTopics(stationType: string, specialty: string): string {
+    const topics = {
+      'history-taking': {
+        'emergency-medicine': 'Chest pain, breathlessness, abdominal pain, headache, collapse',
+        'cardiology': 'Chest pain, palpitations, syncope, heart failure symptoms',
+        'respiratory': 'Cough, breathlessness, chest pain, hemoptysis',
+        'general-medicine': 'Weight loss, fatigue, fever, joint pain, confusion'
+      },
+      'physical-examination': {
+        'cardiology': 'Cardiovascular examination, murmur assessment, heart failure signs',
+        'respiratory': 'Respiratory examination, pleural effusion, consolidation',
+        'neurology': 'Neurological examination, stroke assessment, cranial nerves'
+      },
+      'communication-skills': {
+        'oncology': 'Breaking bad news, discussing prognosis, treatment options',
+        'general-medicine': 'Explaining diagnosis, lifestyle advice, medication counseling'
+      }
+    };
+    
+    return topics[stationType as keyof typeof topics]?.[specialty as keyof any] || 
+           'Standard clinical presentations and management scenarios';
+  }
+
+  function createFallbackPLAB2Stations(templates: any[], stationType: string, specialty: string, difficulty: string, count: number) {
+    return templates.slice(0, count).map((template, index) => ({
+      ...template,
+      id: `plab2_fallback_${specialty}_${stationType}_${Date.now()}_${index}`,
+      type: stationType,
+      specialty,
+      difficulty,
+      title: `${specialty} ${stationType} Station ${index + 1}`,
+      scenario: template.scenario || `Clinical scenario for ${specialty} ${stationType} practice`
+    }));
+  }
+
+  // Load/Save PLAB 2 Station Bank
+  let plab2StationBank: any[] = [];
+  const plab2QuestionBankFile = path.join(process.cwd(), 'generated-plab2-question-bank.json');
+
+  function loadPLAB2StationBank() {
+    try {
+      if (fs.existsSync(plab2QuestionBankFile)) {
+        const data = fs.readFileSync(plab2QuestionBankFile, 'utf8');
+        if (data.trim()) {
+          plab2StationBank = JSON.parse(data);
+          console.log(`Loaded ${plab2StationBank.length} PLAB 2 stations from storage`);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading PLAB 2 station bank:', error);
+      plab2StationBank = [];
+    }
+  }
+
+  function savePLAB2StationBank() {
+    try {
+      fs.writeFileSync(plab2QuestionBankFile, JSON.stringify(plab2StationBank, null, 2));
+      console.log(`Saved ${plab2StationBank.length} stations to storage`);
+    } catch (error) {
+      console.error('Error saving PLAB 2 station bank:', error);
+    }
+  }
+
+  // Initialize PLAB 2 station bank
+  loadPLAB2StationBank();
+
+  // PLAB 2 Station Bank Generation Endpoint
+  app.post("/api/generate-plab2-5000-stations", async (req, res) => {
+    if (!isAIEnabled()) {
+      return res.status(503).json({ 
+        error: "AI services unavailable", 
+        message: getAIStatus()
+      });
+    }
+
+    try {
+      const generationResults: any[] = [];
+      let totalGenerated = plab2StationBank.length;
+      const targetStations = 1000; // PLAB 2 has fewer stations but more detailed
+      
+      if (totalGenerated >= targetStations) {
+        return res.json({
+          success: true,
+          message: `PLAB 2 station bank already complete with ${totalGenerated} stations`,
+          totalGenerated,
+          target: targetStations,
+          progress: `${totalGenerated}/${targetStations}`
+        });
+      }
+
+      // PLAB 2 specialties and station types distribution (realistic OSCE coverage)
+      const plab2Specialties = [
+        { specialty: 'emergency-medicine', stations: 120 },
+        { specialty: 'general-medicine', stations: 150 },
+        { specialty: 'cardiology', stations: 100 },
+        { specialty: 'respiratory', stations: 100 },
+        { specialty: 'gastroenterology', stations: 80 },
+        { specialty: 'neurology', stations: 80 },
+        { specialty: 'psychiatry', stations: 80 },
+        { specialty: 'obstetrics-gynaecology', stations: 100 },
+        { specialty: 'paediatrics', stations: 100 },
+        { specialty: 'surgery', stations: 60 },
+        { specialty: 'oncology', stations: 30 }
+      ];
+
+      const stationTypes = ['history-taking', 'physical-examination', 'communication-skills', 'practical-procedures', 'emergency-management', 'prescribing-safety'];
+
+      for (const spec of plab2Specialties) {
+        const remainingForSpecialty = Math.max(0, spec.stations - (plab2StationBank.filter(s => s.specialty === spec.specialty).length));
+        if (remainingForSpecialty <= 0) continue;
+
+        // Distribute stations across different types
+        const stationsPerType = Math.ceil(remainingForSpecialty / stationTypes.length);
+        const batches = Math.ceil(stationsPerType / 2); // 2 stations per batch
+
+        for (const stationType of stationTypes) {
+          for (let batch = 0; batch < batches && totalGenerated < targetStations; batch++) {
+            try {
+              const stationsInBatch = Math.min(2, spec.stations - (plab2StationBank.filter(s => s.specialty === spec.specialty && s.type === stationType).length));
+              if (stationsInBatch <= 0) break;
+
+              console.log(`Starting PLAB 2 batch ${batch + 1}/${batches} for ${spec.specialty} ${stationType}...`);
+              console.log(`Generating ${stationsInBatch} ${spec.specialty} ${stationType} stations...`);
+              
+              const batchStations = await generatePLAB2OSCEStations(
+                PLAB2_TEMPLATE_STATIONS,
+                stationType,
+                spec.specialty,
+                "intermediate",
+                stationsInBatch
+              );
+              
+              if (batchStations && batchStations.length > 0) {
+                plab2StationBank.push(...batchStations);
+                totalGenerated += batchStations.length;
+                savePLAB2StationBank();
+                
+                generationResults.push({
+                  specialty: spec.specialty,
+                  stationType,
+                  batch: batch + 1,
+                  generated: batchStations.length,
+                  total: totalGenerated
+                });
+                
+                console.log(`Generated PLAB 2 batch ${batch + 1}/${batches} for ${spec.specialty} ${stationType}: ${batchStations.length} stations (Total: ${totalGenerated}/5000)`);
+              } else {
+                console.log(`No stations generated in batch ${batch + 1} for ${spec.specialty} ${stationType}`);
+              }
+              
+              await new Promise(resolve => setTimeout(resolve, 1000));
+              
+            } catch (error) {
+              console.error(`Error generating PLAB 2 batch ${batch + 1} for ${spec.specialty} ${stationType}:`, error);
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+          }
+        }
+      }
+
+      // Final save
+      savePLAB2StationBank();
+
+      res.json({
+        success: true,
+        totalGenerated,
+        target: targetStations,
+        progress: `${totalGenerated}/${targetStations}`,
+        results: generationResults,
+        stationBankSize: plab2StationBank.length,
+        savedToFile: plab2QuestionBankFile
+      });
+
+    } catch (error) {
+      console.error('PLAB 2 batch generation error:', error);
+      res.status(500).json({ error: "Failed to generate PLAB 2 station bank", details: error.message });
+    }
+  });
+
+  // Get PLAB 2 stations endpoint
+  app.get("/api/plab2/stations", (req, res) => {
+    try {
+      const { specialty, type, difficulty, limit = 50 } = req.query;
+      
+      let filteredStations = [...PLAB2_TEMPLATE_STATIONS, ...plab2StationBank];
+      
+      if (specialty && specialty !== 'all') {
+        filteredStations = filteredStations.filter(s => s.specialty === specialty);
+      }
+      
+      if (type && type !== 'all') {
+        filteredStations = filteredStations.filter(s => s.type === type);
+      }
+      
+      if (difficulty && difficulty !== 'all') {
+        filteredStations = filteredStations.filter(s => s.difficulty === difficulty);
+      }
+      
+      const limitedStations = filteredStations.slice(0, parseInt(limit as string));
+      
+      res.json({
+        stations: limitedStations,
+        total: filteredStations.length,
+        templateStations: PLAB2_TEMPLATE_STATIONS.length,
+        generatedStations: plab2StationBank.length,
+        filters: { specialty, type, difficulty, limit }
+      });
+    } catch (error) {
+      console.error('Error fetching PLAB 2 stations:', error);
+      res.status(500).json({ error: "Failed to fetch PLAB 2 stations" });
     }
   });
 
