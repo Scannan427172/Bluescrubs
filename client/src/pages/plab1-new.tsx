@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, MessageCircle
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, MessageCircle, FileText, X
 } from "lucide-react";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 import { apiRequest } from "@/lib/queryClient";
@@ -52,6 +52,9 @@ export default function PLAB1New() {
   
   // AI Tutor state
   const [showAITutor, setShowAITutor] = useState(false);
+  
+  // NICE NG136 Guide state
+  const [showNiceGuide, setShowNiceGuide] = useState(false);
   
   // Session results tracking
   const [sessionResults, setSessionResults] = useState<Array<{
@@ -2638,6 +2641,17 @@ export default function PLAB1New() {
         </Button>
       )}
 
+      {/* NICE NG136 Guide Floating Button */}
+      {sessionStarted && (
+        <Button
+          onClick={() => setShowNiceGuide(true)}
+          className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-green-600 hover:bg-green-700 shadow-lg z-50 flex items-center justify-center"
+          title="NICE NG136 + PLAB MCQ"
+        >
+          <FileText className="w-6 h-6 text-white" />
+        </Button>
+      )}
+
       {/* AI Tutor Modal */}
       <AITutor
         currentQuestion={generatedQuestions[currentQuestionIndex]}
@@ -2651,6 +2665,142 @@ export default function PLAB1New() {
         onClose={() => setShowAITutor(false)}
         isVisible={showAITutor}
       />
+
+      {/* NICE NG136 + PLAB MCQ Guide Overlay */}
+      {showNiceGuide && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <FileText className="w-6 h-6 text-green-600" />
+                <h2 className="text-2xl font-bold text-gray-900">NICE NG136 + PLAB MCQ Format</h2>
+              </div>
+              <Button
+                onClick={() => setShowNiceGuide(false)}
+                variant="outline"
+                size="sm"
+                className="hover:bg-gray-100"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-8">
+              {/* Clinical Scenario Section */}
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg">
+                <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5" />
+                  Clinical Scenario Framework
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-white border border-blue-200 rounded-lg p-4">
+                    <h4 className="font-medium text-blue-800 mb-2">1. Patient Presentation</h4>
+                    <p className="text-sm text-blue-700">Age, gender, chief complaint, duration of symptoms, relevant medical history</p>
+                  </div>
+                  <div className="bg-white border border-blue-200 rounded-lg p-4">
+                    <h4 className="font-medium text-blue-800 mb-2">2. Clinical Findings</h4>
+                    <p className="text-sm text-blue-700">Physical examination findings, vital signs, initial observations</p>
+                  </div>
+                  <div className="bg-white border border-blue-200 rounded-lg p-4">
+                    <h4 className="font-medium text-blue-800 mb-2">3. Investigation Results</h4>
+                    <p className="text-sm text-blue-700">Laboratory values, imaging findings, diagnostic test results</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* NICE NG136 Integration */}
+              <div className="bg-green-50 border-l-4 border-green-400 p-6 rounded-r-lg">
+                <h3 className="text-lg font-semibold text-green-900 mb-4 flex items-center gap-2">
+                  <Target className="w-5 h-5" />
+                  NICE NG136 Guidance Integration
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-white border border-green-200 rounded-lg p-4">
+                    <h4 className="font-medium text-green-800 mb-2">Risk Assessment Tools</h4>
+                    <p className="text-sm text-green-700">QRISK3, CHA₂DS₂-VASc, HAS-BLED scoring systems</p>
+                  </div>
+                  <div className="bg-white border border-green-200 rounded-lg p-4">
+                    <h4 className="font-medium text-green-800 mb-2">Treatment Thresholds</h4>
+                    <p className="text-sm text-green-700">10-year CVD risk ≥10%, blood pressure targets, lipid management</p>
+                  </div>
+                  <div className="bg-white border border-green-200 rounded-lg p-4">
+                    <h4 className="font-medium text-green-800 mb-2">Lifestyle Interventions</h4>
+                    <p className="text-sm text-green-700">Diet, exercise, smoking cessation, alcohol reduction</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* PLAB MCQ Structure */}
+              <div className="bg-purple-50 border-l-4 border-purple-400 p-6 rounded-r-lg">
+                <h3 className="text-lg font-semibold text-purple-900 mb-4 flex items-center gap-2">
+                  <Brain className="w-5 h-5" />
+                  PLAB MCQ Structure
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-white border border-purple-200 rounded-lg p-4">
+                    <h4 className="font-medium text-purple-800 mb-2">Question Format</h4>
+                    <p className="text-sm text-purple-700">Single best answer from 5 options (A-E), clinical vignette based</p>
+                  </div>
+                  <div className="bg-white border border-purple-200 rounded-lg p-4">
+                    <h4 className="font-medium text-purple-800 mb-2">Answer Options</h4>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      <div className="w-6 h-6 rounded-full border-2 border-black bg-white text-black flex items-center justify-center font-semibold text-xs">A</div>
+                      <div className="w-6 h-6 rounded-full border-2 border-black bg-white text-black flex items-center justify-center font-semibold text-xs">B</div>
+                      <div className="w-6 h-6 rounded-full border-2 border-black bg-white text-black flex items-center justify-center font-semibold text-xs">C</div>
+                      <div className="w-6 h-6 rounded-full border-2 border-black bg-white text-black flex items-center justify-center font-semibold text-xs">D</div>
+                      <div className="w-6 h-6 rounded-full border-2 border-black bg-white text-black flex items-center justify-center font-semibold text-xs">E</div>
+                    </div>
+                  </div>
+                  <div className="bg-white border border-purple-200 rounded-lg p-4">
+                    <h4 className="font-medium text-purple-800 mb-2">Clinical Reasoning</h4>
+                    <p className="text-sm text-purple-700">Evidence-based explanations, guideline references, memory aids</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Memory Aids Integration */}
+              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg">
+                <h3 className="text-lg font-semibold text-yellow-900 mb-4 flex items-center gap-2">
+                  <Lightbulb className="w-5 h-5" />
+                  Memory Aids & Mnemonics
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-white border border-yellow-200 rounded-lg p-4">
+                    <h4 className="font-medium text-yellow-800 mb-2">QRISK3 Factors</h4>
+                    <p className="text-sm text-yellow-700"><strong>DEMOGRAPHICS:</strong> Age, Gender, Ethnicity, Deprivation</p>
+                  </div>
+                  <div className="bg-white border border-yellow-200 rounded-lg p-4">
+                    <h4 className="font-medium text-yellow-800 mb-2">CVD Prevention</h4>
+                    <p className="text-sm text-yellow-700"><strong>ASPIRE:</strong> Antiplatelet, Statin, Pressure control, Intervention (lifestyle), Risk assessment, Education</p>
+                  </div>
+                  <div className="bg-white border border-yellow-200 rounded-lg p-4">
+                    <h4 className="font-medium text-yellow-800 mb-2">Hypertension Management</h4>
+                    <p className="text-sm text-yellow-700"><strong>ABCD:</strong> ACE inhibitor, Beta-blocker, Calcium channel blocker, Diuretic</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="text-center pt-6 border-t border-gray-200">
+                <p className="text-sm text-gray-600">
+                  This format integrates NICE NG136 cardiovascular disease prevention guidelines with PLAB examination standards
+                </p>
+                <Button
+                  onClick={() => window.open('https://www.nice.org.uk/guidance/ng136', '_blank')}
+                  variant="outline"
+                  size="sm"
+                  className="mt-3"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  View NICE NG136 Full Guidelines
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
