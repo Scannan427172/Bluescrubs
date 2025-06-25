@@ -209,6 +209,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: CLAUDE AI PROVIDER REMOVED - Eliminated all Anthropic Claude AI integration, switched AI tutor to OpenAI GPT-4o only, removed @anthropic-ai/sdk dependency
 - June 25, 2025: COMPLETE BRAND UPDATE - Changed all instances of "NHSprep" to "BlueScrubsPrep" throughout the platform, updated logo, landing page, documentation, and service worker cache names
 - June 25, 2025: ADVANCED AI FEATURES DEPLOYED - Implemented complete adaptive learning system with 4 core features: Adaptive Learning Algorithm (automatic difficulty adjustment), Real-time Weakness Detection (knowledge gap identification), Performance Prediction Model (ML exam success forecasting), and Smart Question Generation (targeted content creation) - all working offline without external API calls
+- June 25, 2025: HERO BANNER OPTIMIZATION - Reduced text sizes, made buttons smaller, removed multiple badges to showcase video background prominently - clean minimal overlay design with maximum visibility of woman in video
 
 # User Preferences
 

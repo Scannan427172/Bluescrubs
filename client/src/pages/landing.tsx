@@ -29,35 +29,38 @@ export default function Landing() {
 
         
         {/* Hero Content - Portrait Layout */}
-        <div className="relative z-10 flex items-center justify-start min-h-screen px-4">
-          <div className="max-w-7xl mx-auto w-full">
-            {/* Left Side - Content - Compact */}
+        <div className="relative z-10 flex flex-col justify-between min-h-screen px-4">
+          <div className="max-w-7xl mx-auto w-full flex-1 flex items-center">
+            {/* Main Title - Centered */}
             <div className="hero-text text-white space-y-6 max-w-xl">
-              <div className="space-y-4">
-                <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
-                  <Star className="w-4 h-4 mr-2 text-yellow-400" />
-                  <span className="text-xs font-semibold text-white">Comprehensive Medical Exam Preparation</span>
-                </div>
-                
-                <h1 className="text-3xl lg:text-5xl font-bold leading-tight text-white">
+              <h1 className="text-3xl lg:text-5xl font-bold leading-tight text-white">
+                <div className="flex flex-col items-start">
+                  <span className="text-3xl lg:text-5xl">Master Your</span>
                   <div className="flex flex-col items-start">
-                    <span className="text-3xl lg:text-5xl">Master Your</span>
-                    <div className="flex flex-col items-start">
-                      <Logo size="lg" />
-                      <span className="text-3xl lg:text-5xl">Journey</span>
-                    </div>
+                    <Logo size="lg" />
+                    <span className="text-3xl lg:text-5xl">Journey</span>
                   </div>
-                </h1>
-                
-                <p className="text-xs lg:text-sm text-white/90 leading-relaxed max-w-lg">
-                  The world's most comprehensive independent medical platform featuring{" "}
-                  <span className="text-blue-400 font-semibold">5,528 authentic stations</span>,{" "}
-                  <span className="text-purple-400 font-semibold">hybrid AI enhancement</span>, and{" "}
-                  <span className="text-green-400 font-semibold">39 language support</span>.
-                </p>
+                </div>
+              </h1>
+            </div>
+          </div>
+          
+          {/* Bottom Content - Badge, Subtext, and Button */}
+          <div className="max-w-7xl mx-auto w-full pb-20">
+            <div className="hero-text text-white space-y-4 max-w-xl">
+              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
+                <Star className="w-4 h-4 mr-2 text-yellow-400" />
+                <span className="text-xs font-semibold text-white">Comprehensive Medical Exam Preparation</span>
               </div>
               
-              {/* CTA Buttons - Smaller */}
+              <p className="text-xs lg:text-sm text-white/90 leading-relaxed max-w-lg">
+                The world's most comprehensive independent medical platform featuring{" "}
+                <span className="text-blue-400 font-semibold">5,528 authentic stations</span>,{" "}
+                <span className="text-purple-400 font-semibold">hybrid AI enhancement</span>, and{" "}
+                <span className="text-green-400 font-semibold">39 language support</span>.
+              </p>
+              
+              {/* CTA Button */}
               <div className="flex flex-col sm:flex-row gap-3 pt-3">
                 <Link href="/premium">
                   <Button size="default" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-base font-semibold rounded-lg shadow-xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
@@ -65,13 +68,6 @@ export default function Landing() {
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform text-white" />
                   </Button>
                 </Link>
-                <Link href="/hybrid-ai">
-                  <Button variant="outline" size="default" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 group">
-                    <Shield className="mr-2 w-4 h-4 text-white" />
-                    <span className="text-white">Hybrid AI System</span>
-                  </Button>
-                </Link>
-
               </div>
             </div>
           </div>
