@@ -184,7 +184,6 @@ export default function HybridAIDashboard() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="openai">OpenAI GPT-4</SelectItem>
-                  <SelectItem value="anthropic">Anthropic Claude</SelectItem>
                 </SelectContent>
               </Select>
             </div>

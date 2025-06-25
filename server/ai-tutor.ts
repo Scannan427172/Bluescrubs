@@ -1,7 +1,7 @@
-import Anthropic from '@anthropic-ai/sdk';
+import OpenAI from 'openai';
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || 'sk-ant-api03-placeholder'
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || 'sk-openai-placeholder'
 });
 
 interface TutorContext {
@@ -39,12 +39,15 @@ Current context: ${context ? JSON.stringify(context, null, 2) : 'No specific con
 
     const userPrompt = buildUserPrompt(query, context);
 
-    const response = await anthropic.messages.create({
-      model: 'claude-3-sonnet-20240229',
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o',
       max_tokens: 1500,
       temperature: 0.3,
-      system: systemPrompt,
       messages: [
+        {
+          role: 'system',
+          content: systemPrompt
+        },
         {
           role: 'user',
           content: userPrompt
