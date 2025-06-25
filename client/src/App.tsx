@@ -35,6 +35,9 @@ import CulturalTraining from "@/pages/cultural-training";
 import Mentors from "@/pages/mentors";
 import Gamification from "@/pages/gamification";
 import InternationalExamsPage from "@/pages/international-exams";
+import PLABIndependence from "@/pages/plab-independence";
+import TranslationDashboard from "@/pages/translation-dashboard";
+import ContentIndependence from "@/pages/content-independence";
 import NotFound from "@/pages/not-found";
 import Test from "@/pages/test";
 import LiveAnalytics from "@/pages/live-analytics";
@@ -278,6 +281,33 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <InternationalExamsPage />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/plab-independence">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <PLABIndependence />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/translation-dashboard">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <TranslationDashboard />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/content-independence">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <ContentIndependence />
           </div>
         </div>
       </Route>
