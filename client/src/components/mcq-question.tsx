@@ -141,19 +141,17 @@ export default function MCQQuestion({
                   <div className="flex items-center space-x-3">
                     <div
                       className={cn(
-                        "w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors",
+                        "w-8 h-8 rounded-full flex items-center justify-center transition-colors font-semibold text-sm",
                         isAnswered
                           ? isCorrect
-                            ? "border-mint-green bg-mint-green text-white"
+                            ? "bg-mint-green text-white"
                             : isSelected && !isCorrect
-                            ? "border-deep-rose bg-deep-rose text-white"
-                            : "border-gray-300 text-gray-600"
-                          : isSelected
-                          ? "border-medical-blue bg-medical-blue text-white"
-                          : "border-gray-300 text-gray-600 group-hover:border-medical-blue group-hover:text-medical-blue"
+                            ? "bg-deep-rose text-white"
+                            : "bg-red-600 text-white"
+                          : "bg-red-600 text-white"
                       )}
                     >
-                      <span className="font-semibold text-sm">{optionLetter}</span>
+                      <span>{optionLetter}</span>
                     </div>
                     <span className="text-gray-700 group-hover:text-gray-900">{option}</span>
                   </div>

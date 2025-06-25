@@ -1408,7 +1408,9 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   className={`w-full p-4 border-2 rounded-lg text-left transition-all duration-200 flex items-center justify-between ${getOptionButtonClass(option)}`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="font-semibold text-lg">{option}.</span>
+                    <div className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center font-semibold text-sm">
+                      {option}
+                    </div>
                     <span>{displayText}</span>
                   </div>
                   {getOptionIcon(option)}

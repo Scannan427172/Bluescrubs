@@ -174,16 +174,14 @@ export function MCQInterface({ questions, onAnswerSubmit, onQuizComplete, timeLi
                   } ${showExplanation ? 'cursor-default' : 'cursor-pointer'}`}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold ${
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm ${
                       showExplanation
                         ? isCorrect
-                          ? 'border-mint-green bg-mint-green text-white'
+                          ? 'bg-mint-green text-white'
                           : isIncorrect
-                          ? 'border-red-500 bg-red-500 text-white'
-                          : 'border-gray-300 text-gray-600'
-                        : isSelected
-                        ? 'border-medical-blue bg-medical-blue text-white'
-                        : 'border-gray-300 text-gray-600'
+                          ? 'bg-red-500 text-white'
+                          : 'bg-red-600 text-white'
+                        : 'bg-red-600 text-white'
                     }`}>
                       {showExplanation && isCorrect ? (
                         <CheckCircle className="w-4 h-4" />
