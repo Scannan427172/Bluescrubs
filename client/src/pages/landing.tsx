@@ -220,7 +220,7 @@ export default function Landing() {
                     description: "Complete offline translation system with medical terminology dictionaries covering Arabic, Chinese, Hindi, Spanish, French and 34 additional languages. Cultural adaptations and RTL support ensure global accessibility."
                   },
                   {
-                    icon: Database,
+                    icon: Shield,
                     title: "Complete System Independence",
                     description: "Zero external API costs, unlimited offline usage, complete data ownership, and instant content access. Professional medical standards maintained with predictable performance and no usage restrictions."
                   }
