@@ -34,7 +34,7 @@ import SmartPlanner from "@/pages/smart-planner";
 import CulturalTraining from "@/pages/cultural-training";
 import Mentors from "@/pages/mentors";
 import Gamification from "@/pages/gamification";
-import InternationalExams from "@/pages/international-exams";
+import InternationalExamsPage from "@/pages/international-exams";
 import NotFound from "@/pages/not-found";
 import Test from "@/pages/test";
 import LiveAnalytics from "@/pages/live-analytics";
@@ -277,7 +277,7 @@ function Router() {
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
-            <InternationalExams />
+            <InternationalExamsPage />
           </div>
         </div>
       </Route>

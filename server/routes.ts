@@ -15,6 +15,7 @@ import fs from "fs";
 import path from "path";
 import { PLAB2_TEMPLATE_STATIONS, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-templates";
 import { generateUserFormatStations, saveUserFormatStations, loadUserFormatStations, getUserFormatStationCount } from './user-format-generator';
+import { generateInternationalStations, saveInternationalStations, loadInternationalStations, getInternationalStationCount, getSupportedExams } from './international-format-generator';
 
 // AI Question Generation Functions
 async function generateMedicalQuestions(templates: any[], category: string, difficulty: string, count: number) {
@@ -480,6 +481,11 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
   // Initialize PLAB 2 station bank
   loadPLAB2StationBank();
   loadUserFormatStations();
+  
+  // Initialize international exam stations
+  getSupportedExams().forEach(examType => {
+    loadInternationalStations(examType);
+  });
 
   // PLAB 2 Station Bank Generation Endpoint
   app.post("/api/generate-plab2-5000-stations", async (req, res) => {
@@ -1464,6 +1470,91 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     const remaining = Math.max(0, targetCount - totalStations);
     
     res.json({
+      totalStations,
+      targetCount,
+      remaining,
+      percentComplete: Math.round((totalStations / targetCount) * 100),
+      targetReached: totalStations >= targetCount
+    });
+  });
+
+  // International Medical Exam endpoints
+  app.get('/api/international/exams', (req, res) => {
+    const supportedExams = getSupportedExams();
+    const examStats = supportedExams.map(examType => ({
+      examType,
+      totalStations: getInternationalStationCount(examType),
+      stations: loadInternationalStations(examType)
+    }));
+    res.json(examStats);
+  });
+
+  app.get('/api/international/:examType/stations', (req, res) => {
+    const { examType } = req.params;
+    const stations = loadInternationalStations(examType.toUpperCase());
+    res.json(stations);
+  });
+
+  app.post('/api/generate-international-stations', async (req, res) => {
+    if (!isAIEnabled()) {
+      return res.status(503).json({ 
+        error: "AI services unavailable", 
+        message: getAIStatus()
+      });
+    }
+
+    try {
+      const { examType, targetCount = 1000 } = req.body;
+      
+      if (!getSupportedExams().includes(examType)) {
+        return res.status(400).json({ error: `Unsupported exam type: ${examType}` });
+      }
+
+      const currentCount = getInternationalStationCount(examType);
+      const remaining = targetCount - currentCount;
+      
+      if (remaining <= 0) {
+        return res.json({ 
+          success: true, 
+          message: `Target achieved! ${currentCount} ${examType} stations available`,
+          totalStations: currentCount 
+        });
+      }
+      
+      console.log(`Generating ${examType} stations: ${remaining} remaining toward ${targetCount} target`);
+      
+      const batchSize = 5;
+      const stations = await generateInternationalStations(examType, Math.min(batchSize, remaining));
+      
+      if (stations.length > 0) {
+        const totalStations = saveInternationalStations(examType, stations);
+        console.log(`Generated ${stations.length} ${examType} stations (Total: ${totalStations}/${targetCount})`);
+        
+        res.json({ 
+          success: true, 
+          examType,
+          generated: stations.length,
+          totalStations,
+          remaining: Math.max(0, targetCount - totalStations),
+          targetReached: totalStations >= targetCount
+        });
+      } else {
+        res.json({ success: false, error: 'No stations generated' });
+      }
+    } catch (error) {
+      console.error('Error generating international stations:', error);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+
+  app.get('/api/international/:examType/status', (req, res) => {
+    const { examType } = req.params;
+    const totalStations = getInternationalStationCount(examType.toUpperCase());
+    const targetCount = 1000;
+    const remaining = Math.max(0, targetCount - totalStations);
+    
+    res.json({
+      examType: examType.toUpperCase(),
       totalStations,
       targetCount,
       remaining,
