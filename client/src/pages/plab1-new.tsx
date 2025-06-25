@@ -1091,6 +1091,27 @@ export default function PLAB1New() {
             </CardContent>
           </Card>
 
+          {/* NICE NG136 + PLAB MCQ Format Guide */}
+          <Card className="mb-8 cursor-pointer hover:shadow-lg transition-shadow border-green-200" onClick={() => setShowNiceGuide(true)}>
+            <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 transition-colors">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <FileText className="w-6 h-6 text-green-600" />
+                  <div>
+                    <CardTitle className="text-green-800">NICE NG136 + PLAB MCQ Format</CardTitle>
+                    <CardDescription className="text-green-600 mt-1">
+                      Clinical scenario framework, risk assessment tools, and structured learning approach
+                    </CardDescription>
+                  </div>
+                </div>
+                <Button variant="outline" size="sm" className="text-green-600 border-green-200 hover:bg-green-50">
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  View Guide
+                </Button>
+              </div>
+            </CardHeader>
+          </Card>
+
           {/* Practice Options - Block System */}
           <Card id="practice-options" className="mb-8">
             <CardHeader>
