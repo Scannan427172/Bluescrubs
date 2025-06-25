@@ -1861,8 +1861,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
 
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-                      <h4 className="text-xl font-bold text-blue-900 mb-4">Risk Assessment Tools</h4>
-                      <ul className="space-y-3 text-lg text-blue-800">
+                      <h4 className="text-xl font-bold text-black mb-4">Risk Assessment Tools</h4>
+                      <ul className="space-y-3 text-lg text-black">
                         <li>• Patient demographics and comorbidities</li>
                         <li>• Symptom severity assessment</li>
                         <li>• Previous antibiotic exposure</li>
@@ -1871,8 +1871,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                     </div>
 
                     <div className="bg-purple-50 p-6 rounded-xl border border-purple-200">
-                      <h4 className="text-xl font-bold text-purple-900 mb-4">Structured Learning Approach</h4>
-                      <ul className="space-y-3 text-lg text-purple-800">
+                      <h4 className="text-xl font-bold text-black mb-4">Structured Learning Approach</h4>
+                      <ul className="space-y-3 text-lg text-black">
                         <li>• Systematic history taking</li>
                         <li>• Evidence-based examination</li>
                         <li>• Appropriate investigations</li>
