@@ -33,6 +33,11 @@ export default function Landing() {
           <div className="max-w-7xl mx-auto w-full pt-16">
             {/* Main Title - Higher Position */}
             <div className="hero-text text-white space-y-6 max-w-xl">
+              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
+                <Star className="w-4 h-4 mr-2 text-yellow-400" />
+                <span className="text-xs font-semibold text-white">Comprehensive Medical Exam Preparation</span>
+              </div>
+              
               <h1 className="text-3xl lg:text-5xl font-bold leading-tight text-white">
                 <div className="flex flex-col items-start">
                   <span className="text-3xl lg:text-5xl">Master Your</span>
@@ -45,14 +50,9 @@ export default function Landing() {
             </div>
           </div>
           
-          {/* Bottom Content - Badge, Subtext, and Button */}
+          {/* Bottom Content - Subtext and Button */}
           <div className="max-w-7xl mx-auto w-full pb-20">
             <div className="hero-text text-white space-y-4 max-w-xl">
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
-                <Star className="w-4 h-4 mr-2 text-yellow-400" />
-                <span className="text-xs font-semibold text-white">Comprehensive Medical Exam Preparation</span>
-              </div>
-              
               <p className="text-xs lg:text-sm text-white/90 leading-relaxed max-w-lg">
                 The world's most comprehensive independent medical platform featuring{" "}
                 <span className="text-blue-400 font-semibold">5,528 authentic stations</span>,{" "}
