@@ -1630,6 +1630,33 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           )}
         </Card>
 
+        {/* NICE NG136 + PLAB MCQ Format Guide */}
+        {submitted && (
+          <div className="mb-6 p-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg shadow-lg">
+            <Card className="cursor-pointer hover:shadow-xl transition-all duration-300 border-0" onClick={() => setShowNiceGuide(true)}>
+              <CardHeader className="bg-white hover:bg-green-50 transition-colors p-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-green-100 rounded-full">
+                      <FileText className="w-8 h-8 text-green-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-green-800 text-xl font-bold">NICE NG136 + PLAB MCQ Format</CardTitle>
+                      <CardDescription className="text-green-700 mt-2 text-base">
+                        📋 Clinical scenario framework, risk assessment tools, and structured learning approach
+                      </CardDescription>
+                    </div>
+                  </div>
+                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white border-0 px-6 py-3">
+                    <BookOpen className="w-5 h-5 mr-2" />
+                    View Guide
+                  </Button>
+                </div>
+              </CardHeader>
+            </Card>
+          </div>
+        )}
+
         {/* BNF Medication Guidance */}
         {submitted && currentQuestion.bnfGuidance && (
           <Card className="mb-6 shadow-sm">
