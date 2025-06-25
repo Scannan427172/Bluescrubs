@@ -538,27 +538,27 @@ export default function PLAB1New() {
     return questionCounts[category] || 100;
   };
 
-  // Available categories with question counts
+  // Available categories without question counts
   const availableCategories = [
-    { value: 'all' as const, label: 'All Categories', count: getQuestionCount('all') },
-    { value: 'cardiovascular' as const, label: 'Cardiovascular', count: getQuestionCount('cardiovascular') },
-    { value: 'respiratory' as const, label: 'Respiratory', count: getQuestionCount('respiratory') },
-    { value: 'gastroenterology' as const, label: 'Gastroenterology', count: getQuestionCount('gastroenterology') },
-    { value: 'neurology' as const, label: 'Neurology', count: getQuestionCount('neurology') },
-    { value: 'endocrinology' as const, label: 'Endocrinology', count: getQuestionCount('endocrinology') },
-    { value: 'psychiatry' as const, label: 'Psychiatry', count: getQuestionCount('psychiatry') },
-    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology', count: getQuestionCount('obstetrics-gynaecology') },
-    { value: 'paediatrics' as const, label: 'Paediatrics', count: getQuestionCount('paediatrics') },
-    { value: 'surgery' as const, label: 'Surgery', count: getQuestionCount('surgery') },
-    { value: 'nephrology' as const, label: 'Nephrology', count: getQuestionCount('nephrology') },
-    { value: 'haematology' as const, label: 'Haematology', count: getQuestionCount('haematology') },
-    { value: 'infectious-diseases' as const, label: 'Infectious Diseases', count: getQuestionCount('infectious-diseases') },
-    { value: 'rheumatology' as const, label: 'Rheumatology', count: getQuestionCount('rheumatology') },
-    { value: 'dermatology' as const, label: 'Dermatology', count: getQuestionCount('dermatology') },
-    { value: 'emergency-medicine' as const, label: 'Emergency Medicine', count: getQuestionCount('emergency-medicine') },
-    { value: 'ethics-law' as const, label: 'Ethics & Law', count: getQuestionCount('ethics-law') },
-    { value: 'public-health' as const, label: 'Public Health', count: getQuestionCount('public-health') },
-    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology', count: getQuestionCount('clinical-pharmacology') }
+    { value: 'all' as const, label: 'All Categories' },
+    { value: 'cardiovascular' as const, label: 'Cardiovascular' },
+    { value: 'respiratory' as const, label: 'Respiratory' },
+    { value: 'gastroenterology' as const, label: 'Gastroenterology' },
+    { value: 'neurology' as const, label: 'Neurology' },
+    { value: 'endocrinology' as const, label: 'Endocrinology' },
+    { value: 'psychiatry' as const, label: 'Psychiatry' },
+    { value: 'obstetrics-gynaecology' as const, label: 'Obstetrics & Gynaecology' },
+    { value: 'paediatrics' as const, label: 'Paediatrics' },
+    { value: 'surgery' as const, label: 'Surgery' },
+    { value: 'nephrology' as const, label: 'Nephrology' },
+    { value: 'haematology' as const, label: 'Haematology' },
+    { value: 'infectious-diseases' as const, label: 'Infectious Diseases' },
+    { value: 'rheumatology' as const, label: 'Rheumatology' },
+    { value: 'dermatology' as const, label: 'Dermatology' },
+    { value: 'emergency-medicine' as const, label: 'Emergency Medicine' },
+    { value: 'ethics-law' as const, label: 'Ethics & Law' },
+    { value: 'public-health' as const, label: 'Public Health' },
+    { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology' }
   ];
 
   // Generate AI questions
