@@ -9,7 +9,7 @@ import {
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
-  Globe, Languages, MessageCircle, Bot
+  Globe, Languages, MessageCircle, Bot, Maximize, X
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -90,6 +90,7 @@ export default function Plab2Osce() {
   const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
   const [tutorInput, setTutorInput] = useState('');
   const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
+  const [isAnatomyFullscreen, setIsAnatomyFullscreen] = useState(false);
 
   // Load neurodiversity settings from localStorage
   useEffect(() => {
