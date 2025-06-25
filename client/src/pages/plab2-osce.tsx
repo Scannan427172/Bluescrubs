@@ -9,7 +9,7 @@ import {
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
-  Globe, Languages, MessageCircle, Bot, Maximize, X
+  Globe, Languages, MessageCircle, Bot
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -90,7 +90,6 @@ export default function Plab2Osce() {
   const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
   const [tutorInput, setTutorInput] = useState('');
   const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
-  const [isAnatomyFullscreen, setIsAnatomyFullscreen] = useState(false);
 
   // Load neurodiversity settings from localStorage
   useEffect(() => {
@@ -821,117 +820,10 @@ export default function Plab2Osce() {
               >
                 Skills
               </TabsTrigger>
-              <TabsTrigger 
-                value="anatomy" 
-                className={accommodations.largerButtons ? 'text-[10px] md:text-sm py-2 text-red-600 font-semibold' : 'text-[9px] md:text-xs text-red-600 font-semibold'}
-              >
-                3D
-              </TabsTrigger>
+
             </TabsList>
 
-          {/* 3D Anatomy Viewer Tab */}
-          <TabsContent value="anatomy" className="mt-6">
-            <Card className="mb-6">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg md:text-xl text-gray-900 flex items-center gap-2 flex-wrap">
-                  <Heart className="w-5 h-5 md:w-6 md:h-6 text-red-600 flex-shrink-0" />
-                  <span className="leading-tight">Interactive 3D Human Anatomy</span>
-                </CardTitle>
-                <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                  Explore detailed 3D anatomy models to enhance your PLAB 2 clinical examination skills.
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-3 md:p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Brain className="w-4 h-4 md:w-5 md:h-5 text-blue-600 flex-shrink-0" />
-                    <h4 className="font-semibold text-blue-800 text-sm md:text-base">Usage Guide</h4>
-                  </div>
-                  <ul className="text-xs md:text-sm text-blue-700 space-y-1 list-disc pl-4">
-                    <li>Click and drag to rotate 3D model</li>
-                    <li>Mouse wheel to zoom in/out</li>
-                    <li>Click body systems for details</li>
-                    <li>Perfect for PLAB 2 prep</li>
-                  </ul>
-                </div>
-                
-                {/* Zygote Body 3D Viewer */}
-                <div className="relative w-full h-[400px] md:h-[600px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
-                  {/* Fullscreen Button */}
-                  <Button
-                    onClick={() => setIsAnatomyFullscreen(true)}
-                    className="absolute top-2 right-2 z-10 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md shadow-lg"
-                    size="sm"
-                  >
-                    <Maximize className="w-4 h-4" />
-                  </Button>
-                  
-                  <iframe
-                    src="https://zygotebody.com"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    allowFullScreen
-                    title="Zygote Body 3D Human Anatomy"
-                    className="w-full h-full"
-                  />
-                </div>
 
-                {/* Fullscreen Modal */}
-                {isAnatomyFullscreen && (
-                  <div className="fixed inset-0 z-50 bg-black bg-opacity-95 flex items-center justify-center">
-                    {/* Close Button */}
-                    <Button
-                      onClick={() => setIsAnatomyFullscreen(false)}
-                      className="absolute top-4 right-4 z-60 bg-red-600 hover:bg-red-700 text-white p-3 rounded-full shadow-lg"
-                      size="sm"
-                    >
-                      <X className="w-6 h-6" />
-                    </Button>
-                    
-                    {/* Fullscreen Iframe */}
-                    <div className="w-full h-full p-4">
-                      <iframe
-                        src="https://zygotebody.com"
-                        width="100%"
-                        height="100%"
-                        frameBorder="0"
-                        allowFullScreen
-                        title="Zygote Body 3D Human Anatomy - Fullscreen"
-                        className="w-full h-full rounded-lg"
-                      />
-                    </div>
-                  </div>
-                )}
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-                  <Card className="border-green-200 bg-green-50">
-                    <CardContent className="p-3 md:p-4 text-center">
-                      <Heart className="w-6 h-6 md:w-8 md:h-8 text-green-600 mx-auto mb-2" />
-                      <h4 className="font-semibold text-green-800 text-sm md:text-base mb-1">Cardiovascular</h4>
-                      <p className="text-xs text-green-700">Heart, vessels, circulation</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="border-blue-200 bg-blue-50">
-                    <CardContent className="p-3 md:p-4 text-center">
-                      <Brain className="w-6 h-6 md:w-8 md:h-8 text-blue-600 mx-auto mb-2" />
-                      <h4 className="font-semibold text-blue-800 text-sm md:text-base mb-1">Neurological</h4>
-                      <p className="text-xs text-blue-700">Brain, nerves, reflexes</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="border-purple-200 bg-purple-50">
-                    <CardContent className="p-3 md:p-4 text-center">
-                      <Stethoscope className="w-6 h-6 md:w-8 md:h-8 text-purple-600 mx-auto mb-2" />
-                      <h4 className="font-semibold text-purple-800 text-sm md:text-base mb-1">Respiratory</h4>
-                      <p className="text-xs text-purple-700">Lungs, airways, breathing</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
 
           <TabsContent value={selectedType} className="mt-6">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
