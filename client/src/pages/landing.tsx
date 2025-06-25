@@ -59,10 +59,16 @@ export default function Landing() {
               
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/hybrid-ai">
+                <Link href="/premium">
                   <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
-                    <span className="text-white">Hybrid AI System</span>
+                    <span className="text-white">Start Premium Trial</span>
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
+                  </Button>
+                </Link>
+                <Link href="/hybrid-ai">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
+                    <Shield className="mr-2 w-5 h-5 text-white" />
+                    <span className="text-white">Hybrid AI System</span>
                   </Button>
                 </Link>
                 <Link href="/content-independence">
