@@ -1832,6 +1832,95 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             </CardContent>
           </Card>
         )}
+
+        {/* NICE NG136 Guide Overlay */}
+        {showNiceGuide && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-green-800">NICE NG136 + PLAB MCQ Format Guide</h2>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => setShowNiceGuide(false)}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    ✕
+                  </Button>
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+                    <h3 className="font-semibold text-green-800 mb-2">Clinical Scenario Framework</h3>
+                    <p className="text-green-700">
+                      NICE NG136 provides evidence-based guidance for urinary tract infections in adults. 
+                      This framework helps structure clinical decision-making for PLAB examination scenarios.
+                    </p>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-blue-800 mb-3">Risk Assessment Tools</h4>
+                      <ul className="space-y-2 text-blue-700">
+                        <li>• Patient demographics and comorbidities</li>
+                        <li>• Symptom severity assessment</li>
+                        <li>• Previous antibiotic exposure</li>
+                        <li>• Resistance risk factors</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-purple-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-purple-800 mb-3">Structured Learning Approach</h4>
+                      <ul className="space-y-2 text-purple-700">
+                        <li>• Systematic history taking</li>
+                        <li>• Evidence-based examination</li>
+                        <li>• Appropriate investigations</li>
+                        <li>• Treatment decision algorithms</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                    <h4 className="font-semibold text-yellow-800 mb-3">Memory Aids for PLAB</h4>
+                    <div className="space-y-2 text-yellow-700">
+                      <p><strong>NICE UTI:</strong> Nitrites, Increased frequency, Cloudy urine, Erythrocytes (blood)</p>
+                      <p><strong>First-line antibiotics:</strong> Nitrofurantoin, Trimethoprim, Pivmecillinam</p>
+                      <p><strong>Red flags:</strong> Fever, Flank pain, Rigors, Elderly confusion</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-800 mb-3">Clinical Decision Points</h4>
+                    <div className="grid md:grid-cols-3 gap-4 text-sm">
+                      <div>
+                        <h5 className="font-medium text-gray-700">Uncomplicated UTI</h5>
+                        <p className="text-gray-600">Non-pregnant women, no comorbidities</p>
+                      </div>
+                      <div>
+                        <h5 className="font-medium text-gray-700">Complicated UTI</h5>
+                        <p className="text-gray-600">Men, pregnancy, immunocompromised</p>
+                      </div>
+                      <div>
+                        <h5 className="font-medium text-gray-700">Recurrent UTI</h5>
+                        <p className="text-gray-600">≥3 episodes in 12 months</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <Button 
+                      onClick={() => setShowNiceGuide(false)}
+                      className="bg-green-600 hover:bg-green-700 text-white px-8 py-2"
+                    >
+                      Close Guide
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Mobile-Only Bottom Navigation - Next Question Button */}
