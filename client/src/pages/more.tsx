@@ -463,8 +463,26 @@ link: "/ask-ai"
                   </p>
                   
                   <div className="bg-white/50 p-3 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">Qualifications</h4>
+                    <h4 className="font-semibold text-blue-900 mb-2">Academic Qualifications</h4>
                     <p className="text-gray-700">BA Hons Dip CSD</p>
+                  </div>
+                  
+                  <div className="bg-white/50 p-3 rounded-lg">
+                    <h4 className="font-semibold text-blue-900 mb-2">Massage Therapy Qualifications</h4>
+                    <ul className="text-gray-700 space-y-1 text-xs">
+                      <li>• Therapist Qualification</li>
+                      <li>• Mobilis Stabilise Phase 'British Athletics'</li>
+                      <li>• Mobilis Normalise Phase 'British Athletics'</li>
+                      <li>• Mobilis Functionalise Phase 'British Athletics'</li>
+                      <li>• Strength and Conditioning 'British Athletics'</li>
+                      <li>• Biomechanical Assessment 'Sporting Therapy Organisation'</li>
+                      <li>• Myofascial Release Structural Integration Techniques</li>
+                      <li>• Level 4 British Athletics Coach</li>
+                      <li>• Pregnancy Massage</li>
+                      <li>• Swedish Massage</li>
+                      <li>• Sports Massage</li>
+                      <li>• Deep Tissue Massage</li>
+                    </ul>
                   </div>
                   
                   <div className="bg-white/50 p-3 rounded-lg">
