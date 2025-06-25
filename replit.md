@@ -232,6 +232,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: ZYGOTE BODY 3D ANATOMY INTEGRATION - Added interactive 3D human anatomy viewer to PLAB 2 section using free Zygote Body platform, includes usage instructions, system highlights for cardiovascular/neurological/respiratory anatomy, and clinical examination preparation tools
 - June 25, 2025: ZYGOTE BODY REMOVAL - Removed Zygote Body 3D anatomy viewer from PLAB 2 section per user request, restored original 7-tab layout without anatomy integration
 - June 25, 2025: INNERBODY ANATOMY INTEGRATION - Added InnerBody free anatomy viewer to PLAB 2 section with interactive exploration, usage guide, and four system highlights (cardiovascular, neurological, respiratory, musculoskeletal)
+- June 25, 2025: ANATOMOGRAPHY INTEGRATION - Replaced InnerBody with Anatomography 3D viewer (lifesciencedb.jp/bp3d) featuring interactive 3D models, cross-sectional anatomy, and medical imaging integration for enhanced PLAB 2 preparation
 
 # User Preferences
 
