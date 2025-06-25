@@ -50,30 +50,31 @@ export default function Landing() {
                 </h1>
                 
                 <p className="text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl">
-                  The world's most advanced AI-powered platform for NHSprep featuring{" "}
-                  <span className="text-blue-400 font-semibold">video OSCE simulations</span>,{" "}
-                  <span className="text-purple-400 font-semibold">adaptive learning</span>, and{" "}
-                  <span className="text-green-400 font-semibold">expert mentorship</span>.
+                  The world's most comprehensive independent medical platform featuring{" "}
+                  <span className="text-blue-400 font-semibold">5,528 authentic stations</span>,{" "}
+                  <span className="text-purple-400 font-semibold">hybrid AI enhancement</span>, and{" "}
+                  <span className="text-green-400 font-semibold">39 language support</span>.
                 </p>
               </div>
               
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/auth">
+                <Link href="/hybrid-ai">
                   <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
-                    <span className="text-white">Start Your Free Trial</span>
+                    <span className="text-white">Hybrid AI System</span>
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform text-white" />
                   </Button>
                 </Link>
-                <Link href="/pricing">
+                <Link href="/content-independence">
                   <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
-                    <span className="text-white">View Pricing</span>
+                    <Shield className="mr-2 w-5 h-5 text-white" />
+                    <span className="text-white">Content Independence</span>
                   </Button>
                 </Link>
-                <Link href="/dashboard">
+                <Link href="/translation-dashboard">
                   <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 group">
-                    <Play className="mr-2 w-5 h-5 text-white" />
-                    <span className="text-white">Try Demo</span>
+                    <Globe className="mr-2 w-5 h-5 text-white" />
+                    <span className="text-white">39 Languages</span>
                   </Button>
                 </Link>
               </div>
@@ -204,24 +205,24 @@ export default function Landing() {
               <div className="space-y-6">
                 {[
                   {
-                    icon: Globe,
-                    title: "35-Language Support",
-                    description: "Industry-leading multilingual PLAB preparation including Arabic, Hindi, Mandarin, Spanish, French, German, Portuguese, Russian, Japanese, Korean, Urdu, Bengali, Tamil, Telugu, Gujarati, Punjabi, Malayalam, Kannada, Marathi, Thai, Vietnamese, Indonesian, Filipino, Turkish, Polish, Italian, Dutch, Swedish, Norwegian, Finnish, Danish, Czech, Hungarian, Romanian, and Bulgarian."
+                    icon: Shield,
+                    title: "Independent Content System",
+                    description: "Complete medical accuracy with 5,528 authentic stations generated independently without AI bias. Zero external dependencies ensure unlimited usage, predictable performance, and professional medical standards maintained at all times."
                   },
                   {
                     icon: Zap,
-                    title: "Predictive AI Learning Engine",
-                    description: "Advanced algorithms predict exam failure 2-3 weeks early, calculate success probability with 94% accuracy, and provide contextual hints without revealing answers. Features adaptive difficulty adjustment and personalized study sequences."
+                    title: "Hybrid AI Enhancement",
+                    description: "Optional AI enhancement for video analysis and feedback generation with complete independent fallbacks. Questions remain AI-free for authenticity while advanced features benefit from smart AI when available."
                   },
                   {
-                    icon: Shield,
-                    title: "Complete NHS Integration",
-                    description: "Live NICE, GMC, CKS guidelines with automatic updates, real hospital partnerships (Imperial College, Manchester Royal Infirmary), post-PLAB NHS job placement assistance, and comprehensive cultural competency training."
+                    icon: Globe,
+                    title: "39-Language Translation",
+                    description: "Complete offline translation system with medical terminology dictionaries covering Arabic, Chinese, Hindi, Spanish, French and 34 additional languages. Cultural adaptations and RTL support ensure global accessibility."
                   },
                   {
-                    icon: Users,
-                    title: "40+ Advanced AI Systems",
-                    description: "Virtual patient actors with complex personalities, VR OSCE environments, mobile offline learning, voice-to-revision notes, ARCP portfolio builder, professional networking, and career pathway analysis - features no competitor offers."
+                    icon: Database,
+                    title: "Complete System Independence",
+                    description: "Zero external API costs, unlimited offline usage, complete data ownership, and instant content access. Professional medical standards maintained with predictable performance and no usage restrictions."
                   }
                 ].map((advantage, index) => (
                   <div key={index} className="flex gap-4">
@@ -280,19 +281,19 @@ export default function Landing() {
           {/* Revenue Projections & Market Position */}
           <div className="mt-20 text-center">
             <div className="premium-plab-card bg-white rounded-3xl p-8 shadow-xl border-2 border-gray-200">
-              <h4 className="text-2xl font-bold text-gray-900 mb-6">Market-Leading PLAB Platform</h4>
+              <h4 className="text-2xl font-bold text-gray-900 mb-6">Independent Medical Platform</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                  <div className="text-3xl font-bold text-blue-600 mb-2">Live</div>
-                  <p className="text-gray-800 font-medium">Video Consultations</p>
+                  <div className="text-3xl font-bold text-blue-600 mb-2">5,528</div>
+                  <p className="text-gray-800 font-medium">Authentic Stations</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-green-600 mb-2">AI</div>
-                  <p className="text-gray-800 font-medium">Essay Marking</p>
+                  <div className="text-3xl font-bold text-green-600 mb-2">£0</div>
+                  <p className="text-gray-800 font-medium">API Costs</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-purple-600 mb-2">VR</div>
-                  <p className="text-gray-800 font-medium">Clinical Training</p>
+                  <div className="text-3xl font-bold text-purple-600 mb-2">39</div>
+                  <p className="text-gray-800 font-medium">Languages</p>
                 </div>
               </div>
             </div>
