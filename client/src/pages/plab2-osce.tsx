@@ -856,7 +856,16 @@ export default function Plab2Osce() {
                 </div>
                 
                 {/* Zygote Body 3D Viewer */}
-                <div className="w-full h-[400px] md:h-[600px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
+                <div className="relative w-full h-[400px] md:h-[600px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
+                  {/* Fullscreen Button */}
+                  <Button
+                    onClick={() => setIsAnatomyFullscreen(true)}
+                    className="absolute top-2 right-2 z-10 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-md shadow-lg"
+                    size="sm"
+                  >
+                    <Maximize className="w-4 h-4" />
+                  </Button>
+                  
                   <iframe
                     src="https://zygotebody.com"
                     width="100%"
@@ -867,6 +876,33 @@ export default function Plab2Osce() {
                     className="w-full h-full"
                   />
                 </div>
+
+                {/* Fullscreen Modal */}
+                {isAnatomyFullscreen && (
+                  <div className="fixed inset-0 z-50 bg-black bg-opacity-95 flex items-center justify-center">
+                    {/* Close Button */}
+                    <Button
+                      onClick={() => setIsAnatomyFullscreen(false)}
+                      className="absolute top-4 right-4 z-60 bg-red-600 hover:bg-red-700 text-white p-3 rounded-full shadow-lg"
+                      size="sm"
+                    >
+                      <X className="w-6 h-6" />
+                    </Button>
+                    
+                    {/* Fullscreen Iframe */}
+                    <div className="w-full h-full p-4">
+                      <iframe
+                        src="https://zygotebody.com"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allowFullScreen
+                        title="Zygote Body 3D Human Anatomy - Fullscreen"
+                        className="w-full h-full rounded-lg"
+                      />
+                    </div>
+                  </div>
+                )}
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
                   <Card className="border-green-200 bg-green-50">
