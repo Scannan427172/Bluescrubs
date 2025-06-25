@@ -49,7 +49,7 @@ export function Navigation({ user }: NavigationProps) {
             
             {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center space-x-2 lg:space-x-3 xl:space-x-4 2xl:space-x-6 overflow-x-auto">
-              {navigation.slice(0, 8).map((item) => (
+              {navigation.slice(0, 9).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -185,15 +185,15 @@ export function Navigation({ user }: NavigationProps) {
           </Link>
 
           <Link
-            href="/video-osce"
+            href="/adaptive-learning"
             className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/video-osce"
+              location === "/adaptive-learning"
                 ? "text-medical-blue bg-blue-50"
                 : "text-gray-400"
             }`}
           >
-            <Video className="w-5 h-5 mb-1" />
-            <span className="text-xs font-medium">Video OSCE</span>
+            <Zap className="w-5 h-5 mb-1" />
+            <span className="text-xs font-medium">Adaptive AI</span>
           </Link>
 
           <Link
