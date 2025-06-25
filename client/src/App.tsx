@@ -133,6 +133,14 @@ function Router() {
           </div>
         </div>
       </Route>
+      <Route path="/user-format-stations">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <UserFormatStations />
+          </div>
+        </div>
+      </Route>
       <Route path="/premium">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />

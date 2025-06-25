@@ -189,6 +189,8 @@ This repository contains a comprehensive PLAB (Professional and Linguistic Asses
 - June 25, 2025: PLAB 2 Maximum Scale - 500+ parallel processes generating authentic clinical OSCE scenarios with 2.86MB station bank growth toward 1000 target completion
 - June 25, 2025: PLAB 2 Mnemonics Integration - Enhanced template stations with educational mnemonics (SOCRATES, SPIKES, IPPA) and deploying 1300+ parallel processes for final 236 stations
 - June 25, 2025: PLAB 2 TARGET EXCEEDED - Successfully generated 1,294 authentic OSCE stations (129% of 1000 target) with comprehensive mnemonics integration across all medical specialties
+- June 25, 2025: USER FORMAT SYSTEM LAUNCH - Created streamlined OSCE station format based on user preference with actor scripts, cleaner JSON structure, and practical exam approach
+- June 25, 2025: USER FORMAT GENERATION ACTIVE - Deploying parallel processes to scale user's preferred format to 3000 stations with 5-station batches for reliability
 
 # User Preferences
 

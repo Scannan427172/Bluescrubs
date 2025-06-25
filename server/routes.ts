@@ -14,6 +14,7 @@ import {
 import fs from "fs";
 import path from "path";
 import { PLAB2_TEMPLATE_STATIONS, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-templates";
+import { generateUserFormatStations, saveUserFormatStations, loadUserFormatStations, getUserFormatStationCount } from './user-format-generator';
 
 // AI Question Generation Functions
 async function generateMedicalQuestions(templates: any[], category: string, difficulty: string, count: number) {
@@ -478,6 +479,7 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
 
   // Initialize PLAB 2 station bank
   loadPLAB2StationBank();
+  loadUserFormatStations();
 
   // PLAB 2 Station Bank Generation Endpoint
   app.post("/api/generate-plab2-5000-stations", async (req, res) => {
