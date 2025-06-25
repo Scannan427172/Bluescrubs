@@ -9,7 +9,7 @@ import {
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
-  Globe, Languages, MessageCircle, Bot
+  Globe, Languages, MessageCircle, Bot, Activity
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
