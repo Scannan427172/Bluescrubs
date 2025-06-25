@@ -71,18 +71,7 @@ export default function Landing() {
                     <span className="text-white">Hybrid AI System</span>
                   </Button>
                 </Link>
-                <Link href="/content-independence">
-                  <Button variant="outline" size="default" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 group">
-                    <Shield className="mr-2 w-4 h-4 text-white" />
-                    <span className="text-white">Content Independence</span>
-                  </Button>
-                </Link>
-                <Link href="/translation-dashboard">
-                  <Button variant="outline" size="default" className="w-full sm:w-auto border-2 border-white/50 bg-transparent text-white hover:bg-white/20 backdrop-blur-sm px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 group">
-                    <Globe className="mr-2 w-4 h-4 text-white" />
-                    <span className="text-white">39 Languages</span>
-                  </Button>
-                </Link>
+
               </div>
             </div>
           </div>
