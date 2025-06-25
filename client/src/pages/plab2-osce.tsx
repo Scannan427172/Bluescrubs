@@ -775,9 +775,9 @@ export default function Plab2Osce() {
           </Card>
         </div>
 
-          {/* Station Type Filters */}
+          {/* Station Type Filters with 3D Anatomy */}
           <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-            <TabsList className="grid w-full grid-cols-7 gap-1">
+            <TabsList className="grid w-full grid-cols-8 gap-1">
               <TabsTrigger 
                 value="all" 
                 className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-gray-700' : 'text-xs lg:text-sm text-gray-700'}
@@ -820,7 +820,83 @@ export default function Plab2Osce() {
               >
                 Skills ({EXPANDED_STATION_STATS.byType['practical-skills']})
               </TabsTrigger>
+              <TabsTrigger 
+                value="anatomy" 
+                className={accommodations.largerButtons ? 'text-sm lg:text-base py-3 text-red-600 font-semibold' : 'text-xs lg:text-sm text-red-600 font-semibold'}
+              >
+                3D Anatomy
+              </TabsTrigger>
             </TabsList>
+
+          {/* 3D Anatomy Viewer Tab */}
+          <TabsContent value="anatomy" className="mt-6">
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="text-xl text-gray-900 flex items-center gap-2">
+                  <Heart className="w-6 h-6 text-red-600" />
+                  Interactive 3D Human Anatomy - Zygote Body
+                </CardTitle>
+                <p className="text-sm text-gray-600">
+                  Explore detailed 3D anatomy models to enhance your PLAB 2 clinical examination skills. 
+                  Perfect for understanding anatomical structures and their clinical correlations.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Brain className="w-5 h-5 text-blue-600" />
+                    <h4 className="font-semibold text-blue-800">How to Use 3D Anatomy</h4>
+                  </div>
+                  <ul className="text-sm text-blue-700 space-y-1 list-disc pl-4">
+                    <li>Click and drag to rotate the 3D model</li>
+                    <li>Use mouse wheel to zoom in/out</li>
+                    <li>Click on body systems to explore specific anatomy</li>
+                    <li>Perfect for PLAB 2 examination preparation</li>
+                  </ul>
+                </div>
+                
+                {/* Zygote Body 3D Viewer */}
+                <div className="w-full h-[600px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
+                  <iframe
+                    src="https://zygotebody.com"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    allowFullScreen
+                    title="Zygote Body 3D Human Anatomy"
+                    className="w-full h-full"
+                    style={{ minHeight: '600px' }}
+                  />
+                </div>
+                
+                <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <Card className="border-green-200 bg-green-50">
+                    <CardContent className="p-4 text-center">
+                      <Heart className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                      <h4 className="font-semibold text-green-800 mb-1">Cardiovascular</h4>
+                      <p className="text-xs text-green-700">Heart, vessels, circulation</p>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="border-blue-200 bg-blue-50">
+                    <CardContent className="p-4 text-center">
+                      <Brain className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                      <h4 className="font-semibold text-blue-800 mb-1">Neurological</h4>
+                      <p className="text-xs text-blue-700">Brain, nerves, reflexes</p>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="border-purple-200 bg-purple-50">
+                    <CardContent className="p-4 text-center">
+                      <Stethoscope className="w-8 h-8 text-purple-600 mx-auto mb-2" />
+                      <h4 className="font-semibold text-purple-800 mb-1">Respiratory</h4>
+                      <p className="text-xs text-purple-700">Lungs, airways, breathing</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
 
           <TabsContent value={selectedType} className="mt-6">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
