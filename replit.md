@@ -214,6 +214,8 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: HERO REFINEMENTS - Removed bouncing scroll arrow, adjusted heading size for optimal balance, fine-tuned spacing to maximize video visibility while maintaining readability
 - June 25, 2025: HEADING SIZE OPTIMIZATION - Set heading to medium-large size (text-4xl lg:text-6xl xl:text-7xl) for perfect balance between visual impact and video showcase
 - June 25, 2025: DIFFICULTY SYSTEM STANDARDIZATION - Consolidated all difficulty levels to 3 consistent levels: Basic, Intermediate, Advanced across adaptive learning, question generation, and UI components
+- June 25, 2025: PLAB DIFFICULTY ALIGNMENT - Updated Advanced level to represent official PLAB exam standard with appropriate labeling and blue color coding
+- June 25, 2025: MOBILE NAVIGATION ENHANCEMENT - Added sticky bottom navigation with Next/Previous buttons for mobile devices, hidden desktop top navigation on mobile for cleaner interface
 
 # User Preferences
 

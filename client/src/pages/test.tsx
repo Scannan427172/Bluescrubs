@@ -106,8 +106,8 @@ export default function Test() {
 
   const difficultyLevels = [
     { id: "basic", name: "Basic Level", description: "Foundation knowledge questions" },
-    { id: "intermediate", name: "Intermediate", description: "Standard PLAB 1 level" },
-    { id: "advanced", name: "Advanced", description: "Complex clinical scenarios" }
+    { id: "intermediate", name: "Intermediate", description: "General medical knowledge" },
+    { id: "advanced", name: "PLAB Standard", description: "Official PLAB exam level" }
   ];
 
   // Language definitions
@@ -1337,7 +1337,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   {currentQuestion.topic}
                 </Badge>
               </div>
-              <div className="flex gap-2">
+              {/* Desktop Navigation - Hide on Mobile */}
+              <div className="hidden md:flex gap-2">
                 <Button
                   variant="outline"
                   size="sm"
@@ -1670,7 +1671,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               </CardDescription>
             </CardHeader>
             <CardContent className="p-6 space-y-6">
-              {/* 250-word Guideline Summary */}
+              {/* Guideline Summary */}
               <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
                 <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
                   <BookOpen className="w-4 h-4" />
@@ -1743,7 +1744,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   <div>
                     <h5 className="font-medium text-yellow-800">Foundation Doctor Study Tip</h5>
                     <p className="text-sm text-yellow-700 mt-1">
-                      Use this 250-word summary for quick revision, then explore the supplementary guidelines for deeper understanding. Each reference provides specific protocols used in UK clinical practice.
+                      Use this summary for quick revision, then explore the supplementary guidelines for deeper understanding. Each reference provides specific protocols used in UK clinical practice.
                     </p>
                   </div>
                 </div>
@@ -1780,6 +1781,44 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           </Card>
         )}
       </div>
+
+      {/* Mobile-Only Bottom Navigation - Next Question Button */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 safe-area-bottom">
+        <div className="px-4 py-3">
+          <div className="flex items-center justify-between gap-4">
+            {/* Previous Button */}
+            <Button
+              onClick={handlePrevQuestion}
+              disabled={currentQuestionIndex === 0}
+              variant="outline"
+              className="flex-1 h-12 text-sm font-medium"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Previous
+            </Button>
+
+            {/* Question Progress */}
+            <div className="text-center px-2">
+              <div className="text-sm font-medium text-gray-700">
+                {currentQuestionIndex + 1} of {questions.length}
+              </div>
+            </div>
+
+            {/* Next Button */}
+            <Button
+              onClick={handleNextQuestion}
+              disabled={currentQuestionIndex === questions.length - 1}
+              className="flex-1 h-12 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium"
+            >
+              Next
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Add bottom padding to prevent content overlap with fixed bottom nav on mobile */}
+      <div className="md:hidden h-20"></div>
     </div>
   );
 }
