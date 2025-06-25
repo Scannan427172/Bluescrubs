@@ -26,6 +26,13 @@ import {
   createTranslationManifest,
   CULTURAL_ADAPTATIONS 
 } from './translation-system';
+import { 
+  translateStationIndependently, 
+  batchTranslateStations, 
+  saveIndependentTranslations,
+  getIndependentTranslationStats,
+  MEDICAL_TERMINOLOGY_DICTIONARY 
+} from './independent-translation';
 
 // AI Question Generation Functions
 async function generateMedicalQuestions(templates: any[], category: string, difficulty: string, count: number) {
@@ -1716,6 +1723,94 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
       res.json(manifest);
     } catch (error) {
       res.status(500).json({ error: 'Failed to get translation manifest' });
+    }
+  });
+
+  // Independent Translation API (No external dependencies)
+  app.get('/api/independent-translations/stats', (req, res) => {
+    try {
+      const stats = getIndependentTranslationStats();
+      res.json(stats);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get independent translation stats' });
+    }
+  });
+
+  app.post('/api/independent-translations/translate', (req, res) => {
+    try {
+      const { stationData, targetLanguages = ['ar', 'zh', 'hi', 'es', 'fr'] } = req.body;
+      
+      if (!stationData) {
+        return res.status(400).json({ error: 'Station data required' });
+      }
+
+      // Translate to multiple languages independently
+      const translations = [];
+      for (const language of targetLanguages) {
+        const translated = translateStationIndependently(stationData, language);
+        translations.push(translated);
+      }
+      
+      res.json({ 
+        success: true, 
+        translations,
+        translatedLanguages: targetLanguages,
+        method: 'independent_dictionary',
+        aiDependency: 'none'
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post('/api/independent-translations/batch', (req, res) => {
+    try {
+      const { examType, targetLanguages = ['ar', 'zh', 'hi', 'es', 'fr'] } = req.body;
+      
+      // Load stations for the exam type
+      let stations = [];
+      if (examType === 'PLAB2') {
+        stations = loadUserFormatStations();
+      } else {
+        stations = loadInternationalStations(examType);
+      }
+      
+      if (stations.length === 0) {
+        return res.status(404).json({ error: `No stations found for ${examType}` });
+      }
+
+      // Translate first 10 stations as sample
+      const sampleStations = stations.slice(0, 10);
+      const translations = batchTranslateStations(sampleStations, targetLanguages);
+      
+      // Save translations
+      const saved = saveIndependentTranslations(examType, translations);
+      
+      res.json({ 
+        success: saved, 
+        examType,
+        stationsTranslated: sampleStations.length,
+        languagesCreated: targetLanguages.length,
+        totalTranslations: translations.length,
+        method: 'independent_dictionary',
+        aiDependency: 'none'
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get('/api/independent-translations/dictionary', (req, res) => {
+    try {
+      res.json({
+        medicalDictionary: MEDICAL_TERMINOLOGY_DICTIONARY,
+        supportedLanguagePairs: Object.keys(MEDICAL_TERMINOLOGY_DICTIONARY),
+        totalTerms: Object.values(MEDICAL_TERMINOLOGY_DICTIONARY).reduce((total, dict) => total + Object.keys(dict).length, 0),
+        independentCapability: true,
+        offlineReady: true
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get dictionary' });
     }
   });
 

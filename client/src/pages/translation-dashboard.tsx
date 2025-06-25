@@ -22,6 +22,16 @@ interface TranslationStats {
   coveragePercentage: Record<string, number>;
 }
 
+interface IndependentStats {
+  totalLanguages: number;
+  supportedLanguages: string[];
+  dictionarySize: number;
+  patternCount: number;
+  culturalAdaptations: number;
+  aiDependency: string;
+  offlineCapable: boolean;
+}
+
 export default function TranslationDashboard() {
   const [selectedExam, setSelectedExam] = useState<string>('');
   const [selectedLanguage, setSelectedLanguage] = useState<string>('');
@@ -36,6 +46,10 @@ export default function TranslationDashboard() {
 
   const { data: manifest } = useQuery({
     queryKey: ['/api/translations/manifest'],
+  });
+
+  const { data: independentStats } = useQuery<IndependentStats>({
+    queryKey: ['/api/independent-translations/stats'],
   });
 
   const examTypes = ['PLAB2', 'USMLE', 'AMC', 'MCCQE', 'SCHS', 'DHA', 'HAAD'];
@@ -66,6 +80,26 @@ export default function TranslationDashboard() {
     'ar', 'zh', 'hi', 'es', 'fr', 'de', 'pt', 'ru', 'ja', 'ko'
   ];
 
+  const translateIndependently = async (examType: string) => {
+    try {
+      const response = await fetch('/api/independent-translations/batch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          examType, 
+          targetLanguages: priorityLanguages.slice(0, 5) // First 5 priority languages
+        })
+      });
+      
+      const result = await response.json();
+      if (result.success) {
+        alert(`Successfully created ${result.totalTranslations} independent translations for ${examType}!`);
+      }
+    } catch (error) {
+      console.error('Independent translation error:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-4">
       <div className="max-w-7xl mx-auto">
@@ -86,6 +120,21 @@ export default function TranslationDashboard() {
             </Link>
           </div>
         </div>
+
+        {/* Independence Status */}
+        <Card className="mb-8 bg-gradient-to-r from-green-600 to-blue-600 text-white">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">Independent Translation System</h2>
+                <p className="text-lg">
+                  {independentStats?.dictionarySize || 0} medical terms • {independentStats?.totalLanguages || 0} languages • Zero AI dependency
+                </p>
+              </div>
+              <Shield className="h-12 w-12" />
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -296,6 +345,14 @@ export default function TranslationDashboard() {
                 </Button>
                 
                 <Button
+                  onClick={() => translateIndependently(selectedExam || 'PLAB2')}
+                  className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white"
+                >
+                  <Shield className="w-4 h-4 mr-2" />
+                  Create Independent Translations
+                </Button>
+                
+                <Button
                   onClick={() => downloadTranslations(selectedExam, selectedLanguage)}
                   disabled={!selectedExam || !selectedLanguage}
                   className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
@@ -318,9 +375,11 @@ export default function TranslationDashboard() {
               <ul className="space-y-3">
                 {[
                   'No external translation API required',
-                  'Professional medical terminology',
+                  'Built-in medical terminology dictionary',
+                  'Pattern-based translation system',
                   'Cultural adaptation guidelines',
-                  'Offline translation support',
+                  'Complete offline capability',
+                  'Zero AI dependency',
                   'Medical accuracy preservation',
                   'RTL language support included'
                 ].map((feature, index) => (
