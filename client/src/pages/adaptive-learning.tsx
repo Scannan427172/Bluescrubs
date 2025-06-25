@@ -46,8 +46,8 @@ export default function AdaptiveLearning() {
             <Card className="border-2 border-blue-200 bg-blue-50">
               <CardContent className="p-6 text-center">
                 <Target className="h-8 w-8 mx-auto mb-3 text-blue-600" />
-                <h3 className="font-semibold mb-2">Adaptive Questions</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">Adaptive Questions</h3>
+                <p className="text-sm text-black">
                   Questions automatically adjust difficulty based on your performance patterns
                 </p>
               </CardContent>
@@ -56,8 +56,8 @@ export default function AdaptiveLearning() {
             <Card className="border-2 border-orange-200 bg-orange-50">
               <CardContent className="p-6 text-center">
                 <AlertTriangle className="h-8 w-8 mx-auto mb-3 text-orange-600" />
-                <h3 className="font-semibold mb-2">Weakness Detection</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">Weakness Detection</h3>
+                <p className="text-sm text-black">
                   AI scans your answer patterns to identify specific knowledge gaps
                 </p>
               </CardContent>
@@ -66,8 +66,8 @@ export default function AdaptiveLearning() {
             <Card className="border-2 border-green-200 bg-green-50">
               <CardContent className="p-6 text-center">
                 <TrendingUp className="h-8 w-8 mx-auto mb-3 text-green-600" />
-                <h3 className="font-semibold mb-2">Success Prediction</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">Success Prediction</h3>
+                <p className="text-sm text-black">
                   ML algorithm predicts your exam success probability with confidence intervals
                 </p>
               </CardContent>
@@ -76,8 +76,8 @@ export default function AdaptiveLearning() {
             <Card className="border-2 border-purple-200 bg-purple-50">
               <CardContent className="p-6 text-center">
                 <Lightbulb className="h-8 w-8 mx-auto mb-3 text-purple-600" />
-                <h3 className="font-semibold mb-2">Smart Generation</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">Smart Generation</h3>
+                <p className="text-sm text-black">
                   Creates targeted questions using your existing bank to address weak areas
                 </p>
               </CardContent>
@@ -166,48 +166,48 @@ export default function AdaptiveLearning() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="text-center p-4 border rounded-lg">
                 <Badge className="mb-3 bg-green-100 text-green-800">Unique Advantage</Badge>
-                <h3 className="font-semibold mb-2">Authentic Content Only</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">Authentic Content Only</h3>
+                <p className="text-sm text-black">
                   Uses real medical scenarios, not AI-generated content, for genuine exam preparation
                 </p>
               </div>
 
               <div className="text-center p-4 border rounded-lg">
                 <Badge className="mb-3 bg-blue-100 text-blue-800">Technical Innovation</Badge>
-                <h3 className="font-semibold mb-2">Offline Intelligence</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">Offline Intelligence</h3>
+                <p className="text-sm text-black">
                   Complete AI functionality without external API dependencies or internet requirements
                 </p>
               </div>
 
               <div className="text-center p-4 border rounded-lg">
                 <Badge className="mb-3 bg-purple-100 text-purple-800">Medical Focus</Badge>
-                <h3 className="font-semibold mb-2">UK Guidelines Integration</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">UK Guidelines Integration</h3>
+                <p className="text-sm text-black">
                   Deep integration with NICE, BNF, CKS, and GMC standards for accurate learning
                 </p>
               </div>
 
               <div className="text-center p-4 border rounded-lg">
                 <Badge className="mb-3 bg-orange-100 text-orange-800">Predictive Analytics</Badge>
-                <h3 className="font-semibold mb-2">ML Exam Prediction</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">ML Exam Prediction</h3>
+                <p className="text-sm text-black">
                   Statistical models predict success probability with confidence intervals
                 </p>
               </div>
 
               <div className="text-center p-4 border rounded-lg">
                 <Badge className="mb-3 bg-red-100 text-red-800">Real-time Analysis</Badge>
-                <h3 className="font-semibold mb-2">Instant Weakness Detection</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">Instant Weakness Detection</h3>
+                <p className="text-sm text-black">
                   Identifies knowledge gaps during practice with immediate feedback
                 </p>
               </div>
 
               <div className="text-center p-4 border rounded-lg">
                 <Badge className="mb-3 bg-yellow-100 text-yellow-800">Adaptive Learning</Badge>
-                <h3 className="font-semibold mb-2">Dynamic Difficulty</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-2 text-black">Dynamic Difficulty</h3>
+                <p className="text-sm text-black">
                   Questions adapt in real-time based on performance patterns and learning speed
                 </p>
               </div>
@@ -232,8 +232,8 @@ export default function AdaptiveLearning() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="font-semibold mb-3">Adaptive Learning Engine</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-3 text-black">Adaptive Learning Engine</h3>
+                <ul className="space-y-2 text-sm text-black">
                   <li>• Performance tracking across 11 medical specialties</li>
                   <li>• Mastery threshold algorithms (85% accuracy target)</li>
                   <li>• Dynamic difficulty adjustment based on user patterns</li>
@@ -242,8 +242,8 @@ export default function AdaptiveLearning() {
               </div>
 
               <div>
-                <h3 className="font-semibold mb-3">Weakness Detection System</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-3 text-black">Weakness Detection System</h3>
+                <ul className="space-y-2 text-sm text-black">
                   <li>• Real-time pattern analysis of answer selections</li>
                   <li>• Common mistake identification and categorization</li>
                   <li>• Improvement trend tracking over time</li>
@@ -252,8 +252,8 @@ export default function AdaptiveLearning() {
               </div>
 
               <div>
-                <h3 className="font-semibold mb-3">Performance Prediction</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-3 text-black">Performance Prediction</h3>
+                <ul className="space-y-2 text-sm text-black">
                   <li>• Statistical modeling with confidence intervals</li>
                   <li>• Multi-factor analysis (accuracy, consistency, coverage)</li>
                   <li>• Time-to-readiness estimation algorithms</li>
@@ -262,8 +262,8 @@ export default function AdaptiveLearning() {
               </div>
 
               <div>
-                <h3 className="font-semibold mb-3">Smart Question Generation</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
+                <h3 className="font-semibold mb-3 text-black">Smart Question Generation</h3>
+                <ul className="space-y-2 text-sm text-black">
                   <li>• Template extraction from authentic questions</li>
                   <li>• Weakness-targeted scenario creation</li>
                   <li>• Clinical pattern recognition and variation</li>
