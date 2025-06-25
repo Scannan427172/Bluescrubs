@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
-import { MessageCircle, BookOpen, Target, Lightbulb, X } from 'lucide-react';
+import { MessageCircle, BookOpen, Target, Lightbulb, X, Upload, Mic, MicOff, FileText, Headphones, Zap } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 
@@ -12,6 +12,15 @@ interface AITutorProps {
   userPerformance?: any;
   onClose: () => void;
   isVisible: boolean;
+}
+
+interface StudySession {
+  id: string;
+  title: string;
+  progress: number;
+  flashcards: number;
+  questions: number;
+  timeSpent: number;
 }
 
 interface TutorResponse {
@@ -24,7 +33,10 @@ interface TutorResponse {
 
 export function AITutor({ currentQuestion, userPerformance, onClose, isVisible }: AITutorProps) {
   const [userQuery, setUserQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'help' | 'study' | 'concepts'>('help');
+  const [activeTab, setActiveTab] = useState<'help' | 'study' | 'concepts' | 'upload' | 'voice'>('help');
+  const [uploadedContent, setUploadedContent] = useState('');
+  const [voiceMode, setVoiceMode] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const queryClient = useQueryClient();
 
   const tutorMutation = useMutation({
@@ -76,6 +88,46 @@ export function AITutor({ currentQuestion, userPerformance, onClose, isVisible }
     });
   };
 
+  const generateFlashcards = () => {
+    const content = uploadedContent || currentQuestion?.explanation || 'Current medical topic';
+    tutorMutation.mutate({
+      query: `Generate spaced-repetition flashcards from this content: ${content}`,
+      context: { type: 'flashcard_generation', specialty: currentQuestion?.category || 'general' }
+    });
+  };
+
+  const generatePodcast = () => {
+    const content = uploadedContent || currentQuestion?.explanation || 'Current medical topic';
+    tutorMutation.mutate({
+      query: `Create an AI-narrated podcast script from this content: ${content}`,
+      context: { type: 'podcast_generation', audioFormat: true }
+    });
+  };
+
+  const startVoiceInteraction = () => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      const recognition = new SpeechRecognition();
+      
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+      
+      recognition.onstart = () => setIsListening(true);
+      recognition.onend = () => setIsListening(false);
+      
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setUserQuery(transcript);
+        handleAskTutor();
+      };
+      
+      recognition.start();
+    } else {
+      alert('Voice recognition not supported in this browser');
+    }
+  };
+
   if (!isVisible) return null;
 
   return (
@@ -94,35 +146,120 @@ export function AITutor({ currentQuestion, userPerformance, onClose, isVisible }
         
         <CardContent className="space-y-6">
           {/* Tab Navigation */}
-          <div className="flex gap-2 border-b">
+          <div className="flex gap-2 border-b overflow-x-auto">
             <Button
               variant={activeTab === 'help' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => setActiveTab('help')}
-              className="flex items-center gap-2"
             >
-              <Lightbulb className="h-4 w-4" />
-              Question Help
+              <MessageCircle className="w-4 h-4 mr-1" />
+              Help
             </Button>
             <Button
               variant={activeTab === 'study' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => setActiveTab('study')}
-              className="flex items-center gap-2"
             >
-              <Target className="h-4 w-4" />
+              <BookOpen className="w-4 h-4 mr-1" />
               Study Plan
             </Button>
             <Button
               variant={activeTab === 'concepts' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => setActiveTab('concepts')}
-              className="flex items-center gap-2"
             >
-              <BookOpen className="h-4 w-4" />
+              <Target className="w-4 h-4 mr-1" />
               Concepts
             </Button>
+            <Button
+              variant={activeTab === 'upload' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setActiveTab('upload')}
+            >
+              <Upload className="w-4 h-4 mr-1" />
+              Content
+            </Button>
+            <Button
+              variant={activeTab === 'voice' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setActiveTab('voice')}
+            >
+              <Mic className="w-4 h-4 mr-1" />
+              Voice
+            </Button>
           </div>
+
+          {/* Content Upload Tab */}
+          {activeTab === 'upload' && (
+            <div className="space-y-4">
+              <div className="text-center p-6 border-2 border-dashed border-gray-300 rounded-lg">
+                <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+                <h3 className="text-lg font-semibold mb-2">Upload Medical Content</h3>
+                <p className="text-gray-600 mb-4">Upload lectures, articles, or medical documents to generate study materials</p>
+                <Textarea
+                  placeholder="Paste medical content here (lectures, articles, case studies)..."
+                  value={uploadedContent}
+                  onChange={(e) => setUploadedContent(e.target.value)}
+                  className="min-h-32 mb-4"
+                />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                  <Button onClick={generateFlashcards} disabled={!uploadedContent || tutorMutation.isPending}>
+                    <Zap className="w-4 h-4 mr-1" />
+                    Generate Flashcards
+                  </Button>
+                  <Button onClick={generatePodcast} disabled={!uploadedContent || tutorMutation.isPending}>
+                    <Headphones className="w-4 h-4 mr-1" />
+                    Create Podcast
+                  </Button>
+                  <Button onClick={() => tutorMutation.mutate({
+                    query: `Summarize this content: ${uploadedContent}`,
+                    context: { type: 'content_summary' }
+                  })} disabled={!uploadedContent || tutorMutation.isPending}>
+                    <FileText className="w-4 h-4 mr-1" />
+                    AI Summary
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Voice Interaction Tab */}
+          {activeTab === 'voice' && (
+            <div className="space-y-4">
+              <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg">
+                <Mic className="w-12 h-12 mx-auto mb-4 text-blue-600" />
+                <h3 className="text-lg font-semibold mb-2">Voice OSCE Simulator</h3>
+                <p className="text-gray-600 mb-4">Practice clinical scenarios with voice interaction</p>
+                <Button
+                  onClick={startVoiceInteraction}
+                  disabled={isListening}
+                  className={`w-full ${isListening ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-600 hover:bg-blue-700'}`}
+                >
+                  {isListening ? (
+                    <>
+                      <MicOff className="w-4 h-4 mr-2" />
+                      Listening... Click to stop
+                    </>
+                  ) : (
+                    <>
+                      <Mic className="w-4 h-4 mr-2" />
+                      Start Voice Interaction
+                    </>
+                  )}
+                </Button>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Voice Query Result:</label>
+                <Textarea
+                  placeholder="Your voice will be transcribed here..."
+                  value={userQuery}
+                  onChange={(e) => setUserQuery(e.target.value)}
+                  className="min-h-20"
+                />
+              </div>
+            </div>
+          )}
 
           {/* Question Help Tab */}
           {activeTab === 'help' && (
