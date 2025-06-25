@@ -1763,9 +1763,10 @@ export default function PLAB1New() {
               ) : showExplanation ? (
                 <Button 
                   onClick={handleNextQuestion}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium flex items-center gap-2"
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-lg font-semibold text-lg flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-200"
                 >
-                  Next Question <ArrowRight className="w-4 h-4" />
+                  Next Question <ArrowRight className="w-5 h-5" />
                 </Button>
               ) : null}
             </div>
