@@ -1,78 +1,77 @@
 export const userFormatTemplates = [
   {
-    "station_type": "History Taking",
-    "scenario_title": "Chest Pain in a 54-Year-Old Male",
-    "brief": "You are in GP surgery. A 54-year-old man presents with chest pain. Take a relevant history.",
+    "station_type": "Cardiology",
+    "scenario_title": "Angina in an Elderly Male",
+    "brief": "This is a station about angina in an elderly male. Take history, explain, or counsel appropriately.",
     "actor_script": {
-      "opening": "Doctor, I've been having this chest discomfort for two days.",
-      "details": "Pain is central, pressure-like, radiates to left arm. Worse with exertion. Smoker. Family history of MI.",
-      "hidden_info": "Pain started while walking upstairs, relieved with rest. No previous episodes."
+      "opening": "Doctor, I'm worried about angina...",
+      "details": "Patient explains concern when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
     },
     "mark_scheme": [
-      "Introduces self and confirms identity",
-      "Clarifies SOCRATES pain features",
-      "Asks about red flags (e.g. breathlessness, syncope)",
-      "Screens for cardiac risk factors",
-      "ICE (Ideas, Concerns, Expectations)",
-      "Summarises history",
-      "Safety nets and seeks help"
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
     ],
-    "mnemonic": "SOCRATES + ICE",
-    "communication_notes": "Empathise about pain, acknowledge fear of heart issues",
+    "mnemonic": "SOCRATES + CV Risk",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for cardiology scenarios.",
     "guideline_links": {
-      "NICE": "https://www.nice.org.uk/guidance/cg95/chapter/Recommendations",
-      "BNF": "https://bnf.nice.org.uk/drug/glyceryl-trinitrate.html",
-      "RCGP": "https://www.rcgp.org.uk/clinical-and-research/resources/toolkits/chest-pain-toolkit.aspx"
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance",
+      "BNF": "https://bnf.nice.org.uk",
+      "Resus": "https://www.resus.org.uk/library/2021-resuscitation-guidelines"
     }
   },
   {
-    "station_type": "Ethics / Consent",
-    "scenario_title": "Refusal of Blood Transfusion",
-    "brief": "A patient with a bleeding duodenal ulcer refuses a blood transfusion for religious reasons. Explain their options.",
+    "station_type": "Ethics",
+    "scenario_title": "Consent and Capacity Assessment",
+    "brief": "This is a station about consent and capacity. Assess, explain, or counsel appropriately.",
     "actor_script": {
-      "opening": "I don't want any blood products, doctor.",
-      "details": "Jehovah's Witness. Wants treatment but no blood. Anxious about dying but firm in beliefs.",
-      "hidden_info": "Would accept volume expanders or alternatives if safe."
+      "opening": "I don't understand what the doctor said...",
+      "details": "Patient shows confusion when prompted about treatment options.",
+      "hidden_info": "More understanding revealed with appropriate communication techniques."
     },
     "mark_scheme": [
-      "Clarifies understanding and confirms capacity",
-      "Explains condition and consequences of refusing transfusion",
-      "Explores beliefs respectfully",
-      "Uses BRAN (Benefits, Risks, Alternatives, Nothing)",
-      "Documents decision and offers ongoing care"
+      "Introduces and clarifies role",
+      "Assesses capacity systematically",
+      "Explains information clearly",
+      "Explores patient understanding and concerns",
+      "Documents appropriately and involves MDT"
     ],
-    "mnemonic": "BRAN + CURB (Capacity: Understand, Retain, Balance, Communicate)",
-    "communication_notes": "Non-judgemental, calm, supportive",
+    "mnemonic": "CURB (Understand, Retain, Balance, Communicate)",
+    "communication_notes": "Use simple language, check understanding, remain patient-centered.",
     "guideline_links": {
-      "GMC": "https://www.gmc-uk.org/ethical-guidance/ethical-hub/refusing-treatment",
-      "NHS": "https://www.nhs.uk/conditions/refusing-consent-to-treatment/",
-      "RCGP": "https://www.rcgp.org.uk/clinical-and-research/resources/toolkits/end-of-life-care-toolkit.aspx"
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance",
+      "BNF": "https://bnf.nice.org.uk",
+      "Resus": "https://www.resus.org.uk/library/2021-resuscitation-guidelines"
     }
   },
   {
-    "station_type": "Physical Examination",
-    "scenario_title": "Respiratory Examination - Shortness of Breath",
-    "brief": "You are in A&E. A 65-year-old patient presents with acute shortness of breath. Perform a focused respiratory examination.",
+    "station_type": "Respiratory",
+    "scenario_title": "Shortness of Breath Assessment",
+    "brief": "This is a station about shortness of breath. Examine, assess, or counsel appropriately.",
     "actor_script": {
-      "opening": "Doctor, I can't catch my breath properly.",
-      "details": "Started this morning. Getting worse. Smoker for 30 years. Had a cough for weeks.",
-      "hidden_info": "Pain on deep inspiration. Usually walks 2 miles daily but can't today."
+      "opening": "Doctor, I can't catch my breath...",
+      "details": "Patient describes breathlessness when prompted with appropriate questions.",
+      "hidden_info": "More symptoms revealed with systematic questioning."
     },
     "mark_scheme": [
-      "Introduces self and gains consent",
-      "Positions patient at 45 degrees",
-      "Inspects for respiratory distress and cyanosis",
-      "Palpates for chest expansion and tactile fremitus",
-      "Percusses systematically",
-      "Auscultates all lung fields",
-      "Summarises findings professionally"
+      "Introduces and clarifies role",
+      "Systematic examination approach",
+      "Demonstrates clinical reasoning",
+      "Explains findings and next steps",
+      "Professional manner throughout"
     ],
-    "mnemonic": "IPPA (Inspect, Palpate, Percuss, Auscultate)",
-    "communication_notes": "Ensure patient comfort, explain each step, maintain dignity",
+    "mnemonic": "IPPA + SOB Assessment",
+    "communication_notes": "Ensure patient comfort, explain procedures, maintain professionalism.",
     "guideline_links": {
-      "BTS": "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/",
-      "NICE": "https://www.nice.org.uk/guidance/cg121",
-      "NHS": "https://www.nhs.uk/conditions/shortness-of-breath/"
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance",
+      "BNF": "https://bnf.nice.org.uk",
+      "Resus": "https://www.resus.org.uk/library/2021-resuscitation-guidelines"
     }
   }
 ];

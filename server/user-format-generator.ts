@@ -7,13 +7,17 @@ const openai = new OpenAI({
 });
 
 const stationTypes = [
-  'History Taking',
-  'Physical Examination', 
-  'Communication Skills',
-  'Ethics / Consent',
-  'Data Interpretation',
-  'Practical Skills',
-  'Emergency Management'
+  'Cardiology',
+  'Respiratory', 
+  'Gastroenterology',
+  'Neurology',
+  'Emergency Medicine',
+  'Ethics',
+  'Psychiatry',
+  'Obstetrics & Gynaecology',
+  'Paediatrics',
+  'Surgery',
+  'Endocrinology'
 ];
 
 const specialties = [
@@ -38,13 +42,13 @@ ${JSON.stringify(userFormatTemplates[0], null, 2)}
 
 Requirements:
 - Station type: ${stationType}
-- Medical specialty: ${specialty}
-- Create realistic UK clinical scenario
-- Include practical actor script with opening/details/hidden_info
-- Provide clear mark scheme checklist
-- Add memorable mnemonic
-- Include verified UK medical guideline links
-- Use authentic patient presentations
+- Create realistic UK clinical scenario for ${specialty}
+- Brief should be: "This is a station about [condition/scenario]. Take history, examine, explain, or counsel appropriately."
+- Actor script should be concise with realistic patient responses
+- Mark scheme should have 5 clear, practical assessment points
+- Include appropriate mnemonic for the specialty/condition
+- Communication notes should be specialty-specific
+- Use the standard guideline links (NICE, GMC, BNF, Resus)
 - Ensure clinical accuracy for PLAB 2 level
 
 Return only the JSON object, no additional text.`;
