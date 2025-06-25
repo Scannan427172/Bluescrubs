@@ -1768,25 +1768,7 @@ export default function PLAB1New() {
               })}
             </div>
 
-            {/* Submit Answer Button - Positioned directly under questions */}
-            <div className="mt-6 flex justify-center">
-              {!showExplanation && selectedAnswer ? (
-                <Button 
-                  onClick={handleSubmitAnswer}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium"
-                >
-                  Submit Answer
-                </Button>
-              ) : showExplanation ? (
-                <Button 
-                  onClick={handleNextQuestion}
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-lg font-semibold text-lg flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-200"
-                >
-                  Next Question <ArrowRight className="w-5 h-5" />
-                </Button>
-              ) : null}
-            </div>
+            {/* Navigation removed - buttons now at bottom */}
 
           </CardContent>
         </Card>
@@ -2502,8 +2484,8 @@ export default function PLAB1New() {
         )}
       </div>
 
-      {/* PassMedicine-Style Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      {/* Fixed Bottom Navigation - Blue Buttons */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="max-w-4xl mx-auto p-4">
           <div className="flex items-center justify-between">
             {/* Previous Button */}
@@ -2517,48 +2499,43 @@ export default function PLAB1New() {
                 }
               }}
               disabled={currentQuestionIndex === 0}
-              variant="outline"
-              className="w-12 h-12 p-0 bg-gray-100 hover:bg-gray-200 disabled:opacity-30"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold disabled:bg-gray-300 disabled:text-gray-500 flex items-center gap-2"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4" />
+              Previous
             </Button>
 
             {/* Center Content - Question Progress */}
-            <div className="flex-1 flex justify-center">
-              <div className="text-center">
-                <p className="text-sm text-gray-600">
-                  Question {currentQuestionIndex + 1} of {generatedQuestions.length}
-                </p>
-                {selectedAnswer && !showExplanation && (
-                  <p className="text-xs text-blue-600 mt-1">Answer selected - submit button above</p>
-                )}
+            <div className="text-center flex-1">
+              <div className="text-sm font-medium text-gray-700">
+                Question {currentQuestionIndex + 1} of {generatedQuestions.length}
+              </div>
+              <div className="text-xs text-gray-500 mt-1">
+                {formatTime(questionTimer)}
               </div>
             </div>
 
-            {/* Next Button */}
-            <Button
-              onClick={() => {
-                if (currentQuestionIndex < generatedQuestions.length - 1) {
-                  setCurrentQuestionIndex(prev => prev + 1);
-                  setSelectedAnswer("");
-                  setShowExplanation(false);
-                  setQuestionStartTime(Date.now());
-                }
-              }}
-              disabled={currentQuestionIndex >= generatedQuestions.length - 1}
-              variant="outline"
-              className="w-12 h-12 p-0 bg-gray-100 hover:bg-gray-200 disabled:opacity-30"
-            >
-              <ArrowRight className="w-5 h-5" />
-            </Button>
+            {/* Submit/Next Button */}
+            {!showExplanation ? (
+              <Button
+                onClick={handleSubmitAnswer}
+                disabled={!selectedAnswer}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold disabled:bg-gray-300 disabled:text-gray-500"
+              >
+                Submit Answer
+              </Button>
+            ) : (
+              <Button
+                onClick={handleNextQuestion}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2"
+              >
+                {currentQuestionIndex === generatedQuestions.length - 1 ? "Complete" : "Next"}
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            )}
           </div>
 
-          {/* Question counter */}
-          <div className="text-center mt-2">
-            <span className="text-sm text-gray-500">
-              {currentQuestionIndex + 1} of {generatedQuestions.length}
-            </span>
-          </div>
+
         </div>
       </div>
 
