@@ -145,62 +145,62 @@ export function Navigation({ user }: NavigationProps) {
             {/* Essential Navigation Items */}
             <Link
               href="/dashboard"
-              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/dashboard"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
-              <Home className={`w-4 h-4 mb-0.5 ${location === "/dashboard" ? "scale-110" : ""}`} />
-              <span className="text-[10px] font-medium">Home</span>
+              <Home className={`w-5 h-5 mb-0.5 ${location === "/dashboard" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">Home</span>
             </Link>
 
             <Link
               href="/plab1-new"
-              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/plab1-new"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
-              <BookOpen className={`w-4 h-4 mb-0.5 ${location === "/plab1-new" ? "scale-110" : ""}`} />
-              <span className="text-[10px] font-medium">PLAB 1</span>
+              <BookOpen className={`w-5 h-5 mb-0.5 ${location === "/plab1-new" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">PLAB 1</span>
             </Link>
 
             <Link
               href="/plab2-osce"
-              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/plab2-osce"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
-              <Video className={`w-4 h-4 mb-0.5 ${location === "/plab2-osce" ? "scale-110" : ""}`} />
-              <span className="text-[10px] font-medium">PLAB 2</span>
+              <Video className={`w-5 h-5 mb-0.5 ${location === "/plab2-osce" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">PLAB 2</span>
             </Link>
 
             <Link
               href="/adaptive-learning"
-              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/adaptive-learning"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
-              <Brain className={`w-4 h-4 mb-0.5 ${location === "/adaptive-learning" ? "scale-110" : ""}`} />
-              <span className="text-[10px] font-medium">AI</span>
+              <Brain className={`w-5 h-5 mb-0.5 ${location === "/adaptive-learning" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">AI</span>
             </Link>
 
             <Link
               href="/more"
-              className={`flex flex-col items-center justify-center py-1 px-1 rounded-md transition-all duration-200 flex-1 ${
+              className={`flex flex-col items-center justify-center py-2 px-1 rounded-md transition-all duration-200 flex-1 ${
                 location === "/more"
                   ? "text-blue-600 bg-blue-100/80"
                   : "text-gray-500 hover:text-gray-700"
               }`}
             >
-              <Settings className={`w-4 h-4 mb-0.5 ${location === "/more" ? "scale-110" : ""}`} />
-              <span className="text-[10px] font-medium">More</span>
+              <Settings className={`w-5 h-5 mb-0.5 ${location === "/more" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">More</span>
             </Link>
           </div>
         </div>
