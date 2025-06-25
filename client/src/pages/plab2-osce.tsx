@@ -210,10 +210,8 @@ export default function Plab2Osce() {
     queryKey: ['/api/osce/stations', selectedType],
     queryFn: async () => {
       const params = new URLSearchParams({
-        type: selectedType === 'all' ? 'history-taking' : selectedType,
-        specialty: 'general-medicine',
-        difficulty: 'intermediate',
-        count: '5'
+        type: selectedType,
+        count: '20'
       });
       const response = await fetch(`/api/osce/stations?${params}`);
       if (!response.ok) throw new Error('Failed to fetch OSCE stations');
@@ -760,9 +758,30 @@ export default function Plab2Osce() {
 
 
           <TabsContent value={selectedType} className="mt-6">
+            {isLoading && (
+              <div className="flex items-center justify-center py-8">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                  <span className="text-gray-600">Loading OSCE stations...</span>
+                </div>
+              </div>
+            )}
+            
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                <p className="text-red-700">Error loading stations: {error.message}</p>
+              </div>
+            )}
+            
+            {!isLoading && !error && filteredStations.length === 0 && (
+              <div className="text-center py-8">
+                <p className="text-gray-600">No stations found for the selected type.</p>
+              </div>
+            )}
+            
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {filteredStations.map((station: any) => {
-                const IconComponent = getStationTypeIcon(station.type);
+              {filteredStations.map((station: any, index: number) => {
+                const IconComponent = getStationTypeIcon(station.category);
                 const isCompleted = completedStations.includes(station.id);
                 const score = stationScores[station.id];
 
@@ -771,12 +790,12 @@ export default function Plab2Osce() {
                     isCompleted 
                       ? 'border-green-300 bg-green-50 shadow-md' 
                       : 'border-gray-200 hover:border-blue-300 hover:shadow-md'
-                  }`}>
+                  }`} onClick={() => setActiveStation(station)}>
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
                         <div className="flex items-center gap-2">
                           <IconComponent className="w-5 h-5 text-blue-600" />
-                          <span className="text-sm font-medium text-blue-600">Station {station.stationNumber}</span>
+                          <span className="text-sm font-medium text-blue-600">Station {index + 1}</span>
                         </div>
                         {isCompleted && (
                           <div className="flex items-center gap-1">
@@ -787,17 +806,20 @@ export default function Plab2Osce() {
                       </div>
                       <CardTitle className="text-lg leading-tight text-gray-900">{station.title}</CardTitle>
                       <div className="flex flex-wrap gap-1">
-                        <Badge variant="secondary" className="text-xs">{OSCE_STATION_TYPES.find(t => t.value === station.type)?.label || station.type}</Badge>
+                        <Badge variant="secondary" className="text-xs">{station.category}</Badge>
                         <Badge className={`text-xs ${getDifficultyColor(station.difficulty)}`}>
                           {station.difficulty}
                         </Badge>
-                        <Badge variant="outline" className="text-xs">{station.category}</Badge>
+                        <Badge variant="outline" className="text-xs flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {station.duration}min
+                        </Badge>
                       </div>
                     </CardHeader>
                     
                     <CardContent className="pt-0">
                       <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                        {station.scenario}
+                        {station.description || station.scenario}
                       </p>
                       
                       {/* Medication Information */}
