@@ -276,7 +276,7 @@ export default function Plab2Osce() {
         stationTitle: activeStation.title,
         scenario: activeStation.scenario,
         instructions: activeStation.instructions,
-        keyActions: activeStation.keyActions,
+        keyActions: activeStation.keyActions || [],
         redFlags: activeStation.redFlags
       } : { stationType: 'PLAB 2 OSCE General' };
 

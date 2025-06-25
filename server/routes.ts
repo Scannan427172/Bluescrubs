@@ -764,6 +764,81 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     });
   });
 
+  // OSCE Stations endpoint
+  app.get("/api/osce/stations", async (req, res) => {
+    try {
+      const { type, specialty, difficulty, count } = req.query;
+      
+      // Load user format stations from storage
+      const userFormatStations = loadUserFormatStations();
+      
+      if (userFormatStations && userFormatStations.length > 0) {
+        let filteredStations = userFormatStations;
+        
+        // Apply filters if provided
+        if (type && type !== 'all') {
+          filteredStations = filteredStations.filter(station => 
+            station.stationType?.toLowerCase().includes(type.toString().toLowerCase()) ||
+            station.title?.toLowerCase().includes(type.toString().toLowerCase())
+          );
+        }
+        
+        if (specialty && specialty !== 'all') {
+          filteredStations = filteredStations.filter(station => 
+            station.specialty?.toLowerCase().includes(specialty.toString().toLowerCase())
+          );
+        }
+        
+        if (difficulty && difficulty !== 'all') {
+          filteredStations = filteredStations.filter(station => 
+            station.difficulty?.toLowerCase() === difficulty.toString().toLowerCase()
+          );
+        }
+        
+        // Limit results if count is specified
+        const limit = count ? parseInt(count.toString()) : 20;
+        const limitedStations = filteredStations.slice(0, limit);
+        
+        // Transform to match expected format
+        const transformedStations = limitedStations.map(station => ({
+          id: station.id,
+          title: station.scenarioTitle || station.title,
+          category: station.specialty || 'General Medicine',
+          difficulty: station.difficulty || 'intermediate',
+          duration: station.duration || 8,
+          description: station.briefDescription || '',
+          scenario: station.detailedScenario || station.scenario || '',
+          instructions: {
+            candidate: station.candidateInstructions || '',
+            examiner: station.examinerInstructions || '',
+            standardizedPatient: station.actorScript || ''
+          },
+          markingCriteria: station.markScheme ? [{
+            category: "Overall Performance",
+            maxMarks: 20,
+            criteria: Array.isArray(station.markScheme) ? station.markScheme : [station.markScheme]
+          }] : [],
+          keyActions: station.keyLearningPoints || [],
+          redFlags: station.redFlags || [],
+          medications: station.medications || [],
+          references: station.clinicalGuidelines || [],
+          completed: false,
+          attempts: 0,
+          bestScore: 0,
+          examFrequency: 'high'
+        }));
+        
+        res.json(transformedStations);
+      } else {
+        // Fallback to empty array if no stations found
+        res.json([]);
+      }
+    } catch (error) {
+      console.error('Error fetching OSCE stations:', error);
+      res.status(500).json({ error: "Failed to fetch OSCE stations" });
+    }
+  });
+
   // Analytics endpoints
   app.get("/api/analytics/live", async (req, res) => {
     try {
