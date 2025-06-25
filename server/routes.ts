@@ -45,11 +45,12 @@ import {
   generateIndependentFeedback,
   analyzeImageIndependently 
 } from './independent-analysis';
+import { hybridAI, HybridConfig } from './hybrid-ai-system';
 
-// Independent Question Generation Functions (No AI dependency)
+// Independent Question Generation (No AI - keeps questions authentic)
 async function generateMedicalQuestions(templates: any[], category: string, difficulty: string, count: number) {
   try {
-    // Use template-based generation instead of AI
+    // Always use template-based generation for questions to maintain authenticity
     return generateQuestionFromTemplate(category, count);
     
     const { default: OpenAI } = await import('openai');
@@ -1880,23 +1881,99 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     try {
       const system = exportCompleteIndependentSystem();
       const alternatives = createIndependentAlternatives();
+      const hybridStatus = hybridAI.getSystemStatus();
       
       res.json({
         ...system,
         independentFeatures: alternatives,
+        hybridCapabilities: hybridStatus,
         aiReplacement: {
-          questionGeneration: 'template_based',
-          videoAnalysis: 'structured_assessment', 
-          translation: 'dictionary_based',
+          questionGeneration: 'template_based_only', // Never AI
+          videoAnalysis: 'hybrid_with_fallback', 
+          translation: 'dictionary_based_only', // Never AI
           imageAnalysis: 'structured_observation',
-          feedback: 'template_responses',
-          guidance: 'protocol_based'
+          feedback: 'hybrid_with_fallback',
+          guidance: 'hybrid_with_fallback'
         },
-        completeDependency: 'none',
+        questionBankPolicy: 'no_ai_ever',
+        completeDependency: 'optional_ai_enhancement',
         offlineCapable: true
       });
     } catch (error) {
       res.status(500).json({ error: 'Failed to get complete independence status' });
+    }
+  });
+
+  // Hybrid AI Configuration
+  app.get('/api/hybrid/status', (req, res) => {
+    try {
+      const status = hybridAI.getSystemStatus();
+      res.json(status);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get hybrid status' });
+    }
+  });
+
+  app.post('/api/hybrid/config', (req, res) => {
+    try {
+      const { useAI, fallbackToIndependent, aiProvider } = req.body;
+      
+      hybridAI.updateConfig({
+        useAI: useAI !== undefined ? useAI : true,
+        fallbackToIndependent: fallbackToIndependent !== undefined ? fallbackToIndependent : true,
+        aiProvider: aiProvider || 'openai'
+      });
+      
+      res.json({ 
+        success: true, 
+        message: 'Hybrid AI configuration updated',
+        status: hybridAI.getSystemStatus()
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update hybrid config' });
+    }
+  });
+
+  // Enhanced AI-powered endpoints (when AI is available)
+  app.post('/api/hybrid/video-analysis', async (req, res) => {
+    try {
+      const { stationTitle, stationCategory, learningObjectives = [], recordingDuration = 480, useAI = true } = req.body;
+      
+      const analysis = await hybridAI.analyzeVideo(
+        stationTitle || 'Clinical Station',
+        stationCategory || 'General',
+        learningObjectives,
+        recordingDuration,
+        useAI
+      );
+      
+      res.json({
+        ...analysis,
+        method: hybridAI.getSystemStatus().aiAvailable && useAI ? 'ai_enhanced' : 'independent_structured',
+        fallbackUsed: !hybridAI.getSystemStatus().aiAvailable && useAI
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to analyze video' });
+    }
+  });
+
+  app.post('/api/hybrid/feedback', async (req, res) => {
+    try {
+      const { topic, userResponse, useAI = true } = req.body;
+      
+      const feedback = await hybridAI.generateFeedback(
+        topic || 'medical scenario', 
+        userResponse || '',
+        useAI
+      );
+      
+      res.json({
+        feedback,
+        method: hybridAI.getSystemStatus().aiAvailable && useAI ? 'ai_enhanced' : 'template_based',
+        fallbackUsed: !hybridAI.getSystemStatus().aiAvailable && useAI
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to generate feedback' });
     }
   });
 
