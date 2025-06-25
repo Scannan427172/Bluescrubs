@@ -26,17 +26,17 @@ export default function AdaptiveLearning() {
           <div className="flex items-center justify-center mb-4">
             <Brain className="h-16 w-16 text-primary mr-4" />
             <div className="text-left">
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <h1 className="text-5xl font-bold text-black">
                 Adaptive AI Learning
               </h1>
-              <p className="text-xl text-muted-foreground mt-2">
+              <p className="text-xl text-black mt-2">
                 Intelligence that evolves with your learning
               </p>
             </div>
           </div>
           
           <div className="max-w-3xl mx-auto mb-8">
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg text-black leading-relaxed">
               Experience the next generation of medical education with AI that understands your learning patterns, 
               identifies weaknesses in real-time, and adapts question difficulty to maximize your progress.
             </p>

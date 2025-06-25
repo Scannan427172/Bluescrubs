@@ -124,11 +124,11 @@ export function AdaptiveLearningDashboard({ userId }: AdaptiveDashboardProps) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4 flex items-center gap-2">
+        <h1 className="text-4xl font-bold mb-4 flex items-center gap-2 text-black">
           <Brain className="h-8 w-8 text-primary" />
           Adaptive Learning Dashboard
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-lg text-black">
           Intelligent learning system that adapts to your performance patterns
         </p>
       </div>
@@ -148,18 +148,18 @@ export function AdaptiveLearningDashboard({ userId }: AdaptiveDashboardProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div className="text-center">
                 <Target className="h-8 w-8 mx-auto mb-2 text-blue-500" />
-                <h3 className="font-semibold">Adaptive Questions</h3>
-                <p className="text-sm text-muted-foreground">Difficulty adjusts to your performance</p>
+                <h3 className="font-semibold text-black">Adaptive Questions</h3>
+                <p className="text-sm text-black">Difficulty adjusts to your performance</p>
               </div>
               <div className="text-center">
                 <AlertTriangle className="h-8 w-8 mx-auto mb-2 text-orange-500" />
-                <h3 className="font-semibold">Weakness Detection</h3>
-                <p className="text-sm text-muted-foreground">Real-time identification of knowledge gaps</p>
+                <h3 className="font-semibold text-black">Weakness Detection</h3>
+                <p className="text-sm text-black">Real-time identification of knowledge gaps</p>
               </div>
               <div className="text-center">
                 <TrendingUp className="h-8 w-8 mx-auto mb-2 text-green-500" />
-                <h3 className="font-semibold">Performance Prediction</h3>
-                <p className="text-sm text-muted-foreground">ML-powered exam success forecasting</p>
+                <h3 className="font-semibold text-black">Performance Prediction</h3>
+                <p className="text-sm text-black">ML-powered exam success forecasting</p>
               </div>
             </div>
             
