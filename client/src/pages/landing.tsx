@@ -252,14 +252,14 @@ export default function Landing() {
               
               <div className="space-y-4 mb-8">
                 {[
-                  "Unlimited video consultations",
-                  "AI essay marking & feedback",
-                  "VR clinical scenario access",
-                  "All certification pathways",
-                  "Expert tutor marketplace",
-                  "35-language content library",
-                  "Advanced analytics & insights",
-                  "Priority customer support"
+                  "5,528+ authentic medical stations",
+                  "Complete AI independence option",
+                  "39-language translation system",
+                  "Global exam preparation",
+                  "Hybrid AI enhancement",
+                  "Unlimited offline usage",
+                  "Professional medical accuracy",
+                  "Zero external dependencies"
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center">
                     <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" style={{ color: '#ffffff' }} />
@@ -319,29 +319,29 @@ export default function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                category: "AI Learning Systems",
-                icon: Brain,
-                color: "from-blue-500 to-cyan-500",
+                category: "Independent Content System",
+                icon: Shield,
+                color: "from-green-500 to-emerald-500",
                 features: [
-                  "Weakness prediction 2-3 weeks early",
-                  "Success probability calculator",
-                  "Adaptive difficulty adjustment",
-                  "Contextual hint system",
-                  "Personalized study sequences",
-                  "AI-powered question generation"
+                  "5,528 authentic medical stations",
+                  "Zero AI dependency for questions",
+                  "39 language translation support",
+                  "Complete offline capability",
+                  "Professional medical accuracy",
+                  "Template-based generation"
                 ]
               },
               {
-                category: "Video & Interactive Training",
-                icon: Video,
+                category: "Hybrid AI Enhancement",
+                icon: Zap,
                 color: "from-purple-500 to-pink-500",
                 features: [
-                  "Video-based OSCE practice",
-                  "Interactive patient scenarios",
-                  "Clinical environment simulations",
-                  "Recorded session analysis",
-                  "Performance feedback system",
-                  "Adaptive learning pathways"
+                  "Optional AI video analysis",
+                  "Enhanced feedback generation",
+                  "Independent fallback systems",
+                  "Configurable AI providers",
+                  "Always-functional offline mode",
+                  "Smart hybrid capabilities"
                 ]
               },
               {
