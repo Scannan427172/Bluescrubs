@@ -216,6 +216,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: DIFFICULTY SYSTEM STANDARDIZATION - Consolidated all difficulty levels to 3 consistent levels: Basic, Intermediate, Advanced across adaptive learning, question generation, and UI components
 - June 25, 2025: PLAB DIFFICULTY ALIGNMENT - Updated Advanced level to represent official PLAB exam standard with appropriate labeling and blue color coding
 - June 25, 2025: MOBILE NAVIGATION ENHANCEMENT - Added sticky bottom navigation with Next/Previous buttons for mobile devices, hidden desktop top navigation on mobile for cleaner interface
+- June 25, 2025: GUIDELINE TITLE CLEANUP - Removed "(250-word Summary)" text from all clinical guideline summaries for cleaner presentation
 
 # User Preferences
 
