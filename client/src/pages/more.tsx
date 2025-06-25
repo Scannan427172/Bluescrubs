@@ -464,7 +464,7 @@ link: "/ask-ai"
                   
                   <div className="bg-white/50 p-3 rounded-lg">
                     <h4 className="font-semibold text-blue-900 mb-2">Qualifications</h4>
-                    <p className="text-gray-700">BA Hons, Dip, CADE</p>
+                    <p className="text-gray-700">BA Hons Dip CSD</p>
                   </div>
                   
                   <div className="bg-white/50 p-3 rounded-lg">
