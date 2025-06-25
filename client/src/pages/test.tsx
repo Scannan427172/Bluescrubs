@@ -68,7 +68,7 @@ export default function Test() {
 
   // Test Categories and Filtering
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string>("mixed");
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string>("basic");
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
 
   // Practice Mode Selection
@@ -105,11 +105,9 @@ export default function Test() {
   ];
 
   const difficultyLevels = [
-    { id: "mixed", name: "Mixed Difficulty", description: "Balanced mix of question levels" },
     { id: "basic", name: "Basic Level", description: "Foundation knowledge questions" },
     { id: "intermediate", name: "Intermediate", description: "Standard PLAB 1 level" },
-    { id: "advanced", name: "Advanced", description: "Complex clinical scenarios" },
-    { id: "exam-style", name: "Exam Style", description: "Authentic PLAB 1 format" }
+    { id: "advanced", name: "Advanced", description: "Complex clinical scenarios" }
   ];
 
   // Language definitions

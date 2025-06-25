@@ -167,7 +167,7 @@ export default function PersonalisedPaths() {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner':
+      case 'Basic':
         return 'bg-green-100 text-green-800';
       case 'Intermediate':
         return 'bg-yellow-100 text-yellow-800';

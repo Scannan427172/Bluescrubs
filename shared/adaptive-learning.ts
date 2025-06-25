@@ -4,7 +4,7 @@
 export interface UserPerformance {
   userId: number;
   topic: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: 'basic' | 'intermediate' | 'advanced';
   totalAttempts: number;
   correctAnswers: number;
   averageTime: number;
@@ -13,7 +13,7 @@ export interface UserPerformance {
 }
 
 export interface AdaptiveRecommendation {
-  nextDifficulty: 'easy' | 'medium' | 'hard';
+  nextDifficulty: 'basic' | 'intermediate' | 'advanced';
   focusTopics: string[];
   confidenceScore: number;
   recommendedQuestions: number;
@@ -27,24 +27,24 @@ export class AdaptiveLearningEngine {
   /**
    * Analyzes user performance to determine next optimal difficulty
    */
-  static getNextDifficulty(performance: UserPerformance[]): 'easy' | 'medium' | 'hard' {
-    if (performance.length === 0) return 'easy';
+  static getNextDifficulty(performance: UserPerformance[]): 'basic' | 'intermediate' | 'advanced' {
+    if (performance.length === 0) return 'basic';
 
     const recentPerformance = performance
       .filter(p => p.totalAttempts >= this.MIN_ATTEMPTS)
       .sort((a, b) => b.lastAttempt.getTime() - a.lastAttempt.getTime())
       .slice(0, 10); // Last 10 topics
 
-    if (recentPerformance.length === 0) return 'easy';
+    if (recentPerformance.length === 0) return 'basic';
 
     const avgAccuracy = recentPerformance.reduce((sum, p) => sum + p.accuracy, 0) / recentPerformance.length;
 
     if (avgAccuracy >= this.MASTERY_THRESHOLD) {
-      return 'hard';
+      return 'advanced';
     } else if (avgAccuracy >= this.WEAKNESS_THRESHOLD) {
-      return 'medium';
+      return 'intermediate';
     } else {
-      return 'easy';
+      return 'basic';
     }
   }
 
@@ -133,7 +133,7 @@ export class AdaptiveLearningEngine {
     existing: UserPerformance[],
     userId: number,
     topic: string,
-    difficulty: 'easy' | 'medium' | 'hard',
+    difficulty: 'basic' | 'intermediate' | 'advanced',
     isCorrect: boolean,
     timeSpent: number
   ): UserPerformance[] {

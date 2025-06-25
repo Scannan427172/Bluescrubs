@@ -129,7 +129,7 @@ export const GMC_CATEGORIES_DISTRIBUTION = {
 } as const;
 
 export function getQuestionsByCategory(category: GMCCategory): GMCQuestion[] {
-  return Array.from({ length: 5 }, (_, i) => generateGMCQuestion(category, ['foundation', 'intermediate', 'advanced'][i % 3]));
+  return Array.from({ length: 5 }, (_, i) => generateGMCQuestion(category, ['basic', 'intermediate', 'advanced'][i % 3]));
 }
 
 export function getQuestionsByDifficulty(difficulty: string): GMCQuestion[] {
