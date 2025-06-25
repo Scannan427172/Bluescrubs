@@ -777,7 +777,7 @@ export default function Plab2Osce() {
 
           {/* Station Type Filters with 3D Anatomy */}
           <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-            <TabsList className="grid w-full grid-cols-4 md:grid-cols-8 gap-1">
+            <TabsList className="grid w-full grid-cols-4 md:grid-cols-7 gap-1">
               <TabsTrigger 
                 value="all" 
                 className={accommodations.largerButtons ? 'text-[10px] md:text-sm py-2 text-gray-700' : 'text-[9px] md:text-xs text-gray-700'}
@@ -820,89 +820,9 @@ export default function Plab2Osce() {
               >
                 Skills
               </TabsTrigger>
-              <TabsTrigger 
-                value="anatomy" 
-                className={accommodations.largerButtons ? 'text-[10px] md:text-sm py-2 text-red-600 font-semibold' : 'text-[9px] md:text-xs text-red-600 font-semibold'}
-              >
-                Anatomy
-              </TabsTrigger>
             </TabsList>
 
-          {/* Anatomy Viewer Tab */}
-          <TabsContent value="anatomy" className="mt-6">
-            <Card className="mb-6">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg md:text-xl text-gray-900 flex items-center gap-2 flex-wrap">
-                  <Heart className="w-5 h-5 md:w-6 md:h-6 text-red-600 flex-shrink-0" />
-                  <span className="leading-tight">Anatomography 3D Viewer</span>
-                </CardTitle>
-                <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                  Explore detailed 3D anatomy models with cross-sectional views for PLAB 2 preparation.
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-3 md:p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Brain className="w-4 h-4 md:w-5 md:h-5 text-blue-600 flex-shrink-0" />
-                    <h4 className="font-semibold text-blue-800 text-sm md:text-base">Usage Guide</h4>
-                  </div>
-                  <ul className="text-xs md:text-sm text-blue-700 space-y-1 list-disc pl-4">
-                    <li>Interact with 3D anatomical models</li>
-                    <li>View cross-sectional anatomy slices</li>
-                    <li>Explore detailed organ systems</li>
-                    <li>Access medical imaging references</li>
-                  </ul>
-                </div>
-                
-                {/* Anatomography 3D Viewer */}
-                <div className="w-full h-[400px] md:h-[600px] border border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg">
-                  <iframe
-                    src="https://lifesciencedb.jp/bp3d/"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    allowFullScreen
-                    title="Anatomography 3D Human Anatomy"
-                    className="w-full h-full"
-                  />
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
-                  <Card className="border-green-200 bg-green-50">
-                    <CardContent className="p-3 md:p-4 text-center">
-                      <Heart className="w-6 h-6 md:w-8 md:h-8 text-green-600 mx-auto mb-2" />
-                      <h4 className="font-semibold text-green-800 text-sm md:text-base mb-1">Cardiovascular</h4>
-                      <p className="text-xs text-green-700">Heart, vessels, circulation</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="border-blue-200 bg-blue-50">
-                    <CardContent className="p-3 md:p-4 text-center">
-                      <Brain className="w-6 h-6 md:w-8 md:h-8 text-blue-600 mx-auto mb-2" />
-                      <h4 className="font-semibold text-blue-800 text-sm md:text-base mb-1">Neurological</h4>
-                      <p className="text-xs text-blue-700">Brain, nerves, reflexes</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="border-purple-200 bg-purple-50">
-                    <CardContent className="p-3 md:p-4 text-center">
-                      <Stethoscope className="w-6 h-6 md:w-8 md:h-8 text-purple-600 mx-auto mb-2" />
-                      <h4 className="font-semibold text-purple-800 text-sm md:text-base mb-1">Respiratory</h4>
-                      <p className="text-xs text-purple-700">Lungs, airways, breathing</p>
-                    </CardContent>
-                  </Card>
 
-                  <Card className="border-orange-200 bg-orange-50">
-                    <CardContent className="p-3 md:p-4 text-center">
-                      <Activity className="w-6 h-6 md:w-8 md:h-8 text-orange-600 mx-auto mb-2" />
-                      <h4 className="font-semibold text-orange-800 text-sm md:text-base mb-1">Musculoskeletal</h4>
-                      <p className="text-xs text-orange-700">Bones, muscles, joints</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
 
           <TabsContent value={selectedType} className="mt-6">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
