@@ -49,7 +49,7 @@ export default function Landing() {
                   </div>
                 </h1>
                 
-                <p className="text-sm lg:text-base text-white/90 leading-relaxed max-w-xl">
+                <p className="text-xs lg:text-sm text-white/90 leading-relaxed max-w-lg">
                   The world's most comprehensive independent medical platform featuring{" "}
                   <span className="text-blue-400 font-semibold">5,528 authentic stations</span>,{" "}
                   <span className="text-purple-400 font-semibold">hybrid AI enhancement</span>, and{" "}
