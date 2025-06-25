@@ -486,6 +486,14 @@ link: "/ask-ai"
                   </div>
                   
                   <div className="bg-white/50 p-3 rounded-lg">
+                    <h4 className="font-semibold text-blue-900 mb-2">Awards & Recognition</h4>
+                    <ul className="text-gray-700 space-y-1">
+                      <li>• Coach of the Year 2012</li>
+                      <li>• Queens Award 2020</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-white/50 p-3 rounded-lg">
                     <h4 className="font-semibold text-blue-900 mb-2">Athletic Achievements</h4>
                     <ul className="text-gray-700 space-y-1">
                       <li>• Coached 2 European golf bronze medalists</li>
