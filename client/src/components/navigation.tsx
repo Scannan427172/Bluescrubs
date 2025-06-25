@@ -84,40 +84,50 @@ export function Navigation({ user }: NavigationProps) {
                     <Menu className="w-6 h-6 text-gray-700" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[280px] sm:w-[320px] h-full overflow-hidden">
+                <SheetContent side="right" className="w-[300px] sm:w-[340px] h-full overflow-hidden bg-white/95 backdrop-blur-xl border-l-0 shadow-2xl">
                   <div className="flex flex-col h-full">
-                    {/* Header */}
-                    <div className="flex items-center space-x-3 pb-6 border-b">
-                      <div className="w-8 h-8 bg-medical-blue rounded-lg flex items-center justify-center">
-                        <Stethoscope className="w-5 h-5 text-white" />
+                    {/* Header - iPhone Style */}
+                    <div className="flex items-center justify-between pb-6 pt-2 border-b border-gray-100">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                          <Stethoscope className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <span className="text-lg font-bold text-gray-900">BlueScrubsPrep</span>
+                          <p className="text-xs text-gray-500">Medical Education</p>
+                        </div>
                       </div>
-                      <span className="text-lg font-bold text-medical-blue">PLAB Master</span>
                     </div>
                     
-                    {/* Scrollable Navigation */}
-                    <div className="flex-1 overflow-y-auto py-6 space-y-2">
+                    {/* Scrollable Navigation - iPhone Style */}
+                    <div className="flex-1 overflow-y-auto py-4 space-y-1">
                       {navigation.map((item) => (
                         <Link
                           key={item.name}
                           href={item.href}
-                          className={`flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+                          className={`flex items-center space-x-4 p-4 mx-2 rounded-2xl transition-all duration-200 ${
                             item.current
-                              ? "bg-medical-blue text-white"
-                              : "text-gray-700 hover:bg-gray-100"
+                              ? "bg-blue-600 text-white shadow-lg shadow-blue-200 scale-[0.98]"
+                              : "text-gray-700 hover:bg-gray-100/80 active:scale-[0.96]"
                           }`}
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          <item.icon className="w-5 h-5" />
-                          <span className="font-medium text-sm">{item.name}</span>
+                          <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
+                            item.current ? "bg-white/20" : "bg-gray-100"
+                          }`}>
+                            <item.icon className={`w-5 h-5 ${item.current ? "text-white" : "text-gray-600"}`} />
+                          </div>
+                          <span className="font-medium text-base">{item.name}</span>
                         </Link>
                       ))}
                     </div>
                     
-                    {/* Footer */}
-                    <div className="pt-4 border-t">
-                      <div className="text-center text-xs text-gray-500">
-                        <p>All 12 unique features available</p>
-                        <p className="mt-1">Comprehensive PLAB preparation</p>
+                    {/* Footer - iPhone Style */}
+                    <div className="pt-4 pb-2 px-2">
+                      <div className="bg-gray-50/80 rounded-2xl p-4 text-center">
+                        <p className="text-sm font-medium text-gray-700">Premium Features</p>
+                        <p className="text-xs text-gray-500 mt-1">5,528 authentic medical stations</p>
+                        <p className="text-xs text-gray-500">39 language support</p>
                       </div>
                     </div>
                   </div>
@@ -128,69 +138,71 @@ export function Navigation({ user }: NavigationProps) {
         </div>
       </nav>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
-        <div className="grid grid-cols-5 gap-1">
-          {/* Essential Navigation Items */}
-          <Link
-            href="/dashboard"
-            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/dashboard"
-                ? "text-medical-blue bg-blue-50"
-                : "text-gray-400"
-            }`}
-          >
-            <Home className="w-5 h-5 mb-1" />
-            <span className="text-xs font-medium">Dashboard</span>
-          </Link>
+      {/* Mobile Bottom Navigation - iPhone Style */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200/50 md:hidden z-40 shadow-lg">
+        <div className="safe-area-pb">
+          <div className="grid grid-cols-5 gap-0 px-2 py-2">
+            {/* Essential Navigation Items */}
+            <Link
+              href="/dashboard"
+              className={`flex flex-col items-center justify-center py-2 px-2 rounded-xl transition-all duration-200 ${
+                location === "/dashboard"
+                  ? "text-blue-600 bg-blue-100/80 scale-105"
+                  : "text-gray-500 hover:text-gray-700 active:scale-95"
+              }`}
+            >
+              <Home className={`w-6 h-6 mb-1 ${location === "/dashboard" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">Home</span>
+            </Link>
 
-          <Link
-            href="/plab1-new"
-            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/plab1-new"
-                ? "text-medical-blue bg-blue-50"
-                : "text-gray-400"
-            }`}
-          >
-            <BookOpen className="w-5 h-5 mb-1" />
-            <span className="text-xs font-medium">PLAB 1</span>
-          </Link>
+            <Link
+              href="/plab1-new"
+              className={`flex flex-col items-center justify-center py-2 px-2 rounded-xl transition-all duration-200 ${
+                location === "/plab1-new"
+                  ? "text-blue-600 bg-blue-100/80 scale-105"
+                  : "text-gray-500 hover:text-gray-700 active:scale-95"
+              }`}
+            >
+              <BookOpen className={`w-6 h-6 mb-1 ${location === "/plab1-new" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">PLAB 1</span>
+            </Link>
 
-          <Link
-            href="/plab2-osce"
-            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/plab2-osce"
-                ? "text-medical-blue bg-blue-50"
-                : "text-gray-400"
-            }`}
-          >
-            <GraduationCap className="w-5 h-5 mb-1" />
-            <span className="text-xs font-medium">PLAB 2</span>
-          </Link>
+            <Link
+              href="/plab2-osce"
+              className={`flex flex-col items-center justify-center py-2 px-2 rounded-xl transition-all duration-200 ${
+                location === "/plab2-osce"
+                  ? "text-blue-600 bg-blue-100/80 scale-105"
+                  : "text-gray-500 hover:text-gray-700 active:scale-95"
+              }`}
+            >
+              <Video className={`w-6 h-6 mb-1 ${location === "/plab2-osce" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">PLAB 2</span>
+            </Link>
 
-          <Link
-            href="/adaptive-learning"
-            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/adaptive-learning"
-                ? "text-medical-blue bg-blue-50"
-                : "text-gray-400"
-            }`}
-          >
-            <Zap className="w-5 h-5 mb-1" />
-            <span className="text-xs font-medium">Adaptive AI</span>
-          </Link>
+            <Link
+              href="/adaptive-learning"
+              className={`flex flex-col items-center justify-center py-2 px-2 rounded-xl transition-all duration-200 ${
+                location === "/adaptive-learning"
+                  ? "text-blue-600 bg-blue-100/80 scale-105"
+                  : "text-gray-500 hover:text-gray-700 active:scale-95"
+              }`}
+            >
+              <Brain className={`w-6 h-6 mb-1 ${location === "/adaptive-learning" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">AI Learn</span>
+            </Link>
 
-          <Link
-            href="/more"
-            className={`flex flex-col items-center justify-center py-2 px-1 transition-colors ${
-              location === "/more"
-                ? "text-medical-blue bg-blue-50"
-                : "text-gray-400"
-            }`}
-          >
-            <MoreHorizontal className="w-5 h-5 mb-1" />
-            <span className="text-xs font-medium">More</span>
-          </Link>
+            <Link
+              href="/analytics"
+              className={`flex flex-col items-center justify-center py-2 px-2 rounded-xl transition-all duration-200 ${
+                location === "/analytics"
+                  ? "text-blue-600 bg-blue-100/80 scale-105"
+                  : "text-gray-500 hover:text-gray-700 active:scale-95"
+              }`}
+            >
+              <BarChart3 className={`w-6 h-6 mb-1 ${location === "/analytics" ? "scale-110" : ""}`} />
+              <span className="text-xs font-medium">Stats</span>
+            </Link>
+          </div>
         </div>
       </nav>
     </>
