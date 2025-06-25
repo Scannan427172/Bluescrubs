@@ -15,6 +15,7 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { EXPANDED_PLAB2_STATIONS, EXPANDED_STATION_STATS, EnhancedOSCEStation } from "@shared/expanded-plab2-stations";
 import plab2BgImage from '@assets/6675ABC6-B1E7-4E4C-92C4-D90C32FA1CB4_1750366172462.png';
+import AnatomyViewer3D from '@/components/anatomy-viewer-3d';
 
 // Define station types for filtering
 const OSCE_STATION_TYPES = [
@@ -90,6 +91,10 @@ export default function Plab2Osce() {
   const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
   const [tutorInput, setTutorInput] = useState('');
   const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
+
+  // 3D Anatomy Viewer state
+  const [showAnatomyViewer, setShowAnatomyViewer] = useState(false);
+  const [isAnatomyFullscreen, setIsAnatomyFullscreen] = useState(false);
 
   // Load neurodiversity settings from localStorage
   useEffect(() => {
@@ -777,7 +782,7 @@ export default function Plab2Osce() {
 
           {/* Station Type Filters with 3D Anatomy */}
           <Tabs value={selectedType} onValueChange={setSelectedType} className="w-full">
-            <TabsList className="grid w-full grid-cols-4 md:grid-cols-7 gap-1">
+            <TabsList className="grid w-full grid-cols-4 md:grid-cols-8 gap-1">
               <TabsTrigger 
                 value="all" 
                 className={accommodations.largerButtons ? 'text-[10px] md:text-sm py-2 text-gray-700' : 'text-[9px] md:text-xs text-gray-700'}
@@ -820,9 +825,73 @@ export default function Plab2Osce() {
               >
                 Skills
               </TabsTrigger>
+              <TabsTrigger 
+                value="anatomy" 
+                className={accommodations.largerButtons ? 'text-[10px] md:text-sm py-2 text-blue-700' : 'text-[9px] md:text-xs text-blue-700'}
+              >
+                3D Anatomy
+              </TabsTrigger>
             </TabsList>
 
 
+
+          {/* 3D Anatomy Viewer Tab */}
+          <TabsContent value="anatomy" className="mt-6">
+            <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                      <Activity className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl text-blue-900">Interactive 3D Human Anatomy</CardTitle>
+                      <p className="text-blue-700 text-sm">Explore body systems for PLAB 2 clinical examination practice</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={() => setIsAnatomyFullscreen(true)}
+                      variant="outline"
+                      size="sm"
+                      className="flex items-center gap-2"
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                      Fullscreen
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="h-96 rounded-lg overflow-hidden bg-gray-900">
+                  <AnatomyViewer3D />
+                </div>
+                <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div className="p-3 bg-white rounded-lg border border-blue-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Heart className="w-4 h-4 text-red-500" />
+                      <span className="font-semibold text-gray-900">Clinical Applications</span>
+                    </div>
+                    <p className="text-gray-600">Perfect for OSCE examination practice and anatomical reference during clinical scenarios</p>
+                  </div>
+                  <div className="p-3 bg-white rounded-lg border border-blue-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Brain className="w-4 h-4 text-purple-500" />
+                      <span className="font-semibold text-gray-900">Interactive Learning</span>
+                    </div>
+                    <p className="text-gray-600">Click on organs to see detailed clinical notes and PLAB-relevant examination points</p>
+                  </div>
+                  <div className="p-3 bg-white rounded-lg border border-blue-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Activity className="w-4 h-4 text-blue-500" />
+                      <span className="font-semibold text-gray-900">6 Body Systems</span>
+                    </div>
+                    <p className="text-gray-600">Cardiovascular, respiratory, nervous, digestive, urinary, and musculoskeletal systems</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
 
           <TabsContent value={selectedType} className="mt-6">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -1101,6 +1170,32 @@ function OSCEStationView({
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Fullscreen 3D Anatomy Viewer Modal */}
+      {isAnatomyFullscreen && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-95 flex items-center justify-center">
+          <div className="w-full h-full relative">
+            <div className="absolute top-4 right-4 z-10">
+              <Button
+                onClick={() => setIsAnatomyFullscreen(false)}
+                variant="outline"
+                size="sm"
+                className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="absolute top-4 left-4 z-10">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 text-white">
+                <span className="text-sm font-medium">3D Human Anatomy - Fullscreen Mode</span>
+              </div>
+            </div>
+            <div className="w-full h-full">
+              <AnatomyViewer3D />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
