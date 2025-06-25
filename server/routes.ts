@@ -778,14 +778,14 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
         // Apply filters if provided
         if (type && type !== 'all') {
           filteredStations = filteredStations.filter(station => 
-            station.stationType?.toLowerCase().includes(type.toString().toLowerCase()) ||
-            station.title?.toLowerCase().includes(type.toString().toLowerCase())
+            station.station_type?.toLowerCase().includes(type.toString().toLowerCase()) ||
+            station.scenario_title?.toLowerCase().includes(type.toString().toLowerCase())
           );
         }
         
         if (specialty && specialty !== 'all') {
           filteredStations = filteredStations.filter(station => 
-            station.specialty?.toLowerCase().includes(specialty.toString().toLowerCase())
+            station.station_type?.toLowerCase().includes(specialty.toString().toLowerCase())
           );
         }
         
@@ -800,28 +800,33 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
         const limitedStations = filteredStations.slice(0, limit);
         
         // Transform to match expected format
-        const transformedStations = limitedStations.map(station => ({
-          id: station.id,
-          title: station.scenarioTitle || station.title,
-          category: station.specialty || 'General Medicine',
+        const transformedStations = limitedStations.map((station, index) => ({
+          id: `station_${index + 1}`,
+          title: station.scenario_title || station.title || 'Clinical Station',
+          category: station.station_type || 'General Medicine',
           difficulty: station.difficulty || 'intermediate',
           duration: station.duration || 8,
-          description: station.briefDescription || '',
-          scenario: station.detailedScenario || station.scenario || '',
+          description: station.brief || '',
+          scenario: station.detailed_scenario || station.scenario || station.brief || '',
           instructions: {
-            candidate: station.candidateInstructions || '',
-            examiner: station.examinerInstructions || '',
-            standardizedPatient: station.actorScript || ''
+            candidate: station.candidate_instructions || 'Take appropriate history, examination, or explanation as indicated',
+            examiner: station.examiner_instructions || 'Assess candidate performance according to marking scheme',
+            standardizedPatient: typeof station.actor_script === 'object' ? 
+              `Opening: ${station.actor_script.opening || ''}\nDetails: ${station.actor_script.details || ''}\nHidden Info: ${station.actor_script.hidden_info || ''}` :
+              station.actor_script || ''
           },
-          markingCriteria: station.markScheme ? [{
+          markingCriteria: station.mark_scheme ? [{
             category: "Overall Performance",
             maxMarks: 20,
-            criteria: Array.isArray(station.markScheme) ? station.markScheme : [station.markScheme]
+            criteria: Array.isArray(station.mark_scheme) ? station.mark_scheme : [station.mark_scheme]
           }] : [],
-          keyActions: station.keyLearningPoints || [],
-          redFlags: station.redFlags || [],
+          keyActions: station.key_learning_points || station.mark_scheme || [],
+          redFlags: station.red_flags || [],
           medications: station.medications || [],
-          references: station.clinicalGuidelines || [],
+          references: station.guideline_links ? Object.entries(station.guideline_links).map(([title, url]) => ({
+            title,
+            url: url as string
+          })) : [],
           completed: false,
           attempts: 0,
           bestScore: 0,
