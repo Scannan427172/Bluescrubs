@@ -8,7 +8,7 @@ export interface GeneratedQuestion {
   category: string;
   subcategory: string;
   cognitiveLevel: 'knowledge' | 'application' | 'problem-solving';
-  difficulty: 'foundation' | 'intermediate' | 'advanced';
+  difficulty: 'basic' | 'intermediate' | 'advanced';
   clinicalSetting: string;
   ageGroup: string;
   stem: string;
@@ -25,7 +25,7 @@ export interface GeneratedQuestion {
 export async function generateMedicalQuestion(
   category: string,
   subcategory: string,
-  difficulty: 'foundation' | 'intermediate' | 'advanced'
+  difficulty: 'basic' | 'intermediate' | 'advanced'
 ): Promise<GeneratedQuestion> {
   const prompt = `Create a medical MCQ for ${category} (${subcategory}, ${difficulty} level).
 
@@ -106,7 +106,7 @@ Make it realistic, evidence-based, and concise.`;
 export async function generateMultipleQuestions(
   category: string,
   subcategories: string[],
-  difficulty: 'foundation' | 'intermediate' | 'advanced',
+  difficulty: 'basic' | 'intermediate' | 'advanced',
   count: number
 ): Promise<GeneratedQuestion[]> {
   console.log(`Starting parallel generation of ${count} questions for ${category}`);

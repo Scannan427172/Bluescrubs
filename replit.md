@@ -213,6 +213,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: HERO LAYOUT RESTRUCTURE - Moved badge above main title, repositioned elements for optimal video visibility - badge and title at top, large open middle space, subtext and button at bottom
 - June 25, 2025: HERO REFINEMENTS - Removed bouncing scroll arrow, adjusted heading size for optimal balance, fine-tuned spacing to maximize video visibility while maintaining readability
 - June 25, 2025: HEADING SIZE OPTIMIZATION - Set heading to medium-large size (text-4xl lg:text-6xl xl:text-7xl) for perfect balance between visual impact and video showcase
+- June 25, 2025: DIFFICULTY SYSTEM STANDARDIZATION - Consolidated all difficulty levels to 3 consistent levels: Basic, Intermediate, Advanced across adaptive learning, question generation, and UI components
 
 # User Preferences
 
