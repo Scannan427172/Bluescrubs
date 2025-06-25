@@ -18,14 +18,14 @@ export function Navigation({ user }: NavigationProps) {
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: Home, current: location === "/dashboard" },
     { name: "PLAB 1", href: "/plab1-new", icon: BookOpen, current: location === "/plab1-new" },
-    { name: "Leaderboards", href: "/leaderboard", icon: Trophy, current: location === "/leaderboard" },
-    { name: "Analytics", href: "/analytics", icon: BarChart3, current: location === "/analytics" },
-    { name: "Spaced Learning", href: "/spaced-repetition", icon: Brain, current: location === "/spaced-repetition" },
     { name: "PLAB 2", href: "/plab2-osce", icon: Video, current: location === "/plab2-osce" },
+    { name: "Analytics", href: "/analytics", icon: BarChart3, current: location === "/analytics" },
+    { name: "Adaptive AI", href: "/adaptive-learning", icon: Zap, current: location === "/adaptive-learning" },
+    { name: "Leaderboards", href: "/leaderboard", icon: Trophy, current: location === "/leaderboard" },
+    { name: "Spaced Learning", href: "/spaced-repetition", icon: Brain, current: location === "/spaced-repetition" },
     { name: "Placements", href: "/placements", icon: Building, current: location === "/placements" },
     { name: "Clinical Guides", href: "/clinical-guides", icon: FileText, current: location === "/clinical-guides" },
     { name: "AI Study Tools", href: "/ai-study-tools", icon: Brain, current: location === "/ai-study-tools" },
-    { name: "Adaptive AI", href: "/adaptive-learning", icon: Zap, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },
     { name: "Community", href: "/community", icon: Users, current: location === "/community" },
     { name: "NHS Prep", href: "/nhs-prep", icon: GraduationCap, current: location === "/nhs-prep" },
@@ -47,13 +47,13 @@ export function Navigation({ user }: NavigationProps) {
               </Link>
             </div>
             
-            {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center space-x-2 lg:space-x-3 xl:space-x-4 2xl:space-x-6 overflow-x-auto">
-              {navigation.slice(0, 9).map((item) => (
+            {/* Desktop Navigation Links - Reduced for landscape mobile */}
+            <div className="hidden md:flex items-center space-x-1 lg:space-x-2 xl:space-x-3 2xl:space-x-4 overflow-x-auto">
+              {navigation.slice(0, 5).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`font-medium transition-colors text-sm whitespace-nowrap px-3 py-2 rounded-md ${
+                  className={`font-medium transition-colors text-xs lg:text-sm whitespace-nowrap px-2 lg:px-3 py-2 rounded-md ${
                     item.current
                       ? "text-blue-600 bg-blue-50 border border-blue-200"
                       : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
@@ -64,29 +64,13 @@ export function Navigation({ user }: NavigationProps) {
               ))}
             </div>
 
-            {/* Right Side */}
-            <div className="flex items-center space-x-2 lg:space-x-4">
-              {/* Notifications */}
-              <Button variant="ghost" size="sm" className="relative">
+            {/* Right Side - Simplified */}
+            <div className="flex items-center space-x-2">
+              {/* Notifications - Hidden on small screens */}
+              <Button variant="ghost" size="sm" className="relative hidden lg:flex">
                 <Bell className="w-5 h-5 text-gray-600 hover:text-medical-blue" />
                 <Badge className="absolute -top-1 -right-1 w-3 h-3 p-0 bg-deep-rose" />
               </Button>
-
-              {/* User Profile */}
-              {user && (
-                <div className="flex items-center space-x-3">
-                  <Avatar className="w-8 h-8">
-                    <AvatarImage src="" alt={user.username} />
-                    <AvatarFallback className="bg-medical-blue text-white text-sm">
-                      {user.username.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="hidden sm:block">
-                    <div className="text-sm font-medium text-gray-900">{user.username}</div>
-                    <div className="text-xs text-gray-500">{user.studyStreak} day streak 🔥</div>
-                  </div>
-                </div>
-              )}
 
               {/* Mobile Menu Trigger */}
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
