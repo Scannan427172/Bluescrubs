@@ -126,7 +126,7 @@ export default function Premium() {
       reviews: 94,
       rate: "£75/hour",
       languages: ["English", "Arabic", "Urdu"],
-      image: "/api/placeholder/150/150"
+      image: "https://images.unsplash.com/photo-1594824804732-ca8db76fb37d?w=150&h=150&fit=crop&crop=face"
     },
     {
       name: "Dr. Rajesh Patel",
@@ -136,7 +136,7 @@ export default function Premium() {
       reviews: 203,
       rate: "£90/hour",
       languages: ["English", "Hindi", "Gujarati"],
-      image: "/api/placeholder/150/150"
+      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&h=150&fit=crop&crop=face"
     }
   ];
 
