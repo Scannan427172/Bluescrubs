@@ -233,6 +233,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: OPTION LETTER CIRCLES REDESIGN - Changed all option letter circles (A, B, C, D, E) from red background with white text to black outline with white interior and black text across all MCQ interfaces for improved readability and professional appearance
 - June 25, 2025: NICE NG136 CLINICAL GUIDE INTEGRATION - Added floating green button providing comprehensive NICE NG136 + PLAB MCQ format overlay with clinical scenario framework, risk assessment tools, memory aids, and structured learning approach positioned between AI Medical Tutor and Memory Aid sections
 - June 25, 2025: CATEGORY SECTION CLEANUP - Removed all question count numbers from medical specialty categories across all pages for cleaner interface presentation, updated both PLAB 1 and test page category displays
+- June 25, 2025: NICE NG136 GUIDE ENHANCEMENT - Added complete interactive overlay with clinical framework, risk assessment tools, memory aids, and decision points with black text for maximum readability on mobile devices
 
 # User Preferences
 

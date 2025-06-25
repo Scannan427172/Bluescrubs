@@ -1852,8 +1852,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                 
                 <div className="space-y-8">
                   <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
-                    <h3 className="text-xl font-bold text-green-900 mb-3">Clinical Scenario Framework</h3>
-                    <p className="text-lg text-green-800 leading-relaxed">
+                    <h3 className="text-xl font-bold text-black mb-3">Clinical Scenario Framework</h3>
+                    <p className="text-lg text-black leading-relaxed">
                       NICE NG136 provides evidence-based guidance for urinary tract infections in adults. 
                       This framework helps structure clinical decision-making for PLAB examination scenarios.
                     </p>
@@ -1882,8 +1882,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   </div>
 
                   <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-lg">
-                    <h4 className="text-xl font-bold text-yellow-900 mb-4">Memory Aids for PLAB</h4>
-                    <div className="space-y-3 text-lg text-yellow-800">
+                    <h4 className="text-xl font-bold text-black mb-4">Memory Aids for PLAB</h4>
+                    <div className="space-y-3 text-lg text-black">
                       <p><strong>NICE UTI:</strong> Nitrites, Increased frequency, Cloudy urine, Erythrocytes (blood)</p>
                       <p><strong>First-line antibiotics:</strong> Nitrofurantoin, Trimethoprim, Pivmecillinam</p>
                       <p><strong>Red flags:</strong> Fever, Flank pain, Rigors, Elderly confusion</p>
@@ -1891,19 +1891,19 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   </div>
 
                   <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                    <h4 className="text-xl font-bold text-gray-900 mb-4">Clinical Decision Points</h4>
+                    <h4 className="text-xl font-bold text-black mb-4">Clinical Decision Points</h4>
                     <div className="grid md:grid-cols-3 gap-6">
                       <div className="bg-white p-4 rounded-lg border border-gray-300">
-                        <h5 className="text-lg font-bold text-gray-800 mb-2">Uncomplicated UTI</h5>
-                        <p className="text-base text-gray-700">Non-pregnant women, no comorbidities</p>
+                        <h5 className="text-lg font-bold text-black mb-2">Uncomplicated UTI</h5>
+                        <p className="text-base text-black">Non-pregnant women, no comorbidities</p>
                       </div>
                       <div className="bg-white p-4 rounded-lg border border-gray-300">
-                        <h5 className="text-lg font-bold text-gray-800 mb-2">Complicated UTI</h5>
-                        <p className="text-base text-gray-700">Men, pregnancy, immunocompromised</p>
+                        <h5 className="text-lg font-bold text-black mb-2">Complicated UTI</h5>
+                        <p className="text-base text-black">Men, pregnancy, immunocompromised</p>
                       </div>
                       <div className="bg-white p-4 rounded-lg border border-gray-300">
-                        <h5 className="text-lg font-bold text-gray-800 mb-2">Recurrent UTI</h5>
-                        <p className="text-base text-gray-700">≥3 episodes in 12 months</p>
+                        <h5 className="text-lg font-bold text-black mb-2">Recurrent UTI</h5>
+                        <p className="text-base text-black">≥3 episodes in 12 months</p>
                       </div>
                     </div>
                   </div>
