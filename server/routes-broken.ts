@@ -295,8 +295,8 @@ ${JSON.stringify({
     });
   });
 
-  // Ask NHS Prep AI endpoint - SUSPENDED
-  app.post("/api/ask-nhs-prep", async (req, res) => {
+  // Ask BlueScrubsPrep AI endpoint - SUSPENDED
+  app.post("/api/ask-blue-scrubs-prep", async (req, res) => {
     if (!isAIEnabled()) {
       return res.status(503).json({ 
         error: "AI services suspended", 
@@ -347,7 +347,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
         throw openaiError;
       }
     } catch (error: any) {
-      console.error('NHS Prep endpoint error:', error);
+      console.error('BlueScrubsPrep endpoint error:', error);
       
       // If it's an OpenAI quota error that wasn't caught above, handle it here
       if (error.status === 429 || error.code === 'insufficient_quota') {
@@ -379,7 +379,7 @@ To restore full AI functionality, contact support to update the OpenAI API key.`
         });
       }
       
-      res.status(500).json({ error: "Failed to process NHS Prep request" });
+      res.status(500).json({ error: "Failed to process BlueScrubsPrep request" });
     }
   });
 

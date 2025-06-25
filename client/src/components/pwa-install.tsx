@@ -61,7 +61,7 @@ export function PWAInstallPrompt() {
     <Card className="fixed bottom-4 right-4 z-50 w-80 shadow-lg">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg">Install NHS Prep</CardTitle>
+          <CardTitle className="text-lg">Install BlueScrubsPrep</CardTitle>
           <Button variant="ghost" size="sm" onClick={handleDismiss}>
             <X className="h-4 w-4" />
           </Button>

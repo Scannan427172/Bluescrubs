@@ -99,7 +99,7 @@ export default function Landing() {
 
 
 
-      {/* Why We're Different Section - Core NHSprep Features */}
+      {/* Why We're Different Section - Core BlueScrubsPrep Features */}
       <div className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 sm:mb-16">
@@ -196,10 +196,10 @@ export default function Landing() {
           {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Choose <span className="text-blue-600">NHSprep</span>
+              Why Choose <span className="text-blue-600">BlueScrubsPrep</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover the unique advantages that make NHSprep the most comprehensive PLAB preparation platform
+              Discover the unique advantages that make BlueScrubsPrep the most comprehensive PLAB preparation platform
             </p>
           </div>
 
@@ -451,7 +451,7 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* NHSprep+ Global Expansion Section */}
+      {/* BlueScrubsPrep+ Global Expansion Section */}
       <div className="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -461,11 +461,11 @@ export default function Landing() {
             </div>
             
             <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
-              <span className="text-white">Beyond</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">NHSprep</span>
+              <span className="text-white">Beyond</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">BlueScrubsPrep</span>
             </h2>
             
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Introducing <span className="font-bold">NHSprep+</span> - Your gateway to medical careers across 6 countries with support for 15+ international medical exams
+              Introducing <span className="font-bold">BlueScrubsPrep+</span> - Your gateway to medical careers across 6 countries with support for 15+ international medical exams
             </p>
           </div>
 
@@ -585,7 +585,7 @@ export default function Landing() {
 
             <div className="bg-gradient-to-br from-purple-800/50 to-blue-800/50 rounded-3xl p-8 border border-white/20">
               <div className="text-center mb-6">
-                <h4 className="text-2xl font-bold text-white mb-4">NHSprep+ Global Access</h4>
+                <h4 className="text-2xl font-bold text-white mb-4">BlueScrubsPrep+ Global Access</h4>
                 <div className="text-5xl font-bold text-white mb-2">£129<span className="text-xl">/month</span></div>
                 <p className="text-gray-300">Access to all global medical exams</p>
               </div>

@@ -551,7 +551,7 @@ p.auth-icon-text {
   color: #2563eb !important;
 }
 
-/* Fix for "Why Choose NHSprep" heading - ensure blue text stays blue */
+/* Fix for "Why Choose BlueScrubsPrep" heading - ensure blue text stays blue */
 h2 .text-blue-600,
 h2 span.text-blue-600 {
   color: #2563eb !important;

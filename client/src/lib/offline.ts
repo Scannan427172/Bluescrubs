@@ -1,4 +1,4 @@
-// Offline functionality for NHSprep platform
+// Offline functionality for BlueScrubsPrep platform
 interface OfflineData {
   questions: any[];
   progress: any;

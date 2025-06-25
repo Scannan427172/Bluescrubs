@@ -23,7 +23,7 @@ export function Logo({ className = '', size = 'md' }: LogoProps) {
   return (
     <div className={`flex items-center ${className}`}>
       <span className={`font-bold ${size === 'xl' ? 'bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent animate-pulse' : 'text-emerald-600'} ${sizeClasses[size]}`}>
-        NHSprep
+        BlueScrubsPrep
       </span>
     </div>
   );
