@@ -11,6 +11,7 @@ import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
 import Plab2Osce from "@/pages/plab2-osce";
 import PLAB1New from "@/pages/plab1-new";
+import UserFormatStations from "@/pages/user-format-stations";
 import InteractiveFlashcards from "@/pages/interactive-flashcards";
 import ClinicalGuides from "@/pages/clinical-guides";
 import Leaderboards from "@/pages/leaderboards";
