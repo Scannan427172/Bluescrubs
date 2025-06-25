@@ -1718,22 +1718,17 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   <Library className="w-4 h-4 text-gray-600" />
                   Further Reading & Guidelines
                 </h4>
-                <div className="grid md:grid-cols-2 gap-3">
+                <div className="flex flex-wrap gap-3">
                   {currentQuestion.links.supplementary.map((link, index) => (
                     <a
                       key={index}
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-start gap-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+                      className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group text-sm"
                     >
-                      <div className="bg-gray-100 group-hover:bg-gray-200 p-2 rounded-lg transition-colors">
-                        <ExternalLink className="w-4 h-4 text-gray-600" />
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="font-medium text-gray-900 text-sm">{link.title}</h5>
-                        <p className="text-xs text-gray-600 mt-1">{link.description}</p>
-                      </div>
+                      <ExternalLink className="w-4 h-4 text-gray-600" />
+                      <span className="font-medium text-gray-900">{link.title}</span>
                     </a>
                   ))}
                 </div>
