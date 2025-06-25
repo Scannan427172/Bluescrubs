@@ -230,6 +230,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: TEAM SECTION ADDITION - Added comprehensive team section to More page featuring Dr. Yasar Ahmad (Medical Director) and Keith Hunter (Co-Founder & Creative Director) with complete professional backgrounds and achievements
 - June 25, 2025: KEITH HUNTER PROFILE ENHANCEMENT - Updated qualifications to "BA Hons Dip CSD", added complete massage therapy certifications, prestigious awards (Coach of the Year 2012, Queens Award 2020), and corrected athletic achievements (1 European bronze medalist, 1 European long jump champion, 1 world champion bronze medalist)
 - June 25, 2025: ZYGOTE BODY 3D ANATOMY INTEGRATION - Added interactive 3D human anatomy viewer to PLAB 2 section using free Zygote Body platform, includes usage instructions, system highlights for cardiovascular/neurological/respiratory anatomy, and clinical examination preparation tools
+- June 25, 2025: OPTION LETTER CIRCLES REDESIGN - Changed all option letter circles (A, B, C, D, E) from red background with white text to black outline with white interior and black text across all MCQ interfaces for improved readability and professional appearance
 
 # User Preferences
 
