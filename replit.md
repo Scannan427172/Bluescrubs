@@ -224,6 +224,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: NICE VISUAL SUMMARY INTEGRATION - Added NICE NG136 visual summary PDF link to supplementary references for enhanced clinical guidance access
 - June 25, 2025: CONSISTENT OPTION LETTER STYLING - Updated all option letters (A, B, C, D, E) to have uniform white text on red background styling across all test interfaces
 - June 25, 2025: MORE PAGE BUTTON RESTORED - Added "More" page button back to bottom navigation menu as 5th navigation item with Settings icon
+- June 25, 2025: MORE PAGE CRASH PREVENTION - Fixed all More page sections to prevent crashes by redirecting broken links to existing pages (/dashboard, /ask-ai, /community, /premium, /plab1-new, /plab2-osce) and ensuring all feature cards have valid routes
 
 # User Preferences
 

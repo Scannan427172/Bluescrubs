@@ -110,7 +110,7 @@ export default function More() {
       title: "Who are BlueScrubsPrep",
       description: "Meet the founders - NHS doctor Yasa and developer Keith Hunter",
       hasArrow: true,
-      link: "/about-team"
+link: "/dashboard"
     },
     {
       icon: BookOpen,
@@ -252,7 +252,7 @@ export default function More() {
       title: "Ask BlueScrubsPrep AI",
       description: "Get instant answers to any medical question with UK guidelines",
       hasArrow: true,
-      link: "/ask-nhs-prep"
+link: "/ask-ai"
     },
     {
       icon: Accessibility,
@@ -386,7 +386,7 @@ export default function More() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {adminTools.map((tool, index) => (
-                <Link key={index} href="/admin-tools">
+                <Link key={index} href="/dashboard">
                   <Card className="bg-white border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
                     <CardContent className="flex flex-col items-center justify-center p-6 text-center">
                       <tool.icon className="h-8 w-8 text-blue-600 mb-3" />

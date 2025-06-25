@@ -28,9 +28,6 @@ import InteractivePatientPage from "@/pages/interactive-patient-page";
 import PersonalisedPaths from "@/pages/personalised-paths";
 import VideoOSCE from "@/pages/video-osce";
 import More from "@/pages/more";
-import AboutTeam from "@/pages/about-team";
-import AdminTools from "@/pages/admin-tools";
-import AskNHSPrep from "@/pages/ask-nhs-prep";
 import AdaptiveLearning from "@/pages/adaptive-learning";
 import SmartPlanner from "@/pages/smart-planner";
 import CulturalTraining from "@/pages/cultural-training";
@@ -242,32 +239,7 @@ function Router() {
         </div>
       </Route>
 
-      <Route path="/about-team">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <AboutTeam />
-          </div>
-        </div>
-      </Route>
 
-      <Route path="/admin-tools">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <AdminTools />
-          </div>
-        </div>
-      </Route>
-
-      <Route path="/ask-nhs-prep">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <AskNHSPrep />
-          </div>
-        </div>
-      </Route>
 
 
 
