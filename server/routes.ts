@@ -16,6 +16,16 @@ import path from "path";
 import { PLAB2_TEMPLATE_STATIONS, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-templates";
 import { generateUserFormatStations, saveUserFormatStations, loadUserFormatStations, getUserFormatStationCount } from './user-format-generator';
 import { generateInternationalStations, saveInternationalStations, loadInternationalStations, getInternationalStationCount, getSupportedExams } from './international-format-generator';
+import { getContentIndependenceStatus, createManualStation, exportContentLibrary, validateContentSufficiency } from './content-independence';
+import { 
+  SUPPORTED_LANGUAGES, 
+  getTranslationTemplate, 
+  saveTranslation, 
+  loadTranslations, 
+  getTranslationStats,
+  createTranslationManifest,
+  CULTURAL_ADAPTATIONS 
+} from './translation-system';
 
 // AI Question Generation Functions
 async function generateMedicalQuestions(templates: any[], category: string, difficulty: string, count: number) {
@@ -1561,6 +1571,152 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
       percentComplete: Math.round((totalStations / targetCount) * 100),
       targetReached: totalStations >= targetCount
     });
+  });
+
+  // Content Independence API
+  app.get('/api/content/independence-status', (req, res) => {
+    try {
+      const stats = getContentIndependenceStatus();
+      res.json(stats);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get content independence status' });
+    }
+  });
+
+  app.post('/api/content/manual-station', (req, res) => {
+    try {
+      const { examType, stationData } = req.body;
+      
+      if (!examType || !stationData) {
+        return res.status(400).json({ error: 'examType and stationData required' });
+      }
+
+      const success = createManualStation(examType, stationData);
+      
+      if (success) {
+        res.json({ 
+          success: true, 
+          message: `Manual station added to ${examType}`,
+          stationId: stationData.id
+        });
+      } else {
+        res.status(500).json({ error: 'Failed to create manual station' });
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get('/api/content/export/:examType?', (req, res) => {
+    try {
+      const { examType } = req.params;
+      const content = exportContentLibrary(examType?.toUpperCase());
+      
+      res.json({
+        examType: examType || 'ALL',
+        totalStations: content.length,
+        content,
+        exportedAt: new Date().toISOString(),
+        aiDependency: 'none'
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to export content library' });
+    }
+  });
+
+  app.get('/api/content/sufficiency/:examType', (req, res) => {
+    try {
+      const { examType } = req.params;
+      const { minimumStations = 500 } = req.query;
+      
+      const validation = validateContentSufficiency(
+        examType.toUpperCase(), 
+        parseInt(minimumStations as string)
+      );
+      
+      res.json(validation);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to validate content sufficiency' });
+    }
+  });
+
+  // Translation System API
+  app.get('/api/translations/supported-languages', (req, res) => {
+    res.json({
+      languages: SUPPORTED_LANGUAGES,
+      totalCount: Object.keys(SUPPORTED_LANGUAGES).length,
+      culturalAdaptations: CULTURAL_ADAPTATIONS
+    });
+  });
+
+  app.get('/api/translations/stats', (req, res) => {
+    try {
+      const stats = getTranslationStats();
+      res.json(stats);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get translation stats' });
+    }
+  });
+
+  app.get('/api/translations/:examType/:language', (req, res) => {
+    try {
+      const { examType, language } = req.params;
+      const translations = loadTranslations(examType.toUpperCase(), language);
+      res.json({
+        examType: examType.toUpperCase(),
+        language,
+        translations,
+        count: translations.length
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to load translations' });
+    }
+  });
+
+  app.post('/api/translations/:examType/:language', (req, res) => {
+    try {
+      const { examType, language } = req.params;
+      const { translationData } = req.body;
+      
+      if (!translationData) {
+        return res.status(400).json({ error: 'Translation data required' });
+      }
+
+      const success = saveTranslation(examType.toUpperCase(), language, translationData);
+      
+      if (success) {
+        res.json({ 
+          success: true, 
+          message: `Translation saved for ${examType} in ${language}`,
+          translationId: translationData.id
+        });
+      } else {
+        res.status(500).json({ error: 'Failed to save translation' });
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get('/api/translations/template', (req, res) => {
+    try {
+      const template = getTranslationTemplate();
+      res.json({
+        template,
+        manifest: createTranslationManifest()
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get translation template' });
+    }
+  });
+
+  app.get('/api/translations/manifest', (req, res) => {
+    try {
+      const manifest = createTranslationManifest();
+      res.json(manifest);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get translation manifest' });
+    }
   });
 
   const httpServer = createServer(app);
