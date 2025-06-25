@@ -21,6 +21,7 @@ import Placements from "@/pages/placements";
 import Premium from "@/pages/premium";
 import AskAI from "@/pages/ask-ai";
 import AIStudyTools from "@/pages/ai-study-tools";
+import AdaptiveLearning from "@/pages/adaptive-learning";
 import Community from "@/pages/community";
 import Pricing from "@/pages/pricing";
 

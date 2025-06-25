@@ -25,6 +25,7 @@ export function Navigation({ user }: NavigationProps) {
     { name: "Placements", href: "/placements", icon: Building, current: location === "/placements" },
     { name: "Clinical Guides", href: "/clinical-guides", icon: FileText, current: location === "/clinical-guides" },
     { name: "AI Study Tools", href: "/ai-study-tools", icon: Brain, current: location === "/ai-study-tools" },
+    { name: "Adaptive AI", href: "/adaptive-learning", icon: Zap, current: location === "/adaptive-learning" },
     { name: "Smart Planner", href: "/smart-planner", icon: Calendar, current: location === "/smart-planner" },
     { name: "Community", href: "/community", icon: Users, current: location === "/community" },
     { name: "NHS Prep", href: "/nhs-prep", icon: GraduationCap, current: location === "/nhs-prep" },
