@@ -226,6 +226,8 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: MORE PAGE BUTTON RESTORED - Added "More" page button back to bottom navigation menu as 5th navigation item with Settings icon
 - June 25, 2025: MORE PAGE CRASH PREVENTION - Fixed all More page sections to prevent crashes by redirecting broken links to existing pages (/dashboard, /ask-ai, /community, /premium, /plab1-new, /plab2-osce) and ensuring all feature cards have valid routes
 - June 25, 2025: OPTION LETTER STYLING ENHANCEMENT - Updated "Why Other Options Are Inappropriate" section to display option letters (A-F) as red circular badges with black letters, matching the green badge style in "Correct Answer Explanation" section
+- June 25, 2025: MEMORY AID BULLET POINTS - Converted memory aid section to bullet point format with yellow markers for improved readability
+- June 25, 2025: TEAM SECTION ADDITION - Added comprehensive team section to More page featuring Dr. Yasar Ahmad (Medical Director) and Keith Hunter (Co-Founder & Creative Director) with complete professional backgrounds and achievements
 
 # User Preferences
 
