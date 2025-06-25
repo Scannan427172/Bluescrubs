@@ -802,6 +802,78 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
   });
 
   // PLAB practice test questions - Static content only
+  // Initialize adaptive AI engine with question bank
+  const initializeAdaptiveAI = () => {
+    try {
+      // Use the existing ukQuestionBank that's already loaded
+      if (ukQuestionBank && ukQuestionBank.length > 0) {
+        AdaptiveAIEngine.initialize(ukQuestionBank);
+        console.log(`Adaptive AI Engine initialized with ${ukQuestionBank.length} questions`);
+      } else {
+        console.log('Adaptive AI Engine: No questions available for initialization');
+        // Initialize with empty array for now
+        AdaptiveAIEngine.initialize([]);
+      }
+    } catch (error) {
+      console.error('Failed to initialize Adaptive AI Engine:', error);
+      // Initialize with empty array as fallback
+      AdaptiveAIEngine.initialize([]);
+    }
+  };
+  
+  // Initialize on startup
+  initializeAdaptiveAI();
+
+  // Adaptive AI Engine routes
+  app.post('/api/adaptive/start-session', async (req, res) => {
+    try {
+      const { userId, existingPerformance } = req.body;
+      const sessionId = AdaptiveAIEngine.startSession(userId, existingPerformance);
+      res.json({ sessionId, success: true });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to start adaptive session' });
+    }
+  });
+
+  app.post('/api/adaptive/process-answer', async (req, res) => {
+    try {
+      const { sessionId, questionId, selectedAnswer, timeSpent } = req.body;
+      const response = AdaptiveAIEngine.processAnswer(sessionId, questionId, selectedAnswer, timeSpent);
+      res.json(response);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to process answer' });
+    }
+  });
+
+  app.get('/api/adaptive/analytics/:userId', async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId);
+      const analytics = AdaptiveAIEngine.getUserAnalytics(userId);
+      res.json(analytics);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get user analytics' });
+    }
+  });
+
+  app.post('/api/adaptive/weakness-check', async (req, res) => {
+    try {
+      const { sessionId, currentAnswer } = req.body;
+      const check = AdaptiveAIEngine.getRealTimeWeaknessCheck(sessionId, currentAnswer);
+      res.json(check);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to check weakness' });
+    }
+  });
+
+  app.get('/api/adaptive/stats', async (req, res) => {
+    try {
+      const stats = AdaptiveAIEngine.getEngineStats();
+      res.json(stats);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to get engine stats' });
+    }
+  });
+
   app.get("/api/test/questions", async (req, res) => {
     try {
       // Track page view

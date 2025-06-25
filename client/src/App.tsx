@@ -21,7 +21,6 @@ import Placements from "@/pages/placements";
 import Premium from "@/pages/premium";
 import AskAI from "@/pages/ask-ai";
 import AIStudyTools from "@/pages/ai-study-tools";
-import AdaptiveLearning from "@/pages/adaptive-learning";
 import Community from "@/pages/community";
 import Pricing from "@/pages/pricing";
 
@@ -29,7 +28,6 @@ import InteractivePatientPage from "@/pages/interactive-patient-page";
 import PersonalisedPaths from "@/pages/personalised-paths";
 import VideoOSCE from "@/pages/video-osce";
 import More from "@/pages/more";
-
 import AdaptiveLearning from "@/pages/adaptive-learning";
 import SmartPlanner from "@/pages/smart-planner";
 import CulturalTraining from "@/pages/cultural-training";
@@ -172,6 +170,15 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <AIStudyTools />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/adaptive-learning">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <AdaptiveLearning />
           </div>
         </div>
       </Route>
