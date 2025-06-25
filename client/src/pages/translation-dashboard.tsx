@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Globe, Languages, Users, Download, ArrowLeft, CheckCircle, Clock, FileText } from 'lucide-react';
+import { Globe, Languages, Users, Download, ArrowLeft, CheckCircle, Clock, FileText, Shield } from 'lucide-react';
 import { Link } from 'wouter';
 
 interface SupportedLanguages {
