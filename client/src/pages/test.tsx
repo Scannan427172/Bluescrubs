@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle, FileText } from "lucide-react";
 import examRoomImg from "@assets/image_1750775004743.png";
 
 import { useQuery } from "@tanstack/react-query";
@@ -65,6 +65,9 @@ export default function Test() {
   const [tutorInput, setTutorInput] = useState('');
   const [tutorMessages, setTutorMessages] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
   const [isLoadingTutorResponse, setIsLoadingTutorResponse] = useState(false);
+  
+  // NICE NG136 Guide state
+  const [showNiceGuide, setShowNiceGuide] = useState(false);
 
   // Test Categories and Filtering
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -913,6 +916,8 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               </div>
             </CardContent>
           </Card>
+
+
         </div>
 
         {/* Statistics Overview Cards */}
