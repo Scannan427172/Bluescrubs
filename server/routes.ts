@@ -348,13 +348,14 @@ Use these template stations as the EXACT format reference:
 ${JSON.stringify(templates.slice(0, 2), null, 2)}
 
 CRITICAL Requirements:
-- Follow the exact JSON structure: id, title, scenario, type, duration, difficulty, specialty, instructions, markingCriteria, keyActions, redFlags, differentialDiagnosis, references
+- Follow the exact JSON structure: id, title, scenario, type, duration, difficulty, specialty, instructions, markingCriteria, keyActions, redFlags, differentialDiagnosis, mnemonics, references
 - Create authentic UK clinical OSCE scenarios based on real medical practice
 - Include verified NICE, GMC, BNF, NHS, or Royal College guideline references
 - Stations must test clinical skills appropriate for PLAB 2 level
 - Use realistic patient presentations with specific clinical details
 - Provide comprehensive marking criteria with clear assessment points
 - Include detailed instructions for candidate, examiner, and standardized patient
+- Add helpful mnemonics for key learning points (2-3 memorable phrases)
 - Each station must be unique and clinically accurate
 - Duration should be 8 minutes for most stations
 - Difficulty should match requested level: ${difficulty}
@@ -390,6 +391,10 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
         duration: s.duration || 8,
         // Ensure all required fields exist
         title: s.title || `${displaySpecialty} ${stationType} Station`,
+        mnemonics: s.mnemonics || [
+          `${stationType.toUpperCase()}: Remember key clinical skills and systematic approach`,
+          `${displaySpecialty.toUpperCase()}: Focus on specialty-specific knowledge and guidelines`
+        ],
         references: s.references || [
           {
             title: "NICE Guidelines",

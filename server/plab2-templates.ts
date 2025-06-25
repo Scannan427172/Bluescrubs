@@ -84,6 +84,11 @@ export const PLAB2_TEMPLATE_STATIONS = [
         title: "GMC Good Medical Practice - Communication",
         url: "https://www.gmc-uk.org/ethical-guidance/ethical-guidance-for-doctors/good-medical-practice"
       }
+    ],
+    mnemonics: [
+      "SOCRATES for pain history: Site, Onset, Character, Radiation, Associated symptoms, Timing, Exacerbating factors, Severity",
+      "CARDIOVASCULAR risk factors: Diabetes, Hypertension, High cholesterol, Family history, Smoking, Age, Male gender",
+      "RED FLAGS chest pain: Tearing pain (aortic dissection), Pleuritic + breathless (PE), Crushing central (MI)"
     ]
   },
   {
@@ -169,6 +174,11 @@ export const PLAB2_TEMPLATE_STATIONS = [
         title: "BTS Guidelines for pleural disease",
         url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/"
       }
+    ],
+    mnemonics: [
+      "RESPIRATORY examination: Inspect, Palpate, Percuss, Auscultate (IPPA)",
+      "PLEURAL EFFUSION signs: Reduced expansion, Reduced tactile fremitus, Dull percussion, Reduced breath sounds",
+      "CHEST POSITIONING: 45 degrees for respiratory examination to optimize visualization"
     ]
   },
   {
@@ -251,6 +261,11 @@ export const PLAB2_TEMPLATE_STATIONS = [
         title: "NHS Breast Screening Programme",
         url: "https://www.gov.uk/guidance/breast-screening-programme-overview"
       }
+    ],
+    mnemonics: [
+      "SPIKES for breaking bad news: Setting, Perception, Invitation, Knowledge, Emotions, Strategy",
+      "BAD NEWS delivery: Be prepared, Allow time, Deliver sensitively",
+      "BREAST CANCER referral: 2-week rule for suspicious mammography findings"
     ]
   }
 ];
