@@ -47,7 +47,7 @@ export default function Landing() {
               <h1 className="text-2xl lg:text-3xl font-bold text-white drop-shadow-lg">
                 Master Your Journey
               </h1>
-              <p className="text-sm text-white/90 font-medium">
+              <p className="text-sm text-white font-medium drop-shadow-lg">
                 Comprehensive PLAB Preparation
               </p>
             </div>
