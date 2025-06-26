@@ -16,11 +16,22 @@ export default function Landing() {
         <video 
           src={heroVideo}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectFit: 'cover', transform: 'scale(1.2) translateY(-10%)' }}
+          style={{ 
+            objectFit: 'cover', 
+            transform: 'scale(1.2) translateY(-10%)',
+            willChange: 'transform'
+          }}
           autoPlay
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
+          loop={false}
+          onLoadStart={() => {
+            // Video loading started
+          }}
+          onCanPlay={() => {
+            // Video can start playing
+          }}
           onEnded={(e) => {
             const video = e.target as HTMLVideoElement;
             video.currentTime = video.duration;
@@ -32,24 +43,24 @@ export default function Landing() {
 
         
         {/* Hero Content - Bottom Aligned Layout */}
-        <div className="relative z-10 flex flex-col justify-end items-center min-h-screen px-4 pb-8">
+        <div className="relative z-10 flex flex-col justify-end items-center min-h-screen px-4 pb-8" style={{ contain: 'layout' }}>
           {/* Compact Bottom Content */}
-          <div className="text-center space-y-4 hero-text">
+          <div className="text-center space-y-4 hero-text" style={{ transform: 'translateZ(0)' }}>
             {/* Small Badge */}
-            <div className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
+            <div className="inline-flex items-center justify-center px-6 py-3 bg-blue-500/20 backdrop-blur-sm rounded-full border border-blue-400/30" style={{ willChange: 'transform' }}>
               <Star className="w-5 h-5 mr-3 text-yellow-400" />
               <span className="text-lg font-medium text-white text-center">Professional PLAB Preparation</span>
             </div>
             
             {/* Compact Title */}
             <div className="space-y-2">
-              <div style={{ color: '#ffffff' }}>
+              <div className="text-white">
                 <Logo size="xl" className="text-white" />
               </div>
-              <h1 className="text-2xl lg:text-3xl font-bold drop-shadow-lg !text-white" style={{ color: '#ffffff !important' }}>
+              <h1 className="text-2xl lg:text-3xl font-bold text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
                 Master Your Journey
               </h1>
-              <p className="text-sm font-medium drop-shadow-lg !text-white" style={{ color: '#ffffff !important' }}>
+              <p className="text-sm font-medium text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
                 Comprehensive <span className="font-bold">PLAB</span> Preparation
               </p>
             </div>
@@ -57,7 +68,7 @@ export default function Landing() {
             {/* Bottom Button */}
             <div className="pt-2">
               <Link href="/premium">
-                <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 text-sm font-medium rounded-lg shadow-lg hover:shadow-blue-500/25 transition-all duration-300 group">
+                <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 text-sm font-medium rounded-lg shadow-lg transition-all duration-200 group">
                   Start Free Trial
                   <ArrowRight className="ml-1 w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </Button>
