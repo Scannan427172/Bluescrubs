@@ -247,6 +247,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: AI TUTOR TEXT COLOR FIX - Applied forced black color styling to "AI Clinical Skills Tutor" text in blue section for maximum visibility
 - June 26, 2025: AI TUTOR CSS OVERRIDE - Added specific CSS class with !important override to force black text color despite hero section white text rules
 - June 26, 2025: AI TUTOR VISUAL ENHANCEMENT - Added blue background with black text and rounded styling for improved visibility and design consistency
+- June 26, 2025: DESKTOP MORE BUTTON ADDITION - Added "More" dropdown button to desktop navigation menu providing access to all additional navigation items with icons and proper styling
 
 # User Preferences
 

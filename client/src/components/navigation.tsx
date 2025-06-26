@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap, Building, Settings } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Bell, Menu, Stethoscope, Home, BookOpen, Users, GraduationCap, User, Brain, Calendar, UserCheck, Flag, Video, BarChart3, Trophy, Wifi, Route, MoreHorizontal, Accessibility, Globe, FileText, Zap, Building, Settings, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 interface NavigationProps {
@@ -62,6 +63,37 @@ export function Navigation({ user }: NavigationProps) {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* More Dropdown Menu */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="font-medium transition-colors text-xs lg:text-sm whitespace-nowrap px-2 lg:px-3 py-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 flex items-center gap-1"
+                  >
+                    More
+                    <ChevronDown className="w-3 h-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {navigation.slice(5).map((item) => (
+                    <DropdownMenuItem key={item.name} asChild>
+                      <Link
+                        href={item.href}
+                        className={`flex items-center gap-2 w-full px-2 py-2 text-sm cursor-pointer ${
+                          item.current
+                            ? "text-blue-600 bg-blue-50"
+                            : "text-gray-700 hover:text-blue-600"
+                        }`}
+                      >
+                        <item.icon className="w-4 h-4" />
+                        {item.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             {/* Right Side - Simplified */}
