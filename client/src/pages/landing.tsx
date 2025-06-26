@@ -44,7 +44,7 @@ export default function Landing() {
             {/* Compact Title */}
             <div className="space-y-2">
               <div style={{ color: '#ffffff' }}>
-                <Logo size="lg" className="text-white" />
+                <Logo size="xl" className="text-white" />
               </div>
               <h1 className="text-2xl lg:text-3xl font-bold drop-shadow-lg !text-white" style={{ color: '#ffffff !important' }}>
                 Master Your Journey
