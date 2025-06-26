@@ -59,7 +59,7 @@ export default function Landing() {
               <div className="text-white">
                 <Logo size="xl" className="text-white" />
               </div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+              <h1 className="text-xl lg:text-2xl font-bold text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
                 Master Your Journey
               </h1>
               <p className="text-sm font-medium text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
