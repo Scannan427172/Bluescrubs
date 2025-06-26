@@ -1571,8 +1571,10 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                           <div className="space-y-2">
                             {section.points.map((point, pointIndex) => (
                               <div key={pointIndex} className="flex items-start gap-2 text-sm text-gray-700">
-                                <div className="w-2 h-2 bg-green-500 rounded-full mt-2 shrink-0"></div>
-                                <span className="leading-relaxed">{point}</span>
+                                {!point.endsWith(':') && (
+                                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 shrink-0"></div>
+                                )}
+                                <span className={`leading-relaxed ${point.endsWith(':') ? 'font-semibold' : ''}`}>{point}</span>
                               </div>
                             ))}
                           </div>
