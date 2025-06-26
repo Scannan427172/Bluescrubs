@@ -441,7 +441,7 @@ export default function Plab2Osce() {
                           className="font-semibold ai-tutor-text" 
                           style={{ 
                             color: '#000000 !important',
-                            backgroundColor: 'rgba(255,255,255,0.9)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.9)',
                             padding: '2px 4px',
                             borderRadius: '4px'
                           }}
