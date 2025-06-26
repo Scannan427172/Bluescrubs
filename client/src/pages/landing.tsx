@@ -50,7 +50,7 @@ export default function Landing() {
                 Master Your Journey
               </h1>
               <p className="text-sm font-medium drop-shadow-lg !text-white" style={{ color: '#ffffff !important' }}>
-                Comprehensive PLAB Preparation
+                Comprehensive <span className="font-bold">PLAB</span> Preparation
               </p>
             </div>
             
