@@ -916,7 +916,7 @@ export default function Plab2Osce() {
                 </div>
                 
                 <div className="bg-white p-4 rounded-lg border border-green-200">
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="text-center mb-3">
                     <h4 className="font-semibold text-green-800">Zygote Body 3D Anatomy Viewer</h4>
                   </div>
                   
