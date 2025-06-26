@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
@@ -9,7 +9,7 @@ import {
   Stethoscope, Play, Clock, Users, Video, Mic, 
   CheckCircle, Star, Calendar, Award, BookOpen,
   ClipboardList, Heart, Brain, AlertTriangle, ArrowLeft, Volume2,
-  Globe, Languages, MessageCircle, Bot, Activity
+  Globe, Languages, MessageCircle, Bot, Activity, Eye, Maximize
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -880,6 +880,88 @@ export default function Plab2Osce() {
             </div>
           </TabsContent>
         </Tabs>
+        </div>
+
+        {/* 3D Anatomy Viewer Section */}
+        <div className="mt-12 mb-8">
+          <Card className="border-2 border-green-200 bg-gradient-to-r from-green-50 to-teal-50">
+            <CardHeader>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Brain className="w-6 h-6 text-green-600" />
+                </div>
+                <div>
+                  <CardTitle className="text-2xl text-green-800">Interactive 3D Human Anatomy</CardTitle>
+                  <CardDescription className="text-green-700">
+                    Explore detailed 3D anatomy to enhance your clinical examination skills
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="grid md:grid-cols-3 gap-4 text-sm">
+                  <div className="flex items-center gap-2 text-green-700">
+                    <Eye className="w-4 h-4" />
+                    <span>Cardiovascular System</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-green-700">
+                    <Brain className="w-4 h-4" />
+                    <span>Neurological System</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-green-700">
+                    <Activity className="w-4 h-4" />
+                    <span>Respiratory System</span>
+                  </div>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg border border-green-200">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-green-800">Zygote Body 3D Anatomy Viewer</h4>
+                    <Button
+                      onClick={() => {
+                        const iframe = document.getElementById('zygote-iframe') as HTMLIFrameElement;
+                        if (iframe) {
+                          if (iframe.requestFullscreen) {
+                            iframe.requestFullscreen();
+                          } else if ((iframe as any).webkitRequestFullscreen) {
+                            (iframe as any).webkitRequestFullscreen();
+                          } else if ((iframe as any).msRequestFullscreen) {
+                            (iframe as any).msRequestFullscreen();
+                          }
+                        }
+                      }}
+                      variant="outline"
+                      size="sm"
+                      className="border-green-300 text-green-700 hover:bg-green-50"
+                    >
+                      <Maximize className="w-4 h-4 mr-2" />
+                      Fullscreen
+                    </Button>
+                  </div>
+                  
+                  <div className="relative">
+                    <iframe
+                      id="zygote-iframe"
+                      src="https://www.zygotebody.com/embed"
+                      width="100%"
+                      height="600"
+                      style={{ border: 'none', borderRadius: '8px' }}
+                      title="3D Human Anatomy Viewer"
+                      allowFullScreen
+                    />
+                  </div>
+                  
+                  <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                    <p className="text-sm text-green-700">
+                      <strong>Usage Instructions:</strong> Use your mouse to rotate the 3D model. Click and drag to explore different angles. 
+                      Use the controls within the viewer to isolate specific body systems and organs relevant to your OSCE preparation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

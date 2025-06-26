@@ -250,6 +250,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: DESKTOP MORE BUTTON ADDITION - Added "More" dropdown button to desktop navigation menu providing access to all additional navigation items with icons and proper styling
 - June 26, 2025: ADAPTIVE LEARNING TEXT CONTRAST FIX - Applied inline CSS with !important declarations to force white text visibility on dashboard cards, bypassing CSS conflicts
 - June 26, 2025: ADAPTIVE LEARNING BACKGROUND LIGHTENING - Changed card backgrounds to lighter shades (blue-300/400, purple-300/400) for improved text readability with white text
+- June 26, 2025: ZYGOTE BODY 3D ANATOMY INTEGRATION - Added interactive 3D human anatomy viewer to PLAB 2 section using free Zygote Body platform, includes usage instructions, system highlights for cardiovascular/neurological/respiratory anatomy, and clinical examination preparation tools
 
 # User Preferences
 
