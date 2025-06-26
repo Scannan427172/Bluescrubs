@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle, FileText } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle, FileText, X, Shield, Activity, TrendingUp } from "lucide-react";
 import examRoomImg from "@assets/image_1750775004743.png";
 
 import { useQuery } from "@tanstack/react-query";
@@ -432,6 +432,85 @@ export default function Test() {
       translateFullQuestion(currentQuestion);
     }
   }, [currentQuestion, translateQuestions, selectedLanguage]);
+
+  // Format correct answer explanation with structured icons and sections
+  const formatCorrectAnswerExplanation = (explanation: string) => {
+    const sections = [];
+    
+    // Split explanation into logical sections based on bullet points or numbered items
+    const lines = explanation.split('\n').filter(line => line.trim());
+    let currentSection = { title: "Clinical Rationale", icon: <Target className="w-5 h-5" />, points: [] };
+    
+    for (const line of lines) {
+      if (line.includes('•') && (line.includes('Gold Standard') || line.includes('NICE') || line.includes('Guidelines'))) {
+        if (currentSection.points.length > 0) sections.push({ ...currentSection });
+        currentSection = { title: "Guidelines & Evidence", icon: <Shield className="w-5 h-5" />, points: [line.replace('•', '').trim()] };
+      } else if (line.includes('•') && (line.includes('Efficacy') || line.includes('Sensitivity') || line.includes('Effective'))) {
+        if (currentSection.points.length > 0) sections.push({ ...currentSection });
+        currentSection = { title: "Clinical Efficacy", icon: <Activity className="w-5 h-5" />, points: [line.replace('•', '').trim()] };
+      } else if (line.includes('•') && (line.includes('Mechanism') || line.includes('Pathway') || line.includes('Action'))) {
+        if (currentSection.points.length > 0) sections.push({ ...currentSection });
+        currentSection = { title: "Mechanism of Action", icon: <TrendingUp className="w-5 h-5" />, points: [line.replace('•', '').trim()] };
+      } else if (line.includes('•') && (line.includes('Evidence') || line.includes('Trial') || line.includes('Study'))) {
+        if (currentSection.points.length > 0) sections.push({ ...currentSection });
+        currentSection = { title: "Research Evidence", icon: <Award className="w-5 h-5" />, points: [line.replace('•', '').trim()] };
+      } else if (line.includes('•') || line.trim().startsWith('-')) {
+        currentSection.points.push(line.replace(/^[•-]\s*/, '').trim());
+      } else if (line.trim() && !line.includes(':')) {
+        currentSection.points.push(line.trim());
+      }
+    }
+    
+    if (currentSection.points.length > 0) sections.push(currentSection);
+    
+    // If no structured sections found, create a default one
+    if (sections.length === 0) {
+      sections.push({
+        title: "Clinical Explanation",
+        icon: <FileText className="w-5 h-5" />,
+        points: explanation.split('\n').filter(line => line.trim()).slice(0, 5)
+      });
+    }
+    
+    return sections;
+  };
+
+  // Format incorrect answer explanations with structured presentation
+  const formatIncorrectAnswerExplanation = (explanation: string) => {
+    const sections = [];
+    const lines = explanation.split('\n').filter(line => line.trim());
+    
+    for (const line of lines) {
+      const optionMatch = line.match(/^•\s*Option\s+([A-F])\s*\([^)]+\)\s*-\s*(.+?):/);
+      if (optionMatch) {
+        const [, option, title] = optionMatch;
+        const remainingText = line.split(':').slice(1).join(':').trim();
+        
+        sections.push({
+          option,
+          title: title.trim(),
+          points: [remainingText]
+        });
+      } else if (sections.length > 0 && (line.includes('-') || line.includes('•'))) {
+        const lastSection = sections[sections.length - 1];
+        lastSection.points.push(line.replace(/^[-•]\s*/, '').trim());
+      }
+    }
+    
+    // If no structured sections found, create default sections for common incorrect options
+    if (sections.length === 0) {
+      const commonOptions = ['B', 'C', 'D', 'E'];
+      commonOptions.forEach(option => {
+        sections.push({
+          option,
+          title: `Option ${option} - Inappropriate Choice`,
+          points: ['Less effective treatment option', 'Not recommended by current guidelines']
+        });
+      });
+    }
+    
+    return sections;
+  };
 
   // Mock AI Tutor functions
   const getMockTutorResponse = (userMessage: string): string => {
@@ -1445,26 +1524,52 @@ Feel free to ask about any aspect of this question or other medical topics you'r
         {/* Correct Answer Explanation Section */}
         {submitted && currentQuestion && (
           <Card className="mb-6 shadow-sm">
-            <CardHeader>
-              <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-green-600" />
+            <CardHeader className="bg-green-50">
+              <CardTitle className="text-lg font-medium text-green-800 flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-green-600" />
                 Correct Answer Explanation
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="border-l-4 border-green-200 pl-4 bg-green-50 p-4 rounded-r-lg">
-                <div className="flex items-start gap-2">
-                  <Badge 
-                    variant="default"
-                    className="mt-1 bg-green-600"
-                  >
+            <CardContent className="p-6">
+              <div className="space-y-6">
+                {/* Correct Answer Badge */}
+                <div className="flex items-center gap-3 p-4 bg-green-100 border border-green-200 rounded-lg">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
                     {currentQuestion.answer}
-                  </Badge>
+                  </div>
                   <div>
-                    <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                      {currentQuestion.explanation || 'No explanation available'}
+                    <div className="font-semibold text-green-800 mb-1">Correct Answer</div>
+                    <div className="text-sm text-green-700">
+                      {currentQuestion.options[currentQuestion.answer]}
                     </div>
                   </div>
+                </div>
+
+                {/* Structured Explanation with Icons */}
+                <div className="space-y-4">
+                  {formatCorrectAnswerExplanation(currentQuestion.explanation).map((section, index) => (
+                    <div key={index} className="border-l-4 border-green-400 pl-4 bg-green-50/50 p-3 rounded-r-lg">
+                      <div className="flex items-start gap-3">
+                        <div className="mt-1 text-green-600">
+                          {section.icon}
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-green-500" />
+                            {section.title}
+                          </h4>
+                          <div className="space-y-2">
+                            {section.points.map((point, pointIndex) => (
+                              <div key={pointIndex} className="flex items-start gap-2 text-sm text-gray-700">
+                                <div className="w-2 h-2 bg-green-500 rounded-full mt-2 shrink-0"></div>
+                                <span className="leading-relaxed">{point}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </CardContent>
@@ -1474,32 +1579,37 @@ Feel free to ask about any aspect of this question or other medical topics you'r
         {/* Why Other Options Are Inappropriate Section */}
         {submitted && currentQuestion && currentQuestion.incorrectExplanation && (
           <Card className="mb-6 shadow-sm">
-            <CardHeader>
-              <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
+            <CardHeader className="bg-red-50">
+              <CardTitle className="text-lg font-medium text-red-800 flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-red-600" />
                 Why Other Options Are Inappropriate
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="border-l-4 border-red-200 pl-4 bg-red-50 p-4 rounded-r-lg">
-                <div className="text-gray-700 leading-relaxed">
-                  {currentQuestion.incorrectExplanation.split('\n').map((line, index) => {
-                    // Check if line starts with "• Option X" pattern
-                    const optionMatch = line.match(/^(•\s*Option\s+)([A-F])(.*)/);
-                    if (optionMatch) {
-                      const [, prefix, letter, rest] = optionMatch;
-                      return (
-                        <div key={index} className="mb-3 flex items-start gap-2">
-                          <div className="w-6 h-6 rounded-full border-2 border-black bg-white text-black flex items-center justify-center font-semibold text-sm shrink-0 mt-0.5">
-                            {letter}
-                          </div>
-                          <span className="flex-1">•{rest}</span>
+            <CardContent className="p-6">
+              <div className="space-y-4">
+                {formatIncorrectAnswerExplanation(currentQuestion.incorrectExplanation).map((section, index) => (
+                  <div key={index} className="border-l-4 border-red-400 pl-4 bg-red-50/50 p-3 rounded-r-lg">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm shrink-0">
+                        {section.option}
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                          <X className="w-4 h-4 text-red-500" />
+                          {section.title}
+                        </h4>
+                        <div className="space-y-2">
+                          {section.points.map((point, pointIndex) => (
+                            <div key={pointIndex} className="flex items-start gap-2 text-sm text-gray-700">
+                              <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
+                              <span className="leading-relaxed">{point}</span>
+                            </div>
+                          ))}
                         </div>
-                      );
-                    }
-                    return line ? <div key={index} className="mb-2">{line}</div> : <div key={index} className="mb-2"></div>;
-                  })}
-                </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
