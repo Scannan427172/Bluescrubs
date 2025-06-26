@@ -262,6 +262,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: QUESTION COUNT BADGE UPDATE - Changed landing page hero banner badge from "Professional PLAB Preparation" to "5,528 PLAB Questions" to showcase the comprehensive question bank size and improve conversion messaging
 - June 26, 2025: PLAB EMPHASIS ENHANCEMENT - Made "PLAB" bold in hero banner badge text for stronger visual emphasis and clearer exam focus
 - June 26, 2025: APP SIZE OPTIMIZATION - Reduced application size from 1.5GB to 1.3GB by removing 282 unused assets (183MB to 18MB), compressing hero video by 94% (4.3MB to 284KB), and cleaning up generated JSON files for improved performance
+- June 26, 2025: VIDEO STRETCHING FIX - Resolved video distortion by removing transform scale properties and using proper object-fit cover positioning for natural proportions
 
 # User Preferences
 
