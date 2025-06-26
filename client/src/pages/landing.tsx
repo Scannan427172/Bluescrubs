@@ -28,48 +28,33 @@ export default function Landing() {
         
 
         
-        {/* Hero Content - Portrait Layout */}
-        <div className="relative z-10 flex flex-col justify-between min-h-screen px-4">
-          <div className="max-w-7xl mx-auto w-full pt-16">
-            {/* Main Title - Higher Position */}
-            <div className="hero-text text-white space-y-6 max-w-xl">
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 shadow-lg">
-                <Star className="w-4 h-4 mr-2 text-yellow-400" />
-                <span className="text-xs font-semibold text-white">Comprehensive Medical Exam Preparation</span>
-              </div>
-              
-              <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold leading-tight text-white">
-                <div className="flex flex-col items-start">
-                  <span className="text-4xl lg:text-6xl xl:text-7xl">Master Your</span>
-                  <div className="flex flex-col items-start">
-                    <Logo size="xl" />
-                    <span className="text-4xl lg:text-6xl xl:text-7xl">Journey</span>
-                  </div>
-                </div>
+        {/* Hero Content - Minimal Layout */}
+        <div className="relative z-10 flex flex-col justify-center items-center min-h-screen px-4">
+          {/* Compact Central Content */}
+          <div className="text-center space-y-4">
+            {/* Small Badge */}
+            <div className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
+              <Star className="w-3 h-3 mr-1 text-yellow-400" />
+              <span className="text-xs font-medium text-white">Medical Exam Prep</span>
+            </div>
+            
+            {/* Compact Title */}
+            <div className="space-y-2">
+              <Logo size="lg" />
+              <h1 className="text-2xl lg:text-3xl font-bold text-white">
+                Master Your Journey
               </h1>
             </div>
           </div>
           
-          {/* Bottom Content - Subtext and Button */}
-          <div className="max-w-7xl mx-auto w-full pb-8">
-            <div className="hero-text text-white space-y-4 max-w-xl">
-              <p className="text-xs lg:text-sm text-white/90 leading-relaxed max-w-lg">
-                The world's most comprehensive independent medical platform featuring{" "}
-                <span className="text-blue-400 font-semibold">5,528 authentic stations</span>,{" "}
-                <span className="text-purple-400 font-semibold">hybrid AI enhancement</span>, and{" "}
-                <span className="text-green-400 font-semibold">39 language support</span>.
-              </p>
-              
-              {/* CTA Button */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-3">
-                <Link href="/premium">
-                  <Button size="default" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 text-base font-semibold rounded-lg shadow-xl hover:shadow-blue-500/25 transition-all duration-300 group transform hover:scale-105">
-                    <span className="text-white">Start Premium Trial</span>
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform text-white" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
+          {/* Bottom Button - Ultra Minimal */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+            <Link href="/premium">
+              <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 text-sm font-medium rounded-lg shadow-lg hover:shadow-blue-500/25 transition-all duration-300 group">
+                Start Free Trial
+                <ArrowRight className="ml-1 w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </div>
 

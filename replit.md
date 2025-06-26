@@ -234,6 +234,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: NICE NG136 CLINICAL GUIDE INTEGRATION - Added floating green button providing comprehensive NICE NG136 + PLAB MCQ format overlay with clinical scenario framework, risk assessment tools, memory aids, and structured learning approach positioned between AI Medical Tutor and Memory Aid sections
 - June 25, 2025: CATEGORY SECTION CLEANUP - Removed all question count numbers from medical specialty categories across all pages for cleaner interface presentation, updated both PLAB 1 and test page category displays
 - June 25, 2025: NICE NG136 GUIDE ENHANCEMENT - Added complete interactive overlay with clinical framework, risk assessment tools, memory aids, and decision points with black text for maximum readability on mobile devices
+- June 25, 2025: HERO BANNER MINIMIZATION - Reduced text overlay to ultra-minimal center layout with smaller logo, compact title, and single button to showcase more of the woman in the video background
 
 # User Preferences
 
