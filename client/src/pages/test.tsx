@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 interface Question {
   id: string;
+  topic?: string;
   question: string;
   options: {
     A: string;
@@ -24,20 +25,29 @@ interface Question {
     E: string;
   };
   answer: string;
-  explanation: {
-    A: string;
-    B: string;
-    C: string;
-    D: string;
-    E: string;
-  };
+  explanation: string;
+  incorrectExplanation?: string;
   mnemonic: string;
   medications?: string[];
   bnfGuidance?: string;
+  guidelineSummary?: {
+    title: string;
+    content: string;
+  };
   links: {
     NICE: string;
     CKS: string;
     "NHS UK": string;
+    primary?: {
+      title: string;
+      url: string;
+      description: string;
+    };
+    supplementary?: Array<{
+      title: string;
+      url: string;
+      description: string;
+    }>;
   };
 }
 
@@ -435,11 +445,11 @@ export default function Test() {
 
   // Format correct answer explanation with structured icons and sections
   const formatCorrectAnswerExplanation = (explanation: string) => {
-    const sections = [];
+    const sections: Array<{title: string, icon: JSX.Element, points: string[]}> = [];
     
     // Split explanation into logical sections based on bullet points or numbered items
     const lines = explanation.split('\n').filter(line => line.trim());
-    let currentSection = { title: "Clinical Rationale", icon: <Target className="w-5 h-5" />, points: [] };
+    let currentSection = { title: "Clinical Rationale", icon: <Target className="w-5 h-5" />, points: [] as string[] };
     
     for (const line of lines) {
       if (line.includes('•') && (line.includes('Gold Standard') || line.includes('NICE') || line.includes('Guidelines'))) {
@@ -1540,7 +1550,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                   <div>
                     <div className="font-semibold text-green-800 mb-1">Correct Answer</div>
                     <div className="text-sm text-green-700">
-                      {currentQuestion.options[currentQuestion.answer]}
+                      {(currentQuestion.options as any)[currentQuestion.answer] || currentQuestion.options.A}
                     </div>
                   </div>
                 </div>
