@@ -548,7 +548,9 @@ export default function Plab2Osce() {
           backgroundImage: `url(${plab2BgImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundBlendMode: 'multiply'
+          backgroundBlendMode: 'multiply',
+          willChange: 'transform',
+          contain: 'layout style paint'
         }}
       >
 

@@ -38,6 +38,35 @@
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6) !important;
   }
   
+  /* Hero banner performance optimizations */
+  .hero-banner-optimized {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+    contain: layout style paint;
+  }
+  
+  .hero-content-optimized {
+    transform: translateZ(0);
+    contain: layout;
+    will-change: transform;
+  }
+  
+  /* Reduce layout shifts */
+  .hero-video-container {
+    aspect-ratio: 16/9;
+    contain: size layout style;
+  }
+  
+  /* Optimize background images */
+  .hero-bg-optimized {
+    background-attachment: scroll;
+    transform: translateZ(0);
+    will-change: transform;
+    contain: strict;
+  }
+  
   /* AI Clinical Skills Tutor black text override within utilities layer */
   .ai-tutor-text,
   .ai-tutor-text *,
