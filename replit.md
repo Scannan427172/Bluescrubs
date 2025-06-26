@@ -236,6 +236,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: NICE NG136 GUIDE ENHANCEMENT - Added complete interactive overlay with clinical framework, risk assessment tools, memory aids, and decision points with black text for maximum readability on mobile devices
 - June 25, 2025: HERO BANNER MINIMIZATION - Reduced text overlay to ultra-minimal center layout with smaller logo, compact title, and single button to showcase more of the woman in the video background
 - June 25, 2025: HERO BANNER OPTIMIZATION - Video stops on last frame, moved all text to bottom layout, added white subtitle, enhanced text visibility with drop shadows for maximum contrast against video background
+- June 25, 2025: VIDEO POSITIONING ENHANCEMENT - Scaled video up 20% and moved higher in frame with translateY(-10%) for better focal point of woman in video background
 
 # User Preferences
 

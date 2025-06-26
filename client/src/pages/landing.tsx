@@ -16,7 +16,7 @@ export default function Landing() {
         <video 
           src={heroVideo}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectFit: 'cover', transform: 'scale(1.2)' }}
+          style={{ objectFit: 'cover', transform: 'scale(1.2) translateY(-10%)' }}
           autoPlay
           muted
           playsInline
