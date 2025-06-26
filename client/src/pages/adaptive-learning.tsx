@@ -87,7 +87,7 @@ export default function AdaptiveLearning() {
 
         {/* Features Deep Dive */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <Card className="bg-gradient-to-br from-blue-500 to-blue-600 adaptive-card-white">
+          <Card className="bg-gradient-to-br from-blue-300 to-blue-400 adaptive-card-white">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BarChart3 className="h-5 w-5" />
@@ -119,7 +119,7 @@ export default function AdaptiveLearning() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-500 to-purple-600 adaptive-card-white">
+          <Card className="bg-gradient-to-br from-purple-300 to-purple-400 adaptive-card-white">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Zap className="h-5 w-5" />
