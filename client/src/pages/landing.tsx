@@ -49,7 +49,7 @@ export default function Landing() {
             {/* Small Badge */}
             <div className="inline-flex items-center justify-center px-6 py-3 bg-blue-500/20 backdrop-blur-sm rounded-full border border-blue-400/30" style={{ willChange: 'transform' }}>
               <Star className="w-5 h-5 mr-3 text-yellow-400" />
-              <span className="text-lg font-medium text-white text-center">5,528 PLAB Questions</span>
+              <span className="text-lg font-medium text-white text-center">5,528 <span className="font-bold">PLAB</span> Questions</span>
             </div>
             
             {/* Compact Title */}
