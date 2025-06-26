@@ -60,6 +60,17 @@
     text-shadow: none !important;
   }
   
+  /* Force white text on adaptive learning cards */
+  .adaptive-card-white,
+  .adaptive-card-white *,
+  .adaptive-card-white h3,
+  .adaptive-card-white p,
+  .adaptive-card-white span,
+  .adaptive-card-white svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+  }
+  
   /* Mobile text adjustments */
   @media (max-width: 768px) {
     .hero-text h1 {

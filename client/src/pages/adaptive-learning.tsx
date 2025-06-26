@@ -87,65 +87,65 @@ export default function AdaptiveLearning() {
 
         {/* Features Deep Dive */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <Card className="bg-gradient-to-br from-blue-500 to-blue-600" style={{ color: '#ffffff !important' }}>
+          <Card className="bg-gradient-to-br from-blue-500 to-blue-600 adaptive-card-white">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2" style={{ color: '#ffffff !important' }}>
-                <BarChart3 className="h-5 w-5" style={{ color: '#ffffff !important' }} />
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
                 Advanced Analytics Engine
               </CardTitle>
-              <CardDescription style={{ color: '#ffffff !important' }}>
+              <CardDescription>
                 No external API calls - completely offline intelligence
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" style={{ color: '#ffffff !important' }} />
-                  <span className="text-sm" style={{ color: '#ffffff !important' }}>Pattern recognition algorithms</span>
+                  <CheckCircle className="h-4 w-4" />
+                  <span className="text-sm">Pattern recognition algorithms</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" style={{ color: '#ffffff !important' }} />
-                  <span className="text-sm" style={{ color: '#ffffff !important' }}>Statistical performance modeling</span>
+                  <CheckCircle className="h-4 w-4" />
+                  <span className="text-sm">Statistical performance modeling</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" style={{ color: '#ffffff !important' }} />
-                  <span className="text-sm" style={{ color: '#ffffff !important' }}>Real-time weakness identification</span>
+                  <CheckCircle className="h-4 w-4" />
+                  <span className="text-sm">Real-time weakness identification</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" style={{ color: '#ffffff !important' }} />
-                  <span className="text-sm" style={{ color: '#ffffff !important' }}>Predictive exam readiness scoring</span>
+                  <CheckCircle className="h-4 w-4" />
+                  <span className="text-sm">Predictive exam readiness scoring</span>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-500 to-purple-600" style={{ color: '#ffffff !important' }}>
+          <Card className="bg-gradient-to-br from-purple-500 to-purple-600 adaptive-card-white">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2" style={{ color: '#ffffff !important' }}>
-                <Zap className="h-5 w-5" style={{ color: '#ffffff !important' }} />
+              <CardTitle className="flex items-center gap-2">
+                <Zap className="h-5 w-5" />
                 Intelligent Question System
               </CardTitle>
-              <CardDescription style={{ color: '#ffffff !important' }}>
+              <CardDescription>
                 Template-based generation using your authentic question bank
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" style={{ color: '#ffffff !important' }} />
-                  <span className="text-sm" style={{ color: '#ffffff !important' }}>5,000+ authentic medical questions</span>
+                  <CheckCircle className="h-4 w-4" />
+                  <span className="text-sm">5,000+ authentic medical questions</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" style={{ color: '#ffffff !important' }} />
-                  <span className="text-sm" style={{ color: '#ffffff !important' }}>Difficulty adaptation algorithms</span>
+                  <CheckCircle className="h-4 w-4" />
+                  <span className="text-sm">Difficulty adaptation algorithms</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" style={{ color: '#ffffff !important' }} />
-                  <span className="text-sm" style={{ color: '#ffffff !important' }}>Weakness-targeted question creation</span>
+                  <CheckCircle className="h-4 w-4" />
+                  <span className="text-sm">Weakness-targeted question creation</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" style={{ color: '#ffffff !important' }} />
-                  <span className="text-sm" style={{ color: '#ffffff !important' }}>UK medical guidelines integration</span>
+                  <CheckCircle className="h-4 w-4" />
+                  <span className="text-sm">UK medical guidelines integration</span>
                 </div>
               </div>
             </CardContent>
