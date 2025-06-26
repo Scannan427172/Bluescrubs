@@ -886,16 +886,14 @@ export default function Plab2Osce() {
         <div className="mt-12 mb-8">
           <Card className="border-2 border-green-200 bg-gradient-to-r from-green-50 to-teal-50">
             <CardHeader>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Brain className="w-6 h-6 text-green-600" />
                 </div>
-                <div>
-                  <CardTitle className="text-2xl text-green-800">Interactive 3D Human Anatomy</CardTitle>
-                  <CardDescription className="text-green-700">
-                    Explore detailed 3D anatomy to enhance your clinical examination skills
-                  </CardDescription>
-                </div>
+                <CardTitle className="text-2xl text-green-800 mb-2">Interactive 3D Human Anatomy</CardTitle>
+                <CardDescription className="text-green-700">
+                  Explore detailed 3D anatomy to enhance your clinical examination skills
+                </CardDescription>
               </div>
             </CardHeader>
             <CardContent>
