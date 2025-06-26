@@ -44,7 +44,7 @@ export default function Landing() {
             {/* Compact Title */}
             <div className="space-y-2">
               <Logo size="lg" />
-              <h1 className="text-2xl lg:text-3xl font-bold text-white">
+              <h1 className="text-2xl lg:text-3xl font-bold text-white drop-shadow-lg">
                 Master Your Journey
               </h1>
               <p className="text-sm text-white/90 font-medium">
