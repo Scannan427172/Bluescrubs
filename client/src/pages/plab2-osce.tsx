@@ -542,10 +542,10 @@ export default function Plab2Osce() {
       >
 
         <div className="relative z-50 flex flex-col items-center justify-center text-center px-4 sm:px-8 py-12 sm:py-16 hero-text">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-black">
             PLAB 2 OSCE Practice
           </h1>
-          <p className="text-lg sm:text-xl lg:text-2xl mb-6 px-4">
+          <p className="text-lg sm:text-xl lg:text-2xl mb-6 px-4 text-black">
             Master clinical skills with comprehensive OSCE stations
           </p>
         </div>
