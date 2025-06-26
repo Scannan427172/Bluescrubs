@@ -19,18 +19,21 @@ export default function Landing() {
           style={{ objectFit: 'cover' }}
           autoPlay
           muted
-          loop
           playsInline
           preload="metadata"
+          onEnded={(e) => {
+            const video = e.target as HTMLVideoElement;
+            video.currentTime = video.duration;
+          }}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
         
 
         
-        {/* Hero Content - Minimal Layout */}
-        <div className="relative z-10 flex flex-col justify-center items-center min-h-screen px-4">
-          {/* Compact Central Content */}
+        {/* Hero Content - Bottom Aligned Layout */}
+        <div className="relative z-10 flex flex-col justify-end items-center min-h-screen px-4 pb-8">
+          {/* Compact Bottom Content */}
           <div className="text-center space-y-4">
             {/* Small Badge */}
             <div className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
@@ -44,17 +47,20 @@ export default function Landing() {
               <h1 className="text-2xl lg:text-3xl font-bold text-white">
                 Master Your Journey
               </h1>
+              <p className="text-sm text-white/90 font-medium">
+                Comprehensive PLAB Preparation
+              </p>
             </div>
-          </div>
-          
-          {/* Bottom Button - Ultra Minimal */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
-            <Link href="/premium">
-              <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 text-sm font-medium rounded-lg shadow-lg hover:shadow-blue-500/25 transition-all duration-300 group">
-                Start Free Trial
-                <ArrowRight className="ml-1 w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            
+            {/* Bottom Button */}
+            <div className="pt-2">
+              <Link href="/premium">
+                <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 text-sm font-medium rounded-lg shadow-lg hover:shadow-blue-500/25 transition-all duration-300 group">
+                  Start Free Trial
+                  <ArrowRight className="ml-1 w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
 
