@@ -436,7 +436,18 @@ export default function Plab2Osce() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Bot className="w-5 h-5 text-blue-600" />
-                        <h4 id="ai-clinical-skills-tutor-heading" className="font-semibold text-black ai-tutor-text" style={{ color: '#000000 !important' }}>AI Clinical Skills Tutor</h4>
+                        <h4 
+                          id="ai-clinical-skills-tutor-heading" 
+                          className="font-semibold ai-tutor-text" 
+                          style={{ 
+                            color: '#000000 !important',
+                            backgroundColor: 'rgba(255,255,255,0.9)',
+                            padding: '2px 4px',
+                            borderRadius: '4px'
+                          }}
+                        >
+                          AI Clinical Skills Tutor
+                        </h4>
                       </div>
                       <Button
                         variant="outline"
