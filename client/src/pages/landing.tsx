@@ -38,7 +38,7 @@ export default function Landing() {
             {/* Small Badge */}
             <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
               <Star className="w-5 h-5 mr-3 text-yellow-400" />
-              <span className="text-base font-medium text-white">PLAB 1 and 2 Prep</span>
+              <span className="text-base font-medium text-white">Complete PLAB Mastery</span>
             </div>
             
             {/* Compact Title */}

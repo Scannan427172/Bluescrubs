@@ -252,7 +252,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: ADAPTIVE LEARNING BACKGROUND LIGHTENING - Changed card backgrounds to lighter shades (blue-300/400, purple-300/400) for improved text readability with white text
 - June 26, 2025: ZYGOTE BODY 3D ANATOMY INTEGRATION - Added interactive 3D human anatomy viewer to PLAB 2 section using free Zygote Body platform, includes usage instructions, system highlights for cardiovascular/neurological/respiratory anatomy, and clinical examination preparation tools
 - June 26, 2025: ZYGOTE BODY IFRAME FIX - Resolved iframe embedding restrictions by replacing with direct link button that opens full Zygote Body website in new tab for optimal anatomy viewing experience
-- June 26, 2025: HERO BANNER TEXT UPDATE - Changed "Medical Exam Prep" badge to "PLAB 1 and 2 Prep" for more specific branding focus
+- June 26, 2025: HERO BANNER TEXT UPDATE - Changed "Medical Exam Prep" badge to "Complete PLAB Mastery" for more comprehensive branding focus
 - June 26, 2025: 3D ANATOMY SECTION CENTERING - Centered all text elements in the Interactive 3D Human Anatomy section including title, description, and Zygote Body viewer heading
 - June 26, 2025: 3D ANATOMY SECTION REMOVAL - Completely removed the Interactive 3D Human Anatomy section from PLAB 2 page bottom per user request
 
