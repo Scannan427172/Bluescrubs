@@ -45,6 +45,9 @@ import LiveAnalytics from "@/pages/live-analytics";
 import GenerationStatus from "@/pages/generation-status";
 import CostCalculator from "@/pages/cost-calculator";
 import HowTo from "@/pages/how-to";
+import Security from "@/pages/security";
+import Settings from "@/pages/settings";
+import Team from "@/pages/team";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -411,6 +414,33 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <HowTo />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/security">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Security />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/settings">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Settings />
+          </div>
+        </div>
+      </Route>
+
+      <Route path="/team">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <Team />
           </div>
         </div>
       </Route>

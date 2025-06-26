@@ -99,14 +99,14 @@ export default function More() {
       title: "Security",
       description: "Security settings and access controls",
       hasArrow: true,
-      link: "/premium"
+      link: "/security"
     },
     {
       icon: Settings,
       title: "Settings",
       description: "Platform configuration and preferences",
       hasArrow: true,
-      link: "/dashboard"
+      link: "/settings"
     }
   ];
 
@@ -129,73 +129,85 @@ link: "/dashboard"
       icon: BookOpen,
       title: "Study Resources",
       description: "PLAB exam guides, medical textbooks, and educational materials",
-      hasArrow: true
+      hasArrow: true,
+      link: "/clinical-guides"
     },
     {
       icon: Heart,
       title: "Clinical Skills",
       description: "Essential clinical examination techniques and patient care",
-      hasArrow: true
+      hasArrow: true,
+      link: "/plab2-osce"
     },
     {
       icon: Award,
       title: "Achievements",
       description: "Your PLAB preparation milestones and progress badges",
-      hasArrow: true
+      hasArrow: true,
+      link: "/dashboard"
     },
     {
       icon: Clock,
       title: "Study History",
       description: "Past study sessions and examination progress tracking",
-      hasArrow: true
+      hasArrow: true,
+      link: "/analytics"
     },
     {
       icon: User,
       title: "Medical Profile",
       description: "Manage your medical student profile and preferences",
-      hasArrow: true
+      hasArrow: true,
+      link: "/settings"
     },
     {
       icon: Users,
       title: "Mentors Corner",
       description: "Exclusive resources and guidance from medical mentors",
-      hasArrow: true
+      hasArrow: true,
+      link: "/community"
     },
     {
       icon: FileText,
       title: "GMC Guidelines",
       description: "Official GMC regulations and medical practice standards",
-      hasArrow: true
+      hasArrow: true,
+      link: "/clinical-guides"
     },
     {
       icon: Stethoscope,
       title: "Clinical Cases",
       description: "Interactive medical case studies and diagnostic scenarios",
-      hasArrow: true
+      hasArrow: true,
+      link: "/plab1-new"
     },
     {
       icon: Shield,
       title: "Patient Safety",
       description: "Essential patient safety protocols and risk management",
-      hasArrow: true
+      hasArrow: true,
+      link: "/security"
     },
     {
       icon: Brain,
       title: "Medical Knowledge",
       description: "Comprehensive medical knowledge assessment and tracking",
-      hasArrow: true
+      hasArrow: true,
+      link: "/ask-ai"
     },
     {
       icon: Activity,
       title: "Performance Analytics",
       description: "Detailed analysis of your PLAB preparation performance",
-      hasArrow: true
+      hasArrow: true,
+      link: "/analytics"
     },
     {
       icon: Camera,
       title: "OSCE Practice",
       description: "Video-based OSCE station practice and skill assessment",
-      hasArrow: true
+      hasArrow: true,
+      link: "/plab2-osce"
     },
     {
       icon: Users,
