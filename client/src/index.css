@@ -38,6 +38,28 @@
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6) !important;
   }
   
+  /* AI Clinical Skills Tutor black text override within utilities layer */
+  .ai-tutor-text,
+  .ai-tutor-text *,
+  h4.ai-tutor-text,
+  h4.font-semibold.text-black.ai-tutor-text,
+  .p-4.border-b.border-gray-200.bg-gradient-to-r.from-blue-50.to-indigo-50 h4.ai-tutor-text {
+    color: #000000 !important;
+    text-shadow: none !important;
+  }
+  
+  /* Prevent hero-text from affecting AI tutor */
+  .hero-text .ai-tutor-text,
+  .hero-text * .ai-tutor-text {
+    color: #000000 !important;
+  }
+  
+  /* Ultimate override with ID selector */
+  #ai-clinical-skills-tutor-heading {
+    color: #000000 !important;
+    text-shadow: none !important;
+  }
+  
   /* Mobile text adjustments */
   @media (max-width: 768px) {
     .hero-text h1 {
@@ -98,10 +120,30 @@
     color: white !important;
   }
   
-  /* Force black text for AI Clinical Skills Tutor */
+  /* Force black text for AI Clinical Skills Tutor - Very specific override */
   .ai-tutor-text,
-  .ai-tutor-text * {
+  .ai-tutor-text *,
+  h4.ai-tutor-text,
+  .bg-gradient-to-r .ai-tutor-text,
+  .from-blue-50 .ai-tutor-text,
+  .to-indigo-50 .ai-tutor-text,
+  div.bg-gradient-to-r.from-blue-50.to-indigo-50 h4.ai-tutor-text,
+  .border-gray-200 .ai-tutor-text {
     color: #000000 !important;
+    text-shadow: none !important;
+  }
+  
+  /* Override any hero text rules for AI tutor specifically */
+  .hero-text .ai-tutor-text,
+  .hero-text * .ai-tutor-text {
+    color: #000000 !important;
+  }
+  
+  /* Maximum specificity override outside utilities layer */
+  html body div#ai-clinical-skills-tutor-heading,
+  html body h4#ai-clinical-skills-tutor-heading {
+    color: #000000 !important;
+    text-shadow: none !important;
   }
   
   .hero-text-white,
