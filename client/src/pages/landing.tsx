@@ -36,9 +36,9 @@ export default function Landing() {
           {/* Compact Bottom Content */}
           <div className="text-center space-y-4 hero-text">
             {/* Small Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
-              <Star className="w-4 h-4 mr-2 text-yellow-400" />
-              <span className="text-sm font-medium text-white">Medical Exam Prep</span>
+            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
+              <Star className="w-5 h-5 mr-3 text-yellow-400" />
+              <span className="text-base font-medium text-white">Medical Exam Prep</span>
             </div>
             
             {/* Compact Title */}
