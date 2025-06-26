@@ -264,6 +264,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: APP SIZE OPTIMIZATION - Reduced application size from 1.5GB to 1.3GB by removing 282 unused assets (183MB to 18MB), compressing hero video by 94% (4.3MB to 284KB), and cleaning up generated JSON files for improved performance
 - June 26, 2025: VIDEO STRETCHING FIX - Resolved video distortion by removing transform scale properties and using proper object-fit cover positioning for natural proportions
 - June 26, 2025: UK ENGLISH DEFAULT SETTING - Updated HTML lang attribute to en-GB, modified internationalization system to use UK English as default language, and configured proper British locale formatting for dates, numbers, and currency throughout the platform
+- June 26, 2025: HOW TO GUIDE CREATION - Created comprehensive "How to Use BlueScrubsPrep" page with quick start guide, feature explanations, study tips, best practices, FAQ section, and step-by-step instructions for PLAB 1 & 2 preparation - added to More section as first featured card for easy user access
 
 # User Preferences
 

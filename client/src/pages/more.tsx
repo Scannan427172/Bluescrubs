@@ -106,6 +106,13 @@ export default function More() {
 
   const features = [
     {
+      icon: BookOpen,
+      title: "How to Use BlueScrubsPrep",
+      description: "Complete guide to mastering PLAB 1 & 2 preparation with our platform",
+      hasArrow: true,
+      link: "/how-to"
+    },
+    {
       icon: Users,
       title: "Who are BlueScrubsPrep",
       description: "Meet the founders - NHS doctor Yasa and developer Keith Hunter",
