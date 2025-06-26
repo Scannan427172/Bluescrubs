@@ -918,36 +918,32 @@ export default function Plab2Osce() {
                 <div className="bg-white p-4 rounded-lg border border-green-200">
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="font-semibold text-green-800">Zygote Body 3D Anatomy Viewer</h4>
-                    <div className="flex gap-2">
-                      <Button
-                        onClick={() => window.open('https://www.zygotebody.com/', '_blank')}
-                        variant="outline"
-                        size="sm"
-                        className="border-green-300 text-green-700 hover:bg-green-50"
-                      >
-                        <Maximize className="w-4 h-4 mr-2" />
-                        Open Full Site
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          const iframe = document.getElementById('zygote-iframe') as HTMLIFrameElement;
-                          if (iframe) {
-                            iframe.src = 'https://human.biodigital.com/view?id=production_maleAdult01_heartCardiovascularSystem&lang=en';
+                    <Button
+                      onClick={() => {
+                        const iframe = document.getElementById('zygote-iframe') as HTMLIFrameElement;
+                        if (iframe) {
+                          if (iframe.requestFullscreen) {
+                            iframe.requestFullscreen();
+                          } else if ((iframe as any).webkitRequestFullscreen) {
+                            (iframe as any).webkitRequestFullscreen();
+                          } else if ((iframe as any).msRequestFullscreen) {
+                            (iframe as any).msRequestFullscreen();
                           }
-                        }}
-                        variant="outline"
-                        size="sm"
-                        className="border-blue-300 text-blue-700 hover:bg-blue-50"
-                      >
-                        Alternative Viewer
-                      </Button>
-                    </div>
+                        }
+                      }}
+                      variant="outline"
+                      size="sm"
+                      className="border-green-300 text-green-700 hover:bg-green-50"
+                    >
+                      <Maximize className="w-4 h-4 mr-2" />
+                      Fullscreen
+                    </Button>
                   </div>
                   
                   <div className="relative">
                     <iframe
                       id="zygote-iframe"
-                      src="https://human.biodigital.com/embed/production_maleAdult01_heartCardiovascularSystem"
+                      src="https://www.zygotebody.com/embed"
                       width="100%"
                       height="600"
                       style={{ border: 'none', borderRadius: '8px' }}
@@ -959,7 +955,7 @@ export default function Plab2Osce() {
                   <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
                     <p className="text-sm text-green-700">
                       <strong>Usage Instructions:</strong> Use your mouse to rotate the 3D model. Click and drag to explore different angles. 
-                      The viewer shows detailed cardiovascular anatomy. Click "Open Full Site" to access the complete Zygote Body platform with all body systems.
+                      Use the controls within the viewer to isolate specific body systems and organs relevant to your OSCE preparation.
                     </p>
                   </div>
                 </div>
