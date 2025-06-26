@@ -244,6 +244,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: ANSWER EXPLANATION BULLET POINT REFINEMENT - Removed green dots from lines ending with colons in correct answer explanations and made those lines bold for better visual hierarchy
 - June 26, 2025: GREEN BOX VISIBILITY FIX - Fixed layout and overflow issues causing green answer explanation boxes to be cut off by adding comprehensive CSS overrides for width, margins, and mobile responsiveness
 - June 26, 2025: PLAB 2 HERO TEXT COLOR FIX - Made PLAB 2 OSCE Practice hero banner text black for improved readability
+- June 26, 2025: AI TUTOR TEXT COLOR FIX - Applied forced black color styling to "AI Clinical Skills Tutor" text in blue section for maximum visibility
 
 # User Preferences
 
