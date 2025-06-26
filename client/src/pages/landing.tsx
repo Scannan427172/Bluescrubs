@@ -18,9 +18,9 @@ export default function Landing() {
           className="absolute inset-0 w-full h-full"
           style={{ 
             objectFit: 'cover',
-            objectPosition: 'center center',
-            transform: 'scale(1.3)',
-            transformOrigin: 'center center',
+            objectPosition: 'center 30%',
+            transform: 'scale(1.4)',
+            transformOrigin: 'center 30%',
             willChange: 'transform'
           }}
           autoPlay
