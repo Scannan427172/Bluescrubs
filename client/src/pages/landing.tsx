@@ -19,7 +19,7 @@ export default function Landing() {
           style={{ 
             objectFit: 'cover',
             objectPosition: 'center center',
-            transform: 'scale(1.2)',
+            transform: 'scale(1.5)',
             transformOrigin: 'center center',
             willChange: 'transform'
           }}
