@@ -34,7 +34,7 @@ export default function Landing() {
         {/* Hero Content - Bottom Aligned Layout */}
         <div className="relative z-10 flex flex-col justify-end items-center min-h-screen px-4 pb-8">
           {/* Compact Bottom Content */}
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-4 hero-text">
             {/* Small Badge */}
             <div className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-blue-400/30">
               <Star className="w-3 h-3 mr-1 text-yellow-400" />
@@ -43,11 +43,13 @@ export default function Landing() {
             
             {/* Compact Title */}
             <div className="space-y-2">
-              <Logo size="lg" />
-              <h1 className="text-2xl lg:text-3xl font-bold text-white drop-shadow-lg">
+              <div style={{ color: '#ffffff' }}>
+                <Logo size="lg" className="text-white" />
+              </div>
+              <h1 className="text-2xl lg:text-3xl font-bold drop-shadow-lg !text-white" style={{ color: '#ffffff !important' }}>
                 Master Your Journey
               </h1>
-              <p className="text-sm text-white font-medium drop-shadow-lg">
+              <p className="text-sm font-medium drop-shadow-lg !text-white" style={{ color: '#ffffff !important' }}>
                 Comprehensive PLAB Preparation
               </p>
             </div>
