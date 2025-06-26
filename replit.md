@@ -251,6 +251,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: ADAPTIVE LEARNING TEXT CONTRAST FIX - Applied inline CSS with !important declarations to force white text visibility on dashboard cards, bypassing CSS conflicts
 - June 26, 2025: ADAPTIVE LEARNING BACKGROUND LIGHTENING - Changed card backgrounds to lighter shades (blue-300/400, purple-300/400) for improved text readability with white text
 - June 26, 2025: ZYGOTE BODY 3D ANATOMY INTEGRATION - Added interactive 3D human anatomy viewer to PLAB 2 section using free Zygote Body platform, includes usage instructions, system highlights for cardiovascular/neurological/respiratory anatomy, and clinical examination preparation tools
+- June 26, 2025: ZYGOTE BODY IFRAME FIX - Resolved iframe embedding restrictions by replacing with direct link button that opens full Zygote Body website in new tab for optimal anatomy viewing experience
 
 # User Preferences
 

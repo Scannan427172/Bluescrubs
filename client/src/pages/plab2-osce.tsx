@@ -918,38 +918,23 @@ export default function Plab2Osce() {
                 <div className="bg-white p-4 rounded-lg border border-green-200">
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="font-semibold text-green-800">Zygote Body 3D Anatomy Viewer</h4>
-                    <Button
-                      onClick={() => {
-                        const iframe = document.getElementById('zygote-iframe') as HTMLIFrameElement;
-                        if (iframe) {
-                          if (iframe.requestFullscreen) {
-                            iframe.requestFullscreen();
-                          } else if ((iframe as any).webkitRequestFullscreen) {
-                            (iframe as any).webkitRequestFullscreen();
-                          } else if ((iframe as any).msRequestFullscreen) {
-                            (iframe as any).msRequestFullscreen();
-                          }
-                        }
-                      }}
-                      variant="outline"
-                      size="sm"
-                      className="border-green-300 text-green-700 hover:bg-green-50"
-                    >
-                      <Maximize className="w-4 h-4 mr-2" />
-                      Fullscreen
-                    </Button>
                   </div>
                   
                   <div className="relative">
-                    <iframe
-                      id="zygote-iframe"
-                      src="https://www.zygotebody.com/embed"
-                      width="100%"
-                      height="600"
-                      style={{ border: 'none', borderRadius: '8px' }}
-                      title="3D Human Anatomy Viewer"
-                      allowFullScreen
-                    />
+                    <div className="bg-gray-100 rounded-lg p-8 text-center">
+                      <Brain className="w-16 h-16 mx-auto mb-4 text-green-600" />
+                      <h4 className="text-lg font-semibold text-gray-800 mb-2">3D Anatomy Access</h4>
+                      <p className="text-gray-600 mb-4">
+                        Click below to open the Zygote Body 3D anatomy viewer in a new tab for optimal viewing experience.
+                      </p>
+                      <Button
+                        onClick={() => window.open('https://www.zygotebody.com/', '_blank')}
+                        className="bg-green-600 hover:bg-green-700 text-white"
+                      >
+                        <Maximize className="w-4 h-4 mr-2" />
+                        Open Zygote Body 3D Viewer
+                      </Button>
+                    </div>
                   </div>
                   
                   <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
