@@ -118,6 +118,35 @@ export const globalLeaderboard = pgTable("global_scoreboard", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+// Chat conversation tables for study companion
+export const chatConversations = pgTable("chat_conversations", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id").notNull(),
+  title: text("title").notNull(),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const chatMessages = pgTable("chat_messages", {
+  id: serial("id").primaryKey(),
+  conversationId: integer("conversation_id").notNull(),
+  role: text("role").notNull(), // user, assistant, system
+  content: text("content").notNull(),
+  metadata: jsonb("metadata"), // quote info, study stats, etc
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const motivationalQuotes = pgTable("motivational_quotes", {
+  id: serial("id").primaryKey(),
+  category: text("category").notNull(), // study, success, perseverance, medical
+  quote: text("quote").notNull(),
+  author: text("author").notNull(),
+  tags: jsonb("tags"), // array of relevant tags
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 // Removed duplicate table definitions - keeping the ones below
 
 // Block-based leaderboard tables
@@ -703,3 +732,28 @@ export type StudyGroupMember = typeof studyGroupMembers.$inferSelect;
 export type InsertStudyGroupMember = z.infer<typeof insertStudyGroupMemberSchema>;
 export type CountryStats = typeof countryStats.$inferSelect;
 export type InsertCountryStats = z.infer<typeof insertCountryStatsSchema>;
+
+// Chat and motivational quotes schemas
+export const insertChatConversationSchema = createInsertSchema(chatConversations).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertChatMessageSchema = createInsertSchema(chatMessages).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertMotivationalQuoteSchema = createInsertSchema(motivationalQuotes).omit({
+  id: true,
+  createdAt: true,
+});
+
+// Chat types
+export type ChatConversation = typeof chatConversations.$inferSelect;
+export type InsertChatConversation = z.infer<typeof insertChatConversationSchema>;
+export type ChatMessage = typeof chatMessages.$inferSelect;
+export type InsertChatMessage = z.infer<typeof insertChatMessageSchema>;
+export type MotivationalQuote = typeof motivationalQuotes.$inferSelect;
+export type InsertMotivationalQuote = z.infer<typeof insertMotivationalQuoteSchema>;
