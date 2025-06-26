@@ -240,6 +240,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 25, 2025: BADGE AND LOGO ENHANCEMENT - Increased Medical Exam Prep badge size with larger padding and text, restored BlueScrubsPrep logo pulsating animation with xl size and gradient colors
 - June 26, 2025: ENHANCED VISUAL EXPLANATION FORMATTING - Implemented structured answer explanations with professional icons, color-coded sections, and improved visual hierarchy for both correct answers (green theme with checkmarks, shields, targets) and incorrect options (red theme with warning icons) - matches medical education best practices for scannable, digestible content
 - June 26, 2025: HERO BANNER SUBTEXT ENHANCEMENT - Made "PLAB" bold in hero banner subtext "Comprehensive PLAB Preparation" for improved visual emphasis
+- June 26, 2025: NICE GUIDE TEXT COLOR FIX - Fixed white text issue in NICE NG136 overlay blocks by adding specific CSS overrides for light backgrounds to ensure proper black text visibility
 
 # User Preferences
 
