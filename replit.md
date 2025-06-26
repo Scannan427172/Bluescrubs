@@ -1,6 +1,6 @@
 # Overview
 
-This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and Linguistic Assessments Board) exam preparation platform designed for international medical graduates seeking to practice medicine in the UK. The application integrates PLAB 1 knowledge testing with PLAB 2 clinical skills training, incorporating UK medical guidelines (NICE, CKS, GMC) and neurodiversity accommodations.
+This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and Linguistic Assessments Board) exam preparation platform designed for international medical graduates seeking to practice medicine in the UK. BlueScrubsPrep offers "Professional PLAB Preparation" through an integrated ecosystem combining PLAB 1 knowledge testing with PLAB 2 clinical skills training, incorporating UK medical guidelines (NICE, CKS, GMC) and neurodiversity accommodations. The platform has evolved from NHSprep to BlueScrubsPrep with enhanced branding and comprehensive medical education features.
 
 # System Architecture
 
@@ -255,7 +255,31 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: HERO BANNER TEXT UPDATE - Changed "Medical Exam Prep" badge to "Professional PLAB Preparation" for more professional branding focus
 - June 26, 2025: 3D ANATOMY SECTION CENTERING - Centered all text elements in the Interactive 3D Human Anatomy section including title, description, and Zygote Body viewer heading
 - June 26, 2025: 3D ANATOMY SECTION REMOVAL - Completely removed the Interactive 3D Human Anatomy section from PLAB 2 page bottom per user request
+- June 26, 2025: HERO BANNER BADGE TEXT ENLARGEMENT - Increased badge text size from text-base to text-lg for better visibility of "Professional PLAB Preparation"
+- June 26, 2025: COMPREHENSIVE DOCUMENTATION UPDATE - Updated all project documentation to reflect BlueScrubsPrep branding and Professional PLAB Preparation positioning
 
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+
+# Brand Identity
+
+## Current Branding
+- **Platform Name**: BlueScrubsPrep (formerly NHSprep)
+- **Tagline**: "Professional PLAB Preparation"
+- **Target Audience**: International medical graduates preparing for UK medical licensing
+- **Core Focus**: PLAB 1 and PLAB 2 comprehensive exam preparation
+
+## Visual Identity
+- **Primary Colors**: Blue gradients with purple accents
+- **Hero Banner**: Video background with "Professional PLAB Preparation" badge
+- **Logo**: BlueScrubsPrep with pulsating animation
+- **Typography**: Clean, professional fonts with proper contrast
+
+## Platform Statistics (Current)
+- **Question Bank**: 5,528 authentic medical questions
+- **OSCE Stations**: 3,898 clinical scenarios
+- **Language Support**: 39 languages with medical terminology
+- **AI Features**: Hybrid system with independent fallbacks
+- **Specialties Covered**: 11 major medical specialties
+- **Exam Systems**: PLAB, USMLE, AMC, MCCQE support
