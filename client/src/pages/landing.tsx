@@ -17,9 +17,10 @@ export default function Landing() {
           src={heroVideo}
           className="absolute inset-0 w-full h-full"
           style={{ 
-            objectFit: 'fill',
-            width: '100%',
-            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            transform: 'scale(1.3)',
+            transformOrigin: 'center center',
             willChange: 'transform'
           }}
           autoPlay
