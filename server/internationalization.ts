@@ -85,9 +85,9 @@ export class InternationalisationEngine {
   // Supported languages prioritised by international medical graduate populations
   private supportedLanguages: Language[] = [
     {
-      code: 'en',
-      name: 'English',
-      nativeName: 'English',
+      code: 'en-GB',
+      name: 'English (UK)',
+      nativeName: 'English (UK)',
       flag: '🇬🇧',
       rtl: false,
       medicalTerminologySupport: true,

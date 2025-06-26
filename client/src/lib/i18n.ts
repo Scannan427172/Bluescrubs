@@ -12,7 +12,7 @@ export interface LanguageOption {
 }
 
 export const SUPPORTED_LANGUAGES: LanguageOption[] = [
-  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧' },
+  { code: 'en', name: 'English (UK)', nativeName: 'English (UK)', flag: '🇬🇧' },
   { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
   { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
@@ -465,7 +465,7 @@ class I18nManager {
 
   private updateDocumentDirection(): void {
     document.documentElement.dir = this.isRTL() ? 'rtl' : 'ltr';
-    document.documentElement.lang = this.currentLanguage;
+    document.documentElement.lang = this.currentLanguage === 'en' ? 'en-GB' : this.currentLanguage;
   }
 
   onLanguageChange(listener: (language: Language) => void): () => void {
@@ -484,12 +484,14 @@ class I18nManager {
 
   // Format numbers according to locale
   formatNumber(number: number): string {
-    return new Intl.NumberFormat(this.currentLanguage).format(number);
+    const locale = this.currentLanguage === 'en' ? 'en-GB' : this.currentLanguage;
+    return new Intl.NumberFormat(locale).format(number);
   }
 
   // Format dates according to locale
   formatDate(date: Date, options?: Intl.DateTimeFormatOptions): string {
-    return new Intl.DateTimeFormat(this.currentLanguage, options).format(date);
+    const locale = this.currentLanguage === 'en' ? 'en-GB' : this.currentLanguage;
+    return new Intl.DateTimeFormat(locale, options).format(date);
   }
 
   // Format currency according to locale
