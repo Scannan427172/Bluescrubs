@@ -123,7 +123,7 @@ export default function More() {
       title: "Who are BlueScrubsPrep",
       description: "Meet the founders - NHS doctor Yasa and developer Keith Hunter",
       hasArrow: true,
-link: "/dashboard"
+      link: "/team"
     },
     {
       icon: BookOpen,
@@ -424,117 +424,7 @@ link: "/ask-ai"
           </Card>
         </div>
 
-        {/* Team Section */}
-        <div className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Meet the BlueScrubsPrep Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Dr. Yasar Ahmad */}
-            <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
-                    <Stethoscope className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-green-900">Dr. Yasar Ahmad</CardTitle>
-                    <CardDescription className="text-green-700">Medical Director & Clinical Advisor</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 text-sm">
-                  <div className="bg-white/50 p-3 rounded-lg">
-                    <h4 className="font-semibold text-green-900 mb-2">Qualifications</h4>
-                    <ul className="text-gray-700 space-y-1">
-                      <li>• B.Sc (Hons), MBBS, MRCGP</li>
-                      <li>• PGCert in Clinical Practice, Management and Education</li>
-                      <li>• PGCert in Advancing Diabetes Care</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="bg-white/50 p-3 rounded-lg">
-                    <h4 className="font-semibold text-green-900 mb-2">Current Roles</h4>
-                    <ul className="text-gray-700 space-y-1">
-                      <li>• Salaried/Sessional GP</li>
-                      <li>• CMN Audit Lead</li>
-                      <li>• Clinical Supervisor</li>
-                    </ul>
-                  </div>
-                  
-                  <p className="text-gray-600 italic">
-                    Dr. Ahmad ensures all medical content meets the highest clinical standards and UK medical practice guidelines.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
 
-            {/* Keith Hunter */}
-            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                    <User className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-blue-900">Keith Hunter</CardTitle>
-                    <CardDescription className="text-blue-700">Co-Founder & Creative Director</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 text-sm">
-                  <p className="text-gray-700">
-                    Creative, multidisciplinary freelance digital creative with over 35 years commercial experience in web, print, motion graphics, identity design, and app development.
-                  </p>
-                  
-                  <div className="bg-white/50 p-3 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">Academic Qualifications</h4>
-                    <p className="text-gray-700">BA Hons Dip CSD</p>
-                  </div>
-                  
-                  <div className="bg-white/50 p-3 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">Massage Therapy Qualifications</h4>
-                    <ul className="text-gray-700 space-y-1 text-xs">
-                      <li>• Therapist Qualification</li>
-                      <li>• Mobilis Stabilise Phase 'British Athletics'</li>
-                      <li>• Mobilis Normalise Phase 'British Athletics'</li>
-                      <li>• Mobilis Functionalise Phase 'British Athletics'</li>
-                      <li>• Strength and Conditioning 'British Athletics'</li>
-                      <li>• Biomechanical Assessment 'Sporting Therapy Organisation'</li>
-                      <li>• Myofascial Release Structural Integration Techniques</li>
-                      <li>• Level 4 British Athletics Coach</li>
-                      <li>• Pregnancy Massage</li>
-                      <li>• Swedish Massage</li>
-                      <li>• Sports Massage</li>
-                      <li>• Deep Tissue Massage</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="bg-white/50 p-3 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">Awards & Recognition</h4>
-                    <ul className="text-gray-700 space-y-1">
-                      <li>• Coach of the Year 2012</li>
-                      <li>• Queens Award 2020</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="bg-white/50 p-3 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">Athletic Achievements</h4>
-                    <ul className="text-gray-700 space-y-1">
-                      <li>• Coached 1 European bronze medalist</li>
-                      <li>• One European long jump champion</li>
-                      <li>• One world champion bronze medalist</li>
-                    </ul>
-                  </div>
-                  
-                  <p className="text-gray-600 italic">
-                    Based in Manchester, Keith brings decades of design expertise and coaching excellence to medical education technology.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
 
         {/* Features Section */}
         <div className="mb-12">

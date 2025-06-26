@@ -265,6 +265,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: VIDEO STRETCHING FIX - Resolved video distortion by removing transform scale properties and using proper object-fit cover positioning for natural proportions
 - June 26, 2025: UK ENGLISH DEFAULT SETTING - Updated HTML lang attribute to en-GB, modified internationalization system to use UK English as default language, and configured proper British locale formatting for dates, numbers, and currency throughout the platform
 - June 26, 2025: HOW TO GUIDE CREATION - Created comprehensive "How to Use BlueScrubsPrep" page with quick start guide, feature explanations, study tips, best practices, FAQ section, and step-by-step instructions for PLAB 1 & 2 preparation - added to More section as first featured card for easy user access
+- June 26, 2025: TEAM PAGE CREATION - Created dedicated Team page (/team) featuring Dr. Yasar Ahmad (Medical Director) and Keith Hunter (Co-Founder & Creative Director) with comprehensive professional backgrounds, qualifications, achievements, and company values - moved team details from More page to dedicated page for better organization
 
 # User Preferences
 
