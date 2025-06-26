@@ -242,6 +242,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: HERO BANNER SUBTEXT ENHANCEMENT - Made "PLAB" bold in hero banner subtext "Comprehensive PLAB Preparation" for improved visual emphasis
 - June 26, 2025: NICE GUIDE TEXT COLOR FIX - Fixed white text issue in NICE NG136 overlay blocks by adding specific CSS overrides for light backgrounds to ensure proper black text visibility
 - June 26, 2025: ANSWER EXPLANATION BULLET POINT REFINEMENT - Removed green dots from lines ending with colons in correct answer explanations and made those lines bold for better visual hierarchy
+- June 26, 2025: GREEN BOX VISIBILITY FIX - Fixed layout and overflow issues causing green answer explanation boxes to be cut off by adding comprehensive CSS overrides for width, margins, and mobile responsiveness
 
 # User Preferences
 

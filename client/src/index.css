@@ -317,6 +317,54 @@ button[class*="bg-gradient"], button[class*="bg-gradient"] * {
   color: #000000 !important;
 }
 
+/* Fix layout and overflow issues for green answer explanation boxes */
+.min-h-screen {
+  overflow-x: visible !important;
+  width: 100% !important;
+}
+
+/* Ensure green explanation boxes are fully visible */
+.border-l-4.border-green-400,
+.bg-green-50\/50,
+.bg-green-100 {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+/* Fix container overflow for answer explanations */
+.space-y-4 > div,
+.space-y-6 > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Ensure card content doesn't clip green boxes */
+.card-content,
+.p-6 {
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+/* Mobile responsive fixes for green boxes */
+@media (max-width: 768px) {
+  .border-l-4.border-green-400 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 12px !important;
+    width: 100% !important;
+  }
+  
+  .bg-green-50\/50 {
+    padding: 12px !important;
+    width: 100% !important;
+  }
+}
+
 /* Card and container backgrounds */
 .bg-white {
   background-color: white !important;
