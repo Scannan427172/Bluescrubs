@@ -15,12 +15,10 @@ export default function Landing() {
       <div className="relative w-full h-screen overflow-hidden bg-gradient-to-r from-blue-600 to-purple-700 mb-0">
         <video 
           src={heroVideo}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full object-cover"
           style={{ 
             objectFit: 'cover',
-            objectPosition: 'center 30%',
-            transform: 'scale(1.4)',
-            transformOrigin: 'center 30%',
+            objectPosition: 'center center',
             willChange: 'transform'
           }}
           autoPlay
