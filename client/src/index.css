@@ -98,6 +98,12 @@
     color: white !important;
   }
   
+  /* Force black text for AI Clinical Skills Tutor */
+  .ai-tutor-text,
+  .ai-tutor-text * {
+    color: #000000 !important;
+  }
+  
   .hero-text-white,
   .hero-text-white *,
   .hero-text-white h1,
