@@ -254,6 +254,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: ZYGOTE BODY IFRAME FIX - Resolved iframe embedding restrictions by replacing with direct link button that opens full Zygote Body website in new tab for optimal anatomy viewing experience
 - June 26, 2025: HERO BANNER TEXT UPDATE - Changed "Medical Exam Prep" badge to "PLAB 1 and 2 Prep" for more specific branding focus
 - June 26, 2025: 3D ANATOMY SECTION CENTERING - Centered all text elements in the Interactive 3D Human Anatomy section including title, description, and Zygote Body viewer heading
+- June 26, 2025: 3D ANATOMY SECTION REMOVAL - Completely removed the Interactive 3D Human Anatomy section from PLAB 2 page bottom per user request
 
 # User Preferences
 

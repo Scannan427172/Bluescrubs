@@ -882,70 +882,7 @@ export default function Plab2Osce() {
         </Tabs>
         </div>
 
-        {/* 3D Anatomy Viewer Section */}
-        <div className="mt-12 mb-8">
-          <Card className="border-2 border-green-200 bg-gradient-to-r from-green-50 to-teal-50">
-            <CardHeader>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Brain className="w-6 h-6 text-green-600" />
-                </div>
-                <CardTitle className="text-2xl text-green-800 mb-2">Interactive 3D Human Anatomy</CardTitle>
-                <CardDescription className="text-green-700">
-                  Explore detailed 3D anatomy to enhance your clinical examination skills
-                </CardDescription>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="grid md:grid-cols-3 gap-4 text-sm">
-                  <div className="flex items-center gap-2 text-green-700">
-                    <Eye className="w-4 h-4" />
-                    <span>Cardiovascular System</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-green-700">
-                    <Brain className="w-4 h-4" />
-                    <span>Neurological System</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-green-700">
-                    <Activity className="w-4 h-4" />
-                    <span>Respiratory System</span>
-                  </div>
-                </div>
-                
-                <div className="bg-white p-4 rounded-lg border border-green-200">
-                  <div className="text-center mb-3">
-                    <h4 className="font-semibold text-green-800">Zygote Body 3D Anatomy Viewer</h4>
-                  </div>
-                  
-                  <div className="relative">
-                    <div className="bg-gray-100 rounded-lg p-8 text-center">
-                      <Brain className="w-16 h-16 mx-auto mb-4 text-green-600" />
-                      <h4 className="text-lg font-semibold text-gray-800 mb-2">3D Anatomy Access</h4>
-                      <p className="text-gray-600 mb-4">
-                        Click below to open the Zygote Body 3D anatomy viewer in a new tab for optimal viewing experience.
-                      </p>
-                      <Button
-                        onClick={() => window.open('https://www.zygotebody.com/', '_blank')}
-                        className="bg-green-600 hover:bg-green-700 text-white"
-                      >
-                        <Maximize className="w-4 h-4 mr-2" />
-                        Open Zygote Body 3D Viewer
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                    <p className="text-sm text-green-700">
-                      <strong>Usage Instructions:</strong> Use your mouse to rotate the 3D model. Click and drag to explore different angles. 
-                      Use the controls within the viewer to isolate specific body systems and organs relevant to your OSCE preparation.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+
       </div>
     </div>
   );
