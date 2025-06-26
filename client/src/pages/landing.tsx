@@ -5,7 +5,7 @@ import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle
 import { Logo } from "@/components/logo";
 
 import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
-import heroVideo from "@assets/hero-video-compressed.mp4";
+import heroVideo from "@assets/hero-video-restored.mp4";
 
 
 export default function Landing() {
