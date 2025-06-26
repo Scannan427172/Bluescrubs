@@ -90,17 +90,23 @@ export default function More() {
     {
       icon: Database,
       title: "Storage Management",
-      description: "System management and optimization tools"
+      description: "System management and optimization tools",
+      hasArrow: true,
+      link: "/cost-calculator"
     },
     {
       icon: Shield,
       title: "Security",
-      description: "Security settings and access controls"
+      description: "Security settings and access controls",
+      hasArrow: true,
+      link: "/premium"
     },
     {
       icon: Settings,
       title: "Settings",
-      description: "Platform configuration and preferences"
+      description: "Platform configuration and preferences",
+      hasArrow: true,
+      link: "/dashboard"
     }
   ];
 
@@ -393,7 +399,7 @@ link: "/ask-ai"
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {adminTools.map((tool, index) => (
-                <Link key={index} href="/dashboard">
+                <Link key={index} href={tool.link || "/dashboard"}>
                   <Card className="bg-white border-blue-300 hover:bg-blue-50 transition-colors cursor-pointer">
                     <CardContent className="flex flex-col items-center justify-center p-6 text-center">
                       <tool.icon className="h-8 w-8 text-blue-600 mb-3" />
