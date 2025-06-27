@@ -829,27 +829,69 @@ export default function PLAB1New() {
           count: questionCount // Generate exact number of questions
         })
       });
-      const data = await response.json();
+      if (response.ok) {
+        const data = await response.json();
+        if (data.questions && data.questions.length > 0) {
+          // Slice to exact count in case more were generated
+          const exactQuestions = data.questions.slice(0, questionCount);
+          setGeneratedQuestions(exactQuestions);
+          setCurrentQuestionIndex(0);
+          setSelectedAnswer("");
+          setShowExplanation(false);
+          setQuestionStartTime(Date.now());
+          setSessionStarted(true);
+          setIsTimerRunning(true);
+          
+          // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
+          const totalTimeMs = questionCount * 60 * 1000; // 1 minute per question
+          setTimeout(() => {
+            setIsTimerRunning(false);
+            setSessionComplete(true);
+          }, totalTimeMs);
+          return;
+        }
+      }
       
-      // Slice to exact count in case more were generated
-      const exactQuestions = data.questions.slice(0, questionCount);
-      setGeneratedQuestions(exactQuestions);
-      setCurrentQuestionIndex(0);
-      setSelectedAnswer("");
-      setShowExplanation(false);
-      setQuestionStartTime(Date.now());
-      setSessionStarted(true);
-      setIsTimerRunning(true);
-      
-      // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
-      const totalTimeMs = questionCount * 60 * 1000; // 1 minute per question
-      setTimeout(() => {
-        setIsTimerRunning(false);
-        setSessionComplete(true);
-      }, totalTimeMs);
+      // Fallback to test questions
+      console.log('AI generation failed, falling back to test questions');
+      const fallbackResponse = await fetch('/api/test/questions');
+      if (fallbackResponse.ok) {
+        const testQuestions = await fallbackResponse.json();
+        if (testQuestions && testQuestions.length > 0) {
+          const exactQuestions = testQuestions.slice(0, questionCount);
+          setGeneratedQuestions(exactQuestions);
+          setCurrentQuestionIndex(0);
+          setSelectedAnswer("");
+          setShowExplanation(false);
+          setQuestionStartTime(Date.now());
+          setSessionStarted(true);
+          setIsTimerRunning(true);
+          
+          const totalTimeMs = questionCount * 60 * 1000;
+          setTimeout(() => {
+            setIsTimerRunning(false);
+            setSessionComplete(true);
+          }, totalTimeMs);
+        }
+      }
       
     } catch (error) {
       console.error('Error generating questions:', error);
+      // Final fallback
+      try {
+        const fallbackResponse = await fetch('/api/test/questions');
+        if (fallbackResponse.ok) {
+          const testQuestions = await fallbackResponse.json();
+          if (testQuestions && testQuestions.length > 0) {
+            const exactQuestions = testQuestions.slice(0, questionCount);
+            setGeneratedQuestions(exactQuestions);
+            setSessionStarted(true);
+            setQuestionStartTime(Date.now());
+          }
+        }
+      } catch (fallbackError) {
+        console.error('Fallback failed:', fallbackError);
+      }
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -868,17 +910,52 @@ export default function PLAB1New() {
           count: 20 // Start with 20, will generate more as needed
         })
       });
-      const data = await response.json();
-      setGeneratedQuestions(data.questions);
-      setCurrentQuestionIndex(0);
-      setSelectedAnswer("");
-      setShowExplanation(false);
-      setQuestionStartTime(Date.now());
-      setSessionStarted(true);
-      setIsTimerRunning(false); // No timer for unlimited
+      if (response.ok) {
+        const data = await response.json();
+        if (data.questions && data.questions.length > 0) {
+          setGeneratedQuestions(data.questions);
+          setCurrentQuestionIndex(0);
+          setSelectedAnswer("");
+          setShowExplanation(false);
+          setQuestionStartTime(Date.now());
+          setSessionStarted(true);
+          setIsTimerRunning(false); // No timer for unlimited
+          return;
+        }
+      }
+      
+      // Fallback to test questions
+      console.log('AI generation failed, falling back to test questions');
+      const fallbackResponse = await fetch('/api/test/questions');
+      if (fallbackResponse.ok) {
+        const testQuestions = await fallbackResponse.json();
+        if (testQuestions && testQuestions.length > 0) {
+          setGeneratedQuestions(testQuestions);
+          setCurrentQuestionIndex(0);
+          setSelectedAnswer("");
+          setShowExplanation(false);
+          setQuestionStartTime(Date.now());
+          setSessionStarted(true);
+          setIsTimerRunning(false);
+        }
+      }
       
     } catch (error) {
       console.error('Error generating questions:', error);
+      // Final fallback
+      try {
+        const fallbackResponse = await fetch('/api/test/questions');
+        if (fallbackResponse.ok) {
+          const testQuestions = await fallbackResponse.json();
+          if (testQuestions && testQuestions.length > 0) {
+            setGeneratedQuestions(testQuestions);
+            setSessionStarted(true);
+            setQuestionStartTime(Date.now());
+          }
+        }
+      } catch (fallbackError) {
+        console.error('Fallback failed:', fallbackError);
+      }
     } finally {
       setIsGeneratingQuestions(false);
     }
