@@ -1098,6 +1098,23 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     }
   });
 
+  // Visual diagnostic dermatology questions endpoint
+  app.get("/api/dermatology/visual-questions", async (req, res) => {
+    try {
+      const questionsPath = path.join(process.cwd(), 'dermatology-visual-questions.json');
+      if (fs.existsSync(questionsPath)) {
+        const questionsData = fs.readFileSync(questionsPath, 'utf8');
+        const questions = JSON.parse(questionsData);
+        res.json(questions);
+      } else {
+        res.json([]);
+      }
+    } catch (error) {
+      console.error('Error loading visual diagnostic questions:', error);
+      res.json([]);
+    }
+  });
+
   app.get("/api/test/questions", async (req, res) => {
     try {
       // Track page view
