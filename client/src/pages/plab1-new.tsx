@@ -598,12 +598,17 @@ export default function PLAB1New() {
       const fallbackResponse = await fetch('/api/test/questions');
       if (fallbackResponse.ok) {
         const testQuestions = await fallbackResponse.json();
+        console.log('Fallback questions loaded:', testQuestions.length);
         if (testQuestions && testQuestions.length > 0) {
           // Take up to the requested number of questions
           const selectedQuestions = testQuestions.slice(0, questionCount);
           setGeneratedQuestions(selectedQuestions);
+          setCurrentQuestionIndex(0);
+          setSelectedAnswer("");
+          setShowExplanation(false);
           setSessionStarted(true);
           setQuestionStartTime(Date.now());
+          console.log('Fallback questions set successfully');
           return;
         }
       }
@@ -1518,13 +1523,23 @@ export default function PLAB1New() {
   // Main question interface - Template Style Layout
   if (!currentQuestion) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Card>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center pb-24">
+        <Card className="w-full max-w-md mb-16">
           <CardContent className="p-8 text-center">
-            <p className="text-gray-600">No questions available</p>
-            <Button onClick={() => setSessionStarted(false)} className="mt-4">
-              Back to Home
-            </Button>
+            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">❌</span>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Load Questions</h3>
+            <p className="text-gray-600 mb-4">Please try refreshing the page.</p>
+            <div className="flex gap-2 justify-center">
+              <Button onClick={() => window.location.reload()} className="bg-blue-600 hover:bg-blue-700">
+                <RotateCcw className="w-4 h-4 mr-2" />
+                Refresh Page
+              </Button>
+              <Button variant="outline" onClick={() => setSessionStarted(false)}>
+                Back to Home
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
