@@ -146,7 +146,8 @@ function getCategoryTopics(category: string): string {
     'emergency-medicine': "Trauma, Poisoning, Shock, Cardiac Arrest, Burns",
     'obstetrics-gynaecology': "Pregnancy, Labour, Gynaecological Disorders, Contraception",
     paediatrics: "Child Development, Immunisations, Common Childhood Illnesses",
-    surgery: "Pre-operative Assessment, Post-operative Care, Surgical Emergencies"
+    surgery: "Pre-operative Assessment, Post-operative Care, Surgical Emergencies",
+    dermatology: "Vitiligo, Alopecia Areata, Melanoma, Eczema, Psoriasis, Rashes, Skin Cancer"
   };
   return topics[category as keyof typeof topics] || "General Medical Conditions";
 }
