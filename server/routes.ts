@@ -15,6 +15,7 @@ import fs from "fs";
 import path from "path";
 import { PLAB2_TEMPLATE_STATIONS, PLAB2_STATION_TYPES, PLAB2_SPECIALTIES } from "./plab2-templates";
 import { generateUserFormatStations, saveUserFormatStations, loadUserFormatStations, getUserFormatStationCount } from './user-format-generator';
+import { generateComprehensiveOSCEBank, loadComprehensiveOSCEBank, getOSCEBankStats } from './comprehensive-osce-generator';
 import { generateInternationalStations, saveInternationalStations, loadInternationalStations, getInternationalStationCount, getSupportedExams } from './international-format-generator';
 import { getContentIndependenceStatus, createManualStation, exportContentLibrary, validateContentSufficiency } from './content-independence';
 import { 
@@ -841,6 +842,110 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     } catch (error) {
       console.error('Error fetching OSCE stations:', error);
       res.status(500).json({ error: "Failed to fetch OSCE stations" });
+    }
+  });
+
+  // Comprehensive OSCE Generation Routes
+  app.post("/api/generate-comprehensive-osce", async (req, res) => {
+    try {
+      const { targetCount = 150 } = req.body;
+      
+      console.log(`Starting comprehensive OSCE generation for ${targetCount} stations`);
+      
+      // Generate comprehensive OSCE bank
+      const stations = generateComprehensiveOSCEBank(targetCount);
+      
+      res.json({
+        success: true,
+        message: `Generated ${stations.length} comprehensive OSCE stations`,
+        totalStations: stations.length,
+        targetCount,
+        stats: getOSCEBankStats()
+      });
+      
+    } catch (error) {
+      console.error('Comprehensive OSCE generation error:', error);
+      res.status(500).json({ error: "Failed to generate comprehensive OSCE bank" });
+    }
+  });
+
+  app.get("/api/comprehensive-osce/stations", async (req, res) => {
+    try {
+      const { count = 20, type, specialty, difficulty } = req.query;
+      
+      // Load comprehensive OSCE stations
+      let stations = loadComprehensiveOSCEBank();
+      
+      // Apply filters
+      if (type && type !== 'all') {
+        stations = stations.filter(station => 
+          station.station_type.toLowerCase().includes(type.toString().toLowerCase())
+        );
+      }
+      
+      if (specialty && specialty !== 'all') {
+        stations = stations.filter(station => 
+          station.specialty?.toLowerCase().includes(specialty.toString().toLowerCase())
+        );
+      }
+      
+      if (difficulty && difficulty !== 'all') {
+        stations = stations.filter(station => 
+          station.difficulty?.toLowerCase() === difficulty.toString().toLowerCase()
+        );
+      }
+      
+      // Limit results
+      const limitedStations = stations.slice(0, parseInt(count.toString()));
+      
+      // Transform to expected format
+      const transformedStations = limitedStations.map((station, index) => ({
+        id: `comp_station_${index + 1}`,
+        title: station.scenario_title,
+        category: station.station_type,
+        difficulty: station.difficulty?.toLowerCase() || 'intermediate',
+        duration: station.duration || 8,
+        description: station.brief,
+        scenario: station.brief,
+        instructions: {
+          candidate: station.brief,
+          examiner: `Assess candidate performance using the marking criteria`,
+          standardizedPatient: `${station.actor_script.opening}\n${station.actor_script.details}\n${station.actor_script.hidden_info}`
+        },
+        markingCriteria: [{
+          category: "Clinical Performance",
+          maxMarks: 20,
+          criteria: station.mark_scheme
+        }],
+        keyActions: station.mark_scheme,
+        mnemonic: station.mnemonic,
+        communicationNotes: station.communication_notes,
+        references: Object.entries(station.guideline_links).map(([title, url]) => ({
+          title,
+          url
+        })),
+        specialty: station.specialty,
+        completed: false,
+        attempts: 0,
+        bestScore: 0,
+        examFrequency: 'high'
+      }));
+      
+      res.json(transformedStations);
+      
+    } catch (error) {
+      console.error('Error fetching comprehensive OSCE stations:', error);
+      res.status(500).json({ error: "Failed to fetch comprehensive OSCE stations" });
+    }
+  });
+
+  app.get("/api/comprehensive-osce/stats", async (req, res) => {
+    try {
+      const stats = getOSCEBankStats();
+      res.json(stats);
+    } catch (error) {
+      console.error('Error fetching OSCE stats:', error);
+      res.status(500).json({ error: "Failed to fetch OSCE statistics" });
     }
   });
 
