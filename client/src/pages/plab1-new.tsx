@@ -561,7 +561,7 @@ export default function PLAB1New() {
     { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology' }
   ];
 
-  // Generate AI questions
+  // Generate AI questions with fallback to test questions
   const startPractice = async (questionCount: number) => {
     setIsGeneratingQuestions(true);
     setGeneratedQuestions([]);
@@ -570,6 +570,7 @@ export default function PLAB1New() {
     setCurrentQuestionIndex(0);
     
     try {
+      // First try to generate AI questions
       const response = await fetch('/api/generate-questions', {
         method: 'POST',
         headers: {
@@ -584,16 +585,48 @@ export default function PLAB1New() {
 
       if (response.ok) {
         const data = await response.json();
-        setGeneratedQuestions(data.questions || []);
         if (data.questions && data.questions.length > 0) {
+          setGeneratedQuestions(data.questions);
           setSessionStarted(true);
           setQuestionStartTime(Date.now());
+          return;
         }
-      } else {
-        console.error('Failed to generate questions');
       }
+      
+      // Fallback to existing test questions if AI generation fails
+      console.log('AI generation failed, falling back to test questions');
+      const fallbackResponse = await fetch('/api/test/questions');
+      if (fallbackResponse.ok) {
+        const testQuestions = await fallbackResponse.json();
+        if (testQuestions && testQuestions.length > 0) {
+          // Take up to the requested number of questions
+          const selectedQuestions = testQuestions.slice(0, questionCount);
+          setGeneratedQuestions(selectedQuestions);
+          setSessionStarted(true);
+          setQuestionStartTime(Date.now());
+          return;
+        }
+      }
+      
+      console.error('Failed to load any questions');
     } catch (error) {
       console.error('Error generating questions:', error);
+      
+      // Final fallback attempt
+      try {
+        const fallbackResponse = await fetch('/api/test/questions');
+        if (fallbackResponse.ok) {
+          const testQuestions = await fallbackResponse.json();
+          if (testQuestions && testQuestions.length > 0) {
+            const selectedQuestions = testQuestions.slice(0, questionCount);
+            setGeneratedQuestions(selectedQuestions);
+            setSessionStarted(true);
+            setQuestionStartTime(Date.now());
+          }
+        }
+      } catch (fallbackError) {
+        console.error('Fallback question loading failed:', fallbackError);
+      }
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -722,23 +755,62 @@ export default function PLAB1New() {
           count: 100 // Generate enough questions for timed session
         })
       });
-      const data = await response.json();
-      setGeneratedQuestions(data.questions);
-      setCurrentQuestionIndex(0);
-      setSelectedAnswer("");
-      setShowExplanation(false);
-      setQuestionStartTime(Date.now());
-      setSessionStarted(true);
-      setIsTimerRunning(true);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.questions && data.questions.length > 0) {
+          setGeneratedQuestions(data.questions);
+          setCurrentQuestionIndex(0);
+          setSelectedAnswer("");
+          setShowExplanation(false);
+          setQuestionStartTime(Date.now());
+          setSessionStarted(true);
+          setIsTimerRunning(true);
+          
+          // Set timer for timed practice
+          setTimeout(() => {
+            setIsTimerRunning(false);
+            setSessionComplete(true);
+          }, timeInMinutes * 60 * 1000);
+          return;
+        }
+      }
       
-      // Set timer for timed practice
-      setTimeout(() => {
-        setIsTimerRunning(false);
-        setSessionComplete(true);
-      }, timeInMinutes * 60 * 1000);
+      // Fallback to test questions
+      const fallbackResponse = await fetch('/api/test/questions');
+      if (fallbackResponse.ok) {
+        const testQuestions = await fallbackResponse.json();
+        if (testQuestions && testQuestions.length > 0) {
+          setGeneratedQuestions(testQuestions);
+          setCurrentQuestionIndex(0);
+          setSelectedAnswer("");
+          setShowExplanation(false);
+          setQuestionStartTime(Date.now());
+          setSessionStarted(true);
+          setIsTimerRunning(true);
+          
+          setTimeout(() => {
+            setIsTimerRunning(false);
+            setSessionComplete(true);
+          }, timeInMinutes * 60 * 1000);
+        }
+      }
       
     } catch (error) {
       console.error('Error generating questions:', error);
+      // Final fallback attempt
+      try {
+        const fallbackResponse = await fetch('/api/test/questions');
+        if (fallbackResponse.ok) {
+          const testQuestions = await fallbackResponse.json();
+          if (testQuestions && testQuestions.length > 0) {
+            setGeneratedQuestions(testQuestions);
+            setSessionStarted(true);
+            setQuestionStartTime(Date.now());
+          }
+        }
+      } catch (fallbackError) {
+        console.error('Fallback failed:', fallbackError);
+      }
     } finally {
       setIsGeneratingQuestions(false);
     }
