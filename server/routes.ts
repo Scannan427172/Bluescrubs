@@ -770,8 +770,9 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     try {
       const { type, specialty, difficulty, count } = req.query;
       
-      // Load user format stations from storage
-      const userFormatStations = loadUserFormatStations();
+      // Load comprehensive OSCE stations (176 stations covering full GMC blueprint)
+      const comprehensiveStations = loadComprehensiveOSCEBank();
+      const userFormatStations = comprehensiveStations.length > 0 ? comprehensiveStations : loadUserFormatStations();
       
       if (userFormatStations && userFormatStations.length > 0) {
         let filteredStations = userFormatStations;
