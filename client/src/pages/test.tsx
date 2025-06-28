@@ -409,7 +409,15 @@ export default function Test() {
 
   // Fetch questions from API
   const { data: questions, isLoading, error } = useQuery<Question[]>({
-    queryKey: ["/api/test/questions"],
+    queryKey: ["/api/test/questions", selectedCategory, selectedDifficulty],
+    queryFn: () => {
+      const params = new URLSearchParams();
+      if (selectedCategory !== "all") params.append("category", selectedCategory);
+      if (selectedDifficulty !== "all") params.append("difficulty", selectedDifficulty);
+      params.append("count", "10");
+      
+      return fetch(`/api/test/questions?${params.toString()}`).then(res => res.json());
+    },
     retry: false,
   });
 
