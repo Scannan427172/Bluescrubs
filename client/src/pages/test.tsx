@@ -17,6 +17,13 @@ interface Question {
   id: string;
   topic?: string;
   question: string;
+  images?: Array<{
+    type?: string;
+    content?: string;
+    url?: string;
+    alt: string;
+    caption: string;
+  }>;
   options: {
     A: string;
     B: string;

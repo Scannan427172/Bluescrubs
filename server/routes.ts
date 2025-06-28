@@ -1211,24 +1211,93 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
       },
       {
         id: "derm2", 
-        topic: "Acne Management",
+        topic: "Psoriasis Visual Diagnosis",
         category: "dermatology",
-        question: "A 17-year-old presents with moderate acne affecting the face and back, with inflammatory papules and pustules. What is the most appropriate first-line treatment?",
+        images: [
+          {
+            type: "svg",
+            content: `<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="200" height="200" fill="#f4c2a1"/>
+              <circle cx="100" cy="100" r="60" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+              <circle cx="80" cy="80" r="15" fill="#fecaca" opacity="0.8"/>
+              <circle cx="120" cy="90" r="20" fill="#fecaca" opacity="0.8"/>
+              <circle cx="110" cy="120" r="12" fill="#fecaca" opacity="0.8"/>
+              <text x="100" y="180" text-anchor="middle" font-size="12" fill="#333">Image 1: Elbow lesion</text>
+            </svg>`,
+            alt: "Well-demarcated red plaque with silvery scales on elbow",
+            caption: "Classic extensor surface involvement"
+          },
+          {
+            type: "svg", 
+            content: `<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="200" height="200" fill="#f4c2a1"/>
+              <ellipse cx="100" cy="100" rx="40" ry="70" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="85" cy="80" rx="8" ry="12" fill="#fecaca" opacity="0.9"/>
+              <ellipse cx="115" cy="95" rx="10" ry="15" fill="#fecaca" opacity="0.9"/>
+              <ellipse cx="100" cy="125" rx="6" ry="10" fill="#fecaca" opacity="0.9"/>
+              <text x="100" y="180" text-anchor="middle" font-size="12" fill="#333">Image 2: Knee lesion</text>
+            </svg>`,
+            alt: "Similar plaque pattern on knee showing symmetrical distribution",
+            caption: "Bilateral extensor involvement"
+          },
+          {
+            type: "svg",
+            content: `<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="200" height="200" fill="#fef3c7"/>
+              <rect x="60" y="40" width="80" height="4" fill="#dc2626" rx="2"/>
+              <rect x="65" y="50" width="70" height="4" fill="#dc2626" rx="2"/>
+              <rect x="70" y="60" width="60" height="4" fill="#dc2626" rx="2"/>
+              <rect x="50" y="70" width="100" height="6" fill="#dc2626" rx="3"/>
+              <rect x="55" y="85" width="90" height="5" fill="#dc2626" rx="2"/>
+              <rect x="75" y="100" width="50" height="4" fill="#dc2626" rx="2"/>
+              <circle cx="90" cy="55" r="3" fill="#fecaca"/>
+              <circle cx="110" cy="75" r="4" fill="#fecaca"/>
+              <circle cx="95" cy="90" r="2" fill="#fecaca"/>
+              <text x="100" y="180" text-anchor="middle" font-size="12" fill="#333">Image 3: Scalp involvement</text>
+            </svg>`,
+            alt: "Linear scaly lesions on scalp with hair involvement",
+            caption: "Scalp psoriasis with scaling"
+          }
+        ],
+        question: "A 35-year-old man presents with the lesions shown in the three clinical images. The lesions are well-demarcated, raised, and covered with silvery-white scales. They appeared gradually over 6 months and are mildly itchy. The Auspitz sign is positive. What is the most likely diagnosis?",
         options: {
-          A: "Topical benzoyl peroxide",
-          B: "Oral tetracycline",
-          C: "Topical retinoid + benzoyl peroxide",
-          D: "Oral isotretinoin",
-          E: "Topical antibiotics alone"
+          A: "Plaque psoriasis",
+          B: "Atopic dermatitis", 
+          C: "Seborrheic dermatitis",
+          D: "Lichen planus",
+          E: "Tinea corporis"
         },
-        answer: "C",
-        explanation: "NICE recommends combination therapy with topical retinoid and benzoyl peroxide for moderate acne to address both comedonal and inflammatory components.",
-        mnemonic: "Acne: COMBO = Comedones + Oral + Moderate + Benzoyl + Optimize",
+        answer: "A",
+        explanation: "Why Plaque psoriasis is correct:\n\n• Classic Clinical Morphology and Distribution: \n  - Well-demarcated, erythematous plaques with characteristic silvery-white scales represent pathognomonic features of chronic plaque psoriasis\n  - Bilateral symmetrical distribution affecting extensor surfaces (elbows, knees) demonstrates typical psoriatic involvement pattern per British Association of Dermatologists guidelines\n  - Scalp involvement with linear scaly lesions supports chronic plaque psoriasis extending beyond typical extensor sites to commonly affected areas\n  - Positive Auspitz sign (pinpoint bleeding when scales removed) confirms psoriatic pathophysiology with capillary loop disruption in dermal papillae\n\n• Pathophysiological Confirmation: \n  - Chronic stable plaque psoriasis results from T-cell mediated autoimmune response causing keratinocyte hyperproliferation and incomplete maturation\n  - Silvery scale formation occurs due to rapid epidermal turnover (3-4 days vs normal 28 days) with parakeratotic scale accumulation\n  - Well-demarcated borders reflect focal inflammatory process with clear distinction between affected and normal skin\n  - Gradual onset over 6 months consistent with chronic plaque psoriasis rather than acute inflammatory conditions\n\n• NICE CG153 Diagnostic Criteria: \n  - Clinical diagnosis based on characteristic morphology, distribution, and chronicity without requiring histological confirmation\n  - Extensor surface predilection (elbows, knees) combined with scalp involvement fulfills classic psoriatic distribution pattern\n  - Mild pruritus typical of chronic plaque psoriasis, distinguishing from intensely itchy atopic dermatitis\n  - Positive Auspitz sign provides additional diagnostic confirmation when clinical features suggest psoriasis\n\n• Evidence-Based Management Framework: \n  - NICE guidelines recommend topical therapies as first-line treatment: vitamin D analogues, topical corticosteroids, or combination preparations\n  - Psoriasis Area and Severity Index (PASI) assessment guides treatment escalation decisions and monitoring response\n  - Systemic therapies (methotrexate, biologics) considered for extensive disease or significant quality of life impact\n  - Regular monitoring for psoriatic arthritis development (affects 30% of psoriasis patients) and cardiovascular comorbidities\n\n• Quality of Life and Psychosocial Impact: \n  - Chronic visible lesions significantly impact quality of life, self-esteem, and social functioning requiring comprehensive patient support\n  - Association with depression, anxiety, and social isolation necessitates holistic approach to management\n  - Patient education regarding chronic nature, treatment expectations, and lifestyle modifications essential for optimal outcomes\n  - Support groups and psychological therapies may benefit patients with significant psychosocial impact",
+        incorrectExplanation: "• Option B (Atopic dermatitis) - Distribution and Morphology Contradictions: \n  - Atopic dermatitis typically affects flexural areas (antecubital fossae, popliteal fossae) rather than extensor surfaces shown in clinical images\n  - Lesions characteristically show poorly-defined borders with eczematous changes rather than well-demarcated plaques with silvery scales\n  - Intense pruritus and excoriation marks typical of atopic dermatitis, contrasting with mild itching described\n  - Positive Auspitz sign not present in atopic dermatitis, which lacks the characteristic capillary bleeding response\n  - Family history of atopy and early childhood onset more common than adult presentation\n\n• Option C (Seborrheic dermatitis) - Anatomical and Scale Character Misalignment: \n  - Seborrheic dermatitis affects sebaceous gland-rich areas (scalp, nasolabial folds, presternal) but rarely involves elbows and knees\n  - Characteristic greasy, yellowish scales rather than dry, silvery-white scales seen in psoriasis\n  - Lesions typically show ill-defined borders with less pronounced elevation compared to psoriatic plaques\n  - Scalp involvement would show greasy scaling rather than the well-demarcated linear lesions demonstrated\n  - Malassezia overgrowth pathophysiology differs from autoimmune T-cell mediated psoriatic inflammation\n\n• Option D (Lichen planus) - Clinical Pattern and Appearance Incompatibility: \n  - Lichen planus presents with flat-topped, polygonal papules with characteristic violaceous color rather than erythematous plaques\n  - Wickham's striae (white lacy patterns) typical of lichen planus, not silvery scaling seen in these images\n  - Distribution commonly affects wrists, ankles, and mucous membranes rather than extensor surfaces\n  - Intense pruritus and shorter duration typical of lichen planus compared to gradual 6-month onset\n  - Positive Auspitz sign not characteristic of lichen planus pathophysiology\n\n• Option E (Tinea corporis) - Morphological and Distribution Pattern Errors: \n  - Fungal infections typically show annular configuration with raised, scaly borders and central clearing\n  - Positive KOH microscopy would be expected showing fungal hyphae and spores\n  - Asymmetrical distribution more common than bilateral symmetrical involvement\n  - Scaling pattern differs from characteristic silvery psoriatic scales\n  - Response to antifungal therapy would be expected within 2-4 weeks, not chronic 6-month progression",
+        mnemonic: "Psoriasis Features: PLAQUES = Papules and plaques, Location extensor surfaces, Auspitz sign positive, Quality well-demarcated, Uniform silvery scales, Extensor distribution, Symmetrical involvement\n\nPsoriasis Distribution: KNEES = Knees and elbows, Nails involved, Extensor surfaces, Ears and scalp, Symmetrical pattern\n\nPsoriasis vs Eczema: PSORIASIS = Plaques well-defined, Silvery scales, Oddly on extensors, Rarely itchy severely, In adults often, Auspitz sign positive, Symmetrical distribution, Involves scalp commonly, Stable chronic course\n\nPsoriasis Treatment: VITAMIN = Vitamin D analogues, Immunosuppressants for severe, Topical steroids, Assessment PASI score, Monitor for arthritis, Investigate comorbidities, Normalize quality of life",
+        guidelineSummary: {
+          title: "Psoriasis Management Summary", 
+          content: "• Clinical Recognition: \n  - Well-demarcated erythematous plaques with silvery scales\n  - Bilateral symmetrical distribution on extensor surfaces\n  - Positive Auspitz sign (pinpoint bleeding when scales removed)\n  - Chronic stable course with gradual onset\n\n• Topical First-Line Therapies: \n  - Vitamin D analogues (calcipotriol) once or twice daily\n  - Topical corticosteroids for inflammatory control\n  - Combination vitamin D/corticosteroid preparations\n  - Coal tar preparations for chronic stable plaques\n\n• Assessment and Monitoring: \n  - PASI (Psoriasis Area and Severity Index) scoring\n  - DLQI (Dermatology Life Quality Index) assessment\n  - Screen for psoriatic arthritis (joint pain, morning stiffness)\n  - Monitor for cardiovascular risk factors\n\n• Systemic Therapy Indications: \n  - PASI >10 or DLQI >10 indicating significant disease impact\n  - Failure of topical therapies after 3-6 months\n  - Psoriatic arthritis requiring disease-modifying therapy\n  - Extensive disease affecting >10% body surface area\n\n• Biological Therapies: \n  - TNF-alpha inhibitors (adalimumab, etanercept)\n  - IL-17 inhibitors (secukinumab, ixekizumab)\n  - IL-23 inhibitors (ustekinumab, guselkumab)\n  - Reserved for severe disease or contraindications to conventional therapy\n\n• Patient Education and Support: \n  - Chronic condition requiring long-term management\n  - Lifestyle modifications: stress reduction, avoid trauma\n  - Sun exposure beneficial but avoid sunburn\n  - Support groups and psychological support if needed"
+        },
         links: {
           primary: {
-            title: "NICE CKS Acne",
-            url: "https://cks.nice.org.uk/topics/acne-vulgaris/"
-          }
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/cg153",
+            description: "NICE CG153: Psoriasis - assessment and management"
+          },
+          supplementary: [
+            {
+              title: "British Association of Dermatologists",
+              url: "https://www.bad.org.uk/shared/get-file.ashx?id=1653&itemtype=document",
+              description: "BAD psoriasis management guidelines"
+            },
+            {
+              title: "NHS Psoriasis Information",
+              url: "https://www.nhs.uk/conditions/psoriasis/",
+              description: "NHS patient information and treatment options"
+            },
+            {
+              title: "Psoriasis Association UK",
+              url: "https://www.psoriasis-association.org.uk/",
+              description: "Patient support and educational resources"
+            }
+          ]
         }
       }
     ],
