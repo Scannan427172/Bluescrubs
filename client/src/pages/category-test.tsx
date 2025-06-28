@@ -560,81 +560,185 @@ export default function CategoryTest() {
 
               {/* Clinical Guidelines */}
               <Card className="border-blue-200 bg-blue-50">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-5 h-5 bg-blue-500 rounded flex items-center justify-center">
-                      <span className="text-xs text-white">📋</span>
+                <CardContent className="pt-6">
+                  {/* UK Guidance Section - Question Specific */}
+                  <div className="mb-6">
+                    <div className="flex items-center space-x-2 mb-3">
+                      <div className="w-5 h-5 bg-blue-600 rounded flex items-center justify-center">
+                        <span className="text-xs text-white">📋</span>
+                      </div>
+                      <h3 className="font-semibold text-blue-800">UK Guidance</h3>
                     </div>
-                    <h3 className="font-semibold text-blue-800">Clinical Guidelines & Evidence</h3>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-blue-700 mb-4">
-                    Comprehensive guideline summary with authentic UK medical references
-                  </p>
-                  
-                  <div className="space-y-4">
-                    {/* Question-specific explanation */}
-                    <div className="p-4 bg-blue-100 rounded-lg">
-                      <div className="flex items-center space-x-2 mb-3">
-                        <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                          <span className="text-xs text-white font-bold">📋</span>
-                        </div>
-                        <span className="font-semibold text-blue-800">
-                          {currentQuestion.topic} Clinical Summary
-                        </span>
-                      </div>
-                      
-                      <div className="text-sm text-blue-800">
-                        <p>{currentQuestion.explanation}</p>
-                      </div>
-                    </div>
-
-                    {/* Question-specific references */}
-                    {currentQuestion.links && (
-                      <div className="space-y-2">
-                        {Object.entries(currentQuestion.links).map(([key, link]: [string, any]) => (
-                          <div key={key} className="p-3 bg-blue-100 rounded">
-                            <div className="flex items-center space-x-2 mb-2">
-                              <div className="w-4 h-4 bg-blue-600 rounded"></div>
-                              <span className="font-medium text-blue-800">{link.title}</span>
-                            </div>
-                            <a 
-                              href={link.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-blue-600 hover:text-blue-800 text-sm underline"
-                            >
-                              {link.url}
-                            </a>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Additional References if available (from original format) */}
-                    {currentQuestion.references && currentQuestion.references.length > 0 && (
-                      <div className="space-y-2">
-                        <h5 className="font-semibold text-blue-800 mb-2">Additional References:</h5>
-                        {currentQuestion.references.map((reference: string, index: number) => (
-                          <div key={index} className="p-3 bg-white border border-blue-200 rounded">
-                            <div className="flex items-center space-x-2">
-                              <div className="w-4 h-4 bg-blue-600 rounded"></div>
-                              <span className="font-medium text-blue-800">{reference}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="mt-4 p-3 bg-yellow-100 rounded">
-                      <h4 className="font-semibold text-yellow-800 mb-2">💡 Foundation Doctor Study Tip</h4>
-                      <p className="text-sm text-yellow-700">
-                        This explanation is specific to the clinical scenario presented. Study the referenced 
-                        guidelines to understand the evidence base and review similar cases for comprehensive 
-                        understanding of this topic area.
+                    
+                    <div className="p-4 bg-white border border-blue-200 rounded-lg">
+                      <p className="text-sm text-blue-800 font-medium">
+                        {/* Generate question-specific NICE guidance title */}
+                        {currentQuestion.category === 'cardiovascular' && currentQuestion.topic?.toLowerCase().includes('infarction') && 
+                          'NICE CG167: Myocardial infarction - cardiac rehabilitation and prevention'
+                        }
+                        {currentQuestion.category === 'cardiovascular' && currentQuestion.topic?.toLowerCase().includes('hypertension') && 
+                          'NICE CG127: Hypertension in adults - diagnosis and management'
+                        }
+                        {currentQuestion.category === 'cardiovascular' && currentQuestion.topic?.toLowerCase().includes('heart failure') && 
+                          'NICE CG108: Chronic heart failure in adults - diagnosis and management'
+                        }
+                        {currentQuestion.category === 'respiratory' && currentQuestion.topic?.toLowerCase().includes('asthma') && 
+                          'NICE NG80: Asthma - diagnosis, monitoring and chronic asthma management'
+                        }
+                        {currentQuestion.category === 'respiratory' && currentQuestion.topic?.toLowerCase().includes('copd') && 
+                          'NICE CG101: Chronic obstructive pulmonary disease in adults'
+                        }
+                        {currentQuestion.category === 'dermatology' && currentQuestion.topic?.toLowerCase().includes('eczema') && 
+                          'NICE CKS: Eczema - atopic dermatitis management'
+                        }
+                        {currentQuestion.category === 'dermatology' && currentQuestion.topic?.toLowerCase().includes('acne') && 
+                          'NICE CKS: Acne vulgaris - management and treatment'
+                        }
+                        {currentQuestion.category === 'gastroenterology' && currentQuestion.topic?.toLowerCase().includes('peptic') && 
+                          'NICE CG184: Gastro-oesophageal reflux disease and dyspepsia'
+                        }
+                        {/* Default if no specific match */}
+                        {!(
+                          (currentQuestion.category === 'cardiovascular' && (currentQuestion.topic?.toLowerCase().includes('infarction') || currentQuestion.topic?.toLowerCase().includes('hypertension') || currentQuestion.topic?.toLowerCase().includes('heart failure'))) ||
+                          (currentQuestion.category === 'respiratory' && (currentQuestion.topic?.toLowerCase().includes('asthma') || currentQuestion.topic?.toLowerCase().includes('copd'))) ||
+                          (currentQuestion.category === 'dermatology' && (currentQuestion.topic?.toLowerCase().includes('eczema') || currentQuestion.topic?.toLowerCase().includes('acne'))) ||
+                          (currentQuestion.category === 'gastroenterology' && currentQuestion.topic?.toLowerCase().includes('peptic'))
+                        ) && 
+                          `NICE Guidelines: ${currentQuestion.topic} - clinical assessment and management`
+                        }
                       </p>
                     </div>
+                  </div>
+
+                  {/* Further Reading & Guidelines Section */}
+                  <div className="mb-6">
+                    <div className="flex items-center space-x-2 mb-4">
+                      <div className="w-5 h-5 bg-gray-600 rounded flex items-center justify-center">
+                        <span className="text-xs text-white">📚</span>
+                      </div>
+                      <h3 className="font-semibold text-gray-800">Further Reading & Guidelines</h3>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {/* Question-specific guidelines based on category */}
+                      {currentQuestion.category === 'cardiovascular' && (
+                        <>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">📋</div>
+                              NICE Guidance
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.nhs.uk/conditions/heart-attack/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">🏥</div>
+                              NHS Cardiac Guidance
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.escardio.org/Guidelines" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">❤️</div>
+                              ESC Guidelines
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.bhf.org.uk/for-professionals" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">🩺</div>
+                              British Cardiovascular Society
+                            </a>
+                          </Button>
+                        </>
+                      )}
+                      
+                      {currentQuestion.category === 'respiratory' && (
+                        <>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">📋</div>
+                              NICE Guidance
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.brit-thoracic.org.uk/quality-improvement/guidelines/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">🫁</div>
+                              BTS Guidelines
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://goldcopd.org/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">🌍</div>
+                              GOLD Guidelines
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://ginasthma.org/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">🌬️</div>
+                              GINA Guidelines
+                            </a>
+                          </Button>
+                        </>
+                      )}
+                      
+                      {currentQuestion.category === 'dermatology' && (
+                        <>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://cks.nice.org.uk/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">📋</div>
+                              NICE CKS
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.bad.org.uk/healthcare-professionals/clinical-standards/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">🧴</div>
+                              British Association of Dermatologists
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://bnf.nice.org.uk/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">💊</div>
+                              BNF Guidance
+                            </a>
+                          </Button>
+                        </>
+                      )}
+                      
+                      {/* Default guidelines for other categories */}
+                      {!['cardiovascular', 'respiratory', 'dermatology'].includes(currentQuestion.category) && (
+                        <>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">📋</div>
+                              NICE Guidance
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://bnf.nice.org.uk/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">💊</div>
+                              BNF (British National Formulary)
+                            </a>
+                          </Button>
+                          <Button variant="outline" className="w-full justify-start" asChild>
+                            <a href="https://www.bmj.com/company/products-services/bmj-best-practice/" target="_blank" rel="noopener noreferrer">
+                              <div className="w-4 h-4 mr-2">🩺</div>
+                              BMJ Best Practice
+                            </a>
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Foundation Doctor Study Tip */}
+                  <div className="p-4 bg-yellow-100 rounded-lg">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <span className="text-yellow-600">💡</span>
+                      <h4 className="font-semibold text-yellow-800">Foundation Doctor Study Tip</h4>
+                    </div>
+                    <p className="text-sm text-yellow-700">
+                      Use this summary for quick revision, then explore the supplementary guidelines for 
+                      deeper understanding. Each reference provides specific protocols used in UK 
+                      clinical practice.
+                    </p>
                   </div>
                 </CardContent>
               </Card>
