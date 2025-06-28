@@ -1106,6 +1106,10 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
         : req.headers['x-session-id'] || generateSessionId();
       trackPageView(sessionId, '/test');
 
+      // Extract query parameters for filtering
+      const { category, difficulty, count } = req.query;
+      const requestedCount = count ? parseInt(count as string) : 10;
+
       const testQuestions = [
         {
           id: "q1", 
@@ -1717,7 +1721,65 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
       }
 
       // Return the actual questions
-      res.json(testQuestions);
+      // Apply category filtering
+      let filteredQuestions = testQuestions;
+      
+      if (category && category !== 'all') {
+        filteredQuestions = testQuestions.filter(q => {
+          const questionCategory = q.category?.toLowerCase() || q.topic?.toLowerCase() || '';
+          const requestedCategory = (category as string).toLowerCase();
+          
+          // Handle different category matching patterns
+          if (requestedCategory === 'dermatology') {
+            return questionCategory.includes('dermatology') || questionCategory.includes('skin') || questionCategory.includes('rash');
+          }
+          if (requestedCategory === 'cardiovascular') {
+            return questionCategory.includes('cardiovascular') || questionCategory.includes('cardio') || questionCategory.includes('heart');
+          }
+          if (requestedCategory === 'respiratory') {
+            return questionCategory.includes('respiratory') || questionCategory.includes('lung') || questionCategory.includes('asthma');
+          }
+          if (requestedCategory === 'gastroenterology') {
+            return questionCategory.includes('gastro') || questionCategory.includes('bowel') || questionCategory.includes('liver');
+          }
+          if (requestedCategory === 'neurology') {
+            return questionCategory.includes('neuro') || questionCategory.includes('brain') || questionCategory.includes('stroke');
+          }
+          if (requestedCategory === 'endocrinology') {
+            return questionCategory.includes('endocrin') || questionCategory.includes('diabetes') || questionCategory.includes('thyroid');
+          }
+          if (requestedCategory === 'psychiatry') {
+            return questionCategory.includes('psychiatr') || questionCategory.includes('mental') || questionCategory.includes('depression');
+          }
+          if (requestedCategory === 'obstetrics-gynaecology') {
+            return questionCategory.includes('obstetric') || questionCategory.includes('gynae') || questionCategory.includes('pregnancy');
+          }
+          if (requestedCategory === 'paediatrics') {
+            return questionCategory.includes('paediatric') || questionCategory.includes('child') || questionCategory.includes('infant');
+          }
+          if (requestedCategory === 'surgery') {
+            return questionCategory.includes('surgery') || questionCategory.includes('surgical') || questionCategory.includes('operation');
+          }
+          if (requestedCategory === 'emergency-medicine') {
+            return questionCategory.includes('emergency') || questionCategory.includes('acute') || questionCategory.includes('trauma');
+          }
+          
+          // Default exact match
+          return questionCategory.includes(requestedCategory);
+        });
+      }
+
+      // Apply difficulty filtering (if needed in future)
+      if (difficulty && difficulty !== 'all') {
+        // Most test questions don't have difficulty, so keep all for now
+      }
+
+      // Limit to requested count
+      const finalQuestions = filteredQuestions.slice(0, requestedCount);
+
+      console.log(`Filtered questions: ${filteredQuestions.length} found for category "${category}", returning ${finalQuestions.length}`);
+
+      res.json(finalQuestions);
     } catch (error) {
       console.error('Error fetching test questions:', error);
       res.status(500).json({ error: "Failed to fetch questions" });
