@@ -421,54 +421,13 @@ export default function CategoryTest() {
                       <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
                       Guidelines & Evidence
                     </h4>
-                    <div className="text-sm text-gray-700 space-y-3">
-                      <div className="bg-green-50 p-3 rounded">
-                        <h5 className="font-semibold text-green-800 mb-2">NICE Guidelines Summary:</h5>
-                        <div className="space-y-2">
-                          {currentQuestion.explanation?.split('.').filter(Boolean).map((sentence: string, index: number) => (
-                            <div key={index} className="flex items-start space-x-2">
-                              <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
-                              <span>{sentence.trim()}.</span>
-                            </div>
-                          ))}
+                    <div className="text-sm text-gray-700 space-y-2">
+                      {currentQuestion.explanation?.split('.').filter(Boolean).map((sentence: string, index: number) => (
+                        <div key={index} className="flex items-start space-x-2">
+                          <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span>{sentence.trim()}.</span>
                         </div>
-                      </div>
-                      
-                      <div className="bg-blue-50 p-3 rounded">
-                        <h5 className="font-semibold text-blue-800 mb-2">Clinical Evidence Base:</h5>
-                        <div className="space-y-2">
-                          <div className="flex items-start space-x-2">
-                            <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Evidence-based treatment approach supported by randomised controlled trials</span>
-                          </div>
-                          <div className="flex items-start space-x-2">
-                            <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Recommended by major UK medical societies and royal colleges</span>
-                          </div>
-                          <div className="flex items-start space-x-2">
-                            <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Aligns with BNF prescribing guidelines and contraindication warnings</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="bg-purple-50 p-3 rounded">
-                        <h5 className="font-semibold text-purple-800 mb-2">UK Practice Standards:</h5>
-                        <div className="space-y-2">
-                          <div className="flex items-start space-x-2">
-                            <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Follows GMC Good Medical Practice guidelines for patient safety</span>
-                          </div>
-                          <div className="flex items-start space-x-2">
-                            <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Meets CQC requirements for quality healthcare delivery</span>
-                          </div>
-                          <div className="flex items-start space-x-2">
-                            <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Incorporates patient safety alerts and quality improvement standards</span>
-                          </div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </CardContent>
@@ -549,53 +508,23 @@ export default function CategoryTest() {
                   </p>
                   
                   <div className="space-y-4">
-                    {/* NICE Summary */}
+                    {/* Question-specific explanation */}
                     <div className="p-4 bg-blue-100 rounded-lg">
                       <div className="flex items-center space-x-2 mb-3">
                         <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                          <span className="text-xs text-white font-bold">N</span>
+                          <span className="text-xs text-white font-bold">📋</span>
                         </div>
                         <span className="font-semibold text-blue-800">
-                          {currentQuestion.topic} Management Summary
+                          {currentQuestion.topic} Clinical Summary
                         </span>
                       </div>
                       
-                      <div className="space-y-3 text-sm text-blue-800">
-                        <div>
-                          <h5 className="font-semibold mb-1">Definition & Recognition:</h5>
-                          <p>- Clinical presentation as described in scenario requires systematic assessment according to current UK guidelines</p>
-                          <p>- Symptoms and signs align with established diagnostic criteria</p>
-                          <p>- Risk factors and patient history inform evidence-based management approach</p>
-                        </div>
-                        
-                        <div>
-                          <h5 className="font-semibold mb-1">Primary Management Strategy:</h5>
-                          <p>- First-line treatment follows NICE recommendations for optimal patient outcomes</p>
-                          <p>- BNF guidance ensures safe prescribing and appropriate monitoring</p>
-                          <p>- Patient safety considerations and contraindication screening mandatory</p>
-                        </div>
-                        
-                        <div>
-                          <h5 className="font-semibold mb-1">Monitoring & Follow-up:</h5>
-                          <p>- Regular review schedule as per specialty society recommendations</p>
-                          <p>- Quality indicators and safety netting measures implemented</p>
-                          <p>- Patient education and shared decision-making prioritised</p>
-                        </div>
+                      <div className="text-sm text-blue-800">
+                        <p>{currentQuestion.explanation}</p>
                       </div>
                     </div>
 
-                    {/* UK Guidance Card */}
-                    <div className="p-3 bg-white border border-blue-200 rounded">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <div className="w-4 h-4 bg-blue-600 rounded"></div>
-                        <span className="font-medium text-blue-800">UK Guidance</span>
-                      </div>
-                      <p className="text-sm text-blue-700">
-                        {currentQuestion.links?.primary?.title || `NICE CG167: ${currentQuestion.topic} - clinical assessment and management`}
-                      </p>
-                    </div>
-
-                    {/* Primary Links */}
+                    {/* Question-specific references */}
                     {currentQuestion.links && (
                       <div className="space-y-2">
                         {Object.entries(currentQuestion.links).map(([key, link]: [string, any]) => (
@@ -617,12 +546,27 @@ export default function CategoryTest() {
                       </div>
                     )}
 
+                    {/* Additional References if available (from original format) */}
+                    {currentQuestion.references && currentQuestion.references.length > 0 && (
+                      <div className="space-y-2">
+                        <h5 className="font-semibold text-blue-800 mb-2">Additional References:</h5>
+                        {currentQuestion.references.map((reference: string, index: number) => (
+                          <div key={index} className="p-3 bg-white border border-blue-200 rounded">
+                            <div className="flex items-center space-x-2">
+                              <div className="w-4 h-4 bg-blue-600 rounded"></div>
+                              <span className="font-medium text-blue-800">{reference}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
                     <div className="mt-4 p-3 bg-yellow-100 rounded">
                       <h4 className="font-semibold text-yellow-800 mb-2">💡 Foundation Doctor Study Tip</h4>
                       <p className="text-sm text-yellow-700">
-                        Use this summary for quick revision, then explore the supplementary guidelines for 
-                        deeper understanding. Each reference provides specific protocols used in UK 
-                        clinical practice and aligns with GMC standards for safe patient care.
+                        This explanation is specific to the clinical scenario presented. Study the referenced 
+                        guidelines to understand the evidence base and review similar cases for comprehensive 
+                        understanding of this topic area.
                       </p>
                     </div>
                   </div>
