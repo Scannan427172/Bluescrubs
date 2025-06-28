@@ -114,11 +114,11 @@ function Router() {
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
-            <CategoryTest />
+            <PLAB1New />
           </div>
         </div>
       </Route>
-      <Route path="/category-test">
+      <Route path="/plab1-working">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">

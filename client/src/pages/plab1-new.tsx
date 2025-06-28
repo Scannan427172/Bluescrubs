@@ -702,28 +702,13 @@ export default function PLAB1New() {
   };
 
   // Load existing questions based on category and difficulty
-  const loadQuestions = async (count: number = 20, overrideCategory?: string) => {
+  const loadQuestions = async (count: number = 20) => {
     setIsLoadingQuestions(true);
     try {
-      // Use override category if provided, otherwise use state
-      const categoryToUse = overrideCategory || selectedCategory;
-      
-      // Debug: Log what category is actually being used
-      console.log('Loading questions with category:', categoryToUse, 'difficulty:', selectedDifficulty);
-      console.log('selectedCategory state:', selectedCategory);
-      
-      // Force dermatology for testing if category is undefined or 'all'
-      const finalCategory = categoryToUse === 'all' || !categoryToUse ? 'dermatology' : categoryToUse;
-      
-      // Try to load from test questions endpoint first (has authentic PLAB questions)
-      const params = new URLSearchParams({
-        category: finalCategory,
-        difficulty: selectedDifficulty,
-        count: count.toString()
-      });
-      
-      const url = `/api/test/questions?${params}`;
-      console.log('API URL being called:', url);
+      // Use current state directly like the working test page
+      const url = `/api/test/questions?category=${selectedCategory}&difficulty=${selectedDifficulty}&count=${count}`;
+      console.log('Loading questions from URL:', url);
+      console.log('Current category state:', selectedCategory);
       
       const response = await fetch(url);
       
