@@ -1101,6 +1101,58 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
 // Generate sample questions for categories that don't have existing questions
 function getSampleQuestionsForCategory(category: string, count: number = 10) {
   const sampleQuestions: any = {
+    ophthalmology: [
+      {
+        id: "opht1",
+        category: "Ophthalmology",
+        topic: "Acute Angle-Closure Glaucoma",
+        question: "A 65-year-old woman presents to A&E with severe right eye pain, nausea, vomiting, and seeing haloes around lights for the past 4 hours. Visual acuity is 6/36 in the right eye. The eye appears red with a fixed, mid-dilated pupil. IOP is 50 mmHg. What is the most appropriate immediate treatment?",
+        options: {
+          A: "Topical pilocarpine 2% plus acetazolamide 500mg IV",
+          B: "Immediate referral to ophthalmology without treatment",
+          C: "Topical timolol 0.5% twice daily",
+          D: "Oral prednisolone 40mg daily",
+          E: "Topical chloramphenicol drops"
+        },
+        answer: "A",
+        explanation: "Why Topical pilocarpine 2% plus acetazolamide 500mg IV is correct:\n\n• NICE CG85 Emergency Management Protocol: \n  - Acute angle-closure glaucoma represents an ophthalmic emergency requiring immediate pressure reduction to prevent irreversible vision loss\n  - Combination therapy with pilocarpine and acetazolamide provides rapid, effective IOP reduction through complementary mechanisms\n  - Royal College of Ophthalmologists guidelines emphasize urgent treatment initiation within hours to preserve visual field\n  - Delay in appropriate therapy results in progressive optic nerve damage and permanent visual field defects\n\n• Optimal Pilocarpine Mechanism and Efficacy: \n  - Direct cholinergic agonist causing pupillary constriction and ciliary muscle contraction\n  - Opens drainage angle by pulling peripheral iris away from trabecular meshwork\n  - Concentration of 2% provides optimal therapeutic effect while minimizing systemic absorption\n  - Rapid onset of action within 15-30 minutes providing immediate anatomical correction\n\n• Acetazolamide Carbonic Anhydrase Inhibition: \n  - Reduces aqueous humor production by 40-60% through ciliary body carbonic anhydrase inhibition\n  - Intravenous administration ensures rapid systemic drug delivery and immediate onset\n  - Dose of 500mg IV provides optimal therapeutic response without excessive side effects\n  - Synergistic effect with pilocarpine addresses both drainage and production components\n\n• Evidence-Based Emergency Intervention: \n  - Clinical trials demonstrate 70-80% IOP reduction within 2 hours using combination therapy\n  - Prevents progression to irreversible glaucomatous optic neuropathy\n  - Significantly improves outcomes when administered within 6-hour critical window\n  - Reduces need for emergency surgical intervention in 60-70% of cases\n\n• Comprehensive Symptom Resolution: \n  - Addresses acute pain through pressure reduction and inflammation control\n  - Resolves nausea and vomiting secondary to severe ocular pain and raised IOP\n  - Eliminates visual disturbances including haloes and blurred vision\n  - Prevents secondary complications including corneal edema and lens damage\n\n• Established Safety and Monitoring: \n  - Well-tolerated combination with predictable side effect profile\n  - Allows safe emergency treatment pending specialist ophthalmology review\n  - Compatible with subsequent definitive laser peripheral iridotomy\n  - Monitoring protocols ensure appropriate response and identify complications",
+        incorrectExplanation: "• Option B (Immediate referral without treatment) - Dangerous Treatment Delay: \n  - Acute angle-closure glaucoma requires immediate pressure reduction to prevent irreversible vision loss\n  - Referral delays of even 1-2 hours can result in permanent visual field defects\n  - Emergency departments must initiate treatment before specialist review\n  - Royal College of Ophthalmologists emphasizes immediate treatment protocols\n  - Untreated acute glaucoma progresses to complete vision loss within 24-48 hours\n  - Primary care and emergency medicine protocols mandate immediate intervention\n\n• Option C (Topical timolol alone) - Insufficient Monotherapy: \n  - Beta-blocker monotherapy inadequate for acute angle-closure crisis\n  - Does not address closed drainage angle requiring pupillary constriction\n  - Insufficient IOP reduction for pressures >40 mmHg\n  - May worsen angle closure through pupillary dilation effects\n  - Requires combination with pilocarpine and systemic agents\n  - Contraindicated in patients with asthma or COPD\n\n• Option D (Oral prednisolone) - Inappropriate Anti-inflammatory Focus: \n  - Corticosteroids do not address elevated intraocular pressure\n  - May worsen angle closure through pupillary dilation\n  - Does not target underlying pathophysiology of aqueous outflow obstruction\n  - Risk of steroid-induced IOP elevation in predisposed individuals\n  - Delays appropriate pressure-reducing interventions\n  - Reserved for post-acute inflammation management\n\n• Option E (Topical chloramphenicol) - Irrelevant Antibiotic Therapy: \n  - Acute angle-closure glaucoma is not infectious condition\n  - Antibiotics provide no therapeutic benefit for raised IOP\n  - Does not address underlying anatomical obstruction\n  - Delays crucial pressure-reducing treatment\n  - May cause additional ocular irritation and inflammation\n  - Completely inappropriate for emergency glaucoma management",
+        mnemonic: "Acute Glaucoma: PAIN = Pilocarpine, Acetazolamide, Immediate treatment, No delays\n\nGlaucoma Risk Factors: CHANGE = Chinese/Asian ethnicity, Hypermetropia, Age >40, Narrow angles, Gender (female), Eye trauma history\n\nGlaucoma Symptoms: VOMIT = Vision haloes, Ocular pain, Mid-dilated pupil, IOP raised, Tenderness\n\nPilocarpine Action: CONTRACTS = Constricts pupil, Opens drainage angle, Normalizes outflow, Treats acute closure, Restores anatomy, Corrects pathophysiology, Therapeutic in emergency, Saves vision",
+        guidelineSummary: {
+          title: "Acute Angle-Closure Glaucoma Management",
+          content: "• Emergency Recognition: \n  - Severe ocular pain, nausea, vomiting, haloes around lights\n  - Red eye with fixed mid-dilated pupil and corneal edema\n  - Intraocular pressure typically >40 mmHg (normal 10-21 mmHg)\n  - Visual acuity reduced, peripheral visual field loss\n\n• Immediate Treatment: \n  - Topical pilocarpine 2% to constrict pupil and open angle\n  - IV acetazolamide 500mg to reduce aqueous production\n  - Topical beta-blocker (timolol) if no contraindications\n  - Analgesia for severe pain management\n\n• Secondary Interventions: \n  - Topical steroid after IOP control for inflammation\n  - Osmotic agents (mannitol) for refractory cases\n  - Monitor IOP response every 30-60 minutes\n  - Urgent ophthalmology referral within 24 hours\n\n• Definitive Management: \n  - Laser peripheral iridotomy (YAG laser) when inflammation settles\n  - Prophylactic iridotomy in fellow eye (50% risk of acute attack)\n  - Consider lens extraction if significant cataract component\n  - Long-term IOP monitoring and glaucoma surveillance\n\n• Contraindications to Treatment: \n  - Acetazolamide: severe renal/hepatic impairment, sulfa allergy\n  - Pilocarpine: acute iritis, lens-induced angle closure\n  - Beta-blockers: asthma, COPD, heart block\n\n• Prevention and Follow-up: \n  - Avoid mydriatic drugs in high-risk patients\n  - Regular ophthalmology review for chronic angle-closure\n  - Patient education regarding symptoms requiring urgent attention\n  - Family screening for anatomical predisposition"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/cg85",
+            description: "NICE CG85: Glaucoma - diagnosis and management"
+          },
+          supplementary: [
+            {
+              title: "Royal College of Ophthalmologists",
+              url: "https://www.rcophth.ac.uk/standards-publications-research/clinical-guidelines/",
+              description: "RCOphth acute glaucoma management guidelines"
+            },
+            {
+              title: "NHS Ophthalmology",
+              url: "https://www.nhs.uk/conditions/glaucoma/",
+              description: "NHS glaucoma treatment protocols"
+            },
+            {
+              title: "SIGN Glaucoma Guidelines",
+              url: "https://www.sign.ac.uk/our-guidelines/glaucoma-referral-and-safe-discharge/",
+              description: "Scottish glaucoma referral guidance"
+            },
+            {
+              title: "Emergency Eye Care",
+              url: "https://www.college-optometrists.org/guidance/clinical-management-guidelines/",
+              description: "Emergency ophthalmic care protocols"
+            }
+          ]
+        }
+      }
+    ],
     dermatology: [
       {
         id: "derm1",
@@ -1225,6 +1277,90 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
             title: "NICE Stroke Guidelines",
             url: "https://www.nice.org.uk/guidance/cg68"
           }
+        }
+      }
+    ],
+    neurology: [
+      {
+        id: "neuro1",
+        category: "Neurology", 
+        topic: "Multiple Sclerosis Diagnosis",
+        question: "A 28-year-old woman presents with numbness and tingling in her left leg that developed over 2 days, preceded by visual disturbance in her right eye 6 months ago. MRI brain shows multiple periventricular white matter lesions. CSF shows oligoclonal bands. What is the most likely diagnosis?",
+        options: {
+          A: "Multiple sclerosis",
+          B: "Vitamin B12 deficiency", 
+          C: "Stroke",
+          D: "Guillain-Barré syndrome",
+          E: "Migraine with aura"
+        },
+        answer: "A",
+        explanation: "Why Multiple sclerosis is correct:\n\n• McDonald Criteria 2017 Diagnostic Framework: \n  - Clinical presentation demonstrates classic multiple sclerosis pattern with discrete neurological episodes separated in time and space\n  - Two distinct clinical events (optic neuritis 6 months ago, current sensory symptoms) fulfill temporal dissemination criteria\n  - Different anatomical locations (optic nerve, spinal cord) satisfy spatial dissemination requirements essential for MS diagnosis\n  - Age and demographic profile (young woman) consistent with typical MS presentation patterns in clinical epidemiological studies\n\n• Characteristic MRI Findings: \n  - Periventricular white matter lesions represent pathognomonic radiological signature of multiple sclerosis\n  - Location corresponds to areas of high myelin density susceptible to inflammatory demyelination\n  - Pattern consistent with McDonald criteria radiological requirements for spatial dissemination\n  - Excludes vascular causes which typically show cortical or subcortical grey matter involvement\n\n• Confirmatory CSF Analysis: \n  - Oligoclonal bands present in CSF but absent in serum represent definitive laboratory marker for multiple sclerosis\n  - Indicates intrathecal immunoglobulin synthesis characteristic of chronic inflammatory CNS disease\n  - Found in 85-95% of MS patients providing strong supportive diagnostic evidence\n  - Helps differentiate from other inflammatory conditions affecting central nervous system\n\n• Clinical Syndrome Recognition: \n  - Previous visual disturbance likely represents optic neuritis, most common initial MS presentation in young women\n  - Current sensory symptoms suggest partial transverse myelitis or hemisensory syndrome\n  - Relapsing-remitting pattern typical of early multiple sclerosis in this demographic\n  - Symptom evolution over days rather than hours excludes acute vascular events",
+        incorrectExplanation: "• Option B (Vitamin B12 deficiency) - Inconsistent Clinical Pattern: \n  - B12 deficiency typically causes progressive rather than relapsing symptoms\n  - Would not explain discrete episode of visual disturbance 6 months prior\n  - MRI changes in B12 deficiency affect spinal cord predominantly, not periventricular brain regions\n  - Oligoclonal bands not characteristic of nutritional deficiencies\n  - Requires serum B12, methylmalonic acid, homocysteine measurement for diagnosis\n\n• Option C (Stroke) - Age and Pattern Mismatch: \n  - Extremely unlikely in 28-year-old without vascular risk factors\n  - Stroke causes acute onset over minutes to hours, not gradual development over days\n  - Would not explain previous visual episode or current MRI pattern\n  - Periventricular lesions not typical of acute cerebrovascular events\n  - CSF oligoclonal bands not present in stroke patients\n\n• Option D (Guillain-Barré syndrome) - Anatomical Distribution Error: \n  - GBS affects peripheral nervous system, not central nervous system\n  - Would not cause brain MRI abnormalities or CSF oligoclonal bands\n  - Typically presents with ascending weakness rather than sensory symptoms\n  - Previous visual episode incompatible with peripheral neuropathy\n  - CSF shows elevated protein without oligoclonal bands\n\n• Option E (Migraine with aura) - Insufficient Explanation: \n  - Migraine does not cause persistent neurological deficits\n  - Would not explain MRI white matter lesions or CSF changes\n  - Visual aura typically lasts 20-60 minutes, not persistent visual disturbance\n  - No headache pattern described in clinical presentation\n  - Cannot account for current sensory symptoms or investigation findings",
+        mnemonic: "MS Diagnosis: CRIMES = CSF oligoclonal bands, Relapsing symptoms, Imaging white matter lesions, Multiple episodes, Examination shows deficits, Separated in time and space\n\nMS Symptoms: VISION = Visual problems, Incontinence, Sensory loss, Intention tremor, Optic neuritis, Nystagmus\n\nMS Types: RPSP = Relapsing-Remitting, Primary Progressive, Secondary Progressive, Progressive-Relapsing",
+        guidelineSummary: {
+          title: "Multiple Sclerosis Management Summary",
+          content: "• Diagnostic Criteria (McDonald 2017): \n  - Clinical: ≥2 attacks affecting different CNS areas separated by ≥30 days\n  - MRI: Lesions disseminated in space (≥2 CNS areas) and time\n  - CSF: Oligoclonal bands or elevated IgG index supportive\n  - Exclude other conditions causing similar presentations\n\n• Initial Investigations: \n  - MRI brain and spinal cord with gadolinium\n  - CSF analysis for oligoclonal bands, cell count, protein\n  - Visual evoked potentials if optic nerve involvement\n  - Blood tests to exclude mimics (B12, thyroid, ANA, ANCA)\n\n• Disease-Modifying Therapies: \n  - First-line: interferon beta, glatiramer acetate, dimethyl fumarate\n  - Second-line: natalizumab, fingolimod, alemtuzumab\n  - Treatment choice based on disease activity, patient factors\n  - Early treatment reduces relapse rate and disability progression\n\n• Acute Relapse Management: \n  - High-dose methylprednisolone 1g IV daily for 3-5 days\n  - Oral prednisolone alternative if IV not available\n  - Physiotherapy and occupational therapy support\n  - Symptom-specific treatments (baclofen for spasticity)\n\n• Long-term Monitoring: \n  - Annual MRI to assess disease activity\n  - EDSS scoring for disability progression\n  - Regular review of disease-modifying therapy effectiveness\n  - Management of complications (infections, osteoporosis)"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/cg186",
+            description: "NICE CG186: Multiple sclerosis in adults - management"
+          },
+          supplementary: [
+            {
+              title: "MS Society UK",
+              url: "https://www.mssociety.org.uk/about-ms/what-is-ms",
+              description: "Multiple sclerosis patient information and support"
+            },
+            {
+              title: "Association of British Neurologists",
+              url: "https://www.theabn.org/page/PracticalNeurology",
+              description: "Professional neurology guidance and standards"
+            }
+          ]
+        }
+      }
+    ],
+    obstetrics: [
+      {
+        id: "obs1",
+        category: "Obstetrics",
+        topic: "Preeclampsia Management",
+        question: "A 32-year-old woman at 36 weeks gestation presents with blood pressure 165/105 mmHg, proteinuria 3+ on dipstick, and headache. She has no previous hypertension. What is the most appropriate immediate management?",
+        options: {
+          A: "Labetalol 200mg orally plus hospital admission",
+          B: "Immediate delivery by caesarean section",
+          C: "Methyldopa 250mg three times daily as outpatient",
+          D: "ACE inhibitor therapy",
+          E: "Diuretic therapy to reduce fluid retention"
+        },
+        answer: "A",
+        explanation: "Why Labetalol 200mg orally plus hospital admission is correct:\n\n• NICE CG107 Severe Preeclampsia Protocol: \n  - Blood pressure ≥160/110 mmHg with proteinuria represents severe preeclampsia requiring immediate hospital admission\n  - Labetalol constitutes first-line antihypertensive therapy in pregnancy with established safety profile\n  - Immediate treatment prevents progression to eclampsia and maternal cerebrovascular complications\n  - Hospital monitoring essential for maternal and fetal surveillance in severe disease\n\n• Optimal Antihypertensive Selection: \n  - Labetalol combines alpha and beta-blocking activity providing effective BP reduction without compromising placental perfusion\n  - Oral route appropriate for conscious patients without evidence of imminent eclampsia\n  - Dose of 200mg achieves therapeutic effect while allowing titration based on response\n  - Safe in pregnancy with minimal fetal side effects compared to other antihypertensive classes\n\n• Critical Maternal Safety Considerations: \n  - Severe hypertension (≥160/110) carries immediate risk of maternal stroke and cardiac complications\n  - Headache suggests possible cerebral involvement requiring urgent intervention\n  - Hospital admission enables close monitoring for progression to eclampsia or HELLP syndrome\n  - Allows for immediate delivery planning if maternal or fetal condition deteriorates\n\n• Evidence-Based Pregnancy Management: \n  - MAGPIE trial demonstrates significant reduction in eclampsia risk with appropriate early intervention\n  - Treatment of severe hypertension reduces maternal morbidity and mortality\n  - Controlled BP reduction prevents placental abruption and intracerebral hemorrhage\n  - Enables optimization of maternal condition before planned delivery",
+        incorrectExplanation: "• Option B (Immediate caesarean section) - Premature Intervention: \n  - Delivery indicated only if maternal stabilization impossible or fetal compromise\n  - Should attempt maternal BP control before considering delivery\n  - 36 weeks gestation benefits from maternal stabilization and corticosteroids if time permits\n  - Immediate delivery without BP control increases perioperative risk\n  - NICE guidelines emphasize maternal stabilization as priority\n\n• Option C (Methyldopa outpatient) - Inadequate Severity Recognition: \n  - Severe preeclampsia requires hospital admission and monitoring\n  - Methyldopa has slower onset of action inappropriate for severe hypertension\n  - Outpatient management unsafe with BP ≥160/110 and symptoms\n  - Risk of progression to eclampsia or stroke without close monitoring\n  - Contradicts all major obstetric guidelines for severe disease\n\n• Option D (ACE inhibitor therapy) - Contraindicated in Pregnancy: \n  - ACE inhibitors cause fetal renal dysfunction and growth restriction\n  - Associated with oligohydramnios and fetal death\n  - Completely contraindicated throughout pregnancy\n  - May cause maternal hypotension and placental hypoperfusion\n  - Never appropriate for hypertension management in pregnancy\n\n• Option E (Diuretic therapy) - Potentially Harmful: \n  - Preeclampsia involves reduced intravascular volume despite fluid retention\n  - Diuretics may worsen placental perfusion and fetal compromise\n  - Does not address underlying pathophysiology of preeclampsia\n  - Risk of electrolyte disturbance and maternal hypotension\n  - Contraindicated in preeclampsia management protocols",
+        mnemonic: "Preeclampsia: HELLP = Hemolysis, Elevated Liver enzymes, Low Platelets\n\nPreeclampsia Signs: PREH = Proteinuria, Raised BP, Edema, Hyperreflexia\n\nPregnancy HTN Drugs: LNM = Labetalol, Nifedipine, Methyldopa (safe)\n\nEclampsia Treatment: MAGS = Magnesium sulfate, Airway management, Get baby out, Stabilize mother",
+        guidelineSummary: {
+          title: "Preeclampsia Management Summary",
+          content: "• Definition and Classification: \n  - Mild: BP ≥140/90 with proteinuria after 20 weeks\n  - Severe: BP ≥160/110 or proteinuria >3g/24h or symptoms\n  - Superimposed: on chronic hypertension\n  - HELLP syndrome: hemolysis, elevated liver enzymes, low platelets\n\n• Immediate Assessment: \n  - Blood pressure measurement, proteinuria testing\n  - Symptoms: headache, visual disturbance, epigastric pain\n  - Blood tests: FBC, LFTs, urea, creatinine, uric acid\n  - Fetal assessment: CTG, ultrasound growth scan\n\n• Antihypertensive Treatment: \n  - Target BP 135-150/80-100 mmHg\n  - First-line: labetalol 200mg orally, up to 400mg TDS\n  - Alternative: nifedipine modified-release 10-20mg BD\n  - Severe hypertension: IV labetalol or hydralazine\n\n• Hospital Management: \n  - Admission for BP ≥160/110 or proteinuria with symptoms\n  - 4-hourly BP monitoring, daily urinalysis\n  - Twice-weekly blood tests monitoring\n  - Magnesium sulfate if severe features or imminent delivery\n\n• Delivery Planning: \n  - Consider delivery after 37 weeks with severe preeclampsia\n  - Before 34 weeks: corticosteroids for fetal lung maturity\n  - Indications for immediate delivery: uncontrolled BP, eclampsia, HELLP\n  - Mode of delivery based on obstetric factors and urgency"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/cg107",
+            description: "NICE CG107: Hypertension in pregnancy - diagnosis and management"
+          },
+          supplementary: [
+            {
+              title: "RCOG Guidance",
+              url: "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/",
+              description: "Royal College of Obstetricians preeclampsia guidelines"
+            },
+            {
+              title: "NHS Pregnancy Care",
+              url: "https://www.nhs.uk/pregnancy/related-conditions/complications/pre-eclampsia/",
+              description: "NHS preeclampsia management protocols"
+            }
+          ]
         }
       }
     ]
