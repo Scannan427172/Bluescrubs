@@ -48,7 +48,6 @@ import HowTo from "@/pages/how-to";
 import Security from "@/pages/security";
 import Settings from "@/pages/settings";
 import Team from "@/pages/team";
-import CategoryTest from "@/pages/category-test";
 
 // Mock user for demo - in real app this would come from auth context
 const DEMO_USER = {
@@ -115,14 +114,6 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <PLAB1New />
-          </div>
-        </div>
-      </Route>
-      <Route path="/plab1-working">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <CategoryTest />
           </div>
         </div>
       </Route>

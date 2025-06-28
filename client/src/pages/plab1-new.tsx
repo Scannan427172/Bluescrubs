@@ -289,11 +289,10 @@ export default function PLAB1New() {
   };
   
   // AI Question Generation
-  const [selectedCategory, setSelectedCategory] = useState<string>('dermatology');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('intermediate');
   const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
   const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
-  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
   const [isBulkGenerating, setIsBulkGenerating] = useState(false);
   const [bulkProgress, setBulkProgress] = useState<{
     completed: number;
@@ -564,11 +563,40 @@ export default function PLAB1New() {
 
   // Generate AI questions
   const startPractice = async (questionCount: number) => {
-    setBlockType('block1');
-    setIsTimedSession(false);
-    // Ensure we use the current category state
-    console.log('Starting practice with category:', selectedCategory);
-    await loadQuestions(questionCount);
+    setIsGeneratingQuestions(true);
+    setGeneratedQuestions([]);
+    setSessionStarted(false);
+    setShowExplanation(false);
+    setCurrentQuestionIndex(0);
+    
+    try {
+      const response = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          category: selectedCategory,
+          count: questionCount,
+          difficulty: selectedDifficulty
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setGeneratedQuestions(data.questions || []);
+        if (data.questions && data.questions.length > 0) {
+          setSessionStarted(true);
+          setQuestionStartTime(Date.now());
+        }
+      } else {
+        console.error('Failed to generate questions');
+      }
+    } catch (error) {
+      console.error('Error generating questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
   };
 
   // Bulk question generation function
@@ -683,66 +711,6 @@ export default function PLAB1New() {
 
   // Start timed practice session
   const startTimedPractice = async (timeInMinutes: number) => {
-    setBlockType('block2');
-    setIsTimedSession(true);
-    setSessionTimeLimit(timeInMinutes);
-    setSessionStartTime(Date.now());
-    
-    // Load questions and start timer
-    await loadQuestions(100);
-    
-    if (generatedQuestions.length > 0) {
-      setIsTimerRunning(true);
-      // Set timer for timed practice
-      setTimeout(() => {
-        setIsTimerRunning(false);
-        setSessionComplete(true);
-      }, timeInMinutes * 60 * 1000);
-    }
-  };
-
-  // Load existing questions based on category and difficulty - Working implementation
-  const loadQuestions = async (count: number = 20) => {
-    setIsLoadingQuestions(true);
-    
-    try {
-      console.log('Starting practice with category:', selectedCategory);
-      const url = `/api/test/questions?category=${selectedCategory}&difficulty=${selectedDifficulty}&count=${count}`;
-      console.log('Loading questions from URL:', url);
-      console.log('Current category state:', selectedCategory);
-      
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        throw new Error('Failed to load questions');
-      }
-      
-      const data = await response.json();
-      console.log('API Response data:', data);
-      
-      if (data && data.length > 0) {
-        setGeneratedQuestions(data);
-        setCurrentQuestionIndex(0);
-        setSelectedAnswer("");
-        setShowExplanation(false);
-        setQuestionStartTime(Date.now());
-        setSessionStarted(true);
-        setIsTimerRunning(true);
-        return;
-      }
-      
-      throw new Error('No questions found for this category');
-      
-    } catch (error) {
-      console.error('Error loading questions:', error);
-      alert(`Unable to load questions for ${selectedCategory}. Please try a different category.`);
-    } finally {
-      setIsLoadingQuestions(false);
-    }
-  };
-
-  // Generate questions using AI
-  const generateQuestions = async (count: number) => {
     setIsGeneratingQuestions(true);
     try {
       const response = await fetch('/api/generate-questions', {
@@ -751,13 +719,48 @@ export default function PLAB1New() {
         body: JSON.stringify({
           category: selectedCategory,
           difficulty: selectedDifficulty,
-          count: count
+          count: 100 // Generate enough questions for timed session
+        })
+      });
+      const data = await response.json();
+      setGeneratedQuestions(data.questions);
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+      setSessionStarted(true);
+      setIsTimerRunning(true);
+      
+      // Set timer for timed practice
+      setTimeout(() => {
+        setIsTimerRunning(false);
+        setSessionComplete(true);
+      }, timeInMinutes * 60 * 1000);
+      
+    } catch (error) {
+      console.error('Error generating questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
+
+  // Start authentic PLAB 1 timed practice session (1 minute per question)
+  const startAuthenticTimedPractice = async (questionCount: number) => {
+    setIsGeneratingQuestions(true);
+    try {
+      const response = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: selectedCategory,
+          difficulty: selectedDifficulty,
+          count: questionCount // Generate exact number of questions
         })
       });
       const data = await response.json();
       
       // Slice to exact count in case more were generated
-      const exactQuestions = data.questions.slice(0, count);
+      const exactQuestions = data.questions.slice(0, questionCount);
       setGeneratedQuestions(exactQuestions);
       setCurrentQuestionIndex(0);
       setSelectedAnswer("");
@@ -767,7 +770,7 @@ export default function PLAB1New() {
       setIsTimerRunning(true);
       
       // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
-      const totalTimeMs = count * 60 * 1000; // 1 minute per question
+      const totalTimeMs = questionCount * 60 * 1000; // 1 minute per question
       setTimeout(() => {
         setIsTimerRunning(false);
         setSessionComplete(true);
@@ -782,16 +785,31 @@ export default function PLAB1New() {
 
   // Start unlimited practice session
   const startUnlimitedPractice = async () => {
-    setBlockType('block3');
-    setIsTimedSession(false);
-    await loadQuestions(20);
-  };
-
-  // Create authentic timed practice function
-  const startAuthenticTimedPractice = async (questionCount: number) => {
-    setBlockType('block1');
-    setIsTimedSession(true);
-    await loadQuestions(questionCount);
+    setIsGeneratingQuestions(true);
+    try {
+      const response = await fetch('/api/generate-questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: selectedCategory,
+          difficulty: selectedDifficulty,
+          count: 20 // Start with 20, will generate more as needed
+        })
+      });
+      const data = await response.json();
+      setGeneratedQuestions(data.questions);
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+      setSessionStarted(true);
+      setIsTimerRunning(false); // No timer for unlimited
+      
+    } catch (error) {
+      console.error('Error generating questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
   };
 
   // Get current question
@@ -1028,65 +1046,46 @@ export default function PLAB1New() {
             </Card>
           </div>
 
-          {/* Practice Category Filter - Working Implementation */}
+          {/* Category Selection */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>PLAB 1 Practice Test</CardTitle>
-              <CardDescription>Select category and difficulty to start your practice session</CardDescription>
+              <CardTitle>Select Practice Category</CardTitle>
+              <CardDescription>Choose a medical specialty to focus your practice</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid md:grid-cols-3 gap-4 mb-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label className="text-sm font-medium mb-2 block">Medical Specialty</Label>
+                  <Label htmlFor="category" className="text-sm font-medium mb-2 block">
+                    Medical Specialty
+                  </Label>
                   <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Categories</SelectItem>
-                      <SelectItem value="cardiovascular">Cardiovascular</SelectItem>
-                      <SelectItem value="infectious-diseases">Infectious Diseases</SelectItem>
-                      <SelectItem value="respiratory">Respiratory</SelectItem>
-                      <SelectItem value="gastrointestinal">Gastrointestinal</SelectItem>
-                      <SelectItem value="neurology">Neurology</SelectItem>
-                      <SelectItem value="endocrinology">Endocrinology</SelectItem>
-                      <SelectItem value="psychiatry">Psychiatry</SelectItem>
-                      <SelectItem value="obstetrics-gynaecology">Obstetrics & Gynaecology</SelectItem>
-                      <SelectItem value="paediatrics">Paediatrics</SelectItem>
-                      <SelectItem value="surgery">Surgery</SelectItem>
-                      <SelectItem value="emergency-medicine">Emergency Medicine</SelectItem>
-                      <SelectItem value="rheumatology">Rheumatology</SelectItem>
-                      <SelectItem value="dermatology">Dermatology</SelectItem>
-                      <SelectItem value="ophthalmology">Ophthalmology</SelectItem>
-                      <SelectItem value="ent">ENT</SelectItem>
-                      <SelectItem value="pharmacology">Pharmacology</SelectItem>
-                      <SelectItem value="ethics-law">Ethics & Law</SelectItem>
+                      {availableCategories.map((category) => (
+                        <SelectItem key={category.value} value={category.value}>
+                          {category.label}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
                 
                 <div>
-                  <Label className="text-sm font-medium mb-2 block">Difficulty Level</Label>
+                  <Label htmlFor="difficulty" className="text-sm font-medium mb-2 block">
+                    Difficulty Level
+                  </Label>
                   <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select difficulty" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="basic">Basic</SelectItem>
+                      <SelectItem value="foundation">Foundation</SelectItem>
                       <SelectItem value="intermediate">Intermediate</SelectItem>
                       <SelectItem value="advanced">Advanced</SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
-
-                <div className="flex items-end">
-                  <Button 
-                    onClick={() => loadQuestions(20)} 
-                    disabled={isLoadingQuestions}
-                    className="w-full bg-blue-600 hover:bg-blue-700"
-                  >
-                    {isLoadingQuestions ? "Loading..." : "Start Practice"}
-                  </Button>
                 </div>
               </div>
             </CardContent>
@@ -1135,7 +1134,7 @@ export default function PLAB1New() {
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   <Button 
                     onClick={() => startPractice(10)}
-                    disabled={isGeneratingQuestions || isLoadingQuestions}
+                    disabled={isGeneratingQuestions}
                     className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
                   >
                     <span className="font-bold text-lg">10</span>
