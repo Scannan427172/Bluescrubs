@@ -1106,6 +1106,9 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
       const { category, difficulty, count, questionId } = req.query;
       const requestedCategory = typeof category === 'string' ? category : 'all';
       const requestedCount = parseInt(typeof count === 'string' ? count : '20');
+      
+      // Debug: Log what category is being requested
+      console.log('Backend received category:', requestedCategory, 'from query:', category);
 
       // Questions organized by category
       const questionsByCategory = {

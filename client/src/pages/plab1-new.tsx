@@ -289,7 +289,7 @@ export default function PLAB1New() {
   };
   
   // AI Question Generation
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('dermatology');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('intermediate');
   const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
   const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
@@ -566,6 +566,8 @@ export default function PLAB1New() {
   const startPractice = async (questionCount: number) => {
     setBlockType('block1');
     setIsTimedSession(false);
+    // Ensure we use the current category state
+    console.log('Starting practice with category:', selectedCategory);
     await loadQuestions(questionCount);
   };
 
@@ -713,13 +715,17 @@ export default function PLAB1New() {
         count: count.toString()
       });
       
-      const response = await fetch(`/api/test/questions?${params}`);
+      const url = `/api/test/questions?${params}`;
+      console.log('API URL being called:', url);
+      
+      const response = await fetch(url);
       
       if (!response.ok) {
         throw new Error('Failed to load questions');
       }
       
       const data = await response.json();
+      console.log('API Response data:', data);
       
       if (data && data.length > 0) {
         setGeneratedQuestions(data);
