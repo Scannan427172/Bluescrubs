@@ -701,11 +701,12 @@ export default function PLAB1New() {
     }
   };
 
-  // Load existing questions based on category and difficulty
+  // Load existing questions based on category and difficulty - Working implementation
   const loadQuestions = async (count: number = 20) => {
     setIsLoadingQuestions(true);
+    
     try {
-      // Use current state directly like the working test page
+      console.log('Starting practice with category:', selectedCategory);
       const url = `/api/test/questions?category=${selectedCategory}&difficulty=${selectedDifficulty}&count=${count}`;
       console.log('Loading questions from URL:', url);
       console.log('Current category state:', selectedCategory);
@@ -726,17 +727,15 @@ export default function PLAB1New() {
         setShowExplanation(false);
         setQuestionStartTime(Date.now());
         setSessionStarted(true);
-        setIsTimerRunning(false);
+        setIsTimerRunning(true);
         return;
       }
       
-      // Fallback: try to generate questions if none found
-      await generateQuestions(count);
+      throw new Error('No questions found for this category');
       
     } catch (error) {
       console.error('Error loading questions:', error);
-      // Final fallback: show error message
-      alert('Unable to load questions. Please try refreshing the page.');
+      alert(`Unable to load questions for ${selectedCategory}. Please try a different category.`);
     } finally {
       setIsLoadingQuestions(false);
     }

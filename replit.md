@@ -267,6 +267,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - June 26, 2025: HOW TO GUIDE CREATION - Created comprehensive "How to Use BlueScrubsPrep" page with quick start guide, feature explanations, study tips, best practices, FAQ section, and step-by-step instructions for PLAB 1 & 2 preparation - added to More section as first featured card for easy user access
 - June 26, 2025: TEAM PAGE CREATION - Created dedicated Team page (/team) featuring Dr. Yasar Ahmad (Medical Director) and Keith Hunter (Co-Founder & Creative Director) with comprehensive professional backgrounds, qualifications, achievements, and company values - moved team details from More page to dedicated page for better organization
 - June 27, 2025: FILE SIZE OPTIMIZATION - Reduced project assets from 27MB to 12MB (56% reduction): removed unused video files (3.3MB saved), compressed images using ImageMagick (15% smaller), optimized hero video from 4.3MB to 357KB (92% reduction), removed backup files - improved loading performance while maintaining visual quality
+- June 28, 2025: CATEGORY FILTERING FIX - Removed complex category selection interface from original PLAB 1 page and replaced with working filtering functionality from /plab1-working page. Updated loadQuestions function to use proper error handling and category state management for reliable question loading across all 18 medical specialties
 
 # User Preferences
 
