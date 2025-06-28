@@ -1283,14 +1283,19 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
           },
           supplementary: [
             {
-              title: "British Association of Dermatologists",
-              url: "https://www.bad.org.uk/shared/get-file.ashx?id=1653&itemtype=document",
-              description: "BAD psoriasis management guidelines"
+              title: "British Medical Journal - Psoriasis",
+              url: "https://bestpractice.bmj.com/topics/en-gb/158",
+              description: "BMJ Best Practice psoriasis management guide"
             },
             {
               title: "NHS Psoriasis Information",
               url: "https://www.nhs.uk/conditions/psoriasis/",
               description: "NHS patient information and treatment options"
+            },
+            {
+              title: "CKS NICE - Psoriasis",
+              url: "https://cks.nice.org.uk/topics/psoriasis/",
+              description: "NICE Clinical Knowledge Summaries for psoriasis"
             },
             {
               title: "Psoriasis Association UK",
