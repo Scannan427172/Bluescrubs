@@ -1115,68 +1115,8 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
           E: "Fungal infection"
         },
         answer: "A",
-        explanation: {
-          correct: {
-            title: "Primary Management Strategy",
-            content: [
-              "Atopic dermatitis represents the most appropriate diagnosis based on the clinical presentation of chronic, recurrent eczematous lesions affecting flexural areas",
-              "NICE CG57 establishes atopic dermatitis as a chronic inflammatory skin condition characterised by itching, erythema, and scaling in typical distribution patterns",
-              "The chronicity (6-month duration), flexural involvement, and clear trigger identification (stress, soaps) strongly support this diagnosis",
-              "British Association of Dermatologists guidelines consistently rank topical management as first-line therapy for mild-to-moderate disease"
-            ]
-          },
-          guidelines: {
-            title: "Guidelines & Evidence",
-            content: [
-              "NICE CG57 Gold Standard Treatment: First-line therapy involves identification and avoidance of triggers combined with appropriate emollient therapy",
-              "British Association of Dermatologists and National Eczema Society guidelines consistently rank trigger avoidance as Class I recommendation",
-              "Achieves superior long-term outcomes compared to reactive treatment approaches",
-              "Evidence demonstrates 65-80% symptom improvement with comprehensive trigger management"
-            ]
-          },
-          inappropriate: [
-            {
-              option: "B",
-              title: "Contact Dermatitis Alternative",
-              reasons: [
-                "Would typically present with more localised reaction pattern to specific contactants",
-                "Less likely to show chronic 6-month progression without clear exposure history",
-                "Usually demonstrates more acute onset following identifiable contact",
-                "Distribution pattern doesn't match typical contact dermatitis presentation"
-              ]
-            },
-            {
-              option: "C", 
-              title: "Psoriasis Differential",
-              reasons: [
-                "Typically presents with well-demarcated silvery-scaled plaques rather than eczematous changes",
-                "Less commonly affects flexural areas as primary presentation",
-                "Usually demonstrates different trigger patterns (trauma, infection) rather than stress/soaps",
-                "Requires different therapeutic approach with topical vitamin D analogues"
-              ]
-            },
-            {
-              option: "D",
-              title: "Seborrheic Dermatitis Consideration", 
-              reasons: [
-                "Primarily affects sebaceous-rich areas (scalp, face, chest) rather than flexural regions",
-                "Less responsive to stress triggers, more associated with Malassezia overgrowth",
-                "Different clinical appearance with greasy rather than dry scaling",
-                "Requires antifungal rather than anti-inflammatory primary treatment"
-              ]
-            },
-            {
-              option: "E",
-              title: "Fungal Infection Exclusion",
-              reasons: [
-                "Would typically demonstrate positive fungal microscopy/culture",
-                "Less likely to show bilateral symmetrical flexural distribution",
-                "Usually responds to topical antifungals rather than trigger avoidance",
-                "Different clinical morphology with distinct borders and central clearing"
-              ]
-            }
-          ]
-        },
+        explanation: "Why Atopic dermatitis (eczema) is correct:\n\n• NICE CG57 Diagnostic Gold Standard: \n  - Atopic dermatitis represents the most clinically appropriate diagnosis based on the constellation of presenting features aligning with UK Working Party diagnostic criteria\n  - The 6-month chronicity combined with classic flexural distribution (hands, elbows, knees) establishes the chronic relapsing nature characteristic of constitutional eczema\n  - Family history of atopic conditions strongly supports genetic predisposition consistent with atopic dermatitis per British Association of Dermatologists guidelines\n  - NICE Clinical Guideline 57 specifically emphasises that combination of chronic course, typical distribution, identified triggers, and characteristic morphology provides sufficient clinical evidence for diagnosis\n\n• Pathophysiological Confirmation: \n  - Trigger identification (stress and soaps) demonstrates the typical multifactorial pathophysiology involving barrier dysfunction, immune dysregulation, and environmental precipitants\n  - Bilateral symmetrical involvement reflects the constitutional nature rather than external contact patterns seen in allergic contact dermatitis\n  - Pruritic nature with secondary excoriation fulfils major diagnostic criteria per Royal College of Dermatologists clinical standards\n  - Type 2 inflammatory response with elevated IgE levels commonly associated with atopic constitution and genetic predisposition\n\n• Clinical Morphology Assessment: \n  - Eczematous changes (erythema, scaling, vesiculation) characteristic of acute and chronic atopic dermatitis phases documented in dermatological literature\n  - Flexural predilection represents classic distribution pattern seen in adolescent and adult atopic dermatitis, distinguishing from childhood extensor involvement\n  - Absence of other characteristic features (well-demarcated plaques, silvery scale, greasy appearance) helps exclude important differential diagnoses\n  - Lichenification and excoriation marks indicate chronic scratching behaviour typical of pruritic atopic conditions requiring long-term management\n\n• Evidence-Based Management Framework: \n  - British Association of Dermatologists consensus statements emphasise stepped care approach: emollients as foundation therapy, topical corticosteroids for acute flares, comprehensive trigger identification protocols\n  - NICE Quality Standard QS44 specifies structured patient education regarding condition management, appropriate topical therapy application techniques, and realistic treatment expectations\n  - Management should follow NICE stepped care model with regular monitoring for treatment response, side effect assessment, and quality of life impact evaluation\n  - Long-term prognosis excellent with appropriate evidence-based therapy, though condition typically persists requiring ongoing maintenance treatment and lifestyle modifications\n\n• Epidemiological and Genetic Context: \n  - Adult-onset atopic dermatitis increasingly recognised in contemporary dermatological practice, affecting 25-30% of adult cases with distinct clinical characteristics\n  - Strong genetic component with 70% concordance in monozygotic twins and clear familial clustering patterns supporting constitutional rather than environmental aetiology\n  - Associated with other atopic conditions (asthma, allergic rhinitis) in 60-80% of cases, forming part of progressive 'atopic march' requiring holistic management\n  - Environmental triggers include soap irritants, stress responses, temperature extremes, and specific allergens identified through comprehensive history taking and trigger identification protocols\n\n• Therapeutic Evidence Base and Outcomes: \n  - Cochrane systematic reviews demonstrate superior efficacy of emollient-based maintenance therapy combined with appropriate anti-inflammatory treatment during active disease phases\n  - Randomised controlled trials consistently show 70-85% clinical improvement with evidence-based stepped therapy protocols and comprehensive patient education programmes\n  - Quality of life scores significantly improve with early accurate diagnosis and implementation of evidence-based management strategies addressing both physical and psychological aspects\n  - Patient education programmes focusing on trigger avoidance and proper skincare techniques reduce healthcare utilisation and improve long-term clinical outcomes per NHS England commissioning data",
+        incorrectExplanation: "• Option B (Allergic contact dermatitis) - Temporal and Distribution Pattern Contradictions: \n  - Contact dermatitis typically demonstrates clear temporal relationship between specific exposure and symptom onset, contrasting sharply with the 6-month chronic relapsing pattern described in this clinical scenario\n  - Would require prior sensitisation exposure and typically manifests 24-72 hours post-contact with specific allergen patterns corresponding directly to anatomical contact sites rather than bilateral flexural distribution\n  - Bilateral symmetrical flexural involvement more strongly suggestive of constitutional eczema rather than external contact patterns characteristic of allergic or irritant contact dermatitis\n  - Diagnostic confirmation would require comprehensive patch testing per British Contact Dermatitis Society protocols involving standardised European baseline series and extended allergen panels with 48-96 hour delayed readings\n  - Management approach differs fundamentally, focusing primarily on allergen identification through detailed occupational and environmental history, strict avoidance protocols, rather than chronic anti-inflammatory maintenance therapy\n  - Family history component significantly less relevant for contact sensitivity development compared to the strong genetic predisposition and constitutional factors central to atopic dermatitis pathogenesis\n\n• Option C (Plaque psoriasis) - Morphological and Clinical Distribution Misalignment: \n  - Psoriasis characteristically presents with well-demarcated, erythematous plaques covered by thick, silvery-white scales demonstrating positive Auspitz sign when removed, contrasting with poorly-defined eczematous patches\n  - Classic psoriatic distribution predominantly involves extensor surfaces (elbows, knees, sacrum, scalp) and nail apparatus, whilst this patient demonstrates flexural involvement characteristic of atopic dermatitis\n  - Koebner phenomenon (isomorphic response) in psoriasis shows lesion development specifically at sites of mechanical trauma or friction, fundamentally different from stress-triggered eczematous flares\n  - Psoriatic triggers include streptococcal infections, physical trauma, certain medications (lithium, beta-blockers, antimalarials), and alcohol consumption rather than soap irritants and stress sensitivity\n  - Treatment algorithms differ significantly: psoriasis responds optimally to topical vitamin D analogues, coal tar preparations, and systemic immunosuppressive agents targeting TNF-alpha and IL-17 pathways\n  - Family history patterns show distinct HLA-Cw6 association and different genetic clustering compared to atopic constitution with multiple allergic manifestations\n  - Nail involvement extremely common in psoriasis (pitting, onycholysis, oil spot changes, subungual hyperkeratosis) but characteristically absent in uncomplicated atopic dermatitis presentations\n\n• Option D (Seborrheic dermatitis) - Anatomical Predilection and Pathophysiological Distinctions: \n  - Seborrheic dermatitis demonstrates strong predilection for sebaceous gland-rich anatomical areas including scalp, nasolabial folds, eyebrows, presternal area, and axillae rather than flexural hand involvement\n  - Pathophysiology centres specifically on Malassezia species (particularly M. restricta and M. globosa) overgrowth in sebaceous environments rather than type 2 immune response and barrier dysfunction characteristic of atopic conditions\n  - Clinical morphology consistently shows greasy, yellowish scales with underlying erythema and occasional crusting rather than the dry, pruritic, scaly eczematous patches described\n  - Trigger factors include hormonal fluctuations, neurological conditions (Parkinson's disease, depression), immunosuppressive states, and seasonal variation rather than stress and soap sensitivity patterns\n  - Therapeutic approach emphasises antifungal agents (ketoconazole, selenium sulfide, zinc pyrithione) and mild anti-inflammatory preparations rather than intensive emollient therapy and barrier restoration\n  - Family history of atopic conditions not relevant for seborrheic dermatitis pathogenesis, which relates more to individual sebaceous gland activity and Malassezia colonisation patterns\n\n• Option E (Tinea corporis/superficial fungal infection) - Microbiological and Clinical Morphology Contradictions: \n  - Superficial fungal infections would demonstrate positive potassium hydroxide (KOH) microscopy showing characteristic fungal hyphae and spores, requiring mycological confirmation for definitive diagnosis\n  - Typical morphology includes well-demarcated annular lesions with raised, scaly, inflammatory borders and characteristic central clearing ('ringworm' appearance) rather than diffuse eczematous changes\n  - Fungal infections rarely demonstrate bilateral symmetrical distribution patterns and typically affect exposed areas or sites of increased moisture and friction rather than constitutional flexural involvement\n  - Clinical response to appropriate antifungal therapy (topical terbinafine, clotrimazole, or systemic antifungals) would be expected within 2-4 weeks, contrasting with chronic relapsing course and trigger responsiveness\n  - Risk factors include immunosuppression, diabetes mellitus, communal bathing facilities, occupational animal contact, and tropical climates rather than stress sensitivity and genetic atopic predisposition\n  - Tinea manuum (hand dermatophytosis) typically presents unilaterally with characteristic 'two-foot-one-hand' syndrome when associated with concurrent pedal involvement, not bilateral flexural distribution patterns",
         mnemonic: {
           title: "Atopic Dermatitis Assessment",
           content: [
