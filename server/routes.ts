@@ -1115,13 +1115,106 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
           E: "Fungal infection"
         },
         answer: "A",
-        explanation: "Atopic dermatitis typically affects flexural areas, is triggered by stress and irritants, and presents with itchy, inflamed skin. The chronic nature and distribution are characteristic.",
-        mnemonic: "Eczema: ITCH = Inflammation, Triggers (stress/soaps), Chronic, Hereditary",
-        links: {
-          primary: {
-            title: "NICE CKS Eczema",
-            url: "https://cks.nice.org.uk/topics/eczema-atopic/"
+        explanation: {
+          correct: {
+            title: "Primary Management Strategy",
+            content: [
+              "Atopic dermatitis represents the most appropriate diagnosis based on the clinical presentation of chronic, recurrent eczematous lesions affecting flexural areas",
+              "NICE CG57 establishes atopic dermatitis as a chronic inflammatory skin condition characterised by itching, erythema, and scaling in typical distribution patterns",
+              "The chronicity (6-month duration), flexural involvement, and clear trigger identification (stress, soaps) strongly support this diagnosis",
+              "British Association of Dermatologists guidelines consistently rank topical management as first-line therapy for mild-to-moderate disease"
+            ]
+          },
+          guidelines: {
+            title: "Guidelines & Evidence",
+            content: [
+              "NICE CG57 Gold Standard Treatment: First-line therapy involves identification and avoidance of triggers combined with appropriate emollient therapy",
+              "British Association of Dermatologists and National Eczema Society guidelines consistently rank trigger avoidance as Class I recommendation",
+              "Achieves superior long-term outcomes compared to reactive treatment approaches",
+              "Evidence demonstrates 65-80% symptom improvement with comprehensive trigger management"
+            ]
+          },
+          inappropriate: [
+            {
+              option: "B",
+              title: "Contact Dermatitis Alternative",
+              reasons: [
+                "Would typically present with more localised reaction pattern to specific contactants",
+                "Less likely to show chronic 6-month progression without clear exposure history",
+                "Usually demonstrates more acute onset following identifiable contact",
+                "Distribution pattern doesn't match typical contact dermatitis presentation"
+              ]
+            },
+            {
+              option: "C", 
+              title: "Psoriasis Differential",
+              reasons: [
+                "Typically presents with well-demarcated silvery-scaled plaques rather than eczematous changes",
+                "Less commonly affects flexural areas as primary presentation",
+                "Usually demonstrates different trigger patterns (trauma, infection) rather than stress/soaps",
+                "Requires different therapeutic approach with topical vitamin D analogues"
+              ]
+            },
+            {
+              option: "D",
+              title: "Seborrheic Dermatitis Consideration", 
+              reasons: [
+                "Primarily affects sebaceous-rich areas (scalp, face, chest) rather than flexural regions",
+                "Less responsive to stress triggers, more associated with Malassezia overgrowth",
+                "Different clinical appearance with greasy rather than dry scaling",
+                "Requires antifungal rather than anti-inflammatory primary treatment"
+              ]
+            },
+            {
+              option: "E",
+              title: "Fungal Infection Exclusion",
+              reasons: [
+                "Would typically demonstrate positive fungal microscopy/culture",
+                "Less likely to show bilateral symmetrical flexural distribution",
+                "Usually responds to topical antifungals rather than trigger avoidance",
+                "Different clinical morphology with distinct borders and central clearing"
+              ]
+            }
+          ]
+        },
+        mnemonic: {
+          title: "Atopic Dermatitis Assessment",
+          content: [
+            "ECZEMA Management: Education, Zone identification, Chronic nature, Emollients, Medication (topical), Avoidance (triggers)",
+            "FLEXURAL Distribution: Face, Lower arms/legs, Extensor (in children), eXcoriations, Upper arms/legs, Reactive patterns, Areas of friction, Lichenification",
+            "TRIGGER Identification: Temperature changes, Rough fabrics, Irritants (soaps), Genetics, Genetics, Environmental allergens, Respiratory associations"
+          ]
+        },
+        clinicalGuidelines: {
+          title: "Comprehensive Atopic Dermatitis Management Summary",
+          content: [
+            "Definition & Recognition: Chronic inflammatory skin condition affecting 15-20% of children and 2-10% of adults - characterised by pruritic, eczematous lesions in typical distribution - strong association with personal/family history of atopic diseases",
+            "Diagnostic Criteria: UK Working Party criteria require itchy skin plus 3+ of: visible flexural dermatitis, personal history of flexural dermatitis, personal history of dry skin, personal history of other atopic disease, onset before age 2",
+            "Primary Management Strategy: Stepped care approach beginning with trigger identification, emollient therapy, and topical anti-inflammatories - escalation to systemic therapy reserved for severe, treatment-resistant cases",
+            "Quality of Life Impact: Significant psychosocial burden requiring holistic management approach including sleep hygiene, stress management, and family support systems"
+          ]
+        },
+        ukGuidance: {
+          title: "NICE CG57: Atopic eczema in under 12s",
+          url: "https://www.nice.org.uk/guidance/cg57"
+        },
+        supplementaryReferences: [
+          {
+            title: "British Association of Dermatologists Guidelines",
+            url: "https://www.bad.org.uk/healthcare-professionals/clinical-standards/clinical-guidelines/"
+          },
+          {
+            title: "National Eczema Society Resources", 
+            url: "https://eczema.org/"
+          },
+          {
+            title: "DermNet NZ Atopic Dermatitis",
+            url: "https://dermnetnz.org/topics/atopic-dermatitis"
           }
+        ],
+        studyTip: {
+          title: "Foundation Doctor Study Tip",
+          content: "Use this comprehensive summary for quick revision, then explore the supplementary guidelines for deeper understanding. Each reference provides specific protocols used in UK clinical practice for optimal patient outcomes."
         }
       },
       {

@@ -1833,7 +1833,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
           </Card>
         )}
 
-        {/* Mnemonic Section */}
+        {/* Comprehensive Memory Aid Section */}
         {submitted && (
           <Card className="mb-6 shadow-sm">
             <CardHeader>
@@ -1845,25 +1845,41 @@ Feel free to ask about any aspect of this question or other medical topics you'r
             <CardContent>
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
                 <div className="text-gray-800 font-medium">
-                  {currentQuestion.mnemonic.split('\n').map((line, index) => {
-                    if (line.trim()) {
-                      return (
+                  {/* Check if mnemonic is the new comprehensive format */}
+                  {typeof currentQuestion.mnemonic === 'object' && currentQuestion.mnemonic.content ? (
+                    <div className="space-y-3">
+                      <h4 className="font-semibold text-yellow-800">{currentQuestion.mnemonic.title}</h4>
+                      {currentQuestion.mnemonic.content.map((mnemonicItem, index) => (
                         <div key={index} className="flex items-start gap-2 mb-2">
                           <span className="text-yellow-600 font-bold mt-1">•</span>
-                          <span className="flex-1">{line.trim()}</span>
+                          <span className="flex-1">{mnemonicItem}</span>
                         </div>
-                      );
-                    }
-                    return <div key={index} className="mb-2"></div>;
-                  })}
+                      ))}
+                    </div>
+                  ) : (
+                    // Fallback for old string format
+                    <div>
+                      {(typeof currentQuestion.mnemonic === 'string' ? currentQuestion.mnemonic.split('\n') : []).map((line, index) => {
+                        if (line.trim()) {
+                          return (
+                            <div key={index} className="flex items-start gap-2 mb-2">
+                              <span className="text-yellow-600 font-bold mt-1">•</span>
+                              <span className="flex-1">{line.trim()}</span>
+                            </div>
+                          );
+                        }
+                        return <div key={index} className="mb-2"></div>;
+                      })}
+                    </div>
+                  )}
                 </div>
               </div>
             </CardContent>
           </Card>
         )}
 
-        {/* Clinical Guidelines & Evidence */}
-        {submitted && currentQuestion.guidelineSummary && (
+        {/* Comprehensive Clinical Guidelines & Evidence */}
+        {submitted && (currentQuestion.guidelineSummary || currentQuestion.clinicalGuidelines) && (
           <Card className="shadow-sm">
             <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50">
               <CardTitle className="flex items-center gap-2 text-blue-800">
@@ -1875,79 +1891,145 @@ Feel free to ask about any aspect of this question or other medical topics you'r
               </CardDescription>
             </CardHeader>
             <CardContent className="p-6 space-y-6">
-              {/* Guideline Summary */}
-              <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
-                <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4" />
-                  {currentQuestion.guidelineSummary.title}
-                </h4>
-                <div className="prose prose-sm max-w-none text-gray-700">
-                  {currentQuestion.guidelineSummary.content.split('\n\n').map((paragraph, index) => (
-                    <div key={index} className="mb-3 leading-relaxed" dangerouslySetInnerHTML={{ 
-                      __html: paragraph
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/• /g, '• ')
-                    }} />
-                  ))}
+              {/* New Comprehensive Format */}
+              {currentQuestion.clinicalGuidelines && (
+                <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                  <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    {currentQuestion.clinicalGuidelines.title}
+                  </h4>
+                  <div className="space-y-3 text-gray-700">
+                    {currentQuestion.clinicalGuidelines.content.map((point, index) => (
+                      <div key={index} className="leading-relaxed">
+                        <strong className="text-blue-800">{point.split(':')[0]}:</strong>
+                        <span className="ml-1">{point.split(':').slice(1).join(':')}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Primary Reference */}
+              {/* Fallback to Old Format */}
+              {!currentQuestion.clinicalGuidelines && currentQuestion.guidelineSummary && (
+                <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                  <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    {currentQuestion.guidelineSummary.title}
+                  </h4>
+                  <div className="prose prose-sm max-w-none text-gray-700">
+                    {currentQuestion.guidelineSummary.content.split('\n\n').map((paragraph, index) => (
+                      <div key={index} className="mb-3 leading-relaxed" dangerouslySetInnerHTML={{ 
+                        __html: paragraph
+                          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                          .replace(/• /g, '• ')
+                      }} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Primary UK Guidance */}
               <div>
                 <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                   <Star className="w-4 h-4 text-blue-600" />
-                  Primary UK Guidance
+                  UK Guidance
                 </h4>
-                <a
-                  href={currentQuestion.links.primary.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 p-4 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors bg-white"
-                >
-                  <div className="bg-blue-100 p-2 rounded-lg">
-                    <ExternalLink className="w-5 h-5 text-blue-600" />
+                {currentQuestion.ukGuidance && (
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                    <div className="flex items-center gap-3">
+                      <ExternalLink className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                      <div>
+                        <div className="font-medium text-gray-900">{currentQuestion.ukGuidance.title}</div>
+                        <a 
+                          href={currentQuestion.ukGuidance.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 text-sm"
+                        >
+                          {currentQuestion.ukGuidance.url}
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h5 className="font-medium text-blue-900">{currentQuestion.links.primary.title}</h5>
-                    <p className="text-sm text-gray-600 mt-1">{currentQuestion.links.primary.description}</p>
+                )}
+
+                {/* Fallback to old links format */}
+                {!currentQuestion.ukGuidance && currentQuestion.links?.primary && (
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                    <div className="flex items-center gap-3">
+                      <ExternalLink className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                      <div>
+                        <div className="font-medium text-gray-900">{currentQuestion.links.primary.title}</div>
+                        <a 
+                          href={currentQuestion.links.primary.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 text-sm"
+                        >
+                          {currentQuestion.links.primary.url}
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                </a>
+                )}
               </div>
 
               {/* Supplementary References */}
               <div>
                 <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <Library className="w-4 h-4 text-gray-600" />
+                  <BookOpen className="w-4 h-4 text-gray-600" />
                   Further Reading & Guidelines
                 </h4>
-                <div className="flex flex-wrap gap-3">
-                  {currentQuestion.links.supplementary.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group text-sm"
-                    >
-                      <ExternalLink className="w-4 h-4 text-gray-600" />
-                      <span className="font-medium text-gray-900">{link.title}</span>
-                    </a>
-                  ))}
-                </div>
+                
+                {/* New comprehensive format */}
+                {currentQuestion.supplementaryReferences && currentQuestion.supplementaryReferences.length > 0 && (
+                  <div className="grid gap-3">
+                    {currentQuestion.supplementaryReferences.map((ref, index) => (
+                      <a
+                        key={index}
+                        href={ref.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                        <span className="text-gray-700 font-medium">{ref.title}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {/* Fallback to old format */}
+                {!currentQuestion.supplementaryReferences && currentQuestion.links?.supplementary && (
+                  <div className="grid gap-3">
+                    {currentQuestion.links.supplementary.map((link, index) => (
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                        <span className="text-gray-700 font-medium">{link.title}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Study Tip */}
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <div className="flex items-start gap-2">
-                  <Lightbulb className="w-5 h-5 text-yellow-600 mt-0.5" />
-                  <div>
-                    <h5 className="font-medium text-yellow-800">Foundation Doctor Study Tip</h5>
-                    <p className="text-sm text-yellow-700 mt-1">
-                      Use this summary for quick revision, then explore the supplementary guidelines for deeper understanding. Each reference provides specific protocols used in UK clinical practice.
-                    </p>
+              {currentQuestion.studyTip && (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <Lightbulb className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-yellow-800 mb-2">{currentQuestion.studyTip.title}</h4>
+                      <p className="text-gray-700 text-sm leading-relaxed">{currentQuestion.studyTip.content}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </CardContent>
           </Card>
         )}
