@@ -1192,11 +1192,11 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         },
         supplementaryReferences: [
           {
-            title: "British Association of Dermatologists Guidelines",
-            url: "https://www.bad.org.uk/healthcare-professionals/clinical-standards/clinical-guidelines/"
+            title: "NHS Eczema Treatment Guidelines",
+            url: "https://www.nhs.uk/conditions/atopic-eczema/"
           },
           {
-            title: "National Eczema Society Resources", 
+            title: "National Eczema Society UK", 
             url: "https://eczema.org/"
           },
           {
