@@ -506,11 +506,33 @@ export default function Test() {
   }, [currentQuestion, translateQuestions, selectedLanguage]);
 
   // Format correct answer explanation with structured icons and sections
-  const formatCorrectAnswerExplanation = (explanation: string) => {
+  const formatCorrectAnswerExplanation = (explanation: any) => {
     const sections: Array<{title: string, icon: JSX.Element, points: string[]}> = [];
     
+    // Handle new comprehensive object format
+    if (typeof explanation === 'object' && explanation?.correct) {
+      sections.push({
+        title: explanation.correct.title || "Clinical Rationale",
+        icon: <Target className="w-5 h-5" />,
+        points: explanation.correct.content || []
+      });
+      
+      if (explanation.guidelines) {
+        sections.push({
+          title: explanation.guidelines.title || "Guidelines & Evidence",
+          icon: <Shield className="w-5 h-5" />,
+          points: explanation.guidelines.content || []
+        });
+      }
+      
+      return sections;
+    }
+    
+    // Handle string format (fallback for older questions)
+    const explanationStr = typeof explanation === 'string' ? explanation : String(explanation || '');
+    
     // Split explanation into logical sections based on bullet points or numbered items
-    const lines = explanation.split('\n').filter(line => line.trim());
+    const lines = explanationStr.split('\n').filter(line => line.trim());
     let currentSection = { title: "Clinical Rationale", icon: <Target className="w-5 h-5" />, points: [] as string[] };
     
     for (const line of lines) {
@@ -540,7 +562,7 @@ export default function Test() {
       sections.push({
         title: "Clinical Explanation",
         icon: <FileText className="w-5 h-5" />,
-        points: explanation.split('\n').filter(line => line.trim()).slice(0, 5)
+        points: explanationStr.split('\n').filter(line => line.trim()).slice(0, 5)
       });
     }
     
@@ -548,9 +570,24 @@ export default function Test() {
   };
 
   // Format incorrect answer explanations with structured presentation
-  const formatIncorrectAnswerExplanation = (explanation: string) => {
+  const formatIncorrectAnswerExplanation = (explanation: any) => {
     const sections = [];
-    const lines = explanation.split('\n').filter(line => line.trim());
+    
+    // Handle new comprehensive object format
+    if (typeof explanation === 'object' && explanation?.incorrect) {
+      explanation.incorrect.forEach((item: any) => {
+        sections.push({
+          option: item.option,
+          title: item.title,
+          points: item.content || []
+        });
+      });
+      return sections;
+    }
+    
+    // Handle string format (fallback)
+    const explanationStr = typeof explanation === 'string' ? explanation : String(explanation || '');
+    const lines = explanationStr.split('\n').filter(line => line.trim());
     
     for (const line of lines) {
       const optionMatch = line.match(/^•\s*Option\s+([A-F])\s*\([^)]+\)\s*-\s*(.+?):/);
