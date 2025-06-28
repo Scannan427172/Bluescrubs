@@ -1098,7 +1098,110 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     }
   });
 
-  app.get("/api/test/questions", async (req, res) => {
+// Generate sample questions for categories that don't have existing questions
+function getSampleQuestionsForCategory(category: string, count: number = 10) {
+  const sampleQuestions: any = {
+    dermatology: [
+      {
+        id: "derm1",
+        topic: "Eczema Management",
+        category: "dermatology",
+        question: "A 25-year-old woman presents with a 6-month history of itchy, red, scaly patches on her hands and flexural areas. The rash worsens with stress and certain soaps. What is the most likely diagnosis?",
+        options: {
+          A: "Atopic dermatitis (eczema)",
+          B: "Contact dermatitis", 
+          C: "Psoriasis",
+          D: "Seborrheic dermatitis",
+          E: "Fungal infection"
+        },
+        answer: "A",
+        explanation: "Atopic dermatitis typically affects flexural areas, is triggered by stress and irritants, and presents with itchy, inflamed skin. The chronic nature and distribution are characteristic.",
+        mnemonic: "Eczema: ITCH = Inflammation, Triggers (stress/soaps), Chronic, Hereditary",
+        links: {
+          primary: {
+            title: "NICE CKS Eczema",
+            url: "https://cks.nice.org.uk/topics/eczema-atopic/"
+          }
+        }
+      },
+      {
+        id: "derm2", 
+        topic: "Acne Management",
+        category: "dermatology",
+        question: "A 17-year-old presents with moderate acne affecting the face and back, with inflammatory papules and pustules. What is the most appropriate first-line treatment?",
+        options: {
+          A: "Topical benzoyl peroxide",
+          B: "Oral tetracycline",
+          C: "Topical retinoid + benzoyl peroxide",
+          D: "Oral isotretinoin",
+          E: "Topical antibiotics alone"
+        },
+        answer: "C",
+        explanation: "NICE recommends combination therapy with topical retinoid and benzoyl peroxide for moderate acne to address both comedonal and inflammatory components.",
+        mnemonic: "Acne: COMBO = Comedones + Oral + Moderate + Benzoyl + Optimize",
+        links: {
+          primary: {
+            title: "NICE CKS Acne",
+            url: "https://cks.nice.org.uk/topics/acne-vulgaris/"
+          }
+        }
+      }
+    ],
+    respiratory: [
+      {
+        id: "resp1",
+        topic: "Asthma Management",
+        category: "respiratory", 
+        question: "A 28-year-old with asthma uses salbutamol 2-3 times per week and experiences night-time symptoms twice a month. What is the next step in management?",
+        options: {
+          A: "Continue current treatment",
+          B: "Add low-dose inhaled corticosteroid",
+          C: "Add LABA",
+          D: "Increase salbutamol dose",
+          E: "Add oral prednisolone"
+        },
+        answer: "B",
+        explanation: "BTS/SIGN guidelines recommend adding low-dose ICS when SABA is needed more than twice weekly or there are night symptoms.",
+        mnemonic: "Asthma Steps: SAIL = Salbutamol, Add ICS, LABA, then oral",
+        links: {
+          primary: {
+            title: "BTS/SIGN Asthma Guidelines",
+            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/asthma/"
+          }
+        }
+      }
+    ],
+    neurology: [
+      {
+        id: "neuro1",
+        topic: "Stroke Management",
+        category: "neurology",
+        question: "A 72-year-old presents with sudden onset left-sided weakness and speech difficulty starting 90 minutes ago. CT head shows no hemorrhage. What is the most appropriate immediate treatment?",
+        options: {
+          A: "Aspirin 300mg",
+          B: "Alteplase (tPA)",
+          C: "Clopidogrel 75mg", 
+          D: "Heparin infusion",
+          E: "Wait for MRI"
+        },
+        answer: "B",
+        explanation: "Alteplase should be given within 4.5 hours of symptom onset for acute ischemic stroke when there are no contraindications.",
+        mnemonic: "Stroke: FAST = Face, Arms, Speech, Time (call 999)",
+        links: {
+          primary: {
+            title: "NICE Stroke Guidelines",
+            url: "https://www.nice.org.uk/guidance/cg68"
+          }
+        }
+      }
+    ]
+  };
+  
+  const categoryQuestions = sampleQuestions[category] || [];
+  return categoryQuestions.slice(0, count);
+}
+
+app.get("/api/test/questions", async (req, res) => {
     try {
       // Track page view
       const sessionId = Array.isArray(req.headers['x-session-id']) 
@@ -1767,6 +1870,13 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
           // Default exact match
           return questionCategory.includes(requestedCategory);
         });
+        
+        // If no questions found for the specific category, generate sample questions
+        if (filteredQuestions.length === 0) {
+          const sampleQuestions = getSampleQuestionsForCategory(category as string, requestedCount);
+          console.log(`No existing questions for "${category}", generated ${sampleQuestions.length} sample questions`);
+          return res.json(sampleQuestions);
+        }
       }
 
       // Apply difficulty filtering (if needed in future)
