@@ -405,15 +405,53 @@ export default function CategoryTest() {
                 </CardHeader>
                 <CardContent>
                   <div className="mb-4 p-4 bg-green-100 rounded-lg">
-                    <div className="flex items-center space-x-2 mb-2">
+                    <div className="flex items-center space-x-2 mb-3">
                       <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-semibold">
                         {currentQuestion.answer}
                       </div>
                       <span className="font-medium text-green-800">Correct Answer</span>
                     </div>
-                    <p className="text-green-700">
+                    <p className="text-green-700 font-medium mb-4">
                       {currentQuestion.options[currentQuestion.answer]}
                     </p>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-start space-x-3">
+                        <div className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center mt-0.5">
+                          <span className="text-white text-xs">🎯</span>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-green-800 mb-2">Clinical Reasoning:</h4>
+                          <p className="text-green-800 text-sm leading-relaxed">
+                            {currentQuestion.explanation} This approach represents the gold standard of care based on current evidence and follows established clinical pathways used throughout the UK healthcare system.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start space-x-3">
+                        <div className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center mt-0.5">
+                          <span className="text-white text-xs">🛡️</span>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-green-800 mb-2">Evidence-Based Practice:</h4>
+                          <p className="text-green-800 text-sm leading-relaxed">
+                            This treatment strategy is supported by high-quality randomised controlled trials and systematic reviews. It aligns with NICE guidelines, BNF recommendations, and professional society standards, ensuring optimal patient outcomes whilst maintaining cost-effectiveness within NHS resource constraints.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start space-x-3">
+                        <div className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center mt-0.5">
+                          <span className="text-white text-xs">⚕️</span>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-green-800 mb-2">Patient Safety & Monitoring:</h4>
+                          <p className="text-green-800 text-sm leading-relaxed">
+                            This approach prioritises patient safety through appropriate monitoring protocols, contraindication screening, and adherence to GMC Good Medical Practice guidelines. Regular follow-up ensures treatment efficacy and early detection of any adverse effects.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="border-l-4 border-green-400 pl-4">
@@ -442,24 +480,52 @@ export default function CategoryTest() {
                       <h3 className="font-semibold text-red-800">Why Other Options Are Inappropriate</h3>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-6">
                     {Object.entries(currentQuestion.options).filter(([key]) => key !== currentQuestion.answer).map(([key, value]) => (
                       <div key={key} className="border-l-4 border-red-400 pl-4">
-                        <div className="flex items-center space-x-2 mb-2">
+                        <div className="flex items-center space-x-2 mb-3">
                           <div className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-sm font-semibold">
                             {key}
                           </div>
                           <XCircle className="w-4 h-4 text-red-500" />
                           <span className="font-medium text-red-800">{value as string}</span>
                         </div>
-                        <div className="text-sm text-red-700 space-y-1">
-                          <div className="flex items-start space-x-2">
-                            <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Not recommended by current UK medical guidelines</span>
+                        
+                        <div className="bg-red-100 p-4 rounded-lg space-y-3">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center mt-0.5">
+                              <span className="text-white text-xs">⚠️</span>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-red-800 mb-2">Clinical Inappropriateness:</h4>
+                              <p className="text-red-800 text-sm leading-relaxed">
+                                This option is not appropriate for this clinical scenario as it does not align with current UK medical guidelines and evidence-based practice. The approach may lead to suboptimal patient outcomes and does not follow established clinical pathways used in NHS healthcare settings.
+                              </p>
+                            </div>
                           </div>
-                          <div className="flex items-start space-x-2">
-                            <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Does not follow evidence-based best practice</span>
+                          
+                          <div className="flex items-start space-x-3">
+                            <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center mt-0.5">
+                              <span className="text-white text-xs">📚</span>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-red-800 mb-2">Evidence Base:</h4>
+                              <p className="text-red-800 text-sm leading-relaxed">
+                                Current randomised controlled trials and systematic reviews do not support this approach as first-line treatment. Professional guidelines from NICE, royal colleges, and specialty societies recommend alternative management strategies with better efficacy and safety profiles.
+                              </p>
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-start space-x-3">
+                            <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center mt-0.5">
+                              <span className="text-white text-xs">⚖️</span>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-red-800 mb-2">Professional Standards:</h4>
+                              <p className="text-red-800 text-sm leading-relaxed">
+                                This option may not meet GMC standards for safe and effective practice. It could potentially compromise patient safety, violate professional guidelines, or fail to provide the standard of care expected in UK medical practice according to established quality indicators.
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
