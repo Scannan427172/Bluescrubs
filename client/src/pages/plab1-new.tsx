@@ -767,7 +767,7 @@ export default function PLAB1New() {
       setIsTimerRunning(true);
       
       // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
-      const totalTimeMs = questionCount * 60 * 1000; // 1 minute per question
+      const totalTimeMs = count * 60 * 1000; // 1 minute per question
       setTimeout(() => {
         setIsTimerRunning(false);
         setSessionComplete(true);
@@ -785,6 +785,13 @@ export default function PLAB1New() {
     setBlockType('block3');
     setIsTimedSession(false);
     await loadQuestions(20);
+  };
+
+  // Create authentic timed practice function
+  const startAuthenticTimedPractice = async (questionCount: number) => {
+    setBlockType('block1');
+    setIsTimedSession(true);
+    await loadQuestions(questionCount);
   };
 
   // Get current question
@@ -1109,7 +1116,7 @@ export default function PLAB1New() {
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   <Button 
                     onClick={() => startPractice(10)}
-                    disabled={isGeneratingQuestions}
+                    disabled={isGeneratingQuestions || isLoadingQuestions}
                     className="bg-blue-600 hover:bg-blue-700 text-white h-16 flex flex-col items-center justify-center gap-1"
                   >
                     <span className="font-bold text-lg">10</span>
