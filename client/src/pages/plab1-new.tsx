@@ -8,32 +8,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, MessageCircle, FileText, X, Camera
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, MessageCircle, FileText, X
 } from "lucide-react";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 import { apiRequest } from "@/lib/queryClient";
 import { AITutor } from "@/components/ai-tutor";
 
 export default function PLAB1New() {
-  console.log('PLAB1New component rendering...');
-  
   // Hero image loading state
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
   
   // Preload hero image for faster loading
   useEffect(() => {
-    try {
-      const img = new Image();
-      img.onload = () => setHeroImageLoaded(true);
-      img.onerror = () => {
-        console.warn('Hero image failed to load, continuing without it');
-        setHeroImageLoaded(true); // Still allow the component to render
-      };
-      img.src = plab1BgImage;
-    } catch (error) {
-      console.error('Error loading hero image:', error);
-      setHeroImageLoaded(true);
-    }
+    const img = new Image();
+    img.onload = () => setHeroImageLoaded(true);
+    img.src = plab1BgImage;
   }, []);
 
   // Translation state
@@ -572,7 +561,7 @@ export default function PLAB1New() {
     { value: 'clinical-pharmacology' as const, label: 'Clinical Pharmacology' }
   ];
 
-  // Generate AI questions with fallback to test questions
+  // Generate AI questions
   const startPractice = async (questionCount: number) => {
     setIsGeneratingQuestions(true);
     setGeneratedQuestions([]);
@@ -581,7 +570,6 @@ export default function PLAB1New() {
     setCurrentQuestionIndex(0);
     
     try {
-      // First try to generate AI questions
       const response = await fetch('/api/generate-questions', {
         method: 'POST',
         headers: {
@@ -596,53 +584,16 @@ export default function PLAB1New() {
 
       if (response.ok) {
         const data = await response.json();
+        setGeneratedQuestions(data.questions || []);
         if (data.questions && data.questions.length > 0) {
-          setGeneratedQuestions(data.questions);
           setSessionStarted(true);
           setQuestionStartTime(Date.now());
-          return;
         }
+      } else {
+        console.error('Failed to generate questions');
       }
-      
-      // Fallback to existing test questions if AI generation fails
-      console.log('AI generation failed, falling back to test questions');
-      const fallbackResponse = await fetch('/api/test/questions');
-      if (fallbackResponse.ok) {
-        const testQuestions = await fallbackResponse.json();
-        console.log('Fallback questions loaded:', testQuestions.length);
-        if (testQuestions && testQuestions.length > 0) {
-          // Take up to the requested number of questions
-          const selectedQuestions = testQuestions.slice(0, questionCount);
-          setGeneratedQuestions(selectedQuestions);
-          setCurrentQuestionIndex(0);
-          setSelectedAnswer("");
-          setShowExplanation(false);
-          setSessionStarted(true);
-          setQuestionStartTime(Date.now());
-          console.log('Fallback questions set successfully');
-          return;
-        }
-      }
-      
-      console.error('Failed to load any questions');
     } catch (error) {
       console.error('Error generating questions:', error);
-      
-      // Final fallback attempt
-      try {
-        const fallbackResponse = await fetch('/api/test/questions');
-        if (fallbackResponse.ok) {
-          const testQuestions = await fallbackResponse.json();
-          if (testQuestions && testQuestions.length > 0) {
-            const selectedQuestions = testQuestions.slice(0, questionCount);
-            setGeneratedQuestions(selectedQuestions);
-            setSessionStarted(true);
-            setQuestionStartTime(Date.now());
-          }
-        }
-      } catch (fallbackError) {
-        console.error('Fallback question loading failed:', fallbackError);
-      }
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -771,62 +722,23 @@ export default function PLAB1New() {
           count: 100 // Generate enough questions for timed session
         })
       });
-      if (response.ok) {
-        const data = await response.json();
-        if (data.questions && data.questions.length > 0) {
-          setGeneratedQuestions(data.questions);
-          setCurrentQuestionIndex(0);
-          setSelectedAnswer("");
-          setShowExplanation(false);
-          setQuestionStartTime(Date.now());
-          setSessionStarted(true);
-          setIsTimerRunning(true);
-          
-          // Set timer for timed practice
-          setTimeout(() => {
-            setIsTimerRunning(false);
-            setSessionComplete(true);
-          }, timeInMinutes * 60 * 1000);
-          return;
-        }
-      }
+      const data = await response.json();
+      setGeneratedQuestions(data.questions);
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+      setSessionStarted(true);
+      setIsTimerRunning(true);
       
-      // Fallback to test questions
-      const fallbackResponse = await fetch('/api/test/questions');
-      if (fallbackResponse.ok) {
-        const testQuestions = await fallbackResponse.json();
-        if (testQuestions && testQuestions.length > 0) {
-          setGeneratedQuestions(testQuestions);
-          setCurrentQuestionIndex(0);
-          setSelectedAnswer("");
-          setShowExplanation(false);
-          setQuestionStartTime(Date.now());
-          setSessionStarted(true);
-          setIsTimerRunning(true);
-          
-          setTimeout(() => {
-            setIsTimerRunning(false);
-            setSessionComplete(true);
-          }, timeInMinutes * 60 * 1000);
-        }
-      }
+      // Set timer for timed practice
+      setTimeout(() => {
+        setIsTimerRunning(false);
+        setSessionComplete(true);
+      }, timeInMinutes * 60 * 1000);
       
     } catch (error) {
       console.error('Error generating questions:', error);
-      // Final fallback attempt
-      try {
-        const fallbackResponse = await fetch('/api/test/questions');
-        if (fallbackResponse.ok) {
-          const testQuestions = await fallbackResponse.json();
-          if (testQuestions && testQuestions.length > 0) {
-            setGeneratedQuestions(testQuestions);
-            setSessionStarted(true);
-            setQuestionStartTime(Date.now());
-          }
-        }
-      } catch (fallbackError) {
-        console.error('Fallback failed:', fallbackError);
-      }
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -845,69 +757,27 @@ export default function PLAB1New() {
           count: questionCount // Generate exact number of questions
         })
       });
-      if (response.ok) {
-        const data = await response.json();
-        if (data.questions && data.questions.length > 0) {
-          // Slice to exact count in case more were generated
-          const exactQuestions = data.questions.slice(0, questionCount);
-          setGeneratedQuestions(exactQuestions);
-          setCurrentQuestionIndex(0);
-          setSelectedAnswer("");
-          setShowExplanation(false);
-          setQuestionStartTime(Date.now());
-          setSessionStarted(true);
-          setIsTimerRunning(true);
-          
-          // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
-          const totalTimeMs = questionCount * 60 * 1000; // 1 minute per question
-          setTimeout(() => {
-            setIsTimerRunning(false);
-            setSessionComplete(true);
-          }, totalTimeMs);
-          return;
-        }
-      }
+      const data = await response.json();
       
-      // Fallback to test questions
-      console.log('AI generation failed, falling back to test questions');
-      const fallbackResponse = await fetch('/api/test/questions');
-      if (fallbackResponse.ok) {
-        const testQuestions = await fallbackResponse.json();
-        if (testQuestions && testQuestions.length > 0) {
-          const exactQuestions = testQuestions.slice(0, questionCount);
-          setGeneratedQuestions(exactQuestions);
-          setCurrentQuestionIndex(0);
-          setSelectedAnswer("");
-          setShowExplanation(false);
-          setQuestionStartTime(Date.now());
-          setSessionStarted(true);
-          setIsTimerRunning(true);
-          
-          const totalTimeMs = questionCount * 60 * 1000;
-          setTimeout(() => {
-            setIsTimerRunning(false);
-            setSessionComplete(true);
-          }, totalTimeMs);
-        }
-      }
+      // Slice to exact count in case more were generated
+      const exactQuestions = data.questions.slice(0, questionCount);
+      setGeneratedQuestions(exactQuestions);
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+      setSessionStarted(true);
+      setIsTimerRunning(true);
+      
+      // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
+      const totalTimeMs = questionCount * 60 * 1000; // 1 minute per question
+      setTimeout(() => {
+        setIsTimerRunning(false);
+        setSessionComplete(true);
+      }, totalTimeMs);
       
     } catch (error) {
       console.error('Error generating questions:', error);
-      // Final fallback
-      try {
-        const fallbackResponse = await fetch('/api/test/questions');
-        if (fallbackResponse.ok) {
-          const testQuestions = await fallbackResponse.json();
-          if (testQuestions && testQuestions.length > 0) {
-            const exactQuestions = testQuestions.slice(0, questionCount);
-            setGeneratedQuestions(exactQuestions);
-            setSessionStarted(true);
-            setQuestionStartTime(Date.now());
-          }
-        }
-      } catch (fallbackError) {
-        console.error('Fallback failed:', fallbackError);
-      }
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -926,52 +796,17 @@ export default function PLAB1New() {
           count: 20 // Start with 20, will generate more as needed
         })
       });
-      if (response.ok) {
-        const data = await response.json();
-        if (data.questions && data.questions.length > 0) {
-          setGeneratedQuestions(data.questions);
-          setCurrentQuestionIndex(0);
-          setSelectedAnswer("");
-          setShowExplanation(false);
-          setQuestionStartTime(Date.now());
-          setSessionStarted(true);
-          setIsTimerRunning(false); // No timer for unlimited
-          return;
-        }
-      }
-      
-      // Fallback to test questions
-      console.log('AI generation failed, falling back to test questions');
-      const fallbackResponse = await fetch('/api/test/questions');
-      if (fallbackResponse.ok) {
-        const testQuestions = await fallbackResponse.json();
-        if (testQuestions && testQuestions.length > 0) {
-          setGeneratedQuestions(testQuestions);
-          setCurrentQuestionIndex(0);
-          setSelectedAnswer("");
-          setShowExplanation(false);
-          setQuestionStartTime(Date.now());
-          setSessionStarted(true);
-          setIsTimerRunning(false);
-        }
-      }
+      const data = await response.json();
+      setGeneratedQuestions(data.questions);
+      setCurrentQuestionIndex(0);
+      setSelectedAnswer("");
+      setShowExplanation(false);
+      setQuestionStartTime(Date.now());
+      setSessionStarted(true);
+      setIsTimerRunning(false); // No timer for unlimited
       
     } catch (error) {
       console.error('Error generating questions:', error);
-      // Final fallback
-      try {
-        const fallbackResponse = await fetch('/api/test/questions');
-        if (fallbackResponse.ok) {
-          const testQuestions = await fallbackResponse.json();
-          if (testQuestions && testQuestions.length > 0) {
-            setGeneratedQuestions(testQuestions);
-            setSessionStarted(true);
-            setQuestionStartTime(Date.now());
-          }
-        }
-      } catch (fallbackError) {
-        console.error('Fallback failed:', fallbackError);
-      }
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -1003,25 +838,19 @@ export default function PLAB1New() {
         <div className="max-w-6xl mx-auto mb-16">
           {/* Hero Banner */}
           <div className="relative bg-gradient-to-r from-blue-600 to-purple-700 w-full h-64 md:h-80 lg:h-96 mb-8 overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
-              {!heroImageLoaded && (
+            {!heroImageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-700">
                 <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              )}
-            </div>
-            {plab1BgImage && (
-              <img 
-                src={plab1BgImage}
-                alt="PLAB 1 Practice"
-                className={`absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-300 ${heroImageLoaded ? 'opacity-60' : 'opacity-0'}`}
-                loading="eager"
-                decoding="async"
-                onLoad={() => setHeroImageLoaded(true)}
-                onError={(e) => {
-                  console.warn('Hero image failed to load');
-                  setHeroImageLoaded(true);
-                }}
-              />
+              </div>
             )}
+            <img 
+              src={plab1BgImage}
+              alt="PLAB 1 Practice"
+              className={`absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity duration-300 ${heroImageLoaded ? 'opacity-60' : 'opacity-0'}`}
+              loading="eager"
+              decoding="async"
+              onLoad={() => setHeroImageLoaded(true)}
+            />
 
             <div className="relative z-50 flex flex-col items-center justify-center text-center px-8 py-16 hero-text">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 drop-shadow-2xl leading-tight" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6)'}}>
@@ -1538,26 +1367,15 @@ export default function PLAB1New() {
   }
 
   // Main question interface - Template Style Layout
-  // Only show error if session has started but no current question is available
-  if (sessionStarted && !currentQuestion) {
+  if (!currentQuestion) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center pb-24">
-        <Card className="w-full max-w-md mb-16">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card>
           <CardContent className="p-8 text-center">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">❌</span>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Load Questions</h3>
-            <p className="text-gray-600 mb-4">Please try refreshing the page.</p>
-            <div className="flex gap-2 justify-center">
-              <Button onClick={() => window.location.reload()} className="bg-blue-600 hover:bg-blue-700">
-                <RotateCcw className="w-4 h-4 mr-2" />
-                Refresh Page
-              </Button>
-              <Button variant="outline" onClick={() => setSessionStarted(false)}>
-                Back to Home
-              </Button>
-            </div>
+            <p className="text-gray-600">No questions available</p>
+            <Button onClick={() => setSessionStarted(false)} className="mt-4">
+              Back to Home
+            </Button>
           </CardContent>
         </Card>
       </div>
@@ -1799,61 +1617,6 @@ export default function PLAB1New() {
                 );
               })()}
             </div>
-
-            {/* Visual Diagnostic Images - Show during question phase */}
-            {currentQuestion.clinicalImages && currentQuestion.clinicalImages.length > 0 && !showExplanation && (
-              <div className="mb-8">
-                <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-4">
-                  <p className="text-sm text-blue-800 font-medium flex items-center gap-2">
-                    <Camera className="w-4 h-4" />
-                    Examine these clinical presentations to make your diagnosis:
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {currentQuestion.clinicalImages.map((image: any, index: number) => (
-                    <div key={index} className="bg-white border-2 border-blue-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-                      <div className="aspect-square bg-gray-100 flex items-center justify-center">
-                        <img 
-                          src={image.url} 
-                          alt={`Clinical presentation ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            const parent = target.parentElement;
-                            if (parent) {
-                              parent.innerHTML = `
-                                <div class="flex flex-col items-center justify-center text-gray-500 p-4">
-                                  <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                  </svg>
-                                  <p class="text-xs text-center">Image unavailable</p>
-                                </div>
-                              `;
-                            }
-                          }}
-                        />
-                      </div>
-                      <div className="p-3 bg-blue-50">
-                        <p className="text-sm text-center text-blue-900 font-medium">
-                          Presentation {index + 1}
-                        </p>
-                        {image.location && (
-                          <p className="text-xs text-center text-blue-700 mt-1">
-                            {image.location}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-r-lg">
-                  <p className="text-sm text-yellow-800">
-                    <strong>Clinical Skills Test:</strong> Look for common patterns, distribution, and characteristic features across these different presentations of the same condition.
-                  </p>
-                </div>
-              </div>
-            )}
 
             {/* Submit Answer Button - Appears after selecting an option */}
             {selectedAnswer !== "" && !showExplanation && (
@@ -2111,66 +1874,6 @@ export default function PLAB1New() {
                 return formatExplanationWithBullets(explanation);
               })()}
             </div>
-
-            {/* Clinical Images for Diagnostic Challenge */}
-            {currentQuestion.clinicalImages && currentQuestion.clinicalImages.length > 0 && showExplanation && (
-              <div className="pt-4 border-t border-gray-200">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                  <Camera className="w-5 h-5 text-blue-600" />
-                  Clinical Presentations of {currentQuestion.diagnosis || 'This Condition'}
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                  {currentQuestion.clinicalImages.map((image: any, index: number) => (
-                    <div key={index} className="bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                      <div className="aspect-square bg-gray-100 flex items-center justify-center">
-                        <img 
-                          src={image.url} 
-                          alt={image.caption || `Clinical presentation ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            const parent = target.parentElement;
-                            if (parent) {
-                              parent.innerHTML = `
-                                <div class="flex flex-col items-center justify-center text-gray-500 p-4">
-                                  <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2-2z"></path>
-                                  </svg>
-                                  <p class="text-xs text-center">Image unavailable</p>
-                                  <a href="${image.url}" target="_blank" class="text-xs text-blue-500 hover:underline mt-1">View source</a>
-                                </div>
-                              `;
-                            }
-                          }}
-                        />
-                      </div>
-                      <div className="p-3">
-                        <p className="text-sm font-medium text-gray-900 mb-1">
-                          {image.caption || `Presentation ${index + 1}`}
-                        </p>
-                        {image.description && (
-                          <p className="text-xs text-gray-600 leading-relaxed">
-                            {image.description}
-                          </p>
-                        )}
-                        {image.source && (
-                          <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
-                            <ExternalLink className="w-3 h-3" />
-                            Source: {image.source}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
-                  <p className="text-sm text-blue-800">
-                    <strong>Learning Point:</strong> Notice how the same condition presents differently across patients, skin types, and body locations. This visual pattern recognition is essential for PLAB success.
-                  </p>
-                </div>
-              </div>
-            )}
 
             {/* Topic heading like PassMedicine */}
             <div className="pt-4 border-t border-gray-200">

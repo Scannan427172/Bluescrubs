@@ -81,7 +81,7 @@ function Router() {
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
-            <PLAB1New />
+            <Test />
           </div>
         </div>
       </Route>

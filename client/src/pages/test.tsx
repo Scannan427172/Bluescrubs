@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -109,7 +109,7 @@ export default function Test() {
     { id: "surgery", name: "Surgery", icon: "🔪" },
     { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨" },
     { id: "rheumatology", name: "Rheumatology", icon: "🦴" },
-    { id: "dermatology", name: "Dermatology", icon: "🫧" },
+    { id: "dermatology", name: "Dermatology", icon: "👁️" },
     { id: "ophthalmology", name: "Ophthalmology", icon: "👁️" },
     { id: "ent", name: "ENT", icon: "👂" },
     { id: "pharmacology", name: "Pharmacology", icon: "💊" },
@@ -407,66 +407,11 @@ export default function Test() {
 
 
 
-  // Fetch questions from API with category and difficulty filters
-  const { data: allQuestions, isLoading, error } = useQuery<Question[]>({
+  // Fetch questions from API
+  const { data: questions, isLoading, error } = useQuery<Question[]>({
     queryKey: ["/api/test/questions"],
     retry: false,
   });
-
-  // Load dermatology visual questions when dermatology is selected
-  const { data: dermatologyQuestions } = useQuery<any[]>({
-    queryKey: ["/api/dermatology/visual-questions"],
-    enabled: selectedCategory === 'dermatology',
-    retry: false,
-  });
-
-  // Filter questions based on selected category and difficulty
-  const questions = useMemo(() => {
-    if (!allQuestions) return [];
-    
-    let filtered = allQuestions;
-    
-    // Add dermatology visual questions if dermatology category is selected
-    if (selectedCategory === 'dermatology' && dermatologyQuestions) {
-      // Convert dermatology questions to match the expected format
-      const convertedDermQuestions = dermatologyQuestions.map(q => ({
-        id: q.id,
-        topic: q.topic,
-        question: q.question,
-        options: q.options,
-        answer: q.answer,
-        explanation: q.explanation,
-        mnemonic: q.mnemonic,
-        links: q.links,
-        clinicalImages: q.clinicalImages,
-        category: 'dermatology',
-        difficulty: 'intermediate'
-      }));
-      filtered = [...filtered, ...convertedDermQuestions];
-    }
-    
-    // Filter by category if not "all"
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(q => 
-        q.topic?.toLowerCase().includes(selectedCategory.toLowerCase()) ||
-        q.category?.toLowerCase() === selectedCategory.toLowerCase()
-      );
-    }
-    
-    // Filter by difficulty if not "mixed"
-    if (selectedDifficulty !== 'mixed') {
-      filtered = filtered.filter(q => 
-        q.difficulty?.toLowerCase() === selectedDifficulty.toLowerCase()
-      );
-    }
-    
-    return filtered;
-  }, [allQuestions, selectedCategory, selectedDifficulty, dermatologyQuestions]);
-
-  // Reset to first question when filters change
-  useEffect(() => {
-    setCurrentQuestionIndex(0);
-  }, [selectedCategory, selectedDifficulty]);
 
   const currentQuestion = questions?.[currentQuestionIndex];
 
@@ -1513,45 +1458,6 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                 return translatedQ?.question || translateText(currentQuestion.question) || currentQuestion.question;
               })()}
             </CardDescription>
-
-            {/* Clinical Images for Dermatology Questions */}
-            {currentQuestion.clinicalImages && currentQuestion.clinicalImages.length > 0 && (
-              <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <h4 className="text-sm font-semibold text-blue-900 mb-3 flex items-center gap-2">
-                  <Activity className="w-4 h-4" />
-                  Clinical Images - Pattern Recognition
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {currentQuestion.clinicalImages.map((image: any, index: number) => (
-                    <div key={index} className="bg-white rounded-lg p-3 shadow-sm border">
-                      <div className="aspect-square bg-gray-100 rounded-md mb-2 flex items-center justify-center">
-                        <img 
-                          src={image.url} 
-                          alt={image.caption}
-                          className="w-full h-full object-cover rounded-md"
-                          onError={(e) => {
-                            // Fallback for broken images
-                            e.currentTarget.style.display = 'none';
-                            e.currentTarget.nextElementSibling.style.display = 'flex';
-                          }}
-                        />
-                        <div className="hidden w-full h-full bg-gray-200 rounded-md items-center justify-center text-gray-500 text-sm">
-                          Clinical Image {index + 1}
-                        </div>
-                      </div>
-                      <p className="text-xs font-medium text-gray-800">{image.caption}</p>
-                      <p className="text-xs text-gray-600 mt-1">{image.description}</p>
-                      <Badge variant="outline" className="text-xs mt-2">
-                        {image.location}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-blue-800 mt-3 italic">
-                  Study the clinical presentations above to identify the pattern and make your diagnosis.
-                </p>
-              </div>
-            )}
             
             {/* Voice Controls in Question */}
             {speechEnabled && (

@@ -146,8 +146,7 @@ function getCategoryTopics(category: string): string {
     'emergency-medicine': "Trauma, Poisoning, Shock, Cardiac Arrest, Burns",
     'obstetrics-gynaecology': "Pregnancy, Labour, Gynaecological Disorders, Contraception",
     paediatrics: "Child Development, Immunisations, Common Childhood Illnesses",
-    surgery: "Pre-operative Assessment, Post-operative Care, Surgical Emergencies",
-    dermatology: "Vitiligo, Alopecia Areata, Melanoma, Eczema, Psoriasis, Rashes, Skin Cancer"
+    surgery: "Pre-operative Assessment, Post-operative Care, Surgical Emergencies"
   };
   return topics[category as keyof typeof topics] || "General Medical Conditions";
 }
@@ -1096,23 +1095,6 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
       res.json(stats);
     } catch (error) {
       res.status(500).json({ error: 'Failed to get engine stats' });
-    }
-  });
-
-  // Visual diagnostic dermatology questions endpoint
-  app.get("/api/dermatology/visual-questions", async (req, res) => {
-    try {
-      const questionsPath = path.join(process.cwd(), 'dermatology-visual-questions.json');
-      if (fs.existsSync(questionsPath)) {
-        const questionsData = fs.readFileSync(questionsPath, 'utf8');
-        const questions = JSON.parse(questionsData);
-        res.json(questions);
-      } else {
-        res.json([]);
-      }
-    } catch (error) {
-      console.error('Error loading visual diagnostic questions:', error);
-      res.json([]);
     }
   });
 
