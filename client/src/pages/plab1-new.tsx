@@ -1521,7 +1521,8 @@ export default function PLAB1New() {
   }
 
   // Main question interface - Template Style Layout
-  if (!currentQuestion) {
+  // Only show error if session has started but no current question is available
+  if (sessionStarted && !currentQuestion) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center pb-24">
         <Card className="w-full max-w-md mb-16">
