@@ -1527,6 +1527,41 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                 return translatedQ?.question || translateText(currentQuestion.question) || currentQuestion.question;
               })()}
             </CardDescription>
+
+            {/* Clinical Images Section */}
+            {currentQuestion.images && currentQuestion.images.length > 0 && (
+              <div className="mt-6 mb-6">
+                <h4 className="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  Clinical Images for Diagnosis
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {currentQuestion.images.map((image, index) => (
+                    <div key={index} className="bg-white border-2 border-gray-200 rounded-lg p-3 shadow-sm">
+                      <div className="aspect-square flex items-center justify-center bg-gray-50 rounded-md mb-3">
+                        {image.type === 'svg' && image.content ? (
+                          <div 
+                            dangerouslySetInnerHTML={{ __html: image.content }}
+                            className="w-full h-full flex items-center justify-center"
+                          />
+                        ) : image.url ? (
+                          <img 
+                            src={image.url} 
+                            alt={image.alt}
+                            className="w-full h-full object-cover rounded-md"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gray-100 rounded-md flex items-center justify-center text-gray-400">
+                            <FileText className="w-8 h-8" />
+                          </div>
+                        )}
+                      </div>
+                      <p className="text-xs text-gray-600 text-center font-medium">{image.caption}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             
             {/* Voice Controls in Question */}
             {speechEnabled && (
