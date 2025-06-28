@@ -408,7 +408,7 @@ export default function Test() {
 
 
   // Fetch questions from API
-  const { data: questions, isLoading, error } = useQuery<Question[]>({
+  const { data: questions, isLoading, error, refetch } = useQuery<Question[]>({
     queryKey: ["/api/test/questions", selectedCategory, selectedDifficulty],
     queryFn: () => {
       const params = new URLSearchParams();
@@ -416,12 +416,66 @@ export default function Test() {
       if (selectedDifficulty !== "all") params.append("difficulty", selectedDifficulty);
       params.append("count", "10");
       
+      console.log(`Fetching questions for category: ${selectedCategory}, difficulty: ${selectedDifficulty}`);
       return fetch(`/api/test/questions?${params.toString()}`).then(res => res.json());
     },
     retry: false,
   });
 
   const currentQuestion = questions?.[currentQuestionIndex];
+
+  // Practice Mode Handlers - Generate questions based on selected category
+  const startFixedPractice = async (questionCount: number) => {
+    setIsGeneratingQuestions(true);
+    try {
+      // Force refetch questions with current category selection
+      await refetch();
+      setPracticeMode('practice');
+    } catch (error) {
+      console.error('Error loading questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
+
+  const startTimedPractice = async (timeInMinutes: number) => {
+    setIsGeneratingQuestions(true);
+    try {
+      // Force refetch questions with current category selection
+      await refetch();
+      setPracticeMode('practice');
+    } catch (error) {
+      console.error('Error loading questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
+
+  const startUnlimitedPractice = async () => {
+    setIsGeneratingQuestions(true);
+    try {
+      // Force refetch questions with current category selection
+      await refetch();
+      setPracticeMode('practice');
+    } catch (error) {
+      console.error('Error loading questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
+
+  const startAuthenticPractice = async (questionCount: number) => {
+    setIsGeneratingQuestions(true);
+    try {
+      // Force refetch questions with current category selection
+      await refetch();
+      setPracticeMode('practice');
+    } catch (error) {
+      console.error('Error loading questions:', error);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
 
   // Speech function for current question (defined after currentQuestion)
   const speakCurrentQuestion = () => {
@@ -756,43 +810,6 @@ Feel free to ask about any aspect of this question or other medical topics you'r
     
     const helpQuery = `Please explain this UTI question and provide study guidance: ${currentQuestion.question}`;
     handleAskTutor(helpQuery);
-  };
-
-  // Practice Mode Handlers (Mock implementations)
-  const startFixedPractice = (questionCount: number) => {
-    setIsGeneratingQuestions(true);
-    // Mock delay for question generation
-    setTimeout(() => {
-      setIsGeneratingQuestions(false);
-      setPracticeMode('practice');
-    }, 2000);
-  };
-
-  const startTimedPractice = (timeInMinutes: number) => {
-    setIsGeneratingQuestions(true);
-    // Mock delay for question generation
-    setTimeout(() => {
-      setIsGeneratingQuestions(false);
-      setPracticeMode('practice');
-    }, 2000);
-  };
-
-  const startUnlimitedPractice = () => {
-    setIsGeneratingQuestions(true);
-    // Mock delay for question generation
-    setTimeout(() => {
-      setIsGeneratingQuestions(false);
-      setPracticeMode('practice');
-    }, 2000);
-  };
-
-  const startAuthenticPractice = (questionCount: number) => {
-    setIsGeneratingQuestions(true);
-    // Mock delay for question generation
-    setTimeout(() => {
-      setIsGeneratingQuestions(false);
-      setPracticeMode('practice');
-    }, 2000);
   };
 
   const backToModeSelection = () => {
