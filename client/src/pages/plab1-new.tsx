@@ -703,6 +703,9 @@ export default function PLAB1New() {
   const loadQuestions = async (count: number = 20) => {
     setIsLoadingQuestions(true);
     try {
+      // Debug: Log what category is actually being used
+      console.log('Loading questions with category:', selectedCategory, 'difficulty:', selectedDifficulty);
+      
       // Try to load from test questions endpoint first (has authentic PLAB questions)
       const params = new URLSearchParams({
         category: selectedCategory,
