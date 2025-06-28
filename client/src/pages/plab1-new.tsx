@@ -1029,46 +1029,65 @@ export default function PLAB1New() {
             </Card>
           </div>
 
-          {/* Category Selection */}
+          {/* Practice Category Filter - Working Implementation */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Select Practice Category</CardTitle>
-              <CardDescription>Choose a medical specialty to focus your practice</CardDescription>
+              <CardTitle>PLAB 1 Practice Test</CardTitle>
+              <CardDescription>Select category and difficulty to start your practice session</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-3 gap-4 mb-6">
                 <div>
-                  <Label htmlFor="category" className="text-sm font-medium mb-2 block">
-                    Medical Specialty
-                  </Label>
+                  <Label className="text-sm font-medium mb-2 block">Medical Specialty</Label>
                   <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      {availableCategories.map((category) => (
-                        <SelectItem key={category.value} value={category.value}>
-                          {category.label}
-                        </SelectItem>
-                      ))}
+                      <SelectItem value="all">All Categories</SelectItem>
+                      <SelectItem value="cardiovascular">Cardiovascular</SelectItem>
+                      <SelectItem value="infectious-diseases">Infectious Diseases</SelectItem>
+                      <SelectItem value="respiratory">Respiratory</SelectItem>
+                      <SelectItem value="gastrointestinal">Gastrointestinal</SelectItem>
+                      <SelectItem value="neurology">Neurology</SelectItem>
+                      <SelectItem value="endocrinology">Endocrinology</SelectItem>
+                      <SelectItem value="psychiatry">Psychiatry</SelectItem>
+                      <SelectItem value="obstetrics-gynaecology">Obstetrics & Gynaecology</SelectItem>
+                      <SelectItem value="paediatrics">Paediatrics</SelectItem>
+                      <SelectItem value="surgery">Surgery</SelectItem>
+                      <SelectItem value="emergency-medicine">Emergency Medicine</SelectItem>
+                      <SelectItem value="rheumatology">Rheumatology</SelectItem>
+                      <SelectItem value="dermatology">Dermatology</SelectItem>
+                      <SelectItem value="ophthalmology">Ophthalmology</SelectItem>
+                      <SelectItem value="ent">ENT</SelectItem>
+                      <SelectItem value="pharmacology">Pharmacology</SelectItem>
+                      <SelectItem value="ethics-law">Ethics & Law</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
                 <div>
-                  <Label htmlFor="difficulty" className="text-sm font-medium mb-2 block">
-                    Difficulty Level
-                  </Label>
+                  <Label className="text-sm font-medium mb-2 block">Difficulty Level</Label>
                   <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select difficulty" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="foundation">Foundation</SelectItem>
+                      <SelectItem value="basic">Basic</SelectItem>
                       <SelectItem value="intermediate">Intermediate</SelectItem>
                       <SelectItem value="advanced">Advanced</SelectItem>
                     </SelectContent>
                   </Select>
+                </div>
+
+                <div className="flex items-end">
+                  <Button 
+                    onClick={() => loadQuestions(20)} 
+                    disabled={isLoadingQuestions}
+                    className="w-full bg-blue-600 hover:bg-blue-700"
+                  >
+                    {isLoadingQuestions ? "Loading..." : "Start Practice"}
+                  </Button>
                 </div>
               </div>
             </CardContent>
