@@ -293,6 +293,7 @@ export default function PLAB1New() {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('intermediate');
   const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
   const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
   const [isBulkGenerating, setIsBulkGenerating] = useState(false);
   const [bulkProgress, setBulkProgress] = useState<{
     completed: number;
@@ -563,40 +564,9 @@ export default function PLAB1New() {
 
   // Generate AI questions
   const startPractice = async (questionCount: number) => {
-    setIsGeneratingQuestions(true);
-    setGeneratedQuestions([]);
-    setSessionStarted(false);
-    setShowExplanation(false);
-    setCurrentQuestionIndex(0);
-    
-    try {
-      const response = await fetch('/api/generate-questions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          category: selectedCategory,
-          count: questionCount,
-          difficulty: selectedDifficulty
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setGeneratedQuestions(data.questions || []);
-        if (data.questions && data.questions.length > 0) {
-          setSessionStarted(true);
-          setQuestionStartTime(Date.now());
-        }
-      } else {
-        console.error('Failed to generate questions');
-      }
-    } catch (error) {
-      console.error('Error generating questions:', error);
-    } finally {
-      setIsGeneratingQuestions(false);
-    }
+    setBlockType('block1');
+    setIsTimedSession(false);
+    await loadQuestions(questionCount);
   };
 
   // Bulk question generation function
@@ -711,41 +681,68 @@ export default function PLAB1New() {
 
   // Start timed practice session
   const startTimedPractice = async (timeInMinutes: number) => {
-    setIsGeneratingQuestions(true);
-    try {
-      const response = await fetch('/api/generate-questions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          category: selectedCategory,
-          difficulty: selectedDifficulty,
-          count: 100 // Generate enough questions for timed session
-        })
-      });
-      const data = await response.json();
-      setGeneratedQuestions(data.questions);
-      setCurrentQuestionIndex(0);
-      setSelectedAnswer("");
-      setShowExplanation(false);
-      setQuestionStartTime(Date.now());
-      setSessionStarted(true);
+    setBlockType('block2');
+    setIsTimedSession(true);
+    setSessionTimeLimit(timeInMinutes);
+    setSessionStartTime(Date.now());
+    
+    // Load questions and start timer
+    await loadQuestions(100);
+    
+    if (generatedQuestions.length > 0) {
       setIsTimerRunning(true);
-      
       // Set timer for timed practice
       setTimeout(() => {
         setIsTimerRunning(false);
         setSessionComplete(true);
       }, timeInMinutes * 60 * 1000);
-      
-    } catch (error) {
-      console.error('Error generating questions:', error);
-    } finally {
-      setIsGeneratingQuestions(false);
     }
   };
 
-  // Start authentic PLAB 1 timed practice session (1 minute per question)
-  const startAuthenticTimedPractice = async (questionCount: number) => {
+  // Load existing questions based on category and difficulty
+  const loadQuestions = async (count: number = 20) => {
+    setIsLoadingQuestions(true);
+    try {
+      // Try to load from test questions endpoint first (has authentic PLAB questions)
+      const params = new URLSearchParams({
+        category: selectedCategory,
+        difficulty: selectedDifficulty,
+        count: count.toString()
+      });
+      
+      const response = await fetch(`/api/test/questions?${params}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to load questions');
+      }
+      
+      const data = await response.json();
+      
+      if (data && data.length > 0) {
+        setGeneratedQuestions(data);
+        setCurrentQuestionIndex(0);
+        setSelectedAnswer("");
+        setShowExplanation(false);
+        setQuestionStartTime(Date.now());
+        setSessionStarted(true);
+        setIsTimerRunning(false);
+        return;
+      }
+      
+      // Fallback: try to generate questions if none found
+      await generateQuestions(count);
+      
+    } catch (error) {
+      console.error('Error loading questions:', error);
+      // Final fallback: show error message
+      alert('Unable to load questions. Please try refreshing the page.');
+    } finally {
+      setIsLoadingQuestions(false);
+    }
+  };
+
+  // Generate questions using AI
+  const generateQuestions = async (count: number) => {
     setIsGeneratingQuestions(true);
     try {
       const response = await fetch('/api/generate-questions', {
@@ -754,13 +751,13 @@ export default function PLAB1New() {
         body: JSON.stringify({
           category: selectedCategory,
           difficulty: selectedDifficulty,
-          count: questionCount // Generate exact number of questions
+          count: count
         })
       });
       const data = await response.json();
       
       // Slice to exact count in case more were generated
-      const exactQuestions = data.questions.slice(0, questionCount);
+      const exactQuestions = data.questions.slice(0, count);
       setGeneratedQuestions(exactQuestions);
       setCurrentQuestionIndex(0);
       setSelectedAnswer("");
@@ -785,31 +782,9 @@ export default function PLAB1New() {
 
   // Start unlimited practice session
   const startUnlimitedPractice = async () => {
-    setIsGeneratingQuestions(true);
-    try {
-      const response = await fetch('/api/generate-questions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          category: selectedCategory,
-          difficulty: selectedDifficulty,
-          count: 20 // Start with 20, will generate more as needed
-        })
-      });
-      const data = await response.json();
-      setGeneratedQuestions(data.questions);
-      setCurrentQuestionIndex(0);
-      setSelectedAnswer("");
-      setShowExplanation(false);
-      setQuestionStartTime(Date.now());
-      setSessionStarted(true);
-      setIsTimerRunning(false); // No timer for unlimited
-      
-    } catch (error) {
-      console.error('Error generating questions:', error);
-    } finally {
-      setIsGeneratingQuestions(false);
-    }
+    setBlockType('block3');
+    setIsTimedSession(false);
+    await loadQuestions(20);
   };
 
   // Get current question
