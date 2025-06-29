@@ -1161,23 +1161,23 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         images: [
           {
             type: "external",
-            url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop&crop=center",
-            title: "Plaque Psoriasis - Classical Presentation",
-            description: "Well-demarcated, erythematous plaques with thick, silvery-white scales on extensor surfaces. Plaques have distinct borders and are elevated above surrounding skin.",
-            attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
-          },
-          {
-            type: "external", 
-            url: "https://images.unsplash.com/photo-1584362917165-526f968f8f83?w=400&h=400&fit=crop&crop=center",
-            title: "Nail Psoriasis - Characteristic Changes",
-            description: "Multiple nail changes including pitting (small punctate depressions), onycholysis (nail plate separation), and oil spot changes (yellow-brown discoloration).",
+            url: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=center",
+            title: "Skin Examination - Dermatological Assessment",
+            description: "Clinical examination of skin condition showing erythematous changes and scaling patterns typical of inflammatory dermatoses. Professional dermatological assessment demonstrates proper examination technique.",
             attribution: "Photo by Towfiqu barbhuiya on Unsplash - Free for educational use"
           },
           {
+            type: "external", 
+            url: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400&h=400&fit=crop&crop=center",
+            title: "Hand Dermatology - Clinical Examination",
+            description: "Professional examination of hand dermatology showing examination techniques used in assessment of inflammatory skin conditions and chronic dermatoses.",
+            attribution: "Photo by Hush Naidoo Jade Photography on Unsplash - Free for educational use"
+          },
+          {
             type: "external",
-            url: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=400&fit=crop&crop=center", 
-            title: "Psoriatic Plaques - Morphological Detail",
-            description: "Chronic, well-circumscribed plaques with characteristic silvery scale that lifts easily. Underlying erythematous base shows increased vascularity.",
+            url: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=400&fit=crop&crop=center", 
+            title: "Dermatological Consultation - Clinical Setting",
+            description: "Professional dermatological consultation demonstrating clinical assessment techniques and patient examination protocols used in chronic skin condition management.",
             attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
           }
         ],
@@ -1229,24 +1229,24 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         images: [
           {
             type: "external",
-            title: "Hand Eczema - Typical Presentation",
-            url: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=400&fit=crop&crop=center",
-            description: "Bilateral involvement of hands showing characteristic eczematous changes: erythema, scaling, vesiculation, and lichenification. Poorly-defined borders distinguish from contact dermatitis.",
+            title: "Hand Dermatology - Clinical Assessment",
+            url: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=400&fit=crop&crop=center",
+            description: "Professional examination of hand skin condition demonstrating clinical assessment techniques for inflammatory dermatoses. Shows proper examination positioning and lighting.",
+            attribution: "Photo by Hush Naidoo Jade Photography on Unsplash - Free for educational use"
+          },
+          {
+            type: "external",
+            title: "Dermatological Examination - Flexural Areas",
+            url: "https://images.unsplash.com/photo-1628348068343-c6a848d2d6dd?w=400&h=400&fit=crop&crop=center",
+            description: "Clinical examination of flexural skin areas showing professional dermatological assessment techniques for chronic inflammatory conditions.",
+            attribution: "Photo by Towfiqu barbhuiya on Unsplash - Free for educational use"
+          },
+          {
+            type: "external",
+            title: "Patient Consultation - Dermatology Setting",
+            url: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=400&fit=crop&crop=center",
+            description: "Professional dermatological consultation environment showing clinical examination setup and patient interaction protocols for skin condition assessment.",
             attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
-          },
-          {
-            type: "external",
-            title: "Flexural Atopic Dermatitis - Elbow Involvement",
-            url: "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=400&h=400&fit=crop&crop=center",
-            description: "Classic flexural distribution in adult atopic dermatitis. Antecubital fossa showing erythematous, scaly patches with excoriation marks from scratching.",
-            attribution: "Photo by Diana Polekhina on Unsplash - Free for educational use"
-          },
-          {
-            type: "external",
-            title: "Facial Atopic Dermatitis - Adult Pattern",
-            url: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=center",
-            description: "Perioral and periorbital involvement typical of adult atopic dermatitis. Dry, scaly, erythematous patches around eyes and mouth.",
-            attribution: "Photo by Christopher Campbell on Unsplash - Free for educational use"
           }
         ],
         question: "A 25-year-old woman presents with a 6-month history of itchy, red, scaly patches on her hands and flexural areas. The rash worsens with stress and certain soaps. What is the most likely diagnosis?",
