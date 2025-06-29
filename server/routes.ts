@@ -1216,47 +1216,185 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         images: [
           {
             type: "svg",
-            content: `<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="200" height="200" fill="#f4c2a1"/>
-              <circle cx="100" cy="100" r="60" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
-              <circle cx="80" cy="80" r="15" fill="#fecaca" opacity="0.8"/>
-              <circle cx="120" cy="90" r="20" fill="#fecaca" opacity="0.8"/>
-              <circle cx="110" cy="120" r="12" fill="#fecaca" opacity="0.8"/>
-              <text x="100" y="180" text-anchor="middle" font-size="12" fill="#333">Image 1: Elbow lesion</text>
+            content: `<svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="silverScale1" patternUnits="userSpaceOnUse" width="8" height="8">
+                  <rect width="8" height="8" fill="#f0f0f0"/>
+                  <rect width="4" height="4" fill="#ffffff" opacity="0.9"/>
+                  <rect x="2" y="2" width="2" height="2" fill="#e8e8e8"/>
+                </pattern>
+                <radialGradient id="skinGrad1" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#f4c2a1"/>
+                  <stop offset="100%" stop-color="#e8b896"/>
+                </radialGradient>
+                <radialGradient id="plaqueGrad1" cx="30%" cy="30%">
+                  <stop offset="0%" stop-color="#e85d75"/>
+                  <stop offset="70%" stop-color="#dc2626"/>
+                  <stop offset="100%" stop-color="#b91c1c"/>
+                </radialGradient>
+              </defs>
+              
+              <!-- Skin background -->
+              <rect width="300" height="200" fill="url(#skinGrad1)"/>
+              
+              <!-- Elbow joint anatomy -->
+              <ellipse cx="150" cy="100" rx="120" ry="80" fill="#deb896" stroke="#c8a270" stroke-width="2"/>
+              <ellipse cx="150" cy="90" rx="30" ry="20" fill="#d4a574" stroke="#b8935f" stroke-width="1"/>
+              
+              <!-- Main psoriatic plaque with raised appearance -->
+              <ellipse cx="150" cy="110" rx="65" ry="45" fill="url(#plaqueGrad1)" stroke="#991b1b" stroke-width="3"/>
+              <ellipse cx="150" cy="108" rx="63" ry="43" fill="url(#silverScale1)" opacity="0.8"/>
+              
+              <!-- Satellite lesions -->
+              <ellipse cx="110" cy="85" rx="20" ry="15" fill="url(#plaqueGrad1)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="110" cy="84" rx="19" ry="14" fill="url(#silverScale1)" opacity="0.7"/>
+              
+              <ellipse cx="190" cy="125" rx="25" ry="18" fill="url(#plaqueGrad1)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="190" cy="124" rx="24" ry="17" fill="url(#silverScale1)" opacity="0.7"/>
+              
+              <!-- Koebner phenomenon (trauma-induced lesions) -->
+              <rect x="120" y="70" width="60" height="4" fill="#dc2626" rx="2"/>
+              <rect x="120" y="69" width="60" height="4" fill="url(#silverScale1)" opacity="0.6"/>
+              
+              <!-- Well-demarcated borders (sharp edges) -->
+              <ellipse cx="150" cy="110" rx="65" ry="45" fill="none" stroke="#7f1d1d" stroke-width="2" stroke-dasharray="3,2"/>
+              
+              <!-- Scale detail -->
+              <circle cx="140" cy="100" r="2" fill="#ffffff" opacity="0.9"/>
+              <circle cx="160" cy="115" r="2" fill="#ffffff" opacity="0.9"/>
+              <circle cx="135" cy="125" r="1.5" fill="#ffffff" opacity="0.9"/>
+              
+              <text x="150" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Elbow: Classic Extensor Surface Psoriasis</text>
+              <text x="150" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">Well-demarcated plaques with characteristic silvery scale</text>
             </svg>`,
-            alt: "Well-demarcated red plaque with silvery scales on elbow",
-            caption: "Classic extensor surface involvement"
+            alt: "Detailed psoriasis lesion on elbow showing well-demarcated erythematous plaques with silvery scales",
+            caption: "Classic extensor surface involvement with satellite lesions"
           },
           {
             type: "svg", 
-            content: `<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="200" height="200" fill="#f4c2a1"/>
-              <ellipse cx="100" cy="100" rx="40" ry="70" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
-              <ellipse cx="85" cy="80" rx="8" ry="12" fill="#fecaca" opacity="0.9"/>
-              <ellipse cx="115" cy="95" rx="10" ry="15" fill="#fecaca" opacity="0.9"/>
-              <ellipse cx="100" cy="125" rx="6" ry="10" fill="#fecaca" opacity="0.9"/>
-              <text x="100" y="180" text-anchor="middle" font-size="12" fill="#333">Image 2: Knee lesion</text>
+            content: `<svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="silverScale2" patternUnits="userSpaceOnUse" width="6" height="6">
+                  <rect width="6" height="6" fill="#f5f5f5"/>
+                  <rect width="3" height="3" fill="#ffffff" opacity="0.95"/>
+                  <rect x="1" y="1" width="2" height="2" fill="#eeeeee"/>
+                </pattern>
+                <radialGradient id="skinGrad2" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#f4c2a1"/>
+                  <stop offset="100%" stop-color="#e8b896"/>
+                </radialGradient>
+                <radialGradient id="plaqueGrad2" cx="30%" cy="30%">
+                  <stop offset="0%" stop-color="#e85d75"/>
+                  <stop offset="70%" stop-color="#dc2626"/>
+                  <stop offset="100%" stop-color="#b91c1c"/>
+                </radialGradient>
+              </defs>
+              
+              <!-- Skin background -->
+              <rect width="300" height="200" fill="url(#skinGrad2)"/>
+              
+              <!-- Knee joint anatomy -->
+              <ellipse cx="150" cy="125" rx="110" ry="90" fill="#deb896" stroke="#c8a270" stroke-width="2"/>
+              <ellipse cx="150" cy="105" rx="35" ry="30" fill="#d4a574" stroke="#b8935f" stroke-width="1"/>
+              
+              <!-- Large central plaque -->
+              <ellipse cx="150" cy="125" rx="70" ry="50" fill="url(#plaqueGrad2)" stroke="#991b1b" stroke-width="3"/>
+              <ellipse cx="150" cy="123" rx="68" ry="48" fill="url(#silverScale2)" opacity="0.85"/>
+              
+              <!-- Symmetrical distribution pattern -->
+              <ellipse cx="100" cy="95" rx="22" ry="18" fill="url(#plaqueGrad2)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="100" cy="94" rx="21" ry="17" fill="url(#silverScale2)" opacity="0.8"/>
+              
+              <ellipse cx="200" cy="95" rx="22" ry="18" fill="url(#plaqueGrad2)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="200" cy="94" rx="21" ry="17" fill="url(#silverScale2)" opacity="0.8"/>
+              
+              <ellipse cx="115" cy="160" rx="28" ry="20" fill="url(#plaqueGrad2)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="115" cy="159" rx="27" ry="19" fill="url(#silverScale2)" opacity="0.8"/>
+              
+              <ellipse cx="185" cy="160" rx="28" ry="20" fill="url(#plaqueGrad2)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="185" cy="159" rx="27" ry="19" fill="url(#silverScale2)" opacity="0.8"/>
+              
+              <!-- Auspitz sign indicators (small bleeding points) -->
+              <circle cx="140" cy="115" r="2" fill="#cc0000" opacity="0.8"/>
+              <circle cx="165" cy="130" r="1.5" fill="#cc0000" opacity="0.8"/>
+              <circle cx="155" cy="145" r="2" fill="#cc0000" opacity="0.8"/>
+              
+              <!-- Thick scale buildup -->
+              <ellipse cx="150" cy="120" rx="40" ry="25" fill="#ffffff" opacity="0.7" stroke="#e0e0e0" stroke-width="1"/>
+              
+              <text x="150" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Knee: Bilateral Symmetrical Distribution</text>
+              <text x="150" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">Confluent plaques over joint prominence with Auspitz sign</text>
             </svg>`,
-            alt: "Similar plaque pattern on knee showing symmetrical distribution",
-            caption: "Bilateral extensor involvement"
+            alt: "Psoriasis lesions on knee showing bilateral symmetrical pattern with confluent plaques",
+            caption: "Bilateral extensor involvement with positive Auspitz sign"
           },
           {
             type: "svg",
-            content: `<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <rect width="200" height="200" fill="#fef3c7"/>
-              <rect x="60" y="40" width="80" height="4" fill="#dc2626" rx="2"/>
-              <rect x="65" y="50" width="70" height="4" fill="#dc2626" rx="2"/>
-              <rect x="70" y="60" width="60" height="4" fill="#dc2626" rx="2"/>
-              <rect x="50" y="70" width="100" height="6" fill="#dc2626" rx="3"/>
-              <rect x="55" y="85" width="90" height="5" fill="#dc2626" rx="2"/>
-              <rect x="75" y="100" width="50" height="4" fill="#dc2626" rx="2"/>
-              <circle cx="90" cy="55" r="3" fill="#fecaca"/>
-              <circle cx="110" cy="75" r="4" fill="#fecaca"/>
-              <circle cx="95" cy="90" r="2" fill="#fecaca"/>
-              <text x="100" y="180" text-anchor="middle" font-size="12" fill="#333">Image 3: Scalp involvement</text>
+            content: `<svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="silverScale3" patternUnits="userSpaceOnUse" width="4" height="4">
+                  <rect width="4" height="4" fill="#f8f8f8"/>
+                  <rect width="2" height="2" fill="#ffffff"/>
+                  <rect x="1" y="1" width="1" height="1" fill="#f0f0f0"/>
+                </pattern>
+                <pattern id="hairPattern" patternUnits="userSpaceOnUse" width="3" height="12">
+                  <line x1="1.5" y1="0" x2="1.5" y2="12" stroke="#8b4513" stroke-width="0.8" opacity="0.7"/>
+                  <line x1="0.5" y1="0" x2="0.5" y2="12" stroke="#654321" stroke-width="0.6" opacity="0.6"/>
+                  <line x1="2.5" y1="0" x2="2.5" y2="12" stroke="#a0522d" stroke-width="0.7" opacity="0.6"/>
+                </pattern>
+                <radialGradient id="scalpGrad" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#f4c2a1"/>
+                  <stop offset="100%" stop-color="#e8b896"/>
+                </radialGradient>
+                <radialGradient id="scalyPlaque" cx="40%" cy="40%">
+                  <stop offset="0%" stop-color="#e85d75"/>
+                  <stop offset="60%" stop-color="#dc2626"/>
+                  <stop offset="100%" stop-color="#b91c1c"/>
+                </radialGradient>
+              </defs>
+              
+              <!-- Scalp background -->
+              <rect width="300" height="200" fill="url(#scalpGrad)"/>
+              
+              <!-- Head/scalp outline -->
+              <ellipse cx="150" cy="125" rx="100" ry="80" fill="#deb896" stroke="#c8a270" stroke-width="2"/>
+              
+              <!-- Hair coverage -->
+              <ellipse cx="150" cy="95" rx="95" ry="60" fill="url(#hairPattern)" opacity="0.8"/>
+              
+              <!-- Main scalp psoriasis lesion -->
+              <path d="M70 85 Q150 65 230 85 Q220 115 150 125 Q80 115 70 85" fill="url(#scalyPlaque)" stroke="#991b1b" stroke-width="3"/>
+              <path d="M72 87 Q150 67 228 87 Q218 113 150 123 Q82 113 72 87" fill="url(#silverScale3)" opacity="0.9"/>
+              
+              <!-- Linear lesions extending beyond hairline -->
+              <ellipse cx="80" cy="70" rx="12" ry="30" fill="url(#scalyPlaque)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="80" cy="70" rx="11" ry="29" fill="url(#silverScale3)" opacity="0.85"/>
+              
+              <ellipse cx="220" cy="70" rx="12" ry="30" fill="url(#scalyPlaque)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="220" cy="70" rx="11" ry="29" fill="url(#silverScale3)" opacity="0.85"/>
+              
+              <!-- Thick adherent scale buildup -->
+              <ellipse cx="150" cy="85" rx="50" ry="20" fill="#ffffff" stroke="#e8e8e8" stroke-width="2" opacity="0.95"/>
+              <ellipse cx="130" cy="80" rx="20" ry="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="1" opacity="0.9"/>
+              <ellipse cx="170" cy="90" rx="25" ry="10" fill="#ffffff" stroke="#e0e0e0" stroke-width="1" opacity="0.9"/>
+              
+              <!-- Scale flakes -->
+              <rect x="140" y="75" width="6" height="3" fill="#ffffff" opacity="0.9" rx="1"/>
+              <rect x="160" y="85" width="8" height="4" fill="#ffffff" opacity="0.9" rx="1"/>
+              <rect x="125" y="90" width="5" height="2" fill="#ffffff" opacity="0.9" rx="1"/>
+              <rect x="175" y="78" width="7" height="3" fill="#ffffff" opacity="0.9" rx="1"/>
+              
+              <!-- Candle grease sign (thick scale) -->
+              <ellipse cx="150" cy="85" rx="30" ry="12" fill="none" stroke="#cccccc" stroke-width="2" stroke-dasharray="2,1"/>
+              
+              <!-- Hair thinning in affected areas -->
+              <ellipse cx="150" cy="85" rx="35" ry="15" fill="url(#hairPattern)" opacity="0.3"/>
+              
+              <text x="150" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Scalp: Thick Adherent Scale Beyond Hairline</text>
+              <text x="150" y="235" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">Linear pattern with characteristic candle grease sign</text>
             </svg>`,
-            alt: "Linear scaly lesions on scalp with hair involvement",
-            caption: "Scalp psoriasis with scaling"
+            alt: "Scalp psoriasis showing thick adherent scale extending beyond hairline with linear distribution",
+            caption: "Scalp psoriasis with candle grease sign and hair involvement"
           }
         ],
         question: "A 35-year-old man presents with the lesions shown in the three clinical images. The lesions are well-demarcated, raised, and covered with silvery-white scales. They appeared gradually over 6 months and are mildly itchy. The Auspitz sign is positive. What is the most likely diagnosis?",
