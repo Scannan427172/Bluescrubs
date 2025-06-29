@@ -1847,6 +1847,128 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
           ]
         }
       }
+    ],
+    paediatrics: [
+      {
+        id: "paed1",
+        topic: "Childhood Fever Management",
+        category: "paediatrics",
+        question: "A 18-month-old child presents with a 3-day history of fever (39.2°C), irritability, and reduced feeding. On examination, the child appears generally unwell but there are no focal signs. Urine dipstick shows nitrites positive and leucocytes ++. What is the most appropriate immediate management?",
+        options: {
+          A: "Start oral trimethoprim and arrange urgent paediatric review",
+          B: "Collect clean-catch urine sample for culture and start IV antibiotics",
+          C: "Give paracetamol and review in 24 hours", 
+          D: "Arrange immediate lumbar puncture",
+          E: "Start oral amoxicillin and discharge home"
+        },
+        answer: "B",
+        explanation: "Why Collect clean-catch urine sample for culture and start IV antibiotics is correct:\n\n• NICE CG54 Paediatric UTI Guidelines: \n  - Children under 2 years with fever and positive urine dipstick require immediate antibiotic therapy to prevent renal scarring\n  - Clean-catch or catheter urine sample essential for culture confirmation and antibiotic sensitivity testing\n  - IV antibiotics indicated for children under 3 months or those appearing systemically unwell\n  - Early appropriate treatment reduces risk of pyelonephritis and long-term renal complications\n\n• Age-Specific Risk Assessment: \n  - 18-month-old children at highest risk for ascending UTI and renal involvement\n  - Immature immune system and shorter urethra increase susceptibility to serious complications\n  - Symptoms of irritability and reduced feeding suggest systemic involvement requiring urgent intervention\n  - Risk of bacteraemia and sepsis significantly higher in this age group\n\n• Clinical Severity Indicators: \n  - Generally unwell appearance with fever >39°C indicates moderate to severe illness\n  - Reduced feeding and irritability suggest systemic inflammatory response\n  - Positive nitrites indicate gram-negative bacterial infection requiring targeted therapy\n  - Leucocytes ++ confirms significant inflammatory response in urinary tract\n\n• Evidence-Based Treatment Protocol: \n  - IV antibiotics ensure therapeutic drug levels and rapid clinical response\n  - Common organisms (E.coli, Klebsiella) typically sensitive to ceftriaxone or co-amoxiclav\n  - Culture results guide targeted antibiotic therapy and duration of treatment\n  - Hospital admission allows monitoring for complications and treatment response\n\n• Prevention of Long-term Complications: \n  - Early appropriate treatment prevents renal scarring and chronic kidney disease\n  - Reduces risk of recurrent UTI and hypertension in later life\n  - DMSA scan may be required if treatment response poor or recurrent infections\n  - Family education regarding prevention and recognition of future episodes",
+        incorrectExplanation: "• Option A (Oral trimethoprim only) - Inadequate Severity Response: \n  - Systemically unwell 18-month-old requires IV rather than oral antibiotics\n  - Trimethoprim alone insufficient for suspected pyelonephritis\n  - Risk of treatment failure and progression to sepsis\n  - NICE guidelines specify IV therapy for unwell infants\n  - Lacks proper culture collection for antibiotic sensitivity\n\n• Option C (Symptomatic treatment only) - Dangerous Delay: \n  - Positive urine dipstick with fever requires immediate antibiotic therapy\n  - 24-hour delay risks progression to pyelonephritis and sepsis\n  - Paracetamol alone does not treat underlying bacterial infection\n  - Contradicts all paediatric UTI management guidelines\n  - Risk of permanent renal damage with delayed treatment\n\n• Option D (Immediate lumbar puncture) - Inappropriate Investigation: \n  - Clinical picture consistent with UTI rather than meningitis\n  - Lumbar puncture not indicated with clear urinary source\n  - Would delay appropriate antibiotic therapy\n  - Risk of clinical deterioration during unnecessary procedure\n  - Urine dipstick findings explain clinical presentation\n\n• Option E (Oral amoxicillin discharge) - Multiple Safety Concerns: \n  - Amoxicillin poor choice for UTI (resistance common)\n  - Oral therapy inappropriate for systemically unwell infant\n  - Discharge unsafe without ensuring treatment response\n  - Lacks culture collection for sensitivity testing\n  - Risk of treatment failure and serious complications",
+        mnemonic: "Paediatric UTI: FEVER = Fever >38°C, Examine urine dipstick, Verify with culture, Early IV antibiotics, Refer if unwell\n\nUTI Risk Factors: BUBBLE = Boys <6 months, Uncircumcised, Bladder dysfunction, Bowel problems, Low fluid intake, E.coli most common\n\nUTI Treatment: CANS = Culture first, Antibiotics IV if unwell, Nitrites/leucocytes positive, Sensitivity-guided therapy\n\nComplications: SCARS = Sepsis, Chronic kidney disease, Abscess, Recurrence, Scarring",
+        guidelineSummary: {
+          title: "Paediatric UTI Management Summary",
+          content: "• Age-Specific Assessment: \n  - <3 months: urgent hospital assessment, IV antibiotics\n  - 3 months-2 years: urine culture essential, consider admission\n  - >2 years: oral antibiotics appropriate if well\n  - High index of suspicion in non-specific presentations\n\n• Urine Collection: \n  - Clean-catch preferred method if toilet trained\n  - Catheter sample if clean-catch not possible\n  - Bag samples unreliable due to contamination\n  - Dipstick: nitrites most specific, leucocytes sensitive\n\n• Antibiotic Selection: \n  - IV: ceftriaxone, co-amoxiclav based on local guidelines\n  - Oral: trimethoprim, nitrofurantoin (>3 months)\n  - Duration: 7-10 days for upper UTI, 3 days for cystitis\n  - Adjust based on culture sensitivities\n\n• Follow-up and Investigation: \n  - Clinical response expected within 24-48 hours\n  - Ultrasound for all children <6 months with first UTI\n  - DMSA scan if atypical or recurrent infections\n  - Prophylactic antibiotics for recurrent UTI\n\n• Prevention Strategies: \n  - Adequate fluid intake, regular bladder emptying\n  - Proper perineal hygiene, treat constipation\n  - Avoid bubble baths, tight clothing\n  - Prompt treatment of future episodes"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/cg54",
+            description: "NICE CG54: Urinary tract infection in under 16s"
+          },
+          supplementary: [
+            {
+              title: "RCPCH Standards",
+              url: "https://www.rcpch.ac.uk/resources/urinary-tract-infection-children",
+              description: "Royal College of Paediatrics UTI guidelines"
+            },
+            {
+              title: "NHS Children's Health",
+              url: "https://www.nhs.uk/conditions/urinary-tract-infections-utis/",
+              description: "NHS UTI management in children"
+            }
+          ]
+        }
+      },
+      {
+        id: "paed2",
+        topic: "Childhood Immunisations",
+        category: "paediatrics", 
+        question: "A mother brings her 4-month-old baby for routine immunisations. The baby received the 8-week vaccines on schedule but missed the 12-week appointment due to a mild cold. The baby is now well. What vaccines should be given today?",
+        options: {
+          A: "Restart the entire vaccination schedule from the beginning",
+          B: "Give the 12-week vaccines (DTaP/IPV/Hib/HepB + PCV + MenB) plus catch up on any due",
+          C: "Wait until the baby is 6 months old to restart",
+          D: "Only give the vaccines that were missed",
+          E: "Give double doses to catch up quickly"
+        },
+        answer: "B",
+        explanation: "Why Give the 12-week vaccines plus catch up on any due is correct:\n\n• UK Immunisation Schedule Protocol: \n  - Delayed vaccines should be given as soon as possible without restarting the schedule\n  - 4-month-old baby should receive 12-week vaccines immediately as these are now overdue\n  - Continue with normal schedule progression to maintain optimal protection\n  - No need to restart from beginning as 8-week vaccines provide foundation immunity\n\n• Evidence-Based Catch-Up Strategy: \n  - DTaP/IPV/Hib/HepB combination provides protection against 6 serious diseases\n  - PCV (pneumococcal) and MenB (meningococcal B) essential for bacterial meningitis prevention\n  - Each vaccine maintains efficacy regardless of delayed administration\n  - Immunological memory established from 8-week vaccines enhances response\n\n• Age-Appropriate Risk Assessment: \n  - 4-month-old at increased risk for vaccine-preventable diseases\n  - Maternal antibodies declining, making vaccination urgent\n  - Pertussis, pneumococcal disease, and meningitis particularly dangerous at this age\n  - Delayed vaccination increases susceptibility during vulnerable period\n\n• Green Book Guidance Compliance: \n  - PHE Green Book specifies no maximum interval between doses\n  - Mild illness not contraindication to vaccination\n  - Standard doses appropriate regardless of delay\n  - Maintains herd immunity through timely catch-up vaccination",
+        incorrectExplanation: "• Option A (Restart entire schedule) - Unnecessary and Harmful: \n  - Wastes previous immunisation benefit from 8-week vaccines\n  - Delays protection against vaccine-preventable diseases\n  - Not recommended by any UK immunisation guidelines\n  - Causes additional needle exposures without benefit\n  - May reduce parental confidence in vaccination programme\n\n• Option C (Wait until 6 months) - Dangerous Delay: \n  - Leaves baby unprotected for additional 2 months\n  - Peak risk period for many vaccine-preventable diseases\n  - No clinical justification for further delay\n  - Contradicts catch-up vaccination principles\n  - Risk of disease outbreak during vulnerable period\n\n• Option D (Only missed vaccines) - Incomplete Protection: \n  - Misunderstands vaccination schedule requirements\n  - Baby needs both catch-up and age-appropriate vaccines\n  - Partial vaccination leaves gaps in protection\n  - Does not follow standard immunisation protocols\n  - Risk of continued susceptibility to preventable diseases\n\n• Option E (Double doses) - Potentially Harmful: \n  - Standard doses provide optimal immune response\n  - Double dosing may increase adverse reactions\n  - No evidence for improved efficacy with higher doses\n  - Not recommended in any vaccination guidelines\n  - Risk of increased side effects without benefit",
+        mnemonic: "Vaccination Schedule: CATCH = Continue from where stopped, Age-appropriate vaccines, Timely administration, Correct standard doses, Herd immunity protection\n\n8-Week Vaccines: DPT-HIB = DTaP, Polio, Pneumococcal, Hib, Hepatitis B, MenB\n\n12-Week Vaccines: SAME = Same as 8-week (DTaP/IPV/Hib/HepB + PCV + MenB)\n\nVaccine Contraindications: SAFE = Severe illness, Anaphylaxis history, Fever >38°C, Encephalopathy",
+        guidelineSummary: {
+          title: "UK Childhood Immunisation Schedule",
+          content: "• Primary Schedule: \n  - 8 weeks: DTaP/IPV/Hib/HepB, PCV, MenB, Rotavirus\n  - 12 weeks: DTaP/IPV/Hib/HepB, PCV, MenB, Rotavirus\n  - 16 weeks: DTaP/IPV/Hib/HepB, PCV, MenB\n  - 1 year: MMR, PCV, Hib/MenC, MenB\n\n• Catch-Up Principles: \n  - Continue where left off, don't restart\n  - Give age-appropriate vaccines immediately\n  - Maintain minimum intervals between doses\n  - No maximum interval between doses\n\n• Contraindications: \n  - Severe acute illness with fever >38°C\n  - Previous anaphylactic reaction to vaccine component\n  - Severe immunodeficiency (live vaccines)\n  - Minor illness not a contraindication\n\n• Administration: \n  - Different injection sites for multiple vaccines\n  - Standard doses regardless of delay\n  - Record in red book and national database\n  - Provide information leaflets to parents\n\n• Adverse Events: \n  - Mild fever and irritability common\n  - Paracetamol for discomfort if needed\n  - Serious adverse events very rare\n  - Report to Yellow Card Scheme if suspected"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.gov.uk/government/collections/immunisation-against-infectious-disease-the-green-book",
+            description: "PHE Green Book - Immunisation guidelines"
+          },
+          supplementary: [
+            {
+              title: "NHS Vaccines Schedule",
+              url: "https://www.nhs.uk/conditions/vaccinations/nhs-vaccinations-and-when-to-have-them/",
+              description: "Complete UK immunisation schedule"
+            },
+            {
+              title: "RCPCH Immunisation",
+              url: "https://www.rcpch.ac.uk/resources/immunisation-children",
+              description: "Paediatric immunisation guidance"
+            }
+          ]
+        }
+      },
+      {
+        id: "paed3",
+        topic: "Developmental Milestones",
+        category: "paediatrics",
+        question: "During a routine 15-month health check, parents are concerned that their toddler is not yet walking independently, although they can cruise around furniture and walk holding onto one hand. The child says 2-3 words, responds to their name, and can build a tower of 2 blocks. What is the most appropriate management?",
+        options: {
+          A: "Urgent referral to paediatric neurology",
+          B: "Reassurance and review at 18 months", 
+          C: "Immediate physiotherapy referral",
+          D: "Request MRI brain scan",
+          E: "Refer to developmental paediatrician immediately"
+        },
+        answer: "B",
+        explanation: "Why Reassurance and review at 18 months is correct:\n\n• Normal Developmental Variation: \n  - Independent walking typically achieved between 12-18 months with significant individual variation\n  - 15-month-old demonstrating cruising and supported walking shows normal motor progression\n  - All other developmental domains (language, social, fine motor) appear age-appropriate\n  - Red flags for concern absent - child achieving expected milestones in most areas\n\n• Evidence-Based Milestone Assessment: \n  - 90% of children walk independently by 15 months, but normal range extends to 18 months\n  - Quality of movement (cruising, supported walking) more important than timing\n  - Language development (2-3 words) and social response (responds to name) reassuring\n  - Fine motor skills (2-block tower) appropriate for 15 months\n\n• Systematic Developmental Review: \n  - Gross motor: progressing normally through expected sequence\n  - Fine motor: age-appropriate (15 months = 2 blocks, 18 months = 3-4 blocks)\n  - Language: within normal limits (15 months = 2-6 words)\n  - Social: appropriate response to name and social interaction\n\n• Risk Factor Assessment: \n  - No mention of prematurity, birth complications, or family history\n  - No regression or loss of previously acquired skills\n  - Steady progression through developmental sequence\n  - Absence of concerning neurological signs",
+        incorrectExplanation: "• Option A (Urgent neurology referral) - Inappropriate Escalation: \n  - No neurological red flags present in developmental history\n  - Independent walking by 18 months still within normal range\n  - Other developmental domains reassuringly normal\n  - Urgent referral not indicated without concerning features\n  - Would cause unnecessary parental anxiety\n\n• Option C (Immediate physiotherapy) - Premature Intervention: \n  - Child showing normal motor progression through cruising and supported walking\n  - Physiotherapy indicated only if walking not achieved by 18 months\n  - Quality of movement appears normal based on description\n  - Intervention before 18 months not supported by evidence\n  - May medicalise normal developmental variation\n\n• Option D (MRI brain scan) - Unjustified Investigation: \n  - No clinical indicators for neuroimaging\n  - Normal developmental progression in other domains\n  - Invasive investigation requiring sedation in young child\n  - No evidence base for scanning delayed walkers without red flags\n  - High healthcare cost without clinical benefit\n\n• Option E (Developmental paediatrician referral) - Unnecessary Specialisation: \n  - Global development appears normal with isolated mild delay\n  - Referral criteria not met at 15 months for walking\n  - Should wait until 18 months before specialist involvement\n  - Primary care monitoring appropriate at this stage\n  - May create long waiting lists for truly concerning cases",
+        mnemonic: "Development Assessment: SEEDS = Social interaction, Eyes/vision, Ears/hearing, Development milestones, Speech/language\n\n15-Month Milestones: WALK = Words 2-3, Acknowledges name, Lifts 2 blocks, Keeps cruising/supported walking\n\nWalking Red Flags: STOP = Symmetry problems, Tone abnormalities, Other delays, Progression lack\n\nDevelopmental Domains: GLFS = Gross motor, Language, Fine motor, Social/cognitive",
+        guidelineSummary: {
+          title: "Developmental Milestone Assessment",
+          content: "• Walking Development: \n  - 50% walk by 12 months, 90% by 15 months, 97% by 18 months\n  - Cruising and supported walking are positive predictors\n  - Quality of movement more important than exact timing\n  - Consider referral if not walking by 18 months\n\n• Red Flags for Concern: \n  - Loss of previously acquired skills (regression)\n  - Significant asymmetry in movement or tone\n  - Multiple domain delays affecting 2+ areas\n  - Absence of protective reflexes or abnormal tone\n\n• 15-Month Expected Milestones: \n  - Gross motor: cruising, may walk independently\n  - Fine motor: pincer grip, 2-block tower\n  - Language: 2-6 meaningful words, follows simple commands\n  - Social: responds to name, imitates actions\n\n• Assessment Approach: \n  - Comprehensive developmental history\n  - Observe child in natural play\n  - Parents are reliable informants for milestones\n  - Consider cultural and individual variations\n\n• Referral Criteria: \n  - Not walking by 18 months\n  - Concerns in multiple developmental domains\n  - Parental concerns about regression\n  - Abnormal neurological signs or tone\n\n• Follow-up Planning: \n  - Review at appropriate intervals\n  - Provide developmental guidance to parents\n  - Document progress in child health records\n  - Early intervention if delays confirmed"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.rcpch.ac.uk/resources/uk-who-growth-charts-early-years",
+            description: "RCPCH developmental assessment guidance"
+          },
+          supplementary: [
+            {
+              title: "NHS Child Development",
+              url: "https://www.nhs.uk/conditions/baby/babys-development/",
+              description: "NHS developmental milestones guide"
+            },
+            {
+              title: "Healthy Child Programme",
+              url: "https://www.gov.uk/government/publications/healthy-child-programme-pregnancy-and-the-first-5-years-of-life",
+              description: "UK child health surveillance"
+            }
+          ]
+        }
+      }
     ]
   };
   
