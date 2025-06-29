@@ -274,6 +274,17 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 
 Preferred communication style: Simple, everyday language.
 
+## Image Licensing Requirements
+When using Creative Commons or Public Domain images:
+• Always verify the license of each image individually
+• For CC BY licenses, include:
+  - Creator name
+  - License type
+  - Source link
+  - Indicate if modified
+• Ensure all medical images meet educational use standards
+• Document attribution in code comments and user-facing displays
+
 # Brand Identity
 
 ## Current Branding
