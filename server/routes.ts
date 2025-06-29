@@ -1158,29 +1158,7 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         id: "derm2", 
         topic: "Psoriasis Diagnosis",
         category: "dermatology",
-        images: [
-          {
-            type: "external",
-            url: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&h=400&fit=crop&crop=faces",
-            title: "Psoriasis Clinical Examination",
-            description: "Clinical dermatological examination showing assessment of psoriatic lesions. Professional medical photography demonstrating examination technique for chronic plaque psoriasis with visible skin changes and scaling patterns.",
-            attribution: "Photo by Towfiqu barbhuiya on Unsplash - Licensed for educational use"
-          },
-          {
-            type: "external", 
-            url: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=400&fit=crop&crop=center",
-            title: "Dermatological Hand Assessment", 
-            description: "Close examination of hands showing dermatological changes typical of chronic inflammatory conditions. Clinical photography demonstrating professional assessment protocols for nail and skin abnormalities.",
-            attribution: "Photo by Christopher Campbell on Unsplash - Licensed for educational use"
-          },
-          {
-            type: "external",
-            url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop&crop=center", 
-            title: "Clinical Skin Condition Assessment",
-            description: "Professional dermatological consultation showing detailed examination of chronic skin condition. Medical photography demonstrating clinical assessment techniques for inflammatory dermatoses and scaling disorders.",
-            attribution: "Photo by National Cancer Institute on Unsplash - Licensed for educational use"
-          }
-        ],
+
         question: "A 35-year-old man presents with well-demarcated, erythematous plaques covered with thick, silvery scales on his elbows and knees. He also has multiple small pits in his fingernails and some yellow-brown discoloration under the nail plates. The lesions are non-pruritic. What is the most likely diagnosis?",
         options: {
           A: "Atopic dermatitis",
@@ -1226,35 +1204,7 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         id: "derm1",
         topic: "Eczema Management",
         category: "dermatology",
-        images: [
-          {
-            type: "clinical_description",
-            title: "Hand Eczema - Acute Vesicular Phase",
-            description: "CLINICAL PRESENTATION: Bilateral hand involvement showing acute eczematous changes. Right hand dorsum: Multiple small vesicles (2-3mm) on erythematous base with surrounding oedema. Left palm: Confluent erythematous patches with fine scaling and linear fissures across palm creases. Finger webs show maceration with white, sodden appearance.",
-            findings: "Vesiculation on erythematous base, confluent patches with scaling, fissuring, finger web maceration",
-            location: "Bilateral hands - dorsum, palms, finger webs",
-            phase: "Acute vesicular with chronic changes",
-            note: "Specific eczema images require verified dermatological database access"
-          },
-          {
-            type: "clinical_description",
-            title: "Flexural Eczema - Antecubital Fossa",
-            description: "CLINICAL PRESENTATION: Left antecubital fossa showing typical flexural eczema pattern. Ill-defined erythematous patch measuring 6x4cm with fine scaling and multiple linear excoriation marks. Surrounding skin shows lichenification with accentuated skin markings. No weeping or secondary infection present.",
-            findings: "Ill-defined erythematous patch, fine scaling, excoriation marks, lichenification of surrounding skin",
-            location: "Left antecubital fossa",
-            size: "6x4cm primary patch",
-            note: "Authentic flexural eczema images available through medical education databases"
-          },
-          {
-            type: "clinical_description",
-            url: "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=400&h=400&fit=crop&crop=center",
-            title: "Chronic Eczema - Lichenification Pattern",
-            description: "CLINICAL PRESENTATION: Chronic eczematous changes showing lichenification. Skin demonstrates thickened, leathery texture with accentuated normal skin markings creating characteristic 'tree bark' appearance. Hyperpigmentation present from chronic inflammation and repeated scratching.",
-            findings: "Lichenification with accentuated skin markings, hyperpigmentation, chronic thickening",
-            chronicity: "Long-standing chronic eczema",
-            attribution: "Educational reference - Diana Polekhina on Unsplash"
-          }
-        ],
+
         question: "A 25-year-old woman presents with a 6-month history of itchy, red, scaly patches on her hands and flexural areas. The rash worsens with stress and certain soaps. What is the most likely diagnosis?",
         options: {
           A: "Atopic dermatitis (eczema)",
