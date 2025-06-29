@@ -1541,58 +1541,98 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {currentQuestion.images.map((image, index) => (
-                    <div key={index} className="bg-white border-2 border-gray-200 rounded-lg p-3 shadow-sm">
-                      <div className="aspect-square flex items-center justify-center bg-gray-50 rounded-md mb-3">
-                        {image.type === 'svg' && image.content ? (
-                          <div 
-                            dangerouslySetInnerHTML={{ __html: image.content }}
-                            className="w-full h-full flex items-center justify-center"
-                          />
-                        ) : image.type === 'external' && image.url ? (
-                          <img 
-                            src={image.url} 
-                            alt={image.title || image.description || 'Clinical image'}
-                            className="w-full h-full object-cover rounded-md"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.style.display = 'none';
-                              target.nextElementSibling?.classList.remove('hidden');
-                            }}
-                          />
-                        ) : image.url ? (
-                          <img 
-                            src={image.url} 
-                            alt={image.alt || image.title || 'Clinical image'}
-                            className="w-full h-full object-cover rounded-md"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gray-100 rounded-md flex items-center justify-center text-gray-400">
-                            <FileText className="w-8 h-8" />
+                    <div key={index} className="bg-white border-2 border-gray-200 rounded-lg p-4 shadow-sm">
+                      {image.type === 'description' ? (
+                        // Clinical Description Format
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-center bg-blue-50 rounded-lg p-4 mb-3">
+                            <div className="text-center">
+                              <Activity className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                              <span className="text-sm font-medium text-blue-800">Clinical Findings</span>
+                            </div>
                           </div>
-                        )}
-                        <div className="hidden w-full h-full bg-gray-100 rounded-md flex items-center justify-center text-gray-400">
-                          <FileText className="w-8 h-8" />
+                          
+                          {image.title && (
+                            <h5 className="text-sm font-semibold text-gray-800 mb-2">{image.title}</h5>
+                          )}
+                          
+                          {image.description && (
+                            <p className="text-xs text-gray-700 leading-relaxed mb-3">{image.description}</p>
+                          )}
+                          
+                          {image.clinicalFeatures && image.clinicalFeatures.length > 0 && (
+                            <div className="space-y-2">
+                              <h6 className="text-xs font-semibold text-gray-800 flex items-center gap-1">
+                                <Target className="w-3 h-3" />
+                                Key Features:
+                              </h6>
+                              <ul className="space-y-1">
+                                {image.clinicalFeatures.map((feature, featureIndex) => (
+                                  <li key={featureIndex} className="text-xs text-gray-600 flex items-start gap-2">
+                                    <span className="w-1 h-1 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></span>
+                                    {feature}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
-                      </div>
-                      
-                      {/* Image Title and Description */}
-                      {image.title && (
-                        <h5 className="text-sm font-semibold text-gray-800 mb-1">{image.title}</h5>
-                      )}
-                      {image.description && (
-                        <p className="text-xs text-gray-600 mb-2">{image.description}</p>
-                      )}
-                      
-                      {/* Attribution for external images */}
-                      {image.attribution && (
-                        <p className="text-xs text-gray-500 italic border-t pt-2 mt-2">
-                          {image.attribution}
-                        </p>
-                      )}
-                      
-                      {/* Legacy caption support */}
-                      {!image.title && !image.description && image.caption && (
-                        <p className="text-xs text-gray-600 text-center font-medium">{image.caption}</p>
+                      ) : (
+                        // Image Format (SVG or External)
+                        <>
+                          <div className="aspect-square flex items-center justify-center bg-gray-50 rounded-md mb-3">
+                            {image.type === 'svg' && image.content ? (
+                              <div 
+                                dangerouslySetInnerHTML={{ __html: image.content }}
+                                className="w-full h-full flex items-center justify-center"
+                              />
+                            ) : image.type === 'external' && image.url ? (
+                              <img 
+                                src={image.url} 
+                                alt={image.title || image.description || 'Clinical image'}
+                                className="w-full h-full object-cover rounded-md"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                  target.nextElementSibling?.classList.remove('hidden');
+                                }}
+                              />
+                            ) : image.url ? (
+                              <img 
+                                src={image.url} 
+                                alt={image.alt || image.title || 'Clinical image'}
+                                className="w-full h-full object-cover rounded-md"
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-gray-100 rounded-md flex items-center justify-center text-gray-400">
+                                <FileText className="w-8 h-8" />
+                              </div>
+                            )}
+                            <div className="hidden w-full h-full bg-gray-100 rounded-md flex items-center justify-center text-gray-400">
+                              <FileText className="w-8 h-8" />
+                            </div>
+                          </div>
+                          
+                          {/* Image Title and Description */}
+                          {image.title && (
+                            <h5 className="text-sm font-semibold text-gray-800 mb-1">{image.title}</h5>
+                          )}
+                          {image.description && (
+                            <p className="text-xs text-gray-600 mb-2">{image.description}</p>
+                          )}
+                          
+                          {/* Attribution for external images */}
+                          {image.attribution && (
+                            <p className="text-xs text-gray-500 italic border-t pt-2 mt-2">
+                              {image.attribution}
+                            </p>
+                          )}
+                          
+                          {/* Legacy caption support */}
+                          {!image.title && !image.description && image.caption && (
+                            <p className="text-xs text-gray-600 text-center font-medium">{image.caption}</p>
+                          )}
+                        </>
                       )}
                     </div>
                   ))}
