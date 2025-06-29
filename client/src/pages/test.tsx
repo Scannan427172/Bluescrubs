@@ -21,8 +21,11 @@ interface Question {
     type?: string;
     content?: string;
     url?: string;
-    alt: string;
-    caption: string;
+    title?: string;
+    description?: string;
+    attribution?: string;
+    alt?: string;
+    caption?: string;
   }>;
   options: {
     A: string;
@@ -1544,10 +1547,21 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                             dangerouslySetInnerHTML={{ __html: image.content }}
                             className="w-full h-full flex items-center justify-center"
                           />
+                        ) : image.type === 'external' && image.url ? (
+                          <img 
+                            src={image.url} 
+                            alt={image.title || image.description || 'Clinical image'}
+                            className="w-full h-full object-cover rounded-md"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              target.nextElementSibling?.classList.remove('hidden');
+                            }}
+                          />
                         ) : image.url ? (
                           <img 
                             src={image.url} 
-                            alt={image.alt}
+                            alt={image.alt || image.title || 'Clinical image'}
                             className="w-full h-full object-cover rounded-md"
                           />
                         ) : (
@@ -1555,8 +1569,30 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                             <FileText className="w-8 h-8" />
                           </div>
                         )}
+                        <div className="hidden w-full h-full bg-gray-100 rounded-md flex items-center justify-center text-gray-400">
+                          <FileText className="w-8 h-8" />
+                        </div>
                       </div>
-                      <p className="text-xs text-gray-600 text-center font-medium">{image.caption}</p>
+                      
+                      {/* Image Title and Description */}
+                      {image.title && (
+                        <h5 className="text-sm font-semibold text-gray-800 mb-1">{image.title}</h5>
+                      )}
+                      {image.description && (
+                        <p className="text-xs text-gray-600 mb-2">{image.description}</p>
+                      )}
+                      
+                      {/* Attribution for external images */}
+                      {image.attribution && (
+                        <p className="text-xs text-gray-500 italic border-t pt-2 mt-2">
+                          {image.attribution}
+                        </p>
+                      )}
+                      
+                      {/* Legacy caption support */}
+                      {!image.title && !image.description && image.caption && (
+                        <p className="text-xs text-gray-600 text-center font-medium">{image.caption}</p>
+                      )}
                     </div>
                   ))}
                 </div>
