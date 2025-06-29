@@ -1160,25 +1160,22 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "external",
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Psoriasis_on_back.jpg/512px-Psoriasis_on_back.jpg",
-            title: "Plaque Psoriasis on Back",
-            description: "Classic presentation of plaque psoriasis showing well-demarcated erythematous plaques with silvery scales",
-            attribution: "Psoriasis on back by James Heilman, MD is licensed under CC BY-SA 3.0. Source: Wikimedia Commons"
+            type: "description",
+            title: "Plaque Psoriasis - Classical Presentation",
+            description: "Well-demarcated, erythematous plaques with thick, silvery-white scales on extensor surfaces. Plaques have distinct borders and are elevated above surrounding skin. Scale removal reveals underlying erythema and may demonstrate Auspitz sign (punctate bleeding).",
+            clinicalFeatures: ["Well-demarcated borders", "Erythematous base", "Thick silvery scales", "Extensor surface predilection", "Auspitz sign positive"]
           },
           {
-            type: "external", 
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Psoriasis_nail.jpg/256px-Psoriasis_nail.jpg",
-            title: "Nail Psoriasis",
-            description: "Fingernail showing characteristic pitting and onycholysis associated with psoriasis",
-            attribution: "Psoriasis nail by James Heilman, MD is licensed under CC BY-SA 3.0. Source: Wikimedia Commons"
+            type: "description", 
+            title: "Nail Psoriasis - Characteristic Changes",
+            description: "Multiple nail changes including: pitting (small punctate depressions), onycholysis (nail plate separation), oil spot changes (yellow-brown discoloration), subungual hyperkeratosis, and splinter hemorrhages.",
+            clinicalFeatures: ["Nail pitting", "Onycholysis", "Oil spot changes", "Subungual hyperkeratosis", "Splinter hemorrhages"]
           },
           {
-            type: "external",
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Psoriasis_elbow.jpg/512px-Psoriasis_elbow.jpg", 
-            title: "Elbow Psoriasis",
-            description: "Typical psoriatic plaque on elbow showing thick silvery scale over erythematous base",
-            attribution: "Psoriasis elbow by James Heilman, MD is licensed under CC BY-SA 3.0. Source: Wikimedia Commons"
+            type: "description",
+            title: "Psoriatic Plaques - Morphological Detail", 
+            description: "Chronic, well-circumscribed plaques with characteristic silvery scale that lifts easily. Underlying erythematous base shows increased vascularity. Koebner phenomenon may be evident at sites of trauma.",
+            clinicalFeatures: ["Chronic stable plaques", "Silvery scale lifting", "Increased vascularity", "Koebner phenomenon", "Symmetrical distribution"]
           }
         ],
         question: "A 35-year-old man presents with well-demarcated, erythematous plaques covered with thick, silvery scales on his elbows and knees. He also has multiple small pits in his fingernails and some yellow-brown discoloration under the nail plates. The lesions are non-pruritic. What is the most likely diagnosis?",
@@ -1228,25 +1225,22 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "external",
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Atopic_dermatitis_hand.jpg/512px-Atopic_dermatitis_hand.jpg",
-            title: "Atopic Dermatitis on Hand",
-            description: "Characteristic eczematous changes on hand showing erythema, scaling, and lichenification",
-            attribution: "Atopic dermatitis hand by James Heilman, MD is licensed under CC BY-SA 3.0. Source: Wikimedia Commons"
+            type: "description",
+            title: "Hand Eczema - Typical Presentation",
+            description: "Bilateral involvement of hands showing characteristic eczematous changes: erythema, scaling, vesiculation, and lichenification. Poorly-defined borders distinguish from contact dermatitis. Finger webs and dorsal surfaces commonly affected.",
+            clinicalFeatures: ["Bilateral symmetrical involvement", "Erythema and scaling", "Vesiculation in acute phase", "Lichenification in chronic phase", "Poorly-defined borders"]
           },
           {
-            type: "external",
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Atopic_dermatitis_elbow.jpg/512px-Atopic_dermatitis_elbow.jpg",
-            title: "Flexural Eczema",
-            description: "Typical flexural distribution of atopic dermatitis with erythema and scaling in elbow crease",
-            attribution: "Atopic dermatitis elbow by James Heilman, MD is licensed under CC BY-SA 3.0. Source: Wikimedia Commons"
+            type: "description",
+            title: "Flexural Atopic Dermatitis - Elbow Involvement",
+            description: "Classic flexural distribution in adult atopic dermatitis. Antecubital fossa showing erythematous, scaly patches with excoriation marks from scratching. Typical presentation in adolescent and adult patients.",
+            clinicalFeatures: ["Flexural predilection", "Erythematous patches", "Fine scaling", "Excoriation marks", "Poorly-defined margins"]
           },
           {
-            type: "external",
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Atopic_dermatitis_face.jpg/384px-Atopic_dermatitis_face.jpg",
-            title: "Facial Atopic Dermatitis",
-            description: "Adult atopic dermatitis showing facial involvement with erythema and scaling",
-            attribution: "Atopic dermatitis face by James Heilman, MD is licensed under CC BY-SA 3.0. Source: Wikimedia Commons"
+            type: "description",
+            title: "Facial Atopic Dermatitis - Adult Pattern",
+            description: "Perioral and periorbital involvement typical of adult atopic dermatitis. Dry, scaly, erythematous patches around eyes and mouth. May be associated with contact sensitivity to cosmetics or topical preparations.",
+            clinicalFeatures: ["Perioral involvement", "Periorbital distribution", "Dry scaly patches", "Associated contact sensitivity", "Adult-onset pattern"]
           }
         ],
         question: "A 25-year-old woman presents with a 6-month history of itchy, red, scaly patches on her hands and flexural areas. The rash worsens with stress and certain soaps. What is the most likely diagnosis?",

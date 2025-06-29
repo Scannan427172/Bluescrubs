@@ -24,6 +24,7 @@ interface Question {
     title?: string;
     description?: string;
     attribution?: string;
+    clinicalFeatures?: string[];
     alt?: string;
     caption?: string;
   }>;
