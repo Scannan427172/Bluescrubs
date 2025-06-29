@@ -1155,6 +1155,364 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
     ],
     dermatology: [
       {
+        id: "derm2", 
+        topic: "Psoriasis Visual Diagnosis",
+        category: "dermatology",
+        images: [
+          {
+            type: "svg",
+            content: `<svg width="400" height="320" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Ultra-detailed silvery scale pattern -->
+                <pattern id="silverScale1" patternUnits="userSpaceOnUse" width="6" height="6">
+                  <rect width="6" height="6" fill="#f8f8f8"/>
+                  <rect width="3" height="3" fill="#ffffff" opacity="0.95"/>
+                  <rect x="1" y="1" width="2" height="2" fill="#f0f0f0"/>
+                  <rect x="2" y="2" width="1" height="1" fill="#e8e8e8"/>
+                  <circle cx="3" cy="3" r="0.5" fill="#ffffff"/>
+                </pattern>
+                
+                <!-- Microvascular pattern for inflammation -->
+                <pattern id="microVessels1" patternUnits="userSpaceOnUse" width="4" height="4">
+                  <line x1="0" y1="2" x2="4" y2="2" stroke="#cc4444" stroke-width="0.3" opacity="0.7"/>
+                  <line x1="2" y1="0" x2="2" y2="4" stroke="#cc4444" stroke-width="0.3" opacity="0.7"/>
+                </pattern>
+                
+                <!-- Advanced skin gradient with realistic tones -->
+                <radialGradient id="skinGrad1" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#f7d7b8"/>
+                  <stop offset="30%" stop-color="#f4c2a1"/>
+                  <stop offset="70%" stop-color="#e8b896"/>
+                  <stop offset="100%" stop-color="#dda975"/>
+                </radialGradient>
+                
+                <!-- Complex plaque gradient with depth -->
+                <radialGradient id="plaqueGrad1" cx="25%" cy="25%">
+                  <stop offset="0%" stop-color="#f87171"/>
+                  <stop offset="20%" stop-color="#e85d75"/>
+                  <stop offset="60%" stop-color="#dc2626"/>
+                  <stop offset="85%" stop-color="#b91c1c"/>
+                  <stop offset="100%" stop-color="#991b1b"/>
+                </radialGradient>
+                
+                <!-- Inflammatory border gradient -->
+                <radialGradient id="inflammatoryBorder1" cx="50%" cy="50%">
+                  <stop offset="80%" stop-color="transparent"/>
+                  <stop offset="90%" stop-color="#dc2626" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#991b1b" stop-opacity="0.8"/>
+                </radialGradient>
+              </defs>
+              
+              <!-- Background skin with realistic texture -->
+              <rect width="400" height="250" fill="url(#skinGrad1)"/>
+              
+              <!-- Skin pores and texture details -->
+              <circle cx="80" cy="60" r="0.8" fill="#d4a574" opacity="0.6"/>
+              <circle cx="95" cy="75" r="0.6" fill="#d4a574" opacity="0.5"/>
+              <circle cx="110" cy="50" r="0.7" fill="#d4a574" opacity="0.6"/>
+              <circle cx="250" cy="65" r="0.8" fill="#d4a574" opacity="0.6"/>
+              <circle cx="280" cy="80" r="0.6" fill="#d4a574" opacity="0.5"/>
+              <circle cx="320" cy="55" r="0.7" fill="#d4a574" opacity="0.6"/>
+              
+              <!-- Elbow joint anatomy with detailed structure -->
+              <ellipse cx="200" cy="130" rx="150" ry="100" fill="#deb896" stroke="#c8a270" stroke-width="2"/>
+              <ellipse cx="200" cy="115" rx="40" ry="25" fill="#d4a574" stroke="#b8935f" stroke-width="1"/>
+              
+              <!-- Olecranon prominence -->
+              <ellipse cx="200" cy="110" rx="25" ry="15" fill="#c8a270" stroke="#b8935f" stroke-width="1"/>
+              
+              <!-- Main psoriatic plaque with 3D appearance -->
+              <ellipse cx="200" cy="140" rx="80" ry="55" fill="url(#plaqueGrad1)" stroke="#991b1b" stroke-width="4"/>
+              <ellipse cx="200" cy="138" rx="78" ry="53" fill="url(#microVessels1)" opacity="0.4"/>
+              <ellipse cx="200" cy="136" rx="76" ry="51" fill="url(#silverScale1)" opacity="0.85"/>
+              
+              <!-- Inflammatory halo around main plaque -->
+              <ellipse cx="200" cy="140" rx="85" ry="60" fill="url(#inflammatoryBorder1)"/>
+              
+              <!-- Satellite lesions with detail -->
+              <ellipse cx="140" cy="105" rx="25" ry="18" fill="url(#plaqueGrad1)" stroke="#991b1b" stroke-width="3"/>
+              <ellipse cx="140" cy="104" rx="24" ry="17" fill="url(#microVessels1)" opacity="0.3"/>
+              <ellipse cx="140" cy="103" rx="23" ry="16" fill="url(#silverScale1)" opacity="0.8"/>
+              
+              <ellipse cx="260" cy="155" rx="30" ry="22" fill="url(#plaqueGrad1)" stroke="#991b1b" stroke-width="3"/>
+              <ellipse cx="260" cy="154" rx="29" ry="21" fill="url(#microVessels1)" opacity="0.3"/>
+              <ellipse cx="260" cy="153" rx="28" ry="20" fill="url(#silverScale1)" opacity="0.8"/>
+              
+              <ellipse cx="170" cy="180" rx="20" ry="15" fill="url(#plaqueGrad1)" stroke="#991b1b" stroke-width="2"/>
+              <ellipse cx="170" cy="179" rx="19" ry="14" fill="url(#silverScale1)" opacity="0.75"/>
+              
+              <!-- Koebner phenomenon with precise detail -->
+              <rect x="150" y="85" width="100" height="6" fill="#dc2626" rx="3"/>
+              <rect x="151" y="86" width="98" height="4" fill="url(#silverScale1)" opacity="0.6" rx="2"/>
+              
+              <!-- Scale lifting and shedding details -->
+              <path d="M 160 140 Q 165 138 170 140 Q 175 142 180 140" 
+                    stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.9"/>
+              <path d="M 220 150 Q 225 148 230 150 Q 235 152 240 150" 
+                    stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.9"/>
+              
+              <!-- Detailed scale edge lifting -->
+              <ellipse cx="185" cy="130" rx="3" ry="1" fill="#ffffff" transform="rotate(15)"/>
+              <ellipse cx="215" cy="145" rx="2.5" ry="0.8" fill="#ffffff" transform="rotate(-20)"/>
+              <ellipse cx="195" cy="160" rx="2" ry="0.6" fill="#ffffff" transform="rotate(30)"/>
+              
+              <!-- Microscopic detail annotations -->
+              <text x="50" y="280" font-family="Arial, sans-serif" font-size="12" fill="#333">
+                Image 1: Elbow plaque psoriasis with silvery scale and satellite lesions
+              </text>
+              <text x="50" y="295" font-family="Arial, sans-serif" font-size="10" fill="#666">
+                Note well-demarcated borders, scale lifting, and Koebner phenomenon
+              </text>
+            </svg>`,
+            title: "Elbow Plaque Psoriasis",
+            description: "Classic presentation showing well-demarcated erythematous plaque with silvery scale, satellite lesions, and Koebner phenomenon"
+          },
+          {
+            type: "svg", 
+            content: `<svg width="400" height="320" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Enhanced scale pattern for close-up view -->
+                <pattern id="silverScale2" patternUnits="userSpaceOnUse" width="8" height="8">
+                  <rect width="8" height="8" fill="#f5f5f5"/>
+                  <polygon points="0,0 4,0 4,4 0,4" fill="#ffffff" opacity="0.95"/>
+                  <polygon points="4,4 8,4 8,8 4,8" fill="#ffffff" opacity="0.95"/>
+                  <rect x="1" y="1" width="2" height="2" fill="#eeeeee"/>
+                  <rect x="5" y="5" width="2" height="2" fill="#eeeeee"/>
+                  <circle cx="2" cy="6" r="0.4" fill="#ffffff"/>
+                  <circle cx="6" cy="2" r="0.4" fill="#ffffff"/>
+                </pattern>
+                
+                <!-- Detailed capillary network -->
+                <pattern id="microVessels2" patternUnits="userSpaceOnUse" width="3" height="3">
+                  <line x1="0" y1="1.5" x2="3" y2="1.5" stroke="#d73027" stroke-width="0.4" opacity="0.8"/>
+                  <line x1="1.5" y1="0" x2="1.5" y2="3" stroke="#d73027" stroke-width="0.4" opacity="0.8"/>
+                  <circle cx="1.5" cy="1.5" r="0.2" fill="#d73027" opacity="0.6"/>
+                </pattern>
+                
+                <!-- Inflammatory gradient -->
+                <radialGradient id="plaqueGrad2" cx="40%" cy="30%">
+                  <stop offset="0%" stop-color="#f87171"/>
+                  <stop offset="25%" stop-color="#ef4444"/>
+                  <stop offset="65%" stop-color="#dc2626"/>
+                  <stop offset="90%" stop-color="#b91c1c"/>
+                  <stop offset="100%" stop-color="#7f1d1d"/>
+                </radialGradient>
+                
+                <!-- Skin texture gradient -->
+                <radialGradient id="skinGrad2" cx="60%" cy="40%">
+                  <stop offset="0%" stop-color="#fde68a"/>
+                  <stop offset="40%" stop-color="#f59e0b"/>
+                  <stop offset="80%" stop-color="#d97706"/>
+                  <stop offset="100%" stop-color="#92400e"/>
+                </radialGradient>
+              </defs>
+              
+              <!-- Skin background -->
+              <rect width="400" height="280" fill="url(#skinGrad2)"/>
+              
+              <!-- Hair follicles and skin details -->
+              <circle cx="70" cy="40" r="1.2" fill="#8b5a2b" opacity="0.7"/>
+              <circle cx="120" cy="60" r="1.0" fill="#8b5a2b" opacity="0.6"/>
+              <circle cx="180" cy="35" r="1.1" fill="#8b5a2b" opacity="0.7"/>
+              <circle cx="320" cy="50" r="1.0" fill="#8b5a2b" opacity="0.6"/>
+              
+              <!-- Main close-up psoriatic lesion -->
+              <ellipse cx="200" cy="140" rx="120" ry="80" fill="url(#plaqueGrad2)" stroke="#7f1d1d" stroke-width="5"/>
+              <ellipse cx="200" cy="138" rx="118" ry="78" fill="url(#microVessels2)" opacity="0.5"/>
+              <ellipse cx="200" cy="136" rx="116" ry="76" fill="url(#silverScale2)" opacity="0.9"/>
+              
+              <!-- Individual scale details with 3D effect -->
+              <ellipse cx="160" cy="120" rx="6" ry="4" fill="#ffffff" stroke="#e5e5e5" stroke-width="0.5" transform="rotate(10)"/>
+              <ellipse cx="180" cy="110" rx="5" ry="3" fill="#ffffff" stroke="#e5e5e5" stroke-width="0.5" transform="rotate(-5)"/>
+              <ellipse cx="220" cy="115" rx="7" ry="4" fill="#ffffff" stroke="#e5e5e5" stroke-width="0.5" transform="rotate(20)"/>
+              <ellipse cx="240" cy="130" rx="6" ry="3" fill="#ffffff" stroke="#e5e5e5" stroke-width="0.5" transform="rotate(-15)"/>
+              <ellipse cx="190" cy="140" rx="5" ry="4" fill="#ffffff" stroke="#e5e5e5" stroke-width="0.5" transform="rotate(25)"/>
+              <ellipse cx="210" cy="155" rx="6" ry="3" fill="#ffffff" stroke="#e5e5e5" stroke-width="0.5" transform="rotate(-10)"/>
+              <ellipse cx="170" cy="165" rx="7" ry="4" fill="#ffffff" stroke="#e5e5e5" stroke-width="0.5" transform="rotate(15)"/>
+              <ellipse cx="230" cy="170" rx="5" ry="3" fill="#ffffff" stroke="#e5e5e5" stroke-width="0.5" transform="rotate(-25)"/>
+              
+              <!-- Scale lifting and shedding -->
+              <path d="M 140 130 Q 145 125 150 130 Q 155 135 160 130" 
+                    stroke="#ffffff" stroke-width="2" fill="none" opacity="0.95"/>
+              <path d="M 240 140 Q 245 135 250 140 Q 255 145 260 140" 
+                    stroke="#ffffff" stroke-width="2" fill="none" opacity="0.95"/>
+              <path d="M 180 180 Q 185 175 190 180 Q 195 185 200 180" 
+                    stroke="#ffffff" stroke-width="2" fill="none" opacity="0.95"/>
+              
+              <!-- Detailed scale edge curling -->
+              <path d="M 175 125 Q 178 120 181 125" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.9"/>
+              <path d="M 215 145 Q 218 140 221 145" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.9"/>
+              <path d="M 195 170 Q 198 165 201 170" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.9"/>
+              
+              <!-- Auspitz sign representation -->
+              <circle cx="185" cy="135" r="2" fill="#dc2626" opacity="0.8"/>
+              <circle cx="205" cy="150" r="1.5" fill="#dc2626" opacity="0.8"/>
+              <circle cx="175" cy="155" r="2.2" fill="#dc2626" opacity="0.8"/>
+              
+              <!-- Microscopic annotation -->
+              <text x="50" y="295" font-family="Arial, sans-serif" font-size="12" fill="#333">
+                Image 2: Close-up showing characteristic silvery scales with lifting edges
+              </text>
+              <text x="50" y="310" font-family="Arial, sans-serif" font-size="10" fill="#666">
+                Individual scales visible with underlying erythema and pinpoint bleeding
+              </text>
+            </svg>`,
+            title: "Psoriatic Scale Detail",
+            description: "Magnified view showing individual silvery scales with characteristic lifting and underlying punctate bleeding (Auspitz sign)"
+          },
+          {
+            type: "svg",
+            content: `<svg width="400" height="320" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Nail matrix pattern -->
+                <pattern id="nailMatrix" patternUnits="userSpaceOnUse" width="2" height="2">
+                  <rect width="2" height="2" fill="#ffc0cb"/>
+                  <rect width="1" height="1" fill="#ffb6c1"/>
+                </pattern>
+                
+                <!-- Pitting pattern -->
+                <pattern id="pittingPattern" patternUnits="userSpaceOnUse" width="4" height="4">
+                  <circle cx="2" cy="2" r="0.6" fill="#d4d4d4"/>
+                  <circle cx="2" cy="2" r="0.4" fill="#a3a3a3"/>
+                </pattern>
+                
+                <!-- Oil spot gradient -->
+                <radialGradient id="oilSpot" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#fbbf24"/>
+                  <stop offset="40%" stop-color="#f59e0b"/>
+                  <stop offset="70%" stop-color="#d97706"/>
+                  <stop offset="100%" stop-color="#92400e"/>
+                </radialGradient>
+                
+                <!-- Nail plate gradient -->
+                <linearGradient id="nailPlate" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fef3c7"/>
+                  <stop offset="30%" stop-color="#fde68a"/>
+                  <stop offset="70%" stop-color="#f59e0b"/>
+                  <stop offset="100%" stop-color="#d97706"/>
+                </linearGradient>
+                
+                <!-- Hyperkeratosis gradient -->
+                <linearGradient id="hyperkeratosis" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f3f4f6"/>
+                  <stop offset="50%" stop-color="#e5e7eb"/>
+                  <stop offset="100%" stop-color="#d1d5db"/>
+                </linearGradient>
+              </defs>
+              
+              <!-- Finger background -->
+              <ellipse cx="200" cy="120" rx="80" ry="160" fill="#f4c2a1" stroke="#dda975" stroke-width="2"/>
+              
+              <!-- Nail bed -->
+              <ellipse cx="200" cy="80" rx="35" ry="50" fill="url(#nailMatrix)"/>
+              
+              <!-- Main nail plate with psoriatic changes -->
+              <ellipse cx="200" cy="75" rx="32" ry="45" fill="url(#nailPlate)" stroke="#d97706" stroke-width="2"/>
+              
+              <!-- Nail pitting (multiple small depressions) -->
+              <ellipse cx="190" cy="50" rx="1.5" ry="1" fill="#a3a3a3"/>
+              <ellipse cx="205" cy="45" rx="1.2" ry="0.8" fill="#a3a3a3"/>
+              <ellipse cx="195" cy="55" rx="1" ry="0.8" fill="#a3a3a3"/>
+              <ellipse cx="210" cy="52" rx="1.3" ry="1" fill="#a3a3a3"/>
+              <ellipse cx="185" cy="60" rx="1.1" ry="0.9" fill="#a3a3a3"/>
+              <ellipse cx="200" cy="62" rx="1.4" ry="1.1" fill="#a3a3a3"/>
+              <ellipse cx="215" cy="58" rx="1" ry="0.7" fill="#a3a3a3"/>
+              <ellipse cx="208" cy="65" rx="1.2" ry="0.9" fill="#a3a3a3"/>
+              
+              <!-- Oil spot changes (yellow-brown discoloration) -->
+              <ellipse cx="190" cy="70" rx="8" ry="6" fill="url(#oilSpot)" opacity="0.7"/>
+              <ellipse cx="210" cy="75" rx="6" ry="4" fill="url(#oilSpot)" opacity="0.6"/>
+              <ellipse cx="195" cy="85" rx="5" ry="3" fill="url(#oilSpot)" opacity="0.5"/>
+              
+              <!-- Onycholysis (nail separation) -->
+              <path d="M 175 95 Q 200 85 225 95 Q 225 105 200 115 Q 175 105 175 95" 
+                    fill="#ffffff" stroke="#d1d5db" stroke-width="1.5" opacity="0.8"/>
+              
+              <!-- Subungual hyperkeratosis -->
+              <ellipse cx="200" cy="110" rx="25" ry="8" fill="url(#hyperkeratosis)" stroke="#9ca3af" stroke-width="1"/>
+              <ellipse cx="200" cy="112" rx="22" ry="6" fill="#f9fafb"/>
+              
+              <!-- Nail ridging (longitudinal) -->
+              <line x1="185" y1="35" x2="185" y2="115" stroke="#d4d4d4" stroke-width="0.8" opacity="0.7"/>
+              <line x1="192" y1="30" x2="192" y2="115" stroke="#d4d4d4" stroke-width="0.6" opacity="0.6"/>
+              <line x1="200" y1="30" x2="200" y2="115" stroke="#d4d4d4" stroke-width="0.8" opacity="0.7"/>
+              <line x1="208" y1="30" x2="208" y2="115" stroke="#d4d4d4" stroke-width="0.6" opacity="0.6"/>
+              <line x1="215" y1="35" x2="215" y2="115" stroke="#d4d4d4" stroke-width="0.8" opacity="0.7"/>
+              
+              <!-- Beau's lines (horizontal ridges) -->
+              <ellipse cx="200" cy="50" rx="30" ry="1" fill="#b5b5b5" opacity="0.6"/>
+              <ellipse cx="200" cy="65" rx="28" ry="0.8" fill="#b5b5b5" opacity="0.5"/>
+              <ellipse cx="200" cy="80" rx="26" ry="0.8" fill="#b5b5b5" opacity="0.5"/>
+              
+              <!-- Cuticle inflammation -->
+              <path d="M 170 35 Q 200 25 230 35 Q 225 45 200 40 Q 175 45 170 35" 
+                    fill="#dc2626" opacity="0.6"/>
+              
+              <!-- Periungual erythema -->
+              <ellipse cx="200" cy="30" rx="40" ry="10" fill="#ef4444" opacity="0.4"/>
+              
+              <!-- Splinter hemorrhages -->
+              <line x1="188" y1="40" x2="188" y2="50" stroke="#7f1d1d" stroke-width="1" opacity="0.8"/>
+              <line x1="205" y1="45" x2="205" y2="55" stroke="#7f1d1d" stroke-width="0.8" opacity="0.7"/>
+              <line x1="212" y1="50" x2="212" y2="60" stroke="#7f1d1d" stroke-width="1" opacity="0.8"/>
+              
+              <!-- Detailed annotations -->
+              <text x="20" y="280" font-family="Arial, sans-serif" font-size="11" fill="#333">
+                Image 3: Nail psoriasis showing multiple characteristic features
+              </text>
+              <text x="20" y="295" font-family="Arial, sans-serif" font-size="9" fill="#666">
+                Pitting, oil spots, onycholysis, subungual hyperkeratosis, ridging
+              </text>
+              <text x="20" y="308" font-family="Arial, sans-serif" font-size="9" fill="#666">
+                Splinter hemorrhages and periungual inflammation visible
+              </text>
+            </svg>`,
+            title: "Nail Psoriasis Features", 
+            description: "Comprehensive nail changes including pitting, oil spot changes, onycholysis, subungual hyperkeratosis, and periungual inflammation"
+          }
+        ],
+        question: "A 35-year-old man presents with well-demarcated, erythematous plaques covered with thick, silvery scales on his elbows and knees. He also has multiple small pits in his fingernails and some yellow-brown discoloration under the nail plates. The lesions are non-pruritic. What is the most likely diagnosis?",
+        options: {
+          A: "Atopic dermatitis",
+          B: "Psoriasis vulgaris", 
+          C: "Seborrheic dermatitis",
+          D: "Lichen planus",
+          E: "Contact dermatitis"
+        },
+        answer: "B",
+        explanation: "Why Psoriasis vulgaris is correct:\n\n• Classic Plaque Morphology: \n  - Well-demarcated erythematous plaques represent the pathognomonic presentation of chronic plaque psoriasis (psoriasis vulgaris)\n  - Thick, silvery scales demonstrate the characteristic hyperkeratotic response with parakeratosis typical of psoriatic lesions\n  - Distribution on extensor surfaces (elbows, knees) follows classic psoriatic predilection sites as documented in dermatological literature\n  - Non-pruritic nature distinguishes psoriasis from eczematous conditions which are characteristically intensely itchy\n\n• Definitive Nail Psoriasis Features: \n  - Nail pitting (punctate depressions) occurs in 70-80% of psoriatic patients and represents focal loss of nail plate cells\n  - Oil spot changes (yellow-brown subungual discoloration) pathognomonic for psoriatic nail involvement, caused by accumulation of parakeratotic cells\n  - Combined nail findings strongly support psoriasis diagnosis - nail involvement seen in <5% of other inflammatory dermatoses\n  - Nail changes often precede skin lesions and may be only manifestation in 5-10% of psoriatic patients\n\n• Pathophysiological Correlation: \n  - Hyperproliferation of keratinocytes with shortened epidermal transit time from 28 days to 3-5 days\n  - Koebner phenomenon potential at sites of trauma, explaining common elbow/knee involvement\n  - Type 17 helper T-cell mediated immune response with IL-17, IL-22, TNF-alpha inflammatory cascade\n  - Genetic predisposition with HLA-Cw6 association in 60% of early-onset cases\n\n• NICE CG153 Diagnostic Criteria: \n  - Clinical diagnosis based on characteristic morphology, distribution, and associated features\n  - Auspitz sign (punctate bleeding when scales removed) may be demonstrable\n  - Family history positive in 30-40% of cases supporting genetic component\n  - Associated with psoriatic arthritis in 20-30% requiring joint screening",
+        incorrectExplanation: "• Option A (Atopic dermatitis) - Distribution and Characteristics Mismatch: \n  - Atopic dermatitis typically affects flexural areas (antecubital fossae, popliteal fossae) rather than extensor surfaces\n  - Lesions characteristically intensely pruritic, contrasting with non-pruritic nature described\n  - Nail involvement extremely rare in isolated atopic dermatitis\n  - Scales less thick and silvery compared to psoriatic plaques\n  - Usually associated with personal/family history of atopy\n\n• Option C (Seborrheic dermatitis) - Anatomical and Morphological Inconsistencies: \n  - Seborrheic dermatitis shows predilection for sebaceous areas (scalp, nasolabial folds, presternal area)\n  - Scales typically greasy and yellowish rather than thick and silvery\n  - Nail changes not characteristic of seborrheic dermatitis\n  - Elbow and knee involvement would be unusual for seborrheic pattern\n  - Associated with Malassezia overgrowth rather than T-cell mediated inflammation\n\n• Option D (Lichen planus) - Morphological and Clinical Distinctions: \n  - Lichen planus presents with purple, polygonal, pruritic papules rather than erythematous plaques\n  - Characteristic Wickham's striae (white lacy pattern) on surface\n  - Nail changes include longitudinal ridging and pterygium formation, not pitting or oil spots\n  - Typically affects wrists, ankles, oral mucosa rather than elbows and knees\n  - Koebner phenomenon present but morphology completely different\n\n• Option E (Contact dermatitis) - Pattern and Progression Inconsistencies: \n  - Contact dermatitis requires identifiable allergen exposure with corresponding distribution\n  - Acute phase shows vesiculation and weeping rather than thick scaling\n  - Nail involvement not typical unless direct contact with nail area\n  - Would expect history of exposure and temporal relationship\n  - Bilateral symmetrical elbow/knee involvement unlikely for contact pattern",
+        mnemonic: "Psoriasis Features: PLAQUES = Pitting (nails), Lesions well-demarcated, Auspitz sign, Quality silvery scales, Unusual extensor sites, Erythematous base, Symmetrical distribution\n\nNail Psoriasis: POSH = Pitting, Oil spots, Subungual hyperkeratosis, Hyperkeratosis/onycholysis\n\nPsoriasis Types: PEGIG = Plaque (chronic), Erythrodermic, Guttate, Inverse, Generalized pustular\n\nPsoriasis Triggers: SPLIT = Streptococcal infection, Physical trauma, Lithium/beta-blockers, Infection, Trauma/stress",
+        guidelineSummary: {
+          title: "Psoriasis Vulgaris Management Summary", 
+          content: "• Clinical Recognition: \n  - Well-demarcated erythematous plaques with silvery scale\n  - Extensor surface predilection (elbows, knees, scalp, lower back)\n  - Nail involvement in 50-80%: pitting, oil spots, onycholysis\n  - Koebner phenomenon: lesions at trauma sites\n\n• Severity Assessment: \n  - PASI score (Psoriasis Area Severity Index) for clinical trials\n  - BSA (Body Surface Area) >10% or palms/soles = severe\n  - DLQI (Dermatology Life Quality Index) for impact assessment\n  - Joint screening for psoriatic arthritis (20-30% develop)\n\n• First-line Topical Treatment: \n  - Topical corticosteroids (potent for body, mild for face)\n  - Vitamin D analogues (calcipotriol, calcitriol)\n  - Combination products (betamethasone/calcipotriol)\n  - Coal tar preparations for chronic stable plaques\n\n• Systemic Treatment Indications: \n  - >10% BSA or significant functional impairment\n  - First-line: methotrexate, ciclosporin, acitretin\n  - Biologics: TNF-alpha inhibitors, IL-12/23, IL-17 inhibitors\n  - Regular monitoring for hepatotoxicity, nephrotoxicity\n\n• Lifestyle and Comorbidity Management: \n  - Cardiovascular risk assessment and modification\n  - Screening for metabolic syndrome, depression\n  - Avoid triggers: infection, trauma, stress, certain medications\n  - Psychological support and patient education important"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/cg153",
+            description: "NICE CG153: Psoriasis - assessment and management"
+          },
+          supplementary: [
+            {
+              title: "NHS Psoriasis Information",
+              url: "https://www.nhs.uk/conditions/psoriasis/",
+              description: "NHS patient information and treatment options"
+            },
+            {
+              title: "CKS NICE - Psoriasis",
+              url: "https://cks.nice.org.uk/topics/psoriasis/",
+              description: "NICE Clinical Knowledge Summaries for psoriasis"
+            },
+            {
+              title: "Psoriasis Association UK",
+              url: "https://www.psoriasis-association.org.uk/",
+              description: "Patient support and educational resources"
+            }
+          ]
+        }
+      },
+      {
         id: "derm1",
         topic: "Eczema Management",
         category: "dermatology",
