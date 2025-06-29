@@ -2016,6 +2016,363 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
           ]
         }
       }
+    ],
+    cardiovascular: [
+      {
+        id: "cardio1",
+        category: "cardiovascular",
+        topic: "Acute Myocardial Infarction",
+        question: "A 58-year-old man presents with severe central chest pain radiating to his left arm, lasting 45 minutes. ECG shows ST elevation >2mm in leads II, III, and aVF. What is the most appropriate immediate management?",
+        options: {
+          A: "Primary percutaneous coronary intervention (PCI) within 120 minutes",
+          B: "Thrombolytic therapy with alteplase immediately", 
+          C: "High-dose atorvastatin and dual antiplatelet therapy",
+          D: "Coronary angiography within 24 hours",
+          E: "Conservative management with aspirin and clopidogrel"
+        },
+        answer: "A",
+        explanation: "Why Primary percutaneous coronary intervention (PCI) within 120 minutes is correct:\n\n• NICE CG167 Gold Standard Protocol: \n  - Primary PCI represents the optimal reperfusion strategy for ST-elevation myocardial infarction (STEMI) when delivered within the critical 120-minute window from first medical contact\n  - European Society of Cardiology and NICE guidelines consistently demonstrate superior outcomes compared to thrombolytic therapy in terms of mortality reduction, reinfarction rates, and stroke prevention\n  - Mechanical reperfusion achieves 90-95% vessel patency rates compared to 50-60% with thrombolytic therapy alone\n  - Time-dependent benefit with maximum myocardial salvage achieved when intervention occurs within the therapeutic window\n\n• Inferior STEMI Recognition and Management: \n  - ECG changes in leads II, III, and aVF indicate inferior wall myocardial infarction typically involving right coronary artery or posterior descending artery occlusion\n  - Inferior STEMI carries significant risk of complications including heart block, right ventricular involvement, and mechanical complications\n  - Immediate reperfusion essential to prevent irreversible myocardial necrosis and preserve left ventricular function\n  - Primary PCI allows direct visualization of culprit vessel and immediate mechanical revascularization\n\n• Evidence-Based Superiority Over Alternatives: \n  - DANAMI-2 and PRAGUE-2 trials demonstrate clear mortality benefit of primary PCI over thrombolysis\n  - Reduced risk of intracranial hemorrhage (0.05% vs 0.7% with thrombolysis)\n  - Lower rates of reinfarction and recurrent ischemia requiring repeat intervention\n  - Superior preservation of left ventricular ejection fraction and long-term prognosis\n\n• Critical Time-Window Optimization: \n  - Door-to-balloon time target of <90 minutes for patients presenting directly to PCI-capable centers\n  - Total ischemic time (symptom onset to reperfusion) should be minimized to reduce infarct size\n  - Every 30-minute delay increases relative mortality risk by 7.5% emphasizing urgency of intervention\n  - Systematic protocols ensure rapid triage, antiplatelet loading, and catheterization laboratory activation",
+        incorrectExplanation: "• Option B (Thrombolytic therapy immediately) - Suboptimal Reperfusion Strategy: \n  - While thrombolytic therapy provides benefit when primary PCI unavailable, it achieves inferior vessel patency rates (50-60% vs 90-95%)\n  - Higher risk of intracranial hemorrhage, particularly in elderly patients or those with hypertension\n  - Incomplete reperfusion often requires rescue PCI, exposing patients to procedural delays and complications\n  - NICE CG167 reserves thrombolysis for situations where PCI cannot be delivered within recommended timeframes\n  - Risk of failed reperfusion requiring emergency PCI with higher complication rates\n\n• Option C (High-dose atorvastatin and dual antiplatelet therapy) - Inadequate Primary Intervention: \n  - While optimal medical therapy forms essential component of STEMI management, it cannot achieve immediate reperfusion\n  - Statin therapy and antiplatelet agents address secondary prevention but do not restore coronary flow\n  - Delays in reperfusion result in irreversible myocardial necrosis and increased mortality\n  - These medications should complement, not replace, primary reperfusion strategy\n  - Evidence shows mechanical reperfusion provides greatest mortality benefit in acute phase\n\n• Option D (Coronary angiography within 24 hours) - Dangerous Treatment Delay: \n  - STEMI requires immediate reperfusion, not delayed diagnostic angiography\n  - 24-hour delay results in completed myocardial infarction with irreversible tissue loss\n  - Time-dependent mortality increase with every hour of delay in reperfusion therapy\n  - Confuses STEMI (immediate PCI) with NSTEMI (early invasive strategy within 72 hours)\n  - Violates fundamental principle of emergency cardiac care requiring immediate intervention\n\n• Option E (Conservative management) - Contraindicated Approach: \n  - Conservative management appropriate for low-risk acute coronary syndromes, not STEMI\n  - ST-elevation indicates complete coronary occlusion requiring immediate mechanical intervention\n  - Aspirin and clopidogrel alone cannot restore coronary flow in completely occluded vessel\n  - Results in completed transmural infarction with maximum myocardial damage\n  - Contradicts all international guidelines mandating immediate reperfusion for STEMI",
+        mnemonic: "STEMI Management: PRIMARY-PCI = Primary intervention, Rapid door-to-balloon <90min, Immediate cathlab activation, Mechanical superiority, Aspirin + P2Y12 loading, Reperfusion within 120min, Years of life saved\n\nSTEMI Recognition: STEMI = ST elevation >1mm limb leads, >2mm chest leads, Territorial pattern, Elevation persistent, Myocardial infarction confirmed, Immediate PCI required\n\nInferior STEMI: RCA = Right Coronary Artery, Complete occlusion, Acute presentation leads II/III/aVF\n\nPCI Benefits: MECHANICS = Mechanical superiority, Enhanced patency 90-95%, Complete visualization, Higher success rates, Angioplasty + stenting, No bleeding risk, Immediate flow restoration, Catheter-based intervention, Superior outcomes",
+        guidelineSummary: {
+          title: "STEMI Management Protocol Summary",
+          content: "• Recognition and Diagnosis: \n  - ST elevation ≥1mm in ≥2 contiguous limb leads or ≥2mm in ≥2 contiguous chest leads\n  - New left bundle branch block in appropriate clinical context\n  - Posterior STEMI: ST depression V1-V3 with tall R waves\n  - Time from symptom onset crucial for treatment decisions\n\n• Primary PCI Pathway: \n  - Door-to-balloon time <90 minutes for direct presentation\n  - First medical contact to device time <120 minutes\n  - Immediate dual antiplatelet therapy: aspirin 300mg + P2Y12 inhibitor\n  - Unfractionated heparin or bivalirudin during procedure\n\n• Thrombolysis Indications: \n  - Primary PCI not available within 120 minutes\n  - No contraindications to fibrinolytic therapy\n  - Alteplase, tenecteplase, or streptokinase options\n  - Door-to-needle time <30 minutes target\n\n• Post-PCI Care: \n  - Dual antiplatelet therapy for 12 months\n  - ACE inhibitor/ARB, beta-blocker, statin therapy\n  - Echocardiography to assess LV function\n  - Cardiac rehabilitation referral\n\n• Complications Management: \n  - Cardiogenic shock: emergency revascularization\n  - Mechanical complications: emergency surgery\n  - Arrhythmias: appropriate antiarrhythmic therapy\n  - Heart failure: guideline-directed medical therapy"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/cg167",
+            description: "NICE CG167: Acute coronary syndromes"
+          },
+          supplementary: [
+            {
+              title: "ESC STEMI Guidelines",
+              url: "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Acute-Coronary-Syndromes-STEMI-Guidelines",
+              description: "European Society of Cardiology STEMI management"
+            },
+            {
+              title: "NHS Heart Attack Treatment",
+              url: "https://www.nhs.uk/conditions/heart-attack/treatment/",
+              description: "NHS heart attack emergency treatment protocols"
+            },
+            {
+              title: "British Cardiovascular Society",
+              url: "https://www.bcs.com/pages/page_box_contents.asp?pageid=1025",
+              description: "BCS primary PCI guidelines"
+            }
+          ]
+        }
+      }
+    ],
+    infectious_diseases: [
+      {
+        id: "infect1",
+        category: "infectious-diseases",
+        topic: "Sepsis Recognition",
+        question: "A 72-year-old woman presents with confusion, temperature 38.9°C, heart rate 110 bpm, blood pressure 85/50 mmHg, and respiratory rate 24/min. Blood tests show lactate 4.2 mmol/L. What is the most appropriate immediate management?",
+        options: {
+          A: "Sepsis Six bundle within 1 hour",
+          B: "Blood cultures then oral antibiotics",
+          C: "Fluid resuscitation with 3L crystalloid",
+          D: "Immediate ICU referral",
+          E: "Paracetamol and observation"
+        },
+        answer: "A",
+        explanation: "Why Sepsis Six bundle within 1 hour is correct:\n\n• NICE NG51 Evidence-Based Protocol: \n  - Sepsis Six bundle implementation within 1 hour represents the gold standard emergency management protocol for suspected sepsis, demonstrating significant mortality reduction in multiple international studies\n  - Time-critical intervention where every hour of delay increases mortality risk by 7.6% according to Kumar et al landmark sepsis research\n  - Bundle approach ensures systematic, comprehensive management addressing all critical aspects of early sepsis care simultaneously\n  - UK Sepsis Trust advocacy and NHS England mandated protocols emphasize immediate bundle initiation upon recognition\n\n• Comprehensive Bundle Components (Take 3, Give 3): \n  - Take 3: Blood cultures, serum lactate, urine output monitoring - providing essential diagnostic and prognostic information\n  - Give 3: High-flow oxygen, IV antibiotics, IV fluid resuscitation - addressing immediate physiological priorities\n  - Each component addresses specific pathophysiological aspect of sepsis syndrome\n  - Standardized approach reduces treatment variability and ensures consistent care quality\n\n• Pathophysiological Rationale: \n  - Systemic inflammatory response syndrome (SIRS) criteria: temperature >38°C, HR >90, RR >20, altered mental state\n  - Hypotension (85/50 mmHg) indicates septic shock requiring immediate intervention\n  - Elevated lactate (4.2 mmol/L) suggests tissue hypoperfusion and anaerobic metabolism\n  - Multi-organ dysfunction evident from confusion, cardiovascular instability, respiratory compromise\n\n• Clinical Outcome Evidence: \n  - Surviving Sepsis Campaign guidelines demonstrate 25% mortality reduction with early goal-directed therapy\n  - Rivers et al EGDT trial showed significant survival benefit with aggressive early intervention\n  - UK national audit data confirms improved outcomes with rapid bundle implementation\n  - Cost-effectiveness analysis supports early intervention preventing ICU admission and prolonged hospital stay",
+        incorrectExplanation: "• Option B (Blood cultures then oral antibiotics) - Inadequate Intervention Intensity: \n  - Oral antibiotics inappropriate for septic shock requiring immediate IV antimicrobial therapy\n  - Single intervention approach neglects comprehensive bundle management proven effective\n  - Delays in IV antibiotic administration directly correlate with increased mortality\n  - Blood cultures alone insufficient without concurrent therapeutic interventions\n  - Fails to address hypotension, tissue hypoperfusion, and multi-organ dysfunction\n\n• Option C (Fluid resuscitation with 3L crystalloid) - Incomplete Management Approach: \n  - While fluid resuscitation forms important component, isolated intervention inadequate for septic shock\n  - Fixed 3L volume inappropriate without hemodynamic monitoring and response assessment\n  - Neglects antimicrobial therapy essential for source control\n  - Risk of fluid overload without careful monitoring in elderly patients\n  - Fails to address infection control, oxygenation, and diagnostic requirements\n\n• Option D (Immediate ICU referral) - Treatment Delay Strategy: \n  - ICU referral appropriate but should not delay immediate sepsis management\n  - Emergency department must initiate Sepsis Six bundle before transfer\n  - Referral alone does not provide active treatment for deteriorating patient\n  - Time-sensitive condition requiring immediate intervention, not delayed specialist care\n  - ICU transfer should complement, not replace, immediate bundle therapy\n\n• Option E (Paracetamol and observation) - Dangerous Conservative Approach: \n  - Completely inadequate for septic shock requiring aggressive immediate intervention\n  - Observation inappropriate for patient with clear signs of organ dysfunction\n  - Paracetamol provides minimal benefit and delays essential antimicrobial therapy\n  - Ignores hypotension, altered mental state, and elevated lactate requiring urgent treatment\n  - Contradicts all evidence-based sepsis management guidelines and protocols",
+        mnemonic: "Sepsis Six Bundle: TAKE-GIVE = Take cultures, Take lactate, Take urine output - Give oxygen, Give IV antibiotics, Give IV fluids\n\nSepsis Recognition: SEPSIS = Systemic response, Elevated temperature, Pressure low, Shock signs, Infection suspected, Serum lactate raised\n\nSIRS Criteria: TEMP = Temperature >38°C or <36°C, Elevated heart rate >90, Mental state altered, Pressure low <90 systolic\n\nSeptic Shock: HYPERLACTAT = Hypotension despite fluids, Perfusion poor, End-organ dysfunction, Resuscitation needed, Lactate >4, Antibiotics urgently, Critical care, Tissue hypoxia, Anaerobic metabolism, Treatment time-critical",
+        guidelineSummary: {
+          title: "Sepsis Management Protocol Summary",
+          content: "• Recognition and Screening: \n  - Use NEWS2 scoring system for early warning\n  - SIRS criteria: temp >38°C or <36°C, HR >90, RR >20, WBC >12 or <4\n  - qSOFA score: altered mental state, SBP ≤100, RR ≥22\n  - Lactate >2 mmol/L indicates tissue hypoperfusion\n\n• Sepsis Six Bundle (within 1 hour): \n  - TAKE: Blood cultures (before antibiotics if possible), serum lactate, urine output\n  - GIVE: High-flow oxygen, IV antibiotics, IV fluid resuscitation\n  - Document time of administration for audit\n  - Senior clinician involvement early\n\n• Antibiotic Selection: \n  - Broad-spectrum empirical therapy based on likely source\n  - Local antimicrobial guidelines and resistance patterns\n  - Piperacillin-tazobactam or meropenem for severe sepsis\n  - De-escalate based on culture results and clinical response\n\n• Fluid Resuscitation: \n  - Initial 30ml/kg crystalloid for hypotension or lactate ≥4\n  - Reassess after each 500ml bolus\n  - Consider vasopressors if persistent hypotension\n  - Monitor for fluid overload in elderly/cardiac patients\n\n• Monitoring and Escalation: \n  - ICU referral for organ support requirements\n  - Continuous monitoring of vital signs and urine output\n  - Serial lactate measurements to guide resuscitation\n  - Daily review of antibiotic therapy and source control"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/ng51",
+            description: "NICE NG51: Sepsis recognition, diagnosis and early management"
+          },
+          supplementary: [
+            {
+              title: "UK Sepsis Trust",
+              url: "https://sepsistrust.org/professional-resources/clinical/",
+              description: "Sepsis Six bundle clinical resources"
+            },
+            {
+              title: "Surviving Sepsis Campaign",
+              url: "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines",
+              description: "International sepsis management guidelines"
+            },
+            {
+              title: "NHS England Sepsis Guidance",
+              url: "https://www.england.nhs.uk/patient-safety/sepsis/",
+              description: "NHS sepsis identification and treatment"
+            }
+          ]
+        }
+      }
+    ],
+    respiratory: [
+      {
+        id: "resp1",
+        category: "respiratory",
+        topic: "COPD Exacerbation",
+        question: "A 68-year-old smoker with known COPD presents with increased breathlessness, purulent sputum, and wheeze. Oxygen saturation is 88% on air. What is the most appropriate oxygen target?",
+        options: {
+          A: "88-92% oxygen saturation",
+          B: "94-98% oxygen saturation",
+          C: "100% oxygen via non-rebreather mask",
+          D: "No supplemental oxygen needed",
+          E: "35% oxygen via Venturi mask"
+        },
+        answer: "A",
+        explanation: "BTS guidelines recommend controlled oxygen therapy targeting 88-92% in COPD patients to avoid CO2 retention while maintaining adequate oxygenation during acute exacerbations.",
+        mnemonic: "COPD Oxygen: 88-92 SAFE = Saturation Appropriate, Avoid CO2 retention, Fixed target, Examine ABG",
+        links: {
+          primary: {
+            title: "BTS COPD Guidelines",
+            url: "https://www.brit-thoracic.org.uk/quality-improvement/guidelines/copd/"
+          }
+        }
+      }
+    ],
+    gastrointestinal: [
+      {
+        id: "gi1",
+        category: "gastrointestinal",
+        topic: "Upper GI Bleeding",
+        question: "A 55-year-old man presents with coffee-ground vomiting and melaena. He takes regular ibuprofen for arthritis. Heart rate 110 bpm, BP 95/60 mmHg. What is the most appropriate immediate management?",
+        options: {
+          A: "Immediate upper endoscopy within 24 hours",
+          B: "IV proton pump inhibitor and urgent endoscopy",
+          C: "Blood transfusion and discharge home",
+          D: "Oral omeprazole and outpatient follow-up",
+          E: "IV fluids only"
+        },
+        answer: "B",
+        explanation: "NICE CG141 recommends immediate IV PPI for suspected peptic ulcer bleeding plus urgent endoscopy within 24 hours for haemodynamically unstable patients.",
+        mnemonic: "Upper GI Bleed: AIMS = Assess haemodynamics, IV access/PPI, Monitor/transfuse, Scope urgently",
+        links: {
+          primary: {
+            title: "NICE CG141: Upper gastrointestinal bleeding",
+            url: "https://www.nice.org.uk/guidance/cg141"
+          }
+        }
+      }
+    ],
+    endocrinology: [
+      {
+        id: "endo1",
+        category: "endocrinology",
+        topic: "Diabetic Ketoacidosis",
+        question: "A 19-year-old type 1 diabetic presents with vomiting, dehydration, and Kussmaul breathing. Blood glucose 28 mmol/L, ketones 5.2 mmol/L, pH 7.15. What is the most appropriate initial fluid management?",
+        options: {
+          A: "0.9% sodium chloride 1L over 1 hour",
+          B: "5% dextrose 500ml over 4 hours",
+          C: "0.45% sodium chloride with 5% dextrose",
+          D: "Hartmann's solution 2L stat",
+          E: "No fluids until insulin started"
+        },
+        answer: "A",
+        explanation: "Why 0.9% sodium chloride 1L over 1 hour is correct:\n\n• NICE NG18 DKA Management Protocol: \n  - Initial fluid resuscitation with 0.9% sodium chloride represents the evidence-based first-line approach for diabetic ketoacidosis management in both adults and young people\n  - Rapid restoration of intravascular volume essential to reverse dehydration, improve peripheral perfusion, and facilitate subsequent insulin therapy effectiveness\n  - 1-liter bolus over 1 hour provides controlled, monitored rehydration without precipitating cerebral edema or fluid overload\n  - Joint British Diabetes Societies guidelines emphasize immediate fluid replacement as cornerstone of DKA management\n\n• Pathophysiological Correction: \n  - Severe dehydration (typically 5-10% body weight) results from osmotic diuresis caused by hyperglycemia\n  - Intravascular volume depletion impairs insulin sensitivity and delays ketoacid clearance\n  - 0.9% saline isotonic solution prevents rapid osmolality changes that could precipitate cerebral complications\n  - Adequate hydration essential before insulin administration to prevent cardiovascular collapse\n\n• Evidence-Based Fluid Selection: \n  - Normal saline preferred over dextrose-containing solutions initially due to hyperglycemic state\n  - Balanced crystalloids may be considered but normal saline remains standard care\n  - Avoids hypotonic solutions which increase cerebral edema risk\n  - Plasma glucose reduction occurs with rehydration alone before insulin therapy\n\n• Critical Safety Considerations: \n  - Controlled fluid administration prevents rapid glucose reduction >5 mmol/L/hour\n  - Monitoring for signs of fluid overload particularly important in elderly patients\n  - Establishes hemodynamic stability essential for safe insulin therapy initiation\n  - Reduces risk of hypokalemia by improving renal perfusion and potassium handling",
+        incorrectExplanation: "• Option B (5% dextrose 500ml over 4 hours) - Inappropriate Initial Choice: \n  - Dextrose-containing fluids contraindicated initially in hyperglycemic crisis (glucose 28 mmol/L)\n  - Would exacerbate hyperglycemia and delay ketoacid resolution\n  - Reserved for later management when glucose approaches normal range\n  - Insufficient volume and rate for severe dehydration requiring immediate correction\n  - Does not address primary pathophysiology of volume depletion and ketoacidosis\n\n• Option C (0.45% sodium chloride with 5% dextrose) - Dangerous Hypotonic Solution: \n  - Hypotonic solutions significantly increase cerebral edema risk in DKA\n  - Dextrose component inappropriate for initial hyperglycemic management\n  - May precipitate rapid intracellular fluid shifts causing neurological complications\n  - Not recommended in any major DKA management guidelines\n  - Could worsen osmotic imbalance and delay clinical recovery\n\n• Option D (Hartmann's solution 2L stat) - Excessive Volume and Rate: \n  - 2L stat administration risks fluid overload and cardiovascular complications\n  - Hartmann's solution contains lactate which may interfere with ketone metabolism\n  - Rapid large-volume resuscitation increases cerebral edema risk\n  - Lacks controlled, monitored approach essential for safe DKA management\n  - Violates guidelines emphasizing gradual, careful fluid replacement\n\n• Option E (No fluids until insulin started) - Dangerous Treatment Delay: \n  - Contradicts fundamental DKA management requiring immediate fluid resuscitation\n  - Insulin therapy without prior fluid replacement risks cardiovascular collapse\n  - Severe dehydration impairs insulin effectiveness and delays recovery\n  - Increases risk of shock, renal impairment, and treatment complications\n  - Violates all evidence-based DKA management protocols requiring fluids first",
+        mnemonic: "DKA Management: FLUID-FIRST = Fluids immediately (0.9% saline), Launch monitoring, Underneath check K+, IV insulin after fluids, Dextrose when glucose <14, Follow glucose hourly, Immediate senior input, Rehydration priority, Sodium normal saline, Treatment protocol\n\nDKA Recognition: KETOACID = Ketones >3, Elevated glucose >11, Thirst/polyuria, Osmotic diuresis, Acidosis pH <7.3, Confusion/drowsiness, Insulin deficiency, Dehydration severe\n\nFluid Protocol: NORMAL-SALINE = Normal 0.9% sodium chloride, Osmolality maintained, Rapid initial liter, Monitor response, Avoid hypotonic, Large volume risk, Sodium replacement, Arterial monitoring, Lactate avoid initially, Isotonic preferred, No dextrose initially, Electrolyte balance\n\nInsulin Timing: AFTER-FLUIDS = Always fluids first, Fluid resuscitation, Therapeutic insulin, Electrolyte correction, Rehydration complete, Follow protocols, Lactic avoid, Urgent but controlled, IV access secured, Diabetes specialist, Senior involvement",
+        guidelineSummary: {
+          title: "Diabetic Ketoacidosis Management Summary",
+          content: "• Recognition and Diagnosis: \n  - Ketones >3 mmol/L (blood) or >2+ (urine)\n  - Blood glucose >11 mmol/L or known diabetes\n  - Venous pH <7.3 or bicarbonate <15 mmol/L\n  - Clinical features: polyuria, polydipsia, weight loss, vomiting\n\n• Initial Resuscitation (First Hour): \n  - 0.9% sodium chloride 1L over 1 hour\n  - Assess response and fluid balance\n  - Consider central venous access if shocked\n  - Monitor electrolytes, particularly potassium\n\n• Insulin Therapy: \n  - Fixed-rate IV insulin infusion 0.1 units/kg/hour\n  - Start after initial fluid resuscitation\n  - Continue long-acting insulin if prescribed\n  - Aim for ketone reduction 0.5 mmol/L/hour\n\n• Fluid Continuation: \n  - 0.9% saline with potassium supplementation\n  - Add 10% dextrose when glucose <14 mmol/L\n  - Typical fluid deficit 100ml/kg requiring replacement\n  - Monitor for fluid overload, especially elderly\n\n• Monitoring and Complications: \n  - Hourly blood glucose and ketones\n  - 2-hourly venous blood gas and electrolytes\n  - Watch for cerebral edema (especially <25 years)\n  - Consider HDU/ICU if severe or complications"
+        },
+        links: {
+          primary: {
+            title: "UK Guidance",
+            url: "https://www.nice.org.uk/guidance/ng18",
+            description: "NICE NG18: Diabetes in children and young people"
+          },
+          supplementary: [
+            {
+              title: "Joint British Diabetes Societies",
+              url: "https://www.diabetes.org.uk/professionals/position-statements-reports/specialist-care-for-children-and-adults-and-complications/management-of-dka-in-adults",
+              description: "JBDS DKA management guidelines"
+            },
+            {
+              title: "NHS Diabetes Guidelines",
+              url: "https://www.england.nhs.uk/diabetes/",
+              description: "NHS diabetes emergency management"
+            },
+            {
+              title: "Diabetes UK Professional",
+              url: "https://www.diabetes.org.uk/professionals",
+              description: "Professional diabetes care resources"
+            }
+          ]
+        }
+      }
+    ],
+    psychiatry: [
+      {
+        id: "psych1",
+        category: "psychiatry",
+        topic: "Depression Diagnosis",
+        question: "A 34-year-old woman presents with 3 weeks of low mood, loss of interest in activities, poor sleep, and feelings of worthlessness. PHQ-9 score is 16. What is the most appropriate first-line treatment?",
+        options: {
+          A: "Cognitive behavioural therapy (CBT) plus SSRI",
+          B: "SSRI antidepressant alone",
+          C: "Tricyclic antidepressant",
+          D: "Referral to psychiatrist",
+          E: "Lifestyle advice only"
+        },
+        answer: "A",
+        explanation: "NICE CG90 recommends combination of psychological therapy (CBT) plus antidepressant for moderate-severe depression (PHQ-9 ≥10). This provides optimal evidence-based treatment.",
+        mnemonic: "Depression Treatment: STEP-UP = Start with therapy, SSRI Together, Exercise/lifestyle, Psychological support, Under specialist care, Prevent relapse",
+        links: {
+          primary: {
+            title: "NICE CG90: Depression in adults",
+            url: "https://www.nice.org.uk/guidance/cg90"
+          }
+        }
+      }
+    ],
+    surgery: [
+      {
+        id: "surg1",
+        category: "surgery",
+        topic: "Acute Appendicitis",
+        question: "A 23-year-old man presents with 12-hour history of central abdominal pain that has migrated to the right iliac fossa. He has nausea, low-grade fever, and tenderness at McBurney's point. What is the most appropriate management?",
+        options: {
+          A: "Laparoscopic appendicectomy within 24 hours",
+          B: "Conservative management with antibiotics",
+          C: "CT scan to confirm diagnosis first",
+          D: "Open appendicectomy immediately",
+          E: "Ultrasound scan and observe"
+        },
+        answer: "A",
+        explanation: "NICE CG141 appendicitis guidelines recommend laparoscopic appendicectomy as first-line treatment, ideally within 24 hours of diagnosis to reduce complications.",
+        mnemonic: "Appendicitis: PAINS = Pain migration, Anorexia, Inflammation markers, Nausea/vomiting, Surgery (laparoscopic)",
+        links: {
+          primary: {
+            title: "RCS Appendicitis Guidelines",
+            url: "https://www.rcseng.ac.uk/standards-and-research/standards-and-guidance/"
+          }
+        }
+      }
+    ],
+    emergency_medicine: [
+      {
+        id: "emerg1",
+        category: "emergency-medicine",
+        topic: "Anaphylaxis Management",
+        question: "A 28-year-old develops facial swelling, widespread urticaria, wheeze, and hypotension 10 minutes after eating nuts. What is the most appropriate immediate treatment?",
+        options: {
+          A: "Intramuscular adrenaline 0.5mg (1:1000) and IV chlorpheniramine",
+          B: "High-flow oxygen and IV hydrocortisone only",
+          C: "Nebulised salbutamol and oral antihistamine",
+          D: "IV adrenaline infusion",
+          E: "Oral prednisolone and observation"
+        },
+        answer: "A",
+        explanation: "Resuscitation Council UK guidelines: IM adrenaline 0.5mg (1:1000) is first-line treatment for anaphylaxis, plus antihistamine and corticosteroid as secondary treatments.",
+        mnemonic: "Anaphylaxis: ADRENALINE = Adrenaline IM 0.5mg, Don't delay, Remove trigger, Emergency position, No oral route, Antihistamine IV, Look for biphasic, IV access, Never alone, Emergency call",
+        links: {
+          primary: {
+            title: "Resuscitation Council UK",
+            url: "https://www.resus.org.uk/library/2021-resuscitation-guidelines/emergency-treatment-anaphylaxis-guidelines-healthcare-providers"
+          }
+        }
+      }
+    ],
+    rheumatology: [
+      {
+        id: "rheum1",
+        category: "rheumatology",
+        topic: "Rheumatoid Arthritis",
+        question: "A 45-year-old woman presents with 6 weeks of symmetrical joint pain and stiffness affecting hands and feet, worst in the morning lasting 2 hours. RF and anti-CCP positive. What is the most appropriate first-line treatment?",
+        options: {
+          A: "Methotrexate plus folic acid and prednisolone bridge",
+          B: "Sulfasalazine alone",
+          C: "Biologics (anti-TNF therapy)",
+          D: "NSAIDs and physiotherapy only",
+          E: "Hydroxychloroquine"
+        },
+        answer: "A",
+        explanation: "NICE NG100 recommends methotrexate as first-line DMARD plus folic acid, with short-term prednisolone bridge therapy to provide rapid symptom control while methotrexate takes effect.",
+        mnemonic: "RA Treatment: DMARD-First = Disease modifying, Methotrexate first-line, Aggressive early treatment, Reduce inflammation, Don't delay, Folic acid supplement, Include prednisolone bridge, Regular monitoring, Specialist care, Target remission",
+        links: {
+          primary: {
+            title: "NICE NG100: Rheumatoid arthritis in adults",
+            url: "https://www.nice.org.uk/guidance/ng100"
+          }
+        }
+      }
+    ],
+    ent: [
+      {
+        id: "ent1",
+        category: "ent",
+        topic: "Acute Otitis Media",
+        question: "A 4-year-old child presents with 2 days of ear pain, fever, and irritability. Otoscopy shows red, bulging tympanic membrane. What is the most appropriate management?",
+        options: {
+          A: "Immediate antibiotics (amoxicillin) for 5 days",
+          B: "Watchful waiting for 72 hours then antibiotics if no improvement",
+          C: "Topical antibiotic drops",
+          D: "Urgent ENT referral",
+          E: "Decongestants and pain relief only"
+        },
+        answer: "B",
+        explanation: "NICE CKS recommends watchful waiting for 72 hours in uncomplicated acute otitis media, as many cases resolve spontaneously. Antibiotics if symptoms persist or worsen.",
+        mnemonic: "Otitis Media: WAIT-3 = Watch And wait Initially, Antibiotics if persisting, In 72 hours reassess, Temperature and pain control",
+        links: {
+          primary: {
+            title: "NICE CKS: Otitis media - acute",
+            url: "https://cks.nice.org.uk/topics/otitis-media-acute/"
+          }
+        }
+      }
+    ],
+    pharmacology: [
+      {
+        id: "pharm1",
+        category: "pharmacology",
+        topic: "Warfarin Interaction",
+        question: "A 68-year-old on warfarin for atrial fibrillation (target INR 2-3) develops a chest infection. His INR today is 2.4. Which antibiotic is SAFEST to prescribe?",
+        options: {
+          A: "Amoxicillin 500mg three times daily",
+          B: "Clarithromycin 500mg twice daily",
+          C: "Ciprofloxacin 500mg twice daily",
+          D: "Co-trimoxazole 960mg twice daily",
+          E: "Erythromycin 500mg four times daily"
+        },
+        answer: "A",
+        explanation: "Amoxicillin has minimal interaction with warfarin compared to macrolides (clarithromycin/erythromycin), quinolones (ciprofloxacin), and co-trimoxazole which significantly increase INR.",
+        mnemonic: "Warfarin Interactions: CREAM = Clarithromycin, Rifampicin (decreases), Erythromycin, Antibiotics (most), Metronidazole. Amoxicillin safest.",
+        links: {
+          primary: {
+            title: "BNF Drug Interactions",
+            url: "https://bnf.nice.org.uk/interactions/"
+          }
+        }
+      }
+    ],
+    ethics_law: [
+      {
+        id: "ethics1",
+        category: "ethics-law",
+        topic: "Consent Capacity",
+        question: "A 17-year-old requests contraception but asks you not to inform her parents. She demonstrates understanding of risks and benefits. What is the most appropriate action?",
+        options: {
+          A: "Provide contraception without parental consent (Gillick competent)",
+          B: "Refuse unless parents are informed",
+          C: "Provide but inform parents anyway",
+          D: "Refer to family planning clinic only",
+          E: "Wait until 18th birthday"
+        },
+        answer: "A",
+        explanation: "GMC 0-18 years guidance: if under-16 demonstrates sufficient understanding (Gillick competent), contraception can be provided confidentially without parental consent in their best interests.",
+        mnemonic: "Gillick Competence: MATURE = Mind capable, Autonomous decision, Thorough understanding, Understands consequences, Rational thought, Ethical practice",
+        links: {
+          primary: {
+            title: "GMC 0-18 years: guidance for doctors",
+            url: "https://www.gmc-uk.org/ethical-guidance/ethical-guidance-for-doctors/0-18-years"
+          }
+        }
+      }
     ]
   };
   
