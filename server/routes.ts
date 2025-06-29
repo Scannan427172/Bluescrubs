@@ -18,6 +18,7 @@ import { generateUserFormatStations, saveUserFormatStations, loadUserFormatStati
 import { generateComprehensiveOSCEBank, loadComprehensiveOSCEBank, getOSCEBankStats } from './comprehensive-osce-generator';
 import { generateInternationalStations, saveInternationalStations, loadInternationalStations, getInternationalStationCount, getSupportedExams } from './international-format-generator';
 import { getContentIndependenceStatus, createManualStation, exportContentLibrary, validateContentSufficiency } from './content-independence';
+import { loadUKQuestionBank, generateFullQuestionBank } from "./bulk-uk-generator";
 import { 
   SUPPORTED_LANGUAGES, 
   getTranslationTemplate, 
@@ -2376,7 +2377,12 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
     ]
   };
   
+  // Get questions from comprehensive sample bank with all medical specialties
   const categoryQuestions = sampleQuestions[category] || [];
+  
+  // Log available question count for this category
+  console.log(`${category}: ${categoryQuestions.length} questions available`);
+  
   return categoryQuestions.slice(0, count);
 }
 
