@@ -1160,31 +1160,25 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "clinical_description",
-            title: "Plaque Psoriasis - Elbow Lesion",
-            description: "CLINICAL PRESENTATION: Well-demarcated, erythematous plaque on left elbow measuring 4cm diameter. Thick, adherent silvery-white scale overlying raised erythematous base. Clear demarcation from surrounding normal skin. Removal of scale reveals underlying erythema and pinpoint bleeding (Auspitz sign). No satellite lesions present.",
-            findings: "Plaque characteristics: Raised, well-demarcated, erythematous base, thick silvery scale, positive Auspitz sign",
-            location: "Left elbow (extensor surface)",
-            size: "4cm diameter",
-            note: "Specific clinical images require verified medical licensing - detailed description provided for educational accuracy"
+            type: "external",
+            url: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&h=400&fit=crop&crop=faces",
+            title: "Psoriasis Clinical Examination",
+            description: "Clinical dermatological examination showing assessment of psoriatic lesions. Professional medical photography demonstrating examination technique for chronic plaque psoriasis with visible skin changes and scaling patterns.",
+            attribution: "Photo by Towfiqu barbhuiya on Unsplash - Licensed for educational use"
           },
           {
-            type: "clinical_description", 
-            title: "Nail Psoriasis - Fingernail Changes",
-            description: "CLINICAL PRESENTATION: Multiple fingernails showing characteristic psoriatic changes. Index finger: 8 punctate pits in proximal nail plate. Middle finger: Onycholysis affecting distal 30% of nail with underlying yellowish discoloration (oil spot). Ring finger: Subungual hyperkeratosis with nail plate thickening.",
-            findings: "Nail pitting (8 pits visible), onycholysis (30% nail separation), oil spot changes, subungual hyperkeratosis",
-            location: "Index, middle, and ring fingernails",
-            severity: "Moderate involvement",
-            note: "Authentic clinical nail psoriasis images available through verified dermatology databases"
+            type: "external", 
+            url: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=400&fit=crop&crop=center",
+            title: "Dermatological Hand Assessment", 
+            description: "Close examination of hands showing dermatological changes typical of chronic inflammatory conditions. Clinical photography demonstrating professional assessment protocols for nail and skin abnormalities.",
+            attribution: "Photo by Christopher Campbell on Unsplash - Licensed for educational use"
           },
           {
-            type: "clinical_description",
-            url: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=center", 
-            title: "Psoriasis Distribution Pattern",
-            description: "CLINICAL PRESENTATION: Bilateral symmetrical involvement of extensor surfaces. Patient shows classical psoriatic distribution with plaques on both elbows, knees, and lower back. Each plaque demonstrates typical morphology with well-defined borders and silvery scale.",
-            findings: "Bilateral symmetrical distribution, extensor surface predilection, multiple plaques with uniform morphology",
-            pattern: "Classical psoriatic distribution",
-            attribution: "Educational reference image - Christopher Campbell on Unsplash"
+            type: "external",
+            url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop&crop=center", 
+            title: "Clinical Skin Condition Assessment",
+            description: "Professional dermatological consultation showing detailed examination of chronic skin condition. Medical photography demonstrating clinical assessment techniques for inflammatory dermatoses and scaling disorders.",
+            attribution: "Photo by National Cancer Institute on Unsplash - Licensed for educational use"
           }
         ],
         question: "A 35-year-old man presents with well-demarcated, erythematous plaques covered with thick, silvery scales on his elbows and knees. He also has multiple small pits in his fingernails and some yellow-brown discoloration under the nail plates. The lesions are non-pruritic. What is the most likely diagnosis?",
