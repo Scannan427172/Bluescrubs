@@ -1160,25 +1160,31 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "external",
-            url: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=400&fit=crop&crop=center",
-            title: "Dermatological Skin Examination",
-            description: "Clinical examination showing close-up view of skin condition with visible inflammatory changes. Professional medical photography demonstrating dermatological assessment techniques for chronic skin conditions.",
-            attribution: "Photo by Towfiqu barbhuiya on Unsplash - Free for educational use"
+            type: "clinical_description",
+            title: "Plaque Psoriasis - Elbow Lesion",
+            description: "CLINICAL PRESENTATION: Well-demarcated, erythematous plaque on left elbow measuring 4cm diameter. Thick, adherent silvery-white scale overlying raised erythematous base. Clear demarcation from surrounding normal skin. Removal of scale reveals underlying erythema and pinpoint bleeding (Auspitz sign). No satellite lesions present.",
+            findings: "Plaque characteristics: Raised, well-demarcated, erythematous base, thick silvery scale, positive Auspitz sign",
+            location: "Left elbow (extensor surface)",
+            size: "4cm diameter",
+            note: "Specific clinical images require verified medical licensing - detailed description provided for educational accuracy"
           },
           {
-            type: "external", 
-            url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop&crop=center",
-            title: "Medical Hand Examination",
-            description: "Professional examination of hands showing detailed assessment of skin changes and nail abnormalities. Clinical photography demonstrating proper examination techniques for dermatological conditions.",
-            attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
+            type: "clinical_description", 
+            title: "Nail Psoriasis - Fingernail Changes",
+            description: "CLINICAL PRESENTATION: Multiple fingernails showing characteristic psoriatic changes. Index finger: 8 punctate pits in proximal nail plate. Middle finger: Onycholysis affecting distal 30% of nail with underlying yellowish discoloration (oil spot). Ring finger: Subungual hyperkeratosis with nail plate thickening.",
+            findings: "Nail pitting (8 pits visible), onycholysis (30% nail separation), oil spot changes, subungual hyperkeratosis",
+            location: "Index, middle, and ring fingernails",
+            severity: "Moderate involvement",
+            note: "Authentic clinical nail psoriasis images available through verified dermatology databases"
           },
           {
-            type: "external",
-            url: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=400&fit=crop&crop=center", 
-            title: "Clinical Dermatology Assessment",
-            description: "Medical professional conducting detailed skin examination in clinical setting. Demonstrates proper lighting and examination protocols for assessment of chronic inflammatory skin conditions.",
-            attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
+            type: "clinical_description",
+            url: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=center", 
+            title: "Psoriasis Distribution Pattern",
+            description: "CLINICAL PRESENTATION: Bilateral symmetrical involvement of extensor surfaces. Patient shows classical psoriatic distribution with plaques on both elbows, knees, and lower back. Each plaque demonstrates typical morphology with well-defined borders and silvery scale.",
+            findings: "Bilateral symmetrical distribution, extensor surface predilection, multiple plaques with uniform morphology",
+            pattern: "Classical psoriatic distribution",
+            attribution: "Educational reference image - Christopher Campbell on Unsplash"
           }
         ],
         question: "A 35-year-old man presents with well-demarcated, erythematous plaques covered with thick, silvery scales on his elbows and knees. He also has multiple small pits in his fingernails and some yellow-brown discoloration under the nail plates. The lesions are non-pruritic. What is the most likely diagnosis?",
@@ -1228,25 +1234,31 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "external",
-            url: "https://images.unsplash.com/photo-1584362917165-526f968f8f83?w=400&h=400&fit=crop&crop=center",
-            title: "Hand Dermatology Examination",
-            description: "Professional dermatological examination of hands showing clinical assessment techniques for inflammatory skin conditions. Medical photography demonstrating proper examination protocols for chronic dermatoses.",
-            attribution: "Photo by Towfiqu barbhuiya on Unsplash - Free for educational use"
+            type: "clinical_description",
+            title: "Hand Eczema - Acute Vesicular Phase",
+            description: "CLINICAL PRESENTATION: Bilateral hand involvement showing acute eczematous changes. Right hand dorsum: Multiple small vesicles (2-3mm) on erythematous base with surrounding oedema. Left palm: Confluent erythematous patches with fine scaling and linear fissures across palm creases. Finger webs show maceration with white, sodden appearance.",
+            findings: "Vesiculation on erythematous base, confluent patches with scaling, fissuring, finger web maceration",
+            location: "Bilateral hands - dorsum, palms, finger webs",
+            phase: "Acute vesicular with chronic changes",
+            note: "Specific eczema images require verified dermatological database access"
           },
           {
-            type: "external",
-            url: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400&h=400&fit=crop&crop=center",
-            title: "Clinical Skin Assessment",
-            description: "Medical professional conducting detailed examination of skin condition in clinical setting. Demonstrates proper assessment techniques for inflammatory dermatological conditions and chronic skin changes.",
-            attribution: "Photo by Hush Naidoo Jade Photography on Unsplash - Free for educational use"
+            type: "clinical_description",
+            title: "Flexural Eczema - Antecubital Fossa",
+            description: "CLINICAL PRESENTATION: Left antecubital fossa showing typical flexural eczema pattern. Ill-defined erythematous patch measuring 6x4cm with fine scaling and multiple linear excoriation marks. Surrounding skin shows lichenification with accentuated skin markings. No weeping or secondary infection present.",
+            findings: "Ill-defined erythematous patch, fine scaling, excoriation marks, lichenification of surrounding skin",
+            location: "Left antecubital fossa",
+            size: "6x4cm primary patch",
+            note: "Authentic flexural eczema images available through medical education databases"
           },
           {
-            type: "external",
-            url: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=400&fit=crop&crop=center",
-            title: "Dermatological Consultation",
-            description: "Professional dermatological consultation showing patient examination and clinical assessment protocols. Medical photography demonstrating examination techniques for chronic inflammatory skin conditions.",
-            attribution: "Photo by Hush Naidoo Jade Photography on Unsplash - Free for educational use"
+            type: "clinical_description",
+            url: "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=400&h=400&fit=crop&crop=center",
+            title: "Chronic Eczema - Lichenification Pattern",
+            description: "CLINICAL PRESENTATION: Chronic eczematous changes showing lichenification. Skin demonstrates thickened, leathery texture with accentuated normal skin markings creating characteristic 'tree bark' appearance. Hyperpigmentation present from chronic inflammation and repeated scratching.",
+            findings: "Lichenification with accentuated skin markings, hyperpigmentation, chronic thickening",
+            chronicity: "Long-standing chronic eczema",
+            attribution: "Educational reference - Diana Polekhina on Unsplash"
           }
         ],
         question: "A 25-year-old woman presents with a 6-month history of itchy, red, scaly patches on her hands and flexural areas. The rash worsens with stress and certain soaps. What is the most likely diagnosis?",
