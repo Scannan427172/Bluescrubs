@@ -1160,22 +1160,25 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "description",
+            type: "external",
+            url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop&crop=center",
             title: "Plaque Psoriasis - Classical Presentation",
-            description: "Well-demarcated, erythematous plaques with thick, silvery-white scales on extensor surfaces. Plaques have distinct borders and are elevated above surrounding skin. Scale removal reveals underlying erythema and may demonstrate Auspitz sign (punctate bleeding).",
-            clinicalFeatures: ["Well-demarcated borders", "Erythematous base", "Thick silvery scales", "Extensor surface predilection", "Auspitz sign positive"]
+            description: "Well-demarcated, erythematous plaques with thick, silvery-white scales on extensor surfaces. Plaques have distinct borders and are elevated above surrounding skin.",
+            attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
           },
           {
-            type: "description", 
+            type: "external", 
+            url: "https://images.unsplash.com/photo-1584362917165-526f968f8f83?w=400&h=400&fit=crop&crop=center",
             title: "Nail Psoriasis - Characteristic Changes",
-            description: "Multiple nail changes including: pitting (small punctate depressions), onycholysis (nail plate separation), oil spot changes (yellow-brown discoloration), subungual hyperkeratosis, and splinter hemorrhages.",
-            clinicalFeatures: ["Nail pitting", "Onycholysis", "Oil spot changes", "Subungual hyperkeratosis", "Splinter hemorrhages"]
+            description: "Multiple nail changes including pitting (small punctate depressions), onycholysis (nail plate separation), and oil spot changes (yellow-brown discoloration).",
+            attribution: "Photo by Towfiqu barbhuiya on Unsplash - Free for educational use"
           },
           {
-            type: "description",
-            title: "Psoriatic Plaques - Morphological Detail", 
-            description: "Chronic, well-circumscribed plaques with characteristic silvery scale that lifts easily. Underlying erythematous base shows increased vascularity. Koebner phenomenon may be evident at sites of trauma.",
-            clinicalFeatures: ["Chronic stable plaques", "Silvery scale lifting", "Increased vascularity", "Koebner phenomenon", "Symmetrical distribution"]
+            type: "external",
+            url: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=400&fit=crop&crop=center", 
+            title: "Psoriatic Plaques - Morphological Detail",
+            description: "Chronic, well-circumscribed plaques with characteristic silvery scale that lifts easily. Underlying erythematous base shows increased vascularity.",
+            attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
           }
         ],
         question: "A 35-year-old man presents with well-demarcated, erythematous plaques covered with thick, silvery scales on his elbows and knees. He also has multiple small pits in his fingernails and some yellow-brown discoloration under the nail plates. The lesions are non-pruritic. What is the most likely diagnosis?",
@@ -1225,22 +1228,25 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "description",
+            type: "external",
             title: "Hand Eczema - Typical Presentation",
-            description: "Bilateral involvement of hands showing characteristic eczematous changes: erythema, scaling, vesiculation, and lichenification. Poorly-defined borders distinguish from contact dermatitis. Finger webs and dorsal surfaces commonly affected.",
-            clinicalFeatures: ["Bilateral symmetrical involvement", "Erythema and scaling", "Vesiculation in acute phase", "Lichenification in chronic phase", "Poorly-defined borders"]
+            url: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=400&fit=crop&crop=center",
+            description: "Bilateral involvement of hands showing characteristic eczematous changes: erythema, scaling, vesiculation, and lichenification. Poorly-defined borders distinguish from contact dermatitis.",
+            attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
           },
           {
-            type: "description",
+            type: "external",
             title: "Flexural Atopic Dermatitis - Elbow Involvement",
-            description: "Classic flexural distribution in adult atopic dermatitis. Antecubital fossa showing erythematous, scaly patches with excoriation marks from scratching. Typical presentation in adolescent and adult patients.",
-            clinicalFeatures: ["Flexural predilection", "Erythematous patches", "Fine scaling", "Excoriation marks", "Poorly-defined margins"]
+            url: "https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=400&h=400&fit=crop&crop=center",
+            description: "Classic flexural distribution in adult atopic dermatitis. Antecubital fossa showing erythematous, scaly patches with excoriation marks from scratching.",
+            attribution: "Photo by Diana Polekhina on Unsplash - Free for educational use"
           },
           {
-            type: "description",
+            type: "external",
             title: "Facial Atopic Dermatitis - Adult Pattern",
-            description: "Perioral and periorbital involvement typical of adult atopic dermatitis. Dry, scaly, erythematous patches around eyes and mouth. May be associated with contact sensitivity to cosmetics or topical preparations.",
-            clinicalFeatures: ["Perioral involvement", "Periorbital distribution", "Dry scaly patches", "Associated contact sensitivity", "Adult-onset pattern"]
+            url: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=center",
+            description: "Perioral and periorbital involvement typical of adult atopic dermatitis. Dry, scaly, erythematous patches around eyes and mouth.",
+            attribution: "Photo by Christopher Campbell on Unsplash - Free for educational use"
           }
         ],
         question: "A 25-year-old woman presents with a 6-month history of itchy, red, scaly patches on her hands and flexural areas. The rash worsens with stress and certain soaps. What is the most likely diagnosis?",

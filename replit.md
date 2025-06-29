@@ -301,6 +301,13 @@ When using Creative Commons or Public Domain images:
 • Link: https://openi.nlm.nih.gov
 • Requirements: Verify per image, especially journal sources
 
+**Unsplash**
+• Content: High-quality medical and health-related photography
+• License: Unsplash License (free for commercial and educational use)
+• Use: ✅ Free for educational and commercial use without attribution required
+• Link: https://unsplash.com
+• Requirements: No attribution required but recommended for courtesy
+
 ## Image Attribution Template
 For CC BY licensed images, use this format:
 ```
