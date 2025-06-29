@@ -1,1 +1,434 @@
-[]
+[
+  {
+    "question": "A 55-year-old female with 20-year smoking history presents with productive cough. Chest X-ray shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Pulmonary embolism",
+      "Pneumonia",
+      "Lung cancer",
+      "COPD exacerbation",
+      "Asthma"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221155304-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 73-year-old female with recent travel presents with progressive dyspnea. CT scan shows consolidation. What is the most likely diagnosis?",
+    "options": [
+      "Lung cancer",
+      "COPD exacerbation",
+      "Pulmonary embolism",
+      "Pneumonia",
+      "Asthma"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221155304-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 73-year-old male with known COPD presents with progressive dyspnea. CT scan shows consolidation. What is the most likely diagnosis?",
+    "options": [
+      "Asthma",
+      "Lung cancer",
+      "Pneumonia",
+      "Pulmonary embolism",
+      "COPD exacerbation"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221165407-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 42-year-old male with known COPD presents with progressive dyspnea. Chest X-ray shows bilateral infiltrates. What is the most likely diagnosis?",
+    "options": [
+      "Pulmonary embolism",
+      "Asthma",
+      "Pneumonia",
+      "COPD exacerbation",
+      "Lung cancer"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221165407-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 73-year-old male with recent travel presents with productive cough. Spirometry shows bilateral infiltrates. What is the most likely diagnosis?",
+    "options": [
+      "Pulmonary embolism",
+      "Lung cancer",
+      "COPD exacerbation",
+      "Asthma",
+      "Pneumonia"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221176685-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 55-year-old male with recent travel presents with productive cough. Chest X-ray shows bilateral infiltrates. What is the most likely diagnosis?",
+    "options": [
+      "Asthma",
+      "Pulmonary embolism",
+      "Lung cancer",
+      "COPD exacerbation",
+      "Pneumonia"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221176685-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 55-year-old female with known COPD presents with chest pain. Spirometry shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Pneumonia",
+      "Lung cancer",
+      "Pulmonary embolism",
+      "Asthma",
+      "COPD exacerbation"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221182266-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 73-year-old female with known COPD presents with chest pain. Spirometry shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Pneumonia",
+      "Asthma",
+      "Pulmonary embolism",
+      "Lung cancer",
+      "COPD exacerbation"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221182266-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 42-year-old female with recent travel presents with chest pain. Chest X-ray shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Pulmonary embolism",
+      "Asthma",
+      "COPD exacerbation",
+      "Pneumonia",
+      "Lung cancer"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221202863-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 68-year-old male with recent travel presents with chest pain. Spirometry shows bilateral infiltrates. What is the most likely diagnosis?",
+    "options": [
+      "Asthma",
+      "Pulmonary embolism",
+      "COPD exacerbation",
+      "Pneumonia",
+      "Lung cancer"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221202863-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 73-year-old male with known COPD presents with chest pain. Spirometry shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Asthma",
+      "Lung cancer",
+      "Pulmonary embolism",
+      "COPD exacerbation",
+      "Pneumonia"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221215363-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 68-year-old female with recent travel presents with chest pain. CT scan shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Asthma",
+      "Lung cancer",
+      "COPD exacerbation",
+      "Pulmonary embolism",
+      "Pneumonia"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221215363-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 68-year-old male with recent travel presents with productive cough. Spirometry shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Pneumonia",
+      "Asthma",
+      "Pulmonary embolism",
+      "Lung cancer",
+      "COPD exacerbation"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221219928-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 55-year-old female with 20-year smoking history presents with progressive dyspnea. Spirometry shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Pneumonia",
+      "Pulmonary embolism",
+      "COPD exacerbation",
+      "Asthma",
+      "Lung cancer"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221219928-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 73-year-old female with recent travel presents with chest pain. CT scan shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "COPD exacerbation",
+      "Lung cancer",
+      "Pneumonia",
+      "Asthma",
+      "Pulmonary embolism"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221224500-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 42-year-old female with known COPD presents with progressive dyspnea. CT scan shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Asthma",
+      "Pulmonary embolism",
+      "Pneumonia",
+      "COPD exacerbation",
+      "Lung cancer"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751221224500-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  }
+]
