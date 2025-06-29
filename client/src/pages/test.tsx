@@ -120,7 +120,7 @@ export default function Test() {
     { id: "surgery", name: "Surgery", icon: "🔪" },
     { id: "emergency-medicine", name: "Emergency Medicine", icon: "🚨" },
     { id: "rheumatology", name: "Rheumatology", icon: "🦴" },
-    { id: "dermatology", name: "Dermatology", icon: "👁️" },
+    { id: "dermatology", name: "Dermatology", icon: "🔬" },
     { id: "ophthalmology", name: "Ophthalmology", icon: "👁️" },
     { id: "ent", name: "ENT", icon: "👂" },
     { id: "pharmacology", name: "Pharmacology", icon: "💊" },
