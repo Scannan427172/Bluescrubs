@@ -285,6 +285,36 @@ When using Creative Commons or Public Domain images:
 • Ensure all medical images meet educational use standards
 • Document attribution in code comments and user-facing displays
 
+## Trusted Medical Image Sources
+**Wikimedia Commons**
+• Content: Large repository of medical and dermatological images
+• License: Mostly Creative Commons (CC BY, CC BY-SA) or Public Domain
+• Use: ✅ Allowed in commercial apps with proper attribution
+• Link: https://commons.wikimedia.org
+• Requirements: Check each image license, attribute author and license
+
+**Open-i (U.S. National Library of Medicine)**
+• Content: Clinical and research images including radiology, dermatology
+• License: Mostly public domain (verify per image)
+• Use: ✅ Free for educational and commercial use
+• Link: https://openi.nlm.nih.gov
+• Requirements: Verify per image, especially journal sources
+
+## Image Attribution Template
+For CC BY licensed images, use this format:
+```
+"Image Title" by Author Name is licensed under CC BY 4.0
+Source: [original URL]
+Modified: [describe any changes made]
+```
+
+For Public Domain images:
+```
+"Image Title" - Public Domain
+Source: [original URL]
+Repository: [Wikimedia Commons/Open-i]
+```
+
 # Brand Identity
 
 ## Current Branding
