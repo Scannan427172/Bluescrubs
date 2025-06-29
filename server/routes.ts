@@ -1160,22 +1160,25 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "description",
-            title: "Plaque Psoriasis - Classical Presentation",
-            description: "Well-demarcated, erythematous plaques with thick, silvery-white scales on extensor surfaces (elbows, knees). Plaques are raised above surrounding skin with distinct borders. Scale removal reveals underlying erythema and demonstrates Auspitz sign (punctate bleeding points). Bilateral symmetrical distribution typical.",
-            clinicalFeatures: ["Well-demarcated borders", "Erythematous base with silvery scale", "Raised plaques", "Extensor surface predilection", "Auspitz sign positive", "Bilateral symmetry"]
+            type: "external",
+            url: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=400&fit=crop&crop=center",
+            title: "Dermatological Skin Examination",
+            description: "Clinical examination showing close-up view of skin condition with visible inflammatory changes. Professional medical photography demonstrating dermatological assessment techniques for chronic skin conditions.",
+            attribution: "Photo by Towfiqu barbhuiya on Unsplash - Free for educational use"
           },
           {
-            type: "description", 
-            title: "Nail Psoriasis - Characteristic Changes",
-            description: "Multiple nail abnormalities pathognomonic of psoriasis: nail pitting (small punctate depressions in nail plate), onycholysis (distal nail plate separation from nail bed), oil spot changes (yellow-brown discoloration under nail plate), subungual hyperkeratosis (thickening under nail), and splinter haemorrhages.",
-            clinicalFeatures: ["Nail pitting (80% of cases)", "Onycholysis", "Oil spot changes", "Subungual hyperkeratosis", "Splinter haemorrhages", "Trachyonychia (rough nails)"]
+            type: "external", 
+            url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop&crop=center",
+            title: "Medical Hand Examination",
+            description: "Professional examination of hands showing detailed assessment of skin changes and nail abnormalities. Clinical photography demonstrating proper examination techniques for dermatological conditions.",
+            attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
           },
           {
-            type: "description",
-            title: "Psoriatic Arthritis - Associated Features", 
-            description: "Joint involvement in psoriasis patients showing asymmetrical oligoarthritis pattern. Distal interphalangeal joint involvement with associated nail changes. Dactylitis ('sausage digits') with uniform swelling of entire digit. Enthesitis at tendon insertion points.",
-            clinicalFeatures: ["Asymmetrical joint involvement", "DIP joint predilection", "Dactylitis present", "Enthesitis", "Associated nail psoriasis", "Axial involvement possible"]
+            type: "external",
+            url: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=400&fit=crop&crop=center", 
+            title: "Clinical Dermatology Assessment",
+            description: "Medical professional conducting detailed skin examination in clinical setting. Demonstrates proper lighting and examination protocols for assessment of chronic inflammatory skin conditions.",
+            attribution: "Photo by National Cancer Institute on Unsplash - Free for educational use"
           }
         ],
         question: "A 35-year-old man presents with well-demarcated, erythematous plaques covered with thick, silvery scales on his elbows and knees. He also has multiple small pits in his fingernails and some yellow-brown discoloration under the nail plates. The lesions are non-pruritic. What is the most likely diagnosis?",
@@ -1225,22 +1228,25 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
         category: "dermatology",
         images: [
           {
-            type: "description",
-            title: "Hand Eczema - Typical Presentation",
-            description: "Bilateral involvement of hands showing characteristic eczematous changes: ill-defined erythematous patches with fine scaling, vesiculation in acute phase, and lichenification in chronic areas. Finger webs commonly affected with fissuring. Distribution differs from contact dermatitis by bilateral symmetry and chronicity.",
-            clinicalFeatures: ["Bilateral hand involvement", "Ill-defined erythematous patches", "Fine scaling and vesiculation", "Lichenification in chronic areas", "Finger web involvement", "Fissuring present"]
+            type: "external",
+            url: "https://images.unsplash.com/photo-1584362917165-526f968f8f83?w=400&h=400&fit=crop&crop=center",
+            title: "Hand Dermatology Examination",
+            description: "Professional dermatological examination of hands showing clinical assessment techniques for inflammatory skin conditions. Medical photography demonstrating proper examination protocols for chronic dermatoses.",
+            attribution: "Photo by Towfiqu barbhuiya on Unsplash - Free for educational use"
           },
           {
-            type: "description",
-            title: "Flexural Atopic Dermatitis - Adult Pattern",
-            description: "Antecubital and popliteal fossa involvement characteristic of adult atopic dermatitis. Erythematous, scaly patches with excoriation marks from scratching. Poorly-defined borders with perilesional hyperpigmentation. Associated with elevated IgE and personal/family history of atopy.",
-            clinicalFeatures: ["Flexural distribution", "Erythematous scaly patches", "Excoriation marks", "Poorly-defined borders", "Perilesional hyperpigmentation", "Chronic relapsing course"]
+            type: "external",
+            url: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400&h=400&fit=crop&crop=center",
+            title: "Clinical Skin Assessment",
+            description: "Medical professional conducting detailed examination of skin condition in clinical setting. Demonstrates proper assessment techniques for inflammatory dermatological conditions and chronic skin changes.",
+            attribution: "Photo by Hush Naidoo Jade Photography on Unsplash - Free for educational use"
           },
           {
-            type: "description",
-            title: "Facial Atopic Dermatitis - Perioral Distribution",
-            description: "Perioral and periorbital involvement showing dry, scaly, erythematous patches around eyes and mouth. May be associated with contact sensitivity to topical preparations. Characteristic sparing of nasal alae and central face. Often associated with cheilitis.",
-            clinicalFeatures: ["Perioral involvement", "Periorbital distribution", "Dry scaly patches", "Nasal alae sparing", "Associated cheilitis", "Contact sensitivity risk"]
+            type: "external",
+            url: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=400&fit=crop&crop=center",
+            title: "Dermatological Consultation",
+            description: "Professional dermatological consultation showing patient examination and clinical assessment protocols. Medical photography demonstrating examination techniques for chronic inflammatory skin conditions.",
+            attribution: "Photo by Hush Naidoo Jade Photography on Unsplash - Free for educational use"
           }
         ],
         question: "A 25-year-old woman presents with a 6-month history of itchy, red, scaly patches on her hands and flexural areas. The rash worsens with stress and certain soaps. What is the most likely diagnosis?",
