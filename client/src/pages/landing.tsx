@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle, Target, Zap, Shield, Star, Play, CheckCircle, Globe, Award } from "lucide-react";
+import { ArrowRight, Brain, Users, Trophy, Clock, BookOpen, Video, MessageCircle, Target, Zap, Shield, Star, Play, CheckCircle, Globe, Award, Stethoscope } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 import { QUESTION_BANK_STATS } from "@shared/expanded-question-bank";
@@ -311,81 +311,81 @@ export default function Landing() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                category: "Independent Content System",
+                category: "Comprehensive Question Bank",
                 icon: Shield,
                 color: "from-green-500 to-emerald-500",
                 features: [
-                  "5,528 authentic medical stations",
-                  "Zero AI dependency for questions",
-                  "39 language translation support",
-                  "Complete offline capability",
-                  "Professional medical accuracy",
-                  "Template-based generation"
+                  "656+ authentic PLAB questions",
+                  "Enhanced clinical explanations",
+                  "Professional medical mnemonics",
+                  "UK guideline integration",
+                  "Multiple choice practice",
+                  "Category-based filtering"
                 ]
               },
               {
-                category: "Hybrid AI Enhancement",
-                icon: Zap,
+                category: "Complete OSCE Practice",
+                icon: Stethoscope,
+                color: "from-blue-500 to-cyan-500",
+                features: [
+                  "176 comprehensive OSCE stations",
+                  "History taking scenarios",
+                  "Physical examination skills",
+                  "Communication training",
+                  "Marking criteria included",
+                  "AI clinical skills tutor"
+                ]
+              },
+              {
+                category: "Multimedia Learning",
+                icon: Video,
                 color: "from-purple-500 to-pink-500",
                 features: [
-                  "Optional AI video analysis",
-                  "Enhanced feedback generation",
-                  "Independent fallback systems",
-                  "Configurable AI providers",
-                  "Always-functional offline mode",
-                  "Smart hybrid capabilities"
+                  "Custom video player with chapters",
+                  "Interactive study materials",
+                  "Audio support for accessibility",
+                  "Subtitle and speed controls",
+                  "Progress tracking",
+                  "Offline video capability"
                 ]
               },
               {
-                category: "UK Clinical Integration",
-                icon: Globe,
-                color: "from-green-500 to-emerald-500",
-                features: [
-                  "Live NHS guidelines integration",
-                  "UK medical school alignment",
-                  "Hospital scenario simulations",
-                  "Cultural competency training",
-                  "Post-PLAB career placement",
-                  "NHS job application assistance"
-                ]
-              },
-              {
-                category: "Mobile & Accessibility",
+                category: "Personalized Analytics",
                 icon: Target,
                 color: "from-orange-500 to-red-500",
                 features: [
-                  "Microlearning modules (5-10 min)",
-                  "Smart notification timing",
-                  "Voice-to-revision notes",
-                  "Offline content sync",
-                  "45-language support",
-                  "Commute-optimized learning"
+                  "Local performance tracking",
+                  "Weakness detection system",
+                  "Adaptive difficulty adjustment",
+                  "Study schedule management",
+                  "Progress visualization",
+                  "Exam countdown timer"
                 ]
               },
               {
-                category: "Professional Development",
+                category: "Neurodiversity Support",
                 icon: Users,
                 color: "from-indigo-500 to-purple-500",
                 features: [
-                  "ARCP portfolio builder",
-                  "Continuing education recommendations",
-                  "Professional networking",
-                  "Career pathway analysis",
-                  "Competency gap identification",
-                  "Leadership development programs"
+                  "8 accommodation types",
+                  "Extended time options",
+                  "Larger text and buttons",
+                  "Audio support features",
+                  "Reduced visual clutter",
+                  "Memory aid assistance"
                 ]
               },
               {
-                category: "Gamification & Motivation",
-                icon: Trophy,
+                category: "Multi-language Access",
+                icon: Globe,
                 color: "from-yellow-500 to-orange-500",
                 features: [
-                  "Personalized achievements",
-                  "Dynamic challenge generation",
-                  "Virtual study buddy",
-                  "Progress celebrations",
-                  "Streak recovery system",
-                  "Meaningful reward structure"
+                  "39 language translations",
+                  "Medical terminology support",
+                  "Built-in translation system",
+                  "Cultural adaptations",
+                  "Voice pronunciation",
+                  "Offline language support"
                 ]
               }
             ].map((category, index) => (

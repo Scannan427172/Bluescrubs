@@ -121,79 +121,79 @@ export default function More() {
     {
       icon: Users,
       title: "Who are BlueScrubsPrep",
-      description: "Meet the founders - NHS doctor Yasa and developer Keith Hunter",
+      description: "Meet the founders - NHS doctor Yasar and developer Keith Hunter",
       hasArrow: true,
       link: "/team"
     },
     {
-      icon: BookOpen,
-      title: "Study Resources",
-      description: "PLAB exam guides, medical textbooks, and educational materials",
-      hasArrow: true,
-      link: "/clinical-guides"
-    },
-    {
-      icon: Heart,
-      title: "Clinical Skills",
-      description: "Essential clinical examination techniques and patient care",
-      hasArrow: true,
-      link: "/plab2-osce"
-    },
-    {
-      icon: Award,
-      title: "Achievements",
-      description: "Your PLAB preparation milestones and progress badges",
-      hasArrow: true,
-      link: "/dashboard"
-    },
-    {
-      icon: Clock,
-      title: "Study History",
-      description: "Past study sessions and examination progress tracking",
-      hasArrow: true,
-      link: "/analytics"
-    },
-    {
-      icon: User,
-      title: "Medical Profile",
-      description: "Manage your medical student profile and preferences",
-      hasArrow: true,
-      link: "/settings"
-    },
-    {
-      icon: Users,
-      title: "Mentors Corner",
-      description: "Exclusive resources and guidance from medical mentors",
-      hasArrow: true,
-      link: "/community"
-    },
-    {
-      icon: FileText,
-      title: "GMC Guidelines",
-      description: "Official GMC regulations and medical practice standards",
-      hasArrow: true,
-      link: "/clinical-guides"
-    },
-    {
       icon: Stethoscope,
-      title: "Clinical Cases",
-      description: "Interactive medical case studies and diagnostic scenarios",
+      title: "PLAB 1 Practice Tests",
+      description: "656+ authentic MCQ questions with detailed clinical explanations",
       hasArrow: true,
       link: "/plab1-new"
     },
     {
-      icon: Shield,
-      title: "Patient Safety",
-      description: "Essential patient safety protocols and risk management",
+      icon: Camera,
+      title: "PLAB 2 OSCE Stations",
+      description: "176 comprehensive clinical scenarios with marking criteria",
       hasArrow: true,
-      link: "/security"
+      link: "/plab2-osce"
+    },
+    {
+      icon: BarChart3,
+      title: "Personalized Dashboard",
+      description: "Performance analytics with adaptive learning insights",
+      hasArrow: true,
+      link: "/dashboard"
+    },
+    {
+      icon: Video,
+      title: "Multimedia Learning",
+      description: "Custom video player with chapters and progress tracking",
+      hasArrow: true,
+      link: "/dashboard"
     },
     {
       icon: Brain,
-      title: "Medical Knowledge",
-      description: "Comprehensive medical knowledge assessment and tracking",
+      title: "AI Medical Tutor",
+      description: "Get instant answers to medical questions with UK guidelines",
       hasArrow: true,
       link: "/ask-ai"
+    },
+    {
+      icon: Accessibility,
+      title: "Neurodiversity Support",
+      description: "8 accommodation types including extended time and audio",
+      hasArrow: true,
+      link: "/settings"
+    },
+    {
+      icon: Activity,
+      title: "Local Analytics Engine",
+      description: "Performance tracking and weakness detection system",
+      hasArrow: true,
+      link: "/dashboard"
+    },
+    {
+      icon: Timer,
+      title: "Study Scheduling",
+      description: "Smart scheduling with browser notifications and reminders",
+      hasArrow: true,
+      link: "/dashboard"
+    },
+    {
+      icon: Target,
+      title: "Adaptive Difficulty",
+      description: "Automatic difficulty adjustment based on performance",
+      hasArrow: true,
+      link: "/dashboard"
+    },
+    {
+      icon: MapPin,
+      title: "Multi-language Support",
+      description: "39 languages with medical terminology translations",
+      hasArrow: true,
+      link: "/settings"
     },
     {
       icon: Activity,
