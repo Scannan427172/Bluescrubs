@@ -46026,5 +46026,59 @@
     "category": "respiratory",
     "difficulty": "intermediate",
     "topic": "Respiratory"
+  },
+  {
+    "question": "A 73-year-old male with 20-year smoking history presents with progressive dyspnea. Spirometry shows hyperinflation. What is the most likely diagnosis?",
+    "options": [
+      "Lung cancer",
+      "Asthma",
+      "Pneumonia",
+      "COPD exacerbation",
+      "Pulmonary embolism"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751319673033-0",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
+  },
+  {
+    "question": "A 68-year-old female with 20-year smoking history presents with productive cough. CT scan shows consolidation. What is the most likely diagnosis?",
+    "options": [
+      "Asthma",
+      "COPD exacerbation",
+      "Pulmonary embolism",
+      "Lung cancer",
+      "Pneumonia"
+    ],
+    "answer": 0,
+    "explanation": {
+      "A": "Clinical reasoning based on presentation and guidelines",
+      "B": "Consider differential diagnosis and risk factors",
+      "C": "Evaluate symptoms in clinical context",
+      "D": "Apply evidence-based medicine principles",
+      "E": "Follow established clinical protocols"
+    },
+    "mnemonic": "Clinical reasoning approach",
+    "links": {
+      "NICE": "https://www.nice.org.uk",
+      "GMC": "https://www.gmc-uk.org/ethical-guidance"
+    },
+    "id": "template-respiratory-1751319673033-1",
+    "category": "respiratory",
+    "difficulty": "intermediate",
+    "topic": "Respiratory"
   }
 ]

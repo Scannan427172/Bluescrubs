@@ -239,6 +239,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
 
     try {
+      const { targetCount = 5000 } = req.body;
+      
       // Get the 8 template questions from current question bank
       const templateQuestions = [];
       
@@ -252,29 +254,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(500).json({ error: 'Cannot access template questions' });
       }
 
-      // Template questions already added above
-
-      // Define medical specialties for 10 question generation
+      // Define medical specialties for comprehensive question generation
+      const totalSpecialties = 11;
+      const questionsPerSpecialty = Math.floor(targetCount / totalSpecialties);
       const medicalSpecialties = [
-        { category: "cardiovascular", count: 2 },
-        { category: "respiratory", count: 2 },
-        { category: "infectious-diseases", count: 2 },
-        { category: "endocrinology", count: 2 },
-        { category: "gastroenterology", count: 2 }
+        { category: "cardiovascular", count: questionsPerSpecialty },
+        { category: "respiratory", count: questionsPerSpecialty },
+        { category: "infectious-diseases", count: questionsPerSpecialty },
+        { category: "endocrinology", count: questionsPerSpecialty },
+        { category: "gastroenterology", count: questionsPerSpecialty },
+        { category: "neurology", count: questionsPerSpecialty },
+        { category: "psychiatry", count: questionsPerSpecialty },
+        { category: "dermatology", count: questionsPerSpecialty },
+        { category: "rheumatology", count: questionsPerSpecialty },
+        { category: "haematology", count: questionsPerSpecialty },
+        { category: "oncology", count: questionsPerSpecialty + (targetCount % totalSpecialties) } // Add remainder to last specialty
       ];
 
       let totalGenerated = 0;
       const generationResults = [];
 
       // Generate questions in batches for each specialty
-      console.log(`Starting 10 question generation at ${new Date().toISOString()}`);
+      console.log(`Starting ${targetCount} question generation at ${new Date().toISOString()}`);
       console.log(`Breakdown: ${medicalSpecialties.map(s => `${s.category}: ${s.count}`).join(', ')}`);
       
       for (const specialty of medicalSpecialties) {
         console.log(`Generating ${specialty.count} ${specialty.category} questions...`);
         
         // Generate in smaller batches to avoid token limits
-        const batchSize = 2; // Very small batches for reliability
+        const batchSize = 5; // Moderate batch size for efficiency
         const batches = Math.ceil(specialty.count / batchSize);
         
         for (let batch = 0; batch < batches; batch++) {
@@ -301,16 +309,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 total: totalGenerated
               });
               
-              console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/500)`);
+              console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/${targetCount})`);
             } else {
               console.log(`No questions generated in batch ${batch + 1} for ${specialty.category}`);
             }
             
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Longer delay for larger batches
             
           } catch (error) {
             console.error(`Error generating batch ${batch + 1} for ${specialty.category}:`, error);
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 1000));
           }
         }
       }
@@ -322,8 +330,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({
         success: true,
         totalGenerated,
-        target: 500,
-        progress: `${totalGenerated}/500`,
+        target: targetCount,
+        progress: `${totalGenerated}/${targetCount}`,
         results: generationResults,
         questionBankSize: ukQuestionBank.length,
         savedToFile: questionBankFile
