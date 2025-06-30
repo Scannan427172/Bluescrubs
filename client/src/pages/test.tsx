@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle, FileText, X, Shield, Activity, TrendingUp } from "lucide-react";
+import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle, FileText, X, Shield, Activity, TrendingUp, BarChart3 } from "lucide-react";
 import examRoomImg from "@assets/image_1750775004743.png";
 import { MedicalTermTooltip } from "@/components/MedicalTermTooltip";
 import { PersonalizedDashboard } from "@/components/PersonalizedDashboard";
@@ -522,6 +522,13 @@ export default function Test() {
       translateFullQuestion(currentQuestion);
     }
   }, [currentQuestion, translateQuestions, selectedLanguage]);
+
+  // Initialize timer when question changes
+  useEffect(() => {
+    if (currentQuestion) {
+      setQuestionStartTime(Date.now());
+    }
+  }, [currentQuestion]);
 
   // Comprehensive medical terms dictionary for tooltips
   const medicalTerms = {
