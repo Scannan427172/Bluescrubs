@@ -342,7 +342,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Execute all generation tasks in parallel with concurrency limit
       console.log(`🚀 Starting ${allGenerationTasks.length} parallel generation tasks...`);
-      const concurrencyLimit = 20; // Process 20 batches simultaneously
+      const concurrencyLimit = 100; // Process 100 batches simultaneously for maximum speed
       
       for (let i = 0; i < allGenerationTasks.length; i += concurrencyLimit) {
         const chunk = allGenerationTasks.slice(i, i + concurrencyLimit);
