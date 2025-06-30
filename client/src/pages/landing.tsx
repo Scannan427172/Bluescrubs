@@ -510,19 +510,19 @@ export default function Landing() {
             <h3 className="text-2xl font-bold text-white text-center mb-8">Global Impact</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-4xl font-bold text-purple-400 mb-2">6</div>
-                <p className="text-gray-300">Countries Covered</p>
+                <div className="text-4xl font-bold text-purple-400 mb-2">656+</div>
+                <p className="text-gray-300">PLAB Questions</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-blue-400 mb-2">15+</div>
-                <p className="text-gray-300">Medical Exams</p>
+                <div className="text-4xl font-bold text-blue-400 mb-2">176</div>
+                <p className="text-gray-300">OSCE Stations</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-green-400 mb-2">Active</div>
-                <p className="text-gray-300">Platform Status</p>
+                <div className="text-4xl font-bold text-green-400 mb-2">100%</div>
+                <p className="text-gray-300">Offline Capable</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-yellow-400 mb-2">35</div>
+                <div className="text-4xl font-bold text-yellow-400 mb-2">39</div>
                 <p className="text-gray-300">Languages Supported</p>
               </div>
             </div>

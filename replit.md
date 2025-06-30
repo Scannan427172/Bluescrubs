@@ -102,6 +102,7 @@ This repository contains BlueScrubsPrep, a comprehensive PLAB (Professional and 
 - **Error Handling**: Comprehensive error boundaries and logging
 
 # Changelog
+- June 30, 2025: COMPREHENSIVE CARD UPDATES - Updated all feature cards across the application to accurately reflect current functionality: Landing page cards updated with Comprehensive Question Bank (656+ questions), Complete OSCE Practice (176 stations), Multimedia Learning, Personalized Analytics, Neurodiversity Support, and Multi-language Access. More page cards updated with authentic app features including PLAB 1/2 practice, personalized dashboard, multimedia learning, AI tutor, analytics engine, study scheduling, adaptive difficulty, and accessibility features. Premium page cards updated to reflect actual offerings including Full Question Bank Access, Complete OSCE Practice, Multimedia Learning Suite, and Advanced Analytics. Updated landing page statistics to show 656+ PLAB Questions, 176 OSCE Stations, 100% Offline Capable, and 39 Languages Supported.
 - June 23, 2025: Initial setup
 - June 23, 2025: Updated clinical guidelines with corrected NICE, CKS, BNF, and GMC URLs for UTI management
 - June 23, 2025: Suspended all OpenAI activity per user request
