@@ -156,5 +156,801 @@
       "difficulty": "intermediate"
     },
     "id": "haad-1751320558712-b95u462k4"
+  },
+  {
+    "station_type": "Family Medicine",
+    "scenario_title": "Hypertension Management in Primary Care",
+    "brief": "This is a station about hypertension management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I've been having high blood pressure readings...",
+      "details": "Patient shares concerns about medication side effects and lifestyle.",
+      "hidden_info": "More revealed if candidate asks about lifestyle and medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Discusses medication adherence and lifestyle modifications",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ABCDE (Assess, Blood pressure, Cholesterol, Diet, Exercise)",
+    "communication_notes": "Ensure empathy, clear explanations, and culturally appropriate decision-making, acknowledging the importance of family involvement in the UAE.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/hypertension",
+      "Local": "https://example.com/uae-hypertension-guidelines",
+      "International": "https://www.cdc.gov/bloodpressure"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320736862-u3o5s9foc"
+  },
+  {
+    "station_type": "Quality & Safety",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320739631-auaw4e6dl"
+  },
+  {
+    "station_type": "Quality & Safety",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://doh.gov.ae/en/Abu-Dhabi-Healthcare-Quality-Indicators",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320742708-l8qjdlunt"
+  },
+  {
+    "station_type": "Preventive Medicine",
+    "scenario_title": "Colon Cancer Screening",
+    "brief": "This is a station about preventive screenings. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I heard I might need a screening test for colon cancer...",
+      "details": "Patient explains concerns about screening and family history if prompted.",
+      "hidden_info": "Family history of colon cancer is revealed if candidate inquires about family medical history."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores patient concern and family history",
+      "Explains screening options and rationale",
+      "Involves patient in decision-making process",
+      "Demonstrates empathy and cultural sensitivity"
+    ],
+    "mnemonic": "FOBT + Colonoscopy",
+    "communication_notes": "Respect cultural beliefs regarding medical procedures, emphasize importance of prevention.",
+    "guideline_links": {
+      "HAAD": "https://www.doh.gov.ae/en/covid-19/Guidelines",
+      "WHO": "https://www.who.int/health-topics/cancer",
+      "Local": "https://example.com/local-uae-guidelines",
+      "International": "https://www.wcrf.org/dietandcancer/colorectal-cancer"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320747499-7rdct95hy"
+  },
+  {
+    "station_type": "Preventive Medicine",
+    "scenario_title": "Hypertension Screening and Lifestyle Modification",
+    "brief": "This is a station about hypertension management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I've been told I have high blood pressure...",
+      "details": "Patient shares concerns about lifestyle and previous readings when prompted with empathy.",
+      "hidden_info": "Patient is not adherent to lifestyle changes and is worried about medication side effects."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Discusses risk factors and lifestyle modifications",
+      "Explains management plan clearly",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ABCDE (Assess, Blood pressure, Cholesterol, Diet, Exercise)",
+    "communication_notes": "Use culturally sensitive language and involve family if appropriate, ensuring clarity and respect.",
+    "guideline_links": {
+      "DOH Abu Dhabi": "https://www.doh.gov.ae/en",
+      "MOHAP": "https://www.mohap.gov.ae/en/awareness-center",
+      "International": "https://www.heart.org/en/health-topics/high-blood-pressure",
+      "NICE": "https://www.nice.org.uk/guidance/ng136"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "8 minutes",
+      "difficulty": "beginner"
+    },
+    "id": "haad-1751320752603-wvz5yntt7"
+  },
+  {
+    "station_type": "Quality & Safety",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320735449-fg900pzye"
+  },
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child has been having trouble breathing...",
+      "details": "Parent describes child's wheezing and breathlessness, especially at night or during exercise.",
+      "hidden_info": "Symptoms improve with inhaler use; more details if candidate inquires."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern and history of asthma symptoms thoroughly",
+      "Assesses and demonstrates understanding of asthma triggers and management",
+      "Explains asthma action plan and involves the parent",
+      "Displays empathy and builds rapport with parent and child"
+    ],
+    "mnemonic": "ASTHMA: Assess, Symptoms, Triggers, Help, Medications, Action plan",
+    "communication_notes": "Use simple language, involve both parent and child, respect cultural norms, and encourage questions.",
+    "guideline_links": {
+      "UAE Guidelines": "https://www.dha.gov.ae/en/HealthRegulation/Pages/guidelines.aspx",
+      "Global Initiative for Asthma": "https://ginasthma.org/",
+      "MOHAP": "https://mohap.gov.ae/en/health-wellness/healthy-living/asthma-management",
+      "International": "https://www.who.int/news-room/fact-sheets/detail/asthma"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320741167-ogtubozw0"
+  },
+  {
+    "station_type": "Preventive Medicine",
+    "scenario_title": "Hypertension Screening and Lifestyle Advice",
+    "brief": "This is a station about hypertension screening. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I came for a routine check-up...",
+      "details": "Patient expresses concern about high blood pressure and lifestyle when probed.",
+      "hidden_info": "Patient has a family history of hypertension and a sedentary lifestyle, revealed if candidate asks."
+    },
+    "mark_scheme": [
+      "Introduces self and purpose of visit",
+      "Conducts thorough cardiovascular risk assessment",
+      "Provides clear explanation of hypertension and its implications",
+      "Advises on lifestyle modifications and follow-up plan",
+      "Demonstrates empathy and cultural sensitivity"
+    ],
+    "mnemonic": "DASH (Dietary Approaches to Stop Hypertension)",
+    "communication_notes": "Use simple language, respect cultural beliefs, and encourage patient participation in their care plan.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/hypertension",
+      "Local": "https://www.doh.gov.ae/healthcare-practitioners/clinical-guidelines",
+      "International": "https://www.eshonline.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320746350-fs67av8ts"
+  },
+  {
+    "station_type": "Quality & Safety",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://www.doh.gov.ae/en",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320749260-3jwz4n1py"
+  },
+  {
+    "station_type": "Internal Medicine",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management, being mindful of cultural sensitivities in the UAE.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://www.doh.gov.ae/en/resources/standards",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320752790-y2pycifiy"
+  },
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child has been having trouble breathing...",
+      "details": "Parent describes child's asthma symptoms and concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes about triggers and medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Identifies asthma triggers and adherence issues",
+      "Explains management plan and involves parent",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ASTHMA: Assess, Symptoms, Triggers, Healthcare plan, Monitor, Adherence",
+    "communication_notes": "Ensure clarity, empathy, and involve parents in decision-making for chronic disease management. Consider cultural sensitivities in UAE.",
+    "guideline_links": {
+      "MOHAP": "https://www.mohap.gov.ae/en/AwarenessCenter/Pages/healthguidelines.aspx",
+      "WHO": "https://www.who.int/teams/noncommunicable-diseases/asthma",
+      "Local": "https://example.com/local-guidelines-uae",
+      "International": "https://ginasthma.org/gina-reports/"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320738054-xnhdi68sh"
+  },
+  {
+    "station_type": "Preventive Medicine",
+    "scenario_title": "Hypertension Screening in Adults",
+    "brief": "This is a station about hypertension screening. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I heard high blood pressure runs in my family. Should I be worried?",
+      "details": "Patient provides family history of hypertension and lifestyle habits if asked.",
+      "hidden_info": "Additional stressors and dietary habits revealed if candidate probes into lifestyle and stress management."
+    },
+    "mark_scheme": [
+      "Introduces self and confirms patient's understanding",
+      "Explores family history and lifestyle factors",
+      "Demonstrates understanding of hypertension risk assessment",
+      "Provides clear advice and involves patient in management plan",
+      "Maintains empathy and rapport throughout consultation"
+    ],
+    "mnemonic": "ABCDE: Assess, Blood Pressure, Counsel, Diet, Exercise",
+    "communication_notes": "Use clear, culturally sensitive language and emphasize shared decision-making in lifestyle changes.",
+    "guideline_links": {
+      "Local": "https://www.doh.gov.ae/en/resources/standards",
+      "International": "https://www.who.int/publications/i/item/9789241550197"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320742380-s32j19i6x"
+  },
+  {
+    "station_type": "Internal Medicine",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management. Be culturally sensitive and respectful.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320745695-7ax1fgqty"
+  },
+  {
+    "station_type": "Preventive Medicine",
+    "scenario_title": "Hypertension Screening in Primary Care",
+    "brief": "This is a station about hypertension management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I was told my blood pressure was high at my last visit...",
+      "details": "Patient discusses lifestyle and previous blood pressure readings when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes about family history and lifestyle factors."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly, including lifestyle and family history",
+      "Demonstrates clinical reasoning in assessing cardiovascular risk",
+      "Explains lifestyle modifications and treatment options, involving patient in decision-making",
+      "Empathy and rapport throughout the consultation"
+    ],
+    "mnemonic": "ABCDE - Assess, Blood pressure, Cholesterol, Diet, Exercise",
+    "communication_notes": "Ensure clarity, cultural sensitivity, and shared decision-making, considering local dietary and lifestyle factors.",
+    "guideline_links": {
+      "MOHAP": "https://mohap.gov.ae/en/services/hypertension",
+      "WHO": "https://www.who.int/health-topics/hypertension",
+      "Local": "https://example.com/uae-hypertension-guidelines",
+      "International": "https://www.ish-world.com/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320750339-t55zhuk3c"
+  },
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about pediatric asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my son has been having trouble breathing...",
+      "details": "Parent describes child's symptoms and concerns with prompting.",
+      "hidden_info": "More revealed if candidate asks about triggers or family history."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains asthma management plan and involves parent",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ASTHMA: Assessment, Symptoms, Triggers, Home care, Medications, Action plan",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making in a culturally sensitive manner.",
+    "guideline_links": {
+      "MOH UAE": "https://www.moh.gov.ae/en/AwarenessCenter/Pages/Asthma.aspx",
+      "GINA": "https://ginasthma.org/gina-reports/",
+      "Local": "https://example.com/local-pediatric-guidelines",
+      "International": "https://www.nhlbi.nih.gov/health-topics/asthma"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320755777-z6i79nuu4"
+  },
+  {
+    "station_type": "Quality & Safety",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management in a culturally sensitive manner.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://www.doh.gov.ae/en/resources",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320737395-luccjbgnt"
+  },
+  {
+    "station_type": "Internal Medicine",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "Patient has not been checking blood sugar regularly and has been experiencing increased thirst and fatigue. More revealed if candidate probes about lifestyle and symptoms."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Assesses lifestyle factors and adherence to medication",
+      "Explains next steps and involves patient in management plan",
+      "Shows empathy and maintains rapport throughout the consultation"
+    ],
+    "mnemonic": "ABCDE of Diabetes Management: A - Assess, B - Blood Sugar, C - Complications, D - Diet, E - Exercise",
+    "communication_notes": "Ensure clarity, cultural sensitivity, and practice shared decision-making in chronic disease management.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://www.doh.gov.ae/en/resources",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320741964-78qxfp5l7"
+  },
+  {
+    "station_type": "Internal Medicine",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management. Respect cultural beliefs and practices related to health and family roles in the UAE.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320745271-7iqzbmx2y"
+  },
+  {
+    "station_type": "Emergency Medicine",
+    "scenario_title": "Acute Asthma Exacerbation",
+    "brief": "This is a station about acute asthma exacerbation management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I can't seem to catch my breath...",
+      "details": "Patient describes shortness of breath, wheezing when prompted with empathy.",
+      "hidden_info": "Patient recently stopped using inhaler regularly; more revealed if candidate probes for medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Assesses severity of exacerbation",
+      "Explains management plan and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ASTHMA: Assess, Stabilize, Treat, Help with Medications & Adherence",
+    "communication_notes": "Ensure clarity, empathy, and reinforce importance of adherence to asthma management plan.",
+    "guideline_links": {
+      "UAE Guidelines": "https://example.com/uae-asthma-guidelines",
+      "GINA": "https://ginasthma.org/gina-reports/",
+      "Local": "https://example.com/local-emergency-guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320749610-23po428x6"
+  },
+  {
+    "station_type": "Emergency Medicine",
+    "scenario_title": "Acute Asthma Exacerbation in Emergency Department",
+    "brief": "This is a station about managing an acute asthma exacerbation. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I can't catch my breath...",
+      "details": "Patient describes shortness of breath and wheezing. Responds to open-ended questions with details of asthma history and current medication.",
+      "hidden_info": "Patient reveals recent cold and poor inhaler technique if asked."
+    },
+    "mark_scheme": [
+      "Introduces self and confirms patient's identity",
+      "Thoroughly assesses asthma history and triggers",
+      "Demonstrates understanding of acute management",
+      "Explains treatment plan and checks understanding",
+      "Shows empathy and reassurance throughout consultation"
+    ],
+    "mnemonic": "ASTHMA: Assess, Stabilize, Treat, Help with inhaler technique, Monitor, Advise follow-up",
+    "communication_notes": "Use clear language, show empathy, and respect cultural communication norms. Encourage patient participation in management plan.",
+    "guideline_links": {
+      "Local": "https://doh.gov.ae/resources/publications/asthma-guidelines",
+      "GINA": "https://ginasthma.org/gina-reports/",
+      "NICE": "https://www.nice.org.uk/guidance/ng80",
+      "WHO": "https://www.who.int/news-room/fact-sheets/detail/asthma"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320755974-p12s4k53m"
+  },
+  {
+    "station_type": "Preventive Medicine",
+    "scenario_title": "Hypertension Management in Primary Care",
+    "brief": "This is a station about hypertension management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I was told my blood pressure is high...",
+      "details": "Patient describes lifestyle and concerns about hypertension when prompted with empathy.",
+      "hidden_info": "Further details about medication adherence and lifestyle can be revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Assesses lifestyle and medication adherence",
+      "Explains management plan and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ABCDE Approach (Assess, Blood Pressure, Control, Diet, Exercise)",
+    "communication_notes": "Ensure cultural sensitivity, use clear language, and focus on patient-centered care and lifestyle changes.",
+    "guideline_links": {
+      "MOHAP": "https://mohap.gov.ae/en/awareness-center/health-guidelines",
+      "ESC": "https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Arterial-Hypertension-Management",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://www.who.int/news-room/fact-sheets/detail/hypertension"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320738844-mjm8bhvsy"
+  },
+  {
+    "station_type": "Surgery",
+    "scenario_title": "Appendicitis Diagnosis in Emergency",
+    "brief": "This is a station about appendicitis diagnosis. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I've been having severe stomach pain...",
+      "details": "Patient describes worsening pain, nausea, and loss of appetite.",
+      "hidden_info": "Pain is localized in the right lower quadrant, worsened by movement."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting complaint thoroughly",
+      "Performs focused abdominal examination",
+      "Explains probable diagnosis and management plan",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "RIF Pain + Nausea/Vomiting + Fever",
+    "communication_notes": "Use culturally appropriate language and engage family if present. Ensure patient understands the urgency of surgical assessment.",
+    "guideline_links": {
+      "UAE-MOH": "https://www.mohap.gov.ae/en/services/Pages/638.aspx",
+      "WHO": "https://www.who.int/news-room/fact-sheets/detail/appendicitis",
+      "Local": "https://example.com/local-guidelines-surgery",
+      "International": "https://www.fascrs.org/clinical-practice-guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320743263-us8mm5gir"
+  },
+  {
+    "station_type": "Family Medicine",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and shared decision-making for chronic disease management, considering cultural sensitivities in UAE.",
+    "guideline_links": {
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "Local": "https://haad.ae/haad/tabid/819/Default.aspx",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320746082-qatwiorbw"
+  },
+  {
+    "station_type": "Surgery",
+    "scenario_title": "Preoperative Assessment for Cholecystectomy",
+    "brief": "This is a station about preoperative evaluation. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm here for my gallbladder surgery, and I'm a bit anxious about it.",
+      "details": "Patient expresses concerns about surgery when asked with sensitivity.",
+      "hidden_info": "Patient has a family history of anesthesia complications if candidate inquires."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Gathers comprehensive surgical and medical history",
+      "Assesses patient's understanding and concerns",
+      "Explains surgical procedure and risks effectively",
+      "Empathy and rapport maintained throughout"
+    ],
+    "mnemonic": "GESR (Gallstones, Examination, Surgery Risks)",
+    "communication_notes": "Maintain a professional and culturally sensitive approach, addressing anxieties respectfully.",
+    "guideline_links": {
+      "Local": "https://www.haad.ae/HAAD/LinkClick.aspx?fileticket=local-guidelines",
+      "NICE": "https://www.nice.org.uk/guidance/ng104",
+      "International": "https://www.facs.org/education/patient-education/surgery/gs/"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320751093-enkr6xhs5"
+  },
+  {
+    "station_type": "Quality & Safety",
+    "scenario_title": "Medication Safety in Chronic Disease Management",
+    "brief": "This is a station about medication safety in chronic disease management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I think I might be taking too many pills...",
+      "details": "Patient expresses concerns about polypharmacy and possible side effects when prompted with empathy.",
+      "hidden_info": "Reveals a recent incident of confusion with medication if asked about recent changes or issues."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Identifies all current medications and explores any issues",
+      "Assesses for potential drug interactions and side effects",
+      "Provides clear explanations and engages in shared decision-making",
+      "Maintains empathy and rapport throughout the interaction"
+    ],
+    "mnemonic": "SAFE - Screen, Assess, Formulate, Educate",
+    "communication_notes": "Ensure clear communication, respect cultural sensitivities, and engage in shared decision-making, emphasizing patient safety and understanding.",
+    "guideline_links": {
+      "HAAD": "https://www.doh.gov.ae/en/Abu-Dhabi-Health-Guidelines",
+      "MOHAP": "https://www.mohap.gov.ae/en/services",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://www.who.int/initiatives/medication-without-harm"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320757162-iaqdmpqd4"
   }
 ]
