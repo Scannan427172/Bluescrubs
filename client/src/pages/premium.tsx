@@ -22,87 +22,89 @@ import {
   BookOpen,
   Trophy,
   Shield,
-  Download
+  Download,
+  Stethoscope,
+  TrendingUp
 } from "lucide-react";
 
 export default function Premium() {
-  const [activeFeature, setActiveFeature] = useState("video-consultation");
+  const [activeFeature, setActiveFeature] = useState("comprehensive-question-bank");
 
   const premiumFeatures = [
     {
-      id: "video-consultation",
-      name: "Video Consultations",
-      icon: Video,
-      description: "Live OSCE practice with qualified UK doctors",
-      price: "£25/session",
-      features: [
-        "One-on-one OSCE practice sessions",
-        "Real-time feedback from PLAB examiners",
-        "Group study sessions with international peers",
-        "Recorded sessions for review",
-        "Flexible scheduling across time zones"
-      ],
-      stats: {
-        sessions: "500+ completed",
-        rating: "4.9/5",
-        success: "94% pass rate"
-      }
-    },
-    {
-      id: "ai-essay-marking",
-      name: "AI Essay Marking",
+      id: "comprehensive-question-bank",
+      name: "Full Question Bank Access",
       icon: Brain,
-      description: "Automated PLAB 2 written assessment scoring",
-      price: "£15/essay",
+      description: "Complete access to 656+ authentic PLAB questions",
+      price: "£19/month",
       features: [
-        "Instant comprehensive feedback",
-        "Clinical reasoning evaluation",
-        "Communication skills assessment",
-        "Detailed improvement suggestions",
-        "Performance benchmarking"
+        "656+ authentic MCQ questions",
+        "Detailed clinical explanations",
+        "UK guideline integration",
+        "Professional mnemonics",
+        "Category-based filtering"
       ],
       stats: {
-        essays: "1200+ marked",
-        accuracy: "98% accuracy",
-        improvement: "40% avg improvement"
+        questions: "656+ questions",
+        coverage: "11 specialties",
+        accuracy: "UK standard"
       }
     },
     {
-      id: "vr-scenarios",
-      name: "VR Clinical Scenarios",
-      icon: Headset,
-      description: "Immersive hospital ward simulations",
+      id: "osce-practice-full",
+      name: "Complete OSCE Practice",
+      icon: Stethoscope,
+      description: "176 comprehensive PLAB 2 clinical stations",
+      price: "£25/month",
+      features: [
+        "176 authentic OSCE stations",
+        "Detailed marking criteria",
+        "AI clinical skills tutor",
+        "Multi-language support",
+        "Progress tracking"
+      ],
+      stats: {
+        stations: "176 stations",
+        types: "6 station types",
+        languages: "39 languages"
+      }
+    },
+    {
+      id: "multimedia-learning",
+      name: "Multimedia Learning Suite",
+      icon: Video,
+      description: "Advanced video learning with custom player",
+      price: "£15/month",
+      features: [
+        "Custom video player",
+        "Chapter navigation",
+        "Progress tracking",
+        "Subtitle support",
+        "Offline capability"
+      ],
+      stats: {
+        features: "Full multimedia",
+        tracking: "Progress saved",
+        access: "Offline ready"
+      }
+    },
+    {
+      id: "personalized-analytics",
+      name: "Advanced Analytics",
+      icon: TrendingUp,
+      description: "Comprehensive performance tracking and insights",
       price: "£12/month",
       features: [
-        "3D hospital ward environments",
-        "Cultural communication scenarios",
-        "Interactive anatomy modules",
-        "Emergency response training",
-        "Performance analytics"
+        "Local analytics engine",
+        "Weakness detection",
+        "Adaptive difficulty",
+        "Study scheduling",
+        "Performance visualization"
       ],
       stats: {
-        scenarios: "50+ scenarios",
-        engagement: "85% completion",
-        skills: "60% skill improvement"
-      }
-    },
-    {
-      id: "certification",
-      name: "Digital Certificates",
-      icon: Award,
-      description: "Professional development pathways",
-      price: "£199/pathway",
-      features: [
-        "Accredited certification pathways",
-        "CPD point tracking",
-        "Blockchain-verified certificates",
-        "Portfolio building tools",
-        "Career guidance"
-      ],
-      stats: {
-        certificates: "300+ issued",
-        recognition: "RCP recognised",
-        career: "80% career advancement"
+        tracking: "Real-time",
+        features: "5 analytics tabs",
+        insights: "Personalized"
       }
     }
   ];
@@ -244,7 +246,7 @@ export default function Premium() {
           ))}
         </TabsList>
 
-        <TabsContent value="video-consultation" className="mt-6">
+        <TabsContent value="comprehensive-question-bank" className="mt-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
