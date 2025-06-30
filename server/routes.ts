@@ -274,53 +274,95 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let totalGenerated = 0;
       const generationResults = [];
 
-      // Generate questions in batches for each specialty
+      // Generate questions in parallel batches for maximum speed
       console.log(`Starting ${targetCount} question generation at ${new Date().toISOString()}`);
       console.log(`Breakdown: ${medicalSpecialties.map(s => `${s.category}: ${s.count}`).join(', ')}`);
+      console.log(`Using parallel processing for rapid generation...`);
+      
+      // Create all generation tasks upfront for parallel execution
+      const allGenerationTasks = [];
       
       for (const specialty of medicalSpecialties) {
-        console.log(`Generating ${specialty.count} ${specialty.category} questions...`);
-        
-        // Generate in smaller batches to avoid token limits
-        const batchSize = 5; // Moderate batch size for efficiency
+        const batchSize = 10; // Larger batches for efficiency
         const batches = Math.ceil(specialty.count / batchSize);
         
         for (let batch = 0; batch < batches; batch++) {
           const questionsInBatch = Math.min(batchSize, specialty.count - (batch * batchSize));
           
-          try {
-            console.log(`Starting batch ${batch + 1}/${batches} for ${specialty.category}...`);
-            const batchQuestions = await generateMedicalQuestions(
-              templateQuestions,
-              specialty.category,
-              "mixed",
-              questionsInBatch
-            );
-            
-            if (batchQuestions && batchQuestions.length > 0) {
-              ukQuestionBank.push(...batchQuestions);
-              totalGenerated += batchQuestions.length;
-              saveQuestionBank();
+          const generationTask = async () => {
+            try {
+              console.log(`Parallel batch ${batch + 1}/${batches} for ${specialty.category} (${questionsInBatch} questions)...`);
+              const batchQuestions = await generateMedicalQuestions(
+                templateQuestions,
+                specialty.category,
+                "mixed",
+                questionsInBatch
+              );
               
-              generationResults.push({
+              if (batchQuestions && batchQuestions.length > 0) {
+                // Thread-safe addition to question bank
+                ukQuestionBank.push(...batchQuestions);
+                totalGenerated += batchQuestions.length;
+                
+                console.log(`✅ Generated ${batchQuestions.length} ${specialty.category} questions (Total: ${totalGenerated}/${targetCount})`);
+                
+                return {
+                  specialty: specialty.category,
+                  batch: batch + 1,
+                  generated: batchQuestions.length,
+                  total: totalGenerated,
+                  success: true
+                };
+              } else {
+                console.log(`❌ No questions generated for ${specialty.category} batch ${batch + 1}`);
+                return {
+                  specialty: specialty.category,
+                  batch: batch + 1,
+                  generated: 0,
+                  total: totalGenerated,
+                  success: false
+                };
+              }
+            } catch (error) {
+              console.error(`Error in ${specialty.category} batch ${batch + 1}:`, error);
+              return {
                 specialty: specialty.category,
                 batch: batch + 1,
-                generated: batchQuestions.length,
-                total: totalGenerated
-              });
-              
-              console.log(`Generated batch ${batch + 1}/${batches} for ${specialty.category}: ${batchQuestions.length} questions (Total: ${totalGenerated}/${targetCount})`);
-            } else {
-              console.log(`No questions generated in batch ${batch + 1} for ${specialty.category}`);
+                generated: 0,
+                total: totalGenerated,
+                success: false,
+                error: error.message
+              };
             }
-            
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Longer delay for larger batches
-            
-          } catch (error) {
-            console.error(`Error generating batch ${batch + 1} for ${specialty.category}:`, error);
-            await new Promise(resolve => setTimeout(resolve, 1000));
-          }
+          };
+          
+          allGenerationTasks.push(generationTask);
         }
+      }
+      
+      // Execute all generation tasks in parallel with concurrency limit
+      console.log(`🚀 Starting ${allGenerationTasks.length} parallel generation tasks...`);
+      const concurrencyLimit = 20; // Process 20 batches simultaneously
+      
+      for (let i = 0; i < allGenerationTasks.length; i += concurrencyLimit) {
+        const chunk = allGenerationTasks.slice(i, i + concurrencyLimit);
+        console.log(`Processing chunk ${Math.floor(i/concurrencyLimit) + 1}/${Math.ceil(allGenerationTasks.length/concurrencyLimit)} (${chunk.length} parallel tasks)`);
+        
+        const chunkResults = await Promise.allSettled(chunk.map(task => task()));
+        
+        // Process results and save after each chunk
+        chunkResults.forEach((result, index) => {
+          if (result.status === 'fulfilled' && result.value.success) {
+            generationResults.push(result.value);
+          }
+        });
+        
+        // Save progress after each chunk
+        saveQuestionBank();
+        console.log(`💾 Saved progress: ${ukQuestionBank.length} total questions`);
+        
+        // Brief pause between chunks to avoid overwhelming the API
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
 
       // Final save
