@@ -1758,7 +1758,7 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
             {
               title: "British Association of Dermatologists - Psoriasis Guidelines",
               url: "https://www.bad.org.uk/pils/psoriasis/",
-              description: "Patient support and educational resources"
+              description: "BAD professional clinical guidelines for psoriasis management"
             }
           ]
         }
