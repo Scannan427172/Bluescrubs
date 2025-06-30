@@ -576,13 +576,10 @@ export default function Test() {
       );
       
       if (matchedTerm) {
-        const termData = medicalTerms[matchedTerm as keyof typeof medicalTerms];
         result.push(
           <MedicalTermTooltip
             key={index}
             term={matchedTerm}
-            definition={termData.definition}
-            translation={termData.translation}
           >
             {word}
           </MedicalTermTooltip>
@@ -1881,7 +1878,9 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                           {section.points.map((point, pointIndex) => (
                             <div key={pointIndex} className="flex items-start gap-2 text-sm text-gray-700">
                               <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
-                              <span className="leading-relaxed">{point}</span>
+                              <span className="leading-relaxed">
+                                {renderTextWithTooltips(point)}
+                              </span>
                             </div>
                           ))}
                         </div>
