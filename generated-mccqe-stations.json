@@ -1,1 +1,161 @@
-[]
+[
+  {
+    "station_type": "Surgery",
+    "scenario_title": "Post-Operative Care for Appendectomy",
+    "brief": "This is a station about post-operative care for appendectomy. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I've been feeling some pain and I'm not sure if it's normal...",
+      "details": "Patient describes mild abdominal pain and discomfort, concerned about surgical site infection.",
+      "hidden_info": "Reveals fever and redness at the incision site if asked about symptoms."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores current symptoms and surgical history thoroughly",
+      "Identifies potential complications and demonstrates clinical reasoning",
+      "Provides appropriate management plan and involves patient",
+      "Empathy and rapport throughout the interaction"
+    ],
+    "mnemonic": "PAIN - Pain, Appearance, Infection signs, Nutritional advice",
+    "communication_notes": "Use clear language, validate patient concerns, and emphasize shared decision-making in post-operative care.",
+    "guideline_links": {
+      "CMAJ": "https://www.cmaj.ca/content/192/19/E521",
+      "CPSI": "https://www.patientsafetyinstitute.ca/en/toolsResources",
+      "Local": "https://www.canada.ca/en/health-canada/services/healthy-living/surgery.html",
+      "International": "https://www.facs.org/quality-programs/guidelines/"
+    },
+    "exam_specific": {
+      "exam_type": "MCCQE",
+      "country": "Canada",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "mccqe-1751320601433-96trgnvov"
+  },
+  {
+    "station_type": "Surgery",
+    "scenario_title": "Preoperative Assessment for Cholecystectomy",
+    "brief": "This is a station about preoperative assessment. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm scheduled for gallbladder surgery...",
+      "details": "Patient provides history of gallstone attacks when prompted with empathy.",
+      "hidden_info": "Previous episode of jaundice and family history of anesthesia reactions revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores surgical and medical history thoroughly",
+      "Identifies potential surgical risks and mitigation",
+      "Explains surgical procedure and postoperative expectations",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ABCDE (Allergies, Bleeding, Clotting, Drugs, Events)",
+    "communication_notes": "Ensure clarity, empathy, and involve the patient in decision-making. Validate patient concerns about surgery.",
+    "guideline_links": {
+      "CAGS": "https://www.cags-accg.ca",
+      "Canadian Anesthesiologists' Society": "https://www.cas.ca/en/standards-guidelines",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://www.facs.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "MCCQE",
+      "country": "Canada",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "mccqe-1751320607542-6ka79xzrr"
+  },
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child keeps wheezing and it's getting worse...",
+      "details": "Parent describes the child's asthma symptoms and triggers when asked with empathy.",
+      "hidden_info": "More detailed history about exacerbations and medication use revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces self and clarifies role",
+      "Thoroughly explores the child's and parent's concerns",
+      "Demonstrates clinical reasoning for asthma management",
+      "Explains asthma action plan and involves parent",
+      "Displays empathy and builds rapport throughout"
+    ],
+    "mnemonic": "ASTHMA - Assess Severity, Trigger Identification, Home Management, Medications, Action Plan",
+    "communication_notes": "Use clear language, be empathetic, and ensure shared decision-making, recognizing cultural and linguistic diversity in Canada.",
+    "guideline_links": {
+      "CPS": "https://www.cps.ca/en/documents/position/asthma-in-children",
+      "CTS": "https://cts-sct.ca/guidelines/",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://ginasthma.org/"
+    },
+    "exam_specific": {
+      "exam_type": "MCCQE",
+      "country": "Canada",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "mccqe-1751320613639-hun86yvuw"
+  },
+  {
+    "station_type": "Community Health",
+    "scenario_title": "Hypertension Management in Primary Care",
+    "brief": "This is a station about hypertension management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I've been told my blood pressure is high...",
+      "details": "Patient shares lifestyle and dietary habits when asked with understanding.",
+      "hidden_info": "More revealed if candidate asks about family history and medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces and establishes patient comfort",
+      "Thoroughly explores the symptom and risk factors",
+      "Demonstrates appropriate clinical reasoning and decision-making",
+      "Provides clear management plan and patient involvement",
+      "Maintains empathy and rapport throughout the encounter"
+    ],
+    "mnemonic": "ABCDE - Assess, Blood pressure, Cholesterol, Diet, Exercise",
+    "communication_notes": "Ensure use of plain language, active listening, and patient-centered care for managing chronic illness.",
+    "guideline_links": {
+      "Hypertension Canada": "https://hypertension.ca/professionals/guidelines/",
+      "CMA": "https://www.cma.ca/clinical-practice-guidelines",
+      "Local": "https://www.example.ca/local-guidelines",
+      "International": "https://www.who.int/news-room/fact-sheets/detail/hypertension"
+    },
+    "exam_specific": {
+      "exam_type": "MCCQE",
+      "country": "Canada",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "mccqe-1751320621829-u58wcz2lr"
+  },
+  {
+    "station_type": "Emergency Medicine",
+    "scenario_title": "Acute Asthma Exacerbation in the ED",
+    "brief": "This is a station about acute asthma exacerbation. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm having trouble breathing...",
+      "details": "Patient describes worsening asthma symptoms, recent triggers, and medication use when prompted effectively.",
+      "hidden_info": "Patient uses inhaler inconsistently and recent exposure to a known allergen if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Conducts focused history on asthma exacerbation",
+      "Performs appropriate clinical examination",
+      "Outlines management plan and educates patient",
+      "Shows empathy and maintains rapport"
+    ],
+    "mnemonic": "ASTHMA: Assess, Stabilize, Treat, Help, Monitor, Act",
+    "communication_notes": "Use clear language, show empathy, and respect patient autonomy while providing education on asthma management in Canada.",
+    "guideline_links": {
+      "Canadian Thoracic Society": "https://www.cts-sct.ca/guidelines",
+      "International": "https://ginasthma.org",
+      "Local": "https://example.com/local-guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "MCCQE",
+      "country": "Canada",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "mccqe-1751320627616-k9jdayjpg"
+  }
+]
