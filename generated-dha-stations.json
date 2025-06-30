@@ -1,1 +1,160 @@
-[]
+[
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about managing asthma in children. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child has been wheezing a lot lately...",
+      "details": "Parent describes child's asthma symptoms and concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate asks about triggers and medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning specific to pediatric asthma",
+      "Explains management plan and involves parent",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ASTHMA: Assess, Symptoms, Triggers, History, Medications, Action plan",
+    "communication_notes": "Ensure clarity, empathy, and involve parents in decision-making. Respect cultural sensitivities common in UAE families.",
+    "guideline_links": {
+      "UAE": "https://www.dha.gov.ae/AsthmaGuidelines",
+      "Global Initiative for Asthma": "https://ginasthma.org/",
+      "Local": "https://example.com/local-asthma-guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "DHA",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "dha-1751320485965-q74lb6ptk"
+  },
+  {
+    "station_type": "Surgery",
+    "scenario_title": "Post-Operative Care for Appendectomy",
+    "brief": "This is a station about post-operative care for appendectomy. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I’m feeling some pain around my surgery site...",
+      "details": "Patient shares details about discomfort and follows up with questions if the candidate shows empathy.",
+      "hidden_info": "Patient has been non-compliant with medication if asked specifically about adherence."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores post-operative concerns thoroughly",
+      "Demonstrates clinical reasoning and safety-netting",
+      "Explains post-operative care plan and involves patient",
+      "Empathy and rapport throughout interaction"
+    ],
+    "mnemonic": "PAIN (Pain control, Activity, Incision care, Nutrition)",
+    "communication_notes": "Ensure sensitivity towards cultural norms, encourage family involvement in care decisions.",
+    "guideline_links": {
+      "Local": "https://www.dha.gov.ae/en/Guidelines",
+      "International": "https://www.facs.org/guidelines",
+      "NICE": "https://www.nice.org.uk/guidance",
+      "WHO": "https://www.who.int/surgery"
+    },
+    "exam_specific": {
+      "exam_type": "DHA",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "dha-1751320491258-b07x2nbaz"
+  },
+  {
+    "station_type": "Public Health",
+    "scenario_title": "Hypertension Management in Community Settings",
+    "brief": "This is a station about hypertension management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I've been told I have high blood pressure. What should I do?",
+      "details": "Patient provides background on lifestyle and concerns about hypertension when asked with sensitivity.",
+      "hidden_info": "Details about family history and stress levels revealed if candidate probes with skill."
+    },
+    "mark_scheme": [
+      "Introduces self and explains purpose of consultation",
+      "Investigates patient's lifestyle and medical history comprehensively",
+      "Demonstrates understanding of public health implications",
+      "Discusses lifestyle modifications and treatment options",
+      "Maintains empathy and cultural sensitivity throughout"
+    ],
+    "mnemonic": "ABCDE for Hypertension (Aspirin, Blood pressure, Cholesterol, Diet, Exercise)",
+    "communication_notes": "Use clear language, respect cultural norms, and involve family in decision-making when appropriate.",
+    "guideline_links": {
+      "DHA": "https://www.dha.gov.ae/en/HealthRegulation/Pages/Hypertension.aspx",
+      "MOHAP": "https://www.mohap.gov.ae/en/services/health-awareness",
+      "Local": "https://example.com/uae-guidelines",
+      "International": "https://www.who.int/health-topics/hypertension"
+    },
+    "exam_specific": {
+      "exam_type": "DHA",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "dha-1751320495890-fkg2xcczu"
+  },
+  {
+    "station_type": "Critical Care",
+    "scenario_title": "Acute Asthma Exacerbation",
+    "brief": "This is a station about acute asthma exacerbation management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm having trouble breathing...",
+      "details": "Patient describes worsening shortness of breath, wheezing, and previous asthma diagnosis.",
+      "hidden_info": "History of recent upper respiratory infection; poor adherence to asthma medication regimen."
+    },
+    "mark_scheme": [
+      "Introduces self and confirms patient's identity",
+      "Thoroughly assesses symptoms and history",
+      "Demonstrates clinical reasoning and plans management",
+      "Communicates management plan and ensures patient understanding",
+      "Maintains empathy and builds patient rapport"
+    ],
+    "mnemonic": "ASTHMA: Assess, Stabilize, Treat, Help with adherence, Monitor, Avoid triggers",
+    "communication_notes": "Use clear language, ensure patient understands the severity, and emphasize the importance of adherence to treatment.",
+    "guideline_links": {
+      "MOHAP": "https://mohap.gov.ae/en/services/asthma-management",
+      "SEHA": "https://www.seha.ae/en/clinical-services/asthma",
+      "Local": "https://example.com/uae-asthma-guidelines",
+      "International": "https://ginasthma.org/gina-reports/"
+    },
+    "exam_specific": {
+      "exam_type": "DHA",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "dha-1751320501567-lgr2ag83l"
+  },
+  {
+    "station_type": "Family Medicine",
+    "scenario_title": "Hypertension Management in Primary Care",
+    "brief": "This is a station about hypertension management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I've been told my blood pressure is high...",
+      "details": "Patient mentions recent headaches and family history of hypertension when prompted.",
+      "hidden_info": "Lifestyle factors like high salt diet and sedentary lifestyle revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern and risk factors thoroughly",
+      "Applies clinical guidelines to assess and plan management",
+      "Communicates management plan and involves patient",
+      "Demonstrates empathy and builds rapport"
+    ],
+    "mnemonic": "ABCDE (Assess, Blood pressure control, Cholesterol management, Diet, Exercise)",
+    "communication_notes": "Ensure clarity, empathy, and respect cultural sensitivities in discussing lifestyle changes and chronic disease management.",
+    "guideline_links": {
+      "MOHAP": "https://www.mohap.gov.ae/en/AwarenessCenter/Pages/Guidelines.aspx",
+      "DHA": "https://www.dha.gov.ae/en/healthregulation/pages/guidelines.aspx",
+      "International": "https://www.who.int/publications/i/item/9789241550208"
+    },
+    "exam_specific": {
+      "exam_type": "DHA",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "dha-1751320505976-7vok5sdxi"
+  }
+]

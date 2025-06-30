@@ -1,1 +1,161 @@
-[]
+[
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child has been wheezing a lot lately...",
+      "details": "Parent shares concerns about child's asthma symptoms when prompted with empathy.",
+      "hidden_info": "More details about triggers and medication adherence revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "ASTHMA - Assess, Severity, Triggers, Health maintenance, Medication, Action plan",
+    "communication_notes": "Use clear language, ensure empathy, involve parent and child in management plan discussions.",
+    "guideline_links": {
+      "National Asthma Council Australia": "https://www.nationalasthma.org.au/health-professionals/asthma-action-plans",
+      "Australian Asthma Handbook": "https://www.asthmahandbook.org.au/",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://ginasthma.org/"
+    },
+    "exam_specific": {
+      "exam_type": "AMC",
+      "country": "Australia",
+      "duration": "8 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "amc-1751320536102-y6tvxa2ln"
+  },
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about asthma management in children. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child has been wheezing a lot lately...",
+      "details": "Parent describes concerns and symptoms when prompted with empathy.",
+      "hidden_info": "Symptoms worsen at night and with exercise; family history of asthma if asked."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates understanding of asthma management",
+      "Explains next steps and medication use",
+      "Empathy and rapport with parent and child"
+    ],
+    "mnemonic": "ASTHMA - Assess, Symptoms, Triggers, Health plan, Medications, Actions",
+    "communication_notes": "Use clear, non-technical language and involve both parent and child in the discussion.",
+    "guideline_links": {
+      "NAC": "https://www.nationalasthma.org.au/health-professionals/nac-guidelines",
+      "RCH": "https://www.rch.org.au/clinicalguide/guideline_index/Asthma/",
+      "Local": "https://example.com/local-pediatric-guidelines",
+      "International": "https://ginasthma.org/"
+    },
+    "exam_specific": {
+      "exam_type": "AMC",
+      "country": "Australia",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "amc-1751320541795-quadyf0ec"
+  },
+  {
+    "station_type": "Emergency Medicine",
+    "scenario_title": "Acute Asthma Exacerbation",
+    "brief": "This is a station about managing an acute asthma exacerbation. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm having trouble breathing...",
+      "details": "Patient describes worsening asthma symptoms when asked with concern.",
+      "hidden_info": "Patient's medication adherence and triggers are revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role to patient",
+      "Collects detailed history of asthma symptoms and triggers",
+      "Performs appropriate physical examination",
+      "Explains management plan and follow-up care",
+      "Demonstrates empathy and builds rapport with patient"
+    ],
+    "mnemonic": "ASTHMA - Assess, Stabilize, Treat, Help, Monitor, Advise",
+    "communication_notes": "Use plain language, demonstrate empathy, and involve the patient in the management plan. Be mindful of diverse cultural backgrounds in Australia.",
+    "guideline_links": {
+      "National Asthma Council Australia": "https://www.nationalasthma.org.au/health-professionals/asthma-action-plans",
+      "Australian Asthma Handbook": "https://www.asthmahandbook.org.au/",
+      "Local Health District": "https://example.com/local-asthma-guidelines",
+      "International Guidelines": "https://ginasthma.org/gina-reports/"
+    },
+    "exam_specific": {
+      "exam_type": "AMC",
+      "country": "Australia",
+      "duration": "8 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "amc-1751320549211-fsow6xklv"
+  },
+  {
+    "station_type": "Emergency Medicine",
+    "scenario_title": "Acute Asthma Exacerbation in the Emergency Department",
+    "brief": "This is a station about acute asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm having trouble breathing...",
+      "details": "Patient shares history of asthma and current symptoms when prompted empathetically.",
+      "hidden_info": "Recent exposure to allergens and missed medication revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Establishes a calm and supportive environment",
+      "Gathers detailed history of current exacerbation",
+      "Assesses severity and implements immediate management",
+      "Explains treatment plan and follow-up care clearly",
+      "Utilizes empathy and builds rapport effectively"
+    ],
+    "mnemonic": "ASTHMA - Assess, Stabilize, Treat, Help, Monitor, Avoid triggers",
+    "communication_notes": "Use clear language, demonstrate empathy, and engage in shared decision-making relevant to Australian cultural contexts.",
+    "guideline_links": {
+      "National Asthma Council Australia": "https://www.nationalasthma.org.au/",
+      "Australian Asthma Handbook": "https://www.asthmahandbook.org.au/",
+      "RACGP": "https://www.racgp.org.au/clinical-resources/clinical-guidelines/key-racgp-guidelines/view-all-racgp-guidelines/asthma"
+    },
+    "exam_specific": {
+      "exam_type": "AMC",
+      "country": "Australia",
+      "duration": "8 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "amc-1751320555952-dmovyih2h"
+  },
+  {
+    "station_type": "Psychiatry",
+    "scenario_title": "Managing Depression in a Young Adult",
+    "brief": "This is a station about assessing and managing depression. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I just don't feel like myself lately...",
+      "details": "Patient describes symptoms such as persistent sadness, lack of interest, and sleep disturbances if asked empathetically.",
+      "hidden_info": "Reveals stressors like recent job loss and relationship issues if probed correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores symptoms and psychosocial factors thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains management plan and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "SIGECAPS (Sleep, Interest, Guilt, Energy, Concentration, Appetite, Psychomotor, Suicidality)",
+    "communication_notes": "Ensure non-judgmental approach, active listening, and culturally sensitive communication.",
+    "guideline_links": {
+      "RANZCP": "https://www.ranzcp.org/practice-education/guidelines-and-resources-for-practice",
+      "BeyondBlue": "https://www.beyondblue.org.au/the-facts/depression",
+      "Local": "https://example.com/australian-guidelines",
+      "International": "https://www.who.int/mental_health/management/depression/en/"
+    },
+    "exam_specific": {
+      "exam_type": "AMC",
+      "country": "Australia",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "amc-1751320562300-445w7xbu4"
+  }
+]

@@ -1,1 +1,162 @@
-[]
+[
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child has been wheezing a lot...",
+      "details": "Parent explains child's asthma symptoms and triggers when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes about family history and medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role to parent and child",
+      "Thoroughly explores asthma symptoms and triggers",
+      "Demonstrates clinical reasoning specific to pediatrics",
+      "Explains next steps and involves parent and child in management plan",
+      "Shows empathy and builds rapport with both parent and child"
+    ],
+    "mnemonic": "ASTHMA: Assess, Symptoms, Triggers, History, Medications, Action Plan",
+    "communication_notes": "Ensure clarity, empathy, and involve parents in shared decision-making. Respect cultural nuances.",
+    "guideline_links": {
+      "Saudi Pediatrics": "https://example.com/saudi-pediatrics-guidelines",
+      "Global Initiative for Asthma": "https://ginasthma.org/",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://www.who.int/news-room/fact-sheets/detail/asthma"
+    },
+    "exam_specific": {
+      "exam_type": "SCHS",
+      "country": "Saudi Arabia",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "schs-1751320504335-4pd7vr3sl"
+  },
+  {
+    "station_type": "Internal Medicine",
+    "scenario_title": "Diabetes Management in Primary Care",
+    "brief": "This is a station about diabetes management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about my blood sugar...",
+      "details": "Patient explains diabetic concerns when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores presenting concern thoroughly",
+      "Demonstrates clinical reasoning",
+      "Explains next steps and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "HbA1c + Lifestyle Management",
+    "communication_notes": "Ensure clarity, empathy, and respect for cultural norms, involving family if appropriate.",
+    "guideline_links": {
+      "Saudi Ministry of Health": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/Diseases/Diabetes/Pages/default.aspx",
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "WHO": "https://www.who.int/health-topics/diabetes",
+      "International": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "SCHS",
+      "country": "Saudi Arabia",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "schs-1751320513426-77qw725r5"
+  },
+  {
+    "station_type": "Islamic Medical Ethics",
+    "scenario_title": "Fasting During Ramadan with Diabetes",
+    "brief": "This is a station about managing diabetes during Ramadan. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I want to fast during Ramadan, but I'm worried about my diabetes...",
+      "details": "Patient expresses desire to fast and concerns about managing blood sugar levels during questioning.",
+      "hidden_info": "Patient takes insulin and has a history of hypoglycemia, revealed if candidate inquires about past fasting experiences."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores religious beliefs and health concerns",
+      "Assesses medical history and medication use",
+      "Explains risks and safe fasting practices",
+      "Empathy and culturally sensitive communication"
+    ],
+    "mnemonic": "FASTING - Fasting Advice for Safe TImes and Nutrition Guidelines",
+    "communication_notes": "Use culturally sensitive language, respect religious practices, and provide clear, empathetic advice on managing diabetes during Ramadan.",
+    "guideline_links": {
+      "Saudi Guidelines": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/PublicHealth/Pages/007.aspx",
+      "Diabetes and Ramadan": "https://www.daralliance.org",
+      "Local": "https://example.com/local-diabetes-ramadan-guidelines",
+      "International": "https://www.idf.org/diabetes-and-ramadan"
+    },
+    "exam_specific": {
+      "exam_type": "SCHS",
+      "country": "Saudi Arabia",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "schs-1751320522105-2d9wl42xz"
+  },
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child keeps wheezing and coughing...",
+      "details": "Parent describes child's asthma symptoms and triggers when prompted with empathy.",
+      "hidden_info": "More revealed if candidate probes correctly about environmental factors and medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces self and clarifies role to parent",
+      "Explores symptoms and potential triggers thoroughly",
+      "Demonstrates clinical reasoning and diagnosis confirmation",
+      "Explains management plan and involves parent in decision",
+      "Maintains empathy and builds rapport throughout consultation"
+    ],
+    "mnemonic": "ASTHMA - Assess Triggers, Symptoms, Treatment, Health Maintenance, Medication Adherence",
+    "communication_notes": "Use clear language, show empathy, involve the parent in the management plan, and be aware of cultural sensitivities.",
+    "guideline_links": {
+      "SADA": "https://www.saudithoracic.org/asthma-guidelines",
+      "MOH": "https://www.moh.gov.sa/en/HealthAwareness/EducationalContent/PublicHealth/Pages/Asthma.aspx",
+      "Local": "https://example.com/local-guidelines",
+      "International": "https://ginasthma.org"
+    },
+    "exam_specific": {
+      "exam_type": "SCHS",
+      "country": "Saudi Arabia",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "schs-1751320528545-6tye8j1tw"
+  },
+  {
+    "station_type": "Emergency Medicine",
+    "scenario_title": "Acute Asthma Exacerbation",
+    "brief": "This is a station about asthma exacerbation. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I can’t breathe properly and I'm wheezing...",
+      "details": "Patient describes difficulty breathing and previous asthma history when prompted appropriately.",
+      "hidden_info": "Reveals use of an inhaler and recent exposure to allergens if asked."
+    },
+    "mark_scheme": [
+      "Introduces and establishes a calm environment",
+      "Gathers comprehensive history of the current exacerbation",
+      "Assesses severity using clinical reasoning",
+      "Explains management plan and involves patient in decisions",
+      "Shows empathy and builds trust throughout interaction"
+    ],
+    "mnemonic": "ASTHMA: Assessment, Severity, Treatment, Help, Monitor, Advise",
+    "communication_notes": "Communicate with empathy, respect patient privacy, and consider cultural norms in decision-making.",
+    "guideline_links": {
+      "Saudi Guidelines": "https://example.com/saudi-asthma-guidelines",
+      "GINA": "https://ginasthma.org/gina-reports/",
+      "NHLBI": "https://www.nhlbi.nih.gov/health-topics/asthma",
+      "International": "https://www.globalasthmareport.org/"
+    },
+    "exam_specific": {
+      "exam_type": "SCHS",
+      "country": "Saudi Arabia",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "schs-1751320537056-orc5hn3nm"
+  }
+]

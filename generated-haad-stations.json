@@ -1,1 +1,160 @@
-[]
+[
+  {
+    "station_type": "Quality & Safety",
+    "scenario_title": "Safe Prescribing Practices in Primary Care",
+    "brief": "This is a station about safe prescribing practices. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm here to talk about the new medication...",
+      "details": "Patient mentions concerns about potential side effects of a newly prescribed medication when asked.",
+      "hidden_info": "More information about medication history is revealed if candidate inquires about past experiences with medications."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores medication concerns thoroughly",
+      "Demonstrates knowledge of safe prescribing",
+      "Explains medication management plan and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "S.A.F.E. (Side effects, Allergies, Follow-up, Education)",
+    "communication_notes": "Ensure clear communication, respect cultural sensitivities, and highlight the importance of patient education in the UAE context.",
+    "guideline_links": {
+      "HAAD": "https://www.doh.gov.ae/en/services/patient-safety",
+      "MOHAP": "https://www.mohap.gov.ae/en/services/prescription-safety",
+      "International": "https://www.who.int/news-room/fact-sheets/detail/patient-safety"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320518189-0a5iwpgwc"
+  },
+  {
+    "station_type": "Quality & Safety",
+    "scenario_title": "Insulin Management in Diabetes",
+    "brief": "This is a station about diabetes management focusing on insulin administration safety. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I'm worried about using my insulin correctly...",
+      "details": "Patient shares experiences with insulin use and concerns about administration errors when prompted with empathy.",
+      "hidden_info": "Patient feels overwhelmed and occasionally skips doses, revealed if candidate probes about adherence and challenges."
+    },
+    "mark_scheme": [
+      "Introduces and clarifies role",
+      "Explores insulin use and administration thoroughly",
+      "Identifies and addresses potential safety risks",
+      "Explains safe insulin practices and involves patient",
+      "Empathy and rapport throughout"
+    ],
+    "mnemonic": "SAFE: Schedule, Administration, Frequency, Education",
+    "communication_notes": "Use culturally sensitive language, ensure empathy, and emphasize the importance of shared decision-making and patient education.",
+    "guideline_links": {
+      "UAE_National": "https://mohap.gov.ae/en/awareness-center/diabetes",
+      "ADA": "https://www.diabetes.org/professionals/standards",
+      "IDF": "https://www.idf.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320534766-fibs8837g"
+  },
+  {
+    "station_type": "Pediatrics",
+    "scenario_title": "Asthma Management in Children",
+    "brief": "This is a station about asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, my child has been having trouble breathing...",
+      "details": "Parent expresses concerns about child’s breathing and nighttime coughing, especially after playing.",
+      "hidden_info": "Child has been using an inhaler inconsistently, more details if candidate asks about medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces self and confirms child's details",
+      "Gathers comprehensive history including triggers",
+      "Identifies signs of poor control and need for action plan",
+      "Explains management plan clearly to parent",
+      "Builds rapport and addresses concerns empathetically"
+    ],
+    "mnemonic": "ASTHMA: Assess, Symptoms, Triggers, Help, Medication, Action plan",
+    "communication_notes": "Use simple language, ensure parental understanding, respect cultural sensitivities, and encourage family involvement in management.",
+    "guideline_links": {
+      "MOHAP": "https://mohap.gov.ae/en/AwarenessCenter/Pages/Asthma.aspx",
+      "GINA": "https://ginasthma.org/",
+      "Local": "https://example.com/uae-asthma-guidelines",
+      "International": "https://www.globalasthmareport.org/"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "8 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320542136-a0lgqbp8n"
+  },
+  {
+    "station_type": "Emergency Medicine",
+    "scenario_title": "Acute Asthma Exacerbation in the Emergency Department",
+    "brief": "This is a station about acute asthma management. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I can't seem to catch my breath...",
+      "details": "Patient describes worsening wheezing and shortness of breath over the last 2 hours, triggered by recent exposure to dust.",
+      "hidden_info": "Patient has a history of asthma not well-controlled due to poor medication adherence."
+    },
+    "mark_scheme": [
+      "Introduces self and establishes patient comfort",
+      "Elicits detailed history of current exacerbation",
+      "Performs focused respiratory examination",
+      "Explains management plan and involves patient in decision-making",
+      "Demonstrates empathy and reassures patient"
+    ],
+    "mnemonic": "ABCDE (Airway, Breathing, Circulation, Disability, Exposure)",
+    "communication_notes": "Emphasize empathy, patient comfort, and understanding local environmental triggers for asthma.",
+    "guideline_links": {
+      "UAE Guidelines": "https://www.doh.gov.ae/en/covid-19/Guidelines-for-Healthcare-Professionals",
+      "GINA": "https://ginasthma.org/gina-reports/",
+      "Local": "https://example.com/local-asthma-guidelines",
+      "International": "https://www.who.int/news-room/fact-sheets/detail/asthma"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "10 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320552646-9ido6eilz"
+  },
+  {
+    "station_type": "Surgery",
+    "scenario_title": "Pre-operative Assessment for Cholecystectomy",
+    "brief": "This is a station about pre-operative assessment for cholecystectomy. Take history, examine, explain, or counsel appropriately.",
+    "actor_script": {
+      "opening": "Doctor, I've been scheduled for a gallbladder surgery...",
+      "details": "Patient shares symptoms of gallstones and medication history when asked.",
+      "hidden_info": "Patient has mild anxiety about the procedure, revealed if candidate asks about concerns."
+    },
+    "mark_scheme": [
+      "Introduces self and confirms patient details",
+      "Conducts thorough surgical history and risk assessment",
+      "Explains the surgery process and addresses patient concerns",
+      "Discusses potential risks and post-operative care",
+      "Builds rapport and reassures the patient"
+    ],
+    "mnemonic": "SAMPLE (Signs/Symptoms, Allergies, Medications, Past medical history, Last oral intake, Events leading to surgery)",
+    "communication_notes": "Ensure respectful communication, address cultural sensitivities, and involve family if appropriate.",
+    "guideline_links": {
+      "HAAD": "https://www.doh.gov.ae/en/Standard-Policies",
+      "NHS": "https://www.nhs.uk/conditions/gallbladder-removal-surgery/",
+      "Local": "https://example.com/uae-surgical-guidelines",
+      "International": "https://www.facs.org/guidelines"
+    },
+    "exam_specific": {
+      "exam_type": "HAAD",
+      "country": "UAE",
+      "duration": "15 minutes",
+      "difficulty": "intermediate"
+    },
+    "id": "haad-1751320558712-b95u462k4"
+  }
+]
