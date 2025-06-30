@@ -1,0 +1,51 @@
+{
+  "id": "derm-001",
+  "category": "Dermatology",
+  "question_scenario": "A 35-year-old man presents with well-demarcated, erythematous plaques covered with thick, silvery scales on his elbows and knees. He also has multiple small pits in his fingernails and some yellow-brown discoloration under the nail plates. The lesions are non-pruritic.",
+  "question_stem": "What is the most likely diagnosis?",
+  "options": [
+    { "label": "A", "text": "Atopic dermatitis" },
+    { "label": "B", "text": "Psoriasis vulgaris", "is_correct": true },
+    { "label": "C", "text": "Seborrheic dermatitis" },
+    { "label": "D", "text": "Lichen planus" },
+    { "label": "E", "text": "Contact dermatitis" }
+  ],
+  "correct_answer_explanation": {
+    "clinical_features": "Psoriasis commonly presents as erythematous, well-demarcated plaques with silvery scales on extensor surfaces (like elbows and knees). Nail changes, including pitting and onycholysis, are classical in psoriasis and help differentiate it from other dermatoses.",
+    "pathophysiology": "Psoriasis is a chronic immune-mediated disease characterized by keratinocyte hyperproliferation, involving T-cell activation and increased cytokine production (IL-17, IL-23, TNF-α).",
+    "diagnostic_criteria": "Diagnosis is primarily clinical. Key criteria include distribution (extensor surfaces), plaque morphology, and nail involvement. Skin biopsy is rarely needed unless diagnosis is uncertain.",
+    "uk_guidelines_summary": {
+      "treatment_protocol": "First-line: topical corticosteroids + vitamin D analogues. Systemics (e.g., methotrexate, biologics) reserved for moderate-to-severe cases (based on PASI/DLQI).",
+      "referral_criteria": "Referral to dermatology if: diagnostic uncertainty, impact on QoL, failure of primary care treatments, or requirement for systemic therapies.",
+      "tools": "PASI (Psoriasis Area and Severity Index) and DLQI (Dermatology Life Quality Index) are used to assess severity."
+    }
+  },
+  "incorrect_options_explanation": {
+    "A": "Atopic dermatitis typically affects flexural areas, is pruritic, and lacks silvery scales or nail pitting.",
+    "C": "Seborrheic dermatitis affects sebaceous areas (scalp, face, chest) and has greasy scales, not silvery plaques.",
+    "D": "Lichen planus has purple, polygonal, pruritic papules; Wickham’s striae may be seen, but not nail pitting or plaques.",
+    "E": "Contact dermatitis is more acute, often pruritic, and related to identifiable allergen exposure; lacks nail changes."
+  },
+  "mnemonic": {
+    "name": "PLAQUES",
+    "definition": "Pitting (nails), Lesions well-demarcated, Auspitz sign, Quality silvery scales, Unusual extensor sites, Erythematous base, Symmetrical distribution"
+  },
+  "references": [
+    {
+      "source": "NICE Guideline CG153: Psoriasis",
+      "url": "https://www.nice.org.uk/guidance/cg153"
+    },
+    {
+      "source": "CKS: Psoriasis (NICE)",
+      "url": "https://cks.nice.org.uk/topics/psoriasis/"
+    },
+    {
+      "source": "NHS Inform: Psoriasis",
+      "url": "https://www.nhsinform.scot/illnesses-and-conditions/skin-hair-and-nails/psoriasis"
+    },
+    {
+      "source": "British Association of Dermatologists",
+      "url": "https://www.bad.org.uk/pils/psoriasis/"
+    }
+  ]
+}
