@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle, FileText, X, Shield, Activity, TrendingUp } from "lucide-react";
 import examRoomImg from "@assets/image_1750775004743.png";
 import { MedicalTermTooltip } from "@/components/MedicalTermTooltip";
+import { PersonalizedDashboard } from "@/components/PersonalizedDashboard";
+import { useLocalAnalytics } from "@/hooks/useLocalAnalytics";
 
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -67,6 +69,10 @@ export default function Test() {
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now());
+  const [showDashboard, setShowDashboard] = useState(false);
+  
+  const { recordAttempt } = useLocalAnalytics();
 
 
   // Translation state
@@ -1039,8 +1045,22 @@ Feel free to ask about any aspect of this question or other medical topics you'r
   };
 
   const handleSubmit = () => {
-    if (selectedAnswer) {
+    if (selectedAnswer && currentQuestion) {
       setSubmitted(true);
+      
+      // Record analytics data
+      const timeSpent = Math.round((Date.now() - questionStartTime) / 1000);
+      const isCorrect = selectedAnswer === currentQuestion.answer;
+      
+      recordAttempt({
+        questionId: currentQuestion.id,
+        category: selectedCategory || 'general',
+        difficulty: selectedDifficulty,
+        isCorrect,
+        timeSpent,
+        selectedAnswer,
+        correctAnswer: currentQuestion.answer
+      });
     }
   };
 
