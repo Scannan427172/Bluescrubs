@@ -1194,9 +1194,9 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
               description: "NICE Clinical Knowledge Summaries for psoriasis"
             },
             {
-              title: "Psoriasis Association UK",
-              url: "https://www.psoriasis-association.org.uk/",
-              description: "Patient support and educational resources"
+              title: "British Association of Dermatologists - Psoriasis Guidelines",
+              url: "https://www.bad.org.uk/pils/psoriasis/",
+              description: "BAD professional clinical guidelines for psoriasis management"
             }
           ]
         }
@@ -1756,8 +1756,8 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
               description: "NICE Clinical Knowledge Summaries for psoriasis"
             },
             {
-              title: "Psoriasis Association UK",
-              url: "https://www.psoriasis-association.org.uk/",
+              title: "British Association of Dermatologists - Psoriasis Guidelines",
+              url: "https://www.bad.org.uk/pils/psoriasis/",
               description: "Patient support and educational resources"
             }
           ]
