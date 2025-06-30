@@ -1074,6 +1074,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer("");
       setSubmitted(false);
+      setQuestionStartTime(Date.now()); // Reset timer for new question
     }
   };
 
@@ -1082,6 +1083,7 @@ Feel free to ask about any aspect of this question or other medical topics you'r
       setCurrentQuestionIndex(prev => prev - 1);
       setSelectedAnswer("");
       setSubmitted(false);
+      setQuestionStartTime(Date.now()); // Reset timer for new question
     }
   };
 
@@ -1267,6 +1269,13 @@ Feel free to ask about any aspect of this question or other medical topics you'r
 
 
         </div>
+
+        {/* Personalized Dashboard */}
+        {showDashboard && (
+          <div className="container mx-auto px-4 mb-8">
+            <PersonalizedDashboard />
+          </div>
+        )}
 
         {/* Statistics Overview Cards */}
         <div className="container mx-auto px-4 pb-12">
@@ -1509,16 +1518,25 @@ Feel free to ask about any aspect of this question or other medical topics you'r
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Back to Mode Selection */}
+      {/* Back to Mode Selection and Dashboard Toggle */}
       <div className="container mx-auto px-4 pt-4">
-        <Button
-          onClick={backToModeSelection}
-          variant="outline"
-          className="mb-4"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Practice Modes
-        </Button>
+        <div className="flex justify-between items-center mb-4">
+          <Button
+            onClick={backToModeSelection}
+            variant="outline"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Practice Modes
+          </Button>
+          <Button
+            onClick={() => setShowDashboard(!showDashboard)}
+            variant={showDashboard ? "default" : "outline"}
+            className="flex items-center gap-2"
+          >
+            <BarChart3 className="w-4 h-4" />
+            {showDashboard ? "Hide Analytics" : "View Analytics"}
+          </Button>
+        </div>
       </div>
 
       {/* Hero Banner with Exam Room Image */}
