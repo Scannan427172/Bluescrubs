@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, ExternalLink, Lightbulb, BookOpen, ArrowLeft, ArrowRight, Volume2, VolumeX, Languages, Globe, MessageCircle, Bot, Send, Brain, Filter, Target, Clock, Award, Star, Library, AlertTriangle, FileText, X, Shield, Activity, TrendingUp } from "lucide-react";
 import examRoomImg from "@assets/image_1750775004743.png";
+import { MedicalTermTooltip } from "@/components/MedicalTermTooltip";
 
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -515,6 +516,89 @@ export default function Test() {
       translateFullQuestion(currentQuestion);
     }
   }, [currentQuestion, translateQuestions, selectedLanguage]);
+
+  // Medical terms dictionary for tooltips
+  const medicalTerms = {
+    "nitrofurantoin": {
+      definition: "A bacteriostatic antibiotic that interferes with bacterial carbohydrate metabolism, specifically effective against most Gram-positive and Gram-negative bacteria causing UTIs.",
+      translation: "نيتروفورانتوين"
+    },
+    "bacteriostatic": {
+      definition: "An antimicrobial agent that inhibits bacterial growth without killing the bacteria directly.",
+      translation: "مثبط للبكتيريا"
+    },
+    "trimethoprim": {
+      definition: "A folate antagonist antibiotic that inhibits bacterial DNA synthesis by blocking dihydrofolate reductase.",
+      translation: "تريميثوبريم"
+    },
+    "uncomplicated cystitis": {
+      definition: "Bladder infection in non-pregnant, immunocompetent women without structural or functional urinary tract abnormalities.",
+      translation: "التهاب المثانة غير المعقد"
+    },
+    "dysuria": {
+      definition: "Painful or difficult urination, often described as burning sensation during micturition.",
+      translation: "عسر التبول"
+    },
+    "urinary frequency": {
+      definition: "Increased frequency of urination, typically >8 times per day.",
+      translation: "تكرار التبول"
+    },
+    "urgency": {
+      definition: "Sudden, compelling desire to urinate that is difficult to defer.",
+      translation: "إلحاح التبول"
+    },
+    "antimicrobial resistance": {
+      definition: "Ability of microorganisms to survive exposure to antimicrobial agents that would normally kill them or inhibit their growth.",
+      translation: "مقاومة المضادات الميكروبية"
+    },
+    "pyelonephritis": {
+      definition: "Inflammation of the kidney parenchyma and renal pelvis, typically caused by bacterial infection ascending from the lower urinary tract.",
+      translation: "التهاب الحويضة والكلية"
+    },
+    "nephrotoxicity": {
+      definition: "Kidney damage caused by toxic substances, including certain medications.",
+      translation: "السمية الكلوية"
+    }
+  };
+
+  // Helper function to render text with medical term tooltips
+  const renderTextWithTooltips = (text: string) => {
+    const words = text.split(' ');
+    const result: (string | JSX.Element)[] = [];
+    
+    words.forEach((word, index) => {
+      // Clean word for matching (remove punctuation)
+      const cleanWord = word.replace(/[.,!?;:()]/g, '').toLowerCase();
+      const matchedTerm = Object.keys(medicalTerms).find(term => 
+        cleanWord === term.toLowerCase() || 
+        cleanWord.includes(term.toLowerCase()) ||
+        term.toLowerCase().includes(cleanWord)
+      );
+      
+      if (matchedTerm) {
+        const termData = medicalTerms[matchedTerm as keyof typeof medicalTerms];
+        result.push(
+          <MedicalTermTooltip
+            key={index}
+            term={matchedTerm}
+            definition={termData.definition}
+            translation={termData.translation}
+          >
+            {word}
+          </MedicalTermTooltip>
+        );
+      } else {
+        result.push(word);
+      }
+      
+      // Add space after each word except the last
+      if (index < words.length - 1) {
+        result.push(' ');
+      }
+    });
+    
+    return result;
+  };
 
   // Format correct answer explanation with structured icons and sections
   const formatCorrectAnswerExplanation = (explanation: any) => {
@@ -1755,7 +1839,9 @@ Feel free to ask about any aspect of this question or other medical topics you'r
                                 {!point.endsWith(':') && (
                                   <div className="w-2 h-2 bg-green-500 rounded-full mt-2 shrink-0"></div>
                                 )}
-                                <span className={`leading-relaxed ${point.endsWith(':') ? 'font-semibold' : ''}`}>{point}</span>
+                                <span className={`leading-relaxed ${point.endsWith(':') ? 'font-semibold' : ''}`}>
+                                  {renderTextWithTooltips(point)}
+                                </span>
                               </div>
                             ))}
                           </div>
