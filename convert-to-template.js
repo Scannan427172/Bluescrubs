@@ -96,6 +96,9 @@ function extractReferralCriteria(explanation) {
 
 function extractAssessmentTools(explanation) {
   if (!explanation) return "Use validated clinical assessment tools as per guidelines.";
+  if (typeof explanation !== 'string') {
+    explanation = JSON.stringify(explanation);
+  }
   const tools = explanation.match(/([A-Z]{2,}[-\d]*|[A-Z][a-z]+[-\d]*)/g);
   return tools ? tools.slice(0, 3).join(', ') + " scoring systems" : "Use validated clinical assessment tools as per guidelines.";
 }
