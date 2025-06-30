@@ -517,24 +517,61 @@ export default function Test() {
     }
   }, [currentQuestion, translateQuestions, selectedLanguage]);
 
-  // Medical terms dictionary for tooltips
+  // Comprehensive medical terms dictionary for tooltips
   const medicalTerms = {
+    // Antibiotics & Medications
     "nitrofurantoin": {
       definition: "A bacteriostatic antibiotic that interferes with bacterial carbohydrate metabolism, specifically effective against most Gram-positive and Gram-negative bacteria causing UTIs.",
       translation: "نيتروفورانتوين"
-    },
-    "bacteriostatic": {
-      definition: "An antimicrobial agent that inhibits bacterial growth without killing the bacteria directly.",
-      translation: "مثبط للبكتيريا"
     },
     "trimethoprim": {
       definition: "A folate antagonist antibiotic that inhibits bacterial DNA synthesis by blocking dihydrofolate reductase.",
       translation: "تريميثوبريم"
     },
+    "methotrexate": {
+      definition: "A disease-modifying antirheumatic drug (DMARD) that inhibits dihydrofolate reductase, used in autoimmune conditions and cancer.",
+      translation: "ميثوتريكسات"
+    },
+    "topical corticosteroids": {
+      definition: "Anti-inflammatory medications applied directly to the skin to reduce inflammation, itching, and immune responses.",
+      translation: "الكورتيكوستيرويدات الموضعية"
+    },
+    "calcipotriol": {
+      definition: "A synthetic vitamin D3 analogue used topically to treat psoriasis by regulating skin cell growth and differentiation.",
+      translation: "كالسيبوتريول"
+    },
+    "ciclosporin": {
+      definition: "An immunosuppressive medication that inhibits T-cell activation, used in severe autoimmune conditions.",
+      translation: "سيكلوسبورين"
+    },
+    
+    // Medical Conditions
     "uncomplicated cystitis": {
       definition: "Bladder infection in non-pregnant, immunocompetent women without structural or functional urinary tract abnormalities.",
       translation: "التهاب المثانة غير المعقد"
     },
+    "psoriasis": {
+      definition: "A chronic autoimmune skin condition characterized by rapid skin cell turnover, resulting in thick, scaly, inflamed patches.",
+      translation: "الصدفية"
+    },
+    "plaque psoriasis": {
+      definition: "The most common form of psoriasis, characterized by raised, red patches covered with silvery-white scales.",
+      translation: "صدفية الأطباق"
+    },
+    "eczema": {
+      definition: "A group of inflammatory skin conditions causing itchy, red, and dry skin patches.",
+      translation: "الأكزيما"
+    },
+    "atopic dermatitis": {
+      definition: "A chronic inflammatory skin condition characterized by itchy, inflamed skin, often associated with allergies and asthma.",
+      translation: "التهاب الجلد التأتبي"
+    },
+    "pyelonephritis": {
+      definition: "Inflammation of the kidney parenchyma and renal pelvis, typically caused by bacterial infection ascending from the lower urinary tract.",
+      translation: "التهاب الحويضة والكلية"
+    },
+    
+    // Symptoms & Clinical Signs
     "dysuria": {
       definition: "Painful or difficult urination, often described as burning sensation during micturition.",
       translation: "عسر التبول"
@@ -547,17 +584,65 @@ export default function Test() {
       definition: "Sudden, compelling desire to urinate that is difficult to defer.",
       translation: "إلحاح التبول"
     },
+    "pruritus": {
+      definition: "Medical term for itching, often associated with skin conditions or systemic diseases.",
+      translation: "الحكة"
+    },
+    "erythema": {
+      definition: "Redness of the skin caused by increased blood flow in superficial capillaries.",
+      translation: "الحمامى"
+    },
+    "scaling": {
+      definition: "Shedding of the outer layer of skin in flakes or scales, often seen in dermatological conditions.",
+      translation: "التقشر"
+    },
+    
+    // Medical Concepts
+    "bacteriostatic": {
+      definition: "An antimicrobial agent that inhibits bacterial growth without killing the bacteria directly.",
+      translation: "مثبط للبكتيريا"
+    },
     "antimicrobial resistance": {
       definition: "Ability of microorganisms to survive exposure to antimicrobial agents that would normally kill them or inhibit their growth.",
       translation: "مقاومة المضادات الميكروبية"
     },
-    "pyelonephritis": {
-      definition: "Inflammation of the kidney parenchyma and renal pelvis, typically caused by bacterial infection ascending from the lower urinary tract.",
-      translation: "التهاب الحويضة والكلية"
-    },
     "nephrotoxicity": {
       definition: "Kidney damage caused by toxic substances, including certain medications.",
       translation: "السمية الكلوية"
+    },
+    "immunosuppression": {
+      definition: "Reduction in the activation or efficacy of the immune system, either naturally occurring or medically induced.",
+      translation: "كبت المناعة"
+    },
+    "autoimmune": {
+      definition: "A condition in which the immune system mistakenly attacks the body's own healthy tissues.",
+      translation: "المناعة الذاتية"
+    },
+    "inflammation": {
+      definition: "The body's immune response to harmful stimuli, characterized by redness, swelling, heat, and pain.",
+      translation: "الالتهاب"
+    },
+    
+    // Clinical Assessment
+    "first-line treatment": {
+      definition: "The initial treatment approach recommended for a condition based on clinical evidence and guidelines.",
+      translation: "العلاج من الخط الأول"
+    },
+    "contraindication": {
+      definition: "A condition or factor that makes a particular treatment or procedure inadvisable.",
+      translation: "موانع الاستعمال"
+    },
+    "monitoring": {
+      definition: "Regular assessment of a patient's condition or response to treatment through clinical observation and tests.",
+      translation: "المراقبة"
+    },
+    "efficacy": {
+      definition: "The ability of a treatment to produce the desired therapeutic effect under ideal conditions.",
+      translation: "الفعالية"
+    },
+    "side effects": {
+      definition: "Unintended effects of a medication or treatment that occur alongside the therapeutic effects.",
+      translation: "الآثار الجانبية"
     }
   };
 
