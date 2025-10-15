@@ -3058,12 +3058,12 @@ app.get("/api/test/questions", async (req, res) => {
         return res.json(question);
       }
 
-      // Return the actual questions
+      // Return the actual questions from generated question bank or fallback to test questions
       // Apply category filtering
-      let filteredQuestions = testQuestions;
+      let filteredQuestions = ukQuestionBank.length > 0 ? ukQuestionBank : testQuestions;
       
       if (category && category !== 'all') {
-        filteredQuestions = testQuestions.filter(q => {
+        filteredQuestions = (ukQuestionBank.length > 0 ? ukQuestionBank : testQuestions).filter(q => {
           const questionCategory = q.category?.toLowerCase() || q.topic?.toLowerCase() || '';
           const requestedCategory = (category as string).toLowerCase();
           
@@ -3120,7 +3120,19 @@ app.get("/api/test/questions", async (req, res) => {
       }
 
       // Limit to requested count
-      const finalQuestions = filteredQuestions.slice(0, requestedCount);
+      let finalQuestions = filteredQuestions.slice(0, requestedCount);
+
+      // Transform questions to ensure answer is the TEXT not numeric index
+      finalQuestions = finalQuestions.map(q => {
+        if (typeof q.answer === 'number' && Array.isArray(q.options)) {
+          // Convert numeric answer index to the actual option text
+          return {
+            ...q,
+            answer: q.options[q.answer] || q.options[0]
+          };
+        }
+        return q;
+      });
 
       console.log(`Filtered questions: ${filteredQuestions.length} found for category "${category}", returning ${finalQuestions.length}`);
 

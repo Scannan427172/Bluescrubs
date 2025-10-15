@@ -18,7 +18,7 @@ export const QUESTION_TEMPLATES = {
         action: ["initial management", "investigation", "treatment"]
       },
       answers: ["Aspirin and clopidogrel", "Echocardiogram", "ACE inhibitor", "Urgent cardiology referral", "Beta-blocker"],
-      correct_index: 0
+      correct_index: -1 // Will be randomized
     }
   ],
   respiratory: [
@@ -33,7 +33,7 @@ export const QUESTION_TEMPLATES = {
         finding: ["bilateral infiltrates", "hyperinflation", "consolidation"]
       },
       answers: ["Pneumonia", "COPD exacerbation", "Pulmonary embolism", "Lung cancer", "Asthma"],
-      correct_index: 0
+      correct_index: -1 // Will be randomized
     }
   ]
 };
@@ -123,11 +123,25 @@ function generateFromPattern(template: any): any {
     questionText = questionText.replace(regex, randomOption);
   }
 
+  // Randomize correct answer if not specified
+  const correctIndex = template.correct_index === -1 
+    ? Math.floor(Math.random() * template.answers.length)
+    : template.correct_index;
+  
+  // Get the correct answer BEFORE shuffling
+  const correctAnswer = template.answers[correctIndex];
+  
+  // Shuffle the options
+  const shuffledOptions = shuffleArray([...template.answers]);
+  
+  // Find the new index of the correct answer AFTER shuffling
+  const newCorrectIndex = shuffledOptions.indexOf(correctAnswer);
+
   return {
     question: questionText,
-    options: shuffleArray([...template.answers]),
-    answer: template.correct_index,
-    explanation: generateExplanation(questionText, template.answers[template.correct_index]),
+    options: shuffledOptions,
+    answer: newCorrectIndex,
+    explanation: generateExplanation(questionText, correctAnswer),
     mnemonic: "Clinical reasoning approach",
     links: {
       "NICE": "https://www.nice.org.uk",
