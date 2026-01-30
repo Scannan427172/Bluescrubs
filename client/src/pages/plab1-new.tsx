@@ -1299,47 +1299,42 @@ export default function PLAB1New() {
                   <Button 
                     onClick={() => startPractice(10)}
                     disabled={isGeneratingQuestions}
-                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>10</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Questions</span>
+                    <span className="font-bold text-lg">10</span>
+                    <span className="text-xs opacity-90">Questions</span>
                   </Button>
                   <Button 
                     onClick={() => startPractice(20)}
                     disabled={isGeneratingQuestions}
-                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>20</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Questions</span>
+                    <span className="font-bold text-lg">20</span>
+                    <span className="text-xs opacity-90">Questions</span>
                   </Button>
                   <Button 
                     onClick={() => startPractice(50)}
                     disabled={isGeneratingQuestions}
-                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>50</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Questions</span>
+                    <span className="font-bold text-lg">50</span>
+                    <span className="text-xs opacity-90">Questions</span>
                   </Button>
                   <Button 
                     onClick={() => startPractice(100)}
                     disabled={isGeneratingQuestions}
-                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>100</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Questions</span>
+                    <span className="font-bold text-lg">100</span>
+                    <span className="text-xs opacity-90">Questions</span>
                   </Button>
                   <Button 
                     onClick={() => startPractice(180)}
                     disabled={isGeneratingQuestions}
-                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-blue-600 hover:bg-blue-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>180</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>PLAB Mock</span>
+                    <span className="font-bold text-lg">180</span>
+                    <span className="text-xs opacity-90">PLAB Mock</span>
                   </Button>
                 </div>
               </div>
@@ -1355,47 +1350,42 @@ export default function PLAB1New() {
                   <Button 
                     onClick={() => startTimedPractice(10)}
                     disabled={isGeneratingQuestions}
-                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>10m</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Sprint</span>
+                    <span className="font-bold text-lg">10m</span>
+                    <span className="text-xs opacity-90">Sprint</span>
                   </Button>
                   <Button 
                     onClick={() => startTimedPractice(30)}
                     disabled={isGeneratingQuestions}
-                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>30m</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Focus</span>
+                    <span className="font-bold text-lg">30m</span>
+                    <span className="text-xs opacity-90">Focus</span>
                   </Button>
                   <Button 
                     onClick={() => startTimedPractice(60)}
                     disabled={isGeneratingQuestions}
-                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>60m</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Endurance</span>
+                    <span className="font-bold text-lg">60m</span>
+                    <span className="text-xs opacity-90">Endurance</span>
                   </Button>
                   <Button 
                     onClick={() => startTimedPractice(120)}
                     disabled={isGeneratingQuestions}
-                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>2h</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Marathon</span>
+                    <span className="font-bold text-lg">2h</span>
+                    <span className="text-xs opacity-90">Marathon</span>
                   </Button>
                   <Button 
                     onClick={() => startTimedPractice(180)}
                     disabled={isGeneratingQuestions}
-                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-orange-600 hover:bg-orange-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>3h</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Ultra</span>
+                    <span className="font-bold text-lg">3h</span>
+                    <span className="text-xs opacity-90">Ultra</span>
                   </Button>
                 </div>
               </div>
@@ -1431,47 +1421,42 @@ export default function PLAB1New() {
                   <Button 
                     onClick={() => startAuthenticTimedPractice(10)}
                     disabled={isGeneratingQuestions}
-                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>10</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>10 mins</span>
+                    <span className="font-bold text-lg">10</span>
+                    <span className="text-xs opacity-90">10 mins</span>
                   </Button>
                   <Button 
                     onClick={() => startAuthenticTimedPractice(20)}
                     disabled={isGeneratingQuestions}
-                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>20</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>20 mins</span>
+                    <span className="font-bold text-lg">20</span>
+                    <span className="text-xs opacity-90">20 mins</span>
                   </Button>
                   <Button 
                     onClick={() => startAuthenticTimedPractice(50)}
                     disabled={isGeneratingQuestions}
-                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>50</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>50 mins</span>
+                    <span className="font-bold text-lg">50</span>
+                    <span className="text-xs opacity-90">50 mins</span>
                   </Button>
                   <Button 
                     onClick={() => startAuthenticTimedPractice(60)}
                     disabled={isGeneratingQuestions}
-                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>60</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>1 hour</span>
+                    <span className="font-bold text-lg">60</span>
+                    <span className="text-xs opacity-90">1 hour</span>
                   </Button>
                   <Button 
                     onClick={() => startAuthenticTimedPractice(180)}
                     disabled={isGeneratingQuestions}
-                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1"
-                    style={{ color: 'white' }}
+                    className="bg-purple-600 hover:bg-purple-700 h-16 flex flex-col items-center justify-center gap-1 force-white-text"
                   >
-                    <span className="font-bold text-lg" style={{ color: 'white' }}>180</span>
-                    <span className="text-xs opacity-90" style={{ color: 'white' }}>Full PLAB</span>
+                    <span className="font-bold text-lg">180</span>
+                    <span className="text-xs opacity-90">Full PLAB</span>
                   </Button>
                 </div>
               </div>

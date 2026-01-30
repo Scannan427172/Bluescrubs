@@ -38,6 +38,12 @@
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0px 0px 8px rgba(0,0,0,0.6) !important;
   }
   
+  /* Force white text on colored buttons */
+  .force-white-text,
+  .force-white-text * {
+    color: #ffffff !important;
+  }
+  
   /* Hero banner performance optimizations */
   .hero-banner-optimized {
     transform: translateZ(0);
