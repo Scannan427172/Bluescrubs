@@ -1084,14 +1084,41 @@ export default function PLAB1New() {
             </Card>
           </div>
 
-          {/* Category Selection */}
-          <Card className="mb-8">
+          {/* NICE NG136 + PLAB MCQ Format Guide - Prominent Display */}
+          <div className="mb-8 p-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg shadow-lg">
+            <Card className="cursor-pointer hover:shadow-xl transition-all duration-300 border-0" onClick={() => setShowNiceGuide(true)}>
+              <CardHeader className="bg-white hover:bg-green-50 transition-colors p-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-green-100 rounded-full">
+                      <FileText className="w-8 h-8 text-green-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-green-800 text-xl font-bold">NICE NG136 + PLAB MCQ Format</CardTitle>
+                      <CardDescription className="text-green-700 mt-2 text-base">
+                        📋 Clinical scenario framework, risk assessment tools, and structured learning approach
+                      </CardDescription>
+                    </div>
+                  </div>
+                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white border-0 px-6 py-3">
+                    <BookOpen className="w-5 h-5 mr-2" />
+                    View Guide
+                  </Button>
+                </div>
+              </CardHeader>
+            </Card>
+          </div>
+
+          {/* Customise Your Practice - Combined Settings and Practice Modes */}
+          <Card id="practice-options" className="mb-8">
             <CardHeader>
-              <CardTitle>Select Practice Category</CardTitle>
-              <CardDescription>Choose a medical specialty to focus your practice</CardDescription>
+              <CardTitle>Customise Your Practice</CardTitle>
+              <CardDescription>Select your category, difficulty, and practice mode</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-6">
+            <CardContent className="space-y-6">
+              
+              {/* Category and Difficulty Selection */}
+              <div className="grid md:grid-cols-2 gap-6 pb-6 border-b">
                 <div>
                   <Label htmlFor="category" className="text-sm font-medium mb-2 block">
                     Medical Specialty
@@ -1126,41 +1153,6 @@ export default function PLAB1New() {
                   </Select>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-
-          {/* NICE NG136 + PLAB MCQ Format Guide - Prominent Display */}
-          <div className="mb-8 p-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg shadow-lg">
-            <Card className="cursor-pointer hover:shadow-xl transition-all duration-300 border-0" onClick={() => setShowNiceGuide(true)}>
-              <CardHeader className="bg-white hover:bg-green-50 transition-colors p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 bg-green-100 rounded-full">
-                      <FileText className="w-8 h-8 text-green-600" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-green-800 text-xl font-bold">NICE NG136 + PLAB MCQ Format</CardTitle>
-                      <CardDescription className="text-green-700 mt-2 text-base">
-                        📋 Clinical scenario framework, risk assessment tools, and structured learning approach
-                      </CardDescription>
-                    </div>
-                  </div>
-                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white border-0 px-6 py-3">
-                    <BookOpen className="w-5 h-5 mr-2" />
-                    View Guide
-                  </Button>
-                </div>
-              </CardHeader>
-            </Card>
-          </div>
-
-          {/* Practice Options - Block System */}
-          <Card id="practice-options" className="mb-8">
-            <CardHeader>
-              <CardTitle>Choose Practice Mode</CardTitle>
-              <CardDescription>Select your preferred study format</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
               
               {/* Block 1: Fixed Question Count */}
               <div className="border rounded-lg p-4 bg-blue-50">
