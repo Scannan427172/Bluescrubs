@@ -64,6 +64,11 @@ export default function PLAB1New() {
   }>>([]);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   
+  // Pause/Continue milestone tracking
+  const [showPauseModal, setShowPauseModal] = useState(false);
+  const [lastMilestone, setLastMilestone] = useState(0);
+  const CORRECT_ANSWER_MILESTONE = 5; // Show pause option every 5 correct answers
+  
   // Block configuration for leaderboard submission
   const [blockType, setBlockType] = useState<'block1' | 'block2' | 'block3'>('block1');
   const [isTimedSession, setIsTimedSession] = useState(false);
@@ -568,6 +573,11 @@ export default function PLAB1New() {
     setSessionStarted(false);
     setShowExplanation(false);
     setCurrentQuestionIndex(0);
+    setSessionResults([]);
+    setUserAnswers([]);
+    setLastMilestone(0);
+    setShowPauseModal(false);
+    setSessionComplete(false);
     
     try {
       const response = await fetch('/api/generate-questions', {
@@ -672,6 +682,22 @@ export default function PLAB1New() {
 
   // Handle next question navigation
   const handleNextQuestion = () => {
+    // Check for correct answer milestone
+    const correctCount = sessionResults.filter(r => r.correct).length;
+    const nextMilestone = Math.floor(correctCount / CORRECT_ANSWER_MILESTONE) * CORRECT_ANSWER_MILESTONE;
+    
+    // Show pause modal if we've hit a new milestone (at least 5 correct)
+    if (correctCount > 0 && correctCount >= CORRECT_ANSWER_MILESTONE && nextMilestone > lastMilestone) {
+      setLastMilestone(nextMilestone);
+      setShowPauseModal(true);
+      return; // Don't proceed until user decides
+    }
+    
+    proceedToNextQuestion();
+  };
+  
+  // Actually move to next question (called after pause modal or directly)
+  const proceedToNextQuestion = () => {
     if (currentQuestionIndex < generatedQuestions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer("");
@@ -696,6 +722,18 @@ export default function PLAB1New() {
       
       setSessionComplete(true);
     }
+  };
+  
+  // Handle continue after pause modal
+  const handleContinuePractice = () => {
+    setShowPauseModal(false);
+    proceedToNextQuestion();
+  };
+  
+  // Handle pause/end session from pause modal
+  const handlePauseSession = () => {
+    setShowPauseModal(false);
+    setSessionComplete(true);
   };
 
 
@@ -2688,6 +2726,74 @@ export default function PLAB1New() {
         onClose={() => setShowAITutor(false)}
         isVisible={showAITutor}
       />
+
+      {/* Pause/Continue Milestone Modal */}
+      {showPauseModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+            {/* Header with celebration */}
+            <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-6 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
+                <Award className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-2">Great Progress!</h2>
+              <p className="text-green-100">
+                You've got {sessionResults.filter(r => r.correct).length} questions correct!
+              </p>
+            </div>
+            
+            {/* Stats */}
+            <div className="p-6 space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-green-50 rounded-lg p-4 text-center">
+                  <div className="text-2xl font-bold text-green-600">
+                    {sessionResults.filter(r => r.correct).length}
+                  </div>
+                  <div className="text-sm text-green-700">Correct</div>
+                </div>
+                <div className="bg-blue-50 rounded-lg p-4 text-center">
+                  <div className="text-2xl font-bold text-blue-600">
+                    {sessionResults.length}
+                  </div>
+                  <div className="text-sm text-blue-700">Answered</div>
+                </div>
+              </div>
+              
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">Questions Remaining</span>
+                  <span className="font-semibold text-gray-800">
+                    {generatedQuestions.length - currentQuestionIndex - 1}
+                  </span>
+                </div>
+              </div>
+              
+              <p className="text-center text-gray-600 text-sm">
+                Would you like to take a break or continue practicing?
+              </p>
+              
+              {/* Action Buttons */}
+              <div className="flex flex-col gap-3">
+                <Button
+                  onClick={handleContinuePractice}
+                  className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-3"
+                >
+                  <ArrowRight className="w-4 h-4 mr-2" />
+                  Continue Practicing
+                </Button>
+                <Button
+                  onClick={handlePauseSession}
+                  variant="outline"
+                  className="w-full border-gray-300 hover:bg-gray-50 py-3"
+                >
+                  <CheckCircle className="w-4 h-4 mr-2" />
+                  Take a Break & See Results
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* NICE NG136 + PLAB MCQ Guide Overlay */}
       {showNiceGuide && (
