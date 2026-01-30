@@ -8,15 +8,24 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { 
   Clock, CheckCircle, XCircle, BookOpen, Target, Brain, 
-  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, MessageCircle, FileText, X
+  ArrowRight, ArrowLeft, RotateCcw, Award, TrendingUp, Home, Globe, Languages, ExternalLink, Volume2, Lightbulb, Plus, MessageCircle, FileText, X, Star, Flame, Trophy
 } from "lucide-react";
 import plab1BgImage from '@assets/458CC7DF-D6D7-4BAD-85F5-99EEBD33ECD9_1750366142331.png';
 import { apiRequest } from "@/lib/queryClient";
 import { AITutor } from "@/components/ai-tutor";
+import { useToast } from "@/hooks/use-toast";
 
 export default function PLAB1New() {
+  const { toast } = useToast();
+  
   // Hero image loading state
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+  
+  // Gamification state
+  const [sessionPoints, setSessionPoints] = useState(0);
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [showPointsAnimation, setShowPointsAnimation] = useState(false);
+  const [lastPointsEarned, setLastPointsEarned] = useState(0);
   
   // Preload hero image for faster loading
   useEffect(() => {
@@ -656,6 +665,32 @@ export default function PLAB1New() {
     }
   };
 
+  // Calculate points for an answer
+  const calculatePoints = (isCorrect: boolean, timeSpentMs: number, streak: number): number => {
+    if (!isCorrect) return 0;
+    
+    const BASE_POINTS = 10;
+    const difficultyMultipliers: Record<string, number> = {
+      foundation: 1,
+      intermediate: 1.5,
+      advanced: 2,
+    };
+    const difficultyMultiplier = difficultyMultipliers[selectedDifficulty] || 1;
+    const difficultyBonus = Math.floor(BASE_POINTS * (difficultyMultiplier - 1));
+    
+    let speedBonus = 0;
+    if (timeSpentMs <= 30000) speedBonus = 5;
+    
+    let streakBonus = 0;
+    if (streak >= 50) streakBonus = 100;
+    else if (streak >= 20) streakBonus = 50;
+    else if (streak >= 10) streakBonus = 25;
+    else if (streak >= 5) streakBonus = 10;
+    else if (streak >= 3) streakBonus = 5;
+    
+    return BASE_POINTS + difficultyBonus + speedBonus + streakBonus;
+  };
+
   // Handle answer submission
   const handleSubmitAnswer = () => {
     if (selectedAnswer && !showExplanation) {
@@ -674,6 +709,49 @@ export default function PLAB1New() {
         timeSpent: timeForQuestion,
         questionId: currentQuestion?.id || `q_${currentQuestionIndex}`
       }]);
+      
+      // Gamification: Calculate and award points
+      const newStreak = isCorrect ? currentStreak + 1 : 0;
+      setCurrentStreak(newStreak);
+      
+      if (isCorrect) {
+        const pointsEarned = calculatePoints(true, timeForQuestion, newStreak);
+        setSessionPoints(prev => prev + pointsEarned);
+        setLastPointsEarned(pointsEarned);
+        setShowPointsAnimation(true);
+        setTimeout(() => setShowPointsAnimation(false), 1500);
+        
+        // Show toast for streaks
+        if (newStreak === 3) {
+          toast({
+            title: "🔥 Streak Started!",
+            description: "3 correct in a row! +5 bonus points",
+          });
+        } else if (newStreak === 5) {
+          toast({
+            title: "💥 On Fire!",
+            description: "5 correct in a row! +10 bonus points",
+          });
+        } else if (newStreak === 10) {
+          toast({
+            title: "🚀 Unstoppable!",
+            description: "10 correct in a row! +25 bonus points",
+          });
+        } else if (newStreak === 20) {
+          toast({
+            title: "👑 Legendary Streak!",
+            description: "20 correct in a row! +50 bonus points",
+          });
+        }
+        
+        // Speed bonus toast
+        if (timeForQuestion <= 30000) {
+          toast({
+            title: "⚡ Speed Bonus!",
+            description: "+5 points for quick answer",
+          });
+        }
+      }
       
       setShowExplanation(true);
       setIsTimerRunning(false);
@@ -697,7 +775,7 @@ export default function PLAB1New() {
   };
   
   // Actually move to next question (called after pause modal or directly)
-  const proceedToNextQuestion = () => {
+  const proceedToNextQuestion = async () => {
     if (currentQuestionIndex < generatedQuestions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer("");
@@ -720,6 +798,33 @@ export default function PLAB1New() {
         difficulty: selectedDifficulty
       });
       
+      // Persist points to the server
+      const accuracy = generatedQuestions.length > 0 
+        ? (correctAnswers / generatedQuestions.length) * 100 
+        : 0;
+      
+      try {
+        await apiRequest('POST', '/api/gamification/award-points', {
+          userId: 1,
+          points: sessionPoints,
+          reason: 'session_complete',
+          sessionData: {
+            questionsAnswered: generatedQuestions.length,
+            correctAnswers,
+            streak: currentStreak,
+            category: selectedCategory,
+            accuracy
+          }
+        });
+        
+        toast({
+          title: "🎉 Session Complete!",
+          description: `You earned ${sessionPoints} points this session!`,
+        });
+      } catch (error) {
+        console.error('Failed to save points:', error);
+      }
+      
       setSessionComplete(true);
     }
   };
@@ -731,8 +836,37 @@ export default function PLAB1New() {
   };
   
   // Handle pause/end session from pause modal
-  const handlePauseSession = () => {
+  const handlePauseSession = async () => {
     setShowPauseModal(false);
+    
+    // Persist points when pausing
+    const correctAnswers = sessionResults.filter(r => r.correct).length;
+    const accuracy = sessionResults.length > 0 
+      ? (correctAnswers / sessionResults.length) * 100 
+      : 0;
+    
+    try {
+      await apiRequest('POST', '/api/gamification/award-points', {
+        userId: 1,
+        points: sessionPoints,
+        reason: 'session_paused',
+        sessionData: {
+          questionsAnswered: sessionResults.length,
+          correctAnswers,
+          streak: currentStreak,
+          category: selectedCategory,
+          accuracy
+        }
+      });
+      
+      toast({
+        title: "📊 Progress Saved",
+        description: `${sessionPoints} points saved to your profile!`,
+      });
+    } catch (error) {
+      console.error('Failed to save points:', error);
+    }
+    
     setSessionComplete(true);
   };
 
@@ -1415,13 +1549,31 @@ export default function PLAB1New() {
   return (
     <div className="min-h-screen bg-gray-50 p-4 pb-24">
       <div className="max-w-4xl mx-auto mb-16">
-        {/* Progress Header with Stopwatch */}
+        {/* Progress Header with Stopwatch and Points */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
             <Badge variant="outline" className="text-sm">
               Question {currentQuestionIndex + 1} of {generatedQuestions.length}
             </Badge>
             <div className="flex items-center gap-4">
+              {/* Points Display */}
+              <div className="relative flex items-center gap-2 bg-gradient-to-r from-yellow-100 to-amber-100 px-3 py-1 rounded-full border border-yellow-300">
+                <Trophy className="w-4 h-4 text-yellow-600" />
+                <span className="font-bold text-yellow-700">{sessionPoints}</span>
+                <span className="text-xs text-yellow-600">pts</span>
+                {showPointsAnimation && (
+                  <span className="absolute -top-4 right-0 text-green-600 font-bold text-sm animate-bounce">
+                    +{lastPointsEarned}
+                  </span>
+                )}
+              </div>
+              {/* Streak Display */}
+              {currentStreak > 0 && (
+                <div className="flex items-center gap-1 bg-gradient-to-r from-orange-100 to-red-100 px-2 py-1 rounded-full border border-orange-300">
+                  <Flame className="w-4 h-4 text-orange-500" />
+                  <span className="font-bold text-orange-600 text-sm">{currentStreak}</span>
+                </div>
+              )}
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <Clock className="w-4 h-4" />
                 <span>{Math.round(timeSpent / 1000 / 60)}m total</span>

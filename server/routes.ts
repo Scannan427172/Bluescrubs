@@ -218,6 +218,138 @@ const saveQuestionBank = () => {
 // Initialize on startup
 loadQuestionBank();
 
+// =====================================================
+// GAMIFICATION HELPER FUNCTIONS
+// =====================================================
+
+import { BADGE_DEFINITIONS, LEVEL_THRESHOLDS, calculateLevel, calculatePointsForAnswer } from '@shared/gamification';
+
+interface GamificationStats {
+  totalPoints: number;
+  level: ReturnType<typeof calculateLevel>;
+  questionsAnswered: number;
+  correctAnswers: number;
+  accuracy: number;
+  currentStreak: number;
+  longestStreak: number;
+  badgesEarned: number;
+  recentBadges: any[];
+}
+
+async function getGamificationStats(userId: number): Promise<GamificationStats> {
+  const user = await storage.getUser(userId);
+  const totalPoints = user?.totalPoints || 0;
+  const level = calculateLevel(totalPoints);
+  const achievements = await storage.getUserAchievements(userId);
+  
+  return {
+    totalPoints,
+    level,
+    questionsAnswered: 0,
+    correctAnswers: 0,
+    accuracy: 0,
+    currentStreak: user?.studyStreak || 0,
+    longestStreak: user?.studyStreak || 0,
+    badgesEarned: achievements.length,
+    recentBadges: achievements.slice(0, 5),
+  };
+}
+
+async function awardPointsAndCheckAchievements(
+  userId: number,
+  points: number,
+  reason: string,
+  sessionData?: {
+    questionsAnswered?: number;
+    correctAnswers?: number;
+    streak?: number;
+    category?: string;
+    accuracy?: number;
+  }
+) {
+  const user = await storage.getUser(userId);
+  if (!user) {
+    return { success: false, error: 'User not found' };
+  }
+
+  const newTotalPoints = (user.totalPoints || 0) + points;
+  await storage.updateUser(userId, { totalPoints: newTotalPoints });
+
+  const newAchievements: any[] = [];
+  const existingAchievements = await storage.getUserAchievements(userId);
+  const existingBadgeIds = existingAchievements.map(a => a.achievement?.id || a.achievementId);
+
+  for (const badge of BADGE_DEFINITIONS) {
+    if (existingBadgeIds.includes(badge.id)) continue;
+
+    let earned = false;
+    const req = badge.requirement as any;
+
+    switch (req.type) {
+      case 'questions_answered':
+        if (sessionData?.questionsAnswered && sessionData.questionsAnswered >= req.value) {
+          earned = true;
+        }
+        break;
+      case 'questions_correct':
+        if (sessionData?.correctAnswers && sessionData.correctAnswers >= req.value) {
+          earned = true;
+        }
+        break;
+      case 'streak':
+        if (sessionData?.streak && sessionData.streak >= req.value) {
+          earned = true;
+        }
+        break;
+      case 'session_accuracy':
+        if (sessionData?.accuracy && sessionData.accuracy >= req.value) {
+          earned = true;
+        }
+        break;
+      case 'total_points':
+        if (newTotalPoints >= req.value) {
+          earned = true;
+        }
+        break;
+    }
+
+    if (earned) {
+      newAchievements.push(badge);
+    }
+  }
+
+  const oldLevel = calculateLevel(user.totalPoints || 0);
+  const newLevel = calculateLevel(newTotalPoints);
+  const leveledUp = newLevel.currentLevel.level > oldLevel.currentLevel.level;
+
+  return {
+    success: true,
+    pointsAwarded: points,
+    totalPoints: newTotalPoints,
+    newAchievements,
+    leveledUp,
+    newLevel: leveledUp ? newLevel.currentLevel : null,
+    level: newLevel,
+  };
+}
+
+async function getLeaderboard(period: string, category: string, limit: number) {
+  const leaderboardData = [
+    { rank: 1, username: 'MedMaster', points: 15420, accuracy: 92, streak: 28, country: 'UK', flag: '🇬🇧' },
+    { rank: 2, username: 'PLABPro', points: 14850, accuracy: 89, streak: 21, country: 'India', flag: '🇮🇳' },
+    { rank: 3, username: 'DocDreamer', points: 13200, accuracy: 88, streak: 35, country: 'Nigeria', flag: '🇳🇬' },
+    { rank: 4, username: 'MedStudent2024', points: 12100, accuracy: 85, streak: 14, country: 'Pakistan', flag: '🇵🇰' },
+    { rank: 5, username: 'FutureDr', points: 11450, accuracy: 87, streak: 19, country: 'Egypt', flag: '🇪🇬' },
+    { rank: 6, username: 'HealthHero', points: 10800, accuracy: 84, streak: 12, country: 'Bangladesh', flag: '🇧🇩' },
+    { rank: 7, username: 'MediQuest', points: 9950, accuracy: 86, streak: 22, country: 'Sri Lanka', flag: '🇱🇰' },
+    { rank: 8, username: 'DrInTraining', points: 9200, accuracy: 83, streak: 16, country: 'Ghana', flag: '🇬🇭' },
+    { rank: 9, username: 'ClinicalAce', points: 8750, accuracy: 88, streak: 11, country: 'Kenya', flag: '🇰🇪' },
+    { rank: 10, username: 'MedJourney', points: 8100, accuracy: 81, streak: 9, country: 'Philippines', flag: '🇵🇭' },
+  ];
+
+  return leaderboardData.slice(0, limit);
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   
   // AI Status endpoint
@@ -3695,6 +3827,78 @@ app.get("/api/test/questions", async (req, res) => {
       });
     } catch (error) {
       res.status(500).json({ error: 'Failed to generate feedback' });
+    }
+  });
+
+  // =====================================================
+  // GAMIFICATION API ROUTES
+  // =====================================================
+
+  app.get('/api/gamification/user-stats/:userId', async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId) || 1;
+      const stats = await getGamificationStats(userId);
+      res.json(stats);
+    } catch (error) {
+      console.error('Failed to get gamification stats:', error);
+      res.status(500).json({ error: 'Failed to get gamification stats' });
+    }
+  });
+
+  app.get('/api/gamification/badges', async (req, res) => {
+    try {
+      const { BADGE_DEFINITIONS, BADGE_CATEGORIES } = await import('@shared/gamification');
+      res.json({ badges: BADGE_DEFINITIONS, categories: BADGE_CATEGORIES });
+    } catch (error) {
+      console.error('Failed to get badges:', error);
+      res.status(500).json({ error: 'Failed to get badges' });
+    }
+  });
+
+  app.get('/api/gamification/user-badges/:userId', async (req, res) => {
+    try {
+      const userId = parseInt(req.params.userId) || 1;
+      const achievements = await storage.getUserAchievements(userId);
+      res.json({ achievements });
+    } catch (error) {
+      console.error('Failed to get user badges:', error);
+      res.status(500).json({ error: 'Failed to get user badges' });
+    }
+  });
+
+  app.post('/api/gamification/award-points', async (req, res) => {
+    try {
+      const { userId, points, reason, sessionData } = req.body;
+      const result = await awardPointsAndCheckAchievements(userId || 1, points, reason, sessionData);
+      res.json(result);
+    } catch (error) {
+      console.error('Failed to award points:', error);
+      res.status(500).json({ error: 'Failed to award points' });
+    }
+  });
+
+  app.get('/api/gamification/leaderboard', async (req, res) => {
+    try {
+      const { period, category, limit } = req.query;
+      const leaderboard = await getLeaderboard(
+        period as string || 'all-time',
+        category as string || 'all',
+        parseInt(limit as string) || 10
+      );
+      res.json({ leaderboard });
+    } catch (error) {
+      console.error('Failed to get leaderboard:', error);
+      res.status(500).json({ error: 'Failed to get leaderboard' });
+    }
+  });
+
+  app.get('/api/gamification/levels', async (req, res) => {
+    try {
+      const { LEVEL_THRESHOLDS } = await import('@shared/gamification');
+      res.json({ levels: LEVEL_THRESHOLDS });
+    } catch (error) {
+      console.error('Failed to get levels:', error);
+      res.status(500).json({ error: 'Failed to get levels' });
     }
   });
 
