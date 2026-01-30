@@ -238,9 +238,9 @@ export default function Premium() {
 
       {/* Detailed Feature Tabs */}
       <Tabs value={activeFeature} onValueChange={setActiveFeature} className="mb-8">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto gap-1">
           {premiumFeatures.map((feature) => (
-            <TabsTrigger key={feature.id} value={feature.id} className="text-xs">
+            <TabsTrigger key={feature.id} value={feature.id} className="text-xs py-2 px-2 whitespace-normal text-center leading-tight">
               {feature.name}
             </TabsTrigger>
           ))}
