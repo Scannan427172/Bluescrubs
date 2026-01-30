@@ -1091,7 +1091,7 @@ export default function PLAB1New() {
               <CardDescription>Choose a medical specialty to focus your practice</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="category" className="text-sm font-medium mb-2 block">
                     Medical Specialty
@@ -1124,18 +1124,6 @@ export default function PLAB1New() {
                       <SelectItem value="advanced">Advanced</SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
-                
-                <div>
-                  <Label className="text-sm font-medium mb-2 block">
-                    Available Questions
-                  </Label>
-                  <div className="flex items-center gap-2 h-10 px-3 border rounded-md bg-gray-50">
-                    <BookOpen className="w-4 h-4 text-green-600" />
-                    <span className="text-sm font-medium text-green-700">
-                      {getQuestionCount(selectedCategory).toLocaleString()}+ questions
-                    </span>
-                  </div>
                 </div>
               </div>
             </CardContent>
