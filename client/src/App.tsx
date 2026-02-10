@@ -40,7 +40,7 @@ import ContentIndependence from "@/pages/content-independence";
 import CompleteIndependence from "@/pages/complete-independence";
 import HybridAIDashboard from "@/pages/hybrid-ai-dashboard";
 import NotFound from "@/pages/not-found";
-import Test from "@/pages/test";
+
 import LiveAnalytics from "@/pages/live-analytics";
 import GenerationStatus from "@/pages/generation-status";
 import CostCalculator from "@/pages/cost-calculator";
@@ -77,14 +77,6 @@ function Router() {
       </Route>
 
 
-      <Route path="/plab1-new">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <Test />
-          </div>
-        </div>
-      </Route>
       <Route path="/plab1">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
@@ -106,14 +98,6 @@ function Router() {
           <Navigation user={DEMO_USER} />
           <div className="flex-1 pb-16 md:pb-0">
             <ClinicalGuides />
-          </div>
-        </div>
-      </Route>
-      <Route path="/test">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <Test />
           </div>
         </div>
       </Route>
@@ -244,17 +228,6 @@ function Router() {
       </Route>
 
 
-
-
-
-      <Route path="/adaptive-learning">
-        <div className="flex flex-col min-h-screen">
-          <Navigation user={DEMO_USER} />
-          <div className="flex-1 pb-16 md:pb-0">
-            <AdaptiveLearning />
-          </div>
-        </div>
-      </Route>
 
       <Route path="/smart-planner">
         <div className="flex flex-col min-h-screen">
