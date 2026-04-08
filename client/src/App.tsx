@@ -85,6 +85,14 @@ function Router() {
           </div>
         </div>
       </Route>
+      <Route path="/plab1-new">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <PLAB1New />
+          </div>
+        </div>
+      </Route>
       <Route path="/flashcards">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
