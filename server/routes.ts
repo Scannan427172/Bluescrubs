@@ -850,16 +850,82 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
 
   // Single batch generation endpoint (for smaller requests)
   app.post("/api/generate-questions", async (req, res) => {
+    const { category, difficulty = "mixed", count = 50 } = req.body;
+    const requestedCount = parseInt(String(count)) || 50;
+
+    // Normalize a question from any stored format to the frontend's expected format
+    const normalizeQuestion = (q: any): any => {
+      // Determine correct answer index (always a number 0-4)
+      let correctAnswer = q.correctAnswer ?? q.correct_answer ?? q.answer;
+      if (typeof correctAnswer === 'string') {
+        // If it's a letter like "A", convert to index
+        if (/^[A-E]$/.test(correctAnswer)) {
+          correctAnswer = correctAnswer.charCodeAt(0) - 65;
+        } else {
+          // Try parse as a number string
+          const parsed = parseInt(correctAnswer);
+          correctAnswer = isNaN(parsed) ? 0 : parsed;
+        }
+      }
+
+      // Normalise options to an array
+      let options = q.options;
+      if (options && typeof options === 'object' && !Array.isArray(options)) {
+        options = Object.values(options);
+      }
+      if (!Array.isArray(options)) options = [];
+
+      return {
+        ...q,
+        options,
+        correctAnswer,
+        correct_answer: correctAnswer, // keep both forms for compatibility
+        answer: correctAnswer,
+      };
+    };
+
+    // If AI is unavailable, serve questions from the existing bank
     if (!isAIEnabled()) {
-      return res.status(503).json({ 
-        error: "AI services unavailable", 
-        message: getAIStatus()
+      let pool = ukQuestionBank.length > 0 ? ukQuestionBank : [];
+
+      // Filter by category if specified and it's not 'all'
+      if (category && category !== 'all' && pool.length > 0) {
+        const filtered = pool.filter((q: any) => {
+          const qCat = (q.category || q.topic || '').toLowerCase();
+          return qCat.includes(category.toLowerCase());
+        });
+        if (filtered.length >= 5) pool = filtered;
+      }
+
+      // Filter by difficulty if specified and it's not 'mixed'
+      if (difficulty && difficulty !== 'mixed' && pool.length > 0) {
+        const filtered = pool.filter((q: any) => 
+          (q.difficulty || '').toLowerCase() === difficulty.toLowerCase()
+        );
+        if (filtered.length >= 5) pool = filtered;
+      }
+
+      // Shuffle and slice to requested count
+      const shuffled = [...pool].sort(() => Math.random() - 0.5);
+      const questions = shuffled.slice(0, requestedCount).map(normalizeQuestion);
+
+      if (questions.length === 0) {
+        return res.status(503).json({ 
+          error: "No questions available", 
+          message: "Question bank is empty and AI generation is unavailable."
+        });
+      }
+
+      return res.json({
+        success: true,
+        generated: questions.length,
+        questions,
+        totalQuestionBank: ukQuestionBank.length,
+        source: 'bank'
       });
     }
 
     try {
-      const { category, difficulty = "mixed", count = 50 } = req.body;
-      
       // Use existing test questions as templates
       const response = await fetch(`${req.protocol}://${req.get('host')}/api/test/questions`);
       const templateQuestions = await response.json();
@@ -869,7 +935,7 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
         templateQuestions.slice(0, 8), 
         category, 
         difficulty, 
-        count
+        requestedCount
       );
       
       // Add to question bank and save
@@ -880,11 +946,26 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
         success: true,
         generated: generatedQuestions.length,
         questions: generatedQuestions,
-        totalQuestionBank: ukQuestionBank.length
+        totalQuestionBank: ukQuestionBank.length,
+        source: 'ai'
       });
       
     } catch (error) {
       console.error('Question generation error:', error);
+
+      // On AI error, also fall back to the bank
+      const shuffled = [...ukQuestionBank].sort(() => Math.random() - 0.5);
+      const questions = shuffled.slice(0, requestedCount).map(normalizeQuestion);
+      if (questions.length > 0) {
+        return res.json({
+          success: true,
+          generated: questions.length,
+          questions,
+          totalQuestionBank: ukQuestionBank.length,
+          source: 'bank'
+        });
+      }
+
       res.status(500).json({ error: "Failed to generate questions" });
     }
   });

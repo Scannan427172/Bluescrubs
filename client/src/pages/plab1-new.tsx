@@ -607,12 +607,16 @@ export default function PLAB1New() {
         if (data.questions && data.questions.length > 0) {
           setSessionStarted(true);
           setQuestionStartTime(Date.now());
+        } else {
+          toast({ title: "No questions found", description: "No questions matched your selection. Try a different category.", variant: "destructive" });
         }
       } else {
-        console.error('Failed to generate questions');
+        const err = await response.json().catch(() => ({}));
+        toast({ title: "Could not load questions", description: err.message || "Please try again.", variant: "destructive" });
       }
     } catch (error) {
       console.error('Error generating questions:', error);
+      toast({ title: "Connection error", description: "Could not reach the server. Please refresh and try again.", variant: "destructive" });
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -696,7 +700,8 @@ export default function PLAB1New() {
     if (selectedAnswer && !showExplanation) {
       const timeForQuestion = Date.now() - questionStartTime;
       const currentQuestion = generatedQuestions[currentQuestionIndex];
-      const isCorrect = parseInt(selectedAnswer) === currentQuestion?.correct_answer;
+      const correctIdx = currentQuestion?.correctAnswer ?? currentQuestion?.correct_answer ?? currentQuestion?.answer;
+      const isCorrect = parseInt(selectedAnswer) === (typeof correctIdx === 'string' ? correctIdx.charCodeAt(0) - 65 : correctIdx);
       
       // Update question times and user answers
       setQuestionTimes(prev => [...prev, timeForQuestion]);
