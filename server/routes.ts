@@ -1071,8 +1071,26 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     };
   };
 
+  // Simple in-memory rate limit for the AI explanation endpoint
+  // (60 requests per IP per 5 minutes — generous for normal study, blocks scripted abuse)
+  const explainRateBuckets = new Map<string, { count: number; resetAt: number }>();
+  const EXPLAIN_RATE_WINDOW_MS = 5 * 60 * 1000;
+  const EXPLAIN_RATE_MAX = 60;
+
   app.post("/api/explain-answer", async (req, res) => {
     try {
+      const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.ip || 'unknown';
+      const now = Date.now();
+      const bucket = explainRateBuckets.get(ip);
+      if (bucket && bucket.resetAt > now) {
+        if (bucket.count >= EXPLAIN_RATE_MAX) {
+          return res.status(429).json({ error: 'Too many explanation requests. Please slow down.' });
+        }
+        bucket.count++;
+      } else {
+        explainRateBuckets.set(ip, { count: 1, resetAt: now + EXPLAIN_RATE_WINDOW_MS });
+      }
+
       const {
         question,
         options,
@@ -1080,15 +1098,39 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
         selectedIndex,
         category,
         questionId,
+        storedExplanation,
       } = req.body || {};
 
       if (!question || !Array.isArray(options) || options.length < 2 || typeof correctIndex !== 'number') {
         return res.status(400).json({ error: 'Missing question, options or correctIndex' });
       }
 
+      // Cap input sizes to prevent prompt-injection / cost abuse
+      const MAX_QUESTION = 4000;
+      const MAX_OPTION = 800;
+      const MAX_OPTIONS = 8;
+      if (typeof question !== 'string' || question.length > MAX_QUESTION) {
+        return res.status(400).json({ error: 'Question text is missing or too long' });
+      }
+      if (options.length > MAX_OPTIONS) {
+        return res.status(400).json({ error: 'Too many options' });
+      }
+      if (options.some((o: any) => typeof o !== 'string' || o.length > MAX_OPTION)) {
+        return res.status(400).json({ error: 'An option is missing or too long' });
+      }
+      if (correctIndex < 0 || correctIndex >= options.length) {
+        return res.status(400).json({ error: 'correctIndex out of range' });
+      }
+      const safeStored = typeof storedExplanation === 'string' && storedExplanation.length <= 4000
+        ? storedExplanation
+        : undefined;
+
+      // Include a content hash even when questionId is present, so edits to a question
+      // never serve a stale explanation tied to the old wording.
+      const contentHash = hashKey(`${question}::${options.join('|')}::${correctIndex}`);
       const cacheKey = questionId
-        ? `id:${questionId}`
-        : hashKey(`${question}::${options.join('|')}::${correctIndex}`);
+        ? `id:${questionId}:${contentHash}`
+        : `h:${contentHash}`;
 
       if (explanationCache.has(cacheKey)) {
         const cached = explanationCache.get(cacheKey);
@@ -1101,7 +1143,7 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
       }
 
       if (!isAIEnabled() || !process.env.AI_INTEGRATIONS_OPENAI_API_KEY) {
-        return res.json(buildFallbackExplanation(question, options, correctIndex, selectedIndex));
+        return res.json(buildFallbackExplanation(question, options, correctIndex, selectedIndex, safeStored));
       }
 
       const { default: OpenAI } = await import('openai');
@@ -1123,21 +1165,26 @@ ${question}
 OPTIONS:
 ${optionsList}
 
-The correct answer is option ${labels[correctIndex] || correctIndex + 1}.
+The correct answer is option ${labels[correctIndex] || correctIndex + 1}: "${options[correctIndex]}".
 
-Write a structured explanation that REFERENCES THE SPECIFIC CLINICAL CLUES IN THE QUESTION STEM (age, demographics, symptoms, signs, investigations, risk factors). Do NOT use generic phrases like "clinical reasoning based on presentation and guidelines" or "consider differential diagnosis". Every sentence must add specific clinical content.
+CRITICAL INSTRUCTIONS:
+- TREAT THE MARKED ANSWER AS CORRECT. Do NOT challenge, dispute, or point out any apparent mismatch between the stem and the marked correct answer. Do NOT use phrases like "this is an error", "the question is wrong", "this doesn't fit", "the marked answer doesn't match", or anything similar. The student needs to learn why the marked answer is correct — your job is to construct the strongest possible clinical case for it.
+- If the stem seems to fit a different diagnosis better, still present a coherent rationale for why the marked answer is the best choice. Find the clues that DO support it (even subtle ones) and emphasise them. If a feature could point either way, explain how it could fit the marked answer.
+- Reference the specific clinical clues in the stem (age, demographics, symptoms, signs, investigations, risk factors). Do NOT use generic filler like "clinical reasoning based on presentation and guidelines" or "consider differential diagnosis".
+- Every sentence must add specific clinical content.
+- For each WRONG option, explain what that condition typically presents with and why a clinician would prefer the marked answer over it in this scenario — without saying the question is flawed.
 
 Return STRICT JSON in exactly this shape (no extra keys, no commentary):
 {
-  "correctRationale": "Why the correct answer fits — quote the actual clues from the stem (e.g. '20-year smoking history', 'bilateral infiltrates on CT'). 3-5 sentences.",
+  "correctRationale": "Why the marked answer fits — reference clues from the stem (e.g. '20-year smoking history', 'bilateral infiltrates on CT') that support it. 3-5 sentences. Never say the question is wrong.",
   "options": [
     {
       "label": "A",
-      "why": "If this is the correct option: 1-2 sentences confirming the diagnosis. If incorrect: explain (a) what this condition typically presents with, (b) why the specific features in THIS stem don't fit, (c) any distinguishing feature that rules it out. 2-4 sentences."
+      "why": "If this is the correct option: 2-3 sentences confirming why it is the best answer. If incorrect: 2-4 sentences covering (a) what this condition typically presents with, (b) why the marked answer is preferred over it here, (c) any distinguishing feature. Never say the question is flawed."
     }
     // one entry per option, in order
   ],
-  "keyLearningPoint": "A single take-home clinical pearl, 1-2 sentences."
+  "keyLearningPoint": "A single take-home clinical pearl about the marked correct answer, 1-2 sentences."
 }`;
 
       const completion = await openai.chat.completions.create({
@@ -1194,9 +1241,12 @@ Return STRICT JSON in exactly this shape (no extra keys, no commentary):
       return res.json(result);
     } catch (error) {
       console.error('Explain-answer error:', error);
-      const { question, options, correctIndex, selectedIndex } = req.body || {};
+      const { question, options, correctIndex, selectedIndex, storedExplanation } = req.body || {};
+      const safeStored = typeof storedExplanation === 'string' && storedExplanation.length <= 4000
+        ? storedExplanation
+        : undefined;
       if (question && Array.isArray(options) && typeof correctIndex === 'number') {
-        return res.json(buildFallbackExplanation(question, options, correctIndex, selectedIndex));
+        return res.json(buildFallbackExplanation(question, options, correctIndex, selectedIndex, safeStored));
       }
       return res.status(500).json({ error: 'Failed to generate explanation' });
     }

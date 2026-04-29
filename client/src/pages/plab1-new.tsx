@@ -809,6 +809,9 @@ export default function PLAB1New() {
     setAiExplanationLoading(true);
     setAiExplanation(null);
     try {
+      const storedExplanation = typeof question.explanation === 'string'
+        ? question.explanation
+        : (typeof question.explanation?.text === 'string' ? question.explanation.text : undefined);
       const resp = await fetch('/api/explain-answer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -819,6 +822,7 @@ export default function PLAB1New() {
           selectedIndex: selectedIdx,
           category: question.category || question.topic,
           questionId: qid,
+          storedExplanation,
         }),
       });
       if (!resp.ok) return;
@@ -2159,7 +2163,7 @@ export default function PLAB1New() {
                     <div className="h-3 bg-blue-100 rounded animate-pulse w-4/6" />
                   </div>
                 </div>
-              ) : aiExplanation ? (
+              ) : aiExplanation && aiExplanation.source !== 'fallback' ? (
                 <div className="space-y-5">
                   {/* Why correct */}
                   <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
