@@ -58,7 +58,15 @@ const DEMO_USER = {
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Landing} />
+      <Route path="/">
+        <div className="flex flex-col min-h-screen">
+          <Navigation user={DEMO_USER} />
+          <div className="flex-1 pb-16 md:pb-0">
+            <PLAB1New />
+          </div>
+        </div>
+      </Route>
+      <Route path="/landing" component={Landing} />
       <Route path="/home">
         <div className="flex flex-col min-h-screen">
           <Navigation user={DEMO_USER} />
