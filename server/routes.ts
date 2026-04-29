@@ -923,6 +923,31 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     }
   });
 
+  // Pull questions from the local bank with best-effort category/difficulty filtering.
+  // Falls back to the full pool if a strict filter would leave too few questions.
+  const pickFromBank = (category?: string, difficulty?: string, requestedCount = 50) => {
+    let pool: any[] = ukQuestionBank.length > 0 ? ukQuestionBank : [];
+
+    if (category && category !== 'all' && pool.length > 0) {
+      const needle = category.toLowerCase().replace(/[-_\s]+/g, '');
+      const filtered = pool.filter((q: any) => {
+        const qCat = (q.category || q.topic || '').toLowerCase().replace(/[-_\s]+/g, '');
+        return qCat && (qCat.includes(needle) || needle.includes(qCat));
+      });
+      if (filtered.length >= 5) pool = filtered;
+    }
+
+    if (difficulty && difficulty !== 'mixed' && pool.length > 0) {
+      const filtered = pool.filter((q: any) =>
+        (q.difficulty || '').toLowerCase() === difficulty.toLowerCase()
+      );
+      if (filtered.length >= 5) pool = filtered;
+    }
+
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, requestedCount).map(normalizeStoredQuestion);
+  };
+
   // Single batch generation endpoint (for smaller requests)
   app.post("/api/generate-questions", async (req, res) => {
     const { category, difficulty = "mixed", count = 50 } = req.body;
@@ -930,32 +955,11 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
 
     // If AI is unavailable, serve questions from the existing bank
     if (!isAIEnabled()) {
-      let pool = ukQuestionBank.length > 0 ? ukQuestionBank : [];
-
-      // Filter by category if specified and it's not 'all'
-      if (category && category !== 'all' && pool.length > 0) {
-        const filtered = pool.filter((q: any) => {
-          const qCat = (q.category || q.topic || '').toLowerCase();
-          return qCat.includes(category.toLowerCase());
-        });
-        if (filtered.length >= 5) pool = filtered;
-      }
-
-      // Filter by difficulty if specified and it's not 'mixed'
-      if (difficulty && difficulty !== 'mixed' && pool.length > 0) {
-        const filtered = pool.filter((q: any) => 
-          (q.difficulty || '').toLowerCase() === difficulty.toLowerCase()
-        );
-        if (filtered.length >= 5) pool = filtered;
-      }
-
-      // Shuffle and slice to requested count
-      const shuffled = [...pool].sort(() => Math.random() - 0.5);
-      const questions = shuffled.slice(0, requestedCount).map(normalizeStoredQuestion);
+      const questions = pickFromBank(category, difficulty, requestedCount);
 
       if (questions.length === 0) {
-        return res.status(503).json({ 
-          error: "No questions available", 
+        return res.status(503).json({
+          error: "No questions available",
           message: "Question bank is empty and AI generation is unavailable."
         });
       }
@@ -973,19 +977,37 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
       // Use existing test questions as templates
       const response = await fetch(`${req.protocol}://${req.get('host')}/api/test/questions`);
       const templateQuestions = await response.json();
-      
+
       // Generate questions using AI with templates as reference
       const generatedQuestions = await generateMedicalQuestions(
-        templateQuestions.slice(0, 8), 
-        category, 
-        difficulty, 
+        templateQuestions.slice(0, 8),
+        category,
+        difficulty,
         requestedCount
       );
-      
+
+      // If AI returned nothing usable, fall back to the question bank
+      if (!generatedQuestions || generatedQuestions.length === 0) {
+        const fallback = pickFromBank(category, difficulty, requestedCount);
+        if (fallback.length > 0) {
+          return res.json({
+            success: true,
+            generated: fallback.length,
+            questions: fallback,
+            totalQuestionBank: ukQuestionBank.length,
+            source: 'bank'
+          });
+        }
+        return res.status(503).json({
+          error: "No questions available",
+          message: "AI generation returned no questions and the local bank is empty."
+        });
+      }
+
       // Add to question bank and save
       ukQuestionBank.push(...generatedQuestions);
       saveQuestionBank();
-      
+
       res.json({
         success: true,
         generated: generatedQuestions.length,
@@ -993,18 +1015,17 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
         totalQuestionBank: ukQuestionBank.length,
         source: 'ai'
       });
-      
+
     } catch (error) {
       console.error('Question generation error:', error);
 
-      // On AI error, also fall back to the bank
-      const shuffled = [...ukQuestionBank].sort(() => Math.random() - 0.5);
-      const questions = shuffled.slice(0, requestedCount).map(normalizeStoredQuestion);
-      if (questions.length > 0) {
+      // On AI error, fall back to the bank with the requested filters
+      const fallback = pickFromBank(category, difficulty, requestedCount);
+      if (fallback.length > 0) {
         return res.json({
           success: true,
-          generated: questions.length,
-          questions,
+          generated: fallback.length,
+          questions: fallback,
           totalQuestionBank: ukQuestionBank.length,
           source: 'bank'
         });
