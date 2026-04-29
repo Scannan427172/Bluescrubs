@@ -189,13 +189,88 @@ async function generateMedicalGuidanceResponse(question: string, context: any) {
 // Pre-loaded question bank for instant delivery with persistence
 let ukQuestionBank: any[] = [];
 
+// Normalize a question from any stored format to a consistent internal format
+const normalizeStoredQuestion = (q: any): any => {
+  // Enhanced format: has question_stem / question_scenario and options with is_correct flag
+  const isEnhancedFormat = q.question_stem || q.question_scenario;
+
+  let questionText: string;
+  let options: string[];
+  let correctAnswer: number;
+  let explanation: string;
+
+  if (isEnhancedFormat) {
+    // Build question text from scenario + stem
+    questionText = [q.question_scenario, q.question_stem].filter(Boolean).join('\n\n');
+
+    // Options: array of {label, text, is_correct}
+    const rawOptions: any[] = Array.isArray(q.options) ? q.options : [];
+    options = rawOptions.map((o: any) => (typeof o === 'string' ? o : o.text || ''));
+    correctAnswer = rawOptions.findIndex((o: any) => o.is_correct === true);
+    if (correctAnswer < 0) correctAnswer = 0;
+
+    // Explanation from detailed field
+    explanation =
+      q.correct_answer_explanation ||
+      q.correct_answer_explanation_detailed ||
+      q.explanation ||
+      '';
+  } else {
+    // Template/legacy format: has question string, options array, answer index/letter
+    questionText = q.question || '';
+    let rawOptions = q.options;
+    if (rawOptions && typeof rawOptions === 'object' && !Array.isArray(rawOptions)) {
+      rawOptions = Object.values(rawOptions);
+    }
+    options = Array.isArray(rawOptions) ? rawOptions : [];
+
+    let ca = q.correctAnswer ?? q.correct_answer ?? q.answer;
+    if (typeof ca === 'string') {
+      ca = /^[A-E]$/.test(ca) ? ca.charCodeAt(0) - 65 : (parseInt(ca) || 0);
+    }
+    correctAnswer = typeof ca === 'number' ? ca : 0;
+
+    explanation = typeof q.explanation === 'string'
+      ? q.explanation
+      : q.explanation
+        ? Object.values(q.explanation).join(' ')
+        : '';
+  }
+
+  return {
+    ...q,
+    question: questionText,
+    options,
+    correctAnswer,
+    correct_answer: correctAnswer,
+    answer: correctAnswer,
+    explanation,
+  };
+};
+
 // Initialize question bank with persistent storage
 const loadQuestionBank = () => {
   try {
-    const filePath = path.join(process.cwd(), 'generated-question-bank.json');
-    if (fs.existsSync(filePath)) {
-      const savedQuestions = fs.readFileSync(filePath, 'utf8');
-      ukQuestionBank = JSON.parse(savedQuestions);
+    const allQuestions: any[] = [];
+
+    // Load enhanced/high-quality questions first (656 with is_correct flags)
+    const enhancedPath = path.join(process.cwd(), 'question-bank-enhanced.json');
+    if (fs.existsSync(enhancedPath)) {
+      const data = JSON.parse(fs.readFileSync(enhancedPath, 'utf8'));
+      allQuestions.push(...data);
+      console.log(`Loaded ${data.length} enhanced questions`);
+    }
+
+    // Also load generated questions (template-based, fills gaps if needed)
+    const generatedPath = path.join(process.cwd(), 'generated-question-bank.json');
+    if (fs.existsSync(generatedPath)) {
+      const data = JSON.parse(fs.readFileSync(generatedPath, 'utf8'));
+      allQuestions.push(...data);
+      console.log(`Loaded ${data.length} generated questions`);
+    }
+
+    if (allQuestions.length > 0) {
+      ukQuestionBank = allQuestions;
       console.log(`Loaded ${ukQuestionBank.length} questions from storage`);
     }
   } catch (error) {
@@ -853,37 +928,6 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     const { category, difficulty = "mixed", count = 50 } = req.body;
     const requestedCount = parseInt(String(count)) || 50;
 
-    // Normalize a question from any stored format to the frontend's expected format
-    const normalizeQuestion = (q: any): any => {
-      // Determine correct answer index (always a number 0-4)
-      let correctAnswer = q.correctAnswer ?? q.correct_answer ?? q.answer;
-      if (typeof correctAnswer === 'string') {
-        // If it's a letter like "A", convert to index
-        if (/^[A-E]$/.test(correctAnswer)) {
-          correctAnswer = correctAnswer.charCodeAt(0) - 65;
-        } else {
-          // Try parse as a number string
-          const parsed = parseInt(correctAnswer);
-          correctAnswer = isNaN(parsed) ? 0 : parsed;
-        }
-      }
-
-      // Normalise options to an array
-      let options = q.options;
-      if (options && typeof options === 'object' && !Array.isArray(options)) {
-        options = Object.values(options);
-      }
-      if (!Array.isArray(options)) options = [];
-
-      return {
-        ...q,
-        options,
-        correctAnswer,
-        correct_answer: correctAnswer, // keep both forms for compatibility
-        answer: correctAnswer,
-      };
-    };
-
     // If AI is unavailable, serve questions from the existing bank
     if (!isAIEnabled()) {
       let pool = ukQuestionBank.length > 0 ? ukQuestionBank : [];
@@ -907,7 +951,7 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
 
       // Shuffle and slice to requested count
       const shuffled = [...pool].sort(() => Math.random() - 0.5);
-      const questions = shuffled.slice(0, requestedCount).map(normalizeQuestion);
+      const questions = shuffled.slice(0, requestedCount).map(normalizeStoredQuestion);
 
       if (questions.length === 0) {
         return res.status(503).json({ 
@@ -955,7 +999,7 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
 
       // On AI error, also fall back to the bank
       const shuffled = [...ukQuestionBank].sort(() => Math.random() - 0.5);
-      const questions = shuffled.slice(0, requestedCount).map(normalizeQuestion);
+      const questions = shuffled.slice(0, requestedCount).map(normalizeStoredQuestion);
       if (questions.length > 0) {
         return res.json({
           success: true,
