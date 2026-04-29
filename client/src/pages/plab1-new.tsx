@@ -899,23 +899,37 @@ export default function PLAB1New() {
           count: 100 // Generate enough questions for timed session
         })
       });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        toast({ title: "Could not load questions", description: err.message || "Please try again.", variant: "destructive" });
+        return;
+      }
+
       const data = await response.json();
-      setGeneratedQuestions(data.questions);
+      const questions = Array.isArray(data.questions) ? data.questions : [];
+      if (questions.length === 0) {
+        toast({ title: "No questions found", description: "No questions matched your selection. Try a different category.", variant: "destructive" });
+        return;
+      }
+
+      setGeneratedQuestions(questions);
       setCurrentQuestionIndex(0);
       setSelectedAnswer("");
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
       setSessionStarted(true);
       setIsTimerRunning(true);
-      
+
       // Set timer for timed practice
       setTimeout(() => {
         setIsTimerRunning(false);
         setSessionComplete(true);
       }, timeInMinutes * 60 * 1000);
-      
+
     } catch (error) {
       console.error('Error generating questions:', error);
+      toast({ title: "Connection error", description: "Could not reach the server. Please refresh and try again.", variant: "destructive" });
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -934,10 +948,22 @@ export default function PLAB1New() {
           count: questionCount // Generate exact number of questions
         })
       });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        toast({ title: "Could not load questions", description: err.message || "Please try again.", variant: "destructive" });
+        return;
+      }
+
       const data = await response.json();
-      
+      const questions = Array.isArray(data.questions) ? data.questions : [];
+      if (questions.length === 0) {
+        toast({ title: "No questions found", description: "No questions matched your selection. Try a different category.", variant: "destructive" });
+        return;
+      }
+
       // Slice to exact count in case more were generated
-      const exactQuestions = data.questions.slice(0, questionCount);
+      const exactQuestions = questions.slice(0, questionCount);
       setGeneratedQuestions(exactQuestions);
       setCurrentQuestionIndex(0);
       setSelectedAnswer("");
@@ -945,16 +971,17 @@ export default function PLAB1New() {
       setQuestionStartTime(Date.now());
       setSessionStarted(true);
       setIsTimerRunning(true);
-      
+
       // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
-      const totalTimeMs = questionCount * 60 * 1000; // 1 minute per question
+      const totalTimeMs = exactQuestions.length * 60 * 1000; // 1 minute per question
       setTimeout(() => {
         setIsTimerRunning(false);
         setSessionComplete(true);
       }, totalTimeMs);
-      
+
     } catch (error) {
       console.error('Error generating questions:', error);
+      toast({ title: "Connection error", description: "Could not reach the server. Please refresh and try again.", variant: "destructive" });
     } finally {
       setIsGeneratingQuestions(false);
     }
@@ -973,17 +1000,31 @@ export default function PLAB1New() {
           count: 20 // Start with 20, will generate more as needed
         })
       });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        toast({ title: "Could not load questions", description: err.message || "Please try again.", variant: "destructive" });
+        return;
+      }
+
       const data = await response.json();
-      setGeneratedQuestions(data.questions);
+      const questions = Array.isArray(data.questions) ? data.questions : [];
+      if (questions.length === 0) {
+        toast({ title: "No questions found", description: "No questions matched your selection. Try a different category.", variant: "destructive" });
+        return;
+      }
+
+      setGeneratedQuestions(questions);
       setCurrentQuestionIndex(0);
       setSelectedAnswer("");
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
       setSessionStarted(true);
       setIsTimerRunning(false); // No timer for unlimited
-      
+
     } catch (error) {
       console.error('Error generating questions:', error);
+      toast({ title: "Connection error", description: "Could not reach the server. Please refresh and try again.", variant: "destructive" });
     } finally {
       setIsGeneratingQuestions(false);
     }
