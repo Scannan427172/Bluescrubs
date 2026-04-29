@@ -15,6 +15,54 @@ import { apiRequest } from "@/lib/queryClient";
 import { AITutor } from "@/components/ai-tutor";
 import { useToast } from "@/hooks/use-toast";
 
+// Map a reference label/title to its canonical official URL.
+// Order matters — more specific patterns before generic ones.
+const REFERENCE_URL_MAP: { match: RegExp; url: string }[] = [
+  { match: /\bESC\b|European Society of Cardiology/i, url: 'https://www.escardio.org/Guidelines' },
+  { match: /\bBTS\b|British Thoracic Society/i, url: 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/' },
+  { match: /\bBSG\b|British Society of Gastroenterology/i, url: 'https://www.bsg.org.uk/clinical-resource/guidelines/' },
+  { match: /\bRCOG\b|Royal College of Obstetricians/i, url: 'https://www.rcog.org.uk/guidance/browse-all-guidance/' },
+  { match: /\bRCGP\b|Royal College of General Practitioners/i, url: 'https://www.rcgp.org.uk/representing-you/policy-areas/clinical-policy' },
+  { match: /\bADA\b|American Diabetes Association/i, url: 'https://professional.diabetes.org/standards-of-care' },
+  { match: /\bSIGN\b|Scottish Intercollegiate/i, url: 'https://www.sign.ac.uk/our-guidelines/' },
+  { match: /\bBMJ Best Practice\b/i, url: 'https://bestpractice.bmj.com/' },
+  { match: /\bGMC\b.*Good Medical Practice|Good Medical Practice/i, url: 'https://www.gmc-uk.org/professional-standards/professional-standards-for-doctors/good-medical-practice' },
+  { match: /\bMLA\b|Medical Licensing Assessment|Content Map/i, url: 'https://www.gmc-uk.org/education/medical-licensing-assessment/mla-content-map' },
+  { match: /Foundation Programme/i, url: 'https://foundationprogramme.nhs.uk/curriculum/' },
+  { match: /\bCKS\b|Clinical Knowledge Summaries/i, url: 'https://cks.nice.org.uk/' },
+  { match: /\bBNF\b|British National Formulary/i, url: 'https://bnf.nice.org.uk/' },
+  { match: /\bNICE\b/i, url: 'https://www.nice.org.uk/guidance' },
+];
+
+const getReferenceUrl = (text: string): string | null => {
+  if (!text) return null;
+  for (const entry of REFERENCE_URL_MAP) {
+    if (entry.match.test(text)) return entry.url;
+  }
+  return null;
+};
+
+const ReferenceLink = ({ text }: { text: string }) => {
+  const url = getReferenceUrl(text);
+  if (!url) {
+    return <p className="text-blue-700">• {text}</p>;
+  }
+  return (
+    <p className="text-blue-700">
+      <span aria-hidden="true">• </span>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-700 hover:text-blue-900 underline decoration-blue-400 hover:decoration-blue-700 underline-offset-2 inline-flex items-baseline gap-1"
+      >
+        {text}
+        <ExternalLink className="w-3 h-3 self-center" aria-hidden="true" />
+      </a>
+    </p>
+  );
+};
+
 export default function PLAB1New() {
   const { toast } = useToast();
   
@@ -2645,95 +2693,93 @@ export default function PLAB1New() {
                           // Filter out CKS references that duplicate what's already in the CKS button
                           return !title.toLowerCase().includes('cks:') && !title.toLowerCase().includes('clinical guideline: cks');
                         })
-                        .map((reference: any, index: number) => (
-                        <div key={index} className="bg-white border border-blue-200 rounded-lg p-3 mb-3">
-                          <p className="text-blue-700 leading-relaxed mb-3 text-sm">
-                            {typeof reference === 'string' ? reference : reference.title || reference.text}
-                          </p>
-                          {typeof reference === 'object' && reference.url && (
-                            <Button
-                              size="sm"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                window.open(reference.url, '_blank');
-                              }}
-                              className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
-                            >
-                              <ExternalLink className="w-4 h-4 mr-1" />
-                              View Full Guidelines
-                            </Button>
-                          )}
-                        </div>
-                      ))
+                        .map((reference: any, index: number) => {
+                          const refTitle = typeof reference === 'string' ? reference : reference.title || reference.text || '';
+                          const refUrl = (typeof reference === 'object' && reference.url) || getReferenceUrl(refTitle);
+                          return (
+                            <div key={index} className="bg-white border border-blue-200 rounded-lg p-3 mb-3">
+                              <p className="text-blue-700 leading-relaxed mb-3 text-sm">{refTitle}</p>
+                              {refUrl && (
+                                <a
+                                  href={refUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium"
+                                >
+                                  <ExternalLink className="w-4 h-4" />
+                                  View Full Guidelines
+                                </a>
+                              )}
+                            </div>
+                          );
+                        })
                     ) : (
                       <div className="space-y-2">
                         {/* Specialty-specific references with comprehensive guidelines */}
                         {currentQuestion.category?.toLowerCase().includes('cardio') && (
                           <>
-                            <p className="text-blue-700">• ESC Guidelines - European Society of Cardiology evidence-based recommendations</p>
-                            <p className="text-blue-700">• NICE Guidelines - Cardiovascular disease prevention and management</p>
-                            <p className="text-blue-700">• SIGN Guidelines - Scottish cardiovascular evidence and recommendations</p>
-                            <p className="text-blue-700">• BNF - British National Formulary for cardiac medications</p>
-                            <p className="text-blue-700">• MLA Content Map - Applied Medical Sciences: Cardiovascular pathophysiology</p>
-                            <p className="text-blue-700">• Foundation Programme - Acute care and emergency medicine competencies</p>
+                            <ReferenceLink text="ESC Guidelines - European Society of Cardiology evidence-based recommendations" />
+                            <ReferenceLink text="NICE Guidelines - Cardiovascular disease prevention and management" />
+                            <ReferenceLink text="SIGN Guidelines - Scottish cardiovascular evidence and recommendations" />
+                            <ReferenceLink text="BNF - British National Formulary for cardiac medications" />
+                            <ReferenceLink text="MLA Content Map - Applied Medical Sciences: Cardiovascular pathophysiology" />
+                            <ReferenceLink text="Foundation Programme - Acute care and emergency medicine competencies" />
                           </>
                         )}
                         {currentQuestion.category?.toLowerCase().includes('respiratory') && (
                           <>
-                            <p className="text-blue-700">• BTS Guidelines - British Thoracic Society respiratory standards</p>
-                            <p className="text-blue-700">• NICE Guidelines - Asthma, COPD and respiratory disease management</p>
-                            <p className="text-blue-700">• SIGN Guidelines - Scottish respiratory evidence and recommendations</p>
-                            <p className="text-blue-700">• BNF - British National Formulary for respiratory medications</p>
-                            <p className="text-blue-700">• MLA Content Map - Clinical Skills: Respiratory examination and procedures</p>
-                            <p className="text-blue-700">• Foundation Programme - Safe prescribing and therapeutics</p>
+                            <ReferenceLink text="BTS Guidelines - British Thoracic Society respiratory standards" />
+                            <ReferenceLink text="NICE Guidelines - Asthma, COPD and respiratory disease management" />
+                            <ReferenceLink text="SIGN Guidelines - Scottish respiratory evidence and recommendations" />
+                            <ReferenceLink text="BNF - British National Formulary for respiratory medications" />
+                            <ReferenceLink text="MLA Content Map - Clinical Skills: Respiratory examination and procedures" />
+                            <ReferenceLink text="Foundation Programme - Safe prescribing and therapeutics" />
                           </>
                         )}
                         {(currentQuestion.category?.toLowerCase().includes('diabetes') || 
                           currentQuestion.category?.toLowerCase().includes('endocrin')) && (
                           <>
-                            <p className="text-blue-700">• ADA Guidelines - American Diabetes Association standards of care</p>
-                            <p className="text-blue-700">• NICE Guidelines - Type 1 and Type 2 diabetes management</p>
-                            <p className="text-blue-700">• SIGN Guidelines - Scottish diabetes evidence and recommendations</p>
-                            <p className="text-blue-700">• BNF - British National Formulary for diabetes medications</p>
-                            <p className="text-blue-700">• MLA Content Map - Applied Medical Sciences: Endocrine pathophysiology</p>
-                            <p className="text-blue-700">• Foundation Programme - Quality improvement and patient safety</p>
+                            <ReferenceLink text="ADA Guidelines - American Diabetes Association standards of care" />
+                            <ReferenceLink text="NICE Guidelines - Type 1 and Type 2 diabetes management" />
+                            <ReferenceLink text="SIGN Guidelines - Scottish diabetes evidence and recommendations" />
+                            <ReferenceLink text="BNF - British National Formulary for diabetes medications" />
+                            <ReferenceLink text="MLA Content Map - Applied Medical Sciences: Endocrine pathophysiology" />
+                            <ReferenceLink text="Foundation Programme - Quality improvement and patient safety" />
                           </>
                         )}
                         {currentQuestion.category?.toLowerCase().includes('gastro') && (
                           <>
-                            <p className="text-blue-700">• BSG Guidelines - British Society of Gastroenterology clinical standards</p>
-                            <p className="text-blue-700">• NICE Guidelines - Gastrointestinal conditions and procedures</p>
-                            <p className="text-blue-700">• SIGN Guidelines - Scottish GI evidence and recommendations</p>
-                            <p className="text-blue-700">• BNF - British National Formulary for GI medications</p>
-                            <p className="text-blue-700">• MLA Content Map - Clinical Skills: Abdominal examination techniques</p>
-                            <p className="text-blue-700">• Foundation Programme - Infection prevention and antimicrobial stewardship</p>
+                            <ReferenceLink text="BSG Guidelines - British Society of Gastroenterology clinical standards" />
+                            <ReferenceLink text="NICE Guidelines - Gastrointestinal conditions and procedures" />
+                            <ReferenceLink text="SIGN Guidelines - Scottish GI evidence and recommendations" />
+                            <ReferenceLink text="BNF - British National Formulary for GI medications" />
+                            <ReferenceLink text="MLA Content Map - Clinical Skills: Abdominal examination techniques" />
+                            <ReferenceLink text="Foundation Programme - Infection prevention and antimicrobial stewardship" />
                           </>
                         )}
                         {(currentQuestion.category?.toLowerCase().includes('obstetric') || 
                           currentQuestion.category?.toLowerCase().includes('gynaecol')) && (
                           <>
-                            <p className="text-blue-700">• RCOG Guidelines - Royal College of Obstetricians and Gynaecologists standards</p>
-                            <p className="text-blue-700">• NICE Guidelines - Antenatal, intrapartum and postnatal care</p>
-                            <p className="text-blue-700">• SIGN Guidelines - Scottish women's health evidence</p>
-                            <p className="text-blue-700">• BNF - British National Formulary for women's health medications</p>
-                            <p className="text-blue-700">• MLA Content Map - Professional Behaviour: Women's health communication</p>
-                            <p className="text-blue-700">• Foundation Programme - Health inequalities and social determinants</p>
+                            <ReferenceLink text="RCOG Guidelines - Royal College of Obstetricians and Gynaecologists standards" />
+                            <ReferenceLink text="NICE Guidelines - Antenatal, intrapartum and postnatal care" />
+                            <ReferenceLink text="SIGN Guidelines - Scottish women's health evidence" />
+                            <ReferenceLink text="BNF - British National Formulary for women's health medications" />
+                            <ReferenceLink text="MLA Content Map - Professional Behaviour: Women's health communication" />
+                            <ReferenceLink text="Foundation Programme - Health inequalities and social determinants" />
                           </>
                         )}
                         {/* Always show core UK medical references with MLA content map integration */}
                         <>
-                          <p className="text-blue-700">• NICE Guidelines - Clinical evidence and recommendations</p>
-                          <p className="text-blue-700">• BMJ Best Practice - Evidence-based clinical guidance and management</p>
-                          <p className="text-blue-700">• CKS Clinical Knowledge Summaries - Practical primary care guidance</p>
-                          <p className="text-blue-700">• BNF - British National Formulary for medications and prescribing</p>
-                          <p className="text-blue-700">• GMC Good Medical Practice - Professional standards and ethics</p>
-                          <p className="text-blue-700">• MLA Content Map - Applied Medical Sciences, Clinical Skills, Professional Behaviour</p>
-                          <p className="text-blue-700">• Foundation Programme Curriculum - Acute care, safe prescribing, quality improvement</p>
-                          <p className="text-blue-700">• RCGP Guidelines - Royal College of General Practitioners clinical standards</p>
-                          <p className="text-blue-700">• SIGN Guidelines - Scottish Intercollegiate Guidelines Network evidence</p>
-                          <p className="text-blue-700">• CKS Clinical Knowledge Summaries - Practical management guidance</p>
-                        </>)
+                          <ReferenceLink text="NICE Guidelines - Clinical evidence and recommendations" />
+                          <ReferenceLink text="BMJ Best Practice - Evidence-based clinical guidance and management" />
+                          <ReferenceLink text="CKS Clinical Knowledge Summaries - Practical primary care guidance" />
+                          <ReferenceLink text="BNF - British National Formulary for medications and prescribing" />
+                          <ReferenceLink text="GMC Good Medical Practice - Professional standards and ethics" />
+                          <ReferenceLink text="MLA Content Map - Applied Medical Sciences, Clinical Skills, Professional Behaviour" />
+                          <ReferenceLink text="Foundation Programme Curriculum - Acute care, safe prescribing, quality improvement" />
+                          <ReferenceLink text="RCGP Guidelines - Royal College of General Practitioners clinical standards" />
+                          <ReferenceLink text="SIGN Guidelines - Scottish Intercollegiate Guidelines Network evidence" />
+                        </>
                       </div>
                     )}
                     
