@@ -16,18 +16,35 @@ import { AITutor } from "@/components/ai-tutor";
 import { useToast } from "@/hooks/use-toast";
 
 // Map a reference label/title to its canonical official URL.
-// Order matters — more specific patterns before generic ones.
+// All URLs below are openly accessible — no login, paywall, or subscription required.
+// Order matters: SPECIFIC topic-aware patterns first, then generic fallbacks.
 const REFERENCE_URL_MAP: { match: RegExp; url: string }[] = [
-  { match: /\bESC\b|European Society of Cardiology/i, url: 'https://www.escardio.org/Guidelines' },
+  // === NICE — deep-link to specialty topic indices ===
+  { match: /NICE.*(cardiovascular|cardiac|cardio)/i, url: 'https://www.nice.org.uk/guidance/conditions-and-diseases/cardiovascular-conditions' },
+  { match: /NICE.*(asthma|copd|respiratory)/i, url: 'https://www.nice.org.uk/guidance/conditions-and-diseases/respiratory-conditions' },
+  { match: /NICE.*(diabetes|type 1|type 2)/i, url: 'https://www.nice.org.uk/search?q=diabetes&ngt=Guidance' },
+  { match: /NICE.*(endocrin|nutrition|metabolic)/i, url: 'https://www.nice.org.uk/search?q=endocrine&ngt=Guidance' },
+  { match: /NICE.*(gastrointestinal|gastro|digestive|gi conditions|gi medications)/i, url: 'https://www.nice.org.uk/guidance/conditions-and-diseases/digestive-tract-conditions' },
+  { match: /NICE.*(antenatal|intrapartum|postnatal|pregnancy|maternity|maternal)/i, url: 'https://www.nice.org.uk/search?q=antenatal+care&ngt=Guidance' },
+  { match: /NICE.*(obstetric|gynaecol|gynecol|women)/i, url: 'https://www.nice.org.uk/search?q=obstetrics+gynaecology&ngt=Guidance' },
+
+  // === BNF — deep-link to system-level treatment summaries ===
+  { match: /BNF.*(cardiac|cardiovascular)/i, url: 'https://bnf.nice.org.uk/treatment-summaries/cardiovascular-system-overview/' },
+  { match: /BNF.*(respiratory|asthma|copd)/i, url: 'https://bnf.nice.org.uk/treatment-summaries/respiratory-system-overview/' },
+  { match: /BNF.*(diabetes|endocrin)/i, url: 'https://bnf.nice.org.uk/treatment-summaries/diabetes/' },
+  { match: /BNF.*(gi|gastrointestinal|gastro|digestive)/i, url: 'https://bnf.nice.org.uk/treatment-summaries/gastro-intestinal-system-overview/' },
+  { match: /BNF.*(women|obstetric|gynaecol|pregnancy|contracept)/i, url: 'https://bnf.nice.org.uk/treatment-summaries/contraception-overview/' },
+
+  // === Other source organisations (all free / open access) ===
+  { match: /\bESC\b|European Society of Cardiology/i, url: 'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines' },
   { match: /\bBTS\b|British Thoracic Society/i, url: 'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/' },
   { match: /\bBSG\b|British Society of Gastroenterology/i, url: 'https://www.bsg.org.uk/clinical-resource/guidelines/' },
   { match: /\bRCOG\b|Royal College of Obstetricians/i, url: 'https://www.rcog.org.uk/guidance/browse-all-guidance/' },
-  { match: /\bRCGP\b|Royal College of General Practitioners/i, url: 'https://www.rcgp.org.uk/representing-you/policy-areas/clinical-policy' },
+  { match: /\bRCGP\b|Royal College of General Practitioners/i, url: 'https://www.rcgp.org.uk/clinical-and-research' },
   { match: /\bADA\b|American Diabetes Association/i, url: 'https://professional.diabetes.org/standards-of-care' },
   { match: /\bSIGN\b|Scottish Intercollegiate/i, url: 'https://www.sign.ac.uk/our-guidelines/' },
-  { match: /\bBMJ Best Practice\b/i, url: 'https://bestpractice.bmj.com/' },
   { match: /\bGMC\b.*Good Medical Practice|Good Medical Practice/i, url: 'https://www.gmc-uk.org/professional-standards/professional-standards-for-doctors/good-medical-practice' },
-  { match: /\bMLA\b|Medical Licensing Assessment|Content Map/i, url: 'https://www.gmc-uk.org/education/medical-licensing-assessment/mla-content-map' },
+  { match: /\bMLA\b|Medical Licensing Assessment|Content Map/i, url: 'https://www.gmc-uk.org/education/standards-guidance-and-curricula/curricula/medical-licensing-assessment' },
   { match: /Foundation Programme/i, url: 'https://foundationprogramme.nhs.uk/curriculum/' },
   { match: /\bCKS\b|Clinical Knowledge Summaries/i, url: 'https://cks.nice.org.uk/' },
   { match: /\bBNF\b|British National Formulary/i, url: 'https://bnf.nice.org.uk/' },
@@ -2535,7 +2552,7 @@ export default function PLAB1New() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.open(currentQuestion.ada_guidance.ada_url || 'https://care.diabetesjournals.org/content/standards-of-care', '_blank');
+                            window.open(currentQuestion.ada_guidance.ada_url || 'https://professional.diabetes.org/standards-of-care', '_blank');
                           }}
                           className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
                         >
@@ -2771,7 +2788,6 @@ export default function PLAB1New() {
                         {/* Always show core UK medical references with MLA content map integration */}
                         <>
                           <ReferenceLink text="NICE Guidelines - Clinical evidence and recommendations" />
-                          <ReferenceLink text="BMJ Best Practice - Evidence-based clinical guidance and management" />
                           <ReferenceLink text="CKS Clinical Knowledge Summaries - Practical primary care guidance" />
                           <ReferenceLink text="BNF - British National Formulary for medications and prescribing" />
                           <ReferenceLink text="GMC Good Medical Practice - Professional standards and ethics" />

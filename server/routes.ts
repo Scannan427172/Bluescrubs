@@ -2286,11 +2286,6 @@ function getSampleQuestionsForCategory(category: string, count: number = 10) {
           },
           supplementary: [
             {
-              title: "British Medical Journal - Psoriasis",
-              url: "https://bestpractice.bmj.com/topics/en-gb/158",
-              description: "BMJ Best Practice psoriasis management guide"
-            },
-            {
               title: "NHS Psoriasis Information",
               url: "https://www.nhs.uk/conditions/psoriasis/",
               description: "NHS patient information and treatment options"
