@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -50,6 +50,18 @@ export default function PLAB1New() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [showExplanation, setShowExplanation] = useState(false);
+
+  // AI-generated structured explanation for the current answer
+  type AIExplanation = {
+    correctRationale: string;
+    options: Array<{ label: string; text: string; isCorrect: boolean; isSelected: boolean; why: string }>;
+    keyLearningPoint: string;
+    source: 'ai' | 'fallback';
+  };
+  const [aiExplanation, setAiExplanation] = useState<AIExplanation | null>(null);
+  const [aiExplanationLoading, setAiExplanationLoading] = useState(false);
+  // Cache of explanations by question id, so navigating back to a question doesn't re-fetch.
+  const aiExplanationCache = useRef<Map<string, AIExplanation>>(new Map());
   const [timeSpent, setTimeSpent] = useState(0);
   const [questionStartTime, setQuestionStartTime] = useState(Date.now());
   const [sessionComplete, setSessionComplete] = useState(false);
@@ -760,6 +772,63 @@ export default function PLAB1New() {
       
       setShowExplanation(true);
       setIsTimerRunning(false);
+
+      // Fetch a structured AI explanation for this answer (cached per question id)
+      void fetchAIExplanation(currentQuestion, parseInt(selectedAnswer));
+    }
+  };
+
+  // Generate a structured per-answer explanation using the backend AI endpoint.
+  const fetchAIExplanation = async (question: any, selectedIdx: number) => {
+    if (!question) return;
+
+    const qid = String(question.id ?? `idx_${currentQuestionIndex}`);
+    const cached = aiExplanationCache.current.get(qid);
+    if (cached) {
+      // Re-mark which option the user selected this time
+      setAiExplanation({
+        ...cached,
+        options: cached.options.map((o, i) => ({ ...o, isSelected: selectedIdx === i })),
+      });
+      return;
+    }
+
+    const correctIdxRaw = question.correctAnswer ?? question.correct_answer ?? question.answer;
+    const correctIdx = typeof correctIdxRaw === 'string'
+      ? (/^[A-E]$/.test(correctIdxRaw) ? correctIdxRaw.charCodeAt(0) - 65 : parseInt(correctIdxRaw) || 0)
+      : (typeof correctIdxRaw === 'number' ? correctIdxRaw : 0);
+
+    let optionsArr: string[] = [];
+    if (Array.isArray(question.options)) {
+      optionsArr = question.options.map((o: any) => typeof o === 'string' ? o : (o?.text ?? ''));
+    } else if (question.options && typeof question.options === 'object') {
+      optionsArr = Object.values(question.options).map((o: any) => typeof o === 'string' ? o : (o?.text ?? ''));
+    }
+    if (optionsArr.length < 2) return;
+
+    setAiExplanationLoading(true);
+    setAiExplanation(null);
+    try {
+      const resp = await fetch('/api/explain-answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: question.question || question.question_scenario || '',
+          options: optionsArr,
+          correctIndex: correctIdx,
+          selectedIndex: selectedIdx,
+          category: question.category || question.topic,
+          questionId: qid,
+        }),
+      });
+      if (!resp.ok) return;
+      const data: AIExplanation = await resp.json();
+      aiExplanationCache.current.set(qid, data);
+      setAiExplanation(data);
+    } catch (err) {
+      console.error('Failed to fetch AI explanation:', err);
+    } finally {
+      setAiExplanationLoading(false);
     }
   };
 
@@ -785,6 +854,8 @@ export default function PLAB1New() {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer("");
       setShowExplanation(false);
+      setAiExplanation(null);
+      setAiExplanationLoading(false);
       setQuestionStartTime(Date.now());
       setIsTimerRunning(true);
     } else {
@@ -2074,21 +2145,106 @@ export default function PLAB1New() {
           <>
           <div className="space-y-6 mb-8">
 
-            {/* Bullet-point explanation format */}
+            {/* Structured AI explanation (or fallback to legacy bullet list) */}
             <div className="text-gray-800 leading-relaxed space-y-4">
-              {(() => {
-                const explanation = currentQuestion.explanation || '';
-                
-                // Convert explanation to bullet points
-                const formatExplanationWithBullets = (text: string) => {
-                  // Split by periods and clean up
-                  const sentences = text.split('.').filter(s => s.trim().length > 10);
-                  
+              {aiExplanationLoading && !aiExplanation ? (
+                <div className="space-y-2 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="flex items-center gap-2 text-blue-800">
+                    <Brain className="w-4 h-4 animate-pulse" />
+                    <span className="text-sm font-medium">Generating clinical reasoning…</span>
+                  </div>
+                  <div className="space-y-2 mt-2">
+                    <div className="h-3 bg-blue-100 rounded animate-pulse" />
+                    <div className="h-3 bg-blue-100 rounded animate-pulse w-5/6" />
+                    <div className="h-3 bg-blue-100 rounded animate-pulse w-4/6" />
+                  </div>
+                </div>
+              ) : aiExplanation ? (
+                <div className="space-y-5">
+                  {/* Why correct */}
+                  <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                    <div className="flex items-start gap-2 mb-2">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <h4 className="font-semibold text-green-900">
+                        Why the correct answer fits
+                      </h4>
+                    </div>
+                    <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">
+                      {aiExplanation.correctRationale}
+                    </p>
+                  </div>
+
+                  {/* Per-option breakdown */}
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3">Option-by-option analysis:</h4>
+                    <div className="space-y-3">
+                      {aiExplanation.options.map((opt) => (
+                        <div
+                          key={opt.label}
+                          className={`border-l-4 p-3 rounded-r-lg ${
+                            opt.isCorrect
+                              ? 'border-green-500 bg-green-50'
+                              : opt.isSelected
+                              ? 'border-red-500 bg-red-50'
+                              : 'border-gray-300 bg-gray-50'
+                          }`}
+                        >
+                          <div className="flex items-start gap-2 mb-1">
+                            <span
+                              className={`font-bold text-sm px-2 py-0.5 rounded ${
+                                opt.isCorrect
+                                  ? 'bg-green-600 text-white'
+                                  : opt.isSelected
+                                  ? 'bg-red-600 text-white'
+                                  : 'bg-gray-300 text-gray-800'
+                              }`}
+                            >
+                              {opt.label}
+                            </span>
+                            <span className="font-medium text-sm text-gray-900">
+                              {opt.text}
+                            </span>
+                            {opt.isCorrect && (
+                              <Badge className="ml-auto bg-green-600 hover:bg-green-700 text-xs">Correct</Badge>
+                            )}
+                            {opt.isSelected && !opt.isCorrect && (
+                              <Badge variant="destructive" className="ml-auto text-xs">Your answer</Badge>
+                            )}
+                          </div>
+                          <p className="text-sm text-gray-700 leading-relaxed pl-9">
+                            {opt.why}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Key learning point */}
+                  <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                    <div className="flex items-start gap-2 mb-1">
+                      <Award className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                      <h4 className="font-semibold text-amber-900">Key learning point</h4>
+                    </div>
+                    <p className="text-sm text-gray-800 leading-relaxed">
+                      {aiExplanation.keyLearningPoint}
+                    </p>
+                  </div>
+
+                  {aiExplanation.source === 'fallback' && (
+                    <p className="text-xs text-gray-500 italic">
+                      AI-generated explanation unavailable — showing the stored explanation. Try again later for a richer breakdown.
+                    </p>
+                  )}
+                </div>
+              ) : (
+                (() => {
+                  const explanation = currentQuestion.explanation || '';
+                  const sentences = explanation.split('.').filter((s: string) => s.trim().length > 10);
                   return (
                     <div className="space-y-3">
                       <h4 className="font-semibold text-gray-900 mb-3">Explanation:</h4>
                       <ul className="space-y-2 ml-4">
-                        {sentences.map((sentence, index) => (
+                        {sentences.map((sentence: string, index: number) => (
                           <li key={index} className="flex items-start gap-2">
                             <span className="text-blue-600 mt-1">•</span>
                             <span className="text-base leading-relaxed">{sentence.trim()}</span>
@@ -2097,10 +2253,8 @@ export default function PLAB1New() {
                       </ul>
                     </div>
                   );
-                };
-                
-                return formatExplanationWithBullets(explanation);
-              })()}
+                })()
+              )}
             </div>
 
             {/* Topic heading like PassMedicine */}

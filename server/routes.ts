@@ -1035,6 +1035,173 @@ Return ONLY a valid JSON array with exactly ${count} stations. No additional tex
     }
   });
 
+  // Per-question structured explanation generator
+  // Cache by hash of question + options + correctIndex so repeats don't re-bill OpenAI.
+  const explanationCache = new Map<string, any>();
+  const hashKey = (s: string) => {
+    let h = 0;
+    for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h |= 0; }
+    return String(h);
+  };
+
+  const buildFallbackExplanation = (
+    question: string,
+    options: string[],
+    correctIndex: number,
+    selectedIndex: number | undefined,
+    storedExplanation?: string
+  ) => {
+    const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    return {
+      correctRationale:
+        storedExplanation && storedExplanation.length > 30
+          ? storedExplanation
+          : `The correct answer is ${labels[correctIndex] || '?'}: ${options[correctIndex] || ''}. A detailed AI-generated rationale is unavailable right now — please review the question stem and the option above against the relevant NICE/CKS guidance.`,
+      options: options.map((text, i) => ({
+        label: labels[i] || String(i + 1),
+        text,
+        isCorrect: i === correctIndex,
+        isSelected: selectedIndex === i,
+        why: i === correctIndex
+          ? 'This option best matches the clinical features described in the question stem.'
+          : 'This option does not best fit the features in the question stem. Consider its typical presentation and how it differs from the scenario above.',
+      })),
+      keyLearningPoint: 'Always anchor your reasoning in the specific clues from the question stem — patient demographics, symptoms, signs and investigations — and match them to the most likely diagnosis or best management step per current UK guidance.',
+      source: 'fallback' as const,
+    };
+  };
+
+  app.post("/api/explain-answer", async (req, res) => {
+    try {
+      const {
+        question,
+        options,
+        correctIndex,
+        selectedIndex,
+        category,
+        questionId,
+      } = req.body || {};
+
+      if (!question || !Array.isArray(options) || options.length < 2 || typeof correctIndex !== 'number') {
+        return res.status(400).json({ error: 'Missing question, options or correctIndex' });
+      }
+
+      const cacheKey = questionId
+        ? `id:${questionId}`
+        : hashKey(`${question}::${options.join('|')}::${correctIndex}`);
+
+      if (explanationCache.has(cacheKey)) {
+        const cached = explanationCache.get(cacheKey);
+        // Re-mark which option the user selected this time
+        return res.json({
+          ...cached,
+          options: cached.options.map((o: any, i: number) => ({ ...o, isSelected: selectedIndex === i })),
+          cached: true,
+        });
+      }
+
+      if (!isAIEnabled() || !process.env.AI_INTEGRATIONS_OPENAI_API_KEY) {
+        return res.json(buildFallbackExplanation(question, options, correctIndex, selectedIndex));
+      }
+
+      const { default: OpenAI } = await import('openai');
+      const openai = new OpenAI({
+        apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
+        baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+      });
+
+      const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+      const optionsList = options.map((t: string, i: number) =>
+        `${labels[i] || i + 1}. ${t}${i === correctIndex ? '   <-- CORRECT ANSWER' : ''}`
+      ).join('\n');
+
+      const prompt = `You are a UK PLAB 1 medical examiner writing model answer explanations for international medical graduates. Reference UK guidance (NICE, CKS, BNF, GMC) where relevant.
+
+QUESTION${category ? ` (specialty: ${category})` : ''}:
+${question}
+
+OPTIONS:
+${optionsList}
+
+The correct answer is option ${labels[correctIndex] || correctIndex + 1}.
+
+Write a structured explanation that REFERENCES THE SPECIFIC CLINICAL CLUES IN THE QUESTION STEM (age, demographics, symptoms, signs, investigations, risk factors). Do NOT use generic phrases like "clinical reasoning based on presentation and guidelines" or "consider differential diagnosis". Every sentence must add specific clinical content.
+
+Return STRICT JSON in exactly this shape (no extra keys, no commentary):
+{
+  "correctRationale": "Why the correct answer fits — quote the actual clues from the stem (e.g. '20-year smoking history', 'bilateral infiltrates on CT'). 3-5 sentences.",
+  "options": [
+    {
+      "label": "A",
+      "why": "If this is the correct option: 1-2 sentences confirming the diagnosis. If incorrect: explain (a) what this condition typically presents with, (b) why the specific features in THIS stem don't fit, (c) any distinguishing feature that rules it out. 2-4 sentences."
+    }
+    // one entry per option, in order
+  ],
+  "keyLearningPoint": "A single take-home clinical pearl, 1-2 sentences."
+}`;
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          { role: "system", content: "You are a senior UK clinician writing concise, exam-grade PLAB 1 explanations. Always ground answers in the specific clues from the question stem." },
+          { role: "user", content: prompt },
+        ],
+        temperature: 0.3,
+        response_format: { type: "json_object" },
+        max_tokens: 1400,
+      });
+
+      const raw = completion.choices?.[0]?.message?.content || '{}';
+      let parsed: any;
+      try { parsed = JSON.parse(raw); } catch { parsed = {}; }
+
+      const optionAnalyses: any[] = Array.isArray(parsed.options) ? parsed.options : [];
+
+      const result = {
+        correctRationale: typeof parsed.correctRationale === 'string' && parsed.correctRationale.trim().length > 0
+          ? parsed.correctRationale.trim()
+          : buildFallbackExplanation(question, options, correctIndex, selectedIndex).correctRationale,
+        options: options.map((text: string, i: number) => {
+          const fromAi = optionAnalyses.find((o: any) =>
+            (o.label && String(o.label).toUpperCase() === labels[i]) ||
+            (typeof o.index === 'number' && o.index === i)
+          ) || optionAnalyses[i] || {};
+          return {
+            label: labels[i] || String(i + 1),
+            text,
+            isCorrect: i === correctIndex,
+            isSelected: selectedIndex === i,
+            why: typeof fromAi.why === 'string' && fromAi.why.trim().length > 0
+              ? fromAi.why.trim()
+              : (i === correctIndex
+                ? 'This option best matches the clinical features described.'
+                : 'This option does not best fit the features in the stem.'),
+          };
+        }),
+        keyLearningPoint: typeof parsed.keyLearningPoint === 'string' && parsed.keyLearningPoint.trim().length > 0
+          ? parsed.keyLearningPoint.trim()
+          : 'Anchor reasoning in the specific clues from the question stem and the most likely diagnosis given UK guidance.',
+        source: 'ai' as const,
+      };
+
+      explanationCache.set(cacheKey, result);
+      // Cap cache size to avoid runaway memory
+      if (explanationCache.size > 2000) {
+        const firstKey = explanationCache.keys().next().value;
+        if (firstKey) explanationCache.delete(firstKey);
+      }
+
+      return res.json(result);
+    } catch (error) {
+      console.error('Explain-answer error:', error);
+      const { question, options, correctIndex, selectedIndex } = req.body || {};
+      if (question && Array.isArray(options) && typeof correctIndex === 'number') {
+        return res.json(buildFallbackExplanation(question, options, correctIndex, selectedIndex));
+      }
+      return res.status(500).json({ error: 'Failed to generate explanation' });
+    }
+  });
+
   // AI NHS Prep endpoint
   app.post("/api/ask-nhs-prep", async (req, res) => {
     if (!isAIEnabled()) {
