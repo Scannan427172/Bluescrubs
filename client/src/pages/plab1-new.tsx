@@ -684,6 +684,8 @@ export default function PLAB1New() {
         if (data.questions && data.questions.length > 0) {
           setSessionStarted(true);
           setQuestionStartTime(Date.now());
+          setQuestionTimer(0);
+          setIsTimerRunning(true);
         } else {
           toast({ title: "No questions found", description: "No questions matched your selection. Try a different category.", variant: "destructive" });
         }
@@ -1059,6 +1061,7 @@ export default function PLAB1New() {
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
       setSessionStarted(true);
+      setQuestionTimer(0);
       setIsTimerRunning(true);
 
       // Set timer for timed practice
@@ -1160,7 +1163,8 @@ export default function PLAB1New() {
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
       setSessionStarted(true);
-      setIsTimerRunning(false); // No timer for unlimited
+      setQuestionTimer(0);
+      setIsTimerRunning(true); // Per-question elapsed clock (no session-level timeout)
 
     } catch (error) {
       console.error('Error generating questions:', error);
