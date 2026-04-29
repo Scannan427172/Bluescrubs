@@ -127,6 +127,13 @@ export default function PLAB1New() {
   const [aiExplanationLoading, setAiExplanationLoading] = useState(false);
   // Cache of explanations by question id, so navigating back to a question doesn't re-fetch.
   const aiExplanationCache = useRef<Map<string, AIExplanation>>(new Map());
+  const sessionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clearSessionTimeout = () => {
+    if (sessionTimeoutRef.current) {
+      clearTimeout(sessionTimeoutRef.current);
+      sessionTimeoutRef.current = null;
+    }
+  };
   const [timeSpent, setTimeSpent] = useState(0);
   const [questionStartTime, setQuestionStartTime] = useState(Date.now());
   const [sessionComplete, setSessionComplete] = useState(false);
@@ -249,15 +256,20 @@ export default function PLAB1New() {
     return () => clearInterval(interval);
   }, [isTimerRunning]);
 
-  // Start timer when new question is shown
+  // Start timer when new question is shown (only in timed practice modes)
   useEffect(() => {
-    if (sessionStarted && !showExplanation) {
+    if (sessionStarted && !showExplanation && isTimedSession) {
       setQuestionTimer(0);
       setIsTimerRunning(true);
     } else {
       setIsTimerRunning(false);
     }
-  }, [currentQuestionIndex, sessionStarted, showExplanation]);
+  }, [currentQuestionIndex, sessionStarted, showExplanation, isTimedSession]);
+
+  // Cancel any pending session-end timeout when component unmounts
+  useEffect(() => {
+    return () => clearSessionTimeout();
+  }, []);
 
 
 
@@ -654,6 +666,7 @@ export default function PLAB1New() {
 
   // Generate AI questions
   const startPractice = async (questionCount: number) => {
+    clearSessionTimeout();
     setIsGeneratingQuestions(true);
     setGeneratedQuestions([]);
     setSessionStarted(false);
@@ -684,8 +697,8 @@ export default function PLAB1New() {
         if (data.questions && data.questions.length > 0) {
           setSessionStarted(true);
           setQuestionStartTime(Date.now());
-          setQuestionTimer(0);
-          setIsTimerRunning(true);
+          setIsTimedSession(false);
+          setIsTimerRunning(false);
         } else {
           toast({ title: "No questions found", description: "No questions matched your selection. Try a different category.", variant: "destructive" });
         }
@@ -928,9 +941,13 @@ export default function PLAB1New() {
       setAiExplanation(null);
       setAiExplanationLoading(false);
       setQuestionStartTime(Date.now());
-      setIsTimerRunning(true);
+      if (isTimedSession) {
+        setQuestionTimer(0);
+        setIsTimerRunning(true);
+      }
     } else {
       // Session complete - calculate final score and submit to leaderboard
+      clearSessionTimeout();
       const totalTime = questionTimes.reduce((sum, time) => sum + time, 0);
       const correctAnswers = userAnswers.filter((answer, index) => 
         parseInt(answer) === generatedQuestions[index]?.correctAnswer
@@ -1030,6 +1047,7 @@ export default function PLAB1New() {
 
   // Start timed practice session
   const startTimedPractice = async (timeInMinutes: number) => {
+    clearSessionTimeout();
     setIsGeneratingQuestions(true);
     try {
       const response = await fetch('/api/generate-questions', {
@@ -1061,11 +1079,13 @@ export default function PLAB1New() {
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
       setSessionStarted(true);
+      setIsTimedSession(true);
       setQuestionTimer(0);
       setIsTimerRunning(true);
 
       // Set timer for timed practice
-      setTimeout(() => {
+      sessionTimeoutRef.current = setTimeout(() => {
+        sessionTimeoutRef.current = null;
         setIsTimerRunning(false);
         setSessionComplete(true);
       }, timeInMinutes * 60 * 1000);
@@ -1080,6 +1100,7 @@ export default function PLAB1New() {
 
   // Start authentic PLAB 1 timed practice session (1 minute per question)
   const startAuthenticTimedPractice = async (questionCount: number) => {
+    clearSessionTimeout();
     setIsGeneratingQuestions(true);
     try {
       const response = await fetch('/api/generate-questions', {
@@ -1113,11 +1134,14 @@ export default function PLAB1New() {
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
       setSessionStarted(true);
+      setIsTimedSession(true);
+      setQuestionTimer(0);
       setIsTimerRunning(true);
 
       // Set timer for authentic PLAB 1 timing (exactly 1 minute per question)
       const totalTimeMs = exactQuestions.length * 60 * 1000; // 1 minute per question
-      setTimeout(() => {
+      sessionTimeoutRef.current = setTimeout(() => {
+        sessionTimeoutRef.current = null;
         setIsTimerRunning(false);
         setSessionComplete(true);
       }, totalTimeMs);
@@ -1132,6 +1156,7 @@ export default function PLAB1New() {
 
   // Start unlimited practice session
   const startUnlimitedPractice = async () => {
+    clearSessionTimeout();
     setIsGeneratingQuestions(true);
     try {
       const response = await fetch('/api/generate-questions', {
@@ -1163,8 +1188,8 @@ export default function PLAB1New() {
       setShowExplanation(false);
       setQuestionStartTime(Date.now());
       setSessionStarted(true);
-      setQuestionTimer(0);
-      setIsTimerRunning(true); // Per-question elapsed clock (no session-level timeout)
+      setIsTimedSession(false);
+      setIsTimerRunning(false); // No timer for unlimited study mode
 
     } catch (error) {
       console.error('Error generating questions:', error);
@@ -1768,10 +1793,12 @@ export default function PLAB1New() {
                 <Clock className="w-4 h-4" />
                 <span>{Math.round(timeSpent / 1000 / 60)}m total</span>
               </div>
-              <div className={`flex items-center gap-2 text-sm font-mono ${isTimerRunning ? 'text-green-600' : 'text-gray-600'}`}>
-                <div className={`w-2 h-2 rounded-full ${isTimerRunning ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-                <span>{formatTime(questionTimer)}</span>
-              </div>
+              {isTimedSession && (
+                <div className={`flex items-center gap-2 text-sm font-mono ${isTimerRunning ? 'text-green-600' : 'text-gray-600'}`}>
+                  <div className={`w-2 h-2 rounded-full ${isTimerRunning ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+                  <span>{formatTime(questionTimer)}</span>
+                </div>
+              )}
             </div>
           </div>
           <Progress 
@@ -2197,9 +2224,11 @@ export default function PLAB1New() {
                 <div className="text-sm font-medium text-gray-700">
                   Question {currentQuestionIndex + 1} of {generatedQuestions.length}
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
-                  {formatTime(questionTimer)}
-                </div>
+                {isTimedSession && (
+                  <div className="text-xs text-gray-500 mt-1">
+                    {formatTime(questionTimer)}
+                  </div>
+                )}
               </div>
               
               <Button
@@ -3030,9 +3059,11 @@ export default function PLAB1New() {
               <div className="text-sm font-medium text-gray-700">
                 Question {currentQuestionIndex + 1} of {generatedQuestions.length}
               </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {formatTime(questionTimer)}
-              </div>
+              {isTimedSession && (
+                <div className="text-xs text-gray-500 mt-1">
+                  {formatTime(questionTimer)}
+                </div>
+              )}
             </div>
 
             {/* Submit/Next Button */}
